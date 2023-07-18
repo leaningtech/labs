@@ -4,7 +4,7 @@ import DiscordPresenceCount from "./DiscordPresenceCount.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
-import logotype from "~/assets/branding/labs/logotype-white.svg";
+import logotype from "../assets/branding/labs/logotype-white.svg";
 
 const links = [
 	{ name: "Blog", href: "/blog" },
@@ -19,12 +19,7 @@ const links = [
 		<div class="grow flex items-center gap-6 max-w-2xl">
 			<a href="/" class="flex-shrink-0 hover:opacity-90">
 				<!-- TODO: bespoke, locally-hosted svg -->
-				<img
-					src={logotype.src}
-					width={logotype.width}
-					height={logotype.height}
-					alt={SITE_TITLE}
-				/>
+				<img src={logotype} alt={SITE_TITLE} class="w-20" />
 			</a>
 
 			<div

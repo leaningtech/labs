@@ -23,9 +23,6 @@ export default defineConfig({
 		}), // TODO: remove policy when we're ready to go live
 	],
 	compressHTML: prod,
-	experimental: {
-		assets: true,
-	},
 	output: "hybrid",
 	adapter: cloudflare(),
 });

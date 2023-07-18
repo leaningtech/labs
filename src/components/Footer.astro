@@ -1,7 +1,5 @@
 ---
-import logotype from "~/assets/branding/company/logotype-white.svg";
-
-const logotypeScale = 2;
+import logotype from "../assets/branding/company/logotype-white.svg";
 
 const today = new Date();
 
@@ -72,11 +70,10 @@ const sections: Section[] = [
 		<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
 			<!-- TODO: local svg -->
 			<img
-				src={logotype.src}
-				width={logotype.width * logotypeScale}
-				height={logotype.height * logotypeScale}
+				src={logotype}
 				loading="lazy"
 				alt="Leaning Technologies"
+				class="h-16"
 			/>
 		</a>
 
