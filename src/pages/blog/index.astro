@@ -1,0 +1,24 @@
+---
+import Shell from "../../layouts/Shell.astro";
+import { getCollection } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+---
+
+<Shell>
+	<section>
+		<ul>
+			{
+				posts.map((post) => (
+					<li>
+						<FormattedDate date={post.data.pubDate} />
+						<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</Shell>

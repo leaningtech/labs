@@ -1,0 +1,21 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import GlobalNav from "../components/GlobalNav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body
+		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-stone-900 text-stone-200"
+	>
+		<GlobalNav />
+		<slot />
+		<div class="grow"></div>
+		<Footer />
+	</body>
+</html>

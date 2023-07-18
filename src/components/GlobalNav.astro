@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon'
+import DiscordPresenceCount from './DiscordPresenceCount.astro';
+
+import { SITE_TITLE, DISCORD_URL } from "../consts";
+
+import logotype from "~/assets/branding/labs/logotype-white.svg";
+
+const links = [
+	{ name: "Blog", href: "/blog" },
+	{ name: "Demos", href: "/demos" },
+]
+---
+
+<nav aria-label="Primary navigation" class="bg-stone-900 text-white">
+	<div class="container mx-auto h-14 p-2 sm:px-6 lg:px-8 flex items-stretch justify-between gap-6 whitespace-nowrap">
+			<div class="grow flex items-center gap-6 max-w-2xl">
+				<a href="/" class="flex-shrink-0 hover:opacity-90">
+					<!-- TODO: bespoke, locally-hosted svg -->
+					<img
+						src={logotype.src}
+						width={logotype.width}
+						height={logotype.height}
+						alt={SITE_TITLE}
+					>
+				</a>
+		
+				<div class="border-stone-600 border rounded-md px-2 self-stretch flex items-center gap-1.5 grow cursor-text">
+					<Icon name="fa-solid:search" class="ml-2 w-4 h-4" />
+					Search
+					<div class="grow"></div>
+					<div class="bg-stone-900 text-stone-400 px-2 rounded flex font-mono">
+						/
+					</div>
+				</div>
+			</div>
+
+			<div class="flex items-center gap-4 ml-auto">
+				{links.map(link => (
+					<a
+						href={link.href}
+						class="hover:underline"
+					>
+						{link.name}
+					</a>
+				))}
+			</div>
+
+			<a href={DISCORD_URL} class="flex items-center gap-2 font-semibold hover:opacity-90">
+				<div class="bg-blurple rounded-md px-4 self-stretch flex items-center gap-1.5">
+					<Icon name="fa-brands:discord" class="w-6 h-6" />
+					Join the community
+					<span class="sr-only">on Discord</span>
+				</div>
+				<div class="bg-stone-800 text-stone-300 text-sm rounded-full flex items-center justify-center h-8 w-24">
+					<DiscordPresenceCount />
+				</div>
+			</a>
+		</div>
+	</div>
+</nav>

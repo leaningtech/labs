@@ -1,0 +1,30 @@
+---
+interface DiscordWidgetData {
+	presence_count: number;
+}
+
+const MINUTE = 60
+
+// TODO: consider doing this client-side and caching it in local storage, so we don't have to SSR
+const data = await fetch('https://ptb.discord.com/api/guilds/988743885121548329/widget.json', {
+	cache: "default",
+	headers: {
+		"Accept": "application/json",
+		"Cache-Control": `max-age=${15 * MINUTE}`, // TODO: check if this actually works
+	}
+})
+	.then(async r => {
+		if (r.ok) {
+			return r.json() as Promise<DiscordWidgetData>
+		} else {
+			const error: { code: number, message: string } = await r.json();
+			throw error;
+		}
+	})
+	.catch(error => {
+		console.warn("Failed to fetch Discord widget data", error);
+		return null;
+	});
+---
+
+{data?.presence_count ? `${data.presence_count} online` : ""}
