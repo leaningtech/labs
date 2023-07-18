@@ -21,42 +21,50 @@ const sections: Section[] = [
 		links: [
 			{ text: "Discord server", href: "https://discord.gg/qBMHpK9Kqv" }, // TODO: member account badge
 			{ text: "Twitter", href: "https://twitter.com/leaningtech" },
-		]
+		],
 	},
 	{
 		name: "Open source",
 		description: "Description todo",
 		links: [
 			{ text: "GitHub organisation", href: "https://github.com/leaningtech" },
-			{ text: "Cheerp repository", href: "https://github.com/leaningtech/cheerp-meta" },
+			{
+				text: "Cheerp repository",
+				href: "https://github.com/leaningtech/cheerp-meta",
+			},
 			// TODO
-		]
+		],
 	},
 	{
 		name: "Blog",
-		links: [
-			{ text: "Read the blog", href: "/blog" },
-		]
+		links: [{ text: "Read the blog", href: "/blog" }],
 	},
 	{
 		name: "Company",
 		links: [
 			{ text: "About us", href: "https://leaningtech.com/about-us/" },
-			{ text: "Meet the team", href: "https://leaningtech.com/about-us/#meet-the-team" },
+			{
+				text: "Meet the team",
+				href: "https://leaningtech.com/about-us/#meet-the-team",
+			},
 			{ text: "Contact us", href: "https://leaningtech.com/contact-us/" },
-			{ text: "Partner programs", href: "https://leaningtech.com/partner-programs/" },
+			{
+				text: "Partner programs",
+				href: "https://leaningtech.com/partner-programs/",
+			},
 			{ text: "News", href: "https://leaningtech.com/news/" },
-			{ text: "Privacy policy", href: "https://leaningtech.com/privacy-policy/" },
+			{
+				text: "Privacy policy",
+				href: "https://leaningtech.com/privacy-policy/",
+			},
 			{ text: "Careers", href: "https://leaningtech.freshteam.com/jobs" },
-		]
+		],
 	},
 	{
 		name: "Products",
-		links: [
-			{ text: "Cheerp", href: "/cheerp" },
-		]
+		links: [{ text: "Cheerp", href: "/cheerp" }],
 	},
-]
+];
 ---
 
 <footer class="py-14 px-8 md:px-14 bg-black">
@@ -69,30 +77,38 @@ const sections: Section[] = [
 				height={logotype.height * logotypeScale}
 				loading="lazy"
 				alt="Leaning Technologies"
-			>
+			/>
 		</a>
 
-		<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-content-between text-lg">
-			{sections.map(section => (
-				<section class="space-y-1">
-					<h3 class="text-xl font-semibold">{section.name}</h3>
-					{section.description && <p class="text-stone-400">{section.description}</p>}
-					<ul>
-						{section.links.map(link => (
-							<li>
-								<a href={link.href} class="text-primary-500 hover:underline">
-									{link.text}
-								</a>	
-							</li>
-						))}
-					</ul>
-				</section>
-			))}
+		<div
+			class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 place-content-between text-lg"
+		>
+			{
+				sections.map((section) => (
+					<section class="space-y-1">
+						<h3 class="text-xl font-semibold">{section.name}</h3>
+						{section.description && (
+							<p class="text-stone-400">{section.description}</p>
+						)}
+						<ul>
+							{section.links.map((link) => (
+								<li>
+									<a href={link.href} class="text-primary-500 hover:underline">
+										{link.text}
+									</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				))
+			}
 		</div>
 		<div class="pt-4 text-stone-400 max-w-prose">
-			© Leaning Technologies {today.getFullYear()}. All rights reserved.
-			Cheerp is a registered trademark of Leaning Technologies.
-			The Cheerp, CheerpJ, and CheerpX logos are based on the HTML5 logo by <a href="https://www.w3.org/">W3C</a> (<a href="https://creativecommons.org/licenses/by/3.0/">license</a>)
+			© Leaning Technologies {today.getFullYear()}. All rights reserved. Cheerp
+			is a registered trademark of Leaning Technologies. The Cheerp, CheerpJ,
+			and CheerpX logos are based on the HTML5 logo by <a
+				href="https://www.w3.org/">W3C</a
+			> (<a href="https://creativecommons.org/licenses/by/3.0/">license</a>)
 		</div>
 	</div>
 </footer>

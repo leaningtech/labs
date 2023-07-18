@@ -1,15 +1,19 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-
 import tailwind from "@astrojs/tailwind";
-
+import robotsTxt from "astro-robots-txt";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://example.com",
-	integrations: [mdx(), sitemap(), tailwind()],
+	site: "https://labs.leaningtech.com",
+	integrations: [
+		mdx(),
+		sitemap(),
+		tailwind(),
+		robotsTxt({ policy: [{ userAgent: "*", disallow: "/" }] }), // TODO: remove policy when we're ready to go live
+	],
 	compressHTML: prod,
 	experimental: {
 		assets: true,

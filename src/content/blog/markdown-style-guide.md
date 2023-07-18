@@ -60,13 +60,13 @@ The blockquote element represents content that is quoted from another source, op
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Example HTML5 Document</title>
+	</head>
+	<body>
+		<p>Test</p>
+	</body>
 </html>
 ```
 

@@ -1,14 +1,16 @@
 ---
 interface Props {
-	name: string,
-	logotypeUrl: string,
+	name: string;
+	logotypeUrl: string;
 }
 
 const { name, logotypeUrl } = Astro.props;
 ---
 
 <nav aria-label="Product navigation" class="bg-stone-800 text-white">
-	<div class="container mx-auto h-16 p-2 sm:px-6 lg:px-8 flex items-stretch justify-between gap-6 whitespace-nowrap">
-		<img src={logotypeUrl} alt={name}>
+	<div
+		class="container mx-auto h-16 p-2 sm:px-6 lg:px-8 flex items-stretch justify-between gap-6 whitespace-nowrap"
+	>
+		<img src={logotypeUrl} alt={name} />
 	</div>
 </nav>
