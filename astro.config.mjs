@@ -22,6 +22,11 @@ export default defineConfig({
 			],
 		}), // TODO: remove policy when we're ready to go live
 	],
+	markdown: {
+		shikiConfig: {
+			theme: "dracula",
+		},
+	},
 	compressHTML: prod,
 	output: "hybrid",
 	adapter: cloudflare(),

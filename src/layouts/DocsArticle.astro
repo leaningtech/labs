@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Props as ProductNavProps } from "../components/ProductNav.astro";
+import Shell from "./Shell.astro";
+import ProductNav from "../components/ProductNav.astro";
+
+interface Props {
+	article: CollectionEntry<"cheerp">["data"];
+	product: ProductNavProps;
+}
+
+const { article, product } = Astro.props;
+
+if (!article.title) {
+	console.warn("docs article is missing title: ", Astro.url.pathname);
+}
+---
+
+<Shell title={article.title} description={article.description}>
+	<ProductNav {...product} />
+	<main>
+		<div
+			class="container mx-auto px-4 py-12 prose prose-stone lg:prose-xl dark:prose-invert"
+		>
+			{article.title && <h1>{article.title}</h1>}
+			<slot />
+		</div>
+	</main>
+</Shell>

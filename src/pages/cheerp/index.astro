@@ -1,12 +1,11 @@
 ---
 import Shell from "../../layouts/Shell.astro";
 import ProductNav from "../../components/ProductNav.astro";
-
-import cheerpLogotype from "../../assets/branding/products/cheerp/logotype-white.svg";
+import cheerp from "./product";
 ---
 
 <Shell>
-	<ProductNav name="Cheerp" logotypeUrl={cheerpLogotype} />
+	<ProductNav {...cheerp} />
 	<main>
 		<h1>Cheerp</h1>
 	</main>

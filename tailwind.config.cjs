@@ -15,7 +15,15 @@ module.exports = {
 				},
 				blurple: "#5865F2", // https://discord.com/branding
 			},
+			typography: (theme) => ({
+				stone: {
+					css: {
+						"--tw-prose-links": theme("colors.primary[500]"),
+						"--tw-prose-invert-links": theme("colors.primary[400]"),
+					},
+				},
+			}),
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/typography")],
 };

@@ -1,0 +1,22 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import DocsArticle from "../../layouts/DocsArticle.astro";
+import cheerp from "./product";
+
+export async function getStaticPaths() {
+	const articles = await getCollection("cheerp");
+	return articles.map((article) => ({
+		params: { slug: article.slug },
+		props: article,
+	}));
+}
+
+type Props = CollectionEntry<"cheerp">;
+
+const article = Astro.props;
+const { Content } = await article.render();
+---
+
+<DocsArticle product={cheerp} {article}>
+	<Content />
+</DocsArticle>
