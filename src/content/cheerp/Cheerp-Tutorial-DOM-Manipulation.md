@@ -43,7 +43,7 @@ and open it with your favourite browser.
 
 As you can see the text should have been `Boring static text` but has been replaced by our script.
 
-![](/assets/Dom1.png)
+![](/cheerp/assets/Dom1.png)
 
 ## Using callbacks <a name="callbackuse"></a>
 
@@ -127,7 +127,7 @@ void webMain()
 }
 ```
 
-![](/assets/Dom2.png)
+![](/cheerp/assets/Dom2.png)
 
 When declaring JavsScript methods in C++ you can use the following data types:
 
@@ -241,4 +241,4 @@ void webMain()
 }
 ```
 
-![](/assets/xhr.png)
+![](/cheerp/assets/xhr.png)
