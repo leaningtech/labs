@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	collection: CollectionEntry<"cheerp">[];
+}
+
+const links = Astro.props.collection;
+
+// TODO: responsive - collapse to hamburger on sm
+---
+
+<aside class="w-64 xl:text-lg whitespace-nowrap overflow-hidden">
+	<ul class="space-y-1">
+		{
+			links.map((link) => {
+				if (!link) throw new Error("dead link");
+
+				const href = `/cheerp/${link.slug}`;
+				const isActive = href === Astro.url.pathname;
+
+				return (
+					<li
+						class:list={[
+							"group py-1",
+							{ "font-semibold text-primary-500": isActive },
+						]}
+					>
+						<a {href} class="block">
+							<span class="px-2 xl:px-3 py-1.5 rounded group-hover:bg-stone-800">
+								{link.data.title || link.id}
+							</span>
+						</a>
+					</li>
+				);
+			})
+		}
+	</ul>
+</aside>

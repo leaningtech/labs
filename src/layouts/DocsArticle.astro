@@ -1,29 +1,39 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import type { Props as ProductNavProps } from "../components/ProductNav.astro";
 import Shell from "./Shell.astro";
 import ProductNav from "../components/ProductNav.astro";
+import DocsSidebar from "../components/DocsSidebar.astro";
 
 interface Props {
-	article: CollectionEntry<"cheerp">["data"];
 	product: ProductNavProps;
+	title: string;
 }
 
-const { article, product } = Astro.props;
+const { product, title } = Astro.props;
 
-if (!article.title) {
-	console.warn("docs article is missing title: ", Astro.url.pathname);
-}
+const collection = await getCollection("cheerp"); // TODO: get from product
 ---
 
-<Shell title={article.title} description={article.description}>
+<Shell {title}>
 	<ProductNav {...product} />
-	<main>
-		<div
-			class="container mx-auto px-4 py-12 prose prose-stone lg:prose-xl dark:prose-invert"
-		>
-			{article.title && <h1>{article.title}</h1>}
-			<slot />
-		</div>
-	</main>
+	<div
+		class="lg:container mx-auto w-full px-4 py-12 flex gap-8 justify-between"
+	>
+		<DocsSidebar {collection} />
+		<main class="grow max-w-prose">
+			<div class="prose prose-stone dark:prose-invert">
+				<h1>{title}</h1>
+				<slot />
+			</div>
+		</main>
+		<aside class="w-32 xl:w-64 hidden lg:block">
+			<h5 class="font-semibold mb-2">On this page</h5>
+			<ul>
+				<li>Table</li>
+				<li>of</li>
+				<li>contents</li>
+			</ul>
+		</aside>
+	</div>
 </Shell>

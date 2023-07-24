@@ -1,5 +1,9 @@
 import { defineCollection, z } from "astro:content";
 
+export enum Product {
+	Cheerp = "cheerp",
+}
+
 const blog = defineCollection({
 	// Type-check frontmatter using a schema
 	schema: z.object({
@@ -18,4 +22,11 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const docs = defineCollection({
+	schema: z.object({
+		title: z.string(),
+		product: z.nativeEnum(Product),
+	}),
+});
+
+export const collections = { docs, blog };

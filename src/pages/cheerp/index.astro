@@ -1,12 +1,8 @@
 ---
-import Shell from "../../layouts/Shell.astro";
-import ProductNav from "../../components/ProductNav.astro";
 import cheerp from "./product";
+import DocsArticle from "../../layouts/DocsArticle.astro";
 ---
 
-<Shell>
-	<ProductNav {...cheerp} />
-	<main>
-		<h1>Cheerp</h1>
-	</main>
-</Shell>
+<DocsArticle product={cheerp} title="Cheerp">
+	<p>Cheerp index page</p>
+</DocsArticle>
