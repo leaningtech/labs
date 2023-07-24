@@ -4,6 +4,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import cloudflare from "@astrojs/cloudflare";
+import pagefind from "astro-pagefind";
+
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
@@ -21,6 +23,7 @@ export default defineConfig({
 				},
 			],
 		}), // TODO: remove policy when we're ready to go live
+		pagefind(),
 	],
 	markdown: {
 		shikiConfig: {

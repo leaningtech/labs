@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon";
-import DiscordPresenceCount from "./DiscordPresenceCount.astro";
+//import DiscordPresenceCount from "./DiscordPresenceCount.astro";
+import Search from "./Search.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
@@ -22,16 +23,7 @@ const links = [
 				<img src={logotype} alt={SITE_TITLE} class="w-20" />
 			</a>
 
-			<div
-				class="border-stone-600 border rounded-md px-2 self-stretch flex items-center gap-1.5 grow cursor-text"
-			>
-				<Icon name="fa-solid:search" class="ml-2 w-4 h-4" />
-				 Search
-				<div class="grow"></div>
-				<div class="bg-stone-900 text-stone-400 px-2 rounded flex font-mono">
-					/
-				</div>
-			</div>
+			<Search />
 		</div>
 
 		<div class="flex items-center gap-4 ml-auto">
@@ -55,11 +47,15 @@ const links = [
 				 Join the community
 				<span class="sr-only">on Discord</span>
 			</div>
-			<div
+			{
+				/*<div
 				class="bg-stone-800 text-stone-300 text-sm rounded-full flex items-center justify-center h-8 w-24"
 			>
 				<DiscordPresenceCount />
-			</div>
+			</div>*/
+			}
 		</a>
 	</div>
 </nav>
+
+<style is:global></style>

@@ -20,7 +20,9 @@
 		"@tailwindcss/typography": "^0.5.9",
 		"astro": "^2.8.5",
 		"astro-icon": "^0.8.1",
+		"astro-pagefind": "^1.2.3",
 		"astro-robots-txt": "^0.5.0",
+		"pagefind": "^0.12.0",
 		"tailwindcss": "^3.0.24"
 	},
 	"devDependencies": {
