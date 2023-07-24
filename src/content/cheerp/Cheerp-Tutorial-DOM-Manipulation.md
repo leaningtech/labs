@@ -6,7 +6,7 @@ title: Tutorial - DOM manipulation
 
 The following example shows how to write a simple Web application that uses the Browser's DOM functionalities. Check our for example [clientlib.h](https://github.com/leaningtech/cheerp-utils/blob/master/include/client/clientlib.h) for a glance of the Web API forward declared in the client namespace using Cheerp.
 
-```c++
+```cpp
 #include <cheerp/clientlib.h>
 
 [[cheerp::genericjs]]
@@ -49,7 +49,7 @@ As you can see the text should have been `Boring static text` but has been repla
 
 Let's extend the previous program to revert the original text after 3 seconds.
 
-```c++
+```cpp
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
 
@@ -102,7 +102,7 @@ Modify `example.html` to include and use jQuery
 
 Let's use the JavaScript `changeTitle` function from C++
 
-```c++
+```cpp
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
 
@@ -140,7 +140,7 @@ When declaring JavsScript methods in C++ you can use the following data types:
 
 You can also use the `__asm__` keyword to inline JavaScript code in the middle of C++ code
 
-```c++
+```cpp
 [[cheerp::genericjs]]
 void webMain()
 {
@@ -152,7 +152,7 @@ void webMain()
 
 Cheerp makes it possible to allocate and use whole C++ classes from JavaScript. This is done using the `[[jsexport]]` class attribute.
 
-```c++
+```cpp
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
 
@@ -217,7 +217,7 @@ As you can see you are free to allocate a new JsBridge object in JavaScript and 
 
 We will show how to use `XMLHttpRequest` to retrieve a file. Please note that Chrome blocks XMLHttpRequests to local files so you need to run the example using Firefox or start a local web server.
 
-```c++
+```cpp
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
 

@@ -10,7 +10,7 @@ The actual object returned by `require()` is a `Promise`, since the code produce
 
 For example, suppose that you have a project in which you need to sort a big array, and you want to replace the slow `Array.sort()` with a faster version. Instead of writing your own sorting function, you can use `std::sort()` from the C++ STL:
 
-```c++
+```cpp
 #include <cheerp/client.h>
 #include <algorithm>
 
@@ -25,12 +25,13 @@ extern "C" void sort(client::Int32Array* a)
 
 You can compile the above code with `/opt/cheerp/bin/clang++ -target cheerp sort.cpp -o sort.js -cheerp-make-module=commonjs` and put the resulting `sort.js` in your project source folder.
 Than, using it is as easy as:
+
 ```js
 let cheerplib = require("./sort");
-cheerplib.then(cl => {
-	let arr = new Int32Array([4,2,3,1]);
+cheerplib.then((cl) => {
+	let arr = new Int32Array([4, 2, 3, 1]);
 	cl.sort(arr);
-	console.log("Sorted with std::sort: "+arr);
+	console.log("Sorted with std::sort: " + arr);
 });
 ```
 

@@ -14,7 +14,7 @@ Now we will expore a more powerful interface: accessing and modifying the DOM.
 
 Browser APIs are declared inside headers which are provided with Cheerp, namely
 
-```c++
+```cpp
 #include <cheerp/client.h> //Misc client side stuff
 #include <cheerp/clientlib.h> //Complete DOM/HTML5 interface
 #include <cheerp/webgl.h> //WebGL interface
@@ -22,7 +22,7 @@ Browser APIs are declared inside headers which are provided with Cheerp, namely
 
 All classes, global variables and methods exposed by the browser are declared into the `client` namespace. It's a regular C++ namespace, so it's always possible to write more terse code with:
 
-```c++
+```cpp
 using namespace client;
 ```
 
@@ -30,7 +30,7 @@ using namespace client;
 
 You can access the `document` global object directly from C++ code. In the next example we will add an event handler to run our code after the DOM is fully loaded. ([dom.cpp](/tutorials/dom_access/dom.cpp))
 
-```c++
+```cpp
 #include <cheerp/client.h> //Misc client side stuff
 #include <cheerp/clientlib.h> //Complete DOM/HTML5 interface
 
@@ -130,7 +130,7 @@ Cheerp works at the same level as JavaScript. It is designed to complement or re
 
 If you want to manipulate the DOM at run-time you can use the same APIs you would use when writing JavaScript. In the following example we will create two DOM elements and set up event handling using the DOM APIs exposed by the browser.
 
-```c++
+```cpp
 [[cheerp::genericjs]]
 void setupInputAndDisplay()
 {

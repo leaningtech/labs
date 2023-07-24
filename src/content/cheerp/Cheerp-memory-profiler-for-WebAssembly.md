@@ -98,7 +98,7 @@ Return the total amount of memory currently allocated by the program.
 
 ### Example
 
-```C+++
+```cpp+
 auto tag = cheerpMemProfAnnotate("functionX wrapper");
 functionX();   //function that should ideally not generate permanent allocations
 if (cheerpMemProfUsed(tag) > 0)

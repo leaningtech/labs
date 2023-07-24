@@ -5,13 +5,14 @@ title: Tutorial - Pong
 This tutorial will guide you through the steps to create a simple game of pong in C++, and compile it to a combination of WebAssembly (game logic) and JavaScript (game graphics) with Cheerp 3.0.
 
 # Hello World
+
 Source code: [pong.cpp](tutorials/tutorial_1/pong1/pong.cpp). Link to the example: [link](https://oldsite.leaningtech.com/cheerp/examples/pong1/pong.html).
 
-We will start by building a simple console-based Hello World. To get started, you need to download Cheerp and [install](Linux-build-instructions) it on your machine. In this tutorial, we will assume a Linux installation of Cheerp available on ``/opt/cheerp/bin/clang++``.
+We will start by building a simple console-based Hello World. To get started, you need to download Cheerp and [install](Linux-build-instructions) it on your machine. In this tutorial, we will assume a Linux installation of Cheerp available on `/opt/cheerp/bin/clang++`.
 
-Let's create a new C++ file ``pong.cpp`` as follows:
+Let's create a new C++ file `pong.cpp` as follows:
 
-```C++
+```cpp
 #include <cheerp/clientlib.h>
 #include <cheerp/client.h>
 
@@ -26,13 +27,13 @@ void webMain()
 }
 ```
 
-``webMain`` represents the main entry point of the compiled application. Since WebAssembly cannot manipulate the DOM directly, we are instructing Cheerp to compile ``domOutput`` in JavaScript with the ``[[cheerp::genericjs]]`` attribute tag. To compile this file to WebAssembly, this simple command will suffice:
+`webMain` represents the main entry point of the compiled application. Since WebAssembly cannot manipulate the DOM directly, we are instructing Cheerp to compile `domOutput` in JavaScript with the `[[cheerp::genericjs]]` attribute tag. To compile this file to WebAssembly, this simple command will suffice:
 
 ```Shell
 /opt/cheerp/bin/clang++ -target cheerp-wasm -O2 -o pong.js pong.cpp
 ```
 
-This command will generate two files: a JavaScript loader (``pong.js``) and a WebAssembly binary (``pong.wasm``). We will need both files to run the application on a browser. When using Cheerp in mixed-output mode, the JavaScript output will also include all the JavaScript output code, which will be normally used to interact with the DOM or any external JavaScript library.
+This command will generate two files: a JavaScript loader (`pong.js`) and a WebAssembly binary (`pong.wasm`). We will need both files to run the application on a browser. When using Cheerp in mixed-output mode, the JavaScript output will also include all the JavaScript output code, which will be normally used to interact with the DOM or any external JavaScript library.
 
 All we need to run this Hello World is a simple HTML page:
 
@@ -52,7 +53,7 @@ All we need to run this Hello World is a simple HTML page:
 
 We only need to reference the JavaScript loader, and the WebAssembly binary will be automatically loaded.
 
-You now need to start a local HTTP server in the directory containing pong.html, pong.js and pong.wasm. Node’s ```http-server -p 8081``` command work well, but any server will do.
+You now need to start a local HTTP server in the directory containing pong.html, pong.js and pong.wasm. Node’s `http-server -p 8081` command work well, but any server will do.
 
 Visit your page, for example “http://127.0.0.1:8081” with any browser, and you should see something like this:
 
@@ -61,13 +62,14 @@ Visit your page, for example “http://127.0.0.1:8081” with any browser, and y
 Great! We can now move on to build an Hello World that writes on the Canvas.
 
 # Hello World (Canvas)
+
 Source code: [pong.cpp](tutorials/tutorial_1/pong2/pong.cpp). Link to the example: [link](https://oldsite.leaningtech.com/cheerp/examples/pong2/pong.html).
 
 What we will do in this tutorial is keeping all the Canvas manipulation in the JavaScript output, and the rest of the game in WebAssembly. We will be doing our rendering using the Canvas 2D Web API, and we will also use `requestAnimationFrame` for best performance. The Canvas 2D API is not directly accessible from WebAssembly, so we will ask the compiler to generate JavaScript code on the relevant sections.
 
 Let's have a look a this example:
 
-```C++
+```cpp
 #include <cheerp/clientlib.h>
 #include <cheerp/client.h>
 
@@ -108,7 +110,7 @@ void webMain()
 }
 ```
 
-We have created a new ```Graphics``` class and tagged it using the ```[[cheerp::genericjs]]``` attribute. Cheerp will generate all the code for this class in standard JavaScript, so that DOM manipulation can be done easily in C++ with no performance or syntax overhead. The code in webMain is compiled to WebAssembly and will use the WebAssembly imports to call the code compiled to JavaScript. 
+We have created a new `Graphics` class and tagged it using the `[[cheerp::genericjs]]` attribute. Cheerp will generate all the code for this class in standard JavaScript, so that DOM manipulation can be done easily in C++ with no performance or syntax overhead. The code in webMain is compiled to WebAssembly and will use the WebAssembly imports to call the code compiled to JavaScript.
 
 Compile this new code like we did before and refresh the browser tab, you should now see something like this:
 
@@ -117,15 +119,16 @@ Compile this new code like we did before and refresh the browser tab, you should
 Great stuff.
 
 # Drawing on the Canvas
+
 Source code: [pong.cpp](tutorials/tutorial_1/pong3/pong.cpp). Link to the example: [link](https://oldsite.leaningtech.com/cheerp/examples/pong3/pong.html).
 
 Let's get started on our game. We will now focus on drawing the paddle.
 
-For this, we will create a ``Platform`` object, which will be the only controllable entity in the game. The object will be moved to the left and to the right using the keyboard and will be rendered as white box on a black background.
+For this, we will create a `Platform` object, which will be the only controllable entity in the game. The object will be moved to the left and to the right using the keyboard and will be rendered as white box on a black background.
 
 Let’s create a new class for the Platform. We will **not** use the [[cheerp::genericjs]] attribute on this class so that all it’s code will be compiled in WebAssembly.
 
-```C++
+```cpp
 class Platform
 {
 private:
@@ -156,13 +159,13 @@ public:
     	void render() const
     	{
             	Graphics::drawRect(x, y, width, height, 0xffffff);
-    	}                                 	 
+    	}
 };
 ```
 
-The class has some basic properties and a render function which then delegates the actual rendering to the ```Graphics``` class since on the WebAssembly side we don’t have access to the DOM. Let’s add the drawRect function to the Graphics class:
+The class has some basic properties and a render function which then delegates the actual rendering to the `Graphics` class since on the WebAssembly side we don’t have access to the DOM. Let’s add the drawRect function to the Graphics class:
 
-```C++
+```cpp
     	static void drawRect(int x, int y, int width, int height, int rgb)
     	{
             	int r = rgb&0xff;
@@ -173,9 +176,9 @@ The class has some basic properties and a render function which then delegates t
     	}
 ```
 
-We now need an instance of the Platform object, let’s put it in the global scope for convenience, and also add a top level function ```mainLoop``` to handle the main loop of the application. This function will clear the background and then render the platform:
+We now need an instance of the Platform object, let’s put it in the global scope for convenience, and also add a top level function `mainLoop` to handle the main loop of the application. This function will clear the background and then render the platform:
 
-```C++
+```cpp
 // Define a global instance for the platform object. A more serious game
 // would manage these objects dynamically
 Platform platform(185, 380, 30, 7);
@@ -189,9 +192,9 @@ void mainLoop()
 }
 ```
 
-Lastly, we need to add an handler for drawing an animation in our ```Graphics``` class. The browser will call the handler in sync with the display refresh rate, which generally is at 60 fps.
+Lastly, we need to add an handler for drawing an animation in our `Graphics` class. The browser will call the handler in sync with the display refresh rate, which generally is at 60 fps.
 
-```C++
+```cpp
 private:
         // This method is the handler for requestAnimationFrame. The browser will call this
         // in sync with its graphics loop, usually at 60 fps.
@@ -202,8 +205,9 @@ private:
         }
 ```
 
-We then need to call the handler one first time in ```Graphics::initializeCanvas```:
-```C++
+We then need to call the handler one first time in `Graphics::initializeCanvas`:
+
+```cpp
                 client::requestAnimationFrame(cheerp::Callback(rafHandler));
 ```
 
@@ -213,13 +217,14 @@ Let's recompile, and the result should look like this:
 Looking good.
 
 # Animation and Keyboard events
+
 Source code: [pong.cpp](tutorials/tutorial_1/pong4/pong.cpp). Link to the example: [link](https://oldsite.leaningtech.com/cheerp/examples/pong4/pong.html).
 
-We now need to be able to move the platform around. We will add a ```keydown``` event handler for this purpose. Since it’s a DOM interaction, this code will be tagged as ```genericjs```, but it will update the values of the ```Platform``` object which is compiled to WebAssembly.
+We now need to be able to move the platform around. We will add a `keydown` event handler for this purpose. Since it’s a DOM interaction, this code will be tagged as `genericjs`, but it will update the values of the `Platform` object which is compiled to WebAssembly.
 
-Let's add two new methods to ``Platform``:
+Let's add two new methods to `Platform`:
 
-```C++
+```cpp
     	void moveLeft()
     	{
             x -= 5;
@@ -231,9 +236,9 @@ Let's add two new methods to ``Platform``:
 
 ```
 
-as well as a keyDown event handler to the Graphics class which lives in ```genericjs``` code.
+as well as a keyDown event handler to the Graphics class which lives in `genericjs` code.
 
-```C++
+```cpp
 void Graphics::keyDownHandler(client::KeyboardEvent* e)
 {
     	if(e->get_keyCode() == 37)
@@ -243,9 +248,9 @@ void Graphics::keyDownHandler(client::KeyboardEvent* e)
 }
 ```
 
-Let's also register an ```EventListener``` in ```Graphics::initializeCanvas```.
+Let's also register an `EventListener` in `Graphics::initializeCanvas`.
 
-```C++
+```cpp
     			client::document.addEventListener("keydown", cheerp::Callback(keyDownHandler));
 ```
 
@@ -255,11 +260,12 @@ You should now be able to move the paddle around like this:
 Wow.
 
 # Final steps
+
 Source code: [pong.cpp](tutorials/tutorial_1/pong5/pong.cpp). Link to the example: [link](https://oldsite.leaningtech.com/cheerp/examples/pong5/pong.html).
 
-We'll now focus on the ball. We will create a ```Ball``` class, including a basic physical model of position and velocity. We will keep this class in WebAssembly, so no need for a ``[[cheerp::genericjs]]`` tag.
+We'll now focus on the ball. We will create a `Ball` class, including a basic physical model of position and velocity. We will keep this class in WebAssembly, so no need for a `[[cheerp::genericjs]]` tag.
 
-```C++
+```cpp
 class Ball
 {
 private:
@@ -303,11 +309,11 @@ public:
 };
 ```
 
-The ```Ball``` class has methods to update its position, check for collisions and for rendering.
+The `Ball` class has methods to update its position, check for collisions and for rendering.
 
-To visualize our ball on screen we need to implement ```Graphics::drawCircle```:
+To visualize our ball on screen we need to implement `Graphics::drawCircle`:
 
-```C++
+```cpp
         static void drawCircle(int x, int y, int radius, int rgb)
         {
                 int r = rgb&0xff;
@@ -320,17 +326,17 @@ To visualize our ball on screen we need to implement ```Graphics::drawCircle```:
         }
 ```
 
-And, as with ```Platform```, instantiate a ```Ball``` object in the global scope.
+And, as with `Platform`, instantiate a `Ball` object in the global scope.
 
-```C++
+```cpp
 Ball ball(200, 200, 2, -2);
 ```
 
-We will now expand the ```mainLoop``` method to call them in sequence. ```Ball::collide``` also checks if the ball has gone past the bottom of the screen, which is our losing condition, and ```mainLoop``` is going to report that by drawing some text.
+We will now expand the `mainLoop` method to call them in sequence. `Ball::collide` also checks if the ball has gone past the bottom of the screen, which is our losing condition, and `mainLoop` is going to report that by drawing some text.
 
-```C++
+```cpp
 void mainLoop()
-{  	 
+{
     	// Reset the background to black
     	Graphics::drawRect(0, 0, 400, 400, 0);
     	// Draw the platform
@@ -353,8 +359,8 @@ Not too bad!
 
 # Conclusions
 
-WebAssembly is an amazing opportunity to truly realize the promise of the Web as a universal platform. 
+WebAssembly is an amazing opportunity to truly realize the promise of the Web as a universal platform.
 
-[Cheerp](https://github.com/leaningtech/cheerp-meta) contributes to the WebAssembly and 'Web as a platform' ecosystem by enabling C/C++ to be compiled to a combination of high-performance WebAssembly code, and high-flexilibity JavaScript code, with full transparent interaction with the DOM and external JavaScript libraries, and dynamic memory / garbage collection.  
+[Cheerp](https://github.com/leaningtech/cheerp-meta) contributes to the WebAssembly and 'Web as a platform' ecosystem by enabling C/C++ to be compiled to a combination of high-performance WebAssembly code, and high-flexilibity JavaScript code, with full transparent interaction with the DOM and external JavaScript libraries, and dynamic memory / garbage collection.
 
 You can [download Cheerp](https://leaningtech.com/cheerp/#download) today and start using it in a few minutes. Give it a try!

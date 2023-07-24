@@ -7,15 +7,14 @@ The build instructions are provided for the stable release, Cheerp 3.0, or for t
 
 [Scroll to bottom](https://docs.leaningtech.com/cheerp/Linux-build-instructions.html#build-latest-version) for the instruction for the latest version, or keep reading to build stable.
 
-
 ## Prerequisites
 
 We assume that you have git, cmake, python and a modern C++ compiler properly installed.
 Example, using apt-get:
+
 ```bash
 apt-get install cmake python3 python3-distutils ninja-build gcc lld git
 ```
-
 
 ## Build stable version, Cheerp 3.0
 
@@ -45,7 +44,6 @@ cd ..
 
 By default Cheerp will be installed in `/opt/cheerp`, with the main executable at `/opt/cheerp/bin/clang++`.
 If you need write privileges to `/opt/cheerp`, then prepend all install commands with `sudo`.
-
 
 ### Build Cheerp/2: utilities and libraries, stable version
 
@@ -98,8 +96,8 @@ cd ../..
 
 Now you should have a working Cheerp installation, to test it, follow [here](https://docs.leaningtech.com/cheerp/Linux-build-instructions#hello-world-in-cheerp).
 
-
 ## Build latest version
+
 This allows to benefit from the latest develpments and bug fixes, but we reserve the possibility of forward-incompatible changes.
 
 ### Get the sources, latest version
@@ -128,7 +126,6 @@ cd ..
 
 By default Cheerp will be installed in `/opt/cheerp`, with the main executable at `/opt/cheerp/bin/clang++`.
 If you need write privileges to `/opt/cheerp`, then prepend all install commands with `sudo`.
-
 
 ### Build Cheerp/2: utilities and libraries, latest version
 
@@ -179,10 +176,9 @@ cmake --install build_asmjs
 cd ../..
 ```
 
-
 ## "Hello, World" in Cheerp
 
-```c++
+```cpp
 //save as example.cpp
 #include <iostream>
 
@@ -193,7 +189,7 @@ int main()
 }
 ```
 
-```/opt/cheerp/bin/clang++ example.cpp -o cheerp_example.js -O3 && node cheerp_example.js```
+`/opt/cheerp/bin/clang++ example.cpp -o cheerp_example.js -O3 && node cheerp_example.js`
 Should compile and execute the relevant file.
 
 ## Cheerp unit tests
