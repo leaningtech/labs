@@ -1,3 +1,7 @@
+---
+title: Cheerp basics
+---
+
 Cheerp generates JavaScript code, which should be integrated into an HTML page to be executed in a browser. The following trivial example should be ok to start.
 
 ```html
