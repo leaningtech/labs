@@ -30,4 +30,8 @@ export default defineConfig({
 		},
 	},
 	compressHTML: prod,
+	build: {
+		format: "file",
+	},
+	trailingSlash: "never",
 });
