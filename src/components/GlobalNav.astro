@@ -16,12 +16,12 @@ const links = [
 
 <nav
 	aria-label="Primary navigation"
-	class="bg-black text-white text-sm font-semibold leading-6 border-b border-stone-800 shadow-xl"
+	class="sticky top-0 z-20 bg-stone-900 bg-opacity-20 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-800"
 >
 	<div
-		class="container mx-auto h-16 py-4 flex items-center justify-between gap-6 whitespace-nowrap"
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
 	>
-		<div class="basis-64 flex gap-4">
+		<div class="basis-80 flex gap-4">
 			<a href="/">
 				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
 			</a>
@@ -39,7 +39,7 @@ const links = [
 			}
 		</div>
 
-		<div class="border-l border-stone-800 h-6"></div>
+		<div class="border-l border-stone-800 h-6 mx-8"></div>
 
 		<a
 			href={DISCORD_URL}

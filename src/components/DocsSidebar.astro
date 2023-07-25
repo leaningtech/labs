@@ -12,12 +12,18 @@ const pathname = Astro.url.pathname.replace(".html", "");
 // TODO: responsive - collapse to hamburger on sm
 ---
 
-<aside class="w-64 xl:text-lg whitespace-nowrap overflow-hidden">
-	<a href="/cheerp" class="block mb-8">
+<aside
+	is="docs-sidebar"
+	class="bg-stone-900 fixed z-10 px-8 w-80 h-screen overflow-y-auto lg:text-sm"
+>
+	<a
+		href="/cheerp"
+		class="block pt-8 pb-4 sticky top-0 bg-stone-900 shadow-xl shadow-stone-900"
+	>
 		<img src={productLogotype} alt="Cheerp" class="h-10" />
 	</a>
 
-	<ul class="space-y-1">
+	<ul class="py-4">
 		{
 			links.map((link) => {
 				if (!link) throw new Error("dead link");
@@ -28,16 +34,16 @@ const pathname = Astro.url.pathname.replace(".html", "");
 				return (
 					<li
 						class:list={[
-							"group px-1 py-0.5 border-l-4 border-transparent",
+							"group px-4 py-1 border-l border-stone-800 text-stone-400 hover:border-stone-400 hover:text-white",
 							{
-								"font-semibold text-primary-500 !border-primary-500": isActive,
+								"font-semibold !text-primary-500 !border-primary-600 bg-primary-600 bg-opacity-5":
+									isActive,
 							},
 						]}
+						data-is-active={isActive}
 					>
 						<a {href} class="block">
-							<span class="px-2 py-1 rounded group-hover:bg-stone-800">
-								{link.data.title || link.id}
-							</span>
+							{link.data.title || link.id}
 						</a>
 					</li>
 				);
@@ -45,3 +51,51 @@ const pathname = Astro.url.pathname.replace(".html", "");
 		}
 	</ul>
 </aside>
+
+<div class="w-80 h-0">
+	<!-- Take up fixed space -->
+</div>
+
+<script>
+	function loadPos(): number {
+		const pos = parseFloat(
+			sessionStorage.getItem("docs-sidebar-scroll") || "0",
+		);
+		if (isNaN(pos)) return 0;
+		return pos;
+	}
+
+	function savePos(pos: number) {
+		sessionStorage.setItem("docs-sidebar-scroll", pos.toString());
+	}
+
+	class DocsSidebar extends HTMLElement {
+		constructor() {
+			super();
+
+			// Maintain scroll position across page reloads
+			this.scrollTop = loadPos();
+			window.addEventListener("beforeunload", () => {
+				savePos(this.scrollTop);
+			});
+
+			// If the active item is out of view, scroll so it is in the center
+			const activeEl = this.querySelector<HTMLLIElement>("li[data-is-active]");
+			if (activeEl) {
+				const scrollRect = this.getBoundingClientRect();
+				const activeRect = activeEl.getBoundingClientRect();
+
+				const top = activeEl.offsetTop;
+				const bottom = top - scrollRect.height + activeRect.height;
+
+				if (this.scrollTop > top || this.scrollTop < bottom) {
+					this.scrollTop = top - scrollRect.height / 2 + activeRect.height / 2;
+				}
+			} else {
+				console.warn("docs-sidebar didn't find active link");
+			}
+		}
+	}
+
+	customElements.define("docs-sidebar", DocsSidebar, { extends: "aside" });
+</script>

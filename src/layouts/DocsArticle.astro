@@ -13,24 +13,31 @@ const collection = await getCollection("cheerp");
 ---
 
 <Shell {title}>
-	<div
-		class="lg:container mx-auto w-full px-4 py-12 flex gap-8 justify-between"
-	>
+	<div class="max-w-screen-2xl w-full mx-auto flex">
 		<DocsSidebar {collection} />
-		<main class="grow max-w-prose" data-pagefind-body>
-			<div class="prose prose-stone dark:prose-invert">
+		<main class="grow p-4 sm:px-6 md:px-8" data-pagefind-body>
+			<div class="max-w-prose prose prose-stone dark:prose-invert">
 				<div class="mb-6">Breadcrumbs here</div>
 				<h1>{title}</h1>
 				<slot />
 			</div>
 		</main>
-		<aside class="w-32 xl:w-64 hidden lg:block">
-			<h5 class="font-semibold mb-2">On this page</h5>
-			<ul>
-				<li>Table</li>
-				<li>of</li>
-				<li>contents</li>
-			</ul>
+		<aside class="w-32 xl:w-64 p-4 space-y-8 text-sm hidden lg:block">
+			<section>
+				<h5 class="font-semibold mb-2">On this page</h5>
+				<ul>
+					<li>Table</li>
+					<li>of</li>
+					<li>contents</li>
+				</ul>
+			</section>
+			<section>
+				<h5 class="font-semibold mb-2">Contribute</h5>
+				<ul>
+					<li>Edit this page</li>
+					<li>Give feedback</li>
+				</ul>
+			</section>
 		</aside>
 	</div>
 </Shell>
