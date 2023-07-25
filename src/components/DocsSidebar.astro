@@ -6,7 +6,16 @@ interface Props {
 	collection: CollectionEntry<"cheerp">[];
 }
 
-const links = Astro.props.collection;
+const sections = [
+	{
+		title: "Getting started",
+		links: Astro.props.collection,
+	},
+	{
+		title: "Another section",
+		links: Astro.props.collection,
+	},
+];
 const pathname = Astro.url.pathname.replace(".html", "");
 
 // TODO: responsive - collapse to hamburger on sm
@@ -18,33 +27,42 @@ const pathname = Astro.url.pathname.replace(".html", "");
 >
 	<a
 		href="/cheerp"
-		class="block pt-8 pb-4 sticky top-0 bg-stone-900 shadow-xl shadow-stone-900"
+		class="block pt-8 pb-4 sticky top-0 bg-stone-900 shadow-lg shadow-stone-900"
 	>
-		<img src={productLogotype} alt="Cheerp" class="h-10" />
+		<img src={productLogotype} alt="Cheerp" class="h-12" />
 	</a>
 
-	<ul class="py-4">
+	<ul>
 		{
-			links.map((link) => {
-				if (!link) throw new Error("dead link");
-
-				const href = `/cheerp/${link.slug}`;
-				const isActive = href === pathname;
-
+			sections.map((section) => {
 				return (
-					<li
-						class:list={[
-							"group px-4 py-1 border-l border-stone-800 text-stone-400 hover:border-stone-400 hover:text-white",
-							{
-								"font-semibold !text-primary-500 !border-primary-600 bg-primary-600 bg-opacity-5":
-									isActive,
-							},
-						]}
-						data-is-active={isActive}
-					>
-						<a {href} class="block">
-							{link.data.title || link.id}
-						</a>
+					<li class="py-4">
+						<h5 class="mb-2 font-semibold text-slate-100">{section.title}</h5>
+						<ul>
+							{section.links.map((link) => {
+								if (!link) throw new Error("dead link");
+
+								const href = `/cheerp/${link.slug}`;
+								const isActive = href === pathname;
+
+								return (
+									<li
+										class:list={[
+											"group px-4 py-1 border-l border-stone-800 text-stone-400 hover:border-stone-400 hover:text-white",
+											{
+												"font-semibold !text-primary-500 !border-primary-600 bg-primary-600 bg-opacity-5":
+													isActive,
+											},
+										]}
+										data-is-active={isActive}
+									>
+										<a {href} class="block">
+											{link.data.title || link.id}
+										</a>
+									</li>
+								);
+							})}
+						</ul>
 					</li>
 				);
 			})
