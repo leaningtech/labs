@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 
 interface Props {
 	collection: CollectionEntry<"cheerp">[];
@@ -12,6 +13,10 @@ const pathname = Astro.url.pathname.replace(".html", "");
 ---
 
 <aside class="w-64 xl:text-lg whitespace-nowrap overflow-hidden">
+	<a href="/cheerp" class="block mb-8">
+		<img src={productLogotype} alt="Cheerp" class="h-10" />
+	</a>
+
 	<ul class="space-y-1">
 		{
 			links.map((link) => {

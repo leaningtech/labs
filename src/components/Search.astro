@@ -6,20 +6,15 @@ import Search from "astro-pagefind/components/Search";
 <site-search class="self-stretch md:w-60">
 	<button
 		data-open-modal
-		class="group border-stone-700 hover:border-stone-400 md:border rounded-md px-2 w-full h-full flex items-center gap-1.5 grow cursor-pointer"
+		class="group border-stone-800 hover:border-stone-500 md:border-2 rounded-md px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer"
 	>
-		<Icon
-			name="fa-solid:search"
-			class="md:ml-2 w-4 h-4 text-stone-200 group-hover:text-white"
-		/>
-		<span
-			class="font-semibold text-stone-400 group-hover:text-white sr-only md:not-sr-only"
-		>
+		<Icon name="fa-solid:search" class="w-4 h-4 mr-0.5" />
+		<span class="group-hover:text-white sr-only md:not-sr-only">
 			Search...
 		</span>
 		<div class="hidden md:block grow"></div>
 		<div
-			class="bg-stone-900 text-stone-600 px-2 rounded flex font-mono font-bold sr-only md:not-sr-only"
+			class="font-mono font-bold text-sm"
 			aria-label="Keybinding to open search"
 		>
 			/
@@ -28,7 +23,7 @@ import Search from "astro-pagefind/components/Search";
 
 	<dialog
 		aria-label="Search"
-		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl"
+		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl border-2 border-stone-700"
 	>
 		<Search className="search" />
 	</dialog>

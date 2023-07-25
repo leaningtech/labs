@@ -1,7 +1,6 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
 import DocsArticle from "../../layouts/DocsArticle.astro";
-import cheerp from "./product";
 
 export async function getStaticPaths() {
 	const articles = await getCollection("cheerp");
@@ -17,6 +16,6 @@ const article = Astro.props;
 const { Content } = await article.render();
 ---
 
-<DocsArticle product={cheerp} title={article.data.title}>
+<DocsArticle title={article.data.title}>
 	<Content />
 </DocsArticle>

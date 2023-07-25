@@ -5,55 +5,49 @@ import Search from "./Search.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
-import logotype from "../assets/branding/labs/logotype-white.svg";
+import companyLogo from "../assets/branding/company/tower.svg";
 
 const links = [
-	{ name: "Blog", href: "/blog" },
+	{ name: "Docs", href: "/docs" },
 	{ name: "Demos", href: "/demos" },
+	{ name: "Blog", href: "/blog" },
 ];
 ---
 
-<nav aria-label="Primary navigation" class="bg-stone-900 text-white">
+<nav
+	aria-label="Primary navigation"
+	class="bg-black text-white text-sm font-semibold leading-6 border-b border-stone-800 shadow-xl"
+>
 	<div
-		class="container mx-auto h-14 p-2 sm:px-6 lg:px-8 flex items-stretch justify-between gap-6 whitespace-nowrap"
+		class="container mx-auto h-16 py-4 flex items-center justify-between gap-6 whitespace-nowrap"
 	>
-		<div class="grow flex items-center gap-6 max-w-2xl">
-			<a href="/" class="flex-shrink-0 hover:opacity-90">
-				<!-- TODO: bespoke, locally-hosted svg -->
-				<img src={logotype} alt={SITE_TITLE} class="w-20" />
+		<div class="basis-64 flex gap-4">
+			<a href="/">
+				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
 			</a>
-
-			<Search />
 		</div>
 
-		<div class="flex items-center gap-4 ml-auto">
+		<Search />
+
+		<div class="flex items-center gap-8 ml-auto">
 			{
 				links.map((link) => (
-					<a href={link.href} class="hover:underline">
+					<a href={link.href} class="hover:text-primary-500">
 						{link.name}
 					</a>
 				))
 			}
 		</div>
 
+		<div class="border-l border-stone-800 h-6"></div>
+
 		<a
 			href={DISCORD_URL}
-			class="flex items-center gap-2 font-semibold hover:opacity-90"
+			class="bg-blurple rounded-md px-4 self-stretch flex items-center gap-1.5"
 		>
-			<div
-				class="bg-blurple rounded-md px-4 self-stretch flex items-center gap-1.5"
-			>
-				<Icon name="fa-brands:discord" class="w-6 h-6" />
-				 Join the community
-				<span class="sr-only">on Discord</span>
-			</div>
-			{
-				/*<div
-				class="bg-stone-800 text-stone-300 text-sm rounded-full flex items-center justify-center h-8 w-24"
-			>
-				<DiscordPresenceCount />
-			</div>*/
-			}
+			<Icon name="fa-brands:discord" class="w-6 h-6" />
+			 Join the community
+			<span class="sr-only">on Discord</span>
 		</a>
 	</div>
 </nav>

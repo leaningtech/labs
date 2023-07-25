@@ -1,22 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-import type { Props as ProductNavProps } from "../components/ProductNav.astro";
 import Shell from "./Shell.astro";
-import ProductNav from "../components/ProductNav.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
 
 interface Props {
-	product: ProductNavProps;
 	title: string;
 }
 
-const { product, title } = Astro.props;
+const { title } = Astro.props;
 
-const collection = await getCollection("cheerp"); // TODO: get from product
+const collection = await getCollection("cheerp");
 ---
 
 <Shell {title}>
-	<ProductNav {...product} />
 	<div
 		class="lg:container mx-auto w-full px-4 py-12 flex gap-8 justify-between"
 	>
