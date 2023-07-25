@@ -1,16 +1,17 @@
 ---
-title: Getting started
+title: Getting started with Cheerp
+slug: guides/getting-started
 ---
 
 The purpose of this page is setting the basics of working with Cheerp, getting to the compilation of a "Hello World" example program and pointing to further reading and recommended tutorials.
 
 This is the table of contents:
 
-- [Install](Getting-started#install "Install")
-- [Cheerp basics](Getting-started#cheerp-basics "Cheerp basics")
-- [Ready?](Getting-started#ready "Ready?")
-- [Hello, World!](Getting-started#hello-world "Hello, World!")
-- [Tutorials](Getting-started#tutorials "Tutorials")
+- [Install](#install "Install")
+- [Cheerp basics](#cheerp-basics "Cheerp basics")
+- [Ready?](#ready "Ready?")
+- [Hello, World!](#hello-world "Hello, World!")
+- [Tutorials](#tutorials "Tutorials")
 
 ## Install
 

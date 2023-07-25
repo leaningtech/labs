@@ -4,10 +4,18 @@ import DocsArticle from "../../layouts/DocsArticle.astro";
 
 export async function getStaticPaths() {
 	const articles = await getCollection("cheerp");
-	return articles.map((article) => ({
-		params: { slug: article.slug },
-		props: article,
-	}));
+	return articles.map((article) => {
+		if (article.slug.match(/\/\d/g)) {
+			throw new Error(
+				`provide a custom slug for "${article.id}" which doesn't contain numbers`,
+			);
+		}
+
+		return {
+			params: { slug: article.slug },
+			props: article,
+		};
+	});
 }
 
 type Props = CollectionEntry<"cheerp">;

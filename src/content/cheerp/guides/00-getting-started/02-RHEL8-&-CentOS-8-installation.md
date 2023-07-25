@@ -1,6 +1,7 @@
 ---
-title: RHEL8 and CentOS installation
---- 
+title: Installation on RHEL8 and CentOS
+slug: guides/getting-started/rhel8-centos8
+---
 
 We provide pre-built RPM packages for RHEL8 (and CentOS 8).
 
@@ -26,6 +27,7 @@ And install the `cheerp-core` package:
 ```
 yum install cheerp-core
 ```
+
 Note that the nightly and stable repos are **NOT** compatible, so be sure to enable just one of them. Also, going from nightly to stable is always considered a downgrade by the package manager.
 
 # Getting Started
@@ -35,5 +37,6 @@ If you are new to Cheerp, go [here](./Getting-Started) for more information on h
 # Support
 
 For support on Cheerp RPM packages or Cheerp in general, please refer to our two main channels:
+
 1. [Cheerp Discord channel](https://discord.leaningtech.com)
 2. [Cheerp GitHub Issue Tracking](https://github.com/leaningtech/cheerp-meta/issues)

@@ -1,22 +1,42 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import {
+	type Mode,
+	type Group,
+	idToTitle,
+	getCollectionGroupsByMode,
+} from "../lib/nav";
 import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 
 interface Props {
-	collection: CollectionEntry<"cheerp">[];
+	mode: Mode;
+	groups: Group[];
 }
 
-const sections = [
+const { mode, groups } = Astro.props;
+const pathname = Astro.url.pathname.replace(".html", "");
+
+const modes: { mode: Mode; name: string; icon: string }[] = [
 	{
-		title: "Getting started",
-		links: Astro.props.collection,
+		mode: "guides",
+		name: "How-to guides",
+		icon: "🤔",
 	},
 	{
-		title: "Another section",
-		links: Astro.props.collection,
+		mode: "tutorials",
+		name: "Tutorials",
+		icon: "📚",
+	},
+	{
+		mode: "reference",
+		name: "Reference",
+		icon: "📖",
+	},
+	{
+		mode: "explanation",
+		name: "Explanation",
+		icon: "🧠",
 	},
 ];
-const pathname = Astro.url.pathname.replace(".html", "");
 
 // TODO: responsive - collapse to hamburger on sm
 ---
@@ -27,22 +47,50 @@ const pathname = Astro.url.pathname.replace(".html", "");
 >
 	<a
 		href="/cheerp"
-		class="block pt-8 pb-4 sticky top-0 bg-stone-900 shadow-lg shadow-stone-900"
+		class="block pt-8 pb-4 mb-4 sticky top-0 bg-stone-900 shadow-lg shadow-stone-900"
 	>
-		<img src={productLogotype} alt="Cheerp" class="h-12" />
+		<img src={productLogotype} alt="Cheerp" class="h-12 mx-auto" />
 	</a>
+
+	<ul class="leading-8 font-semibold mb-4 text-base space-y-2">
+		{
+			modes.map((item) => (
+				<li>
+					<a
+						href={`/${item.mode}`}
+						class:list={[
+							"group flex items-center gap-4 text-stone-400 hover:text-white",
+							{
+								"!text-cheerp": item.mode === mode,
+							},
+						]}
+					>
+						<span
+							class:list={[
+								"bg-stone-800 group-hover:bg-stone-700 w-8 h-8 rounded-md flex items-center justify-center text-xl",
+								{
+									"!bg-cheerp": item.mode === mode,
+								},
+							]}
+						>
+							{item.icon}
+						</span>
+						<span>{item.name}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
 
 	<ul>
 		{
-			sections.map((section) => {
+			groups.map((group) => {
 				return (
 					<li class="py-4">
-						<h5 class="mb-2 font-semibold text-slate-100">{section.title}</h5>
+						<h5 class="mb-2 font-semibold text-slate-100">{group.title}</h5>
 						<ul>
-							{section.links.map((link) => {
-								if (!link) throw new Error("dead link");
-
-								const href = `/cheerp/${link.slug}`;
+							{group.entries.map((entry) => {
+								const href = `/cheerp/${entry.slug}`;
 								const isActive = href === pathname;
 
 								return (
@@ -57,7 +105,7 @@ const pathname = Astro.url.pathname.replace(".html", "");
 										data-is-active={isActive}
 									>
 										<a {href} class="block">
-											{link.data.title || link.id}
+											{idToTitle(entry.id)}
 										</a>
 									</li>
 								);

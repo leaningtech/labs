@@ -35,6 +35,7 @@ module.exports = {
 					100: "#fad4dd",
 					50: "#fde9ee",
 				},
+				cheerp: "#56f4ec",
 				blurple: "#5865F2", // https://discord.com/branding
 			},
 			typography: (theme) => ({

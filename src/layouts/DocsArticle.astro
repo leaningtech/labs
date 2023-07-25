@@ -1,7 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
+import { getCollectionGroupsByMode } from "../lib/nav";
 
 interface Props {
 	title: string;
@@ -9,12 +9,14 @@ interface Props {
 
 const { title } = Astro.props;
 
-const collection = await getCollection("cheerp");
+const product = "cheerp"; // TODO: first component of pathname
+const mode = "guides"; // TODO: second component of pathname
+const groups = await getCollectionGroupsByMode(product, mode);
 ---
 
 <Shell {title}>
 	<div class="max-w-screen-2xl w-full mx-auto flex">
-		<DocsSidebar {collection} />
+		<DocsSidebar {mode} {groups} />
 		<main class="grow p-4 sm:px-6 md:px-8" data-pagefind-body>
 			<div class="max-w-prose prose prose-stone dark:prose-invert">
 				<div class="mb-6">Breadcrumbs here</div>
