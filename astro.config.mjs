@@ -3,7 +3,6 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
-import cloudflare from "@astrojs/cloudflare";
 import pagefind from "astro-pagefind";
 
 const prod = process.env.NODE_ENV === "production";
@@ -31,6 +30,4 @@ export default defineConfig({
 		},
 	},
 	compressHTML: prod,
-	output: "hybrid",
-	adapter: cloudflare(),
 });
