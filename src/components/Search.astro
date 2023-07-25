@@ -71,6 +71,7 @@ import Search from "astro-pagefind/components/Search";
 			window.addEventListener("keydown", (event) => {
 				if (event.key === "/") {
 					open();
+					event.preventDefault(); // Don't put `/` in input
 				} else if (event.metaKey && event.key === "k") {
 					toggle();
 				}
