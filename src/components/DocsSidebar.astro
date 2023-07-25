@@ -6,6 +6,7 @@ interface Props {
 }
 
 const links = Astro.props.collection;
+const pathname = Astro.url.pathname.replace(".html", "");
 
 // TODO: responsive - collapse to hamburger on sm
 ---
@@ -17,7 +18,7 @@ const links = Astro.props.collection;
 				if (!link) throw new Error("dead link");
 
 				const href = `/cheerp/${link.slug}`;
-				const isActive = href === Astro.url.pathname;
+				const isActive = href === pathname;
 
 				return (
 					<li
