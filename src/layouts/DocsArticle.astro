@@ -1,7 +1,7 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getCollectionGroupsByMode } from "../lib/nav";
+import { getCollectionGroupsByMode, isProduct, isMode } from "../lib/nav";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
 import ContentPagination from "../components/ContentPagination.astro";
@@ -13,8 +13,12 @@ interface Props {
 
 const { id, title } = Astro.props;
 
-const product = "cheerp"; // TODO: first component of pathname
-const mode = "guides"; // TODO: second component of pathname
+// TODO: probably better to have these come in as props?
+//
+const [, product, mode] = Astro.url.pathname.split("/");
+if (!isProduct(product) || !isMode(mode))
+	throw new Error("DocsArticle expects url /[product]/[mode]/[...]");
+
 const groups = await getCollectionGroupsByMode(product, mode);
 
 const today = new Date();
@@ -23,7 +27,7 @@ const today = new Date();
 <Shell {title}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div data-sidebar-wrapper class="hidden lg:block shadow-xl lg:shadow-none">
-			<DocsSidebar {mode} {groups} />
+			<DocsSidebar {product} {mode} {groups} />
 		</div>
 		<div
 			data-backdrop

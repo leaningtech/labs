@@ -11,6 +11,14 @@ export type Mode = "guides" | "tutorials" | "reference" | "explanation";
 
 export type Product = "cheerp";
 
+export function isMode(value: unknown): value is Mode {
+	return value === "guides" || value === "tutorials" || value === "reference";
+}
+
+export function isProduct(value: unknown): value is Product {
+	return value === "cheerp";
+}
+
 /** Sorts a collection into an array of groups, by subdirectory. */
 export function calcCollectionGroups(
 	collection: CollectionEntry<"cheerp">[],
