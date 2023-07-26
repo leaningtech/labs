@@ -1,11 +1,7 @@
 ---
-import {
-	type Mode,
-	type Group,
-	idToTitle,
-	getCollectionGroupsByMode,
-} from "../lib/nav";
+import { type Mode, type Group, idToTitle } from "../lib/nav";
 import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
+import { Icon } from "astro-icon";
 
 interface Props {
 	mode: Mode;
@@ -37,20 +33,23 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		icon: "🧠",
 	},
 ];
-
-// TODO: responsive - collapse to hamburger on sm
 ---
 
 <aside
 	is="docs-sidebar"
-	class="bg-stone-900 fixed z-10 px-8 w-80 h-screen overflow-y-auto lg:text-sm"
+	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 w-96 lg:w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
 >
 	<a
 		href="/cheerp"
-		class="block pt-8 pb-4 mb-4 sticky top-0 bg-stone-900 shadow-lg shadow-stone-900"
+		class="block pt-8 pb-4 mb-4 lg:sticky top-0 lg:bg-shadow-stone-900 lg:shadow-lg shadow-stone-900"
 	>
 		<img src={productLogotype} alt="Cheerp" class="h-12 mx-auto" />
 	</a>
+
+	<button data-sidebar-close class="absolute top-4 right-4 lg:hidden">
+		<span class="sr-only">Close navigation</span>
+		<Icon name="jam:close" class="w-6 h-6 text-stone-400 hover:text-white" />
+	</button>
 
 	<ul class="leading-8 font-semibold mb-4 text-base space-y-2">
 		{
@@ -118,7 +117,7 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 	</ul>
 </aside>
 
-<div class="w-80 h-0">
+<div class="w-80 h-screen px-8 hidden lg:block">
 	<!-- Take up fixed space -->
 </div>
 

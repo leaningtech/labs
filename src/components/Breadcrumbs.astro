@@ -20,7 +20,10 @@ const crumbs = Astro.url.pathname
 		{
 			crumbs.map(({ title, url, isLast }) => (
 				<li class="inline-flex items-center">
-					<a href={url} class="hover:text-primary-500">
+					<a
+						href={url}
+						class:list={["hover:text-primary-500", { "font-semibold": isLast }]}
+					>
 						{title}
 					</a>
 					{!isLast && (

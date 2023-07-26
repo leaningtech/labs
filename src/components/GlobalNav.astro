@@ -21,7 +21,7 @@ const links = [
 	<div
 		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
 	>
-		<div class="basis-80 flex gap-4">
+		<div class="basis-16 lg:basis-80 flex gap-4">
 			<a href="/">
 				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
 			</a>
@@ -29,7 +29,7 @@ const links = [
 
 		<Search />
 
-		<div class="flex items-center gap-8 ml-auto">
+		<div class="flex items-center gap-4 xl:gap-8 ml-auto">
 			{
 				links.map((link) => (
 					<a href={link.href} class="hover:text-primary-500">
@@ -39,7 +39,7 @@ const links = [
 			}
 		</div>
 
-		<div class="border-l border-stone-800 h-6 mx-8"></div>
+		<div class="border-l border-stone-800 h-6 mx-4 xl:mx-8"></div>
 
 		<a
 			href={DISCORD_URL}
