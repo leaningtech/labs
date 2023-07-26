@@ -1,9 +1,10 @@
 ---
+import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
 ---
 
 <Shell>
-	<div class="container mx-auto px-4 py-12">
+	<div class="container mx-auto px-4 py-12 grow">
 		<div class="md:columns-2">
 			<div>
 				<!-- https://github.com/tailwindlabs/tailwindcss/pull/11320 -->
@@ -20,4 +21,5 @@ import Shell from "../layouts/Shell.astro";
 			<img src="https://placekitten.com/400/300" />
 		</div>
 	</div>
+	<Footer />
 </Shell>

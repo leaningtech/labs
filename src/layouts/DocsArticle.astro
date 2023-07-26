@@ -14,6 +14,8 @@ const { title } = Astro.props;
 const product = "cheerp"; // TODO: first component of pathname
 const mode = "guides"; // TODO: second component of pathname
 const groups = await getCollectionGroupsByMode(product, mode);
+
+const today = new Date();
 ---
 
 <Shell {title}>
@@ -26,10 +28,7 @@ const groups = await getCollectionGroupsByMode(product, mode);
 			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur"
 		>
 		</div>
-		<main
-			class="grow p-4 sm:px-6 md:px-8 w-full max-w-3xl mx-auto lg:mx-0"
-			data-pagefind-body
-		>
+		<main class="grow p-4 sm:px-6 md:px-8 w-full max-w-3xl mx-auto lg:mx-0">
 			<div class="mb-2 flex items-center gap-4">
 				<button data-sidebar-toggle class="lg:hidden">
 					<span class="sr-only">Open navigation menu</span>
@@ -38,10 +37,16 @@ const groups = await getCollectionGroupsByMode(product, mode);
 				<Breadcrumbs />
 			</div>
 
-			<div class="prose prose-stone dark:prose-invert">
+			<main data-pagefind-body class="prose prose-stone dark:prose-invert">
 				<h1>{title}</h1>
 				<slot />
-			</div>
+			</main>
+
+			<footer
+				class="mt-10 py-10 border-t border-t-stone-800 text-stone-500 text-sm"
+			>
+				© Leaning Technologies {today.getFullYear()}
+			</footer>
 		</main>
 		<aside class="w-32 xl:w-64 p-4 space-y-8 text-sm hidden lg:block">
 			<section>
