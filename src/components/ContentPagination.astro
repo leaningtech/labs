@@ -1,0 +1,62 @@
+---
+// Provides pagination within the current content group
+
+import { Icon } from "astro-icon";
+import type { Group } from "../lib/nav";
+
+interface Props {
+	activeId: string;
+	product: string;
+	groups: Group[];
+}
+
+const { activeId, product, groups } = Astro.props;
+
+function getNextPrev() {
+	for (const group of groups) {
+		for (let i = 0; i < group.entries.length; i++) {
+			if (group.entries[i]!.id === activeId) {
+				return {
+					next: group.entries[i + 1],
+					prev: group.entries[i - 1],
+				};
+			}
+		}
+	}
+	return { next: undefined, prev: undefined };
+}
+
+const { next, prev } = getNextPrev();
+---
+
+<div class="flex justify-between font-semibold text-stone-400 lg:text-lg gap-8">
+	{
+		prev ? (
+			<a
+				href={`/${product}/${prev.slug}`}
+				class="flex items-center gap-2 hover:text-white p-2"
+			>
+				<Icon name="jam:chevron-left" class="w-8 h-8 inline-block opacity-80" />
+				{prev.data.title}
+			</a>
+		) : (
+			<div />
+		)
+	}
+	{
+		next ? (
+			<a
+				href={`/${product}/${next.slug}`}
+				class="flex items-center gap-2 hover:text-white p-2"
+			>
+				{next.data.title}
+				<Icon
+					name="jam:chevron-right"
+					class="w-8 h-8 inline-block opacity-80"
+				/>
+			</a>
+		) : (
+			<div />
+		)
+	}
+</div>

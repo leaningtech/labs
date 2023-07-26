@@ -24,6 +24,6 @@ const article = Astro.props;
 const { Content } = await article.render();
 ---
 
-<DocsArticle title={article.data.title}>
+<DocsArticle title={article.data.title} id={article.id}>
 	<Content />
 </DocsArticle>

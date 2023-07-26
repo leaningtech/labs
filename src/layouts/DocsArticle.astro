@@ -4,12 +4,14 @@ import DocsSidebar from "../components/DocsSidebar.astro";
 import { getCollectionGroupsByMode } from "../lib/nav";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
+import ContentPagination from "../components/ContentPagination.astro";
 
 interface Props {
-	title: string;
+	id: string;
+	title: string; // TODO: derive from id
 }
 
-const { title } = Astro.props;
+const { id, title } = Astro.props;
 
 const product = "cheerp"; // TODO: first component of pathname
 const mode = "guides"; // TODO: second component of pathname
@@ -42,9 +44,10 @@ const today = new Date();
 				<slot />
 			</main>
 
-			<footer
-				class="mt-10 py-10 border-t border-t-stone-800 text-stone-500 text-sm"
-			>
+			<div class="py-5">
+				<ContentPagination activeId={id} {product} {groups} />
+			</div>
+			<footer class="py-10 border-t border-t-stone-800 text-stone-500 text-sm">
 				© Leaning Technologies {today.getFullYear()}
 			</footer>
 		</main>
