@@ -56,14 +56,14 @@ export function idToTitle(id: string): string {
 		filename = filename.slice(0, dotIndex);
 	}
 
-	// Remove leading numbers and convert to sentence case
-	const [n, firstWord, ...words] = filename.split("-");
-	if (isNaN(parseInt(n ?? "")))
-		throw new Error(`id ${id} does not start with a number`);
+	// Remove leading numbers
+	filename = filename.replace(/^\d+-/, "");
+
+	// Convert to sentence case
+	const [firstWord, ...words] = filename.split("-");
 	if (!firstWord) throw new Error(`id ${id} is empty (has no first word)`);
-	return (
-		firstWord[0]?.toUpperCase() + firstWord.slice(1) + " " + words.join(" ")
-	);
+	const upperFirstWord = firstWord[0]?.toUpperCase() + firstWord.slice(1);
+	return [upperFirstWord, ...words].join(" ");
 }
 
 export async function getCollectionGroupsByMode(

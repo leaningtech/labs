@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon";
+import { idToTitle } from "../lib/nav";
+
+const crumbs = Astro.url.pathname
+	.split("/")
+	.filter((part) => part.length)
+	.map((part, i, all) => {
+		return {
+			title: idToTitle(part),
+			url: "/" + all.slice(0, i + 1).join("/"),
+			isLast: i === all.length - 2,
+		};
+	})
+	.slice(0, -1); // Don't want the current page
+---
+
+<nav aria-label="Breadcrumb" class="leading-7 text-stone-400">
+	<ol>
+		{
+			crumbs.map(({ title, url, isLast }) => (
+				<li class="inline-flex items-center">
+					<a href={url} class="hover:text-primary-500">
+						{title}
+					</a>
+					{!isLast && (
+						<Icon name="jam:chevron-right" class="h-5 mx-2 text-stone-700" />
+					)}
+				</li>
+			))
+		}
+	</ol>
+</nav>
