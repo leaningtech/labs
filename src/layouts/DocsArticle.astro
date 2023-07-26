@@ -5,13 +5,15 @@ import { getCollectionGroupsByMode } from "../lib/nav";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
 import ContentPagination from "../components/ContentPagination.astro";
+import TableOfContents from '../components/TableOfContents.astro';
 
 interface Props {
 	id: string;
 	title: string; // TODO: derive from id
+	headings: { depth: number; slug: string; text: string }[]
 }
 
-const { id, title } = Astro.props;
+const { id, title, headings} = Astro.props;
 
 const product = "cheerp"; // TODO: first component of pathname
 const mode = "guides"; // TODO: second component of pathname
@@ -55,9 +57,7 @@ const today = new Date();
 			<section>
 				<h5 class="font-semibold mb-2">On this page</h5>
 				<ul>
-					<li>Table</li>
-					<li>of</li>
-					<li>contents</li>
+					<TableOfContents headings={headings} />
 				</ul>
 			</section>
 			<section>

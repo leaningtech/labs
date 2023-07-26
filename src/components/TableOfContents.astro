@@ -1,0 +1,24 @@
+---
+// TableOfContents.astro
+import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string
+}
+
+interface Props {
+    headings: Heading[]
+}
+
+const { headings } = Astro.props;
+---
+
+<nav>
+  <ul>
+    {
+        headings.map((heading) => <TableOfContentsHeading heading={heading} />)
+    }
+  </ul>
+</nav>
