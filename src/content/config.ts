@@ -21,6 +21,8 @@ const blog = defineCollection({
 const docs = defineCollection({
 	schema: z.object({
 		title: z.string(),
+		// TODO: optional short title (for navigation)
+		// TODO: description (for SEO)
 	}),
 });
 

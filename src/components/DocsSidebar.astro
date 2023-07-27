@@ -1,16 +1,16 @@
 ---
-import { type Mode, type Group, idToTitle } from "../lib/nav";
+import type { Mode, NavDirectory } from "../lib/nav";
 import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import { Icon } from "astro-icon";
+import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 
 interface Props {
 	product: string;
-	mode: Mode;
-	groups: Group[];
+	mode: Mode | undefined;
+	directory: NavDirectory | undefined;
 }
 
-const { product, mode, groups } = Astro.props;
-const pathname = Astro.url.pathname.replace(".html", "");
+const { product, mode, directory } = Astro.props;
 
 const modes: { mode: Mode; name: string; icon: string }[] = [
 	{
@@ -82,40 +82,15 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		}
 	</ul>
 
-	<ul>
-		{
-			groups.map((group) => {
-				return (
-					<li class="py-4">
-						<h5 class="mb-2 font-semibold text-slate-100">{group.title}</h5>
-						<ul>
-							{group.entries.map((entry) => {
-								const href = `/${entry.slug}`;
-								const isActive = href === pathname;
-
-								return (
-									<li
-										class:list={[
-											"group px-4 py-1 border-l border-stone-800 text-stone-400 hover:border-stone-400 hover:text-white",
-											{
-												"font-semibold !text-primary-500 !border-primary-600 bg-primary-600 bg-opacity-5":
-													isActive,
-											},
-										]}
-										data-is-active={isActive}
-									>
-										<a {href} class="block">
-											{idToTitle(entry.id)}
-										</a>
-									</li>
-								);
-							})}
-						</ul>
-					</li>
-				);
-			})
-		}
-	</ul>
+	{
+		directory && (
+			<ol class="space-y-4">
+				{directory.entries.map((entry) => (
+					<DocsSidebarNavEntry {entry} />
+				))}
+			</ol>
+		)
+	}
 </aside>
 
 <div class="w-80 h-screen px-8 hidden lg:block">

@@ -1,10 +1,21 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 
-/** Navigation group. */
-export interface Group {
+export interface NavFile {
+	type: "file";
+	id: string; // the full path, and also the CollectionEntry id
+	href: string;
 	title: string;
-	entries: CollectionEntry<"docs">[];
 }
+
+export interface NavDirectory {
+	type: "directory";
+	id: string; // the full path
+	dirname: string; // the last component of the path
+	title: string;
+	entries: NavEntry[];
+}
+
+export type NavEntry = NavDirectory | NavFile;
 
 /** https://diataxis.fr */
 export type Mode = "guides" | "tutorials" | "reference" | "explanation";
@@ -19,40 +30,164 @@ export function isProduct(value: unknown): value is Product {
 	return value === "cheerp";
 }
 
-/** Sorts a collection into an array of groups, by subdirectory. */
-export function calcCollectionGroups(
-	collection: CollectionEntry<"docs">[],
-): Group[] {
-	// Group entries by directory
-	const groups: { [directory: string]: Group } = {};
-	for (const entry of collection) {
-		const directory = entry.id.split("/")[2];
-		if (!directory) throw new Error("no directory");
-		if (!groups[directory]) {
-			groups[directory] = {
-				title: idToTitle(directory),
-				entries: [],
-			};
+/**
+ * Unflattens a collection into an array of NavEntrys grouped recursively by directory.
+ * For example, the collection
+ * 		foo/page1.md
+ *    bar/page2.md
+ * becomes
+ * ```json
+ * [
+ *   {
+ *     "id": "foo",
+ * 		 "entries": [foo/page1.md]
+ *   },
+ * 	 {
+ *     "id": "bar",
+ * 		 "entries": [bar/page2.md]
+ *   }
+ * ]
+ * ```
+ */
+export async function getRootNav(): Promise<NavEntry[]> {
+	// Get all the directories
+	const files = await getCollection("docs");
+	const dirPaths = new Set<string>();
+	for (const file of files) {
+		const [directoryName] = splitPath(file.id);
+		if (directoryName) {
+			dirPaths.add(directoryName);
 		}
-		groups[directory]!.entries.push(entry);
 	}
 
-	// Sort entries
-	for (const group of Object.values(groups)) {
-		group.entries.sort((a, b) => {
-			return a.id.localeCompare(b.id);
+	const root: NavEntry[] = [];
+
+	// Map of directory name to its entries. The root directory is "".
+	const dirPathToEntries: { [path: string]: NavEntry[] } = {
+		"": root,
+	};
+
+	// Sort so shortest dir names are first
+	const sortedDirPaths = Array.from(dirPaths);
+	sortedDirPaths.sort((a, b) => a.length - b.length);
+
+	// Add all the directories to their respective parent directories (or root if they are top-level).
+	function addDir(path: string) {
+		const [parentPath, dirname] = splitPath(path);
+
+		// Upsert parent dir
+		let parentEntries = dirPathToEntries[parentPath];
+		if (!parentEntries) {
+			addDir(parentPath);
+			parentEntries = dirPathToEntries[parentPath];
+			if (!parentEntries)
+				throw new Error("addDir(parentPath) didn't add to directoryEntryMap");
+		}
+
+		// Add this directory to its parent
+		const myEntries: NavEntry[] = [];
+		const me: NavDirectory = {
+			type: "directory",
+			id: path,
+			dirname,
+			entries: myEntries,
+			title: idToTitle(path),
+		};
+		parentEntries.push(me);
+		dirPathToEntries[path] = myEntries;
+	}
+	for (const path of sortedDirPaths) {
+		addDir(path);
+	}
+
+	// Add all the files to their respective parent directories.
+	for (const file of files) {
+		const [parentDir, filename] = splitPath(file.id);
+		const parentDirEntries = dirPathToEntries[parentDir];
+		if (!parentDirEntries) {
+			throw new Error(
+				`panic: parent directory ${parentDir} not found for file ${filename}`,
+			);
+		}
+		parentDirEntries.push({
+			type: "file",
+			id: file.id,
+			href: getEntryHref(file),
+			title: file.data.title,
 		});
 	}
 
-	// Convert to array
-	const groupsArr = Object.entries(groups);
-	groupsArr.sort((a, b) => {
-		return a[0].localeCompare(b[0]);
-	});
-	return groupsArr.map(([, group]) => group);
+	// Sort all the directory entries
+	for (const listing of Object.values(dirPathToEntries)) {
+		listing.sort((a, b) => (a.id < b.id ? -1 : 1));
+	}
+
+	// Sanity check that all the files are accounted for
+	let numFiles = 0;
+	function dfsVisit(entry: NavEntry) {
+		if (entry.type === "file") {
+			if (!files.find((f) => f.id === entry.id)) {
+				throw new Error(`panic: file ${entry.id} not found`);
+			}
+			numFiles++;
+		} else {
+			for (const child of entry.entries) {
+				dfsVisit(child);
+			}
+		}
+	}
+	for (const entry of root) {
+		dfsVisit(entry);
+	}
+	if (numFiles !== files.length) {
+		throw new Error(
+			`panic: number of files in root nav (${numFiles}) does not match number of files in collection (${files.length})`,
+		);
+	}
+
+	return root;
 }
 
-// 00-my-dir/00-my-page.md -> My page
+export function findNavDirectory(
+	nav: NavEntry[],
+	pathComponents: string[],
+): NavDirectory | undefined {
+	if (pathComponents.length === 0) {
+		throw new Error(
+			"pathComponents must not be empty; use getRootNav() to get the entries of the root directory",
+		);
+	}
+
+	const [first, ...rest] = pathComponents;
+	for (const entry of nav) {
+		if (entry.type === "directory" && entry.dirname === first) {
+			if (rest.length === 0) {
+				return entry;
+			} else {
+				return findNavDirectory(entry.entries, rest);
+			}
+		}
+	}
+	return undefined;
+}
+
+export async function findParentDirectoryOfId(
+	id: string,
+): Promise<NavDirectory | undefined> {
+	const [parentDir] = splitPath(id);
+	return findNavDirectory(await getRootNav(), parentDir.split("/"));
+}
+
+/** Splits a path in its directory and filename. */
+function splitPath(path: string): [string, string] {
+	const components = path.split("/");
+	const filename = components[components.length - 1] ?? "";
+	const directory = components.slice(0, -1).join("/");
+	return [directory, filename];
+}
+
+// TODO: dont export, use NavEntry.title instead
+/** Converts an id like `00-my-dir/00-my-page.md` to "My page". */
 export function idToTitle(id: string): string {
 	// Get last component
 	const components = id.split("/");
@@ -74,13 +209,13 @@ export function idToTitle(id: string): string {
 	return [upperFirstWord, ...words].join(" ");
 }
 
-export async function getCollectionGroupsByMode(
-	product: Product,
-	mode: Mode,
-): Promise<Group[]> {
-	const collection = await getCollection("docs", ({ id }) => {
-		const components = id.split("/");
-		return components[0] === product && components[1] === mode;
-	});
-	return calcCollectionGroups(collection);
+// TODO: dont export, use NavEntry.href instead
+export function getEntryHref(entry: CollectionEntry<"docs">): string {
+	return (
+		"/" +
+		entry.slug
+			.split("/")
+			.map((component) => component.replace(/^\d+-/, "")) // Strip leading numbers
+			.join("/")
+	);
 }

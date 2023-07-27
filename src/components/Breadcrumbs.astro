@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon";
 import { idToTitle } from "../lib/nav";
 
+// TODO: use getRootNav and derive titles by working backwards
+
 const crumbs = Astro.url.pathname
 	.split("/")
 	.filter((part) => part.length)

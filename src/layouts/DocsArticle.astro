@@ -1,10 +1,10 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getCollectionGroupsByMode, isProduct, isMode } from "../lib/nav";
+import { getRootNav, findNavDirectory, isProduct, isMode } from "../lib/nav";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
-import ContentPagination from "../components/ContentPagination.astro";
+import DocsPagination from "../components/DocsPagination.astro";
 
 interface Props {
 	id: string;
@@ -19,7 +19,8 @@ const [, product, mode] = Astro.url.pathname.split("/");
 if (!isProduct(product) || !isMode(mode))
 	throw new Error("DocsArticle expects url /[product]/[mode]/[...]");
 
-const groups = await getCollectionGroupsByMode(product, mode);
+const nav = await getRootNav();
+const directory = findNavDirectory(nav, [product, mode]);
 
 const today = new Date();
 ---
@@ -27,7 +28,7 @@ const today = new Date();
 <Shell {title}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div data-sidebar-wrapper class="hidden lg:block shadow-xl lg:shadow-none">
-			<DocsSidebar {product} {mode} {groups} />
+			<DocsSidebar {product} {mode} {directory} />
 		</div>
 		<div
 			data-backdrop
@@ -48,9 +49,13 @@ const today = new Date();
 				<slot />
 			</main>
 
-			<div class="py-5">
-				<ContentPagination activeId={id} {product} {groups} />
-			</div>
+			{
+				directory && (
+					<div class="py-5">
+						<DocsPagination activeId={id} />
+					</div>
+				)
+			}
 			<footer class="py-10 border-t border-t-stone-800 text-stone-500 text-sm">
 				© Leaning Technologies {today.getFullYear()}
 			</footer>

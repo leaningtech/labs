@@ -1,6 +1,5 @@
 ---
 title: Installation on Windows and macOS
-slug: cheerp/guides/getting-started/windows-macos
 ---
 
 We provide pre-built Windows and macOS binaries on the main project repository on [GitHub](https://github.com/leaningtech/cheerp-meta/releases) for your convenience.

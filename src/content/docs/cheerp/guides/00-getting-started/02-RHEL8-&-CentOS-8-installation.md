@@ -1,6 +1,5 @@
 ---
 title: Installation on RHEL8 and CentOS
-slug: cheerp/guides/getting-started/rhel8-centos8
 ---
 
 We provide pre-built RPM packages for RHEL8 (and CentOS 8).

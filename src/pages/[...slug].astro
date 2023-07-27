@@ -3,18 +3,16 @@
 
 import { CollectionEntry, getCollection } from "astro:content";
 import DocsArticle from "../layouts/DocsArticle.astro";
+import { getEntryHref } from "../lib/nav";
+
+// TODO: directory pages - directory listings, index redirects, etc.
+// need to think about how to configure this nicely (special file name "00-index.md"? frontmatter? config.yml for directory?)
 
 export async function getStaticPaths() {
-	const articles = await getCollection("docs");
+	const articles = await getCollection("docs"); // TODO: use getNav
 	return articles.map((article) => {
-		if (article.slug.match(/\/\d/g)) {
-			throw new Error(
-				`provide a custom slug for "${article.id}" which doesn't contain numbers`,
-			);
-		}
-
 		return {
-			params: { slug: article.slug },
+			params: { slug: getEntryHref(article).slice(1) }, // XXX use getNav and grab slug from that
 			props: article,
 		};
 	});
