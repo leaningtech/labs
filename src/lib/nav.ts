@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 /** Navigation group. */
 export interface Group {
 	title: string;
-	entries: CollectionEntry<"cheerp">[];
+	entries: CollectionEntry<"docs">[];
 }
 
 /** https://diataxis.fr */
@@ -21,12 +21,12 @@ export function isProduct(value: unknown): value is Product {
 
 /** Sorts a collection into an array of groups, by subdirectory. */
 export function calcCollectionGroups(
-	collection: CollectionEntry<"cheerp">[],
+	collection: CollectionEntry<"docs">[],
 ): Group[] {
 	// Group entries by directory
 	const groups: { [directory: string]: Group } = {};
 	for (const entry of collection) {
-		const directory = entry.id.split("/")[1];
+		const directory = entry.id.split("/")[2];
 		if (!directory) throw new Error("no directory");
 		if (!groups[directory]) {
 			groups[directory] = {
@@ -78,9 +78,9 @@ export async function getCollectionGroupsByMode(
 	product: Product,
 	mode: Mode,
 ): Promise<Group[]> {
-	const collection = await getCollection(
-		product,
-		({ id }) => id.split("/")[0] === mode,
-	);
+	const collection = await getCollection("docs", ({ id }) => {
+		const components = id.split("/");
+		return components[0] === product && components[1] === mode;
+	});
 	return calcCollectionGroups(collection);
 }

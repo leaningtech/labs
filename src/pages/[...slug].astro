@@ -1,9 +1,11 @@
 ---
+// Docs page
+
 import { CollectionEntry, getCollection } from "astro:content";
-import DocsArticle from "../../layouts/DocsArticle.astro";
+import DocsArticle from "../layouts/DocsArticle.astro";
 
 export async function getStaticPaths() {
-	const articles = await getCollection("cheerp");
+	const articles = await getCollection("docs");
 	return articles.map((article) => {
 		if (article.slug.match(/\/\d/g)) {
 			throw new Error(
@@ -18,7 +20,7 @@ export async function getStaticPaths() {
 	});
 }
 
-type Props = CollectionEntry<"cheerp">;
+type Props = CollectionEntry<"docs">;
 
 const article = Astro.props;
 const { Content } = await article.render();

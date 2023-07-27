@@ -1,6 +1,6 @@
 ---
 title: Installation on Ubuntu and Debian with apt
-slug: guides/getting-started/ubuntu-debian
+slug: cheerp/guides/getting-started/ubuntu-debian
 ---
 
 Pre-built packages for Debian/Ubuntu are provided in our [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa). For other Linux distributions, please build from source, see [Linux build](Linux-build-instructions).

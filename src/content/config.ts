@@ -18,10 +18,10 @@ const blog = defineCollection({
 	}),
 });
 
-const cheerp = defineCollection({
+const docs = defineCollection({
 	schema: z.object({
 		title: z.string(),
 	}),
 });
 
-export const collections = { cheerp, blog };
+export const collections = { docs, blog };

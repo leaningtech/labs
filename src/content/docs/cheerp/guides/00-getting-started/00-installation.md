@@ -1,6 +1,6 @@
 ---
 title: Getting started with Cheerp
-slug: guides/getting-started
+slug: cheerp/guides/getting-started
 ---
 
 The purpose of this page is setting the basics of working with Cheerp, getting to the compilation of a "Hello World" example program and pointing to further reading and recommended tutorials.

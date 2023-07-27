@@ -1,6 +1,6 @@
 ---
 title: Building from source on Linux
-slug: guides/building-from-source/linux
+slug: cheerp/guides/building-from-source/linux
 ---
 
 Cheerp is composed of multiple components, they are somewhat interdependent and should be built together.

@@ -33,7 +33,7 @@ const { next, prev } = getNextPrev();
 	{
 		prev ? (
 			<a
-				href={`/${product}/${prev.slug}`}
+				href={`/${prev.slug}`}
 				class="flex items-center gap-2 hover:text-white p-2"
 			>
 				<Icon name="jam:chevron-left" class="w-8 h-8 inline-block opacity-80" />
@@ -46,7 +46,7 @@ const { next, prev } = getNextPrev();
 	{
 		next ? (
 			<a
-				href={`/${product}/${next.slug}`}
+				href={`/${next.slug}`}
 				class="flex items-center gap-2 hover:text-white p-2"
 			>
 				{next.data.title}

@@ -90,7 +90,7 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 						<h5 class="mb-2 font-semibold text-slate-100">{group.title}</h5>
 						<ul>
 							{group.entries.map((entry) => {
-								const href = `/${product}/${entry.slug}`;
+								const href = `/${entry.slug}`;
 								const isActive = href === pathname;
 
 								return (

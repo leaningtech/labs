@@ -1,6 +1,6 @@
 ---
 title: Building from source on Windows
-slug: guides/building-from-source/windows
+slug: cheerp/guides/building-from-source/windows
 ---
 
 The following instructions will guide you in building the lastest version of cheerp on Windows systems. Building the core compiler on Windows using Microsoft Visual Studio is fully supported, but building the base libraries (musl, libc++, libc++abi) is not. You can grab a working copy from the latest release from any platform as they are platform independent.
