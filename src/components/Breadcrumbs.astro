@@ -15,7 +15,7 @@ const crumbs = Astro.url.pathname
 	.slice(0, -1); // Don't want the current page
 ---
 
-<nav aria-label="Breadcrumb" class="leading-7 text-stone-400">
+<nav aria-label="Breadcrumb" class="leading-6 text-stone-400">
 	<ol>
 		{
 			crumbs.map(({ title, url, isLast }) => (

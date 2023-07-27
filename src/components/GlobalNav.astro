@@ -21,9 +21,10 @@ const links = [
 	<div
 		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
 	>
-		<div class="basis-16 lg:basis-80 flex gap-4">
-			<a href="/">
+		<div class="lg:basis-80 flex gap-4">
+			<a href="/" class="flex items-center gap-4">
 				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
+				<span class="hidden md:block text-xl">Developer</span>
 			</a>
 		</div>
 
@@ -43,10 +44,10 @@ const links = [
 
 		<a
 			href={DISCORD_URL}
-			class="bg-blurple rounded-md px-4 self-stretch flex items-center gap-1.5"
+			class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5"
 		>
 			<Icon name="fa-brands:discord" class="w-6 h-6" />
-			 Join the community
+			<span class="hidden md:block">Join the community</span>
 			<span class="sr-only">on Discord</span>
 		</a>
 	</div>
