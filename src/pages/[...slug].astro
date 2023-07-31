@@ -28,6 +28,7 @@ const rendered = await collectionEntry?.render();
 <DocsArticle
 	title={collectionEntry?.data.title ?? navEntry.title}
 	id={navEntry.id}
+	headings={rendered?.headings}
 >
 	{
 		rendered ? (

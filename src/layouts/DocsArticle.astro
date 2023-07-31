@@ -4,14 +4,17 @@ import DocsSidebar from "../components/DocsSidebar.astro";
 import { getRootNav, findNavDirectory, isProduct, isMode } from "../lib/nav";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
+import TableOfContents from "../components/TableOfContents.astro";
+import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 
 interface Props {
 	id: string;
 	title: string; // TODO: derive from id
+	headings: Heading[] | undefined;
 }
 
-const { id, title } = Astro.props;
+const { id, title, headings } = Astro.props;
 
 // TODO: probably better to have these come in as props?
 //
@@ -60,17 +63,10 @@ const today = new Date();
 				© Leaning Technologies {today.getFullYear()}
 			</footer>
 		</main>
-		<aside class="w-32 xl:w-64 px-4 py-32 space-y-8 text-sm hidden lg:block">
+		<aside class="w-32 xl:w-64 px-4 py-6 space-y-8 text-sm hidden lg:block">
+			{headings && <TableOfContents {headings} />}
 			<section>
-				<h5 class="font-semibold mb-2">On this page</h5>
-				<ul>
-					<li>Table</li>
-					<li>of</li>
-					<li>contents</li>
-				</ul>
-			</section>
-			<section>
-				<h5 class="font-semibold mb-2">Contribute</h5>
+				<h5 class="font-semibold mb-4 leading-7">Contribute</h5>
 				<ul>
 					<li>Edit this page</li>
 					<li>Give feedback</li>

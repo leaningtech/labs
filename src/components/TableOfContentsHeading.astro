@@ -1,0 +1,65 @@
+---
+export interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+	subheadings: Heading[];
+}
+
+interface Props {
+	heading: Heading;
+}
+
+const { heading } = Astro.props;
+---
+
+<li is="toc-heading">
+	<a
+		href={"#" + heading.slug}
+		class:list={[
+			"block py-1 text-stone-400 hover:text-stone-200",
+			{
+				"font-semibold": heading.depth <= 2,
+			},
+		]}
+	>
+		{heading.text}
+	</a>
+
+	{
+		heading.subheadings.length > 0 && (
+			<ol class="pl-4">
+				{heading.subheadings.map((subheading) => (
+					<Astro.self heading={subheading} />
+				))}
+			</ol>
+		)
+	}
+</li>
+
+<script>
+	// Active state based on location.hash
+	class TocHeading extends HTMLLIElement {
+		constructor() {
+			super();
+
+			this.update();
+			window.addEventListener("hashchange", () => this.update());
+		}
+
+		update() {
+			const a = this.querySelector("a");
+			if (!a) throw new Error("expected <a> element");
+
+			const href = a.getAttribute("href");
+			console.log(href);
+
+			if (href === location.hash) {
+				a.classList.add("!text-primary-500");
+			} else {
+				a.classList.remove("!text-primary-500");
+			}
+		}
+	}
+	customElements.define("toc-heading", TocHeading, { extends: "li" });
+</script>

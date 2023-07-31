@@ -1,0 +1,46 @@
+---
+import TableOfContentsHeading, {
+	type Heading,
+} from "./TableOfContentsHeading.astro";
+
+type BasicHeading = Omit<Heading, "subheadings">;
+
+interface Props {
+	headings: BasicHeading[];
+}
+
+const { headings } = Astro.props;
+const toc = buildToc(headings);
+
+function buildToc(headings: BasicHeading[]) {
+	const toc: Heading[] = [];
+
+	const parentHeadings = new Map();
+	let globalParentDepth: number = 1;
+	headings.forEach((h, i) => {
+		const heading = { ...h, subheadings: [] };
+		parentHeadings.set(heading.depth, heading);
+
+		if (i === 0) {
+			globalParentDepth = heading.depth;
+		}
+
+		if (heading.depth === globalParentDepth) {
+			toc.push(heading);
+		} else if (
+			parentHeadings.get(heading.depth - 1) != undefined &&
+			heading.depth < 4
+		) {
+			parentHeadings.get(heading.depth - 1).subheadings.push(heading);
+		}
+	});
+	return toc;
+}
+---
+
+<nav>
+	<h5 class="font-semibold mb-4 leading-7">On this page</h5>
+	<ol>
+		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+	</ol>
+</nav>
