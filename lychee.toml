@@ -1,0 +1,9 @@
+# To test, concurrently
+#   pnpm build && pnpm preview --host 0.0.0.0
+#	  lychee http://localhost:3000/
+
+base = "http://localhost:3000"
+remap = [ "https://labs.leaningtech.com http://localhost:3000" ]
+
+# Check links inside `<code>` and `<pre>` blocks
+include_verbatim = true
