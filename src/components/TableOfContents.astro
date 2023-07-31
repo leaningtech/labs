@@ -1,17 +1,10 @@
 ---
-import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+import TableOfContentsHeading, {
+	type Heading,
+} from "./TableOfContentsHeading.astro";
 
-interface Heading {
-	depth: number;
-	slug: string;
-	text: string;
-	subheadings: Heading[];
-}
-interface BasicHeading {
-	depth: number;
-	slug: string;
-	text: string;
-}
+type BasicHeading = Omit<Heading, "subheadings">;
+
 interface Props {
 	headings: BasicHeading[];
 }
@@ -42,6 +35,10 @@ function buildToc(headings: BasicHeading[]) {
 		}
 	});
 	return toc;
+}
+
+if (toc.length === 0) {
+	return null;
 }
 ---
 
