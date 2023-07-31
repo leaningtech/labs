@@ -34,7 +34,7 @@ For editor integration, use:
 - Visual Studio Code: [`chrischinchilla.vale-vscode`](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)
 - Vim: [ALE](https://github.com/dense-analysis/ale)
 
-### Prettier
+### Prettier
 
 Prettier is a code formatter. It's shipped as a `devDependency`, so `pnpm install` will have installed it.
 
