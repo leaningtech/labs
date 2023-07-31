@@ -32,9 +32,6 @@
 	"prettier": {
 		"trailingComma": "all",
 		"useTabs": true,
-		"pluginSearchDirs": [
-			"."
-		],
 		"plugins": [
 			"prettier-plugin-astro"
 		],

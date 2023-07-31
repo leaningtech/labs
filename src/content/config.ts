@@ -18,10 +18,12 @@ const blog = defineCollection({
 	}),
 });
 
-const cheerp = defineCollection({
+const docs = defineCollection({
 	schema: z.object({
 		title: z.string(),
+		// TODO: optional short title (for navigation)
+		// TODO: description (for SEO)
 	}),
 });
 
-export const collections = { cheerp, blog };
+export const collections = { docs, blog };

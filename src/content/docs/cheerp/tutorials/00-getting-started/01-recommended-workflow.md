@@ -1,6 +1,5 @@
 ---
 title: Recommended workflow
-slug: guides/getting-started/recommended-workflow
 ---
 
 Cheerp in itself has no dependencies, but the recommended workflow and the tutorials make use of:

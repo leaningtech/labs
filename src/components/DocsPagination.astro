@@ -1,0 +1,68 @@
+---
+// Provides pagination within the current content group
+
+import { Icon } from "astro-icon";
+import { findParentDirectoryOfId, type NavEntry } from "../lib/nav";
+
+interface Props {
+	activeId: string;
+}
+
+const { activeId } = Astro.props;
+
+async function getNextPrev(): Promise<{
+	next: NavEntry | undefined;
+	prev: NavEntry | undefined;
+}> {
+	const directory = await findParentDirectoryOfId(activeId);
+	if (!directory) {
+		console.warn(
+			`ContentPagination: could not find parent directory of activeId "${activeId}"`,
+		);
+		return { next: undefined, prev: undefined };
+	}
+
+	const activeIndex = directory.entries.findIndex(({ id }) => id === activeId);
+	if (activeIndex === -1) {
+		console.warn(
+			`ContentPagination: could not find activeId "${activeId}" in given directory`,
+		);
+		return { next: undefined, prev: undefined };
+	}
+
+	return {
+		next: directory.entries[activeIndex + 1],
+		prev: directory.entries[activeIndex - 1],
+	};
+}
+
+const { next, prev } = await getNextPrev();
+
+// TODO: `"href" in X` no longer needed once NavDirectorys have href (i.e. dir listing / index pages are a thing)
+---
+
+<div class="flex justify-between font-semibold text-stone-400 lg:text-lg gap-8">
+	{
+		prev && "href" in prev ? (
+			<a href={prev.href} class="flex items-center gap-2 hover:text-white p-2">
+				<Icon name="jam:chevron-left" class="w-8 h-8 inline-block opacity-80" />
+				{prev.title}
+			</a>
+		) : (
+			<div />
+		)
+	}
+	{
+		next && "href" in next ? (
+			<a href={next.href} class="flex items-center gap-2 hover:text-white p-2">
+				{next.title}
+				<Icon
+					name="jam:chevron-right"
+					class="w-8 h-8 inline-block opacity-80"
+				/>
+			</a>
+		) : (
+			<div />
+		)
+	}
+</div>

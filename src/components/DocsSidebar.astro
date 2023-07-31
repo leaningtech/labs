@@ -1,15 +1,16 @@
 ---
-import { type Mode, type Group, idToTitle } from "../lib/nav";
+import type { Mode, NavDirectory } from "../lib/nav";
 import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import { Icon } from "astro-icon";
+import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 
 interface Props {
-	mode: Mode;
-	groups: Group[];
+	product: string;
+	mode: Mode | undefined;
+	directory: NavDirectory | undefined;
 }
 
-const { mode, groups } = Astro.props;
-const pathname = Astro.url.pathname.replace(".html", "");
+const { product, mode, directory } = Astro.props;
 
 const modes: { mode: Mode; name: string; icon: string }[] = [
 	{
@@ -37,13 +38,19 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 
 <aside
 	is="docs-sidebar"
-	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 w-96 lg:w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
+	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 pb-8 w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
 >
 	<a
-		href="/cheerp"
-		class="block pt-8 pb-4 mb-4 lg:sticky top-0 lg:bg-stone-900 lg:shadow-lg lg:shadow-stone-900"
+		href={`/${product}`}
+		class="block pt-8 mb-4 lg:sticky top-0 lg:bg-stone-900"
 	>
-		<img src={productLogotype} alt="Cheerp" class="h-12 mx-auto" />
+		<img src={productLogotype} alt="Cheerp" class="h-20" />
+
+		<div
+			class="hidden absolute bottom--8 lg:block w-full h-8 bg-gradient-to-b from-stone-900 pointer-events-none"
+		>
+			<!-- shadow -->
+		</div>
 	</a>
 
 	<button data-sidebar-close class="absolute top-4 right-4 lg:hidden">
@@ -56,7 +63,7 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 			modes.map((item) => (
 				<li>
 					<a
-						href={`/${item.mode}`}
+						href={`/${product}/${item.mode}`}
 						class:list={[
 							"group flex items-center gap-4 text-stone-400 hover:text-white",
 							{
@@ -81,40 +88,15 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		}
 	</ul>
 
-	<ul>
-		{
-			groups.map((group) => {
-				return (
-					<li class="py-4">
-						<h5 class="mb-2 font-semibold text-slate-100">{group.title}</h5>
-						<ul>
-							{group.entries.map((entry) => {
-								const href = `/cheerp/${entry.slug}`;
-								const isActive = href === pathname;
-
-								return (
-									<li
-										class:list={[
-											"group px-4 py-1 border-l border-stone-800 text-stone-400 hover:border-stone-400 hover:text-white",
-											{
-												"font-semibold !text-primary-500 !border-primary-600 bg-primary-600 bg-opacity-5":
-													isActive,
-											},
-										]}
-										data-is-active={isActive}
-									>
-										<a {href} class="block">
-											{idToTitle(entry.id)}
-										</a>
-									</li>
-								);
-							})}
-						</ul>
-					</li>
-				);
-			})
-		}
-	</ul>
+	{
+		directory && (
+			<ol class="space-y-4">
+				{directory.entries.map((entry) => (
+					<DocsSidebarNavEntry {entry} />
+				))}
+			</ol>
+		)
+	}
 </aside>
 
 <div class="w-80 h-screen px-8 hidden lg:block">
