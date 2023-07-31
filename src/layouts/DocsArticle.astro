@@ -11,7 +11,7 @@ import DocsPagination from "../components/DocsPagination.astro";
 interface Props {
 	id: string;
 	title: string; // TODO: derive from id
-	headings: Heading[];
+	headings: Heading[] | undefined;
 }
 
 const { id, title, headings } = Astro.props;
@@ -64,7 +64,7 @@ const today = new Date();
 			</footer>
 		</main>
 		<aside class="w-32 xl:w-64 px-4 py-32 space-y-8 text-sm hidden lg:block">
-			<TableOfContents {headings} />
+			{headings && <TableOfContents {headings} />}
 			<section>
 				<h5 class="font-semibold mb-4 leading-7">Contribute</h5>
 				<ul>
