@@ -23,7 +23,7 @@ function buildToc(headings: BasicHeading[]) {
 	const toc: Heading[] = [];
 
 	const parentHeadings = new Map();
-	var globalParentDepth: number = 1;
+	let globalParentDepth: number = 1;
 	headings.forEach((h, i) => {
 		const heading = { ...h, subheadings: [] };
 		parentHeadings.set(heading.depth, heading);
