@@ -21,7 +21,8 @@ type Props = NavEntry;
 
 const navEntry = Astro.props;
 
-const collectionEntry = await getEntry("docs", navEntry.slug);
+const collectionEntry =
+	navEntry.type === "file" ? navEntry.collectionEntry : undefined;
 const rendered = await collectionEntry?.render();
 ---
 

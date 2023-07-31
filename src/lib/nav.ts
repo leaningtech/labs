@@ -1,4 +1,4 @@
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export interface NavFile {
 	type: "file";
@@ -6,6 +6,7 @@ export interface NavFile {
 	href: string;
 	slug: string;
 	title: string;
+	collectionEntry: CollectionEntry;
 }
 
 export interface NavDirectory {
@@ -125,6 +126,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			slug,
 			href: "/" + slug,
 			title: file.data.title,
+			collectionEntry: file,
 		});
 	}
 
