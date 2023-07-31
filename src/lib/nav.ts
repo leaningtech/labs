@@ -1,15 +1,18 @@
-import { CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 
 export interface NavFile {
 	type: "file";
 	id: string; // the full path, and also the CollectionEntry id
 	href: string;
+	slug: string;
 	title: string;
 }
 
 export interface NavDirectory {
 	type: "directory";
 	id: string; // the full path
+	href: string;
+	slug: string;
 	dirname: string; // the last component of the path
 	title: string;
 	entries: NavEntry[];
@@ -23,7 +26,12 @@ export type Mode = "guides" | "tutorials" | "reference" | "explanation";
 export type Product = "cheerp";
 
 export function isMode(value: unknown): value is Mode {
-	return value === "guides" || value === "tutorials" || value === "reference";
+	return (
+		value === "guides" ||
+		value === "tutorials" ||
+		value === "reference" ||
+		value === "explanation"
+	);
 }
 
 export function isProduct(value: unknown): value is Product {
@@ -89,6 +97,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 		const me: NavDirectory = {
 			type: "directory",
 			id: path,
+			slug: idToSlug(path),
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
@@ -109,10 +118,12 @@ export async function getRootNav(): Promise<NavEntry[]> {
 				`panic: parent directory ${parentDir} not found for file ${filename}`,
 			);
 		}
+		const slug = idToSlug(file.id); // note: we don't allow slug override
 		parentDirEntries.push({
 			type: "file",
 			id: file.id,
-			href: getEntryHref(file),
+			slug,
+			href: "/" + slug,
 			title: file.data.title,
 		});
 	}
@@ -209,13 +220,28 @@ export function idToTitle(id: string): string {
 	return [upperFirstWord, ...words].join(" ");
 }
 
-// TODO: dont export, use NavEntry.href instead
-export function getEntryHref(entry: CollectionEntry<"docs">): string {
-	return (
-		"/" +
-		entry.slug
-			.split("/")
-			.map((component) => component.replace(/^\d+-/, "")) // Strip leading numbers
-			.join("/")
-	);
+function idToSlug(id: string): string {
+	return id
+		.replace(/\.md$/, "")
+		.split("/")
+		.map((component) => component.replace(/^\d+-/, ""))
+		.join("/");
+}
+
+export function flattenNav(entries: NavEntry[]): NavEntry[] {
+	const result: NavEntry[] = [];
+
+	function dfsVisit(entry: NavEntry) {
+		result.push(entry);
+		if (entry.type === "directory") {
+			for (const child of entry.entries) {
+				dfsVisit(child);
+			}
+		}
+	}
+	for (const entry of entries) {
+		dfsVisit(entry);
+	}
+
+	return result;
 }
