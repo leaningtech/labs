@@ -38,13 +38,19 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 
 <aside
 	is="docs-sidebar"
-	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
+	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 pb-8 w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
 >
 	<a
 		href={`/${product}`}
-		class="block py-8 mb-4 lg:sticky top-0 lg:bg-stone-900 lg:shadow-lg lg:shadow-stone-900"
+		class="block pt-8 mb-4 lg:sticky top-0 lg:bg-stone-900"
 	>
 		<img src={productLogotype} alt="Cheerp" class="h-20" />
+
+		<div
+			class="hidden absolute bottom--8 lg:block w-full h-8 bg-gradient-to-b from-stone-900 pointer-events-none"
+		>
+			<!-- shadow -->
+		</div>
 	</a>
 
 	<button data-sidebar-close class="absolute top-4 right-4 lg:hidden">
