@@ -28,8 +28,6 @@ function buildToc(headings: BasicHeading[]) {
 		const heading = { ...h, subheadings: [] };
 		parentHeadings.set(heading.depth, heading);
 
-		console.log(parentHeadings);
-
 		if (i === 0) {
 			globalParentDepth = heading.depth;
 		}
@@ -40,11 +38,9 @@ function buildToc(headings: BasicHeading[]) {
 			parentHeadings.get(heading.depth - 1) != undefined &&
 			heading.depth < 4
 		) {
-			console.log("heading depth" + heading.depth);
 			parentHeadings.get(heading.depth - 1).subheadings.push(heading);
 		}
 	});
-	console.log(JSON.stringify(toc, null, "\t"));
 	return toc;
 }
 ---
