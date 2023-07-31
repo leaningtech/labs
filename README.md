@@ -1,32 +1,13 @@
-# labs.leaningtech.com
+# Leaning Technologies developer site
 
-## Installation
+## Development setup
 
-You will need:
-
-- Node.js
-- pnpm
-
-```
-$ pnpm install
-```
-
-## Development
-
-```
-$ pnpm run dev
-```
-
-## Commands
-
-| Command                    | Action                                           |
-| :------------------------- | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm run dev`             | Starts local dev server at `localhost:3000`      |
-| `pnpm run build`           | Build your production site to `./dist/`          |
-| `pnpm run preview`         | Preview your build locally, before deploying     |
-| `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm run astro -- --help` | Get help using the Astro CLI                     |
+1. Install [Node.js](https://nodejs.org/en/download/)
+2. Install [pnpm](https://pnpm.io/installation)
+3. Clone this repository
+4. Install dependencies: `pnpm install`
+5. Spawn development server: `pnpm start`
+6. Visit [localhost:3000](http://localhost:3000)
 
 ## Linting
 
@@ -52,3 +33,27 @@ For editor integration, use:
 
 - Visual Studio Code: [`chrischinchilla.vale-vscode`](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)
 - Vim: [ALE](https://github.com/dense-analysis/ale)
+
+### Prettier
+
+Prettier is a code formatter. It's shipped as a `devDependency`, so `pnpm install` will have installed it.
+
+To format all files:
+
+```shell
+$ pnpm format
+```
+
+### Astro diagnostics
+
+Astro has some of its own diagnostics.
+
+```shell
+$ pnpm astro check
+```
+
+### TypeScript
+
+```shell
+$ pnpm tsc
+```
