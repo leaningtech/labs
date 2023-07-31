@@ -6,6 +6,7 @@ on:
 
 jobs:
   links:
+    name: Broken links
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -54,3 +55,11 @@ jobs:
           fail: true
           format: markdown
           jobSummary: true
+
+  prose_vale:
+    name: Prose (Vale)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: errata-ai/vale-action@reviewdog
