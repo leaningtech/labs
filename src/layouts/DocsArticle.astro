@@ -15,7 +15,7 @@ const { id, title } = Astro.props;
 
 // TODO: probably better to have these come in as props?
 //
-const [, product, mode] = Astro.url.pathname.split("/");
+const [, product, mode] = Astro.url.pathname.replace(".html", "").split("/");
 if (!isProduct(product) || !isMode(mode))
 	throw new Error("DocsArticle expects url /[product]/[mode]/[...]");
 
