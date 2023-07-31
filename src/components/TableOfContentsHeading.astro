@@ -1,32 +1,31 @@
 ---
 // TableOfContentsHeading.astro
 
-interface Props {
-    heading : {
-        depth: number,
-        text: string,
-        slug: string
-    }
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+	subheadings: Heading[];
 }
+interface Props {
+	heading: Heading;
+}
+
 const { heading } = Astro.props;
 ---
 
 <li>
-  {
-    heading.depth == 1 && (
-        <a href={'#' + heading.slug} class="ml-6 p-1 hover:text-stone-400">
-            {heading.text}
-        </a>
-    )
-  }
-  {
-    heading.depth == 2 && (
-      <ul>
-        <a href={'#' + heading.slug} class="ml-8 hover:text-stone-400">
-            {heading.text}
-        </a>
-      </ul>
-    )
-  }
+	<a href={"#" + heading.slug} class="hover:text-stone-400">
+		{heading.text}
+	</a>
 
+	{
+		heading.subheadings.length > 0 && (
+			<ul class="pl-5">
+				{heading.subheadings.map((subheading) => (
+					<Astro.self heading={subheading} />
+				))}
+			</ul>
+		)
+	}
 </li>
