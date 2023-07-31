@@ -27,7 +27,8 @@ lychee is a tool that recursively checks all links on the site for 404s.
 Vale checks style and grammar in Markdown files.
 
 1. Install [Vale](https://vale.sh/docs/vale-cli/installation/)
-2. Run Vale: `vale .`
+2. Download style rules: `vale sync`
+3. Check with Vale: `vale .`
 
 For editor integration, use:
 
