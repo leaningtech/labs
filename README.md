@@ -52,7 +52,7 @@ Astro has some of its own diagnostics.
 $ pnpm astro check
 ```
 
-### TypeScript
+### TypeScript
 
 ```shell
 $ pnpm tsc
