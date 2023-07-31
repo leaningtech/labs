@@ -45,7 +45,7 @@ function buildToc(headings: BasicHeading[]) {
 }
 ---
 
-<nav aria-label="TableOfContents">
+<nav>
 	<h5 class="font-semibold mb-2">On this page</h5>
 	<ul>
 		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
