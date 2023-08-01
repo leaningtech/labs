@@ -3,18 +3,19 @@ import Icon from "astro-icon";
 import Search from "astro-pagefind/components/Search";
 ---
 
-<site-search class="self-stretch lg:w-60">
+<site-search class="inline-block w-80 h-10">
 	<button
 		data-open-modal
-		class="group border-stone-700 hover:border-stone-500 lg:border rounded-md px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer"
+		class="group text-stone-300 border-stone-500 hover:border-stone-400 border border-opacity-50 rounded-md px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors"
 	>
-		<Icon name="fa-solid:search" class="w-4 h-4 mr-0.5" />
-		<span class="group-hover:text-white sr-only lg:not-sr-only">
-			Search...
-		</span>
-		<div class="hidden lg:block grow"></div>
+		<Icon
+			name="fa-solid:search"
+			class="w-4 h-4 mr-0.5 text-stone-500 group-hover:text-stone-300 transition-colors"
+		/>
+		<span class="group-hover:text-white transition-colors">Search</span>
+		<div class="grow"></div>
 		<div
-			class="font-mono font-bold text-sm hidden lg:block"
+			class="font-mono font-bold text-sm"
 			aria-label="Keybinding to open search"
 		>
 			/

@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon";
 //import DiscordPresenceCount from "./DiscordPresenceCount.astro";
-import Search from "./Search.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
@@ -16,7 +15,7 @@ const links = [
 
 <nav
 	aria-label="Primary navigation"
-	class="sticky top-0 z-20 bg-stone-900 bg-opacity-40 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-800"
+	class="sticky top-0 z-20 bg-stone-900 bg-opacity-40 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
 >
 	<div
 		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
@@ -27,8 +26,6 @@ const links = [
 				<span class="hidden md:block text-xl">Developer</span>
 			</a>
 		</div>
-
-		<Search />
 
 		<div class="flex items-center gap-4 xl:gap-8 ml-auto">
 			{
