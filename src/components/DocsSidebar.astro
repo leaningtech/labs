@@ -14,14 +14,14 @@ const { product, mode, directory } = Astro.props;
 
 const modes: { mode: Mode; name: string; icon: string }[] = [
 	{
-		mode: "guides",
-		name: "How-to guides",
-		icon: "🤔",
-	},
-	{
 		mode: "tutorials",
 		name: "Tutorials",
 		icon: "📚",
+	},
+	{
+		mode: "guides",
+		name: "How-to guides",
+		icon: "🤔",
 	},
 	{
 		mode: "reference",
@@ -42,7 +42,7 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 >
 	<a
 		href={`/${product}`}
-		class="block pt-8 mb-4 lg:sticky top-0 lg:bg-stone-900"
+		class="block pt-8 mb-8 lg:sticky top-0 lg:bg-stone-900"
 	>
 		<img src={productLogotype} alt="Cheerp" class="h-20" />
 
