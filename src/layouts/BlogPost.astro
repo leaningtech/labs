@@ -2,25 +2,120 @@
 import type { CollectionEntry } from "astro:content";
 import Shell from "./Shell.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import type { Heading } from "../components/TableOfContentsHeading.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+import Footer from "../components/Footer.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+	headings: Heading[] | undefined;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, heroImage, headings } = Astro.props;
+
+const showAuthorSection = false;
 ---
 
-<Shell>
-	<article data-pagefind-body>
-		{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-		<h1 class="title">{title}</h1>
-		<FormattedDate date={pubDate} />
+<Shell {title} {description}>
+	<main class="px-6 py-10 w-full max-w-6xl mx-auto">
 		{
-			updatedDate && (
-				<div class="last-updated-on">
-					Last updated on <FormattedDate date={updatedDate} />
-				</div>
+			heroImage && (
+				<img
+					src={heroImage}
+					alt=""
+					class="rounded-xl w-full mx-auto mb-8"
+					height="552"
+				/>
 			)
 		}
-		<hr />
-		<slot />
-	</article>
+
+		<h1
+			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200"
+			id="introduction"
+		>
+			{title}
+		</h1>
+
+		<div class="flex flex-col lg:flex-row gap-10 mt-16">
+			<aside class="w-40 text-stone-400">
+				<img
+					class="w-16 h-16 rounded-full"
+					src="https://nanaian.town/img/alex.png"
+					alt="Avatar"
+					loading="lazy"
+					decoding="async"
+				/>
+				<div class="font-semibold leading-7 text-lg text-stone-200 mt-4">
+					Alex Bates
+				</div>
+				<div class="text-base leading-6 text-stone-400">
+					<FormattedDate date={pubDate} />
+				</div>
+			</aside>
+
+			<article class="grow max-w-3xl">
+				<div
+					class="prose prose-stone lg:prose-lg dark:prose-invert"
+					data-pagefind-body
+				>
+					<slot />
+				</div>
+			</article>
+
+			<aside class="hidden lg:block w-40">
+				{
+					headings && (
+						<div class="sticky top-24">
+							<TableOfContents
+								headings={[
+									{ depth: 2, slug: "introduction", text: "Introduction" },
+									...headings,
+								]}
+							/>
+						</div>
+					)
+				}
+			</aside>
+		</div>
+	</main>
+
+	{
+		showAuthorSection && (
+			<section class="px-6 py-16 w-full max-w-6xl mx-auto my-16 border-t border-b border-stone-800">
+				<div class="flex gap-4">
+					<h1 class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 basis-40">
+						The author
+					</h1>
+
+					<div class="flex gap-6 max-w-3xl">
+						<img
+							class="w-20 h-20 rounded-full"
+							src="https://nanaian.town/img/alex.png"
+							alt="Avatar"
+							loading="lazy"
+							decoding="async"
+						/>
+						<div class="flex flex-col justify-center gap-1">
+							<div class="font-bold leading-7 text-2xl text-white">
+								Alex Bates
+							</div>
+							<p class="leading-6 text-base text-stone-300">
+								Software engineer @ Leaning Technologies
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<section class="px-6 w-full max-w-6xl mx-auto my-16">
+		<h1
+			class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200"
+			id="introduction"
+		>
+			More from the blog
+		</h1>
+	</section>
+
+	<Footer />
 </Shell>
