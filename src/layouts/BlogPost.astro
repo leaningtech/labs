@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Shell from "./Shell.astro";
+import Icon from "astro-icon";
 import FormattedDate from "../components/FormattedDate.astro";
 import type { Heading } from "../components/TableOfContentsHeading.astro";
 import TableOfContents from "../components/TableOfContents.astro";
@@ -16,7 +17,14 @@ const showAuthorSection = false;
 ---
 
 <Shell {title} {description}>
-	<main class="px-6 py-10 w-full max-w-6xl mx-auto">
+	<main class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
+		<a
+			href="/blog"
+			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+		>
+			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to blog
+		</a>
+
 		{
 			heroImage && (
 				<img

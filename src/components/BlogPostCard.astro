@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<a
+	href={`/blog/${post.slug}`}
+	class="flex flex-col space-between group relative p-8 min-h-[16rem] rounded-xl border border-stone-600 border-opacity-75 hover:border-stone-400 transition-colors bg-stone-800 bg-cover bg-center bg-opacity-80 w-full overflow-hidden"
+	style={{
+		backgroundImage: post.data.heroImage
+			? `url(${post.data.heroImage})`
+			: "none",
+	}}
+>
+	<div
+		class="absolute left-0 right-0 bottom-0 h-2/3 bg-gradient-to-b from-transparent via-stone-900 to-stone-900 group-hover:opacity-80 transition-opacity pointer-events-none"
+	>
+	</div>
+	<div class="grow">
+		<!-- move the div below to the bottom of the container -->
+	</div>
+	<div class="relative">
+		<h3 class="text-3xl font-bold leading-8">{post.data.title}</h3>
+		<div
+			class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-lg whitespace-nowrap"
+		>
+			<div class="flex items-center gap-2 font-semibold">
+				<img
+					class="w-8 h-8 rounded-full flex-none"
+					src="https://nanaian.town/img/alex.png"
+					alt=""
+					loading="lazy"
+					decoding="async"
+				/>
+				<span class="overflow-hidden text-ellipsis"> Alex Bates</span>
+			</div>
+			<FormattedDate date={post.data.pubDate} />
+		</div>
+	</div>
+</a>

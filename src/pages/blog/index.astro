@@ -1,24 +1,58 @@
 ---
-import Shell from "../../layouts/Shell.astro";
+import Basic from "../../layouts/Basic.astro";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
 
 const posts = (await getCollection("blog")).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const topFeatured = posts.filter((post) => post.data.featured).slice(0, 5);
+if (topFeatured.length !== 5) {
+	console.warn("not enough featured posts");
+}
+
+// TODO: once we have more posts, consider pagination
 ---
 
-<Shell>
+<Basic
+	title="Leaning Techologies Developer Blog"
+	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+>
+	<h1 class="my-16 font-extrabold text-6xl text-white">Developer blog</h1>
+
 	<section>
-		<ul>
+		<h2 class="text-4xl font-semibold mb-8">Featured</h2>
+		<ul class="grid lg:grid-cols-3 gap-8 h-[48rem]">
 			{
-				posts.map((post) => (
-					<li>
-						<FormattedDate date={post.data.pubDate} />
-						<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+				topFeatured.map((post, i) => (
+					<li
+						class:list={[
+							"flex justify-stretch items-stretch",
+							{
+								"row-span-3": i === 0,
+								"row-span-2": i === 1 || i === 3,
+								"row-span-1": i === 2 || i === 4,
+							},
+						]}
+					>
+						<BlogPostCard {post} />
 					</li>
 				))
 			}
 		</ul>
 	</section>
-</Shell>
+
+	<section class="my-20">
+		<h2 class="text-4xl font-semibold mb-8">Latest</h2>
+		<ul class="grid lg:grid-cols-2 gap-8">
+			{
+				posts.map((post) => (
+					<li class="flex justify-stretch items-stretch">
+						<BlogPostCard {post} />
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</Basic>
