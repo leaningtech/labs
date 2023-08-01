@@ -19,11 +19,11 @@ if (topFeatured.length !== 5) {
 	title="Leaning Techologies Developer Blog"
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 >
-	<h1 class="my-16 font-extrabold text-6xl text-white">Developer blog</h1>
+	<h1 class="font-extrabold text-6xl text-white">Developer blog</h1>
 
-	<section>
+	<section class="my-16">
 		<h2 class="text-4xl font-semibold mb-8">Featured</h2>
-		<ul class="grid lg:grid-cols-3 gap-8 h-[48rem]">
+		<ul class="grid lg:grid-cols-3 gap-8 h-[36rem]">
 			{
 				topFeatured.map((post, i) => (
 					<li
@@ -43,7 +43,7 @@ if (topFeatured.length !== 5) {
 		</ul>
 	</section>
 
-	<section class="my-20">
+	<section class="my-16">
 		<h2 class="text-4xl font-semibold mb-8">Latest</h2>
 		<ul class="grid lg:grid-cols-2 gap-8">
 			{
