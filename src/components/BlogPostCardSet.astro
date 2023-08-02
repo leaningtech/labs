@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import BlogPostCard from "./BlogPostCard.astro";
 
 interface Props {
@@ -12,18 +12,26 @@ interface Props {
 
 const { tags, exclude } = Astro.props;
 
+function sortCalc(post: CollectionEntry<"blog">): number {
+	let relevancy =
+		tags && post.data.tags
+			? post.data.tags.filter((tag) => tags.includes(tag)).length
+			: 0.1;
+	if (post.data.featured) {
+		relevancy *= 2;
+	}
+	return post.data.pubDate.valueOf() * relevancy;
+}
+
 const posts = (
 	await getCollection("blog", (post) => {
 		if (exclude?.includes(post.id)) {
 			return false;
 		}
-		if (tags) {
-			return post.data.tags?.some((tag) => tags.includes(tag));
-		}
 		return true;
 	})
 )
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.sort((a, b) => sortCalc(b) - sortCalc(a))
 	.slice(0, 3);
 ---
 
