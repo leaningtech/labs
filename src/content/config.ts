@@ -1,11 +1,18 @@
 import { defineCollection, z } from "astro:content";
 
+const blogauthors = defineCollection({
+	schema: z.object({
+		name: z.string(),
+		jobTitle: z.string(),
+		avatar: z.string(),
+		url: z.string().optional(),
+	}),
+});
+
 const blog = defineCollection({
-	// Type-check frontmatter using a schema
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		// Transform string to Date object
 		pubDate: z
 			.string()
 			.or(z.date())
@@ -14,6 +21,7 @@ const blog = defineCollection({
 			.string()
 			.optional()
 			.transform((str) => (str ? new Date(str) : undefined)),
+		author: z.string(),
 		heroImage: z.string().optional(),
 		featured: z.boolean().default(false),
 		tags: z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"])).optional(),
@@ -28,4 +36,4 @@ const docs = defineCollection({
 	}),
 });
 
-export const collections = { docs, blog };
+export const collections = { docs, blog, blogauthors };

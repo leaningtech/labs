@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getEntry, type CollectionEntry } from "astro:content";
 import Shell from "./Shell.astro";
 import Icon from "astro-icon";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -17,7 +17,9 @@ type Props = CollectionEntry<"blog">["data"] & {
 const { id, title, description, pubDate, heroImage, headings, tags } =
 	Astro.props;
 
-const showAuthorSection = true;
+const author = (await getEntry("blogauthors", Astro.props.author)).data;
+
+const showAuthorSection = true; // maybe false for short posts
 ---
 
 <Shell {title} {description}>
@@ -49,16 +51,18 @@ const showAuthorSection = true;
 
 		<div class="flex flex-col lg:flex-row gap-10 mt-16">
 			<aside class="w-40 text-stone-400">
-				<img
-					class="w-16 h-16 rounded-full"
-					src="https://nanaian.town/img/alex.png"
-					alt="Avatar"
-					loading="lazy"
-					decoding="async"
-				/>
-				<div class="font-semibold leading-7 text-lg text-stone-200 mt-4">
-					Alex Bates
-				</div>
+				<a href={author.url}>
+					<img
+						class="w-16 h-16 rounded-full"
+						src={author.avatar}
+						alt=""
+						loading="lazy"
+						decoding="async"
+					/>
+					<div class="font-semibold leading-5 text-lg text-stone-200 mt-4">
+						{author.name}
+					</div>
+				</a>
 				<div class="text-base leading-6 text-stone-400">
 					<FormattedDate date={pubDate} />
 				</div>
@@ -98,23 +102,23 @@ const showAuthorSection = true;
 						The author
 					</h1>
 
-					<div class="flex gap-6 max-w-3xl">
+					<a class="flex gap-6 max-w-3xl" href={author.url}>
 						<img
 							class="w-20 h-20 rounded-full"
-							src="https://nanaian.town/img/alex.png"
-							alt="Avatar"
+							src={author.avatar}
+							alt=""
 							loading="lazy"
 							decoding="async"
 						/>
 						<div class="flex flex-col justify-center gap-1">
 							<div class="font-bold leading-7 text-2xl text-white">
-								Alex Bates
+								{author.name}
 							</div>
-							<p class="leading-6 text-base text-stone-300">
-								Software engineer @ Leaning Technologies
+							<p class="leading-4 text-base text-stone-300">
+								{author.jobTitle}
 							</p>
 						</div>
-					</div>
+					</a>
 				</div>
 			</section>
 		)
