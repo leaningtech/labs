@@ -2,7 +2,8 @@
 title: "Announcing CheerpJ 3.0: a JVM replacement in HTML5 and WebAssembly to run Java applications (and applets) on modern browsers"
 description: |
   For the past year, we have been working on a new architecture for CheerpJ: our implementation of the JVM in HTML5/WebAssembly, designed to run Java applications on the browser. CheerpJ 3.0 will be released in the late summer of 2023, and will be easier to use, faster, and more compatible than ever before. Our live JavaFiddle demo has already been migrated to the current development version.
-author: alessandro
+authors:
+  - alessandro
 pubDate: "May 9 2023"
 heroImage: "https://leaningtech.com/wp-content/uploads/2023/05/CheerpJ-Logo-1-1.png.webp"
 featured: true

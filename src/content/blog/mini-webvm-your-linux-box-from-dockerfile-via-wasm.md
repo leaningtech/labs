@@ -2,7 +2,8 @@
 title: "Mini.WebVM: Your own Linux box from Dockerfile, virtualized in the browser via WebAssembly"
 description: |
   WebVM is a Linux-like virtual machine running fully client-side in the browser. It is based on CheerpX: a x86 execution engine in WebAssembly by Leaning Technologies. With today’s update, you can deploy your own version of WebVM by simply forking the repository on GitHub and editing the included Dockerfile. A GitHub Actions workflow will automatically deploy it to GitHub pages.
-author: alessandro
+authors:
+  - alessandro
 pubDate: "May 22 2023"
 heroImage: "https://leaningtech.com/wp-content/uploads/2023/05/social.png.webp"
 tags:

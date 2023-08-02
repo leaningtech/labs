@@ -7,6 +7,7 @@ const blogauthors = defineCollection({
 		avatar: z.string(),
 		url: z.string().optional(),
 	}),
+	type: "data",
 });
 
 const blog = defineCollection({
@@ -21,7 +22,7 @@ const blog = defineCollection({
 			.string()
 			.optional()
 			.transform((str) => (str ? new Date(str) : undefined)),
-		author: z.string(),
+		authors: z.array(z.string()),
 		heroImage: z.string().optional(),
 		featured: z.boolean().default(false),
 		tags: z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"])).optional(),

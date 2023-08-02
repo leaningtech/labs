@@ -2,7 +2,8 @@
 title: "Beyond the DevTools: Profiling WebApps at the Assembly Level"
 description: |
   Thanks to groundbreaking technologies like CheerpX and CheerpJ, we have successfully redefined what was previously considered achievable within the browser’s environment. While working on such advanced projects, we soon encountered the limitations of a traditional profiling approach, like Chrome’s built-in devtools. As a result, we relied on a custom profiling workflow based on internal Chrome tracing for years which was due for an improvement.
-author: elisabeth
+authors:
+  - elisabeth
 pubDate: "June 28 2023"
 heroImage: "https://leaningtech.com/wp-content/uploads/2023/07/preview.jpg.webp"
 tags:
