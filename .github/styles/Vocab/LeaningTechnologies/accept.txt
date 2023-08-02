@@ -2,6 +2,7 @@ Leaning Technologies
 Cheerp
 CheerpJ
 CheerpX
+WebVM
 
 Astro
 Yarn
