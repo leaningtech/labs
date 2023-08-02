@@ -1,24 +1,133 @@
 ---
 import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
+import Search from "../components/Search.astro";
+import fiddle from "../assets/branding/landing_imgs/fiddle.png";
+import Tweet from "../components/landing-page/Tweet.astro";
+import { Icon } from "astro-icon";
 ---
 
 <Shell>
-	<div class="container mx-auto px-4 py-12 grow">
-		<div class="md:columns-2">
+	<div
+		class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
+	>
+		<!-- cool background -->
+	</div>
+	<!-- Banner section -->
+	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="text-center">
+			<h1 class="text-4xl font-bold tracking-tight text-stone300 sm:text-6xl">
+				Leaning Technologies Developer Hub
+			</h1>
+			<p class="mt-6 text-lg leading-8 text-stone300">
+				Very cool banner in this section
+			</p>
+			<div class="mt-10 flex items-center justify-center gap-x-6">
+				<a
+					href="#"
+					class="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+					>Get started</a
+				>
+				<Search />
+			</div>
 			<div>
-				<!-- https://github.com/tailwindlabs/tailwindcss/pull/11320 -->
-				<h1 class="text-4xl font-semibold text-balance">
-					Welcome to Leaning Technologies Developer!
-				</h1>
-				<p class="max-w-prose">
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint quidem,
-					ut animi tempora vero sit voluptatibus aspernatur blanditiis adipisci
-					ullam laboriosam deleniti et voluptas dolorem fuga? Dignissimos quis
-					commodi officia?
+				<p class="mt-6 text-lg leading-8 text-stone300">Trusted by</p>
+				<p class="mt-6 text-lg leading-8 text-stone300">
+					small client logos here in plain white
 				</p>
 			</div>
-			<img src="https://placekitten.com/400/300" />
+		</div>
+	</div>
+
+	<!-- Fiddle section -->
+	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="text-center">
+			<img src={fiddle} />
+		</div>
+	</div>
+	<!-- Developer Reviews -->
+	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="text-center my-10">
+			<h2 class="text-4xl font-extrabold dark:text-white">Developer Reviews</h2>
+		</div>
+		<div class="grid grid-flow-col-dense gap-3">
+			<div>
+				<a
+					href="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
+				>
+					<div class="rounded-md border border-stone-500">
+						<div class="m-5">
+							<div class="grid grid-cols-[35%_65%] gap-2">
+								<div class="">
+									<img
+										src="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
+										alt=""
+										class="rounded-full w-12 h-12"
+									/>
+								</div>
+
+								<div class="">
+									<p>Leaning Tech</p>
+									<p>@leaningtech</p>
+								</div>
+							</div>
+							<div class="">
+								<p>This is a tweet text!</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div>
+				<Tweet
+					tweetUrl="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
+					imgUrl="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
+					userName="LT2"
+					userTag="@username"
+					text="second tweet!"
+				/>
+			</div>
+			<div>
+				<Tweet
+					tweetUrl="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
+					imgUrl="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
+					userName="LT2"
+					userTag="@username"
+					text="second tweet!"
+				/>
+			</div>
+		</div>
+
+		<!-- Contributors -->
+		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+			<div class="text-center">
+				<h2 class="text-4xl font-extrabold dark:text-white">Contributors</h2>
+			</div>
+		</div>
+
+		<!-- Get started now -->
+		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+			<div class="text-center">
+				<h2 class="text-4xl font-extrabold dark:text-white">
+					Get started now!
+				</h2>
+			</div>
+			<div class="mt-10 flex items-center justify-center gap-x-6">
+				<a
+					href="#"
+					class="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+					>Documentation</a
+				>
+				<a
+					href="#"
+					class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5"
+				>
+					<Icon name="fa-brands:discord" class="w-6 h-6" />
+					<span class="hidden md:block">Join the community</span>
+					<span class="sr-only">on Discord</span>
+				</a>
+			</div>
 		</div>
 	</div>
 	<Footer />
