@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import BlogPostCard from "./BlogPostCard.astro";
+
+interface Props {
+	// Only show posts if they have at least one of these tags
+	tags: string[] | undefined;
+
+	// Exclude posts with these IDs
+	exclude: string[] | undefined;
+}
+
+const { tags, exclude } = Astro.props;
+
+const posts = (
+	await getCollection("blog", (post) => {
+		if (exclude?.includes(post.id)) {
+			return false;
+		}
+		if (tags) {
+			return post.data.tags?.some((tag) => tags.includes(tag));
+		}
+		return true;
+	})
+)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<ul class="grid lg:grid-cols-3 gap-4">
+	{
+		posts.map((post) => (
+			<li class="flex justify-stretch items-stretch">
+				<BlogPostCard {post} />
+			</li>
+		))
+	}
+</ul>

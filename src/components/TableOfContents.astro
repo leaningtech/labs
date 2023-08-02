@@ -3,7 +3,7 @@ import TableOfContentsHeading, {
 	type Heading,
 } from "./TableOfContentsHeading.astro";
 
-type BasicHeading = Omit<Heading, "subheadings">;
+export type BasicHeading = Omit<Heading, "subheadings">;
 
 interface Props {
 	headings: BasicHeading[];
