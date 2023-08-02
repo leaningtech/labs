@@ -4,6 +4,15 @@ import Shell from "../layouts/Shell.astro";
 import Search from "../components/Search.astro";
 import fiddle from "../assets/branding/landing_imgs/fiddle.png";
 import Tweet from "../components/landing-page/Tweet.astro";
+
+import Nasa from "../assets/branding/landing_imgs/clients/nasa2.png";
+import TicketMaster from "../assets/branding/landing_imgs/clients/ticketmaster.png";
+import Hebbian from "../assets/branding/landing_imgs/clients/Hebbian.png";
+import Leonardo from "../assets/branding/landing_imgs/clients/leonardo.png";
+import Blackbird from "../assets/branding/landing_imgs/clients/blackbird.png";
+import Phet from "../assets/branding/landing_imgs/clients/phet.png";
+import Gamepix from "../assets/branding/landing_imgs/clients/gamepix.png";
+
 import { Icon } from "astro-icon";
 ---
 
@@ -24,17 +33,58 @@ import { Icon } from "astro-icon";
 			</p>
 			<div class="mt-10 flex items-center justify-center gap-x-6">
 				<a
-					href="#"
-					class="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-					>Get started</a
+					class="relative group overflow-hidden px-6 h-12 rounded-full flex space-x-2 items-center bg-gradient-to-r from-primary-600 to-primary-400 hover:to-primary-200"
 				>
+					<span class="relative text-sm text-white">Get Started</span>
+					<div class="flex items-center -space-x-3 translate-x-3">
+						<div
+							class="w-2.5 h-[1.6px] rounded bg-white origin-left scale-x-0 transition duration-300 group-hover:scale-x-100"
+						>
+						</div>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5 stroke-white -translate-x-2 transition duration-300 group-hover:translate-x-0"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M9 5l7 7-7 7"></path>
+						</svg>
+					</div>
+				</a>
 				<Search />
 			</div>
+		</div>
+	</div>
+	<div class="mx-auto max-w-screen-lg">
+		<div class="text-center my-10">
+			<h2 class="text-xl font-ebold dark:text-white">Trusted by</h2>
+		</div>
+		<div class="grid grid-cols-7 gap-3 place-items-center justify-center">
 			<div>
-				<p class="mt-6 text-lg leading-8 text-stone300">Trusted by</p>
-				<p class="mt-6 text-lg leading-8 text-stone300">
-					small client logos here in plain white
-				</p>
+				<img src={Nasa} />
+			</div>
+			<div>
+				<img src={TicketMaster} />
+			</div>
+			<div>
+				<img src={Hebbian} />
+			</div>
+			<div>
+				<img src={Leonardo} />
+			</div>
+			<div>
+				<img src={Blackbird} />
+			</div>
+			<div>
+				<img src={Phet} />
+			</div>
+			<div>
+				<img src={Gamepix} />
 			</div>
 		</div>
 	</div>
@@ -45,64 +95,212 @@ import { Icon } from "astro-icon";
 			<img src={fiddle} />
 		</div>
 	</div>
-	<!-- Developer Reviews -->
+
+	<!-- TODO: blog post section -->
 	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="text-center my-10">
+			<h2 class="text-4xl font-extrabold dark:text-white">
+				ToDo:Latest blogs/news
+			</h2>
+		</div>
+	</div>
+	<!-- Developer Reviews -->
+	<div class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
 		<div class="text-center my-10">
 			<h2 class="text-4xl font-extrabold dark:text-white">Developer Reviews</h2>
 		</div>
-		<div class="grid grid-flow-col-dense gap-3">
+		<div class="grid grid-flow-col-dense gap-3 place-items-center">
 			<div>
-				<a
-					href="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
-				>
-					<div class="rounded-md border border-stone-500">
-						<div class="m-5">
-							<div class="grid grid-cols-[35%_65%] gap-2">
-								<div class="">
-									<img
-										src="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
-										alt=""
-										class="rounded-full w-12 h-12"
-									/>
-								</div>
-
-								<div class="">
-									<p>Leaning Tech</p>
-									<p>@leaningtech</p>
-								</div>
-							</div>
-							<div class="">
-								<p>This is a tweet text!</p>
-							</div>
-						</div>
-					</div>
-				</a>
+				<Tweet
+					tweetUrl="https://twitter.com/ballingt/status/1577996820868833281?s=20"
+					imgUrl="https://pbs.twimg.com/profile_images/1064434470697152512/MHK02-vq_400x400.jpg"
+					userName="Thomas Ballinger"
+					userTag="@ballingt"
+					text="This piece pulls it all together! Terrific work by @leaningtech folks, and the ubiquity of @Tailscale continues to surprise me."
+				/>
 			</div>
 
 			<div>
 				<Tweet
-					tweetUrl="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
-					imgUrl="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
-					userName="LT2"
-					userTag="@username"
-					text="second tweet!"
+					tweetUrl="https://twitter.com/iteachchem/status/1262505442778820609?s=20"
+					imgUrl="https://pbs.twimg.com/profile_images/2285223106/image_400x400.jpg"
+					userName="Janeth Brownell"
+					userTag="@iteachchem"
+					text="Woo Hoo!!! #MovingMan #physics sim is finally available in a form other than Java! Thank you @PhETsims and @leaningtech for the #cheerpj version! #scitlap #scichat @NSTA @cascience #ButteCOE"
 				/>
 			</div>
 			<div>
 				<Tweet
-					tweetUrl="https://twitter.com/leaningtech/status/1682417186667737089?s=20"
-					imgUrl="https://pbs.twimg.com/profile_images/1682025307367428097/Mz3tBrfb_400x400.jpg"
-					userName="LT2"
-					userTag="@username"
-					text="second tweet!"
+					tweetUrl="https://twitter.com/tlively52/status/1656055356206854146?s=20"
+					imgUrl="https://pbs.twimg.com/profile_images/1089417696066686977/PPe7YcIE_400x400.jpg"
+					userName="Thomas Lively"
+					userTag="@tlively52"
+					text="Extremely cool to see more JITting of WebAssembly from @leaningtech"
 				/>
 			</div>
 		</div>
 
 		<!-- Contributors -->
-		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-			<div class="text-center">
+		<div class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
+			<div class="text-center my-10">
 				<h2 class="text-4xl font-extrabold dark:text-white">Contributors</h2>
+			</div>
+			<div
+				class="grid sm:grid-cols-5 md:grid-cols-9 lg:grid-cols-12 gap-3 place-items-center justify-center"
+			>
+				<div>
+					<a href="https://github.com/alexp-sssup">
+						<img
+							src="https://avatars.githubusercontent.com/u/191061?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/yuri91">
+						<img
+							src="https://avatars.githubusercontent.com/u/1506147?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/maxgrv">
+						<img
+							src="https://avatars.githubusercontent.com/u/4189010?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/sderossi">
+						<img
+							src="https://avatars.githubusercontent.com/u/5889579?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/nanaian">
+						<img
+							src="https://avatars.githubusercontent.com/u/9429556?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/GabrielaReyna">
+						<img
+							src="https://avatars.githubusercontent.com/u/15352258?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/willmitchell98">
+						<img
+							src="https://avatars.githubusercontent.com/u/26136954?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/Maqrkk">
+						<img
+							src="https://avatars.githubusercontent.com/u/29182327?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/tomoliv30">
+						<img
+							src="https://avatars.githubusercontent.com/u/43568134?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/epanholz">
+						<img
+							src="https://avatars.githubusercontent.com/u/54479232?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/saarikoski-jules">
+						<img
+							src="https://avatars.githubusercontent.com/u/56890810?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/Waqas-Leaningtech">
+						<img
+							src="https://avatars.githubusercontent.com/u/59084531?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/Waqas-Leaningtech">
+						<img
+							src="https://avatars.githubusercontent.com/u/59084531?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/carlopi">
+						<img
+							src="https://avatars.githubusercontent.com/u/842657?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/sere">
+						<img
+							src="https://avatars.githubusercontent.com/u/2992193?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/marsicplusplus">
+						<img
+							src="https://avatars.githubusercontent.com/u/7804222?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
+				<div>
+					<a href="https://github.com/Maqrkk">
+						<img
+							src="https://avatars.githubusercontent.com/u/29182327?v=4"
+							alt=""
+							class="rounded-full w-12 h-12"
+						/>
+					</a>
+				</div>
 			</div>
 		</div>
 
@@ -113,15 +311,17 @@ import { Icon } from "astro-icon";
 					Get started now!
 				</h2>
 			</div>
-			<div class="mt-10 flex items-center justify-center gap-x-6">
+			<div class="mt-10 flex items-center justify-center gap-x-6 h-10">
 				<a
 					href="#"
-					class="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-					>Documentation</a
+					class="bg-primary-500 rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-primary-300"
 				>
+					<span class="hidden md:block">Documentation</span>
+					<Icon name="uiw:right" class="w-6 h-6" />
+				</a>
 				<a
 					href="#"
-					class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5"
+					class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-indigo-400"
 				>
 					<Icon name="fa-brands:discord" class="w-6 h-6" />
 					<span class="hidden md:block">Join the community</span>
