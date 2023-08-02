@@ -5,6 +5,8 @@ description: |
 author: alessandro
 pubDate: "May 22 2023"
 heroImage: "https://leaningtech.com/wp-content/uploads/2023/05/social.png.webp"
+tags:
+  - CheerpX
 ---
 
 _TLDR: WebVM is a Linux-like virtual machine running fully client-side in the browser. It is based on CheerpX: a x86 execution engine in WebAssembly by Leaning Technologies. With today’s update, you can deploy your own version of WebVM by simply_ [_forking the repo_](https://github.com/leaningtech/webvm) _on GitHub and editing the included Dockerfile. A GitHub Actions workflow will automatically deploy it to GitHub pages._

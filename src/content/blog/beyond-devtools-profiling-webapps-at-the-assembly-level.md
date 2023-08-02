@@ -5,6 +5,8 @@ description: |
 author: elisabeth
 pubDate: "June 28 2023"
 heroImage: "https://leaningtech.com/wp-content/uploads/2023/07/preview.jpg.webp"
+tags:
+  - CheerpX
 ---
 
 At Leaning Technologies, we constantly strive to push the boundaries of browser performance, making performance optimization a crucial concern for our developers. Thanks to groundbreaking technologies like [CheerpX](https://leaningtech.com/cheerpx-for-flash/) and [CheerpJ](https://leaningtech.com/cheerpj/), we have successfully redefined what was previously considered achievable within the browser’s environment. While working on such advanced projects, we soon encountered the limitations of a traditional profiling approach, like Chrome’s built-in devtools. As a result, we relied on a custom profiling workflow based on internal Chrome tracing for years which was due for an improvement.
