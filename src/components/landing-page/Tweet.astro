@@ -1,0 +1,31 @@
+---
+export interface Props {
+	tweetUrl: string;
+	imgUrl: string;
+	userName: string;
+	userTag: string;
+	text: string;
+}
+
+const { tweetUrl, imgUrl, userName, userTag, text } = Astro.props;
+---
+
+<a href={tweetUrl}>
+	<div class="rounded-xl border border-stone-500 w-72 bg-stone-800">
+		<div class="m-5">
+			<div>
+				<div class="flex flex-row gap-4">
+					<img src={imgUrl} alt="" class="rounded-full w-12 h-12" />
+
+					<div>
+						<p class="font-bold">{userName}</p>
+						<p class="text-sm text-gray-400">{userTag}</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p class="break-words pt-4">{text}</p>
+			</div>
+		</div>
+	</div>
+</a>
