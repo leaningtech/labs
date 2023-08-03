@@ -1,4 +1,6 @@
 ---
+import companyFavicon from "../assets/branding/company/tower.svg";
+
 export interface Props {
 	title: string;
 	description: string;
@@ -8,12 +10,25 @@ export interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
+
+let favicon = companyFavicon;
+let faviconType = "image/svg+xml";
+if (canonicalURL.pathname.startsWith("/cheerpj")) {
+	favicon = "/cheerpj/favicon.ico";
+	faviconType = "image/x-icon";
+} else if (canonicalURL.pathname.startsWith("/cheerpx")) {
+	favicon = "/cheerpx/favicon.ico";
+	faviconType = "image/x-icon";
+} else if (canonicalURL.pathname.startsWith("/cheerp")) {
+	favicon = "/cheerp/favicon.ico";
+	faviconType = "image/x-icon";
+}
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type={faviconType} href={favicon} />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
