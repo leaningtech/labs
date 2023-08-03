@@ -6,7 +6,7 @@ export interface NavFile {
 	href: string;
 	slug: string;
 	title: string;
-	collectionEntry: CollectionEntry;
+	collectionEntry: CollectionEntry<"docs">;
 }
 
 export interface NavDirectory {
@@ -94,11 +94,13 @@ export async function getRootNav(): Promise<NavEntry[]> {
 		}
 
 		// Add this directory to its parent
+		const slug = idToSlug(path);
 		const myEntries: NavEntry[] = [];
 		const me: NavDirectory = {
 			type: "directory",
 			id: path,
-			slug: idToSlug(path),
+			slug,
+			href: "/" + slug,
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
@@ -224,7 +226,8 @@ export function idToTitle(id: string): string {
 
 function idToSlug(id: string): string {
 	return id
-		.replace(/\.md$/, "")
+		.replace(/\.mdx?$/, "")
+		.replace("/index", "") // index.md overrides directory listing
 		.split("/")
 		.map((component) => component.replace(/^\d+-/, ""))
 		.join("/");
