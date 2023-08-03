@@ -23,7 +23,7 @@ const showAuthorSection = authors.length > 0;
 ---
 
 <Shell {title} {description}>
-	<main class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
+	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
 			href="/blog"
 			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
@@ -43,7 +43,7 @@ const showAuthorSection = authors.length > 0;
 		}
 
 		<h1
-			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200"
+			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
 			id="introduction"
 		>
 			{title}
@@ -74,14 +74,14 @@ const showAuthorSection = authors.length > 0;
 
 			<article class="grow max-w-3xl">
 				<div
-					class="prose prose-stone lg:prose-lg dark:prose-invert"
+					class="prose prose-stone md:prose-lg dark:prose-invert"
 					data-pagefind-body
 				>
 					<slot />
 				</div>
 			</article>
 
-			<aside class="hidden lg:block w-40">
+			<aside class="hidden lg:block w-40 grow">
 				{
 					headings && (
 						<div class="sticky top-24">
