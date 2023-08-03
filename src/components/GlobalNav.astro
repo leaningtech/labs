@@ -14,8 +14,18 @@ const links = [
 	{ name: "Blog", href: "/blog" },
 ];
 
+let requiredTag: "Cheerp" | "CheerpJ" | "CheerpX" | undefined = undefined;
+if (Astro.url.pathname.startsWith("/cheerpj")) requiredTag = "CheerpJ";
+else if (Astro.url.pathname.startsWith("/cheerpx")) requiredTag = "CheerpX";
+else if (Astro.url.pathname.startsWith("/cheerp")) requiredTag = "Cheerp";
+
 const latestFeaturedPost = (
-	await getCollection("blog", (entry) => entry.data.featured)
+	await getCollection(
+		"blog",
+		(entry) =>
+			entry.data.featured &&
+			(!requiredTag || entry.data.tags?.includes(requiredTag)),
+	)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
 ---
 
@@ -24,22 +34,22 @@ const latestFeaturedPost = (
 	class="sticky top-0 z-20 bg-stone-900 bg-opacity-70 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
 >
 	<div
-		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-6 whitespace-nowrap overflow-hidden"
 	>
-		<div class="flex gap-4 overflow-hidden">
+		<div class="flex gap-4 flex-none">
 			<a href="/" class="flex items-center gap-4">
 				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
 				<span class="hidden md:block text-xl">Developer</span>
 			</a>
-
-			{
-				latestFeaturedPost && (
-					<div class="hidden md:block mx-6 overflow-hidden">
-						<BlogPostPill post={latestFeaturedPost} />
-					</div>
-				)
-			}
 		</div>
+
+		{
+			latestFeaturedPost && (
+				<div class="hidden md:block overflow-hidden">
+					<BlogPostPill post={latestFeaturedPost} />
+				</div>
+			)
+		}
 
 		<div class="flex items-center gap-4 xl:gap-8 ml-auto flex-none">
 			{
