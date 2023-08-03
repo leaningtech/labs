@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon";
+import { getCollection } from "astro:content";
 //import DiscordPresenceCount from "./DiscordPresenceCount.astro";
+import BlogPostPill from "./BlogPostPill.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
@@ -11,23 +13,35 @@ const links = [
 	{ name: "Demos", href: "/demos" },
 	{ name: "Blog", href: "/blog" },
 ];
+
+const latestFeaturedPost = (
+	await getCollection("blog", (entry) => entry.data.featured)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
 ---
 
 <nav
 	aria-label="Primary navigation"
-	class="sticky top-0 z-20 bg-stone-900 bg-opacity-40 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
+	class="sticky top-0 z-20 bg-stone-900 bg-opacity-70 backdrop-blur text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
 >
 	<div
 		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between whitespace-nowrap"
 	>
-		<div class="lg:basis-80 flex gap-4">
+		<div class="flex gap-4 overflow-hidden">
 			<a href="/" class="flex items-center gap-4">
 				<img src={companyLogo} alt={SITE_TITLE} class="w-8 h-8" />
 				<span class="hidden md:block text-xl">Developer</span>
 			</a>
+
+			{
+				latestFeaturedPost && (
+					<div class="hidden md:block mx-6 overflow-hidden">
+						<BlogPostPill post={latestFeaturedPost} />
+					</div>
+				)
+			}
 		</div>
 
-		<div class="flex items-center gap-4 xl:gap-8 ml-auto">
+		<div class="flex items-center gap-4 xl:gap-8 ml-auto flex-none">
 			{
 				links.map((link) => (
 					<a href={link.href} class="hover:text-primary-500">

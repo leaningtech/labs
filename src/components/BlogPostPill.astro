@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<a
+	href={`/blog/${post.slug}`}
+	class="rounded-full bg-primary-600 bg-opacity-10 text-primary-600 px-3 py-1 flex items-center gap-1 max-w-full overflow-hidden"
+>
+	<div class="overflow-hidden overflow-ellipsis">{post.data.title}</div>
+	<Icon name="mdi:chevron-right" class="w-6 h-6 flex-none" />
+</a>
