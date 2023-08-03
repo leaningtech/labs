@@ -4,7 +4,7 @@ import companyFavicon from "../assets/branding/company/tower.svg";
 export interface Props {
 	title: string;
 	description: string;
-	image?: string;
+	image?: string | undefined;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);

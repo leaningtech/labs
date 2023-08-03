@@ -22,7 +22,7 @@ const authors = await resolveAuthors(Astro.props.authors);
 const showAuthorSection = authors.length > 0;
 ---
 
-<Shell {title} {description}>
+<Shell {title} {description} image={heroImage}>
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
 			href="/blog"
