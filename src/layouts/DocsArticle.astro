@@ -16,14 +16,15 @@ interface Props {
 
 const { id, title, headings } = Astro.props;
 
-// TODO: probably better to have these come in as props?
-//
-const [, product, mode] = Astro.url.pathname.replace(".html", "").split("/");
-if (!isProduct(product) || !isMode(mode))
-	throw new Error("DocsArticle expects url /[product]/[mode]/[...]");
-
 const nav = await getRootNav();
-const directory = findNavDirectory(nav, [product, mode]);
+
+// TODO: probably better to have these come in as props?
+let [, product, mode] = Astro.url.pathname.replace(".html", "").split("/");
+if (!isProduct(product))
+	throw new Error(`DocsArticle: invalid product in url: ${product}`);
+if (!isMode(mode)) mode = undefined;
+
+const directory = mode ? findNavDirectory(nav, [product, mode]) : undefined;
 
 const today = new Date();
 ---
@@ -47,7 +48,10 @@ const today = new Date();
 				<Breadcrumbs />
 			</div>
 
-			<main data-pagefind-body class="prose prose-stone dark:prose-invert">
+			<main
+				data-pagefind-body
+				class="prose prose-stone dark:prose-invert pb-10"
+			>
 				<h1 class="mb-12 font-bold">{title}</h1>
 				<slot />
 			</main>

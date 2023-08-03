@@ -1,0 +1,24 @@
+---
+interface Props {
+	href: string;
+	label: string;
+	type: "primary" | "secondary";
+}
+
+const { href, label, type } = Astro.props;
+---
+
+<a
+	{href}
+	class:list={[
+		"inline-block px-4 py-2 font-semibold border-2 rounded-md no-underline text-base",
+		{
+			"border-primary-400 bg-primary-500 text-white hover:border-primary-200 transition-colors":
+				type === "primary",
+			"border-stone-600 text-primary-400": type === "secondary",
+		},
+	]}
+>
+	{label}
+	<slot />
+</a>
