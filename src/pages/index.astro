@@ -1,9 +1,13 @@
 ---
+import { Icon } from "astro-icon";
 import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
 import Search from "../components/Search.astro";
 import fiddle from "../assets/branding/landing_imgs/fiddle.png";
 import Tweet from "../components/landing-page/Tweet.astro";
+import BlogSection from "../components/landing-page/BlogSection.astro";
+
+import { products } from "./docs.astro";
 
 import Nasa from "../assets/branding/landing_imgs/clients/nasa2.png";
 import TicketMaster from "../assets/branding/landing_imgs/clients/ticketmaster.png";
@@ -13,7 +17,15 @@ import Blackbird from "../assets/branding/landing_imgs/clients/blackbird.png";
 import Phet from "../assets/branding/landing_imgs/clients/phet.png";
 import Gamepix from "../assets/branding/landing_imgs/clients/gamepix.png";
 
-import { Icon } from "astro-icon";
+const clientImages = [
+	{ src: Nasa, alt: "NASA" },
+	{ src: TicketMaster, alt: "TicketMaster" },
+	{ src: Hebbian, alt: "Hebbian" },
+	{ src: Leonardo, alt: "Leonardo" },
+	{ src: Blackbird, alt: "Blackbird" },
+	{ src: Phet, alt: "Phet" },
+	{ src: Gamepix, alt: "Gamepix" },
+];
 ---
 
 <Shell>
@@ -23,312 +35,310 @@ import { Icon } from "astro-icon";
 		<!-- cool background -->
 	</div>
 	<!-- Banner section -->
-	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-		<div class="text-center">
-			<h1 class="text-4xl font-bold tracking-tight text-stone300 sm:text-6xl">
-				Leaning Technologies Developer Hub
-			</h1>
-			<p class="mt-6 text-lg leading-8 text-stone300">
-				Very cool banner in this section
-			</p>
-			<div class="mt-10 flex items-center justify-center gap-x-6">
-				<a
-					class="relative group overflow-hidden px-6 h-12 rounded-full flex space-x-2 items-center bg-gradient-to-r from-primary-600 to-primary-400 hover:to-primary-200"
-				>
-					<span class="relative text-sm text-white">Get Started</span>
-					<div class="flex items-center -space-x-3 translate-x-3">
-						<div
-							class="w-2.5 h-[1.6px] rounded bg-white origin-left scale-x-0 transition duration-300 group-hover:scale-x-100"
-						>
-						</div>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5 stroke-white -translate-x-2 transition duration-300 group-hover:translate-x-0"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M9 5l7 7-7 7"></path>
-						</svg>
+	<header class="mx-auto max-w-screen-2xl px-6 py-48">
+		<h1
+			class="text-4xl font-bold tracking-tight text-white text-balance sm:text-6xl"
+		>
+			Welcome to Leaning Technologies!
+		</h1>
+		<p class="mt-6 text-lg leading-6 text-stone-200 max-w-prose">
+			Leaning Technologies builds WebAssembly tools that enable you to create
+			awesome web experiences using the languages you already know.
+		</p>
+		<div class="mt-10 inline-flex items-center justify-center gap-4">
+			<a
+				class="relative group overflow-hidden px-6 h-10 rounded-md flex space-x-2 items-center bg-gradient-to-r from-primary-600 to-primary-400 cursor-pointer"
+				href="/docs"
+			>
+				<span class="relative text-base text-white font-semibold">
+					Documentation
+				</span>
+				<div class="flex items-center -space-x-3 translate-x-3">
+					<div
+						class="w-2.5 h-[1.6px] rounded bg-white origin-left scale-x-0 transition duration-300 group-hover:scale-x-100"
+					>
 					</div>
-				</a>
-				<Search />
-			</div>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-5 w-5 stroke-white -translate-x-2 transition duration-300 group-hover:translate-x-0"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9 5l7 7-7 7"></path>
+					</svg>
+				</div>
+			</a>
+			<Search />
 		</div>
-	</div>
-	<div class="mx-auto max-w-screen-lg">
-		<div class="text-center my-10">
-			<h2 class="text-xl font-ebold dark:text-white">Trusted by</h2>
+		<div
+			class="flex justify-around gap-8 flex-col md:flex-row items-center mt-16"
+		>
+			{
+				products.map((product) => (
+					<a href={product.href}>
+						<img src={product.logotype} alt={product.name} class="h-12" />
+					</a>
+				))
+			}
 		</div>
-		<div class="grid grid-cols-7 gap-3 place-items-center justify-center">
-			<div>
-				<img src={Nasa} />
-			</div>
-			<div>
-				<img src={TicketMaster} />
-			</div>
-			<div>
-				<img src={Hebbian} />
-			</div>
-			<div>
-				<img src={Leonardo} />
-			</div>
-			<div>
-				<img src={Blackbird} />
-			</div>
-			<div>
-				<img src={Phet} />
-			</div>
-			<div>
-				<img src={Gamepix} />
-			</div>
-		</div>
-	</div>
+	</header>
 
 	<!-- Fiddle section -->
-	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+	<div class="mx-auto max-w-2xl py-16">
 		<div class="text-center">
 			<img src={fiddle} />
 		</div>
 	</div>
 
-	<!-- TODO: blog post section -->
-	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-		<div class="text-center my-10">
-			<h2 class="text-4xl font-extrabold dark:text-white">
-				ToDo:Latest blogs/news
-			</h2>
-		</div>
-	</div>
-	<!-- Developer Reviews -->
-	<div class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
-		<div class="text-center my-10">
-			<h2 class="text-4xl font-extrabold dark:text-white">Developer Reviews</h2>
-		</div>
-		<div class="grid grid-flow-col-dense gap-3 place-items-center">
-			<div>
-				<Tweet
-					tweetUrl="https://twitter.com/ballingt/status/1577996820868833281?s=20"
-					imgUrl="https://pbs.twimg.com/profile_images/1064434470697152512/MHK02-vq_400x400.jpg"
-					userName="Thomas Ballinger"
-					userTag="@ballingt"
-					text="This piece pulls it all together! Terrific work by @leaningtech folks, and the ubiquity of @Tailscale continues to surprise me."
-				/>
-			</div>
+	<section class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
+		<h2 class="text-4xl font-semibold dark:text-white text-center">
+			Testimonials
+		</h2>
 
-			<div>
-				<Tweet
-					tweetUrl="https://twitter.com/iteachchem/status/1262505442778820609?s=20"
-					imgUrl="https://pbs.twimg.com/profile_images/2285223106/image_400x400.jpg"
-					userName="Janeth Brownell"
-					userTag="@iteachchem"
-					text="Woo Hoo!!! #MovingMan #physics sim is finally available in a form other than Java! Thank you @PhETsims and @leaningtech for the #cheerpj version! #scitlap #scichat @NSTA @cascience #ButteCOE"
-				/>
-			</div>
-			<div>
-				<Tweet
-					tweetUrl="https://twitter.com/tlively52/status/1656055356206854146?s=20"
-					imgUrl="https://pbs.twimg.com/profile_images/1089417696066686977/PPe7YcIE_400x400.jpg"
-					userName="Thomas Lively"
-					userTag="@tlively52"
-					text="Extremely cool to see more JITting of WebAssembly from @leaningtech"
-				/>
-			</div>
+		<div
+			class="grid md:grid-cols-3 gap-4 place-items-start mx-auto max-w-screen-lg my-8"
+		>
+			<Tweet
+				tweetUrl="https://twitter.com/ballingt/status/1577996820868833281?s=20"
+				imgUrl="https://pbs.twimg.com/profile_images/1064434470697152512/MHK02-vq_400x400.jpg"
+				userName="Thomas Ballinger"
+				userTag="@ballingt"
+				text="This piece pulls it all together! Terrific work by @leaningtech folks, and the ubiquity of @Tailscale continues to surprise me."
+			/>
+			<Tweet
+				tweetUrl="https://twitter.com/iteachchem/status/1262505442778820609?s=20"
+				imgUrl="https://pbs.twimg.com/profile_images/2285223106/image_400x400.jpg"
+				userName="Janeth Brownell"
+				userTag="@iteachchem"
+				text="Woo Hoo!!! #MovingMan #physics sim is finally available in a form other than Java! Thank you @PhETsims and @leaningtech for the #cheerpj version! #scitlap #scichat @NSTA @cascience #ButteCOE"
+			/>
+			<Tweet
+				tweetUrl="https://twitter.com/tlively52/status/1656055356206854146?s=20"
+				imgUrl="https://pbs.twimg.com/profile_images/1089417696066686977/PPe7YcIE_400x400.jpg"
+				userName="Thomas Lively"
+				userTag="@tlively52"
+				text="Extremely cool to see more JITting of WebAssembly from @leaningtech"
+			/>
 		</div>
 
-		<!-- Contributors -->
-		<div class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
-			<div class="text-center my-10">
-				<h2 class="text-4xl font-extrabold dark:text-white">Contributors</h2>
+		<ul
+			class="flex justify-items-center justify-between flex-wrap gap-8"
+			aria-label="Clients"
+		>
+			{
+				clientImages.map(({ src, alt }, i) => (
+					<li
+						class:list={[
+							{
+								"hidden lg:block": i >= 4,
+							},
+						]}
+					>
+						<img
+							src={src}
+							alt={alt}
+							loading="lazy"
+							decoding="async"
+							class="opacity-50 h-20"
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<!-- Contributors -->
+	<section class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
+		<div class="text-center my-10">
+			<h2 class="text-4xl font-semibold dark:text-white">Open source</h2>
+		</div>
+		<div
+			class="grid sm:grid-cols-5 md:grid-cols-9 lg:grid-cols-12 gap-3 place-items-center justify-center"
+		>
+			<div>
+				<a href="https://github.com/alexp-sssup">
+					<img
+						src="https://avatars.githubusercontent.com/u/191061?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
 			</div>
-			<div
-				class="grid sm:grid-cols-5 md:grid-cols-9 lg:grid-cols-12 gap-3 place-items-center justify-center"
+			<div>
+				<a href="https://github.com/yuri91">
+					<img
+						src="https://avatars.githubusercontent.com/u/1506147?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/maxgrv">
+					<img
+						src="https://avatars.githubusercontent.com/u/4189010?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/sderossi">
+					<img
+						src="https://avatars.githubusercontent.com/u/5889579?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/nanaian">
+					<img
+						src="https://avatars.githubusercontent.com/u/9429556?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/GabrielaReyna">
+					<img
+						src="https://avatars.githubusercontent.com/u/15352258?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/willmitchell98">
+					<img
+						src="https://avatars.githubusercontent.com/u/26136954?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/Maqrkk">
+					<img
+						src="https://avatars.githubusercontent.com/u/29182327?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/tomoliv30">
+					<img
+						src="https://avatars.githubusercontent.com/u/43568134?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/epanholz">
+					<img
+						src="https://avatars.githubusercontent.com/u/54479232?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/saarikoski-jules">
+					<img
+						src="https://avatars.githubusercontent.com/u/56890810?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/Waqas-Leaningtech">
+					<img
+						src="https://avatars.githubusercontent.com/u/59084531?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/Waqas-Leaningtech">
+					<img
+						src="https://avatars.githubusercontent.com/u/59084531?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/carlopi">
+					<img
+						src="https://avatars.githubusercontent.com/u/842657?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/sere">
+					<img
+						src="https://avatars.githubusercontent.com/u/2992193?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/marsicplusplus">
+					<img
+						src="https://avatars.githubusercontent.com/u/7804222?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+			<div>
+				<a href="https://github.com/Maqrkk">
+					<img
+						src="https://avatars.githubusercontent.com/u/29182327?v=4"
+						alt=""
+						class="rounded-full w-12 h-12"
+					/>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Get started now -->
+	<section class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="text-center">
+			<h2 class="text-4xl font-semibold dark:text-white">Get started now!</h2>
+		</div>
+		<div class="mt-10 flex items-center justify-center gap-x-6 h-10">
+			<a
+				href="/docs"
+				class="bg-primary-500 rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-primary-300"
 			>
-				<div>
-					<a href="https://github.com/alexp-sssup">
-						<img
-							src="https://avatars.githubusercontent.com/u/191061?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/yuri91">
-						<img
-							src="https://avatars.githubusercontent.com/u/1506147?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/maxgrv">
-						<img
-							src="https://avatars.githubusercontent.com/u/4189010?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/sderossi">
-						<img
-							src="https://avatars.githubusercontent.com/u/5889579?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/nanaian">
-						<img
-							src="https://avatars.githubusercontent.com/u/9429556?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/GabrielaReyna">
-						<img
-							src="https://avatars.githubusercontent.com/u/15352258?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/willmitchell98">
-						<img
-							src="https://avatars.githubusercontent.com/u/26136954?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/Maqrkk">
-						<img
-							src="https://avatars.githubusercontent.com/u/29182327?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/tomoliv30">
-						<img
-							src="https://avatars.githubusercontent.com/u/43568134?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/epanholz">
-						<img
-							src="https://avatars.githubusercontent.com/u/54479232?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/saarikoski-jules">
-						<img
-							src="https://avatars.githubusercontent.com/u/56890810?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/Waqas-Leaningtech">
-						<img
-							src="https://avatars.githubusercontent.com/u/59084531?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/Waqas-Leaningtech">
-						<img
-							src="https://avatars.githubusercontent.com/u/59084531?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/carlopi">
-						<img
-							src="https://avatars.githubusercontent.com/u/842657?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/sere">
-						<img
-							src="https://avatars.githubusercontent.com/u/2992193?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/marsicplusplus">
-						<img
-							src="https://avatars.githubusercontent.com/u/7804222?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-				<div>
-					<a href="https://github.com/Maqrkk">
-						<img
-							src="https://avatars.githubusercontent.com/u/29182327?v=4"
-							alt=""
-							class="rounded-full w-12 h-12"
-						/>
-					</a>
-				</div>
-			</div>
+				<span class="hidden md:block">Documentation</span>
+				<Icon name="uiw:right" class="w-6 h-6" />
+			</a>
+			<a
+				href="#"
+				class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-indigo-400"
+			>
+				<Icon name="fa-brands:discord" class="w-6 h-6" />
+				<span class="hidden md:block">Join the community</span>
+				<span class="sr-only">on Discord</span>
+			</a>
 		</div>
-
-		<!-- Get started now -->
-		<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-			<div class="text-center">
-				<h2 class="text-4xl font-extrabold dark:text-white">
-					Get started now!
-				</h2>
-			</div>
-			<div class="mt-10 flex items-center justify-center gap-x-6 h-10">
-				<a
-					href="#"
-					class="bg-primary-500 rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-primary-300"
-				>
-					<span class="hidden md:block">Documentation</span>
-					<Icon name="uiw:right" class="w-6 h-6" />
-				</a>
-				<a
-					href="#"
-					class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-indigo-400"
-				>
-					<Icon name="fa-brands:discord" class="w-6 h-6" />
-					<span class="hidden md:block">Join the community</span>
-					<span class="sr-only">on Discord</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<Footer />
+	</section>
 </Shell>
+<BlogSection />
+<Footer />

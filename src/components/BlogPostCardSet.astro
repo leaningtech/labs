@@ -4,10 +4,10 @@ import BlogPostCard from "./BlogPostCard.astro";
 
 interface Props {
 	// Only show posts if they have at least one of these tags
-	tags: string[] | undefined;
+	tags?: string[] | undefined;
 
 	// Exclude posts with these IDs
-	exclude: string[] | undefined;
+	exclude?: string[] | undefined;
 }
 
 const { tags, exclude } = Astro.props;
