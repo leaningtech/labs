@@ -20,6 +20,11 @@ const { title, description, image } = Astro.props;
 			description={description || SITE_DESCRIPTION}
 			{image}
 		/>
+		<style>
+			.dark {
+				color-scheme: dark;
+			}
+		</style>
 	</head>
 	<body
 		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-stone-900 text-stone-200"
