@@ -1,4 +1,4 @@
-import { getEntry, type CollectionEntry } from "astro:content";
+import { getEntry, type CollectionEntry, getCollection } from "astro:content";
 
 export async function resolveAuthors(
 	authors: string[],
@@ -11,4 +11,21 @@ export async function resolveAuthors(
 			}),
 		),
 	);
+}
+
+export async function latestFeaturedPost(url: URL) {
+	let requiredTag: "Cheerp" | "CheerpJ" | "CheerpX" | undefined = undefined;
+	if (url.pathname.startsWith("/cheerpj")) requiredTag = "CheerpJ";
+	else if (url.pathname.startsWith("/cheerpx")) requiredTag = "CheerpX";
+	else if (url.pathname.startsWith("/cheerp")) requiredTag = "Cheerp";
+
+	const posts = (
+		await getCollection(
+			"blog",
+			(entry) =>
+				entry.data.featured &&
+				(!requiredTag || entry.data.tags?.includes(requiredTag)),
+		)
+	).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	return posts[0];
 }

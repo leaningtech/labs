@@ -3,7 +3,8 @@ import type { Mode, NavDirectory } from "../lib/nav";
 import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import { Icon } from "astro-icon";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
-import Search from "./Search.astro";
+import BlogPostPill from "./BlogPostPill.astro";
+import { latestFeaturedPost } from "../lib/blog";
 
 interface Props {
 	product: string;
@@ -35,6 +36,8 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		icon: "🧠",
 	},
 ];
+
+const post = await latestFeaturedPost(Astro.url);
 ---
 
 <aside
@@ -45,7 +48,7 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		<a href={`/${product}`} class="block mb-4">
 			<img src={productLogotype} alt="Cheerp" class="h-20" />
 		</a>
-		<Search />
+		{post && <BlogPostPill {post} />}
 
 		<div
 			class="hidden absolute bottom--8 lg:block w-full h-8 bg-gradient-to-b from-stone-900 pointer-events-none"

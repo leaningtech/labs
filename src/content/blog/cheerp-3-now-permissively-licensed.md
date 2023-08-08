@@ -1,5 +1,6 @@
 ---
 title: "Cheerp 3.0: The most advanced C++ compiler for the Web, now permissively licensed"
+shortTitle: Cheerp 3.0 released
 description: |
   We are proud to announce Cheerp 3.0, the latest major release of our C++ compiler for the Web. This new version is packed with new features and optimizations that, once more, move the state of the art of using C++ as a programming language for Web applications and games. All the compiler core components and libraries are now licensed permissively under the Apache 2.0 / LLVM license, allowing for Cheerp 3.0 to be used for any purpose, with no restrictions.
 authors:

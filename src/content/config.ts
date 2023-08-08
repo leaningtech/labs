@@ -13,6 +13,7 @@ const blogauthors = defineCollection({
 const blog = defineCollection({
 	schema: z.object({
 		title: z.string(),
+		shortTitle: z.string().optional(),
 		description: z.string(),
 		pubDate: z
 			.string()

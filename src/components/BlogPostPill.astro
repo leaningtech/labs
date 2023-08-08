@@ -11,8 +11,10 @@ const { post } = Astro.props;
 
 <a
 	href={`/blog/${post.slug}`}
-	class="rounded-full bg-primary-600 bg-opacity-10 text-primary-600 px-3 py-1 flex items-center gap-1 max-w-full overflow-hidden"
+	class="rounded-full bg-primary-600 bg-opacity-10 text-primary-600 px-3 py-1 flex items-center gap-1 max-w-full overflow-hidden whitespace-nowrap"
 >
-	<div class="overflow-hidden overflow-ellipsis">{post.data.title}</div>
+	<div class="overflow-hidden overflow-ellipsis grow">
+		{post.data.shortTitle ?? post.data.title}
+	</div>
 	<Icon name="mdi:chevron-right" class="w-6 h-6 flex-none" />
 </a>

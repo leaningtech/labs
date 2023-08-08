@@ -1,32 +1,16 @@
 ---
 import { Icon } from "astro-icon";
-import { getCollection } from "astro:content";
-//import DiscordPresenceCount from "./DiscordPresenceCount.astro";
-import BlogPostPill from "./BlogPostPill.astro";
 
 import { SITE_TITLE, DISCORD_URL } from "../consts";
 
 import companyLogo from "../assets/branding/company/tower.svg";
+import Search from "./Search.astro";
 
 const links = [
 	{ name: "Docs", href: "/docs" },
 	{ name: "Demos", href: "https://leaningtech.com/demo/" }, // TODO: demos page
 	{ name: "Blog", href: "/blog" },
 ];
-
-let requiredTag: "Cheerp" | "CheerpJ" | "CheerpX" | undefined = undefined;
-if (Astro.url.pathname.startsWith("/cheerpj")) requiredTag = "CheerpJ";
-else if (Astro.url.pathname.startsWith("/cheerpx")) requiredTag = "CheerpX";
-else if (Astro.url.pathname.startsWith("/cheerp")) requiredTag = "Cheerp";
-
-const latestFeaturedPost = (
-	await getCollection(
-		"blog",
-		(entry) =>
-			entry.data.featured &&
-			(!requiredTag || entry.data.tags?.includes(requiredTag)),
-	)
-).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
 ---
 
 <nav
@@ -43,13 +27,7 @@ const latestFeaturedPost = (
 			</a>
 		</div>
 
-		{
-			latestFeaturedPost && (
-				<div class="hidden md:block overflow-hidden">
-					<BlogPostPill post={latestFeaturedPost} />
-				</div>
-			)
-		}
+		<Search />
 
 		<div class="flex items-center gap-4 xl:gap-8 ml-auto flex-none">
 			{
