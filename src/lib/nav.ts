@@ -7,6 +7,7 @@ export interface NavFile {
 	slug: string;
 	title: string;
 	collectionEntry: CollectionEntry<"docs">;
+	isIndex: boolean;
 }
 
 export interface NavDirectory {
@@ -129,6 +130,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			href: "/" + slug,
 			title: file.data.title,
 			collectionEntry: file,
+			isIndex: slug === parentDir,
 		});
 	}
 

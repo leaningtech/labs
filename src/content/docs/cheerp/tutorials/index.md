@@ -1,5 +1,5 @@
 ---
-title: Cheerp tutorials
+title: Tutorials
 ---
 
 These tutorials are provided in order of increasing complexity, but are all self-contained and can be followed independently.
@@ -16,7 +16,7 @@ In this tutorial we cover the basics of using Cheerp to compile some basic C++ c
 
 ### Hello, WebAssembly! ([Link to the Tutorial](Tutorial-Hello-Wasm))
 
-In this tutorial, we compile an Hello World to WebAssembly _and_ JavaScript, in order to use `console.log`. 
+In this tutorial, we compile an Hello World to WebAssembly _and_ JavaScript, in order to use `console.log`.
 
 - Input methods: none
 - Output methods: `console.log()`, via `std::cout<<`
