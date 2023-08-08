@@ -9,7 +9,7 @@ export interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
+const { title, description, image = "/social/common@2x.png" } = Astro.props;
 
 let favicon = companyFavicon;
 let faviconType = "image/svg+xml";
