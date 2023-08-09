@@ -3,8 +3,12 @@ import { Icon } from "astro-icon";
 import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
 import Tweet from "../components/landing-page/Tweet.astro";
-import BlogSection from "../components/landing-page/BlogSection.astro";
 import Hero from "../components/landing-page/Hero.astro";
+
+import BlogPostCard from "../components/BlogPostCard.astro";
+import { latestFeaturedPost } from "../lib/blog";
+
+const post = await latestFeaturedPost(Astro.url);
 
 import Nasa from "../assets/branding/landing_imgs/clients/nasa2.png";
 import TicketMaster from "../assets/branding/landing_imgs/clients/ticketmaster.png";
@@ -89,6 +93,21 @@ const clientImages = [
 				))
 			}
 		</ul>
+	</section>
+
+	<section class="w-[40rem] max-w-full p-8 mx-auto my-16">
+		<div class="flex items-center mb-4 text-stone-400">
+			<h2 class="font-semibold grow">
+				Latest blog post
+			</h2>
+			<a
+				href="/blog"
+				class="hover:text-primary-500 flex items-center gap-1"
+			>
+				View all posts <Icon name="mdi:arrow-right" class="w-4 h-4" />
+			</a>
+		</div>
+		{post && <BlogPostCard {post} />}
 	</section>
 
 	<!-- Contributors -->

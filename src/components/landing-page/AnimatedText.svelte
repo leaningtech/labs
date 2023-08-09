@@ -1,13 +1,8 @@
 <script lang="ts">
 	const text = [ // TODO consider making these links to relevant docs/guides
-		"anything",
 		"C and C++",
 		"Java",
 		"native code",
-		//"Linux",
-		//"Java applets",
-		//"Flash",
-		//"Python",
 	];
 
 	let index = 0;
@@ -36,11 +31,11 @@
 				direction = Direction.Waiting;
 			}
 		}
-	}, 50);
+	}, 70);
 
 	setInterval(() => {
 		direction = Direction.Deleting;
-	}, 3000);
+	}, 5000);
 </script>
 
 {visibleText}<span class="cursor inline-block w-3 h-[1em] ml-3 translate-y-4 bg-current"></span>

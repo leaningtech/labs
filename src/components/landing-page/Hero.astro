@@ -2,11 +2,7 @@
 import { Icon } from "astro-icon";
 import LinkButton from "../LinkButton.astro";
 import AnimatedText from "./AnimatedText.svelte";
-import BlogPostCard from "../BlogPostCard.astro";
 import Doodle from "./Doodle.svelte";
-import { latestFeaturedPost } from "../../lib/blog";
-
-const post = await latestFeaturedPost(Astro.url);
 ---
 
 <header
@@ -28,11 +24,11 @@ const post = await latestFeaturedPost(Astro.url);
 				<p class="text-xl mt-8 text-stone-400 leading-6">
 					Client-side developer tools built with WebAssembly.
 				</p>
-				<div class="mt-8 md:space-x-3 space-y-2">
+				<div class="mt-8 md:space-x-1 space-y-2">
 					<div
-						class="text-2xl font-semibold text-stone-100 lg:mr-16 block lg:inline-block"
+						class="text-xl font-semibold text-stone-100 lg:mr-7 block lg:inline-block"
 					>
-						Create with
+						Choose language:
 					</div>
 					<LinkButton
 						href="/cheerp"
@@ -46,15 +42,9 @@ const post = await latestFeaturedPost(Astro.url);
 						type="secondary"
 						iconRight="mdi:arrow-right"
 					/>
-					<!--<LinkButton
-						href="/cheerpj"
-						label="Flash"
-						type="secondary"
-						iconRight="mdi:arrow-right"
-					/>-->
 					<LinkButton
 						href="/cheerpx"
-						label="x86"
+						label="Native code"
 						type="secondary"
 						iconRight="mdi:arrow-right"
 					/>
@@ -64,23 +54,6 @@ const post = await latestFeaturedPost(Astro.url);
 		<div class="flex justify-center pt-8 md:pt-0">
 			<Doodle client:idle />
 		</div>
-	</div>
-
-	<div class="grow"></div>
-
-	<div class="w-[40rem] max-w-full p-8">
-		<div class="flex items-center mb-4 text-stone-400">
-			<div class="font-semibold grow">
-				Latest blog post
-			</div>
-			<a
-				href="/blog"
-				class="hover:text-primary-500 flex items-center gap-1"
-			>
-				View all posts <Icon name="mdi:arrow-right" class="w-4 h-4" />
-			</a>
-		</div>
-		{post && <BlogPostCard {post} />}
 	</div>
 
 	<div class="grow"></div>
