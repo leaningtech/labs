@@ -1,24 +1,27 @@
 ---
+import { Icon } from "astro-icon";
 interface Props {
 	href: string;
 	label: string;
 	type: "primary" | "secondary";
+	iconRight?: string;
 }
 
-const { href, label, type } = Astro.props;
+const { href, label, type, iconRight } = Astro.props;
 ---
 
 <a
 	{href}
 	class:list={[
-		"inline-block px-4 py-2 font-semibold border-2 rounded-md no-underline text-base",
+		"px-6 py-2 font-semibold border-2 rounded-md no-underline text-base transition-colors inline-flex items-center gap-2 whitespace-nowrap",
 		{
-			"border-primary-400 bg-primary-500 text-white hover:border-primary-200 transition-colors":
+			"border-primary-400 bg-primary-500 text-white hover:border-primary-200":
 				type === "primary",
-			"border-stone-600 text-primary-400": type === "secondary",
+			"border-stone-600 text-primary-400 hover:border-primary-300":
+				type === "secondary",
 		},
 	]}
 >
 	{label}
-	<slot />
+	{iconRight && <Icon name={iconRight} class="w-5 h-5" />}
 </a>

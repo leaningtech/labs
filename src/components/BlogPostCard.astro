@@ -5,52 +5,40 @@ import { resolveAuthors } from "../lib/blog";
 
 interface Props {
 	post: CollectionEntry<"blog">;
+	showMetadata?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, showMetadata = false } = Astro.props;
 const authors = await resolveAuthors(post.data.authors);
 ---
 
 <a
 	href={`/blog/${post.slug}`}
-	class="flex flex-col space-between group relative p-8 min-h-[16rem] rounded-xl border border-stone-600 border-opacity-75 hover:border-stone-400 transition-colors bg-stone-800 bg-cover bg-center bg-opacity-80 w-full overflow-hidden"
-	style={{
-		backgroundImage: post.data.heroImage
-			? `url(${post.data.heroImage})`
-			: "none",
-	}}
+	class="inline-flex flex-col space-between group overflow-hidden"
 >
-	<div
-		class="absolute left-0 right-0 bottom-0 h-2/3 bg-gradient-to-b from-transparent via-stone-900 to-stone-900 group-hover:opacity-80 transition-opacity pointer-events-none"
+	<img src={post.data.heroImage} class="rounded-xl mb-6 aspect-video bg-stone-100" />
+	<h3 class="text-2xl font-bold leading-7 text-balance text-white group-hover:text-primary-400">{post.data.title}</h3>
+	{showMetadata && <div
+		class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-lg whitespace-nowrap"
 	>
-	</div>
-	<div class="grow">
-		<!-- move the div below to the bottom of the container -->
-	</div>
-	<div class="relative">
-		<h3 class="text-2xl font-bold leading-6 text-balance">{post.data.title}</h3>
-		<div
-			class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-lg whitespace-nowrap"
-		>
-			<div class="flex items-center gap-2 font-semibold overflow-hidden">
-				<div class="flex-none space-x-[-1rem]">
-					{
-						authors.map((author) => (
-							<img
-								class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
-								src={author.avatar}
-								alt=""
-								loading="lazy"
-								decoding="async"
-							/>
-						))
-					}
-				</div>
-				<span class="overflow-hidden text-ellipsis">
-					{authors.map((author) => author.name).join(", ")}
-				</span>
+		<div class="flex items-center gap-2 font-semibold overflow-hidden">
+			<div class="flex-none space-x-[-1rem]">
+				{
+					authors.map((author) => (
+						<img
+							class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
+							src={author.avatar}
+							alt=""
+							loading="lazy"
+							decoding="async"
+						/>
+					))
+				}
 			</div>
-			<FormattedDate date={post.data.pubDate} />
+			<span class="overflow-hidden text-ellipsis">
+				{authors.map((author) => author.name).join(", ")}
+			</span>
 		</div>
-	</div>
+		<FormattedDate date={post.data.pubDate} />
+	</div>}
 </a>

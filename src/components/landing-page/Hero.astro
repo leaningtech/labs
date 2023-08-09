@@ -1,0 +1,97 @@
+---
+import { Icon } from "astro-icon";
+import LinkButton from "../LinkButton.astro";
+import AnimatedText from "./AnimatedText.svelte";
+import BlogPostCard from "../BlogPostCard.astro";
+import Doodle from "./Doodle.svelte";
+import { latestFeaturedPost } from "../../lib/blog";
+
+const post = await latestFeaturedPost(Astro.url);
+---
+
+<header
+	class="min-h-[calc(100vh-65px)] flex flex-col items-center"
+>
+	<div class="grow"></div>
+
+	<div
+		class="w-full max-w-screen-xl px-4 sm:px-8 py-16 space-y-4 md:grid grid-cols-3 2xl:grid-cols-2"
+	>
+		<div class="flex items-center col-span-2 2xl:col-span-1">
+			<div>
+				<h1
+					class="text-white text-5xl lg:text-6xl xl:text-7xl font-semibold"
+				>
+					Run <span class="font-bold text-primary-500"><AnimatedText client:idle /></span>
+					<br />in the browser.
+				</h1>
+				<p class="text-xl mt-8 text-stone-400 leading-6">
+					Client-side developer tools built with WebAssembly.
+				</p>
+				<div class="mt-8 md:space-x-3 space-y-2">
+					<div
+						class="text-2xl font-semibold text-stone-100 lg:mr-16 block lg:inline-block"
+					>
+						Create with
+					</div>
+					<LinkButton
+						href="/cheerp"
+						label="C / C++"
+						type="secondary"
+						iconRight="mdi:arrow-right"
+					/>
+					<LinkButton
+						href="/cheerpj"
+						label="Java"
+						type="secondary"
+						iconRight="mdi:arrow-right"
+					/>
+					<!--<LinkButton
+						href="/cheerpj"
+						label="Flash"
+						type="secondary"
+						iconRight="mdi:arrow-right"
+					/>-->
+					<LinkButton
+						href="/cheerpx"
+						label="x86"
+						type="secondary"
+						iconRight="mdi:arrow-right"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-center pt-8 md:pt-0">
+			<Doodle client:idle />
+		</div>
+	</div>
+
+	<div class="grow"></div>
+
+	<div class="w-[40rem] max-w-full p-8">
+		<div class="flex items-center mb-4 text-stone-400">
+			<div class="font-semibold grow">
+				Latest blog post
+			</div>
+			<a
+				href="/blog"
+				class="hover:text-primary-500 flex items-center gap-1"
+			>
+				View all posts <Icon name="mdi:arrow-right" class="w-4 h-4" />
+			</a>
+		</div>
+		{post && <BlogPostCard {post} />}
+	</div>
+
+	<div class="grow"></div>
+
+	<!-- Scroll prompt -->
+	<a
+		href="#after-hero"
+		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
+	>
+		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
+	</a>
+</header>
+
+<a id="after-hero"></a>

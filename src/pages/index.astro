@@ -2,11 +2,9 @@
 import { Icon } from "astro-icon";
 import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
-import fiddle from "../assets/branding/landing_imgs/fiddle.png";
 import Tweet from "../components/landing-page/Tweet.astro";
 import BlogSection from "../components/landing-page/BlogSection.astro";
-
-import { products } from "./docs.astro";
+import Hero from "../components/landing-page/Hero.astro";
 
 import Nasa from "../assets/branding/landing_imgs/clients/nasa2.png";
 import TicketMaster from "../assets/branding/landing_imgs/clients/ticketmaster.png";
@@ -28,67 +26,13 @@ const clientImages = [
 ---
 
 <Shell>
-	<!-- Banner section -->
-	<header class="mt--16 py-64 bg-primary-500 bg-[url('/luci.svg')] bg-cover">
-		<div class="mx-auto max-w-screen-2xl px-6">
-			<h1
-				class="text-4xl font-bold tracking-tight text-white text-balance sm:text-6xl"
-			>
-				Welcome to Leaning Technologies!
-			</h1>
-			<p class="mt-6 text-lg leading-6 text-stone-200 max-w-prose">
-				Leaning Technologies builds WebAssembly tools that enable you to create
-				awesome web experiences using the languages you already know.
-			</p>
-			<div class="mt-10 inline-flex items-center justify-center gap-4">
-				<a
-					class="relative group overflow-hidden px-6 h-10 rounded-md flex space-x-2 items-center bg-gradient-to-r from-primary-600 to-primary-400 cursor-pointer"
-					href="/docs"
-				>
-					<span class="relative text-base text-white font-semibold">
-						Get started
-					</span>
-					<div class="flex items-center -space-x-3 translate-x-3">
-						<div
-							class="w-2.5 h-[1.6px] rounded bg-white origin-left scale-x-0 transition duration-300 group-hover:scale-x-100"
-						>
-						</div>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5 stroke-white -translate-x-2 transition duration-300 group-hover:translate-x-0"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M9 5l7 7-7 7"></path>
-						</svg>
-					</div>
-				</a>
-			</div>
-			<div
-				class="flex justify-around gap-8 flex-col md:flex-row items-center mt-16"
-			>
-				{
-					products.map((product) => (
-						<a href={product.href}>
-							<img src={product.logotype} alt={product.name} class="h-12" />
-						</a>
-					))
-				}
-			</div>
-		</div>
-	</header>
-
-	<!-- Fiddle section -->
-	<div class="mx-auto max-w-2xl py-16">
-		<div class="text-center">
-			<img src={fiddle} />
-		</div>
+	<div
+		class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
+	>
+		<!-- cool background -->
 	</div>
+
+	<Hero />
 
 	<section class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
 		<h2 class="text-4xl font-semibold dark:text-white text-center">
@@ -335,5 +279,4 @@ const clientImages = [
 		</div>
 	</section>
 </Shell>
-<BlogSection />
 <Footer />

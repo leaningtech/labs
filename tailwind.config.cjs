@@ -45,7 +45,7 @@ module.exports = {
 						"--tw-prose-invert-links": theme("colors.primary[400]"),
 					},
 				},
-			}),
+			})
 		},
 	},
 	plugins: [require("@tailwindcss/typography"), exportColorsAsCssVariables],

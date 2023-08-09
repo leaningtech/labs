@@ -20,9 +20,13 @@ const { title, description, image } = Astro.props;
 			description={description || SITE_DESCRIPTION}
 			{image}
 		/>
-		<style>
+		<style is:global>
 			.dark {
 				color-scheme: dark;
+			}
+
+			::selection {
+				background-color: rgba(230, 39, 85, 0.5);
 			}
 		</style>
 	</head>
