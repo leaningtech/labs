@@ -17,30 +17,27 @@ interface Section {
 const sections: Section[] = [
 	{
 		name: "Community",
-		
+
 		links: [
-			{ text: "Discord", href: DISCORD_URL }, 
+			{ text: "Discord", href: DISCORD_URL },
 			{ text: "Twitter", href: TWITTER_URL },
 			{ text: "LinkedIn", href: LINKEDIN_URL },
-			
 		],
 	},
 	{
 		name: "Resources",
-		
+
 		links: [
 			{ text: "Documentation", href: "/docs" },
 			{ text: "Blog", href: "/blog" },
-			{ text: "GitHub", href: "https://github.com/leaningtech" }
-		
+			{ text: "GitHub", href: "https://github.com/leaningtech" },
 		],
 	},
 	{
 		name: "Company",
 		links: [
 			{ text: "About us", href: "https://leaningtech.com/about-us/" },
-			
-			
+
 			{ text: "News", href: "https://leaningtech.com/news/" },
 			{
 				text: "Privacy policy",
@@ -54,7 +51,7 @@ const sections: Section[] = [
 		links: [
 			{ text: "Cheerp", href: "/cheerp" },
 			{ text: "CheerpJ", href: "/cheerpj" },
-			{ text: "CheerpX", href: "/cheerpx" }
+			{ text: "CheerpX", href: "/cheerpx" },
 		],
 	},
 ];
@@ -62,78 +59,78 @@ const sections: Section[] = [
 
 <footer class="py-14 bg-black">
 	<div class="px-6 w-full max-w-screen-2xl mx-auto space-y-6">
-		
-
 		<div
 			class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 place-content-between text-lg"
 		>
-		<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
-			<!-- TODO: local svg -->
-			<img
-				src={logotype}
-				loading="lazy"
-				alt="Leaning Technologies"
-				class="h-16"
-			/>
-		</a>
-		<div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 place-content-between text-lg col-span-2">
-			{
-				sections.map((section) => (
-					<section class="space-y-3">
-						<h3 class="text-xl font-semibold">{section.name}</h3>
-						{section.description && (
-							<p class="text-stone-400">{section.description}</p>
-						)}
-						<ul class="space-y-3">
-							{section.links.map((link) => (
-								<li >
-									<a href={link.href} class="text-stone-400 hover:text-primary-500">
-										{link.text}
-									</a>
-								</li>
-							))}
-						</ul>
-					</section>
-				))
-			}
+			<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
+				<!-- TODO: local svg -->
+				<img
+					src={logotype}
+					loading="lazy"
+					alt="Leaning Technologies"
+					class="h-16"
+				/>
+			</a>
+			<div
+				class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 place-content-between text-lg col-span-2"
+			>
+				{
+					sections.map((section) => (
+						<section class="space-y-3">
+							<h3 class="text-xl font-semibold">{section.name}</h3>
+							{section.description && (
+								<p class="text-stone-400">{section.description}</p>
+							)}
+							<ul class="space-y-3">
+								{section.links.map((link) => (
+									<li>
+										<a
+											href={link.href}
+											class="text-stone-400 hover:text-primary-500"
+										>
+											{link.text}
+										</a>
+									</li>
+								))}
+							</ul>
+						</section>
+					))
+				}
+			</div>
 		</div>
-	</div>
-	<div class="grid sm:grid-cols-1 md:grid-cols-4  border-t border-stone-700 pt-4 ">
-		<div class="flex items-left  gap-3 ">
-			<a
-			href={DISCORD_URL}
+		<div
+			class="grid sm:grid-cols-1 md:grid-cols-4 border-t border-stone-700 pt-4"
+		>
+			<div class="flex items-left gap-3">
+				<a href={DISCORD_URL}>
+					<Icon
+						name="fa-brands:discord"
+						class="w-6 h-6 hover:text-primary-500"
+					/>
+				</a>
+				<a href={GITHUB_URL}>
+					<Icon name="mdi:github" class="w-6 h-6 hover:text-primary-500" />
+				</a>
+				<a href={TWITTER_URL}>
+					<Icon name="mdi:twitter" class="w-6 h-6 hover:text-primary-500" />
+				</a>
+				<a href={LINKEDIN_URL}>
+					<Icon name="mdi:linkedin" class="w-6 h-6 hover:text-primary-500" />
+				</a>
+			</div>
+			<div
+				class="text-stone-400 text-xs sm:text-center md:text-right md:col-span-3"
 			>
-			<Icon name="fa-brands:discord" class="w-6 h-6  hover:text-primary-500" />
-		</a>
-		<a
-			href={GITHUB_URL}
-			>
-			<Icon name="mdi:github" class="w-6 h-6  hover:text-primary-500" />
-		</a>
-		<a
-			href={TWITTER_URL}
-			
-			>
-			<Icon name="mdi:twitter" class="w-6 h-6  hover:text-primary-500" />
-		</a>
-		<a
-			href={LINKEDIN_URL}
-			
-			>
-			<Icon name="mdi:linkedin" class="w-6 h-6  hover:text-primary-500" />
-		</a>
+				<p class="align-baseline">
+					© {today.getFullYear()} Leaning Technologies . All rights reserved.
+				</p>
+				<p class="col-span-2">
+					Cheerp is a registered trademark of Leaning Technologies. The Cheerp,
+					CheerpJ, and CheerpX logos are based on the HTML5 logo by <a
+						href="https://www.w3.org/">W3C</a
+					> (<a href="https://creativecommons.org/licenses/by/3.0/">license</a>)
+				</p>
+			</div>
 		</div>
-		<div class=" text-stone-400  text-xs sm:text-center md:text-right  md:col-span-3 ">
-			<p class="align-baseline">© {today.getFullYear()} Leaning Technologies . All rights reserved. </p>
-			<p class="col-span-2">Cheerp is a registered trademark of Leaning Technologies. The Cheerp, CheerpJ,
-				and CheerpX logos are based on the HTML5 logo by <a
-					href="https://www.w3.org/">W3C</a
-				> (<a href="https://creativecommons.org/licenses/by/3.0/">license</a>)</p>
-		</div>
-		
-		
-	</div>
-	
-		
 	</div>
 </footer>
