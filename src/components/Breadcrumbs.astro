@@ -1,20 +1,25 @@
 ---
 import { Icon } from "astro-icon";
-import { idToTitle } from "../lib/nav";
+import { getRootNav, findEntryPath } from "../lib/nav";
 
-// TODO: use getRootNav and derive titles by working backwards
+interface Props {
+	current: string;
+}
 
-const crumbs = Astro.url.pathname
-	.split("/")
-	.filter((part) => part.length)
-	.map((part, i, all) => {
+const { current } = Astro.props;
+
+const nav = await getRootNav();
+const path = findEntryPath(nav, current) ?? [];
+
+const crumbs = path
+	.slice(0, -1) // Don't want the current page
+	.map((entry, i, all) => {
 		return {
-			title: idToTitle(part),
-			url: "/" + all.slice(0, i + 1).join("/"),
-			isLast: i === all.length - 2,
+			title: entry.title,
+			url: entry.href,
+			isLast: i === all.length - 1,
 		};
-	})
-	.slice(0, -1); // Don't want the current page
+	});
 ---
 
 <nav aria-label="Breadcrumb" class="leading-6 text-stone-400">
