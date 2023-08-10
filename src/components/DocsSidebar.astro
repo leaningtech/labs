@@ -1,20 +1,19 @@
 ---
-import type { Mode, NavDirectory } from "../lib/nav";
-import productLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
+import type { NavDirectory } from "../lib/nav";
+
 import { Icon } from "astro-icon";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 import BlogPostPill from "./BlogPostPill.astro";
 import { latestFeaturedPost } from "../lib/blog";
+import { productFromUrl as productFromUrl } from "../lib/products";
 
 interface Props {
-	product: string;
-	mode: Mode | undefined;
 	directory: NavDirectory | undefined;
 }
 
-const { product, mode, directory } = Astro.props;
+const { directory } = Astro.props;
 
-const modes: { mode: Mode; name: string; icon: string }[] = [
+/*const modes: { mode: Mode; name: string; icon: string }[] = [
 	{
 		mode: "tutorials",
 		name: "Tutorials",
@@ -35,9 +34,14 @@ const modes: { mode: Mode; name: string; icon: string }[] = [
 		name: "Explanation",
 		icon: "🧠",
 	},
-];
+];*/
 
 const post = await latestFeaturedPost(Astro.url);
+
+const product = productFromUrl(Astro.url);
+if (!product) {
+	throw new Error(`unable to derive product from url: ${Astro.url.pathname}`);
+}
 ---
 
 <aside
@@ -45,8 +49,8 @@ const post = await latestFeaturedPost(Astro.url);
 	class="bg-stone-800 lg:bg-stone-900 fixed z-10 px-8 pb-8 w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
 >
 	<div class="block pt-8 mb-8 lg:sticky top-0 lg:bg-stone-900">
-		<a href={`/${product}`} class="block mb-4">
-			<img src={productLogotype} alt="Cheerp" class="h-20" />
+		<a href={product.href} class="block mb-4">
+			<img src={product.logotype} alt={product.name} class="h-20" />
 		</a>
 		{post && <BlogPostPill {post} />}
 
@@ -62,12 +66,12 @@ const post = await latestFeaturedPost(Astro.url);
 		<Icon name="jam:close" class="w-6 h-6 text-stone-400 hover:text-white" />
 	</button>
 
-	<ul class="leading-8 font-semibold mb-4 text-base space-y-2">
+	{/*<ul class="leading-8 font-semibold mb-4 text-base space-y-2">
 		{
 			modes.map((item) => (
 				<li>
 					<a
-						href={`/${product}/${item.mode}`}
+						href={`/${product.href}/${item.mode}`}
 						class:list={[
 							"group flex items-center gap-4 text-stone-400 hover:text-white",
 							{
@@ -90,7 +94,7 @@ const post = await latestFeaturedPost(Astro.url);
 				</li>
 			))
 		}
-	</ul>
+	</ul>*/}
 
 	{
 		directory && (

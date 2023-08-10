@@ -2,34 +2,7 @@
 import Basic from "../layouts/Basic.astro";
 
 import companyLogo from "../assets/branding/company/tower.svg";
-import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
-import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
-import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
-
-export const products = [
-	{
-		name: "Cheerp",
-		href: "/cheerp",
-		logotype: cheerpLogotype,
-		subtitle: "Compile C++ for the browser",
-		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
-	},
-	{
-		name: "CheerpJ",
-		href: "/cheerpj",
-		logotype: cheerpjLogotype,
-		subtitle: "Run Java in the browser",
-		description: "Java Virtual Machine (JVM) replacement for the browser.",
-	},
-	{
-		name: "CheerpX",
-		href: "/cheerpx",
-		logotype: cheerpxLogotype,
-		subtitle: "x86-to-WebAssembly virtualization",
-		description:
-			"Execute x86 binaries in the browser with the CheerpX virtual machine.",
-	},
-];
+import { products } from "../lib/products";
 ---
 
 <Basic
@@ -53,7 +26,7 @@ export const products = [
 			</div>
 			<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
 				{
-					products.map((product) => (
+					Object.values(products).map((product) => (
 						<a
 							href={product.href}
 							class="rounded-lg bg-stone-800 bg-opacity-50 hover:bg-opacity-100 border border-stone-700 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6"

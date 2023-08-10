@@ -1,7 +1,8 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getRootNav, findNavDirectory, isProduct, isMode } from "../lib/nav";
+import { getRootNav, findNavDirectory } from "../lib/nav";
+import { productFromUrl } from "../lib/products";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
 import TableOfContents from "../components/TableOfContents.astro";
@@ -18,14 +19,9 @@ interface Props {
 const { id, title, subtitle, headings } = Astro.props;
 
 const nav = await getRootNav();
+const product = productFromUrl(Astro.url);
 
-// TODO: probably better to have these come in as props?
-let [, product, mode] = Astro.url.pathname.replace(".html", "").split("/");
-if (!isProduct(product))
-	throw new Error(`DocsArticle: invalid product in url: ${product}`);
-if (!isMode(mode)) mode = undefined;
-
-const directory = mode ? findNavDirectory(nav, [product, mode]) : undefined;
+const directory = product && findNavDirectory(nav, [product.id]);
 
 const today = new Date();
 ---
@@ -33,7 +29,7 @@ const today = new Date();
 <Shell title={[title, subtitle].filter(Boolean).join(" | ")}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div data-sidebar-wrapper class="hidden lg:block shadow-xl lg:shadow-none">
-			<DocsSidebar {product} {mode} {directory} />
+			<DocsSidebar {directory} />
 		</div>
 		<div
 			data-backdrop
