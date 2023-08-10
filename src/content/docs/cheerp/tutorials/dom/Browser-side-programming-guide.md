@@ -70,16 +70,16 @@ Compiling with:
 Now we need a [html file](/cheerp/tutorials/dom_access/dom.html):
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Cheerp example 2: DOM manipulation</title>
-    <script src="dom.js"></script>
-  </head>
-  <body>
-    <img src="/assets/Diagram_browser.png"></img>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Cheerp example 2: DOM manipulation</title>
+		<script src="dom.js"></script>
+	</head>
+	<body>
+		<img src="/assets/Diagram_browser.png" />
+	</body>
 </html>
 ```
 

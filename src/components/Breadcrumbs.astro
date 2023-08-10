@@ -11,11 +11,11 @@ const { current } = Astro.props;
 const nav = await getRootNav();
 const path = findEntryPath(nav, current) ?? [];
 
-const currentEntry = path[path.length-1];
+const currentEntry = path[path.length - 1];
 
 const crumbs = path
 	.slice(0, -1) // Don't want the current page
-	.filter(entry => entry.href !== currentEntry!.href) // Don't show the immediate parent directory for index pages
+	.filter((entry) => entry.href !== currentEntry!.href) // Don't show the immediate parent directory for index pages
 	.map((entry, i, all) => {
 		return {
 			title: entry.title,

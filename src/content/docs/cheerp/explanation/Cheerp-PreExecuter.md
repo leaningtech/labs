@@ -24,7 +24,6 @@ When global dead code elimination is applied, Cheerp compiles a simple hello wor
 
 Although constructors cannot be eliminated (since that would change the semantics of the program), they can be evaluated at compile time. The constructors of libstdc++ do not depend on any run time input (e.g. environment variables or command line flags), which allows the compiler to compute the initialized values of the constructors at compile time. The initialized values are then stored in memory and loaded at run time.
 
-
 # Effects of the PreExecuter - Benchmarks
 
 In order to evaluate the effect of the PreExecuter, we will refer to two simple examples:
@@ -32,7 +31,7 @@ In order to evaluate the effect of the PreExecuter, we will refer to two simple 
 1. An Hello World program.
 
 `    #include <cheerp/clientlib.h>`
-    
+
     void webMain() {
         client::console.log("Hello world!");
     }
@@ -48,7 +47,7 @@ In order to evaluate the effect of the PreExecuter, we will refer to two simple 
         const char *a;
         A(int i) { a = nullptr; }
     };
-    
+
     void webMain()
     {
         std::vector<A> v;
@@ -77,4 +76,3 @@ A global constructor can be pre-executed a compile time only if it meets certain
 - All the code in the constructor needs to be **type safe** and representable with the [Cheerp Memory Model](Cheerp-memory-model). This is automatically true for all the code that compiles in `genericjs` mode, but not necessarily for code compiled to `asmjs` or `wasm`.
 
 - The constructor cannot call code defined in the `client` namespace, or use the `__asm__` keyword.
-

@@ -5,7 +5,11 @@ title: Interoperability with Web frameworks
 Let's say, for the sake of example, that you have a JavaScript function that expects the following syntax:
 
 ```js
-jsFuncWithObjectParam({requiredParam1:42, requiredParam2:"String", optionalParam1:null});
+jsFuncWithObjectParam({
+	requiredParam1: 42,
+	requiredParam2: "String",
+	optionalParam1: null,
+});
 ```
 
 In C++ you can do the following:

@@ -2,15 +2,15 @@
 title: Filesystem emulation
 ---
 
-As part of the ```libposixcompat``` library, Cheerp includes functionality to emulate filesystem access for ported applications. This library is only available to commercial users of Cheerp.
+As part of the `libposixcompat` library, Cheerp includes functionality to emulate filesystem access for ported applications. This library is only available to commercial users of Cheerp.
 
 ## Usage
 
-When running code in the main thread of the browser it is not possible to make any blocking call, which means that traditional POSIX APIs such as ```open/read/close``` cannot be directly implemented. To work around this browser limitation it is necessary to preload all the additional data files that will be used at runtime. 
+When running code in the main thread of the browser it is not possible to make any blocking call, which means that traditional POSIX APIs such as `open/read/close` cannot be directly implemented. To work around this browser limitation it is necessary to preload all the additional data files that will be used at runtime.
 
 You can achieve this by using the following API
 
-```
+````
 #include <cheerpfs.h>
 
 // Allocate a global object of type cheerp::FilePreloader
@@ -27,4 +27,4 @@ void preloadCallback()
 
 cheerp::FilePreloader files(preloadCallback, "data1.xml", "images/asset1.png");
 
-```
+````

@@ -2,37 +2,37 @@
 title: WebWorker API
 ---
 
-CheerpJ supports running Java code in the background using WebWorkers. To use this functionality you need to include the ```loader.js``` script as usual. (e.g. ```https://cjrtnc.leaningtech.com/latest/loader.js```). The script exposes the APIs described below. It is allowed, but not necessary, to also use CheerpJ in the main thread at the same time.
+CheerpJ supports running Java code in the background using WebWorkers. To use this functionality you need to include the `loader.js` script as usual. (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described below. It is allowed, but not necessary, to also use CheerpJ in the main thread at the same time.
 
-All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript ```Promise```s, and you can use ```.then(...)```, ```.catch(...)``` and ```async/await``` with them.
+All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript `Promise`s, and you can use `.then(...)`, `.catch(...)` and `async/await` with them.
 
 We recommend reading the [Runtime API](Runtime-API) documentation before proceeding on this page.
 
 ## Creating and initializing a CheerpJ worker
 
-The main entry point for CheerpJ workers is the ```CheerpJWorker``` JS interface. It is a normal JS object and it is possible to instantiate it multiple times.
+The main entry point for CheerpJ workers is the `CheerpJWorker` JS interface. It is a normal JS object and it is possible to instantiate it multiple times.
 
 ```
 var w = new CheerpJWorker();
 w.cheerpjInit().then(function(e) { console.log("CheerpJWorker is ready"); });
 ```
 
-This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the ```CheerpJWorker``` exposes the same API as CheerpJ in the main thread. You can read details about the main thread API in the [Runtime API](Runtime-API) page.
+This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the `CheerpJWorker` exposes the same API as CheerpJ in the main thread. You can read details about the main thread API in the [Runtime API](Runtime-API) page.
 
 ## Parameters and return values
 
 WebWorkers do not share any memory with the main threads, and all interactions happen through messages. This imposes limitations on the type of data that can be passed around.
 
-|Data type                                   |Limitations                                 |
-|--------------------------------------------|--------------------------------------------|
-|byte/short/char/int/float/double            |Fully supported in params and return values |
-|byte[]/short[]/char[]/int[]/float[]/double[]|Fully supported in params and return values |
-|JavaScript String                           |Supported in params, not return values      |
-|Any Java object                             |Not supported in params or return values    |
+| Data type                                    | Limitations                                 |
+| -------------------------------------------- | ------------------------------------------- |
+| byte/short/char/int/float/double             | Fully supported in params and return values |
+| byte[]/short[]/char[]/int[]/float[]/double[] | Fully supported in params and return values |
+| JavaScript String                            | Supported in params, not return values      |
+| Any Java object                              | Not supported in params or return values    |
 
 Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](Runtime-API#cjtypedarraytojava).
 
-It is possible to move Java arrays from the main thread and others ```CheerpJWorker```s. Please note that Java arrays are not copied, but _transferred_ across contexts. This increases efficiency, but also means that the data is not available any more from the calling thread. If the data needs be preserved you must manually make a copy.
+It is possible to move Java arrays from the main thread and others `CheerpJWorker`s. Please note that Java arrays are not copied, but _transferred_ across contexts. This increases efficiency, but also means that the data is not available any more from the calling thread. If the data needs be preserved you must manually make a copy.
 
 Java Strings, being Java objects, cannot be passed or returned. But JavaScript strings can be used as parameters and will be converted to Java Strings directly in the WebWorker context.
 
@@ -89,7 +89,7 @@ public class Worker
 }
 ```
 
-The Java version of the API is also extended to support ```long```s in parameters and returned values. Currently they are converted to native JS values when passed to Workers, so their range is limited to +/-2^52.
+The Java version of the API is also extended to support `long`s in parameters and returned values. Currently they are converted to native JS values when passed to Workers, so their range is limited to +/-2^52.
 
 Example usage:
 
@@ -106,7 +106,7 @@ public class WW
 }
 ```
 
-To build the class you need to add ```cheerpj-public.jar``` to the classpath
+To build the class you need to add `cheerpj-public.jar` to the classpath
 
 ```
 javac -cp cheerpj_install_dir/cheerpj-public.jar WW.java

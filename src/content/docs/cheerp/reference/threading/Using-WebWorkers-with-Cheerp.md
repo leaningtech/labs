@@ -57,22 +57,23 @@ void webMain()
 ```
 
 You can build each files using the following command line (for more information see [Getting Started](Getting-started))
+
 ```
 /opt/cheerp/bin/clang++ -O3 cheerpWorkerHost.cpp -o cheerpWorkerHost.js
 /opt/cheerp/bin/clang++ -O3 cheerpWorker.cpp -o cheerpWorker.js
 ```
+
 For your convenience here is the needed HTML to execute the code
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Cheerp test</title>
-    <script src="cheerpWorkerHost.js"></script>
-  </head>
-  <body>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Cheerp test</title>
+		<script src="cheerpWorkerHost.js"></script>
+	</head>
+	<body></body>
 </html>
 ```
 

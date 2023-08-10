@@ -24,6 +24,7 @@ For debugging purposes, human-readable WebAssembly output can be generated using
 For older browsers or for easier inspection of the generated code, AsmJS output is also supported, with the `-cheerp-linear-output=asmjs` option.
 
 # Avoid Wasm traps
+
 The Wasm standard mandates that certain undefined operations should trap and stop the execution of the program (possibly notifying back what happened wrongly). This could serves as run-time checker (es out-of-bound memory accesses lead to a trap) but it's also could lead to some false positives being raised. An example: converting between int and double may lead to a trap being raised, while in C++ it has a well defined (at a cost of possible loss of precision) meaning.
 If you want to avoid the trap mechanism, passing `-cheerp-avoid-wasm-traps` do as the name suggests, and generates non-trapping Wasm code.
 
@@ -33,7 +34,7 @@ Since WebAssembly uses linear memory with a certain size, the heap size can be s
 
 # Using DOM APIs
 
-From WebAssembly it is not possible to call any DOM APIs, not even the basic ```client::console.log```. Cheerp provides automatic generation of FFI/code bridges to indirectly use DOM API though. As an example take the following code.
+From WebAssembly it is not possible to call any DOM APIs, not even the basic `client::console.log`. Cheerp provides automatic generation of FFI/code bridges to indirectly use DOM API though. As an example take the following code.
 
 ```
 #include <cheerp/clientlib.h>
@@ -56,5 +57,4 @@ void webMain()
 
 # Using cheerp::jsexport in combination with WebAssembly
 
-```[[cheerp::jexport]]``` makes it possible to expose C++ classes and functions to JavaScript. [(See here for details on jsexport)](JSExport-attribute).
-
+`[[cheerp::jexport]]` makes it possible to expose C++ classes and functions to JavaScript. [(See here for details on jsexport)](JSExport-attribute).

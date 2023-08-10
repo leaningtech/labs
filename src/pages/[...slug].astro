@@ -23,7 +23,6 @@ const navEntry = Astro.props;
 const collectionEntry =
 	navEntry.type === "file" ? navEntry.collectionEntry : undefined;
 const rendered = await collectionEntry?.render();
-
 ---
 
 <DocsArticle
@@ -51,4 +50,4 @@ const rendered = await collectionEntry?.render();
 		)
 	}
 </DocsArticle>
-å
+ å

@@ -36,8 +36,16 @@ async function getNextPrev(): Promise<{
 	};
 }
 
-function findValidEntry(entries: NavEntry[], index: number, direction: number): NavEntry | undefined {
-	for (let i = index + direction; i >= 0 && i < entries.length; i += direction) {
+function findValidEntry(
+	entries: NavEntry[],
+	index: number,
+	direction: number,
+): NavEntry | undefined {
+	for (
+		let i = index + direction;
+		i >= 0 && i < entries.length;
+		i += direction
+	) {
 		const entry = entries[i];
 		if (entry && !(entry.type === "file" && entry.isIndex)) {
 			return entry;

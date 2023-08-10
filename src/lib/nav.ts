@@ -37,7 +37,12 @@ export function isMode(value: unknown): value is Mode {
 }
 
 export function isProduct(value: unknown): value is Product {
-	return value === "cheerp" || value === "cheerpj2" || value === "cheerpj3" || value === "cheerpx";
+	return (
+		value === "cheerp" ||
+		value === "cheerpj2" ||
+		value === "cheerpj3" ||
+		value === "cheerpx"
+	);
 }
 
 /**
@@ -137,7 +142,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 	// Sort all the directory entries
 	for (const listing of Object.values(dirPathToEntries)) {
 		listing.sort((a, b) => (a.id < b.id ? -1 : 1));
-	}		
+	}
 
 	// Sanity check that all the files are accounted for
 	let numFiles = 0;
@@ -155,7 +160,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 				if (child.slug === entry.slug) {
 					entry.title = child.title;
 				}
-			}			
+			}
 		}
 	}
 	for (const entry of root) {
@@ -259,7 +264,10 @@ export function flattenNav(entries: NavEntry[]): NavEntry[] {
 }
 
 /** Returns an array of NavEntries that path to the given entry ID. */
-export function findEntryPath(nav: NavEntry[], id: string): NavEntry[] | undefined {
+export function findEntryPath(
+	nav: NavEntry[],
+	id: string,
+): NavEntry[] | undefined {
 	function dfsVisit(entry: NavEntry, path: NavEntry[]): NavEntry[] | undefined {
 		if (entry.type === "directory") {
 			for (const child of entry.entries) {

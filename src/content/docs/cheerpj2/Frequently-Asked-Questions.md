@@ -20,7 +20,7 @@ Yes, you can convert any Java SE application with CheerpJ without touching the s
 
 ## Can I use CheerpJ to convert Java libraries and integrate them in my HTML5 application?
 
-Yes. Java methods can be exposed to JavaScript with an asynchronous interface. A synchronous-looking construct is provided to minimise verbosity when multiple methods are invoked. 
+Yes. Java methods can be exposed to JavaScript with an asynchronous interface. A synchronous-looking construct is provided to minimise verbosity when multiple methods are invoked.
 
 ## Can I call JavaScript libraries or web APIs from Java?
 
@@ -28,7 +28,7 @@ Yes, CheerpJ allows you to interoperate with any JavaScript or browser API.
 
 ## How does CheerpJ support reflection?
 
-In order to support reflection, CheerpJ, similarly to a JVM, utilizes the metadata available in the original .jar file. A converted application, to be deployed on a web server, comprises both the converted .jar.js JavaScript files and the .jar archives. After having converted a .jar archive, it is possible to remove all the bytecode from them prior to deployment, in order to minimize download time (we provide a simple tool to do so). The combined size of the pruned .jar archive and the output JavaScript, after compression, is comparable to the original .jar. 
+In order to support reflection, CheerpJ, similarly to a JVM, utilizes the metadata available in the original .jar file. A converted application, to be deployed on a web server, comprises both the converted .jar.js JavaScript files and the .jar archives. After having converted a .jar archive, it is possible to remove all the bytecode from them prior to deployment, in order to minimize download time (we provide a simple tool to do so). The combined size of the pruned .jar archive and the output JavaScript, after compression, is comparable to the original .jar.
 
 Optionally, .jar archives can be split into multiple segments (size to be defined at compile time) before being deployed. The application will only load the required segments at run time, thus further reducing download time.
 
@@ -50,15 +50,15 @@ This said, depending on the application, it is often possible to remove a lot of
 
 Yes, it should. However, this has not been one of our areas of focus so far.
 
-## When compiling my application I see the message ```Failure compiling MyFile.class```, but cheerpjfy continues to execute with no errors
+## When compiling my application I see the message `Failure compiling MyFile.class`, but cheerpjfy continues to execute with no errors
 
-This means that it was not possible to use the new codegen. Cheerpj will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar, 
+This means that it was not possible to use the new codegen. Cheerpj will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar,
 
-## My Java application needs to get data over the network, but I only get ```SocketException```s
+## My Java application needs to get data over the network, but I only get `SocketException`s
 
-In the browser environment it is not possible to use sockets to connect to arbitrary ports. As a special exception CheerpJ provides a custom HTTP/HTTPS handler (based on XHR) that can be used to get data over HTTP and use REST APIs. To enable this handler please set the property ```java.protocol.handler.pkgs=com.leaningtech.handlers``` during the ```cheerpjInit``` call, for example:
+In the browser environment it is not possible to use sockets to connect to arbitrary ports. As a special exception CheerpJ provides a custom HTTP/HTTPS handler (based on XHR) that can be used to get data over HTTP and use REST APIs. To enable this handler please set the property `java.protocol.handler.pkgs=com.leaningtech.handlers` during the `cheerpjInit` call, for example:
 
-```cheerpjInit({javaProperties:["java.protocol.handler.pkgs=com.leaningtech.handlers"]});```
+`cheerpjInit({javaProperties:["java.protocol.handler.pkgs=com.leaningtech.handlers"]});`
 
 Please note that when using CheerpJ to run applets the custom handlers are enabled by default.
 
@@ -70,10 +70,10 @@ Ignore those errors. CheerpJ provides a FileSystem implementation on top of HTTP
 
 Many first time users get stuck at this point. The most common issues are:
 
-* Opening the HTML page directly from disk: The URL in the browser should always start with http:// or https://, if it starts with file:// CheerpJ will not work. You need to use a local web server during testing.
-* Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual fileystem with multiple mount points, the "/app/" prefix is required.
-* More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
-* When converting obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example ```a.class``` and ```A.class``` will be considered the same. Always try to convert the JAR using a Linux machine before reporting a bug when converting obfuscated JARs.
+- Opening the HTML page directly from disk: The URL in the browser should always start with http:// or https://, if it starts with file:// CheerpJ will not work. You need to use a local web server during testing.
+- Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual fileystem with multiple mount points, the "/app/" prefix is required.
+- More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
+- When converting obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example `a.class` and `A.class` will be considered the same. Always try to convert the JAR using a Linux machine before reporting a bug when converting obfuscated JARs.
 
 ## My application compiled with CheerpJ does not work and I see a cross origin error to a Google service in the console. What's going on?
 

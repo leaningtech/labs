@@ -14,7 +14,7 @@ export interface ProductData {
 	description: string;
 }
 
-export const products: {[product in Product]: ProductData} = {
+export const products: { [product in Product]: ProductData } = {
 	cheerp: {
 		id: "cheerp",
 		name: "Cheerp",

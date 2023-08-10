@@ -2,11 +2,11 @@
 title: DOM and JavaScript interoperability
 ---
 
-CheerpJ allows users to interact with the browser DOM directly from Java, without overhead. To achieve this we provide an additional jar (```cheerpj-dom.jar```) in the CheerpJ downloadable archive.
+CheerpJ allows users to interact with the browser DOM directly from Java, without overhead. To achieve this we provide an additional jar (`cheerpj-dom.jar`) in the CheerpJ downloadable archive.
 
-This JAR provides declarations for all of the relevant Java interfaces and classes. In particular you will find them wrapped in the ```com.leaningtech.client``` package, for example the ```Document``` interface of the browser (documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Document)) becomes ```com.leaningtech.client.Document``` with CheerpJ.
+This JAR provides declarations for all of the relevant Java interfaces and classes. In particular you will find them wrapped in the `com.leaningtech.client` package, for example the `Document` interface of the browser (documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Document)) becomes `com.leaningtech.client.Document` with CheerpJ.
 
-The ```com.leaningtech.client.Global``` is a representation of the global namespace in the browser context. It only contains static methods and fields
+The `com.leaningtech.client.Global` is a representation of the global namespace in the browser context. It only contains static methods and fields
 
 ## Basic example
 
@@ -41,11 +41,11 @@ public class DomExample
 
 ## Using Strings
 
-It's important to keep in mind that Java Strings are not JavaScript Strings. To avoid confusion, in CheerpJ the ```JSString``` name is used for the JS version. The static ```Global.JSString``` utility function can be used to create ```JSString```s from Java ```String```s. If a ```JSString``` needs to be used many times it could be useful to cache it. Similarly the ```Global.JavaString``` function can be used to convert back from ```JSString``` to normal Java ```String```.
+It's important to keep in mind that Java Strings are not JavaScript Strings. To avoid confusion, in CheerpJ the `JSString` name is used for the JS version. The static `Global.JSString` utility function can be used to create `JSString`s from Java `String`s. If a `JSString` needs to be used many times it could be useful to cache it. Similarly the `Global.JavaString` function can be used to convert back from `JSString` to normal Java `String`.
 
 ## Calling JS methods
 
-The ```Global``` class provides a few static methods that can be used to call arbitrary JS functions in the global scope.
+The `Global` class provides a few static methods that can be used to call arbitrary JS functions in the global scope.
 
 ```java
 public static Object jsCall(String funcName, Object... arg);
@@ -58,7 +58,7 @@ The various methods behave the same, with the only difference being the expected
 
 ## Building the code
 
-Assuming the example above is contained in ```DomExample.java```, you need to first build the program using the standard ```javac``` compiler, create a JAR and then create the JAR.JS from it using CheerpJ. In both steps the ```cheerpj-dom.jar``` must be explicitly added to the command line as a dependency.
+Assuming the example above is contained in `DomExample.java`, you need to first build the program using the standard `javac` compiler, create a JAR and then create the JAR.JS from it using CheerpJ. In both steps the `cheerpj-dom.jar` must be explicitly added to the command line as a dependency.
 
 ```
 # The CHEERPJ_INSTALL_PATH is assumed to be set to the location where the CheerpJ archive has been installed

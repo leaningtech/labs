@@ -30,7 +30,7 @@ Source: <https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ind
 
 <img src="/cheerpj2/assets/demo_fiddle.png" width="400">
 
-A playground to compile and run Java programs directly in the browser. Both console and GUI applications are supported. The standard ```javac``` compiler is used, since ```javac``` is also written in Java the whole compiler runs in the browser, together with the compiled application.
+A playground to compile and run Java programs directly in the browser. Both console and GUI applications are supported. The standard `javac` compiler is used, since `javac` is also written in Java the whole compiler runs in the browser, together with the compiled application.
 Source: [https://javafiddle.leaningtech.com/index.html] (Inspect the page using the devtools)
 
 ## iText Demo
@@ -42,4 +42,3 @@ Source: [https://javafiddle.leaningtech.com/index.html] (Inspect the page using 
 Edit PDFs fully client side using the industry standard [iText](https://itextpdf.com/en) library converted to JavaScript. This demo demonstrates how CheerpJ APIs can be used to instance Java objects and call methods directly from JavaScript.
 
 Source: <https://cheerpjdemos.leaningtech.com/itextCheerpJDemo.js>
-

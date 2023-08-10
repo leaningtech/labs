@@ -4,9 +4,7 @@
 		"strictNullChecks": true,
 		"jsx": "preserve",
 		"paths": {
-			"@/*": [
-				"./src/*"
-			]
+			"@/*": ["./src/*"]
 		}
 	}
 }

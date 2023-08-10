@@ -15,7 +15,7 @@ void webGLESInit(const client::String& canvasName);
 which accept as the only argument the name of an existing HTML5 canvas element which should already exists at the time of webGLES initialization. An example HTML tag for such canvas:
 
 ```html
-<canvas width=1024 height=768 id="glcanvas"></canvas>
+<canvas width="1024" height="768" id="glcanvas"></canvas>
 ```
 
 # Raw WebGL access

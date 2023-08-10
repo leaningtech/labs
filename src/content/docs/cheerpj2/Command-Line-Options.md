@@ -2,7 +2,7 @@
 title: Command line options
 ---
 
-The basic usage of the ```cheerpjfy.py``` build script is:
+The basic usage of the `cheerpjfy.py` build script is:
 
 ```
 ./cheerpjfy.py application.jar
@@ -16,13 +16,13 @@ Shows all the command line options
 
 ### -v
 
-Shows the CheerpJ version and the recommend ```loader.js``` to use in deployment
+Shows the CheerpJ version and the recommend `loader.js` to use in deployment
 
 ### --deps=DEPSPATHS
 
-List of ```:``` separated JARs that this JAR depends on. Please note that all the listed JAR paths should be either relative to the target JAR or absolute.
+List of `:` separated JARs that this JAR depends on. Please note that all the listed JAR paths should be either relative to the target JAR or absolute.
 
-###   --pack-jar=PACKJAR
+### --pack-jar=PACKJAR
 
 Generate a packed version of the input JAR. Debug information and all code are removed.
 

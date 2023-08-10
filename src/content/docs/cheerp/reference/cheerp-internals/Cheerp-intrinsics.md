@@ -6,23 +6,23 @@ Cheerp uses a few compiler intrinsic to improve the type safety of some operatio
 
 # Clang intrinsics
 
-### void* __builtin_cheerp_pointer_base(const void* ptr);
+### void* \_\_builtin_cheerp_pointer_base(const void* ptr);
 
 See [llvm.cheerp.pointer.base](#pointerbase)
 
-### size_t __builtin_cheerp_pointer_offset(const void* ptr);
+### size_t \_\_builtin_cheerp_pointer_offset(const void\* ptr);
 
 See [llvm.cheerp.pointer.offset](#pointeroffset)
 
-### template&lt;class R,class T,class O&gt; R* __builtin_cheerp_create_closure(T* func, O* obj);
+### template&lt;class R,class T,class O&gt; R* \_\_builtin_cheerp_create_closure(T* func, O\* obj);
 
 See [llvm.cheerp.create.closure](#createclosure)
 
-### template&lt;class R,class T&gt; R* __builtin_cheerp_make_complete_object(T*);
+### template&lt;class R,class T&gt; R* \_\_builtin_cheerp_make_complete_object(T*);
 
 See [llvm.cheerp.make.complete.object](#makecomplete)
 
-### template&lt;class R,class T&gt; R* __builtin_cheerp_make_regular(T*, int);
+### template&lt;class R,class T&gt; R* \_\_builtin_cheerp_make_regular(T*, int);
 
 See [llvm.cheerp.make.regular](#makeregular)
 
@@ -46,7 +46,7 @@ Used to signal to the backend which type casts are explicitly required by the us
 
 ## Intrinsics for type safe allocations
 
-### T* llvm.cheerp.allocate(int32_t sizeInBytes)
+### T\* llvm.cheerp.allocate(int32_t sizeInBytes)
 
 Used allocate memory which a definite type. The traditional pattern of allocating bytes and assigning a type later using a bitcast is fragile and may confuse the backend.
 
@@ -66,14 +66,15 @@ Returns the offset component of the passed pointer.
 
 ## Intrinsics for JavaScript integration
 
-### Func2* llvm.cheerp.create.closure(Func1* f, Obj* o) <a name="createclosure"></a>
+### Func2* llvm.cheerp.create.closure(Func1* f, Obj\* o) <a name="createclosure"></a>
 
 Used to create a JavaScript closure using the following code
 
 ```js
-function cheerpCreateClosure(func, obj)
-{
-    return function(e) { func(obj,e); };
+function cheerpCreateClosure(func, obj) {
+	return function (e) {
+		func(obj, e);
+	};
 }
 ```
 
