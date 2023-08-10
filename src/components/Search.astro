@@ -1,6 +1,6 @@
 ---
 import Icon from "astro-icon";
-import Search from "astro-pagefind/components/Search";
+import PagefindSearch from "astro-pagefind/src/components/Search";
 ---
 
 <site-search class="inline-block w-80 h-10 max-w-full">
@@ -26,7 +26,7 @@ import Search from "astro-pagefind/components/Search";
 		aria-label="Search"
 		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl border-2 border-stone-700"
 	>
-		<Search className="search" />
+		<PagefindSearch className="search" />
 	</dialog>
 </site-search>
 
