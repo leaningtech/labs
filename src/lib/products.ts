@@ -22,13 +22,21 @@ export const products: {[product in Product]: ProductData} = {
 		subtitle: "Compile C++ for the browser",
 		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
 	},
-	cheerpj: {
-		id: "cheerpj",
-		name: "CheerpJ",
-		href: "/cheerpj",
+	cheerpj2: {
+		id: "cheerpj2",
+		name: "CheerpJ 2",
+		href: "/cheerpj2",
 		logotype: cheerpjLogotype,
 		subtitle: "Run Java in the browser",
-		description: "Java Virtual Machine (JVM) replacement for the browser.",
+		description: "Compile Java bytecode to WebAssembly and JavaScript.",
+	},
+	cheerpj3: {
+		id: "cheerpj3",
+		name: "CheerpJ 3",
+		href: "/cheerpj3",
+		logotype: cheerpjLogotype,
+		subtitle: "Run JAR files and Java applets on the web",
+		description: "Java Virtual Machine (JVM) replacement",
 	},
 	cheerpx: {
 		id: "cheerpx",
@@ -37,12 +45,11 @@ export const products: {[product in Product]: ProductData} = {
 		logotype: cheerpxLogotype,
 		subtitle: "x86-to-WebAssembly virtualization",
 		description:
-			"Execute x86 binaries in the browser with the CheerpX virtual machine.",
+			"Execute native binaries in the browser with the CheerpX virtual machine.",
 	},
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
-	// /cheerp/... -> cheerp
 	const path = url.pathname.split("/")[1];
 	if (path && isProduct(path)) {
 		return products[path];

@@ -1,14 +1,15 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getEntry, type CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
 
 interface Props {
-	post: CollectionEntry<"blog">;
+	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
 	showMetadata?: boolean;
 }
 
-const { post, showMetadata = false } = Astro.props;
+const { post: postOrSlug, showMetadata = false } = Astro.props;
+const post = typeof postOrSlug === "string" ? await getEntry("blog", postOrSlug) : postOrSlug;
 const authors = await resolveAuthors(post.data.authors);
 ---
 
