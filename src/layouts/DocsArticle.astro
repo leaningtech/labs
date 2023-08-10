@@ -10,11 +10,12 @@ import DocsPagination from "../components/DocsPagination.astro";
 
 interface Props {
 	id: string;
-	title: string; // TODO: derive from id
+	title: string;
+	subtitle: string | undefined;
 	headings: Heading[] | undefined;
 }
 
-const { id, title, headings } = Astro.props;
+const { id, title, subtitle, headings } = Astro.props;
 
 const nav = await getRootNav();
 
@@ -29,7 +30,7 @@ const directory = mode ? findNavDirectory(nav, [product, mode]) : undefined;
 const today = new Date();
 ---
 
-<Shell {title}>
+<Shell title={[title, subtitle].filter(Boolean).join(" | ")}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div data-sidebar-wrapper class="hidden lg:block shadow-xl lg:shadow-none">
 			<DocsSidebar {product} {mode} {directory} />
@@ -52,7 +53,8 @@ const today = new Date();
 				data-pagefind-body
 				class="prose prose-stone dark:prose-invert pb-10"
 			>
-				<h1 class="mb-12 font-bold">{title}</h1>
+				<h1 class="mb-2 font-bold">{title}</h1>
+				{subtitle && <p class="mt-0 mb-8 text-stone-500 text-xl">{subtitle}</p>}
 				<slot />
 			</main>
 

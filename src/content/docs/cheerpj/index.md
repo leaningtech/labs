@@ -16,7 +16,7 @@ If you are unsure how to start, try our [Tutorial](https://docs.leaningtech.com/
 What is CheerpJ?
 ------
 
-<p align="center"><img src="/cheerpj/assets/cheerpj_visual_2.png" width="450"></p>
+![](/cheerpj/assets/cheerpj_visual_2.png)
 
 CheerpJ is constituted of three components:
 1. The CheerpJ AOT compiler, an LLVM-based Java-bytecode to JavaScript compiler. This can be used to convert Java archives (e.g. .jar) or single .class files to JavaScript. The CheerpJ AOT compiler is available for Linux, macOS and Windows.

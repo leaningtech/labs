@@ -23,10 +23,12 @@ const navEntry = Astro.props;
 const collectionEntry =
 	navEntry.type === "file" ? navEntry.collectionEntry : undefined;
 const rendered = await collectionEntry?.render();
+
 ---
 
 <DocsArticle
 	title={collectionEntry?.data.title ?? navEntry.title}
+	subtitle={collectionEntry?.data.subtitle}
 	id={navEntry.id}
 	headings={rendered?.headings}
 >
@@ -36,7 +38,7 @@ const rendered = await collectionEntry?.render();
 		) : (
 			/* Directory listing */
 			navEntry.type === "directory" && (
-				<ol>
+				<ul>
 					{navEntry.entries.map((child) => {
 						return (
 							<li>
@@ -44,8 +46,9 @@ const rendered = await collectionEntry?.render();
 							</li>
 						);
 					})}
-				</ol>
+				</ul>
 			)
 		)
 	}
 </DocsArticle>
+å
