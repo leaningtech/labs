@@ -1,5 +1,6 @@
 ---
 import companyFavicon from "../assets/branding/company/tower.svg";
+import { productFromUrl } from "../lib/products";
 
 export interface Props {
 	title: string;
@@ -11,18 +12,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/social/common@2x.png" } = Astro.props;
 
-let favicon = companyFavicon;
-let faviconType = "image/svg+xml";
-if (canonicalURL.pathname.startsWith("/cheerpj")) {
-	favicon = "/cheerpj/favicon.ico";
-	faviconType = "image/x-icon";
-} else if (canonicalURL.pathname.startsWith("/cheerpx")) {
-	favicon = "/cheerpx/favicon.ico";
-	faviconType = "image/x-icon";
-} else if (canonicalURL.pathname.startsWith("/cheerp")) {
-	favicon = "/cheerp/favicon.ico";
-	faviconType = "image/x-icon";
-}
+const product = productFromUrl(canonicalURL);
+const favicon = product?.favicon ?? companyFavicon;
+const faviconType = favicon.endsWith(".ico") ? "image/x-icon" : "image/svg+xml";
 ---
 
 <!-- Global Metadata -->
