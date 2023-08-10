@@ -9,6 +9,7 @@ export interface ProductData {
 	name: string;
 	href: string;
 	logotype: string;
+	favicon: string;
 	subtitle: string;
 	description: string;
 }
@@ -19,6 +20,7 @@ export const products: {[product in Product]: ProductData} = {
 		name: "Cheerp",
 		href: "/cheerp",
 		logotype: cheerpLogotype,
+		favicon: "/cheerp/favicon.ico",
 		subtitle: "Compile C++ for the browser",
 		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
 	},
@@ -27,6 +29,7 @@ export const products: {[product in Product]: ProductData} = {
 		name: "CheerpJ 2",
 		href: "/cheerpj2",
 		logotype: cheerpjLogotype,
+		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java in the browser",
 		description: "Compile Java bytecode to WebAssembly and JavaScript.",
 	},
@@ -35,6 +38,7 @@ export const products: {[product in Product]: ProductData} = {
 		name: "CheerpJ 3",
 		href: "/cheerpj3",
 		logotype: cheerpjLogotype,
+		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run JAR files and Java applets on the web",
 		description: "Java Virtual Machine (JVM) replacement",
 	},
@@ -43,6 +47,7 @@ export const products: {[product in Product]: ProductData} = {
 		name: "CheerpX",
 		href: "/cheerpx",
 		logotype: cheerpxLogotype,
+		favicon: "/cheerpx/favicon.ico",
 		subtitle: "x86-to-WebAssembly virtualization",
 		description:
 			"Execute native binaries in the browser with the CheerpX virtual machine.",

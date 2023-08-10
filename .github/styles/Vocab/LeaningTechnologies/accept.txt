@@ -3,6 +3,7 @@ Cheerp
 CheerpJ
 CheerpX
 WebVM
+CheerpJ Applet Runner
 
 Astro
 Yarn

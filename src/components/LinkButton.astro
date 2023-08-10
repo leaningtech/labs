@@ -3,11 +3,12 @@ import { Icon } from "astro-icon";
 interface Props {
 	href: string;
 	label: string;
-	type: "primary" | "secondary";
+	type?: "primary" | "secondary";
+	iconLeft?: string;
 	iconRight?: string;
 }
 
-const { href, label, type, iconRight } = Astro.props;
+const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 ---
 
 <a
@@ -22,6 +23,7 @@ const { href, label, type, iconRight } = Astro.props;
 		},
 	]}
 >
+	{iconLeft && <Icon name={iconLeft} class="w-5 h-5" />}
 	{label}
 	{iconRight && <Icon name={iconRight} class="w-5 h-5" />}
 </a>
