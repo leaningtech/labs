@@ -1,0 +1,19 @@
+---
+export interface Props {
+	profileUrl: string;
+	imgUrl: string;
+	
+}
+
+const {profileUrl, imgUrl} = Astro.props;
+---
+
+<div class="">
+    <a href={profileUrl} >
+        <img
+            src={imgUrl}
+            alt=""
+            class="rounded-full w-12 h-12 outline outline-offset-2 outline-1 outline-stone-400"
+        />
+    </a>
+</div>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	const images = [
-		"/landing/doodle/Cheerp.png",
-		"/landing/doodle/CheerpJ.png",
-		"/landing/doodle/CheerpX.png",
+		"/landing/doodle/cheerp_top.png",
+		"/landing/doodle/cheerpj_top.png",
+		"/landing/doodle/cheerpx_top.png",
 	];
 
 	let index = 0;
@@ -13,7 +13,7 @@
 
 <div class="doodle relative w-full max-h-[36rem] lg:max-h-[48rem]">
 	<img
-		src="/landing/doodle/AllCheerps.png"
+		src="/landing/doodle/all_top.png"
 		alt=""
 		class="absolute top-0 opacity-20"
 	/>
@@ -26,7 +26,18 @@
 			class:opacity-0={i !== index}
 		/>
 	{/each}
+	<img
+	src="/landing/doodle/browser.png"
+	alt=""
+	class="absolute top-0"
+	/>
+
 </div>
+
+
+
+
+
 
 <!-- TODO: <map> and <area> elements -->
 

@@ -3,6 +3,7 @@ import { Icon } from "astro-icon";
 import LinkButton from "../LinkButton.astro";
 import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
+import { DISCORD_URL } from "../../consts";
 ---
 
 <header
@@ -25,26 +26,16 @@ import Doodle from "./Doodle.svelte";
 					Client-side developer tools built with WebAssembly.
 				</p>
 				<div class="mt-8 md:space-x-1 space-y-2">
-					<div
-						class="text-xl font-semibold text-stone-100 lg:mr-7 block lg:inline-block"
-					>
-						Choose language:
-					</div>
+					
 					<LinkButton
-						href="/cheerp"
-						label="C / C++"
-						type="secondary"
+						href="/docs"
+						label="Get started"
+						type="primary"
 						iconRight="mdi:arrow-right"
 					/>
 					<LinkButton
-						href="/cheerpj"
-						label="Java"
-						type="secondary"
-						iconRight="mdi:arrow-right"
-					/>
-					<LinkButton
-						href="/cheerpx"
-						label="Native code"
+						href={DISCORD_URL}
+						label="Find out more"
 						type="secondary"
 						iconRight="mdi:arrow-right"
 					/>
