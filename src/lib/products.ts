@@ -55,7 +55,7 @@ export const products: {[product in Product]: ProductData} = {
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
-	const path = url.pathname.split("/")[1];
+	const path = url.pathname.split("/")[1]?.replace(".html", "");
 	if (path && isProduct(path)) {
 		return products[path];
 	}
