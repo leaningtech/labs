@@ -2,9 +2,7 @@
 import { Icon } from "astro-icon";
 import Footer from "../components/Footer.astro";
 import Shell from "../layouts/Shell.astro";
-import Tweet from "../components/landing-page/Tweet.astro";
 import Hero from "../components/landing-page/Hero.astro";
-
 import BlogPostCard from "../components/BlogPostCard.astro";
 import { latestFeaturedPost } from "../lib/blog";
 
@@ -39,49 +37,13 @@ const clientImages = [
 	<Hero />
 
 	<section class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
-		<h2 class="text-4xl font-semibold dark:text-white text-center">
-			Testimonials
-		</h2>
-
-		<div
-			class="grid md:grid-cols-3 gap-4 place-items-start mx-auto max-w-screen-lg my-8"
-		>
-			<Tweet
-				tweetUrl="https://twitter.com/ballingt/status/1577996820868833281?s=20"
-				imgUrl="https://pbs.twimg.com/profile_images/1064434470697152512/MHK02-vq_400x400.jpg"
-				userName="Thomas Ballinger"
-				userTag="@ballingt"
-				text="This piece pulls it all together! Terrific work by @leaningtech folks, and the ubiquity of @Tailscale continues to surprise me."
-			/>
-			<Tweet
-				tweetUrl="https://twitter.com/iteachchem/status/1262505442778820609?s=20"
-				imgUrl="https://pbs.twimg.com/profile_images/2285223106/image_400x400.jpg"
-				userName="Janeth Brownell"
-				userTag="@iteachchem"
-				text="Woo Hoo!!! #MovingMan #physics sim is finally available in a form other than Java! Thank you @PhETsims and @leaningtech for the #cheerpj version! #scitlap #scichat @NSTA @cascience #ButteCOE"
-			/>
-			<Tweet
-				tweetUrl="https://twitter.com/tlively52/status/1656055356206854146?s=20"
-				imgUrl="https://pbs.twimg.com/profile_images/1089417696066686977/PPe7YcIE_400x400.jpg"
-				userName="Thomas Lively"
-				userTag="@tlively52"
-				text="Extremely cool to see more JITting of WebAssembly from @leaningtech"
-			/>
-		</div>
-
 		<ul
-			class="flex justify-items-center justify-between flex-wrap gap-8"
+			class="flex justify-items-center justify-between gap-8 overflow-hidden"
 			aria-label="Clients"
 		>
 			{
-				clientImages.map(({ src, alt }, i) => (
-					<li
-						class:list={[
-							{
-								"hidden lg:block": i >= 4,
-							},
-						]}
-					>
+				clientImages.map(({ src, alt }) => (
+					<li class="flex-none">
 						<img
 							src={src}
 							alt={alt}
@@ -93,8 +55,8 @@ const clientImages = [
 				))
 			}
 		</ul>
+		
 	</section>
-
 	<section class="w-[40rem] max-w-full p-8 mx-auto my-16">
 		<div class="flex items-center mb-4 text-stone-400">
 			<h2 class="font-semibold grow">
@@ -110,192 +72,10 @@ const clientImages = [
 		{post && <BlogPostCard {post} />}
 	</section>
 
-	<!-- Contributors -->
-	<section class="mx-auto max-w-screen-lg py-32 sm:py-48 lg:py-56">
-		<div class="text-center my-10">
-			<h2 class="text-4xl font-semibold dark:text-white">Open source</h2>
-		</div>
-		<div
-			class="grid sm:grid-cols-5 md:grid-cols-9 lg:grid-cols-12 gap-3 place-items-center justify-center"
-		>
-			<div>
-				<a href="https://github.com/alexp-sssup">
-					<img
-						src="https://avatars.githubusercontent.com/u/191061?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/yuri91">
-					<img
-						src="https://avatars.githubusercontent.com/u/1506147?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/maxgrv">
-					<img
-						src="https://avatars.githubusercontent.com/u/4189010?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/sderossi">
-					<img
-						src="https://avatars.githubusercontent.com/u/5889579?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/nanaian">
-					<img
-						src="https://avatars.githubusercontent.com/u/9429556?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/GabrielaReyna">
-					<img
-						src="https://avatars.githubusercontent.com/u/15352258?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/willmitchell98">
-					<img
-						src="https://avatars.githubusercontent.com/u/26136954?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/Maqrkk">
-					<img
-						src="https://avatars.githubusercontent.com/u/29182327?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/tomoliv30">
-					<img
-						src="https://avatars.githubusercontent.com/u/43568134?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/epanholz">
-					<img
-						src="https://avatars.githubusercontent.com/u/54479232?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/saarikoski-jules">
-					<img
-						src="https://avatars.githubusercontent.com/u/56890810?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/Waqas-Leaningtech">
-					<img
-						src="https://avatars.githubusercontent.com/u/59084531?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/Waqas-Leaningtech">
-					<img
-						src="https://avatars.githubusercontent.com/u/59084531?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/carlopi">
-					<img
-						src="https://avatars.githubusercontent.com/u/842657?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/sere">
-					<img
-						src="https://avatars.githubusercontent.com/u/2992193?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/marsicplusplus">
-					<img
-						src="https://avatars.githubusercontent.com/u/7804222?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-			<div>
-				<a href="https://github.com/Maqrkk">
-					<img
-						src="https://avatars.githubusercontent.com/u/29182327?v=4"
-						alt=""
-						class="rounded-full w-12 h-12"
-					/>
-				</a>
-			</div>
-		</div>
-	</section>
+	
 
-	<!-- Get started now -->
-	<section class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-		<div class="text-center">
-			<h2 class="text-4xl font-semibold dark:text-white">Get started now!</h2>
-		</div>
-		<div class="mt-10 flex items-center justify-center gap-x-6 h-10">
-			<a
-				href="/docs"
-				class="bg-primary-500 rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-primary-300"
-			>
-				<span class="hidden md:block">Documentation</span>
-				<Icon name="uiw:right" class="w-6 h-6" />
-			</a>
-			<a
-				href="#"
-				class="bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5 hover:bg-indigo-400"
-			>
-				<Icon name="fa-brands:discord" class="w-6 h-6" />
-				<span class="hidden md:block">Join the community</span>
-				<span class="sr-only">on Discord</span>
-			</a>
-		</div>
-	</section>
+	
+
+	
 </Shell>
 <Footer />
