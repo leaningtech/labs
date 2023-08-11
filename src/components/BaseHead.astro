@@ -45,3 +45,9 @@ const faviconType = favicon.endsWith(".ico") ? "image/x-icon" : "image/svg+xml";
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Plausible analytics -->
+<script
+	defer
+	data-domain="labs.leaningtech.com"
+	src="https://plausible.leaningtech.com/js/script.js"></script>
