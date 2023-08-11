@@ -2,7 +2,12 @@
 // Provides pagination within the current content group
 
 import { Icon } from "astro-icon";
-import { findParentDirectoryOfId, type NavEntry } from "../lib/nav";
+import {
+	findParentDirectoryOfId,
+	findEntry,
+	type NavEntry,
+	getRootNav,
+} from "../lib/nav";
 
 interface Props {
 	activeId: string;
@@ -14,11 +19,9 @@ async function getNextPrev(): Promise<{
 	next: NavEntry | undefined;
 	prev: NavEntry | undefined;
 }> {
-	const directory = await findParentDirectoryOfId(activeId);
+	let directory = await findParentDirectoryOfId(activeId);
+
 	if (!directory) {
-		console.warn(
-			`ContentPagination: could not find parent directory of activeId "${activeId}"`,
-		);
 		return { next: undefined, prev: undefined };
 	}
 

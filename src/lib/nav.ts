@@ -141,7 +141,13 @@ export async function getRootNav(): Promise<NavEntry[]> {
 
 	// Sort all the directory entries
 	for (const listing of Object.values(dirPathToEntries)) {
-		listing.sort((a, b) => (a.id < b.id ? -1 : 1));
+		listing.sort((a, b) => {
+			// Index pages always come first
+			if (a.type === "file" && a.isIndex) return -1;
+			if (b.type === "file" && b.isIndex) return 1;
+
+			return a.id < b.id ? -1 : 1;
+		});
 	}
 
 	// Sanity check that all the files are accounted for
@@ -269,14 +275,14 @@ export function findEntryPath(
 	id: string,
 ): NavEntry[] | undefined {
 	function dfsVisit(entry: NavEntry, path: NavEntry[]): NavEntry[] | undefined {
+		if (entry.id === id) {
+			return [...path, entry];
+		}
+
 		if (entry.type === "directory") {
 			for (const child of entry.entries) {
 				const r = dfsVisit(child, [...path, entry]);
 				if (r) return r;
-			}
-		} else if (entry.type === "file") {
-			if (entry.id === id) {
-				return [...path, entry];
 			}
 		}
 		return undefined;
@@ -287,4 +293,10 @@ export function findEntryPath(
 		if (r) return r;
 	}
 	return undefined;
+}
+
+export function findEntry(nav: NavEntry[], id: string): NavEntry | undefined {
+	const path = findEntryPath(nav, id);
+	if (!path) return undefined;
+	return path[path.length - 1];
 }
