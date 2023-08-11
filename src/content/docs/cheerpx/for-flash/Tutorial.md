@@ -51,16 +51,16 @@ First, download some flash content and add it in to our CheerpX folder. In this 
 You can also add an index.html file, that you can copy down below:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpX - Flash Demo</title>
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX - Flash Demo</title>
+	</head>
 
-  <body>
-    <embed src="./alien_hominid.swf" width="600" height="600" />
-  </body>
+	<body>
+		<embed src="./alien_hominid.swf" width="600" height="600" />
+	</body>
 </html>
 ```
 
@@ -82,22 +82,22 @@ CheerpX is very simple to integrate on a normal HTML page, due to it only requir
 To do this, we can simply update our HTML to the following:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpX - Flash Demo</title>
-    <script src="./ppdeploy/pp.js"></script>
-    <script>
-      window.onload = (event) => {
-        ppInit();
-      };
-    </script>
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX - Flash Demo</title>
+		<script src="./ppdeploy/pp.js"></script>
+		<script>
+			window.onload = (event) => {
+				ppInit();
+			};
+		</script>
+	</head>
 
-  <body>
-    <embed src="./alien_hominid.swf" width="600" height="600" />
-  </body>
+	<body>
+		<embed src="./alien_hominid.swf" width="600" height="600" />
+	</body>
 </html>
 ```
 

@@ -51,22 +51,22 @@ In some scenarios, a customer cannot edit the HTML of the page directly. If this
 # Basic HTML page for testing
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpX - Flash Demo</title>
-    <script src="https://mydomain.com/cheerpx/pp.js"></script>
-    <script>
-      window.onload = (event) => {
-        ppInit();
-      };
-    </script>
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX - Flash Demo</title>
+		<script src="https://mydomain.com/cheerpx/pp.js"></script>
+		<script>
+			window.onload = (event) => {
+				ppInit();
+			};
+		</script>
+	</head>
 
-  <body>
-    <embed src="./my_flash_content.swf" width="700" height="700" />
-  </body>
+	<body>
+		<embed src="./my_flash_content.swf" width="700" height="700" />
+	</body>
 </html>
 ```
 

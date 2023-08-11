@@ -40,22 +40,22 @@ We now simply need to add a single flag to our `ppInit` function, to tell it to 
 So our HTML from our tutorial would be updated to now look like:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpX - Flash Demo</title>
-    <script src="./ppdeploy/pp.js"></script>
-    <script>
-      window.onload = (event) => {
-        ppInit({ bridgeURL: "ws://localhost:28083" });
-      };
-    </script>
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX - Flash Demo</title>
+		<script src="./ppdeploy/pp.js"></script>
+		<script>
+			window.onload = (event) => {
+				ppInit({ bridgeURL: "ws://localhost:28083" });
+			};
+		</script>
+	</head>
 
-  <body>
-    <embed src="./alien_hominid.swf" width="600" height="600" />
-  </body>
+	<body>
+		<embed src="./alien_hominid.swf" width="600" height="600" />
+	</body>
 </html>
 ```
 

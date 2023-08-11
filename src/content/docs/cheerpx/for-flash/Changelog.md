@@ -4,7 +4,7 @@ title: Changelog
 
 Version 35 - March 28th, 2023:
 
-    * Rebase on up-to-date CheerpX JIT engine. 
+    * Rebase on up-to-date CheerpX JIT engine.
     * Multiple CheerpX JIT performance improvements.
     * New Stage3D implementation with GPU acceleration, leading to drastically improved performance on Stage3D Flash applications.
     * Time zone fixes.
@@ -12,7 +12,7 @@ Version 35 - March 28th, 2023:
 
 Version 34 - May 19th, 2022:
 
-    * Rebase on up-to-date CheerpX JIT engine. 
+    * Rebase on up-to-date CheerpX JIT engine.
     * Multiple CheerpX JIT performance improvements.
     * CheerpX Flash frontend performance improvements.
     * Handle CORE_TIMER_PORT in cxbridge.
@@ -41,8 +41,8 @@ Version 31 - November 11th, 2021:
 Version 30 - November 1st, 2021:
 
     * Significant performance improvements.
-    * CheerpX core JIT performance improvements. 
-    * Bug fixes on JavaScript - Flash interoperability.  
+    * CheerpX core JIT performance improvements.
+    * Bug fixes on JavaScript - Flash interoperability.
     * Improved recognition and replacement of Flash objects within complex pages.
     * General bug fixes.
 
@@ -65,14 +65,14 @@ Version 28 - August 26th, 2021:
 
 Version 27 - June 30th, 2021:
 
-    * CheerpX core JIT performance improvements. 
+    * CheerpX core JIT performance improvements.
     * Bug fixes to font rendering.
     * Bug fixes to the CheerpX scheduler.
     * General bug fixes.
 
 Version 26 - June 14th, 2021:
 
-    * CheerpX core JIT performance improvements. 
+    * CheerpX core JIT performance improvements.
     * Improved compatibility and bug fixes for External Interface (Flash to JavaScript methods).
     * Bug fixes to Flash to JavaScript property access.
     * General bug fixes.
