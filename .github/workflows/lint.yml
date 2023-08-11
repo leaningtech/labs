@@ -127,6 +127,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate Astro type declarations
+        run: pnpm astro sync
+
       - name: Run tsc
         run: pnpm tsc
 
