@@ -76,25 +76,29 @@ const contributeLinks = [
 				© Leaning Technologies {today.getFullYear()}
 			</footer>
 		</main>
-		<aside class="w-32 xl:w-64 px-4 py-6 space-y-10 text-sm hidden lg:block">
-			{headings && <TableOfContents {headings} />}
-			<section>
-				<h5 class="font-semibold mb-1 leading-7 text-stone-300">Contribute</h5>
-				<ul>
-					{
-						contributeLinks.map(({ label, href }) => (
-							<li>
-								<a
-									{href}
-									class="block py-1 text-stone-400 hover:text-stone-200"
-								>
-									{label}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+		<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden lg:block">
+			<div class="space-y-10 sticky top-24">
+				{headings && <TableOfContents {headings} />}
+				<section>
+					<h5 class="font-semibold mb-1 leading-7 text-stone-300">
+						Contribute
+					</h5>
+					<ul>
+						{
+							contributeLinks.map(({ label, href }) => (
+								<li>
+									<a
+										{href}
+										class="block py-1 text-stone-400 hover:text-stone-200"
+									>
+										{label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			</div>
 		</aside>
 	</docs-article>
 </Shell>
