@@ -1,6 +1,6 @@
 # To test, concurrently
 #   pnpm build && pnpm preview --host 0.0.0.0
-#	  lychee http://localhost:3000/
+#	  lychee dist src/content
 
 base = "http://localhost:3000"
 remap = [ "https://labs.leaningtech.com http://localhost:3000" ]

@@ -20,7 +20,9 @@ lychee is a tool that recursively checks all links on the site for 404s.
 1. Install [lychee](https://lychee.cli.rs/#/introduction)
 2. Build the site: `pnpm build`
 3. Preview the site in the background: `pnpm preview --host 0.0.0.0 &`
-4. Run lychee: `lychee http://localhost:3000`
+4. Run lychee: `lychee dist src/content`
+
+You may need to set `GITHUB_TOKEN` to avoid issues checking links to github.com.
 
 ### Prose
 
