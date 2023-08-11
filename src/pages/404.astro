@@ -6,3 +6,9 @@ import Basic from "../layouts/Basic.astro";
 <Basic>
 	<h1 class="text-2xl font-semibold">Page not found 😱</h1>
 </Basic>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		plausible("404", { props: { path: document.location.pathname } });
+	});
+</script>
