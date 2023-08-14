@@ -40,8 +40,6 @@ The Cheerp specific `-cheerp-sourcemap` option instructs Cheerp to output the so
 
 # Practical example
 
-Follow the instruction in the [Cheerp Tutorial](Cheerp_Tutorial#example1) and create the `example.cpp` and `example.html` files.
-
 Build `example.js` and `example.js.map` using the following command line
 
 ```

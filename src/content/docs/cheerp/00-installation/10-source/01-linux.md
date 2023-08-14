@@ -5,7 +5,7 @@ title: How to build Cheerp on Linux
 Cheerp is composed of multiple components, they are somewhat interdependent and should be built together.
 The build instructions are provided for the stable release, Cheerp 3.0, or for the latest / development branch.
 
-[Scroll to bottom](https://docs.leaningtech.com/cheerp/Linux-build-instructions.html#build-latest-version) for the instruction for the latest version, or keep reading to build stable.
+[Scroll to bottom](#build-latest-version) for the instruction for the latest version, or keep reading to build stable.
 
 ## Prerequisites
 

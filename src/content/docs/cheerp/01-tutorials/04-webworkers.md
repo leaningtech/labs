@@ -1,5 +1,5 @@
 ---
-title: WebWorkers with Cheerp
+title: Threading with Web Workers
 ---
 
 # WebWorkers vs. PThreads

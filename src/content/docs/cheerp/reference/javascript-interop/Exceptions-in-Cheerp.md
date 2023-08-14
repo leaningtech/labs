@@ -107,4 +107,4 @@ Throws via the builtin behave exactly as the object was thrown via the JavaScrip
 
 ## `__asm__` sections can't throw
 
-This is the very last 'catch', there can't be throws (either directly or indirectly) in `__asm__` sections (see [asm sections](JavaScript-interoperability.md)).
+This is the very last 'catch', there can't be throws (either directly or indirectly) in `__asm__` sections (see [asm sections](javascript-interop/JavaScript-interoperability)).

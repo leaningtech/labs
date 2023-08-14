@@ -1,5 +1,5 @@
 ---
-title: Tutorial - DOM & the Browser
+title: Modifying the DOM
 ---
 
 # Input and output
