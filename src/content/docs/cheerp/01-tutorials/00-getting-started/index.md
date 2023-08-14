@@ -67,8 +67,8 @@ and from the same folder `firefox hello.html` (or equivalent).
 
 This is what the result should look like: [hello.html](/cheerp/tutorials/hello_world/hello.html)
 
-[Why `webMain()` instead of `main()`?](getting-started/Cheerp-basics#the-webmain-entry-point)
+[Why `webMain()` instead of `main()`?](/cheerp/core-concepts#the-webmain-entry-point)
 
-[What is `console.log()`?](getting-started/Cheerp-basics#what-is-clientconsolelog)
+[What is `console.log()`?](/cheerp/core-concepts#what-is-clientconsolelog)
 
 It would have compiled also with `std::cout<< `, `printf()` or `int main()` (try it yourself), but we wanted to show first what zero-overhead access to the browser looks like.

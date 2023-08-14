@@ -57,8 +57,6 @@ firefox http://127.0.0.1:8000/example.html
 
 If Source Maps are enabled (as described above) you should see the C++ source code in the debugging tab of the developers tools.
 
-![](/cheerp/assets/debug4.png)
-
 # Command line options
 
 - `-g` Required to get the compiler to generate debugging metadata
