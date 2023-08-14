@@ -38,11 +38,20 @@
 	}, 5000);
 </script>
 
-{visibleText}<span class="cursor inline-block w-3 h-[1em] ml-3 translate-y-4 bg-current"></span>
+{visibleText}<span class="cursor inline-block bg-current"></span>
 
 <style>
 	.cursor {
 		animation: cursor 1s infinite;
+
+		width: 0.3ch;
+
+		height: 1em; /* fallback */
+		height: 1lh; /* webkit */
+		height: 1cap; /* firefox */
+
+		margin-left: 0.2ch;
+		transform: translateY(15%);
 	}
 
 	@keyframes cursor {
