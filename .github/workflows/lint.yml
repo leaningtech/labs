@@ -51,7 +51,7 @@ jobs:
       - name: Check for broken links
         uses: lycheeverse/lychee-action@v1.8.0
         with:
-          args: http://127.0.0.1:3000 dist src/content --remap 'localhost:3000 127.0.0.1:3000'
+          args: http://127.0.0.1:3000 dist src/content
           fail: true
           format: markdown
           jobSummary: true
