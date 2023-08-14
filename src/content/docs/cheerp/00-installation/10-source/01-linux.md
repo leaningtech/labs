@@ -94,8 +94,6 @@ cmake --install build_asmjs
 cd ../..
 ```
 
-Now you should have a working Cheerp installation, to test it, follow [here](https://docs.leaningtech.com/cheerp/Linux-build-instructions#hello-world-in-cheerp).
-
 ## Build latest version
 
 This allows to benefit from the latest develpments and bug fixes, but we reserve the possibility of forward-incompatible changes.

@@ -40,7 +40,7 @@ CheerpX for Flash is hosted by you, and is supported by any major HTTP server. A
 
 ## How is CheerpX for Flash integrated on a page?
 
-From the browsers standpoint, you simply need to provide access to one of our JS files using a standard `<script>` tag. You point the script tag to the relevant HTTP server, and the browser will do the rest. In the event that you are not able to add a line of Javascript to the HTML page hosting your flash content, we can also ship custom [Chrome extensions](Chrome-Extension), which will dynamically inject CheerpX on any page (although you then have to configure the end-user machine to have this extension correctly installed).
+From the browsers standpoint, you simply need to provide access to one of our JS files using a standard `<script>` tag. You point the script tag to the relevant HTTP server, and the browser will do the rest. In the event that you are not able to add a line of Javascript to the HTML page hosting your flash content, we can also ship custom [Chrome extensions](/cheerpx/for-flash/Chrome-Extension), which will dynamically inject CheerpX on any page (although you then have to configure the end-user machine to have this extension correctly installed).
 
 ## How does all this work?
 
