@@ -8,6 +8,7 @@ import { Icon } from "astro-icon";
 import TableOfContents from "../components/TableOfContents.astro";
 import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
 	id: string;
@@ -22,8 +23,6 @@ const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
 const directory = product && findNavDirectory(nav, [product.id]);
-
-const today = new Date();
 
 const contributeLinks = [
 	{
@@ -72,11 +71,8 @@ const contributeLinks = [
 					</div>
 				)
 			}
-			<footer class="py-10 border-t border-t-stone-800 text-stone-500 text-sm">
-				© Leaning Technologies {today.getFullYear()}
-			</footer>
 		</main>
-		<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden lg:block">
+		<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block">
 			<div class="space-y-10 sticky top-24">
 				{headings && <TableOfContents {headings} />}
 				<section>
@@ -101,6 +97,7 @@ const contributeLinks = [
 			</div>
 		</aside>
 	</docs-article>
+	<Footer />
 </Shell>
 
 <script>
