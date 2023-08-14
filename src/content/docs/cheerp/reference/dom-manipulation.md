@@ -1,8 +1,6 @@
 ---
-title: Tutorial - DOM manipulation
+title: DOM manipulation
 ---
-
-# Using DOM APIs
 
 The following example shows how to write a simple Web application that uses the Browser's DOM functionalities. Check our for example [clientlib.h](https://github.com/leaningtech/cheerp-utils/blob/master/include/client/clientlib.h) for a glance of the Web API forward declared in the client namespace using Cheerp.
 

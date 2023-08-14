@@ -57,4 +57,4 @@ void webMain()
 
 # Using cheerp::jsexport in combination with WebAssembly
 
-`[[cheerp::jexport]]` makes it possible to expose C++ classes and functions to JavaScript. [(See here for details on jsexport)](JSExport-attribute).
+`[[cheerp::jexport]]` makes it possible to expose C++ classes and functions to JavaScript. [(See here for details on jsexport)](/cheerp/reference/javascript-interop/JSExport-attribute).

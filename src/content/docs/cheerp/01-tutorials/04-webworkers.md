@@ -1,5 +1,5 @@
 ---
-title: WebWorkers with Cheerp
+title: Threading with Web Workers
 ---
 
 # WebWorkers vs. PThreads
@@ -56,7 +56,7 @@ void webMain()
 }
 ```
 
-You can build each files using the following command line (for more information see [Getting Started](Getting-started))
+You can build these files using the following commands:
 
 ```
 /opt/cheerp/bin/clang++ -O3 cheerpWorkerHost.cpp -o cheerpWorkerHost.js

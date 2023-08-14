@@ -1,5 +1,5 @@
 ---
-title: Cheerp basics
+title: Core concepts
 ---
 
 Cheerp generates JavaScript code, which should be integrated into an HTML page to be executed in a browser. The following trivial example should be ok to start.
@@ -18,13 +18,13 @@ Cheerp generates JavaScript code, which should be integrated into an HTML page t
 
 You can also run the generated JavaScript code directly using a command line JavaScript shell like node.js
 
-# Single step JS generation
+## Single step JS generation
 
 ```bash
 /opt/cheerp/bin/clang++ -O3 -target cheerp <file1.cpp> <file2.cpp> -o <file.js>
 ```
 
-# Separate objects compilation and linking
+## Separate objects compilation and linking
 
 ```bash
 /opt/cheerp/bin/clang++ -O3 -c -target cheerp <file1.cpp> -o <file1.bc>
@@ -42,7 +42,7 @@ Libraries are stored using LLVM binary representation
 /opt/cheerp/bin/llvm-link <file1.bc> <file2.bc> ... -o <library.bc>
 ```
 
-# Using cmake
+## Using cmake
 
 A cmake toolchain file is provided in `/opt/cheerp/share/cmake/Modules/CheerpToolchain.cmake`
 it's possible to cross-compile cmake projects for the Cheerp platform using the syntax

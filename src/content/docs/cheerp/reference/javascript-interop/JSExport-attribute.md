@@ -93,4 +93,4 @@ The default behaviour of the compiler is that if a class has a tag `[[cheerp::js
 
 As with all other Cheerp-specific attributes, other compilers will still parse code, so it can be used to target different platforms (eg. native and Web).
 
-Special considerations apply when using the `jsexport` attribute and WebAssembly output, for more information [see here](WebAssembly-output#using-cheerpjsexport-in-combination-with-webassembly).
+Special considerations apply when using the `jsexport` attribute and WebAssembly output, for more information [see here](/cheerp/guides/interfacing-with-browser/WebAssembly-output#using-cheerpjsexport-in-combination-with-webassembly).

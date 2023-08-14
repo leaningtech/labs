@@ -36,6 +36,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Restore lychee cache
+        uses: actions/cache@v3
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - name: Install dependencies
         run: pnpm install
 
@@ -48,13 +55,13 @@ jobs:
           run: pnpm preview --host 0.0.0.0
           wait-on: http://127.0.0.1:3000
 
-      - name: Check for broken links
-        uses: lycheeverse/lychee-action@v1.8.0
-        with:
-          args: http://127.0.0.1:3000 dist src/content --remap 'localhost:3000 127.0.0.1:3000'
-          fail: true
-          format: markdown
-          jobSummary: true
+      - name: Install lychee
+        run: curl -L https://github.com/lycheeverse/lychee/releases/download/nightly/lychee-nightly-x86_64-unknown-linux-gnu.tar.gz | tar -xz
+
+      - name: Run lychee on sitemap
+        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:3000/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   astro:
     name: Astro

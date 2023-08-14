@@ -135,7 +135,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			href: "/" + slug,
 			title: file.data.title,
 			collectionEntry: file,
-			isIndex: slug === parentDir,
+			isIndex: slug === idToSlug(parentDir),
 		});
 	}
 

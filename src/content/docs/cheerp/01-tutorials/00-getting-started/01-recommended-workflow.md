@@ -47,11 +47,3 @@ Other http servers will also work, just change http-server to invoke your prefer
 But any web-browser that comes with your system will do.
 
 Knowing how to launch it from command line could be useful, for example `firefox file.html` opens `file.html` in a new tab.
-
-## Optional: a C++ command line compiler
-
-This is not strictly needed but it could be interesting to compare Cheerp compilation results with native compilations and experiment a bit.
-
-## Done
-
-Great, everything is set, now back to the [Tutorials](Cheerp-Tutorial).

@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Hello, Wasm!
+title: Hello, Wasm!
 ---
 
 This tutorial will cover the basics of using Cheerp to compile a generic C++ source file to JavaScript and JavaScript+WebAssembly.
@@ -12,7 +12,7 @@ I picked a computational heavy task: "Counting how many primes are smaller than 
 
 ## Native compiling
 
-First, save [segmented_sieve.cpp](tutorials/hello_wasm/segmented_sieve.cpp) on your computer and try to compile it natively:
+First, save [segmented_sieve.cpp](/cheerp/tutorials/hello_wasm/segmented_sieve.cpp) on your computer and try to compile it natively:
 
 `g++ segmented_sieve.cpp -o segmented_sieve -O3`
 (or `clang++` or equivalent command line C++ compiler)
@@ -79,7 +79,7 @@ Want to see it inside a browser?
 </html>
 ```
 
-Save this [html file](tutorials/hello_wasm/segmented_sieve.html) in the same folder as `segmented_sieve.js`, and open it in your browser of choice and check the console log.
+Save this [html file](/cheerp/tutorials/hello_wasm/segmented_sieve.html) in the same folder as `segmented_sieve.js`, and open it in your browser of choice and check the console log.
 
 ## Enter WebAssembly / Wasm
 
@@ -124,7 +124,7 @@ Want to see it in your browser?
 
 Take the previous html file, and change `segmented_sieve.js` to `segmented_sieve_loader.js`. You can not open it directly on your browser, since the JavaScript loader will need a way for loading the wasm file, and allowing arbitrary loading of a file is an unsafe operation that most browsers will not allow.
 
-What then? In the [getting ready](Getting-ready#an-http-server) section we covered how to install a web server, now we will need to run it like:
+Next, run a web server:
 
 `http-server -o`
 

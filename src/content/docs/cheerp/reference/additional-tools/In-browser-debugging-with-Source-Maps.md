@@ -40,8 +40,6 @@ The Cheerp specific `-cheerp-sourcemap` option instructs Cheerp to output the so
 
 # Practical example
 
-Follow the instruction in the [Cheerp Tutorial](Cheerp_Tutorial#example1) and create the `example.cpp` and `example.html` files.
-
 Build `example.js` and `example.js.map` using the following command line
 
 ```
@@ -58,8 +56,6 @@ firefox http://127.0.0.1:8000/example.html
 ```
 
 If Source Maps are enabled (as described above) you should see the C++ source code in the debugging tab of the developers tools.
-
-![](/cheerp/assets/debug4.png)
 
 # Command line options
 

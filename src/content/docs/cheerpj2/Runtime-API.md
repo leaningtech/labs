@@ -251,21 +251,27 @@ These functions make it possible to conveniently call Java code from JS. Java co
 
 Calling Java constructors from JavaScript:
 
-```JavaScript
+```js
 /* Equivalent Java code: myClass object = com.my.Java.package.myClass(argument1)  */
 var object = cjNew("com.my.Java.package.myClass", argument1);
 ```
 
 Call static Java methods from JavaScript:
 
-```JavaScript
+```js
 /* Equivalent Java code: int returnVal = com.my.Java.package.myClass.method(argument1, argument2, argument3); */
-var returnVal = cjCall("com.my.Java.package.myClass", "method", argument1, argument2, argument3);
+var returnVal = cjCall(
+	"com.my.Java.package.myClass",
+	"method",
+	argument1,
+	argument2,
+	argument3,
+);
 ```
 
 Call Java methods from JavaScript:
 
-```JavaScript
+```js
 /* Equivalent Java code: int returnVal = object.method(argument1, argument2, argument3); */
 var returnVal = cjCall(object, "method", argument1, argument2, argument3);
 ```
@@ -278,44 +284,56 @@ Using `cjCall/cjNew` is convenient, but under the hood Java reflection APIs are 
 
 Examples:
 
-```JavaScript
-var promise1 = cjResolveCall("com.something.ClassName", "methodName", ["java.lang.String", "int", "double"]);
-var promise2 = cjResolveNew("com.something.ClassName", ["java.lang.String", "int", "double"]);
+```js
+var promise1 = cjResolveCall("com.something.ClassName", "methodName", [
+	"java.lang.String",
+	"int",
+	"double",
+]);
+var promise2 = cjResolveNew("com.something.ClassName", [
+	"java.lang.String",
+	"int",
+	"double",
+]);
 ```
 
 `cjResolveCall` supports both instance and static methods of classes. The third parameter (for both APIs) is an array of Java types and it is only required if the methodName is not unique in the class (i.e. it is overloaded). The third parameter can be omitted (be null) if the method name (or constructor) is unique. For example:
 
-```JavaScript
-var promise = cjResolveCall("com.something.ClassName", "uniqueMethodName", null);
+```js
+var promise = cjResolveCall(
+	"com.something.ClassName",
+	"uniqueMethodName",
+	null,
+);
 ```
 
 `cjResolveCall/cjResolveNew` are async, like most of CheerpJ's APIs. To get the actual result you can either use .then() or the async/await functionality of JS. For example:
 
-```JavaScript
+```js
 var resolvedMethod = await cjResolveCall("com.something.ClassName", "uniqueMethodName", null);
 cjResolveCall("com.something.ClassName", "uniqueMethodName", null).then(function(resolvedMethod) { ... });
 ```
 
 The returned value is an opaque handle to the desired method (or constructor), which can now be called an arbitrary number of times without going through Java reflection.
 
-```JavaScript
+```js
 cjCall(resolvedMethod, arg1, arg2, arg3);
 cjNew(resolvedConstructor, arg1, arg2, arg3);
 ```
 
 Alternatively resolvedMethod can also be used _directly as a function_, for example:
 
-```JavaScript
+```js
 resolvedMethod(arg1, arg2, arg3);
 ```
 
-Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](https://docs.leaningtech.com/cheerpj/WebWorker-API)
+Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/WebWorker-API)
 
 # Data conversion
 
 ## cjStringJavaToJs(str) / cjStringJsToJava(str)
 
-```JavaScript
+```js
 var jsString = cjStringJavaToJs(javaString);
 ```
 

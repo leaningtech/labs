@@ -2,10 +2,10 @@
 #   pnpm build && pnpm preview --host 0.0.0.0
 #	  lychee dist src/content
 
-base = "http://localhost:3000"
-remap = [ "https://labs.leaningtech.com http://localhost:3000" ]
+base = "http://127.0.0.1:3000"
+remap = [ "https://labs.leaningtech.com http://127.0.0.1:3000" ]
 
 # Check links inside `<code>` and `<pre>` blocks
 include_verbatim = true
 
-exclude = [ '.*twitter\.com.*', '.*linkedin\.com.*' ]
+exclude = [ '.*(twitter|github|linkedin)\.com.*', 'http://127\.0\.0\.1:(8000|8080).*', '.*rpm\.leaningtech\.com.*', '.*mydomain\.com.*', '.*microsoft\.com.*', 'file://.*' ]
