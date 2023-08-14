@@ -6,9 +6,7 @@ import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "../../consts";
 ---
 
-<header
-	class="min-h-[calc(100vh-65px)] flex flex-col items-center"
->
+<header class="min-h-[calc(100vh-65px)] flex flex-col items-center">
 	<div class="grow"></div>
 
 	<div
@@ -17,16 +15,18 @@ import { DISCORD_URL } from "../../consts";
 		<div class="flex items-center col-span-2 2xl:col-span-1">
 			<div>
 				<h1
-					class="text-white text-5xl lg:text-6xl xl:text-7xl font-semibold"
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold"
 				>
-					Run <span class="font-bold text-primary-500"><AnimatedText client:idle /></span>
+					Run
+					<span class="font-bold text-primary-500">
+						<AnimatedText client:idle />
+					</span>
 					<br />in the browser.
 				</h1>
 				<p class="text-xl mt-8 text-stone-400 leading-6">
 					Client-side developer tools built with WebAssembly.
 				</p>
 				<div class="mt-8 md:space-x-1 space-y-2">
-					
 					<LinkButton
 						href="/docs"
 						label="Get started"
