@@ -56,12 +56,7 @@ jobs:
           wait-on: http://127.0.0.1:3000
 
       - name: Check for broken links
-        uses: lycheeverse/lychee-action@v1.8.0
-        with:
-          args: http://127.0.0.1:3000 dist --cache --no-progress
-          fail: true
-          format: markdown
-          jobSummary: true
+        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | xargs lychee --cache --no-progress
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
