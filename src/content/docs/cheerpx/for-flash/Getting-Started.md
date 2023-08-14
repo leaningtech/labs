@@ -26,7 +26,7 @@ Simply configure a server of your choice, and place the CheerpX directory into i
 
 Double check your server is correctly serving the files before proceeding.
 
-We tend to find that with most major hosting methods, this is sufficient, but in certain scenario's, additional steps have to be taken to correctly configure the HTTP server. We have detailed some of these common problems on our [troubleshooting](Troubleshooting) page.
+We tend to find that with most major hosting methods, this is sufficient, but in certain scenario's, additional steps have to be taken to correctly configure the HTTP server. We have detailed some of these common problems on our [troubleshooting](/cheerpx/for-flash/Troubleshooting) page.
 
 # How to integrate CheerpX for Flash
 

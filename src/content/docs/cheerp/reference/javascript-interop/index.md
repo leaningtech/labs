@@ -12,7 +12,7 @@ Cheerp implements three advanced interoperability mechanisms to interface C++ co
 
 The `[[cheerp::jsexport]]` attribute can be applied to C++ class and struct definitions, to expose them to JavaScript.
 
-[See here for in-depth information about how to use it and its limitations](JSExport-attribute).
+[See here for in-depth information about how to use it and its limitations](/cheerp/reference/javascript-interop/JSExport-attribute).
 
 A basic example of its usage would be:
 

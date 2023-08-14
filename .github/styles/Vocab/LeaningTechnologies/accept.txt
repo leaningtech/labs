@@ -9,3 +9,7 @@ Astro
 Yarn
 npm
 pnpm
+Wasm
+Web Worker
+Web Workers
+APIs

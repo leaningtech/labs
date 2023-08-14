@@ -44,7 +44,7 @@ From the browsers standpoint, you simply need to provide access to one of our JS
 
 ## How does all this work?
 
-In essence, CheerpX is a Flash player HTML 'emulator', that runs via a JIT compilation engine, entirely in the browser tab, through WASM. To read this in more detail take a look at our [diagrams](How-It-Works), or read more on our [website](https://leaningtech.com/cheerpx-for-flash).
+In essence, CheerpX is a Flash player HTML 'emulator', that runs via a JIT compilation engine, entirely in the browser tab, through WASM. To read this in more detail take a look at our [diagrams](/cheerpx/for-flash/How-It-Works), or read more on our [website](https://leaningtech.com/cheerpx-for-flash).
 
 ## What if I need support?
 
@@ -72,7 +72,7 @@ As with any virtualization, performance hits are inevitable. We strive to improv
 
 ## What happens if performance isn't good enough for me?
 
-We always work with our customers to try find the best solution for them. This may come in different forms, whether the incremental increases in performance are sufficient, or whether targeted performance profiling is necessary. If all else fails, we offer a 'Native Bridge' server side component, which vastly improves performance. You can read more about the native bridge [here](Native-Bridge).
+We always work with our customers to try find the best solution for them. This may come in different forms, whether the incremental increases in performance are sufficient, or whether targeted performance profiling is necessary. If all else fails, we offer a 'Native Bridge' server side component, which vastly improves performance. You can read more about the native bridge [here](/cheerpx/for-flash/Native-Bridge).
 
 ## Do I need a high end machine for this to work?
 

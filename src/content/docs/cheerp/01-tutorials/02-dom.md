@@ -2,11 +2,9 @@
 title: Modifying the DOM
 ---
 
-# Input and output
+In the first two tutorials we used no input methods and only printing to the console as the output method.
 
-In the [first](Getting-started#hello-world) [two](Tutorial-Hello-Wasm) tutorials we used no input methods and only printing to the console as the output method.
-
-Now we will expore a more powerful interface: accessing and modifying the DOM.
+Now we will explore a more powerful interface: accessing and modifying the DOM.
 
 # Accessing the DOM
 
@@ -119,7 +117,7 @@ element->addEventListener("event_kind", cheerp::Callback(callback));
 cheerp::Callbacks are a very powerful instrument:
 
 - they can be attached to any pair of DOM element + [`client::Event`](https://developer.mozilla.org/en-US/docs/Web/Events) to capture mouse movements, clicks, change of focus, button clicks, keyboard buttons pressed, etc.
-- Callbacks can be attached also to `requestAnimationFrame` or `setTimeout`, see expecially [Pong](Cheerp-Tutorial-Mixed-mode-C++-to-WebAssembly-and-JavaScript)
+- Callbacks can be attached also to `requestAnimationFrame` or `setTimeout`
 - Callback could be attached to `DOMContentLoaded` or equivalent events to do initializations (for example, of other callbacks)
 
 ## Manipulating the DOM

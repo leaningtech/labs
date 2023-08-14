@@ -4,9 +4,9 @@ title: Installation
 
 Cheerp binaries are available for:
 
-- [Windows](installation/windows-macos)
-- [macOS](installation/windows-macos)
-- [Ubuntu/Debian](installation/ppa)
-- [RHEL8/CentOS 8](installation/rhel8)
+- [Windows](/cheerp/installation/windows-macos)
+- [macOS](/cheerp/installation/windows-macos)
+- [Ubuntu/Debian](/cheerp/installation/ppa)
+- [RHEL8/CentOS 8](/cheerp/installation/rhel8)
 
-Otherwise, you can [build Cheerp from source](installation/source).
+Otherwise, you can [build Cheerp from source](/cheerp/installation/source).

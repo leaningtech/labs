@@ -44,7 +44,7 @@ The combined size of the .jar to be served (pruned of its bytecode) and of the r
 
 In Java there is no "dead code". Java supports reflection, so all code and classes can be potentially used at runtime. For this reason CheerpJ cannot automatically remove any code.
 
-This said, depending on the application, it is often possible to remove a lot of code using ProGuard: an industry standard open source tool. CheerpJ provides support to automatically generate a ProGuard configuration file to make sure that classes used via reflection are not removed. For more information see: [here](Startup-time-optimization#use-proguard-to-remove-unused-code)
+This said, depending on the application, it is often possible to remove a lot of code using ProGuard: an industry standard open source tool. CheerpJ provides support to automatically generate a ProGuard configuration file to make sure that classes used via reflection are not removed. For more information see: [here](/cheerpj2/Startup-time-optimization#use-proguard-to-remove-unused-code)
 
 ## Can JavaScript code produced by Cheerp be plugged into Node.js?
 

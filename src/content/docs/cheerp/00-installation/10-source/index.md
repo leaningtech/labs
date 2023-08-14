@@ -2,6 +2,6 @@
 title: Building from source
 ---
 
-[Windows](source/windows)
+[Windows](/cheerp/installation/source/windows)
 
-[Linux](source/linux)
+[Linux](/cheerp/installation/source/linux)
