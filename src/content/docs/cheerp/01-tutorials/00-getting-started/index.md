@@ -10,7 +10,7 @@ Cheerp in itself has no dependencies, but the recommended workflow and the tutor
 - an HTTP server (such as http-server)
 - a web browser
 
-If you don't have these, see [recommended workflow](/cheerp/getting-started/recommended-workflow). If you're not sure, make sure that the following commands work in your terminal:
+If you don't have these, see [recommended workflow](/cheerp/tutorials/getting-started/recommended-workflow). If you're not sure, make sure that the following commands work in your terminal:
 
 1. `/opt/cheerp/bin/clang++ --version` (`C:\cheerp\bin\clang++ --version` on Windows systems)
 2. `nodejs --version`
