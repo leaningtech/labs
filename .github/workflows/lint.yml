@@ -55,8 +55,11 @@ jobs:
           run: pnpm preview --host 0.0.0.0
           wait-on: http://127.0.0.1:3000
 
-      - name: Check for broken links
-        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | xargs lychee --cache --no-progress
+      - name: Install lychee
+        run: curl -L https://github.com/lycheeverse/lychee/releases/download/nightly/lychee-nightly-x86_64-unknown-linux-gnu.tar.gz | tar -xz
+
+      - name: Run lychee on sitemap
+        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | xargs ./lychee --cache --no-progress
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
