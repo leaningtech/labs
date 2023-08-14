@@ -2,7 +2,7 @@
 title: Getting started
 ---
 
-To get started with Cheerp, you'll first need to [install it](../installation). Or, you can try Cheerp without installing it with [Cheerp playground](https://cheerp.cppse.nl).
+To get started with Cheerp, you'll first need to [install it](/cheerp/installation). Or, you can try Cheerp without installing it with [Cheerp playground](https://cheerp.cppse.nl).
 
 Cheerp in itself has no dependencies, but the recommended workflow and the tutorials make use of:
 
@@ -10,7 +10,7 @@ Cheerp in itself has no dependencies, but the recommended workflow and the tutor
 - an HTTP server (such as http-server)
 - a web browser
 
-If you don't have these, see [recommended workflow](getting-started/recommended-workflow). If you're not sure, make sure that the following commands work in your terminal:
+If you don't have these, see [recommended workflow](/cheerp/getting-started/recommended-workflow). If you're not sure, make sure that the following commands work in your terminal:
 
 1. `/opt/cheerp/bin/clang++ --version` (`C:\cheerp\bin\clang++ --version` on Windows systems)
 2. `nodejs --version`
