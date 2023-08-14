@@ -11,7 +11,7 @@
 	}, 5000);
 </script>
 
-<div class="doodle relative w-full max-h-[36rem] lg:max-h-[48rem]">
+<div class="doodle relative w-96 md:w-full max-w-full max-h-[36rem] lg:max-h-[48rem] overflow-hidden">
 	<img
 		src="/landing/doodle/all_top.png"
 		alt=""
@@ -34,13 +34,7 @@
 
 </div>
 
-
-
-
-
-
 <!-- TODO: <map> and <area> elements -->
-
 <style>
 	.doodle {
 		aspect-ratio: 1101 / 1577;
