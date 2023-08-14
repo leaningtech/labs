@@ -36,6 +36,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Restore lychee cache
+        uses: actions/cache@v3
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - name: Install dependencies
         run: pnpm install
 
@@ -51,10 +58,12 @@ jobs:
       - name: Check for broken links
         uses: lycheeverse/lychee-action@v1.8.0
         with:
-          args: http://127.0.0.1:3000 dist src/content
+          args: http://127.0.0.1:3000 dist src/content --cache --no-progress
           fail: true
           format: markdown
           jobSummary: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   astro:
     name: Astro
