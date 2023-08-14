@@ -22,22 +22,24 @@ We recommend using the -cheerp-pretty-code command line options to get readable 
 
 You can use the `memprofui.js` visualiser to get a real-time view of memory usage. Once you have a file compiled with the memprof library, you only need to add a script tag and initialise the visualiser. The visualiser component needs to access the DOM, so it can only be used for code running in the main thread (i.e. not a WebWorker).
 
-```HTML
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Cheerp test</title>
-  </head>
-  <body>
-    <script src="target.js"></script>
-    <!-- Add this line, telling the page to load the UI -->
-    <script src="https://cheerp.leaningtech.com/memprofui.js"></script>
-    <!-- There are two parameters, the length in seconds of the profiling window and
+	<head>
+		<meta charset="utf-8" />
+		<title>Cheerp test</title>
+	</head>
+	<body>
+		<script src="target.js"></script>
+		<!-- Add this line, telling the page to load the UI -->
+		<script src="https://cheerp.leaningtech.com/memprofui.js"></script>
+		<!-- There are two parameters, the length in seconds of the profiling window and
            how often the samples should be registered in milliseconds.
            Here 60 seconds and sampling every 100ms-->
-    <script>var cheerpMemUI = new CheerpMemUI(60, 100)</script>
-  </body>
+		<script>
+			var cheerpMemUI = new CheerpMemUI(60, 100);
+		</script>
+	</body>
 </html>
 ```
 
@@ -98,7 +100,7 @@ Return the total amount of memory currently allocated by the program.
 
 ### Example
 
-```cpp+
+```cpp
 auto tag = cheerpMemProfAnnotate("functionX wrapper");
 functionX();   //function that should ideally not generate permanent allocations
 if (cheerpMemProfUsed(tag) > 0)

@@ -14,6 +14,6 @@ Download the DMG image for macOS from from [GitHub](https://github.com/leaningte
 
 The binary is not signed so you may need to run the following to stop Gatekeeper from blocking the executable:
 
-```shell
+```sh
 sudo xattr -d com.apple.quarantine /Applications/cheerp/bin/*
 ```

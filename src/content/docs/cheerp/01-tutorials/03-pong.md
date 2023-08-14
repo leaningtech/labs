@@ -25,7 +25,7 @@ void webMain()
 
 `webMain` represents the main entry point of the compiled application. Since WebAssembly cannot manipulate the DOM directly, we are instructing Cheerp to compile `domOutput` in JavaScript with the `[[cheerp::genericjs]]` attribute tag. To compile this file to WebAssembly, this simple command will suffice:
 
-```Shell
+```sh
 /opt/cheerp/bin/clang++ -target cheerp-wasm -O2 -o pong.js pong.cpp
 ```
 
@@ -33,17 +33,17 @@ This command will generate two files: a JavaScript loader (`pong.js`) and a WebA
 
 All we need to run this Hello World is a simple HTML page:
 
-```HTML
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Cheerp test</title>
-  </head>
-  <body>
-    <canvas id="pongcanvas"></canvas>
-    <script src="pong.js"></script>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Cheerp test</title>
+	</head>
+	<body>
+		<canvas id="pongcanvas"></canvas>
+		<script src="pong.js"></script>
+	</body>
 </html>
 ```
 
