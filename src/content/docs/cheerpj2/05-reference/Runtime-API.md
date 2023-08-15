@@ -327,7 +327,7 @@ Alternatively resolvedMethod can also be used _directly as a function_, for exam
 resolvedMethod(arg1, arg2, arg3);
 ```
 
-Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/WebWorker-API)
+Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/reference/WebWorker-API)
 
 # Data conversion
 

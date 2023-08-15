@@ -1,5 +1,5 @@
 ---
-title: Tutorial
+title: Installation
 ---
 
 CheerpJ is very easy to use, this tutorial will guide you step by step into compiling an unmodified JAR file to a JAR.JS file. We will also create a basic HTML file integrated with the CheerpJ loader to run the Java application in the browser.
@@ -51,7 +51,7 @@ Copy the following HTML code into `~/cheerpj_tutorial/cheerpj_tutorial.html`
 Let's break down what is going on:
 
 - We first include the CheerpJ loader from our cloud runtime. (https://cjrtnc.leaningtech.com/2.3/loader.js). This file is the only script that needs to be loaded to use CheerpJ. CheerpJ will _automatically_ load all other files, including the `TextDemo.jar.js` we generated above.
-- We initialize CheerpJ using the `cheerpjInit()` API. See [Runtime API](/cheerpj2/Runtime-API) for more information.
+- We initialize CheerpJ using the `cheerpjInit()` API. See [Runtime API](/cheerpj2/reference/Runtime-API) for more information.
 - We want to run a graphical application (i.e. a Swing or AWT application), so we need to initialize a _virtual display_ in the page. CheerpJ will render all Java windows into this display.
 - We can now start the JAR file. CheerpJ will _automatically_ download the `TextDemo.jar.js` file as soon as the first application class is loaded
 
@@ -87,4 +87,4 @@ Now open your favourite browser and enter the following URL `http://127.0.0.1:80
 
 # The end!
 
-Congratulations, you have successfully compiled and run your first Java application using CheerpJ. For more information, please read our in-depth [Getting Started](/cheerpj2/Getting-Started) page.
+Congratulations, you have successfully compiled and run your first Java application using CheerpJ. For more information, please read our in-depth [Getting Started](/cheerpj2/getting-started/Getting-Started) page.

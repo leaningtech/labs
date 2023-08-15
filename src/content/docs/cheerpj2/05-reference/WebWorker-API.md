@@ -6,8 +6,6 @@ CheerpJ supports running Java code in the background using Web Workers. To use t
 
 All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript `Promise`s, and you can use `.then(...)`, `.catch(...)` and `async/await` with them.
 
-We recommend reading the [Runtime API](/cheerpj2/Runtime-API) documentation before proceeding on this page.
-
 ## Creating and initializing a CheerpJ worker
 
 The main entry point for CheerpJ workers is the `CheerpJWorker` JS interface. It is a normal JS object and it is possible to instantiate it multiple times.
@@ -17,7 +15,7 @@ var w = new CheerpJWorker();
 w.cheerpjInit().then(function(e) { console.log("CheerpJWorker is ready"); });
 ```
 
-This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the `CheerpJWorker` exposes the same API as CheerpJ in the main thread. You can read details about the main thread API in the [Runtime API](/cheerpj2/Runtime-API) page.
+This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the `CheerpJWorker` exposes the same API as CheerpJ in the main thread.
 
 ## Parameters and return values
 
@@ -30,7 +28,7 @@ WebWorkers do not share any memory with the main threads, and all interactions h
 | JavaScript String                            | Supported in params, not return values      |
 | Any Java object                              | Not supported in params or return values    |
 
-Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](/cheerpj2/Runtime-API#cjtypedarraytojava).
+Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](/cheerpj2/reference/Runtime-API#cjtypedarraytojava).
 
 It is possible to move Java arrays from the main thread and others `CheerpJWorker`s. Please note that Java arrays are not copied, but _transferred_ across contexts. This increases efficiency, but also means that the data is not available any more from the calling thread. If the data needs be preserved you must manually make a copy.
 

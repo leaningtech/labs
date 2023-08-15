@@ -66,5 +66,3 @@ javac -cp $CHEERPJ_INSTALL_PATH/cheerpj-dom.jar DomExample.java
 jar cvf domexample.jar DomExample.class
 $CHEERPJ_INSTALL_PATH/cheerpjfy.py --deps $CHEERPJ_INSTALL_PATH/cheerpj-dom.jar domexample.jar
 ```
-
-See the [Getting Started](/cheerpj2/Getting-Started) page to see how to run the compiled Java code in an HTML page.
