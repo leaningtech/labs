@@ -1,9 +1,10 @@
 ---
-import { Icon } from "astro-icon";
+//import { Icon } from "astro-icon";
 import LinkButton from "../LinkButton.astro";
 import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "../../consts";
+import ClientCarousel from "./ClientCarousel.astro";
 ---
 
 <header class="min-h-[calc(100vh-65px)] flex flex-col items-center">
@@ -47,15 +48,19 @@ import { DISCORD_URL } from "../../consts";
 		</div>
 	</div>
 
+	<div class="p-16 overflow-hidden">
+		<ClientCarousel />
+	</div>
+
 	<div class="grow"></div>
 
 	<!-- Scroll prompt -->
-	<a
+	<!--<a
 		href="#after-hero"
 		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
 	>
 		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
-	</a>
+	</a>-->
 </header>
 
 <a id="after-hero"></a>
