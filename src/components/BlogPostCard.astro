@@ -7,9 +7,15 @@ interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
 	showMetadata?: boolean;
 	size?: "wide" | "narrow";
+	useTransitions?: boolean;
 }
 
-const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
+const {
+	post: postOrSlug,
+	showMetadata = false,
+	size = "narrow",
+	useTransitions = false,
+} = Astro.props;
 const post =
 	typeof postOrSlug === "string"
 		? await getEntry("blog", postOrSlug)
@@ -19,20 +25,22 @@ const authors = await resolveAuthors(post.data.authors);
 
 <a
 	href={`/blog/${post.slug}`}
-	class="inline-flex flex-col space-between group overflow-hidden"
+	class="inline-flex flex-col space-between group overflow-hidden scale-100 hover:scale-105 transition-transform active:z-10"
 >
 	<img
 		src={post.data.heroImage}
 		class:list={{
-			"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
+			"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64 group-hover:shadow": true,
 		}}
+		transition:name={useTransitions ? `blog-img-${post.slug}` : ""}
 	/>
 	<h3
 		class:list={{
-			"font-bold text-balance text-white group-hover:text-primary-400 grow": true,
+			"font-bold text-balance text-white grow": true,
 			"text-2xl leading-7": size === "wide",
 			"text-xl leading-6": size === "narrow",
 		}}
+		transition:name={useTransitions ? `blog-title-${post.slug}` : ""}
 	>
 		{post.data.title}
 	</h3>
@@ -41,13 +49,16 @@ const authors = await resolveAuthors(post.data.authors);
 			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
 				<div class="flex items-center gap-2 font-semibold overflow-hidden">
 					<div class="flex-none space-x-[-1rem]">
-						{authors.map((author) => (
+						{authors.map((author, i) => (
 							<img
 								class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
 								src={author.avatar}
 								alt=""
 								loading="lazy"
 								decoding="async"
+								transition:name={
+									useTransitions ? `blog-author-${post.slug}-${i}` : ""
+								}
 							/>
 						))}
 					</div>

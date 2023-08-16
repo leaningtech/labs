@@ -34,4 +34,7 @@ export default defineConfig({
 		inlineStylesheets: "auto",
 	},
 	trailingSlash: "never",
+	experimental: {
+		viewTransitions: true,
+	},
 });

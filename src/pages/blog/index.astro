@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { ViewTransitions } from "astro:transitions";
 import BlogPostCard from "../../components/BlogPostCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
@@ -9,6 +10,7 @@ const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 );
 ---
 
+<ViewTransitions />
 <Shell
 	title="Leaning Techologies Engineering Blog"
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
@@ -26,7 +28,9 @@ const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 			{
 				[post1, post2].map((post) => (
 					<li class="flex md:justify-stretch md:items-stretch">
-						{post && <BlogPostCard {post} showMetadata size="wide" />}
+						{post && (
+							<BlogPostCard {post} showMetadata size="wide" useTransitions />
+						)}
 					</li>
 				))
 			}
@@ -35,7 +39,7 @@ const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 			{
 				restPosts.map((post) => (
 					<li class="flex md:justify-stretch md:items-stretch">
-						<BlogPostCard {post} showMetadata />
+						<BlogPostCard {post} showMetadata useTransitions />
 					</li>
 				))
 			}

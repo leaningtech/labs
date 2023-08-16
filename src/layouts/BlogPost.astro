@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { ViewTransitions } from "astro:transitions";
 import Shell from "./Shell.astro";
 import Icon from "astro-icon";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -12,16 +13,18 @@ import { resolveAuthors } from "../lib/blog";
 
 type Props = CollectionEntry<"blog">["data"] & {
 	id: CollectionEntry<"blog">["id"];
+	slug: CollectionEntry<"blog">["slug"];
 	headings: BasicHeading[] | undefined;
 };
 
-const { id, title, description, pubDate, heroImage, headings, tags } =
+const { id, slug, title, description, pubDate, heroImage, headings, tags } =
 	Astro.props;
 
 const authors = await resolveAuthors(Astro.props.authors);
 const showAuthorSection = authors.length > 0;
 ---
 
+<ViewTransitions />
 <Shell {title} {description} image={heroImage}>
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
@@ -37,6 +40,7 @@ const showAuthorSection = authors.length > 0;
 					src={heroImage}
 					alt=""
 					class="rounded-xl w-full mx-auto mb-8 object-cover h-96 bg-white"
+					transition:name={`blog-img-${slug}`}
 				/>
 			)
 		}
@@ -44,6 +48,7 @@ const showAuthorSection = authors.length > 0;
 		<h1
 			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
 			id="introduction"
+			transition:name={`blog-title-${slug}`}
 		>
 			{title}
 		</h1>
@@ -51,7 +56,7 @@ const showAuthorSection = authors.length > 0;
 		<div class="flex flex-col lg:flex-row gap-10 mt-16">
 			<aside class="lg:w-40 text-stone-400">
 				{
-					authors.map((author) => (
+					authors.map((author, i) => (
 						<a href={author.url} class="mb-4 flex items-center gap-4 lg:block">
 							<img
 								class="w-16 h-16 rounded-full"
@@ -59,6 +64,7 @@ const showAuthorSection = authors.length > 0;
 								alt=""
 								loading="lazy"
 								decoding="async"
+								transition:name={`blog-author-${slug}-${i}`}
 							/>
 							<div class="font-semibold leading-5 text-lg text-stone-200 lg:mt-2">
 								{author.name}
