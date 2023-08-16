@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import pagefind from "astro-pagefind";
 import svelte from "@astrojs/svelte";
+import prefetch from "@astrojs/prefetch";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
@@ -17,6 +18,10 @@ export default defineConfig({
 		robotsTxt(),
 		pagefind(),
 		svelte(),
+		prefetch({
+			// Prefetch hovered internal links
+			intentSelector: ["a[href^='/']"],
+		}),
 	],
 	markdown: {
 		shikiConfig: {
