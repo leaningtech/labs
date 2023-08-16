@@ -83,7 +83,7 @@ The question is, what will you build with Cheerp?
 
 You can download Cheerp [here](https://leaningtech.com/cheerp/#download). For Debian/Ubuntu, consider using our [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa)
 
-If you are unsure where to start, check out the [Cheerp documentation](/cheerp/).
+If you are unsure where to start, check out the [Cheerp documentation](/cheerp).
 
 For further support make sure to join our Discord: [https://discord.leaningtech.com](https://discord.leaningtech.com), where you will find Leaning Technologies core developers, including myself. We are always happy to help!
 
