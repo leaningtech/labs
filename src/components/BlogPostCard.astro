@@ -6,9 +6,10 @@ import { resolveAuthors } from "../lib/blog";
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
 	showMetadata?: boolean;
+	size?: "wide" | "narrow";
 }
 
-const { post: postOrSlug, showMetadata = false } = Astro.props;
+const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
 const post =
 	typeof postOrSlug === "string"
 		? await getEntry("blog", postOrSlug)
@@ -22,16 +23,22 @@ const authors = await resolveAuthors(post.data.authors);
 >
 	<img
 		src={post.data.heroImage}
-		class="rounded-xl mb-6 aspect-video bg-stone-100"
+		class:list={{
+			"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
+		}}
 	/>
 	<h3
-		class="text-2xl font-bold leading-7 text-balance text-white group-hover:text-primary-400"
+		class:list={{
+			"font-bold text-balance text-white group-hover:text-primary-400 grow": true,
+			"text-2xl leading-7": size === "wide",
+			"text-xl leading-6": size === "narrow",
+		}}
 	>
 		{post.data.title}
 	</h3>
 	{
 		showMetadata && (
-			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-lg whitespace-nowrap">
+			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
 				<div class="flex items-center gap-2 font-semibold overflow-hidden">
 					<div class="flex-none space-x-[-1rem]">
 						{authors.map((author) => (
