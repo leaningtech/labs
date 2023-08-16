@@ -14,15 +14,7 @@ export default defineConfig({
 		mdx(),
 		sitemap(),
 		tailwind(),
-		robotsTxt({
-			policy: [
-				{
-					userAgent: "*",
-					disallow: "/",
-				},
-			],
-		}),
-		// TODO: remove policy when we're ready to go live
+		robotsTxt(),
 		pagefind(),
 		svelte(),
 	],
