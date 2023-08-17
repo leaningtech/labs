@@ -3,32 +3,46 @@ title: CheerpX
 subtitle: Native code virtualization for the modern Web
 ---
 
-CheerpX is a state-of-the-art x86 virtual machine that runs purely client side in your browser.
+**CheerpX is a browser-based runtime for executing native 32-bit executables and full operating systems, entirely client-side.** Apps that required cloud VMs to run can now be executed directly in the browser, without any server-side component.
 
-CheerpX is **coming soon**. [Join our Discord](https://discord.gg/qBMHpK9Kqv) for updates!
+CheerpX enables you to run existing native applications:
 
-## Demo: client side Linux distribution
+- without modifications;
+- without recompilation;
+- without source-code;
+- fully client-side.
 
-Execute, directly in your browser, a Debian distribution.
-Try this live at: [https://webvm.io/](https://webvm.io/).
+CheerpX is perfect for web-based IDEs, programming tutorials, virtual machines, and interactive demos. It can also be used to provide a secure sandbox for untrusted code. CheerpX is used by [WebVM](https://webvm.io/), [PythonFiddle](https://pythonfiddle.leaningtech.com/), and has been fully tested in production as part of [CheerpX for Flash](/cheerpx/for-flash), an enterprise solution to run legacy Adobe Flash content in the browser.
 
-For feedback or bug reports, the repository is on GitHub: [https://github.com/leaningtech/webvm](https://github.com/leaningtech/webvm).
+If you're looking to run Java in the browser, check out [CheerpJ](/cheerpj).
 
-## Demo: client side REPL
+## How it works
 
-Execute, directly in your browser, the Read-Eval-Print Loop for the unmodified x86 binaries of Python, Ruby or Node.js.
-Try this live at: [https://repl.leaningtech.com/](https://repl.leaningtech.com/).
+CheerpX includes an x86-to-WebAssembly JIT compiler, a virtual block-based filesystem, and a Linux syscall emulator.
 
-## Explainer
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7JUs4c99-mo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Yuri Iozzelli talks about CheerpX internals at WasmSF:
+## CheerpX versus cloud VMs
 
-<div style="width:100%; display: flex; place-content:center;">
-<div style="width:70%; max-width:700px; position:relative;">
-<div style="padding-top: 60%">
-<iframe width="100%" height="100%" style="position:absolute; top:0; right:0; left:0; bottom:0;"
-src="https://www.youtube.com/embed/7JUs4c99-mo">
-</iframe>
-</div>
-</div>
-</div>
+CheerpX is a client-side solution, which means that the code is executed directly in the browser, without any server-side component. This has several advantages:
+
+- **Cost effective.** CheerpX utilises client-side compute. No need to pay by the minute for cloud VMs.
+- **Improved user experience.** No latency. Works offline. Performant even in poor network conditions.
+- **Private.** User data never leaves their browser.
+- **Secure.** No risk of bad actors running malicious code on your servers.
+- **Scales to millions.** Leverages the power of the client's device. No need to provision servers.
+
+## CheerpX versus WebContainers
+
+WebContainers [can only execute languages that are natively supported on the Web](https://webcontainers.io/guides/troubleshooting#cannot-load-native-addon-error). In practice, this means only Node.js or WebAssembly can be executed. CheerpX supports any x86 executable and operating system.
+
+## Get started
+
+To get started:
+
+- follow the [quickstart guide](/cheerpx/guides/quickstart)
+- read the [API reference](/cheerpx/reference)
+
+## Community
+
+Have a question, want some inspiration, or just want to chat? Join our [Discord community](https://discord.gg/Qg5wkekTEq)!
