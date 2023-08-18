@@ -6,7 +6,7 @@ authors:
   - yuri
   - alessandro
 pubDate: "April 6 2023"
-heroImage: "https://leaningtech.com/wp-content/uploads/2023/04/WASI-article-main.png.webp"
+heroImage: "public/blog/blog-banners/cheerp-wasi.png"
 tags:
   - CheerpJ
 ---
