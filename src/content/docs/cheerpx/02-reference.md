@@ -2,4 +2,10 @@
 title: API Reference
 ---
 
-TODO
+# `CheerpXApp`
+
+## `CheerpXApp.create`
+
+```ts
+function CheerpXApp.create(options: CreateOptions): Promise<CheerpXApp>
+```

@@ -15,9 +15,25 @@ This guide is a bare-minimum overview of how to start building with CheerpX.
 
 CheerpX's API lives in a global object called `CheerpXApp`. To create a CheerpX instance, call its `create` method.
 
+The example below uses [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/cheerpx/guides/custom-devices).
+
 ```html
 <script type="module">
-	const cx = await CheerpXApp.create();
+	const cx = await CheerpXApp.create({
+		devices: [
+			{
+				type: "block",
+				url: "https://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+				name: "block1",
+			},
+		],
+		mounts: [
+			{ type: "ext2", dev: "block1", path: "/" },
+			{ type: "cheerpOS", dev: "/app", path: "/app" },
+			{ type: "cheerpOS", dev: "/str", path: "/data" },
+			{ type: "devs", dev: "", path: "/dev" },
+		],
+	});
 </script>
 ```
 
@@ -41,7 +57,7 @@ Use the `setConsole` method to use an HTML element as a console.
 ```html
 <pre id="console"></pre>
 <script type="module">
-	const cx = await CheerpXApp.create();
+	const cx = await CheerpXApp.create(/* ... */);
 	cx.setConsole(document.getElementById("console"));
 </script>
 ```
@@ -64,61 +80,7 @@ cx.setCustomConsole(
 
 This is currently the only way to get output from commands. In the future, we'll add support for reading stdout/stderr directly.
 
-## 5. Run an executable
-
-Let's compile a simple C program to x86 and run it.
-
-```c
-#include <stdio.h>
-
-int main() {
-  printf("Hello, world!\n");
-  return 0;
-}
-```
-
-<!-- TODO: do something else because this doesnt work on macos -->
-
-```bash
-gcc -m32 hello.c -o hello
-```
-
-```html
-<pre id="console"></pre>
-<script type="module">
-	const cx = await CheerpXApp.create();
-	cx.setConsole(document.getElementById("console"));
-
-	const exitCode = await cx.run("/hello", []);
-	console.log("hello exited with code", exitCode);
-</script>
-```
-
-## 6. Run a full operating system
-
-Running C/C++ code in the browser is [already possible](/cheerp), though, so let's try something more interesting. Let's run a full operating system in the browser!
-
-```js
-const cx = await CheerpXApp.create({
-	devices: [
-		{
-			type: "block",
-			url: "https://disks.webvm.io/debian_large_20230522_5044875331.ext2",
-			name: "block1",
-		},
-	],
-	mounts: [
-		{ type: "ext2", dev: "block1", path: "/" },
-		{ type: "cheerpOS", dev: "/app", path: "/app" },
-		{ type: "cheerpOS", dev: "/str", path: "/data" },
-		{ type: "devs", dev: "", path: "/dev" },
-	],
-});
-
-await cx.run("/bin/bash", ["-c", "echo Hello, world!"]);
-```
-
-## 7. Send some input
+## 5. Send some input
 
 `setCustomConsole` returns a function that you can use to send keypresses to the console. To send an entire string, you can do something like this:
 
