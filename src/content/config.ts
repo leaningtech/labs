@@ -39,4 +39,11 @@ const docs = defineCollection({
 	}),
 });
 
-export const collections = { docs, blog, blogauthors };
+const demos = defineCollection({
+	schema: z.object({
+		title: z.string(),
+		product: z.enum(["Cheerp", "CheerpJ", "CheerpX"]),
+	}),
+});
+
+export const collections = { docs, blog, blogauthors, demos };

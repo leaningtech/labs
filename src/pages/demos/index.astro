@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Shell from "../../layouts/Shell.astro";
+
+const demos = await getCollection("demos", (entry) => {
+	const params = Astro.url.searchParams;
+
+	if (params.has("product")) {
+		if (params.getAll("product").includes(entry.product)) {
+			return false;
+		}
+	}
+
+	return true;
+});
+---
+
+<Shell
+	title="Demos"
+	description="Technology demos of Cheerp, CheerpJ, and CheerpX."
+>
+	<main>
+		{demos}
+	</main>
+</Shell>
