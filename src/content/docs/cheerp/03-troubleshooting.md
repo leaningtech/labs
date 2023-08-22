@@ -1,6 +1,10 @@
 ---
-title: WebGL Troubleshooting
+title: Troubleshooting
 ---
+
+## RuntimeError: memory access out of bounds
+
+`RuntimeError: memory access out of bounds` can occur if there is not enough heap memory. To increase the heap size, set `-cheerp-linear-heap-size=<value>` to a larger value (in MB, default is 1).
 
 ## Passing data to WebGL uniform\* APIs
 

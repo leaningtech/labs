@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions
+title: Frequently asked questions
 ---
 
 ## Is Cheerp free software? Or is it proprietary?
