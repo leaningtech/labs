@@ -9,6 +9,8 @@ import TableOfContents, {
 import Footer from "../components/Footer.astro";
 import BlogPostCardSet from "../components/BlogPostCardSet.astro";
 import { resolveAuthors } from "../lib/blog";
+import LinkButton from "../components/LinkButton.astro";
+import { DISCORD_URL } from "../consts";
 
 type Props = CollectionEntry<"blog">["data"] & {
 	id: CollectionEntry<"blog">["id"];
@@ -77,6 +79,14 @@ const showAuthorSection = authors.length > 0;
 					data-pagefind-body
 				>
 					<slot />
+				</div>
+				<div class="pt-10">
+					<LinkButton
+						type="discord"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
 				</div>
 			</article>
 
