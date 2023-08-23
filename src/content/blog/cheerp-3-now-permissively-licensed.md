@@ -6,7 +6,7 @@ description: |
 authors:
   - alessandro
 pubDate: "March 14 2023"
-heroImage: "public/blog/blog-banners/cheerp-lines.png"
+heroImage: "/blog/blog-banners/cheerp-lines.png"
 tags:
   - Cheerp
 featured: true

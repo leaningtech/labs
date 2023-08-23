@@ -5,7 +5,7 @@ description: |
 authors:
   - alessandro
 pubDate: "May 9 2023"
-heroImage: "public/blog/blog-banners/cheerpj3.png"
+heroImage: "/blog/blog-banners/cheerpj3.png"
 featured: true
 tags:
   - CheerpJ
