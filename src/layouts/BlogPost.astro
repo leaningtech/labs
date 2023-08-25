@@ -9,6 +9,8 @@ import TableOfContents, {
 import Footer from "../components/Footer.astro";
 import BlogPostCardSet from "../components/BlogPostCardSet.astro";
 import { resolveAuthors } from "../lib/blog";
+import LinkButton from "../components/LinkButton.astro";
+import { DISCORD_URL } from "../consts";
 
 type Props = CollectionEntry<"blog">["data"] & {
 	id: CollectionEntry<"blog">["id"];
@@ -36,8 +38,7 @@ const showAuthorSection = authors.length > 0;
 				<img
 					src={heroImage}
 					alt=""
-					class="rounded-xl w-full mx-auto mb-8"
-					height="552"
+					class="rounded-xl w-full mx-auto mb-8 object-cover h-96 bg-white"
 				/>
 			)
 		}
@@ -78,6 +79,14 @@ const showAuthorSection = authors.length > 0;
 					data-pagefind-body
 				>
 					<slot />
+				</div>
+				<div class="pt-10">
+					<LinkButton
+						type="discord"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
 				</div>
 			</article>
 
@@ -131,7 +140,7 @@ const showAuthorSection = authors.length > 0;
 		)
 	}
 
-	<section class="px-6 w-full max-w-6xl mx-auto my-8">
+	<section class="px-6 w-full max-w-6xl mx-auto my-8 mb-32">
 		<h1
 			class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
 		>

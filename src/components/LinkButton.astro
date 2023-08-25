@@ -3,7 +3,7 @@ import { Icon } from "astro-icon";
 interface Props {
 	href: string;
 	label: string;
-	type?: "primary" | "secondary";
+	type?: "primary" | "secondary" | "discord";
 	iconLeft?: string;
 	iconRight?: string;
 }
@@ -20,6 +20,8 @@ const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 				type === "primary",
 			"border-stone-600 text-primary-400 hover:border-primary-300":
 				type === "secondary",
+			"border-white border-opacity-30 bg-blurple text-white hover:border-opacity-80":
+				type === "discord",
 		},
 	]}
 >

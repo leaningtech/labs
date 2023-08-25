@@ -13,7 +13,6 @@
 		"/cheerp",
 		"/cheerpj",
 		"/cheerpx",
-
 	]
 
 	let index = 0;
@@ -23,12 +22,11 @@
 </script>
 
 <div class="doodle relative w-96 hidden md:block  md:w-full max-w-full max-h-[36rem] lg:max-h-[48rem] overflow-hidden">
-
 	<a href={hrefs[index]}>
 		<img
-		src="/landing/doodle/doodle_vertical/all_top.png"
-		alt=""
-		class="absolute top-0 opacity-20"
+      src="/landing/doodle/doodle_vertical/all_top.png"
+      alt=""
+      class="absolute top-0 opacity-20"
 		/>
 		{#each images as image, i}
 			<img
@@ -39,9 +37,9 @@
 			/>
 		{/each}
 		<img
-		src="/landing/doodle/doodle_vertical/browser.png"
-		alt=""
-		class="absolute top-0"
+      src="/landing/doodle/doodle_vertical/browser.png"
+      alt=""
+      class="absolute top-0"
 		/>
 	</a>
 </div>
@@ -49,11 +47,10 @@
 <div class="doodle_h relative w-full md:hidden mt-28">
 	<a href={hrefs[index]}>
 		<img
-		src="/landing/doodle/doodle_horizontal/all_top_h.png"
-		alt=""
-		class="absolute top-0 opacity-20"
+      src="/landing/doodle/doodle_horizontal/all_top_h.png"
+      alt=""
+      class="absolute top-0 opacity-20"
 		/>
-
 		{#each images_h as image, i}
 			<img
 				src={image}
@@ -63,9 +60,9 @@
 			/>
 		{/each}
 		<img
-		src="/landing/doodle/doodle_horizontal/browser_h.png"
-		alt=""
-		class="absolute top-0"
+      src="/landing/doodle/doodle_horizontal/browser_h.png"
+      alt=""
+      class="absolute top-0"
 		/>
 	</a>
 </div>
@@ -78,5 +75,4 @@
 	.doodle_h {
 		aspect-ratio: 1874 / 1101;
 	}
-	
 </style>

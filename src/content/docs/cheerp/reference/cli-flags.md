@@ -1,16 +1,12 @@
 ---
-title: Cheerp specific clang options
+title: Command line arguments
 ---
 
-Generally useful command line flags:
-
-`-O3`/`-O2` Enable optimizations
+Cheerp extends [Clang's command line arguments](https://clang.llvm.org/docs/ClangCommandLineReference.html) with its own flags.
 
 `-fexceptions` Enable support for exception handling
 
 `-Wno-cheerp-unsafe` Hide some cheerp-specific warnings
-
-Cheerp specific command line flags:
 
 `-cheerp-asmjs-symbolic-globals` Compile global variable addresses as js variables in the asm.js module
 

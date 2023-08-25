@@ -4,7 +4,7 @@ import LinkButton from "../LinkButton.astro";
 import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "../../consts";
-import ClientCarousel from "./ClientCarousel.astro";
+import ClientCarousel from "./ClientCarousel.svelte";
 ---
 
 <header class="min-h-[calc(100vh-65px)] flex flex-col items-center">
@@ -48,8 +48,8 @@ import ClientCarousel from "./ClientCarousel.astro";
 		</div>
 	</div>
 
-	<div class="p-16 overflow-hidden">
-		<ClientCarousel />
+	<div class="p-16 w-full relative overflow-x-hidden">
+		<ClientCarousel client:idle />
 	</div>
 
 	<div class="grow"></div>

@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import pagefind from "astro-pagefind";
 import svelte from "@astrojs/svelte";
+import prefetch from "@astrojs/prefetch";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
@@ -14,17 +15,13 @@ export default defineConfig({
 		mdx(),
 		sitemap(),
 		tailwind(),
-		robotsTxt({
-			policy: [
-				{
-					userAgent: "*",
-					disallow: "/",
-				},
-			],
-		}),
-		// TODO: remove policy when we're ready to go live
+		robotsTxt(),
 		pagefind(),
 		svelte(),
+		prefetch({
+			// Prefetch hovered internal links
+			intentSelector: ["a[href^='/']"],
+		}),
 	],
 	markdown: {
 		shikiConfig: {
@@ -34,6 +31,7 @@ export default defineConfig({
 	compressHTML: prod,
 	build: {
 		format: "file",
+		inlineStylesheets: "auto",
 	},
 	trailingSlash: "never",
 });

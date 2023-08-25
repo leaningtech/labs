@@ -7,11 +7,11 @@ CheerpJ is a Java bytecode to WebAssembly and JavaScript compiler, compatible wi
 
 **Main project link**: <https://leaningtech.com/cheerpj/>
 
-**Download latest version**: [![Latest version](https://img.shields.io/badge/cheerpj-2.3-green.svg)](https://leaningtech.com/download-cheerpj/) [![Latest version changelog](https://img.shields.io/badge/2.3-changelog-green.svg)](/cheerpj2/Changelog)
+**Download latest version**: [![Latest version](https://img.shields.io/badge/cheerpj-2.3-green.svg)](https://leaningtech.com/download-cheerpj/) [![Latest version changelog](https://img.shields.io/badge/2.3-changelog-green.svg)](/cheerpj2/changelog)
 
 **Link to latest runtime**: `https://cjrtnc.leaningtech.com/2.3/loader.js`
 
-If you are unsure how to start, try our [Tutorial](/cheerpj2/Tutorial).
+If you are unsure how to start, try our [Tutorial](/cheerpj2/getting-started/Tutorial).
 
 ## What is CheerpJ?
 
@@ -38,9 +38,9 @@ You can download CheerpJ for Linux, Windows and macOS on our website (<https://l
 
 To get started with CheerpJ, please refer to the following pages:
 
-1. [CheerpJ Tutorial](/cheerpj2/Tutorial)
-2. [Getting Started](/cheerpj2/Getting-Started)
-3. [Command Line Options](/cheerpj2/Command-Line-Options)
+1. [CheerpJ Tutorial](/cheerpj2/getting-started/Tutorial)
+2. [Getting Started](/cheerpj2/getting-started/Getting-Started)
+3. [Command Line Options](/cheerpj2/reference/Command-Line-Options)
 
 ## Demos
 

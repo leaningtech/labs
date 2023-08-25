@@ -56,7 +56,7 @@ jobs:
           wait-on: http://127.0.0.1:3000
 
       - name: Install lychee
-        run: curl -L https://github.com/lycheeverse/lychee/releases/download/nightly/lychee-nightly-x86_64-unknown-linux-gnu.tar.gz | tar -xz
+        run: curl -L https://github.com/lycheeverse/lychee/releases/download/v0.13.0/lychee-v0.13.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz
 
       - name: Run lychee on sitemap
         run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:3000/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress

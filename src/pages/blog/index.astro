@@ -1,58 +1,46 @@
 ---
-import Basic from "../../layouts/Basic.astro";
 import { getCollection } from "astro:content";
 import BlogPostCard from "../../components/BlogPostCard.astro";
+import Shell from "../../layouts/Shell.astro";
+import Footer from "../../components/Footer.astro";
 
-const posts = (await getCollection("blog")).sort(
+const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-const topFeatured = posts.filter((post) => post.data.featured).slice(0, 5);
-if (topFeatured.length !== 5) {
-	console.warn("not enough featured posts");
-}
-
-// TODO: once we have more posts, consider pagination
 ---
 
-<Basic
-	title="Leaning Techologies Developer Blog"
+<Shell
+	title="Leaning Techologies Engineering Blog"
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 >
-	<h1 class="font-extrabold text-6xl text-white">Developer blog</h1>
+	<header class="text-center bg-stone-800 text-stone-100 py-32 px-8">
+		<h1 class="font-bold text-5xl mb-8">Engineering blog</h1>
+		<p class="text-lg text-balance">
+			News, technical writeups, and announcements directly from our development
+			team.
+		</p>
+	</header>
 
-	<section class="my-16">
-		<h2 class="text-4xl font-semibold mb-8">Featured</h2>
-		<ul class="grid lg:grid-cols-3 gap-8 h-[36rem]">
+	<section class="py-24 px-6 mx-auto w-full max-w-screen-xl">
+		<ul class="grid md:grid-cols-2 gap-8 mb-8">
 			{
-				topFeatured.map((post, i) => (
-					<li
-						class:list={[
-							"flex justify-stretch items-stretch",
-							{
-								"row-span-3": i === 0,
-								"row-span-2": i === 1 || i === 3,
-								"row-span-1": i === 2 || i === 4,
-							},
-						]}
-					>
-						<BlogPostCard {post} />
+				[post1, post2].map((post) => (
+					<li class="flex md:justify-stretch md:items-stretch">
+						{post && <BlogPostCard {post} showMetadata size="wide" />}
+					</li>
+				))
+			}
+		</ul>
+		<ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				restPosts.map((post) => (
+					<li class="flex md:justify-stretch md:items-stretch">
+						<BlogPostCard {post} showMetadata />
 					</li>
 				))
 			}
 		</ul>
 	</section>
 
-	<section class="my-16">
-		<h2 class="text-4xl font-semibold mb-8">Latest</h2>
-		<ul class="grid lg:grid-cols-2 gap-8">
-			{
-				posts.map((post) => (
-					<li class="flex justify-stretch items-stretch">
-						<BlogPostCard {post} />
-					</li>
-				))
-			}
-		</ul>
-	</section>
-</Basic>
+	<Footer />
+</Shell>

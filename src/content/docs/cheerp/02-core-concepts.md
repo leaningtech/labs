@@ -42,17 +42,6 @@ Libraries are stored using LLVM binary representation
 /opt/cheerp/bin/llvm-link <file1.bc> <file2.bc> ... -o <library.bc>
 ```
 
-## Using cmake
-
-A cmake toolchain file is provided in `/opt/cheerp/share/cmake/Modules/CheerpToolchain.cmake`
-it's possible to cross-compile cmake projects for the Cheerp platform using the syntax
-
-```bash
-cmake -DCMAKE_TOOLCHAIN_FILE=/opt/cheerp/share/cmake/Modules/CheerpToolchain.cmake <regular arguments>
-```
-
-Please note that, currently, only building static libraries is supported.
-
 ## The `webMain` entry point
 
 By convention the method that will be called first on the client side should have the following signature
