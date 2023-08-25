@@ -9,6 +9,11 @@
 		"/landing/doodle/doodle_horizontal/cheerpj_h.png",
 		"/landing/doodle/doodle_horizontal/cheerpx_h.png",
 	];
+	const hrefs = [
+		"/cheerp",
+		"/cheerpj",
+		"/cheerpx",
+	]
 
 	let index = 0;
 	setInterval(() => {
@@ -17,49 +22,49 @@
 </script>
 
 <div class="doodle relative w-96 hidden md:block  md:w-full max-w-full max-h-[36rem] lg:max-h-[48rem] overflow-hidden">
-	<img
-		src="/landing/doodle/doodle_vertical/all_top.png"
-		alt=""
-		class="absolute top-0 opacity-20"
-	/>
-
-	{#each images as image, i}
+	<a href={hrefs[index]}>
 		<img
-			src={image}
-			alt=""
-			class="absolute top-0 transition-opacity duration-500"
-			class:opacity-0={i !== index}
+      src="/landing/doodle/doodle_vertical/all_top.png"
+      alt=""
+      class="absolute top-0 opacity-20"
 		/>
-	{/each}
-	<img
-	src="/landing/doodle/doodle_vertical/browser.png"
-	alt=""
-	class="absolute top-0"
-	/>
-
+		{#each images as image, i}
+			<img
+				src={image}
+				alt=""
+				class="absolute top-0 transition-opacity duration-500"
+				class:opacity-0={i !== index}
+			/>
+		{/each}
+		<img
+      src="/landing/doodle/doodle_vertical/browser.png"
+      alt=""
+      class="absolute top-0"
+		/>
+	</a>
 </div>
 
 <div class="doodle_h relative w-full md:hidden mt-28">
-	<img
-		src="/landing/doodle/doodle_horizontal/all_top_h.png"
-		alt=""
-		class="absolute top-0 opacity-20"
-	/>
-
-	{#each images_h as image, i}
+	<a href={hrefs[index]}>
 		<img
-			src={image}
-			alt=""
-			class="absolute top-0 transition-opacity duration-500"
-			class:opacity-0={i !== index}
+      src="/landing/doodle/doodle_horizontal/all_top_h.png"
+      alt=""
+      class="absolute top-0 opacity-20"
 		/>
-	{/each}
-	<img
-	src="/landing/doodle/doodle_horizontal/browser_h.png"
-	alt=""
-	class="absolute top-0"
-	/>
-
+		{#each images_h as image, i}
+			<img
+				src={image}
+				alt=""
+				class="absolute top-0 transition-opacity duration-500"
+				class:opacity-0={i !== index}
+			/>
+		{/each}
+		<img
+      src="/landing/doodle/doodle_horizontal/browser_h.png"
+      alt=""
+      class="absolute top-0"
+		/>
+	</a>
 </div>
 
 <!-- TODO: <map> and <area> elements -->
@@ -70,5 +75,4 @@
 	.doodle_h {
 		aspect-ratio: 1874 / 1101;
 	}
-	
 </style>

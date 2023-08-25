@@ -6,7 +6,7 @@ description: |
 authors:
   - alessandro
 pubDate: "March 14 2023"
-heroImage: "https://leaningtech.com/wp-content/uploads/2023/03/Cheerp-3.0-1.png.webp"
+heroImage: "/blog/blog-banners/cheerp-lines.png"
 tags:
   - Cheerp
 featured: true

@@ -5,7 +5,7 @@ description: |
 authors:
   - alessandro
 pubDate: "May 9 2023"
-heroImage: "https://leaningtech.com/wp-content/uploads/2023/05/CheerpJ-Logo-1-1.png.webp"
+heroImage: "/blog/blog-banners/cheerpj3.png"
 featured: true
 tags:
   - CheerpJ
