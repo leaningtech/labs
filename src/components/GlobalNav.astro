@@ -5,6 +5,7 @@ import { SITE_TITLE, DISCORD_URL } from "../consts";
 
 import companyLogo from "../assets/branding/company/tower.svg";
 import Search from "./Search.astro";
+import EventBanner from "./EventBanner.svelte";
 
 const links = [
 	{ name: "Docs", href: "/docs" },
@@ -12,6 +13,8 @@ const links = [
 	{ name: "Blog", href: "/blog" },
 ];
 ---
+
+<EventBanner client:idle />
 
 <nav
 	aria-label="Primary navigation"
