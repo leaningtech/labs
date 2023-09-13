@@ -5,19 +5,23 @@ subtitle: Convert Java to WebAssembly and JavaScript
 
 CheerpJ is a Java bytecode to WebAssembly and JavaScript compiler, compatible with 100% of Java, which allows to compile any Java SE application, library or Java applet into a WebAssembly/JavaScript application.
 
-**Main project link**: <https://leaningtech.com/cheerpj/>
+Please visit the project [website](https://leaningtech.com/cheerpj/).
 
 **Download latest version**: [![Latest version](https://img.shields.io/badge/cheerpj-2.3-green.svg)](https://leaningtech.com/download-cheerpj/) [![Latest version changelog](https://img.shields.io/badge/2.3-changelog-green.svg)](/cheerpj2/changelog)
 
-**Link to latest runtime**: `https://cjrtnc.leaningtech.com/2.3/loader.js`
+**Link to latest runtime**
 
-If you are unsure how to start, try our [Tutorial](/cheerpj2/getting-started/Tutorial).
+```
+https://cjrtnc.leaningtech.com/2.3/loader.js
+```
+
+If you are unsure how to start, try our [tutorial](/cheerpj2/getting-started/Tutorial).
 
 ## What is CheerpJ?
 
 ![](/cheerpj2/assets/cheerpj_visual_2.png)
 
-CheerpJ is constituted of three components:
+**CheerpJ is constituted of three components:**
 
 1. The CheerpJ AOT compiler, an LLVM-based Java-bytecode to JavaScript compiler. This can be used to convert Java archives (e.g. .jar) or single .class files to JavaScript. The CheerpJ AOT compiler is available for Linux, macOS and Windows.
 2. The CheerpJ runtime library, a full Java SE runtime in WebAssembly and JavaScript, that can be distributed in part or in full with applications converted with CheerpJ.
@@ -34,7 +38,7 @@ CheerpJ is constituted of three components:
 
 ## Getting Started
 
-You can download CheerpJ for Linux, Windows and macOS on our website (<https://leaningtech.com/cheerpj/>)
+You can download CheerpJ for Linux, Windows and macOS on our [website](https://leaningtech.com/cheerpj/)
 
 To get started with CheerpJ, please refer to the following pages:
 
@@ -44,7 +48,7 @@ To get started with CheerpJ, please refer to the following pages:
 
 ## Demos
 
-Several demos of CheerpJ can be found at <https://leaningtech.com/demo/?cheerpjfilter>.
+Several demos of CheerpJ can be found [here](https://leaningtech.com/demo/?cheerpjfilter).
 
 ## Bugs and Questions
 
