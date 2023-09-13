@@ -24,7 +24,9 @@ ProGuard is an industry standard open-source tool to optimize and obfuscate Java
 
 Since Java allows reflection at runtime, ProGuard may end up removing code which is actually used, causing unexpected errors. To help in this scenario CheerpJ supports a special option:
 
-`cheerpjInit({enableProguardTrace:true})`
+```js
+cheerpjInit({ enableProguardTrace: true });
+```
 
 When initialized with this option CheerpJ will keep track of the classes used at runtime, including classes which are accessed via reflection. Follow these steps to safely optimize an application using proguard.
 
@@ -56,17 +58,23 @@ By combining the use of this profiler together with the preloader, one can highl
 
 1. Run the application normally using CheerpJ. After the application is loaded, open the JavaScript console of the browser (e.g. Ctrl+Shift+I on many browsers), and type:
 
-`cjGetRuntimeResources()`
+```js
+cjGetRuntimeResources();
+```
 
 The result will look like this:
 
-`["/lts/file1","/lt/file2"]`
+```js
+["/lts/file1", "/lt/file2"];
+```
 
 The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/cheerpj2/reference/Runtime-API#cjgetruntimeresources) for more information.
 
 2. Modify the CheerpJ integration to enable preloading. You will only need to change the `cheerpjInit` call, to pass the `preloadResources` option. For example:
 
-`cheerpjInit({preloadResources:["/lts/file1","/lt/file2"]});`
+```js
+cheerpjInit({ preloadResources: ["/lts/file1", "/lt/file2"] });
+```
 
 See [here](/cheerpj2/reference/Runtime-API#preloadresources) for more information.
 

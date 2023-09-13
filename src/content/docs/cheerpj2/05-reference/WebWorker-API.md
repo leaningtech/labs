@@ -10,9 +10,11 @@ All code in a Worker runs in parallel and asynchronously with the main thread. A
 
 The main entry point for CheerpJ workers is the `CheerpJWorker` JS interface. It is a normal JS object and it is possible to instantiate it multiple times.
 
-```
+```js
 var w = new CheerpJWorker();
-w.cheerpjInit().then(function(e) { console.log("CheerpJWorker is ready"); });
+w.cheerpjInit().then(function (e) {
+	console.log("CheerpJWorker is ready");
+});
 ```
 
 This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the `CheerpJWorker` exposes the same API as CheerpJ in the main thread.
@@ -38,7 +40,7 @@ Java Strings, being Java objects, cannot be passed or returned. But JavaScript s
 
 Runs a Java main method in the WebWorker context
 
-```
+```js
 w.cheerpjRunMain("ClassName", classPath, arg1, arg2).then(...)
 ```
 
@@ -46,7 +48,7 @@ w.cheerpjRunMain("ClassName", classPath, arg1, arg2).then(...)
 
 Executes a static Java method in the WebWorker contet
 
-```
+```js
 w.cjCall("ClassName", "methodName", arg1, arg2).then(...)
 ```
 
@@ -54,8 +56,13 @@ w.cjCall("ClassName", "methodName", arg1, arg2).then(...)
 
 Uses Java reflection to resolve the method and returns an opaque handle to it. This handle can then be used multiple times without using Java reflection again.
 
-```
-w.cjResolveCall("ClassName", "methodName", /*Or array of parameter types if methodName is not unique*/null).then(function(resolvedMethod) { w.cjCall(resolvedMethod, arg1, arg2); ... });
+```js
+w.cjResolveCall("ClassName", "methodName", null).then( // or array of parameter types if methodName is not unique
+        function(resolvedMethod) {
+                        w.cjCall(resolvedMethod, arg1, arg2);
+                        ...
+        }
+);
 ```
 
 # Java API for Workers

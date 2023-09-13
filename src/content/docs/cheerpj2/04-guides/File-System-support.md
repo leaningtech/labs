@@ -46,13 +46,13 @@ The `/str/` mount point is a simple read-only filesystem that can be populated f
 
 From JavaScript you can add files into the filesystem using the `cheerpjAddStringFile` API. Example:
 
-```
+```js
 cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```
 
 You can access this data from Java, for example:
 
-```
+```java
 import java.io.FileReader;
 ...
 

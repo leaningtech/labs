@@ -48,7 +48,11 @@ where version is the specific runtime version you want to link to.
 
 `cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment. `cheerpjInit` accepts an optional object argument which can be used to set options.
 
-This method is to be invoked as follows: `cheerpjInit({option:"value"});`
+This method is to be invoked as follows:
+
+```js
+cheerpjInit({ option: "value" });
+```
 
 All the supported options are described below.
 
@@ -56,8 +60,8 @@ All the supported options are described below.
 
 By default CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard. To change this behaviour you can initialize CheerpJ in the following way:
 
-```
-cheerpjInit({clipboardMode:"system"});
+```js
+cheerpjInit({ clipboardMode: "system" });
 ```
 
 In `system` mode CheerpJ will share the clipboard with the system. Browsers enforce serious limitations on how the system clipboard can be accessed. In practice it is generally accessible when the `Ctrl+C` and `Ctrl+V` shortcuts are used (`Cmd+C` and `Cmd+V` on MacOSX). Due to these limitations the UX when using `clipboardMode:"system"` is:
@@ -74,8 +78,8 @@ CheerpJ automatically reports errors at runtime. Setting this option to `true` d
 
 Example:
 
-```
-cheerpjInit({disableErrorReporting:true});
+```js
+cheerpjInit({ disableErrorReporting: true });
 ```
 
 ## `disableLoadTimeReporting`
@@ -84,8 +88,8 @@ CheerpJ automatically get data about loading time. Setting this option to `true`
 
 Example:
 
-```
-cheerpjInit({disableLoadTimeReporting:true});
+```js
+cheerpjInit({ disableLoadTimeReporting: true });
 ```
 
 ## `enableInputMethods`
@@ -102,8 +106,8 @@ An array of Java properties in the form `"key=value"`. They will be defined on t
 
 Example usage:
 
-```
-cheerpjInit({javaProperties:["prop1=value1","prop2=value2"]});
+```js
+cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 ```
 
 ## `listener`
@@ -122,7 +126,7 @@ For each new .jar.js to be loaded, CheerpJ will call this function. This can be 
 
 Example usage:
 
-```
+```js
 var cheerpjListener = {jsLoadReason:function(scriptName, directReason, userReason){ ... }};
 cheerpjInit({listener:cheerpjListener});
 ```
@@ -136,13 +140,12 @@ This listener may be used in combination with [[preloading support | Startup-tim
 
 Example usage:
 
-```
-function showPreloadProgress(loadedFiles, totalFiles)
-{
-    console.log("Percentage loaded "+(loadedFiles*100/totalFiles));
+```js
+function showPreloadProgress(loadedFiles, totalFiles) {
+	console.log("Percentage loaded " + (loadedFiles * 100) / totalFiles);
 }
-var cheerpjListener = {preloadProgress:showPreloadProgress};
-cheerpjInit({listener:cheerpjListener});
+var cheerpjListener = { preloadProgress: showPreloadProgress };
+cheerpjInit({ listener: cheerpjListener });
 ```
 
 ## `logCanvasUpdates`
@@ -151,8 +154,8 @@ When set to `true`, it enables logs on the console about the display areas which
 
 Example:
 
-```
-cheerpjInit({logCanvasUpdates:true});
+```js
+cheerpjInit({ logCanvasUpdates: true });
 ```
 
 ## `overrideShortcuts`
@@ -168,14 +171,14 @@ Whenever possible we recommend _not_ to use browser reserved shortcuts, to maint
 
 Example:
 
-```
-cheerpjInit({overrideShortcuts:function(e)
-{
-    // Let Java handle Ctrl+F
-    if(e.ctrlKey && e.keyCode == 70)
-      return true;
-    return false;
-}});
+```js
+cheerpjInit({
+	overrideShortcuts: function (e) {
+		// Let Java handle Ctrl+F
+		if (e.ctrlKey && e.keyCode == 70) return true;
+		return false;
+	},
+});
 ```
 
 ## `preloadResources`<a name="preloadResources"></a>
@@ -184,8 +187,8 @@ By using `preloadResources`, you can provide CheerpJ with a list of runtime file
 
 Example:
 
-```
-cheerpjInit({preloadResources:["/lts/file1","/lt/file2"]});
+```js
+cheerpjInit({ preloadResources: ["/lts/file1", "/lt/file2"] });
 ```
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
@@ -204,20 +207,22 @@ Some applications may need to have some parameter modified before getting those 
 
 Example:
 
-```
-cheerpjInit({appletParamFilter:function(name, value)
-{
-    if(name==="httpServer")
-        return value.replace("http", "https");
-    return value;
-}});
+```js
+cheerpjInit({
+	appletParamFilter: function (name, value) {
+		if (name === "httpServer") return value.replace("http", "https");
+		return value;
+	},
+});
 ```
 
 # cheerpjCreateDisplay
 
 This method will create the HTML element that will contain all Java windows. It is only required to run graphical applications.
 
-`cheerpjCreateDisplay(width, height, /*optional*/parent)`
+```js
+cheerpjCreateDisplay(width, height, /*optional*/ parent);
+```
 
 The `width` and `height` parameter represent the display area size in CSS pixels. It is also possible to specify a parent element if required, if a parent element is not specified the display area will be appended to the page `body` element. If a parent is specified it is also possible to pass `-1` to both `width` and `height`, in that case the size will correspond to the parent size and it will also change dynamically if the parent is modified by either CSS changes or browser window resize.
 
@@ -227,20 +232,30 @@ The `width` and `height` parameter represent the display area size in CSS pixels
 
 The most common way of starting an application is to use the `cheerpjRunMain` API, which lets you execute the static main method of a Java class in the classpath.
 
-```
-cheerpjRunMain("fully.qualified.class.name", "/app/my_application_archive.jar:/app/my_dependency_archive.jar", arg1, arg2);
+```js
+cheerpjRunMain(
+	"fully.qualified.class.name",
+	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
+	arg1,
+	arg2,
+);
 ```
 
 Alternatively, if your JAR is designed to be executed with `java -jar my_application_archive.jar`, you can use this simpler API.
 
-```
+```js
 cheerpjRunJar("/app/my_application_archive.jar", arg1, arg2);
 ```
 
 Optionally, if your JAR also need additional dependencies, you can use.
 
-```
-cheerpjRunJarWithClasspath("/app/my_application_archive.jar", "/app/my_dependency_archive.jar", arg1, arg2);
+```js
+cheerpjRunJarWithClasspath(
+	"/app/my_application_archive.jar",
+	"/app/my_dependency_archive.jar",
+	arg1,
+	arg2,
+);
 ```
 
 In all cases the arguments should be JavaScript Strings.

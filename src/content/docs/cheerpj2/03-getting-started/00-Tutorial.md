@@ -18,7 +18,7 @@ CheerpJ compiles unmodified JAR files to JavaScript so that they can run in the 
 
 CheerpJ provides a convenient python program to convert whole JARs to JavaScript: `cheerpjfy.py`. It supports several options for advanced users, but it's basic syntax is very simple. The following command will generate `TextDemo.jar.js`
 
-```
+```console
 cd ~/cheerpj_tutorial/
 ~/cheerpj_2.3/cheerpjfy.py TextDemo.jar
 ```
@@ -30,21 +30,20 @@ cd ~/cheerpj_tutorial/
 
 Copy the following HTML code into `~/cheerpj_tutorial/cheerpj_tutorial.html`
 
-```
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CheerpJ test</title>
-    <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
-  </head>
-  <body>
-  </body>
-  <script>
-      cheerpjInit();
-      cheerpjCreateDisplay(800,600);
-      cheerpjRunJar("/app/TextDemo.jar");
-  </script>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpJ test</title>
+		<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+	</head>
+	<body></body>
+	<script>
+		cheerpjInit();
+		cheerpjCreateDisplay(800, 600);
+		cheerpjRunJar("/app/TextDemo.jar");
+	</script>
 </html>
 ```
 

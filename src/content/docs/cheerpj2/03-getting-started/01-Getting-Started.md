@@ -83,9 +83,11 @@ Applets can be run by Chrome users using the [CheerpJ Applet Runner](https://chr
 
 To support all browsers, you can add the following tags to your page:
 
-```
+```html
 <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
-<script>cheerpjInit({enablePreciseAppletArchives:true});</script>
+<script>
+	cheerpjInit({ enablePreciseAppletArchives: true });
+</script>
 ```
 
 This should be sufficient to get the applet to run on any browser, with the pre-compiled JAR.JS's files deployed in the same directory of the the original JAR files. The `cheerpjInit({enablePreciseAppletArchives:true});` call can be done during page initialization.
@@ -94,19 +96,26 @@ To avoid potential conflicts with native Java we recommend replacing the origina
 
 # Basic HTML page for testing a Java applet
 
-```
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>CheerpJ applet test</title>
-        <script src=" https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
-        <script>cheerpjInit({enablePreciseAppletArchives:true});</script>
-    </head>
-    <body>
-        <cheerpj-applet archive="Example.jar" code="ExamplePath.ExampleApplet" height="900" width="900">
-            <p>not able to load Java applet</p>
-        </cheerpj-applet>
-    </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpJ applet test</title>
+		<script src=" https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+		<script>
+			cheerpjInit({ enablePreciseAppletArchives: true });
+		</script>
+	</head>
+	<body>
+		<cheerpj-applet
+			archive="Example.jar"
+			code="ExamplePath.ExampleApplet"
+			height="900"
+			width="900"
+		>
+			<p>not able to load Java applet</p>
+		</cheerpj-applet>
+	</body>
 </html>
 ```
