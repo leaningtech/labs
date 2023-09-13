@@ -8,7 +8,9 @@ To start, make sure to download the latest available version of CheerpJ [here](h
 
 **Important:** Converting an applet is documented at the bottom of this page.
 
-# Converting a single JAR to a JAR.JS file
+## Converting from .jar to .jar.js
+
+### Converting a single .jar file
 
 `cheerpjfy.py` is an helper script that automatically takes care of unpacking, compiling and optimising a whole JAR archive. Using `cheerpjfy.py` is the recommended way of compiling applications and libraries using CheerpJ.
 
@@ -28,7 +30,7 @@ This command will generate a file called `my_application_archive.jar.js`, which 
 py c:\cheerpj_2.3\cheerpjfy.py application.jar
 ```
 
-# Converting multiple JARs to JAR.JS's files
+### Converting multiple .jar files
 
 If your JAR has any dependencies in the form of further JAR archives, the `cheerpjfy.py` command line must be modified as follows:
 
@@ -47,7 +49,7 @@ do
 done
 ```
 
-# Basic HTML page for testing a Java application
+## Basic HTML page for testing a Java application
 
 ```html
 <!doctype html>
@@ -77,7 +79,7 @@ You can now serve this web page on a simple http server, such as the http-server
 http-server ~/cheerpj_2.3/
 ```
 
-# Converting an applet
+## Converting an applet
 
 Applets can be run by Chrome users using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner-bet/bbmolahhldcbngedljfadjlognfaaein) Chrome extension. You can also compile the applet ahead of time using the method described above.
 
@@ -94,7 +96,7 @@ This should be sufficient to get the applet to run on any browser, with the pre-
 
 To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
 
-# Basic HTML page for testing a Java applet
+## Basic HTML page for testing a Java applet
 
 ```html
 <!doctype html>

@@ -8,7 +8,7 @@ Read only and read/write filesystems are exposed in Java and can be used to read
 
 **Note**: CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser it's forbidden for security reasons.
 
-# File Systems in CheerpJ
+## File Systems in CheerpJ
 
 CheerpJ implements three main filesystem concepts:
 
@@ -23,7 +23,7 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 3. `/lt/` → Another HTTP-based read-only filesystem, pointing to the CheerpJ runtime
 4. `/str/` → A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code
 
-# `/app/` mount point
+## `/app/` mount point
 
 The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` is used to access JAR files and data from your local server.
 
@@ -34,13 +34,13 @@ The `/app/` directory refers to the root of your web server. So, assuming that y
 - `/app/example.jar` → `http://127.0.0.1:8080/example.jar`
 - `/app/subdirectory/example.txt` → `http://127.0.0.1:8080/subdirectory/example.txt`
 
-# `/files/` mount point
+## `/files/` mount point
 
 The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem. `/files/` is used to store persistent data on the browser client.
 
 The `/files/` directory is a virtual concept used by CheerpJ to store and refer to files.
 
-# `/str/` mount point
+## `/str/` mount point
 
 The `/str/` mount point is a simple read-only filesystem that can be populated from JavaScript to share data with Java code.
 

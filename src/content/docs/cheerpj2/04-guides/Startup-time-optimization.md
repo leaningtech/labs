@@ -4,7 +4,7 @@ title: Startup time optimization
 
 This page is a collection of different steps to reduce the startup time of a Java application converted with CheerpJ.
 
-# Overview
+## Overview
 
 Traditionally, users had to have Java preinstalled on their computer in order to run Java applications and applets. CheerpJ converts Java to HTML5/JavaScript, allowing to run applications and applets on browser without users having to install any additional dependency on their computer. Similarly to their JVM counterparts, applications converted to JavaScript with CheerpJ require runtime components to be loaded during execution. In CheerpJ, runtime components are JavaScript modules that are loaded on demand, only if required.
 
@@ -12,13 +12,13 @@ The CheerpJ runtime is highly optimised to minimise the total download size of a
 
 This page provides a list of recommendations to reduce the one-time download size, and the resulting application first startup time.
 
-# Gzip compression of JavaScript on server
+## Gzip compression of JavaScript on server
 
 In our experience it is not uncommon to see that most of the loading time is spent downloading the main `jar.js` file for the application (i.e. not from the runtime). **It is critical that the Web server on which your application is deployed has gzip compression enabled for the application's JavaScript files**.
 
 If you are self-hosting the CheerpJ runtime (most likely you will not), please make sure to enable compression on these components as well. The CheerpJ cloud runtime has compression enabled by default.
 
-# Use ProGuard to remove unused code
+## Use ProGuard to remove unused code
 
 ProGuard is an industry standard open-source tool to optimize and obfuscate Java bytecode. ProGuard, by itself, can automatically trace the classes used from the application entry point and automatically remove unused classes, methods and field. This can enable a very significant reduction of download size and startup time, especially with applications using multiple third party libraries.
 
@@ -38,15 +38,15 @@ When initialized with this option CheerpJ will keep track of the classes used at
 6. Run `proguard` on the `uber-JAR` using the generated configuration file to generate a smaller JAR with only the needed classes. `proguard -dontwarn -injars uber.jar -outjars uber-stripped.jar -libraryjars ~/cheerpj_1.2/rt.jar @cheerpj.pro`
 7. Convert this new JAR using `cheerpjfy.py`
 
-# Reduce the size of the JAR file
+## Reduce the size of the JAR file
 
 `cheerpjfy.py` supports a command line option (`--pack-jar`) to generate a minimised JAR for deployment.
 
 This smaller JAR is stripped of all original Java bytecode and can no longer be used to run the application on the JVM. The JAR is however necessary for CheerpJ to support Java reflection.
 
-More details are available [here](/cheerpj2/reference/Command-Line-Options#--pack-jarpackjar)
+More details are available [here](/cheerpj2/reference/Command-Line-Options#pack-jarpackjar)
 
-# Preload resources
+## Preload resources
 
 CheerpJ cannot predict which runtime resources will be required by an arbitrary application. CheerpJ runtime resources are therefore loaded on demand, one after the other, depending on the requirements of the application at run time.
 

@@ -65,7 +65,7 @@ w.cjResolveCall("ClassName", "methodName", null).then( // or array of parameter 
 );
 ```
 
-# Java API for Workers
+## Java API for Workers
 
 CheerpJ exposes a custom API to access this feature directly from Java code. The API is equivalent in terms of capabilities. This API is blocking, so to actually take advantage of concurrency between the main thread and Web Workers it is necessary to use this API from a Java thread.
 

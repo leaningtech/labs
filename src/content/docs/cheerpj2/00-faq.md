@@ -77,7 +77,7 @@ Many first time users get stuck at this point. The most common issues are:
 
 ## My application compiled with CheerpJ does not work and I see a cross origin error to a Google service in the console. What's going on?
 
-The cross origin message you see happens as part of our automatic bug reporting system and it is not the real error. Something else is making your application crash, please report a bug here: https://github.com/leaningtech/cheerpj-meta/issues
+The cross origin message you see happens as part of our automatic bug reporting system and it is not the real error. Something else is making your application crash, please report a bug [here](https://github.com/leaningtech/cheerpj-meta/issues).
 
 ## Can I play Old School RuneScape using CheerpJ or the CheerpJ Applet Runner extension?
 

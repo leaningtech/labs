@@ -4,7 +4,7 @@ title: Runtime API
 
 CheerpJ exposes a simple API to interact with a Java application converted to JavaScript. This API can be use to initialise CheerpJ, invoke Java methods, convert data and to enable/disable certain debugging features.
 
-# Integrating an application converted with CheerpJ in a HTML page
+## Integrating an application converted with CheerpJ in a HTML page
 
 A basic HTML file to load a CheerpJ application will look as follows:
 
@@ -28,7 +28,7 @@ A basic HTML file to load a CheerpJ application will look as follows:
 </html>
 ```
 
-# Loading the CheerpJ runtime
+## Loading the CheerpJ runtime
 
 To load the most recent runtime, use the following link:
 
@@ -44,7 +44,7 @@ More in general, you can use this line:
 
 where version is the specific runtime version you want to link to.
 
-# cheerpjInit
+## cheerpjInit
 
 `cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment. `cheerpjInit` accepts an optional object argument which can be used to set options.
 
@@ -56,7 +56,7 @@ cheerpjInit({ option: "value" });
 
 All the supported options are described below.
 
-## `clipboardMode`
+### `clipboardMode`
 
 By default CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard. To change this behaviour you can initialize CheerpJ in the following way:
 
@@ -72,7 +72,7 @@ In `system` mode CheerpJ will share the clipboard with the system. Browsers enfo
 
 Commercial users adopting this integration have so far reported that this change in UX is not a significant burden for users. Moreover, in the future we plan to add an additional clipboard mode to take advantage of a new permission-based browser API which is currently being standardized. This future mode will provide native like user experience in all cases.
 
-## `disableErrorReporting`
+### `disableErrorReporting`
 
 CheerpJ automatically reports errors at runtime. Setting this option to `true` disables this system.
 
@@ -82,7 +82,7 @@ Example:
 cheerpjInit({ disableErrorReporting: true });
 ```
 
-## `disableLoadTimeReporting`
+### `disableLoadTimeReporting`
 
 CheerpJ automatically get data about loading time. Setting this option to `true` disables this system.
 
@@ -92,15 +92,15 @@ Example:
 cheerpjInit({ disableLoadTimeReporting: true });
 ```
 
-## `enableInputMethods`
+### `enableInputMethods`
 
 When this option is set to `true` CheerpJ will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
 
-## `enableProguardTrace`
+### `enableProguardTrace`
 
 When this option is set to `true` CheerpJ will automatically keep track of the classes actually used at runtime. Moreover, it will also keep track of classes which are accessed by reflection. After the application has been fully tested you can use the `cjGetProguardConfiguration()` function from the browser console to download a proguard configuration file (`cheerpj.pro`) that you can directly use with proguard to remove unneeded classes, methods and fields from the application, greatly reducing the download size and startup time.
 
-## `javaProperties`
+### `javaProperties`
 
 An array of Java properties in the form `"key=value"`. They will be defined on the System object (System properties). This option should be used if command line arguments in the form `-Dkey=value` are required when using native Java.
 
@@ -110,11 +110,11 @@ Example usage:
 cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 ```
 
-## `listener`
+### `listener`
 
 An object containing callbacks that CheerpJ will use to report various information to the user. Currently only the `jsLoadReason` and `preloadProgress` callbacks are supported.
 
-### `jsLoadReason(scriptName, directReason, userReason)`
+#### `jsLoadReason(scriptName, directReason, userReason)`
 
 **Please note that enabling this listener may have significant performance impact and should not be used in production**
 
@@ -131,7 +131,7 @@ var cheerpjListener = {jsLoadReason:function(scriptName, directReason, userReaso
 cheerpjInit({listener:cheerpjListener});
 ```
 
-### `preloadProgress(loadedFiles, totalFiles)`
+#### `preloadProgress(loadedFiles, totalFiles)`
 
 This listener may be used in combination with [[preloading support | Startup-time-optimization#Preload-resources]] to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
 
@@ -148,7 +148,7 @@ var cheerpjListener = { preloadProgress: showPreloadProgress };
 cheerpjInit({ listener: cheerpjListener });
 ```
 
-## `logCanvasUpdates`
+### `logCanvasUpdates`
 
 When set to `true`, it enables logs on the console about the display areas which are being updated. Useful to debug overdrawing.
 
@@ -158,7 +158,7 @@ Example:
 cheerpjInit({ logCanvasUpdates: true });
 ```
 
-## `overrideShortcuts`
+### `overrideShortcuts`
 
 Some applications needs to internally handle keyboard shortcuts which are also used by the browser, for example Ctrl+F. Most users expect the standard browser behavior for these shortcuts and CheerpJ does not, by default, override them in any way.
 
@@ -181,7 +181,7 @@ cheerpjInit({
 });
 ```
 
-## `preloadResources`<a name="preloadResources"></a>
+### `preloadResources`<a name="preloadResources"></a>
 
 By using `preloadResources`, you can provide CheerpJ with a list of runtime files which you know in advance will be required for the specific application. The list should be given as a JavaScript array of strings.
 
@@ -193,7 +193,7 @@ cheerpjInit({ preloadResources: ["/lts/file1", "/lt/file2"] });
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
 
-## `status`
+### `status`
 
 This option determines the level of verbosity of CheerpJ in reporting status updates.
 
@@ -201,7 +201,7 @@ This option determines the level of verbosity of CheerpJ in reporting status upd
 - `"splash"`: Enabled status reporting only during initialization. There will be no feedback after the first window is shown on screen.
 - `"none"`: Disable all status reporting.
 
-## `appletParamFilter`
+### `appletParamFilter`
 
 Some applications may need to have some parameter modified before getting those inside the applet.
 
@@ -216,7 +216,7 @@ cheerpjInit({
 });
 ```
 
-# cheerpjCreateDisplay
+## cheerpjCreateDisplay
 
 This method will create the HTML element that will contain all Java windows. It is only required to run graphical applications.
 
@@ -226,7 +226,7 @@ cheerpjCreateDisplay(width, height, /*optional*/ parent);
 
 The `width` and `height` parameter represent the display area size in CSS pixels. It is also possible to specify a parent element if required, if a parent element is not specified the display area will be appended to the page `body` element. If a parent is specified it is also possible to pass `-1` to both `width` and `height`, in that case the size will correspond to the parent size and it will also change dynamically if the parent is modified by either CSS changes or browser window resize.
 
-# Running applications and JARs
+## Running applications and JARs
 
 **Warning**: CheerpJ does not support opening the HTML pages directly from disk. If the URL in your browser starts with `file://`, CheerpJ will not run. You _must_ use a local Web server.
 
@@ -260,7 +260,7 @@ cheerpjRunJarWithClasspath(
 
 In all cases the arguments should be JavaScript Strings.
 
-# cjCall / cjNew
+## cjCall / cjNew
 
 These functions make it possible to conveniently call Java code from JS. Java code is always run asynchronously, so the returned values are `Promise`s. See below for details.
 
@@ -344,9 +344,9 @@ resolvedMethod(arg1, arg2, arg3);
 
 Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/reference/WebWorker-API)
 
-# Data conversion
+## Data conversion
 
-## cjStringJavaToJs(str) / cjStringJsToJava(str)
+### cjStringJavaToJs(str) / cjStringJsToJava(str)
 
 ```js
 var jsString = cjStringJavaToJs(javaString);
@@ -360,7 +360,7 @@ String javaString = cjStringJStoJava(jsString);
 
 This converts a JavaScript string into a Java string. This operations also implies a copy. String parameters passed to `cheerpjRunMain`, `cjCall` and `cjNew` are automatically converted so it is not necessary to use this methods in that case.
 
-## cjTypedArrayToJava
+### cjTypedArrayToJava
 
 Converts a TypedArray to a Java compatible primitive array. This operation implies a copy. Data is converted as follows:
 
@@ -375,8 +375,8 @@ Converts a TypedArray to a Java compatible primitive array. This operation impli
 | Float32Array | float[]    |
 | Float64Array | double[]   |
 
-# Preloading APIs
+## Preloading APIs
 
-## cjGetRuntimeResources<a name="cjGetRuntimeResources"></a>
+### cjGetRuntimeResources<a name="cjGetRuntimeResources"></a>
 
 Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). It is a list of files that have been loaded from the runtime up to the time this function is called.

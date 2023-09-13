@@ -4,7 +4,7 @@ title: Implementing native methods
 
 With CheerpJ, it is possible to implement Java 'native' methods (that would normally be implemented in C/C++ or other AOT-compiled language) in JavaScript, similarly to what would be done in regular Java using the Java Native Interface (JNI).
 
-# Java Native Methods
+## Java Native Methods
 
 Take as an example the following Java class
 
@@ -24,7 +24,7 @@ Java will search for the implementation of `someNativeMethod` using the JNI.
 
 When compiling this class with CheerpJ, a JavaScript implementation of this method will need to be provided. Implementing native Java methods in JavaScript can be useful to use browser functionalities that are not currently exposed at the Java level.
 
-# Java Native Methods in CheerpJ
+## Java Native Methods in CheerpJ
 
 Implementing native methods is simply a matter of adding a JavaScript function in the global scope with a correctly mangled signature.
 
