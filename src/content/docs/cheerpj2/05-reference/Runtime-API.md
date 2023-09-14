@@ -8,7 +8,7 @@ CheerpJ exposes a simple API to interact with a Java application converted to Ja
 
 A basic HTML file to load a CheerpJ application will look as follows:
 
-```html
+```html title="index.html"
 <!doctype html>
 <html lang="en">
 	<head>

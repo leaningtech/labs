@@ -8,9 +8,9 @@ CheerpJ is very easy to use, this tutorial will guide you step by step into comp
 
 Visit [our download page](https://leaningtech.com/download-cheerpj/) and download the CheerpJ archive for your platform. CheerpJ is available for Linux, Mac OS X and Windows.
 
-CheerpJ is distributed as an archive for all the platforms, you can unpack the archive anywhere in the system. During the tutorial we will assume that CheerpJ has been unpacked in the home directory and its root is `~/cheerpj_2.3/`. Please keep in mind to use a different path in the following commands if you have chosen a different position or you are using a different version of CheerpJ.
+CheerpJ is distributed as an archive for all the platforms, you can unpack the archive anywhere in the system. During the tutorial we will assume that CheerpJ has been unpacked in the Applications directory `/Applications/cheerpj_2.3/`. Please keep in mind to use a different path in the following commands if you have chosen a different position or you are using a different version of CheerpJ.
 
-## Using CheerpJ AOT compiler
+## Using CheerpJ's AOT compiler
 
 ### Build or download the JAR file
 
@@ -20,9 +20,9 @@ CheerpJ compiles unmodified JAR files to JavaScript so that they can run in the 
 
 CheerpJ provides a convenient python program to convert whole JARs to JavaScript: `cheerpjfy.py`. It supports several options for advanced users, but it's basic syntax is very simple. The following command will generate `TextDemo.jar.js`
 
-```
+```shell
 cd ~/cheerpj_tutorial/
-~/cheerpj_2.3/cheerpjfy.py TextDemo.jar
+/Applications/cheerpj_2.3/cheerpjfy.py TextDemo.jar
 ```
 
 **NOTE**: `cheerpjfy.py` it's a python3 program, you need to have python3 installed on your system.
@@ -32,7 +32,7 @@ cd ~/cheerpj_tutorial/
 
 Copy the following HTML code into `~/cheerpj_tutorial/cheerpj_tutorial.html`
 
-```html
+```html title="cheerpj_tutorial/cheerpj_tutorial.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -80,7 +80,7 @@ To test CheerpJ you _must_ use a local Web Server. Opening the `cheerpj_tutorial
 
 To run TextDemo.jar in the browser using CheerpJ, do the following
 
-```
+```console
 cd ~/cheerpj_tutorial/
 python3 -m http.server 8080
 ```

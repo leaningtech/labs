@@ -4,7 +4,7 @@ title: Command line options
 
 The basic usage of the `cheerpjfy.py` build script is:
 
-```
+```shell
 ./cheerpjfy.py application.jar
 ```
 

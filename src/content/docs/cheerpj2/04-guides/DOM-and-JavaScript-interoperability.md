@@ -10,7 +10,7 @@ The `com.leaningtech.client.Global` is a representation of the global namespace 
 
 ## Basic example
 
-```java
+```java title="DomExample.java"
 import com.leaningtech.client.Document;
 import com.leaningtech.client.Element;
 import com.leaningtech.client.Global;
@@ -60,7 +60,7 @@ The various methods behave the same, with the only difference being the expected
 
 Assuming the example above is contained in `DomExample.java`, you need to first build the program using the standard `javac` compiler, create a JAR and then create the JAR.JS from it using CheerpJ. In both steps the `cheerpj-dom.jar` must be explicitly added to the command line as a dependency.
 
-```
+```shell
 # The CHEERPJ_INSTALL_PATH is assumed to be set to the location where the CheerpJ archive has been installed
 javac -cp $CHEERPJ_INSTALL_PATH/cheerpj-dom.jar DomExample.java
 jar cvf domexample.jar DomExample.class

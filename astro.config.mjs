@@ -6,12 +6,14 @@ import robotsTxt from "astro-robots-txt";
 import pagefind from "astro-pagefind";
 import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
+import astroExpressiveCode from "astro-expressive-code";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://labs.leaningtech.com",
 	integrations: [
+		astroExpressiveCode(),
 		mdx(),
 		sitemap(),
 		tailwind(),

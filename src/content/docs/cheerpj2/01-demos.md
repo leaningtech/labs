@@ -26,8 +26,6 @@ A few selected Java Swing examples to demonstrate how complex Swing GUI apps can
 
 ## JavaFiddle
 
-<h>
-
 <img src="/cheerpj2/assets/demo_fiddle.png" width="400">
 
 A playground to compile and run Java programs directly in the browser. Both console and GUI applications are supported. The standard `javac` compiler is used, since `javac` is also written in Java the whole compiler runs in the browser, together with the compiled application.

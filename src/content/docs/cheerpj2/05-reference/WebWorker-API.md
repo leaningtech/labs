@@ -69,7 +69,7 @@ w.cjResolveCall("ClassName", "methodName", null).then( // or array of parameter 
 
 CheerpJ exposes a custom API to access this feature directly from Java code. The API is equivalent in terms of capabilities. This API is blocking, so to actually take advantage of concurrency between the main thread and Web Workers it is necessary to use this API from a Java thread.
 
-```java
+```java title="Worker.java"
 package com.leaningtech.cheerpj;
 
 public class Worker
@@ -98,7 +98,7 @@ The Java version of the API is also extended to support `long`s in parameters an
 
 Example usage:
 
-```java
+```java title="WW.java"
 import com.leaningtech.cheerpj.Worker;
 
 public class WW
@@ -113,6 +113,6 @@ public class WW
 
 To build the class you need to add `cheerpj-public.jar` to the classpath
 
-```
+```shell
 javac -cp cheerpj_install_dir/cheerpj-public.jar WW.java
 ```
