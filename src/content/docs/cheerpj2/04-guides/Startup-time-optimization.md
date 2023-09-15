@@ -28,13 +28,13 @@ Since Java allows reflection at runtime, ProGuard may end up removing code which
 cheerpjInit({ enableProguardTrace: true });
 ```
 
-When initialized with this option CheerpJ will keep track of the classes used at runtime, including classes which are accessed via reflection. Follow these steps to safely optimize an application using proguard.
+When initialized with this option CheerpJ will keep track of the classes used at runtime, including classes which are accessed via reflection. Follow these steps to safely optimize an application using ProGuard.
 
 1. Build a single `uber-JAR` by merging the application and dependencies
 2. Convert the new JAR to JS using `cheerpjfy.py`
 3. Run the application using CheerpJ with the `enableProguardTrace:true` option
 4. Fully test the application, making sure that all possible scenarios are executed and all needed classes are loaded
-5. From the browser console call `cjGetProguardConfiguration()`, a proguard configuration file (`cheerpj.pro`) will be automatically generated and downloaded
+5. From the browser console call `cjGetProguardConfiguration()`, a ProGuard configuration file (`cheerpj.pro`) will be automatically generated and downloaded
 6. Run `proguard` on the `uber-JAR` using the generated configuration file to generate a smaller JAR with only the needed classes. `proguard -dontwarn -injars uber.jar -outjars uber-stripped.jar -libraryjars ~/cheerpj_1.2/rt.jar @cheerpj.pro`
 7. Convert this new JAR using `cheerpjfy.py`
 

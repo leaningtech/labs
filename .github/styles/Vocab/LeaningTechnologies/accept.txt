@@ -4,6 +4,8 @@ CheerpJ
 CheerpX
 WebVM
 CheerpJ Applet Runner
+cjCall
+cjNew
 
 Astro
 Yarn
@@ -15,3 +17,30 @@ Web Workers
 APIs
 CMake
 toolchain
+gzip
+iText
+ProGuard
+profiler
+preload
+preloader
+preloading
+preloaded
+params
+classpath
+devtools
+PDFs
+transpiler
+async
+interoperate
+minimalistic
+codegen
+filesystem
+namespace
+untyped
+virtualized
+methodName
+resolvedMethod
+preloadResources
+
+
+

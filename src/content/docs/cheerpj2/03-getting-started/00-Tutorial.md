@@ -72,11 +72,11 @@ The `/app/` directory is virtual, it only exists inside of CheerpJ and it's need
 
 To test CheerpJ you _must_ use a local Web Server. Opening the `cheerpj_tutorial.html` page directly from the disk (for example, by double-clicking on it) is **_not supported_**. This is a very common mistake for first time users.
 
-**_TIP_**: There are many different Web servers that you can use, and all of them should work. For a quick test we recommand:
+**_TIP_**: There are many different Web servers that you can use, and all of them should work. For a quick test we recommend:
 
 - Python2: `python2 -m SimpleHTTPServer 8080`
 - Python3: `python3 -m http.server 8080`
-- NPM (http-server): `http-server -p 8080`
+- npm (http-server): `http-server -p 8080`
 
 To run TextDemo.jar in the browser using CheerpJ, do the following
 

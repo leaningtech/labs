@@ -46,7 +46,7 @@ w.cheerpjRunMain("ClassName", classPath, arg1, arg2).then(...)
 
 ## CheerpJWorker.cjCall
 
-Executes a static Java method in the WebWorker contet
+Executes a static Java method in the WebWorker content
 
 ```js
 w.cjCall("ClassName", "methodName", arg1, arg2).then(...)

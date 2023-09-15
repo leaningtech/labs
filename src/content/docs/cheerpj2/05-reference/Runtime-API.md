@@ -98,7 +98,7 @@ When this option is set to `true` CheerpJ will be able to receive text input fro
 
 ### `enableProguardTrace`
 
-When this option is set to `true` CheerpJ will automatically keep track of the classes actually used at runtime. Moreover, it will also keep track of classes which are accessed by reflection. After the application has been fully tested you can use the `cjGetProguardConfiguration()` function from the browser console to download a proguard configuration file (`cheerpj.pro`) that you can directly use with proguard to remove unneeded classes, methods and fields from the application, greatly reducing the download size and startup time.
+When this option is set to `true` CheerpJ will automatically keep track of the classes actually used at runtime. Moreover, it will also keep track of classes which are accessed by reflection. After the application has been fully tested you can use the `cjGetProguardConfiguration()` function from the browser console to download a ProGuard configuration file (`cheerpj.pro`) that you can directly use with ProGuard to remove unneeded classes, methods and fields from the application, greatly reducing the download size and startup time.
 
 ### `javaProperties`
 
@@ -133,7 +133,7 @@ cheerpjInit({listener:cheerpjListener});
 
 #### `preloadProgress(loadedFiles, totalFiles)`
 
-This listener may be used in combination with [[preloading support | Startup-time-optimization#Preload-resources]] to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
+This listener may be used in combination with [[preloading support | Startup-time-optimization#preload-resources]] to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
 
 - `loadedFiles`: How many files have been preloaded so far
 - `totalFiles`: How many files needs to be preloaded in total. This number may increment during the loading phase. CheerpJ has a prediction mechanism and may preload additional resources depending on application behaviour

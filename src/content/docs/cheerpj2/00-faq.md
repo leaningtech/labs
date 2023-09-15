@@ -52,7 +52,7 @@ Yes, it should. However, this has not been one of our areas of focus so far.
 
 ## When compiling my application I see the message `Failure compiling MyFile.class`, but cheerpjfy continues to execute with no errors
 
-This means that it was not possible to use the new codegen. Cheerpj will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar,
+This means that it was not possible to use the new codegen. CheerpJ will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar,
 
 ## My Java application needs to get data over the network, but I only get `SocketException`s
 
@@ -64,14 +64,14 @@ Please note that when using CheerpJ to run applets the custom handlers are enabl
 
 ## When I run an application compiled with CheerpJ I see 404 errors in the browser console. What's going on?
 
-Ignore those errors. CheerpJ provides a FileSystem implementation on top of HTTP. In this context it is absolutely ok for some files to be missing. CheerpJ will correctly interpret 404 errors as a file not found condition.
+Ignore those errors. CheerpJ provides a filesystem implementation on top of HTTP. In this context it is absolutely ok for some files to be missing. CheerpJ will correctly interpret 404 errors as a file not found condition.
 
 ## My application compiled with CheerpJ does not work and I just see the "CheerpJ runtime ready" on the top of the screen. What's going on?
 
 Many first time users get stuck at this point. The most common issues are:
 
 - Opening the HTML page directly from disk: The URL in the browser should always start with http:// or https://, if it starts with file:// CheerpJ will not work. You need to use a local web server during testing.
-- Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual fileystem with multiple mount points, the "/app/" prefix is required.
+- Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual filesystem with multiple mount points, the "/app/" prefix is required.
 - More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
 - When converting obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example `a.class` and `A.class` will be considered the same. Always try to convert the JAR using a Linux machine before reporting a bug when converting obfuscated JARs.
 
@@ -83,7 +83,7 @@ The cross origin message you see happens as part of our automatic bug reporting 
 
 Not yet. The main problem is that RuneScape requires low level network connections primitives (sockets) which are not provided by browsers at this time due to security concerns. In the future we might provide a paid add-on to the CheerpJ Applet Runner extension to support this use case via tunneling.
 
-## How can I use CheerpJ to generate WebAssembly code instead of Javascript?
+## How can I use CheerpJ to generate WebAssembly code instead of JavaScript?
 
 CheerpJ cannot be used to generate WebAssembly code at the moment.
 

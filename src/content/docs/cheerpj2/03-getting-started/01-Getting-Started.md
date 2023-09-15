@@ -4,7 +4,7 @@ title: Getting started
 
 This page will help you getting started with CheerpJ and converting your first Java application to JavaScript in no time.
 
-To start, make sure to download the latest available version of CheerpJ [here](https://leaningtech.com/download-cheerpj/). Decompress the Cheerpj 2.3 archive anywhere, for example in `~/cheerpj_2.3` or `/Applications/cheerpj_2.3/`.
+To start, make sure to download the latest available version of CheerpJ [here](https://leaningtech.com/download-cheerpj/). Decompress the CheerpJ 2.3 archive anywhere, for example in `~/cheerpj_2.3` or `/Applications/cheerpj_2.3/`.
 
 **Important:** Converting an applet is documented at the bottom of this page.
 
@@ -73,7 +73,7 @@ done
 
 This page will initialize the CheerpJ system, create a graphical environment to contain all Java windows and then execute the `main` method of `ChangeThisToYourClassName`. The second parameter of cheerpjRunMain is a `:` separated list of JARs where application classes can be found (the classpath). The `/app/` is a virtual file system mount point that reference the root of the web server this page is loaded from.
 
-You can now serve this web page on a simple http server, such as the http-server utility.
+You can now serve this web page on a simple HTTP server, such as the http-server utility.
 
 ```shell
 http-server [path] [options]
@@ -92,7 +92,7 @@ To support all browsers, you can add the following tags to your page:
 </script>
 ```
 
-This should be sufficient to get the applet to run on any browser, with the pre-compiled JAR.JS's files deployed in the same directory of the the original JAR files. The `cheerpjInit({enablePreciseAppletArchives:true});` call can be done during page initialization.
+This should be sufficient to get the applet to run on any browser, with the pre-compiled JAR.JS's files deployed in the same directory of the original JAR files. The `cheerpjInit({enablePreciseAppletArchives:true});` call can be done during page initialization.
 
 To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
 
