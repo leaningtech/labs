@@ -12,7 +12,7 @@ The CheerpJ runtime is highly optimised to minimise the total download size of a
 
 This page provides a list of recommendations to reduce the one-time download size, and the resulting application first startup time.
 
-## Gzip compression of JavaScript on server
+## gzip compression of JavaScript on server
 
 In our experience it is not uncommon to see that most of the loading time is spent downloading the main `jar.js` file for the application (i.e. not from the runtime). **It is critical that the Web server on which your application is deployed has gzip compression enabled for the application's JavaScript files**.
 
