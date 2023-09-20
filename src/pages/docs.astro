@@ -3,6 +3,7 @@ import Basic from "../layouts/Basic.astro";
 
 import companyLogo from "../assets/branding/company/tower.svg";
 import { products } from "../lib/products";
+import { Image } from "astro:assets";
 ---
 
 <Basic
@@ -13,7 +14,7 @@ import { products } from "../lib/products";
 		<div
 			class="border-b border-white border-opacity-30 flex flex-col items-center gap-8 pb-8"
 		>
-			<img src={companyLogo} alt="" class="w-24 h-24" />
+			<Image src={companyLogo} alt="" class="w-24 h-24" />
 			<h1 class="text-4xl lg:text-5xl font-extrabold text-center text-white">
 				Leaning&nbsp;Technologies Documentation
 			</h1>
@@ -34,10 +35,10 @@ import { products } from "../lib/products";
 								class="rounded-lg bg-stone-800 bg-opacity-50 hover:bg-opacity-100 border border-stone-700 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6"
 							>
 								<p class=" leading-6 mb-16 font-semibold">{product.subtitle}</p>
-								<img
+								<Image
 									src={product.logotype}
 									alt={product.name}
-									class="h-12 mb-4"
+									class="w-auto h-12 mb-4"
 								/>
 								<p class="leading-6 text-balance text-lg mb-8">
 									{product.description}

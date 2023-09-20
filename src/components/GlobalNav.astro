@@ -6,6 +6,7 @@ import { SITE_TITLE, DISCORD_URL } from "../consts";
 import companyLogo from "../assets/branding/company/tower.svg";
 import Search from "./Search.astro";
 import EventBanner from "./EventBanner.svelte";
+import { Image } from "astro:assets";
 
 const links = [
 	{ name: "Docs", href: "/docs" },
@@ -25,7 +26,7 @@ const links = [
 	>
 		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10">
 			<a href="/" class="flex items-center gap-4">
-				<img
+				<Image
 					src={companyLogo}
 					alt={SITE_TITLE}
 					class="w-8 h-8"

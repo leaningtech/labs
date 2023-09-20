@@ -2,6 +2,7 @@
 import logotype from "../assets/branding/company/logotype-white.svg";
 import { Icon } from "astro-icon";
 import { DISCORD_URL, TWITTER_URL, GITHUB_URL, LINKEDIN_URL } from "../consts";
+import { Image } from "astro:assets";
 
 const today = new Date();
 
@@ -63,12 +64,11 @@ const sections: Section[] = [
 			class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 place-content-between text-lg"
 		>
 			<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
-				<!-- TODO: local svg -->
-				<img
+				<Image
 					src={logotype}
 					loading="lazy"
 					alt="Leaning Technologies"
-					class="h-16"
+					class="w-auto h-16"
 				/>
 			</a>
 			<div

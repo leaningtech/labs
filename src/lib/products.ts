@@ -8,7 +8,7 @@ export interface ProductData {
 	id: string;
 	name: string;
 	href: string;
-	logotype: string;
+	logotype: ImageMetadata;
 	favicon: string;
 	subtitle: string;
 	description: string;

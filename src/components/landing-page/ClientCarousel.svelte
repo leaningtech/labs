@@ -54,7 +54,7 @@
 				class="inline-block px-8"
 			>
 				<img
-					src={src}
+					src={src.src}
 					alt={alt}
 					decoding="async"
 					class="opacity-50 h-16 grayscale contrast-0"
