@@ -96,7 +96,9 @@ import PagefindSearch from "astro-pagefind/components/Search";
 		background: color-mix(var(--color-stone-900), 0.5);
 		backdrop-filter: blur(4px);
 	}
+</style>
 
+<style is:global>
 	.search {
 		--pagefind-ui-primary: var(--color-primary-400);
 		--pagefind-ui-text: var(--color-stone-100);
@@ -108,9 +110,7 @@ import PagefindSearch from "astro-pagefind/components/Search";
 
 		height: 36em;
 	}
-</style>
 
-<style is:global>
 	/* Scroll results whilst keeping input in view */
 	.pagefind-ui,
 	.pagefind-ui .pagefind-ui__form {
