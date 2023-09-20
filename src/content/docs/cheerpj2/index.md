@@ -5,7 +5,7 @@ subtitle: Convert Java to WebAssembly and JavaScript
 
 CheerpJ is a Java bytecode to WebAssembly and JavaScript compiler, compatible with 100% of Java, which allows to compile any Java SE application, library or Java applet into a WebAssembly/JavaScript application.
 
-Please visit the project [website](https://leaningtech.com/cheerpj/).
+Please visit the project [website](https://cheerpj.com/).
 
 **Download latest version**: [![Latest version](https://img.shields.io/badge/cheerpj-2.3-green.svg)](https://leaningtech.com/download-cheerpj/) [![Latest version changelog](https://img.shields.io/badge/2.3-changelog-green.svg)](/cheerpj2/changelog)
 
