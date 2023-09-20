@@ -2,8 +2,8 @@
 #   pnpm build && pnpm preview --host 0.0.0.0
 #	  lychee dist src/content
 
-base = "http://127.0.0.1:3000"
-remap = [ "https://labs.leaningtech.com http://127.0.0.1:3000" ]
+base = "http://127.0.0.1:4321"
+remap = [ "https://labs.leaningtech.com http://127.0.0.1:4321" ]
 
 # Check links inside `<code>` and `<pre>` blocks
 include_verbatim = true
