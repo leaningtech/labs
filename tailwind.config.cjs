@@ -22,6 +22,9 @@ const exportColorsAsCssVariables = plugin(({ addBase, theme }) => {
 
 /** @type {import('tailwindcss').Config} */
 const disabledCss = {
+	pre: false,
+	code: false,
+	"pre code": false,
 	"code::before": false,
 	"code::after": false,
 	"blockquote p:first-of-type::before": false,

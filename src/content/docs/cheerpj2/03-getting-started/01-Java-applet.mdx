@@ -9,7 +9,7 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 **There are two different ways to run a Java Applet in the browser:**
 
 - Running your own Java applet using the CheerpJ runtime environment and the `<cheerpj-applet>` tag in your own webpage.
-- Running a public applet using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner-bet/) Chrome extension for applets integrated with the applet tag `<applet>` in public websites.
+- Running a public applet using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner-bet/) Chrome extension for applets integrated with the applet tag `<applet>` on public websites.
 
 ## Running your own applet
 
@@ -52,19 +52,19 @@ You can now serve this web page on a simple HTTP server, such as the http-server
 
 ```shell
 npm install http-server
-http-server [path] [options]
+http-server -p 8080
 ```
 
 ### What's going on?
 
-- The `cheerpjInit({enablePreciseAppletArchives:true});` initializes CheerpJ runtime environment indicating we are running an applet and not an standalone app.
+- The `cheerpjInit({enablePreciseAppletArchives:true});` initializes CheerpJ runtime environment indicating we are loading an applet.
 - The `<cheerpj-applet>` tag specifies the code base in a similar manner as the now deprecated `<applet>` tag.
 
 > To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
 
 ## Running a public applet
 
-### Step 1: Install the CheerpJ applet runner
+### 1. Install the CheerpJ applet runner
 
 CheerpJ Applet Runner is available for Chrome and Edge.
 
@@ -85,8 +85,17 @@ CheerpJ Applet Runner is available for Chrome and Edge.
 
 </div>
 
-### Step 2: Go to a website with an applet
+### 2. Go to a website with an applet
 
 Visit a page with a Java applet, [such as this one](http://www.neilwallis.com/projects/java/water/index.php) and click on the CheerpJ Applet Runner icon in the toolbar and enable CheerpJ.
 
 ![](/cheerpj2/assets/cheerpj_applet_demo.gif)
+
+## The result
+
+You will see the CheerpJ display on your browser with some loading messages before showing your applet running. Depending on your application and the optimizations applied, this could take just a few seconds.
+
+## Further reading
+
+- [AOT optimization](/cheerpj2/guides/AOT-optimization)
+- [Runtime API](http://localhost:3000/cheerpj2/reference/Runtime-API)
