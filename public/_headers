@@ -1,0 +1,2 @@
+/*.html:
+	Cache-Control: private, max-age=3600
