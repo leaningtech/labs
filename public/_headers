@@ -1,2 +1,2 @@
-/*.html:
-	Cache-Control: private, max-age=3600
+/*.html
+	CDN-Cache-Control: private, no-cache
