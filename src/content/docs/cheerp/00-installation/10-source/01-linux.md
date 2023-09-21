@@ -37,7 +37,7 @@ git clone --branch cheerp-3.0 https://github.com/leaningtech/cheerp-libs
 ```bash
 cd cheerp-compiler
 cmake -DCMAKE_INSTALL_PREFIX=${CHEERP_DEST} -S llvm -B build -C llvm/CheerpCmakeConf.cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS=clang -G Ninja
-ninja -C build -j4
+ninja -C build
 ninja -C build install
 cd ..
 ```
@@ -57,13 +57,13 @@ cd cheerp-musl
 mkdir build_genericjs
 cd build_genericjs
 RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp -I LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
-make -j8
+make -j
 make install
 cd ..
 mkdir build_asmjs
 cd build_asmjs
 RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
-make -j8
+make -j
 make install
 cd ../..
 
@@ -115,7 +115,7 @@ git clone https://github.com/leaningtech/cheerp-libs
 ```bash
 cd cheerp-compiler
 cmake -DCMAKE_INSTALL_PREFIX=${CHEERP_DEST} -S llvm -B build -C llvm/CheerpCmakeConf.cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS=clang -G Ninja
-ninja -C build -j4
+ninja -C build
 ninja -C build install
 cd ..
 ```
@@ -135,13 +135,13 @@ cd cheerp-musl
 mkdir build_genericjs
 cd build_genericjs
 RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
-make -j8
+make -j
 make install
 cd ..
 mkdir build_asmjs
 cd build_asmjs
 RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
-make -j8
+make -j
 make install
 cd ../..
 
