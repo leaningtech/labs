@@ -56,14 +56,14 @@ cd ..
 cd cheerp-musl
 mkdir build_genericjs
 cd build_genericjs
-RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp -I ${CHEERP_DEST}/lib/clang/15.0.0/include" LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
+RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp -I LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
 make clean
 make -j8
 make install
 cd ..
 mkdir build_asmjs
 cd build_asmjs
-RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm -I ${CHEERP_DEST}/lib/clang/15.0.0/include" LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
+RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
 make clean
 make -j8
 make install
@@ -136,14 +136,14 @@ cd ..
 cd cheerp-musl
 mkdir build_genericjs
 cd build_genericjs
-RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp -I ${CHEERP_DEST}/lib/clang/15.0.0/include" LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
+RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
 make clean
 make -j8
 make install
 cd ..
 mkdir build_asmjs
 cd build_asmjs
-RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm -I ${CHEERP_DEST}/lib/clang/15.0.0/include" LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
+RANLIB="${CHEERP_DEST}/bin/llvm-ar s" AR="${CHEERP_DEST}/bin/llvm-ar"  CC="${CHEERP_DEST}/bin/clang -target cheerp-wasm LD="${CHEERP_DEST}/bin/llvm-link" CFLAGS="-Wno-int-conversion" ../configure --target=cheerp-wasm --disable-shared --prefix=${CHEERP_DEST} --with-malloc=dlmalloc
 make clean
 make -j8
 make install
