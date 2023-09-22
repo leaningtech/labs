@@ -38,58 +38,9 @@ function buildToc(headings: BasicHeading[]) {
 }
 ---
 
-<aside
-	is="docs-sidebar"
-	class="bg-stone-800 lg:bg-stone-900 fixed lg:sticky top-[65px] z-10 px-8 pb-8 w-full sm:w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
->
-	<nav>
-		<h5 class="font-semibold mb-1 leading-7 text-stone-300">On this page</h5>
-		<ol>
-			{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-		</ol>
-	</nav>
-</aside>
-
-<script>
-	function loadPos(): number {
-		const pos = parseFloat(
-			sessionStorage.getItem("docs-sidebar-scroll") || "0",
-		);
-		if (isNaN(pos)) return 0;
-		return pos;
-	}
-
-	function savePos(pos: number) {
-		sessionStorage.setItem("docs-sidebar-scroll", pos.toString());
-	}
-	class TableOfContents extends HTMLElement {
-		constructor() {
-			super();
-
-			// Maintain scroll position across page reloads
-			this.scrollTop = loadPos();
-			window.addEventListener("beforeunload", () => {
-				savePos(this.scrollTop);
-			});
-
-			// If the active item is out of view, scroll so it is in the center
-			const activeEl = this.querySelector<HTMLLIElement>("li[data-is-active]");
-			if (activeEl) {
-				const scrollRect = this.getBoundingClientRect();
-				const activeRect = activeEl.getBoundingClientRect();
-
-				const top = activeEl.offsetTop;
-				const bottom = top - scrollRect.height + activeRect.height;
-
-				if (this.scrollTop > top || this.scrollTop < bottom) {
-					this.scrollTop = top - scrollRect.height / 2 + activeRect.height / 2;
-				}
-			} else {
-				console.warn("docs-sidebar didn't find active link");
-			}
-		}
-	}
-	customElements.define("tableOfContents", TableOfContents, {
-		extends: "aside",
-	});
-</script>
+<nav>
+	<h5 class="font-semibold mb-1 leading-7 text-stone-300">On this page</h5>
+	<ol>
+		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+	</ol>
+</nav>
