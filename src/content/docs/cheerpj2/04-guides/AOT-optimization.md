@@ -55,7 +55,5 @@ done
 
 ## Further reading
 
-- [Startup time optimization](cheerpj2/guides/Startup-time-optimization)
 - [Command line options](/cheerpj2/reference/Command-Line-Options)
-- [Run a Java application](/cheerpj2/getting-started/Java-app)
-- [Run a Java applet](/cheerpj2/getting-started/Java-applet)
+- [Startup time optimization](cheerpj2/guides/Startup-time-optimization)
