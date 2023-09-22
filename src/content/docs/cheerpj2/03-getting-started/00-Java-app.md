@@ -1,14 +1,14 @@
 ---
-title: Run a Java Application
+title: Run a Java application
 ---
 
-CheerpJ can run a Java application in the browser with to no modifications. This page will help you getting started with CheerpJ and running your first Java application in the browser.
+CheerpJ can run a Java application in the browser with little to no modifications. This page will help you getting started with CheerpJ and running your first Java application in the browser.
 
 Java source code is not needed to use CheerpJ. If you are building your own application you should already have its `.jar` file(s).
 
 **To get started you will need:**
 
-- Your java application file(s). You can also use this [TextDemo.jar](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/TextDemoProject/TextDemo.jar) sample.
+- Your Java application file(s). You can also use this [TextDemo.jar](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/TextDemoProject/TextDemo.jar) sample.
 - An HTML file where your Java app will be wrapped
 - A simple HTTP server to test your webpage locally
 
@@ -34,15 +34,16 @@ Let's create a basic HTML file like the following example. Please notice the Che
 		<title>CheerpJ test</title>
 		<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
 	</head>
-	<body></body>
-	<script>
-		cheerpjInit();
-		cheerpjCreateDisplay(800, 600);
-		cheerpjRunMain(
-			"ChangeThisToYourClassName",
-			"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
-		);
-	</script>
+	<body>
+		<script>
+			cheerpjInit();
+			cheerpjCreateDisplay(800, 600);
+			cheerpjRunMain(
+				"ChangeThisToYourClassName",
+				"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
+			);
+		</script>
+	</body>
 </html>
 ```
 
@@ -79,4 +80,4 @@ You will see the CheerpJ display on your browser with some loading messages befo
 ## Further reading
 
 - [AOT optimization](/cheerpj2/guides/AOT-optimization)
-- [Runtime API](http://localhost:3000/cheerpj2/reference/Runtime-API)
+- [Runtime API](/cheerpj2/reference/Runtime-API)
