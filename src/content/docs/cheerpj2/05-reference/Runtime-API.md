@@ -78,7 +78,7 @@ An object containing callbacks that CheerpJ will use to report various informati
 
 #### `jsLoadReason(scriptName, directReason, userReason)`
 
->Please note that enabling this listener may have significant performance impact and should not be used in production**
+> **Warning:** enabling this listener may have significant performance impact and should not be used in production.
 
 For each new .jar.js to be loaded, CheerpJ will call this function. This can be useful to debug the reason why some parts of the runtime are loaded, if unexpected.
 
@@ -95,7 +95,7 @@ cheerpjInit({listener:cheerpjListener});
 
 #### `preloadProgress(loadedFiles, totalFiles)`
 
-This listener may be used in combination with [[preloading support | Startup-time-optimization#preload-resources]] to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
+This listener may be used in combination with [`preloadResources`](#preloadresources) to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
 
 - `loadedFiles`: How many files have been preloaded so far
 - `totalFiles`: How many files needs to be preloaded in total. This number may increment during the loading phase. CheerpJ has a prediction mechanism and may preload additional resources depending on application behaviour
@@ -177,6 +177,10 @@ cheerpjInit({
 	},
 });
 ```
+
+#### `enablePreciseAppletArchives`
+
+Boolean option which enables a special applet classloader.
 
 ## Graphics
 
