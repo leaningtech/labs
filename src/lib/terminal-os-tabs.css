@@ -1,0 +1,37 @@
+.expressive-code {
+	@apply my-4;
+
+	& code {
+		@apply !font-mono;
+	}
+
+	& .has-tabs {
+		justify-content: start !important;
+		@apply !p-2;
+
+		/* Remove traffic lights */
+		&::before,
+		& .title {
+			display: none;
+		}
+
+		/* Allow buttons to be clicked */
+		&::after {
+			pointer-events: none;
+		}
+
+		& .tab-button {
+			border: none;
+			border-radius: 0;
+			background: transparent;
+			cursor: pointer;
+
+			@apply text-slate-500;
+
+			&.is-active,
+			&:hover {
+				@apply text-slate-300;
+			}
+		}
+	}
+}
