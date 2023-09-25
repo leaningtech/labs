@@ -22,7 +22,7 @@ Cheerp is designed to give you full access to all browser APIs, including WebWor
 
 You can use Cheerp to generate JavaScript running in the Worker, JavaScript in the main page that run a Worker, or both. Below you find a trivial example ported from http://www.html5rocks.com/en/tutorials/workers/basics/.
 
-```cpp
+```cpp title="cheerpWorkerHost.cpp"
 // cheerpWorkerHost.cpp: Code to include in the HTML page
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
@@ -39,8 +39,8 @@ void webMain()
 }
 ```
 
-```cpp
-// cheerpWorker.cpp: Code that run inside the worker
+```cpp title="cheerpWorker.cpp"
+// cheerpWorker.cpp: Code that runs inside the worker
 #include <cheerp/clientlib.h>
 #include <cheerp/client.h>
 
@@ -58,14 +58,14 @@ void webMain()
 
 You can build these files using the following commands:
 
-```
+```shell
 /opt/cheerp/bin/clang++ -O3 cheerpWorkerHost.cpp -o cheerpWorkerHost.js
 /opt/cheerp/bin/clang++ -O3 cheerpWorker.cpp -o cheerpWorker.js
 ```
 
 For your convenience here is the needed HTML to execute the code
 
-```html
+```html title="cheerpWorker.html"
 <!doctype html>
 <html lang="en">
 	<head>
