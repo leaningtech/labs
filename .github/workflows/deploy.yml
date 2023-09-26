@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  purge_cache:
+    name: Purge Cloudflare cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep to allow Pages to build
+        run: sleep 60
+      - name: Purge cache
+        run: |
+          curl --request POST \
+            --url https://api.cloudflare.com/client/v4/zones/2ab0c67ef74c8cb12474c3f7d76b1ac1/purge_cache \
+            --header 'Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}' \
+            --data '{ "purge_everything": true }'
