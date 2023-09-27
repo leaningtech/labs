@@ -7,6 +7,7 @@ import pagefind from "astro-pagefind";
 import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
 import astroExpressiveCode from "astro-expressive-code";
+import remarkObsidianCallout from "remark-obsidian-callout";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
@@ -29,11 +30,19 @@ export default defineConfig({
 		shikiConfig: {
 			theme: "dracula",
 		},
+		remarkPlugins: [
+			[
+				remarkObsidianCallout,
+				{
+					blockquoteClass: "not-prose",
+				},
+			],
+		],
 	},
 	compressHTML: prod,
 	build: {
 		format: "file",
-		inlineStylesheets: "auto",
+		inlineStylesheets: "always",
 	},
 	trailingSlash: "never",
 });

@@ -8,7 +8,7 @@ This tutorial will guide you through the steps to create a simple game of pong i
 
 Let's create a new C++ file `pong.cpp` as follows:
 
-```cpp
+```cpp title="pong.cpp"
 #include <cheerp/clientlib.h>
 #include <cheerp/client.h>
 
@@ -33,7 +33,7 @@ This command will generate two files: a JavaScript loader (`pong.js`) and a WebA
 
 All we need to run this Hello World is a simple HTML page:
 
-```html
+```html title="pong.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -63,7 +63,7 @@ What we will do in this tutorial is keeping all the Canvas manipulation in the J
 
 Let's have a look a this example:
 
-```cpp
+```cpp title="pong.cpp"
 #include <cheerp/clientlib.h>
 #include <cheerp/client.h>
 
@@ -120,7 +120,7 @@ For this, we will create a `Platform` object, which will be the only controllabl
 
 Let’s create a new class for the Platform. We will **not** use the [[cheerp::genericjs]] attribute on this class so that all it’s code will be compiled in WebAssembly.
 
-```cpp
+```cpp title="pong.cpp"
 class Platform
 {
 private:
@@ -170,7 +170,7 @@ The class has some basic properties and a render function which then delegates t
 
 We now need an instance of the Platform object, let’s put it in the global scope for convenience, and also add a top level function `mainLoop` to handle the main loop of the application. This function will clear the background and then render the platform:
 
-```cpp
+```cpp title="pong.cpp"
 // Define a global instance for the platform object. A more serious game
 // would manage these objects dynamically
 Platform platform(185, 380, 30, 7);
@@ -215,7 +215,7 @@ We now need to be able to move the platform around. We will add a `keydown` even
 
 Let's add two new methods to `Platform`:
 
-```cpp
+```cpp title="pong.cpp"
     	void moveLeft()
     	{
             x -= 5;
@@ -229,7 +229,7 @@ Let's add two new methods to `Platform`:
 
 as well as a keyDown event handler to the Graphics class which lives in `genericjs` code.
 
-```cpp
+```cpp title="pong.cpp"
 void Graphics::keyDownHandler(client::KeyboardEvent* e)
 {
     	if(e->get_keyCode() == 37)
@@ -241,7 +241,7 @@ void Graphics::keyDownHandler(client::KeyboardEvent* e)
 
 Let's also register an `EventListener` in `Graphics::initializeCanvas`.
 
-```cpp
+```cpp title="pong.cpp"
     			client::document.addEventListener("keydown", cheerp::Callback(keyDownHandler));
 ```
 
@@ -253,7 +253,7 @@ You should now be able to move the paddle around like this:
 
 We'll now focus on the ball. We will create a `Ball` class, including a basic physical model of position and velocity. We will keep this class in WebAssembly, so no need for a `[[cheerp::genericjs]]` tag.
 
-```cpp
+```cpp title="pong.cpp"
 class Ball
 {
 private:
@@ -301,7 +301,7 @@ The `Ball` class has methods to update its position, check for collisions and fo
 
 To visualize our ball on screen we need to implement `Graphics::drawCircle`:
 
-```cpp
+```cpp title="pong.cpp"
         static void drawCircle(int x, int y, int radius, int rgb)
         {
                 int r = rgb&0xff;
@@ -316,13 +316,13 @@ To visualize our ball on screen we need to implement `Graphics::drawCircle`:
 
 And, as with `Platform`, instantiate a `Ball` object in the global scope.
 
-```cpp
+```cpp title="pong.cpp"
 Ball ball(200, 200, 2, -2);
 ```
 
 We will now expand the `mainLoop` method to call them in sequence. `Ball::collide` also checks if the ball has gone past the bottom of the screen, which is our losing condition, and `mainLoop` is going to report that by drawing some text.
 
-```cpp
+```cpp title="pong.cpp"
 void mainLoop()
 {
     	// Reset the background to black

@@ -12,13 +12,13 @@ To add it to your system you have two options:
 
 add the following line to /etc/apt/sources.list
 
-```
+```sh
 deb http://ppa.launchpad.net/leaningtech-dev/cheerp-ppa/ubuntu focal main
 ```
 
 and import the key for apt with the command
 
-```
+```sh
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 84540D4B9BF457D5
 sudo apt-get update
 ```
@@ -29,7 +29,7 @@ or
 
 run the following command
 
-```
+```sh
 sudo add-apt-repository ppa:leaningtech-dev/cheerp-ppa
 sudo apt-get update
 ```
@@ -38,6 +38,6 @@ sudo apt-get update
 
 To install all cheerp components, run
 
-```
+```sh
 apt-get install cheerp-core
 ```

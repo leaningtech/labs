@@ -10,7 +10,7 @@ We provide a repo with stable builds at https://rpm.leaningtech.com/stable and a
 
 To install Cheerp just add the repo configuration file (Stable in this case):
 
-```
+```sh
 cat << EOF > /etc/yum.repos.d/cheerp.repo
 [Cheerp-Stable]
 name=Cheerp Stable
@@ -23,7 +23,7 @@ EOF
 
 And install the `cheerp-core` package:
 
-```
+```sh
 yum install cheerp-core
 ```
 

@@ -63,11 +63,14 @@ void webMain()
 ```
 
 Compiling with:
-`/opt/cheerp/bin/clang++ -O3 dom.cpp -o dom.js`
+
+```shell
+/opt/cheerp/bin/clang++ -O3 dom.cpp -o dom.js
+```
 
 Now we need a [html file](/cheerp/tutorials/dom_access/dom.html):
 
-```html
+```html title="dom.html"
 <!doctype html>
 <html lang="en">
 	<head>

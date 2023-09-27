@@ -10,18 +10,14 @@ Cheerp in itself has no dependencies, but the recommended workflow and the tutor
 - an HTTP server (such as http-server)
 - a web browser
 
-If you don't have these, see [recommended workflow](/cheerp/tutorials/getting-started/recommended-workflow). If you're not sure, make sure that the following commands work in your terminal:
-
-1. `/opt/cheerp/bin/clang++ --version` (`C:\cheerp\bin\clang++ --version` on Windows systems)
-2. `nodejs --version`
-3. `http-server -o`
+If you don't have these, see [recommended workflow](/cheerp/tutorials/getting-started/recommended-workflow).
 
 ## Compiling your first application
 
 You are now ready for compiling your first Web application using Cheerp.
 Move to a folder of your choice and save the following C++ program as `hello.cpp`.
 
-```cpp
+```cpp title="hello.cpp"
 // The cheerp/clientlib.h header contains declarations for the browser APIs
 #include <cheerp/clientlib.h>
 
@@ -34,19 +30,19 @@ void webMain()
 
 You can then compile this program using the following command line:
 
-```
+```shell
 /opt/cheerp/bin/clang++ -target cheerp hello.cpp -o hello.js
 ```
 
 Great, you have compiled your first program with Cheerp. You can now run the generated JavaScript directly with
 
-```
-nodejs hello.js
+```shell
+node hello.js
 ```
 
 You can also save this HTML file as `hello.html`:
 
-```html
+```html title="hello.html"
 <!doctype html>
 <html lang="en">
 	<head>

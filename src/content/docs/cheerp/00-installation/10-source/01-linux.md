@@ -174,22 +174,6 @@ cmake --install build_asmjs
 cd ../..
 ```
 
-## "Hello, World" in Cheerp
-
-```cpp
-//save as example.cpp
-#include <iostream>
-
-int main()
-{
-    std::cout << "Hello, World!\n";
-    return 0;
-}
-```
-
-`/opt/cheerp/bin/clang++ example.cpp -o cheerp_example.js -O3 && node cheerp_example.js`
-Should compile and execute the relevant file.
-
 ## Cheerp unit tests
 
 ```bash
