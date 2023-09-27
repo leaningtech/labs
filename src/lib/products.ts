@@ -26,7 +26,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	cheerpj2: {
 		id: "cheerpj2",
-		name: "CheerpJ 2",
+		name: "CheerpJ",
 		href: "/cheerpj2",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
@@ -35,7 +35,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	cheerpj3: {
 		id: "cheerpj3",
-		name: "CheerpJ 3",
+		name: "CheerpJ",
 		href: "/cheerpj3",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",

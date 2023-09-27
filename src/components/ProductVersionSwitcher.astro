@@ -1,0 +1,34 @@
+---
+import type { ProductData } from "@/lib/products";
+
+interface Props {
+	product: ProductData;
+}
+
+const { product } = Astro.props;
+---
+
+<div class="flex items-center justify-end gap-2">
+	{product.id === "cheerpj3" && <div>Preview</div>}
+
+	<label for="version-switcher" class="sr-only">Version</label>
+	<select
+		class="px-2 py-1 rounded bg-stone-950 text-stone-400 font-medium"
+		id="version-switcher"
+	>
+		<option value="cheerpj3" selected={product.id === "cheerpj3"}> v3</option>
+		<option value="cheerpj2" selected={product.id === "cheerpj2"}> v2</option>
+	</select>
+</div>
+
+<script>
+	const select = document.getElementById(
+		"version-switcher",
+	) as HTMLSelectElement;
+	select.addEventListener("change", () => {
+		location.pathname = location.pathname.replace(
+			/\/cheerpj\d/,
+			`/${select.value}`,
+		);
+	});
+</script>
