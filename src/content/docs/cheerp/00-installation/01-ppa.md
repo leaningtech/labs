@@ -36,7 +36,7 @@ sudo apt-get update
 
 ## Install packages
 
-To install all cheerp components, run
+To install all Cheerp components, run
 
 ```
 apt-get install cheerp-core
