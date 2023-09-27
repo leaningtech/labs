@@ -1,15 +1,39 @@
 ---
 title: CheerpJ 2
-subtitle: Java to WebAssembly and JavaScript compiler and JVM replacement
+subtitle: JVM replacement for the browser
 ---
 
-CheerpJ 2 is a Java bytecode to WebAssembly and JavaScript compiler and JVM replacement, compatible with 100% of Java 8, which allows to compile any Java SE application, library or Java applet into a WebAssembly/JavaScript application so that can be runned on the browser.
-
-Please visit the project [website](https://cheerpj.com/).
-
-## What is CheerpJ?
+CheerpJ is a **drop-in replacement** for the JVM, and is compatible with 100% of Java 8, including Swing, reflection and dynamic class loading.
 
 ![](/cheerpj2/assets/cheerpj_visual_2.png)
+
+With CheerpJ, you can:
+
+- Run existing **Java applications** in the browser with no changes
+- Include **Java applets** in webpages without legacy plugins
+- Migrate **Java Web Start / JNLP** applications to work on modern systems
+- Use Java libraries in JavaScript/TypeScript seamlessly
+
+## Getting started
+
+Know what you're building? Jump straight to the relevant tutorial:
+
+<div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
+  <a href="/cheerpj2/getting-started/Java-app" class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg">
+    Application
+  </a>
+  <a href="/cheerpj2/getting-started/Java-applet" class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg">
+    Applet
+  </a>
+  <!--<a href="/cheerpj2/getting-started/Java-app" class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg">
+    Java Web Start / JNLP
+  </a>-->
+  <a href="/cheerpj2/getting-started/Java-library" class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg">
+    Library
+  </a>
+</div>
+
+## What is CheerpJ?
 
 **CheerpJ is constituted of three components:**
 
@@ -26,16 +50,16 @@ Please visit the project [website](https://cheerpj.com/).
 5. CheerpJ enables bidirectional Java-JavaScript interoperability. JavaScript libraries, as well as the DOM, can be called and manipulated from Java. Converted Java modules can be invoked from JavaScript.
 6. CheerpJ supports Java multi-threading. In addition, it allows to create concurrent applications by using WebWorkers.
 
-## Getting Started
+## Licensing
 
-You can download CheerpJ for Linux, Windows and macOS on our [website](https://leaningtech.com/cheerpj/)
-
-If you are unsure how to start, try our [run a Java application](/cheerpj2/getting-started/Java-app) or [run a Java applet](/cheerpj2/getting-started/Java-applet) tutorials.
+CheerpJ is free for technical evaluation and non-commercial use. See [licensing](https://cheerpj.com/licensing/) for details.
 
 ## Demos
 
-Several demos of CheerpJ can be found [here](https://leaningtech.com/demo/?cheerpjfilter).
+Several demos of CheerpJ can be found [here](https://leaningtech.com/demo/).
 
-## Bugs and Questions
+## Feedback
 
-We welcome any feedback and bug report on it through our [Issue Tracking](https://github.com/leaningtech/cheerpj-meta/issues).
+[Report issues on GitHub](https://github.com/leaningtech/cheerpj-meta/issues)
+
+[Join the Discord server](https://discord.leaningtech.com/)
