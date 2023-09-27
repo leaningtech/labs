@@ -1,10 +1,10 @@
 ---
-title: Using web workers
+title: Using Web Workers
 ---
 
-## Using the JavaScript web workers API
+## Using the JavaScript Web Workers API
 
-CheerpJ supports running Java code in the background using Web Workers. To use this functionality you need to include the `loader.js` script as usual (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described in [JavaScript web worker API](/cheerpj2/reference/WebWorker-API#javascript-web-worker-api). You can use CheerpJ in the main thread at the same time.
+CheerpJ supports running Java code in the background using Web Workers. To use this functionality you need to include the `loader.js` script as usual (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described in [JavaScript Web Worker API](/cheerpj2/reference/WebWorker-API#javascript-web-worker-api). You can use CheerpJ in the main thread at the same time.
 
 All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript `Promise`s, and you can use `.then(...)`, `.catch(...)` and `async/await` with them.
 
@@ -23,7 +23,7 @@ This starts the WebWorker and initializes CheerpJ in that context. All workers n
 
 ### Parameters and return values
 
-Web workers do not share any memory with the main threads, and all interactions happen through messages. This imposes limitations on the type of data that can be passed around.
+Web Workers do not share any memory with the main threads, and all interactions happen through messages. This imposes limitations on the type of data that can be passed around.
 
 | Data type                                    | Limitations                                 |
 | -------------------------------------------- | ------------------------------------------- |
@@ -38,13 +38,13 @@ It is possible to move Java arrays from the main thread and others `CheerpJWorke
 
 Java Strings, being Java objects, cannot be passed or returned. But JavaScript strings can be used as parameters and will be converted to Java Strings directly in the WebWorker context.
 
-## Using the Java API for web workers
+## Using the Java API for Web Workers
 
 CheerpJ exposes a custom API to access this feature directly from Java code. The API is equivalent in terms of capabilities. This API is blocking, so to actually take advantage of concurrency between the main thread and Web Workers it is necessary to use this API from a Java thread.
 
 The Java version of the API is also extended to support `long`s in parameters and returned values. Currently they are converted to native JS values when passed to Workers, so their range is limited to +/-2^52.
 
-See the reference for [Java web worker API](/cheerpj2/reference/WebWorker-API#java-web-worker-api)
+See the reference for [Java Web Worker API](/cheerpj2/reference/WebWorker-API#java-web-worker-api)
 
 Example usage:
 
@@ -69,4 +69,4 @@ javac -cp cheerpj_install_dir/cheerpj-public.jar WW.java
 
 ## Further reading
 
-- [Web worker APIs (reference)](/cheerpj2/reference/WebWorker-API)
+- [Web Worker APIs (reference)](/cheerpj2/reference/WebWorker-API)

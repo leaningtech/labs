@@ -4,7 +4,7 @@ title: AOT Optimization
 
 CheerpJ compiles unmodified `.jar` files to JavaScript as an optimization step. CheerpJ AOT compiler is very easy to use, this page will guide you step by step into compiling an unmodified `.jar` file to a `.jar.js` file. We will also create a basic HTML file integrated with the CheerpJ loader to run the Java application in the browser.
 
-This optimization is not required for running a Java application or applet in the browser but it enhaces performance. Before doing any compilation it is recommended to first run your application without the AOT optimization to ensure everything works.
+This optimization is not required for running a Java application or applet in the browser but it enhances performance. Before doing any compilation it is recommended to first run your application without the AOT optimization to ensure everything works.
 
 ## CheerpJ AOT compiler installation
 

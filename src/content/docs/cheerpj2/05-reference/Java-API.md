@@ -26,7 +26,7 @@ Converts a JSString to a Java String.
 String mystring = Global.JavaString("Hello!");
 ```
 
-## Global.jsCall / jsCallI /j sCallD / jsCallS
+## Global.jsCall / jsCallI / jsCallD / jsCallS
 
 Calls an arbitrary JavaScript function.
 | Method | Parameters | Output |

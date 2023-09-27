@@ -8,6 +8,8 @@ CheerpJ exposes a simple JavaScript API to interact with a Java application conv
 
 ### cheerpjInit
 
+`cheerpjInit(options)`
+
 `cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment. `cheerpjInit` accepts an optional object argument which can be used to set options.
 
 This method is to be invoked as follows:
@@ -58,9 +60,17 @@ cheerpjInit({ disableLoadTimeReporting: true });
 
 When this option is set to `true` CheerpJ will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
 
+```js
+cheerpjInit({ enableInputMethods: true });
+```
+
 #### `enableProguardTrace`
 
 When this option is set to `true` CheerpJ will automatically keep track of the classes actually used at runtime. Moreover, it will also keep track of classes which are accessed by reflection. After the application has been fully tested you can use the `cjGetProguardConfiguration()` function from the browser console to download a ProGuard configuration file (`cheerpj.pro`) that you can directly use with ProGuard to remove unneeded classes, methods and fields from the application, greatly reducing the download size and startup time.
+
+```js
+cheerpjInit({ enableProguardTrace: true });
+```
 
 #### `javaProperties`
 
@@ -76,31 +86,39 @@ cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 
 An object containing callbacks that CheerpJ will use to report various information to the user. Currently only the `jsLoadReason` and `preloadProgress` callbacks are supported.
 
-#### `jsLoadReason(scriptName, directReason, userReason)`
+```js
+cheerpjInit({ listener: cheerpjListener });
+```
+
+#### `jsLoadReason`
 
 > **Warning:** enabling this listener may have significant performance impact and should not be used in production.
 
 For each new .jar.js to be loaded, CheerpJ will call this function. This can be useful to debug the reason why some parts of the runtime are loaded, if unexpected.
 
+**Parameters:**
+
 - `scriptName`: The name of the JS file being loaded
 - `directReason`: A CheerpJ uncompressed and mangled symbol. The method that most directly caused the load. This might not be very useful since it will most often be a `java.lang.ClassLoader` method. Can be `(Internal)` if it could not be detected.
 - `userReason`: A CheerpJ uncompressed and mangled symbol. The last non-runtime method in the stack before the loading. This should be more useful in understanding the user code that introduces the dependency. Can be `(Internal)` if it could not be detected.
 
-Example usage:
+Example:
 
 ```js
 var cheerpjListener = {jsLoadReason:function(scriptName, directReason, userReason){ ... }};
 cheerpjInit({listener:cheerpjListener});
 ```
 
-#### `preloadProgress(loadedFiles, totalFiles)`
+#### `preloadProgress`
 
 This listener may be used in combination with [`preloadResources`](#preloadresources) to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
+
+**Parameters:**
 
 - `loadedFiles`: How many files have been preloaded so far
 - `totalFiles`: How many files needs to be preloaded in total. This number may increment during the loading phase. CheerpJ has a prediction mechanism and may preload additional resources depending on application behaviour
 
-Example usage:
+Example:
 
 ```js
 function showPreloadProgress(loadedFiles, totalFiles) {
@@ -163,6 +181,12 @@ This option determines the level of verbosity of CheerpJ in reporting status upd
 - `"splash"`: Enabled status reporting only during initialization. There will be no feedback after the first window is shown on screen.
 - `"none"`: Disable all status reporting.
 
+Example:
+
+```js
+cheerpjInit({ status: "splash" });
+```
+
 #### `appletParamFilter`
 
 Some applications may need to have some parameter modified before getting those inside the applet.
@@ -182,9 +206,17 @@ cheerpjInit({
 
 Boolean option which enables a special applet classloader.
 
+Example:
+
+```js
+cheerpjInit({ enablePreciseAppletArchives: true });
+```
+
 ## Graphics
 
 ### cheerpjCreateDisplay
+
+`cheerpjCreateDisplay(w, h, oldElem, useLoadingAnimation)`
 
 This method will create the HTML element that will contain all Java windows. It is only required to run graphical applications.
 
@@ -200,6 +232,8 @@ The `width` and `height` parameter represent the display area size in CSS pixels
 
 ### cheerpjRunMain
 
+`cheerpjRunMain(className, classPath, ...)`
+
 The most common way of starting an application is to use the `cheerpjRunMain` API, which lets you execute the static main method of a Java class in the classpath.
 
 ```js
@@ -213,6 +247,8 @@ cheerpjRunMain(
 
 ### cheerpjRunJar
 
+`cheerpjRunJar(jarName, ...)`
+
 Alternatively, if your JAR is designed to be executed with `java -jar my_application_archive.jar`, you can use this simpler API.
 
 ```js
@@ -220,6 +256,8 @@ cheerpjRunJar("/app/my_application_archive.jar", arg1, arg2);
 ```
 
 ### cheerpjRunJarWithClasspath
+
+`cheerpjRunJarWithClasspath(jarName, classPath, ...)`
 
 Optionally, if your JAR also need additional dependencies, you can use.
 
@@ -236,18 +274,17 @@ In all cases the arguments should be JavaScript Strings.
 
 ## Calling Java from JS
 
-### cjCall / cjNew
-
 These functions make it possible to conveniently call Java code from JS. Java code is always run asynchronously, so the returned values are `Promise`s. See below for details.
 
-Calling Java constructors from JavaScript:
+Both `cjNew` and `cjCall` return standard JavaScript `Promise`s. They can be transparently used in other calls to `cjNew/cjCall` or you can use `.then(...)` and `.catch(...)` to access the resulting value and handle errors. It is also possible to use `async/await` (either natively or through a JS transpiler) to write sync-like code using `cjNew/cjCall` as async primitives.
 
-```js
-/* Equivalent Java code: myClass object = com.my.Java.package.myClass(argument1)  */
-var object = cjNew("com.my.Java.package.myClass", argument1);
-```
+### cjCall
 
-Call static Java methods from JavaScript:
+`cjCall(objOrClassNameOrInvoker, methodName, ...)`
+
+Call static Java methods from JavaScript.
+
+Example 1:
 
 ```js
 /* Equivalent Java code: int returnVal = com.my.Java.package.myClass.method(argument1, argument2, argument3); */
@@ -260,16 +297,31 @@ var returnVal = cjCall(
 );
 ```
 
-Call Java methods from JavaScript:
+Example 2:
 
 ```js
 /* Equivalent Java code: int returnVal = object.method(argument1, argument2, argument3); */
 var returnVal = cjCall(object, "method", argument1, argument2, argument3);
 ```
 
-Both `cjNew` and `cjCall` return standard JavaScript `Promise`s. They can be transparently used in other calls to `cjNew/cjCall` or you can use `.then(...)` and `.catch(...)` to access the resulting value and handle errors. It is also possible to use `async/await` (either natively or through a JS transpiler) to write sync-like code using `cjNew/cjCall` as async primitives.
+### cjNew
+
+`cjNew(classNameOrInvoker, ...)`
+
+Calls Java constructors from JavaScript.
+
+Example:
+
+```js
+/* Equivalent Java code: myClass object = com.my.Java.package.myClass(argument1)  */
+var object = cjNew("com.my.Java.package.myClass", argument1);
+```
 
 ### cjResolveCall / cjResolveNew
+
+`cjResolveCall(className, methodName, types)`
+
+`cjResolveNew(className, types)`
 
 Using `cjCall/cjNew` is convenient, but under the hood Java reflection APIs are used, which may have a significant performance impact if used heavily. If you plan to use `cjCall/cjNew` many times it is convenient to go through reflection APIs only once by using the `cjResolveCall/cjResolveNew` API.
 
@@ -322,13 +374,19 @@ Please note that this convenient form can unfortunately only be used on the main
 
 ## Data conversion
 
-### cjStringJavaToJs(str) / cjStringJsToJava(str)
+### cjStringJavaToJs
+
+`cjStringJavaToJs(javaString)`
 
 ```js
 var jsString = cjStringJavaToJs(javaString);
 ```
 
 This converts a Java string into a JavaScript string. This operation implies a copy.
+
+### cjStringJsToJava
+
+`cjStringJsToJava(jsString)`
 
 ```java
 String javaString = cjStringJStoJava(jsString);
@@ -337,6 +395,8 @@ String javaString = cjStringJStoJava(jsString);
 This converts a JavaScript string into a Java string. This operations also implies a copy. String parameters passed to `cheerpjRunMain`, `cjCall` and `cjNew` are automatically converted so it is not necessary to use this methods in that case.
 
 ### cjTypedArrayToJava
+
+`cjTypedArrayToJava(array)`
 
 Converts a TypedArray to a Java compatible primitive array. This operation implies a copy. Data is converted as follows:
 
@@ -356,3 +416,29 @@ Converts a TypedArray to a Java compatible primitive array. This operation impli
 ### cjGetRuntimeResources<a name="cjGetRuntimeResources"></a>
 
 Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). It is a list of files that have been loaded from the runtime up to the time this function is called.
+
+## Filesystem
+
+### cjFileBlob
+
+`cjFileBlob(fileName)`
+
+Used to download files from the CheerpJ filesystem. It returns a promise that eventually resolve to a Blob object, which can be downloaded with standard HTML5 techniques.
+
+### cheerpjAddStringFile
+
+`cheerpjAddStringFile(fileName, str)`
+
+Used to add files into the `/str/` mount point filesystem.
+
+Example:
+
+```js
+cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
+```
+
+## Tracing
+
+### cjGetProguardConfiguration
+
+To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`). See [enableProguardTrace](/cheerpj2/reference/Runtime-API#enableproguardtrace).

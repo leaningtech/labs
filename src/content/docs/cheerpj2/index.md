@@ -3,7 +3,7 @@ title: CheerpJ 2
 subtitle: Java to WebAssembly and JavaScript compiler and JVM replacement
 ---
 
-CheerpJ 2 is a Java bytecode to WebAssembly and JavaScript compiler and JVM replacement, compatible with 100% of Java 8, which allows to compile any Java SE application, library or Java applet into a WebAssembly/JavaScript application so that can be runned on the browser.
+CheerpJ 2 is a Java bytecode to WebAssembly and JavaScript compiler and JVM replacement, compatible with 100% of Java 8, which allows to compile any Java SE application, library or Java applet into a WebAssembly/JavaScript application so that can be ran on the browser.
 
 Please visit the project [website](https://cheerpj.com/).
 

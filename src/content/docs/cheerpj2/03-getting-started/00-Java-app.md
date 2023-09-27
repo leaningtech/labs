@@ -68,7 +68,7 @@ http-server -p 8080
 
 - CheerpJ loader is included from our cloud runtime as
   `<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>`.
-- CheerpJ runtime environment is initilized by `cheerpjInit()`.
+- CheerpJ runtime environment is initialized by `cheerpjInit()`.
 - `cheerpjCreateDisplay()` creates a graphical environment to contain all Java windows
 - `cheerpjRunMain()` executes the `main` method of `ChangeThisToYourClassName`. The second parameter is a `:` separated list of `.jar` files where application classes can be found (the classpath).
 - The `/app/` is a virtual file system mount point that reference the root of the web server this page is loaded from.

@@ -15,9 +15,11 @@ w.cheerpjInit().then(function (e) {
 });
 ```
 
-For more information visit the [Using web workers](/cheerpj2/guides/Using-web-workers) guide.
+For more information visit the [Using Web Workers](/cheerpj2/guides/Using-web-workers) guide.
 
 ### CheerpJWorker.cheerpjRunMain
+
+`cheerpjRunMain(className, classPath, ...)`
 
 Runs a Java main method in the WebWorker context
 
@@ -27,6 +29,8 @@ w.cheerpjRunMain("ClassName", classPath, arg1, arg2).then(...)
 
 ### CheerpJWorker.cjCall
 
+`cjCall(objOrClassNameOrInvoker, methodName, ...)`
+
 Executes a static Java method in the WebWorker content
 
 ```js
@@ -34,6 +38,8 @@ w.cjCall("ClassName", "methodName", arg1, arg2).then(...)
 ```
 
 ### CheerpJWorker.cjResolveCall
+
+`cjResolveCall(className, methodName, types)`
 
 Uses Java reflection to resolve the method and returns an opaque handle to it. This handle can then be used multiple times without using Java reflection again.
 
@@ -46,11 +52,23 @@ w.cjResolveCall("ClassName", "methodName", null).then( // or array of parameter 
 );
 ```
 
+### CheerpJWorker.cjFileBlob
+
+`cjFileBlob(fileName)`
+
+Used to download files from the CheerpJ filesystem. It returns a promise that eventually resolve to a Blob object, which can be downloaded with standard HTML5 techniques.
+
+### CheerpJWorkercheerpj.AddStringFile
+
+`AddStringFile(fileName, str)`
+
+Used to add files into the `/str/` mount point filesystem.
+
 ## Java Web Worker API
 
 ### Worker
 
-Initializes the Worker object, this method is blocking
+Initializes the Worker object, this method is blocking.
 
 ```java
 Worker w = new Worker();
@@ -59,7 +77,7 @@ Worker w = new Worker();
 
 ### runMain
 
-Runs the main method of the given class in the Web Worker context, this method is blocking
+Runs the main method of the given class in the Web Worker context, this method is blocking.
 
 | Parameters                                        | Output |
 | ------------------------------------------------- | ------ |
@@ -102,4 +120,4 @@ Runs the given resolved method handle in the Web Worker context, this method is 
 
 ## Further reading
 
-- [Using web workers (guide)](/cheerpj2/guides/Using-web-workers)
+- [Using Web Workers (guide)](/cheerpj2/guides/Using-web-workers)
