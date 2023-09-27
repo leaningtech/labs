@@ -3,8 +3,6 @@ import type { NavDirectory } from "../lib/nav";
 
 import { Icon } from "astro-icon";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
-import BlogPostPill from "./BlogPostPill.astro";
-import { latestFeaturedPost } from "../lib/blog";
 import { productFromUrl as productFromUrl } from "../lib/products";
 import { Image } from "astro:assets";
 
@@ -37,8 +35,6 @@ const { directory } = Astro.props;
 	},
 ];*/
 
-const post = await latestFeaturedPost(Astro.url);
-
 const product = productFromUrl(Astro.url);
 if (!product) {
 	throw new Error(`unable to derive product from url: ${Astro.url.pathname}`);
@@ -53,7 +49,6 @@ if (!product) {
 		<a href={product.href} class="block mb-4">
 			<Image src={product.logotype} alt={product.name} class="h-20" />
 		</a>
-		{post && <BlogPostPill {post} />}
 
 		<div
 			class="hidden absolute bottom--8 lg:block w-full h-8 bg-gradient-to-b from-stone-900 pointer-events-none"

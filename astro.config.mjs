@@ -8,6 +8,7 @@ import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
 import astroExpressiveCode from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
+import { resolve } from "node:path";
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
@@ -45,4 +46,14 @@ export default defineConfig({
 		inlineStylesheets: "always",
 	},
 	trailingSlash: "never",
+	vite: {
+		resolve: {
+			alias: [
+				{
+					find: "@",
+					replacement: resolve("./src/"),
+				},
+			],
+		},
+	},
 });
