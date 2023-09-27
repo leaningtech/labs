@@ -42,7 +42,7 @@ export default defineConfig({
 	compressHTML: prod,
 	build: {
 		format: "file",
-		inlineStylesheets: "auto",
+		inlineStylesheets: "always",
 	},
 	trailingSlash: "never",
 });
