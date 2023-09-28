@@ -2,7 +2,7 @@
 title: Java API
 ---
 
-An additional jar (`cheerpj-dom.jar`) in the CheerpJ [downloadable archive](<(https://leaningtech.com/download-cheerpj/)>) has been provided to allow interactions with the browser DOM directly from Java.
+An additional jar (`cheerpj-dom.jar`) in the CheerpJ [downloadable archive](https://leaningtech.com/download-cheerpj/) has been provided to allow interactions with the browser DOM directly from Java.
 
 This JAR provides declarations for all of the relevant Java interfaces and classes. In particular you will find them wrapped in the `com.leaningtech.client` package, for example the `Document` interface of the browser (documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Document)) becomes `com.leaningtech.client.Document` with CheerpJ.
 
