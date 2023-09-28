@@ -2,7 +2,7 @@
 title: DOM and JavaScript interoperability
 ---
 
-CheerpJ allows users to interact with the browser DOM directly from Java, without overhead. To achieve this you will need to use the CheerpJ [Java API](/cheerpj2/reference/Java-API) (`cheerpj-dom.jar`) and found at the CheerpJ [downloadable archive](<(https://leaningtech.com/download-cheerpj/)>). Usage examples are shown below.
+CheerpJ allows users to interact with the browser DOM directly from Java, without overhead. To achieve this you will need to use the CheerpJ [Java API](/cheerpj2/reference/Java-API) (`cheerpj-dom.jar`) and found at the CheerpJ [downloadable archive](https://leaningtech.com/download-cheerpj/). Usage examples are shown below.
 
 ## Basic example
 
