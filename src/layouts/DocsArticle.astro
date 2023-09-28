@@ -72,8 +72,10 @@ const contributeLinks = [
 				)
 			}
 		</main>
-		<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block">
-			<div class="space-y-10 sticky top-24">
+		<aside
+			class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky"
+		>
+			<div class="space-y-10">
 				{headings && <TableOfContents {headings} />}
 				<section>
 					<h5 class="font-semibold mb-1 leading-7 text-stone-300">

@@ -30,7 +30,7 @@ A few selected Java Swing examples to demonstrate how complex Swing GUI apps can
 
 A playground to compile and run Java programs directly in the browser. Both console and GUI applications are supported. The standard `javac` compiler is used, since `javac` is also written in Java the whole compiler runs in the browser, together with the compiled application.
 
-- Go to the [demo](ttps://javafiddle.leaningtech.com/) (please inspect the page using the devtools).
+- Go to the [demo](https://javafiddle.leaningtech.com/) (please inspect the page using the devtools).
 
 ## iText Demo
 
