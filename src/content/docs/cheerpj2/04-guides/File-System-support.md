@@ -18,10 +18,12 @@ CheerpJ implements three main filesystem concepts:
 
 CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. The default mount points are defined as follows:
 
-1. `/app/` → An HTTP-based read-only filesystem, used to access JARs and data from your local server.
-2. `/files/` → An IndexedDB-based, persistent read-write file system
-3. `/lt/` → Another HTTP-based read-only filesystem, pointing to the CheerpJ runtime
-4. `/str/` → A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code
+| Mount     | Description                                                                                               |
+| --------- | --------------------------------------------------------------------------------------------------------- |
+| `/app/`   | An HTTP-based read-only filesystem, used to access JARs and data from your local server                   |
+| `/files/` | An IndexedDB-based, persistent read-write file system                                                     |
+| `/lt/`    | Another HTTP-based read-only filesystem, pointing to the CheerpJ runtime                                  |
+| `/str/`   | A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code |
 
 ## `/app/` mount point
 

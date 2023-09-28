@@ -41,6 +41,17 @@ virtualized
 methodName
 resolvedMethod
 preloadResources
+arg 
+className
+resolvedFunc
+funcName
+JSString
+jsCall
+runMain
+classPath
+resolveCall
+nops
+
 
 
 

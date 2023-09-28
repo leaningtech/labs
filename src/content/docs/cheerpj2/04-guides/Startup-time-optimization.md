@@ -42,7 +42,19 @@ When initialized with this option CheerpJ will keep track of the classes used at
 
 `cheerpjfy.py` supports a command line option (`--pack-jar`) to generate a minimised JAR for deployment.
 
-This smaller JAR is stripped of all original Java bytecode and can no longer be used to run the application on the JVM. The JAR is however necessary for CheerpJ to support Java reflection.
+This smaller JAR is stripped of all original Java bytecode and can no longer be used to run the application on the JVM. The JAR is however necessary for CheerpJ to support Java reflection. This optimisation can be used with our without AOT compiling.
+
+Usage example:
+
+```shell
+
+/cheerpj_2.3/cheerpjfy.py yourInput.jar --pack-jar yourOutput.jar
+
+```
+
+> It is important to use the same name on your input and output `.jar` files for your application to work. This action will overwrite your original `.jar` file with the packed one. We recommend backing up your original files somewhere else to keep their state in case you need to use them again.
+
+To use this command you will require to have java installed on your machine.
 
 More details are available [here](/cheerpj2/reference/Command-Line-Options#pack-jarpackjar)
 
@@ -66,6 +78,12 @@ The result will look like this:
 
 ```js
 ["/lts/file1", "/lt/file2"];
+```
+
+If the output is not visible fully, you can use:
+
+```js
+document.write(cjGetRuntimeResources());
 ```
 
 The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/cheerpj2/reference/Runtime-API#cjgetruntimeresources) for more information.

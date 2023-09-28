@@ -29,7 +29,7 @@ function buildToc(headings: BasicHeading[]) {
 			toc.push(heading);
 		} else if (
 			parentHeadings.get(heading.depth - 1) != undefined &&
-			heading.depth < 4
+			heading.depth < 5
 		) {
 			parentHeadings.get(heading.depth - 1).subheadings.push(heading);
 		}

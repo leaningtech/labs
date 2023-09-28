@@ -37,7 +37,16 @@ mkdir native/
 cheerpjfy.py --stub-natives=native/ some.jar
 ```
 
-This will generate a tree of directories under the `native` folder, which will replicate the Java package structure. Each class with at least one native method will generate a `ClassName_native.js` stub file with ready to be implemented.
+This will generate a tree of directories under the `native` folder, which will replicate the Java package structure. Each class with at least one native method will generate a `ClassName_native.js` stub file ready to be implemented.
+
+```js title= "Someclass_native.js"
+function _CHEERPJ_COMPRESS(ZN9Someclass16someNativeMethodEVEI)(a0,p)
+{
+	/*instance*/
+	debugger
+}
+
+```
 
 Once all have been implemented, native methods can be packaged with the compiled code using the following command:
 
@@ -45,14 +54,4 @@ Once all have been implemented, native methods can be packaged with the compiled
 cheerpjfy.py --natives=native/ some.jar
 ```
 
-## `CHEERPJ_COMPRESS(x)` macro
-
-CheerpJ uses a compression scheme to encode mangled signatures. The `CHEERPJ_COMPRESS(x)` macro will encode the argument in parenthesis following such scheme. This macro is used automatically by the `cheerpjfy.py --stub-natives=` command, but can also be used manually.
-
-## `CHEERPJ_SET_CLASS(x)` macro
-
-Set the current internal class for resolving fields when using `CHEERPJ_FIELD` and `CHEERPJ_STATIC_FIELD` macros.
-
-## `CHEERPJ_FIELD(x)` and `CHEERPJ_STATIC_FIELD(x)` macro
-
-The compiler replaces this macro with the encoded field name, it assumes the current class has been set by `CHEERPJ_SET_CLASS`.
+CheerpJ uses a compression scheme to encode mangled signatures. The `CHEERPJ_COMPRESS` macro is used automatically by the `cheerpjfy.py --stub-natives=` command, but can also be used manually. For more information about macros visit [this page](/cheerpj2/reference/Command-Line-Options#--stub-nativesnativespath).

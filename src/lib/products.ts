@@ -30,8 +30,9 @@ export const products: { [product in Product]: ProductData } = {
 		href: "/cheerpj2",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
-		subtitle: "Run Java in the browser",
-		description: "Compile Java bytecode to WebAssembly and JavaScript.",
+		subtitle: "Java Virtual Machine replacement for the browser",
+		description:
+			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 	},
 	cheerpj3: {
 		id: "cheerpj3",

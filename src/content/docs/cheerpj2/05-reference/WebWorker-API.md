@@ -1,12 +1,10 @@
 ---
-title: Web Worker API
+title: Web Worker APIs
 ---
 
-CheerpJ supports running Java code in the background using Web Workers. To use this functionality you need to include the `loader.js` script as usual (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described below. You can use CheerpJ in the main thread at the same time.
+## JavaScript Web Worker API
 
-All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript `Promise`s, and you can use `.then(...)`, `.catch(...)` and `async/await` with them.
-
-## Creating and initializing a CheerpJ worker
+### CheerpJWorker
 
 The main entry point for CheerpJ workers is the `CheerpJWorker` JS interface. It is a normal JS object and it is possible to instantiate it multiple times.
 
@@ -17,26 +15,11 @@ w.cheerpjInit().then(function (e) {
 });
 ```
 
-This starts the WebWorker and initializes CheerpJ in that context. All workers need to be initialized in this way. As a general rule the `CheerpJWorker` exposes the same API as CheerpJ in the main thread.
+For more information visit the [Using Web Workers](/cheerpj2/guides/Using-web-workers) guide.
 
-## Parameters and return values
+### CheerpJWorker.cheerpjRunMain
 
-WebWorkers do not share any memory with the main threads, and all interactions happen through messages. This imposes limitations on the type of data that can be passed around.
-
-| Data type                                    | Limitations                                 |
-| -------------------------------------------- | ------------------------------------------- |
-| byte/short/char/int/float/double             | Fully supported in params and return values |
-| byte[]/short[]/char[]/int[]/float[]/double[] | Fully supported in params and return values |
-| JavaScript String                            | Supported in params, not return values      |
-| Any Java object                              | Not supported in params or return values    |
-
-Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](/cheerpj2/reference/Runtime-API#cjtypedarraytojava).
-
-It is possible to move Java arrays from the main thread and others `CheerpJWorker`s. Please note that Java arrays are not copied, but _transferred_ across contexts. This increases efficiency, but also means that the data is not available any more from the calling thread. If the data needs be preserved you must manually make a copy.
-
-Java Strings, being Java objects, cannot be passed or returned. But JavaScript strings can be used as parameters and will be converted to Java Strings directly in the WebWorker context.
-
-## CheerpJWorker.cheerpjRunMain
+`cheerpjRunMain(className, classPath, ...)`
 
 Runs a Java main method in the WebWorker context
 
@@ -44,7 +27,9 @@ Runs a Java main method in the WebWorker context
 w.cheerpjRunMain("ClassName", classPath, arg1, arg2).then(...)
 ```
 
-## CheerpJWorker.cjCall
+### CheerpJWorker.cjCall
+
+`cjCall(objOrClassNameOrInvoker, methodName, ...)`
 
 Executes a static Java method in the WebWorker content
 
@@ -52,7 +37,9 @@ Executes a static Java method in the WebWorker content
 w.cjCall("ClassName", "methodName", arg1, arg2).then(...)
 ```
 
-## CheerpJWorker.cjResolveCall
+### CheerpJWorker.cjResolveCall
+
+`cjResolveCall(className, methodName, types)`
 
 Uses Java reflection to resolve the method and returns an opaque handle to it. This handle can then be used multiple times without using Java reflection again.
 
@@ -65,54 +52,72 @@ w.cjResolveCall("ClassName", "methodName", null).then( // or array of parameter 
 );
 ```
 
-## Java API for Workers
+### CheerpJWorker.cjFileBlob
 
-CheerpJ exposes a custom API to access this feature directly from Java code. The API is equivalent in terms of capabilities. This API is blocking, so to actually take advantage of concurrency between the main thread and Web Workers it is necessary to use this API from a Java thread.
+`cjFileBlob(fileName)`
 
-```java title="Worker.java"
-package com.leaningtech.cheerpj;
+Used to download files from the CheerpJ filesystem. It returns a promise that eventually resolve to a Blob object, which can be downloaded with standard HTML5 techniques.
 
-public class Worker
-{
-        // Initialize the Worker object, this method is blocking
-        public Worker();
-        // Runs the main method of the given class in the Web Worker context, this method is blocking
-        public void runMain(String className, String classPath, Object... arg);
-        // Runs the given static method in the Web Worker context, this method is blocking
-        public Object call(String className, String methodName, Object... arg);
-        // Same as "call". These should be used when primitives are expected.
-        public int callI(String className, String methodName, Object... arg);
-        public double callD(String className, String methodName, Object... arg);
-        public long callL(String className, String methodName, Object... arg);
-	// Returns an handle to a resolved method, this method is blocking
-	public Object resolveCall(String className, String methodName, String[] types);
-	// Run the given resolved method handle in the Web Worker context, this method is blocking
-	public Object call(Object resolvedFunc, Object... arg);
-	public int callI(Object resolvedFunc, Object... arg);
-	public double callD(Object resolvedFunc, Object... arg);
-	public long callL(Object resolvedFunc, Object... arg);
-}
+### CheerpJWorkercheerpj.AddStringFile
+
+`AddStringFile(fileName, str)`
+
+Used to add files into the `/str/` mount point filesystem.
+
+## Java Web Worker API
+
+### Worker
+
+Initializes the Worker object, this method is blocking.
+
+```java
+Worker w = new Worker();
+
 ```
 
-The Java version of the API is also extended to support `long`s in parameters and returned values. Currently they are converted to native JS values when passed to Workers, so their range is limited to +/-2^52.
+### runMain
 
-Example usage:
+Runs the main method of the given class in the Web Worker context, this method is blocking.
 
-```java title="WW.java"
-import com.leaningtech.cheerpj.Worker;
+| Parameters                                        | Output |
+| ------------------------------------------------- | ------ |
+| String className, String classPath, Object... arg | None   |
 
-public class WW
-{
-        public static void main(String[] args)
-        {
-                Worker w = new Worker();
-                w.runMain("Hello", "");
-        }
-}
+```java
+
+w.runMain("Hello", "");
 ```
 
-To build the class you need to add `cheerpj-public.jar` to the classpath
+### call / callI / callD / callL (for static method)
 
-```shell
-javac -cp cheerpj_install_dir/cheerpj-public.jar WW.java
-```
+Runs the given static method in the Web Worker context, this method is blocking
+
+callI, callD and callL should be used when primitives are expected.
+| Method | Parameters | Output |
+| ------ | ------------------------------------ | ------ |
+| call | String className, String methodName, Object... arg | Object |
+| callI | String className, String methodName, Object... arg | Int |
+| callD | String className, String methodName, Object... arg | Double |
+| callL | String className, String methodName, Object... arg | Long |
+
+### resolveCall
+
+Returns an handle to a resolved method, this method is blocking.
+| Parameters | Output |
+| ------------------------------------------------- | ------ |
+| String className, String methodName, String[] types | Object |
+
+### call / callI / WcallD / callL (for resolved method)
+
+Runs the given resolved method handle in the Web Worker context, this method is blocking
+
+| Method | Parameters                           | Output |
+| ------ | ------------------------------------ | ------ |
+| call   | Object resolvedFunc, , Object... arg | Object |
+| callI  | Object resolvedFunc, , Object... arg | Int    |
+| callD  | Object resolvedFunc, , Object... arg | Double |
+| callL  | Object resolvedFunc, , Object... arg | Long   |
+
+## Further reading
+
+- [Using Web Workers (guide)](/cheerpj2/guides/Using-web-workers)
