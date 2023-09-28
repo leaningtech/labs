@@ -26,7 +26,7 @@ mkdir directory_name
 
 Let's create a basic HTML file like the following example. Please notice the CheerpJ runtime environment has been integrated and initialized. In this example we are assuming your HTML file and your `.jar` files are under the project directory you just created.
 
-```html title="index.html" {6, 9-16}
+```html title="index.html" {6, 10-12}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -38,19 +38,19 @@ Let's create a basic HTML file like the following example. Please notice the Che
 		<script>
 			cheerpjInit();
 			cheerpjCreateDisplay(800, 600);
-			cheerpjRunMain(
-				"ChangeThisToYourClassName",
-				"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
-			);
+			cheerpjRunJar("/app/my_application_archive.jar");
 		</script>
 	</body>
 </html>
 ```
 
-Alternatively, if your application is designed to be executed with the command `java -jar` you can replace `cheerpjRunMain()` for the following line:
+Alternatively, if your application is not designed to be executed with the command `java -jar` you can replace `cheerpjRunJar()` for `cheerpjRunMain()` and pass your qualified class name as an argument. For example:
 
 ```js
-cheerpjRunJar("/app/my_application_archive.jar");
+cheerpjRunMain(
+	"com.application.MyClassName",
+	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
+);
 ```
 
 ## 3. Host your page
@@ -62,7 +62,7 @@ npm install http-server
 http-server -p 8080
 ```
 
-> To test CheerpJ you _must_ use a local web server. Opening the `.html` page directly from the disk (for example, by double-clicking on it) is **_not supported_**. This is a very common mistake for first time users.
+> To test CheerpJ you must use a web server. Opening the `.html` page directly from the disk (for example, by double-clicking on it) is not supported.
 
 ## What's going on?
 

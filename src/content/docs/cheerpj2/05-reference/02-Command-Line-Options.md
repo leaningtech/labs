@@ -78,11 +78,13 @@ cheerpjfy.py --stub-natives=native/ some.jar
 
 > **Note**: Existing files in the passed directory will be overwritten.
 
-| macro               | Description                                                                                                                     |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `CHEERPJ_COMPRESS`  | Encode the argument in parenthesis following such scheme.                                                                       |
-| `CHEERPJ_SET_CLASS` | Set the current internal class for resolving fields when using `CHEERPJ_FIELD` and `CHEERPJ_STATIC_FIELD` macros.               |
-| `CHEERPJ_FIELD`     | The compiler replaces this macro with the encoded field name, it assumes the current class has been set by `CHEERPJ_SET_CLASS`. |
+CheerpJ uses a compression scheme to encode mangled signatures. The `CHEERPJ_COMPRESS` macro is used automatically by this command, but can also be used manually.
+
+| macro                                      | Description                                                                                                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `CHEERPJ_COMPRESS`                         | Encode the argument in parenthesis following such scheme.                                                                       |
+| `CHEERPJ_SET_CLASS`                        | Set the current internal class for resolving fields when using `CHEERPJ_FIELD` and `CHEERPJ_STATIC_FIELD` macros.               |
+| `CHEERPJ_FIELD` and `CHEERPJ_STATIC_FIELD` | The compiler replaces this macro with the encoded field name, it assumes the current class has been set by `CHEERPJ_SET_CLASS`. |
 
 ### `--pack-classes-list=PACKCLASSESLIST`
 

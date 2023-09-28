@@ -204,7 +204,7 @@ cheerpjInit({
 
 #### `enablePreciseAppletArchives`
 
-Boolean option which enables a special applet classloader.
+Boolean option which makes the classloader behavior similar to the native Java plugin. For better performance it is recommended to upgrade to CheerpJ 3.
 
 Example:
 
