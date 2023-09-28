@@ -56,4 +56,4 @@ done
 ## Further reading
 
 - [Command line options](/cheerpj2/reference/Command-Line-Options)
-- [Startup time optimization](cheerpj2/guides/Startup-time-optimization)
+- [Startup time optimization](/cheerpj2/guides/Startup-time-optimization)
