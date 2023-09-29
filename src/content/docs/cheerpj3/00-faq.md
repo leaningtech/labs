@@ -6,13 +6,13 @@ title: FAQ
 
 CheerpJ is a solution for converting unmodified Java client applications into browser-based HTML5/JavaScript web applications. CheerpJ consists of a full Java runtime environment in JavaScript, and of a on-the-fly compiler for dynamic class generation, to be deployed alongside the application.
 
-## What does the CheerpJ compiler do?
-
-The CheerpJ compiler, based on LLVM/Clang, as well as on parts of [Cheerp](https://github.com/leaningtech/cheerp-meta), converts Java bytecode into JavaScript, without requiring the Java source. CheerpJ can be invoked on whole Java archives (.jar) or on single .class files.
-
 ## What parts of the Java SE runtime are supported?
 
 The CheerpJ runtime environment is a full Java SE runtime in JavaScript. Differently from other technologies which provide a partial re-implementation written manually in JavaScript, we opted to convert the entire OpenJDK Java SE runtime to JavaScript using CheerpJ. The CheerpJ runtime is constituted of both JavaScript files and .jar archives. All CheerpJ runtime components are dynamically downloaded on demand by the application to minimise total download size. The CheerpJ runtime library is hosted by us on a dedicated CDN-backed domain, and we invite users to link to it in order to take advantage of caching and cross-application resource sharing.
+
+## Can I self-host the CheerpJ runtime?
+
+Please [contact us](https://cheerpj.com/contact/) to discuss self-hosting CheerpJ and its runtime on your infrastructure.
 
 ## Can I use CheerpJ to convert my legacy Java application? I have no longer access to the source code.
 
@@ -26,43 +26,19 @@ Yes. Java methods can be exposed to JavaScript with an asynchronous interface. A
 
 Yes, CheerpJ allows you to interoperate with any JavaScript or browser API.
 
-## How does CheerpJ support reflection?
+## Does CheerpJ support reflection?
 
-In order to support reflection, CheerpJ, similarly to a JVM, utilizes the metadata available in the original .jar file. A converted application, to be deployed on a web server, comprises both the converted .jar.js JavaScript files and the .jar archives. After having converted a .jar archive, it is possible to remove all the bytecode from them prior to deployment, in order to minimize download time (we provide a simple tool to do so). The combined size of the pruned .jar archive and the output JavaScript, after compression, is comparable to the original .jar.
+Yes.
 
-Optionally, .jar archives can be split into multiple segments (size to be defined at compile time) before being deployed. The application will only load the required segments at run time, thus further reducing download time.
+## Does CheerpJ support dynamic class generation?
 
-## How does CheerpJ support dynamic class generation?
-
-One component of CheerpJ is the CheerpJ on-the-fly compiler (cheerpJ.js), a minimalistic Java-bytecode-to-JavaScript compiler written in C++ and compiled to JavaScript. CheerpJ.js needs to be distributed alongside any converted Java application that makes use of dynamic constructs such as proxy classes, which get compiled on the fly at run time directly on the browser.
-
-## What is the size of the output of CheerpJ
-
-The combined size of the .jar to be served (pruned of its bytecode) and of the resulting JavaScript is similar to that of the original .jar archive. Anecdotally, an overhead of 20% seems to be the average.
-
-## The size of the output is too big! Why doesn't CheerpJ remove "dead code"?
-
-In Java there is no "dead code". Java supports reflection, so all code and classes can be potentially used at runtime. For this reason CheerpJ cannot automatically remove any code.
-
-This said, depending on the application, it is often possible to remove a lot of code using ProGuard: an industry standard open source tool. CheerpJ provides support to automatically generate a ProGuard configuration file to make sure that classes used via reflection are not removed. For more information see: [here](/cheerpj3/guides/Startup-time-optimization#use-proguard-to-remove-unused-code)
-
-## Can JavaScript code produced by Cheerp be plugged into Node.js?
-
-Yes, it should. However, this has not been one of our areas of focus so far.
+Yes.
 
 ## When compiling my application I see the message `Failure compiling MyFile.class`, but cheerpjfy continues to execute with no errors
 
 This means that it was not possible to use the new codegen. CheerpJ will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar,
 
-## My Java application needs to get data over the network, but I only get `SocketException`s
-
-In the browser environment it is not possible to use sockets to connect to arbitrary ports. As a special exception CheerpJ provides a custom HTTP/HTTPS handler (based on XHR) that can be used to get data over HTTP and use REST APIs. To enable this handler please set the property `java.protocol.handler.pkgs=com.leaningtech.handlers` during the `cheerpjInit` call, for example:
-
-`cheerpjInit({javaProperties:["java.protocol.handler.pkgs=com.leaningtech.handlers"]});`
-
-Please note that when using CheerpJ to run applets the custom handlers are enabled by default.
-
-## When I run an application compiled with CheerpJ I see 404 errors in the browser console. What's going on?
+## When I run CheerpJ I see 404/403 errors in the browser console. What's going on?
 
 Ignore those errors. CheerpJ provides a filesystem implementation on top of HTTP. In this context it is absolutely ok for some files to be missing. CheerpJ will correctly interpret 404 errors as a file not found condition.
 
@@ -82,12 +58,6 @@ The cross origin message you see happens as part of our automatic bug reporting 
 ## Can I play Old School RuneScape using CheerpJ or the CheerpJ Applet Runner extension?
 
 Not yet. The main problem is that RuneScape requires low level network connections primitives (sockets) which are not provided by browsers at this time due to security concerns. In the future we might provide a paid add-on to the CheerpJ Applet Runner extension to support this use case via tunneling.
-
-## How can I use CheerpJ to generate WebAssembly code instead of JavaScript?
-
-CheerpJ cannot be used to generate WebAssembly code at the moment.
-
-CheerpJ uses WebAssembly internally for some components of the runtime, but Java bytecode can only be compiled to JavaScript at this time since WebAssembly currently is not an efficient target for Java. CheerpJ will support WebAssembly output when the platform matures.
 
 ## What is the status of CheerpJ?
 

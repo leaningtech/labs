@@ -38,26 +38,6 @@ When initialized with this option CheerpJ will keep track of the classes used at
 6. Run `proguard` on the `uber-JAR` using the generated configuration file to generate a smaller JAR with only the needed classes. `proguard -dontwarn -injars uber.jar -outjars uber-stripped.jar -libraryjars ~/cheerpj_1.2/rt.jar @cheerpj.pro`
 7. Convert this new JAR using `cheerpjfy.py`
 
-## Reduce the size of the JAR file
-
-`cheerpjfy.py` supports a command line option (`--pack-jar`) to generate a minimised JAR for deployment.
-
-This smaller JAR is stripped of all original Java bytecode and can no longer be used to run the application on the JVM. The JAR is however necessary for CheerpJ to support Java reflection.
-
-Usage example:
-
-```shell
-
-/cheerpj_2.3/cheerpjfy.py yourInput.jar --pack-jar yourOutput.jar
-
-```
-
-> It is important to use the same name on your input and output `.jar` files for your application to work. This action will overwrite your original `.jar` file with the packed one. We recommend backing up your original files somewhere else to keep their state in case you need to use them again.
-
-To use this command you will require to have java installed on your machine.
-
-More details are available [here](/cheerpj3/reference/Command-Line-Options#pack-jarpackjar)
-
 ## Preload resources
 
 CheerpJ cannot predict which runtime resources will be required by an arbitrary application. CheerpJ runtime resources are therefore loaded on demand, one after the other, depending on the requirements of the application at run time.

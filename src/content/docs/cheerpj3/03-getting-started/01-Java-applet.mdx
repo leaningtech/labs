@@ -38,11 +38,8 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 		>
 		</cheerpj-applet>
 	</body>
-	<script>
-		async function myInit() {
-			await cheerpjInit();
-		}
-		myInit();
+	<script type="module">
+		await cheerpjInit();
 	</script>
 </html>
 ```

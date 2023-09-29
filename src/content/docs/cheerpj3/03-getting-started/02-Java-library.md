@@ -12,8 +12,8 @@ subtitle: Use Java classes in JavaScript
 ## 2. Initialize CheerpJ and load your Java library
 
 ```js
-cheerpjInit();
-cheerpjRunJar("/app/library.jar");
+await cheerpjInit();
+const cj = await cheerpjRunLibrary("/app/library.jar");
 ```
 
 This will load `library.jar` from the root of your web server.
@@ -21,8 +21,9 @@ This will load `library.jar` from the root of your web server.
 ## 3. Call Java from JavaScript
 
 ```js
-let obj = await cjNew("com.library.MyClass");
-await cjCall(obj, "myMethod");
+const MyClass = await cj.com.library.MyClass;
+const obj = await new MyClass();
+await obj.myMethod();
 ```
 
 ## Further reading
