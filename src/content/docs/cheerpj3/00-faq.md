@@ -4,21 +4,21 @@ title: FAQ
 
 ## What is CheerpJ?
 
-CheerpJ is a solution for converting unmodified Java client applications into browser-based HTML5/JavaScript web applications. CheerpJ consists of a full Java runtime environment in JavaScript, and of a on-the-fly compiler for dynamic class generation, to be deployed alongside the application.
+CheerpJ is a solution for running unmodified Java client applications into browser-based HTML5/JavaScript web applications. CheerpJ consists of a full Java runtime environment in JavaScript, and of a on-the-fly compiler for dynamic class generation, to be deployed alongside the application.
 
 ## What parts of the Java SE runtime are supported?
 
-The CheerpJ runtime environment is a full Java SE runtime in JavaScript. Differently from other technologies which provide a partial re-implementation written manually in JavaScript, we opted to convert the entire OpenJDK Java SE runtime to JavaScript using CheerpJ. The CheerpJ runtime is constituted of both JavaScript files and .jar archives. All CheerpJ runtime components are dynamically downloaded on demand by the application to minimise total download size. The CheerpJ runtime library is hosted by us on a dedicated CDN-backed domain, and we invite users to link to it in order to take advantage of caching and cross-application resource sharing.
+The CheerpJ runtime environment is a full Java SE runtime in JavaScript. Differently from other technologies which provide a partial re-implementation written manually in JavaScript, we opted to replace the entire OpenJDK Java SE runtime to JavaScript and WebAssembly. The CheerpJ runtime is constituted of both JavaScript files and .jar archives. All CheerpJ runtime components are dynamically downloaded on demand by the application to minimise total download size. The CheerpJ runtime library is hosted by us on a dedicated CDN-backed domain, and we invite users to link to it in order to take advantage of caching and cross-application resource sharing.
 
 ## Can I self-host the CheerpJ runtime?
 
 Please [contact us](https://cheerpj.com/contact/) to discuss self-hosting CheerpJ and its runtime on your infrastructure.
 
-## Can I use CheerpJ to convert my legacy Java application? I have no longer access to the source code.
+## Can I use CheerpJ to run my legacy Java application in the browser? I have no longer access to the source code.
 
-Yes, you can convert any Java SE application with CheerpJ without touching the source code. You only need all the .jar archives of your application.
+Yes, you can run any Java SE application with CheerpJ without touching the source code. You only need all the .jar archives of your application.
 
-## Can I use CheerpJ to convert Java libraries and integrate them in my HTML5 application?
+## Can I use Java libraries and integrate them in my HTML5 application using CheerpJ?
 
 Yes. Java methods can be exposed to JavaScript with an asynchronous interface. A synchronous-looking construct is provided to minimise verbosity when multiple methods are invoked.
 
@@ -49,7 +49,7 @@ Many first time users get stuck at this point. The most common issues are:
 - Opening the HTML page directly from disk: The URL in the browser should always start with http:// or https://, if it starts with file:// CheerpJ will not work. You need to use a local web server during testing.
 - Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual filesystem with multiple mount points, the "/app/" prefix is required.
 - More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
-- When converting obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example `a.class` and `A.class` will be considered the same. Always try to convert the JAR using a Linux machine before reporting a bug when converting obfuscated JARs.
+- When executing obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example `a.class` and `A.class` will be considered the same. Always try to run the JAR using a Linux machine before reporting a bug when executing obfuscated JARs.
 
 ## My application compiled with CheerpJ does not work and I see a cross origin error to a Google service in the console. What's going on?
 

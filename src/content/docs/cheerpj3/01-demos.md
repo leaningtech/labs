@@ -19,7 +19,7 @@ This specific applet is a visualization tool for protein structures.
 
 <img src="/cheerpj2/assets/demo_swing.png" width="400">
 
-A few selected Java Swing examples to demonstrate how complex Swing GUI apps can be automatically converted to HTML5/JavaScript.
+A few selected Java Swing examples to demonstrate how complex Swing GUI apps can be automatically compiled to HTML5/JavaScript.
 
 - Go to the [demo](https://cheerpjdemos.leaningtech.com/SwingDemo.html)
 - [Source](https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html)
@@ -36,7 +36,7 @@ A playground to compile and run Java programs directly in the browser. Both cons
 
 <img src="/cheerpj2/assets/demo_itext.png" width="400">
 
-Edit PDFs fully client side using the industry standard [iText](https://itextpdf.com/en) library converted to JavaScript. This demo demonstrates how CheerpJ APIs can be used to instance Java objects and call methods directly from JavaScript.
+Edit PDFs fully client side using the industry standard [iText](https://itextpdf.com/en) library compiled to JavaScript. This demo demonstrates how CheerpJ APIs can be used to instance Java objects and call methods directly from JavaScript.
 
 - Go to the [demo](https://cheerpjdemos.leaningtech.com/iTextDemo.html)
 - [Source](https://cheerpjdemos.leaningtech.com/itextCheerpJDemo.js)

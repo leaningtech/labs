@@ -2,7 +2,7 @@
 title: File System support
 ---
 
-CheerpJ provides full filesystem support for converted Java applications.
+CheerpJ provides full filesystem support for Java applications running with CheerpJ.
 
 Read only and read/write filesystems are exposed in Java and can be used to read, write and manipulate files as normally when running on a JVM.
 

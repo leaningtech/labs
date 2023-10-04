@@ -2,11 +2,11 @@
 title: Startup time optimization
 ---
 
-This page is a collection of different steps to reduce the startup time of a Java application converted with CheerpJ.
+This page is a collection of different steps to reduce the startup time of a Java application compiled with CheerpJ.
 
 ## Overview
 
-Traditionally, users had to have Java preinstalled on their computer in order to run Java applications and applets. CheerpJ converts Java to HTML5/JavaScript, allowing to run applications and applets on browser without users having to install any additional dependency on their computer. Similarly to their JVM counterparts, applications converted to JavaScript with CheerpJ require runtime components to be loaded during execution. In CheerpJ, runtime components are JavaScript modules that are loaded on demand, only if required.
+Traditionally, users had to have Java preinstalled on their computer in order to run Java applications and applets. CheerpJ compiles Java to HTML5/JavaScript, allowing to run applications and applets on browser without users having to install any additional dependency on their computer. Similarly to their JVM counterparts, applications compiled to JavaScript with CheerpJ require runtime components to be loaded during execution. In CheerpJ, runtime components are JavaScript modules that are loaded on demand, only if required.
 
 The CheerpJ runtime is highly optimised to minimise the total download size of an 'average' application, totalling 10-20MB of data for a typical download (as a point of comparison, the approximate size of the Java runtime installer is over 60MB). All downloaded components of CheerpJ are cached by the browser, which reduces the download time in subsequent executions of a same application.
 
@@ -31,12 +31,10 @@ cheerpjInit({ enableProguardTrace: true });
 When initialized with this option CheerpJ will keep track of the classes used at runtime, including classes which are accessed via reflection. Follow these steps to safely optimize an application using ProGuard.
 
 1. Build a single `uber-JAR` by merging the application and dependencies
-2. Convert the new JAR to JS using `cheerpjfy.py`
-3. Run the application using CheerpJ with the `enableProguardTrace:true` option
-4. Fully test the application, making sure that all possible scenarios are executed and all needed classes are loaded
-5. From the browser console call `cjGetProguardConfiguration()`, a ProGuard configuration file (`cheerpj.pro`) will be automatically generated and downloaded
-6. Run `proguard` on the `uber-JAR` using the generated configuration file to generate a smaller JAR with only the needed classes. `proguard -dontwarn -injars uber.jar -outjars uber-stripped.jar -libraryjars ~/cheerpj_1.2/rt.jar @cheerpj.pro`
-7. Convert this new JAR using `cheerpjfy.py`
+2. Run the application using CheerpJ with the `enableProguardTrace:true` option
+3. Fully test the application, making sure that all possible scenarios are executed and all needed classes are loaded
+4. From the browser console call `cjGetProguardConfiguration()`, a ProGuard configuration file (`cheerpj.pro`) will be automatically generated and downloaded
+5. Run `proguard` on the `uber-JAR` using the generated configuration file to generate a smaller JAR with only the needed classes. `proguard -dontwarn -injars uber.jar -outjars uber-stripped.jar -libraryjars ~/cheerpj_1.2/rt.jar @cheerpj.pro`
 
 ## Preload resources
 
@@ -46,7 +44,7 @@ To take advantage of parallel downloads, and reduce download and startup time of
 
 This list of resources is to be specified manually when starting the CheerpJ environment in an HTML page. We also provide a simple profiling tool to automatically record and output a list of used resources during the execution of an application.
 
-By combining the use of this profiler together with the preloader, one can highly optimise the initial download and startup time of a converted application. Taking advantage of this is a simple 2-step process:
+By combining the use of this profiler together with the preloader, one can highly optimise the initial download and startup time of an application. Taking advantage of this is a simple 2-step process:
 
 1. Run the application normally using CheerpJ. After the application is loaded, open the JavaScript console of the browser (e.g. Ctrl+Shift+I on many browsers), and type:
 
