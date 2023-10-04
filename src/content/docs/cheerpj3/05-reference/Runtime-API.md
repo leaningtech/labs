@@ -34,28 +34,6 @@ In `system` mode CheerpJ will share the clipboard with the system. Browsers enfo
 - `Ctrl+V`/`Cmd+V`: this shortcut behaves normally, there is no difference with native execution.
 - Menu based Copy/Paste: `Ctrl+C`/`Ctrl+V` are needed to access the clipboard. CheerpJ will block the execution while waiting the appropriate shortcut.
 
-Commercial users adopting this integration have so far reported that this change in UX is not a significant burden for users. Moreover, in the future we plan to add an additional clipboard mode to take advantage of a new permission-based browser API which is currently being standardized. This future mode will provide native like user experience in all cases.
-
-#### `disableErrorReporting`
-
-CheerpJ automatically reports errors at runtime. Setting this option to `true` disables this system.
-
-Example:
-
-```js
-cheerpjInit({ disableErrorReporting: true });
-```
-
-#### `disableLoadTimeReporting`
-
-CheerpJ automatically get data about loading time. Setting this option to `true` disables this system.
-
-Example:
-
-```js
-cheerpjInit({ disableLoadTimeReporting: true });
-```
-
 #### `enableInputMethods`
 
 When this option is set to `true` CheerpJ will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
@@ -200,16 +178,6 @@ cheerpjInit({
 		return value;
 	},
 });
-```
-
-#### `enablePreciseAppletArchives`
-
-Boolean option which makes the classloader behavior similar to the native Java plugin. For better performance it is recommended to upgrade to CheerpJ 3.
-
-Example:
-
-```js
-cheerpjInit({ enablePreciseAppletArchives: true });
 ```
 
 ## Graphics
@@ -371,45 +339,6 @@ resolvedMethod(arg1, arg2, arg3);
 ```
 
 Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj3/reference/WebWorker-API)
-
-## Data conversion
-
-### cjStringJavaToJs
-
-`cjStringJavaToJs(javaString)`
-
-```js
-var jsString = cjStringJavaToJs(javaString);
-```
-
-This converts a Java string into a JavaScript string. This operation implies a copy.
-
-### cjStringJsToJava
-
-`cjStringJsToJava(jsString)`
-
-```java
-String javaString = cjStringJStoJava(jsString);
-```
-
-This converts a JavaScript string into a Java string. This operations also implies a copy. String parameters passed to `cheerpjRunMain`, `cjCall` and `cjNew` are automatically converted so it is not necessary to use this methods in that case.
-
-### cjTypedArrayToJava
-
-`cjTypedArrayToJava(array)`
-
-Converts a TypedArray to a Java compatible primitive array. This operation implies a copy. Data is converted as follows:
-
-| Typed Array  | Java array |
-| ------------ | ---------- |
-| Int8Array    | byte[]     |
-| Uint8Array   | byte[]     |
-| Int16Array   | short[]    |
-| Uint16Array  | char[]     |
-| Int32Array   | int[]      |
-| Uint32Array  | int[]      |
-| Float32Array | float[]    |
-| Float64Array | double[]   |
 
 ## Preloading
 

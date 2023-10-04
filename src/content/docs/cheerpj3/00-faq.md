@@ -20,11 +20,11 @@ Yes, you can run any Java SE application with CheerpJ without touching the sourc
 
 ## Can I use Java libraries and integrate them in my HTML5 application using CheerpJ?
 
-Yes. Java methods can be exposed to JavaScript with an asynchronous interface. A synchronous-looking construct is provided to minimise verbosity when multiple methods are invoked.
+Yes. Java methods can be exposed to JavaScript with an interface compatible with async/await for convenience.
 
 ## Can I call JavaScript libraries or web APIs from Java?
 
-Yes, CheerpJ allows you to interoperate with any JavaScript or browser API.
+Yes, CheerpJ allows you to interoperate with any JavaScript or browser API. Java native methods implemented in JavaScript are supported.
 
 ## Does CheerpJ support reflection?
 
@@ -33,10 +33,6 @@ Yes.
 ## Does CheerpJ support dynamic class generation?
 
 Yes.
-
-## When compiling my application I see the message `Failure compiling MyFile.class`, but cheerpjfy continues to execute with no errors
-
-This means that it was not possible to use the new codegen. CheerpJ will use, for this class, the legacy codegen. This might happen for multiple classes in the same .jar,
 
 ## When I run CheerpJ I see 404/403 errors in the browser console. What's going on?
 
@@ -49,7 +45,6 @@ Many first time users get stuck at this point. The most common issues are:
 - Opening the HTML page directly from disk: The URL in the browser should always start with http:// or https://, if it starts with file:// CheerpJ will not work. You need to use a local web server during testing.
 - Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual filesystem with multiple mount points, the "/app/" prefix is required.
 - More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
-- When executing obfuscated JARs on MacOS and Windows there might be collisions between classes due to the case-insensitive nature of the filesystem. For example `a.class` and `A.class` will be considered the same. Always try to run the JAR using a Linux machine before reporting a bug when executing obfuscated JARs.
 
 ## My application compiled with CheerpJ does not work and I see a cross origin error to a Google service in the console. What's going on?
 

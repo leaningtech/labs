@@ -54,7 +54,7 @@ http-server -p 8080
 
 ### What's going on?
 
-- The `cheerpjInit({enablePreciseAppletArchives:true});` initializes CheerpJ runtime environment indicating we are loading an applet.
+- The `cheerpjInit();` initializes CheerpJ runtime environment.
 - The `<cheerpj-applet>` tag specifies the code base in a similar manner as the now deprecated `<applet>` tag.
 
 > To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
