@@ -42,14 +42,6 @@ When this option is set to `true` CheerpJ will be able to receive text input fro
 cheerpjInit({ enableInputMethods: true });
 ```
 
-#### `enableProguardTrace`
-
-When this option is set to `true` CheerpJ will automatically keep track of the classes actually used at runtime. Moreover, it will also keep track of classes which are accessed by reflection. After the application has been fully tested you can use the `cjGetProguardConfiguration()` function from the browser console to download a ProGuard configuration file (`cheerpj.pro`) that you can directly use with ProGuard to remove unneeded classes, methods and fields from the application, greatly reducing the download size and startup time.
-
-```js
-cheerpjInit({ enableProguardTrace: true });
-```
-
 #### `javaProperties`
 
 An array of Java properties in the form `"key=value"`. They will be defined on the System object (System properties). This option should be used if command line arguments in the form `-Dkey=value` are required when using native Java.
@@ -100,7 +92,7 @@ By using `preloadResources`, you can provide CheerpJ with a list of runtime file
 Example:
 
 ```js
-cheerpjInit({ preloadResources: JSON.parse(cjGetRuntimeResources()) });
+cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]} });
 ```
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
@@ -298,7 +290,15 @@ Please note that this convenient form can unfortunately only be used on the main
 
 ### cjGetRuntimeResources<a name="cjGetRuntimeResources"></a>
 
-Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). It is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
+`cjGetRuntimeResources()`
+
+Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). Once parsed, it is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
+
+Output example:
+
+```js
+'{"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]}';
+```
 
 ## Filesystem
 
@@ -324,4 +324,6 @@ cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
 
 ### cjGetProguardConfiguration
 
-To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`). See [enableProguardTrace](/cheerpj3/reference/Runtime-API#enableproguardtrace).
+`cjGetProguardConfiguration()`
+
+To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`).
