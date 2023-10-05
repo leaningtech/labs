@@ -60,52 +60,6 @@ Example usage:
 cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 ```
 
-#### `listener`
-
-An object containing callbacks that CheerpJ will use to report various information to the user. Currently only the `jsLoadReason` and `preloadProgress` callbacks are supported.
-
-```js
-cheerpjInit({ listener: cheerpjListener });
-```
-
-#### `jsLoadReason`
-
-> **Warning:** enabling this listener may have significant performance impact and should not be used in production.
-
-For each new .jar.js to be loaded, CheerpJ will call this function. This can be useful to debug the reason why some parts of the runtime are loaded, if unexpected.
-
-**Parameters:**
-
-- `scriptName`: The name of the JS file being loaded
-- `directReason`: A CheerpJ uncompressed and mangled symbol. The method that most directly caused the load. This might not be very useful since it will most often be a `java.lang.ClassLoader` method. Can be `(Internal)` if it could not be detected.
-- `userReason`: A CheerpJ uncompressed and mangled symbol. The last non-runtime method in the stack before the loading. This should be more useful in understanding the user code that introduces the dependency. Can be `(Internal)` if it could not be detected.
-
-Example:
-
-```js
-var cheerpjListener = {jsLoadReason:function(scriptName, directReason, userReason){ ... }};
-cheerpjInit({listener:cheerpjListener});
-```
-
-#### `preloadProgress`
-
-This listener may be used in combination with [`preloadResources`](#preloadresources) to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
-
-**Parameters:**
-
-- `loadedFiles`: How many files have been preloaded so far
-- `totalFiles`: How many files needs to be preloaded in total. This number may increment during the loading phase. CheerpJ has a prediction mechanism and may preload additional resources depending on application behaviour
-
-Example:
-
-```js
-function showPreloadProgress(loadedFiles, totalFiles) {
-	console.log("Percentage loaded " + (loadedFiles * 100) / totalFiles);
-}
-var cheerpjListener = { preloadProgress: showPreloadProgress };
-cheerpjInit({ listener: cheerpjListener });
-```
-
 #### `logCanvasUpdates`
 
 When set to `true`, it enables logs on the console about the display areas which are being updated. Useful to debug overdrawing.
@@ -146,7 +100,7 @@ By using `preloadResources`, you can provide CheerpJ with a list of runtime file
 Example:
 
 ```js
-cheerpjInit({ preloadResources: ["/lts/file1", "/lt/file2"] });
+cheerpjInit({ preloadResources: {"/lt/file1.jar":[int, int, ...], "/lt/file2.jar":[int,int, ...]} });
 ```
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
@@ -344,7 +298,7 @@ Please note that this convenient form can unfortunately only be used on the main
 
 ### cjGetRuntimeResources<a name="cjGetRuntimeResources"></a>
 
-Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). It is a list of files that have been loaded from the runtime up to the time this function is called.
+Returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). It is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
 
 ## Filesystem
 
