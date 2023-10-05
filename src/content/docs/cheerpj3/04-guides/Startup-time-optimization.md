@@ -20,32 +20,12 @@ To take advantage of parallel downloads, and reduce download and startup time of
 
 This list of resources is to be specified manually when starting the CheerpJ environment in an HTML page. We also provide a simple profiling tool to automatically record and output a list of used resources during the execution of an application.
 
-By combining the use of this profiler together with the preloader, one can highly optimise the initial download and startup time of an application. Taking advantage of this is a simple 2-step process:
+The function `cjGetRuntimeResources()` returns a JavaScript string representing the data that should be passed to [preloadResources](#preloadResources). Once parsed, it is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
 
-1. Run the application normally using CheerpJ. After the application is loaded, open the JavaScript console of the browser (e.g. Ctrl+Shift+I on many browsers), and type:
-
-```js
-cjGetRuntimeResources();
-```
-
-The result will look like this:
+Modify the CheerpJ integration to enable preloading. You will only need to change the `cheerpjInit` call, to pass the `preloadResources` option. For example:
 
 ```js
-{"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]}
-```
-
-If the output is not visible fully, you can use:
-
-```js
-document.write(cjGetRuntimeResources());
-```
-
-The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/cheerpj3/reference/Runtime-API#cjgetruntimeresources) for more information.
-
-2. Modify the CheerpJ integration to enable preloading. You will only need to change the `cheerpjInit` call, to pass the `preloadResources` option. For example:
-
-```js
-cheerpjInit({ preloadResources: {"/lt/file1.jar":[int, int, ...], "/lt/file2.jar":[int,int, ...]} });
+cheerpjInit({ preloadResources: JSON.parse(cjGetRuntimeResources()) });
 ```
 
 See [here](/cheerpj3/reference/Runtime-API#preloadresources) for more information.

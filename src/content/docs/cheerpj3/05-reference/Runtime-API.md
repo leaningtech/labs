@@ -100,7 +100,7 @@ By using `preloadResources`, you can provide CheerpJ with a list of runtime file
 Example:
 
 ```js
-cheerpjInit({ preloadResources: {"/lt/file1.jar":[int, int, ...], "/lt/file2.jar":[int,int, ...]} });
+cheerpjInit({ preloadResources: JSON.parse(cjGetRuntimeResources()) });
 ```
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
