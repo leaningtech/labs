@@ -1,22 +1,58 @@
 ---
 title: cheerpjCreateDisplay
+description: Display GUI elements
 ---
 
-This method will create the HTML element that will contain all Java windows. It is only required to run graphical applications.
+`cheerpjCreateDisplay` adds an element to the DOM which will be used for graphical rendering.
 
-| **Parameters**    | **Type**    |
-| ----------------- | ----------- |
-| width             | number      |
-| height            | number      |
-| parent (optional) | HTMLElement |
-| **Returns**       | HTMLElement |
-
-```js
-cheerpjCreateDisplay(width, height, /*optional*/ parent);
+```ts
+function cheerpjCreateDisplay(
+	width: number,
+	height: number,
+	parent?: HTMLElement,
+): HTMLElement;
 ```
 
-The `width` and `height` parameter represent the display area size in CSS pixels. It is also possible to specify a parent element if required, if a parent element is not specified the display area will be appended to the page `body` element. If a parent is specified it is also possible to pass `-1` to both `width` and `height`, in that case the size will correspond to the parent size and it will also change dynamically if the parent is modified by either CSS changes or browser window resize.
+## Parameters
 
-## Running applications and `.jar`(s)
+- `width`: The width of the display area in CSS pixels, or `-1` to match parent width.
+- `height`: The height of the display area in CSS pixels, or `-1` to match parent height.
+- `parent` (optional): Element to add display as a child of.
 
-**Warning**: CheerpJ does not support opening the HTML pages directly from disk. If the URL in your browser starts with `file://`, CheerpJ will not run. You _must_ use a local Web server.
+### Returns
+
+`cheerpjCreateDisplay` returns the [HTMLElement] that it created.
+
+## Examples
+
+### Create a display
+
+```js
+cheerpjCreateDisplay(800, 600);
+```
+
+This creates a 800x600 display for rendering, and appends it to the document body.
+
+### Take up the whole page
+
+```js
+cheerpjCreateDisplay(-1, -1, document.body);
+```
+
+This creates a display that takes up the whole page, and responds to changes in the page size.
+
+### Usage with React
+
+```jsx
+import { useRef, useEffect } from "react";
+
+function Display({ width, height }) {
+	const parent = useRef();
+	useEffect(() => {
+		cheerpjCreateDisplay(width, height, parent);
+	});
+	return <div ref={parent} />;
+}
+```
+
+[HTMLElement]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
