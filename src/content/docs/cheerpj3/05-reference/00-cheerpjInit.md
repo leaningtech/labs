@@ -1,41 +1,46 @@
 ---
 title: cheerpjInit
+description: Set up and initialize the CheerpJ runtime environment
 ---
 
-`cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment. `cheerpjInit()` accepts an optional object argument which can be used to set options.
+`cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment.
 
-| **Parameters**       | **Type**                                                                                     |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| options (optional)   | object                                                                                       |
-| **_Key_**            | **_value_**                                                                                  |
-| version              | number                                                                                       |
-| fetch                | (url: string, method: string, postData: ArrayBuffer, headers: unknown[]) => Promise<unknown> |
-| status               | "splash" or "none" or"default"                                                               |
-| logCanvasUpdates     | boolean                                                                                      |
-| preloadResources     | { [key: string]: number[] }                                                                  |
-| clipboardMode        | "permission" or "system" or "java"                                                           |
-| beepCallback         | () => void                                                                                   |
-| enableInputMethods   | boolean                                                                                      |
-| overrideShortcuts    | (evt: KeyboardEvent) => boolean                                                              |
-| appletParamFilter    | (originalName: string, paramValue: string) => string                                         |
-| natives              | { [method: string]: Function }                                                               |
-| overrideDocumentBase | string                                                                                       |
-| javaProperties       | string[]                                                                                     |
-| tailscaleControlUrl  | string                                                                                       |
-| tailscaleDnsUrl      | string                                                                                       |
-| tailscaleAuthKey     | string                                                                                       |
-| tailscaleLoginUrlCb  | () => void                                                                                   |
-| **Returns**          | Promise\<void>                                                                               |
-
-This method is to be invoked as follows:
-
-```js
-cheerpjInit({ option: "value" });
+```ts
+async function cheerpjInit(options?: {
+	version?: number;
+	fetch?: (
+		url: string,
+		method: string,
+		postData: ArrayBuffer,
+		headers: unknown[],
+	) => Promise<unknown>;
+	status?: "splash" | "none" | "default";
+	logCanvasUpdates?: boolean;
+	preloadResources?: { [key: string]: number[] };
+	clipboardMode?: "permission" | "system" | "java";
+	beepCallback?: () => void;
+	enableInputMethods?: boolean;
+	overrideShortcuts?: (evt: KeyboardEvent) => boolean;
+	appletParamFilter?: (originalName: string, paramValue: string) => string;
+	natives?: { [method: string]: Function };
+	overrideDocumentBase?: string;
+	javaProperties?: string[];
+	tailscaleControlUrl?: string;
+	tailscaleDnsUrl?: string;
+	tailscaleAuthKey?: string;
+	tailscaleLoginUrlCb?: (r: unknown) => void;
+}): Promise<void>;
 ```
 
-Options are described below.
+## Parameters
 
-#### `clipboardMode`
+`cheerpjInit` takes an optional `options` object as its only parameter.
+
+### `version`
+
+The Java runtime version to use. `8` is the only supported value at the moment.
+
+### `clipboardMode`
 
 By default CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard. To change this behaviour you can initialize CheerpJ in the following way:
 
@@ -49,7 +54,7 @@ In `system` mode CheerpJ will share the clipboard with the system. Browsers enfo
 - `Ctrl+V`/`Cmd+V`: this shortcut behaves normally, there is no difference with native execution.
 - Menu based Copy/Paste: `Ctrl+C`/`Ctrl+V` are needed to access the clipboard. CheerpJ will block the execution while waiting the appropriate shortcut.
 
-#### `enableInputMethods`
+### `enableInputMethods`
 
 When this option is set to `true` CheerpJ will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
 
@@ -57,7 +62,7 @@ When this option is set to `true` CheerpJ will be able to receive text input fro
 cheerpjInit({ enableInputMethods: true });
 ```
 
-#### `javaProperties`
+### `javaProperties`
 
 An array of Java properties in the form `"key=value"`. They will be defined on the System object (System properties). This option should be used if command line arguments in the form `-Dkey=value` are required when using native Java.
 
@@ -67,7 +72,7 @@ Example usage:
 cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 ```
 
-#### `logCanvasUpdates`
+### `logCanvasUpdates`
 
 When set to `true`, it enables logs on the console about the display areas which are being updated. Useful to debug overdrawing.
 
@@ -77,7 +82,7 @@ Example:
 cheerpjInit({ logCanvasUpdates: true });
 ```
 
-#### `overrideShortcuts`
+### `overrideShortcuts`
 
 Some applications needs to internally handle keyboard shortcuts which are also used by the browser, for example Ctrl+F. Most users expect the standard browser behavior for these shortcuts and CheerpJ does not, by default, override them in any way.
 
@@ -100,7 +105,7 @@ cheerpjInit({
 });
 ```
 
-#### `preloadResources`<a name="preloadResources"></a>
+### `preloadResources`<a name="preloadResources"></a>
 
 By using `preloadResources`, you can provide CheerpJ with a list of runtime files which you know in advance will be required for the specific application. The list should be given as a JavaScript array of strings.
 
@@ -112,7 +117,7 @@ cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.j
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
 
-#### `status`
+### `status`
 
 This option determines the level of verbosity of CheerpJ in reporting status updates.
 
@@ -126,7 +131,7 @@ Example:
 cheerpjInit({ status: "splash" });
 ```
 
-#### `appletParamFilter`
+### `appletParamFilter`
 
 Some applications may need to have some parameter modified before getting those inside the applet.
 
