@@ -19,7 +19,7 @@ function cheerpjCreateDisplay(
 - `height`: The height of the display area in CSS pixels, or `-1` to match parent height.
 - `parent` (optional): Element to add display as a child of.
 
-### Returns
+## Returns
 
 `cheerpjCreateDisplay` returns the [HTMLElement] that it created.
 
