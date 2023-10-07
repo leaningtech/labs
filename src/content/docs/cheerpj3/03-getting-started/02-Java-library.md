@@ -28,4 +28,4 @@ await obj.myMethod();
 
 ## Further reading
 
-- [API reference](/cheerpj3/reference/Runtime-API#calling-java-from-js)
+- [`cheerpjRunLibrary` reference](/cheerpj3/reference/cheerpjRunLibrary)
