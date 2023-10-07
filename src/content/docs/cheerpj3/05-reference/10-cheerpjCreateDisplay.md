@@ -15,13 +15,13 @@ function cheerpjCreateDisplay(
 
 ## Parameters
 
-- `width`: The width of the display area in CSS pixels, or `-1` to match parent width.
-- `height`: The height of the display area in CSS pixels, or `-1` to match parent height.
-- `parent` (optional): Element to add display as a child of.
+- **width (`number`)** - The width of the display area in CSS pixels, or `-1` to match parent width.
+- **height (`number`)** - The height of the display area in CSS pixels, or `-1` to match parent height.
+- **parent (`HTMLElement`, _optional_)** - Element to add display as a child of.
 
 ## Returns
 
-`cheerpjCreateDisplay` returns the [HTMLElement] that it created.
+- [`HTMLElement`]
 
 ## Examples
 
@@ -55,4 +55,4 @@ function Display({ width, height }) {
 }
 ```
 
-[HTMLElement]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+[`HTMLElement`]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement

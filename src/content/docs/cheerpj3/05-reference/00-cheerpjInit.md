@@ -34,7 +34,35 @@ async function cheerpjInit(options?: {
 
 ## Parameters
 
-`cheerpjInit` takes an optional `options` object as its only parameter.
+- **options (`object`, _optional_)** - Used to configure different settings of the CheerpJ runtime environment in the form `{ option: "value" }`.
+
+| **Option**                                                                 | **Value expected type**                                                                        |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [`version`](/cheerpj3/reference/cheerpjInit#version)                       | `number`                                                                                       |
+| [`fetch`](/cheerpj3/reference/cheerpjInit#fetch)                           | `(url: string, method: string, postData: ArrayBuffer, headers: unknown[]) => Promise<unknown>` |
+| [`status`](/cheerpj3/reference/cheerpjInit#status)                         | `"splash" or "none" or"default"`                                                               |
+| [`logCanvasUpdates`](/cheerpj3/reference/cheerpjInit#logcanvasupdates)     | `boolean`                                                                                      |
+| [`preloadResources`](/cheerpj3/reference/cheerpjInit#preloadresources)     | `{ [key: string]: number[] }`                                                                  |
+| [`clipboardMode`](/cheerpj3/reference/cheerpjInit#clipboardmode)           | `"permission" or "system" or "java"`                                                           |
+| `beepCallback`                                                             | `() => void`                                                                                   |
+| [`enableInputMethods`](/cheerpj3/reference/cheerpjInit#enableinputmethods) | `boolean`                                                                                      |
+| [`overrideShortcuts`](/cheerpj3/reference/cheerpjInit#overrideshortcuts)   | `evt: KeyboardEvent) => boolean`                                                               |
+| [`appletParamFilter`](/cheerpj3/reference/cheerpjInit#appletparamfilter)   | `(originalName: string, paramValue: string) => string`                                         |
+| `natives`                                                                  | `{ [method: string]: Function }`                                                               |
+| `overrideDocumentBase`                                                     | `string`                                                                                       |
+| [`javaProperties`](/cheerpj3/reference/cheerpjInit#javaproperties)         | `string[]`                                                                                     |
+| `tailscaleControlUrl`                                                      | `string`                                                                                       |
+| `tailscaleDnsUrl`                                                          | `string`                                                                                       |
+| `tailscaleAuthKey`                                                         | `string`                                                                                       |
+| `tailscaleLoginUrlCb`                                                      | `() => void`                                                                                   |
+
+## Returns
+
+- **`Promise\<void>`**
+
+## Examples
+
+A description of each `cheerpjInit()` option with brief examples are given below.
 
 ### `version`
 
@@ -145,3 +173,7 @@ cheerpjInit({
 	},
 });
 ```
+
+### `fetch`
+
+This option is used to make a `fetch` request over the network.

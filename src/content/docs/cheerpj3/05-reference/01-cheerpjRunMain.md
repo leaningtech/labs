@@ -4,14 +4,25 @@ title: cheerpjRunMain
 
 The most common way of starting an application is to use the `cheerpjRunMain` API, which lets you execute the static main method of a Java class in the classpath.
 
-| **Parameters** | **Type**          |
-| -------------- | ----------------- |
-| className      | string            |
-| classPath      | string            |
-| ...args        | string[]          |
-| **Returns**    | Promise\<unknown> |
+```ts
+async function cheerpjRunMain(
+	className: string,
+	classPath: string,
+	...args: string[]
+): Promise<CJ3Library>;
+```
 
-Example:
+## Parameters
+
+- **className (`string`)** - The class name with the main method of your java application.
+- **classPath (`string`)** - The location of the file with your class and its dependencies separated by `:`.
+- **..args (`string[]`, _optional)_** - Any other arguments.
+
+## Returns
+
+- **`Promise\<CJ3Library>`**
+
+## Example
 
 ```js
 cheerpjRunMain(
