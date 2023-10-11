@@ -30,14 +30,55 @@ Parameters and return values of method calls are automatically converted between
 > [!warning] Warning
 > Array interop is not yet supported.
 
-## Example
+## Examples
+
+### Using the standard library
 
 ```js
 await cheerpjInit();
-const cj = await cheerpjRunLibrary("/app/library.jar");
-const MyClass = await cj.com.library.MyClass;
-const obj = await new MyClass();
-await obj.myMethod();
+const lib = await cheerpjRunLibrary("");
+
+const System = await lib.java.lang.System;
+await System.out.println("Hello from Java");
+```
+
+### Using a custom library
+
+Let's say we had a library called `example.jar` compiled from the following class:
+
+```java
+package com.example;
+
+public class Example {
+  public void hello() {
+    System.out.println("Example says hello!");
+  }
+}
+```
+
+With `example.jar` being available on the web server at `/example.jar`, we could use it like so:
+
+```js
+await cheerpjInit();
+const lib = await cheerpjRunLibrary("/app/example.jar");
+
+const Example = await lib.com.example.Example;
+const example = await new Example();
+await example.hello(); // Example says hello!
+```
+
+### Exception handling
+
+```js
+await cheerpjInit();
+const lib = await cheerpjRunLibrary("");
+
+try {
+	// Attempt to load a class that doesn't exist
+	await lib.java.lang.DoesntExist;
+} catch (e) {
+	await e.printStackTrace(); // java.lang.ClassNotFoundException: java.lang.DoesntExist
+}
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
