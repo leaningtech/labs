@@ -35,10 +35,12 @@ Let's create a basic HTML file like the following example. Please notice the Che
 		<script src="https://cjrtnc.leaningtech.com/3_20230819_174/cj3loader.js"></script>
 	</head>
 	<body>
-		<script type="module">
-			await cheerpjInit();
-			await cheerpjCreateDisplay(800, 600);
-			await cheerpjRunJar("/app/my_application_archive.jar");
+		<script>
+			(async function () {
+				await cheerpjInit();
+				cheerpjCreateDisplay(800, 600);
+				await cheerpjRunJar("/app/my_application_archive.jar");
+			})();
 		</script>
 	</body>
 </html>

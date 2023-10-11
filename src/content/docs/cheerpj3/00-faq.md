@@ -46,10 +46,6 @@ Many first time users get stuck at this point. The most common issues are:
 - Forgetting to add "/app/" prefix to the JAR files used in Web page. CheerpJ implements a virtual filesystem with multiple mount points, the "/app/" prefix is required.
 - More in general, you can use the "Network tab" of the developer tools in the browser to check if the JAR is being correctly downloaded. If the JAR is never downloaded, or a 404 error is returned, something is wrong with the JAR path. If you don't see anything in the "Network tab", please reload the page while keeping the developer tools open.
 
-## My application compiled with CheerpJ does not work and I see a cross origin error to a Google service in the console. What's going on?
-
-The cross origin message you see happens as part of our automatic bug reporting system and it is not the real error. Something else is making your application crash, please report a bug [here](https://github.com/leaningtech/cheerpj-meta/issues).
-
 ## Can I play Old School RuneScape using CheerpJ or the CheerpJ Applet Runner extension?
 
 Not yet. The main problem is that RuneScape requires low level network connections primitives (sockets) which are not provided by browsers at this time due to security concerns. In the future we might provide a paid add-on to the CheerpJ Applet Runner extension to support this use case via tunneling.
