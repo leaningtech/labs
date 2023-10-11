@@ -2,19 +2,22 @@
 title: cjGetProguardConfiguration
 ---
 
-To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`).
+Triggers download of a configuration file which can be used to tree-shake JARs using [ProGuard].
 
 ```ts
 function cjGetProguardConfiguration(): void;
 ```
 
+> [!note] Note
+> This function is intended for use in the browser console. It is not intended to be called from within your application.
+
 ## Parameters
 
-- No parameters are required
+`cjGetProguardConfiguration` does not take any parameters.
 
 ## Returns
 
-- void
+`cjGetProguardConfiguration` does not return a value. It triggers a download of a `cheerpj.pro` file.
 
 ## Example
 
@@ -25,3 +28,5 @@ cjGetProguardConfiguration();
 ```
 
 This will trigger the download of `cheerpj.pro` file.
+
+[ProGuard]: https://github.com/Guardsquare/proguard

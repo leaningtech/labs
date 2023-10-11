@@ -143,7 +143,7 @@ Example:
 cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]} });
 ```
 
-See also [cjGetRuntimeResources](#cjGetRuntimeResources).
+See also [cjGetRuntimeResources].
 
 ### `status`
 
@@ -177,3 +177,5 @@ cheerpjInit({
 ### `fetch`
 
 This option is used to make a `fetch` request over the network.
+
+[cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
