@@ -8,25 +8,29 @@ With CheerpJ, it is possible to implement Java 'native' methods (that would norm
 As an example, consider the following Java class:
 
 ```java title="TestClass.java"
+package com.example;
+
 public class TestClass {
   public native void alert(String str);
 }
 ```
 
-To provide an implementation of `someNativeMethod` in JavaScript, pass it to the `cheerpjInit` function as a property of the `natives` object:
+To provide an implementation of `alert`, pass it to the `cheerpjInit` function as a property of the `natives` object:
 
 ```js
-cheerpjInit({
+await cheerpjInit({
 	natives: {
-		Java_TestClass_alert(lib, str) {
-			alert(str);
+		async Java_com_example_TestClass_alert(lib, str) {
+			window.alert(str);
 		},
 	},
 });
 ```
 
-> [!todo] TODO
-> Explanation of lib parameter, also consider calling it env to match native JNI
+The name of methods in the `natives` object must be in the form `Java_<fully-qualified-class-name>_<method-name>`.
 
-> [!todo] TODO
-> Explanation of how method names are resolved ([it's not the same as native JNI](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/design.html#resolving_native_method_names))
+The `lib` parameter is a [CJ3Library]. It can be used to access other classes and methods of the library.
+
+Parameters and return values of JNI calls are automatically converted between JavaScript and Java types.
+
+[CJ3Library]: /cheerpj3/reference/cheerpjRunLibrary#cj3library
