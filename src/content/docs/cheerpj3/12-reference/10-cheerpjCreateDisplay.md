@@ -21,7 +21,7 @@ function cheerpjCreateDisplay(
 
 ## Returns
 
-- [`HTMLElement`]
+`cheerpjCreateDisplay` returns an [`HTMLElement`] representing the created display.
 
 ## Examples
 

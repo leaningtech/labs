@@ -4,7 +4,7 @@ title: SwingSet3
 
 In this tutorial, we'll run the SwingSet3 application in the browser. Here's what we'll build:
 
-<iframe src="https://cheerpj-example-swingset3.pages.dev/" class="w-full aspect-square"></iframe>
+<iframe src="https://cheerpj-example-swingset3.leaningtech.com/" class="w-full aspect-square"></iframe>
 
 ## Prerequisites
 
