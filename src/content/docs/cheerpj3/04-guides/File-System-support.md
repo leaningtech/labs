@@ -6,7 +6,7 @@ CheerpJ provides full filesystem support for Java applications running with Chee
 
 Read only and read/write filesystems are exposed in Java and can be used to read, write and manipulate files as normally when running on a JVM.
 
-**Note**: CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser it's forbidden for security reasons.
+**Note**: CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden for security reasons.
 
 ## File Systems in CheerpJ
 
