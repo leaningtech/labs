@@ -19,6 +19,7 @@ async function cheerpjInit(options?: {
 	preloadResources?: { [key: string]: number[] };
 	clipboardMode?: "permission" | "system" | "java";
 	beepCallback?: () => void;
+	preloadProgress?: (preloadDone: number, preloadTotal: number) => void;
 	enableInputMethods?: boolean;
 	overrideShortcuts?: (evt: KeyboardEvent) => boolean;
 	appletParamFilter?: (originalName: string, paramValue: string) => string;
@@ -45,6 +46,7 @@ async function cheerpjInit(options?: {
 | [`preloadResources`](/cheerpj3/reference/cheerpjInit#preloadresources)     | `{ [key: string]: number[] }`                                                                  |
 | [`clipboardMode`](/cheerpj3/reference/cheerpjInit#clipboardmode)           | `"permission" or "system" or "java"`                                                           |
 | `beepCallback`                                                             | `() => void`                                                                                   |
+| [`preloadProgress`](/cheerpj3/reference/cheerpjInit#preloadprogress)       | `(preloadDone: number, preloadTotal: number) => void`                                          |
 | [`enableInputMethods`](/cheerpj3/reference/cheerpjInit#enableinputmethods) | `boolean`                                                                                      |
 | [`overrideShortcuts`](/cheerpj3/reference/cheerpjInit#overrideshortcuts)   | `evt: KeyboardEvent) => boolean`                                                               |
 | [`appletParamFilter`](/cheerpj3/reference/cheerpjInit#appletparamfilter)   | `(originalName: string, paramValue: string) => string`                                         |
@@ -144,6 +146,20 @@ cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.j
 ```
 
 See also [cjGetRuntimeResources](#cjGetRuntimeResources).
+
+### `preloadProgress`<a name="preloadResources"></a>
+
+This callback may be used in combination with [`preloadResources`](#preloadresources) to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
+
+Example:
+
+```js
+function showPreloadProgress(preloadDone, preloadTotal) {
+	console.log("Percentage loaded " + (preloadDone * 100) / preloadTotal);
+}
+
+await cheerpjInit({ preloadProgress: showPreloadProgress });
+```
 
 ### `status`
 
