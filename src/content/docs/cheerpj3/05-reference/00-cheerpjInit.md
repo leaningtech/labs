@@ -58,7 +58,7 @@ async function cheerpjInit(options?: {
 
 ## Returns
 
-- **`Promise\<void>`**
+`cheerpjInit` returns a [Promise] which is resolved when the CheerpJ runtime environment is ready to be used.
 
 ## Examples
 
@@ -179,3 +179,4 @@ cheerpjInit({
 This option is used to make a `fetch` request over the network.
 
 [cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

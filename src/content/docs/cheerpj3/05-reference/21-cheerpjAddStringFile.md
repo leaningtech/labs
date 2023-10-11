@@ -1,21 +1,22 @@
 ---
 title: cheerpjAddStringFile
+subtitle: Write a file into the virtual filesystem
 ---
 
-Used to add files into the `/str/` mount point filesystem.
+Used to write files into the `/str/` filesystem. If the file already exists, it will be overwritten.
 
 ```ts
-function cheerpjAddStringFile(name: string, str: string): void;
+function cheerpjAddStringFile(path: string, data: string | Uint8Array): void;
 ```
 
 ## Parameters
 
-- **fileName (`string`)** - Name of the file to be added.
-- **str (`string`)** - Text in a JavaScript string.
+- **path (`string`)** - The path to the file to overwrite. Must begin with `/str/`.
+- **data (`string` or `Uint8Array`)** - File contents, as text or binary data.
 
 ## Returns
 
-- **`void`**
+`cheerpjAddStringFile` does not return a value.
 
 ## Example
 

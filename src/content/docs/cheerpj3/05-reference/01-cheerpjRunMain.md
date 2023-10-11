@@ -1,34 +1,38 @@
 ---
 title: cheerpjRunMain
+subtitle: Starts an application by executing the static main method of a Java class
 ---
-
-The most common way of starting an application is to use the `cheerpjRunMain` API, which lets you execute the static main method of a Java class in the classpath.
 
 ```ts
 async function cheerpjRunMain(
 	className: string,
 	classPath: string,
 	...args: string[]
-): Promise<CJ3Library>;
+): Promise<number>;
 ```
 
 ## Parameters
 
-- **className (`string`)** - The class name with the main method of your java application.
-- **classPath (`string`)** - The location of the file with your class and its dependencies separated by `:`.
-- **..args (`string[]`, _optional)_** - Any other arguments.
+- **className (`string`)** - The fully-qualified name of the class with a static main method to execute. For example, `com.application.MyClassName`.
+- **classPath (`string`)** - The location of the class's jar in the [virtual filesystem], with its dependencies separated by `:`.
+- **..args (`string[]`, _optional)_** - Arguments to pass to the main method.
 
 ## Returns
 
-- **`Promise\<CJ3Library>`**
+`cheerpjRunMain` returns a [Promise] which resolves with the [exit code] of the program. `0` indicates success, any other value indicates failure.
 
 ## Example
 
 ```js
-cheerpjRunMain(
-	"fully.qualified.class.name",
+const exitCode = await cheerpjRunMain(
+	"fully.qualified.ClassName",
 	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
 	arg1,
 	arg2,
 );
+console.log(`Program exited with code ${exitCode}`);
 ```
+
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[exit code]: https://en.wikipedia.org/wiki/Exit_status#Java
+[virtual filesystem]: /cheerpj3/guides/File-System-support

@@ -1,28 +1,39 @@
 ---
 title: cjFileBlob
+subtitle: Read a file from the virtual filesystem
 ---
 
-Used to download files from the CheerpJ filesystem. It returns a promise that eventually resolve to a Blob object, which can be downloaded with standard HTML5 techniques.
+Used to read files from the `/files/` virtual filesystem.
 
 ```ts
-async function cjFileBlob(fileName: string): Promise<Blob>;
+async function cjFileBlob(path: string): Promise<Blob>;
 ```
 
 ## Parameters
 
-- **fileName (`string`)** - The name of the file to be downloaded
+- **path (`string`)** - The path to the file to be read. Must begin with `/files/`.
 
 ## Returns
 
-- **`Promise\<Blob>`**
+`cjFileBlob` returns a [Promise] which resolves to a [Blob] of the file contents.
 
-## Example
+## Examples
+
+## Read a text file
 
 ```js
-const myBlob = await cjFileBlob("/files/file1.txt");
-const objectURL = URL.createObjectURL(myBlob);
-// do something else
+const blob = await cjFileBlob("/files/file1.txt");
+const text = await blob.text();
+console.log(text);
 ```
 
-> [!note] Important
-> Remember to use the `/files/` prefix to refer to the CheerpJ filesystem mountpoint
+## Read a binary file
+
+```js
+const blob = await cjFileBlob("/files/file2.bin");
+const data = new Uint8Array(await blob.arrayBuffer());
+console.log(data);
+```
+
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Blob]: https://developer.mozilla.org/en-US/docs/Web/API/Blob
