@@ -1,6 +1,6 @@
 ---
 title: cheerpjCreateDisplay
-description: Display GUI elements
+subtitle: Display GUI elements
 ---
 
 `cheerpjCreateDisplay` adds an element to the DOM which will be used for graphical rendering.

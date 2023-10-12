@@ -1,6 +1,6 @@
 ---
 title: cheerpjRunJar
-subtitle: Starts an application by executing its main class
+subtitle: Execute the main class of a JAR
 ---
 
 ```ts
