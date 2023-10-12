@@ -11,10 +11,11 @@ No downloads are provided with CheerpJ 3.
 - AOT optimization: CheerpJ 3 uses a JIT compiler only, and as such it does not require any pre-processing of the jar files, like conversion to `.jar.js`.
 - `--natives`: JNI function implementations should be passed to `cheerpjInit` using the `natives` option. See the [JNI guide] for more information.
 
-## `cheerpjInit` and `cheerpjRunMain` are now asynchronous
+## `cheerpjInit`
 
-- The `cheerpjInit` function now returns a `Promise` that resolves when the initialization is complete.
-- The `cheerpjRunMain` function now returns a `Promise` that resolves when the jar has been loaded.
+The runtime API is not exposed until `cheerpjInit` is called and its `Promise` resolves.
+
+Therefore, be sure to `await` the `cheerpjInit` call before using any other functions.
 
 ## `cheerpjRunJarWithClasspath` removed
 
@@ -42,16 +43,18 @@ await obj.myMethod();
 ## `com.leaningtech.handlers` HTTP handler no longer needed
 
 Previously, CheerpJ 2 required a special Java property to be set in order for HTTP(S) requests to work. This is no longer needed.
-
-## WebWorker API not yet implemented
-
-This is a work-in-progress.
+.
 
 ## `cheerpj-dom.jar` removed
 
 Calling JavaScript functions from Java is now done using the `natives` option of `cheerpjInit`. See the [JNI guide] for more information.
 
 If you used the `com.leaningtech.client` package extensively, check out the [CJDom library](https://github.com/reportmill/CJDom) (not maintained by Leaning Technologies).
+
+## APIs not yet implemented
+
+- `cheerpjRunJarWithClasspath`
+- `CheerpJWorker`
 
 [`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
