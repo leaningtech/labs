@@ -55,4 +55,4 @@ If you used the `com.leaningtech.client` package extensively, check out the [CJD
 
 [`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
-[JNI guide]: /cheerpj3/guides/Implementing-Java-native-methods
+[JNI guide]: /cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript
