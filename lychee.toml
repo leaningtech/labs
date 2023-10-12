@@ -8,4 +8,13 @@ remap = [ "https://labs.leaningtech.com http://127.0.0.1:4321" ]
 # Check links inside `<code>` and `<pre>` blocks
 include_verbatim = true
 
-exclude = [ '.*(twitter|github|linkedin)\.com.*', 'http://127\.0\.0\.1:(8000|8080).*', '.*rpm\.leaningtech\.com.*', '.*mydomain\.com.*', '.*microsoft\.com.*', 'file://.*' ]
+exclude = [
+	'.*(twitter|github|linkedin)\.com.*',
+	'http://127\.0\.0\.1:(8000|8080).*',
+	'.*rpm\.leaningtech\.com.*',
+	'.*mydomain\.com.*',
+	'.*microsoft\.com.*',
+	'file://.*',
+	'chrome://.*',
+	'wss?://*'
+]

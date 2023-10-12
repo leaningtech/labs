@@ -8,8 +8,8 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 
 **There are two different ways to run a Java Applet in the browser:**
 
-- [Running your own Java applet](/cheerpj2/getting-started/Java-applet#running-your-own-applet) using the CheerpJ runtime environment and the `<cheerpj-applet>` tag in your own webpage.
-- [Running a public applet](/cheerpj2/getting-started/Java-applet#running-a-public-applet) using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein) Chrome extension for applets integrated with the applet tag `<applet>` on public websites.
+- [Running your own Java applet](/cheerpj3/getting-started/Java-applet#running-your-own-applet) using the CheerpJ runtime environment and the `<cheerpj-applet>` tag in your own webpage.
+- [Running a public applet](/cheerpj3/getting-started/Java-applet#running-a-public-applet) using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein) Chrome extension for applets integrated with the applet tag `<applet>` on public websites.
 
 ## Running your own applet
 
@@ -21,16 +21,13 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 
 ### 1. Create a basic HTML file
 
-```html title="index.html" {6-9,12-19}
+```html title="index.html" {6, 9-17}
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ applet test</title>
-		<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
-		<script>
-			cheerpjInit({ enablePreciseAppletArchives: true });
-		</script>
+		<script src="https://cjrtnc.leaningtech.com/3_20230819_174/cj3loader.js"></script>
 	</head>
 	<body>
 		<cheerpj-applet
@@ -38,9 +35,10 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 			code="ExamplePath.ExampleApplet"
 			height="900"
 			width="900"
-		>
-			<p>not able to load Java applet</p>
-		</cheerpj-applet>
+		></cheerpj-applet>
+		<script>
+			cheerpjInit();
+		</script>
 	</body>
 </html>
 ```
@@ -56,7 +54,7 @@ http-server -p 8080
 
 ### What's going on?
 
-- The `cheerpjInit({enablePreciseAppletArchives:true});` initializes CheerpJ runtime environment indicating we are loading an applet.
+- The `cheerpjInit();` initializes CheerpJ runtime environment.
 - The `<cheerpj-applet>` tag specifies the code base in a similar manner as the now deprecated `<applet>` tag.
 
 > To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
@@ -96,5 +94,4 @@ You will see the CheerpJ display on your browser with some loading messages befo
 
 ## Further reading
 
-- [AOT optimization](/cheerpj2/guides/AOT-optimization)
-- [Runtime API](/cheerpj2/reference/Runtime-API)
+- [Runtime API reference](/cheerpj3/reference)

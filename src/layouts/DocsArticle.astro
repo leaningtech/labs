@@ -38,12 +38,15 @@ const contributeLinks = [
 
 <Shell title={[title, subtitle].filter(Boolean).join(" | ")}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
-		<div data-sidebar-wrapper class="hidden lg:block shadow-xl lg:shadow-none">
+		<div
+			data-sidebar-wrapper
+			class="hidden lg:block shadow-xl lg:shadow-none z-20"
+		>
 			<DocsSidebar {directory} />
 		</div>
 		<div
 			data-backdrop
-			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur"
+			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-10"
 		>
 		</div>
 		<main class="grow p-6 sm:px-6 md:px-8 w-full max-w-3xl mx-auto lg:mx-0">
