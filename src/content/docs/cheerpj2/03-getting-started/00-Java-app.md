@@ -26,7 +26,7 @@ mkdir directory_name
 
 Let's create a basic HTML file like the following example. Please notice the CheerpJ runtime environment has been integrated and initialized. In this example we are assuming your HTML file and your `.jar` files are under the project directory you just created.
 
-```html title="index.html" {6, 10-12}
+```html title="index.html" {6, 9-13}
 <!doctype html>
 <html lang="en">
 	<head>

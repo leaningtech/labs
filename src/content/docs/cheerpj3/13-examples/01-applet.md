@@ -1,8 +1,10 @@
 ---
-title: Applet
+title: Pitch applet
 ---
 
-In this tutorial you will learn how to run an applet in your webpage using CheerpJ
+In this tutorial you will learn how to run a Java applet in a modern browser by integrating CheerpJ within your page.
+
+For this tutorial we will use the Pitch applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive animation of an aircraft's pitch motion. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/aircraft-rotations/).
 
 ## Prerequisites
 
