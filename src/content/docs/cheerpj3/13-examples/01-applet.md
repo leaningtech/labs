@@ -41,7 +41,7 @@ To view the example, we need to host the files on a web server. [Vite](https://v
 npx vite
 ```
 
-Alternatively you can also use the http-server utility
+Alternatively you can also use the http-server utility.
 
 ```sh
 npm install http-server
@@ -72,7 +72,7 @@ A basic HTML file would look like this:
 
 The next step is to add the applet tag with its parameters, just like they used to be integrated on web pages. We will also add some titles, descriptions and styles.
 
-```html {24-31}
+```html {24-31} title="index.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -118,15 +118,15 @@ The next step is to add the applet tag with its parameters, just like they used 
 </html>
 ```
 
-Go to your browser and refresh the page. You will see the titles and text you just added. As expected, the applet will not be on display, instead there is a message _**Your browser cannot handle the applet tag!**_
+Go to your browser and refresh the page. You will see the titles and text you just added. As expected, the applet will not be on display, instead there is the message _**Your browser cannot handle the applet tag!**_
 
-## 4. Integrating CheerpJ within your page
+## 4. Integrating CheerpJ
 
-Integrating CheerpJ within your page is as simple as adding a `<script>` with the CheerpJ loader url. This will be placed witih the document's `<head>` tag. Next, we need to call `cheerpjInit()` in another script block.
+Integrating CheerpJ in your page is as simple as adding a `<script>` with the CheerpJ loader url. This will be placed within the document's `<head>` tag. Next, we need to call `cheerpjInit()` in another script block.
 
 Your document will look like this:
 
-```html {6, 49-51}
+```html {6, 49-51} title="index.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -182,9 +182,15 @@ Your document will look like this:
 </html>
 ```
 
-Refresh your page and now you will be able to see your applet running within your page!
+Refresh your page and now you will be able to see your applet running!
 
 > You can also replace the `applet` tag with `<cheerpj-applet>` to avoid potential conflicts with native Java
+
+## The result
+
+Your final page will look like this:
+
+<iframe src="https://leaningtech.github.io/cheerpj-example-applet/" class="w-full aspect-square"></iframe>
 
 ## Source code
 
@@ -193,3 +199,7 @@ Refresh your page and now you will be able to see your applet running within you
 ## Credits
 
 The applet used for this tutorial belongs to the NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/) and it is available at their [GitHub repository](https://github.com/nasa/BGA/tree/main).
+
+## Further reading
+
+To continue learning about cheerpJ, visit the [reference](/cheerpj3/reference).
