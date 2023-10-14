@@ -112,3 +112,7 @@ View the page again, and you should see the application take up the entire windo
 ## Source code
 
 [View full source code on GitHub](https://github.com/leaningtech/cheerpj-example-swingset3)
+
+## Further reading
+
+To continue learning about CheerpJ, visit the [reference](/cheerpj3/reference).
