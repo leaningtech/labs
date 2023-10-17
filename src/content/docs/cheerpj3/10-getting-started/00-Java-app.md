@@ -1,6 +1,6 @@
 ---
 title: Run a Java application
-subtitle: Convert a desktop app to a webapp
+description: Convert a desktop app to a webapp
 ---
 
 CheerpJ can run a Java application in the browser with little to no modifications. This page will help you getting started with CheerpJ and running your first Java application in the browser.

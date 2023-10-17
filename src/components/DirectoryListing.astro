@@ -7,9 +7,9 @@ interface Props {
 
 const { dir } = Astro.props;
 
-function getEntrySubtitle(entry: NavEntry): string | undefined {
+function getEntryDescription(entry: NavEntry): string | undefined {
 	if (entry.type === "file") {
-		return entry.collectionEntry.data.subtitle;
+		return entry.collectionEntry.data.description;
 	}
 	return undefined;
 }
@@ -28,7 +28,7 @@ function getEntrySubtitle(entry: NavEntry): string | undefined {
 							{entry.title}
 						</div>
 						<div class="text-ellipsis whitespace-nowrap overflow-hidden text-stone-400 text-sm">
-							{getEntrySubtitle(entry)}
+							{getEntryDescription(entry)}
 						</div>
 					</a>
 				</li>

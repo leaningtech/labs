@@ -1,6 +1,6 @@
 ---
 title: cheerpjInit
-subtitle: Set up and initialize the CheerpJ runtime environment
+description: Set up and initialize the CheerpJ runtime environment
 ---
 
 `cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment.

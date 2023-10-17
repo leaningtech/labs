@@ -1,6 +1,6 @@
 ---
 title: CMake
-subtitle: How to build a CMake project using Cheerp
+description: How to build a CMake project using Cheerp
 ---
 
 CMake projects can be compiled with Cheerp by passing a single additional command-line flag to `cmake`.

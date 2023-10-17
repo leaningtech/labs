@@ -1,6 +1,6 @@
 ---
 title: Implementing native methods
-subtitle: Java Native Interface (JNI) with CheerpJ
+description: Java Native Interface (JNI) with CheerpJ
 ---
 
 With CheerpJ, it is possible to implement Java 'native' methods (that would normally be implemented in C/C++ or other AOT-compiled language) in JavaScript, similarly to what would be done in regular Java using the Java Native Interface (JNI).

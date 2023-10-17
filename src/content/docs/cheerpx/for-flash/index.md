@@ -1,6 +1,6 @@
 ---
 title: CheerpX for Flash
-subtitle: Run Flash content in the browser without the Flash Player
+description: Run Flash content in the browser without the Flash Player
 ---
 
 **Latest release:** ![Latest version](https://img.shields.io/badge/2022--05--19-v35-green)
