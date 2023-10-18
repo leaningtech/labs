@@ -19,7 +19,7 @@ async function cjFileBlob(path: string): Promise<Blob>;
 
 ## Examples
 
-## Read a text file
+### Read a text file
 
 ```js
 const blob = await cjFileBlob("/files/file1.txt");
@@ -27,7 +27,7 @@ const text = await blob.text();
 console.log(text);
 ```
 
-## Read a binary file
+### Read a binary file
 
 ```js
 const blob = await cjFileBlob("/files/file2.bin");
