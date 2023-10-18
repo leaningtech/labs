@@ -4,22 +4,26 @@ title: Migration from CheerpJ 2
 
 CheerpJ 3 is a complete reimplementation of CheerpJ 2, and as such it is not fully backwards compatible. This page lists the API differences between the two versions.
 
+## Script tag
+
+Include CheerpJ 3 on your page with the following snippet:
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+```
+
+## `cheerpjInit`
+
+The runtime API is not exposed until [`cheerpjInit`] is called and its `Promise` resolves.
+
+Therefore, **be sure to `await` the [`cheerpjInit`] call** before using any other functions.
+
 ## `cheerpjify.py` removed
 
 No downloads are provided with CheerpJ 3.
 
 - AOT optimization: CheerpJ 3 uses a JIT compiler only, and as such it does not require any pre-processing of the jar files, like conversion to `.jar.js`.
 - `--natives`: JNI function implementations should be passed to `cheerpjInit` using the `natives` option. See the [JNI guide] for more information.
-
-## `cheerpjInit`
-
-The runtime API is not exposed until `cheerpjInit` is called and its `Promise` resolves.
-
-Therefore, be sure to `await` the `cheerpjInit` call before using any other functions.
-
-## `cheerpjRunJarWithClasspath` removed
-
-Use [`cheerpjRunMain`] instead.
 
 ## `cjNew` and `cjCall` replaced with CJ3Library API
 
@@ -56,6 +60,7 @@ If you used the `com.leaningtech.client` package extensively, check out the [CJD
 - `cheerpjRunJarWithClasspath`
 - `CheerpJWorker`
 
+[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
 [`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
 [JNI guide]: /cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript
