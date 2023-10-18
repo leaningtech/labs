@@ -61,20 +61,19 @@ cheerpjRunMain(
 You can now serve this web page on a simple HTTP server, such as the http-server utility.
 
 ```shell
-npm install http-server
-http-server -p 8080
+npx http-server -p 8080
 ```
 
-> To test CheerpJ you must use a web server. Opening the `.html` page directly from the disk (for example, by double-clicking on it) is not supported.
+> [!tip]
+> Opening the page directly from the disk (for example, by double-clicking on it) is not supported.
 
 ## What's going on?
 
-- CheerpJ loader is included from our cloud runtime as
-  `<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>`.
-- CheerpJ runtime environment is initialized by `cheerpjInit()`.
-- `cheerpjCreateDisplay()` creates a graphical environment to contain all Java windows
-- `cheerpjRunMain()` executes the `main` method of `ChangeThisToYourClassName`. The second parameter is a `:` separated list of `.jar` files where application classes can be found (the classpath).
-- The `/app/` is a virtual file system mount point that reference the root of the web server this page is loaded from.
+- The `<head>` script loads CheerpJ.
+- [`cheerpjInit`] initialises the CheerpJ runtime environment.
+- [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
+- [`cheerpjRunJar`] executes your application!
+- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
 
 ## The result
 
@@ -83,3 +82,9 @@ You will see the CheerpJ display on your browser with some loading messages befo
 ## Further reading
 
 - [Runtime API reference](/cheerpj3/reference)
+
+[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /cheerpj3/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
+[`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
+[virtual filesystem]: /cheerpj3/guides/File-System-support
