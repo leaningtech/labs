@@ -2,7 +2,11 @@
 title: Pitch applet
 ---
 
+import LinkButton from "@/components/LinkButton.astro";
+
 In this tutorial you will learn how to run a Java applet in a modern browser by integrating CheerpJ within your page.
+
+<LinkButton label="View demo" href="#the-result" />
 
 For this tutorial we will use the Pitch applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive animation of an aircraft's pitch motion. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/aircraft-rotations/).
 
@@ -190,7 +194,10 @@ Refresh your page and now you will be able to see your applet running!
 
 Your final page will look like this:
 
-<iframe src="https://leaningtech.github.io/cheerpj-example-applet/" class="w-full aspect-square"></iframe>
+<iframe
+	src="https://leaningtech.github.io/cheerpj-example-applet/"
+	class="w-full aspect-square"
+></iframe>
 
 ## Source code
 

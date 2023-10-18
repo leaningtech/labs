@@ -3,9 +3,11 @@ title: SwingSet3
 description: Porting a Swing application to the web
 ---
 
-In this tutorial, we'll run the SwingSet3 application in the browser. Here's what we'll build:
+import LinkButton from "@/components/LinkButton.astro";
 
-<iframe src="https://cheerpj-example-swingset3.leaningtech.com/" class="w-full aspect-square"></iframe>
+In this tutorial, we'll run the SwingSet3 application in the browser.
+
+<LinkButton label="View demo" href="#the-result" />
 
 ## Prerequisites
 
@@ -110,10 +112,15 @@ Passing `-1` as the width and height tells CheerpJ to use the full size of the c
 
 View the page again, and you should see the application take up the entire window. Also notice that resizing the window resizes the application.
 
+---
+
+## The result
+
+<iframe
+	src="https://cheerpj-example-swingset3.leaningtech.com/"
+	class="w-full aspect-square"
+></iframe>
+
 ## Source code
 
 [View full source code on GitHub](https://github.com/leaningtech/cheerpj-example-swingset3)
-
-## Further reading
-
-To continue learning about CheerpJ, visit the [reference](/cheerpj3/reference).
