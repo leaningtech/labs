@@ -132,7 +132,7 @@ Your document will look like this:
 	<head>
 		<meta charset="utf-8" />
 		<title>Pitch applet (CheerpJ)</title>
-		<script src="https://cjrtnc.leaningtech.com/3_20231012_227/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
 	</head>
 	<style>
 		div {
