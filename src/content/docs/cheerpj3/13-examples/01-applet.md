@@ -202,4 +202,4 @@ The applet used for this tutorial belongs to the NASA's [Beginner's Guide to Aer
 
 ## Further reading
 
-To continue learning about cheerpJ, visit the [reference](/cheerpj3/reference).
+To continue learning about CheerpJ, visit the [reference](/cheerpj3/reference).
