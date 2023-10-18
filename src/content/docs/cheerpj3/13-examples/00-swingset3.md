@@ -1,5 +1,6 @@
 ---
 title: SwingSet3
+description: Porting a Swing application to the web
 ---
 
 In this tutorial, we'll run the SwingSet3 application in the browser. Here's what we'll build:

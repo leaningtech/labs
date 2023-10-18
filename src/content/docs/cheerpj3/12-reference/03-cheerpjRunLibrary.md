@@ -1,5 +1,6 @@
 ---
 title: cheerpjRunLibrary
+description: Load a Java Library
 ---
 
 Allows to load a Java Library into JavaScript.

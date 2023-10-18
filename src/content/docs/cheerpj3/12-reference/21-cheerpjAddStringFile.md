@@ -1,6 +1,6 @@
 ---
 title: cheerpjAddStringFile
-subtitle: Write a file into the virtual filesystem
+description: Write a file into the virtual filesystem
 ---
 
 Used to write files into the `/str/` filesystem. If the file already exists, it will be overwritten.

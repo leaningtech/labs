@@ -1,6 +1,6 @@
 ---
 title: Run a Java library
-subtitle: Use Java classes in JavaScript
+description: Use Java classes in JavaScript
 ---
 
 ## 1. Include CheerpJ on your page

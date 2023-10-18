@@ -13,11 +13,11 @@ import Footer from "../components/Footer.astro";
 interface Props {
 	id: string;
 	title: string;
-	subtitle: string | undefined;
+	description: string | undefined;
 	headings: Heading[] | undefined;
 }
 
-const { id, title, subtitle, headings } = Astro.props;
+const { id, title, description, headings } = Astro.props;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -36,7 +36,7 @@ const contributeLinks = [
 ];
 ---
 
-<Shell title={[title, subtitle].filter(Boolean).join(" | ")}>
+<Shell title={[title, description].filter(Boolean).join(" | ")}>
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div
 			data-sidebar-wrapper
@@ -63,7 +63,11 @@ const contributeLinks = [
 				class="prose prose-stone dark:prose-invert pb-10"
 			>
 				<h1 class="mb-2 font-bold">{title}</h1>
-				{subtitle && <p class="mt-0 mb-8 text-stone-500 text-xl">{subtitle}</p>}
+				{
+					description && (
+						<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
+					)
+				}
 				<slot />
 			</main>
 

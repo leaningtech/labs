@@ -1,6 +1,6 @@
 ---
 title: cheerpjRunMain
-subtitle: Starts an application by executing the static main method of a Java class
+description: Starts an application by executing the static main method of a Java class
 ---
 
 ```ts

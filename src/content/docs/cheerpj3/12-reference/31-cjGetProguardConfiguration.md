@@ -1,5 +1,6 @@
 ---
 title: cjGetProguardConfiguration
+description: Download a ProGuard configuration file
 ---
 
 Triggers download of a configuration file which can be used to tree-shake JARs using [ProGuard].

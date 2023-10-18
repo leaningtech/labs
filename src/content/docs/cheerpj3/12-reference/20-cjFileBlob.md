@@ -1,6 +1,6 @@
 ---
 title: cjFileBlob
-subtitle: Read a file from the virtual filesystem
+description: Read a file from the virtual filesystem
 ---
 
 Used to read files from the `/files/` virtual filesystem.
