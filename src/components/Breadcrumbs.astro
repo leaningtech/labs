@@ -14,7 +14,7 @@ const path = findEntryPath(nav, current) ?? [];
 const currentEntry = path[path.length - 1];
 
 const crumbs = path
-	.slice(0, -1) // Don't want the current page
+	.slice(1, -1) // Don't want the current page or the product root
 	.filter((entry) => entry.href !== currentEntry!.href) // Don't show the immediate parent directory for index pages
 	.map((entry, i, all) => {
 		return {
