@@ -4,37 +4,12 @@ import type { NavDirectory } from "../lib/nav";
 import { Icon } from "astro-icon";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 import { productFromUrl as productFromUrl } from "../lib/products";
-import { Image } from "astro:assets";
-import ProductVersionSwitcher from "./ProductVersionSwitcher.astro";
 
 interface Props {
 	directory: NavDirectory | undefined;
 }
 
 const { directory } = Astro.props;
-
-/*const modes: { mode: Mode; name: string; icon: string }[] = [
-	{
-		mode: "tutorials",
-		name: "Tutorials",
-		icon: "📚",
-	},
-	{
-		mode: "guides",
-		name: "How-to guides",
-		icon: "🤔",
-	},
-	{
-		mode: "reference",
-		name: "Reference",
-		icon: "📖",
-	},
-	{
-		mode: "explanation",
-		name: "Explanation",
-		icon: "🧠",
-	},
-];*/
 
 const product = productFromUrl(Astro.url);
 if (!product) {
@@ -50,38 +25,6 @@ if (!product) {
 		<span class="sr-only">Close navigation</span>
 		<Icon name="jam:close" class="w-6 h-6 text-stone-400 hover:text-white" />
 	</button>
-
-	{
-		/*<ul class="leading-8 font-semibold mb-4 text-base space-y-2">
-		{
-			modes.map((item) => (
-				<li>
-					<a
-						href={`/${product.href}/${item.mode}`}
-						class:list={[
-							"group flex items-center gap-4 text-stone-400 hover:text-white",
-							{
-								"!text-cheerp": item.mode === mode,
-							},
-						]}
-					>
-						<span
-							class:list={[
-								"bg-stone-800 group-hover:bg-stone-700 w-8 h-8 rounded-md flex items-center justify-center text-xl",
-								{
-									"!bg-cheerp": item.mode === mode,
-								},
-							]}
-						>
-							{item.icon}
-						</span>
-						<span>{item.name}</span>
-					</a>
-				</li>
-			))
-		}
-	</ul>*/
-	}
 
 	{
 		directory && (
