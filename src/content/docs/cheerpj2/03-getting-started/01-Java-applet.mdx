@@ -21,7 +21,7 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 
 ### 1. Integrating CheerpJ in your HTML file
 
-This example assumes you already have your own HTML file displaying your applet using `<applet>`, `<object>` or `<embed>`.
+This tutorial assumes you already have an HTML file with an `<applet>`, `<object>` or `<embed>` tag.
 
 In order to integrate CheerpJ, you just need to add:
 
@@ -78,7 +78,8 @@ http-server -p 8080
 
 - The `cheerpjInit({enablePreciseAppletArchives:true})` initializes CheerpJ runtime environment indicating we are loading an applet.
 
-> To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
+> [!tip] Avoiding conflicts with native Java plugins
+> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>, and `<cheerpj-embed>` are all supported.
 
 ## Running a public applet
 
