@@ -1,5 +1,5 @@
 ---
-title: FAQ
+title: Frequently Asked Questions
 ---
 
 ## What is CheerpJ?
