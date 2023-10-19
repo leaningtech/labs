@@ -12,7 +12,7 @@ const pathname = Astro.url.pathname.replace(".html", "");
 ---
 
 {
-	entry.type === "file" && (
+	entry.type === "file" && (!entry.isIndex || depth === 0) && (
 		<li
 			class:list={[
 				"group py-1 text-stone-300 hover:border-stone-400 hover:text-white",
