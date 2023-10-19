@@ -1,0 +1,35 @@
+---
+import Footer from "@/components/Footer.astro";
+import Shell from "@/layouts/Shell.astro";
+import { products } from "@/lib/products";
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+const product = products.cheerpj3;
+
+const collectionEntry = await getEntry({
+	collection: "docs",
+	slug: "cheerpj3",
+});
+const rendered = await collectionEntry.render();
+---
+
+<Shell
+	title={[collectionEntry.data.title, collectionEntry.data.description]
+		.filter(Boolean)
+		.join(" | ")}
+>
+	<main
+		data-pagefind-body
+		class="prose prose-stone dark:prose-invert max-w-screen-md mx-auto py-10"
+	>
+		<div class="not-prose flex flex-col items-center my-10 gap-4">
+			<h1><Image alt={product.name} src={product.logotype} /></h1>
+			<p class="text-xl font-medium text-stone-500">
+				{product.subtitle}
+			</p>
+		</div>
+		<rendered.Content />
+	</main>
+</Shell>
+<Footer />

@@ -40,7 +40,7 @@ export const products: { [product in Product]: ProductData } = {
 		href: "/cheerpj3",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
-		subtitle: "Java Virtual Machine replacement for the browser",
+		subtitle: "Java Virtual Machine for modern web browsers",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 	},
