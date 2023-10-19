@@ -16,12 +16,32 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 **You will need:**
 
 - Your applet file(s)
-- An HTML file to wrap your applet
+- The HTML file where your applet is meant to be displayed.
 - A basic HTTP server to test locally
 
-### 1. Create a basic HTML file
+### 1. Integrating CheerpJ in your HTML file
 
-```html title="index.html" {6-9,12-19}
+This example assumes you already have your own HTML file displaying your applet using `<applet>`, `<object>` or `<embed>`.
+
+In order to integrate CheerpJ, you just need to add:
+
+1.  A simple `<script>` within the `<head>` of your page with the CheerpJ runtime loader.
+
+```html
+<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+```
+
+2.  A second script calling `cheerpjInit()`
+
+```html
+<script>
+	cheerpjInit({ enablePreciseAppletArchives: true });
+</script>
+```
+
+For example:
+
+```html title="index.html" {6-9}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -33,14 +53,14 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 		</script>
 	</head>
 	<body>
-		<cheerpj-applet
+		<applet
 			archive="Example.jar"
 			code="ExamplePath.ExampleApplet"
 			height="900"
 			width="900"
 		>
 			<p>not able to load Java applet</p>
-		</cheerpj-applet>
+		</applet>
 	</body>
 </html>
 ```
@@ -56,8 +76,7 @@ http-server -p 8080
 
 ### What's going on?
 
-- The `cheerpjInit({enablePreciseAppletArchives:true});` initializes CheerpJ runtime environment indicating we are loading an applet.
-- The `<cheerpj-applet>` tag specifies the code base in a similar manner as the now deprecated `<applet>` tag.
+- The `cheerpjInit({enablePreciseAppletArchives:true})` initializes CheerpJ runtime environment indicating we are loading an applet.
 
 > To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
 
