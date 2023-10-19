@@ -1,4 +1,5 @@
 ---
+import { SITE_TITLE } from "@/consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
 
@@ -38,6 +39,7 @@ const faviconType = favicon.endsWith(".ico") ? "image/x-icon" : "image/svg+xml";
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:site_name" content={SITE_TITLE} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

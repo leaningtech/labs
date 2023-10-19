@@ -23,7 +23,9 @@ const { id, title, description, headings } = Astro.props;
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
-const directory = product && findNavDirectory(nav, [product.id]);
+if (!product) throw new Error("Product not found");
+
+const directory = findNavDirectory(nav, [product.id]);
 
 const contributeLinks = [
 	{
@@ -37,8 +39,8 @@ const contributeLinks = [
 ];
 ---
 
-<Shell title={[title, description].filter(Boolean).join(" | ")}>
-	{product && <ProductNav {product} />}
+<Shell title={[title, product.name + " Documentation"].join(" - ")}>
+	<ProductNav {product} />
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div
 			data-sidebar-wrapper

@@ -18,7 +18,7 @@ const rendered = await collectionEntry.render();
 <Shell
 	title={[collectionEntry.data.title, collectionEntry.data.description]
 		.filter(Boolean)
-		.join(" | ")}
+		.join(" - ")}
 >
 	<ProductNav {product} />
 	<main
