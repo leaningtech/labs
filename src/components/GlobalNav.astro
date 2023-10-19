@@ -1,16 +1,12 @@
 ---
-import { Icon } from "astro-icon";
-
-import { SITE_TITLE, DISCORD_URL } from "../consts";
-
 import companyLogo from "../assets/branding/company/tower.svg";
-import Search from "./Search.astro";
 import EventBanner from "./EventBanner.svelte";
 import { Image } from "astro:assets";
 
 const links = [
-	{ name: "Docs", href: "/docs" },
-	{ name: "Demos", href: "https://leaningtech.com/demo/" }, // TODO: demos page
+	{ name: "Cheerp", href: "/cheerp" },
+	{ name: "CheerpJ", href: "/cheerpj" },
+	{ name: "CheerpX", href: "/cheerpx" },
 	{ name: "Blog", href: "/blog" },
 ];
 ---
@@ -19,48 +15,30 @@ const links = [
 
 <nav
 	aria-label="Primary navigation"
-	class="sm:sticky top-0 z-30 bg-stone-900 bg-opacity-50 backdrop-blur-lg text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
+	class="z-30 bg-stone-950 text-stone-400 text-sm"
 >
 	<div
-		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-6 whitespace-nowrap overflow-hidden"
+		class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 md:px-8 h-12 whitespace-nowrap overflow-hidden flex items-center justify-between"
 	>
-		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10">
-			<a href="/" class="flex items-center gap-4">
-				<Image
-					src={companyLogo}
-					alt={SITE_TITLE}
-					class="w-8 h-8"
-					title="Leaning Technologies"
-				/>
-				<span class="hidden md:block text-xl" title="Leaning Technologies"
-					>Developer Labs</span
-				>
-			</a>
-		</div>
-
-		<Search />
-
-		<div class="flex items-center gap-4 xl:gap-8 ml-auto flex-none">
+		<a href="/" class="flex items-center gap-2">
+			<Image
+				src={companyLogo}
+				alt="Leaning Technologies Logo"
+				class="w-6 h-6"
+			/>
+			<span class="text-base text-stone-300">
+				Leaning Technologies <span class="text-stone-400">Developer</span>
+			</span>
+		</a>
+		<div class="flex items-center gap-4 ml-auto flex-none font-medium">
 			{
 				links.map((link) => (
-					<a href={link.href} class="hover:text-primary-500">
+					<a href={link.href} class="hover:text-white">
 						{link.name}
 					</a>
 				))
 			}
 		</div>
-
-		<div class="border-l border-stone-800 h-6 mx-4 xl:mx-8 hidden lg:block">
-		</div>
-
-		<a
-			href={DISCORD_URL}
-			class="md:bg-blurple rounded-md px-2 md:px-4 self-stretch flex items-center gap-1.5"
-		>
-			<Icon name="fa-brands:discord" class="w-6 h-6" />
-			<span class="hidden md:block">Join the community</span>
-			<span class="sr-only">on Discord</span>
-		</a>
 	</div>
 </nav>
 
