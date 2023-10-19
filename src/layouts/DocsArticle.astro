@@ -9,6 +9,7 @@ import TableOfContents from "../components/TableOfContents.astro";
 import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
+import ProductNav from "@/components/ProductNav.astro";
 
 interface Props {
 	id: string;
@@ -37,6 +38,7 @@ const contributeLinks = [
 ---
 
 <Shell title={[title, description].filter(Boolean).join(" | ")}>
+	{product && <ProductNav {product} />}
 	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
 		<div
 			data-sidebar-wrapper

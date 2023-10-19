@@ -12,6 +12,7 @@ export interface ProductData {
 	favicon: string;
 	subtitle: string;
 	description: string;
+	github: string;
 }
 
 export const products: { [product in Product]: ProductData } = {
@@ -23,6 +24,7 @@ export const products: { [product in Product]: ProductData } = {
 		favicon: "/cheerp/favicon.ico",
 		subtitle: "Compile C++ for the browser",
 		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
+		github: "https://github.com/leaningtech/cheerp-meta",
 	},
 	cheerpj2: {
 		id: "cheerpj2",
@@ -33,6 +35,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Java Virtual Machine replacement for the browser",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
+		github: "https://github.com/leaningtech/cheerpj-meta",
 	},
 	cheerpj3: {
 		id: "cheerpj3",
@@ -43,6 +46,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Java Virtual Machine for modern web browsers",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
+		github: "https://github.com/leaningtech/cheerpj-meta",
 	},
 	cheerpx: {
 		id: "cheerpx",
@@ -53,6 +57,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "x86-to-WebAssembly virtualization",
 		description:
 			"Execute native binaries in the browser with the CheerpX virtual machine.",
+		github: "https://github.com/leaningtech/webvm", // TODO
 	},
 };
 

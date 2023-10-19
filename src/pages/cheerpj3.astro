@@ -4,6 +4,7 @@ import Shell from "@/layouts/Shell.astro";
 import { products } from "@/lib/products";
 import { getEntry } from "astro:content";
 import { Image } from "astro:assets";
+import ProductNav from "@/components/ProductNav.astro";
 
 const product = products.cheerpj3;
 
@@ -19,11 +20,12 @@ const rendered = await collectionEntry.render();
 		.filter(Boolean)
 		.join(" | ")}
 >
+	<ProductNav {product} />
 	<main
 		data-pagefind-body
-		class="prose prose-stone dark:prose-invert w-full max-w-screen-md mx-auto px-3 py-10"
+		class="prose prose-stone dark:prose-invert w-full max-w-[840px] mx-auto px-3 py-10"
 	>
-		<div class="not-prose flex flex-col items-center my-10 gap-4">
+		<div class="not-prose flex flex-col items-center mb-10 gap-4">
 			<h1><Image alt={product.name} src={product.logotype} /></h1>
 			<p class="text-xl font-medium text-stone-500">
 				{product.subtitle}

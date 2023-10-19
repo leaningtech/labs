@@ -44,21 +44,8 @@ if (!product) {
 
 <aside
 	is="docs-sidebar"
-	class="bg-stone-800 lg:bg-stone-900 fixed lg:sticky top-[65px] z-10 px-8 pb-8 w-full sm:w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
+	class="bg-stone-800 lg:bg-stone-900 fixed lg:sticky top-[65px] z-10 p-8 w-full sm:w-80 h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
 >
-	<div class="block pt-8 mb-8 lg:sticky top-0 lg:bg-stone-900">
-		<a href={product.href} class="block">
-			<Image src={product.logotype} alt={product.name} class="h-20" />
-		</a>
-		{product.id.startsWith("cheerpj") && <ProductVersionSwitcher {product} />}
-
-		<div
-			class="hidden absolute bottom--8 lg:block w-full h-8 bg-gradient-to-b from-stone-900 pointer-events-none"
-		>
-			<!-- shadow -->
-		</div>
-	</div>
-
 	<button data-sidebar-close class="absolute top-4 right-4 lg:hidden">
 		<span class="sr-only">Close navigation</span>
 		<Icon name="jam:close" class="w-6 h-6 text-stone-400 hover:text-white" />
