@@ -21,7 +21,7 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 
 ### 1. Integrating CheerpJ in your HTML file
 
-This example assumes you already have your own HTML file displaying your applet using `<applet>`, `<object>` or `<embed>`.
+This tutorial assumes you already have an HTML file with an `<applet>`, `<object>` or `<embed>` tag.
 
 In order to integrate CheerpJ, you just need to add:
 
@@ -31,7 +31,7 @@ In order to integrate CheerpJ, you just need to add:
 <script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
 ```
 
-2.  A second script calling `cheerpjInit()`
+2.  A second script calling [`cheerpjInit()`] to initialize CheerpJ's runtime environment.
 
 ```html
 <script>
@@ -57,7 +57,7 @@ For example:
 			width="900"
 		></applet>
 		<script>
-			await cheerpjInit();
+			cheerpjInit();
 		</script>
 	</body>
 </html>
@@ -72,11 +72,8 @@ npm install http-server
 http-server -p 8080
 ```
 
-### What's going on?
-
-- The `cheerpjInit();` initializes CheerpJ runtime environment.
-
-> To avoid potential conflicts with native Java we recommend replacing the original HTML tag with `cheerpj-` prefixed version. You should use `<cheerpj-applet>`, `<cheerpj-object>` or `<cheerpj-embed>` depending on the original tag.
+> [!tip] Avoiding conflicts with native Java plugins
+> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
 
 ## Running a public applet
 
@@ -114,3 +111,5 @@ You will see the CheerpJ display on your browser with some loading messages befo
 ## Further reading
 
 - [Runtime API reference](/cheerpj3/reference)
+
+[`cheerpjInit()`]: /cheerpj3/reference/cheerpjInit
