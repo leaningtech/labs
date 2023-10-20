@@ -31,7 +31,7 @@ In order to integrate CheerpJ, you just need to add:
 <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
 ```
 
-2.  A second script calling `cheerpjInit()`
+2.  A second script calling [`cheerpjInit({enablePreciseAppletArchives:true})`] to initialize CheerpJ's runtime environment.
 
 ```html
 <script>
@@ -74,12 +74,8 @@ npm install http-server
 http-server -p 8080
 ```
 
-### What's going on?
-
-- The `cheerpjInit({enablePreciseAppletArchives:true})` initializes CheerpJ runtime environment indicating we are loading an applet.
-
 > [!tip] Avoiding conflicts with native Java plugins
-> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>, and `<cheerpj-embed>` are all supported.
+> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
 
 ## Running a public applet
 
@@ -118,3 +114,5 @@ You will see the CheerpJ display on your browser with some loading messages befo
 
 - [AOT optimization](/cheerpj2/guides/AOT-optimization)
 - [Runtime API](/cheerpj2/reference/Runtime-API)
+
+[`cheerpjInit({enablePreciseAppletArchives:true})`]: /cheerpj2/reference/Runtime-API#enablepreciseappletarchives
