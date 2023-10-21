@@ -1,5 +1,5 @@
 ---
-import { type ProductData } from "@/lib/products";
+import { type ProductData, getProductNav } from "@/lib/products";
 import { Image } from "astro:assets";
 import Search from "./Search.astro";
 import { DISCORD_URL } from "@/consts";
@@ -12,11 +12,15 @@ interface Props {
 
 const { product } = Astro.props;
 
-const links = [
-	{ name: "Learn", href: `${product.href}/getting-started` },
-	{ name: "Reference", href: `${product.href}/reference` },
-	{ name: "Examples", href: `${product.href}/examples` },
-];
+const nav = await getProductNav(product.id);
+const links = nav.entries
+	.filter((entry) => entry.type === "directory")
+	.map((entry) => {
+		return {
+			name: entry.title,
+			href: entry.href,
+		};
+	});
 ---
 
 <nav

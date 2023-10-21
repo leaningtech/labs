@@ -1,11 +1,19 @@
-import { isProduct, type Product } from "./nav";
+import {
+	findNavDirectory,
+	getRootNav,
+	isProduct,
+	type NavDirectory,
+	type Product,
+} from "./nav";
 
 import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
 
+export type ProductId = "cheerp" | "cheerpj2" | "cheerpj3" | "cheerpx";
+
 export interface ProductData {
-	id: string;
+	id: ProductId;
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
@@ -67,4 +75,14 @@ export function productFromUrl(url: URL): ProductData | undefined {
 		return products[path];
 	}
 	return undefined;
+}
+
+export async function getProductNav(
+	productId: ProductId,
+): Promise<NavDirectory> {
+	const root = await getRootNav();
+	const directory = findNavDirectory(root, [productId]);
+	if (!directory)
+		throw new Error(`no nav directory found for product ${productId}`);
+	return directory;
 }
