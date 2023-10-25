@@ -72,17 +72,33 @@ The Java runtime version to use. `8` is the only supported value at the moment.
 
 ### `clipboardMode`
 
-By default CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard. To change this behaviour you can initialize CheerpJ in the following way:
+This option allows you to configure how the clipboard will behave. Supported clipboard modes are [`java`], [`system`] and [`permission`].
+
+Example:
 
 ```js
 cheerpjInit({ clipboardMode: "system" });
 ```
+
+#### `java` mode
+
+This is the default setting. CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard.
+
+#### `system` mode
 
 In `system` mode CheerpJ will share the clipboard with the system. Browsers enforce serious limitations on how the system clipboard can be accessed. In practice it is generally accessible when the `Ctrl+C` and `Ctrl+V` shortcuts are used (`Cmd+C` and `Cmd+V` on MacOSX). Due to these limitations the UX when using `clipboardMode:"system"` is:
 
 - `Ctrl+C`/`Cmd+C`: the user has to press the shortcut twice to give CheerpJ access to the system clipboard. CheerpJ will block the execution while waiting for the second `Ctrl+C`.
 - `Ctrl+V`/`Cmd+V`: this shortcut behaves normally, there is no difference with native execution.
 - Menu based Copy/Paste: `Ctrl+C`/`Ctrl+V` are needed to access the clipboard. CheerpJ will block the execution while waiting the appropriate shortcut.
+
+#### `permission` mode
+
+With `permission` mode enabled, CheerpJ offers a more seamless integration than `system` mode. This includes support for images and HTML on top of plain text. Another important feature is that pressing extra `Ctrl+C`/`Ctrl+V` to perform copying and pasting operations is not required.
+
+The first time an operation is requested, the user will be asked for permission to use the clipboard. If this permission is refused, a message will be prompted explaining this permission is necessary to continue.
+
+> This mode is experimental and might show a few inconsistencies in some browsers. [`See more`](https://caniuse.com/mdn-api_permissions_permission_clipboard-read).
 
 ### `enableInputMethods`
 
@@ -196,3 +212,6 @@ This option is used to make a `fetch` request over the network.
 
 [cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[`java`]: /cheerpj3/reference/cheerpjInit#java-mode
+[`system`]: /cheerpj3/reference/cheerpjInit#system-mode
+[`permission`]: /cheerpj3/reference/cheerpjInit#permission-mode
