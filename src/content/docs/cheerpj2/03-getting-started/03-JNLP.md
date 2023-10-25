@@ -18,8 +18,8 @@ The `.jnlp` file contains the specifics of how to launch your Java application. 
 Your `.jnlp` file might look something like the example below. There are three essential elements you need to find:
 
 1. The `.jar` files specified under the `<resources>` element, usually indicated with a `<jar>` or `<nativelib>` tags.
-2. Your application type. Seek for ` <application-desc>` or `<applet-desc>` tag.
-3. You may need the `codebase` URL at `<jnlp>`.
+2. Your application type. Look for an `<application-desc>` or `<applet-desc>` tag.
+3. You may need the `codebase` URL given by `<jnlp>`.
 
 ```xml title="example.jnlp" {5, 22-23, 26}
 <?xml version="1.0" encoding="utf-8"?>
