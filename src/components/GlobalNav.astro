@@ -30,7 +30,9 @@ const links = [
 				Leaning Technologies <span class="text-stone-400">Developer</span>
 			</span>
 		</a>
-		<div class="flex items-center gap-4 ml-auto flex-none font-medium">
+		<div
+			class="hidden sm:flex items-center gap-4 ml-auto flex-none font-medium"
+		>
 			{
 				links.map((link) => (
 					<a href={link.href} class="hover:text-white">

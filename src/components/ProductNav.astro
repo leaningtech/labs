@@ -28,7 +28,7 @@ const links = nav.entries
 	class="sm:sticky top-0 z-40 bg-stone-900 bg-opacity-90 backdrop-blur-lg text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
 >
 	<div
-		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-8 whitespace-nowrap overflow-hidden"
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-2 md:gap-6 whitespace-nowrap overflow-hidden"
 	>
 		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
 			<a href={product.href} class="flex items-center">
@@ -37,9 +37,13 @@ const links = nav.entries
 			{product.id.startsWith("cheerpj") && <ProductVersionSwitcher {product} />}
 		</div>
 
+		<div class="grow sm:hidden"></div>
+
 		<Search />
 
-		<div class="flex items-center gap-4 ml-auto flex-none text-stone-300">
+		<div
+			class="hidden sm:flex items-center gap-4 ml-auto flex-none text-stone-300"
+		>
 			{
 				links.map((link) => (
 					<a href={link.href} class="hover:text-white">
