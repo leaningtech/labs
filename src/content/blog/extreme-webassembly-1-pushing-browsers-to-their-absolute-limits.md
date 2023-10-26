@@ -56,10 +56,12 @@ Indirect jumps are also relatively infrequent in real world code, since the comm
 
 If you disassemble any dynamically linked binary you will find code like this:
 
+```
 08049060 <puts@plt>:
 8049060: f3 0f 1e fb endbr32
 8049064: ff 25 0c c0 04 08 jmp \*0x804c00c
 804906a: 66 0f 1f 44 00 00 nopw 0x0(%eax,%eax,1)
+```
 
 For the unlucky few who cannot read Matrix code fluently, the *jmp* instruction will first load a 32-bit value from address 0x804c00c, and then redirect execution to the loaded address. The dynamic linker takes care of writing the actual address of the ‘_puts_’ function at address 0x804c00c, which will never change during the execution of the program.
 
@@ -69,8 +71,10 @@ What we have in the end is an indirect jump which is actually quasi-direct: It w
 
 Remember that in WebAssembly the unit of execution is the “function”. Moreover, the only way of transferring the control to a different WebAssembly function is a call. What we *could* do is this:
 
+```
 call N
 ret
+```
 
 This is actually correct, and it *mostly* works, at least until the dreaded “Maximum call stack” exception arises. The fundamental problem is that indirect jumps are not only used in the PLT as described above, but may be used to pass around control unpredictably. If, for any reason, a few thousands of such indirect jumps happen in a row, the WebAssembly/JavaScript stack will blow.
 
