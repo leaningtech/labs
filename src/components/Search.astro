@@ -4,14 +4,14 @@ import Icon from "astro-icon";
 import PagefindSearch from "astro-pagefind/components/Search";
 ---
 
-<site-search class="inline-block w-80 h-10 max-w-full">
+<site-search class="inline-block sm:w-80 h-10 max-w-full">
 	<button
 		data-open-modal
-		class="group text-stone-300 border-stone-500 hover:border-stone-400 sm:border border-opacity-50 rounded-md px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors"
+		class="group text-stone-300 border-stone-500 hover:border-stone-400 sm:border border-opacity-50 rounded-md px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors"
 	>
 		<Icon
 			name="fa-solid:search"
-			class="w-4 h-4 mr-0.5 sm:text-stone-500 group-hover:text-stone-300 transition-colors"
+			class="w-4 h-4 mr-0.5 text-stone-200 group-hover:text-white transition-colors"
 		/>
 		<span class="group-hover:text-white transition-colors hidden sm:block"
 			>Search</span

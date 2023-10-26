@@ -5,10 +5,13 @@ import { getRootNav, findNavDirectory } from "../lib/nav";
 import { productFromUrl } from "../lib/products";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
 import TableOfContents from "../components/TableOfContents.astro";
 import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
+import ProductNav from "@/components/ProductNav.astro";
+import WasThisHelpful from "@/components/WasThisHelpful.astro";
 
 interface Props {
 	id: string;
@@ -22,88 +25,85 @@ const { id, title, description, headings } = Astro.props;
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
-const directory = product && findNavDirectory(nav, [product.id]);
+if (!product) throw new Error("Product not found");
 
-const contributeLinks = [
-	{
-		label: "Edit this page",
-		href: `https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`,
-	},
-	{
-		label: "Give feedback",
-		href: "https://github.com/leaningtech/labs.leaningtech.com/issues/new",
-	},
-];
+const directory = findNavDirectory(nav, [product.id]);
 ---
 
-<Shell title={[title, description].filter(Boolean).join(" | ")}>
-	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
+<Shell
+	title={[
+		title === product.name ? undefined : title,
+		product.name + " Documentation",
+	]
+		.filter(Boolean)
+		.join(" - ")}
+	description={description ?? product.description}
+>
+	<ProductNav {product} />
+	<docs-article class="max-w-[92rem] w-full mx-auto flex">
 		<div
 			data-sidebar-wrapper
-			class="hidden lg:block shadow-xl lg:shadow-none z-20"
+			class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
 		>
 			<DocsSidebar {directory} />
 		</div>
 		<div
 			data-backdrop
-			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-10"
+			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
 		>
 		</div>
-		<main class="grow p-6 sm:px-6 md:px-8 w-full max-w-3xl mx-auto lg:mx-0">
-			<div class="mb-2.5 flex items-center gap-4">
+		<main class="overflow-x-hidden">
+			<div
+				class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20"
+			>
 				<button data-sidebar-toggle class="lg:hidden">
 					<span class="sr-only">Open navigation menu</span>
-					<Icon name="jam:menu" class="w-8 h-8" />
+					<Icon name="mi:menu" class="w-8 h-8 text-white" />
 				</button>
 				<Breadcrumbs current={id} />
 			</div>
 
 			<main
 				data-pagefind-body
-				class="prose prose-stone dark:prose-invert pb-10"
+				class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 max-w-3xl xl:max-w-[49rem]"
 			>
-				<h1 class="mb-2 font-bold">{title}</h1>
 				{
-					description && (
-						<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
+					title === product.name ? (
+						<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
+							<h1>
+								<Image alt={product.name} src={product.logotype} />
+							</h1>
+							<p class="text-xl font-medium text-stone-500">{description}</p>
+						</div>
+					) : (
+						<>
+							<h1 class="mb-2 font-bold">{title}</h1>
+							{description && (
+								<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
+							)}
+						</>
 					)
 				}
 				<slot />
 			</main>
 
-			{
-				directory && (
-					<div class="py-5">
-						<DocsPagination activeId={id} />
-					</div>
-				)
-			}
+			<div class="py-3 px-6 md:px-8">
+				<WasThisHelpful
+					editHref={`https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`}
+				/>
+				{
+					directory && (
+						<div class="py-5">
+							<DocsPagination activeId={id} />
+						</div>
+					)
+				}
+			</div>
 		</main>
 		<aside
 			class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky"
 		>
-			<div class="space-y-10">
-				{headings && <TableOfContents {headings} />}
-				<section>
-					<h5 class="font-semibold mb-1 leading-7 text-stone-300">
-						Contribute
-					</h5>
-					<ul>
-						{
-							contributeLinks.map(({ label, href }) => (
-								<li>
-									<a
-										{href}
-										class="block py-1 text-stone-400 hover:text-stone-200"
-									>
-										{label}
-									</a>
-								</li>
-							))
-						}
-					</ul>
-				</section>
-			</div>
+			{headings && <TableOfContents {headings} />}
 		</aside>
 	</docs-article>
 	<Footer />

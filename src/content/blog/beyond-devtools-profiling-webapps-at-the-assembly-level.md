@@ -5,7 +5,7 @@ description: |
 authors:
   - elisabeth
 pubDate: "June 28 2023"
-heroImage: "/blog/blog-banners/profiling.png"
+heroImage: "./profiling.png"
 tags:
   - CheerpX
 ---
