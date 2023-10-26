@@ -35,7 +35,7 @@ This article is intended as the first of a series about the problems we have fou
 
 To start with, I will try to explain some of the magic behind CheerpX. How can we even run arbitrary x86 code in the browser? In particular: how do we deal with the arbitrary control flow of x86 code.
 
-# Taming arbitrary control flow
+## Taming arbitrary control flow
 
 In WebAssembly, the unit of execution is the “function”. CheerpX uses a dynamic and flexible conversion strategy: all the code reachable via direct jumps and hot enough from a given entry point will become 1 Wasm function.
 
@@ -48,7 +48,7 @@ Now that these general ideas are introduced we can summarize how CheerpX handles
 3. **Returns** at the machine code level are actually a form of indirect jumps. In principle they could jump anywhere. In practice, though, they will *usually* cleanly return to the previous method in the WebAssembly stack. CheerpX optimizes for the common case of a well behaved call stack, but can deal correctly with badly behaving code using rets to jump to arbitrary addresses.
 4. **Indirect jumps**: These are relatively uncommon, but quite problematic, and the whole reason I am writing this piece.
 
-# The secret life of indirect jumps
+## The secret life of indirect jumps
 
 The most naïve approach to support indirect jumps is to effectively give up on structured control flow and go back to the outer loop which drives the whole execution.
 
@@ -67,7 +67,7 @@ For the unlucky few who cannot read Matrix code fluently, the *jmp* instructio
 
 What we have in the end is an indirect jump which is actually quasi-direct: It will always go to the same place. As an optimization CheerpX can actually detect such cases and “devirtualize” this, but in general thismight not be possible.
 
-# Going too deep
+## Going too deep
 
 Remember that in WebAssembly the unit of execution is the “function”. Moreover, the only way of transferring the control to a different WebAssembly function is a call. What we *could* do is this:
 
@@ -80,7 +80,7 @@ This is actually correct, and it *mostly* works, at least until the dreaded �
 
 And this happens in practice. I am not sure what specific component causes the problem. I suspect either something deep in the dynamic linker or possibly an optimized bytecode interpreter in the target x86 code. It doesn’t matter anyway, we want to build a generic and robust solution, so we need to do better.
 
-# Wrapping up
+## Wrapping up
 
 ![](/blog/1*TyhAQyn2i36-C7BBHZFPMQ.gif)
 

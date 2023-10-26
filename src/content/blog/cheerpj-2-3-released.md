@@ -23,7 +23,7 @@ CheerpJ, originally released around 5 years ago, is trusted by [many large orga
 
 CheerpJ 2.3 is the only solution on the market to migrate real-world large-scale Java applications to modern HTML5 with pixel-perfect accuracy.
 
-# CheerpJ at a glance
+## CheerpJ at a glance
 
 CheerpJ can be used to run Java bytecode on the browser as WebAssembly/JavaScript.
 
@@ -37,13 +37,13 @@ CheerpJ provides several browser-based system functions, including virtualized f
 
 Since release 2.2 (release notes [here](https://leaningtech.com/cheerpj-2-2-released/)), there have been improvements in how files are read and written in our custom file system, class generation now allows for non-ASCII fields to be present and improvements in how network connections are handled have been made. The full Changelog for version 2.3 of CheerpJ is available [here](https://docs.leaningtech.com/cheerpj/Changelog).
 
-# Getting started
+## Getting started
 
 CheerpJ 2.3 is [available](https://leaningtech.com/cheerpj/#download) for Windows, macOS and Linux. You can download it, integrate it and test it with no restrictions.
 
 You can head to our [Documentation](https://docs.leaningtech.com/cheerpj/) for examples and tutorials.
 
-# How to upgrade to CheerpJ 2.3
+## How to upgrade to CheerpJ 2.3
 
 To try out or update to CheerpJ 2.3, simply download the compiler [here](https://leaningtech.com/download-cheerpj/) , and rebuild your project with the new compiler.
 
@@ -57,7 +57,7 @@ The old 2.2 version will keep working, but the only way to gain the benefits of 
 
 Please notice that using the new runtime with a jar.js generated with the 2.2 compiler is unsupported and might lead to unexpected behaviours.
 
-# Download and try CheerpJ
+## Download and try CheerpJ
 
 If you have never tried our compiler before it’s really easy!
 
@@ -67,7 +67,7 @@ You can follow [this link](https://docs.leaningtech.com/cheerpj/) to our wiki 
 
 You can also try CheerpJ online using our [Java Fiddle](https://javafiddle.leaningtech.com/).
 
-# Future releases
+## Future releases
 
 We have exciting news for the next release, more of which will be shared in the coming months!
 

@@ -31,7 +31,7 @@ Originally developed to have our tech tested as much as possible *in the wild*,
 
 Just to be clear, we don’t buy reviews.
 
-# Not the best way to begin your day
+## Not the best way to begin your day
 
 In March 2020, as the COVID-19 pandemic began to rage over the planet, I woke up one day to find what any extension developer dreads the most. Two emails, in rapid succession:
 
@@ -48,7 +48,7 @@ After such a long time, we can’t postpone updates any longer, and can’t cont
 
 > This post is about our plan to get out of this quagmire, about the inevitable costs of this situation (both for us and our users), and the massive amount of frustration, pointless limitations and ugly bugs that we have found along the way. Hopefully, this will be useful for other developers of Chrome extensions. At the very least, they might find some comfort from seeing other people having their fair share of pain.
 
-# Are we the bad guys?
+## Are we the bad guys?
 
 Chrome Web Store policies change frequently, mostly getting stricter by the day, and for very good reasons.
 
@@ -74,7 +74,7 @@ That said, our extension needs to be able to do some tricky stuff just to work a
 - It’s not possible to predict which domains may still use Java applets. They could be anywhere, although most likely not on major, well maintained sites. We know from user’s bug reports that an immense number of obscure pages still include Java applets. Inevitably, our extension needs to be able to run (potentially) on any website, but should only be actually enabled on the small subset of domains that the user requires.
 - Finally, our extension needs to do the magic trick of “converting and running Java Applets” as HTML5 in the browser, without a plugin. While this is our bread and butter, and we know this is not only possible, but also safe to do, we can imagine that an overworked extension reviewer may have a different impression, and with little time available may just opt for the safer option of declining approval.
 
-# We don’t need no weird permission
+## We don’t need no weird permission
 
 With quite a bit of effort, we settled on the following permissions scheme, which worked well for us for years, up until the unsettling emails of March 2020.
 
@@ -92,7 +92,7 @@ The previous extension popup, describing the meaning of each icon
 
 - **activeTab:** A very lightweight permission, just used to query the current tab id and bootstrap the process. Although using *activeTab* is recommended, and possibly the least invasive thing you can ask for, Google still requires a justification for using it.
 
-# No good deed goes unpunished
+## No good deed goes unpunished
 
 To the best of our understanding, by following this scheme we were playing well within the rules. Certainly above the industry average. Getting so close to losing our extension after all this effort has been very painful and frustrating, and has essentially forced us to delay updates for a very long time, to avoid risking the extension being banned.
 
@@ -106,7 +106,7 @@ Moreover, as far as we understand the extension is currently living on borrowed 
 
 This is our plan to update the CheerpJ Applet Runner extension, in the hope of a successful and quick review and approval on the Chrome Web store.
 
-# The plan (1/4): Be as light as a feather
+## The plan (1/4): Be as light as a feather
 
 As you can imagine, we are extremely worried about the risks of getting the next update to the CheerpJ Applet Runner rejected, and about the risks of the extension getting taken down for no reason.
 
@@ -150,7 +150,7 @@ After all these, somewhat painful, choices we are left with an extension that on
 
 The new popup UI, some elements were removed to reflect the lost functionalities
 
-# **The plan (2/4): Prepare for the worst**
+## **The plan (2/4): Prepare for the worst**
 
 Even with all the precautions that we have taken, unfortunately we can’t be sure that CheerpJ Applet Runner will not be taken down by the Chrome Web Store.
 
@@ -158,7 +158,7 @@ To make sure that another option is available to our users, we have just release
 
 We have also prototyped extensions for Firefox and Safari. As things stands, though, manifest V3 is not supported by either, so we would need to provide a specifically downgraded version for them. At this time we have decided against supporting Firefox/Safari, but we plan to revise our decision when V3 is supported. Firefox in particular has [announced a beta](https://blog.mozilla.org/addons/2021/05/27/manifest-v3-update/) of the feature later in 2021/early 2022.
 
-# The plan (3/4): Make some noise
+## The plan (3/4): Make some noise
 
 The main point of this post is to be open about the whole process of maintaining and updating a Chrome extension.
 
@@ -166,7 +166,7 @@ As a consequence of the “difficulties” of this process, the next version of 
 
 We hope that this post will raise awareness on the very sorry state of the Chrome Web Store, and of the approval process for updates. We are not the first developers to be negatively impacted by the extension review process (and we won’t be the last), and we have seen how, in previous cases, getting some attention from the community can go a long way. Hopefully this will apply to the CheerpJ Applet Runner as well.
 
-# The plan (4/4): Roll the dice
+## The plan (4/4): Roll the dice
 
 Once updated, we will try to reintroduce some of the lost UX, in particular we’d like the **declarativeContent** support in Chromium to be fixed, so that we can restore the use of color-coded icons to better inform the users.
 
@@ -176,7 +176,7 @@ About requiring a click every single time you want to use the extension, while n
 
 If you can think of a good way of solving the problem, I’d be very interested to chat. Feel free to ping me on [Twitter](https://twitter.com/alexpignotti).
 
-# The end, for now
+## The end, for now
 
 If you made it to the end of this post, thanks a lot for your patience.
 

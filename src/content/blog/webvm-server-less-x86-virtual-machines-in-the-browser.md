@@ -35,7 +35,7 @@ A few months ago we released the [REPL demo](https://repl.leaningtech.com/), pr
 
 Today we are proud to announce a major step towards realizing our vision: [WebVM](https://webvm.io/), a full Debian based virtual machine running in the browser, powered by CheerpX.
 
-# So, what is CheerpX?
+## So, what is CheerpX?
 
 [CheerpX](https://leaningtech.com/cheerpx/) is a x86 virtual machine, written in C++ and compiled to a combination of JavaScript and WebAssembly with the [Cheerp](https://leaningtech.com/cheerp/) compiler.
 
@@ -53,7 +53,7 @@ CheerpX is a very complex system with many moving parts. It correctly deals with
 
 Now it feels like the perfect time to release our most-complex demo, yet: WebVM.
 
-# So, what is WebVM?
+## So, what is WebVM?
 
 If you have seen our previous REPL demo, you might notice that WebVM is not conceptually much different. The same core components are used:
 
@@ -71,7 +71,7 @@ Our previous demos were intended as snapshots of CheerpX progress and showcases 
 
 CheerpX has been, so far, only exposed to users in a relatively controlled fashion. One single application at a time. WebVM is the first time we really give control to a wider public and we do expect problems to arise. But public feedback will make it possible to discover many more bugs and, ultimately, deliver a more robust solution.
 
-# What can I do with WebVM right now?
+## What can I do with WebVM right now?
 
 We think the [demo](https://webvm.io/) will, most likely, speak for itself. If case you are unsure, try this:
 
@@ -84,11 +84,11 @@ We think the [demo](https://webvm.io/) will, most likely, speak for itself. If
 
 Example files for various languages are available in the `examples` directory. If, for any reason, you don’t like to use `gcc`, feel free to try `clang` as well!
 
-# Where can I run it
+## Where can I run it
 
 WebVM and CheerpX are compatible with any browser, both on Desktop (Chrome/Chromium, Edge, Firefox, Safari), and Mobile (Chrome, Safari), provided support for [SAB](https://caniuse.com/?search=SharedArrayBuffer) is present, and the device has sufficient memory.
 
-# Is this all?
+## Is this all?
 
 This release of WebVM is really just a first step. We plan to improve and evolve WebVM over time, and feedback from users will be guiding our efforts.
 

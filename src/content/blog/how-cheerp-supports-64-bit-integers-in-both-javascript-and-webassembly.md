@@ -14,11 +14,11 @@ I recently improved support for 64-bit integers in [Cheerp](https://leaningtech
 
 In this post, I will explain why supporting 64-bit integers requires special attention, what Cheerp used to do in the past, why the current situation is better, and what we will be able to do in the future to further improve support.
 
-# About Cheerp
+## About Cheerp
 
 Cheerp is a C/C++ to WebAssembly/JavaScript compiler, similar to Emscripten. Its focus is primarily better interoperability with the browser APIs and third party JavaScript libraries. This is achieved by compiling the code to either WebAssembly, using a standard flat memory model, or to JavaScript, using an object memory models that maps C++ struct/classes instances to JavaScript garbage-collected objects.
 
-# Supporting 64-bit integers in JavaScript
+## Supporting 64-bit integers in JavaScript
 
 Before WebAssembly was a thing, Cheerp supported compiling C++ code to plain JavaScript. JavaScript has no built-in support for 64 bit integers (well, there is [BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) now… more on that later), so we needed a way of supporting these integers and their operations in term of simpler types.
 
@@ -59,7 +59,7 @@ store i32 %and.low, i32\* %j.gep.low, align 4
 
 This design decision proved to be an hindrance for supporting real 64 bit integers for WebAssembly output.
 
-# Supporting 64-bit integers in WebAssembly
+## Supporting 64-bit integers in WebAssembly
 
 WebAssembly natively supports i64 values, so we don’t need need to manually decompose them into i32 and emulate all the instructions.
 
@@ -69,7 +69,7 @@ Moreover, since we were never actually generating `i64` values from clang, we 
 
 On top of all this, we wanted a solution that would allow us in the future to take advantage of a new JavaScript feature: `BigInt`.
 
-# JavaScript has actual integers now!
+## JavaScript has actual integers now!
 
 `[BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)` is a new numerical type recently added to JavaScript. It allows to precisely represent and compute arbitrarily sized integers. The new `[BigInt64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt64Array)` also allows to efficiently use 64-bit values in arrays.
 
@@ -81,7 +81,7 @@ Automatic conversion between JavaScript `BigInt` and Wasm `i64`, which would 
 
 So while this is a very useful feature, and Cheerp will definitely support optionally using BigInt, it is not a definitive solution to the problem.
 
-# Lowering i64 in an LLVM pass
+## Lowering i64 in an LLVM pass
 
 Instead of modifying Clang to compile `int64_t` values and instructions directly to `i32` , we can leave the normal code generation as it is, and later run a custom LLVM pass to remove all the `i64` and convert them to `i32` .
 
@@ -125,7 +125,7 @@ Example LLVM IR of a store (for code compiled to Wasm):
 %2 = bitcast \[2 x i32\]\* %i.addr to i64\*
 store i64 %i, i64\* %2, align 8
 
-# Conclusion and future development
+## Conclusion and future development
 
 This new approach lets us take advantage of native 64-bit arithmetic AND load/stores in Wasm, while keeping the code generation flexible enough to support plain JavaScript and the legacy asm.js target. All these improvements are now merged in master and are available to nightly PPA users. The next step for us is to optionally enable the use of BigInts, which will be the focus of my next post.
 

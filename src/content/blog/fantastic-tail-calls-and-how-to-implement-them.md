@@ -23,7 +23,7 @@ As Apple’s [Webkit already implements proper tail calls in ECMAScript 6](http
 
 **This article aims at demystifying WebAssembly tail calls while giving the reader an idea of how we have implemented the feature in WebKit.**
 
-# Let’s refresh our memory…
+## Let’s refresh our memory…
 
 There are different ways of representing function arguments at the machine level, these are named “calling conventions”. We will focus on how the call stack is allocated and how arguments are passed in JavaScriptCore, Safari’s JavaScript engine. Similar reasonings can apply to other environments.
 
@@ -88,7 +88,7 @@ ret /
 
 This is wasteful and can be optimized. Here lies the concept of tail call elimination, through which we consider the callee as an extension of the caller.
 
-# How it can be done in WebAssembly: return_call
+## How it can be done in WebAssembly: return_call
 
 The following shows the WebAssembly equivalent of our factorial example, with tail calls enabled.
 
@@ -128,7 +128,7 @@ We will now compare a deeply recursive call to factorial, both with and without 
 
 It becomes apparent that with `return_call`, we only use one frame for `factorial` and all potential recursions of it.
 
-# Arguments vs. Return values
+## Arguments vs. Return values
 
 WebAssembly also supports multiple return values. This implies that the stack used by arguments equally stores the callee’s return values. This plays well with tail calls, since we can assume that **A** has enough space for **B**’s return values (Fig. 4). The tail calls specification also ensures that **B** can only tail call a function that returns the same number of values. However, this raises a concern regarding their offsets on the stack
 
@@ -152,7 +152,7 @@ When **A** restores the stack pointer as if it had called **B**, it is able t
 
 We therefore have demonstrated a viable implementation of tail calls in WebAssembly. While being rather straightforward conceptually, the feature has to find its place in a complex codebase with many moving parts involving the stack, for example: exception handling. The implementation is still going through reviews at the time of writing and I invite you to [consult the pull request](https://github.com/WebKit/WebKit/pull/2065) for a more technical follow-up.
 
-# The next steps
+## The next steps
 
 We hope to see WebAssembly tail calls land in JavaScriptCore soon. This would effectively push the proposal to the next phase, paving the way for a full standardisation.
 

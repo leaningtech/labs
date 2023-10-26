@@ -20,7 +20,7 @@ He got started after reading “[Is WebAssembly magic performance pixie dust?](h
 
 He tried something similar, but targeting directly JavaScript instead of WebAssembly.
 
-## Rules of the game:
+### Rules of the game:
 
 1. Take some arbitrary JavaScript benchmarks
 2. Come up with a JavaScript-only equivalent version that’s more performant
@@ -31,9 +31,9 @@ TLDR: He mostly managed to succeed! Go to https://carlopi.github.io/js-opt-bench
 
 ![Screenshot of benchmark results](./images/1*L9XEUnBIUooQt-kRog6CNw.png)
 
-## So how did he do it?
+### So how did he do it?
 
-### Scoping
+#### Scoping
 
 How to go on solving such a challenge? Is this even possible at all?
 
@@ -49,7 +49,7 @@ This affects all 3 stages: JavaScript -> IR, IR -> optimized IR, optimized IR ->
 
 ![JavaScript logo / LLVM logo (a dragon) / JavaScript logo](./images/1*h17N8vQ5CK18-pMSN1vjpA.png)
 
-# Presentations
+## Presentations
 
 Now we have some JavaScript code, and we want to feed it into Cheerp. From there the compiler will take care of applying all LLVM optimization passes (and enforcing that the additional invariants will not be broken) and generating JavaScript for us.
 
@@ -57,7 +57,7 @@ Now to get this process started, we need to process JavaScript code and output e
 
 I took what seemed the faster to prototype path: compiling JS to C++.
 
-# JavaScript → C++
+## JavaScript → C++
 
 Now the problem I was left with looked like this: how to generate C++ code that has the same semantics of a given JavaScript program?
 
@@ -67,7 +67,7 @@ TypeScript is a superset of JavaScript that allows to add type information to pa
 
 (Note, one of TypeScript explicit [non-goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals#non-goals) is optimizing the resulting code, so the TypeScript Compiler is mostly busy checking that no forbidden operations are done, using the type information whenever provided)
 
-## TypeScript AST
+### TypeScript AST
 
 TypeScript AST has currently 300+ kinds of nodes. Like PlusToken, AsteriskEqualsToken, Identifier, IfStatement, and many more. Here the complete list: [typescript.d.ts](https://github.com/microsoft/TypeScript/blob/master/lib/typescript.d.ts#L341).
 
@@ -94,7 +94,7 @@ It’s basically all there, taking advantages of 2 Cheerp’s features:
 
 ![JavaScript logo (yellow square) / C++ logo (blueish exagon)](./images/1*VTIDRdkX5u83T1RRQ81bqA.png)
 
-# C++ → JavaScript
+## C++ → JavaScript
 
 Now we just have to run Cheerp on it.
 
@@ -115,7 +115,7 @@ One thing to note is that the non-readable version ends up being roughly as big 
 
 JavaScript to C++ to optimized JavaScript, thanks to AST visitor and Cheerp
 
-# Micro Benchmark Time
+## Micro Benchmark Time
 
 Benchmarks are hard to get right, and benchmarks on micro programs have their own additional set of limitations. Read for example the disclaimer in the central part of [Surma’s article](https://surma.dev/things/js-to-asc/index.html) or [“Why measure toy benchmark programs?”](https://benchmarksgame-team.pages.debian.net/benchmarksgame/why-measure-toy-benchmark-programs.html).
 
@@ -133,7 +133,7 @@ The first 3 benchmarks were the subjects of Surma’s article. The fourth one ha
 
 I would like again to stress that these programs are not relevant nor representative of general JavaScript programs. But that’s fine, since what I am interested is showing that there is room for a JavaScript -> JavaScript optimizing compiler, and attach some numbers to the claim.
 
-# Results
+## Results
 
 I put up a bare-bones web page where you can test those 7 benchmarks on your own device + browser (and thus JavaScript engine) of choice: [https://carlopi.github.io/js-opt-benchmark/](https://carlopi.github.io/js-opt-benchmark/).
 
@@ -145,7 +145,7 @@ There are a few notes to be made here:
 - The point of choosing these benchmarks is taking JavaScript already written to minimize execution time, so any performance extracted on top of that is much more significant.
 - JavaScript code that wasn’t as optimal as this would possibly benefit much more from a compilation step.
 
-# The end?
+## The end?
 
 We did it.
 
@@ -164,41 +164,41 @@ The actual process I iterated to add a new benchmark/test looked like this:
 
 It’s far from ideal and brittle, but worked enough to get this experiment up and running in a few hundreds lines of code.
 
-# Comparisons
+## Comparisons
 
 These are some related projects:
 
-## V8 / SpiderMonkey / JavaScriptCode
+### V8 / SpiderMonkey / JavaScriptCode
 
 These are engines that actually run JavaScript, basically compiling JavaScript into machine code. There is plenty of magic happening under the hood. Something that’s worth mentioning is that a lot of the magic depend on runtime knowledge of what’s actually being run (not even just types).
 
-## Google’s Closure Compiler
+### Google’s Closure Compiler
 
 The Closure Compiler is a JavaScript -> JavaScript compiler, that performs optimization mainly with the goal of reducing the dimension of a JavaScript file. The idea is that downloading a JavaScript file is a blocker to interactivity, so smaller code is the main metric (from my understanding). The Closure Compiler optimizations (eg. dead code elimination) will mainly help in that direction. Do read the [disclaimer](https://developers.google.com/closure/compiler/docs/api-tutorial3).
 
-## TypeScript Compiler
+### TypeScript Compiler
 
 [TypeScript](https://github.com/microsoft/TypeScript) augments the JavaScript language with the goal of providing the compiler more information to help catch errors during development. Another goal is helping in converting from modern JavaScript syntax to (more) widely supported JavaScript syntax.
 
 Performance improvements are explicitly not in the scope of the TypeScript compiler.
 
-## AssemblyScript
+### AssemblyScript
 
 [AssemblyScript](https://www.assemblyscript.org/) is a TypeScript dialect that compiles to [Bynarien IR](https://github.com/WebAssembly/binaryen), and from there to WebAssembly. I got started after reading from [Surma’s article](https://surma.dev/things/js-to-asc/index.html) about how to optimize JavaScript performance (passing via AssemblyScript and then WebAssembly).
 
 I know very little of AssemblyScript, but there is plenty of cool work being done, check it out.
 
-## Cheerp
+### Cheerp
 
 [Cheerp](https://github.com/leaningtech/cheerp-compiler) is a C++ to JavaScript / WebAssembly compiler. It does the heavy lifting for this exploration, bringing code generation and access to LLVM optimizations. Cheerp is also a basic building block for [CheerpJ](https://leaningtech.com/cheerpj/) (Java to HTML5) and CheerpX ([x86](https://leaningtech.com/cheerpx/) / [Flash](https://leaningtech.com/cheerpx-for-flash/) to HTML5).
 
-## WebAssembly
+### WebAssembly
 
 This post is long enough, and probably I could fill many more paragraphs talking about what WebAssembly is or is not.
 
 The short answer is that it’s not yet an ideal target for pure JavaScript compilation. I could have instructed Cheerp to compile to mixed JavaScript and Webassembly, but that would have meant additional complexity (both in generating C++ code *and* in the explanation) that I don’t believe would have added much value.
 
-# The end!
+## The end!
 
 This is it, I have shown how an optimizing compiler JavaScript -> JavaScript could perform and a path to build one. I think this is somehow an unique result, and I am quite proud of having pulled this off.
 

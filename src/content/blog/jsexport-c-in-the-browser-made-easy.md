@@ -22,7 +22,7 @@ std::shuffle applied to [https://www.google.com/search?q=how+to+shuffle+array](
 
 For the last many weeks, I had been busy cleaning up, testing, and improving on `[[cheerp::jsexport`\]\]. The first phase has now been merged into our main branch ([GitHub](https://github.com/leaningtech/cheerp-clang/blob/bde23c135d741403af18096de4281fab0026f36c/lib/Sema/SemaCheerp.cpp)), and it’s now available for everyone to experiment with ([Cheerp’s PPA](https://github.com/leaningtech/cheerp-meta/wiki/Ubuntu-Debian-installation-using-PPA)), so it’s the right moment to show some examples of how it can be used and what can be achieved with it + some discussion of the (current) [limitations](https://github.com/leaningtech/cheerp-meta/wiki/JSExport-attribute) and the possible usage of JSExported classes and free functions.
 
-# GCD
+## GCD
 
 Let’s start from the basics.
 
@@ -54,7 +54,7 @@ It works!
 
 Great. So a function with signature `int(int,int)` can be converted to an equivalent JavaScript function. Something else?
 
-# Shuffle
+## Shuffle
 
 ![](./images/Screenshot-2021-08-10-at-09.37.11-300x126.png)
 
@@ -74,7 +74,7 @@ My proposal for next year’s Easter’s egg
 
 This is fun, but do not try it at home. (But feel free to do it [here](https://leaningtech.com/pages/cheerp_demos.html).)
 
-# Free functions limitations
+## Free functions limitations
 
 Now it’s the right time to say that there are limitations on the free functions taggable with `[[cheerp::jsexport]]`.
 
@@ -88,7 +88,7 @@ They come in a few flavors:
 
 Cheerp will give you a compile-time error whenever any of these rule are broken, explaining what went wrong AND how to fix the problem. There is also a more proper [documentation](https://github.com/leaningtech/cheerp-meta/wiki/JSExport-attribute) to help out.
 
-# And now, stateful objects
+## And now, stateful objects
 
 Exporting free functions is helpful on its own, but the possibility of exporting classes or structs it’s even more powerful (and comes with an additional set of limitations).
 
@@ -112,7 +112,7 @@ Few things to note here:
 - The class exports both a constructor (that has to be called with new ClassName(arguments)) and a generate() member function
 - This class lives completely on the JavaScript side, and the Garbage Collector will take care of getting rid of it after any reference isn’t held any more
 
-# Classes/structs restrictions
+## Classes/structs restrictions
 
 Stateful objects have great power, but also a major limitation: they need to have a trivial destructor. The reason for this limitation is that JavaScript lacks the concept of “finalizers”. Since C++ destructors can, in general, do anything it is not safe to let the GC simply collect objects which are not referenced anymore, *unless* their destructor is “trivial”, which means that it does nothing.
 
@@ -137,7 +137,7 @@ public std::set<client::HTMLElement\*>
 
 and have it magically work. It may be possible in the future (with some caveats) but the main focus has been on building a stable set of features that’s useful AND forward compatible.
 
-# Why compiling to JavaScript?
+## Why compiling to JavaScript?
 
 Why may one want to generate JavaScript starting from C++ code?
 
@@ -147,7 +147,7 @@ Or the problem is easily solved in C++ than in JavaScript (eg. write a performan
 
 Or you may need to already maintain a C++ codebase, and generating JavaScript from the C++ means avoiding the time/cost of keeping the two aligned.
 
-# JSExporting WebAssembly?
+## JSExporting WebAssembly?
 
 In all the examples there was a `-target cheerp`option, that means that the libraries code and all will be compiled to generic JavaScript.
 

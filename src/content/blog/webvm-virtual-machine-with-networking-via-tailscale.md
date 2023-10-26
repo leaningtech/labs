@@ -35,7 +35,7 @@ What if we could offload this “VPN provider” business to someone more qualif
 
 If we could find a VPN service that can be used directly from the browser, we could even eliminate the first issue, and avoid the need to host any server infrastructure ourselves.
 
-# Meet Tailscale
+## Meet Tailscale
 
 [Tailscale](https://tailscale.com/) is a VPN service based on the [WireGuard](https://www.wireguard.com/) protocol. It includes a control plane that manages the WireGuard keys of all the machines in the network and takes care of authenticating users.
 
@@ -55,7 +55,7 @@ Just kidding! Luckily for us, the official Tailscale client (written in Go) [co
 
 By slightly modifying their browser ssh client (tsconnect), and implementing a custom Tun device, we successfully communicated with a Tailscale network by just sending/receiving IP packets on a JavaScript MessageChannel!
 
-## About Go and Wasm
+### About Go and Wasm
 
 I was pleasantly surprised by how easy it is to compile Go code to Wasm.
 
@@ -69,7 +69,7 @@ Wasm-opt didn’t help much either: it shaved just 1MB. For comparison, the whol
 
 For this reason, the networking code is lazily loaded only if you attempt to log in to Tailscale.
 
-# TCP/IP Stack
+## TCP/IP Stack
 
 With surprisingly little work, we can now exchange IP packets from a Browser. Unfortunately, most applications don’t send raw IP packets but use TCP or UDP to communicate.
 
@@ -79,11 +79,11 @@ We could build a TCP/IP stack from scratch, but hopefully we can find an existin
 
 The only missing part is to implement a bunch of network-related syscalls in CheerpX using lwip, and we are good to go.
 
-# Demos
+## Demos
 
 Enough with the theory, what can we do with this thing?
 
-## SSH
+### SSH
 
 The most straightforward use of a network-enabled WebVM is to use it as an ssh client:
 
@@ -95,7 +95,7 @@ You can also use ssh to easily move files in and out of WebVM. This increases th
 
 ![](/blog/1*2HFiFR_Ilmx-FZTpQpWFKg.gif)
 
-## Full stack web development
+### Full stack web development
 
 A more ambitious goal is to use WebVM as a full-stack development platform.
 
@@ -127,7 +127,7 @@ It is certainly not fast to install the pip dependencies (some setup scripts are
 
 And there are of course many more limitations. For example, npm is not working yet, nor is apt. But none of these issues is particularly complex to solve, and our syscall emulation layer is constantly improving (thanks also to the expanded set of applications that we can run with network support).
 
-# Try it yourself
+## Try it yourself
 
 If you want to give it a try yourself, here are the steps to enable network access in WebVM:
 
@@ -142,7 +142,7 @@ If you want to give it a try yourself, here are the steps to enable network acce
 
 Given the short-lived nature of WebVM, we log into Tailscale as an Ephemeral Node. This means that the node will disappear from your Tailscale Network after a period of inactivity. It also means that when you reload the tab, you need to log in again. It should be faster the second time.
 
-# What’s next?
+## What’s next?
 
 We are very excited about the possibilities that network support unlocks for WebVM.
 

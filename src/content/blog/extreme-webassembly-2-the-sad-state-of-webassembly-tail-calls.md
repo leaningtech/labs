@@ -26,7 +26,7 @@ To be clear, I am not referring here to some [very questionable takes](https://
 
 Let’s talk a bit about tail calls.
 
-# Support for WebAssembly Tail Calls
+## Support for WebAssembly Tail Calls
 
 As discussed in my [previous article](https://medium.com/leaningtech/extreme-webassembly-1-pushing-browsers-to-their-absolute-limits-56a393435323) tail calls are critical to efficiently support the execution of arbitrary x86 code, in particular to support indirect jumps while keeping a consistent call stack .WebAssembly tail calls are a post-MVP feature which is currently in Phase 3 (implementation phase).
 
@@ -34,7 +34,7 @@ This specification introduces two new opcodes: `return_call` and `return_indi
 
 No other browser seems to have taken the “Implementation Phase” of the standard process as literally though.
 
-## Tail call status on V8/Chrome
+### Tail call status on V8/Chrome
 
 At first sight, tail calls are well implemented in V8, and we have been using (and abusing) them for a while now in our generated code. There are limitations though.
 
@@ -48,7 +48,7 @@ Unfortunately, before the newly generated Wasm bytecode can be used, the browser
 
 Don’t feel bad if you are confused by the multiple layers of JITting. Sometimes we are as well.
 
-## Tail call status on SpiderMonkey/Firefox
+### Tail call status on SpiderMonkey/Firefox
 
 It is not great. And I am being kind, being a proud Firefox user myself.
 
@@ -58,7 +58,7 @@ Now, the obvious argument here is that Firefox is FOSS and we could “just” i
 
 If any SpiderMonkey dev is reading this, please do get in touch. We are happy to help as much as we can to get this feature out, but we certainly cannot do it ourselves.
 
-## Tail call status on JavaScriptCore/Safari
+### Tail call status on JavaScriptCore/Safari
 
 I must admit that my understanding of the development process of Safari is not as clear.
 
@@ -66,7 +66,7 @@ From what I can see tail calls are not supported in Safari and it seemed to me t
 
 Again, if any dev from Safari/WebKit/JavaScriptCore is reading this, get in touch. We are happy to help.
 
-## Conclusions
+### Conclusions
 
 Tail calls are extraordinarily useful when implementing virtual machines and functional languages. WebAssembly tail calls are currently in Phase 3 (Implementation Phase). The next step, Phase 4, would then achieve full standardization of the feature.
 
@@ -74,11 +74,11 @@ Unfortunately, one of the requirements to move from Phase 3 to Phase 4 is to hav
 
 For this feature to move forward either Firefox or Safari needs to make progress, any help on how to get this done is appreciated.
 
-# Bonus content 1
+## Bonus content 1
 
 In the [previous post in the series](https://medium.com/leaningtech/extreme-webassembly-1-pushing-browsers-to-their-absolute-limits-56a393435323), we shared a very early public demo of CheerpX, the x86 Python3 REPL running in the browser. You can find a much more polished version of the demo [here,](https://leaningtech.com/pages/pythondemo.html) please note that this will only work in Chrome/Chromium, after explicitly enabling tail calls. Instructions are included in the page. This new version includes most standard packages from Python (everything shipped in the [python3.8-stdlib](https://packages.ubuntu.com/focal/libpython3.8-stdlib) Ubuntu package), and *backspace* finally works!
 
-# Bonus content 2 — Hello World in CheerpX
+## Bonus content 2 — Hello World in CheerpX
 
 But I also want to share something more with you, are you ready to get your hands dirty? I am going to describe how to run your first *Hello World* using CheerpX.
 
@@ -92,7 +92,7 @@ cd cheerpx_hello
 Create your vanilla C hello world, nothing fancy here.
 
 // hello.c
-#include <stdio.h>int main()
+##include <stdio.h>int main()
 {
 printf("Hello world!\\n");
 return 0;
@@ -151,7 +151,7 @@ A minor miracle has just happened in front of your eyes.
 
 Magic! And this works also for code compiled from C++ or Rust… or anything actually, although more libraries might be required. Feel free to experiment with this, but keep in mind that this is not a released or polished product. If you hack something nice, let me know [https://twitter.com/alexpignotti](https://twitter.com/alexpignotti)
 
-# Get in touch!
+## Get in touch!
 
 Want to know more about the amazing and impossible products we make? Follow us on [Twitter](https://twitter.com/leaningtech) and join our Discord server. We are also eager to hear your opinion:
 

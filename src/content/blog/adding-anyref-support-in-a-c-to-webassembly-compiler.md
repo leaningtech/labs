@@ -14,7 +14,7 @@ WebAssembly in its current MVP form is shipped by all major browsers and is alre
 
 One such [proposal](https://github.com/WebAssembly/reference-types/blob/master/proposals/reference-types/Overview.md) is about adding the so-called `anyref` / `externref` type (and related instructions) to the specification. But what is `anyref`, and why is it desirable to add it to WebAssembly?
 
-# WebAssembly Anyref
+## WebAssembly Anyref
 
 The full proposal is explained in detail in [this repo](https://github.com/WebAssembly/reference-types), but the basic idea is to be able to represent opaque host references (JavaScript objects in the case of a Web Browser) from WebAssembly. Even with this proposal, these references can only be passed around via function arguments and return values, and stored and loaded in tables. Future proposals will expand what is possible to do, and eventually lead to full GC support in WebAssembly.
 
@@ -26,7 +26,7 @@ Integrating `anyref` support directly in languages like C/C++ and Rust (i.e. d
 
 Demo application of a C++ application compiled to Wasm with anyref support
 
-# Cheerp
+## Cheerp
 
 I work on [Cheerp](https://leaningtech.com/cheerp/), a C++ to JavaScript and WebAssembly compiler based on LLVM.
 
@@ -36,7 +36,7 @@ This allows Cheerp to compile C++ code to regular JavaScript, and interoperate e
 
 There are some limitations: while linear memory objects (declared with the `cheerp::wasm` attribute) can be used by code compiled to both WebAssembly and JavaScript, garbage collected JavaScript objects (declared with the `cheerp::genericjs` attribute) cannot be accessed by code compiled to WebAssembly. This is enforced by our compiler frontend. `anyref` can allow us to relax some of the current restrictions since we are now able to pass around references to JavaScript objects in WebAssembly code!
 
-# Implementation of anyref support in Cheerp
+## Implementation of anyref support in Cheerp
 
 As an experimental prototype of `anyref` support, we decided to only allow classes defined in the special `client` namespace to be used in WebAssembly functions: these classes have no layout on the C++ side, only methods. Special methods starting with `set_` and `get_` are compiled to accesses to the corresponding member fields of the object. Classes declared in this namespace can model existing objects coming from the JavaScript outside of Cheerp, like the native web APIs or a third party JavaScript library.
 
@@ -104,13 +104,13 @@ The main limitation that remains is that we have no way of storing anyref values
 
 This is annoying, but with future expanded support for globals (using real WebAssembly globals instead of wrapper functions) and exposed access to WebAssembly tables we plan to improve the situation.
 
-# Demo
+## Demo
 
 To showcase what is possible to do in the current state, I wrote this (very incomplete) pong-like game using the JavaScript 3d library **three.js**, implemented with only functions compiled to WebAssembly (excluding the automatic wrappers of course):
 
-## Cheerp Anyref example
+### Cheerp Anyref example
 
-### Live demo
+#### Live demo
 
 yuri91.github.io
 
@@ -122,7 +122,7 @@ The demo in action
 
 You can find the repo with the source code [here](https://github.com/yuri91/AnyPong).
 
-# Conclusions
+## Conclusions
 
 The `anyref` feature looks very promising for Cheerp, and we plan to eventually expand its use to all `genericjs` types, to allow truly seamless interoperability between code compiled to JavaScript and to WebAssembly, as well as external JavaScript libraries.
 
