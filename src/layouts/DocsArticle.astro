@@ -42,7 +42,7 @@ const contributeLinks = [
 
 <Shell title={[title, product.name + " Documentation"].join(" - ")}>
 	<ProductNav {product} />
-	<docs-article class="max-w-screen-2xl w-full mx-auto flex">
+	<docs-article class="max-w-[92rem] w-full mx-auto flex">
 		<div
 			data-sidebar-wrapper
 			class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
@@ -54,7 +54,7 @@ const contributeLinks = [
 			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
 		>
 		</div>
-		<main class="grow overflow-x-hidden">
+		<main class="overflow-x-hidden">
 			<div
 				class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20"
 			>
@@ -71,7 +71,7 @@ const contributeLinks = [
 			>
 				{
 					title === product.name ? (
-						<div class="not-prose flex flex-col items-center mb-10 gap-4">
+						<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
 							<h1>
 								<Image alt={product.name} src={product.logotype} />
 							</h1>
