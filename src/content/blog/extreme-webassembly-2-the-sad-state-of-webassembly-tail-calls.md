@@ -110,35 +110,38 @@ cp /lib/i386-linux-gnu/libc.so.6 lib/i386-linux-gnu/
 
 Now we need a basic HTML page to let CheerpX do its magic.
 
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en" style="height:100%;">
-  <head>
-    <meta charset="utf-8">
-    <title>CheerpX Hello World</title>
-    <script src="[https://cheerpxdemos.leaningtech.com/publicdeploy/cx.js](https://cheerpxdemos.leaningtech.com/publicdeploy/cx.js)"></script>
-  </head>
-  <body style="margin:0;height:100%;">
-    <pre id="console" style="width:100%;height:100%;margin:0;">
-    </pre>
-    <script>
-      async function cxReady(cx)
-      {
-        cx.setConsole(document.getElementById("console"));
-        cx.run("/hello", \[\]);
-      }
-      function cxFailed(e)
-      {
-         console.log("CheerpX could not start. Reason: "+e);
-      }
-      CheerpXApp.create().then(cxReady, cxFailed);
-    </script>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX Hello World</title>
+		<script src="https://cheerpxdemos.leaningtech.com/publicdeploy/cx.js"></script>
+	</head>
+	<body style="margin:0;height:100%;">
+		<pre id="console" style="width:100%;height:100%;margin:0;"></pre>
+		<script>
+			async function cxReady(cx)
+			{
+			  cx.setConsole(document.getElementById("console"));
+			  cx.run("/hello", \[\]);
+			}
+			function cxFailed(e)
+			{
+			   console.log("CheerpX could not start. Reason: "+e);
+			}
+			CheerpXApp.create().then(cxReady, cxFailed);
+		</script>
+	</body>
 </html>
+```
 
 Start your favorite local HTTP server, and visit the HTML page you created.
 
+```bash
 http-server -p 8086 &
 chromium-browser --incognito --js-flags="--experimental-wasm-return-call" http://127.0.0.1:8086/index.html
+```
 
 ![](https://miro.medium.com/max/60/1*CdbFVF0GAW0erM8RGTkcWw.png?q=20)
 
@@ -150,7 +153,7 @@ Magic! And this works also for code compiled from C++ or Rust… or anything act
 
 # Get in touch!
 
-Want to know more about the amazing and impossible products we make? Follow us on [Twitter](https://twitter.com/leaningtech) and [Medium](https://medium.com/leaningtech). We are also eager to hear your opinion:
+Want to know more about the amazing and impossible products we make? Follow us on [Twitter](https://twitter.com/leaningtech) and join our Discord server. We are also eager to hear your opinion:
 
 - How do you feel about our tech?
 - Do you have in mind any cool use cases?

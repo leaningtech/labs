@@ -49,7 +49,9 @@ To try out or update to CheerpJ 2.3, simply download the compiler [here](https:
 
 If using the CheerpJ cloud runtime, make sure to change your CheerpJ runtime header to
 
-<script src=”[https://cjrtnc.leaningtech.com/2.3/loader.js](https://cjrtnc.leaningtech.com/2.3/loader.js)“></script>
+```html
+<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+```
 
 The old 2.2 version will keep working, but the only way to gain the benefits of this new release is to change the runtime endpoint and regenerate the jar.js files.
 

@@ -29,7 +29,7 @@ Since its inception, we have been working extensively with WebAssembly, that is 
 
 In late 2018, we started working on what we believed was a missing piece of software development tools for the HTML5/WebAssembly platform — an x86 virtual machine, primarily aimed at Linux executables — in WebAssembly.
 
-This technology, which we named CheerpX, would allow running Linux binaries in-browser, *without needing to re-compile them to WebAssembly from source*, via an x86 to WebAssembly binary translation JIT engine. More detail on CheerpX is available on [our website](/pages/cheerpx.html).
+This technology, which we named CheerpX, would allow running Linux binaries in-browser, *without needing to re-compile them to WebAssembly from source*, via an x86 to WebAssembly binary translation JIT engine. More detail on CheerpX is available on [our website](/cheerpx).
 
 In essence, CheerpX transparently creates a local HTML5 virtual machine on the browser, that can be used to run any unmodified executable without recompilation to WebAssembly.
 
@@ -95,6 +95,6 @@ An Enterprise Evaluation Programme is now available for organisations interested
 
 ### For Partners
 
-We are also welcoming new partnerships with IT, Consultancy and third-party support firms to join our [Partner Program](/partner-programs/) for exclusive support to our line of bespoke tools to extend the life of legacy Flash & Java applications and our specialist expertise in WebAssembly.
+We are also welcoming new partnerships with IT, Consultancy and third-party support firms to join our [Partner Program](https://leaningtech.com/partner-programs/) for exclusive support to our line of bespoke tools to extend the life of legacy Flash & Java applications and our specialist expertise in WebAssembly.
 
 If you would like to find out more about our Partner Program, please get in touch with [sales@leaningtech.com](mailto:sales@leaningtech.com).
