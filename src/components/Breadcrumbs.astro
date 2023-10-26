@@ -25,14 +25,14 @@ const crumbs = path
 	});
 ---
 
-<nav aria-label="Breadcrumb" class="leading-6 text-stone-400">
+<nav aria-label="Breadcrumb" class="leading-6 text-stone-400 text-sm">
 	<ol>
 		{
 			crumbs.map(({ title, url, isLast }) => (
 				<li class="inline-flex items-center">
 					<a
 						href={url}
-						class:list={["hover:text-primary-500", { "font-semibold": isLast }]}
+						class:list={["hover:text-primary-500", { "font-medium": isLast }]}
 					>
 						{title}
 					</a>
