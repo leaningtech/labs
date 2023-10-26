@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import Shell from "./Shell.astro";
 import Icon from "astro-icon";
+import { SocialShare } from "astro-social-share";
 import FormattedDate from "../components/FormattedDate.astro";
 import TableOfContents, {
 	type BasicHeading,
@@ -74,6 +75,8 @@ const showAuthorSection = authors.length > 0;
 			</aside>
 
 			<article class="grow max-w-3xl">
+				<SocialShare {title} {description} via="leaningtech" />
+
 				<div
 					class="prose prose-stone md:prose-lg dark:prose-invert"
 					data-pagefind-body
@@ -151,3 +154,11 @@ const showAuthorSection = authors.length > 0;
 
 	<Footer />
 </Shell>
+
+<style is:global>
+	.social-share-btn {
+		display: inline-block;
+		width: 24px;
+		@apply fill-stone-400;
+	}
+</style>
