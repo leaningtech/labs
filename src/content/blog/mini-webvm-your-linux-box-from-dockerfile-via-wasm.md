@@ -5,7 +5,7 @@ description: |
 authors:
   - alessandro
 pubDate: "May 22 2023"
-heroImage: "/blog/blog-banners/webvm-post.png"
+heroImage: "./webvm-post.png"
 tags:
   - CheerpX
 featured: true

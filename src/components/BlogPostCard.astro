@@ -2,6 +2,7 @@
 import { getEntry, type CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
+import { Image } from "astro:assets";
 
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
@@ -21,12 +22,17 @@ const authors = await resolveAuthors(post.data.authors);
 	href={`/blog/${post.slug}`}
 	class="inline-flex flex-col space-between group overflow-hidden"
 >
-	<img
-		src={post.data.heroImage}
-		class:list={{
-			"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
-		}}
-	/>
+	{
+		post.data.heroImage && (
+			<Image
+				src={post.data.heroImage}
+				alt=""
+				class:list={{
+					"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
+				}}
+			/>
+		)
+	}
 	<h3
 		class:list={{
 			"font-bold text-balance text-white group-hover:text-primary-400 grow": true,
@@ -41,15 +47,17 @@ const authors = await resolveAuthors(post.data.authors);
 			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
 				<div class="flex items-center gap-2 font-semibold overflow-hidden">
 					<div class="flex-none space-x-[-1rem]">
-						{authors.map((author) => (
-							<img
-								class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
-								src={author.avatar}
-								alt=""
-								loading="lazy"
-								decoding="async"
-							/>
-						))}
+						{authors.map((author) =>
+							author.avatar ? (
+								<img
+									class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
+									src={author.avatar.src}
+									alt=""
+									loading="lazy"
+									decoding="async"
+								/>
+							) : undefined,
+						)}
 					</div>
 					<span class="overflow-hidden text-ellipsis">
 						{authors.map((author) => author.name).join(", ")}

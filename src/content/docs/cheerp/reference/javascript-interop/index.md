@@ -167,7 +167,7 @@ Example usage:
 {
     return CHEERP_SAFE_INLINE(double, (const char* s), {
         client::console.log(s);
-        return client::Date::now();
+        return client::pubDate::now();
     }, str);
 }
 ```

@@ -6,7 +6,7 @@ authors:
   - yuri
   - alessandro
 pubDate: "April 6 2023"
-heroImage: "/blog/blog-banners/cheerp-wasi.png"
+heroImage: "./cheerp-wasi.png"
 tags:
   - CheerpJ
 ---
