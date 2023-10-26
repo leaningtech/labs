@@ -16,7 +16,7 @@ Think taking a C++ codebase, feeding it into a LLVM/clang based compiler, and ge
 
 Recently, I have been working on one of Cheerp’s unique features, `[[cheerp::jsexport]]`, a custom attribute that allows to create powerful interfaces between generated and ‘native’ JavaScript. Some cool things now possible thanks to this technology will be shown in this article series. Enjoy!
 
-![](./images/0*WncSwGz75W-GAPRO.gif)
+![](/blog/0*WncSwGz75W-GAPRO.gif)
 
 std::shuffle applied to [https://www.google.com/search?q=how+to+shuffle+array](https://www.google.com/search?q=how+to+shuffle+array)
 
@@ -68,7 +68,7 @@ We will obtain a minified blob of characters that represent the exact same logic
 
 This is just regular JavaScript code, so it could be invoked in any environment that executes JavaScript, e.g. scrambling around elements of a web page at will:
 
-![](./images/0*Zd-2hgTqw1743gGY.gif)
+![](/blog/0*Zd-2hgTqw1743gGY.gif)
 
 My proposal for next year’s Easter’s egg
 
