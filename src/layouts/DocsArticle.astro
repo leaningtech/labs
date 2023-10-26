@@ -30,7 +30,15 @@ if (!product) throw new Error("Product not found");
 const directory = findNavDirectory(nav, [product.id]);
 ---
 
-<Shell title={[title, product.name + " Documentation"].join(" - ")}>
+<Shell
+	title={[
+		title === product.name ? undefined : title,
+		product.name + " Documentation",
+	]
+		.filter(Boolean)
+		.join(" - ")}
+	description={description ?? product.description}
+>
 	<ProductNav {product} />
 	<docs-article class="max-w-[92rem] w-full mx-auto flex">
 		<div
