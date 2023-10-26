@@ -13,14 +13,10 @@ interface Props {
 const { product } = Astro.props;
 
 const nav = await getProductNav(product.id);
-const links = nav.entries
-	.filter((entry) => entry.type === "directory")
-	.map((entry) => {
-		return {
-			name: entry.title,
-			href: entry.href,
-		};
-	});
+const getStartedHref =
+	product.id === "cheerpx"
+		? undefined
+		: nav.entries.filter((entry) => entry.type === "directory")[0]?.href;
 ---
 
 <nav
@@ -28,7 +24,7 @@ const links = nav.entries
 	class="sm:sticky top-0 z-40 bg-stone-900 bg-opacity-90 backdrop-blur-lg text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
 >
 	<div
-		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-2 md:gap-6 whitespace-nowrap overflow-hidden"
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden"
 	>
 		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
 			<a href={product.href} class="flex items-center">
@@ -41,27 +37,23 @@ const links = nav.entries
 
 		<Search />
 
-		<div
-			class="hidden lg:flex items-center gap-4 ml-auto flex-none text-stone-300"
-		>
-			{
-				links.map((link) => (
-					<a href={link.href} class="hover:text-white">
-						{link.name}
-					</a>
-				))
-			}
-		</div>
+		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
+			<a href={DISCORD_URL} class="flex items-center gap-1.5 hover:text-white">
+				<Icon name="fa-brands:discord" class="w-5 h-5" />
+				<span class="sr-only md:not-sr-only">Community</span>
+			</a>
 
-		<div class="flex items-center gap-4">
-			<a href={product.github}>
-				<Icon name="fa-brands:github" class="w-6 h-6" />
-				<span class="sr-only">GitHub</span>
-			</a>
-			<a href={DISCORD_URL}>
-				<Icon name="fa-brands:discord" class="w-6 h-6" />
-				<span class="sr-only">Discord server</span>
-			</a>
+			{
+				getStartedHref && (
+					<a
+						href={getStartedHref}
+						class="flex items-center gap-1 pl-4 pr-3 py-1 rounded-full bg-primary-600 bg-opacity-20 border border-primary-400 border-opacity-50 hover:border-opacity-100 text-primary-400"
+					>
+						Get started
+						<Icon name="ph:caret-right-bold" class="w-4 h-4" />
+					</a>
+				)
+			}
 		</div>
 	</div>
 </nav>
