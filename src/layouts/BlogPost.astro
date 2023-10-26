@@ -168,4 +168,8 @@ const showAuthorSection = authors.length > 0;
 		width: 24px;
 		@apply fill-stone-400;
 	}
+
+	.prose :where(img):not(:where([class~="not-prose"])) {
+		@apply rounded-lg bg-stone-200;
+	}
 </style>
