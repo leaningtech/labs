@@ -22,10 +22,10 @@ const { product } = Astro.props;
 </div>
 
 <script>
-	const select = document.getElementById(
-		"version-switcher",
-	) as HTMLSelectElement;
-	select.addEventListener("change", async () => {
+	const select = document.getElementById("version-switcher") as
+		| HTMLSelectElement
+		| undefined;
+	select?.addEventListener("change", async () => {
 		let href = location.pathname.replace(/\/cheerpj\d/, `/${select.value}`);
 
 		// If the page doesn't exist, redirect to the homepage
