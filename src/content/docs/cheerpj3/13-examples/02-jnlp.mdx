@@ -1,0 +1,363 @@
+---
+title: JNLP apps
+description: Run a working example of a JNLP application or applet
+---
+
+This tutorial will take you step by step on how to run a working example of an JNLP (also known as JWS app) in the browser using CheerpJ.
+
+This tutorial is divided in two parts:
+
+- [Application example (SwingSet3)](#jnlp-application-swingset3)
+- [Applet example (Pitch)](#jnlp-applet-pitch)
+
+## Prerequisites
+
+For either application or applet, you will need:
+
+- The application `.jnlp` file (given below)
+- Node.js (>= 18)
+- A simple http-server to host your page locally
+- A text editor to create and edit an HTML file
+- A modern browser like Chrome, Firefox or Safari.
+
+If you already have a JNLP app and you want to go straight to run it in the browser with CheerpJ, we recommend taking a look at our [JNLP quickstart] tutorial.
+
+[JNLP quickstart]: /cheerpj3/getting-started/JNLP
+
+## JNLP application: SwingSet3
+
+### 1. The `.jnlp` file
+
+We are going to start by looking at the JNLP file. Below, there is an example of an JNLP file for the known demo application SwingSet3. There are three essential elements highlighted:
+
+- **The code base:** Found as `<jnlp codebase="">` Indicates where the application files will be downloaded from.
+- **The JAR files:** Given by the `<jar>` tag in the `<resources>` section.
+- **The class name:** Given by `main-class` under the `<application-desc>` tag. This tag also indicates that the app is a standalone application.
+
+```xml {3, 15-19, 21 } title="SwingSet3.jnlp"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc.//DTD JNLP 1.5//EN">
+<jnlp codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main" href="SwingSet3.jnlp" spec="6.0+">
+  <information>
+    <title>SwingSet3</title>
+    <vendor>Oracle America, Inc.</vendor>
+    <homepage href="https://swingset3.dev.java.net"/>
+    <description>Demo to showcase features of the Swing UI toolkit in Java 6</description>
+    <icon href="swingset3/resources/images/splash.png" kind="splash"/>
+    <offline-allowed/>
+    <shortcut online="true"/>
+  </information>
+  <resources>
+    <j2se version="1.6+"/>
+    <jar href="SwingSet3.jar" main="false"/>
+    <jar href="lib/AppFramework.jar"/>
+    <jar href="lib/TimingFramework.jar"/>
+    <jar href="lib/swing-worker.jar"/>
+    <jar href="lib/swingx.jar"/>
+  </resources>
+  <application-desc main-class="com.sun.swingset3.SwingSet3"/>
+</jnlp>
+```
+
+### 2. Download the application files
+
+You will download the application JAR files by manually building their full URL and pasting it in the browser navigation bar. This is done by appending the `codebase` URL and the `jar` URL.
+For example:
+
+```
+https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main/SwingSet3.jar
+
+```
+
+Do this for all the JARs in the JNLP.
+
+### 3. Create a project directory
+
+Create a directory where all the files will live. You can choose any name such `cheerpj-example-swingset3`:
+
+```bash
+mkdir cheerpj-example-swingset3
+```
+
+Now create the application structure as shown in the JNLP file. For this example there is a subdirectory called `lib`.
+
+```sh
+cd cheerpj-example-swingset3
+mkdir lib
+```
+
+Now allocate the application JARs inside this directory following the JNLP directory structure.
+For this app it will be something like this:
+
+```
+└──cheerpj-example-swingset3
+    ├── SwingSet3.jar
+    └── lib
+        ├── AnimatedTransitions.jar
+        ├── AppFramework.jar
+        ├── Filters.jar
+        ├── MultipleGradientPaint.jar
+        ├── TimingFramework.jar
+        ├── javaws.jar
+        ├── swing-layout-1.0.jar
+        ├── swing-worker.jar
+        └── swingx.jar
+```
+
+### 4. Create an HTML file
+
+Inside our project directory `cheerpj-example-swingset3` we will create a basic HTML file called `index.html` like the following:
+
+```html {7, 22-26} title="index.html"
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>SwingSet3 (CheerpJ)</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+		<style>
+			html,
+			body {
+				margin: 0;
+			}
+
+			#container {
+				width: 100vw;
+				height: 100svh;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="module">
+			await cheerpjInit();
+			cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
+			await cheerpjRunJar("/app/SwingSet3.jar");
+		</script>
+	</body>
+</html>
+```
+
+#### What is going on?
+
+- The CheerpJ runtime environment is being integrated at:
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+```
+
+- [`cheerpjInit()`] initializes the CheerpJ runtime environment
+- [`cheerpjCreateDisplay()`] creates a graphical environment to contain all Java windows.
+- [`cheerpjRunJar()`] executes the application.
+- `/app/` is a virtual filesystem mount point that references the root of the web server this page is loaded from.
+
+> For this example we are using [`cheerpjRunJar()`] as the class name is included in the manifest. When this is not the case you can use [`cheerpjRunMain()`] with the main-class name indicated in the JNLP.
+
+### 5. Host your page locally
+
+To view the example, we need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+
+```sh
+npx vite
+```
+
+Alternatively you can also use the http-server utility:
+
+```sh
+npm install http-server
+http-server -p 8080
+```
+
+Visit the address indicated by your http-server in the browser. For example, `http://localhost:8080`.
+
+### The result
+
+You should be able to see the application running in the browser:
+
+<iframe
+	src="https://cheerpj-example-swingset3.leaningtech.com/"
+	class="w-full aspect-square"
+></iframe>
+
+### Source code and credits
+
+- [View full source code fort this example on GitHub](https://github.com/leaningtech/cheerpj-example-swingset3)
+- SwingSet3 is a demo application by Oracle America, Inc.
+
+## JNLP applet: Pitch
+
+We will use the Pitch applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive animation of an aircraft's pitch motion. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/aircraft-rotations/).
+
+### 1. The `.jnlp` file
+
+We are going to start by looking at the JNLP file. Below, there is an JNLP example for Pitch applet. There are three essential elements highlighted:
+
+- **The code base:** Found as `<jnlp codebase="">` Indicates where the application files will be downloaded from.
+- **The JAR files:** Given by the `<jar>` tag in the `<resources>` section.
+- **The class name:** Given by `main-class` under the `<applet-desc>` tag. This tag also indicates that the app is an applet.
+
+```xml title= "PitchApplet.jnlp" {5, 21, 23}
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Pitch applet -->
+<jnlp
+  spec="1.0+"
+  codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main/"
+
+  href="PitchApplet.jnlp">
+  <information>
+    <title>Pitch</title>
+    <vendor>NASA Glenn Research Center</vendor>
+    <homepage href="https://www.grc.nasa.gov/WWW/K-12/airplane/"/>
+    <description>Pitch motion simulator</description>
+    <description kind="short">Beginner's Guide to Aeronautics - Pitch motion simulator written in Java</description>
+    <offline-allowed/>
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.4+" initial-heap-size="30m" max-heap-size="300m" />
+    <jar href="Pitch.jar"/>
+  </resources>
+  <applet-desc main-class="Pitchview" width="300" height="500"/>
+</jnlp>
+```
+
+### 3. Download the applet file
+
+You will download the applet JAR files by manually building the full URL and pasting it in the browser navigation bar. This is done by appending the `codebase` URL and the `jar` URL.
+For example:
+
+```
+https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main/Pitch.jar
+
+```
+
+### 3. Create a project directory
+
+Create a directory where all the files will live. You can choose any name such `cheerpj-example-applet`:
+
+```bash
+mkdir cheerpj-example-applet
+```
+
+Now allocate the application JAR inside this directory following the JNLP directory structure.
+For this app it will be something like this:
+
+```
+└──cheerpj-example-applet
+    ├── Pitch.jar
+```
+
+### 4. Create an HTML file
+
+Inside the project directory, create an HTML file called `index.html` like the following:
+
+```html {6, 26-33, 49-51} title="index.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Pitch applet (CheerpJ)</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+	</head>
+	<style>
+		div {
+			max-width: 500px;
+			margin: auto;
+			text-align: center;
+		}
+		h1 {
+			margin-bottom: 50px;
+		}
+		h5 {
+			margin-top: 20px;
+		}
+	</style>
+
+	<body>
+		<div>
+			<h1>Applet example with CheerpJ</h1>
+			<div>
+				<cheerpj-applet
+					archive="Pitch.jar"
+					code="Pitchview"
+					height="300"
+					width="500"
+				>
+					Your browser cannot handle the applet tag!
+				</cheerpj-applet>
+			</div>
+			<h5>
+				The applet shown in this example belongs to the NASA's
+				<a href="https://www.grc.nasa.gov/WWW/K-12/airplane/"
+					>Beginner's Guide to Aeronautics</a
+				>
+				and it is available at their
+				<a href="https://github.com/nasa/BGA/tree/main">GitHub repository</a>.
+			</h5>
+			<h5>
+				Applet is running with
+				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://leaningtech.com/">©Leaning Technologies</a>
+			</h5>
+		</div>
+		<script type="module">
+			await cheerpjInit();
+		</script>
+	</body>
+</html>
+```
+
+### What is happening?
+
+- The CheerpJ runtime environment is being integrated at:
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+```
+
+- The `<cheerpj-applet>` tag contains the applet `.jar` location, size and class name. This tag prevents conflicts with native java, the classic `<applet>` tag can also be used.
+- [`cheerpjInit()`] initializes the CheerpJ runtime environment.
+
+### 5. Host your page locally
+
+To view the example, we need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+
+```sh
+npx vite
+```
+
+Alternatively you can also use the http-server utility:
+
+```sh
+npm install http-server
+http-server -p 8080
+```
+
+Visit the address indicated by your http-server in the browser. For example, `http://localhost:8080`.
+
+### The result
+
+You should be able to see the applet running in the browser:
+
+<iframe
+	src="https://leaningtech.github.io/cheerpj-example-applet/"
+	class="w-full aspect-square"
+></iframe>
+
+### Source code and credits
+
+- [Find the full source code for this example in GitHub](https://github.com/leaningtech/cheerpj-example-applet)
+
+- The applet used for this tutorial belongs to the NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/) and it is available at their [GitHub repository](https://github.com/nasa/BGA/tree/main).
+
+## Further reading
+
+To continue learning about CheerpJ, visit the [reference](/cheerpj3/reference).
+
+[`cheerpjRunJar()`]: /cheerpj3/reference/cheerpjRunJar
+[`cheerpjRunMain()`]: /cheerpj3/reference/cheerpjRunMain
+[`cheerpjInit()`]: /cheerpj3/reference/cheerpjInit
+[`cheerpjCreateDisplay()`]: /cheerpj3/reference/cheerpjCreateDisplay
