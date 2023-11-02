@@ -19,5 +19,11 @@ exclude = [
 	'.*microsoft\.com.*',
 	'file://.*',
 	'chrome://.*',
-	'wss?://*'
+	'wss?://*',
+	'http://localhost:8080/',
+	'https://swingset3.dev.java.net/',
+	'https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main',
+	'https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main',
+	'https://swingset3.dev.java.net/',
+	''
 ]
