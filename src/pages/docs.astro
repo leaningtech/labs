@@ -4,6 +4,24 @@ import Basic from "../layouts/Basic.astro";
 import companyLogo from "../assets/branding/company/tower.svg";
 import { products } from "../lib/products";
 import { Image } from "astro:assets";
+
+const others = [
+	{
+		href: "/cheerpx/for-flash",
+		name: "CheerpX for Flash",
+		description: "Run your Flash content in the browser, without the Flash Player plugin, with 100% accuracy.",
+	},
+	{
+		href: "https://javafiddle.leaningtech.com/",
+		name: "JavaFiddle",
+		description: "Build, run, and share snippets of Java code in your browser. Powered by CheerpJ.",
+	},
+	{
+		href: "https://webvm.io/",
+		name: "WebVM",
+		description: "Linux virtual machine running fully client-side. Powered by CheerpX."
+	},
+]
 ---
 
 <Basic
@@ -49,6 +67,32 @@ import { Image } from "astro:assets";
 			</div>
 		</div>
 	</div>
+
+	<div>
+		<div class="my-8">
+			<h2 class="text-4xl font-bold text-white">Other tools</h2>
+		</div>
+		<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
+			{
+				others.map((product) => (
+					<a
+						href={product.href}
+						class="rounded-lg border border-stone-700 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6"
+					>
+						<h5
+							class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100"
+						>
+							{product.name}
+						</h5>
+						<p class="leading-6 text-balance text-lg">
+							{product.description}
+						</p>
+					</a>
+				))
+			}
+		</div>
+	</div>
+</div>
 
 	<div
 		class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
