@@ -232,7 +232,7 @@ cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 tailscaleControlUrl?: string;
 ```
 
-This option expects a string URL of the Tailscale control plane. The control plane verifies the user's identity and validates various keys among the connected peers in the network. This option is used in the scenario of self-hosting, if omitted it will point to the Tailscale control plane.
+This option expects a string URL of the Tailscale control plane. The control plane verifies the user's identity and validates various keys among the connected peers in the network. Only pass this option if you are [self-hosting Tailscale](https://github.com/leaningtech/headscale), if omitted, it will point to the Tailscale control plane.
 
 Example usage:
 
@@ -273,7 +273,7 @@ cheerpjInit({ tailscaleAuthKey: "AuthKeyStringGoesHere" });
 ### `tailscaleLoginUrlCb`
 
 ```ts
-tailscaleLoginUrlCb?: (r: string) => void;
+tailscaleLoginUrlCb?: (url: string) => void;
 ```
 
 This option is used to login into a Tailscale network and it is mutually exclusive with [`tailscaleAuthKey`](#tailscaleauthkey). It expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to login to Tailscale via the UI.
@@ -282,7 +282,7 @@ For more information visit the [Tailscale documentation](https://tailscale.com/k
 
 ```js
 cheerpjInit({
-	tailscaleLoginUrlCb: function (stringUrl) {
+	tailscaleLoginUrlCb(url) {
 		// your function code here to continue with login
 	},
 });
