@@ -1,8 +1,10 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import BlogPostCard from "../../components/BlogPostCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
+import BlogDoodle from "./blog-doodle.png";
 
 const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -13,12 +15,27 @@ const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
 	title="Leaning Techologies Engineering Blog"
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 >
-	<header class="text-center bg-stone-800 text-stone-100 py-32 px-8">
+	<header class="text-center text-stone-100 py-32">
+		<div class="flex justify-center items-center">
+			<Image
+				src={BlogDoodle}
+				width="150"
+				height="129"
+				class="invisible md:visible"
+				alt="person reading a newspaper"
+			/>
+		</div>
+
 		<h1 class="font-bold text-5xl mb-8">Engineering blog</h1>
 		<p class="text-lg text-balance">
 			News, technical writeups, and announcements directly from our development
 			team.
 		</p>
+		<div
+			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
+		>
+			<!-- cool background -->
+		</div>
 	</header>
 
 	<section class="py-24 px-6 mx-auto w-full max-w-screen-xl">
