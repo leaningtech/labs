@@ -23,7 +23,7 @@ async function cheerpjInit(options?: {
 	tailscaleControlUrl?: string;
 	tailscaleDnsUrl?: string;
 	tailscaleAuthKey?: string;
-	tailscaleLoginUrlCb?: (r: unknown) => void;
+	tailscaleLoginUrlCb?: (url: string) => void;
 	fetch?: (
 		url: string,
 		method: string,
@@ -224,6 +224,68 @@ Example usage:
 
 ```js
 cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
+```
+
+### `tailscaleControlUrl`
+
+```ts
+tailscaleControlUrl?: string;
+```
+
+This option expects a string URL of the Tailscale control plane. The control plane verifies the user's identity and validates various keys among the connected peers in the network. Only pass this option if you are [self-hosting Tailscale](https://github.com/leaningtech/headscale), if omitted, it will point to the Tailscale control plane.
+
+Example usage:
+
+```js
+cheerpjInit({ tailscaleControlUrl: "https://my.url.com/" });
+```
+
+### `tailscaleDnsUrl`
+
+```ts
+ tailscaleDnsUrl?: string;
+```
+
+Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitted, the default IP address is "8.8.8.8".
+
+Example usage:
+
+```js
+cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
+```
+
+### `tailscaleAuthKey`
+
+```ts
+tailscaleAuthKey?: string;
+```
+
+This option expects a string that contains a Tailscale auth key. Using auth keys allows to register new nodes that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+
+For more information about auth keys visit the [Tailscale auth keys documentation](https://tailscale.com/kb/1085/auth-keys/).
+
+Example of usage:
+
+```js
+cheerpjInit({ tailscaleAuthKey: "AuthKeyStringGoesHere" });
+```
+
+### `tailscaleLoginUrlCb`
+
+```ts
+tailscaleLoginUrlCb?: (url: string) => void;
+```
+
+This option is used to login into a Tailscale network and it is mutually exclusive with [`tailscaleAuthKey`](#tailscaleauthkey). It expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to login to Tailscale via the UI.
+
+For more information visit the [Tailscale documentation](https://tailscale.com/kb/1080/cli/#login).
+
+```js
+cheerpjInit({
+	tailscaleLoginUrlCb(url) {
+		// your function code here to continue with login
+	},
+});
 ```
 
 ### `fetch`
