@@ -23,7 +23,7 @@ async function cheerpjInit(options?: {
 	tailscaleControlUrl?: string;
 	tailscaleDnsUrl?: string;
 	tailscaleAuthKey?: string;
-	tailscaleLoginUrlCb?: (r: string) => void;
+	tailscaleLoginUrlCb?: (url: string) => void;
 	fetch?: (
 		url: string,
 		method: string,
