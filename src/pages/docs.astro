@@ -4,6 +4,7 @@ import Basic from "../layouts/Basic.astro";
 import companyLogo from "../assets/branding/company/tower.svg";
 import { products } from "../lib/products";
 import { Image } from "astro:assets";
+import LinkButton from "@/components/LinkButton.astro";
 
 const others = [
 	{
@@ -12,14 +13,19 @@ const others = [
 		description: "Run your Flash content in the browser, without the Flash Player plugin, with 100% accuracy.",
 	},
 	{
+		href: "https://webvm.io/",
+		name: "WebVM",
+		description: "Linux virtual machine running fully client-side. Powered by CheerpX."
+	},
+	{
 		href: "https://javafiddle.leaningtech.com/",
 		name: "JavaFiddle",
 		description: "Build, run, and share snippets of Java code in your browser. Powered by CheerpJ.",
 	},
 	{
-		href: "https://webvm.io/",
-		name: "WebVM",
-		description: "Linux virtual machine running fully client-side. Powered by CheerpX."
+		href: "https://pythonfiddle.leaningtech.com/",
+		name: "PythonFiddle",
+		description: "Build, run, and share snippets of Python code in your browser. Powered by CheerpX.",
 	},
 ]
 ---
@@ -41,7 +47,7 @@ const others = [
 		<div>
 			<div class="mb-8">
 				<p class="text-lg text-stone-400">Our ecosystem</p>
-				<h2 class="text-4xl font-bold text-white">Explore products</h2>
+				<h2 class="text-4xl font-bold text-white">Explore technologies</h2>
 			</div>
 			<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
 				{
@@ -70,6 +76,7 @@ const others = [
 
 	<div>
 		<div class="my-8">
+			<p class="text-lg text-stone-400">What can you build with our technology?</p>
 			<h2 class="text-4xl font-bold text-white">Other tools</h2>
 		</div>
 		<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
@@ -77,7 +84,7 @@ const others = [
 				others.map((product) => (
 					<a
 						href={product.href}
-						class="rounded-lg border border-stone-700 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6"
+						class="rounded-lg border border-stone-800 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6"
 					>
 						<h5
 							class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100"
@@ -90,6 +97,30 @@ const others = [
 					</a>
 				))
 			}
+			<div class="rounded-lg border border-stone-800 text-stone-400 shadow px-8 py-6">
+				<h5
+					class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100"
+				>
+					CheerpJ Applet Runner
+				</h5>
+				<p class="leading-6 text-balance text-lg mb-4">
+					A Chrome and Edge browser extension which runs Java applets found in the wild on modern browsers.
+				</p>
+				<div class="flex flex-wrap gap-2">
+					<LinkButton
+						type="secondary"
+						href="https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
+						label="Add to Chrome"
+						iconLeft="openmoji:chrome"
+					/>
+					<LinkButton
+						type="secondary"
+						href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic"
+						label="Add to Microsoft Edge"
+						iconLeft="openmoji:edge"
+					/>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
