@@ -19,5 +19,6 @@ exclude = [
 	'.*microsoft\.com.*',
 	'file://.*',
 	'chrome://.*',
-	'wss?://*'
+	'wss?://*',
+	'https://my.url.com/'
 ]
