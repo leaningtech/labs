@@ -246,7 +246,7 @@ cheerpjInit({ tailscaleControlUrl: "https://my.url.com/" });
  tailscaleDnsUrl?: string;
 ```
 
-Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitted, the default IP address is "8.8.8.8". For more information visit [DNS in Tailscale](https://tailscale.com/kb/1054/dns/).
+Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitted, the default IP address is "8.8.8.8".
 
 Example usage:
 
