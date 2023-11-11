@@ -26,6 +26,8 @@ const authors = await resolveAuthors(post.data.authors);
 		post.data.heroImage && (
 			<Image
 				src={post.data.heroImage}
+				width={size === "wide" ? 600 : 390}
+				height={256}
 				alt=""
 				class:list={{
 					"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
