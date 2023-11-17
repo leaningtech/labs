@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const projects = await getCollection("showcase", ({ data }) => {
+	return data.tags.includes("CheerpJ");
+});
+---
+
+<ul class="not-prose grid grid-cols-2">
+	{
+		projects.map((project) => {
+			return (
+				<li>
+					<a
+						href={project.data.url}
+						class="block p-2 border border-stone-700 rounded-lg shadow-lg"
+					>
+						<Image
+							alt={project.data.title}
+							src={project.data.image}
+							class="rounded"
+						/>
+						<h5 class="font-semibold p-3 pb-1">{project.data.title}</h5>
+						<p class="p-3 pt-0 text-stone-500 leading-5">
+							{project.data.description}
+						</p>
+					</a>
+				</li>
+			);
+		})
+	}
+</ul>
