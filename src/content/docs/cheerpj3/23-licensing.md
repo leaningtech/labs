@@ -2,25 +2,27 @@
 title: Licensing
 ---
 
+CheerpJ is free to use for personal projects, most non-commercial applications and for technical evaluations. For commercial projects, you need a license.
+
 CheerpJ is **free for personal use and technical evaluation**. Companies must [purchase a license][licensing]. For academic and not-for-profit projects, please [contact us][contact].
 
 - Individuals can use CheerpJ for **free**. This includes:
   - Most open-source projects
   - Personal projects that generate income
   - Public-facing applications (such as games, educational applications, etc.)
-- Academic and not-for-profits: [please enquire for eligibility][contact]
-- Commercial users:
+- Academic and non-profit organisations: [please enquire for eligibility][contact]
+- For all other organisations (commercial, public sector, etc.):
   - Free for technical evaluations / testing
-  - Requires [CheerpJ Commercial License][licensing]
+  - Requires a [Commercial license][licensing]
 
 ## Examples
 
-- Example 1: You are using CheerpJ for a personal open-source project. **Your price is zero.**
+- Example 1: You are using CheerpJ for a personal open-source project. **Free license.**
 - Example 2: You are a company and you want to use CheerpJ to build a free customer-facing application. [You require a license][licensing].
 - Example 3: You are a company and you want to use CheerpJ to build a web application for internal use. [You require a license][licensing].
-- Example 4: You are a company and are evaluating CheerpJ to be used for a future commercial project. **Your price is zero.**
-- Example 5: You are a public sector, not-for-profit, school, or academic organisation. [Contact us][contact].
-- Example 6: You are a single developer building a commercial project, but you have not gone into production yet. **Your price is zero**.
+- Example 4: You are a company and are evaluating CheerpJ to be used for a future commercial project. **Free license.**
+- Example 5: You are a public sector, not-for-profit, or academic organisation. [Contact us][contact].
+- Example 6: You are an individual developer building a commercial project. **Free license**.
 
 ## Technical evaluations
 
@@ -35,7 +37,11 @@ This does not include:
 
 ## Self-hosting
 
-CheerpJ is available as a cloud service. If you wish to self-host CheerpJ, you will need a license. [Contact us][contact] for more information.
+If you wish to self-host CheerpJ, you will need a license. [Contact us][contact] for more information.
+
+### System Integrators (SIs), Resellers and Distributors, OEMs
+
+Please [contact us directly][contact] to discuss OEM or Reseller licences.
 
 ---
 
