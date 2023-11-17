@@ -1,5 +1,7 @@
 import { defineCollection, z } from "astro:content";
 
+const productTags = z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"]));
+
 const blogauthors = defineCollection({
 	schema: ({ image }) =>
 		z.object({
@@ -28,7 +30,7 @@ const blog = defineCollection({
 			authors: z.array(z.string()),
 			heroImage: image().optional(),
 			featured: z.boolean().default(false),
-			tags: z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"])).optional(),
+			tags: productTags.optional(),
 		}),
 });
 
@@ -41,4 +43,16 @@ const docs = defineCollection({
 	}),
 });
 
-export const collections = { docs, blog, blogauthors };
+const showcase = defineCollection({
+	type: "data",
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string().optional(),
+			url: z.string(),
+			image: image(),
+			tags: productTags,
+		}),
+});
+
+export const collections = { docs, blog, blogauthors, showcase };
