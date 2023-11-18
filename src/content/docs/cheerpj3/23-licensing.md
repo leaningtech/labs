@@ -2,9 +2,7 @@
 title: Licensing
 ---
 
-CheerpJ is free to use for personal projects, most non-commercial applications and for technical evaluations. For commercial projects, you need a license.
-
-CheerpJ is **free for personal use and technical evaluation**. Companies must [purchase a license][licensing]. For academic and not-for-profit projects, please [contact us][contact].
+CheerpJ is free to use for personal projects, most non-commercial applications, and for technical evaluations.
 
 - Individuals can use CheerpJ for **free**. This includes:
   - Most open-source projects
