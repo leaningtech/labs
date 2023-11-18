@@ -218,11 +218,11 @@ Let's add two new methods to `Platform`:
 ```cpp title="pong.cpp"
     	void moveLeft()
     	{
-            x -= 5;
+            x = fmax(x-10, 0);
     	}
-    	void moveRight()
+    	void moveRight(int Xmax)
     	{
-            x += 5;
+            x += fmin(x+10, Xmax-width);
     	}
 
 ```
@@ -235,10 +235,10 @@ void Graphics::keyDownHandler(client::KeyboardEvent* e)
     	if(e->get_keyCode() == 37)
             	platform.moveLeft();
     	else if(e->get_keyCode() == 39)
-            	platform.moveRight();
+            	platform.moveRight(400);
 }
 ```
-
+The keenest eye would notice that we are using cheerpy `fmin` and `fmax` instead of the usual `std::min`/`std::max`.
 Let's also register an `EventListener` in `Graphics::initializeCanvas`.
 
 ```cpp title="pong.cpp"
