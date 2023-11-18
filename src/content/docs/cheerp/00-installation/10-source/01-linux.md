@@ -13,7 +13,7 @@ We assume that you have git, cmake, python and a modern C++ compiler properly in
 Example, using apt-get:
 
 ```bash
-apt-get install cmake python3 python3-distutils ninja-build gcc lld git
+sudo apt-get install cmake python3 python3-distutils ninja-build gcc lld git
 ```
 
 ## Build stable version, Cheerp 3.0
