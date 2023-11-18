@@ -163,7 +163,7 @@ The class has some basic properties and a render function which then delegates t
             	int r = rgb&0xff;
             	int g = (rgb>>8)&0xff;
             	int b = (rgb>>16)&0xff;
-            	canvasCtx->set_fillStyle(client::String("").concat("rgb(r", ",", g, ",", b, ")"));
+            	canvasCtx->set_fillStyle(client::String("").concat("rgb(", r, ",", g, ",", b, ")"));
             	canvasCtx->fillRect(x, y, width, height);
     	}
 ```
