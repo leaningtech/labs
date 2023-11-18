@@ -39,5 +39,5 @@ sudo apt-get update
 To install all Cheerp components, run
 
 ```sh
-apt-get install cheerp-core
+sudo apt-get install cheerp-core
 ```
