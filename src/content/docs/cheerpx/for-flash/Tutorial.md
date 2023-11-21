@@ -8,7 +8,7 @@ CheerpX is very easy to use, this tutorial will guide you step by step into host
 
 You should already be receiving our latest releases of CheerpX for Flash. If you haven't gotten in touch yet, feel free to [contact us](https://leaningtech.com/contact-us) and we'll look to add you to our evaluation programme.
 
-You should also have contacted Harman, who will provide you with their custom binary (which is used in the virtualization process). You can contact them and ask for the `libHCSFP.so` file that is necessary to run CheerpX.
+You should also have contacted Harman, who will provide you with their custom binary (which is used in the virtualization process). You can contact them and ask for the `libHCSFP_CX.so` file that is necessary to run CheerpX.
 
 # Download and prepare CheerpX for Flash
 
@@ -16,7 +16,7 @@ Head to your emails and find the latest release - from here you can click the do
 
 <p align="center"><img src="https://leaningtech.com/wp-content/uploads/2021/04/cheerpx_contents.png" width="700"></p>
 
-Unzip the file into a safe location. For the ease of referencing our CheerpX for Flash build, you should also rename the folder. In this example, we'll rename our CheerpX build to `ppdeploy`. From here we can head inside the `ppfp` directory, and add our `libHCSFP.so` file, along with the two files that ship with CheerpX for Flash, `Arial` and `ppfp`.
+Unzip the file into a safe location. For the ease of referencing our CheerpX for Flash build, you should also rename the folder. In this example, we'll rename our CheerpX build to `ppdeploy`. From here we can head inside the `ppfp` directory, and add our `libHCSFP_CX.so` file, along with the two files that ship with CheerpX for Flash, `Arial` and `ppfp`.
 
 Once this is done, we can now setup a HTTP server and host CheerpX on it.
 

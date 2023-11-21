@@ -42,7 +42,7 @@ Here, we are using a few flags:
 - `-p 28083:28083` simply binds the host port :28083 to the container port :28083.
 - `--init` will kill any zombie processes left behind after the container is stopped.
 - `--rm` will remove the container after it is stopped.
-- `-v /path/to/harman/binary/ppdeploy/ppfp/:/flash` is the **most important** flag in the command. To run the Native Bridge, you need to mount a volume with the Harman provided `libHCSFP.so` file inside the container at `/flash`.
+- `-v /path/to/harman/binary/ppdeploy/ppfp/:/flash` is the **most important** flag in the command. To run the Native Bridge, you need to mount a volume with the Harman provided `libHCSFP_CX.so` file inside the container at `/flash`.
 
 Finally, we just run the latest build of the bridge that has been shipped, and loaded into docker.
 

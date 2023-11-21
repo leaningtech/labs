@@ -18,7 +18,7 @@ If you see a logo that looks like this in place of your application:
 
 <p align="center"><img src="https://leaningtech.com/wp-content/uploads/2021/04/faulty_flash_logo.png" width="700"></p>
 
-You have correctly configured CheerpX, congratulations! Your issue is that the Harman library is either expired, or is being given `.SWF` files from a domain that is not whitelisted. If you get in touch with Harman, they should provide you with a new `libHCSFP.so` with an updated 1 month license. Make sure that you have given them the correct domains to whitelist, these should be the origins of the flash content, and **not** the pages they are hosted on.
+You have correctly configured CheerpX, congratulations! Your issue is that the Harman library is either expired, or is being given `.SWF` files from a domain that is not whitelisted. If you get in touch with Harman, they should provide you with a new `libHCSFP_CX.so` with an updated 1 month license. Make sure that you have given them the correct domains to whitelist, these should be the origins of the flash content, and **not** the pages they are hosted on.
 
 ## I'm having trouble hosting on IIS
 
