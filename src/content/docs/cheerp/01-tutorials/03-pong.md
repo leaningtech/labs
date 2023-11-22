@@ -184,7 +184,7 @@ void mainLoop()
 }
 ```
 
-Lastly, we need to add an handler for drawing an animation in our `Graphics` class. The browser will call the handler in sync with the display refresh rate, which generally is at 60 fps.
+Lastly, we need to add a handler for drawing an animation in our `Graphics` class. The browser will call the handler in sync with the display refresh rate, which generally is at 60 fps.
 
 ```cpp
 private:
