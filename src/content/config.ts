@@ -2,6 +2,8 @@ import { defineCollection, z } from "astro:content";
 
 const productTags = z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"]));
 
+export type ProductTag = z.infer<typeof productTags>[0];
+
 const blogauthors = defineCollection({
 	schema: ({ image }) =>
 		z.object({
@@ -50,7 +52,9 @@ const showcase = defineCollection({
 			title: z.string(),
 			description: z.string().optional(),
 			url: z.string(),
-			image: image(),
+			image: image().refine((img) => img.width / img.height == 1.5, {
+				message: "Image must have 3:2 aspect ratio",
+			}),
 			tags: productTags,
 		}),
 });
