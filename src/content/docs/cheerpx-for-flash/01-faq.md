@@ -1,5 +1,5 @@
 ---
-title: CheerpX for Flash FAQs
+title: Frequently asked questions
 ---
 
 ## Which browsers/operating systems are supported by CheerpX for Flash?
@@ -40,11 +40,11 @@ CheerpX for Flash is hosted by you, and is supported by any major HTTP server. A
 
 ## How is CheerpX for Flash integrated on a page?
 
-From the browsers standpoint, you simply need to provide access to one of our JS files using a standard `<script>` tag. You point the script tag to the relevant HTTP server, and the browser will do the rest. In the event that you are not able to add a line of Javascript to the HTML page hosting your flash content, we can also ship custom [Chrome extensions](/cheerpx-for-flash/Chrome-Extension), which will dynamically inject CheerpX on any page (although you then have to configure the end-user machine to have this extension correctly installed).
+From the browsers standpoint, you simply need to provide access to one of our JS files using a standard `<script>` tag. You point the script tag to the relevant HTTP server, and the browser will do the rest. In the event that you are not able to add a line of Javascript to the HTML page hosting your flash content, we can also ship custom [Chrome extensions](/cheerpx-for-flash/chrome-extension), which will dynamically inject CheerpX on any page (although you then have to configure the end-user machine to have this extension correctly installed).
 
 ## How does all this work?
 
-In essence, CheerpX is a Flash player HTML 'emulator', that runs via a JIT compilation engine, entirely in the browser tab, through WASM. To read this in more detail take a look at our [diagrams](/cheerpx-for-flash/How-It-Works), or read more on our [website](https://leaningtech.com/cheerpx-for-flash).
+In essence, CheerpX is a Flash player HTML 'emulator', that runs via a JIT compilation engine, entirely in the browser tab, through WASM. To read this in more detail take a look at our [diagrams](/cheerpx-for-flash/how), or read more on our [website](https://leaningtech.com/cheerpx-for-flash).
 
 ## What if I need support?
 
@@ -72,7 +72,7 @@ As with any virtualization, performance hits are inevitable. We strive to improv
 
 ## What happens if performance isn't good enough for me?
 
-We always work with our customers to try find the best solution for them. This may come in different forms, whether the incremental increases in performance are sufficient, or whether targeted performance profiling is necessary. If all else fails, we offer a 'Native Bridge' server side component, which vastly improves performance. You can read more about the native bridge [here](/cheerpx-for-flash/Native-Bridge).
+We always work with our customers to try find the best solution for them. This may come in different forms, whether the incremental increases in performance are sufficient, or whether targeted performance profiling is necessary. If all else fails, we offer a 'Native Bridge' server side component, which vastly improves performance. You can read more about the native bridge [here](/cheerpx-for-flash/native-bridge).
 
 ## Do I need a high end machine for this to work?
 

@@ -1,5 +1,5 @@
 ---
-title: How CheerpX for Flash works
+title: How it works
 ---
 
 CheerpX is designed to be simple. Our aim is to take as much complexity away from the customers and end user as possible, hence why end users don't need to do anything to use CheerpX for Flash.
