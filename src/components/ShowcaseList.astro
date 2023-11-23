@@ -1,30 +1,49 @@
 ---
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import type { ProductTag } from "@/content/config";
 
-const projects = await getCollection("showcase", ({ data }) => {
-	return data.tags.includes("CheerpJ");
+interface Props {
+	tag?: ProductTag;
+	limit?: number;
+}
+
+const props = Astro.props;
+
+let projects = await getCollection("showcase", ({ data }) => {
+	if (props.tag) {
+		return data.tags.includes(props.tag);
+	} else {
+		return true;
+	}
 });
+
+if (typeof props.limit == "number") {
+	projects = projects.slice(0, props.limit);
+}
 ---
 
-<ul class="not-prose grid grid-cols-2">
+<ul class="not-prose grid grid-cols-2 gap-4">
 	{
 		projects.map((project) => {
 			return (
 				<li>
 					<a
 						href={project.data.url}
-						class="block p-2 border border-stone-700 rounded-lg shadow-lg"
+						class="block h-full p-2 border border-stone-700 text-stone-500 rounded-lg shadow-lg hover:translate-y-[-2px] hover:border-stone-600 hover:text-stone-400 transition-all"
 					>
 						<Image
 							alt={project.data.title}
 							src={project.data.image}
-							class="rounded"
+							class="rounded bg-primary-500 overflow-hidden"
+							width={334 * 2}
+							height={223 * 2}
+							loading="lazy"
 						/>
-						<h5 class="font-semibold p-3 pb-1">{project.data.title}</h5>
-						<p class="p-3 pt-0 text-stone-500 leading-5">
-							{project.data.description}
-						</p>
+						<h5 class="font-semibold p-3 pb-1 text-stone-100">
+							{project.data.title}
+						</h5>
+						<p class="p-3 pt-0 leading-5">{project.data.description}</p>
 					</a>
 				</li>
 			);

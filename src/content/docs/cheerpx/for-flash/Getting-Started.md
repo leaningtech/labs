@@ -6,7 +6,7 @@ This page will help you get started with CheerpX for Flash and give you a brief 
 
 To start, you need to have joined the Enterprise Evaluation Programme, or purchased a license for CheerpX to receive our releases. You should receive these via email each time we have a new release. If you want to enquire about the EEP feel free to [contact us](https://leaningtech.com/contact-us).
 
-You also need to make sure you have agreed to Adobe's free evaluation license, and received your custom build of `libHCSFP.so` from Adobe/Harman. Feel free to get in touch with Harman, tell them that you're planning to use CheerpX, and ask them for the `libHCSFP.so` file. They will provide you with a build to use alongside CheerpX.
+You also need to make sure you have agreed to Adobe's free evaluation license, and received your custom build of `libHCSFP_CX.so` from Adobe/Harman. Feel free to get in touch with Harman, tell them that you're planning to use CheerpX, and ask them for the `libHCSFP_CX.so` file. They will provide you with a build to use alongside CheerpX.
 
 Make sure you have downloaded the latest CheerpX release, and unzipped this. The contents of the zip should look like this:
 

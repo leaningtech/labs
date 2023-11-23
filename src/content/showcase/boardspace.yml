@@ -1,0 +1,6 @@
+title: Boardspace
+description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
+url: https://boardspace.net/login.html
+image: ./boardspace.png
+tags:
+  - CheerpJ

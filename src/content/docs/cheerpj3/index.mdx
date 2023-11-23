@@ -4,6 +4,7 @@ description: Java Virtual Machine for modern web browsers
 ---
 
 import LinkButton from "@/components/LinkButton.astro";
+import ShowcaseList from "@/components/ShowcaseList.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
 <div class="not-prose flex gap-2 mb-2">
@@ -134,13 +135,28 @@ You can also see CheerpJ in action in [JavaFiddle](https://javafiddle.leaningtec
 
 ## Community
 
-CheerpJ is loved by teams at NASA, Siemens, UBS, and many others. We have a Discord server where you can ask questions, share your projects, and get community support.
+CheerpJ is used in production by teams at NASA, Siemens, UBS, and [many others](https://leaningtech.com/case-studies/).
+
+There are several community projects that use CheerpJ, such as:
+
+<ShowcaseList tag="CheerpJ" limit={2} />
+
+<div class="flex justify-end pt-4">
+	<LinkButton
+		type="secondary"
+		href="/cheerpj3/community"
+		label="View more community projects"
+		iconRight="mi:arrow-right"
+	/>
+</div>
+
+We have a vibrant Discord community where you can ask questions, share your projects, and get community support.
 
 <LinkButton
 	type="discord"
 	href={DISCORD_URL}
 	iconLeft="fa-brands:discord"
-	label="Join the Discord community"
+	label="Join our Discord server"
 />
 
 <LinkButton
