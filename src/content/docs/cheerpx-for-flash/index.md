@@ -55,4 +55,4 @@ If you have already spoken to us and are beginning to test CheerpX, please refer
 
 If you are testing CheerpX for Flash, or using it in production, please report any bugs on your dedicated Asana portal. Feel free to @ an engineer, sometimes the notifications will slip through the cracks.
 
-For any further questions, please [get in touch](https://leaningtech.com/contact-us/?subject=CheerpX%20for%20Flash%20information%20request#mailus) with us or read our [FAQ](/cheerpx-for-flash/Frequently-Asked-Questions).
+For any further questions, please [get in touch](https://leaningtech.com/contact-us/?subject=CheerpX%20for%20Flash%20information%20request#mailus) with us or read our [FAQ](/cheerpx-for-flash/faq).
