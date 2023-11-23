@@ -37,7 +37,7 @@ Work on CheerpX is still ongoing, and the tool is not released at present.
 
 ### CheerpX for Flash
 
-[CheerpX for Flash](/cheerpx/for-flash) is a special embodiment of [CheerpX](/cheerpx), a WebAssembly virtualization solution to run Linux executables in-browser.
+[CheerpX for Flash](/cheerpx-for-flash) is a special embodiment of [CheerpX](/cheerpx), a WebAssembly virtualization solution to run Linux executables in-browser.
 
 CheerpX for Flash uses the CheerpX technology to run an ‘emulated’ (virtualized) version of the Adobe Flash Player, without having to install it on the client browser, and therefore compatibly with the deprecation of Flash post-2020.
 

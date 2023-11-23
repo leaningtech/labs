@@ -1,5 +1,5 @@
 ---
-title: CheerpX for Flash - Chrome Extension
+title: Chrome extension
 ---
 
 In a small number of use cases, our customer could have the following scenario:

@@ -1,5 +1,5 @@
 ---
-title: CheerpX for Flash - Native Bridge
+title: Native Bridge
 ---
 
 In a small number of use cases, our customer could have the following scenario:
