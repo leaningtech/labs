@@ -12,7 +12,7 @@ Make sure you have downloaded the latest CheerpX release, and unzipped this. The
 
 <p align="center"><img src="https://leaningtech.com/wp-content/uploads/2021/04/cheerpx_contents.png" width="700"></p>
 
-Open the `ppfp/` folder and drop the `libHSCFP.so` file into there.
+Open the `ppfp/` folder and drop the `libHCSFP_CX.so` file into there.
 
 You now have CheerpX ready to be installed on a HTTP server!
 
