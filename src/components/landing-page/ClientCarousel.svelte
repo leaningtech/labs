@@ -42,22 +42,25 @@
 	}
 </script>
 
-<div class="w-full relative mx-auto 2xl:max-w-screen-2xl opacity-0 transition-opacity" class:opacity-100={typeof repeatWidth === "number"}>
+<div
+	class="w-full relative mx-auto 2xl:max-w-screen-2xl opacity-0 transition-opacity"
+	class:opacity-100={typeof repeatWidth === "number"}
+>
 	<ul
 		class="client-carousel whitespace-nowrap mx-auto 2xl:!animate-none 2xl:overflow-x-hidden"
 		aria-label="Clients"
 		style:--repeat-width={repeatWidth + "px"}
-		style:animation-name={typeof repeatWidth === "undefined" ? "unset" : "client-carousel"}
+		style:animation-name={typeof repeatWidth === "undefined"
+			? "unset"
+			: "client-carousel"}
 	>
 		{#each clientImages2x as { src, alt }, i}
-			<li
-				class="inline-block px-8"
-			>
+			<li class="inline-block px-8">
 				<img
 					src={src.src}
-					alt={alt}
+					{alt}
 					decoding="async"
-					class="opacity-50 h-16 grayscale contrast-0"
+					class="opacity-80 h-16 grayscale contrast-0"
 					bind:this={imgEls[i]}
 					on:load={() => loadedImagesCount++}
 				/>
