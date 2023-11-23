@@ -25,7 +25,12 @@ export type NavEntry = NavDirectory | NavFile;
 /** https://diataxis.fr */
 export type Mode = "guides" | "tutorials" | "reference" | "explanation";
 
-export type Product = "cheerp" | "cheerpj2" | "cheerpj3" | "cheerpx";
+export type Product =
+	| "cheerp"
+	| "cheerpj2"
+	| "cheerpj3"
+	| "cheerpx"
+	| "cheerpx-for-flash";
 
 export function isMode(value: unknown): value is Mode {
 	return (
@@ -41,7 +46,8 @@ export function isProduct(value: unknown): value is Product {
 		value === "cheerp" ||
 		value === "cheerpj2" ||
 		value === "cheerpj3" ||
-		value === "cheerpx"
+		value === "cheerpx" ||
+		value === "cheerpx-for-flash"
 	);
 }
 

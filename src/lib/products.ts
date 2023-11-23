@@ -10,10 +10,8 @@ import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.sv
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
 
-export type ProductId = "cheerp" | "cheerpj2" | "cheerpj3" | "cheerpx";
-
 export interface ProductData {
-	id: ProductId;
+	id: Product;
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
@@ -67,6 +65,17 @@ export const products: { [product in Product]: ProductData } = {
 			"Execute native binaries in the browser with the CheerpX virtual machine.",
 		github: "https://github.com/leaningtech/webvm", // TODO
 	},
+	"cheerpx-for-flash": {
+		id: "cheerpx-for-flash",
+		name: "CheerpX for Flash",
+		href: "/cheerpx-for-flash",
+		logotype: cheerpxLogotype,
+		favicon: "/cheerpx/favicon.ico",
+		subtitle: "Run Flash content without the Adobe Flash plugin",
+		description:
+			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
+		github: "https://github.com/leaningtech/cheerpx-flash",
+	},
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
@@ -77,9 +86,7 @@ export function productFromUrl(url: URL): ProductData | undefined {
 	return undefined;
 }
 
-export async function getProductNav(
-	productId: ProductId,
-): Promise<NavDirectory> {
+export async function getProductNav(productId: Product): Promise<NavDirectory> {
 	const root = await getRootNav();
 	const directory = findNavDirectory(root, [productId]);
 	if (!directory)
