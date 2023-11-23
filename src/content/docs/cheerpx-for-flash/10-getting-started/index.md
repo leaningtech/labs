@@ -56,7 +56,7 @@ And that's it! As long as the user is accessing the page from a WebAssembly-enab
 
 ---
 
-In some scenarios, a customer cannot edit the HTML of the page directly. If this is your case, we can offer one other workaround, which involves configuring and installing a custom [chrome extension](/cheerpx-for-flash/chrome-extension). This extension does not contain CheerpX for Flash, it simply dynamically adds the same JavaScript outlined above, as soon as a user navigates to the page.
+In some scenarios, a customer cannot edit the HTML of the page directly. If this is your case, we can offer one other workaround, which involves configuring and installing a custom [chrome extension](/cheerpx-for-flash/extension). This extension does not contain CheerpX for Flash, it simply dynamically adds the same JavaScript outlined above, as soon as a user navigates to the page.
 
 ## Basic HTML page for testing
 
