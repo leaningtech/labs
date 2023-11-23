@@ -2,7 +2,7 @@
 title: Bridge Tutorial
 ---
 
-When CheerpX has a performance drop off too large for a customer, we will offer our Native Bridge extension. To read more about the Native Bridge, read our [feature page](/cheerpx/for-flash/Native-Bridge).
+When CheerpX has a performance drop off too large for a customer, we will offer our Native Bridge extension. To read more about the Native Bridge, read our [feature page](/cheerpx-for-flash/Native-Bridge).
 
 # Setup the image
 
