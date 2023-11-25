@@ -11,6 +11,7 @@
 /cheerpx3 /cheerpx
 /docs /#ecosystem
 /cheerpx/for-flash /cheerpx-for-flash
+/cheerpx/for-flash/ /cheerpx-for-flash
 /cheerpx/for-flash/Bridge-Tutorial /cheerpx-for-flash/native-bridge/tutorial
 /cheerpx/for-flash/Changelog /cheerpx-for-flash/changelog
 /cheerpx/for-flash/Chrome-Extension /cheerpx-for-flash/extension
@@ -20,3 +21,5 @@
 /cheerpx/for-flash/Native-Bridge /cheerpx-for-flash/native-bridge
 /cheerpx/for-flash/Troubleshooting /cheerpx-for-flash/troubleshooting
 /cheerpx/for-flash/Tutorial /cheerpx-for-flash/getting-started/tutorial
+/webvm /cheerpx
+/news /blog
