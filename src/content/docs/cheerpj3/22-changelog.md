@@ -39,10 +39,8 @@ title: Changelog
 - `CheerpJWorker` removed (3.0rc2 adds support for `importScripts`)
 - `com.leaningtech.handlers` HTTP handler no longer needed. HTTP(S) requests just work
 
-[More details](/blog/cheerpj-3-deep-dive)
-
 ## Previous versions
 
-CheerpJ 3.0 was a major architectural rewrite of CheerpJ.
+[CheerpJ 3.0 was a major architectural rewrite of CheerpJ](/blog/cheerpj-3-deep-dive).
 
 For previous versions, see the [CheerpJ 2.x changelog](/cheerpj2/changelog).
