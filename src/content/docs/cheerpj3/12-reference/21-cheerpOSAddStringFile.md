@@ -1,12 +1,12 @@
 ---
-title: cheerpjAddStringFile
+title: cheerpOSAddStringFile
 description: Write a file into the virtual filesystem
 ---
 
 Used to write files into the `/str/` filesystem. If the file already exists, it will be overwritten.
 
 ```ts
-function cheerpjAddStringFile(path: string, data: string | Uint8Array): void;
+function cheerpOSAddStringFile(path: string, data: string | Uint8Array): void;
 ```
 
 ## Parameters
@@ -16,10 +16,10 @@ function cheerpjAddStringFile(path: string, data: string | Uint8Array): void;
 
 ## Returns
 
-`cheerpjAddStringFile` does not return a value.
+`cheerpOSAddStringFile` does not return a value.
 
 ## Example
 
 ```js
-cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
+cheerpOSAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```

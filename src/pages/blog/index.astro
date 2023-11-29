@@ -6,9 +6,9 @@ import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
 
-const [post1, post2, ...restPosts] = (await getCollection("blog")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const [post1, post2, ...restPosts] = (
+	await getCollection("blog", ({ data }) => data.draft !== true)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Shell

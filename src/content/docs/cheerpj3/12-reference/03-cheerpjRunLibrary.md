@@ -19,17 +19,23 @@ async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
 
 ### CJ3Library
 
-This object can be used to access the classes and methods of the loaded library through property access.
+This object can be used to access the classes and methods of the loaded library through property access:
 
 - To load a class, access it and await it.
 - To call a static method, call it as a method on a loaded class and await it.
 - To construct a class into an instance, use `await new`.
 - To call an instance method, call it as a method on an instance of a loaded class and await it.
 
-Parameters and return values of method calls are automatically converted between JavaScript and Java types.
+Array interoperability is supported:
 
-> [!warning] Warning
-> Array interop is not yet supported.
+- Passing JS arrays to Java arrays via copying.
+- Passing JS arrays to Java JSObject.
+- Passing Java object arrays to JavaScript by reference.
+- Passing Java primitive arrays to JavaScript
+- Public Java fields can now be both read/written from JS with appropriate type conversion.
+- Classes in JS supports `instanceof`.
+
+Parameters and return values of method calls are automatically converted between JavaScript and Java types.
 
 ## Examples
 
@@ -51,6 +57,7 @@ Let's say we had a library called `example.jar` compiled from the following clas
 package com.example;
 
 public class Example {
+  public String[] greetings = {"Hello", "Bye"};
   public void hello() {
     System.out.println("Example says hello!");
   }
@@ -66,6 +73,20 @@ const lib = await cheerpjRunLibrary("/app/example.jar");
 const Example = await lib.com.example.Example;
 const example = await new Example();
 await example.hello(); // Example says hello!
+```
+
+### Access to object property/attribute
+
+From the example above:
+
+```js
+const greetingsArray = example["greetings"];
+```
+
+or
+
+```js
+const greetingsArray = example.greetings;
 ```
 
 ### Exception handling
