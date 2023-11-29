@@ -9,13 +9,14 @@ Version 3.0 RC2 - November 29th, 2023:
 * Support for synchronised methods in the JIT
 * Restored support for AWT at the same level of CheerpJ 2.3
 * Improved reflection support
-* Support for running in Web Workers
+* Support for Web Workers (just use importScripts)
 * Improved clipboard support
-* Improved library mode with support object fields, arrays, instanceof and quality-of-life and debugging
+* Improved library mode with support object field access, arrays, instanceof, quality-of-life and debugging
 * Improved support for fonts
 * Improved support for class loaders
 * Fixed preloading support
 * Support for ClassCastException
+* cheerpjAddStringFile deprecated, renamed to cheerpOSAddStringFile
 
 ```
 
