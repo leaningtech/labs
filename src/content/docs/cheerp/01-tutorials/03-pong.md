@@ -238,7 +238,7 @@ void Graphics::keyDownHandler(client::KeyboardEvent* e)
             	platform.moveRight(400);
 }
 ```
-The keenest eye would notice that we are using `fmin` and `fmax` instead of the usual `std::min`/`std::max`. In general, the standard library is compiled in `wasm`. We can use these functions from the js code but there are restrictions. One of these dictates that wasm functions that have pointers or references to basic types are not available in the js-annotated part of the code. Indeed, `std::min`/`std::max` get references to basic types while `std::fmin`/`std::fmax` get their inputs by copy. Another solution would have been to wrap `std::min`/`std::max` in non-js-annotated functions that take ints by copy. This limitation will hopefully disappear at some point in the future.
+Notice that we are using `fmin` and `fmax` instead of the usual `std::min`/`std::max`. In general, standard library (STL) functions are compiled to Wasm. We can use STL functions from the JS code but there are restrictions. One of these dictates that Wasm functions that have pointers or references to basic types are not available in the JS-annotated part of the code. Indeed, `std::min`/`std::max` get references to basic types while `std::fmin`/`std::fmax` get their inputs by copy. Another solution would have been to wrap `std::min`/`std::max` in non-JS-annotated functions that take `int`s by copy. This limitation will hopefully disappear at some point in the future.
 
 Let's also register an `EventListener` in `Graphics::initializeCanvas`.
 
