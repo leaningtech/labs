@@ -94,7 +94,7 @@ cd ../..
 
 ## Build latest version
 
-This allows to benefit from the latest develpments and bug fixes, but we reserve the possibility of forward-incompatible changes.
+This allows to benefit from the latest developments and bug fixes, but we reserve the possibility of forward-incompatible changes.
 
 ### Get the sources, latest version
 
