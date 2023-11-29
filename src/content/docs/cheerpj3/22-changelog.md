@@ -2,6 +2,23 @@
 title: Changelog
 ---
 
+Version 3.0 RC2 - November 29th, 2023:
+
+```
+* Reduced verbosity of debug messages
+* Support for synchronised methods in the JIT
+* Restored support for AWT at the same level of CheerpJ 2.3
+* Improved reflection support
+* Support for running in Web Workers
+* Improved clipboard support
+* Improved library mode with support object fields, arrays, instanceof and quality-of-life and debugging
+* Improved support for fonts
+* Improved support for class loaders
+* Fixed preloading support
+* Support for ClassCastException
+
+```
+
 version 3.0 - September 22nd, 2023:
 
 ```
