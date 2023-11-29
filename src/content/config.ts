@@ -32,6 +32,7 @@ const blog = defineCollection({
 			authors: z.array(z.string()),
 			heroImage: image().optional(),
 			featured: z.boolean().default(false),
+			draft: z.boolean().default(false),
 			tags: productTags.optional(),
 		}),
 });

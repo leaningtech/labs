@@ -24,6 +24,7 @@ export async function latestFeaturedPost(url: URL) {
 			"blog",
 			(entry) =>
 				entry.data.featured &&
+				!entry.data.draft &&
 				(!requiredTag || entry.data.tags?.includes(requiredTag)),
 		)
 	).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());

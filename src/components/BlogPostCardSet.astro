@@ -25,7 +25,7 @@ function sortCalc(post: CollectionEntry<"blog">): number {
 
 const posts = (
 	await getCollection("blog", (post) => {
-		if (exclude?.includes(post.id)) {
+		if (post.data.draft || exclude?.includes(post.id)) {
 			return false;
 		}
 		return true;
