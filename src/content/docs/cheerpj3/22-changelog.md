@@ -2,59 +2,47 @@
 title: Changelog
 ---
 
-Version 3.0 RC2 - November 29th, 2023:
+## [3.0rc2](/blog/cheerpj-30rc2) - November 29, 2023
 
-```
-* Reduced verbosity of debug messages
-* Support for synchronised methods in the JIT
-* Restored support for AWT at the same level of CheerpJ 2.3
-* Improved reflection support
-* Support for Web Workers (just use importScripts)
-* Improved clipboard support
-* Improved library mode with support object field access, arrays, instanceof, quality-of-life and debugging
-* Improved support for fonts
-* Improved support for class loaders
-* Fixed preloading support
-* Support for ClassCastException
-* cheerpjAddStringFile deprecated, renamed to cheerpOSAddStringFile
-
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
 ```
 
-version 3.0 - September 22nd, 2023:
+- Reduced verbosity of debug messages
+- Support for `synchronised` methods in the JIT
+- Restored support for AWT to the same level as CheerpJ 2.3
+- Improved reflection support
+- Support for Web Workers (just use `importScripts`)
+- Improved clipboard support
+- Improved library mode with support object field access, arrays, `instanceof`, quality-of-life and debugging
+- Improved support for fonts
+- Improved support for class loaders
+- Fixed preloading support
+- Support for `ClassCastException`
+- `cheerpjAddStringFile` deprecated, renamed to `cheerpOSAddStringFile`
 
+## [3.0rc1](/blog/cheerpj-30rc1) - October 18, 2023
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
 ```
 
-Focus on performance, particularly on startup time
-* Multiple fixes on the Cheerp compiler to better optimize JNI code
-* Multiple experiments on the JIT to better interact with V8 tiering
-```
+- Completely new JIT-based architecture
+  - Removed AOT compiler
+- Full classloader support
+- New scalable JNI architecture (`cheerpjInit` `natives` option)
+- Library mode (`cheerpjRunLibrary`)
+  - Removed `cjCall` and `cjNew`
+- `cheerpjInit` is now asynchronous
+- `cheerpj-dom.jar` removed
+- `cheerpjRunJarWithClasspath` removed
+- `CheerpJWorker` removed (3.0rc2 adds support for `importScripts`)
+- `com.leaningtech.handlers` HTTP handler no longer needed. HTTP(S) requests just work
 
-version 3.0 - September 15th, 2023:
+[More details](/blog/cheerpj-3-deep-dive)
 
-```
-Work on CJ3 Library mode, with a focus on performance and Java <-> JS type conversions
-* Optimized away context switching overhead on user native calls
-* Support many more type conversion between JS numbers/integers/booleans and Java primitive types
-* Support conversion between JS numbers and Java boxed types (i.e. java.lang.Integer)
-* JIT optimizations
-* Optimization of the core class loading code path
-```
+## Previous versions
 
-version 3.0 - September 8th, 2023:
+CheerpJ 3.0 was a major architectural rewrite of CheerpJ.
 
-```
-JNLP support and performance work
-* Significant speed up of System.arrayCopy
-* JIT optimizations
-```
-
-version 3.0 - September 1st, 2023:
-
-```
-Focus on networking
-* Integrated Tailscale support for low level TCP/UDP traffic, same code we use for WebVM/CheerpX
-* Custom HTTP/HTTPS handlers are now enabled by default unless Tailscale is used. The handlers provide http/https support in common cases.
-* Optimized exception handling
-* Optimized code rendering
-* Multiple JIT optimizations
-```
+For previous versions, see the [CheerpJ 2.x changelog](/cheerpj2/changelog).
