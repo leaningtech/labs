@@ -46,10 +46,10 @@ The `/files/` directory is a virtual concept used by CheerpJ to store and refer 
 
 The `/str/` mount point is a simple read-only filesystem that can be populated from JavaScript to share data with Java code.
 
-From JavaScript you can add files into the filesystem using the `cheerpjAddStringFile` API. Example:
+From JavaScript you can add files into the filesystem using the `cheerpOSAddStringFile` API. Example:
 
 ```js
-cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
+cheerpOSAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```
 
 You can access this data from Java, for example:
@@ -62,4 +62,4 @@ FileReader f = new FileReader("/str/fileName.txt")
 ...
 ```
 
-The `cheerpjAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application, for example a user selected file coming from an HTML5 `<input type="file">` tag.
+The `cheerpOSAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application, for example a user selected file coming from an HTML5 `<input type="file">` tag.
