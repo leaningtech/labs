@@ -20,7 +20,7 @@ const authors = await resolveAuthors(post.data.authors);
 
 <a
 	href={`/blog/${post.slug}`}
-	class="inline-flex flex-col space-between group overflow-hidden"
+	class="inline-flex flex-col space-between group overflow-hidden not-prose"
 >
 	{
 		post.data.heroImage && (
@@ -30,7 +30,7 @@ const authors = await resolveAuthors(post.data.authors);
 				height={256}
 				alt=""
 				class:list={{
-					"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64": true,
+					"rounded-xl mb-4 height-20 bg-stone-100 object-cover h-64 self-center": true,
 				}}
 			/>
 		)
