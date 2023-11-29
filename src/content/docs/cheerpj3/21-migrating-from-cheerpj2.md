@@ -89,6 +89,10 @@ CheerpJ 2.3 had very limited support for ClassLoaders. As a consequence of requi
 
 Previously, CheerpJ 2 required a special Java property to be set in order for HTTP(S) requests to work. This is no longer needed.
 
+### `cheerpjAddStringFile` deprecated and renamed to `cheerpOSAddStringFile`
+
+The `cheerpjAddStringFile` function has been renamed to `cheerpOSAddStringFile` to better reflect its behaviour and provide parity with CheerpX. The old name is still available for backwards compatibility.
+
 [`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
 [`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
