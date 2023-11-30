@@ -11,20 +11,27 @@ As an example, consider the following Java class:
 package com.example;
 
 public class TestClass {
-  public native void alert(String str);
+
+	public static native void nativeAlert(String url);
+
+	public static void main(String[] args) {
+        nativeAlert("Hello from Java!");
+	}
+
 }
 ```
 
-To provide an implementation of `alert`, pass it to the `cheerpjInit` function as a property of the `natives` object:
+To provide an implementation of `nativeAlert`, pass it to the `cheerpjInit` function as a property of the `natives` object:
 
 ```js
 await cheerpjInit({
 	natives: {
-		async Java_com_example_TestClass_alert(lib, str) {
+		async Java_TestClass_nativeAlert(lib, str) {
 			window.alert(str);
 		},
 	},
 });
+await cheerpjRunMain("TestClass", "/app/");
 ```
 
 The name of methods in the `natives` object must be in the form `Java_<fully-qualified-class-name>_<method-name>`.

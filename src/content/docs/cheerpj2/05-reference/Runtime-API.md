@@ -255,23 +255,6 @@ Alternatively, if your JAR is designed to be executed with `java -jar my_applica
 cheerpjRunJar("/app/my_application_archive.jar", arg1, arg2);
 ```
 
-### cheerpjRunJarWithClasspath
-
-`cheerpjRunJarWithClasspath(jarName, classPath, ...)`
-
-Optionally, if your JAR also need additional dependencies, you can use.
-
-```js
-cheerpjRunJarWithClasspath(
-	"/app/my_application_archive.jar",
-	"/app/my_dependency_archive.jar",
-	arg1,
-	arg2,
-);
-```
-
-In all cases the arguments should be JavaScript Strings.
-
 ## Calling Java from JS
 
 These functions make it possible to conveniently call Java code from JS. Java code is always run asynchronously, so the returned values are `Promise`s. See below for details.
