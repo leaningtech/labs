@@ -1,5 +1,5 @@
 ---
-title: "A deep dive into CheerpJ 3.0: A WebAssembly Java Virtual Machine for the browser"
+title: "Deep dive into CheerpJ 3.0: A WebAssembly Java Virtual Machine for the browser"
 description: |
   CheerpJ is a WebAssembly-based JVM that runs fully client side in the browser. It supports Java applications, legacy applets and libraries, with no need for compilation, server backends, plugins, or post-processing steps. CheerpJ 3.0 introduces a completely new JIT-based architecture which makes the tool faster, more usable and much more powerful.
 authors:
@@ -38,7 +38,7 @@ CheerpJ was originally released in 2017, quickly becoming Leaning Technologies' 
 
 CheerpJ 3.0 introduces a completely new JIT-based architecture which makes the tool faster, more usable and much more powerful.
 
-CheerpJ 3.0 will be released in January 2024, with support for Java 8. [The second release candidate is now available](/blog/cheerpj-30rc2); we invite developers and organizations to test it and evaluate it. Thanks to its new runtime architecture, subsequent 2024 releases of CheerpJ will expand its support to more recent LTS releases of Java, starting from Java 11.
+CheerpJ 3.0 will be released in January 2024, with support for Java 8. [The second release candidate is now available](/blog/cheerpj-30rc2); we invite developers and organizations to test and evaluate it. Thanks to its new runtime architecture, subsequent 2024 releases of CheerpJ will expand its support to more recent LTS releases of Java, starting from Java 11.
 
 ## What can CheerpJ do?
 
@@ -50,8 +50,6 @@ It exposes a simple API for executing standalone Java applications, applets, Jav
 
 Being a collection of static assets, it is easily self-hostable, and we provide a cloud version under the [CheerpJ Community Licence](#licensing) (free to use for personal projects and technical evaluations).
 
-CheerpJ is an extremely complete solution for running Java in the browser.
-
 ### No modifications needed
 
 **CheerpJ can run unmodified Java applications, applets and libraries from JAR files**. It does not require access to the source code, or specialized compile-time tools. This is especially useful when running legacy applications, whose source code might not be available, or applications based on 3rd party commercial libraries.
@@ -62,9 +60,9 @@ Developers can use their existing JAR files with no changes to your building pro
 
 ### Full Java support
 
-**CheerpJ supports multiple processes and threads.** It can run single or multiple independent Java applications, each consisting of multiple threads. Synchronization features are supported.
+**CheerpJ supports multiple processes and threads.** It can run a single or multiple independent Java applications, each consisting of multiple threads. Synchronization features are supported.
 
-**CheerpJ provides full support for ClassLoaders.** Java classes are loaded following the same approach as native Java implementations. The correct ClassLoader is invoked, depending on the current execution context which internally resolves the correct Java bytecode using arbitrary logic. User-provided ClassLoaders are also supported, including customs ones implementing encryption or obfuscation.
+**CheerpJ provides full support for ClassLoaders.** Java classes are loaded following the same approach as native Java implementations. The correct ClassLoader is invoked, depending on the current execution context, which internally resolves the correct Java bytecode using arbitrary logic. User-provided ClassLoaders are also supported, including customs ones implementing encryption or obfuscation.
 
 **Reflective access** to methods and fields is achieved via metadata provided by Java bytecode. After a ClassLoader resolves the bytecode CheerpJ will store it not only for the purpose of running and compiling Java code, but also to implement reflection. Annotations are also supported.
 
@@ -74,8 +72,6 @@ Developers can use their existing JAR files with no changes to your building pro
 
 **Graphical applications, including Swing and AWT are supported.** Swing ones, being platform independent, will render exactly as they do in native. Swing Look&Feel is also supported, including 3rd party ones. Multi-window applications are supported, with keyboard focus being managed as expected. Integration with the system clipboard can be enabled via an initialization option.
 
-**HTTP and TCP networking** are supported, as well as several **virtual filesystems**.
-
 **CheerpJ provides advanced, bidirectional Java-JavaScript interoperability:** You can access JavaScript and the DOM from Java by [implementing `native` methods directly in JavaScript][JNI]. You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API].
 
 [JNI]: /cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript
@@ -83,7 +79,9 @@ Developers can use their existing JAR files with no changes to your building pro
 
 ## How does CheerpJ 3.0 work?
 
-The CheerpJ 3.0 architecture was engineered to solve the limitations present in CheerpJ 2.x and to take advantage of the unique experience about in-browser JIT-ting that we gathered from our work on CheerpX: a WebAssembly-based virtual machine for x86 binary code.
+The CheerpJ 3.0 architecture was engineered to solve the limitations present in CheerpJ 2.x and to take advantage of the unique experience about in-browser JIT-ting that we gathered from our work on [CheerpX]: a WebAssembly-based virtual machine for x86 binary code.
+
+[CheerpX]: /cheerpx
 
 ![CheerpJ 3.0 architecture diagram](./cheerpj-3-deep-dive-arch.png)
 
@@ -92,13 +90,13 @@ At a high level, CheerpJ is composed of the following building blocks:
 - **A JVM implementation:** Written in C++ and [compiled](/cheerp) to WebAssembly. The CheerpJ JVM implements a 2-tier execution mode. Code runs within an interpreter before being Just-In-Time compiled to optimized JavaScript. The interpreter does not only deal with initialization and rarely-used code, but also gathers information necessary for JIT-ting. Generated code is very efficient, and the internal optimizer can, among other things, inline and devirtualize calls, which is extremely important for a language such as Java.
 - **A virtualized window manager:** Which supports AWT/Swing. Each window is converted to a hierarchy of HTML elements and HTML5 canvases.
 - **A virtualized File System:** CheepJ provides [multiple filesystem backends](/cheerpj3/guides/File-System-support) to accommodate different application needs, including access to server-hosted files and persistent local storage.
-- **Networking support:** For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer, and which can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided _exit node_.
+- **Networking support:** For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided _exit node_.
 
 All these capabilities are implemented as pure WebAssembly or JavaScript. CheerpJ requires no binary component, plugin or non-standard browser configuration.
 
 ## How does this compare to CheerpJ 2.x?
 
-When designing the new CheerpJ 3.0 architecture, we had the objective of making a drop-in replacement for CheerpJ 2.3. With some minor exceptions (improved APIs that led to some others being deprecated), this objective was achieved.
+When designing the new CheerpJ 3.0 architecture, we had the objective of making a drop-in replacement for CheerpJ 2.3. With some minor exceptions (improved APIs that led to some others being removed), this objective was achieved.
 
 ### Important information for CheerpJ 2.x users
 
@@ -233,10 +231,10 @@ CheerpJ is free to use for personal projects, including those that generate reve
 
 CheerpJ 3.0 is the most advanced solution for running large-scale Java applications in the browser.
 
-We are very proud of what we have achieved, nevertheless there are some limitations that our users should be aware of:
+We are very proud of what we have achieved, nevertheless there are currently some limitations that our users should be aware of:
 
-- **No access to user filesystem:** For obvious security reasons Web applications do not have direct access to the local machine filesystem. Access can be provided to specific files, or directories with the newer FileSystem API. CheerpJ does not currently support an integrated user experience for Java applications to access such files, but the problem can be worked around via JavaScript code and the `/str/` filesystem. We have plans to provide a better integration for this use case in the future. Future backends will allow access to JavaScript Blobs, FileSystem API and cloud storage solutions such as Google Drive and Dropbox.
-- **Java 8 only:** The new CheerpJ 3.0 architecture is engineered to fix the gap with modern Java versions quite easily. We target supporting Java 11 (and possibly more) with the future CheerpJ 3.1 release. Support for newer versions of Java will come with the future 3.1 release. We are targeting, in particular, Java 11, the next LTS. The architecture makes it possible to build specific past revisions for customers that have requirements from either dependencies or certifications.
+- **No access to user filesystem:** For obvious security reasons Web applications do not have direct access to the local machine filesystem. Access can be provided to specific files, or directories with the newer FileSystem API. CheerpJ does not currently support an integrated user experience for Java applications to access such files, but the problem can be worked around via JavaScript code and the `/str/` filesystem. We have plans to to implement more backends in the future to allow access to JavaScript Blobs, FileSystem API and cloud storage solutions such as Google Drive and Dropbox.
+- **Java 8 only:** The new CheerpJ 3.0 architecture is engineered to fix the gap with modern Java versions quite easily. We target supporting Java 11 (and possibly more) with the future CheerpJ 3.1 release. The architecture makes it possible to build specific past revisions for customers that have requirements from either dependencies or certifications.
 - **No support for third-party JNI components:** There are a few large scale Java apps that cannot run in CheerpJ at this time since they depend on binary libraries. The most notable of these is Minecraft, which uses _LWJGL_. In the future we plan to release our JNI implementation to the public, allowing users to build their own WebAssembly JNI modules from C/C++.
 - **WasmGC support:** The most keen reader might be wondering how the recently standardized WasmGC extension to WebAssembly impacts our work. As things stand we don’t think WasmGC will be necessary to reach a satisfactory level of performance, but it’s possible that our evaluation will change in the future. In any case, if CheerpJ will eventually introduce WasmGC as a JIT target, it will be a purely internal implementation detail. From the point of view of the user nothing will change besides a performance improvement.
 
