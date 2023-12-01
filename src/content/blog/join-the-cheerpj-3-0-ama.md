@@ -10,7 +10,7 @@ categories:
 authors:
   - alex
   - alessandro
-heroImage: ./cheerpj3-orange.webp
+heroImage: ./cheerpj3-orange.png
 ---
 
 <iframe title="&quot;It's impossible!&quot; - Building a Java JVM in the browser (CheerpJ 3.0 AMA)" src="https://www.youtube.com/embed/Z-mHW6ldgco" width="100%" class="aspect-video" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
