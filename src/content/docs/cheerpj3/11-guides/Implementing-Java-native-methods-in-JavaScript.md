@@ -12,7 +12,7 @@ package com.example;
 
 public class TestClass {
 
-	public static native void nativeAlert(String url);
+	public static native void nativeAlert(String str);
 
 	public static void main(String[] args) {
         nativeAlert("Hello from Java!");
