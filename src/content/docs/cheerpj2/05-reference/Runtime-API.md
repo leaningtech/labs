@@ -259,6 +259,9 @@ cheerpjRunJar("/app/my_application_archive.jar", arg1, arg2);
 
 `cheerpjRunJarWithClasspath(jarName, classPath, ...)`
 
+> [!warning] Deprecation warning
+> This API is deprecated and was removed in CheerpJ 3.0.
+
 Optionally, if your JAR also need additional dependencies, you can use.
 
 ```js
@@ -270,7 +273,7 @@ cheerpjRunJarWithClasspath(
 );
 ```
 
-In all cases the arguments should be JavaScript Strings.
+In all cases the arguments should be JavaScript strings.
 
 ## Calling Java from JS
 
