@@ -29,7 +29,7 @@ CheerpJ can be used to run Java bytecode on the browser as WebAssembly/JavaScrip
 
 It is intended to work as a pure-HTML5 replacement to the JVM, and allow any type of unmodified Java client to run on the browser.
 
-Being compatible with 100% of the Java 8 language (including reflection and all dynamic features), as well as with the full Java 8 runtime, it can run any application including Swing clients, AWT clients, and any complex frameworks, including Oracle Forms.
+Boasting extensive compatibility with Java 8 (including reflection and all dynamic features), it has been tested on Oracle Forms, EBS, Swing, AWT and numerous frameworks and libraries.
 
 Thanks to Java-JavaScript bidirectional interoperability, CheerpJ can also be used to integrate Java libraries as part of web applications or to rewrite UIs to legacy Java clients.
 
