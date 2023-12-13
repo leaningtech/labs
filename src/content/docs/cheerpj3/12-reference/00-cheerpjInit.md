@@ -248,7 +248,7 @@ cheerpjInit({
 });
 ```
 
-Read more about implementing native methods [here](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript)
+Read more about implementing native methods [here](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript).
 
 ### `overrideDocumentBase`
 
