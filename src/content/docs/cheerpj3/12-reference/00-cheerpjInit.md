@@ -154,6 +154,22 @@ The first time an operation is requested, the user will be asked for permission 
 
 > This mode is experimental and might show a few inconsistencies in some browsers. [`See more`](https://caniuse.com/mdn-api_permissions_permission_clipboard-read).
 
+### `beepCallback`
+
+```ts
+beepCallback?: () => void;
+```
+
+This callback runs when `java.awt.Toolkit.getDefaultToolkit().beep()` is called in java.
+
+```js
+cheerpjInit({
+	beepCallback: function () {
+		// Do something
+	},
+});
+```
+
 ### `enableInputMethods`
 
 ```ts
@@ -210,6 +226,42 @@ cheerpjInit({
 		return value;
 	},
 });
+```
+
+### `natives`
+
+```ts
+natives?: { [method: string]: Function };
+```
+
+This option is used to implement native methods from an AOT-compiled language in JavaScript.
+
+Example usage:
+
+```js
+cheerpjInit({
+	natives: {
+		async Java_MyClass_myMethod(lib, str) {
+			window.alert(str);
+		},
+	},
+});
+```
+
+Read more about implementing native methods [here](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript)
+
+### `overrideDocumentBase`
+
+```ts
+overrideDocumentBase?: string;
+```
+
+Replaces the current `<base>` URL of the document with the URL passed as a `string`.
+
+Example usage:
+
+```js
+cheerpjInit({ overrideDocumentBase: "YourNewURLHere" });
 ```
 
 ### `javaProperties`
