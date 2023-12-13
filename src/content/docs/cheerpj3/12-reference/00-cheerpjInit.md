@@ -162,6 +162,8 @@ beepCallback?: () => void;
 
 This callback runs when `java.awt.Toolkit.getDefaultToolkit().beep()` is called in java.
 
+Example of usage:
+
 ```js
 cheerpjInit({
 	beepCallback: function () {
