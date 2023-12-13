@@ -25,7 +25,7 @@ This mount point is virtual and only exists inside of CheerpJ. It is required to
 
 The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, here is a simple example:
 
-Assuming that your web server is available at `http://127.0.0.1:8080/`, here are some file mapping examples :
+Assuming that your web server is available at `http://127.0.0.1:8080/`:
 
 - `/app/example.jar` → `http://127.0.0.1:8080/example.jar`
 
