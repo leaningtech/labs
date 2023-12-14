@@ -10,6 +10,12 @@ CheerpJ is a solution for running unmodified Java client applications into brows
 
 The CheerpJ runtime environment is a full Java SE runtime in JavaScript. Differently from other technologies which provide a partial re-implementation written manually in JavaScript, we opted to replace the entire OpenJDK Java SE runtime to JavaScript and WebAssembly. The CheerpJ runtime is constituted of both JavaScript files and .jar archives. All CheerpJ runtime components are dynamically downloaded on demand by the application to minimise total download size. The CheerpJ runtime library is hosted by us on a dedicated CDN-backed domain, and we invite users to link to it in order to take advantage of caching and cross-application resource sharing.
 
+## Which Java versions are supported?
+
+CheerpJ supports Java 8. We intend to add support for later LTS versions of Java in the future.
+
+The new architecture introduced in CheerpJ 3.0 is engineered to fix the gap with modern Java versions quite easily. We plan to support Java 11 (and possibly more) in a future CheerpJ 3.1 release.
+
 ## Can I self-host the CheerpJ runtime?
 
 Please [contact us](https://cheerpj.com/contact/) to discuss self-hosting CheerpJ and its runtime on your infrastructure.
