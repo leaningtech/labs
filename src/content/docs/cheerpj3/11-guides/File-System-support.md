@@ -1,27 +1,28 @@
 ---
-title: File System support
+title: Files and filesystems
+description: Virtual filesystems and how to use them
 ---
-
-## File Systems in CheerpJ
 
 CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
-| Mount     | Description                                                                                               |
-| --------- | --------------------------------------------------------------------------------------------------------- |
-| `/app/`   | An HTTP-based read-only filesystem used to access JARs and data from your local server                    |
-| `/files/` | An IndexedDB-based, persistent read-write file system                                                     |
-| `/str/`   | A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code |
+| Mount     | Description                                                        | Write     | Read |
+| --------- | ------------------------------------------------------------------ | --------- | ---- |
+| `/app/`   | An HTTP-based filesystem for loading files from the web server     | No        | Yes  |
+| `/files/` | A persistent read-write file system                                | Java only | Yes  |
+| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java | JS only   | Yes  |
 
 ![](/cheerpj2/assets/filesystem.png)
 
-> [!warning]Important
-> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden due to security constraints ruled by the browser.
+> [!info] Local files
+> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. Accessing local files directly is forbidden for browser security reasons.
 
 ## `/app/` mount point
 
 The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
 
-The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, let's assume that your web server is available at `http://127.0.0.1:8080/`:
+The `/app/` mount point refers to the root of your web server. When a file is read from `/app/`, CheerpJ will make an HTTP(S) request to fetch the file.
+
+To have a clearer concept of the `/app/` mount point, let's assume that HTML file with the CheerpJ application is served from the `http://127.0.0.1:8080/` origin:
 
 - `/app/example.jar` would be the same as `http://127.0.0.1:8080/example.jar`
 
@@ -33,12 +34,14 @@ Considering the examples above, to run a JAR with [`cheerpjRunJar`] and assuming
 cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
-> [!tip] Storing JAR files
-> The /app/ mount point is the most common location to store the application's JARs but this is not mandatory.
+> [!tip] JAR file locations
+> The /app/ mount point is the most common location to store the application's JARs but this is not mandatory. For example, you could write a JAR file into `/str/` with JS and then run that.
 
 ## `/files/` mount point
 
 The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem and it is used to store persistent data in the browser client.
+
+Use this for storing data that should persist between sessions, such as user preferences.
 
 Writing files into the `/files/` mount point is only possible from inside the Java application. For example:
 
@@ -48,22 +51,24 @@ OutputStream out = new FileOutputStream(file);
 out.close();
 ```
 
-> [!warning] About data persistency
+> [!tip] About data persistency
 > The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
 
 For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
 
 ## `/str/` mount point
 
-The `/str/` mount point is a simple read-only filesystem that can be populated from JavaScript to share data with Java code.
+The `/str/` mount point is a simple filesystem that can be populated from JavaScript to share data with Java code. This filesystem is read-only from Java.
 
-From JavaScript, it is possible to add files into the filesystem using the `cheerpOSAddStringFile` API. Example:
+### Writing files with JavaScript
+
+From JavaScript, it is possible to add files into the filesystem using the [`cheerpOSAddStringFile`] API. Example:
 
 ```js
 cheerpOSAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```
 
-You can also access this data from Java, for example:
+Then, you can access this data from Java, for example:
 
 ```java
 
@@ -89,3 +94,4 @@ console.log(text);
 
 [`cjFileBlob`]: /cheerpj3/reference/cjFileBlob
 [`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
+[`cheerpOSAddStringFile`]: /cheerpj3/reference/cheerpOSAddStringFile
