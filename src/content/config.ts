@@ -11,6 +11,7 @@ const blogauthors = defineCollection({
 			jobTitle: z.string().optional(),
 			avatar: image().optional(),
 			url: z.string().optional(),
+			guest: z.boolean().default(false),
 		}),
 	type: "data",
 });

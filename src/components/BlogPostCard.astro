@@ -64,6 +64,11 @@ const authors = await resolveAuthors(post.data.authors);
 					<span class="overflow-hidden text-ellipsis">
 						{authors.map((author) => author.name).join(", ")}
 					</span>
+					{authors.some((a) => a.guest) && (
+						<span class="py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+							Guest
+						</span>
+					)}
 				</div>
 				<FormattedDate date={post.data.pubDate} />
 			</div>
