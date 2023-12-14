@@ -2,11 +2,9 @@
 title: File System support
 ---
 
-CheerpJ provides filesystem support to accommodate different Java application needs. On this page you will find valuable information on how to manage your application data and work with the different filesystem features that CheerpJ provides.
-
 ## File Systems in CheerpJ
 
-CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. These mount points are virtual and only exists inside of CheerpJ. Brief explanations are found in the table below.
+CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
 | Mount     | Description                                                                                               |
 | --------- | --------------------------------------------------------------------------------------------------------- |
@@ -21,7 +19,7 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 
 ## `/app/` mount point
 
-The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server. It is required to distinguish between local server, runtime files and files stored in the browser database.
+The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
 
 The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, let's assume that your web server is available at `http://127.0.0.1:8080/`:
 
