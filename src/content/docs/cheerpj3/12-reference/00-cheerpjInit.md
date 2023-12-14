@@ -160,14 +160,14 @@ The first time an operation is requested, the user will be asked for permission 
 beepCallback?: () => void;
 ```
 
-This callback runs when `java.awt.Toolkit.getDefaultToolkit().beep()` is called in java.
+This callback runs when `java.awt.Toolkit.getDefaultToolkit().beep()` is called in Java. It corresponds to the system's _beep_ sound.
 
 Example of usage:
 
 ```js
 cheerpjInit({
 	beepCallback: function () {
-		// Do something
+		alert("Beep!");
 	},
 });
 ```
