@@ -37,6 +37,9 @@ Considering the examples above, to run a JAR with [`cheerpjRunJar`] and assuming
 cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
+> [!tip] Storing JAR files
+> The /app/ mount point is the most common location to store the application's JARs but this is not necessarily mandatory.
+
 ## `/files/` mount point
 
 The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem and it is used to store persistent data in the browser client.
