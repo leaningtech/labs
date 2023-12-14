@@ -17,12 +17,14 @@ Dragon Court was a free, old-school fantasy multiplayer browser RPG that came in
 
 ## Why revive it?
 
-The game was no longer playable, both because Java Applet support was removed from browsers, and that the original creator was no longer interested in maintaining Dragon Court due to various reasons. Sadly it became abandonware.
-
-While there have been other efforts to bring back Dragon Court in some form, they were either based on an older version of the client source, missing the server source, or were remakes based on fan memories. [CheerpJ](/cheerpj3) was the perfect solution to bring back the original game binary, and to continue development of the game.
-
 I grew up playing online browser games like Dragon Court because my parents would send me to the public library on weekends hoping I would immerse myself with books. I would instead use the library computers to find and play online games. I also brought this habit to my school computers during weekdays and
 Dragon Court was one of the few games that were not blocked at school. Dragon Court, I would say, had one of the earliest "energy" systems that we see in Facebook/mobile free to play games. That game loop was serious about getting me in a daily habit of signing in and I was hooked!
+
+The original Dragon Court is no longer playable, both because Java Applet support was removed from browsers, and that the original creator was no longer interested in maintaining it. Sadly, it became abandonware.
+
+While there have been other efforts to bring back Dragon Court in some form, they were either based on an older version of the client source, missing the server source, or were remakes based on fan memories.
+
+[CheerpJ](/cheerpj3) was the perfect solution to make Dragon Court run in the browser again, and to continue development of the game. CheerpJ is a Java Virtual Machine that runs in the browser, and is able to run applets from a .jar binary file.
 
 ## Early steps
 
@@ -32,11 +34,11 @@ Out of the box, CheerpJ support was easily able to handle network requests for i
 
 From here, I began picking up on the failed network requests from the game binary and implementing server handling of the requests. The initial version was pretty straightforward in terms of utilizing CheerpJ and having the mostly original binary talking to the server.
 
-In addition to the essential loading and saving for player data with the server database, the in-game mail and clan management functions, are now also replicated and functioning on the Dragon Court: Revived server.
+In addition to the essential loading and saving for player data with the server database, the in-game mail and clan management functions are now also replicated and functioning on the Dragon Court: Revived server.
 
 ## Updating the client
 
-An intense segment of the project was unobfuscating the original .jar binary so bug fixes and new features could be added. It was a long and arduous process that is still ongoing, but development of new features and bug fixes has gradually become accelerated. The project originally started primarily of server development efforts, but has since shifted towards client development thanks to the untangling of the original binary that is now recompilable.
+A large segment of the project was deobfuscating the original .jar binary so bug fixes and new features could be added. It was a long and arduous process that is still ongoing, but development of new features and bug fixes has gradually become accelerated. The project originally started primarily of server development efforts, but has since shifted towards client development thanks to the untangling of the original binary that is now recompilable.
 
 Development from hereon was able to continue like a regular client project, and CheerpJ made the new client build pipeline possible, and without hindrance.
 
@@ -63,4 +65,4 @@ Dragon Court: Revived is undergoing development for it's next major content rele
 
 Interested in using CheerpJ in your own project? [Get started here.](/cheerpj3)
 
-Thanks for reading the first in a series of guest posts from our developer community! If you're interested in writing a guest post, please get in touch on our Discord server.
+Thanks for reading the first in a series of guest posts from our [developer community](/cheerpj3/community)! If you're interested in writing a guest post, please get in touch on our Discord server.
