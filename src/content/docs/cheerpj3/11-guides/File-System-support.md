@@ -1,65 +1,97 @@
 ---
-title: File System support
+title: Files and filesystems
+description: Virtual filesystems and how to use them
 ---
 
-CheerpJ provides full filesystem support for Java applications running with CheerpJ.
+CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
-Read only and read/write filesystems are exposed in Java and can be used to read, write and manipulate files as normally when running on a JVM.
+| Mount     | Description                                                        | Write     | Read |
+| --------- | ------------------------------------------------------------------ | --------- | ---- |
+| `/app/`   | An HTTP-based filesystem for loading files from the web server     | No        | Yes  |
+| `/files/` | A persistent read-write file system                                | Java only | Yes  |
+| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java | JS only   | Yes  |
 
-**Note**: CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden for security reasons.
+![](/cheerpj2/assets/filesystem.png)
 
-## File Systems in CheerpJ
-
-CheerpJ implements three main filesystem concepts:
-
-1. A read-only, HTTP-based filesystem
-2. A read/write, IndexedDB-based, persistent filesystem
-3. A read-only, memory based filesystem
-
-CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. The default mount points are defined as follows:
-
-| Mount     | Description                                                                                               |
-| --------- | --------------------------------------------------------------------------------------------------------- |
-| `/app/`   | An HTTP-based read-only filesystem, used to access JARs and data from your local server                   |
-| `/files/` | An IndexedDB-based, persistent read-write file system                                                     |
-| `/lt/`    | Another HTTP-based read-only filesystem, pointing to the CheerpJ runtime                                  |
-| `/str/`   | A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code |
+> [!info] Local files
+> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. Accessing local files directly is forbidden for browser security reasons.
 
 ## `/app/` mount point
 
-The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` is used to access JAR files and data from your local server.
+The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
 
-The `/app/` directory is virtual, and only exists inside of CheerpJ. It is required to distinguish files from the local server from runtime files and files stored in the browser database.
+The `/app/` mount point refers to the root of your web server. When a file is read from `/app/`, CheerpJ will make an HTTP(S) request to fetch the file.
 
-The `/app/` directory refers to the root of your web server. So, assuming that your web server is available at `http://127.0.0.1:8080/`, here are some example file mappings:
+To have a clearer concept of the `/app/` mount point, let's assume that HTML file with the CheerpJ application is served from the `http://127.0.0.1:8080/` origin:
 
-- `/app/example.jar` → `http://127.0.0.1:8080/example.jar`
-- `/app/subdirectory/example.txt` → `http://127.0.0.1:8080/subdirectory/example.txt`
+- `/app/example.jar` would be the same as `http://127.0.0.1:8080/example.jar`
+
+- `/app/subdirectory/example.txt` would be the same as `http://127.0.0.1:8080/subdirectory/example.txt`
+
+Considering the examples above, to run a JAR with [`cheerpjRunJar`] and assuming it is stored in the root of the web server, it should be done as follows:
+
+```js
+cheerpjRunJar("/app/my_application_archive.jar");
+```
+
+> [!tip] JAR file locations
+> The /app/ mount point is the most common location to store the application's JARs but this is not mandatory. For example, you could write a JAR file into `/str/` with JS and then run that.
 
 ## `/files/` mount point
 
-The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem. `/files/` is used to store persistent data on the browser client.
+The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem and it is used to store persistent data in the browser client.
 
-The `/files/` directory is a virtual concept used by CheerpJ to store and refer to files.
+Use this for storing data that should persist between sessions, such as user preferences.
+
+Writing files into the `/files/` mount point is only possible from inside the Java application. For example:
+
+```java
+File file = new File("/files/myfile.ext");
+OutputStream out = new FileOutputStream(file);
+out.close();
+```
+
+> [!tip] About data persistency
+> The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
+
+For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
 
 ## `/str/` mount point
 
-The `/str/` mount point is a simple read-only filesystem that can be populated from JavaScript to share data with Java code.
+The `/str/` mount point is a simple filesystem that can be populated from JavaScript to share data with Java code. This filesystem is read-only from Java.
 
-From JavaScript you can add files into the filesystem using the `cheerpOSAddStringFile` API. Example:
+### Writing files with JavaScript
+
+From JavaScript, it is possible to add files into the filesystem using the [`cheerpOSAddStringFile`] API. Example:
 
 ```js
 cheerpOSAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```
 
-You can access this data from Java, for example:
+Then, you can access this data from Java, for example:
 
 ```java
-import java.io.FileReader;
-...
 
+import java.io.FileReader;
+
+...
 FileReader f = new FileReader("/str/fileName.txt")
 ...
+
 ```
 
-The `cheerpOSAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application, for example a user selected file coming from an HTML5 `<input type="file">` tag.
+The `cheerpOSAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application. For example, a selected file coming from an HTML5 `<input type="file">` tag.
+
+## Reading files with JavaScript
+
+To read files from any of the mount-points using JavaScript, you must use the [`cjFileBlob`] API as follows:
+
+```js
+const blob = await cjFileBlob("/files/myfile.ext");
+const text = await blob.text();
+console.log(text);
+```
+
+[`cjFileBlob`]: /cheerpj3/reference/cjFileBlob
+[`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
+[`cheerpOSAddStringFile`]: /cheerpj3/reference/cheerpOSAddStringFile

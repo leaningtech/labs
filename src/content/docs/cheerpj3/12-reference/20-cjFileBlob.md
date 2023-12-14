@@ -3,7 +3,7 @@ title: cjFileBlob
 description: Read a file from the virtual filesystem
 ---
 
-Used to read files from the `/files/` virtual filesystem.
+Used to read files from the CheerpJ virtual filesystem.
 
 ```ts
 async function cjFileBlob(path: string): Promise<Blob>;
@@ -11,7 +11,7 @@ async function cjFileBlob(path: string): Promise<Blob>;
 
 ## Parameters
 
-- **path (`string`)** - The path to the file to be read. Must begin with `/files/`.
+- **path (`string`)** - The path to the file to be read. Must begin with `/files/`, `/app/` or `/str/`.
 
 ## Returns
 
