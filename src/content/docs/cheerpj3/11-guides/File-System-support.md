@@ -6,7 +6,7 @@ CheerpJ provides filesystem support to accommodate different Java application ne
 
 ## File Systems in CheerpJ
 
-CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. Brief explanations are found in the table below.
+CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. These mount points are virtual and only exists inside of CheerpJ. Brief explanations are found in the table below.
 
 | Mount     | Description                                                                                               |
 | --------- | --------------------------------------------------------------------------------------------------------- |
@@ -17,13 +17,11 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 ![](/cheerpj2/assets/filesystem.png)
 
 > [!warning]Important
-> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden due to security reasons.
+> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden due to security constraints ruled by the browser.
 
 ## `/app/` mount point
 
-The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` is used to access JAR files and data from your local server.
-
-This mount point is virtual and only exists inside of CheerpJ. It is required to distinguish between local server, runtime files and files stored in the browser database.
+The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server. It is required to distinguish between local server, runtime files and files stored in the browser database.
 
 The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, let's assume that your web server is available at `http://127.0.0.1:8080/`:
 
@@ -38,26 +36,18 @@ cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
 > [!tip] Storing JAR files
-> The /app/ mount point is the most common location to store the application's JARs but this is not necessarily mandatory.
+> The /app/ mount point is the most common location to store the application's JARs but this is not mandatory.
 
 ## `/files/` mount point
 
 The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem and it is used to store persistent data in the browser client.
 
-Writing files into the `/files/` mount point is only possible from inside the Java application and specifying the root of the file path explicitly. For example:
+Writing files into the `/files/` mount point is only possible from inside the Java application. For example:
 
 ```java
 File file = new File("/files/myfile.ext");
 OutputStream out = new FileOutputStream(file);
 out.close();
-```
-
-To read files from the `/files/` mount-point using JavaScript is done with the [`cjFileBlob`] API as follows:
-
-```js
-const blob = await cjFileBlob("/files/myfile.ext");
-const text = await blob.text();
-console.log(text);
 ```
 
 > [!warning] About data persistency
@@ -82,16 +72,22 @@ You can also access this data from Java, for example:
 import java.io.FileReader;
 
 ...
-
-
-
 FileReader f = new FileReader("/str/fileName.txt")
-
 ...
 
 ```
 
 The `cheerpOSAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application. For example, a selected file coming from an HTML5 `<input type="file">` tag.
+
+## Reading files with JavaScript
+
+To read files from any of the mount-points using JavaScript, you must use the [`cjFileBlob`] API as follows:
+
+```js
+const blob = await cjFileBlob("/files/myfile.ext");
+const text = await blob.text();
+console.log(text);
+```
 
 [`cjFileBlob`]: /cheerpj3/reference/cjFileBlob
 [`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
