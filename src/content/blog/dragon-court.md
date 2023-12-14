@@ -6,14 +6,20 @@ description: |
 authors:
   - guest-penguinchilling
 pubDate: 2023-12-14
-heroImage: "./dragon-court.webp"
+heroImage: "./dragon-court.png"
 tags:
   - CheerpJ
+---
+
+This is the first guest post from the [CheerpJ developer community](/cheerpj3/community). Clarky Lee talks about how he used [CheerpJ](/cheerpj3) to bring back a 90s RPG, Dragon Court.
+
 ---
 
 Dragon Court was a free, old-school fantasy multiplayer browser RPG that came in a Java Applet format. It featured a large number of limited hero actions that would be refreshed daily, leading to a daily login habit from engaged players. It was created by Fred Haslam, and is believed to have been originally released around 1997.
 
 [Dragon Court: Revived](https://dragoncourt.penguinchilling.com/) is a project to bring back the nostalgic game for fans, and to continue development of the game in terms of end-game content, balancing, bug fixes, and modern quality of life changes. It will continue to be forever free to play, without micro-transactions.
+
+![](./dragon-court-classes.png)
 
 ## Why revive it?
 
@@ -63,6 +69,6 @@ Dragon Court: Revived is undergoing development for it's next major content rele
 
 ---
 
-Interested in using CheerpJ in your own project? [Get started here.](/cheerpj3)
+CheerpJ is a WebAssembly-based Java Virtual Machine for the browser. It runs Java applications, applets, libraries, and Java Web Start / JNLP applications in the browser without plugins. **Interested in using CheerpJ in your own project?** [Get started here.](/cheerpj3)
 
 Thanks for reading the first in a series of guest posts from our [developer community](/cheerpj3/community)! If you're interested in writing a guest post, please get in touch on our Discord server.
