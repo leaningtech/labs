@@ -14,6 +14,8 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 | `/files/` | An IndexedDB-based, persistent read-write file system                                                     |
 | `/str/`   | A read-only filesystem to easily share JavaScript Strings or binary data (an `Uint8Array`) with Java code |
 
+![](/cheerpj2/assets/filesystem.png)
+
 > [!warning]Important
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local computer. Accessing local files from the browser is forbidden due to security reasons.
 
@@ -23,13 +25,11 @@ The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem.
 
 This mount point is virtual and only exists inside of CheerpJ. It is required to distinguish between local server, runtime files and files stored in the browser database.
 
-The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, here is a simple example:
+The `/app/` mount point refers to the root of your web server. To have a clearer concept of the `/app/` mount point, let's assume that your web server is available at `http://127.0.0.1:8080/`:
 
-Assuming that your web server is available at `http://127.0.0.1:8080/`:
+- `/app/example.jar` would be the same as `http://127.0.0.1:8080/example.jar`
 
-- `/app/example.jar` → `http://127.0.0.1:8080/example.jar`
-
-- `/app/subdirectory/example.txt` → `http://127.0.0.1:8080/subdirectory/example.txt`
+- `/app/subdirectory/example.txt` would be the same as `http://127.0.0.1:8080/subdirectory/example.txt`
 
 Considering the examples above, to run a JAR with [`cheerpjRunJar`] and assuming it is stored in the root of the web server, it should be done as follows:
 
@@ -58,7 +58,9 @@ console.log(text);
 ```
 
 > [!warning] About data persistency
-> The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" would get rid of the files in this mount-point as well.
+> The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
+
+For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
 
 ## `/str/` mount point
 
