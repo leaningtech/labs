@@ -46,6 +46,8 @@ Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
+During development, you don't need to set these headers if you're using `localhost` as the origin. However, you'll need to set them and make sure you serve over HTTPS when you deploy.
+
 <!-- TODO: link to a guide on how to set headers in various environments -->
 
 ## 4. Attach a console
