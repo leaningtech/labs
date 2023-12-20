@@ -5,7 +5,7 @@ description: |
 authors:
   - elisabeth
 pubDate: "June 28 2023"
-heroImage: "https://leaningtech.com/wp-content/uploads/2023/07/preview.jpg.webp"
+heroImage: "./profiling.png"
 tags:
   - CheerpX
 ---

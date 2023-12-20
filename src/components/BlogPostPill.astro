@@ -11,7 +11,7 @@ const { post } = Astro.props;
 
 <a
 	href={`/blog/${post.slug}`}
-	class="rounded-full bg-primary-600 bg-opacity-10 text-primary-600 px-3 py-1 flex items-center gap-1 max-w-full overflow-hidden whitespace-nowrap"
+	class="not-prose rounded-full bg-primary-600 bg-opacity-10 text-primary-600 px-3 py-1 flex items-center gap-1 max-w-full overflow-hidden whitespace-nowrap"
 >
 	<div class="overflow-hidden overflow-ellipsis grow">
 		{post.data.shortTitle ?? post.data.title}

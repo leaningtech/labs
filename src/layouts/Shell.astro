@@ -12,7 +12,7 @@ interface Props {
 const { title, description, image } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark">
 	<head>
 		<BaseHead
@@ -27,6 +27,18 @@ const { title, description, image } = Astro.props;
 
 			::selection {
 				background-color: rgba(230, 39, 85, 0.5);
+			}
+
+			.heading-link-icon {
+				opacity: 0;
+			}
+
+			h1:hover .heading-link-icon,
+			h2:hover .heading-link-icon,
+			h3:hover .heading-link-icon,
+			h4:hover .heading-link-icon,
+			h5:hover .heading-link-icon {
+				opacity: 1;
 			}
 		</style>
 	</head>

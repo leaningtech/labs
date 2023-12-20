@@ -1,0 +1,59 @@
+---
+import { type ProductData, getProductNav } from "@/lib/products";
+import { Image } from "astro:assets";
+import Search from "./Search.astro";
+import { DISCORD_URL } from "@/consts";
+import Icon from "astro-icon";
+import ProductVersionSwitcher from "./ProductVersionSwitcher.astro";
+
+interface Props {
+	product: ProductData;
+}
+
+const { product } = Astro.props;
+
+const nav = await getProductNav(product.id);
+const getStartedHref =
+	product.id === "cheerpx"
+		? undefined
+		: nav.entries.filter((entry) => entry.type === "directory")[0]?.href;
+---
+
+<nav
+	aria-label="Product navigation"
+	class="sm:sticky top-0 z-40 bg-stone-900 bg-opacity-90 backdrop-blur-lg text-white text-sm font-semibold leading-6 border-b border-stone-600 border-opacity-20"
+>
+	<div
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden"
+	>
+		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
+			<a href={product.href} class="flex items-center">
+				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+			</a>
+			{product.id.startsWith("cheerpj") && <ProductVersionSwitcher {product} />}
+		</div>
+
+		<div class="grow lg:hidden"></div>
+
+		<Search />
+
+		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
+			<a href={DISCORD_URL} class="flex items-center gap-1.5 hover:text-white">
+				<Icon name="fa-brands:discord" class="w-5 h-5" />
+				<span class="sr-only md:not-sr-only">Community</span>
+			</a>
+
+			{
+				getStartedHref && (
+					<a
+						href={getStartedHref}
+						class="flex items-center gap-1 pl-4 pr-3 py-1 rounded-full bg-primary-600 bg-opacity-20 border border-primary-400 border-opacity-50 hover:border-opacity-100 text-primary-400"
+					>
+						Get started
+						<Icon name="jam:chevron-right" class="w-4 h-4" />
+					</a>
+				)
+			}
+		</div>
+	</div>
+</nav>

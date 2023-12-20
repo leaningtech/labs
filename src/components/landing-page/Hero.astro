@@ -1,13 +1,15 @@
 ---
-//import { Icon } from "astro-icon";
 import LinkButton from "../LinkButton.astro";
 import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "../../consts";
 import ClientCarousel from "./ClientCarousel.svelte";
+import Icon from "astro-icon";
 ---
 
-<header class="min-h-[calc(100vh-65px)] flex flex-col items-center">
+<header
+	class="min-h-[calc(100vh-48px)] flex flex-col items-center bg-gradient-to-b to-[#e6275544] from-stone-950"
+>
 	<div class="grow"></div>
 
 	<div
@@ -27,18 +29,18 @@ import ClientCarousel from "./ClientCarousel.svelte";
 				<p class="text-xl mt-8 text-stone-400 leading-6">
 					Client-side developer tools built with WebAssembly.
 				</p>
-				<div class="mt-8 md:space-x-1 space-y-2">
+				<div class="mt-8 flex flex-wrap gap-4">
 					<LinkButton
-						href="/docs"
-						label="Get started"
+						href="#ecosystem"
+						label="Explore technologies"
 						type="primary"
 						iconRight="mdi:arrow-right"
 					/>
 					<LinkButton
 						href={DISCORD_URL}
-						label="Find out more"
-						type="secondary"
-						iconRight="mdi:arrow-right"
+						label="Join the Discord server"
+						type="discord"
+						iconLeft="fa-brands:discord"
 					/>
 				</div>
 			</div>
@@ -55,12 +57,12 @@ import ClientCarousel from "./ClientCarousel.svelte";
 	<div class="grow"></div>
 
 	<!-- Scroll prompt -->
-	<!--<a
-		href="#after-hero"
+	<a
+		href="#ecosystem"
 		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
 	>
 		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
-	</a>-->
+	</a>
 </header>
 
 <a id="after-hero"></a>

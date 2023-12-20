@@ -4,6 +4,8 @@ CheerpJ
 CheerpX
 WebVM
 CheerpJ Applet Runner
+cjCall
+cjNew
 
 Astro
 Yarn
@@ -13,3 +15,45 @@ Wasm
 Web Worker
 Web Workers
 APIs
+CMake
+toolchain
+gzip
+iText
+ProGuard
+profiler
+preload
+preloader
+preloading
+preloaded
+params
+classpath
+devtools
+PDFs
+transpiler
+async
+interoperate
+minimalistic
+codegen
+filesystem
+namespace
+untyped
+virtualized
+methodName
+resolvedMethod
+preloadResources
+arg 
+className
+resolvedFunc
+funcName
+JSString
+jsCall
+runMain
+classPath
+resolveCall
+nops
+Tailscale
+Headscale
+
+
+
+

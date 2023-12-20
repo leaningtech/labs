@@ -29,7 +29,7 @@ function buildToc(headings: BasicHeading[]) {
 			toc.push(heading);
 		} else if (
 			parentHeadings.get(heading.depth - 1) != undefined &&
-			heading.depth < 4
+			heading.depth < 5
 		) {
 			parentHeadings.get(heading.depth - 1).subheadings.push(heading);
 		}
@@ -38,8 +38,7 @@ function buildToc(headings: BasicHeading[]) {
 }
 ---
 
-<nav>
-	<h5 class="font-semibold mb-1 leading-7 text-stone-300">On this page</h5>
+<nav aria-label="On this page">
 	<ol>
 		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
 	</ol>

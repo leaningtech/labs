@@ -7,7 +7,7 @@
 3. Clone this repository
 4. Install dependencies: `pnpm install`
 5. Spawn development server: `pnpm start`
-6. Visit [localhost:3000](http://localhost:3000)
+6. Visit [localhost:4321](http://localhost:4321)
 
 ## Linting
 

@@ -21,6 +21,16 @@ const exportColorsAsCssVariables = plugin(({ addBase, theme }) => {
 });
 
 /** @type {import('tailwindcss').Config} */
+const disabledCss = {
+	pre: false,
+	code: false,
+	"pre code": false,
+	"code::before": false,
+	"code::after": false,
+	"blockquote p:first-of-type::before": false,
+	"blockquote p:last-of-type::after": false,
+};
+
 module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
@@ -45,6 +55,11 @@ module.exports = {
 						"--tw-prose-invert-links": theme("colors.primary[400]"),
 					},
 				},
+				DEFAULT: { css: disabledCss },
+				sm: { css: disabledCss },
+				lg: { css: disabledCss },
+				xl: { css: disabledCss },
+				"2xl": { css: disabledCss },
 			}),
 		},
 	},

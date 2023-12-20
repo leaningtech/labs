@@ -85,14 +85,14 @@ There are some Cheerp specific limitations at this time:
 
 A working example/tutorial is here: [example of _ asmjs _ and namespace client on Github](https://gist.github.com/carlopi/c36e9b8f0eaf72c569491fadac331707)
 
-Code inside `__asm__` tag should never throw to the external scope.
+Code inside `__asm__` tag should never throw to the external scope, and should consist of a single JS expression or statement without the final `;`.
 
 ## Clobbering names
 
 Cheerp minifies the output by default (unless the `-cheerp-pretty-code` option is used). This happens by assigning the smallest possible symbols to the most used local or global variables. If you need to use temporary variables in inline asm code you need to declare those variables in the clobber list, for example
 
 ```
-__asm__("var jsTemp1=%0; var jsTemp2=jsTemp+1; console.log(jsTemp2);" : /*No output*/ : "r"(42) : /*Clobber list*/ "jsTemp1","jsTemp2"); // This will print out "43"
+__asm__("(function(){var jsTemp1=%0; var jsTemp2=jsTemp+1; console.log(jsTemp2);})()" : /*No output*/ : "r"(42) : /*Clobber list*/ "jsTemp1","jsTemp2"); // This will print out "43"
 ```
 
 All names declared as clobbered will be globally excluded from the list of symbol that are used for minification. The effect is the same as marking those names as reserved using the `-cheerp-reserved-names` command line option. For best results we recommend to choose temporary names while keeping the following into account:
@@ -167,7 +167,7 @@ Example usage:
 {
     return CHEERP_SAFE_INLINE(double, (const char* s), {
         client::console.log(s);
-        return client::Date::now();
+        return client::pubDate::now();
     }, str);
 }
 ```

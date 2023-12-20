@@ -25,17 +25,17 @@ function sortCalc(post: CollectionEntry<"blog">): number {
 
 const posts = (
 	await getCollection("blog", (post) => {
-		if (exclude?.includes(post.id)) {
+		if (post.data.draft || exclude?.includes(post.id)) {
 			return false;
 		}
 		return true;
 	})
 )
 	.sort((a, b) => sortCalc(b) - sortCalc(a))
-	.slice(0, 2);
+	.slice(0, 3);
 ---
 
-<ul class="grid md:grid-cols-2 gap-8">
+<ul class="grid md:grid-cols-3 gap-8">
 	{
 		posts.map((post) => (
 			<li class="flex justify-stretch items-stretch">

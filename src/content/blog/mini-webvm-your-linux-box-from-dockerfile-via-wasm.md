@@ -5,7 +5,7 @@ description: |
 authors:
   - alessandro
 pubDate: "May 22 2023"
-heroImage: "https://leaningtech.com/wp-content/uploads/2023/05/social.png.webp"
+heroImage: "./webvm-post.png"
 tags:
   - CheerpX
 featured: true
