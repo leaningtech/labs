@@ -3,17 +3,17 @@ title: Quickstart
 subtitle: Getting started with CheerpX
 ---
 
-This guide is a bare-minimum overview of how to start building with CheerpX.
-
 ## 1. Include the CheerpX library on your page
 
 ```html
-<script src="https://cheerpxdemos.leaningtech.com/publicdeploy/cx.js"></script>
+<script src="%CHEERPX_LATEST%"></script>
 ```
+
+CheerpX's API is still in the works, so we are not tagging releases yet. All nightly builds are immutable so you can trust that the URL above will not break.
 
 ## 2. Create a CheerpX instance
 
-CheerpX's API lives in a global object called `CheerpXApp`. To create a CheerpX instance, call its `create` method.
+CheerpX is exposed in a global object called `CheerpXApp`. To create a CheerpX instance, call its `create` method.
 
 The example below uses [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/cheerpx/guides/custom-devices).
 
@@ -48,7 +48,7 @@ Cross-Origin-Opener-Policy: same-origin
 
 During development, you don't need to set these headers if you're using `localhost` as the origin. However, you'll need to set them and make sure you serve over HTTPS when you deploy.
 
-<!-- TODO: link to a guide on how to set headers in various environments -->
+{/_ TODO: link to a guide on how to set headers in various environments _/}
 
 ## 4. Attach a console
 
