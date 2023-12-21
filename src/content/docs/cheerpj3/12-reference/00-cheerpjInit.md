@@ -24,12 +24,6 @@ async function cheerpjInit(options?: {
 	tailscaleDnsUrl?: string;
 	tailscaleAuthKey?: string;
 	tailscaleLoginUrlCb?: (url: string) => void;
-	fetch?: (
-		url: string,
-		method: string,
-		postData: ArrayBuffer,
-		headers: unknown[],
-	) => Promise<unknown>;
 }): Promise<void>;
 ```
 
@@ -341,19 +335,6 @@ cheerpjInit({
 	},
 });
 ```
-
-### `fetch`
-
-```ts
-fetch?: (
-    url: string,
-    method: string,
-    postData: ArrayBuffer,
-    headers: unknown[],
-  ) => Promise<unknown>;
-```
-
-This option is used to make a `fetch` request over the network.
 
 [cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
