@@ -3,7 +3,7 @@ title: Quickstart
 description: Getting started with CheerpX
 ---
 
-## 1. Include the CheerpX library on your page
+## 1. Include CheerpX on your page
 
 ```html
 <script src="%CHEERPX_LATEST%"></script>
@@ -11,7 +11,7 @@ description: Getting started with CheerpX
 
 CheerpX's API is still in the works, so we are not tagging releases yet. All nightly builds are immutable so you can trust that the URL above will not break.
 
-## 2. Create a CheerpX application instance
+## 2. Create an application instance
 
 CheerpX is exposed in a global object called `CheerpXApp`. To create an instance, call the [`create`](/cheerpx/reference/CheerpXApp-create) method.
 
@@ -53,14 +53,34 @@ During development, you don't need to set these headers if you're using `localho
 
 ## 4. Attach a console
 
-### As an HTML element
+Use the [`setConsole`](/cheerpx/reference/CheerpXApp-setConsole) method to use an HTML element as a console.
 
-Use the `setConsole` method to use an HTML element as a console.
-
-```html
+```html {1,4}
 <pre id="console"></pre>
 <script type="module">
 	const cx = await CheerpXApp.create(/* ... */);
 	cx.setConsole(document.getElementById("console"));
 </script>
 ```
+
+## 5. Run an executable
+
+Let's [`run`](/cheerpx/reference/CheerpXApp-run) bash!
+
+```js
+await cx.run("/bin/bash", ["--login"], {
+	env: [
+		"HOME=/home/user",
+		"USER=user",
+		"SHELL=/bin/bash",
+		"EDITOR=vim",
+		"LANG=en_US.UTF-8",
+		"LC_ALL=C",
+	],
+	cwd: "/home/user",
+	uid: 1000,
+	gid: 1000,
+});
+```
+
+Now you can interact with the console to run commands. 🎉
