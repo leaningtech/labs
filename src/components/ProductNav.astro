@@ -13,10 +13,9 @@ interface Props {
 const { product } = Astro.props;
 
 const nav = await getProductNav(product.id);
-const getStartedHref =
-	product.id === "cheerpx"
-		? undefined
-		: nav.entries.filter((entry) => entry.type === "directory")[0]?.href;
+const getStartedHref = nav.entries.filter(
+	(entry) => entry.type === "directory",
+)[0]?.href;
 ---
 
 <nav
