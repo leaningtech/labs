@@ -1,6 +1,6 @@
 ---
 title: Custom devices
-subtitle: How to create custom CheerpX devices from Docker containers
+description: How to create custom CheerpX devices from Docker containers
 ---
 
 This guide will show you how to configure a Docker container and build it into an `ext2` image for use with CheerpX.
@@ -54,17 +54,17 @@ For example, if you're using Vite, put the `ext2` file in the `public` directory
 
 ## 6. Add the image as a CheerpX device
 
-Add the image to the `devices` array in the `CheerpXApp.create` options object.
+Add the image to the `devices` array in the [`CheerpXApp.create`] options object.
 
 For example, if the image was available at `/image.ext2`, you would add the following to your HTML:
 
-```js
+```js {3-7}
 const cx = await CheerpXApp.create({
 	devices: [
 		{
+			name: "block1",
 			type: "bytes",
 			url: "/image.ext2",
-			name: "block1",
 		},
 	],
 	mounts: [{ type: "ext2", dev: "block1", path: "/" }],
@@ -72,3 +72,5 @@ const cx = await CheerpXApp.create({
 ```
 
 Make sure to use `type: "bytes"` when hosting your own images.
+
+[`CheerpXApp.create`]: /cheerpx/reference/CheerpXApp-create
