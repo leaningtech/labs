@@ -41,17 +41,49 @@ const { title, description, image } = Astro.props;
 				opacity: 1;
 			}
 
+			@font-face {
+				font-family: "Monaspace Argon";
+				src:
+					url("/fonts/monaspace/MonaspaceArgonVarVF[wght,wdth,slnt].otf")
+						format("woff2"),
+					url("/fonts/monaspace/MonaspaceArgonVarVF[wght,wdth,slnt].woff2")
+						format("woff2-variations");
+			}
+
+			code {
+				/* Leaning Technologies ;) */
+				font-variation-settings: "slnt" -9 !important;
+
+				/* Enable texture healing and ligatures */
+				font-feature-settings:
+					"calt" var(--texture-healing, 1),
+					"dlig" var(--ligatures, 1),
+					"ss01" var(--ligatures, 1),
+					"ss02" var(--ligatures, 1),
+					"ss03" var(--ligatures, 1),
+					"ss04" var(--ligatures, 1),
+					"ss05" var(--ligatures, 1),
+					"ss06" var(--ligatures, 1),
+					"ss07" var(--ligatures, 1),
+					"ss08" var(--ligatures, 1) !important;
+			}
+
 			/* inline code */
 			.prose
 				:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
 				@apply bg-stone-800;
 
 				padding: 0.2em 0.4em;
-				font-size: 85%;
+				font-size: 90%;
 
 				border-radius: 6px;
 
 				white-space: break-spaces;
+
+				/* No italics because we're already slanted */
+				& span {
+					font-style: normal !important;
+				}
 			}
 		</style>
 	</head>
