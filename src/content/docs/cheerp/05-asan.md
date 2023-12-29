@@ -1,5 +1,6 @@
 ---
 title: Address Sanitizer (ASan)
+description: -fsanitize=address support
 ---
 
 [Address Sanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer) is a memory error detector capable of finding common programming errors such as:
@@ -116,15 +117,15 @@ explicitly call `exit(3)` or something similar which calls the onexit hooks for 
 
 The way that ASan works is basically by inserting a check before every load/store, calling a report function if the
 program wasn't allowed to do it. This means that it's OK to have uninstrumented code mixed with instrumented code.
-However, it won't be able to detect memory errors in the uninstrumented code. This is basically what happens with the standard libraries, which are not sanitized, but only a few commonly used functions being intercepted (memcpy, memset, etc.).
+However, it won't be able to detect memory errors in the uninstrumented code. This is basically what happens with the standard libraries, which are not sanitized, but only a few commonly used functions being intercepted (`memcpy`, `memset`, etc.).
 
-You can also disable instrumentation for a specific functions by giving it the following attribute
+You can also disable instrumentation for a specific functions by giving it the following attribute:
 
 ```cpp
 __attribute__((no_sanitize("address")))
 ```
 
-## More reading
+## Further reading
 
 If you want to learn more about AddressSanitizer and its features:
 https://github.com/google/sanitizers/wiki/AddressSanitizer
