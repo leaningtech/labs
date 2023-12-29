@@ -3,7 +3,7 @@ title: cheerpjRunLibrary
 description: Load a Java Library
 ---
 
-Allows to load a Java Library into JavaScript.
+Loads a Java library for use in JavaScript. See [library mode](/cheerpj3/guides/library-mode) for more information.
 
 ```ts
 async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
