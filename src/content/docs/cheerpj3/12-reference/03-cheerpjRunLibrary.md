@@ -46,6 +46,16 @@ Type conversions adhere to the [LiveConnect specification](https://web.archive.o
 
 For other types, refer to the LiveConnect specification.
 
+#### `CJ3Library#getJNIDataView`
+
+```ts
+class CJ3Library {
+	getJNIDataView(): DataView;
+}
+```
+
+Returns a `DataView` of the library's raw JNI memory.
+
 ## Examples
 
 ### Using the standard library
