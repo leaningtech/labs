@@ -43,7 +43,7 @@ await cheerpjInit({
 await cheerpjRunMain("Example", "/app/");
 ```
 
-The `lib` parameter is a [CJ3Library]. It can be used to access other classes and methods of the library.
+The `lib` parameter is a [`CJ3Library`]. It can be used to access other classes and methods of the library.
 
 Parameters and return values of JNI calls are automatically converted between JavaScript and Java types.
 
