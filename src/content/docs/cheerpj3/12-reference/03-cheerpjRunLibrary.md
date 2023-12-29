@@ -19,25 +19,32 @@ async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
 
 ### CJ3Library
 
-This object can be used to access the classes and methods of the loaded library through property access:
+`CJ3Library` instances can be used to access the classes and methods of the loaded library through property access:
 
 - To load a class, access it and await it.
 - To call a static method, call it as a method on a loaded class and await it.
 - To construct a class into an instance, use `await new`.
 - To call an instance method, call it as a method on an instance of a loaded class and await it.
+- To read/write a public field, do so normally.
+- `instanceof` is supported.
 
-Array interoperability is supported:
+#### Conversion rules
 
-- Passing JS arrays to Java arrays via copying.
-- Passing JS arrays to Java JSObject.
-- Passing Java object arrays to JavaScript by reference.
-- Passing Java primitive arrays to JavaScript
-- Public Java fields can now be both read/written from JS with appropriate type conversion.
-- Classes in JS supports `instanceof`.
+Type conversions adhere to the [LiveConnect specification](https://web.archive.org/web/20110204185537/http://jdk6.java.net/plugin2/liveconnect/#JS_JAVA_CONVERSIONS). There are some extensions:
 
-Parameters and return values of method calls are automatically converted between JavaScript and Java types.
+| JavaScript type | Java type                      | Note             |
+| --------------- | ------------------------------ | ---------------- |
+| `Uint8Array`    | `boolean[]`                    | By reference     |
+| `Int8Array`     | `byte[]`                       | By reference     |
+| `Uint16Array`   | `char[]`                       | By reference     |
+| `Int16Array`    | `short[]`                      | By reference     |
+| `Int32Array`    | `int[]`                        | By reference     |
+| `BigInt64Array` | `long[]`                       | By reference     |
+| `Float32Array`  | `float[]`                      | By reference     |
+| `Float64Array`  | `double[]`                     | By reference     |
+| `any`           | `netscape.javascript.JSObject` | Opaque reference |
 
-## Examples
+For other types, refer to the LiveConnect specification.
 
 ### Using the standard library
 
