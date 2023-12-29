@@ -40,6 +40,19 @@ const { title, description, image } = Astro.props;
 			h5:hover .heading-link-icon {
 				opacity: 1;
 			}
+
+			/* inline code */
+			.prose
+				:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+				@apply bg-stone-800;
+
+				padding: 0.2em 0.4em;
+				font-size: 85%;
+
+				border-radius: 6px;
+
+				white-space: break-spaces;
+			}
 		</style>
 	</head>
 	<body
