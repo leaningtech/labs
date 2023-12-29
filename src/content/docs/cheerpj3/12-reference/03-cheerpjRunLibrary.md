@@ -46,6 +46,8 @@ Type conversions adhere to the [LiveConnect specification](https://web.archive.o
 
 For other types, refer to the LiveConnect specification.
 
+## Examples
+
 ### Using the standard library
 
 ```js
