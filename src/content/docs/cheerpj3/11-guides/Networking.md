@@ -3,14 +3,14 @@ title: Networking
 description: Networking with CheerpJ
 ---
 
-CheerpJ 3.0 supports different networking scenarios that are divided into two categories:
+CheerpJ supports different networking scenarios that are divided into two categories:
 
 - Same-origin HTTP/HTTPS requests using fetch seamlessly.
-- Generalized networking via Tailscale.
+- Generalized networking via Tailscale (anything else that is not HTTP(S) such as opening TCP/UDP sockets).
 
 ## Same origin HTTP/HTTPS requests
 
-A Java application running in the browser with CheerpJ can request resources to the local server (same origin) via fetch through the HTTP/HTTPS protocols. As expected, these requests are asynchronous. Remember that for a request to be considered same-origin, it needs to match the scheme, hostname and port between the requester and the receiver.
+A Java application running in the browser with CheerpJ can request resources to the local server (same origin) via fetch through the HTTP/HTTPS protocols. As expected, these requests are asynchronous. Remember that for a request to be considered same-origin, it needs to match the scheme, host name and port between the requester and the receiver.
 
 With CheerpJ you can perform `fetch()` requests with the [browser fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) as usual.
 
@@ -26,7 +26,7 @@ To support networking beyond same origin requests, it is necessary to host a pro
 
 When it comes to generalised networking scenarios, there are some browser-enforced limitations to enhance users' security. These limitations are bound to the browser not exposing access to lower-level protocols such as UDP and TCP. The browser only allows one to perform HTTP(S) requests ruled by CORS policies.
 
-A good example of these scenarios is when an application uses WebSockets, where there is a two-way interaction between two end-points in an event-driven manner. A WebSocket connection starts with a request from the browser via HTTP that when accepted, this connection is upgraded and does not conform to the HTTP protocol anymore. This way the user and the server (or any other end-point) can keep a connection and send bidirectional messages until this connection is closed from one of the end-points. Upgrading the WebSocket connection protocol and unwrapping packets before sending them to the destinations requires a proxy server.
+A good example of this scenario is when an application uses WebSockets, where there is a two-way interaction between two end-points in an event-driven manner. A WebSocket connection starts with a request from the browser via HTTP that when accepted, this connection is upgraded and does not conform to the HTTP protocol anymore. This way the user and the server (or any other end-point) can keep a connection and send bidirectional messages until this connection is closed from one of the end-points. Upgrading the WebSocket connection protocol and unwrapping packets before sending them to the destinations requires a proxy server.
 
 These limitations have been overcome by supporting networking via Tailscale, which allows one to use its VPN via its WebSocket proxy, meaning the perfect solution for the limitations described above.
 
@@ -49,16 +49,24 @@ cheerpjInit({
 
 What is happening here?
 
-- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](https://github.com/leaningtech/headscale)
+- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/cheerpj3/guides/Networking#self-hosting-headscale).
 - `tailscaleAuthKey` is string with an auth key to register new nodes that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
 
-Example to prompt the user for manual login:
+Example to prompt the user for manual login on a different tab:
+
+```html
+<a id="loginLink">Click here to login to Tailscale</a>
+```
 
 ```js
+const loginElem = document.getElementById("loginLink");
+
 cheerpjInit({
 	tailscaleControlUrl: "https://my.url.com/",
 	tailscaleLoginUrlCb: function (url) {
-		// your function code here to continue with login
+		loginElem.href = url;
+		loginElem.target = "_blank";
+		// continue with login
 	},
 });
 ```
