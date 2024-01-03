@@ -1,0 +1,110 @@
+---
+import Icon from "astro-icon";
+import Pagefind from "./Pagefind.svelte";
+import DiscordButton from "../btn/DiscordButton.astro";
+import type { Product } from "@/lib/nav";
+
+interface Props {
+	filterProductId?: Product | "blog"; // data-pagefind-filter productId
+}
+---
+
+<site-search class="inline-block sm:w-80 h-10 max-w-full">
+	<button
+		data-open-modal
+		class="group text-stone-300 border-stone-500 hover:border-stone-400 sm:border border-opacity-50 rounded-md px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors"
+	>
+		<Icon
+			name="fa-solid:search"
+			class="w-4 h-4 mr-0.5 text-stone-200 group-hover:text-white transition-colors"
+		/>
+		<span class="group-hover:text-white transition-colors hidden sm:block"
+			>Search</span
+		>
+		<div class="grow hidden sm:block"></div>
+		<div
+			class="font-mono font-bold text-sm hidden md:block"
+			aria-label="Keybinding to open search"
+		>
+			/
+		</div>
+	</button>
+
+	<dialog
+		aria-label="Search"
+		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl border border-stone-700"
+	>
+		<Pagefind client:visible productId={Astro.props.filterProductId}>
+			<div
+				slot="no-results"
+				class="flex flex-col h-full items-center justify-center"
+			>
+				<div class="text-xl">👽 <span class="italic">No results!</span></div>
+				<p class="py-4 text-base text-stone-400 font-normal">
+					If you have a question, please ask it in our Discord server.
+				</p>
+				<DiscordButton />
+			</div>
+		</Pagefind>
+	</dialog>
+</site-search>
+
+<script>
+	class SiteSearch extends HTMLElement {
+		constructor() {
+			super();
+			const openBtn = this.querySelector<HTMLButtonElement>(
+				"button[data-open-modal]",
+			);
+			const dialog = this.querySelector<HTMLDialogElement>("dialog");
+
+			if (!openBtn || !dialog) throw new Error("Missing required elements");
+
+			const open = (event?: MouseEvent) => {
+				dialog.showModal();
+
+				const input = this.querySelector<HTMLInputElement>("input");
+				if (!input) throw new Error("<Pagefind> missing input element");
+				input.value = "";
+				input.dispatchEvent(new Event("input"));
+				input.focus();
+
+				event?.stopPropagation();
+			};
+			openBtn.addEventListener("click", open);
+
+			const toggle = () => {
+				if (dialog.open) {
+					close();
+				} else {
+					open();
+				}
+			};
+			window.addEventListener("keydown", (event) => {
+				if (event.key === "/") {
+					open();
+					event.preventDefault(); // Don't put `/` in input
+				} else if (event.metaKey && event.key === "k") {
+					toggle();
+				}
+			});
+
+			// Close if user clicks backdrop
+			dialog.addEventListener("click", (event: MouseEvent) => {
+				if (event.target === dialog) {
+					dialog.close();
+				}
+			});
+		}
+	}
+
+	customElements.define("site-search", SiteSearch);
+</script>
+
+<style>
+	dialog::backdrop {
+		background: rgba(0, 0, 0, 0.5); /* fallback if color-mix not supported */
+		background: color-mix(var(--color-stone-900), 0.5);
+		backdrop-filter: blur(4px);
+	}
+</style>

@@ -1,7 +1,7 @@
 ---
 import { type ProductData, getProductNav } from "@/lib/products";
 import { Image } from "astro:assets";
-import Search from "./Search.astro";
+import Search from "./search/Search.astro";
 import { DISCORD_URL } from "@/consts";
 import Icon from "astro-icon";
 import ProductVersionSwitcher from "./ProductVersionSwitcher.astro";
@@ -34,7 +34,7 @@ const getStartedHref = nav.entries.filter(
 
 		<div class="grow lg:hidden"></div>
 
-		<Search />
+		<Search filterProductId={product.id} />
 
 		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
 			<a href={DISCORD_URL} class="flex items-center gap-1.5 hover:text-white">

@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
-import pagefind from "astro-pagefind";
+import pagefind from "./pagefind.mjs";
 import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
 import astroExpressiveCode from "astro-expressive-code";
@@ -12,6 +12,7 @@ import { resolve } from "node:path";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
+
 const prod = process.env.NODE_ENV === "production";
 
 // https://astro.build/config
