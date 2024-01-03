@@ -40,7 +40,9 @@
 		results = response.results;
 		noResultsForQuery = query.length > 0 && results.length === 0;
 
-		plausible("Search", { props: { query, resultsCount: results.length } });
+		plausible("Search", {
+			props: { query, resultsCount: results.length, productId },
+		});
 	}
 </script>
 
