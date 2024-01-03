@@ -24,6 +24,7 @@ async function cheerpjInit(options?: {
 	tailscaleDnsUrl?: string;
 	tailscaleAuthKey?: string;
 	tailscaleLoginUrlCb?: (url: string) => void;
+	tailscaleIpCb?: (ip: string) => void;
 }): Promise<void>;
 ```
 
@@ -332,6 +333,24 @@ For more information visit the [Tailscale documentation](https://tailscale.com/k
 cheerpjInit({
 	tailscaleLoginUrlCb(url) {
 		// your function code here to continue with login
+	},
+});
+```
+
+### `tailscaleIpCb`
+
+```ts
+tailscaleIpCb?: (ip: string) => void;
+```
+
+This callback is used to retrieve the IP address of the client once the connection with the Tailscale network is established.
+
+Example of usage:
+
+```js
+cheerpjInit({
+	tailscaleIpCb: function (ip) {
+		console.log("IP address " + ip);
 	},
 });
 ```
