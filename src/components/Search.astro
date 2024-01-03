@@ -1,7 +1,7 @@
 ---
+import "@pagefind/default-ui/css/ui.css";
+
 import Icon from "astro-icon";
-// @ts-ignore
-import PagefindSearch from "astro-pagefind/components/Search";
 ---
 
 <site-search class="inline-block sm:w-80 h-10 max-w-full">
@@ -29,7 +29,6 @@ import PagefindSearch from "astro-pagefind/components/Search";
 		aria-label="Search"
 		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl border-2 border-stone-700"
 	>
-		<PagefindSearch className="search" />
 	</dialog>
 </site-search>
 
@@ -43,8 +42,6 @@ import PagefindSearch from "astro-pagefind/components/Search";
 			const dialog = this.querySelector<HTMLDialogElement>("dialog");
 
 			if (!openBtn || !dialog) throw new Error("Missing required elements");
-
-			// TODO: listen for `/` and `cmd + k`
 
 			const open = (event?: MouseEvent) => {
 				dialog.showModal();
@@ -83,7 +80,22 @@ import PagefindSearch from "astro-pagefind/components/Search";
 				}
 			});
 
-			// TODO: Up/down arrow keys to navigate results
+			// Initialise pagefind in dialog
+			window.addEventListener("DOMContentLoaded", () => {
+				const onIdle =
+					window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+				onIdle(async () => {
+					const { PagefindUI } = await import("@pagefind/default-ui");
+					new PagefindUI({
+						element: dialog,
+						baseUrl: import.meta.env.BASE_URL,
+						bundlePath:
+							import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+						showImages: false,
+						showSubResults: true,
+					});
+				});
+			});
 		}
 	}
 
@@ -100,132 +112,6 @@ import PagefindSearch from "astro-pagefind/components/Search";
 
 <style is:global>
 	.search {
-		--pagefind-ui-primary: var(--color-primary-400);
-		--pagefind-ui-text: var(--color-stone-100);
-		--pagefind-ui-background: var(--color-stone-800);
-		--pagefind-ui-border: var(--pagefind-ui-background);
-		--pagefind-ui-border-width: 0;
-		--pagefind-ui-tag: #152028;
-		--pagefind-ui-font: inherit;
-
 		height: 36em;
-	}
-
-	/* Scroll results whilst keeping input in view */
-	.pagefind-ui,
-	.pagefind-ui .pagefind-ui__form {
-		overflow: hidden;
-		height: 100%;
-	}
-	.pagefind-ui .pagefind-ui__form {
-		display: flex;
-		flex-direction: column;
-	}
-	.pagefind-ui .pagefind-ui__search-input {
-		flex-shrink: 0;
-	}
-	.pagefind-ui .pagefind-ui__drawer {
-		overflow-y: auto;
-	}
-
-	.pagefind-ui .pagefind-ui__drawer {
-		flex-grow: 1;
-
-		border-top: 1px solid var(--color-stone-700);
-		padding: 1em;
-	}
-
-	.pagefind-ui .pagefind-ui__results-area {
-		margin-top: 0 !important;
-	}
-
-	/* N results for term / No results message */
-	.pagefind-ui .pagefind-ui__message {
-		display: none !important; /* 'N results for term' is kinda useless */
-		text-align: center;
-
-		padding-top: 0 !important;
-
-		font-weight: 500 !important;
-		color: var(--color-stone-400);
-	}
-	.pagefind-ui .pagefind-ui__message:has(+ ol:empty) {
-		display: block !important; /* 'No results' is useful */
-
-		width: 100%;
-		height: auto;
-		padding: 0;
-
-		font-size: 1.25rem; /* text-xl */
-	}
-	.pagefind-ui .pagefind-ui__results-area:has(> ol:empty) {
-		display: flex;
-		align-items: center;
-		justify-items: center;
-	}
-
-	.pagefind-ui .pagefind-ui__results {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	.pagefind-ui .pagefind-ui__result {
-		padding: 1em 1.25em !important;
-		background: var(--color-stone-700);
-		border-radius: 0.5rem; /* rounded-lg */
-
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.pagefind-ui .pagefind-ui__result-inner {
-		margin-top: 0 !important;
-		overflow: hidden;
-	}
-	.pagefind-ui .pagefind-ui__result-thumb {
-		/* Hide thumbnails */
-		display: none !important;
-	}
-	.pagefind-ui .pagefind-ui__result-excerpt {
-		width: 100%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		color: var(--color-stone-300);
-	}
-	.pagefind-ui .pagefind-ui__result-excerpt mark {
-		color: var(--color-stone-100);
-		background: unset;
-		font-weight: bold;
-	}
-	.pagefind-ui .pagefind-ui__result:has(a:hover),
-	.pagefind-ui .pagefind-ui__result:focus-within {
-		background: var(--color-primary-500);
-	}
-	.pagefind-ui .pagefind-ui__result:has(a:hover) .pagefind-ui__result-excerpt,
-	.pagefind-ui .pagefind-ui__result:focus-within .pagefind-ui__result-excerpt {
-		color: var(--color-primary-100);
-	}
-
-	.pagefind-ui .pagefind-ui__search-clear {
-		color: var(--color-stone-400) !important;
-		font-weight: 500;
-	}
-	.pagefind-ui .pagefind-ui__search-clear:hover,
-	.pagefind-ui .pagefind-ui__search-clear:focus {
-		color: var(--color-primary-400) !important;
-	}
-
-	/* 'Load more results' button */
-	.pagefind-ui__drawer button[type="button"] {
-		display: inline-block;
-		margin: 2em 0 0 0;
-		padding: 0.5em 1em;
-		border-radius: 0.5rem; /* rounded-lg */
-		background: var(--color-stone-700) !important;
-		color: var(--color-stone-300) !important;
-	}
-	.pagefind-ui__drawer button[type="button"]:hover,
-	.pagefind-ui__drawer button[type="button"]:focus {
-		background: var(--color-primary-500) !important;
-		color: var(--color-white) !important;
 	}
 </style>
