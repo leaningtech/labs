@@ -6,7 +6,7 @@ import robotsTxt from "astro-robots-txt";
 import pagefind from "./pagefind.mjs";
 import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
-import astroExpressiveCode from "astro-expressive-code";
+import astroExpressiveCode, { loadShikiTheme } from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
 import { resolve } from "node:path";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -15,11 +15,32 @@ import rehypeExternalLinks from "rehype-external-links";
 
 const prod = process.env.NODE_ENV === "production";
 
+const theme = await loadShikiTheme("material-theme-darker");
+theme.styleOverrides.frames = {
+	editorBackground: "transparent",
+	codeBackground: "transparent",
+	terminalBackground: "transparent",
+	terminalTitlebarBackground: "transparent",
+	terminalTitlebarBorderBottom: "transparent",
+	editorTabBarBackground: "transparent",
+	editorActiveTabBackground: "transparent",
+	editorActiveTabBorderBottom: "transparent",
+	shadowColor: "transparent",
+};
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://labs.leaningtech.com",
 	integrations: [
-		astroExpressiveCode(),
+		astroExpressiveCode({
+			theme,
+			styleOverrides: {
+				codeBackground: "transparent",
+				borderColor: "rgb(41, 37, 36)", // border-stone-800
+				// doesn't work?
+				frames: {},
+			},
+		}),
 		mdx(),
 		sitemap(),
 		tailwind(),
@@ -32,9 +53,6 @@ export default defineConfig({
 		}),
 	],
 	markdown: {
-		shikiConfig: {
-			theme: "dracula",
-		},
 		remarkPlugins: [
 			[
 				remarkObsidianCallout,
