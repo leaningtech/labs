@@ -37,12 +37,12 @@ interface Props {
 			super();
 			const [yesButton, noButton] = this.querySelectorAll("button");
 
-			yesButton.addEventListener("click", () => {
+			yesButton!.addEventListener("click", () => {
 				plausible("HelpfulYes");
 				alert("Thanks for your feedback!");
 			});
 
-			noButton.addEventListener("click", () => {
+			noButton!.addEventListener("click", () => {
 				plausible("HelpfulNo", {
 					props: {
 						reason: prompt(

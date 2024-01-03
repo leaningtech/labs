@@ -6,6 +6,10 @@ import { Image } from "astro:assets";
 
 const today = new Date();
 
+interface Props {
+	includeGrow?: boolean; // default: true
+}
+
 interface Section {
 	name: string;
 	description?: string;
@@ -59,7 +63,7 @@ const sections: Section[] = [
 ];
 ---
 
-<div class="grow"></div>
+{Astro.props.includeGrow === false ? null : <div class="grow" />}
 
 <footer class="p-14 bg-black">
 	<div class="w-full max-w-screen-2xl mx-auto space-y-6">
