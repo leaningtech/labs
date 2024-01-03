@@ -4,7 +4,9 @@ title: ES6 Modules in Cheerp
 
 ## How to generate ES6 modules with Cheerp?
 
-<pre><code>/opt/cheerp/bin/clang++ yourCode.cpp -o yourModule.js -O2 <b>-cheerp-make-module=es6</b></code></pre>
+```bash
+/opt/cheerp/bin/clang++ yourCode.cpp -o yourModule.js -O2 -cheerp-make-module=es6
+```
 
 This generally generates two files: `yourModule.js` and `yourModule.wasm` that togheter implement whatever logic or functionality of the code base you are compiling.
 
