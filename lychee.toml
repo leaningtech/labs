@@ -27,5 +27,6 @@ exclude = [
 	'https://swingset3.dev.java.net/',
 	'https://my.url.com/',
 	'https://www.w3.org/.*',
+	'https://lkml.org/.*',
 	'.*\.ext2'
 ]
