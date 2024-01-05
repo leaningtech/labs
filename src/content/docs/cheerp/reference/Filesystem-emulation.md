@@ -10,7 +10,7 @@ When running code in the main thread of the browser it is not possible to make a
 
 You can achieve this by using the following API
 
-````
+````cpp
 #include <cheerpfs.h>
 
 // Allocate a global object of type cheerp::FilePreloader

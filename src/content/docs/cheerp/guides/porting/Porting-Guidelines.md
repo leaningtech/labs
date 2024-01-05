@@ -87,7 +87,7 @@ We recommend to comment out whole methods as opposed to sections of code. Undefi
 
 If you need to comment out subsections of a method we recommend the following idiom to avoid potential issues.
 
-```
+```cpp
 #ifdef __CHEERP__
 assert(false && "Missing support for ...");
 #else

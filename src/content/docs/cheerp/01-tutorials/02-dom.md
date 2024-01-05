@@ -104,7 +104,7 @@ There are two important things to notice:
 
 `Callback` is a function defined in the `cheerp` namespace which is required to use C++ functions, functors and lambads as callbacks for browser events. For example.
 
-```
+```cpp
 cheerp::Callback(regularCXXFunc);
 cheerp::Callback(CXXFunctor());
 cheerp::Callback([](client::Event*){ ... });
@@ -113,7 +113,7 @@ cheerp::Callback([capturedVariable](client::Event*){ ... });
 
 The general usage is:
 
-```
+```cpp
 element->addEventListener("event_kind", cheerp::Callback(callback));
 ```
 

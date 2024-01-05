@@ -105,7 +105,7 @@ All names declared as clobbered will be globally excluded from the list of symbo
 
 A common use case for inline asm is to return a literal object to JavaScript:
 
-```
+```cpp
 double field1 = 1;
 client::String* field2 = new client::String("hello");
 client::Object* result;
@@ -116,7 +116,7 @@ This is usually much more performant than creating a `new client::Object()` and 
 
 The `CHEERP_OBJECT` macro can be used to achieve the same result without the boilerplate and with a more elegant syntax:
 
-```
+```cpp
 double field1 = 1;
 client::String* field2 = new client::String("hello");
 client::Object* result = CHEERP_OBJECT(field1, field2);
