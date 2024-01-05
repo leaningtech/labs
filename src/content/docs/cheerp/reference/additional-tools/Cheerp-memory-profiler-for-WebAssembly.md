@@ -12,7 +12,7 @@ The Cheerp memory profiler is built specifically for tracking allocations on Web
 
 To use the tool, you need to link the memprof library to your C/C++ project compiled with Cheerp, for example:
 
-```
+```bash
 /opt/cheerp/bin/clang++ -target cheerp-wasm -cheerp-linear-output=asmjs -cheerp-pretty-code *.cpp -o target.js -lmemprof
 ```
 

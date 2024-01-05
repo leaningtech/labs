@@ -42,7 +42,7 @@ The Cheerp specific `-cheerp-sourcemap` option instructs Cheerp to output the so
 
 Build `example.js` and `example.js.map` using the following command line
 
-```
+```bash
 /opt/cheerp/bin/clang++ -target cheerp example.cpp -o example.js -g -cheerp-sourcemap=example.js.map
 ```
 
@@ -50,7 +50,7 @@ To see Source Maps in action, please start a Web server in the current directory
 
 For example, you could use python to start a local Web server
 
-```
+```bash
 python -m SimpleHTTPServer &
 firefox http://127.0.0.1:8000/example.html
 ```

@@ -6,14 +6,14 @@ Cheerp includes a wrapper script that sets up a proper environment to let autoco
 
 Let's consider the common build instructions:
 
-```
+```bash
 ./configure --prefix=/some/system/path
 make
 ```
 
 If you have Cheerp installed on your system you can take advantage of cross compilation support by using the `--host` command line switch and the `cheerpwrap` script.
 
-```
+```bash
 /opt/cheerp/bin/cheerpwrap ./configure --prefix=/some/system/path --host=cheerp-unknown-none
 /opt/cheerp/bin/cheerpwrap make
 ```
