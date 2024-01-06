@@ -35,19 +35,19 @@ async function libraryModeTour() {
 	const a = await points.toArray();
 
 	// Iterate on the array and set y = x
-	for (const i = 0; i < a.length; i++) {
+	for (let i = 0; i < a.length; i++) {
 		// Fields can be read and written directly
 		a[i].y = a[i].x;
 	}
 
 	// Convert all the elements to Strings
-	for (const i = 0; i < a.length; i++) {
+	for (let i = 0; i < a.length; i++) {
 		// Java arrays can be read and written directly
 		a[i] = await a[i].toString();
 	}
 
 	// Print them out
-	for (const i = 0; i < a.length; i++) {
+	for (let i = 0; i < a.length; i++) {
 		// Static fields can be accessed too
 		await System.out.println(a[i]);
 	}
