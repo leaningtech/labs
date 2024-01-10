@@ -51,7 +51,7 @@ Development from hereon was able to continue like a regular client project, and 
 ### Touch device support with JS-Java interop
 
 One of the interesting problems that did come up was that the touch device support for Java 8 did not truly exist at the time and some elements like touch device keyboard input was not available. Touch support was highly desired by mobile device players who were unable to login.
-Thankfully, CheerpJ allows you to [invoke Java methods from a page's JavaScript](/cheerpj3/reference/cheerpjRunLibrary#cj3library), and a login widget was effectively able to communicate with the game client to bypass the keyboard requirement for touch devices.
+Thankfully, CheerpJ allows you to [invoke Java methods from a page's JavaScript](/cheerpj3/guides/library-mode), and a login widget was effectively able to communicate with the game client to bypass the keyboard requirement for touch devices.
 
 ### User preference persistence with cookies
 

@@ -35,6 +35,9 @@ module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		extend: {
+			fontFamily: {
+				mono: ["Monaspace Argon", "monospace"],
+			},
 			colors: {
 				primary: {
 					600: "#e62755",

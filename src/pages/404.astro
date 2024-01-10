@@ -1,6 +1,6 @@
 ---
+import Search from "@/components/search/Search.astro";
 import Footer from "../components/Footer.astro";
-import LinkButton from "../components/LinkButton.astro";
 import Shell from "../layouts/Shell.astro";
 ---
 
@@ -8,14 +8,13 @@ import Shell from "../layouts/Shell.astro";
 	<main
 		class="grow flex items-center justify-center bg-[url('/404/bg.svg')] bg-center bg-[length:100px]"
 	>
-		<div class="space-y-4">
-			<h1 class="text-6xl font-bold">404</h1>
-			<p>We couldn't find that page 😱</p>
-			<LinkButton type="primary" href="/" label="Go home" />
+		<div class="space-y-6">
+			<h1 class="text-6xl font-medium italic">Page not found!</h1>
+			<Search />
 		</div>
 	</main>
 
-	<Footer />
+	<Footer includeGrow={false} />
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {

@@ -3,7 +3,7 @@ title: cheerpjRunLibrary
 description: Load a Java Library
 ---
 
-Allows to load a Java Library into JavaScript.
+Loads a Java library for use in JavaScript. See [library mode](/cheerpj3/guides/library-mode) for more information.
 
 ```ts
 async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
@@ -15,27 +15,7 @@ async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
 
 ## Returns
 
-`cheerpjRunLibrary` returns a [Promise] which resolves to a `CJ3Library` object.
-
-### CJ3Library
-
-This object can be used to access the classes and methods of the loaded library through property access:
-
-- To load a class, access it and await it.
-- To call a static method, call it as a method on a loaded class and await it.
-- To construct a class into an instance, use `await new`.
-- To call an instance method, call it as a method on an instance of a loaded class and await it.
-
-Array interoperability is supported:
-
-- Passing JS arrays to Java arrays via copying.
-- Passing JS arrays to Java JSObject.
-- Passing Java object arrays to JavaScript by reference.
-- Passing Java primitive arrays to JavaScript
-- Public Java fields can now be both read/written from JS with appropriate type conversion.
-- Classes in JS supports `instanceof`.
-
-Parameters and return values of method calls are automatically converted between JavaScript and Java types.
+`cheerpjRunLibrary` returns a [Promise] which resolves to a [CJ3Library] object.
 
 ## Examples
 
@@ -75,33 +55,6 @@ const example = await new Example();
 await example.hello(); // Example says hello!
 ```
 
-### Access to object property/attribute
-
-From the example above:
-
-```js
-const greetingsArray = example["greetings"];
-```
-
-or
-
-```js
-const greetingsArray = example.greetings;
-```
-
-### Exception handling
-
-```js
-await cheerpjInit();
-const lib = await cheerpjRunLibrary("");
-
-try {
-	// Attempt to load a class that doesn't exist
-	await lib.java.lang.DoesntExist;
-} catch (e) {
-	await e.printStackTrace(); // java.lang.ClassNotFoundException: java.lang.DoesntExist
-}
-```
-
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [virtual filesystem]: /cheerpj3/guides/File-System-support
+[CJ3Library]: /cheerpj3/reference/CJ3Library

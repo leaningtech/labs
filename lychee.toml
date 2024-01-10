@@ -31,3 +31,4 @@ exclude = [
 	'https://www.wireguard.com/',
 	'.*\.ext2'	
 ]
+

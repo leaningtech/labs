@@ -59,7 +59,7 @@ const showAuthorSection = authors.length > 0;
 			<aside class="lg:w-40 text-stone-400">
 				{
 					authors.map((author) => (
-						<a href={author.url} class="flex items-center gap-4 lg:block">
+						<a href={author.url} class="flex items-center gap-4 lg:block mb-2">
 							{author.avatar && (
 								<img
 									class="w-16 h-16 rounded-full"
@@ -77,7 +77,7 @@ const showAuthorSection = authors.length > 0;
 				}
 				{
 					authors.some((a) => a.guest) && (
-						<div class="mt-2 inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+						<div class="inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
 							Guest post
 						</div>
 					)
@@ -93,6 +93,7 @@ const showAuthorSection = authors.length > 0;
 				<div
 					class="prose prose-stone md:prose-lg dark:prose-invert"
 					data-pagefind-body
+					data-pagefind-filter="productId:blog"
 				>
 					<slot />
 				</div>

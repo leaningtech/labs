@@ -6,7 +6,7 @@ One common issue when porting code to Cheerp is the lack of support for custom a
 
 Let's take this code for example:
 
-```
+```cpp
 void* myalloc(size_t s)
 {
     return malloc(s);
@@ -21,7 +21,7 @@ Cheerp: Legacy C memory allocation must be immediately casted to the actual type
 
 The problem is that allocations in cheerp are translated to the creation of a JS object with the right set of properties. This code:
 
-```
+```cpp
 class Foo {
     int var1;
     int var2;
@@ -32,7 +32,7 @@ Foo foo* = (Foo*)malloc(sizeof(Foo));
 
 translates to the following JS code:
 
-```
+```js
 tmp0={i0:0, i1:0};
 ```
 
@@ -40,7 +40,7 @@ As you can see, the type information provided by the cast operator is needed to 
 
 If for some reason you really need the custom allocator function, consider using a template:
 
-```
+```cpp
 template<class T>
 T* myalloc(size_t size)
 {
