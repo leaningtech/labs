@@ -28,6 +28,6 @@ exclude = [
 	'https://my.url.com/',
 	'https://www.w3.org/.*',
 	'https://lkml.org/.*',
-	'.*\.ext2',
-	'https://www.wireguard.com/'
+	'https://www.wireguard.com/',
+	'.*\.ext2'	
 ]
