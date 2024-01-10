@@ -11,7 +11,7 @@ scheme = [ "http", "https" ]
 include_verbatim = true
 
 exclude = [
-	'.*(twitter|github|linkedin|reddit)\.com.*',
+	'.*(twitter|github|linkedin|reddit|youtube|youtube-nocookie)\.com.*',
 	'.*packages\.ubuntu\.com.*',
 	'http://127\.0\.0\.1:(8000|8080|8086).*',
 	'.*rpm\.leaningtech\.com.*',
@@ -27,5 +27,7 @@ exclude = [
 	'https://swingset3.dev.java.net/',
 	'https://my.url.com/',
 	'https://www.w3.org/.*',
+	'https://lkml.org/.*',
+	'.*\.ext2',
 	'https://www.wireguard.com/'
 ]
