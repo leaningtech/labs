@@ -38,7 +38,7 @@ The easiest way to enable generalized networking on your Java application withou
 
 Connecting the Java application client to your Tailscale network is as simple as providing client authentication via `cheerpjInit()`:
 
-Example for pre-authenticated nodes:
+Example for pre-authenticated users/devices:
 
 ```js
 cheerpjInit({
@@ -47,10 +47,13 @@ cheerpjInit({
 });
 ```
 
+> [!info] Info
+> A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
+
 What is happening here?
 
 - `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/cheerpj3/guides/Networking#self-hosting-headscale).
-- `tailscaleAuthKey` is string with an auth key to register new nodes that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+- `tailscaleAuthKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
 
 Example to prompt the user for manual login on a different tab:
 

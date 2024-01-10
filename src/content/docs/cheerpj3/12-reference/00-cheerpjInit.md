@@ -309,7 +309,10 @@ cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
 tailscaleAuthKey?: string;
 ```
 
-This option expects a string that contains a Tailscale auth key. Using auth keys allows to register new nodes that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+This option expects a string that contains a Tailscale auth key. Using auth keys allows one to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+
+> [!info] Info
+> A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
 
 For more information about auth keys visit the [Tailscale auth keys documentation](https://tailscale.com/kb/1085/auth-keys/).
 
