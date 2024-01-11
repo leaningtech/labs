@@ -33,7 +33,7 @@ Foo foo* = (Foo*)malloc(sizeof(Foo));
 translates to the following JS code:
 
 ```js
-tmp0={i0:0, i1:0};
+tmp0 = { i0: 0, i1: 0 };
 ```
 
 As you can see, the type information provided by the cast operator is needed to provide the right object layout. An equivalent (and better) solution is to use the C++ `new` operator whenever possible.
