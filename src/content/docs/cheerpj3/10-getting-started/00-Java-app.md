@@ -56,6 +56,9 @@ cheerpjRunMain(
 );
 ```
 
+> [!help] Don't forget to use the /app/ prefix
+> It is common for first-time users to forget to add the prefix “/app/” when passing the application location to cheerpJRunJar() or cheerpjRunMain().
+
 ## 3. Host your page
 
 You can now serve this web page on a simple HTTP server, such as the http-server utility.
@@ -78,6 +81,14 @@ npx http-server -p 8080
 ## The result
 
 You will see the CheerpJ display on your browser with some loading messages before showing your application running. Depending on your application and the optimizations applied, this could take just a few seconds.
+
+### Is your application not working?
+
+Please try these checks:
+
+- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
+- Your Java application works normally on your machine without CheerpJ.
+- You are not opening the page by double clicking on it and you are using an http-server instead.
 
 ## Further reading
 

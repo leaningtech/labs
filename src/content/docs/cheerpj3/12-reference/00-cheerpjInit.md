@@ -24,12 +24,7 @@ async function cheerpjInit(options?: {
 	tailscaleDnsUrl?: string;
 	tailscaleAuthKey?: string;
 	tailscaleLoginUrlCb?: (url: string) => void;
-	fetch?: (
-		url: string,
-		method: string,
-		postData: ArrayBuffer,
-		headers: unknown[],
-	) => Promise<unknown>;
+	tailscaleIpCb?: (ip: string) => void;
 }): Promise<void>;
 ```
 
@@ -314,7 +309,10 @@ cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
 tailscaleAuthKey?: string;
 ```
 
-This option expects a string that contains a Tailscale auth key. Using auth keys allows to register new nodes that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+This option expects a string that contains a Tailscale auth key. Using auth keys allows one to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+
+> [!info] Info
+> A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
 
 For more information about auth keys visit the [Tailscale auth keys documentation](https://tailscale.com/kb/1085/auth-keys/).
 
@@ -342,18 +340,23 @@ cheerpjInit({
 });
 ```
 
-### `fetch`
+### `tailscaleIpCb`
 
 ```ts
-fetch?: (
-    url: string,
-    method: string,
-    postData: ArrayBuffer,
-    headers: unknown[],
-  ) => Promise<unknown>;
+tailscaleIpCb?: (ip: string) => void;
 ```
 
-This option is used to make a `fetch` request over the network.
+This callback is used to retrieve the IP address of the client once the connection with the Tailscale network is established.
+
+Example of usage:
+
+```js
+cheerpjInit({
+	tailscaleIpCb: function (ip) {
+		console.log("IP address " + ip);
+	},
+});
+```
 
 [cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
