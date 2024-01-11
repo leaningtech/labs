@@ -56,7 +56,7 @@ cheerpjRunMain(
 );
 ```
 
-> [!warning]Important
+> [!help] Don't forget to use the /app/ prefix
 > It is common for first-time users to forget to add the prefix “/app/” when passing the application location to cheerpJRunJar() or cheerpjRunMain().
 
 ## 3. Host your page

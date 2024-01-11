@@ -16,7 +16,7 @@ await cheerpjInit();
 const cj = await cheerpjRunLibrary("/app/library.jar");
 ```
 
-> [!warning]Important
+> [!help] Don't forget to use the /app/ prefix
 > It is common for first-time users to forget to add the prefix “/app/” when passing the JAR location to cheerpJRunLibrary().
 
 This will load `library.jar` from the root of your web server.
