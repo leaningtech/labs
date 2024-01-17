@@ -1,0 +1,177 @@
+---
+title: Server-Client (Networking)
+description: Communication between a client-side and server-side Java apps using CheerpJ and Tailscale.
+---
+
+This tutorial will take you step by step over a networking scenario of server-client communication between two Java applications. You will learn how to set up CheerpJ and Tailscale to run a Java client application in the browser that requires communication via `java.netSocket` and `java.net.ServerSocket` with a Server application.
+
+If you are not familiar with how CheerpJ and Tailscale work together, we invite you to take a look at our [Networking guide].
+
+## Pre-requisites:
+
+- [Node.js](https://nodejs.org/en/)(>= 18)
+- A simple HTTP server to host your page locally.
+- A text editor to create and edit an HTML file.
+- A modern browser like Chrome, Firefox or Safari.
+- A Tailscale account (explanation later in this tutorial)
+- Java 8 installation such as OpenJDK (optional)
+
+## 1. The Java applications
+
+The applications we will be running in this tutorial consist of a Java Server and a Java client that communicate with each other via Sockets simulating a chat room. This application example has been based on [TechVidvan] tutorial and you can find the source code extensively explained [here](https://techvidvan.com/tutorials/java-chat-application/).
+
+The idea is to run the Server on your local machine and the Client will be running in the browser with CheerpJ.
+
+<img src="/cheerpj2/assets/client-server.png"></img>
+
+- [Download the Server JAR](/cheerpj3/examples/Server.jar)
+- [Download the Client JAR](/cheerpj3/examples/Client.jar)
+
+## 2. Server set-up
+
+You can run the Server application in two different ways:
+
+1. In your local machine, which will require a Java 8 installation such as OpenJDK.
+2. In the browser using CheerpJ.
+
+   This tutorial will follow option number 1 given that in a real-life scenario is more likely that the server will be a real machine you can manipulate. If you want to go for option 2, then just follow the instructions for [Run a Java app] separately and then connect this app to Tailscale in a [similar manner as the Client](#32-connecting-the-client-application-to-tailscale).
+
+### 2.1 Tailscale
+
+You will be creating a Tailscale network and configure your machine as an _exit node_. An _exit node_ is a machine connected to the Tailscale VPN that will route all the traffic from the wider Internet in and out of the network. We need this connection to the internet to load the CheerpJ runtime later via our CDN. If CheerpJ is being hosted on your server, you might not need an _exit node_.
+
+1.  Create a Tailscale account and [log in](https://login.tailscale.com/)
+2.  [Install Tailscale](https://tailscale.com/kb/installation) on your machine.
+3.  Set up your machine as an exit node following the instructions [here](https://tailscale.com/kb/1103/exit-nodes).
+
+### 2.3 Running the server
+
+Now you can run the Server application on your machine by simply double-clicking on the JAR or running your instance of the source code in an IDE such as IntelliJ IDEA.
+
+<img src="/cheerpj2/assets/server.png"></img>
+
+## 3. Client set-up
+
+Now we want to run the Client application in the browser with CheerpJ and no Java installation on your machine!
+
+To do so, we will follow the steps in the [Run a Java app] page.
+
+### 3.1 The project files
+
+Let's create a project directory, place the Client JAR in this folder and create an HTML file. Your project directory should look something like this:
+
+```
+└──serverClientTutorial
+    ├── Client.jar
+    └── client.html
+```
+
+Paste this in your HTML file:
+
+```html title="client.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Client</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+	</head>
+	<body>
+		<script>
+			(async function () {
+				await cheerpjInit();
+				cheerpjCreateDisplay(800, 600);
+				await cheerpjRunJar("/app/Client.jar");
+			})();
+		</script>
+	</body>
+</html>
+```
+
+#### What's going on?
+
+- The `<head>` script loads CheerpJ.
+- [`cheerpjInit`] initialises the CheerpJ runtime environment.
+- [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
+- [`cheerpjRunJar`] executes your application!
+- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
+
+You can serve this page using a simple http-server but you won't be able to connect with the Server app as this Client app is not connected to your Tailscale network yet.
+
+### 3.2 Connecting the Client Application to Tailscale
+
+So far, only the Server application is connected to Tailscale. Now we will connect the Client application. Two things need to happen:
+
+1. Authenticate the Client application via an auth key.
+2. Communicate with the Server, we will need to pass the host IP address via `args`.
+
+#### 3.2.1 Tailscale authentication
+
+To authenticate to your Tailscale network follow the steps below:
+
+1. Create an auth key [here](https://login.tailscale.com/admin/settings/keys). We recommend creating an "ephemeral" one-time use auth key for this tutorial.
+2. Copy your key and pass it to CheerpJ via [`cheerpjInit`]. Please edit you HTML file as follows:
+
+   ```js
+   await cheerpjInit({
+   	tailscaleAuthKey: "PasteYourKeyHere",
+   });
+   ```
+
+#### 3.2.2 Connecting with the server
+
+To communicate with the server, the Client app needs to know the IP address of the Server. The Client app expects this IP address via the `main` class arguments. We can pass arguments to the application's `main` via [`cheerpJRunJar`].
+
+1. Check the IP address of the Server on the [Tailscale Dashboard](https://login.tailscale.com/admin/machines)
+2. Pass the IP address via [`cheerpJRunJar`]. For example, if the IP address is 100.80.80.33 you will modify your HTML file as follows:
+
+```js
+await cheerpjRunJar("/app/Client.jar", ["100.80.80.33"]);
+```
+
+You can also manually change the IP address of the server in the Tailscale dashboard. Both Server and Client applications are using port `7777` by default, you do not need to do anything about the port.
+
+> [!tip] Keep in mind
+> Passing the IP address this way is not secure, in a real-life scenario, you might want to use a more robust and secure method.
+
+### 3.3 Running the Client
+
+Now that everything is ready, serve your page by starting a simple http-server
+
+```bash
+http-server -p 8080
+```
+
+Open your browser and visit the address of your page, it should be something similar to `http://127.0.0.1:8080/client.html`
+You will see the CheerpJ loading animation for a brief moment and then the UI of the Client application will show up.
+
+<img src="/cheerpj2/assets/client-browser-test.png"></img>
+
+## 4. Final test
+
+Now that your Server and Client applications are both running and connected to your Tailscale network, you will be able to establish a connection between them and send messages back and forth via the UI. Remember to always check on your Tailscale dashboard to monitor your network.
+
+<img src="/cheerpj2/assets/server-client-final.png"></img>
+
+> [!tip] Disclaimer
+> Remember that granting your application access to the internet involves several risks. The methodology shown in this tutorial aims to give a general understanding of a very simple networking scenario for learning purposes only. We recommend being careful about how you manage your authentication methods, exit nodes and overall administration of your network. CheerpJ is not responsible for this.
+
+You can download the full template of this tutorial [here](/cheerpj3/examples/serverclient.zip).
+
+## Credits
+
+The Java applications used in this networking tutorial belong to [TechVidvan]. You can find their tutorial with source code [here](https://techvidvan.com/tutorials/java-chat-application/). Some minor edits have been made to adapt to this tutorial.
+
+## Further reading
+
+- [Networking guide]
+- visit the reference: [`cheerpjInit`]
+
+[Networking guide]: /cheerpj3/guides/Networking
+[TechVidvan]: https://techvidvan.com/tutorials/
+[Run a Java app]: /cheerpj3/getting-started/Java-app
+[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /cheerpj3/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
+[virtual filesystem]: /cheerpj3/guides/File-System-support
+[`tailscaleAuthKey`]: /cheerpj3/reference/cheerpjInit#tailscaleauthkey
