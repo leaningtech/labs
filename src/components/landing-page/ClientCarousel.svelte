@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Nasa from "../../assets/branding/landing_imgs/clients/nasa2.png";
 	import TicketMaster from "../../assets/branding/landing_imgs/clients/ticketmaster.png";
-	import Ubs from "../../assets/branding/landing_imgs/clients/ubs.png";
 	import Leonardo from "../../assets/branding/landing_imgs/clients/leonardo.png";
 	import Blackbird from "../../assets/branding/landing_imgs/clients/blackbird.png";
 	import Phet from "../../assets/branding/landing_imgs/clients/phet.png";
@@ -10,7 +9,6 @@
 	const clientImages = [
 		{ src: Nasa, alt: "NASA" },
 		{ src: TicketMaster, alt: "TicketMaster" },
-		{ src: Ubs, alt: "UBS" },
 		{ src: Leonardo, alt: "Leonardo" },
 		{ src: Blackbird, alt: "Blackbird" },
 		{ src: Phet, alt: "Phet" },
