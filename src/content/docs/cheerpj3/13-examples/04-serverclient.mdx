@@ -31,10 +31,10 @@ If you have read our [Networking Guide], you learned that enabling non-HTTP (s) 
 You will be creating a Tailscale network and connecting both Java apps to this network as _nodes_. A Tailscale _node_ is a term that refers to a combination of a user/machine connected to Tailscale network.
 
 1.  Create a Tailscale account and [log in](https://login.tailscale.com/). By creating an account you will be creating a Network.
-2.  Create two ephemeral auth keys [here](https://login.tailscale.com/admin/settings/keys) and reserve, you will be using these keys to authenticate the Java applications into your Tailscale network later.
+2.  Create the appropriate auth keys [here](https://login.tailscale.com/admin/settings/keys) and reserve, you will be using these keys to authenticate the Java applications into your Tailscale network later.
 
-> [!tip] Ephemeral keys
-> Remember to create another auth key every time you reload a page. Ephemeral keys are for one-time use only. Remember to delete machines from your Tailscale network as needed.
+> [!tip] Tailscale auth keys
+> You can create the type of auth key that works best for you by mixing and matching the options in the Tailscale keys menu. If you care about the Tailscale quota keep in mind to remove the unused devices manually or by using ephemeral keys.
 
 ## 3. Setting up the project
 
@@ -49,7 +49,7 @@ mkdir -p ServerClientTutorial/{Server, Client}
 2. Paste the application's JARs inside the corresponding folder.
    - [Download the Server JAR](/cheerpj3/examples/Server.jar)
    - [Download the Client JAR](/cheerpj3/examples/Client.jar)
-1. Create an HTML file inside each subfolder, let's name it `client.html` and `server.html`
+1. Create an HTML file inside each subdirectory, let's name it `client.html` and `server.html`
    Your project tree should look like this:
 
 ```
@@ -69,22 +69,27 @@ mkdir -p ServerClientTutorial/{Server, Client}
 ```html title="server.html"
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Server</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
-	</head>
-	<body>
-		<script>
-			(async function () {
-				await cheerpjInit({
-					tailscaleAuthKey: "PasteYourKeyHere",
-				});
-				cheerpjCreateDisplay(800, 600);
-				await cheerpjRunJar("/app/Server.jar");
-			})();
-		</script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Server</title>
+    <script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+  </head>
+  <body>
+    <input type="text" id="ip"></input>
+    <script>
+      (async function () {
+        await cheerpjInit({
+          tailscaleAuthKey: "PasteYourKeyHere",
+          tailscaleIpCb: (ip) => {
+            let el = document.querySelector("#ip");
+            el.value = ip;
+          },
+        });
+        cheerpjCreateDisplay(800, 600);
+        await cheerpjRunJar("/app/Server.jar");
+      })();
+    </script>
+  </body>
 </html>
 ```
 
@@ -94,6 +99,7 @@ mkdir -p ServerClientTutorial/{Server, Client}
 - [`cheerpjInit`] initialises the CheerpJ runtime environment. The Tailscale auth key is passed for authentication.
 - [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
 - [`cheerpjRunJar`] executes your application!
+- [`tailscaleIpCb`] is used to retrieve the IP address once the application is connected to the Tailscale network. We are using it to clearly display the IP address on the document.
 - `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
 
 2. Copy the first auth key you generated in the previous step and paste it as a string replacing _"PasteYourKeyHere"_.
@@ -105,7 +111,7 @@ http-server -p 8080
 ```
 
 4. Now open a browser tab and visit the address you are serving. It should be something similar to `http://127.0.0.1:8080/server.html`. You will see the CheerpJ loading animation for a brief moment and your application should show.
-5. Open the [Tailscale Dashboard](https://login.tailscale.com/admin/machines) where you should see the connected users/machines. Identify the one that corresponds to the Server application and reserve its API address. You will need it later.
+5. Above the running application you will see the assigned IP address for the Server app. Please reserve it as you will need it later to connect the client with the server. You can also consult the IP address by visiting the [Tailscale Dashboard](https://login.tailscale.com/admin/machines).
 
 ### 3.2 The Client application
 
@@ -114,22 +120,29 @@ http-server -p 8080
 ```html title="client.html"
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Client</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
-	</head>
-	<body>
-		<script>
-			(async function () {
-				await cheerpjInit({
-					tailscaleAuthKey: "PasteYourKeyHere",
-				});
-				cheerpjCreateDisplay(800, 600);
-				await cheerpjRunJar("/app/Client.jar", ["ServerIPAddressHere"]);
-			})();
-		</script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Client</title>
+    <script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+  </head>
+  <body>
+    <input type="text" id="ip"></input>
+    <script>
+      async function start(ip) {
+        await cheerpjInit({
+          tailscaleAuthKey: "PasteYourKeyHere",
+        });
+        cheerpjCreateDisplay(800, 600);
+        await cheerpjRunJar("/app/Client.jar", ip);
+      };
+      let el = document.querySelector("#ip");
+      el.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") {
+          start(el.value);
+        }
+      });
+    </script>
+  </body>
 </html>
 ```
 
@@ -138,7 +151,7 @@ http-server -p 8080
 - [`cheerpjRunJar`] The second parameter corresponds to the _args_ object which is an argument for the Java Main method. we are passing the API address of the Server application so the Client can communicate with it.
 
 2. Copy the second auth key you generated previously and paste it as a string replacing _"PasteYourKeyHere"_.
-3. Copy the Server's IP address from the Tailscale dashboard and paste it as a string replacing _"ServerIPAddressHere"_. For example, the second parameter could look something like this:`["100.80.80.33"]`.
+3. Copy the Server's IP address from the Tailscale dashboard and paste it in the input field and hit enter. The Client app will try to connect to the Server app this way.
 4. Now you are ready to serve this page and run the Client application in the browser. Simply run a HTTP server **inside** the `Client` directory with a different port than the one used for the Server app. For example:
 
 ```bash
