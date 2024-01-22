@@ -151,15 +151,15 @@ http-server -p 8080
 - [`cheerpjRunJar`] The second parameter corresponds to the _args_ object which is an argument for the Java Main method. we are passing the API address of the Server application so the Client can communicate with it.
 
 2. Copy the second auth key you generated previously and paste it as a string replacing _"PasteYourKeyHere"_.
-3. Copy the Server's IP address from the Tailscale dashboard and paste it in the input field and hit enter. The Client app will try to connect to the Server app this way.
-4. Now you are ready to serve this page and run the Client application in the browser. Simply run a HTTP server **inside** the `Client` directory with a different port than the one used for the Server app. For example:
+3. Now you are ready to serve this page and run the Client application in the browser. Simply run a HTTP server **inside** the `Client` directory with a different port than the one used for the Server app. For example:
 
 ```bash
 cd /ServerClientTutorial/Client/
 http-server -p 8081
 ```
 
-5. Now open a browser tab and visit the address you are serving. It should be something similar to `http://127.0.0.1:8081/client.html`. You will see the CheerpJ loading animation for a brief moment and your application should show.
+4. Now open a browser tab and visit the address you are serving. It should be something similar to `http://127.0.0.1:8081/client.html`. You will see the CheerpJ loading animation for a brief moment and your application should show.
+5. Copy the Server's IP address and paste it in the input field and hit enter. The Client app will try to connect to the Server app this way.
 
 ## 4. Final test
 
@@ -196,3 +196,4 @@ The Java applications used in this networking tutorial belong to [TechVidvan]. Y
 [`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
 [virtual filesystem]: /cheerpj3/guides/File-System-support
 [`tailscaleAuthKey`]: /cheerpj3/reference/cheerpjInit#tailscaleauthkey
+[`tailscaleIpCb`]: /cheerpj3/reference/cheerpjInit#tailscaleipcb
