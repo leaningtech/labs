@@ -10,7 +10,6 @@ If you're not familiar with how CheerpJ and Tailscale work together, [read the n
 ## Pre-requisites
 
 - [Download `SwingHTMLBrowser.jar`](/cheerpj3/examples/SwingHTMLBrowser.jar)
-- [Node.js](https://nodejs.org/en/) (>= 18)
 - A simple HTTP server to host your page locally.
 - A text editor to create and edit an HTML file.
 - A modern browser like Chrome, Firefox or Safari.
@@ -22,18 +21,9 @@ Let's start by reviewing the Java application we will be testing. This is a simp
 
 You can type the full URL of a website in the input field and press enter to load the page. Note that the Swing web browser is fairly old, so sites may not display the same as in modern browsers.
 
-<table>
-	<tr>
-		<td>
-			<img src="/cheerpj2/assets/tinybrowser.png" width="350"></img>
-		</td>
-		<td>
-			<img src="/cheerpj2/assets/tinybrowserloaded.png" width="344"></img>
-		</td>
-	</tr>
-</table>
+<img class="w-1/2" src="/cheerpj2/assets/tinybrowserloaded.png"></img>
 
-In this scenario, the page is loading because the machine you are running this application on has an active connection to the internet and Java OpenJDK is installed.
+In this scenario, the page is loading because the machine you are running this application on has an active connection to the internet and Java is installed.
 
 ## 2. Run the application in the browser with CheerpJ
 
@@ -109,7 +99,6 @@ Now try loading a page that is hosted on the local server. Let's add the followi
 In the Java browser application type the following address: `http://127.0.0.1:8080/hello.html` (or any address that corresponds to your local host).
 
 <img src="/cheerpj2/assets/hello_sameorigin.png" width="600"></img>
-
 
 **CheerpJ can only do same-origin requests when is not connected to a Tailscale Network.** The convenience of this scenario is that, even when the app is running in the browser, it is completely isolated from the wider internet.
 
