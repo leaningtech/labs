@@ -1,8 +1,8 @@
 ---
-title: Installation on RHEL8 and CentOS
+title: Installation on RHEL9 and CentOS
 ---
 
-We provide pre-built RPM packages for RHEL8 (and CentOS 8).
+We provide pre-built RPM packages for RHEL9 (and CentOS 9).
 
 # Packages
 
