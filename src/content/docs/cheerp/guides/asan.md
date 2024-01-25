@@ -86,13 +86,13 @@ If you perform compilation and linking separately, you'll have to specify the `-
 When compiling with address sanitizer, you'll be able to specify environment variables through the `CHEERP_ENV` JavaScript global, which is an array of string key,value pairs. To get a list of all available ASan options add the following to the top of your generated JavaScript file:
 
 ```js
-const CHEERP_ENV = [["ASAN_OPTIONS", "help=1"]];
+const CHEERP_ENV = ["ASAN_OPTIONS=help=1"];
 ```
 
 You can separate flags with `:` like this:
 
 ```js
-const CHEERP_ENV = [["ASAN_OPTIONS", "option1=a:option2=b"]];
+const CHEERP_ENV = ["ASAN_OPTIONS=option1=a:option2=b"];
 ```
 
 ## Tips
