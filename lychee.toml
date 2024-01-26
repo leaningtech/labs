@@ -17,6 +17,7 @@ exclude = [
 	'.*rpm\.leaningtech\.com.*',
 	'.*mydomain\.com.*',
 	'.*microsoft\.com.*',
+	'.*medium\.com.*',
 	'file://.*',
 	'chrome://.*',
 	'wss?://*',
@@ -31,4 +32,3 @@ exclude = [
 	'https://www.wireguard.com/',
 	'.*\.ext2'	
 ]
-
