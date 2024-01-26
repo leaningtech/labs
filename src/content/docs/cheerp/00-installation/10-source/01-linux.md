@@ -168,6 +168,10 @@ cmake -B build_asmjs -DCMAKE_INSTALL_PREFIX="$CHEERP_DEST" -DCMAKE_TOOLCHAIN_FIL
 cmake --build build_asmjs
 cmake --install build_asmjs
 cd ../..
+
+cd cheerp-compiler/compiler-rt
+cmake -DCMAKE_INSTALL_PREFIX="$CHEERP_DEST" -B build -C CheerpCmakeConf.cmake -DCMAKE_TOOLCHAIN_FILE="$CHEERP_DEST/share/cmake/Modules/CheerpWasmToolchain.cmake" .
+make -C build install # parallel builds do NOT work
 ```
 
 ## Cheerp unit tests
