@@ -2,7 +2,7 @@
 title: Getting started
 ---
 
-To get started with Cheerp, you'll first need to [install it](/cheerp/installation). Or, you can try Cheerp without installing it with [Cheerp playground](https://cheerp.cppse.nl).
+To get started with Cheerp, you'll first need to [install it](/cheerp/installation).
 
 Cheerp in itself has no dependencies, but the recommended workflow and the tutorials make use of:
 
