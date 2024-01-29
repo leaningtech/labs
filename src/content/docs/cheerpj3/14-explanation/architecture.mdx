@@ -1,7 +1,9 @@
 ---
-title: CheerpJ components
+title: Architecture
 description: How does CheerpJ works?
 ---
+
+import LinkButton from "@/components/LinkButton.astro";
 
 CheerpJ is a WebAssembly-based **Java Virtual Machine for the browser**. This means Java applications can be executed from the browser with no Java installations. Amazing, right? but... How does it work?
 
@@ -47,33 +49,28 @@ Swing applications, will render exactly as they do in native. Swing Look&Feel is
 
 ### The virtualized file system
 
-CheepJ provides [multiple filesystem backends](cheerpj3/guides/File-System-support) to accommodate different application needs, including access to server-hosted files and persistent local storage.
+CheepJ provides multiple filesystem backends to accommodate different application needs, including access to server-hosted files and persistent local storage.
 
 ![](/cheerpj2/assets/filesystem.png)
 
-You can learn more about CheerpJ's filesystem at our [files and filesystems guide].
+<LinkButton
+	type="secondary"
+	href="/cheerpj3/guides/File-System-support"
+	iconRight="ep:arrow-right-bold"
+	label="File System guide"
+/>
 
 ### Networking support
 
 For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided *exit node*.
 ![CheerpJ 3.0 general networking](/cheerpj3/assets/general_networking.png)
-You can learn more about Networking with CheerpJ and Tailscale at our [Networking guide] and our [Networking tutorial 1] and [Networking tutorial 2].
 
-## Use cases
-
-Here we provide a list of the most common uses-cases that CheerpJ supports:
-
-- Restoration of legacy gaming, educational or personal content.
-- Modernization of enterprise software such Java applications, applets, Web Start / JNLP.
-- Building web applications with Java libraries.
-- Fully client-side Java development environments and playgrounds.
-
-CheerpJ is free for personal use and technical evaluation. See [licensing] for details.
-
-## Further reading
-
-- [Getting started](/cheerpj3/getting-started)
-- [Take a look to our tutorials](/cheerpj3/examples)
+<LinkButton
+	type="secondary"
+	href="/cheerpj3/guides/Networking"
+	iconRight="ep:arrow-right-bold"
+	label="Networking guide"
+/>
 
 [cheerp]: /cheerp
 [files and filesystems guide]: /cheerpj3/guides/File-System-support
