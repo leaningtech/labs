@@ -5,7 +5,7 @@ title: Changelog
 ## [3.0rc2](/blog/cheerpj-30rc2) - November 29, 2023
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
 - Reduced verbosity of debug messages

@@ -105,7 +105,7 @@ Example of an HTML file for an app where the class name is included in the manif
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ test</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 	</head>
 	<body>
 		<script>
@@ -151,7 +151,7 @@ The HTML for an applet would look like this:
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ applet test</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 	</head>
 	<body>
 		<applet

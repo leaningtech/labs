@@ -9,7 +9,7 @@ CheerpJ 3 is a complete reimplementation of CheerpJ 2, and as such it is not ful
 Include CheerpJ 3 on your page with the following snippet:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
 ## Breaking changes
@@ -37,7 +37,7 @@ This feature had no real use case because when using `java -jar`, the JAR file i
 CheerpJ can now be imported in a Web Worker without any special setup. Simply call [`importScripts`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts) from a worker to load CheerpJ, then use CheerpJ as usual. The `CheerpJWorker` class has been removed.
 
 ```js
-importScripts("https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js");
+importScripts("https://cjrtnc.leaningtech.com/3.0/cj3loader.js");
 
 // Use CheerpJ as usual
 (async () => {
