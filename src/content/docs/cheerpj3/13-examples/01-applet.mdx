@@ -1,5 +1,5 @@
 ---
-title: Pitch applet
+title: FoilSim applet
 description: Running an applet with CheerpJ
 ---
 
@@ -9,11 +9,11 @@ In this tutorial you will learn how to run a Java applet in a modern browser by 
 
 <LinkButton label="View demo" href="#the-result" />
 
-For this tutorial we will use the Pitch applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive animation of an aircraft's pitch motion. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/aircraft-rotations/).
+For this tutorial we will use the FoilSim applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive simulation of the aerodynamic forces of an aircraft's wings. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/foilsimu/).
 
 ## Prerequisites
 
-- [Download the template project](/cheerpj3/examples/applet-template.zip) and unzip it
+- [Download the template project](/cheerpj3/examples/FoilSim-Applet.zip) and unzip it
 - [Node.js](https://nodejs.org/en/) (>= 18)
 
 The template project has the following structure:
@@ -21,21 +21,7 @@ The template project has the following structure:
 ```
 .
 ├── index.html
-├── Pitchview.class
-├── Pitchview$Dispnl$Butpnl.class
-├── Pitchview$Dispnl$Conpnl.class
-├── Pitchview$Dispnl$Pic.class
-├── Pitchview$Dispnl.class
-└── images
-    ├── pit1.gif
-    ├── pit2.gif
-    ├── pit3.gif
-    ├── pit4.gif
-    ├── pit5.gif
-    ├── pit6.gif
-    ├── pit7.gif
-    ├── pit8.gif
-    └── pit9.gif
+└──  FoilSim.jar
 ```
 
 ## 1. Run a web server
@@ -77,16 +63,16 @@ A basic HTML file would look like this:
 
 The next step is to add the applet tag with its parameters, just like they used to be integrated on web pages. We will also add some titles, descriptions and styles.
 
-```html {24-31} title="index.html"
+```html {25-32} title="index.html"
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Pitch applet (CheerpJ)</title>
+		<title>FoilSim applet (CheerpJ)</title>
 	</head>
 	<style>
 		div {
-			max-width: 500px;
+			max-width: 1000px;
 			margin: auto;
 			text-align: center;
 		}
@@ -97,26 +83,32 @@ The next step is to add the applet tag with its parameters, just like they used 
 			margin-top: 20px;
 		}
 	</style>
+
 	<body>
 		<div>
 			<h1>Applet example with CheerpJ</h1>
 			<div>
-				<applet
-					archive="Pitchview.class"
-					code="Pitchview.class"
-					height="300"
-					width="500"
+				<cheerpj-applet
+					archive="FoilSim.jar"
+					code="Foil.class"
+					height="450"
+					width="950"
 				>
 					Your browser cannot handle the applet tag!
-				</applet>
+				</cheerpj-applet>
 			</div>
 			<h5>
 				The applet shown in this example belongs to the NASA's
-				<a href="https://www.grc.nasa.gov/WWW/K-12/airplane/">
-					Beginner's Guide to Aeronautics
-				</a>
+				<a href="https://www.grc.nasa.gov/WWW/K-12/airplane/"
+					>Beginner's Guide to Aeronautics</a
+				>
 				and it is available at their
-				<a href="https://github.com/nasa/BGA/tree/main"> GitHub repository </a>.
+				<a href="https://github.com/nasa/BGA/tree/main">GitHub repository</a>.
+			</h5>
+			<h5>
+				Applet is running with
+				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://leaningtech.com/">©Leaning Technologies</a>
 			</h5>
 		</div>
 	</body>
@@ -136,12 +128,12 @@ Your document will look like this:
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Pitch applet (CheerpJ)</title>
+		<title>FoilSim applet (CheerpJ)</title>
 		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
 	</head>
 	<style>
 		div {
-			max-width: 500px;
+			max-width: 1000px;
 			margin: auto;
 			text-align: center;
 		}
@@ -157,14 +149,14 @@ Your document will look like this:
 		<div>
 			<h1>Applet example with CheerpJ</h1>
 			<div>
-				<applet
-					archive="Pitchview.class"
-					code="Pitchview.class"
-					height="300"
-					width="500"
+				<cheerpj-applet
+					archive="FoilSim.jar"
+					code="Foil.class"
+					height="450"
+					width="950"
 				>
 					Your browser cannot handle the applet tag!
-				</applet>
+				</cheerpj-applet>
 			</div>
 			<h5>
 				The applet shown in this example belongs to the NASA's
@@ -196,13 +188,13 @@ Refresh your page and now you will be able to see your applet running!
 Your final page will look like this:
 
 <iframe
-	src="https://leaningtech.github.io/cheerpj-example-applet/"
+	src="https://leaningtech.github.io/cheerpj-meta/examples/FoilSim-Applet/"
 	class="w-full aspect-square"
 ></iframe>
 
 ## Source code
 
-[Find the full source code in GitHub](https://github.com/leaningtech/cheerpj-example-applet)
+[Find the full source code in GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/FoilSim-Applet)
 
 ## Credits
 
