@@ -1,0 +1,23 @@
+---
+interface Props {
+	title: string;
+	variant: string;
+}
+
+const { title, variant } = Astro.props;
+
+// NOTE: styles come from the remark-obsidian-callout plugin and lib/callout.css
+---
+
+<blockquote
+	data-callout={variant}
+	data-expandable="false"
+	data-expanded="false"
+>
+	<div class="callout-title">
+		{title}
+	</div>
+	<div>
+		<slot />
+	</div>
+</blockquote>

@@ -12,6 +12,7 @@ import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
 import ProductNav from "@/components/ProductNav.astro";
 import WasThisHelpful from "@/components/WasThisHelpful.astro";
+import Callout from "@/components/Callout.astro";
 
 interface Props {
 	id: string;
@@ -84,6 +85,17 @@ const directory = findNavDirectory(nav, [product.id]);
 							)}
 						</>
 					)
+				}
+				{
+					product.id === "cheerpj2" ? (
+						<Callout title="Deprecation notice" variant="warning">
+							CheerpJ 2 is deprecated. Consider{" "}
+							<a href="/cheerpj3/migrating-from-cheerpj2">
+								migrating to CheerpJ 3
+							</a>
+							.
+						</Callout>
+					) : null
 				}
 				<slot />
 			</main>
