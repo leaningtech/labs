@@ -25,4 +25,4 @@
 /news /blog
 /cheerpj3/reference/cheerpjAddStringFile /cheerpj3/reference/cheerpOSAddStringFile
 /cheerp/installation/rhel8 /cheerp/installation/rhel
-/cheerpj3/tutorials/* /cheerpj3/tutorials/:splat
+/cheerpj3/examples/* /cheerpj3/tutorials/:splat
