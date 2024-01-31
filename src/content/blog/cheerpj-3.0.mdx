@@ -93,16 +93,18 @@ For more details, we recently published [a blog post diving deep into CheerpJ 3.
 
 ## Demo: Minecraft
 
-[TODO: video](https://browsercraft.cheerpj.com)
+<video controls autoplay loop muted playsinline>
+	<source src="/blog/cheerpj-3.0-browsercraft.mp4" type="video/mp4" />
+</video>
+
+To showcase the capabilities of CheerpJ 3.0, we have released [a fully browser-based demo of Minecraft](https://browsercraft.cheerpj.com), probably one of the most well-known Java applications in the world. This experiment demonstrates how the capabilities of CheerpJ can be used to run real world applications as Web apps.
+
+We call this project “**Browsercraft**.”
 
 <div class="text-sm text-stone-500">
 	Browsercraft and CheerpJ are not official Minecraft products. They are not
 	approved by or associated with Mojang or Microsoft.
 </div>
-
-To showcase the capabilities of CheerpJ 3.0, we have released [a fully browser-based demo of Minecraft](https://browsercraft.cheerpj.com), probably one of the most well-known Java applications in the world. This experiment demonstrates how the capabilities of CheerpJ can be used to run real world applications as Web apps.
-
-We call this project “**Browsercraft**.”
 
 - **Unmodified JAR file**: CheerpJ can run the JAR file exactly as provided by Mojang. No decompilation or modification is required. As a matter of fact the JAR is downloaded from Mojang servers by the end-user's browser (via `fetch`) and then stored locally in the `/files/` filesystem. We don’t host or redistribute the JAR in any way.
 - **Persistent data**: Minecraft will generate a “World” which is saved on the persistent local filesystem. If you reload the tab you will be able to continue playing from the same world.
