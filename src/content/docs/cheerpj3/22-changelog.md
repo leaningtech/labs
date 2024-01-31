@@ -2,6 +2,22 @@
 title: Changelog
 ---
 
+## [3.0](/blog/cheerpj-30) - February 1, 2024
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+```
+
+- Support all Java opcodes in the JIT
+- Better support for missing JNI symbols
+- Improved support for socket syscalls
+- Support for loading native libraries as JavaScript modules
+- Support zero-copy passing of primitive arrays in library mode
+- Restore support for image filtering
+- Restore support for printing
+- Optimized font handling
+- Improved error message when server does not support content ranges
+
 ## [3.0rc2](/blog/cheerpj-30rc2) - November 29, 2023
 
 ```html
