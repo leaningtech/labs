@@ -13,18 +13,35 @@ tags:
   - CheerpJ
 ---
 
-<div class="text-xl leading-normal">
-	CheerpJ 3.0, a state-of-the-art WebAssembly JVM that runs in the browser, is
-	now available! It replaces CheerpJ 2.3 as our long-term supported version of
-	CheerpJ. Existing users can upgrade by following [the migration
-	guide](/cheerpj3/migrating-from-cheerpj2). In this post, we'll give an
-	overview of what CheerpJ is, what this new major release brings, and share an
-	exciting demo we've been working on.
+import LinkButton from "@/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+CheerpJ 3.0, **a state-of-the-art WebAssembly JVM that runs in the browser**, is
+now available! In this post, we'll give an
+overview of what CheerpJ is, what this new major release brings, and share an
+exciting demo we've been working on.
+
+<div class="flex items-center gap-2 flex-wrap">
+  <LinkButton
+    type="primary"
+    href="/cheerpj3/getting-started"
+    label="Get started with CheerpJ"
+    iconRight="mi:arrow-right"
+  />
+
+  <LinkButton
+    type="discord"
+    href={DISCORD_URL}
+    iconLeft="fa-brands:discord"
+    label="Join the Discord server"
+  />
 </div>
+
+CheerpJ 3.0 replaces CheerpJ 2.3 as our long-term supported version. Existing users can upgrade by following [the migration guide](/cheerpj3/migrating-from-cheerpj2).
 
 ---
 
-CheerpJ 3.0 is a full re-write of CheerpJ that draws from the lessons learned from 7 years of enterprise and community use of the tool, as well as from several of our other WebAssembly-based projects, particularly [CheerpX](/cheerpx), an x86-to-WebAssembly virtualization solution.
+CheerpJ 3.0 is a **full re-write** of CheerpJ that draws from the lessons learned from 7 years of enterprise and community use of the tool, as well as from several of our other WebAssembly-based projects, particularly [CheerpX](/cheerpx), an x86-to-WebAssembly virtualization solution.
 
 We believe that this release brings a new era for deploying large scale Java applications on the Web, and for integrating Java libraries into Web apps. This is a moment of great pride for us at Leaning Technologies, and is the culmination of two years of extremely focused work on the new CheerpJ 3.0 architecture.
 
@@ -113,8 +130,6 @@ await cheerpjInit();
 ```
 
 CheerpJ is [extensively documented](/cheerpj3), ranging from basic tutorials to the detailed API reference.
-
-import LinkButton from "@/components/LinkButton.astro";
 
 <LinkButton
 	type="primary"
