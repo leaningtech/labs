@@ -33,6 +33,11 @@ blockquote[data-expandable="true"][data-expanded="false"] .callout-caret {
 	transform: rotate(-90deg);
 }
 
+blockquote[data-callout] > div:not(.callout-title) > p {
+	@apply leading-normal;
+	margin: 0;
+}
+
 /* Fallback colours */
 blockquote[data-callout] {
 	@apply bg-blue-400 bg-opacity-10;
