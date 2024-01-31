@@ -12,11 +12,11 @@ interface Props {
 <site-search class="inline-block sm:w-80 h-10 max-w-full">
 	<button
 		data-open-modal
-		class="group text-stone-300 border-stone-500 hover:border-stone-400 sm:border border-opacity-50 rounded-md px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors"
+		class="group text-stone-400 border-stone-700 hover:border-stone-500 sm:border border-opacity-50 rounded-md px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors bg-stone-900 bg-opacity-50 backdrop-blur-lg"
 	>
 		<Icon
 			name="fa-solid:search"
-			class="w-4 h-4 mr-0.5 text-stone-200 group-hover:text-white transition-colors"
+			class="w-4 h-4 mr-0.5 group-hover:text-white transition-colors"
 		/>
 		<span class="group-hover:text-white transition-colors hidden sm:block"
 			>Search</span
@@ -84,8 +84,9 @@ interface Props {
 				if (event.key === "/") {
 					open();
 					event.preventDefault(); // Don't put `/` in input
-				} else if (event.metaKey && event.key === "k") {
+				} else if ((event.metaKey || event.ctrlKey) && event.key === "k") {
 					toggle();
+					event.preventDefault();
 				}
 			});
 

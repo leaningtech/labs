@@ -13,6 +13,7 @@ import Footer from "../components/Footer.astro";
 import ProductNav from "@/components/ProductNav.astro";
 import WasThisHelpful from "@/components/WasThisHelpful.astro";
 import Callout from "@/components/Callout.astro";
+import BentoGrid from "@/components/patterns/BentoGrid.astro";
 
 interface Props {
 	id: string;
@@ -40,8 +41,9 @@ const directory = findNavDirectory(nav, [product.id]);
 		.join(" - ")}
 	description={description ?? product.description}
 >
+	<BentoGrid />
 	<ProductNav {product} />
-	<docs-article class="max-w-[92rem] w-full mx-auto flex">
+	<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
 		<div
 			data-sidebar-wrapper
 			class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
