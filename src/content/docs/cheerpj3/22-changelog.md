@@ -2,7 +2,7 @@
 title: Changelog
 ---
 
-## [3.0](/blog/cheerpj-30) - February 1, 2024
+## [3.0](/blog/cheerpj-3.0) - February 1, 2024
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
