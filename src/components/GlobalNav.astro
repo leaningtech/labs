@@ -2,6 +2,7 @@
 import companyLogo from "../assets/branding/company/tower.svg";
 import EventBanner from "./EventBanner.svelte";
 import { Image } from "astro:assets";
+import LatestBlogPostPill from "./LatestBlogPostPill.astro";
 
 const links = [
 	{ name: "Cheerp", href: "/cheerp" },
@@ -30,6 +31,9 @@ const links = [
 				Leaning Technologies <span class="text-stone-400">Developer</span>
 			</span>
 		</a>
+		<div class="px-9 hidden lg:block overflow-hidden">
+			<LatestBlogPostPill />
+		</div>
 		<div
 			class="hidden sm:flex items-center gap-4 ml-auto flex-none font-medium"
 		>
