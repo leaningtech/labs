@@ -53,14 +53,7 @@ export default defineConfig({
 		}),
 	],
 	markdown: {
-		remarkPlugins: [
-			[
-				remarkObsidianCallout,
-				{
-					blockquoteClass: "not-prose",
-				},
-			],
-		],
+		remarkPlugins: [[remarkObsidianCallout, {}]],
 		rehypePlugins: [
 			rehypeSlug, // astro does this automatically but rehype-autolink-headings needs it
 			[

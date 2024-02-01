@@ -1,5 +1,6 @@
 ---
-title: "Deep dive into CheerpJ 3.0: A WebAssembly Java Virtual Machine for the browser"
+title: "Deep dive into CheerpJ 3.0"
+subtitle: A WebAssembly Java Virtual Machine for the browser
 description: |
   CheerpJ is a WebAssembly-based JVM that runs fully client side in the browser. It supports Java applications, legacy applets and libraries, with no need for compilation, server backends, plugins, or post-processing steps. CheerpJ 3.0 introduces a completely new JIT-based architecture which makes the tool faster, more usable and much more powerful.
 authors:
@@ -18,7 +19,7 @@ CheerpJ is a **WebAssembly-based JVM that runs fully client side** in the browse
 import LinkButton from "@/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-2 flex-wrap">
   <LinkButton
     type="primary"
     href="/cheerpj3/getting-started"
@@ -36,7 +37,7 @@ import { DISCORD_URL } from "@/consts.ts";
 
 CheerpJ was originally released in 2017, quickly becoming Leaning Technologies' most widely known and successful product. In the last six years, we collected a vast amount of feedback from users that led us to perform a full rewrite of CheerpJ, which [we announced in May](/blog/announcing-cheerpj-3).
 
-CheerpJ 3.0 introduces a completely new JIT-based architecture which makes the tool faster, more usable and much more powerful. It will be fully released in January 2024, with support for Java 8. [A release candidate is available](/blog/cheerpj-30rc2) for developers and organizations to test and evaluate it. Thanks to its new runtime architecture, subsequent releases of CheerpJ will expand its support to more recent LTS releases of Java, starting from Java 11.
+CheerpJ 3.0 introduces a completely new JIT-based architecture which makes the tool faster, more usable and much more powerful. [CheerpJ 3.0 was released in January 2024](/blog/cheerpj-3.0), with support for Java 8. Thanks to its new runtime architecture, subsequent releases of CheerpJ will expand its support to more recent LTS releases of Java, starting from Java 11.
 
 ## What can CheerpJ do?
 
@@ -236,12 +237,12 @@ We are very proud of what we have achieved, nevertheless there are currently som
 - **No support for third-party JNI components:** There are a few large scale Java apps that cannot run in CheerpJ at this time since they depend on binary libraries. The most notable of these is Minecraft, which uses _LWJGL_. In the future we plan to release our JNI implementation to the public, allowing users to build their own WebAssembly JNI modules from C/C++.
 - **WasmGC support:** The most keen reader might be wondering how the recently standardized WasmGC extension to WebAssembly impacts our work. As things stand we don’t think WasmGC will be necessary to reach a satisfactory level of performance, but it’s possible that our evaluation will change in the future. In any case, if CheerpJ will eventually introduce WasmGC as a JIT target, it will be a purely internal implementation detail. From the point of view of the user nothing will change besides a performance improvement.
 
-## Get started right away
+## Get started
 
-Although CheerpJ 3.0 is not yet fully released, we are making it available to the public in the form of a release candidate: version 3.0rc2 is now available to the public. You can use it by simply adding a script tag to any HTML page:
+You can use CheerpJ by simply adding a script tag to any HTML page:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
 <div class="pt-2">
@@ -252,12 +253,6 @@ Although CheerpJ 3.0 is not yet fully released, we are making it available to th
 		iconRight="mi:arrow-right"
 	/>
 </div>
-
-Your feedback is invaluable in helping us identify and fix potential issues and ensure that the final release is as stable and polished as possible. Here are some ways to help:
-
-- Try the release candidate today in your real-world scenarios
-- Report any bugs or issues you encounter on [GitHub](https://github.com/leaningtech/cheerpj-meta/issues)
-- Join our [Discord](https://discord.leaningtech.com/) to share what you’re working on or suggest new features
 
 For additional information please refer to our [fully revamped documentation](/cheerpj3).
 

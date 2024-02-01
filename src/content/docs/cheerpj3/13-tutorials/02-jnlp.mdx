@@ -37,7 +37,7 @@ We are going to start by looking at the JNLP file. Below, there is an example of
 ```xml {3, 15-19, 21 } title="SwingSet3.jnlp"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc.//DTD JNLP 1.5//EN">
-<jnlp codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main" href="SwingSet3.jnlp" spec="6.0+">
+<jnlp codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/SwingSet3/" href="SwingSet3.jnlp" spec="6.0+">
   <information>
     <title>SwingSet3</title>
     <vendor>Oracle America, Inc.</vendor>
@@ -65,7 +65,7 @@ Download the application JAR files by manually building their full URL and pasti
 For example:
 
 ```
-https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main/SwingSet3.jar
+https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/SwingSet3/SwingSet3.jar
 
 ```
 
@@ -115,7 +115,7 @@ Inside our project directory `cheerpj-example-swingset3` we will create a basic 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>SwingSet3 (CheerpJ)</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 		<style>
 			html,
 			body {
@@ -144,7 +144,7 @@ Inside our project directory `cheerpj-example-swingset3` we will create a basic 
 - The CheerpJ runtime environment is being integrated at:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
 - [`cheerpjInit()`] initializes the CheerpJ runtime environment
@@ -202,7 +202,7 @@ We are going to start by looking at the JNLP file. Below, there is an JNLP examp
 <!-- JNLP File for Pitch applet -->
 <jnlp
   spec="1.0+"
-  codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main"
+  codebase="https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/Pitch-Applet/"
 
   href="PitchApplet.jnlp">
   <information>
@@ -230,7 +230,7 @@ Download the applet JAR files by manually building the full URL and pasting it i
 For example:
 
 ```
-https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main/Pitch.jar
+https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/Pitch-Applet/Pitch.jar
 
 ```
 
@@ -260,7 +260,7 @@ Inside the project directory, create an HTML file called `index.html` like the f
 	<head>
 		<meta charset="utf-8" />
 		<title>Pitch applet (CheerpJ)</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 	</head>
 	<style>
 		div {
@@ -315,7 +315,7 @@ Inside the project directory, create an HTML file called `index.html` like the f
 - The CheerpJ runtime environment is being integrated at:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc2/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
 - The `<cheerpj-applet>` tag contains the applet `.jar` location, size and class name. This tag prevents conflicts with native java, the classic `<applet>` tag can also be used.

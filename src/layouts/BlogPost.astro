@@ -19,14 +19,19 @@ type Props = CollectionEntry<"blog">["data"] & {
 	headings: BasicHeading[] | undefined;
 };
 
-const { id, title, description, pubDate, heroImage, headings, tags } =
+const { id, title, subtitle, description, pubDate, heroImage, headings, tags } =
 	Astro.props;
 
 const authors = await resolveAuthors(Astro.props.authors);
 const showAuthorSection = authors.length > 0;
+
+let titleAndSubtitle = title;
+if (subtitle) {
+	titleAndSubtitle += `: ${subtitle}`;
+}
 ---
 
-<Shell {title} {description} image={heroImage?.src}>
+<Shell title={titleAndSubtitle} {description} image={heroImage?.src}>
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
 			href="/blog"
@@ -40,7 +45,7 @@ const showAuthorSection = authors.length > 0;
 				<Image
 					src={heroImage}
 					alt=""
-					class="rounded-xl w-full mx-auto mb-8 object-cover h-[30rem] bg-white"
+					class="rounded-xl w-full mx-auto mb-8 object-cover max-h-[30rem] bg-white"
 					width={1232}
 					height={480}
 					quality="max"
@@ -53,6 +58,13 @@ const showAuthorSection = authors.length > 0;
 			id="introduction"
 		>
 			{title}
+			{
+				subtitle && (
+					<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
+						{subtitle}
+					</span>
+				)
+			}
 		</h1>
 
 		<div class="flex flex-col lg:flex-row gap-10 mt-16">
@@ -185,9 +197,5 @@ const showAuthorSection = authors.length > 0;
 		display: inline-block;
 		width: 24px;
 		@apply fill-stone-400;
-	}
-
-	.prose :where(img):not(:where([class~="not-prose"])) {
-		@apply rounded-lg bg-stone-200;
 	}
 </style>
