@@ -84,7 +84,7 @@ It is a sophisticated tool with many moving parts, the main ones being:
 - A WebAssembly **JVM and Just-In-Time compiler** for Java bytecode. The code contained in class files is dynamically compiled and optimized. The JIT compiler supports advanced optimizations such as inlining and dynamic devirtualization.
 - A complete and unmodified build of **OpenJDK.**
 - **A Virtualized system layer, including:**
-  - [Virtualized file systems](/cheerpj3/File-System-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data via `/str/`.
+  - [Virtualized file systems](/cheerpj3/guides/File-System-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data via `/str/`.
   - [Virtualized networking](/cheerpj3/guides/Networking) support via Tailscale. Both server and client applications are supported.
 
 Readers familiar with the previous CheerpJ 2.3 architecture will notice the lack of AOT compilation, which has been removed in CheerpJ 3.0. The performance impact of this change has been vastly positive in all real-world applications tested, with a particular benefit in the reduction of startup time.
