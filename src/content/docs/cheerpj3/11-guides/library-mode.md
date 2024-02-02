@@ -12,7 +12,7 @@ async function libraryModeTour() {
 	await cheerpjInit();
 
 	// Create a library mode object
-	const lib = await cheerpjRunLibrary("/app/");
+	const lib = await cheerpjRunLibrary(""); // "" means standard library only
 
 	// Resolve the Java classes we are going to use
 	const ArrayList = await lib.java.util.ArrayList;
