@@ -19,6 +19,7 @@ export interface ProductData {
 	subtitle: string;
 	description: string;
 	github: string;
+	repositoryName: string;
 }
 
 export const products: { [product in Product]: ProductData } = {
@@ -31,6 +32,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Compile C++ for the browser",
 		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
 		github: "https://github.com/leaningtech/cheerp-meta",
+		repositoryName: "cheerp-meta",
 	},
 	cheerpj2: {
 		id: "cheerpj2",
@@ -42,6 +44,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 		github: "https://github.com/leaningtech/cheerpj-meta",
+		repositoryName: "cheerpj-meta",
 	},
 	cheerpj3: {
 		id: "cheerpj3",
@@ -53,6 +56,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 		github: "https://github.com/leaningtech/cheerpj-meta",
+		repositoryName: "cheerpj-meta",
 	},
 	cheerpx: {
 		id: "cheerpx",
@@ -64,6 +68,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Execute native binaries in the browser with the CheerpX virtual machine.",
 		github: "https://github.com/leaningtech/webvm", // TODO
+		repositoryName: "webvm",
 	},
 	"cheerpx-for-flash": {
 		id: "cheerpx-for-flash",
@@ -75,6 +80,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
 		github: "https://github.com/leaningtech/cheerpx-flash",
+		repositoryName: "cheerpx-flash",
 	},
 };
 
