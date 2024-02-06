@@ -25,6 +25,7 @@ async function cheerpjInit(options?: {
 	tailscaleAuthKey?: string;
 	tailscaleLoginUrlCb?: (url: string) => void;
 	tailscaleIpCb?: (ip: string) => void;
+	licenseKey?: string;
 }): Promise<void>;
 ```
 
@@ -356,6 +357,20 @@ cheerpjInit({
 		console.log("IP address " + ip);
 	},
 });
+```
+
+### `licenseKey`
+
+```ts
+licenseKey?: string;
+```
+
+This option expects a license key string. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used.
+
+Example of usage:
+
+```js
+cheerpjInit({ licenseKey: "YourLicenseKey" });
 ```
 
 [cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
