@@ -39,7 +39,14 @@ const getStartedHref = nav.entries.filter(
 		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
 			<a href={DISCORD_URL} class="flex items-center gap-1.5 hover:text-white">
 				<Icon name="fa-brands:discord" class="w-5 h-5" />
-				<span class="sr-only md:not-sr-only">Community</span>
+				<span class="sr-only md:not-sr-only"></span>
+			</a>
+			<a
+				href={product.github}
+				class="flex items-center gap-1.5 hover:text-white"
+			>
+				<Icon name="fa-brands:github" class="w-5 h-5" />
+				<span class="sr-only md:not-sr-only"></span>
 			</a>
 
 			{
