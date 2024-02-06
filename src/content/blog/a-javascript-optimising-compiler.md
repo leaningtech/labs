@@ -63,7 +63,7 @@ Now the problem I was left with looked like this: how to generate C++ code that 
 
 I researched a bit what tools were available for parsing JavaScript into an [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree), found that [TypeScript](https://www.typescriptlang.org/) has an easy to hack demo on how to build a [linter on their AST](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API#traversing-the-ast-with-a-little-linter). It was the perfect starting point.
 
-TypeScript is a superset of JavaScript that allows to add type information to parameters / returns / variables, and it has to be compiled to JavaScript to be run by engines.
+TypeScript is a superset of JavaScript that allows one to add type information to parameters / returns / variables, and it has to be compiled to JavaScript to be run by engines.
 
 (Note, one of TypeScript explicit [non-goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals#non-goals) is optimizing the resulting code, so the TypeScript Compiler is mostly busy checking that no forbidden operations are done, using the type information whenever provided)
 

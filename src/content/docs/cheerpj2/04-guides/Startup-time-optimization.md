@@ -62,7 +62,7 @@ More details are available [here](/cheerpj2/reference/Command-Line-Options#pack-
 
 CheerpJ cannot predict which runtime resources will be required by an arbitrary application. CheerpJ runtime resources are therefore loaded on demand, one after the other, depending on the requirements of the application at run time.
 
-To take advantage of parallel downloads, and reduce download and startup time of a specific application in production, CheerpJ allows to pre-specify a list of resources (CheerpJ runtime modules) to be loaded at startup.
+To take advantage of parallel downloads, and reduce download and startup time of a specific application in production, CheerpJ allows one to pre-specify a list of resources (CheerpJ runtime modules) to be loaded at startup.
 
 This list of resources is to be specified manually when starting the CheerpJ environment in an HTML page. We also provide a simple profiling tool to automatically record and output a list of used resources during the execution of an application.
 

@@ -14,7 +14,7 @@ Here at Leaning Technologies we build compilers for the Web (which output a comb
 
 Think taking a C++ codebase, feeding it into a LLVM/clang based compiler, and getting something that can to interact with arbitrary JavaScript libraries and the general browser environment. This is [Cheerp](https://leaningtech.com/pages/cheerp.html) in a nutshell.
 
-Recently, I have been working on one of Cheerp’s unique features, `[[cheerp::jsexport]]`, a custom attribute that allows to create powerful interfaces between generated and ‘native’ JavaScript. Some cool things now possible thanks to this technology will be shown in this article series. Enjoy!
+Recently, I have been working on one of Cheerp’s unique features, `[[cheerp::jsexport]]`, a custom attribute that allows one to create powerful interfaces between generated and ‘native’ JavaScript. Some cool things now possible thanks to this technology will be shown in this article series. Enjoy!
 
 ![](/blog/0*WncSwGz75W-GAPRO.gif)
 

@@ -40,7 +40,7 @@ int factorial(int N) {
 }
 ```
 
-This example exposes the a factorial free function and a JsStruct class, and allows to create and use the JsStruct instances from JavaScript, for example:
+This example exposes the a factorial free function and a JsStruct class, and allows one to create and use the JsStruct instances from JavaScript, for example:
 
 ```js
 var testExport = new JsStruct(3.0, 42);
@@ -53,7 +53,7 @@ Classes or struct that have to be JSExported have to tagged with both `[[cheerp:
 
 # The \_\_asm\_\_ keyword
 
-A different mechanism allows to inline JavaScript code in the middle of a C++ application. Similarly to a traditional architecture, the `__asm__` keyword permits to write native (JavaScript) code. This functionality can be used to interface with external JS libraries which have no Cheerp compatible headers yet.
+A different mechanism allows one to inline JavaScript code in the middle of a C++ application. Similarly to a traditional architecture, the `__asm__` keyword permits to write native (JavaScript) code. This functionality can be used to interface with external JS libraries which have no Cheerp compatible headers yet.
 
 The following is a simple example of JavaScript inlining in C++:
 
