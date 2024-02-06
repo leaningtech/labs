@@ -24,7 +24,7 @@ Before WebAssembly was a thing, Cheerp supported compiling C++ code to plain Jav
 
 Despite JavaScript nominally only supporting double-precision floating point numbers, we can efficiently and precisely represent 32-bit integers. We can then decompose a single 64-bit value as an array of two 32-bit values, and implement all the operations in terms of the higher and lower 32 bits explicitly.
 
-This may be not very efficient, but it allows to compile programs that make use of types like `int64_t` (aka `long long` ) and `uint64_t` (aka `unsigned long long` ).
+This may be not very efficient, but it allows one to compile programs that make use of types like `int64_t` (aka `long long` ) and `uint64_t` (aka `unsigned long long` ).
 
 Clang usually compiles these C++ types into the LLVM `i64` type. But since we cannot represent `i64` in JavaScript, we modified Clang to compile operations on `int64_t/uint64_t` in terms of 32-bit instructions on the `i32`type. This decomposition was done directly in Clang when generating LLVM IR code. The reasoning behind this was to do this operation as soon as possible to enable more optimizations, and to never have `i64` values in our IR to avoid possible issues.
 
@@ -71,7 +71,7 @@ On top of all this, we wanted a solution that would allow us in the future to ta
 
 ## JavaScript has actual integers now!
 
-`[BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)` is a new numerical type recently added to JavaScript. It allows to precisely represent and compute arbitrarily sized integers. The new `[BigInt64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt64Array)` also allows to efficiently use 64-bit values in arrays.
+`[BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)` is a new numerical type recently added to JavaScript. It allows one to precisely represent and compute arbitrarily sized integers. The new `[BigInt64Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt64Array)` also allows one to efficiently use 64-bit values in arrays.
 
 We can use these features to solve the issue of representing types like `int64_t` for code that is compiled to JavaScript.
 
