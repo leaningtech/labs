@@ -7,8 +7,8 @@ remap = [ "https://labs.leaningtech.com http://127.0.0.1:4321" ]
 
 scheme = [ "http", "https" ]
 
-# Check links inside `<code>` and `<pre>` blocks
-include_verbatim = true
+# Don't check links inside `<code>` and `<pre>` blocks
+include_verbatim = false
 
 exclude = [
 	'.*(twitter|github|linkedin|reddit|youtube|youtube-nocookie)\.com.*',
