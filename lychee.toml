@@ -25,6 +25,8 @@ exclude = [
 	'https://swingset3.dev.java.net/',
 	'https://raw.githubusercontent.com/leaningtech/cheerpj-example-applet/main',
 	'https://raw.githubusercontent.com/leaningtech/cheerpj-example-swingset3/main',
+	'https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/SwingSet3/',
+	'https://raw.githubusercontent.com/leaningtech/cheerpj-meta/main/examples/Pitch-Applet/',
 	'https://swingset3.dev.java.net/',
 	'https://my.url.com/',
 	'https://www.w3.org/.*',
