@@ -53,13 +53,19 @@ import { DISCORD_URL } from "@/consts.ts";
 
 With CheerpJ, you can:
 
-- Run existing **Java applications** in the browser with no changes
-- Include **Java applets** in webpages without legacy plugins
-- Migrate **Java Web Start / JNLP** applications to work on modern systems
-- Use **Java libraries** in JavaScript/TypeScript seamlessly
+- Run existing **[Java applications]** in the browser with no changes
+- Include **[Java applets]** in webpages without legacy plugins
+- Migrate **[Java Web Start / JNLP]** applications to work on modern systems
+- Use **[Java libraries]** in JavaScript/TypeScript seamlessly
 - Interoperate between Java and JavaScript libraries
 
-CheerpJ is based on a full OpenJDK runtime environment. It supports reflection, custom classloaders, networking, file access, clipboard, audio, printing, Swing, and AWT.
+CheerpJ is based on a full OpenJDK runtime environment and supports:
+
+- [Networking]
+- [Virtualized filesystem]
+- [Clipboard]
+- Audio
+- Printing
 
 <LinkButton
 	label="Get started"
@@ -169,3 +175,11 @@ We have a vibrant Discord community where you can ask questions, share your proj
 ---
 
 [^compat]: CheerpJ has been tested on Oracle Forms, EBS, Swing, AWT, and numerous frameworks and libraries. It should be able to run Java SE applications that you would otherwise need a Java Runtime Environment for.
+
+[Java applications]: /cheerpj3/getting-started/Java-app
+[Java applets]: /cheerpj3/getting-started/Java-applet
+[Java Web Start / JNLP]: /cheerpj3/getting-started/JNLP
+[Java libraries]: /getting-started/Java-library
+[Networking]: /cheerpj3/guides/Networking
+[Virtualized filesystem]: /cheerpj3/guides/File-System-support
+[Clipboard]: /cheerpj3/reference/cheerpjInit#clipboardmode
