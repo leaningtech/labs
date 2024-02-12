@@ -2,17 +2,19 @@
 	import Nasa from "../../assets/branding/landing_imgs/clients/nasa2.png";
 	import TicketMaster from "../../assets/branding/landing_imgs/clients/ticketmaster.png";
 	import Leonardo from "../../assets/branding/landing_imgs/clients/leonardo.png";
-	import Blackbird from "../../assets/branding/landing_imgs/clients/blackbird.png";
-	import Phet from "../../assets/branding/landing_imgs/clients/phet.png";
 	import Siemens from "../../assets/branding/landing_imgs/clients/siemens.png";
+	import Euronext from "../../assets/branding/landing_imgs/clients/euronext.png";
+	import Uscustoms from "../../assets/branding/landing_imgs/clients/usa.png";
+	import Dalkia from "../../assets/branding/landing_imgs/clients/dalkia.png";
 
 	const clientImages = [
 		{ src: Nasa, alt: "NASA" },
 		{ src: TicketMaster, alt: "TicketMaster" },
 		{ src: Leonardo, alt: "Leonardo" },
-		{ src: Blackbird, alt: "Blackbird" },
-		{ src: Phet, alt: "Phet" },
 		{ src: Siemens, alt: "Siemens" },
+		{ src: Euronext, alt: "Euronext" },
+		{ src: Uscustoms, alt: "Uscustoms" },
+		{ src: Dalkia, alt: "Dalkia" },
 	];
 
 	// To do the scroll animation, we need to repeat the images
