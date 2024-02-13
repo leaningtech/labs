@@ -18,7 +18,20 @@ const getStartedHref = nav.entries.filter(
 )[0]?.href;
 const githubData = await fetch(
 	"https://api.github.com/repos/leaningtech/" + product.repositoryName,
-).then((response) => response.json());
+)
+	.then((response) => {
+		if (response.ok) {
+			return response.json();
+		}
+		throw new Error("Something went wrong");
+	})
+	.then((responseJson) => {
+		return responseJson.stargazers_count;
+	})
+	.catch((error) => {
+		console.log("couldn't fetch from GitHub" + error);
+		return 0;
+	});
 ---
 
 <nav
@@ -46,11 +59,17 @@ const githubData = await fetch(
 			</a>
 			<a
 				href={product.github}
-				class="rounded-md flex items-center bg-stone-700 p-1 gap-1.5 hover:text-white"
+				class="rounded-md flex items-center justify-middle bg-stone-700 p-1 gap-1.5 hover:text-white"
 			>
 				<Icon name="fa-brands:github" class="w-5 h-5" />
-				<Icon name="ph:star-bold" class="w-3 h-3" />
-				{githubData.stargazers_count}
+				{
+					githubData > 0 && (
+						<p class="flex items-center justify-between">
+							<Icon name="ph:star-bold" class="w-3 h-3" />
+							{githubData}
+						</p>
+					)
+				}
 			</a>
 
 			{
