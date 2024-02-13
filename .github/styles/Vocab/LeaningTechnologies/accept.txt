@@ -6,6 +6,7 @@ WebVM
 CheerpJ Applet Runner
 cjCall
 cjNew
+Cheerp Memory Profiler
 
 Astro
 Yarn
@@ -56,6 +57,7 @@ Headscale
 ASan
 LSan
 uninstrumented
+superset
 
 
 

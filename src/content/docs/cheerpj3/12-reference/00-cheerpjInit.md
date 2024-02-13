@@ -365,7 +365,7 @@ cheerpjInit({
 licenseKey?: string;
 ```
 
-This option expects a license key string. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used.
+This option expects a license key. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used. Please visit our [licensing guide](/cheerpj3/licensing) for more information.
 
 Example of usage:
 
