@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import Shell from "../../layouts/Shell.astro";
+import Footer from "../../components/Footer.astro";
+
+import CheerpJLogo from "../../assets/branding/products/cheerpj/logotype-white.svg";
+---
+
+<Shell
+	title="Leaning Techologies Engineering Blog"
+	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+>
+	<header class="text-center text-stone-100 py-32">
+		<div class="flex justify-center items-center">
+			<Image
+				src={CheerpJLogo}
+				width="300"
+				height="129"
+				class="invisible md:visible"
+				alt="CheerpJ logo"
+			/>
+		</div>
+		<p class="text-lg text-balance my-8">
+			Run a Java application in the browser (Demo)
+		</p>
+
+		<div
+			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
+		>
+			<!-- cool background -->
+		</div>
+	</header>
+	<body>
+		<div class="flex justify-center items-center">
+			<div class="max-w-xl">
+				<label
+					class="flex justify-center w-full h-32 px-20 transition bg-stone-800 border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
+				>
+					<span class="flex items-center space-x-2">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="w-6 h-6 text-white"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+							></path>
+						</svg>
+						<span class="font-medium text-white">
+							Drop a JAR file or
+							<span class="text-blue-300 underline">browse</span>
+						</span>
+					</span>
+					<input type="file" name="file_upload" class="hidden" />
+				</label>
+			</div>
+		</div>
+	</body>
+
+	<Footer />
+</Shell>
