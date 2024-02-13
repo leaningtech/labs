@@ -7,23 +7,10 @@ import CheerpJLogo from "../../assets/branding/products/cheerpj/logotype-white.s
 ---
 
 <Shell
-	title="Leaning Techologies Engineering Blog"
-	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+	title="CheerpJ Demo"
+	description="Run a Java application example or your own JAR file"
 >
-	<header class="text-center text-stone-100 py-32">
-		<div class="flex justify-center items-center">
-			<Image
-				src={CheerpJLogo}
-				width="300"
-				height="129"
-				class="invisible md:visible"
-				alt="CheerpJ logo"
-			/>
-		</div>
-		<p class="text-lg text-balance my-8">
-			Run a Java application in the browser (Demo)
-		</p>
-
+	<header>
 		<div
 			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
 		>
@@ -31,6 +18,29 @@ import CheerpJLogo from "../../assets/branding/products/cheerpj/logotype-white.s
 		</div>
 	</header>
 	<body>
+		<div class="text-center text-stone-100 py-32">
+			<div class="flex justify-center items-center">
+				<Image
+					src={CheerpJLogo}
+					width="300"
+					height="129"
+					class="invisible md:visible"
+					alt="CheerpJ logo"
+				/>
+			</div>
+			<p class="text-lg text-balance my-8">
+				Select an example
+				<select data-te-select-init>
+					<option hidden selected>Select</option>
+					<option value="1">SwingSet3</option>
+					<option value="2">FoilSim</option>
+					<option value="3">Pitch</option>
+				</select>
+				 or run your own JAR:
+			</p>
+		</div>
+
+		<!-- JAR picker -->
 		<div class="flex justify-center items-center">
 			<div class="max-w-xl">
 				<label
@@ -52,15 +62,19 @@ import CheerpJLogo from "../../assets/branding/products/cheerpj/logotype-white.s
 							></path>
 						</svg>
 						<span class="font-medium text-white">
-							Drop a JAR file or
+							Drop a file or
 							<span class="text-blue-300 underline">browse</span>
 						</span>
 					</span>
-					<input type="file" name="file_upload" class="hidden" />
+					<input
+						type="file"
+						name="file_upload"
+						class="hidden"
+						accept=".jar, .class"
+					/>
 				</label>
 			</div>
 		</div>
+		<Footer />
 	</body>
-
-	<Footer />
 </Shell>
