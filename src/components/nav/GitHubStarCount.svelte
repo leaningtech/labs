@@ -1,4 +1,6 @@
 <script lang="ts">
+	import formatCount from "./format-count";
+
 	export let repo: string; // user/repo
 
 	let localStorageKey = `github-stars-${repo}`;
@@ -35,13 +37,6 @@
 			.catch((error) => {
 				console.error("couldn't fetch from GitHub" + error);
 			});
-	}
-
-	// Format count as 1.2k etc
-	function formatCount(count: number): string {
-		if (count < 1000) return count.toString();
-		if (count < 10000) return (count / 1000).toFixed(1) + "k"; // 1.2k
-		return Math.round(count / 1000) + "k"; // 12k
 	}
 </script>
 
