@@ -90,4 +90,4 @@ If this post has sparked your curiosity about profiling and exploring Linux perf
 
 Once you feel comfortable with the tools, you can utilise one of our custom scripts. The script is designed to launch Chromium and record the open tab using Linux perf, offering a user-friendly experience.
 
-Feel free to explore the repository and stay tuned for further updates. For any questions, join us on [Discord](https://discord.gg/yTNZgySKGa), or get in touch with me on [Twitter](https://twitter.com/panicodes)!
+Feel free to explore the repository and stay tuned for further updates. For any questions, join us on Discord or get in touch with me on [Twitter](https://twitter.com/panicodes)!

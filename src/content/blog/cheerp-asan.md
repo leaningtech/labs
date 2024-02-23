@@ -274,7 +274,7 @@ ASan is now included in our nightly builds of Cheerp. You can download Cheerp
 If you want more details on how to use ASan for Cheerp or Cheerp itself, check
 out the [Cheerp documentation](https://labs.leaningtech.com/cheerp).
 
-For further support make sure to join our [Discord](https://discord.gg/3KwTYvVDZR) where you will find
+For further support make sure to join our Discord where you will find
 Leaning Technologies core developers. We are always happy to help!
 
 We hope you will enjoy using Cheerp. See you soon!

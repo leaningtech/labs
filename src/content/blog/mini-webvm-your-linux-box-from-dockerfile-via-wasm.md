@@ -88,7 +88,7 @@ Mini.WebVM is centered around ease-of-use and designed to unleash the creative p
 
 Work is well underway for our next big release, booting a whole desktop environment in the browser. And, later in the year, running Windows applications and games using WINE.
 
-Stay tuned for further updates. For any question, join us on [Discord](https://discord.gg/yTNZgySKGa), or get in touch on [Twitter](https://twitter.com/alexpignotti).
+Stay tuned for further updates. For any question, join us on Discord or get in touch on [Twitter](https://twitter.com/alexpignotti).
 
 For more information:
 
