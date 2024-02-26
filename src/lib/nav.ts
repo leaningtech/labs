@@ -139,7 +139,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			id: file.id,
 			slug,
 			href: "/" + slug,
-			title: file.data.title,
+			title: file.data.shortTitle ?? file.data.title,
 			collectionEntry: file,
 			isIndex: slug === idToSlug(parentDir),
 		});

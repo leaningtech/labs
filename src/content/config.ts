@@ -43,8 +43,7 @@ const docs = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
-		// TODO: optional short title (for navigation)
-		// TODO: description (for SEO)
+		shortTitle: z.string().optional(), // Used for nav only
 	}),
 });
 
