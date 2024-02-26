@@ -1,5 +1,6 @@
 ---
 title: Core concepts
+# TODO: improve this page / split it into multiple
 ---
 
 Cheerp generates JavaScript code, which should be integrated into an HTML page to be executed in a browser. The following trivial example should be ok to start.
