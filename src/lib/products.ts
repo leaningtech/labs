@@ -9,6 +9,7 @@ import {
 import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
+import jnlprunnerLogotype from "../assets/branding/products/cheerpj-jnlprunner/cheerpj-jnlp_bump.png";
 
 export interface ProductData {
 	id: Product;
@@ -81,6 +82,18 @@ export const products: { [product in Product]: ProductData } = {
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
 		github: "https://github.com/leaningtech/cheerpx-flash",
 		repositoryName: "cheerpx-flash",
+	},
+	"cheerpj-jnlprunner": {
+		id: "cheerpj-jnlprunner",
+		name: "CheerpJ JNLP Runner",
+		href: "/cheerpj-jnlprunner",
+		logotype: jnlprunnerLogotype,
+		favicon: "/cheerpj/favicon.png",
+		subtitle: "Run Java Web Start applications in the browser",
+		description:
+			"Run Java Web Start Applications without a Java Desktop installation.",
+		github: "https://github.com/leaningtech/cheerpj-jnlprunner",
+		repositoryName: "cheerpj-jnlprunner",
 	},
 };
 

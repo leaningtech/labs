@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import Shell from "../../layouts/Shell.astro";
+import Footer from "../../components/Footer.astro";
+import ImageSlider from "../../components/utilities/ImageSlider.astro";
+import LinkButton from "../../components/LinkButton.astro";
+
+import CJJNLPLogo from "../../assets/branding/products/cheerpj-jnlprunner/cheerpj-jnlp_bump.png";
+---
+
+<Shell
+	title="Leaning Techologies Engineering Blog"
+	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+>
+	<header class="text-center text-stone-100 pt-32 pb-8">
+		<div class="flex justify-center items-center">
+			<Image
+				src={CJJNLPLogo}
+				width="600"
+				class="invisible md:visible"
+				alt="CheerpJ logo"
+			/>
+		</div>
+		<p class="text-lg text-balance my-8">
+			The browser extension for Java Web Start applications
+		</p>
+		<LinkButton
+			href="#"
+			label="Install now"
+			type="primary"
+			iconRight="ri:chrome-fill"
+		/>
+		<div
+			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
+		>
+			<!-- cool background -->
+		</div>
+	</header>
+	<body>
+		<div class="flex justify-center items-center pb-36">
+			<ImageSlider />
+		</div>
+
+		<Footer />
+	</body>
+</Shell>
