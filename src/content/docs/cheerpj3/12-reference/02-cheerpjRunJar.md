@@ -22,7 +22,7 @@ async function cheerpjRunJar(
 ## Example
 
 ```js
-const exitCode = await cheerpjRunMain("/app/application.jar");
+const exitCode = await cheerpjRunJar("/app/application.jar");
 console.log(`Program exited with code ${exitCode}`);
 ```
 
