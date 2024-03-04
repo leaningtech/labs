@@ -64,27 +64,10 @@ const others = [
 
 		<div>
 			<div class="mb-8">
-				<p class="text-lg text-stone-400">
-					What can you build with our technology?
-				</p>
-				<h2 class="text-4xl font-bold text-white">Other tools</h2>
+				<p class="text-lg text-stone-400">Our technology, ready to be used</p>
+				<h2 class="text-4xl font-bold text-white">Browser extensions</h2>
 			</div>
 			<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
-				{
-					others.map((product) => (
-						<a
-							href={product.href}
-							class="rounded-lg border border-stone-800 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6 h-64"
-						>
-							<h5 class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100">
-								{product.name}
-							</h5>
-							<p class="leading-6 text-balance text-lg">
-								{product.description}
-							</p>
-						</a>
-					))
-				}
 				<div
 					class="rounded-lg border border-stone-800 text-stone-400 shadow px-8 py-6"
 				>
@@ -112,6 +95,57 @@ const others = [
 						/>
 					</div>
 				</div>
+				<div
+					class="rounded-lg border border-stone-800 text-stone-400 shadow px-8 py-6"
+				>
+					<h5
+						class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100"
+					>
+						CheerpJ JNLP Runner
+					</h5>
+					<p class="leading-6 text-balance text-lg mb-4">
+						Run Java Web Start applications in the browser, no Java Desktop
+						required
+					</p>
+					<div class="flex flex-wrap gap-2">
+						<LinkButton
+							type="secondary"
+							href="https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
+							label="Add to Chrome"
+							iconLeft="openmoji:chrome"
+						/>
+						<LinkButton
+							type="secondary"
+							href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic"
+							label="Add to Microsoft Edge"
+							iconLeft="openmoji:edge"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="my-8">
+				<p class="text-lg text-stone-400">
+					What can you build with our technology?
+				</p>
+				<h2 class="text-4xl font-bold text-white">Other tools</h2>
+			</div>
+			<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
+				{
+					others.map((product) => (
+						<a
+							href={product.href}
+							class="rounded-lg border border-stone-800 hover:border-stone-500 text-stone-400 transition-colors shadow px-8 py-6 h-64"
+						>
+							<h5 class="w-auto h-12 text-2xl font-semibold text-balance text-stone-100">
+								{product.name}
+							</h5>
+							<p class="leading-6 text-balance text-lg">
+								{product.description}
+							</p>
+						</a>
+					))
+				}
 			</div>
 		</div>
 
