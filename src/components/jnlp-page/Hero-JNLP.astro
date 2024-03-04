@@ -1,0 +1,67 @@
+---
+import LinkButton from "../LinkButton.astro";
+import { Image } from "astro:assets";
+import { DISCORD_URL } from "../../consts";
+import Icon from "astro-icon";
+import JNLPBox from "./assets/box-JNLP.png";
+import sparkleIcon from "./assets/sparkle.png";
+---
+
+<header
+	class="min-h-[calc(100vh-48px)] flex flex-col items-center bg-gradient-to-b to-[#e6275544] from-stone-950"
+>
+	<div class="grow"></div>
+
+	<div
+		class="w-full max-w-screen-xl px-4 sm:px-8 py-16 space-y-4 md:grid grid-cols-3"
+	>
+		<div class="flex items-center col-span-2">
+			<div>
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold"
+				>
+					Run
+					<span class="font-bold text-primary-500"> Java Web Start</span>
+					<br />apps in the browser
+				</h1>
+				<p class="text-xl mt-8 text-stone-400 leading-6">
+					Unleash the power of CheerpJ now available in a easy-to-use browser
+					extension. Run Java Web Start Applications, including Oracle
+					E-Business Suite and Oracle Forms Applications, without a Java Desktop
+					installation.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<LinkButton
+						href="#ecosystem"
+						label="Add to Chrome"
+						type="primary"
+						iconRight="ri:chrome-fill"
+					/>
+					<LinkButton
+						href="#"
+						label="Add to Edge"
+						type="secondary"
+						iconRight="ri:edge-fill"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-center">
+			<Image src={JNLPBox} alt="JNLP-Runner logo in a tool box" />
+		</div>
+	</div>
+
+	<div class="p-16 w-full relative overflow-x-hidden"></div>
+
+	<div class="grow"></div>
+
+	<!-- Scroll prompt -->
+	<a
+		href="#features"
+		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
+	>
+		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
+	</a>
+</header>
+
+<a id="after-hero"></a>

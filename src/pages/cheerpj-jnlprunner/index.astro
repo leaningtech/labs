@@ -2,51 +2,193 @@
 import { Image } from "astro:assets";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
-import ImageSlider from "../../components/utilities/ImageSlider.astro";
+import { DISCORD_URL } from "../../consts";
 import LinkButton from "../../components/LinkButton.astro";
-
-import CJJNLPLogo from "../../assets/branding/products/cheerpj-jnlprunner/cheerpj-jnlp_bump.png";
+import Hero_JNLP from "../../components/jnlp-page/Hero-JNLP.astro";
+import sparkleIcon from "../../components/jnlp-page/assets/sparkle.png";
+import networkIcon from "../../components/jnlp-page/assets/network.png";
+import lockIcon from "../../components/jnlp-page/assets/lock.png";
+import billIcon from "../../components/jnlp-page/assets/bill.png";
+import layersIcon from "../../components/jnlp-page/assets/layers.png";
+import rocketIcon from "../../components/jnlp-page/assets/rocket.png";
+import screenshots from "../../components/jnlp-page/assets/screenshots.png";
 ---
 
 <Shell
-	title="Leaning Techologies Engineering Blog"
-	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+	title="CheerpJ JNLP-Runner"
+	description="The browser extension for JNLP applications"
 >
-	<header class="text-center text-stone-100 pt-32 pb-8">
-		<div class="flex justify-center items-center">
-			<Image
-				src={CJJNLPLogo}
-				width="600"
-				class="invisible md:visible"
-				alt="CheerpJ logo"
-			/>
-		</div>
-		<p class="text-lg text-balance my-8">
-			The browser extension for Java Web Start applications
-		</p>
-		<LinkButton
-			href="#"
-			label="Add to Chrome"
-			type="primary"
-			iconRight="ri:chrome-fill"
-		/>
-		<LinkButton
-			href="#"
-			label="Add to Edge"
-			type="primary"
-			iconRight="ri:edge-fill"
-		/>
-		<div
-			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
-		>
-			<!-- cool background -->
-		</div>
-	</header>
-	<body>
-		<div class="flex justify-center items-center pb-36">
-			<ImageSlider />
+	<Hero_JNLP />
+	<div
+		class="px-4 sm:px-8 py-16 space-y-4 mx-4 flex flex-wrap items-center justify-center p-10"
+		id="features"
+	>
+		<div class="px-10 md:w-1/2 lg:w-1/3">
+			<!-- Card -->
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<!-- Icon -->
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={sparkleIcon} width="53" height="61" alt="sparkle icon" />
+				</div>
+				<!-- Text -->
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						No Java installations
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						CheerpJ JNLP-Runner is a browser extension that saves you from the
+						need of having a desktop Java installation
+					</p>
+				</div>
+			</div>
 		</div>
 
-		<Footer />
-	</body>
+		<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={networkIcon} width="53" height="61" alt="network icon" />
+				</div>
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						Modern Browsers
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						Our extension is available for Chrome and Edge. Ready to cover your
+						JWS needs in the most trusted browsers.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={lockIcon} width="53" height="61" alt="lock icon" />
+				</div>
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						Sanboxed
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						Our technology works within the browser security boundaries making
+						it highly reliable and safe.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={billIcon} width="53" height="61" alt="bill icon" />
+				</div>
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						Cost-effective
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						The JNLP-Runner extensions is available for a very affordable price.
+						It is an option for both companies and individual users.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={layersIcon} width="53" height="61" alt="layers icon" />
+				</div>
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						Wide range of utilities
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						CheerpJ JNLP-Runner extension cover all your Java needs, including
+						Swing/AWT, filesystem support, audio, clipboard, networking and
+						more.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full px-4 md:w-1/2 lg:w-1/3">
+			<div
+				class="mb-9 rounded-xl py-8 px-7 shadow-md transition-all hover:shadow-lg sm:p-9 lg:px-6 xl:px-9"
+			>
+				<div class="mx-auto mb-7 inline-block">
+					<Image src={rocketIcon} width="53" height="61" alt="rocket icon" />
+				</div>
+				<div>
+					<h3
+						class="mb-4 text-xl font-bold text-white sm:text-2xl lg:text-xl xl:text-2xl"
+					>
+						Easy to use
+					</h3>
+					<p class="text-base font-medium text-body-color">
+						Using our browser extension could not be easier. Just install,
+						launch your JNLP app as usual and the extension will automatically
+						start working.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div
+		class="px-4 sm:px-8 py-16 space-y-4 mx-4 flex col-span-2 items-center justify-center p-10"
+	>
+		<div>
+			<h3
+				class="font-bold text-right text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
+			>
+				The <span class="font-bold text-primary-500"> JNLP</span> browser
+				extension
+			</h3>
+			<p class="text-right">
+				Follow our channels to stay up to date with our community
+			</p>
+			<div class="mt-8 flex flex-wrap justify-end gap-4 pt-10">
+				<LinkButton
+					href="https://github.com/leaningtech/cheerpj-jnlprunner"
+					label="Repository"
+					type="primary"
+					iconRight="mdi:github"
+				/>
+				<LinkButton
+					href={DISCORD_URL}
+					label="Community"
+					type="discord"
+					iconRight="ic:baseline-discord"
+				/>
+			</div>
+		</div>
+		<div></div>
+		<div class="flex justify-center items-center">
+			<Image class="scale-75" src={screenshots} alt="screenshots" />
+		</div>
+	</div>
 </Shell>
+
+<body>
+	<Footer />
+</body>
