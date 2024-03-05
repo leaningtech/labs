@@ -3,6 +3,7 @@ import LinkButton from "../LinkButton.astro";
 import { Image } from "astro:assets";
 import Icon from "astro-icon";
 import JNLPBox from "./assets/box-JNLP.png";
+import screenshots from "@/components/jnlp-page/assets/screenshots.png";
 ---
 
 <header
@@ -22,14 +23,17 @@ import JNLPBox from "./assets/box-JNLP.png";
 					<span class="font-bold text-primary-500"> Java Web Start</span>
 					<br />apps in the browser
 				</h1>
-				<p class="text-xl mt-8 text-stone-400 leading-6">
-					Unleash the power of CheerpJ, now available as an easy-to-use browser
-					extension. Run Java Web Start Applications without a Java Desktop
-					installation, including Oracle E-Business Suite and Oracle Forms.
+				<p class="text-xl mt-8 text-stone-400 leading-7">
+					Unleash the power of CheerpJ, now available in a easy-to-use browser
+					extension!
+				</p>
+				<p class="text-xl mt-8 text-stone-400 leading-7">
+					Run Java Web Start Applications, including Oracle E-Business Suite and
+					Oracle Forms Applications, without a Java Desktop installation.
 				</p>
 				<div class="mt-8 flex flex-wrap gap-4">
 					<LinkButton
-						href="#ecosystem"
+						href="https://chromewebstore.google.com/detail/cheerpj-jnlp-runner/achnhggjjhnadfapkmgallnbmemdojdi"
 						label="Add to Chrome"
 						type="primary"
 						iconRight="ri:chrome-fill"
@@ -37,17 +41,19 @@ import JNLPBox from "./assets/box-JNLP.png";
 					<LinkButton
 						href="#"
 						label="Add to Edge"
-						type="secondary"
+						type="primary2"
 						iconRight="ri:edge-fill"
 					/>
 				</div>
 			</div>
 		</div>
 		<div class="flex justify-center">
-			<Image src={JNLPBox} alt="JNLP-Runner logo in a tool box" />
+			<Image src={JNLPBox} alt="JNLP Runner logo in a tool box" />
 		</div>
 	</div>
-
+	<div class="flex justify-center items-center">
+		<Image class="scale-75" src={screenshots} alt="screenshots" />
+	</div>
 	<div class="p-16 w-full relative overflow-x-hidden"></div>
 
 	<div class="grow"></div>
