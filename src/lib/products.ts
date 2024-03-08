@@ -89,21 +89,21 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerpx-flash",
 		repositoryName: "cheerpx-flash",
 	},
-	"cheerpj-jnlprunner": {
-		id: "cheerpj-jnlprunner",
+	"cheerpj-jnlp-runner": {
+		id: "cheerpj-jnlp-runner",
 		type: "extension",
 		name: "CheerpJ JNLP Runner",
-		href: "/cheerpj-jnlprunner",
+		href: "/cheerpj-jnlp-runner",
 		logotype: jnlprunnerLogotype,
 		favicon: "/cheerpj/favicon.png",
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
-		github: "https://github.com/leaningtech/cheerpj-jnlprunner",
-		repositoryName: "cheerpj-jnlprunner",
+		github: "https://github.com/leaningtech/cheerpj-jnlp-runner",
+		repositoryName: "cheerpj-jnlp-runner",
 	},
-	"cheerpj-appletrunner": {
-		id: "cheerpj-appletrunner",
+	"cheerpj-applet-runner": {
+		id: "cheerpj-applet-runner",
 		type: "extension",
 		name: "CheerpJ Applet Runner",
 		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
@@ -111,8 +111,8 @@ export const products: { [product in Product]: ProductData } = {
 		favicon: "/cheerpj/favicon.png",
 		subtitle: "Run Java Applets in the modern browser",
 		description: "Run Java Applets in modern browsers without plugins",
-		github: "https://github.com/leaningtech/cheerpj-appletrunner",
-		repositoryName: "cheerpj-appletrunner",
+		github: "https://github.com/leaningtech/cheerpj-applet-runner",
+		repositoryName: "cheerpj-applet-runner",
 	},
 };
 
