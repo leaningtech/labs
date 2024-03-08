@@ -1,7 +1,7 @@
 ---
 import LinkButton from "../LinkButton.astro";
 import { Image } from "astro:assets";
-import Icon from "astro-icon";
+import ScrollPrompt from "@/components/hero/ScrollPrompt.astro";
 import JNLPBox from "./assets/box-JNLP.png";
 import screenshots from "@/components/jnlp-page/assets/screenshots.png";
 ---
@@ -58,13 +58,7 @@ import screenshots from "@/components/jnlp-page/assets/screenshots.png";
 
 	<div class="grow"></div>
 
-	<!-- Scroll prompt -->
-	<a
-		href="#features"
-		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
-	>
-		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
-	</a>
+	<ScrollPrompt />
 </header>
 
 <a id="after-hero"></a>
