@@ -18,6 +18,16 @@ Cheerp is an open-source **C/C++ to WebAssembly compiler**. It compiles virtuall
 
 ![](/cheerp/Diagram_browser.png)
 
+{/* TODO: live demo thing */}
+
+```cpp
+#include <cheerp/client.h>
+
+void webMain() {
+  client::window.alert("Hello Cheerp");
+}
+```
+
 ## What is Cheerp?
 
 Cheerp is a C/C++ compiler to WebAssembly and JavaScript, based on and integrated into the LLVM/Clang infrastructure, and featuring numerous custom optimisation steps to maximise performance and minimise size of the compiled JavaScript/WebAssembly output. Thanks to this, Cheerp is the best performing, most optimised C++ to WebAssembly compiler available on the market.
