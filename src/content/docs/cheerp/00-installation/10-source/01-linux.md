@@ -13,7 +13,7 @@ We assume that you have git, cmake, python and a modern C++ compiler properly in
 Example, using apt-get:
 
 ```bash
-sudo apt-get install cmake python3 python3-distutils ninja-build gcc lld git
+sudo apt-get install cmake python3 python3-distutils ninja-build gcc g++ lld git
 ```
 
 ## Build stable version, Cheerp 3.0
@@ -176,9 +176,12 @@ make -C build install # parallel builds do NOT work
 
 ## Cheerp unit tests
 
+In order to run the unit tests you will have to have a JavaScript engine installed.
+We recommend NodeJS, installation instructions can be found here: https://nodejs.org/en/download/package-manager
+
 ```bash
 cd cheerp-utils/tests
-python run-tests.py /opt/cheerp/bin/clang++ node --all -j8
+python3 run_tests.py /opt/cheerp/bin/clang++ node --all -j8
 ```
 
 This command will compile and execute the Cheerp test suite.
