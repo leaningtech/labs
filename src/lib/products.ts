@@ -114,6 +114,19 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
 		repositoryName: "cheerpj-applet-runner",
 	},
+	"cheerpj-jnlprunner": {
+		id: "cheerpj-jnlprunner",
+		type: "tool",
+		name: "CheerpJ JNLP Runner",
+		href: "/cheerpj-jnlprunner",
+		logotype: jnlprunnerLogotype,
+		favicon: "/cheerpj/favicon.png",
+		subtitle: "Run Java Web Start applications in the browser",
+		description:
+			"Run Java Web Start Applications without a Java Desktop installation.",
+		github: "https://github.com/leaningtech/cheerpj-applet-runner",
+		repositoryName: "cheerpj-jnlp-runner",
+	},
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
