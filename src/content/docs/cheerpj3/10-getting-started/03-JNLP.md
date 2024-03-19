@@ -5,6 +5,8 @@ description: Run a JWS/JNLP application in the browser
 
 This quickstart tutorial will take you step by step on how to run your JNLP app (also known as Java Web Start application) in the browser with CheerpJ.
 
+If you are interested in a ready-to-use tool for running Java Web Start applications, we recommend taking a look at our [CheerpJ JNLP Runner](/cheerpj-jnlp-runner) browser extension.
+
 You will need:
 
 - The application `.jnlp` file.

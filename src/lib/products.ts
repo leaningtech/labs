@@ -11,6 +11,8 @@ import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
+import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
+
 export interface ProductData {
 	id: Product;
 	type: "technology" | "extension" | "tool";
@@ -119,7 +121,7 @@ export const products: { [product in Product]: ProductData } = {
 		type: "tool",
 		name: "CheerpJ JNLP Runner",
 		href: "/cheerpj-jnlprunner",
-		logotype: jnlprunnerLogotype,
+		logotype: jnlprunnerLogotypeLarge,
 		favicon: "/cheerpj/favicon.png",
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
