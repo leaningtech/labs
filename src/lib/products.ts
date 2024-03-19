@@ -116,6 +116,7 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
 		repositoryName: "cheerpj-applet-runner",
 	},
+	// TODO: merge with cheerpj-jnlp-runner
 	"cheerpj-jnlprunner": {
 		id: "cheerpj-jnlprunner",
 		type: "tool",
