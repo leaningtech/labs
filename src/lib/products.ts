@@ -11,6 +11,8 @@ import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
+import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
+
 export interface ProductData {
 	id: Product;
 	type: "technology" | "extension" | "tool";
@@ -95,7 +97,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ JNLP Runner",
 		href: "/cheerpj-jnlp-runner",
 		logotype: jnlprunnerLogotype,
-		favicon: "/cheerpj/favicon.png",
+		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
@@ -108,11 +110,25 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ Applet Runner",
 		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
 		logotype: appletrunnerLogotype,
-		favicon: "/cheerpj/favicon.png",
+		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java Applets in the modern browser",
 		description: "Run Java Applets in modern browsers without plugins",
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
 		repositoryName: "cheerpj-applet-runner",
+	},
+	// TODO: merge with cheerpj-jnlp-runner
+	"cheerpj-jnlprunner": {
+		id: "cheerpj-jnlprunner",
+		type: "tool",
+		name: "CheerpJ JNLP Runner",
+		href: "/cheerpj-jnlprunner",
+		logotype: jnlprunnerLogotypeLarge,
+		favicon: "/cheerpj2/favicon.ico",
+		subtitle: "Run Java Web Start applications in the browser",
+		description:
+			"Run Java Web Start Applications without a Java Desktop installation.",
+		github: "https://github.com/leaningtech/cheerpj-applet-runner",
+		repositoryName: "cheerpj-jnlp-runner",
 	},
 };
 
