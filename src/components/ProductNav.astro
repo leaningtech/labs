@@ -31,7 +31,11 @@ const getStartedHref = nav.entries.filter(
 			<a href={product.href} class="flex items-center">
 				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
 			</a>
-			{product.id.startsWith("cheerpj") && <ProductVersionSwitcher {product} />}
+			{
+				(product.id.match("cheerpj2") || product.id.match("cheerpj3")) && (
+					<ProductVersionSwitcher {product} />
+				)
+			}
 		</div>
 
 		<div class="grow lg:hidden"></div>
