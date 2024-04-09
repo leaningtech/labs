@@ -127,7 +127,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
-		github: "https://github.com/leaningtech/cheerpj-applet-runner",
+		github: "https://github.com/leaningtech/cheerpj-jnlp-runner",
 		repositoryName: "cheerpj-jnlp-runner",
 	},
 };

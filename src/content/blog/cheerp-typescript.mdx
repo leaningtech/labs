@@ -10,7 +10,7 @@ import ThreeDemo from "@/components/ThreeDemo.svelte";
 
 The latest nightly build of Cheerp includes powerful integration with
 [TypeScript](https://www.typescriptlang.org/), a popular programming language
-that adds *static type checking* to JavaScript, allowing us to seamlessly share
+that adds _static type checking_ to JavaScript, allowing us to seamlessly share
 type information across C++ and TypeScript.
 
 We have also completely overhauled [Clientlib](#clientlib), including improved
@@ -61,8 +61,8 @@ arguments have the correct types. Let's start by manually writing a declaration
 file.
 
 ```ts title="square.d.ts"
-export default function(): Promise<{
-    square(x: number): number;
+export default function (): Promise<{
+	square(x: number): number;
 }>;
 ```
 
@@ -115,10 +115,11 @@ public:
 };
 
 [[cheerp::jsexport]]
-client::TArray<client::String*>* keys(client::Object* object) {
-    return client::Object::keys(object);
+client::TArray<client::String*>* keys(client::Object\* object) {
+return client::Object::keys(object);
 }
-```
+
+````
 
 ```ts title="complex.d.ts"
 export interface Vec2 {
@@ -132,7 +133,8 @@ export default function(options?: __Options): Promise<{
         };
         keys(_object: object): Array<string>;
 }>;
-```
+````
+
 </details>
 
 ### Internals
@@ -175,7 +177,7 @@ Let's start by writing a function in JavaScript that we want to call from C++.
 
 ```js title="library.js"
 function square(x) {
-    return x * x;
+	return x * x;
 }
 ```
 
@@ -220,6 +222,7 @@ JavaScript code.
 ```sh
 npx tsc library.js --allowJs --declaration --emitDeclarationOnly
 ```
+
 ```ts title="library.d.ts"
 declare function square(x: any): number;
 ```
@@ -232,6 +235,7 @@ Now we can use ts2cpp to generate a C++ header.
 ```sh
 ts2cpp library.d.ts -o library.h --pretty
 ```
+
 ```cpp file="library.h"
 #ifndef LIBRARY_H
 #define LIBRARY_H
@@ -286,7 +290,7 @@ function, with TypeScript!
 
 ```ts title="library.ts" ": number"
 function square(x: number) {
-    return x * x;
+	return x * x;
 }
 ```
 
@@ -326,11 +330,11 @@ different files.
 
 ```ts
 declare interface Foo {
-    hello(): void;
+	hello(): void;
 }
 
 declare interface Foo {
-    world(): void;
+	world(): void;
 }
 ```
 
@@ -451,7 +455,7 @@ passing in a `TArray<String>`, `T` is `String`, and the function returns
 `String*`. Awesome stuff.
 
 Less awesome, though, is what happens when we pass in a `TArray<double>`. We
-want `pop` to return `double`, *not* `double*`. But when passing in a
+want `pop` to return `double`, _not_ `double*`. But when passing in a
 `TArray<double>`, `T` is `double`, and the function returns `double*`.
 
 We could work around this with some template magic, but that would also be very
@@ -495,7 +499,7 @@ to `Node`.
 
 The new Clientlib solves this using virtual inheritance. This is still
 zero-cost because all classes in the `client` namespace are compiled to opaque
-references to JavaScript objects. There is one downside, while you *can*
+references to JavaScript objects. There is one downside, while you _can_
 `static_cast` from `ChildNode` to `Node`, you cannot `static_cast` from
 `Node` to `ChildNode` when `Node` is a virtual base of `ChildNode`. This is
 still an improvement over the old Clientlib, though, as before you could not
@@ -520,7 +524,7 @@ specified in that case.
 
 This is a pretty simple improvement. Not all client types are objects.
 Primitives, such as numbers and booleans, do not inherit from `Object`. It is
-sometimes useful to say that a value can have *any* type. What do we call the
+sometimes useful to say that a value can have _any_ type. What do we call the
 type for such a value? TypeScript calls it `any`, we call it `_Any`.
 
 #### The `_Union` type
@@ -564,7 +568,7 @@ new Uint8Array(array->get_buffer()->cast()); // error: ambiguous
 new Uint8Array(array->get_buffer()->cast<ArrayBuffer*>()); // ok
 ```
 
-By instead using a const reference union type for the constructor, we *can*
+By instead using a const reference union type for the constructor, we _can_
 directly pass the result of `get_buffer` to the constructor without the need
 for any casts.
 
@@ -590,12 +594,12 @@ rules of TypeScript.
 
 `_Any` can be constructed from any other type. `_Union` can be constructed from
 any type that can be converted to any of the types in the union. `_Function`
-can be constructed from other functions with a *covariant* return type and an
-equal or smaller number of *contravariant* arguments.
+can be constructed from other functions with a _covariant_ return type and an
+equal or smaller number of _contravariant_ arguments.
 
 ## Three.js demo
 
-With `ts2cpp`, we can generate C++ headers not only from our own TypeScript 
+With `ts2cpp`, we can generate C++ headers not only from our own TypeScript
 declarations, but also from third party libraries!
 
 Three.js is a 3D graphics library for JavaScript. TypeScript declarations for

@@ -11,4 +11,4 @@
 	});
 </script>
 
-<canvas bind:this={canvas} width=320 height=240></canvas>
+<canvas bind:this={canvas} width="320" height="240"></canvas>

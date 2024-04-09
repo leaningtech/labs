@@ -12,11 +12,7 @@
 
 	const images = [verticalCheerp, verticalCheerpj, verticalCheerpx];
 	const images_h = [horizontalCheerp, horizontalCheerpj, horizontalCheerpx];
-	const hrefs = [
-		"/cheerp",
-		"/cheerpj",
-		"/cheerpx",
-	]
+	const hrefs = ["/cheerp", "/cheerpj", "/cheerpx"];
 
 	let index = 0;
 	setInterval(() => {
@@ -24,31 +20,33 @@
 	}, 5000);
 </script>
 
-<div class="doodle relative w-96 hidden md:block  md:w-full max-w-full max-h-[36rem] lg:max-h-[48rem] overflow-hidden">
+<div
+	class="doodle relative w-96 hidden md:block md:w-full max-w-full max-h-[36rem] lg:max-h-[48rem] overflow-hidden"
+>
 	<a href={hrefs[index]}>
 		<img
-      src={verticalAll.src}
-      alt=""
+			src={verticalAll.src}
+			alt=""
 			decoding="async"
-  		loading="lazy"
-      class="absolute top-0 opacity-20"
+			loading="lazy"
+			class="absolute top-0 opacity-20"
 		/>
 		{#each images as image, i}
 			<img
 				src={image.src}
 				alt=""
 				decoding="async"
-  			loading="lazy"
+				loading="lazy"
 				class="absolute top-0 transition-opacity duration-500"
 				class:opacity-0={i !== index}
 			/>
 		{/each}
 		<img
-      src={verticalBrowser.src}
-      alt=""
+			src={verticalBrowser.src}
+			alt=""
 			decoding="async"
-  		loading="lazy"
-      class="absolute top-0"
+			loading="lazy"
+			class="absolute top-0"
 		/>
 	</a>
 </div>
@@ -56,28 +54,28 @@
 <div class="doodle_h relative w-full md:hidden mt-28">
 	<a href={hrefs[index]}>
 		<img
-      src={horizontalAll.src}
-      alt=""
+			src={horizontalAll.src}
+			alt=""
 			decoding="async"
-  		loading="lazy"
-      class="absolute top-0 opacity-20"
+			loading="lazy"
+			class="absolute top-0 opacity-20"
 		/>
 		{#each images_h as image, i}
 			<img
 				src={image.src}
 				alt=""
 				decoding="async"
-  			loading="lazy"
+				loading="lazy"
 				class="absolute top-0 transition-opacity duration-500"
 				class:opacity-0={i !== index}
 			/>
 		{/each}
 		<img
-      src={horizontalBrowser.src}
-      alt=""
+			src={horizontalBrowser.src}
+			alt=""
 			decoding="async"
-  		loading="lazy"
-      class="absolute top-0"
+			loading="lazy"
+			class="absolute top-0"
 		/>
 	</a>
 </div>
