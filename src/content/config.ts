@@ -40,11 +40,11 @@ const blog = defineCollection({
 });
 
 const docs = defineCollection({
+	// These are passed to DocsArticle.astro
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
-		// TODO: optional short title (for navigation)
-		// TODO: description (for SEO)
+		fullWidthLayout: z.boolean().default(false),
 	}),
 });
 

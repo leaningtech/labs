@@ -14,14 +14,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = "/social/common@2x.png" } = Astro.props;
 
 const product = productFromUrl(canonicalURL);
-const favicon = product?.favicon ?? companyFavicon.src;
-const faviconType = favicon.endsWith(".ico") ? "image/x-icon" : "image/svg+xml";
+const favicon = product?.favicon ?? companyFavicon;
+const faviconSrc = typeof favicon === "string" ? favicon : favicon.src;
+const faviconType = faviconSrc.endsWith(".ico")
+	? "image/x-icon"
+	: "image/svg+xml";
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type={faviconType} href={favicon} />
+<link rel="icon" type={faviconType} href={faviconSrc} />
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 

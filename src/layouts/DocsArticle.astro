@@ -20,9 +20,10 @@ interface Props {
 	title: string;
 	description: string | undefined;
 	headings: Heading[] | undefined;
+	fullWidthLayout: boolean;
 }
 
-const { id, title, description, headings } = Astro.props;
+const { id, title, description, headings, fullWidthLayout } = Astro.props;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -43,88 +44,79 @@ const directory = findNavDirectory(nav, [product.id]);
 >
 	<BentoGrid />
 	<ProductNav {product} />
-	<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
-		<div
-			data-sidebar-wrapper
-			class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
-		>
-			<DocsSidebar {directory} />
-		</div>
-		<div
-			data-backdrop
-			class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
-		>
-		</div>
-		<main class="overflow-x-hidden">
-			<div
-				class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20"
-			>
-				<button data-sidebar-toggle class="lg:hidden">
-					<span class="sr-only">Open navigation menu</span>
-					<Icon name="mi:menu" class="w-8 h-8 text-white" />
-				</button>
-				<Breadcrumbs current={id} />
-			</div>
-
-			<main
-				data-pagefind-body
-				data-pagefind-filter={`productId:${product.id}`}
-				class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 max-w-3xl xl:max-w-[49rem]"
-			>
-				{
-					title === product.name ? (
-						<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
-							<h1>
-								<Image alt={product.name} src={product.logotype} />
-							</h1>
-							<p class="text-xl font-medium text-stone-500">{description}</p>
-						</div>
-					) : (
-						<>
-							<h1 class="mb-2 font-bold">{title}</h1>
-							{description && (
-								<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
-							)}
-						</>
-					)
-				}
-				{
-					product.id === "cheerpj2" ? (
-						<Callout title="Deprecation notice" variant="warning">
-							CheerpJ 2 is deprecated. Consider{" "}
-							<a href="/cheerpj3/migrating-from-cheerpj2">
-								migrating to CheerpJ 3
-							</a>
-							.
-						</Callout>
-					) : null
-				}
-				<slot />
-			</main>
-
-			<div class="py-3 px-6 md:px-8">
-				<WasThisHelpful
-					editHref={`https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`}
+	{
+		fullWidthLayout ? (
+			<slot />
+		) : (
+			<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
+				<div
+					data-sidebar-wrapper
+					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
+				>
+					<DocsSidebar {directory} />
+				</div>
+				<div
+					data-backdrop
+					class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
 				/>
-				{
-					directory && (
-						<div class="py-5">
-							<DocsPagination activeId={id} />
-						</div>
-					)
-				}
-			</div>
-		</main>
-		<aside
-			class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky"
-		>
-			{
-				headings && !product.id.match("cheerpj-jnlprunner") && (
-					<TableOfContents {headings} />
-				)
-			}
-		</aside>
-	</docs-article>
+				<main class="overflow-x-hidden">
+					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20">
+						<button data-sidebar-toggle class="lg:hidden">
+							<span class="sr-only">Open navigation menu</span>
+							<Icon name="mi:menu" class="w-8 h-8 text-white" />
+						</button>
+						<Breadcrumbs current={id} />
+					</div>
+
+					<main
+						data-pagefind-body
+						data-pagefind-filter={`productId:${product.id}`}
+						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 max-w-3xl xl:max-w-[49rem]"
+					>
+						{title === product.name ? (
+							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
+								<h1>
+									<Image alt={product.name} src={product.logotype} />
+								</h1>
+								<p class="text-xl font-medium text-stone-500">{description}</p>
+							</div>
+						) : (
+							<>
+								<h1 class="mb-2 font-bold">{title}</h1>
+								{description && (
+									<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
+								)}
+							</>
+						)}
+						{product.id === "cheerpj2" ? (
+							<Callout title="Deprecation notice" variant="warning">
+								CheerpJ 2 is deprecated. Consider{" "}
+								<a href="/cheerpj3/migrating-from-cheerpj2">
+									migrating to CheerpJ 3
+								</a>
+								.
+							</Callout>
+						) : null}
+						<slot />
+					</main>
+
+					<div class="py-3 px-6 md:px-8">
+						<WasThisHelpful
+							editHref={`https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`}
+						/>
+						{directory && (
+							<div class="py-5">
+								<DocsPagination activeId={id} />
+							</div>
+						)}
+					</div>
+				</main>
+				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
+					{headings && <TableOfContents {headings} />}
+				</aside>
+			</docs-article>
+		)
+	}
 	<Footer />
 </Shell>
 
