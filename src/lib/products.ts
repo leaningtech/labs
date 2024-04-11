@@ -19,7 +19,7 @@ export interface ProductData {
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
-	favicon: string | ImageMetadata;
+	favicon: string;
 	subtitle: string;
 	description: string;
 	github: string;
@@ -97,7 +97,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ JNLP Runner",
 		href: "/cheerpj-jnlp-runner",
 		logotype: jnlprunnerLogotypeLarge,
-		favicon: jnlprunnerLogotype,
+		favicon: jnlprunnerLogotype.src,
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
