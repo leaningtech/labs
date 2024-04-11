@@ -57,7 +57,7 @@ const getStartedHref = nav.entries.filter(
 						class="w-3 h-3 text-green-500 absolute animate-ping opacity-50"
 					/>
 					<Icon name="ph:circle-fill" class="w-3 h-3 text-green-500" />
-					<DiscordPresenceCount client:only />
+					<DiscordPresenceCount client:only="svelte" />
 				</span>
 			</a>
 			<a
@@ -71,7 +71,7 @@ const getStartedHref = nav.entries.filter(
 				>
 					<Icon name="ph:star-fill" class="w-4 h-4" />
 					<GitHubStarCount
-						client:only
+						client:only="svelte"
 						repo={`leaningtech/${product.repositoryName}`}
 					/>
 				</span>
