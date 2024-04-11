@@ -19,7 +19,7 @@ export interface ProductData {
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
-	favicon: string;
+	favicon: string | ImageMetadata;
 	subtitle: string;
 	description: string;
 	github: string;
@@ -96,8 +96,8 @@ export const products: { [product in Product]: ProductData } = {
 		type: "extension",
 		name: "CheerpJ JNLP Runner",
 		href: "/cheerpj-jnlp-runner",
-		logotype: jnlprunnerLogotype,
-		favicon: "/cheerpj2/favicon.ico",
+		logotype: jnlprunnerLogotypeLarge,
+		favicon: jnlprunnerLogotype,
 		subtitle: "Run Java Web Start applications in the browser",
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
@@ -115,20 +115,6 @@ export const products: { [product in Product]: ProductData } = {
 		description: "Run Java Applets in modern browsers without plugins",
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
 		repositoryName: "cheerpj-applet-runner",
-	},
-	// TODO: merge with cheerpj-jnlp-runner
-	"cheerpj-jnlprunner": {
-		id: "cheerpj-jnlprunner",
-		type: "tool",
-		name: "CheerpJ JNLP Runner",
-		href: "/cheerpj-jnlprunner",
-		logotype: jnlprunnerLogotypeLarge,
-		favicon: "/cheerpj2/favicon.ico",
-		subtitle: "Run Java Web Start applications in the browser",
-		description:
-			"Run Java Web Start Applications without a Java Desktop installation.",
-		github: "https://github.com/leaningtech/cheerpj-jnlp-runner",
-		repositoryName: "cheerpj-jnlp-runner",
 	},
 };
 

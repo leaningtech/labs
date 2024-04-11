@@ -32,7 +32,6 @@ export type Product =
 	| "cheerpx"
 	| "cheerpx-for-flash"
 	| "cheerpj-jnlp-runner"
-	| "cheerpj-jnlprunner"
 	| "cheerpj-applet-runner";
 
 export function isMode(value: unknown): value is Mode {
@@ -51,7 +50,7 @@ export function isProduct(value: unknown): value is Product {
 		value === "cheerpj3" ||
 		value === "cheerpx" ||
 		value === "cheerpx-for-flash" ||
-		value === "cheerpj-jnlprunner"
+		value === "cheerpj-jnlp-runner"
 	);
 }
 

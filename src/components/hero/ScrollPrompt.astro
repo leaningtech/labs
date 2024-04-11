@@ -4,7 +4,7 @@ import Icon from "astro-icon";
 
 <a
 	href="#after-hero"
-	class="hidden md:inline-block p-6 text-white opacity-40 hover:opacity-80 transition-opacity fixed bottom-0"
+	class="hidden md:inline-block p-6 text-white opacity-40 hover:opacity-80 transition-opacity absolute bottom-0"
 	title="Scroll down"
 >
 	<Icon
@@ -14,23 +14,22 @@ import Icon from "astro-icon";
 	/>
 </a>
 
-<!-- TODO: move to Hero.astro -->
 <a id="after-hero"></a>
 
 <script>
-	// Hide the chevron when the user scrolls down
-	window.addEventListener(
-		"scroll",
-		() => {
-			const chevron = document.querySelector("#scroll-prompt-chevron");
-			if (chevron) {
-				if (window.scrollY > 5) {
-					chevron.classList.add("opacity-0");
-				} else {
-					chevron.classList.remove("opacity-0");
-				}
+	function update() {
+		const chevron = document.querySelector("#scroll-prompt-chevron");
+		if (chevron) {
+			if (window.scrollY > 5) {
+				chevron.classList.add("opacity-0");
+			} else {
+				chevron.classList.remove("opacity-0");
 			}
-		},
-		{ passive: true },
-	);
+		}
+	}
+
+	// Hide the chevron when the user scrolls down
+	window.addEventListener("scroll", update, { passive: true });
+
+	window.addEventListener("DOMContentLoaded", update);
 </script>

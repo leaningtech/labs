@@ -36,6 +36,7 @@ const rendered = await collectionEntry?.render();
 	description={collectionEntry?.data.description}
 	id={navEntry.id}
 	headings={rendered?.headings}
+	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
 >
 	{
 		rendered ? (
