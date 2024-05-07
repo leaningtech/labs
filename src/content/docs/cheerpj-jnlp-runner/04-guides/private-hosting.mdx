@@ -1,16 +1,108 @@
 ---
-title: Private hosting
-description: Host the JNLP Runner extension privately
+title: Private hosting (Chrome)
+description: Deploy the JNLP Runner chrome extension via Group Policy (Windows).
 ---
 
-import LinkButton from "@/components/LinkButton.astro";
-import { DISCORD_URL } from "@/consts.ts";
+If your organisation requires to use our extension in multiple devices, we have amazing news for you! Our JNLP Runner extension is available for private hosting and deployment via Group Policy. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
 
-The CheerpJ JNLP Runner extension is available for self-hosting. We are currently writing a complete guide for organisations who want to host the extension privately. In the meantime, feel free to reach us on our Discord server for more information.
+Requirements:
 
-<LinkButton
-	type="discord"
-	href={DISCORD_URL}
-	iconLeft="fa-brands:discord"
-	label="Join our Discord server"
-/>
+- The appropriate IT permissions at your organisation
+- The JNLP Runner extension CRX file.
+
+## The CRX File and Download URL
+
+The CRX file is a compressed format for extensions of browsers belonging to the Chromium family (such as Google Chrome). To obtain the CRX file of the JNLP runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you alongside a license token.
+
+You will need to host the extension CRX file in the appropriate location of your IT infrastructure and create a download URL to access it. You will need this URL later in the tutorial.
+
+> [!info] About the Download URL
+> You can also use the WebStore's download URL, but you won't be self-hosting the extension and it will be retrieved from the WebStore for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
+
+## The extension ID
+
+The extension ID is a unique identifier used by Google. You can easily retrieve it if you have the extension installed in the traditional way from the WebStore:
+
+1.  Go to the extensions menu in Chrome (puzzle icon) and click on _Manage extensions_
+2.  All your installed extensions will show. Now turn on the slider for _Developer Mode_.
+3.  You will see the ID displayed for all your installed extensions. Copy the JNLP Runner's ID and reserve for later.
+
+## The policy string
+
+Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX Download URL separated by a semicolon:
+`ID;DownloadURL`
+It must look something like this:
+`cciilfdpmibiokimppmdpopaolambagi;https://some.download.url.file.crx`
+
+> [!warning] Hypothetical policy string
+> The example above contains hypothetical ID and URL, please do not use this policy string.
+
+## Policy templates
+
+You will need to download and install the Google administrative templates. You can do this by downloading the templates file and following the steps as stated in this [guide by google](https://support.google.com/chrome/a/answer/187202?hl=en)
+
+## Creating a new group policy
+
+Now you have everything you need to create a new GPO, please follow these final steps:
+
+1. Open the Group Policy Management interface
+2. Go to your desired domain and git the right click to display the options menu.
+3. Click on _**Create a GPO in this domain, and Link it here...**_
+4. Name your policy object and hit _**Ok**_.
+5. Right click on top of the policy object you just created and click _**Edit**_.
+6. On the left menu, find the folder _**Administrative Templates: Policy definitions**_ > _**Google**_ > _**Google Chrome**_ > _**Extensions**_.
+7. On the right side of the window, click on _**Configure the list of force-installed apps and extensions**_. This will display a new window with the same title.
+8. Click in the radio button _**Enabled**_ and then click on the button _**Show...**_, this will prompt a small window named _**Show Contents**_.
+9. Now copy the policy string `ID;DownloadURL` you created in the previous step and paste it under the cell _**Value**_, click _**Ok**_ and apply the changes.
+
+## Further group policy setup
+
+Remember you can always configure other settings for this Group Policy that are appropriate for your group of users and the extension.
+
+1. Open the _**Group Policy Management**_ interface, find the JNLP Runner group policy you created previously and click _**Edit**_.
+2. On the left menu, find _**Administrative Templates: Policy definitions**_ > _**Google**_ > _**Google Chrome**_ > _**Extensions**_.
+3. On the right side menu click on _**Configure Extension management settings**_.
+
+In this window you can configure all the settings relevant for your organisation when using the JNLP runner extension. Remember to use the extension ID for those settings that you want to directly apply to the JNLP Runner extension. This is done by editing the JSON string shown in the interface using the format:
+
+```json
+{ "ExtensionIDHere": { "SettingField": "FieldValues" } }
+```
+
+For example:
+
+- Always pin this extension to the browser toolbar
+
+```json
+{ "ExtensionIDHere": { "toolbar_pin": "force_pinned" } }
+```
+
+- Pre-allow specific permissions for the extension (see [permissions list](https://developer.chrome.com/docs/extensions/reference/permissions-list)). For example, to perform downloads:
+
+```json
+{ "ExtensionIDHere": { "allowed_permissions": ["downloads"] } }
+```
+
+- Block extension from interacting with certain websites:
+
+  ```json
+  { "runtime_blocked_hosts": ["*://an.example.com"] }
+  ```
+
+- Allow the extension to interact with specific websites even when they're in the blocked list:
+
+```json
+{ "runtime_allowed_hosts": ["*://an.example.com"] }
+```
+
+For more information about extension settings visit [The Chrome Documentation](https://support.google.com/chrome/a/answer/9867568?hl=en)
+
+## Update your changes
+
+Once you are happy with your group policy configuration, you can apply these changes to see them reflected on your user's chrome clients by running the shell command:
+
+```shell
+ gpupdate
+```
+
+Now your users should be able to see the extension installed in their Chrome browser.
