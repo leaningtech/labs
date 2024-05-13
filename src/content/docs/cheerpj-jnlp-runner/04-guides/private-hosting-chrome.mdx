@@ -55,19 +55,38 @@ Now you have everything you need to create a new GPO, please follow these final 
 8. Click in the radio button _**Enabled**_ and then click on the button _**Show...**_, this will prompt a small window named _**Show Contents**_.
 9. Now copy the policy string `ID;DownloadURL` you created in the previous step and paste it under the cell _**Value**_, click _**Ok**_ and apply the changes.
 
-## Further group policy setup
+## Licensing and further group policy setup
 
-Remember you can always configure other settings for this Group Policy that are appropriate for your group of users and the extension.
+The final step is to setup your license among other relevant configurations for this Group Policy.
 
 1. Open the _**Group Policy Management**_ interface, find the JNLP Runner group policy you created previously and click _**Edit**_.
 2. On the left menu, find _**Administrative Templates: Policy definitions**_ > _**Google**_ > _**Google Chrome**_ > _**Extensions**_.
 3. On the right side menu click on _**Configure Extension management settings**_.
 
-In this window you can configure all the settings relevant for your organisation when using the JNLP runner extension. Remember to use the extension ID for those settings that you want to directly apply to the JNLP Runner extension. This is done by editing the JSON string shown in the interface using the format:
+In this window you can configure all the settings relevant for your organisation when using the JNLP runner extension. To do so you need to input the relevant settings in JSON format into the editor. This is done by editing the JSON string shown in the interface using the format:
+
+```json
+{ "*": { "FieldKey": "FieldValue" } }
+```
+
+They Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
+Remember to use the extension ID for those settings that you want to apply only for the JNLP Runner extension.
 
 ```json
 { "ExtensionIDHere": { "SettingField": "FieldValues" } }
 ```
+
+### Licensing
+
+To correctly configure your license, make sure to include the license token field in your JSON:
+
+```json
+{ "ExtensionIDHere": { "licenseToken": "YourValidTokenHere" } }
+```
+
+### Other settings
+
+Remember you can always configure other settings for this Group Policy that are appropriate for your group of users and the extension. You can do this in this same JSON adding the appropriate key/values as the examples shown below:
 
 For example:
 
