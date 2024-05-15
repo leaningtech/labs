@@ -7,7 +7,7 @@ If your organisation requires to use our extension in multiple devices, we have 
 
 Requirements:
 
-- The appropriate IT permissions at your organisation
+- The appropriate IT permissions at your organisation.
 - The JNLP Runner extension CRX file.
 
 ## The CRX File and Download URL
@@ -21,21 +21,27 @@ You will need to host the extension CRX file in the appropriate location of your
 
 ## The extension ID
 
-The extension ID is a unique identifier used by Google. You can easily retrieve it if you have the extension installed in the traditional way from the WebStore:
+The extension ID is a unique identifier used by the Chrome WebStore. You can retrieve from the extension Chrome Web Store URL (last 32 characters):
 
-1.  Go to the extensions menu in Chrome (puzzle icon) and click on _Manage extensions_
-2.  All your installed extensions will show. Now turn on the slider for _Developer Mode_.
-3.  You will see the ID displayed for all your installed extensions. Copy the JNLP Runner's ID and reserve for later.
+```
+https://chromewebstore.google.com/detail/cheerpj-jnlp-runner/achnhggjjhnadfapkmgallnbmemdojdi
+```
+
+The extension ID is:
+
+```
+achnhggjjhnadfapkmgallnbmemdojdi
+```
 
 ## The policy string
 
 Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX Download URL separated by a semicolon:
 `ID;DownloadURL`
 It must look something like this:
-`cciilfdpmibiokimppmdpopaolambagi;https://some.download.url.file.crx`
+`cciilfdpmibiokimppmdinfaolambagi;https://some.download.url.file.crx`
 
-> [!warning] Hypothetical policy string
-> The example above contains hypothetical ID and URL, please do not use this policy string.
+> [!warning] Hypothetical URL
+> The example above contains hypothetical URL, please do not use this policy string.
 
 ## Policy templates
 
@@ -43,10 +49,10 @@ You will need to download and install the Google administrative templates. You c
 
 ## Creating a new group policy
 
-Now you have everything you need to create a new GPO, please follow these final steps:
+Now you have everything you need to create a new GPO, please follow these final steps to create a Group Policy or you can edit an existing one:
 
 1. Open the Group Policy Management interface
-2. Go to your desired domain and git the right click to display the options menu.
+2. Go to your desired domain and right click to display the options menu.
 3. Click on _**Create a GPO in this domain, and Link it here...**_
 4. Name your policy object and hit _**Ok**_.
 5. Right click on top of the policy object you just created and click _**Edit**_.
