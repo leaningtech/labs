@@ -1,5 +1,6 @@
 <script lang="ts">
-	const text = [ // TODO consider making these links to relevant docs/guides
+	const text = [
+		// TODO consider making these links to relevant docs/guides
 		"C and C++",
 		"Java",
 		"native code",

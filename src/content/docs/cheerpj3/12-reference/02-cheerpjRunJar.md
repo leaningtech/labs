@@ -19,11 +19,19 @@ async function cheerpjRunJar(
 
 `cheerpjRunJar` returns a [Promise] which resolves with the [exit code] of the program. `0` indicates success, any other value indicates failure.
 
-## Example
+## Examples
+
+### Basic usage
 
 ```js
-const exitCode = await cheerpjRunMain("/app/application.jar");
+const exitCode = await cheerpjRunJar("/app/application.jar");
 console.log(`Program exited with code ${exitCode}`);
+```
+
+### Command line arguments
+
+```js
+await cheerpjRunJar("/app/application.jar", ["--version"]);
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

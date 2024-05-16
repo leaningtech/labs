@@ -4,7 +4,7 @@ import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "../../consts";
 import ClientCarousel from "./ClientCarousel.svelte";
-import Icon from "astro-icon";
+import ScrollPrompt from "../hero/ScrollPrompt.astro";
 ---
 
 <header
@@ -56,13 +56,5 @@ import Icon from "astro-icon";
 
 	<div class="grow"></div>
 
-	<!-- Scroll prompt -->
-	<a
-		href="#ecosystem"
-		class="hidden md:inline-block p-6 text-stone-400 hover:text-white transition-colors"
-	>
-		<Icon name="mdi:chevron-down" class="w-8 h-8 animate-bounce" />
-	</a>
+	<ScrollPrompt />
 </header>
-
-<a id="after-hero"></a>

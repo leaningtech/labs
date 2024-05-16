@@ -9,9 +9,13 @@ import {
 import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
+import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
+import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
+import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
 
 export interface ProductData {
 	id: Product;
+	type: "technology" | "extension" | "tool";
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
@@ -25,6 +29,7 @@ export interface ProductData {
 export const products: { [product in Product]: ProductData } = {
 	cheerp: {
 		id: "cheerp",
+		type: "technology",
 		name: "Cheerp",
 		href: "/cheerp",
 		logotype: cheerpLogotype,
@@ -36,6 +41,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	cheerpj2: {
 		id: "cheerpj2",
+		type: "technology",
 		name: "CheerpJ",
 		href: "/cheerpj2",
 		logotype: cheerpjLogotype,
@@ -48,6 +54,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	cheerpj3: {
 		id: "cheerpj3",
+		type: "technology",
 		name: "CheerpJ",
 		href: "/cheerpj3",
 		logotype: cheerpjLogotype,
@@ -60,6 +67,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	cheerpx: {
 		id: "cheerpx",
+		type: "technology",
 		name: "CheerpX",
 		href: "/cheerpx",
 		logotype: cheerpxLogotype,
@@ -72,6 +80,7 @@ export const products: { [product in Product]: ProductData } = {
 	},
 	"cheerpx-for-flash": {
 		id: "cheerpx-for-flash",
+		type: "technology",
 		name: "CheerpX for Flash",
 		href: "/cheerpx-for-flash",
 		logotype: cheerpxLogotype,
@@ -81,6 +90,31 @@ export const products: { [product in Product]: ProductData } = {
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
 		github: "https://github.com/leaningtech/cheerpx-flash",
 		repositoryName: "cheerpx-flash",
+	},
+	"cheerpj-jnlp-runner": {
+		id: "cheerpj-jnlp-runner",
+		type: "extension",
+		name: "CheerpJ JNLP Runner",
+		href: "/cheerpj-jnlp-runner",
+		logotype: jnlprunnerLogotypeLarge,
+		favicon: jnlprunnerLogotype.src,
+		subtitle: "Run Java Web Start applications in the browser",
+		description:
+			"Run Java Web Start Applications without a Java Desktop installation.",
+		github: "https://github.com/leaningtech/cheerpj-jnlp-runner",
+		repositoryName: "cheerpj-jnlp-runner",
+	},
+	"cheerpj-applet-runner": {
+		id: "cheerpj-applet-runner",
+		type: "extension",
+		name: "CheerpJ Applet Runner",
+		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
+		logotype: appletrunnerLogotype,
+		favicon: "/cheerpj2/favicon.ico",
+		subtitle: "Run Java Applets in the modern browser",
+		description: "Run Java Applets in modern browsers without plugins",
+		github: "https://github.com/leaningtech/cheerpj-applet-runner",
+		repositoryName: "cheerpj-applet-runner",
 	},
 };
 

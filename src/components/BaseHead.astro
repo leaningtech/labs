@@ -15,7 +15,19 @@ const { title, description, image = "/social/common@2x.png" } = Astro.props;
 
 const product = productFromUrl(canonicalURL);
 const favicon = product?.favicon ?? companyFavicon.src;
-const faviconType = favicon.endsWith(".ico") ? "image/x-icon" : "image/svg+xml";
+
+// Sniff mime type from favicon extension
+let faviconType: string;
+if (favicon.endsWith(".svg")) {
+	faviconType = "image/svg+xml";
+} else if (favicon.endsWith(".ico")) {
+	faviconType = "image/x-icon";
+} else if (favicon.endsWith(".png")) {
+	faviconType = "image/png";
+} else {
+	console.warn(`Unknown MIME type for favicon "${favicon}"`);
+	faviconType = "image/png";
+}
 ---
 
 <!-- Global Metadata -->

@@ -26,3 +26,5 @@
 /cheerpj3/reference/cheerpjAddStringFile /cheerpj3/reference/cheerpOSAddStringFile
 /cheerp/installation/rhel8 /cheerp/installation/rhel
 /cheerpj3/examples/* /cheerpj3/tutorials/:splat
+/cheerpj-jnlprunner /cheerpj-jnlp-runner
+/cheerpj-jnlprunner/* /cheerpj-jnlp-runner/:splat
