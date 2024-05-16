@@ -1,9 +1,12 @@
 ---
 title: Cheerp
-subtitle: The C/C++ compiler for web applications
+description: The C/C++ compiler for web applications
 ---
 
-import LinkButton from "../../../components/LinkButton.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import LatestBlogPostPill from "@/components/LatestBlogPostPill.astro";
+
+<LatestBlogPostPill />
 
 Cheerp is an open-source **C/C++ to WebAssembly compiler**. It compiles virtually any C/C++ code to WebAssembly and JavaScript.
 
@@ -14,6 +17,16 @@ Cheerp is an open-source **C/C++ to WebAssembly compiler**. It compiles virtuall
 />
 
 ![](/cheerp/Diagram_browser.png)
+
+{/* TODO: live demo thing */}
+
+```cpp
+#include <cheerp/client.h>
+
+void webMain() {
+  client::window.alert("Hello Cheerp");
+}
+```
 
 ## What is Cheerp?
 
@@ -28,7 +41,7 @@ Cheerp is licensed under the "Apache 2.0 License with LLVM exceptions", i.e. the
 Cheerp enables C/C++ code to be compiled to a combination of WebAssembly and JavaScript (or asm.js when targeting legacy browsers). Compared to alternative C/C++ compilers for web applications such as Emscripten, Cheerp:
 
 1. Generates more optimized (smaller) WebAssembly code, but can also compile to a JavaScript output with dynamic memory (garbage-collectible output), zero-overhead DOM manipulation and access to Web APIs and superior C++-JavaScript interoperability.
-2. Allows to compile a single code base into a combination of WebAssembly and JavaScript by (optionally) tagging portions of the code with `[[cheerp::genericjs]]` and `[[cheerp::wasm]]`.
+2. Allows one to compile a single code base into a combination of WebAssembly and JavaScript by (optionally) tagging portions of the code with `[[cheerp::genericjs]]` and `[[cheerp::wasm]]`.
 
 ## Questions
 

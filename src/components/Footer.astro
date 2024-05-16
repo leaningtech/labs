@@ -2,8 +2,13 @@
 import logotype from "../assets/branding/company/logotype-white.svg";
 import { Icon } from "astro-icon";
 import { DISCORD_URL, TWITTER_URL, GITHUB_URL, LINKEDIN_URL } from "../consts";
+import { Image } from "astro:assets";
 
 const today = new Date();
+
+interface Props {
+	includeGrow?: boolean; // default: true
+}
 
 interface Section {
 	name: string;
@@ -28,7 +33,7 @@ const sections: Section[] = [
 		name: "Resources",
 
 		links: [
-			{ text: "Documentation", href: "/docs" },
+			{ text: "Documentation", href: "/#ecosystem" },
 			{ text: "Blog", href: "/blog" },
 			{ text: "GitHub", href: "https://github.com/leaningtech" },
 		],
@@ -52,10 +57,13 @@ const sections: Section[] = [
 			{ text: "Cheerp", href: "/cheerp" },
 			{ text: "CheerpJ", href: "/cheerpj" },
 			{ text: "CheerpX", href: "/cheerpx" },
+			{ text: "CheerpX for Flash", href: "/cheerpx-for-flash" },
 		],
 	},
 ];
 ---
+
+{Astro.props.includeGrow === false ? null : <div class="grow" />}
 
 <footer class="p-14 bg-black">
 	<div class="w-full max-w-screen-2xl mx-auto space-y-6">
@@ -63,12 +71,11 @@ const sections: Section[] = [
 			class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 place-content-between text-lg"
 		>
 			<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
-				<!-- TODO: local svg -->
-				<img
+				<Image
 					src={logotype}
 					loading="lazy"
 					alt="Leaning Technologies"
-					class="h-16"
+					class="w-auto h-16"
 				/>
 			</a>
 			<div

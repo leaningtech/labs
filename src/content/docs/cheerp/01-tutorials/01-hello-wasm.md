@@ -14,15 +14,21 @@ I picked a computational heavy task: "Counting how many primes are smaller than 
 
 First, save [segmented_sieve.cpp](/cheerp/tutorials/hello_wasm/segmented_sieve.cpp) on your computer and try to compile it natively:
 
-`g++ segmented_sieve.cpp -o segmented_sieve -O3`
+```shell
+g++ segmented_sieve.cpp -o segmented_sieve -O3
+```
+
 (or `clang++` or equivalent command line C++ compiler)
 
 and then we run it:
-`./segmented_sieve`
+
+```shell
+./segmented_sieve
+```
 
 the output to the console will be something like:
 
-```
+```text frame="terminal"
 4.0052e-05s	to sieve in the interval (1, 10)	4 primes found
 5.8115e-05s	to sieve in the interval (1, 100)	25 primes found
 2.2484e-05s	to sieve in the interval (1, 1000)	168 primes found
@@ -46,7 +52,7 @@ and then we run it:
 
 the output to the console will be something like:
 
-```
+```text frame="terminal"
 0.006s	to sieve in the interval (1, 10)	4 primes found
 0.007s	to sieve in the interval (1, 100)	25 primes found
 0.008s	to sieve in the interval (1, 1000)	168 primes found
@@ -62,7 +68,7 @@ It works, internally it does equivalents calculations. There is a performance sl
 
 Want to see it inside a browser?
 
-```html
+```html title="segmented_sieve.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -87,7 +93,9 @@ Now we will get to the serious stuff, compiling to a mix of JavaScript (that wil
 
 The command line it's basically the same, just changing the target:
 
-<code>/opt/cheerp/bin/clang++ -target cheerp-wasm segmented_sieve.cpp -o segmented_sieve_wasm.js -O3</code>
+```shell
+/opt/cheerp/bin/clang++ -target cheerp-wasm segmented_sieve.cpp -o segmented_sieve_wasm.js -O3
+```
 
 Note that we are using the **cheerp-wasm** target, not the **cheerp** target. This marks all code to be compiled into wasm (or asmjs) by default, including the C and C++ standard libraries.
 
@@ -126,7 +134,9 @@ Take the previous html file, and change `segmented_sieve.js` to `segmented_sieve
 
 Next, run a web server:
 
-`http-server -o`
+```shell
+http-server -o
+```
 
 This will open a new tab on your favorite browser with a list of the files in the current folder. Choose `segmented_sieve.html` (or whatever name you gave to the file), way few second for the execution and open the console. You should be able to see similar results to the one computed via `nodejs`.
 

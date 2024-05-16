@@ -1,0 +1,101 @@
+blockquote[data-callout] {
+	@apply p-4 px-5 my-3 rounded-md text-slate-200 border-0;
+}
+
+.callout-title {
+	@apply flex items-center gap-1 mb-1;
+}
+
+.callout-title-icon svg {
+	@apply w-5 h-5 mr-1;
+}
+
+.callout-title-text {
+	@apply font-semibold;
+}
+
+blockquote[data-expandable="true"] .callout-title {
+	cursor: pointer;
+	user-select: none;
+}
+
+blockquote[data-expandable="true"][data-expanded="false"]
+	> *:not(.callout-title) {
+	display: none;
+}
+
+.callout-caret {
+	transform: rotate(0);
+	transition: transform 0.2s ease-out;
+}
+
+blockquote[data-expandable="true"][data-expanded="false"] .callout-caret {
+	transform: rotate(-90deg);
+}
+
+blockquote[data-callout] > div:not(.callout-title) > p {
+	@apply leading-normal;
+	margin: 0;
+}
+
+/* Fallback colours */
+blockquote[data-callout] {
+	@apply bg-blue-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-blue-400;
+	}
+}
+
+blockquote[data-callout="tip"],
+blockquote[data-callout="hint"],
+blockquote[data-callout="important"] {
+	@apply bg-cyan-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-cyan-400;
+	}
+}
+
+blockquote[data-callout="success"],
+blockquote[data-callout="check"],
+blockquote[data-callout="done"] {
+	@apply bg-green-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-green-400;
+	}
+}
+
+blockquote[data-callout="question"],
+blockquote[data-callout="help"],
+blockquote[data-callout="faq"] {
+	@apply bg-yellow-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-yellow-400;
+	}
+}
+
+blockquote[data-callout="warning"],
+blockquote[data-callout="caution"],
+blockquote[data-callout="attention"] {
+	@apply bg-orange-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-orange-400;
+	}
+}
+
+blockquote[data-callout="failure"],
+blockquote[data-callout="fail"],
+blockquote[data-callout="missing"],
+blockquote[data-callout="danger"],
+blockquote[data-callout="error"],
+blockquote[data-callout="bug"] {
+	@apply bg-red-400 bg-opacity-10;
+
+	& .callout-title {
+		@apply text-red-400;
+	}
+}

@@ -63,11 +63,14 @@ void webMain()
 ```
 
 Compiling with:
-`/opt/cheerp/bin/clang++ -O3 dom.cpp -o dom.js`
+
+```shell
+/opt/cheerp/bin/clang++ -O3 dom.cpp -o dom.js
+```
 
 Now we need a [html file](/cheerp/tutorials/dom_access/dom.html):
 
-```html
+```html title="dom.html"
 <!doctype html>
 <html lang="en">
 	<head>
@@ -101,7 +104,7 @@ There are two important things to notice:
 
 `Callback` is a function defined in the `cheerp` namespace which is required to use C++ functions, functors and lambads as callbacks for browser events. For example.
 
-```
+```cpp
 cheerp::Callback(regularCXXFunc);
 cheerp::Callback(CXXFunctor());
 cheerp::Callback([](client::Event*){ ... });
@@ -110,7 +113,7 @@ cheerp::Callback([capturedVariable](client::Event*){ ... });
 
 The general usage is:
 
-```
+```cpp
 element->addEventListener("event_kind", cheerp::Callback(callback));
 ```
 

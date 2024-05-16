@@ -53,13 +53,13 @@ jobs:
         uses: JarvusInnovations/background-action@v1
         with:
           run: pnpm preview --host 0.0.0.0
-          wait-on: http://127.0.0.1:3000
+          wait-on: http://127.0.0.1:4321
 
       - name: Install lychee
         run: curl -L https://github.com/lycheeverse/lychee/releases/download/v0.13.0/lychee-v0.13.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz
 
       - name: Run lychee on sitemap
-        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:3000/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress
+        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:4321/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
@@ -184,3 +184,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: errata-ai/vale-action@reviewdog
+        with:
+          version: 2.30.0

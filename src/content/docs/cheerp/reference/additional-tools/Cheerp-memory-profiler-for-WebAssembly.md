@@ -2,7 +2,7 @@
 title: Cheerp Memory Profiler
 ---
 
-Starting from Cheerp 2.0, [commercial users](https://leaningtech.com/cheerp/#Pricing) have access to the Cheerp Memory Profiler. This tool allows to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
+Starting from Cheerp 2.0, [commercial users](https://leaningtech.com/cheerp/#Pricing) have access to the Cheerp Memory Profiler. This tool allows one to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
 
 The Cheerp memory profiler can be used from within the source code (e.g: to assert that there are no leaks inside a certain block) or from the browser console. We provide a visualisation tool that can be simply included in the HTML page hosting compiled code to get an overview of real-time memory consumption during the application lifetime. [Commercial Licence].
 
@@ -12,7 +12,7 @@ The Cheerp memory profiler is built specifically for tracking allocations on Web
 
 To use the tool, you need to link the memprof library to your C/C++ project compiled with Cheerp, for example:
 
-```
+```bash
 /opt/cheerp/bin/clang++ -target cheerp-wasm -cheerp-linear-output=asmjs -cheerp-pretty-code *.cpp -o target.js -lmemprof
 ```
 

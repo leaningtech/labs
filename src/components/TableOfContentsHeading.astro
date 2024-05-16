@@ -19,7 +19,7 @@ const { heading } = Astro.props;
 		class:list={[
 			"block py-1 text-stone-400 hover:text-stone-200",
 			{
-				"font-semibold": heading.depth <= 2,
+				"font-medium": heading.depth <= 2,
 			},
 		]}
 	>
@@ -55,9 +55,9 @@ const { heading } = Astro.props;
 			console.log(href);
 
 			if (href === location.hash) {
-				a.classList.add("!text-primary-500");
+				a.classList.add("!text-primary-400");
 			} else {
-				a.classList.remove("!text-primary-500");
+				a.classList.remove("!text-primary-400");
 			}
 		}
 	}

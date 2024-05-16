@@ -30,36 +30,39 @@ In order to evaluate the effect of the PreExecuter, we will refer to two simple 
 
 1. An Hello World program.
 
-`    #include <cheerp/clientlib.h>`
+```cpp
+#include <cheerp/clientlib.h>
 
-    void webMain() {
-        client::console.log("Hello world!");
-    }
+void webMain() {
+    client::console.log("Hello world!");
+}
+```
 
 2. A simple program which uses the standard library's vector class.
 
-`   #include <cheerp/clientlib.h>`
+```cpp
+#include <cheerp/clientlib.h>
+#include <vector>
 
-`   #include <vector>`
+class A {
+public:
+    const char *a;
+    A(int i) { a = nullptr; }
+};
 
-    class A {
-    public:
-        const char *a;
-        A(int i) { a = nullptr; }
-    };
-
-    void webMain()
-    {
-        std::vector<A> v;
-        client::console.log("sizeof(A):", sizeof(A), "== 4");
-        client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 0");
-        for(int i = 0; i < 10; i++)
-            v.push_back(A(i));
-        client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 10");
-        client::console.log("v.size():", v.size(), "== 10");
-        v.erase(v.begin() + 3);
-        client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 9");
-    }
+void webMain()
+{
+    std::vector<A> v;
+    client::console.log("sizeof(A):", sizeof(A), "== 4");
+    client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 0");
+    for(int i = 0; i < 10; i++)
+        v.push_back(A(i));
+    client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 10");
+    client::console.log("v.size():", v.size(), "== 10");
+    v.erase(v.begin() + 3);
+    client::console.log("v.end()-v.begin():", v.end()-v.begin(), "== 9");
+}
+```
 
 The following plot illustrates the output size of these examples with different levels of optimization: our standard minification available in Cheerp 1.1, a more aggressive baseline minimization included in Cheerp 1.2, and the maximum optimization including the PreExecuter.
 

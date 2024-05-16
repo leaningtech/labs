@@ -1,0 +1,89 @@
+---
+import { type ProductData, getProductNav } from "@/lib/products";
+import { Image } from "astro:assets";
+import Search from "./search/Search.astro";
+import { DISCORD_URL } from "@/consts";
+import Icon from "astro-icon";
+import ProductVersionSwitcher from "./ProductVersionSwitcher.astro";
+import GitHubStarCount from "./nav/GitHubStarCount.svelte";
+import DiscordPresenceCount from "./nav/DiscordPresenceCount.svelte";
+
+interface Props {
+	product: ProductData;
+}
+
+const { product } = Astro.props;
+
+const nav = await getProductNav(product.id);
+const getStartedHref = nav.entries.filter(
+	(entry) => entry.type === "directory",
+)[0]?.href;
+---
+
+<nav
+	aria-label="Product navigation"
+	class="sm:sticky top-0 z-40 bg-stone-900 bg-opacity-90 backdrop-blur-lg xl:bg-transparent xl:backdrop-filter-none text-white text-sm font-semibold leading-6"
+>
+	<div
+		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden"
+	>
+		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
+			<a href={product.href} class="flex items-center">
+				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+			</a>
+			{product.id.startsWith("cheerpj") && <ProductVersionSwitcher {product} />}
+		</div>
+
+		<div class="grow lg:hidden"></div>
+
+		<Search filterProductId={product.id} />
+
+		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
+			<a
+				href={DISCORD_URL}
+				class="flex items-center gap-1.5 hover:text-white group"
+			>
+				<Icon name="fa-brands:discord" class="w-5 h-5" />
+				<span
+					class="hidden md:flex items-center gap-1 text-stone-400 group-hover:text-white"
+					title="Online Discord members"
+				>
+					<Icon
+						name="ph:circle-fill"
+						class="w-3 h-3 text-green-500 absolute animate-ping opacity-50"
+					/>
+					<Icon name="ph:circle-fill" class="w-3 h-3 text-green-500" />
+					<DiscordPresenceCount client:only />
+				</span>
+			</a>
+			<a
+				href={product.github}
+				class="rounded-md flex items-center justify-middle py-1 px-2 gap-2 hover:text-white group"
+			>
+				<Icon name="fa-brands:github" class="w-5 h-5" />
+				<span
+					class="hidden md:flex items-center gap-1 text-stone-400 group-hover:text-white"
+					title="GitHub stars"
+				>
+					<Icon name="ph:star-fill" class="w-4 h-4" />
+					<GitHubStarCount
+						client:only
+						repo={`leaningtech/${product.repositoryName}`}
+					/>
+				</span>
+			</a>
+
+			{
+				getStartedHref && (
+					<a
+						href={getStartedHref}
+						class="flex items-center gap-1 pl-4 pr-3 py-1 rounded-full bg-primary-600 bg-opacity-20 border border-primary-400 border-opacity-50 hover:border-opacity-100 text-primary-400"
+					>
+						Get started
+						<Icon name="jam:chevron-right" class="w-4 h-4" />
+					</a>
+				)
+			}
+		</div>
+	</div>
+</nav>

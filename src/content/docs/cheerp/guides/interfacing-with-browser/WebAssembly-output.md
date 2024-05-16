@@ -6,7 +6,7 @@ title: WebAssembly output
 
 Setting the command line flag `-target cheerp-wasm` lets Cheerp generate binary WebAssembly output:
 
-```
+```bash
 /opt/cheerp/bin/clang++ \
   -target cheerp-wasm \
   -cheerp-linear-heap-size=128 \
@@ -36,7 +36,7 @@ Since WebAssembly uses linear memory with a certain size, the heap size can be s
 
 From WebAssembly it is not possible to call any DOM APIs, not even the basic `client::console.log`. Cheerp provides automatic generation of FFI/code bridges to indirectly use DOM API though. As an example take the following code.
 
-```
+```cpp
 #include <cheerp/clientlib.h>
 
 [[cheerp::genericjs]] int domOutput(const char* str)

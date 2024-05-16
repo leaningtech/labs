@@ -48,7 +48,7 @@ Version 2.0 - February 4th, 2020
     * Improved isolation of CheerpJ symbols
     * Improved support to multi-threading, in particular Thread.interrupt
     * Use the CFGStackifier algorithm to synthesize control flow in generated code
-    * New API to receive preloading notification (allows to build custom progress bars)
+    * New API to receive preloading notification (allows one to build custom progress bars)
     * Improved detection of Applets on HTML pages
     * Improved packaging for MacOS
 
