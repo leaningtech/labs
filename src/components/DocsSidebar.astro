@@ -4,18 +4,14 @@ import type { NavDirectory } from "../lib/nav";
 import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
-import { productFromUrl as productFromUrl } from "../lib/products";
+import type { ProductData } from "@/lib/products";
 
 interface Props {
+	product: ProductData | undefined;
 	directory: NavDirectory | undefined;
 }
 
-const { directory } = Astro.props;
-
-const product = productFromUrl(Astro.url);
-if (!product) {
-	throw new Error(`unable to derive product from url: ${Astro.url.pathname}`);
-}
+const { product, directory } = Astro.props;
 ---
 
 <aside
@@ -27,9 +23,13 @@ if (!product) {
 		<Icon name="jam:close" class="w-6 h-6 text-white" />
 	</button>
 
-	<a class="inline-block lg:hidden pb-4" href={product.href}>
-		<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
-	</a>
+	{
+		product && (
+			<a class="inline-block lg:hidden pb-4" href={product.href}>
+				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+			</a>
+		)
+	}
 
 	{
 		directory && (

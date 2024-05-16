@@ -28,22 +28,20 @@ const { id, title, description, headings, fullWidthLayout } = Astro.props;
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
-if (!product) throw new Error("Product not found");
-
-const directory = findNavDirectory(nav, [product.id]);
+const directory = product ? findNavDirectory(nav, [product.id]) : undefined;
 ---
 
 <Shell
 	title={[
-		title === product.name ? undefined : title,
-		product.name + " Documentation",
+		title === product?.name ? undefined : title,
+		(product?.name ?? "Leaning Technologies") + " Documentation",
 	]
 		.filter(Boolean)
 		.join(" - ")}
-	description={description ?? product.description}
+	description={description ?? product?.description}
 >
 	<BentoGrid />
-	<ProductNav {product} />
+	{product ? <ProductNav {product} /> : null}
 	{
 		fullWidthLayout ? (
 			<slot />
@@ -53,27 +51,31 @@ const directory = findNavDirectory(nav, [product.id]);
 					data-sidebar-wrapper
 					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
 				>
-					<DocsSidebar {directory} />
+					<DocsSidebar {product} {directory} />
 				</div>
 				<div
 					data-backdrop
 					class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
 				/>
-				<main class="overflow-x-hidden">
+				<div class="overflow-x-hidden w-full flex flex-col items-center">
 					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20">
-						<button data-sidebar-toggle class="lg:hidden">
-							<span class="sr-only">Open navigation menu</span>
-							<Icon name="mi:menu" class="w-8 h-8 text-white" />
-						</button>
+						{directory && (
+							<button data-sidebar-toggle class="lg:hidden">
+								<span class="sr-only">Open navigation menu</span>
+								<Icon name="mi:menu" class="w-8 h-8 text-white" />
+							</button>
+						)}
 						<Breadcrumbs current={id} />
 					</div>
 
 					<main
 						data-pagefind-body
-						data-pagefind-filter={`productId:${product.id}`}
-						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 max-w-3xl xl:max-w-[49rem]"
+						data-pagefind-filter={
+							product ? `productId:${product.id}` : undefined
+						}
+						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]"
 					>
-						{title === product.name ? (
+						{title === product?.name ? (
 							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
 								<h1>
 									<Image alt={product.name} src={product.logotype} />
@@ -88,7 +90,7 @@ const directory = findNavDirectory(nav, [product.id]);
 								)}
 							</>
 						)}
-						{product.id === "cheerpj2" ? (
+						{product?.id === "cheerpj2" ? (
 							<Callout title="Deprecation notice" variant="warning">
 								CheerpJ 2 is deprecated. Consider{" "}
 								<a href="/cheerpj3/migrating-from-cheerpj2">
@@ -110,7 +112,7 @@ const directory = findNavDirectory(nav, [product.id]);
 							</div>
 						)}
 					</div>
-				</main>
+				</div>
 				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
 					{headings && <TableOfContents {headings} />}
 				</aside>

@@ -251,12 +251,17 @@ export function idToTitle(id: string): string {
 	return [upperFirstWord, ...words].join(" ");
 }
 
+const slugComponentOverrides = new Map([["CONTRIBUTING", "contributing"]]);
+
 function idToSlug(id: string): string {
 	return id
 		.replace(/\.mdx?$/, "")
 		.replace("/index", "") // index.md overrides directory listing
 		.split("/")
-		.map((component) => component.replace(/^\d+-/, ""))
+		.map((component) => {
+			const part = component.replace(/^\d+-/, "");
+			return slugComponentOverrides.get(part) ?? part;
+		})
 		.join("/");
 }
 
