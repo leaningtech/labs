@@ -57,7 +57,7 @@ const directory = product ? findNavDirectory(nav, [product.id]) : undefined;
 					data-backdrop
 					class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
 				/>
-				<div class="overflow-x-hidden w-full flex flex-col items-center">
+				<div class="overflow-x-hidden w-full">
 					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20">
 						{directory && (
 							<button data-sidebar-toggle class="lg:hidden">
@@ -106,11 +106,9 @@ const directory = product ? findNavDirectory(nav, [product.id]) : undefined;
 						<WasThisHelpful
 							editHref={`https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`}
 						/>
-						{directory && (
-							<div class="py-5">
-								<DocsPagination activeId={id} />
-							</div>
-						)}
+						<div class="py-5">
+							{directory && <DocsPagination activeId={id} />}
+						</div>
 					</div>
 				</div>
 				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
