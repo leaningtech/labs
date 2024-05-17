@@ -30,8 +30,26 @@ document.addEventListener("DOMContentLoaded", () => {
 	for (const figure of figures) {
 		const commands = figure.querySelectorAll(".ec-line > span:first-child");
 		let needsTabs = false;
+		let needsFixCopy = false;
 
-		for (const command of commands) {
+		for (let command of commands) {
+			// Ignore leading $ and space
+			if (command.innerText === "$") {
+				// Make the $ and space not selectable
+				command.style.userSelect = "none";
+
+				command = command.nextElementSibling;
+				if (command.innerText !== " ") {
+					console.error("Expected space after $", command);
+					continue;
+				}
+				command.style.userSelect = "none";
+
+				command = command.nextElementSibling; // The actual command
+
+				needsFixCopy = true;
+			}
+
 			// Skip if no match
 			let didMatch = false;
 			for (const [regex] of replacements) {
@@ -41,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				}
 			}
 			if (!didMatch) continue;
+
+			needsFixCopy = true;
 
 			// Queue update
 			const originalText = command.innerText;
@@ -57,9 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (needsTabs) {
 			const header = figure.querySelector(".header");
 			header.classList.add("has-tabs");
-			header.appendChild(makeTabButton("Windows", "win"));
-			header.appendChild(makeTabButton("macOS", "mac"));
 			header.appendChild(makeTabButton("Linux", "linux"));
+			header.appendChild(makeTabButton("macOS", "mac"));
+			header.appendChild(makeTabButton("Windows", "win"));
+		}
+
+		if (needsFixCopy) {
+			// Disable copy button because of https://github.com/leaningtech/labs/issues/56
+			figure.querySelector(".copy").style.display = "none";
+			// TODO: actually fix copy
 		}
 	}
 
