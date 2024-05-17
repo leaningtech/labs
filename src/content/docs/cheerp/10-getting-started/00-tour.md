@@ -1,7 +1,7 @@
 ---
 title: A tour of Cheerp
 shortTitle: Tour
-description: A 5-minute tour of Cheerp, its features, and how to use it
+description: A 5-minute tour of Cheerp and its features
 ---
 
 ## What Cheerp does
@@ -88,6 +88,7 @@ __asm__("alert('Hello, world!')");
 
 <!-- TODO: link to more info -->
 
+<!--
 ### WebAssembly and JavaScript in the same codebase
 
 Cheerp can compile parts of your code into JavaScript, and other parts into WebAssembly.
@@ -95,35 +96,6 @@ Cheerp can compile parts of your code into JavaScript, and other parts into WebA
 ```cpp
 // TODO
 ```
+-->
 
 <!-- TODO: why is this interesting / helpful? -->
-
-## Usage
-
-Cheerp is a command-line toolchain that includes binaries like `clang` (the compiler).
-
-After [installing Cheerp](/cheerp/installation), you can compile with
-
-```shell
-/opt/cheerp/bin/clang++ -O3 -target cheerp-wasm hello.cpp -o hello.js
-```
-
-which will output `hello.js` and `hello.wasm` files. You can run this in any JavaScript runtime, such as Node.js, Deno, or Bun.
-
-```shell
-node hello.js
-```
-
-You can also include the generated JavaScript code in an HTML file with a script tag, such as
-
-```html
-<script src="hello.js"></script>
-```
-
-<!--
-Cheerp can also generate plain JavaScript code with
-
-```bash "-target cheerp"
-/opt/cheerp/bin/clang++ -O3 -target cheerp hello.cpp -o hello.js
-```
--->
