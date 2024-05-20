@@ -12,14 +12,14 @@ Requirements:
 - The appropriate IT permissions at your organisation.
 - The JNLP Runner extension CRX file.
 
-## The CRX File and DownloadURL
+## The CRX File and `DownloadURL`
 
 The CRX file is a compressed format for extensions of browsers belonging to the Chromium family (such as Google Chrome). To obtain the CRX file of the JNLP runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you alongside a license token.
 
-You will need to host the extension CRX file in the appropriate location of your IT infrastructure and create a DownloadURL to access it. You will need this URL later in the tutorial.
+**Host the extension CRX file in an appropriate location in your IT infrastructure and create a download URL to access it.** You will need this URL later in the tutorial.
 
-> [!info] About the DownloadURL
-> You can also use the WebStore's DownloadURL, but you won't be self-hosting the extension and it will be retrieved from the WebStore for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
+> [!info] About `DownloadURL`
+> You can also use the WebStore's `DownloadURL`, but you won't be self-hosting the extension and it will be retrieved from the WebStore for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
 
 ## The extension ID
 
@@ -37,7 +37,7 @@ achnhggjjhnadfapkmgallnbmemdojdi
 
 ## The policy string
 
-Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX DownloadURL separated by a semicolon:
+Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX `DownloadURL` separated by a semicolon:
 `ID;DownloadURL`
 It must look something like this:
 `achnhggjjhnadfapkmgallnbmemdojdi;https://some.download.url.file.crx`
@@ -83,7 +83,7 @@ In this window you can configure all the settings relevant for your organisation
 { "*": { "FieldKey": "FieldValue" } }
 ```
 
-They Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
+The Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
 Remember to use the extension ID for those settings that you want to apply only for the JNLP Runner extension.
 
 ```json
@@ -131,7 +131,7 @@ For example:
 For more information about extension settings visit [The Chrome Documentation](https://support.google.com/chrome/a/answer/9867568?hl=en)
 
 <LinkButton
-	href="https://support.google.com/chrome/a/answer/187202?hl=en"
+	href="https://support.google.com/chrome/a/answer/9867568?hl=en"
 	label="Chrome Documentation"
 	type="secondary"
 	iconRight="iconoir:google-docs"
