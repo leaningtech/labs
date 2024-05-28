@@ -10,6 +10,8 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 ### Installing Cheerp on Linux
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/cheerp.svg)](https://repology.org/project/cheerp/versions)
+
 #### Ubuntu
 
 Use our [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa):
@@ -27,6 +29,9 @@ Use our [AUR package](https://aur.archlinux.org/packages/cheerp-git):
 ```sh
 $ yay -S cheerp-git
 ```
+
+> [!warning] This might take a while
+> `cheerp-git` will compile Cheerp from source. For a faster install, you can use the community-maintained `cheerp-bin` package which unpacks the Ubuntu package.
 
 <!-- TODO: Nix -->
 
