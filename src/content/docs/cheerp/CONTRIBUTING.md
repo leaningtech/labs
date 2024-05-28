@@ -6,7 +6,7 @@ slug: cheerp/contributing
 
 Cheerp is one of Leaning Technologies' first open source projects that is both under very active development and is used internally and externally by lots of people. We're still working out the best way to accept contributions to Cheerp, but we're excited to have you here.
 
-If you run into any problems contributing or you have any questions, please come ask in the `#cheerp` channel on [our Discord server](https://discord.leaningtech.com).
+To get started with contributing to Cheerp, please introduce yourself in the `#cheerp` channel on [our Discord server](https://discord.leaningtech.com).
 
 Please also consider reading the [main contributing guide](/contributing) which applies to all Leaning Technologies projects.
 
