@@ -9,7 +9,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
 	// The keys of this object are used to generate the path for that image.
 	// In this example, we generate one image at `/open-graph/example.png`.
 	pages: {
-		example: {
+		"cheerpj-jnlp-runner": {
 			title: "Example Page",
 			description: "Description of this page shown in smaller text",
 		},
@@ -20,7 +20,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
 		title: page.title,
 		description: page.description,
 		logo: {
-			path: "./src/astro-docs-logo.png",
+			path: "../assets/branding/products/cheerpj-extensions/jnlp-logo.png",
 		},
 		// There are a bunch more options you can use here!
 	}),
