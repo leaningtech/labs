@@ -3,6 +3,7 @@
 
 import DirectoryListing from "@/components/DirectoryListing.astro";
 import DocsArticle from "../layouts/DocsArticle.astro";
+import { SITE_URL } from "../consts.ts";
 import {
 	getRootNav,
 	flattenNav,
@@ -29,6 +30,7 @@ const navEntry = Astro.props;
 const collectionEntry =
 	navEntry.type === "file" ? navEntry.collectionEntry : undefined;
 const rendered = await collectionEntry?.render();
+const ogImage = `${SITE_URL}/og/docs/${collectionEntry?.slug}.png`;
 ---
 
 <DocsArticle
@@ -37,14 +39,14 @@ const rendered = await collectionEntry?.render();
 	id={navEntry.id}
 	headings={rendered?.headings}
 	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
->
-	{
-		rendered ? (
+	image={ogImage}
+	{rendered ? (
 			<rendered.Content />
 		) : (
 			<div class="not-prose mt-4">
 				<DirectoryListing dir={navEntry as NavDirectory} />
 			</div>
-		)
-	}
-</DocsArticle>
+		)}
+	<
+	DocsArticle
+/>
