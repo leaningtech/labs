@@ -21,6 +21,14 @@ Cheerp's codebase is spread across a few repositories. These are:
 - [cheerp-libs](https://github.com/leaningtech/cheerp-libs) - a collection of helpful libraries for use with Cheerp, such as a GLES implementation
 - [ts2cpp](https://github.com/leaningtech/ts2cpp) - a tool to generate C++ headers from TypeScript declaration files for use with Cheerp
 
+## Bugs
+
+To report bugs, [create a new GitHub Issue](https://github.com/leaningtech/cheerp-meta/issues/new).
+
+## Feature Requests
+
+Please request features on [Discord](https://discord.leaningtech.com). Cheerp is used for commercial purposes, so in general we work on features which our clients have asked for, but often feature requests can be placed on a backlog.
+
 ## Roadmap
 
 We are working on publishing a roadmap for Cheerp. In the meantime, please check the [GitHub issues](https://github.com/leaningtech/cheerp-meta/issues) or the [latest PRs](https://github.com/leaningtech/cheerp-compiler/pulls?q=). We also publish a weekly devlog on [Discord](https://discord.leaningtech.com).
