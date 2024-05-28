@@ -1,5 +1,4 @@
 import { OGImageRoute } from "astro-og-canvas";
-import jnlprunnerLogotype from "src/assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 
 export const { getStaticPaths, GET } = OGImageRoute({
 	// Tell us the name of your dynamic route segment.
@@ -21,7 +20,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
 		title: page.title,
 		description: page.description,
 		logo: {
-			path: jnlprunnerLogotype,
+			path: "src/assets/branding/products/cheerpj-extensions/jnlp-logo.png",
 		},
 		// There are a bunch more options you can use here!
 	}),
