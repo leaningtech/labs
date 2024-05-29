@@ -29,4 +29,4 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$CHEERP/share/cmake/Modules/CheerpWasmToolchain.cma
 
 ## Example
 
-See [this example repository](https://github.com/nanaian/minimal-cmake-cheerp) for a working example.
+See [this example directory](https://github.com/leaningtech/cheerp-meta/tree/master/examples/cmake).
