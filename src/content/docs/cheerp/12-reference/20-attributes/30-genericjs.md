@@ -1,6 +1,6 @@
 ---
 title: "`[[cheerp::genericjs]]`"
-description: Mark a function to be compiled to JavaScript
+description: Mark a function, class, or struct to be compiled to JavaScript
 ---
 
 From WebAssembly it is not possible to call any browser APIs - not even the basic `client::console.log`.
