@@ -14,6 +14,7 @@ import ProductNav from "@/components/ProductNav.astro";
 import WasThisHelpful from "@/components/WasThisHelpful.astro";
 import Callout from "@/components/Callout.astro";
 import BentoGrid from "@/components/patterns/BentoGrid.astro";
+import { Markdown } from "@astropub/md";
 
 interface Props {
 	id: string;
@@ -80,13 +81,17 @@ const directory = product ? findNavDirectory(nav, [product.id]) : undefined;
 								<h1>
 									<Image alt={product.name} src={product.logotype} />
 								</h1>
-								<p class="text-xl font-medium text-stone-500">{description}</p>
+								<p class="text-xl font-medium text-stone-500">
+									{description && <Markdown.Inline of={description} />}
+								</p>
 							</div>
 						) : (
 							<>
 								<h1 class="mb-2 font-bold">{title}</h1>
 								{description && (
-									<p class="mt-0 mb-8 text-stone-500 text-xl">{description}</p>
+									<p class="mt-0 mb-8 text-stone-500 text-xl">
+										<Markdown.Inline of={description} />
+									</p>
 								)}
 							</>
 						)}
