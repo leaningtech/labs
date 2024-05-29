@@ -7,7 +7,6 @@ import {
 	getRootNav,
 	flattenNav,
 	type NavEntry,
-	type NavDirectory,
 } from "../lib/nav";
 
 export async function getStaticPaths() {
@@ -38,13 +37,8 @@ const rendered = await collectionEntry?.render();
 	headings={rendered?.headings}
 	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
 >
-	{
-		rendered ? (
-			<rendered.Content />
-		) : (
-			<div class="not-prose mt-4">
-				<DirectoryListing dir={navEntry as NavDirectory} />
-			</div>
-		)
-	}
+	{rendered && <rendered.Content />}
+	{/* TODO: display when index.md is used */ navEntry.type === "directory" && <div class="not-prose mt-4">
+		<DirectoryListing dir={navEntry} />
+	</div>}
 </DocsArticle>

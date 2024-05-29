@@ -80,7 +80,7 @@ const init = require("./hello.js");
 init(); // Hello, world!
 ```
 
-### Flags and options
+### Command-line options
 
 You can pass additional flags and options to the Cheerp compiler. For example, to compile with optimizations enabled, you can pass the `-O3` flag:
 
@@ -88,7 +88,7 @@ You can pass additional flags and options to the Cheerp compiler. For example, t
 $ /opt/cheerp/bin/clang++ hello.cpp -o hello.js -target cheerp-wasm -cheerp-make-module=es6 -O3
 ```
 
-[Find more information about the available flags and options](/cheerp/reference/compiler-options).
+[Find more information about the available flags and options](/cheerp/reference/command-line-options).
 
 [module]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
 [promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

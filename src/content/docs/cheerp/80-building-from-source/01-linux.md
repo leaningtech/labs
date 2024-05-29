@@ -1,5 +1,6 @@
 ---
 title: How to build Cheerp on Linux
+# TODO: needs review
 ---
 
 Cheerp is composed of multiple components, they are somewhat interdependent and should be built together.
@@ -109,6 +110,10 @@ git clone https://github.com/leaningtech/cheerp-utils
 git clone https://github.com/leaningtech/cheerp-musl
 git clone https://github.com/leaningtech/cheerp-libs
 ```
+
+### Quickstart
+
+To quickly build everything, just run `cd cheerp-compiler && ./debian/build.sh`.
 
 ### Build Cheerp/1: compiler, latest version
 

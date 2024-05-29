@@ -87,7 +87,9 @@ const directory = product ? findNavDirectory(nav, [product.id]) : undefined;
 							</div>
 						) : (
 							<>
-								<h1 class="mb-2 font-bold">{title}</h1>
+								<h1 class="mb-2 font-bold">
+									<Markdown.Inline of={title} />
+								</h1>
 								{description && (
 									<p class="mt-0 mb-8 text-stone-500 text-xl">
 										<Markdown.Inline of={description} />
