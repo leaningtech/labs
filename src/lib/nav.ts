@@ -75,7 +75,10 @@ export function isProduct(value: unknown): value is Product {
  */
 export async function getRootNav(): Promise<NavEntry[]> {
 	// Get all the directories
-	const files = await getCollection("docs");
+	const files = await getCollection("docs", ({ data }) => {
+		// Don't include drafts in production
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
 	const dirPaths = new Set<string>();
 	for (const file of files) {
 		const [directoryName] = splitPath(file.id);

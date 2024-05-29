@@ -46,6 +46,7 @@ const docs = defineCollection({
 		description: z.string().optional(),
 		shortTitle: z.string().optional(), // Used for nav only
 		fullWidthLayout: z.boolean().default(false),
+		draft: z.boolean().default(false),
 	}),
 });
 
