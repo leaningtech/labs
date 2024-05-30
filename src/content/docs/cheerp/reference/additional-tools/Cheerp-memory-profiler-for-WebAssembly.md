@@ -2,9 +2,9 @@
 title: Cheerp Memory Profiler
 ---
 
-Starting from Cheerp 2.0, [commercial users](https://leaningtech.com/cheerp/#Pricing) have access to the Cheerp Memory Profiler. This tool allows one to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
+The nightly builds of Cheerp include the Cheerp Memory Profiler. This tool allows one to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
 
-The Cheerp memory profiler can be used from within the source code (e.g: to assert that there are no leaks inside a certain block) or from the browser console. We provide a visualisation tool that can be simply included in the HTML page hosting compiled code to get an overview of real-time memory consumption during the application lifetime. [Commercial Licence].
+The Cheerp memory profiler can be used from within the source code (e.g: to assert that there are no leaks inside a certain block) or from the browser console. We provide a visualisation tool that can be simply included in the HTML page hosting compiled code to get an overview of real-time memory consumption during the application lifetime.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ We recommend using the -cheerp-pretty-code command line options to get readable 
 
 ## Memory usage graph
 
-You can use the `memprofui.js` visualiser to get a real-time view of memory usage. Once you have a file compiled with the memprof library, you only need to add a script tag and initialise the visualiser. The visualiser component needs to access the DOM, so it can only be used for code running in the main thread (i.e. not a WebWorker).
+The memprof library includes a visualiser to get a real-time view of memory usage. Once you have a program linked with the memprof library, you can use the `CheerpMemUI` js-exported class. The visualiser component needs to access the DOM, so it can only be used for code running in the main thread (i.e. not a WebWorker).
 
 ```html
 <!doctype html>
@@ -31,8 +31,6 @@ You can use the `memprofui.js` visualiser to get a real-time view of memory usag
 	</head>
 	<body>
 		<script src="target.js"></script>
-		<!-- Add this line, telling the page to load the UI -->
-		<script src="https://cheerp.leaningtech.com/memprofui.js"></script>
 		<!-- There are two parameters, the length in seconds of the profiling window and
            how often the samples should be registered in milliseconds.
            Here 60 seconds and sampling every 100ms-->
