@@ -1,4 +1,0 @@
----
-title: Make
-draft: true
----
