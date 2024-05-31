@@ -80,16 +80,19 @@ We want quickstarts for people that use the following build tools (in order of p
 
 If there's a C++ build tool that you use and its not particularly niche, please consider contributing a quickstart guide for it!
 
+<!--(tentative)
 #### 'Make your C++ library available to webdevs' tool
 
 We'd like to provide a CLI that lets one easily convert their C++ library into a JavaScript/TypeScript library that can be `npm publish`ed.
 
 This would probably be provided as part of the [`cheerp` CLI](#cheerp-cli-and-api) installed via pnpm.
+-->
 
 ### Web developers
 
 People with a web development background tend to expect a way to install and integrate Cheerp with their existing codebase, using the tools they already use, like [npm](https://npm.im) and [Vite](https://vitejs.dev/) (which uses Rollup).
 
+<!-- (tentative)
 #### `cheerp` CLI and API
 
 The [Cheerp package](https://github.com/leaningtech/cheerp-meta) is both a way to install the Cheerp CLI but also provides an isomorphic TypeScript API for people to use Cheerp easily both in the browser and in server runtimes like Node.js. In future, we can look into publishing Cheerp for other runtimes (e.g. Deno, Bun) for example by publishing a `@leaningtech/cheerp` [JSR](https://jsr.io/) package.
@@ -132,6 +135,7 @@ src/
 index.html
 vite.config.ts
 ```
+-->
 
 ### Noobs
 
