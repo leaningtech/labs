@@ -2,13 +2,17 @@
 title: Cheerp Memory Profiler
 ---
 
-The nightly builds of Cheerp include the Cheerp Memory Profiler. This tool allows one to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
+> [!warning] Cheerp nightly only
 
-The Cheerp memory profiler can be used from within the source code (e.g: to assert that there are no leaks inside a certain block) or from the browser console. We provide a visualisation tool that can be simply included in the HTML page hosting compiled code to get an overview of real-time memory consumption during the application lifetime.
+The Cheerp Memory Profiler tool allows one to monitor memory use in real-time, and profile memory to identify leaks or inefficiencies.
+
+The Cheerp Memory Profiler can be used from within the source code (e.g: to assert that there are no leaks inside a certain block) or from the browser console. We provide a visualisation tool that can be simply included in the HTML page hosting compiled code to get an overview of real-time memory consumption during the application lifetime.
 
 ## Requirements
 
-The Cheerp memory profiler is built specifically for tracking allocations on WebAssembly memory (i.e. the linear memory heap). JavaScript memory can be profiled using the existing, browser-integrated developer tools.
+The Cheerp Memory Profiler is built specifically for tracking allocations on WebAssembly memory (i.e. the linear memory heap). JavaScript memory can be profiled using the existing, browser-integrated developer tools.
+
+## Usage
 
 To use the tool, you need to link the memprof library to your C/C++ project compiled with Cheerp, for example:
 
