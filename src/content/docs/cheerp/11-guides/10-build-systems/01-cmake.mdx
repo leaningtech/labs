@@ -3,6 +3,8 @@ title: CMake
 description: How to build a CMake project using Cheerp
 ---
 
+import LinkButton from "@/components/LinkButton.astro";
+
 CMake projects can be compiled with Cheerp by passing a single additional command-line flag to `cmake`.
 
 A CMake toolchain file is provided at `$CHEERP/share/cmake/Modules/CheerpToolchain.cmake`, where the `CHEERP` environment variable is set to the path of your Cheerp installation.
@@ -29,4 +31,8 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$CHEERP/share/cmake/Modules/CheerpWasmToolchain.cma
 
 ## Example
 
-See [this example directory](https://github.com/leaningtech/cheerp-meta/tree/master/examples/cmake).
+<LinkButton
+  href="https://github.com/leaningtech/cheerp-meta/tree/master/examples/cmake"
+  label="View full example"
+  type="primary"
+/>
