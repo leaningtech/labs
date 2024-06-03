@@ -53,7 +53,7 @@ Labs is the codebase for the Leaning Technologies developer site. It is built us
 
 ### Linting
 
-Linters run automatically in [this GitHub Action workflow](.github/workflows/lint.yml). You can also run them locally.
+Linters run automatically in [this GitHub Action workflow](https://github.com/leaningtech/labs/actions/workflows/lint.yml). You can also run them locally.
 
 #### Broken links
 
