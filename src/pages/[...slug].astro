@@ -3,11 +3,7 @@
 
 import DirectoryListing from "@/components/DirectoryListing.astro";
 import DocsArticle from "../layouts/DocsArticle.astro";
-import {
-	getRootNav,
-	flattenNav,
-	type NavEntry,
-} from "../lib/nav";
+import { getRootNav, flattenNav, type NavEntry } from "../lib/nav";
 
 export async function getStaticPaths() {
 	const entries = flattenNav(await getRootNav());
@@ -38,7 +34,11 @@ const rendered = await collectionEntry?.render();
 	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
 >
 	{rendered && <rendered.Content />}
-	{/* TODO: display when index.md is used */ navEntry.type === "directory" && <div class="not-prose mt-4">
-		<DirectoryListing dir={navEntry} />
-	</div>}
+	{
+		/* TODO: display when index.md is used */ navEntry.type === "directory" && (
+			<div class="not-prose mt-4">
+				<DirectoryListing dir={navEntry} />
+			</div>
+		)
+	}
 </DocsArticle>

@@ -17,7 +17,7 @@ For JavaScript modules, you can pass environment variables through the initializ
 import init from "./example.js";
 
 await init({
-  env: ["A=1", "B=2"],
+	env: ["A=1", "B=2"],
 });
 ```
 

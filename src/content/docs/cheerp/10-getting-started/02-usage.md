@@ -93,9 +93,9 @@ You can import it from another module like this:
 
 ```html
 <script type="module">
-  import init from "./hello.js";
+	import init from "./hello.js";
 
-  await init(); // Hello, world!
+	await init(); // Hello, world!
 </script>
 ```
 

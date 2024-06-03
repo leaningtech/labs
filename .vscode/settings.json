@@ -2,12 +2,10 @@
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
 	"editor.formatOnSaveMode": "modifications",
-	"prettier.documentSelectors": [
-		"**/*.astro"
-	],
+	"prettier.documentSelectors": ["**/*.astro"],
 	"[astro]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	// Sort in the same way nav.ts does
-	"explorer.sortOrder": "mixed",
+	"explorer.sortOrder": "mixed"
 }

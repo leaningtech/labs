@@ -60,7 +60,6 @@ function someJavaScriptMethod(arg1, arg2) {
 }
 ```
 
-
 # The `cheerp::ArrayRef` class and `cheerp::makeArrayRef` helpers
 
 Cheerp provides an helper class to simplify access to JS array-like objects, such as `client::Array` and `client::Int32Array`. It's common to pass them as pointers, which makes it inconvenient to use the `operator[]` to access their elements. The `cheerp::ArrayRef` class can be wrapper around a pointer to use the `operator[]` more naturally. `cheerp::makeArrayRef` is an helper to automatically deduce the right template type for the `cheerp::ArrayRef` class.

@@ -1,6 +1,6 @@
 ---
 title: Arrays and TypeArrays
-descriptions: Converting C++ arrays to the underlying JS TypedArray 
+descriptions: Converting C++ arrays to the underlying JS TypedArray
 ---
 
 When compiling to JavaScript, C++ arrays of basic data types such as `char`, `unsigned char`, `short`, `unsigned short`, `int`, `unsigned int`, `float` and `double` are backed by JavaScript typed array of corresponding types.
