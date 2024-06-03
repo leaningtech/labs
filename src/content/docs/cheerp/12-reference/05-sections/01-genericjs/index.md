@@ -10,8 +10,30 @@ To place functions in the genericjs section, you can:
 - Tag individual functions with the `[[cheerp::genericjs]]` attribute.
 - Use `-target cheerp` to default to genericjs for all functions.
 
-### Restrictions
+## Restrictions
 
-- Cannot do type unsafe things
-  - Converting a pointer to an integer then using it is undefined behaviour
-  - Cannot convert pointers between eachother. For example, you can't read `int*` as `float*` - this will give garbage. Instead, use a union of an int and a float.
+In genericjs, there are some restrictions due to [the memory model](/cheerp/reference/sections/genericjs/memory-model).
+
+### No type punning
+
+In genericjs, you cannot perform type punning (for example, using `memcpy` or `std::bit_cast`).
+
+<details>
+<summary>Example</summary>
+The following code will not work when compiled to genericjs.
+
+```cpp {34}
+#include <cheerp/client.h>
+#include <iostream>
+#include <bit>
+#include <cstdint>
+
+[[cheerp::genericjs]]
+int main() {
+  float f = 1.5f;
+  auto bits = std::bit_cast<std::uint32_t>(f);
+  std::cout << "Bit pattern of " << f << " is: " << std::hex << bits << std::endl;
+  return 0;
+}
+```
+<details>

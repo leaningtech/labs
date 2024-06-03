@@ -1,28 +1,12 @@
 ---
-title: Cheerp memory model
+title: Memory model
+description: How genericjs objects are represented
 ---
 
-Cheerp compiles at the same time to 2 different languages: either pure JavaScript or WebAssembly. They come with 2 different memory models, JavaScript-like and WebAssembly-like. Understanding them is a key in understanding Cheerp approach, allowing to use Cheerp optimally.
+In the genericjs section, C++ objects are compiled to native JavaScript objects.
+This allows created objects to be garbage collected and be used to interface with external JavaScript code.
 
-WebAssembly-like or Linear Memory is the simpler to understand coming from the world of C++: there is an array of bytes, and every object is stored somewhere in that array. That maps fairly easily to the standard memory model, and allows the same kind of operations:
-
-- accessing a random point of the array (both for writing and reading).
-- pointers (that becomes just index into the array).
-
-This model is relatively straightforward to transpile to, but has 2 main problems:
-
-- it does not allow to pass objects to code that is not been compiled by us (think other JavaScript libraries, or the DOM, or browser resources)
-- it is very brittle when it requires significant amount of memory in a single chunck (since the browsers are not optimized for this use-case)
-
-Cheerp then works also with a second memory model: native JavaScript objects.
-Cheerp maps each C++ object to a JavaScript object, allowing the created objects to be garbage collected AND to be used while interfacing with external JavaScript code.
-
-Cheerp used with the standard command line options compiles the browser APIs (think console.log()) in JavaScript-like memory, while compiling all the rest in Linear Memory mode.
-It is also possible to compile classes and functions with either memory model in a fine-grained way.
-
-Here is a in-depth explanation of our unique JavaScript-like memory model.
-
-# JavaScript types used in Cheerp
+Here is a in-depth explanation of the genericjs memory model.
 
 ## JavaScript Objects
 
@@ -76,7 +60,7 @@ weirdFunc(obj, num, str);
 
 In JavaScript all parameters are passed by reference. So inside `weirdFunc` it's possible to change the content of the passed objects, like `obj`. Also `num` and `str` are passed by reference, but since they are immutable they can be considered more similar to const references or even as copies. The main effect is that a called function has no way to change the value of the number in a manner which is visible by the caller. This means that we need to use a trick to support C++ pointers to integers and floating point values.
 
-# C++ pointers in Cheerp
+## C++ pointers in Cheerp
 
 C++ pointers need to support the following operations:
 
@@ -126,7 +110,7 @@ If a pointer does not fall in the `COMPLETE_OBJECT` category then is represented
 - If a given pointer can be proven to always have the same offset, only the container is stored
 - In most cases instead of creating a JavaScript object with two members we can store the container and offset as separate variables.
 
-# Optimizations
+## Optimizations
 
 What we want to do is to inspect code at compile time to be able to avoid using `REGULAR` pointers as much as possible. The idea is that We can avoid creating a pointer temporary object if a pointer is:
 
