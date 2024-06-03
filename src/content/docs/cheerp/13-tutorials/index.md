@@ -6,14 +6,6 @@ These tutorials are provided in order of increasing complexity, but are all self
 
 The main idea behind these tutorials is to guide you step by step through the specifics of compiling different types of C++ code to be run on the browser. They are designed to be educationals and easy to follow, and to show bite-sized best practices, rather than to push the limits of what's achievable with Cheerp.
 
-### Getting started ([Link to tutorial](/cheerp/tutorials/getting-started))
-
-In this tutorial we cover the basics of using Cheerp to compile some basic C++ code into JavaScript, and running the resulting code on nodejs or the browser.
-
-- Input methods: none
-- Output methods: `console.log()`
-- Compilation mode: genericjs (C++ to JavaScript)
-
 ### Hello, WebAssembly! ([Link to the Tutorial](/cheerp/tutorials/hello-wasm))
 
 In this tutorial, we compile an Hello World to WebAssembly _and_ JavaScript, in order to use `console.log`.

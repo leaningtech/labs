@@ -97,7 +97,7 @@ Bye from loadCallback!
 
 There are two important things to notice:
 
-- the program outlived `webMain()` (while a normal C++ program terminates when the `main` returns) ([why?](/cheerp/core-concepts#the-webmain-entry-point))
+- the program outlived `webMain()` (while a normal C++ program terminates when the `main` returns) ([why?](/cheerp/reference/webMain))
 - running code directly from inside `webMain()` can lead to race conditions, where depending on the execution order we may perform invalid operations (since the DOM is not fully formed). The pattern of invoking a callback on `DOMContentLoaded` is very important and will be used also in all the following examples, and so it is the more general pattern of using `cheerp::Callback`, that we will now examine.
 
 ## The `cheerp::Callback` adapter function
