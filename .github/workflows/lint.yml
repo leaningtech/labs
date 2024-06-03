@@ -180,7 +180,8 @@ jobs:
   prose_vale:
     name: Prose (Vale)
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    # temporarily disabled because test is brittle: https://github.com/errata-ai/vale/issues/841
+    if: github.event_name == 'pull_request' && false
     steps:
       - uses: actions/checkout@v3
       - uses: errata-ai/vale-action@reviewdog
