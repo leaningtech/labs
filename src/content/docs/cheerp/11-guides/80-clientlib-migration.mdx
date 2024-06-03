@@ -1,12 +1,16 @@
 ---
 title: Clientlib migration guide
-description: How to migrate from `clientlib.h` to `client.h`
+description: How to use the updated Clientlib
 ---
 
 import LinkButton from "@/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
 > [!warning] Cheerp nightly only
+
+Clientlib (`clientlib.h`) has been updated with improved type information, addition of modern APIs, integration with C++ coroutines, and more.
+For more information, see [this blog post](/blog/cheerp-typescript#clientlib).
+This guide shows you how to migrate to the updated Clientlib.
 
 ## Common errors
 
