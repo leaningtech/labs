@@ -5,7 +5,7 @@ import BlogPostCard from "../../components/BlogPostCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
-import Search from "@/components/search/Search.astro";
+import Search from "../../components/search/Search.astro";
 
 const [post1, post2, ...restPosts] = (
 	await getCollection("blog", ({ data }) => data.draft !== true)

@@ -4,7 +4,18 @@
 	"version": "0.1.0",
 	"description": "Astro theme",
 	"exports": {
-		".": "./index.ts"
+		".": "./index.ts",
+		"./consts": "./consts.ts",
+		"./products": "./lib/products.ts",
+		"./pages/blog/index.astro": "./pages/blog/index.astro",
+		"./pages/blog/[...slug].astro": "./pages/blog/[...slug].astro",
+		"./pages/docs/[...slug].astro": "./pages/docs/[...slug].astro",
+		"./layouts/Shell.astro": "./layouts/Shell.astro",
+		"./components/LinkButton.astro": "./components/LinkButton.astro",
+		"./components/Footer.astro": "./components/Footer.astro",
+		"./components/BlogPostCardSet.astro": "./components/BlogPostCardSet.astro",
+		"./components/LatestBlogPostPill.astro": "./components/LatestBlogPostPill.astro",
+		"./components/ShowcaseList.astro": "./components/ShowcaseList.astro"
 	},
 	"scripts": {},
 	"peerDependencies": {

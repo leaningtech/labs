@@ -1,0 +1,14 @@
+{
+	"name": "@leaningtech/cheerpj-jnlp-page",
+	"private": true,
+	"version": "0.1.0",
+	"main": "index.js",
+	"peerDependencies": {
+		"astro": "*"
+	},
+	"dependencies": {
+		"@leaningtech/hero": "workspace:^"
+	},
+	"author": "Leaning Technologies",
+	"license": "Apache-2.0"
+}

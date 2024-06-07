@@ -31,7 +31,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerp",
 		type: "technology",
 		name: "Cheerp",
-		href: "/cheerp",
+		href: "/docs/cheerp",
 		logotype: cheerpLogotype,
 		favicon: "/cheerp/favicon.ico",
 		subtitle: "Compile C++ for the browser",
@@ -43,7 +43,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj2",
 		type: "technology",
 		name: "CheerpJ",
-		href: "/cheerpj2",
+		href: "/docs/cheerpj2",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine replacement for the browser",
@@ -56,7 +56,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj3",
 		type: "technology",
 		name: "CheerpJ",
-		href: "/cheerpj3",
+		href: "/docs/cheerpj3",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
@@ -69,7 +69,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpx",
 		type: "technology",
 		name: "CheerpX",
-		href: "/cheerpx",
+		href: "/docs/cheerpx",
 		logotype: cheerpxLogotype,
 		favicon: "/cheerpx/favicon.ico",
 		subtitle: "x86-to-WebAssembly virtualization",
@@ -82,7 +82,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpx-for-flash",
 		type: "technology",
 		name: "CheerpX for Flash",
-		href: "/cheerpx-for-flash",
+		href: "/docs/cheerpx-for-flash",
 		logotype: cheerpxLogotype,
 		favicon: "/cheerpx/favicon.ico",
 		subtitle: "Run Flash content without the Adobe Flash plugin",
@@ -95,7 +95,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj-jnlp-runner",
 		type: "extension",
 		name: "CheerpJ JNLP Runner",
-		href: "/cheerpj-jnlp-runner",
+		href: "/docs/cheerpj-jnlp-runner",
 		logotype: jnlprunnerLogotypeLarge,
 		favicon: jnlprunnerLogotype.src,
 		subtitle: "Run Java Web Start applications in the browser",
@@ -108,7 +108,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj-applet-runner",
 		type: "extension",
 		name: "CheerpJ Applet Runner",
-		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
+		href: "/docs/cheerpj3/getting-started/Java-applet#running-a-public-applet",
 		logotype: appletrunnerLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java Applets in the modern browser",
@@ -119,7 +119,8 @@ export const products: { [product in Product]: ProductData } = {
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
-	const path = url.pathname.split("/")[1]?.replace(".html", "");
+	// /docs/[PRODUCT]/
+	const path = url.pathname.split("/")[2]?.replace(".html", "");
 	if (path && isProduct(path)) {
 		return products[path];
 	}

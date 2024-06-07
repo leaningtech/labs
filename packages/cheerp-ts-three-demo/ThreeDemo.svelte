@@ -5,7 +5,7 @@
 
 	onMount(async () => {
 		window.THREE = await import("three");
-		const { default: init } = await import("../lib/three-demo.js");
+		const { default: init } = await import("./three-demo.js");
 		const { run } = await init();
 		run(canvas);
 	});

@@ -19,6 +19,8 @@
 		"@astrojs/svelte": "^5.3.0",
 		"@astrojs/tailwind": "^5.1.0",
 		"@leaningtech/astro-theme": "workspace:^",
+		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
+		"@leaningtech/cheerpj-jnlp-page": "workspace:^",
 		"@tailwindcss/typography": "^0.5.10",
 		"astro": "^4.5.18",
 		"astro-expressive-code": "^0.23.0",
@@ -31,8 +33,7 @@
 		"rehype-slug": "^6.0.0",
 		"sharp": "^0.32.6",
 		"svelte": "^4.2.1",
-		"tailwindcss": "^3.4.0",
-		"three": "^0.162.0"
+		"tailwindcss": "^3.4.0"
 	},
 	"devDependencies": {
 		"prettier": "^3.0.3",

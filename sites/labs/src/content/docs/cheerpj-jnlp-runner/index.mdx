@@ -5,17 +5,19 @@ fullWidthLayout: true
 ---
 
 import { DISCORD_URL } from "@/consts";
-import LinkButton from "@/components/LinkButton.astro";
-import Hero_JNLP from "@/components/jnlp-page/Hero-JNLP.astro";
-import sparkleIcon from "@/components/jnlp-page/assets/sparkle.png";
-import networkIcon from "@/components/jnlp-page/assets/network.png";
-import lockIcon from "@/components/jnlp-page/assets/lock.png";
-import browserIcon from "@/components/jnlp-page/assets/browser.png";
-import layersIcon from "@/components/jnlp-page/assets/layers.png";
-import rocketIcon from "@/components/jnlp-page/assets/rocket.png";
-import Card from "@/components/feature-cards/Card.astro";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import {
+	Hero,
+	Card,
+	sparkleIcon,
+	networkIcon,
+	lockIcon,
+	browserIcon,
+	layersIcon,
+	rocketIcon,
+} from "@leaningtech/cheerpj-jnlp-page";
 
-<Hero_JNLP />
+<Hero />
 
 <section class="w-full max-w-prose mx-auto text-lg leading-normal px-2 py-16 text-pretty">
 	<h2 class="text-3xl font-semibold text-primary-500 mb-4">
@@ -76,8 +78,8 @@ import Card from "@/components/feature-cards/Card.astro";
 		<h3 class="font-semibold sm:text-3xl md:text-4xl">Community</h3>
 		<p class="pt-4 text-stone-400 leading-7">
 			We have an amazing community of developers and users. <br />
-			Join us today to stay up to date with the latest news, to share your experience
-			with our technologies or to report any bugs.
+			Join us today to stay up to date with the latest news, to share your
+			experience with our technologies or to report any bugs.
 		</p>
 		<div class="mt-4 flex flex-wrap gap-4 pt-5">
 			<LinkButton

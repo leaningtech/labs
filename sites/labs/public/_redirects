@@ -28,3 +28,4 @@
 /cheerpj3/examples/* /cheerpj3/tutorials/:splat
 /cheerpj-jnlprunner /cheerpj-jnlp-runner
 /cheerpj-jnlprunner/* /cheerpj-jnlp-runner/:splat
+/cheerp/* https://cheerp.io/:splat

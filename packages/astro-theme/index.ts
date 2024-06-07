@@ -7,7 +7,6 @@ import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
 import astroExpressiveCode, { loadShikiTheme } from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
-import { resolve } from "node:path";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
@@ -32,8 +31,19 @@ export default function ThemeIntegration(): AstroIntegration {
 	return {
 		name: "@leaningtech/astro-theme",
 		hooks: {
-			// Extend config
-			"astro:config:setup": ({ updateConfig }) => {
+			"astro:config:setup": ({ updateConfig, injectRoute }) => {
+				injectRoute({
+					pattern: "blog",
+					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro",
+				});
+				injectRoute({
+					pattern: "blog/[...slug]",
+					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
+				});
+				injectRoute({
+					pattern: "docs/[...slug]",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
+				});
 				updateConfig({
 					integrations: [
 						astroExpressiveCode({
@@ -101,16 +111,6 @@ export default function ThemeIntegration(): AstroIntegration {
 						inlineStylesheets: "always",
 					},
 					trailingSlash: "never",
-					vite: {
-						resolve: {
-							alias: [
-								{
-									find: "@",
-									replacement: resolve("./src/"),
-								},
-							],
-						},
-					},
 				});
 			},
 		},

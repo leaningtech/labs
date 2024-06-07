@@ -1,6 +1,9 @@
 ---
 import { Icon } from "astro-icon";
-import { getRootNav, findEntryPath } from "../lib/nav";
+import {
+	getRootNav,
+	findEntryPath,
+} from "../lib/nav";
 
 interface Props {
 	current: string;
@@ -8,7 +11,7 @@ interface Props {
 
 const { current } = Astro.props;
 
-const nav = await getRootNav();
+const nav = await getRootNav(Astro.url);
 const path = findEntryPath(nav, current) ?? [];
 
 const currentEntry = path[path.length - 1];

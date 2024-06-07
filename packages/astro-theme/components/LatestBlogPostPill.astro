@@ -1,5 +1,5 @@
 ---
-import { latestFeaturedPost } from "@/lib/blog";
+import { latestFeaturedPost } from "../lib/blog";
 import BlogPostPill from "./BlogPostPill.astro";
 
 const post = await latestFeaturedPost(Astro.url);

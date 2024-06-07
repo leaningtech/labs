@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Nasa from "../../assets/branding/landing_imgs/clients/nasa2.png";
-	import TicketMaster from "../../assets/branding/landing_imgs/clients/ticketmaster.png";
-	import Leonardo from "../../assets/branding/landing_imgs/clients/leonardo.png";
-	import Siemens from "../../assets/branding/landing_imgs/clients/siemens.png";
-	import Euronext from "../../assets/branding/landing_imgs/clients/euronext.png";
-	import Uscustoms from "../../assets/branding/landing_imgs/clients/usa.png";
-	import Dalkia from "../../assets/branding/landing_imgs/clients/dalkia.png";
+	import Nasa from "./landing_imgs/clients/nasa2.png";
+	import TicketMaster from "./landing_imgs/clients/ticketmaster.png";
+	import Leonardo from "./landing_imgs/clients/leonardo.png";
+	import Siemens from "./landing_imgs/clients/siemens.png";
+	import Euronext from "./landing_imgs/clients/euronext.png";
+	import Uscustoms from "./landing_imgs/clients/usa.png";
+	import Dalkia from "./landing_imgs/clients/dalkia.png";
 
 	const clientImages = [
 		{ src: Nasa, alt: "NASA" },

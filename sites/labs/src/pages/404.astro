@@ -1,7 +1,7 @@
 ---
-import Search from "@/components/search/Search.astro";
-import Footer from "../components/Footer.astro";
-import Shell from "../layouts/Shell.astro";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 ---
 
 <Shell>
@@ -10,7 +10,7 @@ import Shell from "../layouts/Shell.astro";
 	>
 		<div class="space-y-6">
 			<h1 class="text-6xl font-medium italic">Page not found!</h1>
-			<Search />
+			<LinkButton label="Take me home" href="/" />
 		</div>
 	</main>
 
