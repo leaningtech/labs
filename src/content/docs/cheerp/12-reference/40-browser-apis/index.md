@@ -8,7 +8,7 @@ You can use browser APIs in [genericjs code](/cheerp/reference/sections/genericj
 
 ## `cheerp/clientlib.h`
 
-Browser APIs are provided by `clientlib.h`, which can be included with:
+`clientlib.h` declares browser APIs and can be included with:
 
 ```cpp
 #include <cheerp/clientlib.h>
@@ -16,16 +16,12 @@ Browser APIs are provided by `clientlib.h`, which can be included with:
 
 ## `cheerp/client.h`
 
-> [!warning] Cheerp nightly only
-> This header is currently only available on Cheerp nightly. Use `clientlib.h` on stable.
 
-Browser APIs are provided by `client.h`, which can be included with:
+`client.h` contains helpers like the `SAFE_INLINE` macro and utilities under the `cheerp` namespace.
 
 ```cpp
 #include <cheerp/client.h>
 ```
-
-To migrate from `clientlib.h` to `client.h`, see [the migration guide](/cheerp/guides/clientlib-migration).
 
 ### Promises and `cheerp/coroutine.h`
 
