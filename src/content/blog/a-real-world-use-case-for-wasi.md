@@ -35,7 +35,7 @@ This plan turned out to be a proverbial can of worms.
 
 After a few days of fighting these issues, we realized that the only principled solution to such inconsistencies was to use the exact same _fontconfig_ version both at run-time and build-time.
 
-At first we considered using the advanced [JavaScript interoperability](/cheerp/reference/javascript-interop) of _Cheerp_, our C++ to WebAssembly/JavaScript compiler, to directly use nodejs to run the `fc-cache` Wasm build on the host, but then we realized that a more appropriate solution had already been designed: the WASI standard proposal.
+At first we considered using the advanced [JavaScript interoperability](/cheerp/reference/interop) of _Cheerp_, our C++ to WebAssembly/JavaScript compiler, to directly use nodejs to run the `fc-cache` Wasm build on the host, but then we realized that a more appropriate solution had already been designed: the WASI standard proposal.
 
 ## What is WASI?
 
