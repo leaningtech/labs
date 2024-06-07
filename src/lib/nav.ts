@@ -75,7 +75,10 @@ export function isProduct(value: unknown): value is Product {
  */
 export async function getRootNav(): Promise<NavEntry[]> {
 	// Get all the directories
-	const files = await getCollection("docs");
+	const files = await getCollection("docs", ({ data }) => {
+		// Don't include drafts in production
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
 	const dirPaths = new Set<string>();
 	for (const file of files) {
 		const [directoryName] = splitPath(file.id);
@@ -142,7 +145,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			id: file.id,
 			slug,
 			href: "/" + slug,
-			title: file.data.title,
+			title: file.data.shortTitle ?? file.data.title,
 			collectionEntry: file,
 			isIndex: slug === idToSlug(parentDir),
 		});
@@ -251,12 +254,17 @@ export function idToTitle(id: string): string {
 	return [upperFirstWord, ...words].join(" ");
 }
 
+const slugComponentOverrides = new Map([["CONTRIBUTING", "contributing"]]);
+
 function idToSlug(id: string): string {
 	return id
 		.replace(/\.mdx?$/, "")
 		.replace("/index", "") // index.md overrides directory listing
 		.split("/")
-		.map((component) => component.replace(/^\d+-/, ""))
+		.map((component) => {
+			const part = component.replace(/^\d+-/, "");
+			return slugComponentOverrides.get(part) ?? part;
+		})
 		.join("/");
 }
 

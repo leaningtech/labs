@@ -44,7 +44,9 @@ const docs = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
+		shortTitle: z.string().optional(), // Used for nav only
 		fullWidthLayout: z.boolean().default(false),
+		draft: z.boolean().default(false),
 	}),
 });
 

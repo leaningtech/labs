@@ -5,7 +5,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 interface Props {
 	title?: string;
-	description?: string;
+	description?: string | undefined;
 	image?: string | undefined;
 }
 
@@ -84,6 +84,11 @@ const { title, description, image } = Astro.props;
 				& span {
 					font-style: normal !important;
 				}
+			}
+
+			/* Don't wrap between link text and the 'external link' icon */
+			.prose a:has(> span > img) {
+				white-space: nowrap;
 			}
 
 			p,

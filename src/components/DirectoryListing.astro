@@ -1,5 +1,6 @@
 ---
 import type { NavDirectory, NavEntry } from "@/lib/nav";
+import { Markdown } from "@astropub/md";
 
 interface Props {
 	dir: NavDirectory;
@@ -15,7 +16,7 @@ function getEntryDescription(entry: NavEntry): string | undefined {
 }
 ---
 
-<ul class="grid grid-cols-2 gap-4">
+<ul class="grid grid-cols-1 gap-4">
 	{
 		dir.entries.map((entry) => {
 			return (
@@ -25,10 +26,10 @@ function getEntryDescription(entry: NavEntry): string | undefined {
 						class="block group rounded-md border bg-stone-950 px-4 py-3 shadow border-stone-800 hover:border-stone-700 transition-colors"
 					>
 						<div class="text-lg font-semibold text-stone-300 group-hover:text-stone-50 transition-colors">
-							{entry.title}
+							<Markdown.Inline of={entry.title} />
 						</div>
 						<div class="text-ellipsis whitespace-nowrap overflow-hidden text-stone-400 text-sm">
-							{getEntryDescription(entry)}
+							<Markdown.Inline of={getEntryDescription(entry) ?? ""} />
 						</div>
 					</a>
 				</li>
