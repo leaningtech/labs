@@ -5,16 +5,12 @@ import { spawn } from "node:child_process";
 import { dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import sirv from "sirv";
+import { type AstroIntegration } from "astro";
 
-export default function pagefind() {
-	/** @type {string} */
-	let outDir;
-
-	/** @type {string} */
-	let cwd;
-
-	/** @type {import('astro').AstroIntegration} */
-	const integration = {
+export default function pagefind(): AstroIntegration {
+	let outDir: string;
+	let cwd: string;
+	return {
 		name: "Pagefind",
 		hooks: {
 			"astro:config:setup": ({ config }) => {
@@ -46,5 +42,4 @@ export default function pagefind() {
 			},
 		},
 	};
-	return integration;
 }
