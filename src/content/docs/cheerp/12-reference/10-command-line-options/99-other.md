@@ -23,10 +23,6 @@ Cheerp extends [Clang's command line arguments](https://clang.llvm.org/docs/Clan
 
 `-cheerp-global-prefix=<value>` Prefix all global names with the given string
 
-`-cheerp-linear-heap-size=<value>` Set wasm/asm.js heap size (in MB, default is 8)
-
-`-cheerp-linear-output=<value>` Output format for the linear memory part of the program [wasm/asmjs]
-
 `-cheerp-linear-stack-size=<value>` Set wasm/asm.js stack size (in MB, default is 1)
 
 `-cheerp-make-module=<value>` Expose the compiled code as a [closure/commonjs/es6] module
