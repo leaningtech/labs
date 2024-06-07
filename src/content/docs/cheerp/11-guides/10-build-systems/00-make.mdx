@@ -5,7 +5,19 @@ description: How to use Make with Cheerp
 
 import LinkButton from "@/components/LinkButton.astro";
 
-To integrate Cheerp into a project that uses [Make](https://gnu.org/software/make/), use this snippet in your Makefile:
+To integrate Cheerp into a project that uses [Make](https://gnu.org/software/make/), you have two options.
+
+## Override CC and CXX
+
+For well-behaved Make projects, you can override the `CC` and `CXX` variables to use Cheerp instead:
+
+```sh
+$ make CC=/opt/cheerp/bin/clang CXX=/opt/cheerp/bin/clang++
+```
+
+## Makefile snippet
+
+To permanently make a Makefile use Cheerp, add this snippet:
 
 ```makefile
 ifeq ($(OS),Windows_NT)
