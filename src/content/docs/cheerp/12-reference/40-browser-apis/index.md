@@ -16,7 +16,6 @@ You can use browser APIs in [genericjs code](/cheerp/reference/sections/genericj
 
 ## `cheerp/client.h`
 
-
 `client.h` contains helpers like the `SAFE_INLINE` macro and utilities under the `cheerp` namespace.
 
 ```cpp
