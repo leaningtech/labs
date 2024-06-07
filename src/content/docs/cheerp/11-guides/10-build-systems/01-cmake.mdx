@@ -7,7 +7,7 @@ import LinkButton from "@/components/LinkButton.astro";
 
 CMake projects can be compiled with Cheerp by passing a single additional command-line flag to `cmake`.
 
-A CMake toolchain file is provided at `$CHEERP/share/cmake/Modules/CheerpToolchain.cmake`, where the `CHEERP` environment variable is set to the path of your Cheerp installation.
+A CMake toolchain files are provided in the `$CHEERP/share/cmake/Modules/` directory, where the `CHEERP` environment variable is set to the path of your Cheerp installation.
 
 For example:
 
@@ -15,18 +15,20 @@ For example:
 - On macOS: `export CHEERP=/Applications/cheerp`
 - On Windows: `set CHEERP=C:\cheerp`
 
-Then pass the toolchain file when configuring the project.
-
-```bash
-cmake -DCMAKE_TOOLCHAIN_FILE=$CHEERP/share/cmake/Modules/CheerpToolchain.cmake .
-```
-
 ## Compiling to WebAssembly
 
-To compile with `-target cheerp-wasm`, use `CheerpWasmToolchain.cmake`.
+To compile with `-target cheerp-wasm` (default, recommended), use `CheerpWasmToolchain.cmake`.
 
 ```bash
 cmake -DCMAKE_TOOLCHAIN_FILE=$CHEERP/share/cmake/Modules/CheerpWasmToolchain.cmake .
+```
+
+## Compiling to JavaScript
+
+To compile with `-target cheerp`, use `CheerpToolchain.cmake`.
+
+```bash
+cmake -DCMAKE_TOOLCHAIN_FILE=$CHEERP/share/cmake/Modules/CheerpToolchain.cmake .
 ```
 
 ## Example
