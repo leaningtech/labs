@@ -1,0 +1,17 @@
+{
+	"name": "@leaningtech/cheerp-io",
+	"private": true,
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@leaningtech/astro-theme": "workspace:^",
+		"astro": "^4.5.18"
+	}
+}
