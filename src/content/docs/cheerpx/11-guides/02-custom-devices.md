@@ -24,7 +24,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && apt-get -y install curl
 ```
 
-Note that the base image's architecture must be i386 (x86).
+Note that the base image's architecture must be 32-bit x86 (for example, `i386` or `i686`).
 
 ## 3. Run the GitHub Actions workflow
 
