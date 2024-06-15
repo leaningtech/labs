@@ -120,6 +120,6 @@ cheerpMemProfClose(tag);
 
 ### Performance
 
-We designed the Cheerp Memory Profiler to be less intrusive as possible, both regarding the performance and modification required on your code.
+We designed the Cheerp Memory Profiler to be as unintrusive as possible, both regarding the performance and modification required on your code.
 
 `cheerpMemProfTotalUsed()` executes in constant time. The other functions in time linear on the number of memory blocks currently alive. Every malloc/free in the code also have to incur an execution cost that's logarithmic on the number of memory blocks currently alive.
