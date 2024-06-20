@@ -1,0 +1,103 @@
+---
+title: CheerpJ applet Runner
+description: Run Java Applets in modern browser without plugins
+fullWidthLayout: true
+---
+
+import { DISCORD_URL } from "@/consts";
+import LinkButton from "@/components/LinkButton.astro";
+import Hero_JNLP from "@/components/jnlp-page/Hero-JNLP.astro";
+import sparkleIcon from "@/components/jnlp-page/assets/sparkle.png";
+import networkIcon from "@/components/jnlp-page/assets/network.png";
+import lockIcon from "@/components/jnlp-page/assets/lock.png";
+import browserIcon from "@/components/jnlp-page/assets/browser.png";
+import layersIcon from "@/components/jnlp-page/assets/layers.png";
+import rocketIcon from "@/components/jnlp-page/assets/rocket.png";
+import Card from "@/components/feature-cards/Card.astro";
+
+<Hero_JNLP />
+
+<section class="w-full max-w-prose mx-auto text-lg leading-normal px-2 py-16 text-pretty">
+	<h2 class="text-3xl font-semibold text-primary-500 mb-4">
+		What is CheerpJ JNLP Runner?
+	</h2>
+	<p>
+		The CheerpJ JNLP Runner browser extension, available for Chrome and Edge,
+		can run Java Web Start (JWS) applications without a local Java Desktop
+		installation. This browser extension, based on the CheerpJ technology, is
+		designed to replace the local Java Desktop installation, and run Java Web
+		Start applications within the browser, without Java.
+	</p>
+</section>
+
+<section
+	class="w-full max-w-screen-2xl mx-auto px-4 sm:px-8 space-y-4 flex flex-wrap items-center justify-center p-10"
+	id="features"
+>
+	<Card
+		title="No Java installations"
+		iconSrc={sparkleIcon}
+		iconAlt="Sparkles doodle"
+		description="CheerpJ JNLP Runner is a browser extension that saves you from installing an outdated, insecure desktop Java installation."
+	/>
+	<Card
+		title="Modern Browsers"
+		iconSrc={networkIcon}
+		iconAlt="Globe doodle representing network"
+		description="Our extension is available for Chrome and Edge. Ready to cover your JWS needs in the most trusted browsers."
+	/>
+	<Card
+		title="Sandboxed"
+		iconSrc={lockIcon}
+		iconAlt="Lock doodle"
+		description="Our technology works within the browser security boundaries making it highly reliable and safe."
+	/>
+	<Card
+		title="Private and secure"
+		iconSrc={browserIcon /* TODO: better icon */}
+		iconAlt="Bill doodle"
+		description="The extension runs fully client-side (i.e. it does not contact any server), and does not collect any data or analytics at all. All your data, as well as your application, are kept within the boundaries of your browser.			"
+	/>
+	<Card
+		title="Wide range of utilities"
+		iconSrc={layersIcon}
+		iconAlt="Layers doodle"
+		description="CheerpJ JNLP Runner covers all your Java needs, including Swing/AWT, filesystem support, audio, clipboard, networking and more."
+	/>
+	<Card
+		title="Easy to use"
+		iconSrc={rocketIcon}
+		iconAlt="Rocket doodle"
+		description="Using our browser extension could not be easier. Just install, launch your JNLP app as usual, and the extension will automatically start working."
+	/>
+</section>
+<section class="px-4 sm:px-8 py-16 space-y-4 m-auto mb-10 flex col-span-1 items-center justify-center rounded-lg">
+	<div>
+		<h3 class="font-semibold sm:text-3xl md:text-4xl">Community</h3>
+		<p class="pt-4 text-stone-400 leading-7">
+			We have an amazing community of developers and users. <br />
+			Join us today to stay up to date with the latest news, to share your experience
+			with our technologies or to report any bugs.
+		</p>
+		<div class="mt-4 flex flex-wrap gap-4 pt-5">
+			<LinkButton
+				href="https://github.com/leaningtech/cheerpj-jnlp-runner"
+				label="Report a bug"
+				type="primary"
+				iconRight="mdi:github"
+			/>
+			<LinkButton
+				href={DISCORD_URL}
+				label="Join the community"
+				type="discord"
+				iconRight="ic:baseline-discord"
+			/>
+			<LinkButton
+				href="/cheerpj3/getting-started/Java-applet#running-a-public-applet"
+				label="Documentation"
+				type="secondary"
+				iconRight="iconoir:google-docs"
+			/>
+		</div>
+	</div>
+</section>

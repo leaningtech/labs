@@ -1,0 +1,71 @@
+---
+import LinkButton from "@/components/LinkButton.astro";
+import { Image } from "astro:assets";
+import ScrollPrompt from "../components/hero/ScrollPrompt.astro";
+import JNLPBox from "../components/jnlp-page/assets/box-JNLP.png";
+import screenshots from "@/components/jnlp-page/assets/screenshots.png";
+---
+
+<header
+	class="min-h-[calc(100vh-48px-64px)] flex flex-col items-center bg-gradient-to-b to-[#e6275544] from-transparent"
+>
+	<div class="grow"></div>
+
+	<div
+		class="w-full max-w-screen-xl px-4 sm:px-8 pt-8 lg:pt-16 xl:pt-32 space-y-4 md:grid grid-cols-3"
+	>
+		<div class="flex items-center col-span-2">
+			<div>
+				<p class="text-4xl mt-8 text-stone-500">CheerpJ Applet Runner</p>
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4"
+				>
+					Run
+					<span class="font-bold text-orange-500"> Java Web Start</span>
+					<br />apps in the browser
+				</h1>
+				<p class="text-xl mt-12 text-stone-300 font-semibold leading-7">
+					Unleash the power of CheerpJ in an easy-to-use browser extension!
+				</p>
+				<p class="text-xl mt-8 text-stone-300 leading-7">
+					Run Java Web Start Applications, including Oracle E-Business Suite and
+					Oracle Forms Applications, without a Java Desktop installation.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<LinkButton
+						href="/cheerpj-jnlp-runner/getting-started/install-chrome"
+						label="Install for Chrome"
+						type="primary"
+						iconRight="ri:chrome-fill"
+					/>
+					<LinkButton
+						href="/cheerpj-jnlp-runner/getting-started/install-edge"
+						label="Install for Edge"
+						type="primary2"
+						iconRight="ri:edge-fill"
+					/>
+					<LinkButton
+						href="/cheerpj3/getting-started/Java-applet#running-a-public-applet"
+						label="Documentation"
+						type="secondary"
+						iconRight="iconoir:google-docs"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-center">
+			<Image
+				src={JNLPBox}
+				alt="JNLP Runner logo in a tool box"
+				class="object-contain"
+			/>
+		</div>
+	</div>
+	<div class="flex justify-center items-center">
+		<Image class="scale-75" src={screenshots} alt="screenshots" />
+	</div>
+
+	<div class="grow"></div>
+
+	<ScrollPrompt />
+</header>

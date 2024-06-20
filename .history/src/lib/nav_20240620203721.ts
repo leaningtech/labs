@@ -50,8 +50,8 @@ export function isProduct(value: unknown): value is Product {
 		value === "cheerpj3" ||
 		value === "cheerpx" ||
 		value === "cheerpx-for-flash" ||
-		value === "cheerpj-jnlp-runner" ||
-		value === "cheerpj-applet-runner"
+		value === "cheerpj-jnlp-runner"||
+		value === "cheerpj-jnlp-runner"
 	);
 }
 
