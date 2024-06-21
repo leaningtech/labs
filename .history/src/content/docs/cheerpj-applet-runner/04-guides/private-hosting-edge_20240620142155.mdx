@@ -1,20 +1,20 @@
 ---
 title: Private hosting (Edge)
-description: Deploy the Applet Runner chrome extension via Group Policy (Windows).
+description: Deploy the JNLP Runner chrome extension via Group Policy (Windows).
 ---
 
 import LinkButton from "@/components/LinkButton.astro";
 
-If your organisation requires to use our extension in multiple devices, we have amazing news for you! Our Applet Runner extension is available for private hosting and deployment via Group Policy. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
+If your organisation requires to use our extension in multiple devices, we have amazing news for you! Our JNLP Runner extension is available for private hosting and deployment via Group Policy. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
 
 Requirements:
 
 - The appropriate IT permissions at your organisation.
-- The Applet Runner extension CRX file.
+- The JNLP Runner extension CRX file.
 
 ## The CRX File and `DownloadURL`
 
-The CRX file is a compressed format for browser extensions. To obtain the CRX file of the Applet runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you alongside a license token.
+The CRX file is a compressed format for browser extensions. To obtain the CRX file of the JNLP runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you alongside a license token.
 
 You will need to host the extension CRX file in the appropriate location of your IT infrastructure and create a DownloadURL to access it. You will need this URL later in the tutorial.
 
@@ -23,10 +23,10 @@ You will need to host the extension CRX file in the appropriate location of your
 
 ## The extension ID
 
-The extension ID is a unique identifier you can easily retrieve from the [extension URL of Edge's Add-ons store](https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/dpleickbpchmkpkmicanfolmianepfhe) (last 32 characters):
+The extension ID is a unique identifier you can easily retrieve from the [extension URL of Edge's Add-ons store](https://microsoftedge.microsoft.com/addons/detail/cheerpj-jnlp-runner/dpleickbpchmkpkmicanfolmianepfhe) (last 32 characters):
 
 ```
-https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/dpleickbpchmkpkmicanfolmianepfhe
+https://microsoftedge.microsoft.com/addons/detail/cheerpj-jnlp-runner/dpleickbpchmkpkmicanfolmianepfhe
 ```
 
 The extension ID is:
@@ -72,18 +72,18 @@ You can now configure your Group Policy to force install the extension in all yo
 
 The final step is to setup your license among other relevant configurations for this Group Policy.
 
-1. Open the _**Group Policy Management**_ interface, find the Applet Runner group policy you created previously (or your existing policy) and click _**Edit**_.
+1. Open the _**Group Policy Management**_ interface, find the JNLP Runner group policy you created previously (or your existing policy) and click _**Edit**_.
 2. Find _**Microsoft Edge**_ > _**Extensions**_ > _**Configure Extension management setting policy**_.
 3. On the right side menu click on _**Configure Extension management settings**_.
 
-In this window you can configure all the settings relevant for your organisation when using the Applet runner extension. To do so you need to input the relevant settings in JSON format into the editor. This is done by editing the JSON string shown in the interface using the format:
+In this window you can configure all the settings relevant for your organisation when using the JNLP runner extension. To do so you need to input the relevant settings in JSON format into the editor. This is done by editing the JSON string shown in the interface using the format:
 
 ```json
 { "*": { "FieldKey": "FieldValue" } }
 ```
 
 They Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
-Remember to use the extension ID for those settings that you want to apply only for the Applet Runner extension.
+Remember to use the extension ID for those settings that you want to apply only for the JNLP Runner extension.
 
 ```json
 { "ExtensionIDHere": { "SettingField": "FieldValues" } }
