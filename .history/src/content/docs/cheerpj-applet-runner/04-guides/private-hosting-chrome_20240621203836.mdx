@@ -1,0 +1,148 @@
+---
+title: Private hosting (Chrome)
+description: Deploy the Applet Runner chrome extension via Group Policy (Windows).
+---
+
+import LinkButton from "@/components/LinkButton.astro";
+
+If your organisation requires to use our extension in multiple devices, we have amazing news for you! Our Applet Runner extension is available for private hosting and deployment via Group Policy. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
+
+Requirements:
+
+- Your applet file(s).
+- The HTML file where your applet is meant to be displayed.
+- A basic HTTP server to test locally.
+
+## Integrating CheerpJ in your HTML file
+
+The CRX file is a compressed format for extensions of browsers belonging to the Chromium family (such as Google Chrome). To obtain the CRX file of the Applet runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you alongside a license token.
+
+**Host the extension CRX file in an appropriate location in your IT infrastructure and create a download URL to access it.** You will need this URL later in the tutorial.
+
+> [!info] About `DownloadURL`
+> You can also use the WebStore's `DownloadURL`, but you won't be self-hosting the extension and it will be retrieved from the WebStore for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
+
+## The extension ID
+
+The extension ID is a unique identifier used by the Chrome WebStore. You can retrieve from the [extension Chrome Web Store URL](https://chromewebstore.google.com/detail/cheerpj-applet-runner/achnhggjjhnadfapkmgallnbmemdojdi) (last 32 characters):
+
+```
+https://chromewebstore.google.com/detail/cheerpj-applet-runner/achnhggjjhnadfapkmgallnbmemdojdi
+```
+
+The extension ID is:
+
+```
+achnhggjjhnadfapkmgallnbmemdojdi
+```
+
+## The policy string
+
+Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX `DownloadURL` separated by a semicolon:
+`ID;DownloadURL`
+It must look something like this:
+`achnhggjjhnadfapkmgallnbmemdojdi;https://some.download.url.file.crx`
+
+> [!warning] Hypothetical URL
+> The example above contains hypothetical URL, please do not use this policy string.
+
+## Policy templates
+
+You will need to download and install the Google administrative templates. You can do this by downloading the templates file and following the steps as stated in the Chrome policies guide by Google.
+
+<LinkButton
+	href="https://support.google.com/chrome/a/answer/187202?hl=en"
+	label="Chrome policies"
+	type="primary"
+	iconRight="ri:chrome-fill"
+/>
+## Creating a new group policy
+
+Now you have everything you need to create a new GPO, please follow these final steps to create a Group Policy or you can edit an existing one:
+
+1. Open the Group Policy Management interface
+2. Go to your desired domain and right click to display the options menu.
+3. Click on _**Create a GPO in this domain, and Link it here...**_
+4. Name your policy object and hit _**Ok**_.
+5. Right click on top of the policy object you just created and click _**Edit**_.
+6. On the left menu, find the folder _**Administrative Templates: Policy definitions**_ > _**Google**_ > _**Google Chrome**_ > _**Extensions**_.
+7. On the right side of the window, click on _**Configure the list of force-installed apps and extensions**_. This will display a new window with the same title.
+8. Click in the radio button _**Enabled**_ and then click on the button _**Show...**_, this will prompt a small window named _**Show Contents**_.
+9. Now copy the policy string `ID;DownloadURL` you created in the previous step and paste it under the cell _**Value**_, click _**Ok**_ and apply the changes.
+
+## Licensing and further group policy setup
+
+The final step is to setup your license among other relevant configurations for this Group Policy.
+
+1. Open the _**Group Policy Management**_ interface, find the Applet Runner group policy you created previously and click _**Edit**_.
+2. On the left menu, find _**Administrative Templates: Policy definitions**_ > _**Google**_ > _**Google Chrome**_ > _**Extensions**_.
+3. On the right side menu click on _**Configure Extension management settings**_.
+
+In this window you can configure all the settings relevant for your organisation when using the Applet runner extension. To do so you need to input the relevant settings in JSON format into the editor. This is done by editing the JSON string shown in the interface using the format:
+
+```json
+{ "*": { "FieldKey": "FieldValue" } }
+```
+
+The Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
+Remember to use the extension ID for those settings that you want to apply only for the Applet Runner extension.
+
+```json
+{ "ExtensionIDHere": { "SettingField": "FieldValues" } }
+```
+
+### Licensing
+
+To correctly configure your license, make sure to include the license token field in your JSON:
+
+```json
+{ "ExtensionIDHere": { "licenseToken": "YourValidTokenHere" } }
+```
+
+### Other settings
+
+Remember you can always configure other settings for this Group Policy that are appropriate for your group of users and the extension. You can do this in this same JSON adding the appropriate key/values as the examples shown below:
+
+For example:
+
+- Always pin this extension to the browser toolbar
+
+```json
+{ "ExtensionIDHere": { "toolbar_pin": "force_pinned" } }
+```
+
+- Pre-allow specific permissions for the extension (see [permissions list](https://developer.chrome.com/docs/extensions/reference/permissions-list)). For example, to perform downloads:
+
+```json
+{ "ExtensionIDHere": { "allowed_permissions": ["downloads"] } }
+```
+
+- Block extension from interacting with certain websites:
+
+  ```json
+  { "runtime_blocked_hosts": ["*://an.example.com"] }
+  ```
+
+- Allow the extension to interact with specific websites even when they're in the blocked list:
+
+```json
+{ "runtime_allowed_hosts": ["*://an.example.com"] }
+```
+
+For more information about extension settings visit [The Chrome Documentation](https://support.google.com/chrome/a/answer/9867568?hl=en)
+
+<LinkButton
+	href="https://support.google.com/chrome/a/answer/9867568?hl=en"
+	label="Chrome Documentation"
+	type="secondary"
+	iconRight="iconoir:google-docs"
+/>
+## Update your changes
+
+Once you are happy with your group policy configuration, you can apply these changes to see them reflected on your user's chrome clients by running the shell command:
+
+```shell
+ gpupdate
+```
+
+Now your users should be able to see the extension installed in their Chrome browser.
