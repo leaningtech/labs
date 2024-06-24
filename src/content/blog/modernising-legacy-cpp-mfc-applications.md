@@ -5,7 +5,7 @@ description: |
 pubDate: "2024-06-20"
 authors:
   - guest-martin
-heroImage: ./javascript-optimising-compiler.webp # TODO
+heroImage: ./mfc.png # TODO
 tags:
   - Cheerp
 ---
