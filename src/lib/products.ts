@@ -108,7 +108,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj-applet-runner",
 		type: "extension",
 		name: "CheerpJ Applet Runner",
-		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
+		href: "/cheerpj-applet-runner",
 		logotype: appletrunnerLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java Applets in the modern browser",
