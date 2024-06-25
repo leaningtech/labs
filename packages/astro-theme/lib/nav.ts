@@ -252,6 +252,14 @@ export function idToTitle(id: string): string {
 }
 
 function idToSlug(id: string): string {
+	// For non-labs sites, the slug scheme does not include the product because it is implied by the site.
+	const prefix = {
+		"https://cheerp.io": "cheerp/",
+		"https://cheerpj.com": "cheerpj3/",
+		"https://cheerpx.io": "cheerpx/",
+	}[import.meta.env.SITE as string];
+	if (prefix && id.startsWith(prefix)) id = id.slice(prefix.length);
+
 	return id
 		.replace(/\.mdx?$/, "")
 		.replace("/index", "") // index.md overrides directory listing

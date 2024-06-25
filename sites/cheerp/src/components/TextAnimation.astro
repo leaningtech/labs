@@ -1,0 +1,39 @@
+<span data-splitting>
+	<slot />
+</span>
+
+<script>
+	import Splitting from "splitting";
+	Splitting();
+</script>
+
+<style>
+	span :global(.char) {
+		--delay: calc((var(--char-index) + 1) * 400ms);
+		animation: breathe 8000ms infinite both;
+		animation-delay: var(--delay);
+	}
+
+	span:hover :global(span) {
+		animation-play-state: paused;
+	}
+
+	@keyframes breathe {
+		0% {
+			font-variation-settings: 'wght' 100;
+		}
+		30% {
+			font-variation-settings: 'wght' 900;
+			transform: scaleY(0.8);
+		}
+		100% {
+			font-variation-settings: 'wght' 100;
+		}
+	}
+
+	@media (prefers-reduced-motion) {
+		span :global(.char) {
+			animation: none;
+		}
+	}
+</style>

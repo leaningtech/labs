@@ -62,4 +62,8 @@ const showcase = defineCollection({
 		}),
 });
 
-export const collections = { docs, blog, blogauthors, showcase };
+const examples = defineCollection({
+	type: "content",
+});
+
+export const collections = { docs, blog, blogauthors, showcase, examples };

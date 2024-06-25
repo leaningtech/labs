@@ -31,7 +31,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerp",
 		type: "technology",
 		name: "Cheerp",
-		href: "/docs/cheerp",
+		href: "https://cheerp.io",
 		logotype: cheerpLogotype,
 		favicon: "/cheerp/favicon.ico",
 		subtitle: "Compile C++ for the browser",
@@ -56,7 +56,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj3",
 		type: "technology",
 		name: "CheerpJ",
-		href: "/docs/cheerpj3",
+		href: "https://cheerpj.com/docs",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
@@ -69,7 +69,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpx",
 		type: "technology",
 		name: "CheerpX",
-		href: "/docs/cheerpx",
+		href: "https://cheerpx.io",
 		logotype: cheerpxLogotype,
 		favicon: "/cheerpx/favicon.ico",
 		subtitle: "x86-to-WebAssembly virtualization",
@@ -119,6 +119,17 @@ export const products: { [product in Product]: ProductData } = {
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
+	// Use site from astro config if possible
+	switch (import.meta.env.SITE) {
+		case "https://cheerp.io":
+			return products.cheerp;
+		case "https://cheerpj.com":
+			return products.cheerpj3;
+		case "https://cheerpx.io":
+			return products.cheerpx;
+	}
+
+	// Fallback for labs
 	// /docs/[PRODUCT]/
 	const path = url.pathname.split("/")[2]?.replace(".html", "");
 	if (path && isProduct(path)) {

@@ -3,11 +3,12 @@ import companyLogo from "../assets/branding/company/tower.svg";
 import EventBanner from "./EventBanner.svelte";
 import { Image } from "astro:assets";
 import LatestBlogPostPill from "./LatestBlogPostPill.astro";
+import { products } from "../lib/products";
 
 const links = [
-	{ name: "Cheerp", href: "/cheerp" },
-	{ name: "CheerpJ", href: "/cheerpj" },
-	{ name: "CheerpX", href: "/cheerpx" },
+	products.cheerp,
+	products.cheerpj3,
+	products.cheerpx,
 	{ name: "Blog", href: "/blog" },
 ];
 ---
@@ -21,7 +22,7 @@ const links = [
 	<div
 		class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 md:px-8 h-12 whitespace-nowrap overflow-hidden flex items-center justify-between"
 	>
-		<a href="/" class="flex items-center gap-2">
+		<a href="https://labs.leaningtech.com" class="flex items-center gap-2">
 			<Image
 				src={companyLogo}
 				alt="Leaning Technologies Logo"

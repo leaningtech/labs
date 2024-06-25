@@ -1,2 +1,35 @@
-Cheerp root page
-TODO
+---
+import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
+import Examples from "@/components/Examples.astro";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import TextAnimation from "@/components/TextAnimation.astro";
+---
+
+<ProductHome>
+	<section>
+		<div class="text-center space-y-6">
+			<h1 class="text-4xl font-extralight text-balance glow">
+				The <TextAnimation>flexible</TextAnimation> C++ compiler for web applications
+			</h1>
+			<p class="text-xl text-balance">Cheerp compiles C++ to efficient WebAssembly and JavaScript.</p>
+		</div>
+
+		<div class="max-w-[32em] m-auto py-8 space-y-6">
+			<Examples />
+			<LinkButton type="primary" href="/docs/installation" label="Get started" />
+		</div>
+	</section>
+	<section>
+		<div class="grid sm:grid-cols-3 gap-6">
+			<div class="bg-stone-800 p-6 rounded-lg">
+				Point 1
+			</div>
+			<div class="bg-stone-800 p-6 rounded-lg">
+				Point 2
+			</div>
+			<div class="bg-stone-800 p-6 rounded-lg">
+				Point 3
+			</div>
+		</div>
+	</section>
+</ProductHome>

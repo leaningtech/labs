@@ -11,7 +11,10 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@designbycode/tailwindcss-text-shadow": "^2.0.0",
 		"@leaningtech/astro-theme": "workspace:^",
-		"astro": "^4.5.18"
+		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
+		"astro": "^4.5.18",
+		"splitting": "^1.1.0"
 	}
 }

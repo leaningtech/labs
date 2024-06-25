@@ -1,0 +1,8 @@
+---
+import { getCollection } from "astro:content";
+
+const examples = await getCollection("examples");
+const renderedExamples = await Promise.all(examples.map(e => e.render()));
+---
+
+{renderedExamples.map(({ Content }) => <Content />)}

@@ -102,12 +102,21 @@ importers:
 
   sites/cheerp:
     dependencies:
+      '@designbycode/tailwindcss-text-shadow':
+        specifier: ^2.0.0
+        version: 2.0.0(tailwindcss@3.4.4)
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
+      '@leaningtech/cheerp-ts-three-demo':
+        specifier: workspace:^
+        version: link:../../packages/cheerp-ts-three-demo
       astro:
         specifier: ^4.5.18
         version: 4.9.3(typescript@5.4.5)
+      splitting:
+        specifier: ^1.1.0
+        version: 1.1.0
 
   sites/labs:
     dependencies:
@@ -594,6 +603,14 @@ packages:
   /@ctrl/tinycolor@3.6.1:
     resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /@designbycode/tailwindcss-text-shadow@2.0.0(tailwindcss@3.4.4):
+    resolution: {integrity: sha512-Dm2NZYXMjeyd0NeptuuG5SejLsTNY4YKovmUMSrqkAzn1eehqxfAvS9UsDgHTuOeT/rklXd/Rwg3axB+AyGV6g==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.4.4
     dev: false
 
   /@emnapi/runtime@1.2.0:
@@ -4802,6 +4819,10 @@ packages:
 
   /space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+    dev: false
+
+  /splitting@1.1.0:
+    resolution: {integrity: sha512-6Tj+4mvlSti4DUu1yl0PnkHIIoLchFYJHqz2DnwYkvEehXbjrR2epa4ds/xdto6ZdZsC+NP5IOOehi9VGjNlMQ==}
     dev: false
 
   /sprintf-js@1.0.3:

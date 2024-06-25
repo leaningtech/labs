@@ -1,0 +1,16 @@
+---
+import Shell from "./Shell.astro";
+import ProductNav from "../components/ProductNav.astro";
+import Footer from "../components/Footer.astro";
+import { productFromUrl } from "../lib/products";
+
+const product = productFromUrl(Astro.url)!;
+---
+
+<Shell title={product.name} description={product?.description}>
+	<ProductNav {product} />
+	<div class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
+		<slot />
+	</div>
+	<Footer />
+</Shell>

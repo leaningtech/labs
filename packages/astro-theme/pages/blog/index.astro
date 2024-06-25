@@ -6,6 +6,10 @@ import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
 import Search from "../../components/search/Search.astro";
+import { productFromUrl } from "../../lib/products";
+import ProductNav from "../../components/ProductNav.astro";
+
+const product = productFromUrl(Astro.url);
 
 const [post1, post2, ...restPosts] = (
 	await getCollection("blog", ({ data }) => data.draft !== true)
@@ -13,9 +17,10 @@ const [post1, post2, ...restPosts] = (
 ---
 
 <Shell
-	title="Leaning Techologies Engineering Blog"
+	title={`${product?.name ?? "Engineering"} blog`}
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 >
+	{product && <ProductNav {product} />}
 	<header class="text-center text-stone-100 py-32">
 		<div class="flex justify-center items-center">
 			<Image
@@ -27,7 +32,7 @@ const [post1, post2, ...restPosts] = (
 			/>
 		</div>
 
-		<h1 class="font-bold text-5xl">Engineering blog</h1>
+		<h1 class="font-bold text-5xl">{product?.name ?? "Engineering"} blog</h1>
 		<p class="text-lg text-balance my-8">
 			News, technical writeups, and announcements directly from our development
 			team.

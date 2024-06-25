@@ -11,11 +11,13 @@
 		"./pages/blog/[...slug].astro": "./pages/blog/[...slug].astro",
 		"./pages/docs/[...slug].astro": "./pages/docs/[...slug].astro",
 		"./layouts/Shell.astro": "./layouts/Shell.astro",
+		"./layouts/ProductHome.astro": "./layouts/ProductHome.astro",
 		"./components/LinkButton.astro": "./components/LinkButton.astro",
 		"./components/Footer.astro": "./components/Footer.astro",
 		"./components/BlogPostCardSet.astro": "./components/BlogPostCardSet.astro",
 		"./components/LatestBlogPostPill.astro": "./components/LatestBlogPostPill.astro",
-		"./components/ShowcaseList.astro": "./components/ShowcaseList.astro"
+		"./components/ShowcaseList.astro": "./components/ShowcaseList.astro",
+		"./components/Callout.astro": "./components/Callout.astro"
 	},
 	"scripts": {},
 	"peerDependencies": {
