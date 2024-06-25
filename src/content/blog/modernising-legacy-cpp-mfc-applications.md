@@ -2,7 +2,7 @@
 title: "Modernising Legacy C++ MFC Applications with Cheerp"
 description: |
   Modernising C++/MFC applications into modern web applications can offer significant practical advantages and enable improved efficiency, productivity and flexibility. WebAssembly, and the Cheerp C++ to Wasm compiler offer a uniquely efficient path to achieve this, by preserving the vast majority of existing source code.
-pubDate: "2024-06-20"
+pubDate: "2024-06-25"
 authors:
   - guest-martin
 heroImage: ./mfc.png
