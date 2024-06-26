@@ -4,8 +4,8 @@ import { resolve } from "node:path";
 
 export default defineConfig({
 	site: "https://cheerpj.com",
-	integrations: [theme()],
-	output: "static",
+	base: "/docs",
+	integrations: [theme({ baseIsDocs: true })],
 	vite: {
 		resolve: {
 			alias: [

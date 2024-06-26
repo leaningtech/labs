@@ -31,7 +31,13 @@ theme.styleOverrides.frames = {
 
 const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 
-export default function ThemeIntegration(): AstroIntegration {
+export type Options = {
+	baseIsDocs?: boolean; // Only true for cheerpj site
+};
+
+export default function ThemeIntegration(
+	options: Options = {},
+): AstroIntegration {
 	return {
 		name: "@leaningtech/astro-theme",
 		hooks: {
@@ -75,16 +81,17 @@ export default function ThemeIntegration(): AstroIntegration {
 					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
 				});*/
 
+				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
-					pattern: "docs",
+					pattern: docsPrefix,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
 				});
 				params.injectRoute({
-					pattern: "docs/404",
+					pattern: `${docsPrefix}/404`,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/404.astro",
 				});
 				params.injectRoute({
-					pattern: "docs/[...slug]",
+					pattern: `${docsPrefix}/[...slug]`,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
 				});
 
