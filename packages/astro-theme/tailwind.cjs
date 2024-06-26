@@ -83,10 +83,6 @@ module.exports = () => ({
 			}),
 		},
 	},
-	plugins: [
-		require("@designbycode/tailwindcss-text-shadow"),
-		require("@tailwindcss/typography"),
-		exportColorsAsCssVariables,
-	],
+	plugins: [require("@tailwindcss/typography"), exportColorsAsCssVariables],
 	darkMode: "class",
 });
