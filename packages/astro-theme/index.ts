@@ -38,6 +38,7 @@ export type Options = {
 export default function ThemeIntegration(
 	options: Options = {},
 ): AstroIntegration {
+	const base = options.baseIsDocs ? "/docs" : "";
 	return {
 		name: "@leaningtech/astro-theme",
 		hooks: {
@@ -107,7 +108,7 @@ export default function ThemeIntegration(
 											className:
 												"not-prose inline-block align-middle heading-link-icon",
 											style: "margin-left: 8px",
-											src: "/icons/heading-link.svg",
+											src: base + "/icons/heading-link.svg",
 										},
 										children: [],
 									},
@@ -122,7 +123,7 @@ export default function ThemeIntegration(
 										properties: {
 											className: "not-prose inline-block align-middle",
 											style: "margin-left: 2px",
-											src: "/icons/external-link.svg",
+											src: base + "/icons/external-link.svg",
 										},
 										children: [],
 									},
