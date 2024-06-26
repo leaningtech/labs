@@ -8,6 +8,7 @@
 		"./consts": "./consts.ts",
 		"./products": "./lib/products.ts",
 		"./content": "./content.ts",
+		"./tailwind": "./tailwind.cjs",
 		"./pages/blog/index.astro": "./pages/blog/index.astro",
 		"./pages/blog/[...slug].astro": "./pages/blog/[...slug].astro",
 		"./pages/docs/index.astro": "./pages/docs/index.astro",
