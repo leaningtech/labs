@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
+import publicDir from "astro-public";
 import pagefind from "./pagefind";
 import svelte from "@astrojs/svelte";
 import prefetch from "@astrojs/prefetch";
@@ -11,6 +12,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
+import { addIntegration } from "astro-integration-kit";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -31,45 +33,55 @@ export default function ThemeIntegration(): AstroIntegration {
 	return {
 		name: "@leaningtech/astro-theme",
 		hooks: {
-			"astro:config:setup": ({ updateConfig, injectRoute }) => {
-				injectRoute({
+			"astro:config:setup": (params) => {
+				const integrations = [
+					astroExpressiveCode({
+						theme,
+						styleOverrides: {
+							codeBackground: "transparent",
+							borderColor: "rgb(41, 37, 36)", // border-stone-800
+							// doesn't work?
+							frames: {},
+						},
+					}),
+					mdx(),
+					sitemap(),
+					tailwind(),
+					robotsTxt(),
+					pagefind(),
+					svelte(),
+					prefetch({
+						// Prefetch hovered internal links
+						//intentSelector: ["a[href^='/']"],
+					}),
+					publicDir({
+						dir: "public",
+						cwd: import.meta.url,
+					}),
+				];
+				for (const integration of integrations) {
+					addIntegration(params, { integration });
+				}
+
+				/*params.injectRoute({
 					pattern: "blog",
 					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro",
 				});
-				injectRoute({
+				params.injectRoute({
 					pattern: "blog/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
-				});
-				injectRoute({
+				});*/
+
+				params.injectRoute({
 					pattern: "docs",
 					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
 				});
-				injectRoute({
+				params.injectRoute({
 					pattern: "docs/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
 				});
-				updateConfig({
-					integrations: [
-						astroExpressiveCode({
-							theme,
-							styleOverrides: {
-								codeBackground: "transparent",
-								borderColor: "rgb(41, 37, 36)", // border-stone-800
-								// doesn't work?
-								frames: {},
-							},
-						}),
-						mdx(),
-						sitemap(),
-						tailwind(),
-						robotsTxt(),
-						pagefind(),
-						svelte(),
-						prefetch({
-							// Prefetch hovered internal links
-							//intentSelector: ["a[href^='/']"],
-						}),
-					],
+
+				params.updateConfig({
 					markdown: {
 						remarkPlugins: [[remarkObsidianCallout, {}]],
 						rehypePlugins: [
