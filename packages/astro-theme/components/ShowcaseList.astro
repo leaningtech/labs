@@ -1,22 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import type { ProductTag } from "@/content/config";
 
 interface Props {
-	tag?: ProductTag;
 	limit?: number;
 }
 
 const props = Astro.props;
 
-let projects = await getCollection("showcase", ({ data }) => {
-	if (props.tag) {
-		return data.tags.includes(props.tag);
-	} else {
-		return true;
-	}
-});
+let projects = await getCollection("showcase");
 
 if (typeof props.limit == "number") {
 	projects = projects.slice(0, props.limit);
