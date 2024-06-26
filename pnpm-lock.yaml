@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: ^2.2.4
-        version: 2.3.1(astro@4.9.3)
+        version: 2.3.1(astro@4.11.2)
       '@astrojs/prefetch':
         specifier: ^0.4.1
         version: 0.4.1
@@ -22,28 +22,28 @@ importers:
         version: 3.1.5
       '@astrojs/svelte':
         specifier: ^5.3.0
-        version: 5.4.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1)
+        version: 5.4.0(astro@4.11.2)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1)
       '@astrojs/tailwind':
         specifier: ^5.1.0
-        version: 5.1.0(astro@4.9.3)(tailwindcss@3.4.4)
+        version: 5.1.0(astro@4.11.2)(tailwindcss@3.4.4)
       '@tailwindcss/typography':
         specifier: ^0.5.10
         version: 0.5.13(tailwindcss@3.4.4)
       astro:
-        specifier: ^4.5.18
-        version: 4.9.3(typescript@5.5.2)
+        specifier: '*'
+        version: 4.11.2(typescript@5.5.2)
       astro-expressive-code:
         specifier: ^0.23.0
-        version: 0.23.0(astro@4.9.3)
+        version: 0.23.0(astro@4.11.2)
       astro-icon:
         specifier: ^0.8.1
         version: 0.8.2
       astro-integration-kit:
         specifier: ^0.14.0
-        version: 0.14.0(astro@4.9.3)
+        version: 0.14.0(astro@4.11.2)
       astro-public:
         specifier: ^0.1.0
-        version: 0.1.0(astro@4.9.3)
+        version: 0.1.0(astro@4.11.2)
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
@@ -108,6 +108,9 @@ importers:
 
   sites/cheerp:
     dependencies:
+      '@astrojs/svelte':
+        specifier: ^5.6.0
+        version: 5.6.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1)
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
@@ -116,19 +119,22 @@ importers:
         version: link:../../packages/cheerp-ts-three-demo
       astro:
         specifier: ^4.5.18
-        version: 4.9.3
+        version: 4.9.3(typescript@5.5.2)
       splitting:
         specifier: ^1.1.0
         version: 1.1.0
 
   sites/cheerpj:
     dependencies:
+      '@astrojs/svelte':
+        specifier: ^5.3.0
+        version: 5.4.0(astro@4.11.2)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1)
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
       astro:
         specifier: ^4.11.2
-        version: 4.11.2
+        version: 4.11.2(typescript@5.5.2)
 
   sites/labs:
     dependencies:
@@ -145,7 +151,7 @@ importers:
         specifier: ^3.1.2
         version: 3.1.5
       '@astrojs/svelte':
-        specifier: ^5.3.0
+        specifier: ^5.4.0
         version: 5.4.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.4.5)(vite@5.3.1)
       '@astrojs/tailwind':
         specifier: ^5.1.0
@@ -333,6 +339,32 @@ packages:
       - supports-color
     dev: false
 
+  /@astrojs/mdx@2.3.1(astro@4.11.2):
+    resolution: {integrity: sha512-BOQFKD2Pi9cRntNQJlpF2fh4xV8doNpmVy9NKI95r4jsitrY4X5aTOhAowi+fkQgP/zW1A4HwCyQ6Pdam6z8zQ==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      astro: ^4.0.0
+    dependencies:
+      '@astrojs/markdown-remark': 5.1.0
+      '@mdx-js/mdx': 3.0.1
+      acorn: 8.11.3
+      astro: 4.11.2(typescript@5.5.2)
+      es-module-lexer: 1.5.3
+      estree-util-visit: 2.0.0
+      github-slugger: 2.0.0
+      gray-matter: 4.0.3
+      hast-util-to-html: 9.0.1
+      kleur: 4.1.5
+      rehype-raw: 7.0.0
+      remark-gfm: 4.0.0
+      remark-smartypants: 2.1.0
+      source-map: 0.7.4
+      unist-util-visit: 5.0.0
+      vfile: 6.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@astrojs/mdx@2.3.1(astro@4.9.3):
     resolution: {integrity: sha512-BOQFKD2Pi9cRntNQJlpF2fh4xV8doNpmVy9NKI95r4jsitrY4X5aTOhAowi+fkQgP/zW1A4HwCyQ6Pdam6z8zQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
@@ -342,7 +374,7 @@ packages:
       '@astrojs/markdown-remark': 5.1.0
       '@mdx-js/mdx': 3.0.1
       acorn: 8.11.3
-      astro: 4.9.3(typescript@5.5.2)
+      astro: 4.9.3(typescript@5.4.5)
       es-module-lexer: 1.5.3
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -388,6 +420,24 @@ packages:
       zod: 3.23.8
     dev: false
 
+  /@astrojs/svelte@5.4.0(astro@4.11.2)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1):
+    resolution: {integrity: sha512-D9/CVJ+Fy3fu+FzJ7x+0GnRUhHsJKsU6tW/xQQ1QzrFMABuEoM5U4YKTYtxWkqB4B4jNb7gbA4p9ZtEhYZ3/+w==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+    peerDependencies:
+      astro: ^4.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.90
+      typescript: ^5.3.3
+    dependencies:
+      '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.17)(vite@5.3.1)
+      astro: 4.11.2(typescript@5.5.2)
+      svelte: 4.2.17
+      svelte2tsx: 0.6.27(svelte@4.2.17)(typescript@5.5.2)
+      typescript: 5.5.2
+    transitivePeerDependencies:
+      - supports-color
+      - vite
+    dev: false
+
   /@astrojs/svelte@5.4.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.4.5)(vite@5.3.1):
     resolution: {integrity: sha512-D9/CVJ+Fy3fu+FzJ7x+0GnRUhHsJKsU6tW/xQQ1QzrFMABuEoM5U4YKTYtxWkqB4B4jNb7gbA4p9ZtEhYZ3/+w==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
@@ -406,8 +456,8 @@ packages:
       - vite
     dev: false
 
-  /@astrojs/svelte@5.4.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1):
-    resolution: {integrity: sha512-D9/CVJ+Fy3fu+FzJ7x+0GnRUhHsJKsU6tW/xQQ1QzrFMABuEoM5U4YKTYtxWkqB4B4jNb7gbA4p9ZtEhYZ3/+w==}
+  /@astrojs/svelte@5.6.0(astro@4.9.3)(svelte@4.2.17)(typescript@5.5.2)(vite@5.3.1):
+    resolution: {integrity: sha512-rdHBlqMQE6UOA1ySF1t3sdb6pf44yP8Dd0TqxGO0yR4HAgbtKtW8XToJ3mQ1PmuRmf5fisH9xzt3EEx7NAQuZg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       astro: ^4.0.0
@@ -417,11 +467,26 @@ packages:
       '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.17)(vite@5.3.1)
       astro: 4.9.3(typescript@5.5.2)
       svelte: 4.2.17
-      svelte2tsx: 0.6.27(svelte@4.2.17)(typescript@5.5.2)
+      svelte2tsx: 0.7.13(svelte@4.2.17)(typescript@5.5.2)
       typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
       - vite
+    dev: false
+
+  /@astrojs/tailwind@5.1.0(astro@4.11.2)(tailwindcss@3.4.4):
+    resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
+    peerDependencies:
+      astro: ^3.0.0 || ^4.0.0
+      tailwindcss: ^3.0.24
+    dependencies:
+      astro: 4.11.2(typescript@5.5.2)
+      autoprefixer: 10.4.19(postcss@8.4.38)
+      postcss: 8.4.38
+      postcss-load-config: 4.0.2(postcss@8.4.38)
+      tailwindcss: 3.4.4
+    transitivePeerDependencies:
+      - ts-node
     dev: false
 
   /@astrojs/tailwind@5.1.0(astro@4.9.3)(tailwindcss@3.4.4):
@@ -430,7 +495,7 @@ packages:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.9.3(typescript@5.5.2)
+      astro: 4.9.3(typescript@5.4.5)
       autoprefixer: 10.4.19(postcss@8.4.38)
       postcss: 8.4.38
       postcss-load-config: 4.0.2(postcss@8.4.38)
@@ -1998,12 +2063,12 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /acorn-jsx@5.3.2(acorn@8.11.3):
+  /acorn-jsx@5.3.2(acorn@8.12.0):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.0
     dev: false
 
   /acorn@8.11.3:
@@ -2103,12 +2168,21 @@ packages:
     hasBin: true
     dev: false
 
+  /astro-expressive-code@0.23.0(astro@4.11.2):
+    resolution: {integrity: sha512-wB3pC1j3Sz4HRKoIzOcakCgxGRa1q7vc/k4p5KrtMv1q4O39aE+D67CETHV07pVOC5mpH4gVd5panXvivmuMIQ==}
+    peerDependencies:
+      astro: ^2.0.0 || ^3.0.0-beta
+    dependencies:
+      astro: 4.11.2(typescript@5.5.2)
+      remark-expressive-code: 0.23.0
+    dev: false
+
   /astro-expressive-code@0.23.0(astro@4.9.3):
     resolution: {integrity: sha512-wB3pC1j3Sz4HRKoIzOcakCgxGRa1q7vc/k4p5KrtMv1q4O39aE+D67CETHV07pVOC5mpH4gVd5panXvivmuMIQ==}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0-beta
     dependencies:
-      astro: 4.9.3(typescript@5.5.2)
+      astro: 4.9.3(typescript@5.4.5)
       remark-expressive-code: 0.23.0
     dev: false
 
@@ -2119,7 +2193,7 @@ packages:
       svgo: 2.8.0
     dev: false
 
-  /astro-integration-kit@0.14.0(astro@4.9.3):
+  /astro-integration-kit@0.14.0(astro@4.11.2):
     resolution: {integrity: sha512-Tg85rlRRKEkTK2a02XJByvNOuzGN1eDIfAJxwHPUTOn/iE7yFxL9RaLqSdO8X8PxnbL4e1H6OkK6AVFnHZob9A==}
     peerDependencies:
       '@astrojs/db': ^0.9 || ^0.10 || ^0.11
@@ -2128,17 +2202,17 @@ packages:
       '@astrojs/db':
         optional: true
     dependencies:
-      astro: 4.9.3(typescript@5.5.2)
+      astro: 4.11.2(typescript@5.5.2)
       pathe: 1.1.2
       recast: 0.23.9
     dev: false
 
-  /astro-public@0.1.0(astro@4.9.3):
+  /astro-public@0.1.0(astro@4.11.2):
     resolution: {integrity: sha512-e+vIfUohHYIOwUmlKyYOOMvlClHKuTT9AMzZcPCFAJeVEL8EQWyXVc+WCtS3IH16gN56UjnymQ2V2hjuQwPrOg==}
     peerDependencies:
       astro: ^4.4.0
     dependencies:
-      astro: 4.9.3(typescript@5.5.2)
+      astro: 4.11.2(typescript@5.5.2)
     dev: false
 
   /astro-robots-txt@1.0.0:
@@ -2152,7 +2226,7 @@ packages:
     resolution: {integrity: sha512-QfJTJV/MZly5/ch9oFZskEl4xzFIIJWN3BVZ0RLEwTwKcjP8LZVsWU8w5TtBnClRwF3wt+o5CFKnU5Q/aOMYyg==}
     dev: false
 
-  /astro@4.11.2:
+  /astro@4.11.2(typescript@5.5.2):
     resolution: {integrity: sha512-8ulWb74qY5VBFhDTjw1KMCMEf+EXOoSBy4QC6J1oHIq5tzMGCVRt3sUPzUxD737HVPb+CxOIbj35skN0w535fw==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
@@ -2210,7 +2284,7 @@ packages:
       shiki: 1.9.1
       string-width: 7.1.0
       strip-ansi: 7.1.0
-      tsconfck: 3.1.0
+      tsconfck: 3.1.0(typescript@5.5.2)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
       vite: 5.3.1
@@ -4304,8 +4378,8 @@ packages:
   /micromark-extension-mdxjs@3.0.0:
     resolution: {integrity: sha512-A873fJfhnJ2siZyUrJ31l34Uqwy4xIFmvPY1oj+Ean5PHcPBYzEsvqvWGaWcfEIr11O5Dlw3p2y0tZWpKHDejQ==}
     dependencies:
-      acorn: 8.11.3
-      acorn-jsx: 5.3.2(acorn@8.11.3)
+      acorn: 8.12.0
+      acorn-jsx: 5.3.2(acorn@8.12.0)
       micromark-extension-mdx-expression: 3.0.0
       micromark-extension-mdx-jsx: 3.0.0
       micromark-extension-mdx-md: 2.0.0
@@ -5712,6 +5786,18 @@ packages:
       typescript: 5.5.2
     dev: false
 
+  /svelte2tsx@0.7.13(svelte@4.2.17)(typescript@5.5.2):
+    resolution: {integrity: sha512-aObZ93/kGAiLXA/I/kP+x9FriZM+GboB/ReOIGmLNbVGEd2xC+aTCppm3mk1cc9I/z60VQf7b2QDxC3jOXu3yw==}
+    peerDependencies:
+      svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
+      typescript: ^4.9.4 || ^5.0.0
+    dependencies:
+      dedent-js: 1.0.1
+      pascal-case: 3.1.2
+      svelte: 4.2.17
+      typescript: 5.5.2
+    dev: false
+
   /svelte@4.2.17:
     resolution: {integrity: sha512-N7m1YnoXtRf5wya5Gyx3TWuTddI4nAyayyIWFojiWV5IayDYNV5i2mRp/7qNGol4DtxEYxljmrbgp1HM6hUbmQ==}
     engines: {node: '>=16'}
@@ -5914,6 +6000,7 @@ packages:
 
   /tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+    requiresBuild: true
     dev: false
 
   /tunnel-agent@0.6.0:
