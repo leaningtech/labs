@@ -4,7 +4,8 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"peerDependencies": {
-		"astro": "*"
+		"astro": "*",
+		"@leaningtech/astro-theme": "workspace:^"
 	},
 	"dependencies": {
 		"@leaningtech/hero": "workspace:^"

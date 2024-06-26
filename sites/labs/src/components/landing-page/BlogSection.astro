@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon";
-import BlogPostCard from "../../components/BlogPostCard.astro";
+import BlogPostCard from "../BlogPostCard.astro";
 import { latestFeaturedPost } from "../../lib/blog";
 
 const post = await latestFeaturedPost(Astro.url);

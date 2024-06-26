@@ -108,6 +108,9 @@ importers:
 
   packages/cheerpj-jnlp-page:
     dependencies:
+      '@leaningtech/astro-theme':
+        specifier: workspace:^
+        version: link:../astro-theme
       '@leaningtech/hero':
         specifier: workspace:^
         version: link:../hero
