@@ -41,6 +41,10 @@ export default function ThemeIntegration(): AstroIntegration {
 					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
 				});
 				injectRoute({
+					pattern: "docs",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
+				});
+				injectRoute({
 					pattern: "docs/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
 				});
@@ -63,7 +67,7 @@ export default function ThemeIntegration(): AstroIntegration {
 						svelte(),
 						prefetch({
 							// Prefetch hovered internal links
-							intentSelector: ["a[href^='/']"],
+							//intentSelector: ["a[href^='/']"],
 						}),
 					],
 					markdown: {

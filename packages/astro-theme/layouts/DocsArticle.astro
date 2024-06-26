@@ -10,7 +10,7 @@ import TableOfContents from "../components/TableOfContents.astro";
 import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
-import ProductNav from "../components/ProductNav.astro";
+import ProductNav from "../components/nav/product/Nav.astro";
 import WasThisHelpful from "../components/WasThisHelpful.astro";
 import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
@@ -30,7 +30,7 @@ const product = productFromUrl(Astro.url);
 
 if (!product) throw new Error("Product not found");
 
-const directory = findNavDirectory(nav, [product.id]);
+const entries = findNavDirectory(nav, [product.id])?.entries ?? nav;
 ---
 
 <Shell
@@ -53,7 +53,7 @@ const directory = findNavDirectory(nav, [product.id]);
 					data-sidebar-wrapper
 					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
 				>
-					<DocsSidebar {directory} />
+					<DocsSidebar {entries} />
 				</div>
 				<div
 					data-backdrop
@@ -104,7 +104,7 @@ const directory = findNavDirectory(nav, [product.id]);
 						<WasThisHelpful
 							editHref={`https://github.com/leaningtech/labs.leaningtech.com/edit/main/src/content/docs/${id}`}
 						/>
-						{directory && (
+						{entries && (
 							<div class="py-5">
 								<DocsPagination activeId={id} />
 							</div>

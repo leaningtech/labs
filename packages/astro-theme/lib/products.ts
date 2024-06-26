@@ -137,11 +137,3 @@ export function productFromUrl(url: URL): ProductData | undefined {
 	}
 	return undefined;
 }
-
-export async function getProductNav(productId: Product): Promise<NavDirectory> {
-	const root = await getRootNav();
-	const directory = findNavDirectory(root, [productId]);
-	if (!directory)
-		throw new Error(`no nav directory found for product ${productId}`);
-	return directory;
-}

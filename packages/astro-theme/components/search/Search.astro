@@ -12,18 +12,18 @@ interface Props {
 <site-search class="inline-block sm:w-80 h-10 max-w-full">
 	<button
 		data-open-modal
-		class="group text-stone-400 border-stone-700 hover:border-stone-500 sm:border border-opacity-50 rounded-md px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors bg-stone-900 bg-opacity-50 backdrop-blur-lg"
+		class="group text-stone-400 border-stone-700 hover:bg-stone-800 sm:border border-opacity-50 rounded-full px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer transition-colors bg-stone-900 bg-opacity-50 backdrop-blur-lg"
 	>
 		<Icon
 			name="fa-solid:search"
-			class="w-4 h-4 mr-0.5 group-hover:text-white transition-colors"
+			class="w-4 h-4 mx-0.5 group-hover:text-white transition-colors"
 		/>
 		<span class="group-hover:text-white transition-colors hidden sm:block"
 			>Search</span
 		>
 		<div class="grow hidden sm:block"></div>
 		<div
-			class="font-mono font-bold text-sm hidden md:block"
+			class="font-mono font-bold text-xs hidden md:block bg-stone-800 group-hover:bg-stone-700 transition-colors w-5 h-5 leading-5 rounded"
 			aria-label="Keybinding to open search"
 		>
 			/

@@ -22,9 +22,6 @@ export interface NavDirectory {
 
 export type NavEntry = NavDirectory | NavFile;
 
-/** https://diataxis.fr */
-export type Mode = "guides" | "tutorials" | "reference" | "explanation";
-
 export type Product =
 	| "cheerp"
 	| "cheerpj2"
@@ -33,15 +30,6 @@ export type Product =
 	| "cheerpx-for-flash"
 	| "cheerpj-jnlp-runner"
 	| "cheerpj-applet-runner";
-
-export function isMode(value: unknown): value is Mode {
-	return (
-		value === "guides" ||
-		value === "tutorials" ||
-		value === "reference" ||
-		value === "explanation"
-	);
-}
 
 export function isProduct(value: unknown): value is Product {
 	return (
@@ -252,14 +240,6 @@ export function idToTitle(id: string): string {
 }
 
 function idToSlug(id: string): string {
-	// For non-labs sites, the slug scheme does not include the product because it is implied by the site.
-	const prefix = {
-		"https://cheerp.io": "cheerp/",
-		"https://cheerpj.com": "cheerpj3/",
-		"https://cheerpx.io": "cheerpx/",
-	}[import.meta.env.SITE as string];
-	if (prefix && id.startsWith(prefix)) id = id.slice(prefix.length);
-
 	return id
 		.replace(/\.mdx?$/, "")
 		.replace("/index", "") // index.md overrides directory listing

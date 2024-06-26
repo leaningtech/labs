@@ -1,5 +1,5 @@
 ---
-import type { NavDirectory } from "../lib/nav";
+import type { NavEntry } from "../lib/nav";
 
 import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
@@ -7,10 +7,10 @@ import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 import { productFromUrl as productFromUrl } from "../lib/products";
 
 interface Props {
-	directory: NavDirectory | undefined;
+	entries: NavEntry[];
 }
 
-const { directory } = Astro.props;
+const { entries } = Astro.props;
 
 const product = productFromUrl(Astro.url);
 if (!product) {
@@ -32,9 +32,9 @@ if (!product) {
 	</a>
 
 	{
-		directory && (
+		entries.length && (
 			<ol class="text-balance">
-				{directory.entries.map((entry) => (
+				{entries.map((entry) => (
 					<DocsSidebarNavEntry {entry} />
 				))}
 			</ol>
