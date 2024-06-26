@@ -1,0 +1,29 @@
+{
+	"private": true,
+	"scripts": {
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"prettier": "^3.0.3",
+		"prettier-plugin-astro": "^0.12.0",
+		"prettier-plugin-svelte": "^3.0.3",
+		"typescript": "^5.2.2"
+	},
+	"prettier": {
+		"trailingComma": "all",
+		"useTabs": true,
+		"plugins": [
+			"prettier-plugin-astro",
+			"prettier-plugin-svelte"
+		],
+		"overrides": [
+			{
+				"files": "*.astro",
+				"options": {
+					"parser": "astro"
+				}
+			}
+		],
+		"astroAllowShorthand": true
+	}
+}

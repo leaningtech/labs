@@ -29,7 +29,9 @@ const { id, title, description, headings, fullWidthLayout } = Astro.props;
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
-const entries = product ? (findNavDirectory(nav, [product.id])?.entries ?? nav) : [];
+const entries = product
+	? findNavDirectory(nav, [product.id])?.entries ?? nav
+	: [];
 ---
 
 <Shell

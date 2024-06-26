@@ -2,6 +2,6 @@
 	"extends": "astro/tsconfigs/strictest",
 	"compilerOptions": {
 		"strictNullChecks": true,
-		"jsx": "preserve",
+		"jsx": "preserve"
 	}
 }

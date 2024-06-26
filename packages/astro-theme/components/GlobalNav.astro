@@ -31,9 +31,7 @@ const links = [
 				alt="Leaning Technologies Logo"
 				class="w-6 h-6"
 			/>
-			<span class="text-base text-stone-300">
-				Leaning Technologies
-			</span>
+			<span class="text-base text-stone-300"> Leaning Technologies</span>
 		</a>
 		<div class="px-9 hidden lg:block overflow-hidden">
 			<LatestBlogPostPill />
@@ -44,11 +42,13 @@ const links = [
 			{
 				links.map((link) => {
 					if (link === spacer) {
-						return <span />
+						return <span />;
 					} else {
-						return <a href={link.href} class="hover:text-white">
-							{link.name}
-						</a>
+						return (
+							<a href={link.href} class="hover:text-white">
+								{link.name}
+							</a>
+						);
 					}
 				})
 			}

@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Get pnpm store directory
         shell: bash
@@ -44,7 +44,7 @@ jobs:
 
       - name: Build sites/cheerpj
         run: cd sites/cheerpj && pnpm run build
-      
+
       - name: Deploy
         uses: burnett01/rsync-deployments@7.0.1
         with:
