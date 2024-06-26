@@ -80,6 +80,10 @@ export default function ThemeIntegration(): AstroIntegration {
 					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
 				});
 				params.injectRoute({
+					pattern: "docs/404",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/404.astro",
+				});
+				params.injectRoute({
 					pattern: "docs/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
 				});

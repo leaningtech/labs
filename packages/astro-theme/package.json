@@ -12,6 +12,7 @@
 		"./pages/blog/index.astro": "./pages/blog/index.astro",
 		"./pages/blog/[...slug].astro": "./pages/blog/[...slug].astro",
 		"./pages/docs/index.astro": "./pages/docs/index.astro",
+		"./pages/docs/404.astro": "./pages/docs/404.astro",
 		"./pages/docs/[...slug].astro": "./pages/docs/[...slug].astro",
 		"./layouts/Shell.astro": "./layouts/Shell.astro",
 		"./layouts/ProductHome.astro": "./layouts/ProductHome.astro",
