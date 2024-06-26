@@ -1,12 +1,12 @@
 ---
-import Hero from "@leaningtech/hero/Hero.astro";
+import Wrapper from "@leaningtech/hero/Hero.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { Image } from "astro:assets";
 import JNLPBox from "./assets/box-JNLP.png";
 import screenshots from "./assets/screenshots.png";
 ---
 
-<Hero>
+<Wrapper>
 	<div
 		class="w-full max-w-screen-xl px-4 sm:px-8 pt-8 lg:pt-16 xl:pt-32 space-y-4 md:grid grid-cols-3"
 	>
@@ -60,4 +60,4 @@ import screenshots from "./assets/screenshots.png";
 	<div class="flex justify-center items-center">
 		<Image class="scale-75" src={screenshots} alt="screenshots" />
 	</div>
-</Hero>
+</Wrapper>
