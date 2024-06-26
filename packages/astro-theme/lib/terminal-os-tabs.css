@@ -26,11 +26,11 @@
 			background: transparent;
 			cursor: pointer;
 
-			@apply text-slate-500;
+			@apply text-stone-500;
 
 			&.is-active,
 			&:hover {
-				@apply text-slate-300;
+				@apply text-stone-300;
 			}
 		}
 	}

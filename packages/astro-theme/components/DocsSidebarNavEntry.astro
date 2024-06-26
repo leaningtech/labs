@@ -9,6 +9,8 @@ export interface Props {
 const { entry, depth = 0 } = Astro.props;
 
 const pathname = Astro.url.pathname.replace(".html", "");
+
+// TODO: use Markdown for entry title - this is really slow for some reason
 ---
 
 {

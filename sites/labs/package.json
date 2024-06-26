@@ -22,6 +22,7 @@
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
 		"@leaningtech/cheerpj-jnlp-page": "workspace:^",
 		"@leaningtech/hero": "workspace:^",
+		"@astropub/md": "^0.4.0",
 		"@tailwindcss/typography": "^0.5.10",
 		"astro": "^4.5.18",
 		"astro-expressive-code": "^0.23.0",

@@ -5,7 +5,7 @@ about:
   and on our social media!
 title: Project submission
 labels: documentation
-assignees: nanaian
+assignees: bates64
 ---
 
 <!--
