@@ -12,6 +12,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
+import { squooshImageService } from "astro/config";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -136,6 +137,9 @@ export default function ThemeIntegration(
 						inlineStylesheets: "always",
 					},
 					trailingSlash: "never",
+					image: {
+						service: squooshImageService(),
+					},
 				});
 			},
 		},
