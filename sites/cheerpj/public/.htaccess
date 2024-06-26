@@ -1,5 +1,8 @@
 ErrorDocument 404 /docs/404.html
 
+# terrible hack to make /docs/ function; rewrites don't seem to work for some reason
+ErrorDocument 403 /docs/index.html
+
 DirectorySlash off
 
 RewriteCond %{REQUEST_URI} ^/docs/([^.]*)$
