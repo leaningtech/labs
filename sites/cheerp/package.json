@@ -14,7 +14,7 @@
 		"@designbycode/tailwindcss-text-shadow": "^2.0.0",
 		"@leaningtech/astro-theme": "workspace:^",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
-		"astro": "^4.5.18",
+		"astro": "^4.11.2",
 		"splitting": "^1.1.0"
 	}
 }
