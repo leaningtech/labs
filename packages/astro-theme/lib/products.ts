@@ -56,7 +56,7 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj3",
 		type: "technology",
 		name: "CheerpJ",
-		href: "https://cheerpj.com/docs",
+		href: "https://cheerpj.com",
 		logotype: cheerpjLogotype,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
