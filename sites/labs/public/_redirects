@@ -28,4 +28,11 @@
 /cheerpj3/examples/* /cheerpj3/tutorials/:splat
 /cheerpj-jnlprunner /cheerpj-jnlp-runner
 /cheerpj-jnlprunner/* /cheerpj-jnlp-runner/:splat
-/cheerp/* https://cheerp.io/:splat
+
+/cheerp/* https://cheerp.io/docs/:splat
+/cheerpj2/* /docs/cheerpj2/:splat
+/cheerpj3/* https://cheerpj.com/docs/:splat
+/cheerpx/* https://cheerpx.io/docs/:splat
+/cheerpx-for-flash/* /docs/cheerpx-for-flash/:splat
+/cheerpj-jnlp-runner/* /docs/cheerpj-jnlp-runner/:splat
+/cheerpj-applet-runner/* /docs/cheerpj-applet-runner/:splat
