@@ -29,6 +29,8 @@ theme.styleOverrides.frames = {
 	shadowColor: "transparent",
 };
 
+const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
+
 export default function ThemeIntegration(): AstroIntegration {
 	return {
 		name: "@leaningtech/astro-theme",
@@ -55,8 +57,9 @@ export default function ThemeIntegration(): AstroIntegration {
 						//intentSelector: ["a[href^='/']"],
 					}),
 					publicDir({
+						// FIXME claims directory does not exist
 						dir: "public",
-						cwd: import.meta.url,
+						cwd: dirname,
 					}),
 				];
 				for (const integration of integrations) {
