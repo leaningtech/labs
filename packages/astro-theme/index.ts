@@ -5,6 +5,7 @@ import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
 import svelte from "@astrojs/svelte";
+import prefetch from "@astrojs/prefetch";
 import astroExpressiveCode, { loadShikiTheme } from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -51,7 +52,12 @@ export default function ThemeIntegration(): AstroIntegration {
 					robotsTxt(),
 					pagefind(),
 					svelte(),
+					prefetch({
+						// Prefetch hovered internal links
+						//intentSelector: ["a[href^='/']"],
+					}),
 					publicDir({
+						// FIXME claims directory does not exist
 						dir: "public",
 						cwd: dirname,
 					}),
