@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon";
+import { getRootNav, findEntryPath } from "../lib/nav";
+
+interface Props {
+	current: string;
+}
+
+const { current } = Astro.props;
+
+const nav = await getRootNav(Astro.url);
+const path = findEntryPath(nav, current) ?? [];
+
+const currentEntry = path[path.length - 1];
+
+const crumbs = path
+	.slice(1, -1) // Don't want the current page or the product root
+	.filter((entry) => entry.href !== currentEntry!.href) // Don't show the immediate parent directory for index pages
+	.map((entry, i, all) => {
+		return {
+			title: entry.title,
+			url: entry.href,
+			isLast: i === all.length - 1,
+		};
+	});
+---
+
+<nav aria-label="Breadcrumb" class="leading-6 text-stone-400 text-sm">
+	<ol>
+		{
+			crumbs.map(({ title, url, isLast }) => (
+				<li class="inline-flex items-center">
+					<a
+						href={url}
+						class:list={["hover:text-primary-500", { "font-medium": isLast }]}
+					>
+						{title}
+					</a>
+					{!isLast && (
+						<Icon name="jam:chevron-right" class="h-5 mx-2 text-stone-700" />
+					)}
+				</li>
+			))
+		}
+	</ol>
+</nav>

@@ -1,0 +1,131 @@
+---
+title: "CheerpJ 3.0rc1 now available"
+description: |
+  The first release candidate for CheerpJ 3.0 is now available for testing and feedback. This version features a completely new architecture for CheerpJ, with a full OpenJDK runtime and a new scalable JNI architecture.
+authors:
+  - alex
+  - alessandro
+pubDate: "October 18 2023"
+heroImage: "./cheerpj-3.0rc1.png"
+tags:
+  - CheerpJ
+---
+
+import Callout from "@leaningtech/astro-theme/components/Callout.astro";
+
+<Callout title="CheerpJ 3.0 now available" variant="important">
+	CheerpJ 3.0 has been released. Read the [release
+	announcement](/blog/cheerpj-3.0) for more information.
+</Callout>
+
+CheerpJ 3.0rc1 is out today! This version features a completely new architecture for CheerpJ, with a full OpenJDK runtime and a new scalable JNI architecture.
+
+## Upgrading
+
+This is a release candidate intended for testing and feedback. You can upgrade to CheerpJ 3.0rc1 using the following script tag:
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+```
+
+This is a breaking change release, so please read the [migration guide] before upgrading. Please report any bugs or issues you encounter on [GitHub] or [Discord].
+
+[GitHub]: https://github.com/leaningtech/cheerpj-meta/issues
+[Discord]: https://discord.leaningtech.com
+[migration guide]: /cheerpj3/migrating-from-cheerpj2
+
+## What's new in CheerpJ 3.0
+
+For the past few years, we have been working tirelessly on a **completely new architecture** for CheerpJ, our solution to run Java applications, applets and libraries on modern browsers.
+
+### Completely new JIT-based architecture
+
+Taking advantage of many years of real-world use of CheerpJ 2.x by hundreds of organisations worldwide, and leveraging many lessons learned from the development of [CheerpX], our browser-based x86 virtual machine, we performed a full rewrite of CheerpJ.
+
+The key features of the new CheerpJ architecture are:
+
+- **Goodbye AOT, hello JIT compilation :** CheerpJ 3.0 features a fully transparent, multi-tier execution model, which starts with a fast interpreter for rarely used code, and combines a JIT compiler for frequently used code. With this new model no code is ever executed or generated for unused classes, improving startup performance. Because there is no AOT compiler or .jar.js files, the integration and deployment of CheerpJ 3.0 is now a matter of adding a few lines to an existing HTML page.
+- **Full Classloader support:** Thanks to the new JIT approach, which mimicks how the JVM normally operates, we can now give full control to the appropriate Classloader for class resolution, including application provided ones. This completely eliminates incompatibilities caused by duplicated classes as well.
+- **A new scalable JNI architecture:** We now compile 100% of the OpenJDK native code to WebAssembly, providing a viable path for supporting modern versions of Java and potentially specific point versions if a user requires so. This also means that CheerpJ now uses a completely unmodified version of OpenJDK, extending its level of compatibility even more.
+
+Thanks to these architectural advancements, CheerpJ 3.0 can be considered a full WebAssembly-based replacement to the JVM, with a full OpenJDK runtime.
+
+### Seamlessly call into Java with `cheerpjRunLibrary`
+
+CheerpJ 3.0 introduces a new function, [`cheerpjRunLibrary`], which allows you to call into Java code from JavaScript. This function returns a JavaScript object that can be used to call Java methods and instanciate Java objects.
+
+The new library mode makes it easier than ever to build apps like [JavaFiddle](https://javafiddle.leaningtech.com/):
+
+<iframe
+	src="https://javafiddle.leaningtech.com/N4IgLglmA2CmIC4QAlbWgewAQHcMCdoATXKACywGUcIA7AcxABoQBXAByIEMxYjEQAJgAMggMwBaAIzCJwgKwAVKQBYEqhPOEA6MVMEAtZiABmEOAGdEAbVDseZAQFkudbQCsuANy7GAxhi0vEECEAC27ARgWJ4+2lw4YNoAYoFgANwAOrThkfjRsVwAHtoWNAzaAFLJ+FxhsFk5EVEx3sWl5fRVADJcAEZojbkthSVldF2VAApctIPZw-mtPmOd2tQTAKqQ0FAQsBZDzUujHRPafQREsPjaAKIRYACeAEJXN43ZftBcFhZYLjoWFycHqQX+ACVWLRaP04FhgNksMisOxWH1dn4sBYwDwIFivBgICQwq5aAAKShgfATawAXSwXHw9AsAEoEUiUVyNgxtuY9gdtHRCQBrWC9Xj4clzHAAsnk1msxpcgC+2U5yLRGPxWEJxKw+GhCo5tC5XOmszQqKwAF4sDKsBa5tAFcqzZrSrAwG98NcpQ6Huxnj6-eSZEwsOHI8IIzJFZ9Te7Hb0BtAsGm7Q7Kim0OTMig0JgIwBhMiwG7sSoAQnzSo1ZugnrAqSC0tgspbYDzIEoNwgJnzEc72im3QAggBJAByEZUgnj9a57HiRCI5Ogddoi5R1Vq9SwJlt9vbjpqdVg3Z59CwsCKdXYcFrbvdJhXa-Ym6TB+09j8Itd27Iq+Fhet0GB+HigQQmgeJeLAigYNKrDoJ+SbAV6ABqEAWBAGIXtSrCwKhyJqrQpEgCqdIqkAA/embed?theme=dark"
+	class="border border-stone-700 rounded-md w-full h-[40rem]"
+></iframe>
+
+### Simplified Java-to-JavaScript interoperability
+
+Instead of requiring complex build steps and name mangling, [`cheerpjInit`] now supports a `natives` object which can be used to implement Java methods marked `native`, in JavaScript.
+
+```java title="TestClass.java"
+package com.example;
+
+public class TestClass {
+  public native void alert(String str);
+}
+```
+
+To provide an implementation of `alert`, simply pass it to the `cheerpjInit` function as a property of the `natives` object:
+
+```js
+await cheerpjInit({
+	natives: {
+		async Java_com_example_TestClass_alert(lib, str) {
+			window.alert(str);
+		},
+	},
+});
+```
+
+Learn more in the [documentation](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript).
+
+### Improved documentation
+
+We've completely revamped our documentation. It's now easier to navigate and find what you're looking for. We've also added a new [migration guide] to help you upgrade from CheerpJ 2.x to CheerpJ 3.0.
+
+[CheerpX]: /cheerpx
+[`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
+[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
+
+## Try CheerpJ 3.0rc1 today
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+<LinkButton
+	type="primary"
+	href="/cheerpj3/getting-started"
+	label="Get started"
+	iconRight="mi:arrow-right"
+/>
+
+<LinkButton
+	type="secondary"
+	href="/cheerpj3/migrating-from-cheerpj2"
+	label="Migration guide"
+/>
+
+Your feedback is invaluable in helping us identify and fix potential issues and
+ensure that the final release is as stable and polished as possible. Here are
+some ways to help:
+
+- Try the release candidate today.
+- Test it in your real-world scenarios.
+- Report any bugs or issues you encounter on [GitHub] or [Discord].
+- Provide feedback on new features and improvements.
+- Join the [Discord] and share what you're working on.
+
+## What's next
+
+We are planning another Release Candidate (3.0rc2) before the end of the year, with a general release scheduled for early 2024.
+
+We greatly appreciate your continued support and involvement in making CheerpJ the best it can be. Together, we can ensure a successful final release.
+
+Thank you for being a part of our community!

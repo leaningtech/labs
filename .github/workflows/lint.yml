@@ -175,7 +175,7 @@ jobs:
         run: pnpm install
 
       - name: Run Prettier
-        run: pnpm prettier --check . src/**/*.*
+        run: pnpm prettier --check .
 
   prose_vale:
     name: Prose (Vale)
