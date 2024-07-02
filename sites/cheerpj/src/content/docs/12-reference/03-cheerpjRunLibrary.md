@@ -3,7 +3,7 @@ title: cheerpjRunLibrary
 description: Load a Java Library
 ---
 
-Loads a Java library for use in JavaScript. See [library mode](/cheerpj3/guides/library-mode) for more information.
+Loads a Java library for use in JavaScript. See [library mode](/docs/guides/library-mode) for more information.
 
 ```ts
 async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
@@ -56,5 +56,5 @@ await example.hello(); // Example says hello!
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[virtual filesystem]: /cheerpj3/guides/File-System-support
-[CJ3Library]: /cheerpj3/reference/CJ3Library
+[virtual filesystem]: /docs/guides/File-System-support
+[CJ3Library]: /docs/reference/CJ3Library

@@ -93,7 +93,7 @@ Previously, CheerpJ 2 required a special Java property to be set in order for HT
 
 The `cheerpjAddStringFile` function has been renamed to `cheerpOSAddStringFile` to better reflect its behaviour and provide parity with CheerpX. The old name is still available for backwards compatibility.
 
-[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
-[`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
-[`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
-[JNI guide]: /cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
+[`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
+[JNI guide]: /docs/guides/Implementing-Java-native-methods-in-JavaScript

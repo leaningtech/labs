@@ -92,10 +92,10 @@ Please try these checks:
 
 ## Further reading
 
-- [Runtime API reference](/cheerpj3/reference)
+- [Runtime API reference](/docs/reference)
 
-[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
-[`cheerpjCreateDisplay`]: /cheerpj3/reference/cheerpjCreateDisplay
-[`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
-[`cheerpjRunMain`]: /cheerpj3/reference/cheerpjRunMain
-[virtual filesystem]: /cheerpj3/guides/File-System-support
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
+[`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
+[virtual filesystem]: /docs/guides/File-System-support

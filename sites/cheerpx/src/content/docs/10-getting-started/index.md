@@ -13,9 +13,9 @@ CheerpX's API is still in the works, so we are not tagging releases yet. All nig
 
 ## 2. Create an application instance
 
-CheerpX is exposed in a global object called `CheerpXApp`. To create an instance, call the [`create`](/cheerpx/reference/CheerpXApp-create) method.
+CheerpX is exposed in a global object called `CheerpXApp`. To create an instance, call the [`create`](/docs/reference/CheerpXApp-create) method.
 
-The example below uses [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/cheerpx/guides/custom-devices).
+The example below uses [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/docs/guides/custom-devices).
 
 ```html
 <script type="module">
@@ -53,7 +53,7 @@ During development, you don't need to set these headers if you're using `localho
 
 ## 4. Attach a console
 
-Use the [`setConsole`](/cheerpx/reference/CheerpXApp-setConsole) method to use an HTML element as a console.
+Use the [`setConsole`](/docs/reference/CheerpXApp-setConsole) method to use an HTML element as a console.
 
 ```html {1,4}
 <pre id="console"></pre>
@@ -65,7 +65,7 @@ Use the [`setConsole`](/cheerpx/reference/CheerpXApp-setConsole) method to use a
 
 ## 5. Run an executable
 
-Let's [`run`](/cheerpx/reference/CheerpXApp-run) bash!
+Let's [`run`](/docs/reference/CheerpXApp-run) bash!
 
 ```js
 await cx.run("/bin/bash", ["--login"], {

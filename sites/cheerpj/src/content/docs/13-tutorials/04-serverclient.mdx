@@ -5,9 +5,9 @@ description: Communication between two Java apps using CheerpJ and Tailscale.
 
 This tutorial will take you step by step over a networking scenario of communication between two Java applications running in the browser with CheerpJ. You will learn how to set up CheerpJ and Tailscale to run a Java Client application in the browser that requires communication via `java.netSocket` and `java.net.ServerSocket` with a Server application.
 
-If you are not familiar with how CheerpJ and Tailscale work together, we invite you to take a look at our [Networking guide]. You can download the full template of this tutorial [here](/cheerpj3/tutorials/ServerClientTutorial.zip).
+If you are not familiar with how CheerpJ and Tailscale work together, we invite you to take a look at our [Networking guide]. You can download the full template of this tutorial [here](/docs/tutorials/ServerClientTutorial.zip).
 
-<img src="/cheerpj3/assets/Tailscale_P2P.png"></img>
+<img src="/docs/assets/Tailscale_P2P.png"></img>
 
 ## Pre-requisites:
 
@@ -49,8 +49,8 @@ mkdir -p ServerClientTutorial/{Server, Client}
 ```
 
 2. Paste the application's JARs inside the corresponding folder.
-   - [Download the Server JAR](/cheerpj3/tutorials/Server.jar)
-   - [Download the Client JAR](/cheerpj3/tutorials/Client.jar)
+   - [Download the Server JAR](/docs/tutorials/Server.jar)
+   - [Download the Client JAR](/docs/tutorials/Client.jar)
 1. Create an HTML file inside each subdirectory, let's name it `client.html` and `server.html`
    Your project tree should look like this:
 
@@ -174,7 +174,7 @@ Now that you have both Client and Server applications running with CheerpJ, you 
 	<img class="w-1/2" src="/cheerpj2/assets/client-browser.png"></img>
 </div>
 
-You can download the full template of this tutorial [here](/cheerpj3/tutorials/ServerClientTutorial.zip) or visit the [GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Server-Client).
+You can download the full template of this tutorial [here](/docs/tutorials/ServerClientTutorial.zip) or visit the [GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Server-Client).
 
 ## Credits
 
@@ -183,14 +183,14 @@ The Java applications used in this networking tutorial belong to [TechVidvan]. Y
 ## Further reading
 
 - [Networking guide]
-- [Visit the reference](/cheerpj3/reference)
+- [Visit the reference](/docs/reference)
 
-[Networking guide]: /cheerpj3/guides/Networking
+[Networking guide]: /docs/guides/Networking
 [TechVidvan]: https://techvidvan.com/tutorials/
-[Run a Java app]: /cheerpj3/getting-started/Java-app
-[`cheerpjInit`]: /cheerpj3/reference/cheerpjInit
-[`cheerpjCreateDisplay`]: /cheerpj3/reference/cheerpjCreateDisplay
-[`cheerpjRunJar`]: /cheerpj3/reference/cheerpjRunJar
-[virtual filesystem]: /cheerpj3/guides/File-System-support
-[`tailscaleAuthKey`]: /cheerpj3/reference/cheerpjInit#tailscaleauthkey
-[`tailscaleIpCb`]: /cheerpj3/reference/cheerpjInit#tailscaleipcb
+[Run a Java app]: /docs/getting-started/Java-app
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
+[virtual filesystem]: /docs/guides/File-System-support
+[`tailscaleAuthKey`]: /docs/reference/cheerpjInit#tailscaleauthkey
+[`tailscaleIpCb`]: /docs/reference/cheerpjInit#tailscaleipcb

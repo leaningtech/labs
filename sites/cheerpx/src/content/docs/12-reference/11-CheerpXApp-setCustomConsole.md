@@ -63,4 +63,4 @@ This is what [WebVM](https://webvm.io) uses.
 
 ## See also
 
-- [`setConsole`](/cheerpx/reference/CheerpXApp-setConsole)
+- [`setConsole`](/docs/reference/CheerpXApp-setConsole)

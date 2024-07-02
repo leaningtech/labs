@@ -38,7 +38,7 @@ Click **Run workflow** and fill out the form:
 
 Then click the **Run workflow** button.
 
-![Screenshot of the GitHub user interface](/cheerpx/guides/create-images/run-workflow.png)
+![Screenshot of the GitHub user interface](/docs/guides/create-images/run-workflow.png)
 
 The workflow may take up to 10 minutes to complete depending on the complexity of your Dockerfile.
 
@@ -73,4 +73,4 @@ const cx = await CheerpXApp.create({
 
 Make sure to use `type: "bytes"` when hosting your own images.
 
-[`CheerpXApp.create`]: /cheerpx/reference/CheerpXApp-create
+[`CheerpXApp.create`]: /docs/reference/CheerpXApp-create

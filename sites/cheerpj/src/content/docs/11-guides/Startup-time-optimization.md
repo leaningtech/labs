@@ -33,7 +33,7 @@ If the output is not visible fully, you can use:
 document.write(cjGetRuntimeResources());
 ```
 
-The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/cheerpj3/reference/cjGetRuntimeResources) for more information.
+The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/docs/reference/cjGetRuntimeResources) for more information.
 
 2. Modify the CheerpJ integration to enable preloading. You will only need to change the `cheerpjInit` call, to pass the `preloadResources` option. For example:
 
@@ -44,6 +44,6 @@ cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.j
 > [!note] Important
 > Please note that this has to be done in two steps, so the resources are loaded in a separate session from the full workflow.
 
-See [here](/cheerpj3/reference/cheerpjInit#preloadresources) for more information.
+See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
 
 When preloading is enabled CheerpJ will be able to download multiple resources in parallel with the execution of the program. This will greatly improve loading time.

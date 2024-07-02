@@ -3,12 +3,12 @@ title: CJ3Library
 description: A library mode session
 ---
 
-This class represents a [library mode](/cheerpj3/guides/library-mode) session. It can be used to access the classes and methods of the loaded library.
+This class represents a [library mode](/docs/guides/library-mode) session. It can be used to access the classes and methods of the loaded library.
 
 You can get a CJ3Library instance by:
 
 - Calling [`cheerpjRunLibrary`] to load a library from a JAR.
-- Implementing a [native method](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript) - the first parameter is a CJ3Library instance.
+- Implementing a [native method](/docs/guides/Implementing-Java-native-methods-in-JavaScript) - the first parameter is a CJ3Library instance.
 
 ## Usage
 
@@ -47,4 +47,4 @@ class CJ3Library {
 
 Returns a `DataView` of the library's raw JNI memory.
 
-[`cheerpjRunLibrary`]: /cheerpj3/reference/cheerpjRunLibrary
+[`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary

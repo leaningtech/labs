@@ -246,7 +246,7 @@ cheerpjInit({
 });
 ```
 
-Read more about implementing native methods [here](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript).
+Read more about implementing native methods [here](/docs/guides/Implementing-Java-native-methods-in-JavaScript).
 
 ### `overrideDocumentBase`
 
@@ -365,7 +365,7 @@ cheerpjInit({
 licenseKey?: string;
 ```
 
-This option expects a license key. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used. Please visit our [licensing guide](/cheerpj3/licensing) for more information.
+This option expects a license key. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used. Please visit our [licensing guide](/docs/licensing) for more information.
 
 Example of usage:
 
@@ -373,8 +373,8 @@ Example of usage:
 cheerpjInit({ licenseKey: "YourLicenseKey" });
 ```
 
-[cjGetRuntimeResources]: /cheerpj3/reference/cjGetRuntimeResources
+[cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[`java`]: /cheerpj3/reference/cheerpjInit#java-mode
-[`system`]: /cheerpj3/reference/cheerpjInit#system-mode
-[`permission`]: /cheerpj3/reference/cheerpjInit#permission-mode
+[`java`]: /docs/reference/cheerpjInit#java-mode
+[`system`]: /docs/reference/cheerpjInit#system-mode
+[`permission`]: /docs/reference/cheerpjInit#permission-mode

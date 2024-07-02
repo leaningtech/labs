@@ -20,7 +20,7 @@ CheerpJ supports wider networking scenarios via Tailscale, which is a VPN techno
 
 [Tailscale](https://tailscale.com/) is based on the [WireGuard](https://www.wireguard.com/) protocol. It includes a control plane that manages the WireGuard keys of all the machines in the network and takes care of authenticating users. Using this service provides more control over the network, user connections, authentication, security etc.
 
-![CheerpJ 3.0 general networking](/cheerpj3/assets/general_networking.png)
+![CheerpJ 3.0 general networking](/docs/assets/general_networking.png)
 
 ### Why Tailscale?
 
@@ -54,7 +54,7 @@ cheerpjInit({
 
 What is happening here?
 
-- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/cheerpj3/guides/Networking#self-hosting-headscale).
+- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
 - `tailscaleAuthKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
 
 Example to prompt the user for manual login on a different tab:
@@ -83,7 +83,7 @@ What is happening here?
 > [!info] Info
 > `tailscaleLoginUrlCb` and `tailscaleAuthKey` are mutually exclusive.
 
-To learn more about CheerpJ's Tailscale APIs please visit [the reference](/cheerpj3/reference/cheerpjInit#tailscalecontrolurl).
+To learn more about CheerpJ's Tailscale APIs please visit [the reference](/docs/reference/cheerpjInit#tailscalecontrolurl).
 
 ### Self-hosting Headscale
 

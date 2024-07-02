@@ -13,7 +13,7 @@ CheerpJ runs in any modern browser using standard Web technologies, particularly
 
 CheerpJ is very simple to use as it exposes an API for executing standalone Java applications, applets, Java Web Starts, and Java libraries - entirely in the browser. One of the strengths of CheerpJ is that it works directly with Java byte code/JARs, meaning no need to modify or have access to the application's source code.
 
-CheerpJ assets are static, which makes it easily self-hostable, and we provide a cloud version under the [CheerpJ Community Licence](/cheerpj3/licensing) (free to use for personal projects and technical evaluations).
+CheerpJ assets are static, which makes it easily self-hostable, and we provide a cloud version under the [CheerpJ Community Licence](/docs/licensing) (free to use for personal projects and technical evaluations).
 
 ## CheerpJ components
 
@@ -24,7 +24,7 @@ CheerpJ is made of the following building blocks:
 - A virtualized file system
 - A module for networking support
 
-![CheerpJ 3.0 architecture diagram](/cheerpj3/assets/cheerpj-3-arch.png)
+![CheerpJ 3.0 architecture diagram](/docs/assets/cheerpj-3-arch.png)
 
 ### The CheerpJ Java Runtime Environment
 
@@ -37,9 +37,9 @@ The most important component of the CheerpJ Java runtime environment is its JVM 
 
 The interpreter does not only deal with initialization and rarely-used code, but also gathers necessary information for JIT-ting. The generated code is very efficient, and the internal optimizer can, among other things, inline and devirtualize calls, which is extremely important for a language such as Java.
 
-![CheerpJ 3.0 JRE diagram](/cheerpj3/assets/JRE.png)
+![CheerpJ 3.0 JRE diagram](/docs/assets/JRE.png)
 
-Alongside being able to run Java applications in the browser, CheerpJ runtime also provides advanced, bidirectional Java-JavaScript interoperability. Meaning you can access DOM from Java by [implementing `native` methods directly in JavaScript](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript). You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API](/cheerpj3/reference/cheerpjRunLibrary).
+Alongside being able to run Java applications in the browser, CheerpJ runtime also provides advanced, bidirectional Java-JavaScript interoperability. Meaning you can access DOM from Java by [implementing `native` methods directly in JavaScript](/docs/guides/Implementing-Java-native-methods-in-JavaScript). You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API](/docs/reference/cheerpjRunLibrary).
 
 ### The virtualized window manager
 
@@ -55,7 +55,7 @@ CheepJ provides multiple filesystem backends to accommodate different applicat
 
 <LinkButton
 	type="secondary"
-	href="/cheerpj3/guides/File-System-support"
+	href="/docs/guides/File-System-support"
 	iconRight="ep:arrow-right-bold"
 	label="File System guide"
 />
@@ -63,16 +63,16 @@ CheepJ provides multiple filesystem backends to accommodate different applicat
 ### Networking support
 
 For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided *exit node*.
-![CheerpJ 3.0 general networking](/cheerpj3/assets/general_networking.png)
+![CheerpJ 3.0 general networking](/docs/assets/general_networking.png)
 
 <LinkButton
 	type="secondary"
-	href="/cheerpj3/guides/Networking"
+	href="/docs/guides/Networking"
 	iconRight="ep:arrow-right-bold"
 	label="Networking guide"
 />
 
 [cheerp]: /cheerp
-[files and filesystems guide]: /cheerpj3/guides/File-System-support
-[Networking guide]: /cheerpj3/guides/Networking
-[licensing]: /cheerpj3/licensing
+[files and filesystems guide]: /docs/guides/File-System-support
+[Networking guide]: /docs/guides/Networking
+[licensing]: /docs/licensing

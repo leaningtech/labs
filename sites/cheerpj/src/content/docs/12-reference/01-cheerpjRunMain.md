@@ -35,4 +35,4 @@ console.log(`Program exited with code ${exitCode}`);
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [exit code]: https://en.wikipedia.org/wiki/Exit_status#Java
-[virtual filesystem]: /cheerpj3/guides/File-System-support
+[virtual filesystem]: /docs/guides/File-System-support

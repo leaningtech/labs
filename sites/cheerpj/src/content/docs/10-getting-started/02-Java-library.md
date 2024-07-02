@@ -31,4 +31,4 @@ await obj.myMethod();
 
 ## Further reading
 
-- [`cheerpjRunLibrary` reference](/cheerpj3/reference/cheerpjRunLibrary)
+- [`cheerpjRunLibrary` reference](/docs/reference/cheerpjRunLibrary)

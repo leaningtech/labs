@@ -22,4 +22,4 @@ class CheerpXApp {
 
 ## See also
 
-If you'd prefer to capture output yourself, use [`setCustomConsole`](/cheerpx/reference/CheerpXApp-setCustomConsole).
+If you'd prefer to capture output yourself, use [`setCustomConsole`](/docs/reference/CheerpXApp-setCustomConsole).

@@ -5,7 +5,7 @@ description: List resources that were loaded
 
 Returns a JavaScript string representing the data that should be passed to [preloadResources]. Once parsed, it is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
 
-See [startup time optimization](/cheerpj3/guides/Startup-time-optimization) for more information.
+See [startup time optimization](/docs/guides/Startup-time-optimization) for more information.
 
 ```ts
 function cjGetRuntimeResources(): string;
@@ -38,5 +38,5 @@ The output would look like this:
 '{"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]}';
 ```
 
-[preloadResources]: /cheerpj3/reference/cheerpjInit#preloadresources
+[preloadResources]: /docs/reference/cheerpjInit#preloadresources
 [JSON.parse]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
