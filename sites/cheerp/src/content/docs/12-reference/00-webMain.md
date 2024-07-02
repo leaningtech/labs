@@ -18,7 +18,7 @@ void webMain()
 `webMain` is `void` and takes no arguments because there is no shell environment for Cheerp to take command-line arguments from or pass an exit code to.
 
 > [!tip] Command-line arguments
-> If your program absolutely needs to have command-line arguments passed in the standard way (through `argc` and `argv` parameters to `main`), you should use `main` instead of `webMain` and [pass args](/cheerp/reference/args).
+> If your program absolutely needs to have command-line arguments passed in the standard way (through `argc` and `argv` parameters to `main`), you should use `main` instead of `webMain` and [pass args](/docs/reference/args).
 
 ## In Cheerp, global objects outlive the entry point
 

@@ -4,7 +4,7 @@ description: "`client.h`"
 # TODO: terrible page because we are explaining both client.h and clientlib.h
 ---
 
-You can use browser APIs in [genericjs code](/cheerp/reference/sections/genericjs) via the `client` namespace.
+You can use browser APIs in [genericjs code](/docs/reference/sections/genericjs) via the `client` namespace.
 
 ## `cheerp/clientlib.h`
 
@@ -53,8 +53,8 @@ Promise<Object*>* wrapper() {
 
 ### Complex types
 
-`client.h` also provides complex types like [`_Any`, `_Union`, and `_Function`](/cheerp/reference/browser-apis/complex-types).
+`client.h` also provides complex types like [`_Any`, `_Union`, and `_Function`](/docs/reference/browser-apis/complex-types).
 
 ## OpenGL ES
 
-OpenGL ES is also supported with [a different header](/cheerp/reference/browser-apis/gles).
+OpenGL ES is also supported with [a different header](/docs/reference/browser-apis/gles).

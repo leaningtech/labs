@@ -66,7 +66,7 @@ Returns an untyped ArrayBufferView of the underlying memory of the `ptr` pointer
 
 # From Typed Array to C++ data
 
-Although Cheerp does not provide an explicit API to achieve this you can directly use an [intrinsic](/cheerp/reference/intrinsics). For example:
+Although Cheerp does not provide an explicit API to achieve this you can directly use an [intrinsic](/docs/reference/intrinsics). For example:
 
 ```cpp
 // Offset might be 0, you can use it create a pointer to a specific element of the typed array

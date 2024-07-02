@@ -12,10 +12,10 @@ To place functions in the wasm section, you can:
 
 ## Restrictions
 
-[The wasm memory model](/cheerp/reference/sections/wasm/memory-model) has some restrictions.
+[The wasm memory model](/docs/reference/sections/wasm/memory-model) has some restrictions.
 
 ### No handling of foreign JavaScript objects or functions
 
 In wasm, you cannot pass objects to code that is not been compiled by us. This includes other JavaScript libraries, the DOM, or browser resources. That is, you cannot call functions or create objects in the `client` namespace from wasm code.
 
-To overcome these restrictions, use [genericjs](/cheerp/reference/sections/genericjs) or [CHEERP_SAFE_INLINE](/cheerp/reference/interop/safe-inline).
+To overcome these restrictions, use [genericjs](/docs/reference/sections/genericjs) or [CHEERP_SAFE_INLINE](/docs/reference/interop/safe-inline).

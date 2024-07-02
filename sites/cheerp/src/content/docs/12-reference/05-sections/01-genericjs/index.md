@@ -12,7 +12,7 @@ To place functions in the genericjs section, you can:
 
 ## Restrictions
 
-In genericjs, there are some restrictions due to [the memory model](/cheerp/reference/sections/genericjs/memory-model).
+In genericjs, there are some restrictions due to [the memory model](/docs/reference/sections/genericjs/memory-model).
 
 ### No type punning
 

@@ -37,13 +37,13 @@ $ yay -S cheerp-git
 
 #### Build from source
 
-Users on other Linux distributions must [build Cheerp from source](/cheerp/building-from-source/linux).
+Users on other Linux distributions must [build Cheerp from source](/docs/building-from-source/linux).
 
 ### Installing Cheerp on Windows
 
 Download the latest graphical installer from [GitHub](https://github.com/leaningtech/cheerp-meta/releases) and follow the installation wizard. The default installation path is currently the only supported one.
 
-You can also [build Cheerp from source](/cheerp/building-from-source/windows) if you prefer.
+You can also [build Cheerp from source](/docs/building-from-source/windows) if you prefer.
 
 If you are using WSL, follow the [instructions for Linux](#installing-cheerp-on-linux).
 

@@ -53,7 +53,7 @@ You now need to start a local HTTP server in the directory containing pong.html,
 
 Visit your page, for example “http://127.0.0.1:8081” with any browser, and you should see something like this:
 
-![](/cheerp/tutorials/tutorial_1/pong1/pong1.png)
+![](/docs/tutorials/tutorial_1/pong1/pong1.png)
 
 Great! We can now move on to build an Hello World that writes on the Canvas.
 
@@ -108,7 +108,7 @@ We have created a new `Graphics` class and tagged it using the `[[cheerp::generi
 
 Compile this new code like we did before and refresh the browser tab, you should now see something like this:
 
-![](/cheerp/tutorials/tutorial_1/pong2/pong2.png)
+![](/docs/tutorials/tutorial_1/pong2/pong2.png)
 
 Great stuff.
 
@@ -205,7 +205,7 @@ We then need to call the handler one first time in `Graphics::initializeCanvas`:
 
 Let's recompile, and the result should look like this:
 
-![](/cheerp/tutorials/tutorial_1/pong3/pong3.png)
+![](/docs/tutorials/tutorial_1/pong3/pong3.png)
 
 Looking good.
 
@@ -249,7 +249,7 @@ Let's also register an `EventListener` in `Graphics::initializeCanvas`.
 
 You should now be able to move the paddle around like this:
 
-![](/cheerp/tutorials/tutorial_1/pong4/pong4.gif)
+![](/docs/tutorials/tutorial_1/pong4/pong4.gif)
 
 # Final steps
 
@@ -344,4 +344,4 @@ void mainLoop()
 
 And that should be it! The game should look like this:
 
-![](/cheerp/tutorials/tutorial_1/pong5/pong5.gif)
+![](/docs/tutorials/tutorial_1/pong5/pong5.gif)

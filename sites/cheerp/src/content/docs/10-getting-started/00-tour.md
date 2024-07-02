@@ -24,9 +24,9 @@ Cheerp is perfect for:
 
 Cheerp can compile parts of your code into JavaScript, and other parts into WebAssembly. This is helpful because they have different memory models, and therefore they have different limitations.
 
-By default, Cheerp code compiles to WebAssembly. This default can be changed with [the `-target` command-line option](/cheerp/reference/command-line-options/targets).
+By default, Cheerp code compiles to WebAssembly. This default can be changed with [the `-target` command-line option](/docs/reference/command-line-options/targets).
 
-To compile a class or function to JavaScript, attach [the `[[cheerp::genericjs]]` attribute](/cheerp/reference/attributes/genericjs). This will compile it to JavaScript and place it in the genericjs section.
+To compile a class or function to JavaScript, attach [the `[[cheerp::genericjs]]` attribute](/docs/reference/attributes/genericjs). This will compile it to JavaScript and place it in the genericjs section.
 
 ```cpp
 #include <cheerp/client.h>
@@ -59,7 +59,7 @@ Calling `client` functions is **zero-overhead** and have the same semantics as t
 
 ### Expose C++ classes and methods to JavaScript
 
-You can export classes and functions by marking them with [the `[[cheerp::jsexport]]` attribute](/cheerp/reference/attributes/jsexport).
+You can export classes and functions by marking them with [the `[[cheerp::jsexport]]` attribute](/docs/reference/attributes/jsexport).
 
 ```cpp title=factorial.cpp
 #include <cheerp/clientlib.h>
@@ -82,7 +82,7 @@ This will add a function `factorial` to JavaScript's global object.
 </script>
 ```
 
-You can also combine this feature with [JavaScript Modules](/cheerp/reference/command-line-options/modules):
+You can also combine this feature with [JavaScript Modules](/docs/reference/command-line-options/modules):
 
 ```javascript title=main.js
 import init from "./factorial.js";
@@ -93,7 +93,7 @@ console.log(factorial(5)); // 120
 
 ### Inline JavaScript code in C++
 
-In genericjs, you can use [the `__asm__` keyword](/cheerp/reference/interop/asm) to write native (JavaScript) code, and pass arguments and get values back as usual.
+In genericjs, you can use [the `__asm__` keyword](/docs/reference/interop/asm) to write native (JavaScript) code, and pass arguments and get values back as usual.
 
 ```cpp
 __asm__("alert('Hello, world!')");

@@ -7,5 +7,5 @@ Cheerp can compile to 2 different languages at once: WebAssembly and JavaScript.
 
 There are two sections:
 
-- [wasm](/cheerp/reference/sections/wasm) (WebAssembly)
-- [genericjs](/cheerp/reference/sections/genericjs) (JavaScript)
+- [wasm](/docs/reference/sections/wasm) (WebAssembly)
+- [genericjs](/docs/reference/sections/genericjs) (JavaScript)

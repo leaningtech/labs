@@ -7,7 +7,7 @@ From WebAssembly it is not possible to call any browser APIs - not even the basi
 
 Instead, you can mark functions, classes, and structs with the `[[cheerp::genericjs]]` attribute to have them be compiled into JavaScript. You can call browser APIs in genericjs functions.
 
-Specifically, functions marked with `[[cheerp::genericjs]]` will be placed in the [genericjs section](/cheerp/reference/sections/genericjs).
+Specifically, functions marked with `[[cheerp::genericjs]]` will be placed in the [genericjs section](/docs/reference/sections/genericjs).
 
 ## Example
 

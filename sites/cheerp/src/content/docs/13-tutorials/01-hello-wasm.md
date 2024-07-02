@@ -12,7 +12,7 @@ I picked a computational heavy task: "Counting how many primes are smaller than 
 
 ## Native compiling
 
-First, save [segmented_sieve.cpp](/cheerp/tutorials/hello_wasm/segmented_sieve.cpp) on your computer and try to compile it natively:
+First, save [segmented_sieve.cpp](/docs/tutorials/hello_wasm/segmented_sieve.cpp) on your computer and try to compile it natively:
 
 ```shell
 g++ segmented_sieve.cpp -o segmented_sieve -O3
@@ -85,7 +85,7 @@ Want to see it inside a browser?
 </html>
 ```
 
-Save this [html file](/cheerp/tutorials/hello_wasm/segmented_sieve.html) in the same folder as `segmented_sieve.js`, and open it in your browser of choice and check the console log.
+Save this [html file](/docs/tutorials/hello_wasm/segmented_sieve.html) in the same folder as `segmented_sieve.js`, and open it in your browser of choice and check the console log.
 
 ## Enter WebAssembly / Wasm
 

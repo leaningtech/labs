@@ -24,7 +24,7 @@ We can compile this with Cheerp by running the following command:
 $ /opt/cheerp/bin/clang++ hello.cpp -o hello.js
 ```
 
-(If this command fails and outputs "file or command not found", you need to [install Cheerp](/cheerp/getting-started/installation).)
+(If this command fails and outputs "file or command not found", you need to [install Cheerp](/docs/getting-started/installation).)
 
 This will produce `hello.js` and `hello.wasm` files. The JavaScript file will fetch and execute the WebAssembly file.
 
@@ -81,13 +81,13 @@ To optimise the output, pass a standard optimisation flag like `-O3`. Cheerp doe
 
 ### JavaScript Modules
 
-To output [JavaScript modules][module], use [`-cheerp-make-module=es6`](/cheerp/reference/command-line-options/modules):
+To output [JavaScript modules][module], use [`-cheerp-make-module=es6`](/docs/reference/command-line-options/modules):
 
 ```shell "-cheerp-make-module=es6"
 $ /opt/cheerp/bin/clang++ hello.cpp -o hello.js -cheerp-make-module=es6
 ```
 
-The default export of the module is a function which returns a [Promise][promise]. The promise resolves when the WebAssembly module has been loaded and its [main function](/cheerp/reference/webMain) has been executed.
+The default export of the module is a function which returns a [Promise][promise]. The promise resolves when the WebAssembly module has been loaded and its [main function](/docs/reference/webMain) has been executed.
 
 You can import it from another module like this:
 
@@ -101,7 +101,7 @@ You can import it from another module like this:
 
 ### Other options
 
-[Find out more about the available command-line options](/cheerp/reference/command-line-options).
+[Find out more about the available command-line options](/docs/reference/command-line-options).
 
 ## Other examples
 
