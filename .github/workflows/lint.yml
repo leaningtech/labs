@@ -46,20 +46,49 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build site
-        run: pnpm build
-
-      - name: Serve site in background
+      - name: Build sites
+        run: pnpm -r build
+      
+      # Serve all the sites on different ports.
+      # Make sure to keep the port numbers in sync with the remap field in lychee.toml
+      - name: Serve labs
         uses: JarvusInnovations/background-action@v1
         with:
-          run: pnpm preview --host 0.0.0.0
+          run: cd sites/labs && pnpm preview --host 0.0.0.0 --port 4321
           wait-on: http://127.0.0.1:4321
+      - name: Serve cheerp
+        uses: JarvusInnovations/background-action@v1
+        with:
+          run: cd sites/cheerp && pnpm preview --host 0.0.0.0 --port 4322
+          wait-on: http://127.0.0.1:4322
+      - name: Serve cheerpj
+        uses: JarvusInnovations/background-action@v1
+        with:
+          run: cd sites/cheerpj && pnpm preview --host 0.0.0.0 --port 4323
+          wait-on: http://127.0.0.1:4323
+      - name: Serve cheerpx
+        uses: JarvusInnovations/background-action@v1
+        with:
+          run: cd sites/cheerpx && pnpm preview --host 0.0.0.0 --port 4324
+          wait-on: http://127.0.0.1:4324
 
       - name: Install lychee
         run: curl -L https://github.com/lycheeverse/lychee/releases/download/v0.13.0/lychee-v0.13.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz
 
-      - name: Run lychee on sitemap
-        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:4321/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress
+      - name: Run lychee on labs
+        run: cat sites/labs/dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:4321/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress --base "http://127.0.0.1:4321"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Run lychee on cheerp
+        run: cat sites/cheerp/dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/cheerp.io/127.0.0.1:4322/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress --base "http://127.0.0.1:4322"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Run lychee on cheerpj
+        run: cat sites/cheerpj/dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/cheerpj.com/127.0.0.1:4323/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress --base "http://127.0.0.1:4323"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Run lychee on cheerpx
+        run: cat sites/cheerpx/dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/cheerpx.io/127.0.0.1:4324/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress --base "http://127.0.0.1:4324"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
@@ -97,48 +126,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run astro check
-        run: pnpm astro check
-
-  typescript:
-    name: TypeScript
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Generate Astro type declarations
-        run: pnpm astro sync
+        run: pnpm -r astro sync
 
-      - name: Run tsc
-        run: pnpm tsc
+      - name: Run astro check
+        run: pnpm -r astro check
 
   prettier:
     name: Prettier

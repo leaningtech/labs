@@ -1,9 +1,10 @@
-# To test, concurrently
-#   pnpm build && pnpm preview --host 0.0.0.0
-#	  lychee dist src/content
-
-base = "http://127.0.0.1:4321"
-remap = [ "https://labs.leaningtech.com http://127.0.0.1:4321" ]
+remap = [
+	# keep this in sync with lint.yml
+	"https://labs.leaningtech.com http://127.0.0.1:4321",
+	"https://cheerp.io http://127.0.0.1:4322",
+	"https://cheerpj.com http://127.0.0.1:4323",
+	"https://cheerpx.io http://127.0.0.1:4324"
+]
 
 scheme = [ "http", "https" ]
 
