@@ -48,7 +48,7 @@ jobs:
 
       - name: Build sites
         run: pnpm -r build
-      
+
       # Serve all the sites on different ports.
       # Make sure to keep the port numbers in sync with the remap field in lychee.toml
       - name: Serve labs
