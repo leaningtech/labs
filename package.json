@@ -25,5 +25,10 @@
 			}
 		],
 		"astroAllowShorthand": true
+	},
+	"dependencies": {
+		"astro-og-canvas": "^0.5.3",
+		"canvaskit-wasm": "^0.39.1",
+		"i": "^0.3.7"
 	}
 }
