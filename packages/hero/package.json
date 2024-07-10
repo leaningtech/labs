@@ -1,0 +1,14 @@
+{
+	"name": "@leaningtech/hero",
+	"private": true,
+	"version": "0.1.0",
+	"exports": {
+		"./Hero.astro": "./Hero.astro"
+	},
+	"peerDependencies": {
+		"astro": "*",
+		"astro-icon": "*"
+	},
+	"author": "Leaning Technologies",
+	"license": "Apache-2.0"
+}
