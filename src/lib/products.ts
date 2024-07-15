@@ -10,8 +10,8 @@ import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.sv
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
-import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
 import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
+import appletrunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-appletrunner-large.png";
 
 export interface ProductData {
 	id: Product;
@@ -108,8 +108,8 @@ export const products: { [product in Product]: ProductData } = {
 		id: "cheerpj-applet-runner",
 		type: "extension",
 		name: "CheerpJ Applet Runner",
-		href: "/cheerpj3/getting-started/Java-applet#running-a-public-applet",
-		logotype: appletrunnerLogotype,
+		href: "/cheerpj-applet-runner",
+		logotype: appletrunnerLogotypeLarge,
 		favicon: "/cheerpj2/favicon.ico",
 		subtitle: "Run Java Applets in the modern browser",
 		description: "Run Java Applets in modern browsers without plugins",

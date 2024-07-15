@@ -1,0 +1,107 @@
+---
+title: CheerpJ Applet Runner
+description: Run Java Applets in modern browser without plugins
+fullWidthLayout: true
+---
+
+import { DISCORD_URL } from "@/consts";
+import LinkButton from "@/components/LinkButton.astro";
+import Hero_Applet from "@/components/applet-page/Hero-Applet.astro";
+import sparkleIcon from "@/components/applet-page/assets/sparkle.png";
+import networkIcon from "@/components/applet-page/assets/network.png";
+import lockIcon from "@/components/applet-page/assets/lock.png";
+import browserIcon from "@/components/applet-page/assets/browser.png";
+import layersIcon from "@/components/applet-page/assets/layers.png";
+import rocketIcon from "@/components/applet-page/assets/rocket.png";
+import Card from "@/components/feature-cards/Card.astro";
+
+<Hero_Applet />
+
+<section class="w-full max-w-prose mx-auto text-lg leading-normal px-2 py-16 text-pretty">
+	<h2 class="text-3xl font-semibold text-primary-500 mb-4">
+		What is CheerpJ Applet Runner?
+	</h2>
+	<p>
+		The CheerpJ Applet Runner, available as a browser extension for Chrome and
+		Edge, empowers users to seamlessly run Java applets within modern web
+		browsers without requiring a local Java installation. Leveraging the
+		innovative CheerpJ technology, this extension facilitates the revival of
+		legacy Java applets, ensuring their functionality in a contemporary browsing
+		environment without the need for traditional Java plugins.
+	</p>
+</section>
+
+<section
+	class="w-full max-w-screen-2xl mx-auto px-4 sm:px-8 space-y-4 flex flex-wrap items-center justify-center p-10"
+	id="features"
+>
+	<Card
+		title="Applets without Java Desktop"
+		iconSrc={sparkleIcon}
+		iconAlt="Sparkles doodle"
+		description="Run Java Applets without a local Java installation, all within your browser."
+	/>
+	<Card
+		title="Easy to Use"
+		iconSrc={rocketIcon}
+		iconAlt="Rocket doodle"
+		description="CheerpJ Applet Runner offers a straightforward, one-click solution for both end-users and organizations, simplifying the use of legacy Java applications with minimal setup."
+	/>
+
+    <Card
+    	title="Runs on Modern Browsers"
+    	iconSrc={lockIcon}
+    	iconAlt="Lock doodle"
+    	description="Compatible with Chrome and Edge, runs securely within the browser sandbox."
+    />
+
+    <Card
+    	title="Battle Tested"
+    	iconSrc={layersIcon}
+    	iconAlt="Layers doodle"
+    	description="Based on CheerpJ, a JVM replacement in WebAssembly and JavaScript, tested on thousands of Java applications, and trusted by many of the world largest private and public sector organizations."
+    />
+    <Card
+    	title="Cost Effective"
+    	iconSrc={browserIcon}
+    	iconAlt="Bill doodle"
+    	description="CheerpJ Applet Runner is free for personal, non-business use and remains economical for business applications, simplifying the maintenance of legacy Java applications without costly migrations."
+    />
+    <Card
+    	title="Extensive Compatibility"
+    	iconSrc={networkIcon}
+    	iconAlt="Globe doodle representing network"
+    	description="CheerpJ supports most Java 8 features, including networking, file systems, clipboard access, and Swing/AWT, ensuring broad compatibility for various Java applications."
+    />
+
+</section>
+<section class="px-4 sm:px-8 py-16 space-y-4 m-auto mb-10 flex col-span-1 items-center justify-center rounded-lg">
+	<div>
+		<h3 class="font-semibold sm:text-3xl md:text-4xl">Community</h3>
+		<p class="pt-4 text-stone-400 leading-7">
+			We have an amazing community of developers and users. <br />
+			Join us today to stay up to date with the latest news, to share your experience
+			with our technologies or to report any bugs.
+		</p>
+		<div class="mt-4 flex flex-wrap gap-4 pt-5">
+			<LinkButton
+				href="https://github.com/leaningtech/cheerpj-applet-runner"
+				label="Report a bug"
+				type="primary"
+				iconRight="mdi:github"
+			/>
+			<LinkButton
+				href={DISCORD_URL}
+				label="Join the community"
+				type="discord"
+				iconRight="ic:baseline-discord"
+			/>
+			<LinkButton
+				href="/cheerpj-applet-runner/getting-started"
+				label="Documentation"
+				type="secondary"
+				iconRight="iconoir:google-docs"
+			/>
+		</div>
+	</div>
+</section>
