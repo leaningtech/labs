@@ -63,6 +63,8 @@ Proposals follow a [process](https://github.com/WebAssembly/meetings/blob/main/p
 
 ## The journey
 
+![The Journey](./cg-phases.png)
+
 ### How do we hint?
 
 A (surprisingly) controversial detail was how to encode the hints:
