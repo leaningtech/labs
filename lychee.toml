@@ -38,3 +38,5 @@ exclude = [
 	'https://stackoverflow.com/questions/ask.*', # 403
 	'.*\.ext2'	
 ]
+
+max_concurrency = 14
