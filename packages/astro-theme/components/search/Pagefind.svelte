@@ -31,6 +31,7 @@
 
 		const response = await pagefind.debouncedSearch(query, {
 			filters: { productId },
+			baseUrl: import.meta.env.BASE_URL,
 		});
 		if (response === null) {
 			// Debounce.
