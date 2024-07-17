@@ -24,7 +24,13 @@ In this article I will explain the purpose of the proposal, and the journey that
 
 It all started from a very practical problem: improving the performance of an application. The application is CheerpX, an X86 virtual machine running in the browser.
 
-What's special about CheerpX is that it Just-in-time (JIT) compiles X86 linux applications into Wasm (See [this talk](https://youtu.be/7JUs4c99-mo?si=2zZSBuqbpQB50c-o) for a more in-depth explanation of the architecture). As most JIT compilers do, CheerpX makes some assumptions to produce better code, and needs to check that they hold before proceeding. The code that is generated has many instances of the following pattern:
+What's special about CheerpX is that it Just-in-time (JIT) compiles X86 linux applications into Wasm.
+
+The internals of CheerpX are not immediately important for the topic at hand, but quite interesting. If you are curious, consider watching the video below for more details. (The first few minutes of audio were unfortunately lost).
+
+<iframe class="t u v jz aj" title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F7JUs4c99-mo%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7JUs4c99-mo&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F7JUs4c99-mo%2Fhqdefault.jpg&amp;key=a19fcc184b9711e1b4764040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube" width="100%" class="aspect-video" frameborder="0" scrolling="auto" allowfullscreen="allowfullscreen" data-mce-fragment="1" style="aspect-ratio: 16/9;"></iframe>
+
+As most JIT compilers do, CheerpX makes some assumptions to produce better code, and needs to check that they hold before proceeding. The code that is generated has many instances of the following pattern:
 
 ```cpp
 while(...) {
