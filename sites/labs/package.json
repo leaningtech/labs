@@ -21,6 +21,7 @@
 		"@astropub/md": "^0.4.0",
 		"@leaningtech/astro-theme": "workspace:^",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
+		"@leaningtech/cheerpj-applet-page": "workspace:^",
 		"@leaningtech/cheerpj-jnlp-page": "workspace:^",
 		"@leaningtech/hero": "workspace:^",
 		"astro": "^4.5.18",

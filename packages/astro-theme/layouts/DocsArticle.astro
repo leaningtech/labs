@@ -116,7 +116,7 @@ const entries = product
 							editHref={`https://github.com/leaningtech/labs/edit/main/src/content/docs/${id}`}
 						/>*/}
 						<div class="py-5">
-							{entries.length && id && <DocsPagination activeId={id} />}
+							{entries.length > 0 && id && <DocsPagination activeId={id} />}
 						</div>
 					</div>
 				</div>

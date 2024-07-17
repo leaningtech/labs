@@ -32,7 +32,7 @@ const { product, entries } = Astro.props;
 	}
 
 	{
-		entries.length && (
+		entries.length > 0 && (
 			<ol class="text-balance">
 				{entries.map((entry) => (
 					<DocsSidebarNavEntry {entry} />

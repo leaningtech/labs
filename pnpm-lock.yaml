@@ -103,6 +103,18 @@ importers:
         specifier: ^0.162.0
         version: 0.162.0
 
+  packages/cheerpj-applet-page:
+    dependencies:
+      '@leaningtech/astro-theme':
+        specifier: workspace:^
+        version: link:../astro-theme
+      '@leaningtech/hero':
+        specifier: workspace:^
+        version: link:../hero
+      astro:
+        specifier: '*'
+        version: 4.9.3(typescript@5.4.5)
+
   packages/cheerpj-jnlp-page:
     dependencies:
       '@leaningtech/astro-theme':
@@ -240,6 +252,9 @@ importers:
       '@leaningtech/cheerp-ts-three-demo':
         specifier: workspace:^
         version: link:../../packages/cheerp-ts-three-demo
+      '@leaningtech/cheerpj-applet-page':
+        specifier: workspace:^
+        version: link:../../packages/cheerpj-applet-page
       '@leaningtech/cheerpj-jnlp-page':
         specifier: workspace:^
         version: link:../../packages/cheerpj-jnlp-page
