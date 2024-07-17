@@ -1,9 +1,9 @@
 ---
 title: "WebAssembly Branch Hinting: From an idea to W3C standard"
 description: |
-  Around a month ago, the WebAssembly Community Group voted to advance the Branch Hinting proposal to phase 4, effectively recommending its addition to the standard (The Working Group will formally add it to the standard by voting into phase 5 at some point in the near future).
+  Around a month ago, the WebAssembly Community Group voted to advance the [Branch Hinting proposal](https://github.com/WebAssembly/branch-hinting) to phase 4, effectively recommending its addition to the standard, and the Working Group formally added it to the standard by voting it into phase 5 last week.
 
-  This was a big achievement for me, as the proposal Champion from its inception almost 4 years ago, and for Leaning Technologies (my company), who sponsored this work.
+  This was a big achievement for me, as the proposal Champion from its inception almost 4 years ago, and for [Leaning Technologies](https://leaningtech.com) (my company), who sponsored this work.
 
   In this article I will explain the purpose of the proposal, and the journey that brought it from idea to standard.
 authors:
@@ -14,7 +14,7 @@ tags:
   - CheerpX
 ---
 
-Around a month ago, the WebAssembly Community Group voted to advance the [Branch Hinting proposal](https://github.com/WebAssembly/branch-hinting) to phase 4, effectively recommending its addition to the standard (The Working Group will formally add it to the standard by voting into phase 5 at some point in the near future).
+Around a month ago, the WebAssembly Community Group voted to advance the [Branch Hinting proposal](https://github.com/WebAssembly/branch-hinting) to phase 4, effectively recommending its addition to the standard, and the Working Group formally added it to the standard by voting it into phase 5 last week.
 
 This was a big achievement for me, as the proposal Champion from its inception almost 4 years ago, and for [Leaning Technologies](https://leaningtech.com) (my company), who sponsored this work.
 
@@ -28,7 +28,14 @@ What's special about CheerpX is that it Just-in-time (JIT) compiles X86 linux ap
 
 The internals of CheerpX are not immediately important for the topic at hand, but quite interesting. If you are curious, consider watching the video below for more details. (The first few minutes of audio were unfortunately lost).
 
-<iframe class="t u v jz aj" title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F7JUs4c99-mo%3Ffeature%3Doembed&amp;display_name=YouTube&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7JUs4c99-mo&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F7JUs4c99-mo%2Fhqdefault.jpg&amp;key=a19fcc184b9711e1b4764040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube" width="100%" class="aspect-video" frameborder="0" scrolling="auto" allowfullscreen="allowfullscreen" data-mce-fragment="1" style="aspect-ratio: 16/9;"></iframe>
+<iframe
+	title='CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli'
+	src="https://www.youtube.com/embed/7JUs4c99-mo"
+	width="100%"
+	class="aspect-video"
+	frameborder="0"
+	allowfullscreen="allowfullscreen"
+></iframe>
 
 As most JIT compilers do, CheerpX makes some assumptions to produce better code, and needs to check that they hold before proceeding. The code that is generated has many instances of the following pattern:
 
@@ -48,7 +55,7 @@ When compiling C/C++ into native code, one can use `__builtin_expect` or`[[unlik
 
 A JIT compiler for a native platform would emit machine code directly, and do this optimizations manually.
 
-When compiling to WebAssembly though, this is not possible, because of its restrictions around control flow: with the exception of loops, in WebAssembly all predecessors of a block come before the block itself syntactically, with the exception of loops.
+When compiling to WebAssembly though, this is not possible, because of its restrictions around control flow: in WebAssembly all predecessors of a block come before the block itself syntactically, with the exception of loops.
 There are ways of going around this, but the resulting code will have some overhead that would defeat the purpose. (See the motivation page on the proposal repo for a more in-depth explanation).
 
 But the final machine code is produced by the engine, so if only we could pass a hint to it, akin to `[[unlikely]]` in C++, we could solve this issue by delegating optimal code ordering to the engine itself.
@@ -79,7 +86,7 @@ Should we add new instruction variants (Similar to the PoC)? Or maybe a single i
 
 The last option was ultimately chosen, with the following reasoning:
 
-The branch hints are just... hints. They don't affect the semantics of the program. An engine could implement them by doing nothing at all and it would be compliant. It feels wrong then to encode them as instructions, and force all engines to to recognize and parse them, even engines that can't or won't make use of them (e.g. interpreters).
+Branch hints are just... hints. They don't affect the semantics of the program. An engine could implement them by doing nothing at all and it would be compliant. It feels wrong then to encode them as instructions, and force all engines to to recognize and parse them, even engines that can't or won't make use of them (e.g. interpreters).
 One can imagine additional kinds of hints added in the future (e.g. inlining, pre-fetching, ...), and adding them as instructions would only increase this burden.
 
 WebAssembly already has a way to attach some metadata to a module: Custom sections.
@@ -127,7 +134,7 @@ An elegant solution is to leverage the custom annotations from the Annotations p
 
 At this point, the main obstacles for standardization was the dependency on the Annotations proposal, and the lack of tests in the official test suite. The Annotations proposal itself was also stuck for lack of testing, for very similar reasons.
 
-This was a tricky issue to solve, because how do you even test something that by definition does not affect the program execution in an observable way? And, on a more practical level, the WebAssembly reference interpreter did not support custom sections at all (and as a result, even the already-standard "name" section did not have tests up to this point)
+This was a tricky issue to solve (and is responsible for the 3-year gap between phase 3 and 4), because how do you even test something that by definition does not affect the program execution in an observable way? And, on a more practical level, the WebAssembly reference interpreter did not support custom sections at all (and as a result, even the already-standard "name" section did not have tests up to this point)
 
 It was decided that custom sections would be tested by validating that their contents are valid and ensuring proper round-tripping between binary and text format.
 
@@ -165,3 +172,5 @@ The proposal is now implemented in all major web engines (V8, SpiderMonkey, Java
 Browsers are still gating the feature behind a flag, but this should change in the near future.
 
 It was a long journey, but working together with many different stakeholders (compiler authors, browser developers, researchers, ...) to improve the proposal and gather consensus around it has been a valuable experience.
+
+Curious to know more about what we do? Join our Discord! My team at Leaning Technologies is available for any question you might have.
