@@ -69,14 +69,14 @@ export default function ThemeIntegration(
 					addIntegration(params, { integration });
 				}
 
-				/*params.injectRoute({
+				params.injectRoute({
 					pattern: "blog",
 					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro",
 				});
 				params.injectRoute({
 					pattern: "blog/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
-				});*/
+				});
 
 				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
