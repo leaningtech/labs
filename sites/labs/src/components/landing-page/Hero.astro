@@ -4,10 +4,10 @@ import AnimatedText from "./AnimatedText.svelte";
 import Doodle from "./Doodle.svelte";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 import ClientCarousel from "./ClientCarousel.svelte";
-import Hero from "@leaningtech/hero/Hero.astro";
+import Wrapper from "@leaningtech/hero/Hero.astro";
 ---
 
-<Hero>
+<Wrapper>
 	<div
 		class="w-full max-w-screen-xl px-4 sm:px-8 py-16 space-y-4 md:grid grid-cols-3"
 	>
@@ -49,4 +49,4 @@ import Hero from "@leaningtech/hero/Hero.astro";
 	<div class="p-16 w-full relative overflow-x-hidden">
 		<ClientCarousel client:idle />
 	</div>
-</Hero>
+</Wrapper>
