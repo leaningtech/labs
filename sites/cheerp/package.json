@@ -17,7 +17,6 @@
 		"@leaningtech/astro-theme": "workspace:^",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
 		"astro": "^4.5.18",
-		"splitting": "^1.1.0",
 		"svelte": "^4.2.18",
 		"tailwindcss": "^3.4.4",
 		"typescript": "^5.5.3"
