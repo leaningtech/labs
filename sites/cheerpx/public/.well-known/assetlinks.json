@@ -1,0 +1,20 @@
+[
+	{
+		"relation": [
+			"lookalikes/allowlist"
+		],
+		"target": {
+			"namespace": "web",
+			"site": "https://cheerp.io"
+		}
+	},
+	{
+		"relation": [
+			"lookalikes/allowlist"
+		],
+		"target": {
+			"namespace": "web",
+			"site": "https://cheerpx.io"
+		}
+	}
+]
