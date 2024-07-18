@@ -75,6 +75,7 @@ export default function makeConfig(): Config {
 						50: "#fde9ee",
 					},
 					cheerp: "#56f4ec",
+					cheerpx: "#3b516d",
 					blurple: "#5865F2", // https://discord.com/branding
 				},
 				typography: (theme: PluginAPI["theme"]) => ({

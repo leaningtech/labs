@@ -2,12 +2,14 @@
 import Shell from "./Shell.astro";
 import ProductNav from "../components/nav/product/Nav.astro";
 import Footer from "../components/Footer.astro";
+import BentoGrid from "../components/patterns/BentoGrid.astro";
 import { productFromUrl } from "../lib/products";
 
 const product = productFromUrl(Astro.url)!;
 ---
 
 <Shell title={product.name} description={product?.description}>
+	<BentoGrid />
 	<ProductNav {product} />
 	<div class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
 		<slot />
