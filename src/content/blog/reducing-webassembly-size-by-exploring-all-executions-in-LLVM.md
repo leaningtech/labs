@@ -25,7 +25,7 @@ The basic process of compiling is:
 - optimization passes transform the original IR into a more compact and performant IR
 - the optimized IR is converted into an executable for a given target
 
-![Basic process of compiling](./images/process-of-compiling.png)
+![Basic process of compiling](./images/black-process-of-compiling.png)
 
 The advantage of this architecture is that different concerns are separated in different components:
 
@@ -37,7 +37,7 @@ We will concentrate now on the “middle-end”, where IR to IR transformations 
 One of the core features of the LLVM framework is the vast amount of sophisticated optimizations which are done in this stage.
 The Intermediate Representation of functions will be a graph (representing the control flow) connecting groups of statements that are executed sequentially (Basic Blocks).
 
-![Example of Control Flow Graph linking together blocks of Instructions - the IR for left_shift and cos](./images/Example-of-Control-Flow-Graph-linking-together-blocks-of-Instructions-the-IR-for-left_shift-and-cos.webp)
+![Example of Control Flow Graph linking together blocks of Instructions - the IR for left_shift and cos](./images/black-Example-of-Control-Flow-Graph-linking-together-blocks-of-Instructions-the-IR-for-left_shift-and-cos.png)
 
 <figcaption>Example of Control Flow Graph linking together blocks of Instructions- the IR for left_shift and cos</figcaption>
 
@@ -88,7 +88,7 @@ And can we generalize the approach so that it works on any function?
 
 It turns out the answer to all 3 questions is “Yes”.
 
-![Control Flow Graph of printf, before and after running PartialExecuter](./images/Control-Flow-Graph-of-printf-before-and-after-running-PartialExecuter.webp)
+![Control Flow Graph of printf, before and after running PartialExecuter](./images/black-Example-of-Control-Flow-Graph.png)
 
 <figcaption>Control Flow Graph of printf, before and after running PartialExecuter</figcaption>
 
@@ -202,7 +202,7 @@ To recap, the visiting algorithm at this point has the following components:
 
 ### Step 5: Fun with graphs
 
-![Code snippet for LLVM IR: Runtime Environment Management](./images/LLVM-IR-runtime-environment-management.png)
+![Code snippet for LLVM IR: Runtime Environment Management](./images/black-llvm-IR-runtime-environment-management.png)
 
 Here is how printf begins. It performs some allocations, then checks whether some global state has been properly initialized and branches based on that.
 
@@ -258,7 +258,7 @@ What we will be doing is basically visiting loops in depth, hoping that they ter
 
 To guarantee termination, we will use the same approach as step 1: we keep a counter of how many times a given Basic Block is visited, bailing out if greater than a fixed amount. This bounds the total running time of this optimization to linear in the number of Instructions. (_waving hands_)
 
-![Before and after PartialExecuter has been performed on printf.](./images/before-and-after-PartialExecuter-has-been-performed-on-printf.webp)
+![Before and after PartialExecuter has been performed on printf.](./images/black-before-and-after-PartialExecuter-has-been-performed-on-printf.png)
 
 <figcaption>Before and after PartialExecuter has been performed on printf</figcaption>
 
