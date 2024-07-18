@@ -1,8 +1,10 @@
 ---
-import logotype from "../assets/branding/company/logotype-white.svg";
 import { Icon } from "astro-icon";
 import { DISCORD_URL, TWITTER_URL, GITHUB_URL, LINKEDIN_URL } from "../consts";
 import { Image } from "astro:assets";
+import logotype from "../assets/branding/company/logotype-white.svg";
+import awardA from "../assets/awards/uk-business-tech-awards.webp";
+import awardB from "../assets/awards/national-technology-awards.webp";
 
 const today = new Date();
 
@@ -67,18 +69,34 @@ const sections: Section[] = [
 {Astro.props.includeGrow === false ? null : <div class="grow" />}
 
 <footer class="p-14 bg-black">
-	<div class="w-full max-w-screen-2xl mx-auto space-y-6">
+	<div class="w-full max-w-screen-2xl mx-auto">
 		<div
-			class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 place-content-between text-lg"
+			class="grid sm:grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-14 place-content-between text-lg"
 		>
-			<a class="inline-block hover:opacity-90" href="https://leaningtech.com">
-				<Image
-					src={logotype}
-					loading="lazy"
-					alt="Leaning Technologies"
-					class="w-auto h-16"
-				/>
-			</a>
+			<div class="flex justify-between gap-6 lg:flex-col">
+				<a class="inline-block hover:opacity-90 col-span-2" href="https://leaningtech.com">
+					<Image
+						src={logotype}
+						loading="lazy"
+						alt="Leaning Technologies"
+						class="w-auto h-20"
+					/>
+				</a>
+				<div class="hidden sm:flex gap-6 justify-between">
+					<Image
+						src={awardA}
+						loading="lazy"
+						alt="UK Business Tech Awards 2022 Finalist"
+						class="w-auto h-32"
+					/>
+					<Image
+						src={awardB}
+						loading="lazy"
+						alt="National Technology Awards 2022 Winner"
+						class="w-auto h-32"
+					/>
+				</div>
+			</div>
 			<div
 				class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 place-content-between text-lg col-span-2"
 			>
@@ -107,7 +125,7 @@ const sections: Section[] = [
 			</div>
 		</div>
 		<div
-			class="grid sm:grid-cols-1 md:grid-cols-4 border-t border-stone-800 pt-6 gap-6"
+			class="grid sm:grid-cols-1 md:grid-cols-4 border-t border-stone-800 mt-14 pt-6 gap-6"
 		>
 			<div class="flex items-left gap-3">
 				<a href={DISCORD_URL}>
