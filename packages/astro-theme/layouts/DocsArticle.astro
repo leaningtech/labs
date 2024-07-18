@@ -32,6 +32,16 @@ const product = productFromUrl(Astro.url);
 const entries = product
 	? findNavDirectory(nav, [product.id])?.entries ?? nav
 	: [];
+
+function getEditHref(id: string): string {
+	let site;
+	if (Astro.site?.hostname === "labs.leaningtech.com") site = "labs";
+	if (Astro.site?.hostname === "cheerp.io") site = "cheerp";
+	if (Astro.site?.hostname === "cheerpj.com") site = "cheerpj";
+	if (Astro.site?.hostname === "cheerpx.io") site = "cheerpx";
+	if (!site) throw new Error("unable to derive site dirname from Astro.site");
+	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
+}
 ---
 
 <Shell
@@ -112,9 +122,7 @@ const entries = product
 					</main>
 
 					<div class="py-3 px-6 md:px-8">
-						{/*TODO <WasThisHelpful
-							editHref={`https://github.com/leaningtech/labs/edit/main/src/content/docs/${id}`}
-						/>*/}
+						{id && <WasThisHelpful editHref={getEditHref(id)} />}
 						<div class="py-5">
 							{entries.length > 0 && id && <DocsPagination activeId={id} />}
 						</div>
