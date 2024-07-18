@@ -89,6 +89,7 @@ And can we generalize the approach so that it works on any function?
 It turns out the answer to all 3 questions is “Yes”.
 
 ![Control Flow Graph of printf, before and after running PartialExecuter](./images/Control-Flow-Graph-of-printf-before-and-after-running-PartialExecuter.webp)
+
 <figcaption>Control Flow Graph of printf, before and after running PartialExecuter</figcaption>
 
 ## Partial Executer: game plan
@@ -140,6 +141,7 @@ void someFunc(int n)
         //some stuff
 }
 ```
+
 And we know that for all call sites the argument ’n’ will be different than 57.
 
 Here we could safely transform someFunc to:
@@ -150,6 +152,7 @@ void someFunc(int n)
      someGlobal = 42;
 }
 ```
+
 Setting someGlobal to 42 will be observable by the rest of the program, so it has to remain in the function, but we can still process the rest of the function and possibly optimize it.
 
 ### Step 3: allowing Loads from non-mutable global state
@@ -162,9 +165,10 @@ void processString(const char* ptr)
     if (*ptr)
         // do something with ptr
     else
-        // String it’s empty, fail 
+        // String it’s empty, fail
 }
 ```
+
 Say that the interpreter needs to decide what branch should be executed. Doing so requires loading from the memory pointed by ptr and checking its value.
 
 Can the load be actually performed by the interpreter?
@@ -213,11 +217,13 @@ It’s time for Strongly Connected Components.
 The basic algorithm for [SCC decomposition](https://en.wikipedia.org/wiki/Strongly_connected_component) works as following:
 
 ---
+
 1. assign each Basic Block to its own component. Edges between blocks becomes edges between components
 
 2. as long as there are cycles in the component graph, merge them in a single (connected!) component
 
 3. the SCC graph will have now no cycles, and each component will represent a group of Basic Blocks
+
 ---
 
 Absence of cycles means the SCC-graph is now a Direct Acyclic Graph ([link](https://en.wikipedia.org/wiki/Directed_acyclic_graph)), that has the useful property to be topologically sortable.
@@ -253,6 +259,7 @@ What we will be doing is basically visiting loops in depth, hoping that they ter
 To guarantee termination, we will use the same approach as step 1: we keep a counter of how many times a given Basic Block is visited, bailing out if greater than a fixed amount. This bounds the total running time of this optimization to linear in the number of Instructions. (_waving hands_)
 
 ![Before and after PartialExecuter has been performed on printf.](./images/before-and-after-PartialExecuter-has-been-performed-on-printf.webp)
+
 <figcaption>Before and after PartialExecuter has been performed on printf</figcaption>
 
 ## Recap
