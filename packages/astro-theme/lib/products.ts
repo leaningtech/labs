@@ -39,7 +39,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ",
 		href: "/docs/cheerpj2",
 		logotype: cheerpjLogotype,
-		favicon: import.meta.env.BASE_URL + "/cheerpj2/favicon.ico",
+		favicon: import.meta.env.BASE_URL + "cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine replacement for the browser",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
@@ -52,7 +52,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ",
 		href: "https://cheerpj.com",
 		logotype: cheerpjLogotype,
-		favicon: import.meta.env.BASE_URL + "/cheerpj3/favicon.ico",
+		favicon: import.meta.env.BASE_URL + "cheerpj3/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
@@ -65,7 +65,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpX",
 		href: "https://cheerpx.io",
 		logotype: cheerpxLogotype,
-		favicon: import.meta.env.BASE_URL + "/cheerpx/favicon.ico",
+		favicon: import.meta.env.BASE_URL + "cheerpx/favicon.ico",
 		subtitle: "x86-to-WebAssembly virtualization",
 		description:
 			"Execute native binaries in the browser with the CheerpX virtual machine.",
@@ -78,7 +78,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpX for Flash",
 		href: "/docs/cheerpx-for-flash",
 		logotype: cheerpxLogotype,
-		favicon: import.meta.env.BASE_URL + "/cheerpx/favicon.ico",
+		favicon: import.meta.env.BASE_URL + "cheerpx/favicon.ico",
 		subtitle: "Run Flash content without the Adobe Flash plugin",
 		description:
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
