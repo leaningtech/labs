@@ -5,7 +5,6 @@ import BlogPostCard from "../../components/BlogPostCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
-import Search from "../../components/search/Search.astro";
 import { productFromUrl } from "../../lib/products";
 import ProductNav from "../../components/nav/product/Nav.astro";
 
@@ -21,7 +20,7 @@ const [post1, post2, ...restPosts] = (
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 >
 	{product && <ProductNav {product} />}
-	<header class="text-center text-stone-100 py-32">
+	<header class="text-center text-stone-100 py-16">
 		<div class="flex justify-center items-center">
 			<Image
 				src={BlogDoodle}
@@ -32,12 +31,11 @@ const [post1, post2, ...restPosts] = (
 			/>
 		</div>
 
-		<h1 class="font-bold text-5xl">{product?.name ?? "Engineering"} blog</h1>
-		<p class="text-lg text-balance my-8">
-			News, technical writeups, and announcements directly from our development
+		<h1 class="text-5xl font-semibold text-balance">{product?.name ?? "Engineering"} blog</h1>
+		<p class="text-lg text-balance my-8 text-stone-400">
+			News, technical writeups, and announcements directly from the development
 			team.
 		</p>
-		<Search filterProductId="blog" />
 		<div
 			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
 		>
@@ -45,7 +43,7 @@ const [post1, post2, ...restPosts] = (
 		</div>
 	</header>
 
-	<section class="py-24 px-6 mx-auto w-full max-w-screen-xl">
+	<section class="pb-24 px-6 mx-auto w-full max-w-screen-xl">
 		<ul class="grid md:grid-cols-2 gap-8 mb-8">
 			{
 				[post1, post2].map((post) => (
