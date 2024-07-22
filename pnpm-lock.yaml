@@ -180,6 +180,9 @@ importers:
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
+      '@leaningtech/cheerp-ts-three-demo':
+        specifier: workspace:^
+        version: link:../../packages/cheerp-ts-three-demo
       astro:
         specifier: ^4.5.18
         version: 4.9.3(typescript@5.5.3)
@@ -207,6 +210,9 @@ importers:
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
+      '@leaningtech/cheerp-ts-three-demo':
+        specifier: workspace:^
+        version: link:../../packages/cheerp-ts-three-demo
       astro:
         specifier: ^4.5.18
         version: 4.9.3(typescript@5.5.3)
