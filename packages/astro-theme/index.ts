@@ -14,6 +14,7 @@ import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
 import { squooshImageService } from "astro/config";
 import { cpSync } from "fs";
+import { join as joinPath } from "path";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -36,7 +37,7 @@ export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 };
 
-const contentDir = dirname + "/content";
+const contentDir = joinPath(dirname, "../../content");
 
 export default function ThemeIntegration(
 	options: Options = {},
