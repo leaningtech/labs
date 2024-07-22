@@ -1,7 +1,5 @@
-import { defineDocsCollection } from "@leaningtech/astro-theme/content";
+import { defineCommonCollections } from "@leaningtech/astro-theme/content";
 import { defineCollection, z } from "astro:content";
-
-const docs = defineDocsCollection();
 
 const showcase = defineCollection({
 	type: "data",
@@ -16,4 +14,4 @@ const showcase = defineCollection({
 		}),
 });
 
-export const collections = { docs, showcase };
+export const collections = { showcase, ...defineCommonCollections() };

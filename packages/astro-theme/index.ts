@@ -13,6 +13,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
 import { squooshImageService } from "astro/config";
+import { cpSync } from "fs";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -34,6 +35,8 @@ const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 };
+
+const contentDir = dirname + "/content";
 
 export default function ThemeIntegration(
 	options: Options = {},
@@ -77,6 +80,7 @@ export default function ThemeIntegration(
 					pattern: "blog/[...slug]",
 					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
 				});
+				cpSync(contentDir, "src/content", { recursive: true }); // Needed until Astro Content Layer implemented
 
 				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
