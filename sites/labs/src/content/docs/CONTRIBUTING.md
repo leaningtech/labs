@@ -46,7 +46,7 @@ Labs is the codebase for the Leaning Technologies developer site. It is built us
 1. Install [Node.js](https://nodejs.org/en/download/)
 2. Install [pnpm](https://pnpm.io/installation)
 3. Clone the repo, e.g. with `gh clone leaningtech/labs`
-4. Change into the directory: `cd labs`
+4. Change into the directory: `cd labs/sites/labs`
 5. Install dependencies: `pnpm install`
 6. Spawn development server: `pnpm start`
 7. Visit [localhost:4321](http://localhost:4321)
@@ -54,17 +54,6 @@ Labs is the codebase for the Leaning Technologies developer site. It is built us
 ### Linting
 
 Linters run automatically in [this GitHub Action workflow](https://github.com/leaningtech/labs/actions/workflows/lint.yml). You can also run them locally.
-
-#### Broken links
-
-lychee is a tool that recursively checks all links on the site for 404s.
-
-1. Install [lychee](https://lychee.cli.rs/#/introduction)
-2. Build the site: `pnpm build`
-3. Preview the site in the background: `pnpm preview --host 0.0.0.0 &`
-4. Run lychee: `lychee dist src/content`
-
-You may need to set `GITHUB_TOKEN` to avoid issues checking links to github.com.
 
 #### Prose
 
