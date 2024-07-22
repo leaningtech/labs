@@ -28,8 +28,9 @@ export const products: { [product in Product]: ProductData } = {
 		href: "https://cheerp.io",
 		logotype: cheerpLogotype,
 		favicon: "/cheerp/favicon.ico",
-		subtitle: "Compile C++ for the browser",
-		description: "C/C++ compiler targeting WebAssembly and JavaScript.",
+		subtitle: "How C++ engineers build web applications",
+		description:
+			"Cheerp is an enterprise-grade compiler toolchain that can compile C/C++ into efficient WebAssembly and JavaScript. It is open source, liberally licensed, and actively developed by Leaning Technologies.",
 		github: "https://github.com/leaningtech/cheerp-meta",
 		repositoryName: "cheerp-meta",
 	},
@@ -66,9 +67,9 @@ export const products: { [product in Product]: ProductData } = {
 		href: "https://cheerpx.io",
 		logotype: cheerpxLogotype,
 		favicon: import.meta.env.BASE_URL + "cheerpx/favicon.ico",
-		subtitle: "x86-to-WebAssembly virtualization",
+		subtitle: "Virtual machines in your web app",
 		description:
-			"Execute native binaries in the browser with the CheerpX virtual machine.",
+			"CheerpX is a JavaScript library that enables secure client-side execution of x86 binaries on any browser. Coming soon.",
 		github: "https://github.com/leaningtech/webvm", // TODO
 		repositoryName: "webvm",
 	},
