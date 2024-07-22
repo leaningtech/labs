@@ -11,7 +11,11 @@ import ProductNav from "../../components/nav/product/Nav.astro";
 const product = productFromUrl(Astro.url);
 
 const [post1, post2, ...restPosts] = (
-	await getCollection("blog", ({ data }) => data.draft !== true && (!product || data?.tags?.includes(product.name)))
+	await getCollection(
+		"blog",
+		({ data }) =>
+			data.draft !== true && (!product || data?.tags?.includes(product.name)),
+	)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
@@ -31,7 +35,9 @@ const [post1, post2, ...restPosts] = (
 			/>
 		</div>
 
-		<h1 class="text-5xl font-semibold text-balance">{product?.name ?? "Engineering"} blog</h1>
+		<h1 class="text-5xl font-semibold text-balance">
+			{product?.name ?? "Engineering"} blog
+		</h1>
 		<p class="text-lg text-balance my-8 text-stone-400">
 			News, technical writeups, and announcements directly from the development
 			team.

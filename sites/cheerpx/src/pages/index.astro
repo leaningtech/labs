@@ -6,15 +6,16 @@ import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 <ProductHome>
 	<section class="py-16">
 		<div class="mx-auto max-w-[56em] text-center space-y-12">
-			<h1 class="text-7xl font-semibold text-balance bg-gradient-to-tr from-cheerpx to-stone-200 text-transparent bg-clip-text fly-in-b">
+			<h1
+				class="text-7xl font-semibold text-balance bg-gradient-to-tr from-cheerpx to-stone-200 text-transparent bg-clip-text fly-in-b"
+			>
 				<b>Virtual machines</b> in your web app.
 			</h1>
 			<p class="text-lg text-balance">
-				CheerpX is a JavaScript library that enables secure client-side execution of x86 binaries on any browser.
+				CheerpX is a JavaScript library that enables secure client-side
+				execution of x86 binaries on any browser.
 			</p>
-			<p class="text-lg text-balance text-stone-400">
-				Coming soon.
-			</p>
+			<p class="text-lg text-balance text-stone-400">Coming soon.</p>
 		</div>
 		<div class="flex items-center gap-4 justify-center mt-12">
 			<LinkButton
@@ -33,29 +34,27 @@ import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 	</section>
 	<section class="flex justify-center">
 		<iframe
-			title='CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli'
+			title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
 			src="https://youtube.com/embed/VqrbVycTXmw?start=151"
 			class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
 			frameborder="0"
-			allowfullscreen="allowfullscreen"
-		></iframe>
+			allowfullscreen="allowfullscreen"></iframe>
 	</section>
 </ProductHome>
 
 <style>
 	@keyframes flyFadeScaleIn {
-  0% {
-    opacity: 0;
-    transform: translateY(70px) scale(0.6);
-  }
-  100% {
-		opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+		0% {
+			opacity: 0;
+			transform: translateY(70px) scale(0.6);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
 
-.fly-in-b {
-  animation: flyFadeScaleIn 300ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-
+	.fly-in-b {
+		animation: flyFadeScaleIn 300ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+	}
 </style>

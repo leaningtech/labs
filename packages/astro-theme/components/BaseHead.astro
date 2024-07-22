@@ -10,7 +10,9 @@ export interface Props {
 }
 
 // For blog posts, the canonical origin should always be labs
-const canonicalSite = Astro.url.pathname.startsWith("/blog/") ? new URL("https://labs.leaningtech.com") : Astro.site;
+const canonicalSite = Astro.url.pathname.startsWith("/blog/")
+	? new URL("https://labs.leaningtech.com")
+	: Astro.site;
 const canonicalURL = new URL(Astro.url.pathname, canonicalSite);
 
 const { title, description, image = "/social/common@2x.png" } = Astro.props;

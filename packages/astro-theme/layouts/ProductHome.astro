@@ -8,7 +8,10 @@ import { productFromUrl } from "../lib/products";
 const product = productFromUrl(Astro.url)!;
 ---
 
-<Shell title={product.name + " － " + product?.subtitle} description={product?.description}>
+<Shell
+	title={product.name + " － " + product?.subtitle}
+	description={product?.description}
+>
 	<BentoGrid />
 	<ProductNav {product} />
 	<div class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
