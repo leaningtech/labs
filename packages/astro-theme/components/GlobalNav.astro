@@ -1,5 +1,5 @@
 ---
-import companyLogo from "../assets/branding/company/tower.svg";
+import logotype from "../assets/branding/company/logotype-white.svg";
 import EventBanner from "./EventBanner.svelte";
 import { Image } from "astro:assets";
 import LatestBlogPostPill from "./LatestBlogPostPill.astro";
@@ -19,38 +19,36 @@ const links = [
 
 <nav
 	aria-label="Primary navigation"
-	class="z-30 bg-stone-950 text-stone-400 text-sm"
+	class="z-30 bg-stone-950 text-white border-b border-stone-700"
 >
 	<div
-		class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 md:px-8 h-10 whitespace-nowrap overflow-hidden flex items-center justify-between"
+		class="w-full h-16 p-4 whitespace-nowrap overflow-hidden flex items-center justify-between"
 	>
-		<a href="https://leaningtech.com" class="flex items-center gap-2">
+		<a href="https://leaningtech.com" class="flex items-center">
 			<Image
-				src={companyLogo}
-				alt="Leaning Technologies Logo"
-				class="w-6 h-6"
+				src={logotype}
+				alt="Leaning Technologies"
+				title="Leaning Technologies"
+				class="h-8"
 			/>
-			<span class="text-base text-stone-300"> Leaning Technologies</span>
 		</a>
-		<div class="px-9 hidden lg:block overflow-hidden">
-			<LatestBlogPostPill />
-		</div>
-		<div
-			class="hidden sm:flex items-center gap-4 ml-auto flex-none font-medium"
-		>
+		<div class="hidden sm:flex items-center gap-4 flex-none font-medium px-8">
 			{
 				links.map((link) => {
 					if (link === spacer) {
 						return <span />;
 					} else {
 						return (
-							<a href={link.href} class="hover:text-white">
+							<a href={link.href} class="hover:text-primary-500">
 								{link.name}
 							</a>
 						);
 					}
 				})
 			}
+		</div>
+		<div class="ml-auto hidden lg:block overflow-hidden">
+			<LatestBlogPostPill />
 		</div>
 	</div>
 </nav>
