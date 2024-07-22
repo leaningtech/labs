@@ -3,11 +3,11 @@ title: "PartialExecuter: Reducing WebAssembly size by exploring all executions i
 description: |
   Discover the "Partial Executer," an LLVM pass that optimizes WebAssembly by removing unreachable code. This article explains the technology, challenges, and benefits, ideal for those versed in LLVM basics.
 pubDate: "2022-03-10"
-categories:
-  - "technical-blog"
 authors:
   - carlo
 heroImage: ./llvm-partialexecuter.png
+tags:
+  - Cheerp
 ---
 
 Partial Executer is a brand-new LLVM optimization pass that uses an Interpreter-like engine to prove some code will never be executed, making it safe to eliminate it.
