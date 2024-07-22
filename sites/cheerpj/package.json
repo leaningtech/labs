@@ -1,0 +1,24 @@
+{
+	"name": "@leaningtech/cheerpj-com",
+	"private": true,
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.7.0",
+		"@astrojs/svelte": "^5.6.0",
+		"@astrojs/tailwind": "^5.1.0",
+		"@leaningtech/astro-theme": "workspace:^",
+		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
+		"astro": "^4.5.18",
+		"svelte": "^4.2.18",
+		"tailwindcss": "^3.4.4",
+		"typescript": "^5.5.3"
+	}
+}

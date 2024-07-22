@@ -1,0 +1,15 @@
+{
+	"name": "@leaningtech/cheerpj-applet-page",
+	"private": true,
+	"version": "0.1.0",
+	"main": "index.js",
+	"peerDependencies": {
+		"astro": "*",
+		"@leaningtech/astro-theme": "workspace:^"
+	},
+	"dependencies": {
+		"@leaningtech/hero": "workspace:^"
+	},
+	"author": "Leaning Technologies",
+	"license": "Apache-2.0"
+}

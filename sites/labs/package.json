@@ -1,0 +1,32 @@
+{
+	"name": "@leaningtech/labs",
+	"private": true,
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.7.0",
+		"@astrojs/mdx": "^2.2.4",
+		"@astrojs/prefetch": "^0.4.1",
+		"@astrojs/rss": "^4.0.5",
+		"@astrojs/sitemap": "^3.1.2",
+		"@astrojs/svelte": "^5.4.0",
+		"@astrojs/tailwind": "^5.1.0",
+		"@astropub/md": "^0.4.0",
+		"@leaningtech/astro-theme": "workspace:^",
+		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
+		"@leaningtech/cheerpj-applet-page": "workspace:^",
+		"@leaningtech/cheerpj-jnlp-page": "workspace:^",
+		"@leaningtech/hero": "workspace:^",
+		"astro": "^4.5.18",
+		"svelte": "^4.2.18",
+		"tailwindcss": "^3.4.4",
+		"typescript": "^5.5.3"
+	}
+}

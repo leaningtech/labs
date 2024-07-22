@@ -1,0 +1,206 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Shell from "./Shell.astro";
+import Icon from "astro-icon";
+import { SocialShare } from "astro-social-share";
+import FormattedDate from "../components/FormattedDate.astro";
+import TableOfContents, {
+	type BasicHeading,
+} from "../components/TableOfContents.astro";
+import Footer from "../components/Footer.astro";
+import BlogPostCardSet from "../components/BlogPostCardSet.astro";
+import { resolveAuthors } from "../lib/blog";
+import LinkButton from "../components/LinkButton.astro";
+import { DISCORD_URL } from "../consts";
+import { Image } from "astro:assets";
+import { productFromUrl } from "../lib/products";
+import ProductNav from "../components/nav/product/Nav.astro";
+
+const product = productFromUrl(Astro.url);
+
+type Props = CollectionEntry<"blog">["data"] & {
+	id: CollectionEntry<"blog">["id"];
+	headings: BasicHeading[] | undefined;
+};
+
+const { id, title, subtitle, description, pubDate, heroImage, headings, tags } =
+	Astro.props;
+
+const authors = await resolveAuthors(Astro.props.authors);
+const showAuthorSection = authors.length > 0;
+
+let titleAndSubtitle = title;
+if (subtitle) {
+	titleAndSubtitle += `: ${subtitle}`;
+}
+---
+
+<Shell title={titleAndSubtitle} {description} image={heroImage?.src}>
+	{product && <ProductNav {product} />}
+	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
+		<a
+			href="/blog"
+			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+		>
+			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to blog
+		</a>
+
+		{
+			heroImage && (
+				<Image
+					src={heroImage}
+					alt=""
+					class="rounded-xl w-full mx-auto mb-8 object-cover max-h-[30rem] bg-white"
+					width={1232}
+					height={480}
+					quality="max"
+				/>
+			)
+		}
+
+		<h1
+			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
+			id="introduction"
+		>
+			{title}
+			{
+				subtitle && (
+					<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
+						{subtitle}
+					</span>
+				)
+			}
+		</h1>
+
+		<div class="flex flex-col lg:flex-row gap-10 mt-16">
+			<aside class="lg:w-40 text-stone-400">
+				{
+					authors.map((author) => (
+						<a href={author.url} class="flex items-center gap-4 lg:block mb-2">
+							{author.avatar && (
+								<img
+									class="w-16 h-16 rounded-full"
+									src={author.avatar.src}
+									alt=""
+									loading="lazy"
+									decoding="async"
+								/>
+							)}
+							<div class="font-semibold leading-5 text-lg text-stone-200 lg:mt-2">
+								{author.name}
+							</div>
+						</a>
+					))
+				}
+				{
+					authors.some((a) => a.guest) && (
+						<div class="inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+							Guest author
+						</div>
+					)
+				}
+				<div class="mt-4 text-base leading-6 text-stone-400">
+					<FormattedDate date={pubDate} />
+				</div>
+			</aside>
+
+			<article class="grow max-w-3xl">
+				<SocialShare {title} {description} via="leaningtech" />
+
+				<div
+					class="prose prose-stone md:prose-lg dark:prose-invert"
+					data-pagefind-body
+					data-pagefind-filter="productId:blog"
+				>
+					<slot />
+				</div>
+				<div class="pt-10">
+					<LinkButton
+						type="discord"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
+				</div>
+			</article>
+
+			<aside class="hidden lg:block w-40 grow">
+				{
+					headings && (
+						<div class="sticky top-24">
+							<TableOfContents
+								headings={[
+									{ depth: 2, slug: "introduction", text: "Introduction" },
+									...headings,
+								]}
+							/>
+						</div>
+					)
+				}
+			</aside>
+		</div>
+	</main>
+
+	{
+		showAuthorSection && (
+			<section class="px-6 py-16 w-full max-w-6xl mx-auto my-8 border-t border-b border-stone-800">
+				<div class="md:flex gap-4">
+					<h1 class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8 basis-64">
+						The author{authors.length > 1 && "s"}
+					</h1>
+					<div class="space-y-8">
+						{authors.map((author) => (
+							<a class="flex gap-6 max-w-3xl" href={author.url}>
+								{author.avatar && (
+									<Image
+										class="w-20 h-20 rounded-full"
+										src={author.avatar}
+										alt=""
+										loading="lazy"
+										decoding="async"
+									/>
+								)}
+								<div class="flex flex-col justify-center gap-1">
+									<div class="font-bold leading-7 text-2xl text-white">
+										{author.name}
+									</div>
+									{author.jobTitle && (
+										<p class="leading-4 text-base text-stone-300">
+											{author.jobTitle}
+										</p>
+									)}
+									{author.guest && (
+										<div>
+											<div class="mt-2 inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+												Guest author
+											</div>
+										</div>
+									)}
+								</div>
+							</a>
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<section class="px-6 w-full max-w-6xl mx-auto my-8 mb-32">
+		<h1
+			class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
+		>
+			Related posts
+		</h1>
+		<BlogPostCardSet {tags} exclude={[id]} />
+	</section>
+
+	<Footer />
+</Shell>
+
+<style is:global>
+	.social-share-btn {
+		display: inline-block;
+		width: 24px;
+		@apply fill-stone-400;
+	}
+</style>

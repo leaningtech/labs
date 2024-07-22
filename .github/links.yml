@@ -1,0 +1,25 @@
+name: Links
+on:
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 4 * * *"
+jobs:
+  crawl_for_broken_links:
+    strategy:
+      matrix:
+        website_url:
+          - "https://labs.leaningtech.com"
+          - "https://cheerp.io"
+          - "https://cheerpj.io"
+          - "https://cheerpx.io"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check links
+        uses: ScholliYT/Broken-Links-Crawler-Action@v3
+        with:
+          website_url: ${{ matrix.website_url }}
+          exclude_url_prefix: "mailto:,https://www.linkedin.com,https://linkedin.com,https://twitter.com"
+          verbose: "true"
+          max_retry_time: 30
+          max_retries: 5

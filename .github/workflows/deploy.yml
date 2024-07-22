@@ -4,17 +4,54 @@ on:
   push:
     branches:
       - main
+      - monorepo # TEMP
 
 jobs:
-  purge_cache:
-    name: Purge Cloudflare cache
+  cheerpj:
+    name: cheerpj.com/docs
     runs-on: ubuntu-latest
     steps:
-      - name: Sleep to allow Pages to build
-        run: sleep 60
-      - name: Purge cache
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Get pnpm store directory
+        shell: bash
         run: |
-          curl --request POST \
-            --url https://api.cloudflare.com/client/v4/zones/2ab0c67ef74c8cb12474c3f7d76b1ac1/purge_cache \
-            --header 'Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}' \
-            --data '{ "purge_everything": true }'
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: cd sites/cheerpj && pnpm install
+
+      - name: Build sites/cheerpj
+        run: cd sites/cheerpj && pnpm run build
+
+      - name: Deploy
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: sites/cheerpj/dist/
+          remote_path: ${{ secrets.RSYNC_DEPLOY_PATH }}
+          remote_host: ${{ secrets.RSYNC_DEPLOY_HOST }}
+          remote_port: ${{ secrets.RSYNC_DEPLOY_PORT }}
+          remote_user: ${{ secrets.RSYNC_DEPLOY_USER }}
+          remote_key: ${{ secrets.RSYNC_DEPLOY_KEY }}

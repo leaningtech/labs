@@ -1,0 +1,62 @@
+---
+import companyLogo from "../assets/branding/company/tower.svg";
+import EventBanner from "./EventBanner.svelte";
+import { Image } from "astro:assets";
+import LatestBlogPostPill from "./LatestBlogPostPill.astro";
+import { products } from "../lib/products";
+
+const spacer = Symbol("spacer");
+const links = [
+	products.cheerp,
+	products.cheerpj3,
+	products.cheerpx,
+	spacer,
+	{ name: "Developers", href: "https://labs.leaningtech.com" },
+];
+---
+
+<EventBanner client:idle />
+
+<nav
+	aria-label="Primary navigation"
+	class="z-30 bg-stone-950 text-stone-400 text-sm"
+>
+	<div
+		class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6 md:px-8 h-10 whitespace-nowrap overflow-hidden flex items-center justify-between"
+	>
+		<a href="https://leaningtech.com" class="flex items-center gap-2">
+			<Image
+				src={companyLogo}
+				alt="Leaning Technologies Logo"
+				class="w-6 h-6"
+			/>
+			<span class="text-base text-stone-300"> Leaning Technologies</span>
+		</a>
+		<div class="px-9 hidden lg:block overflow-hidden">
+			<LatestBlogPostPill />
+		</div>
+		<div
+			class="hidden sm:flex items-center gap-4 ml-auto flex-none font-medium"
+		>
+			{
+				links.map((link) => {
+					if (link === spacer) {
+						return <span />;
+					} else {
+						return (
+							<a href={link.href} class="hover:text-white">
+								{link.name}
+							</a>
+						);
+					}
+				})
+			}
+		</div>
+	</div>
+</nav>
+
+<style is:global>
+	:target {
+		scroll-margin-top: 74px;
+	}
+</style>

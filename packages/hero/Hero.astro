@@ -1,0 +1,15 @@
+---
+import ScrollPrompt from "./ScrollPrompt.astro";
+---
+
+<header
+	class="min-h-[calc(100vh-48px)] flex flex-col items-center bg-gradient-to-b to-[#e6275544] from-stone-950"
+>
+	<div class="grow"></div>
+
+	<slot />
+
+	<div class="grow"></div>
+
+	<ScrollPrompt />
+</header>
