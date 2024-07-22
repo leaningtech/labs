@@ -3,9 +3,8 @@ title: "Adding AddressSanitizer support to the Cheerp WebAssembly compiler"
 description: |
   Cheerp is a powerful C/C++ to JavaScript/WASM compiler.
 pubDate: "2024-02-13"
-categories:
-  - "technical-blog"
-  - "cheerp"
+tags:
+  - Cheerp
 authors:
   - daan
 heroImage: ./cheerp-asan.png
