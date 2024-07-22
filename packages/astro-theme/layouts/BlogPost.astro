@@ -13,6 +13,10 @@ import { resolveAuthors } from "../lib/blog";
 import LinkButton from "../components/LinkButton.astro";
 import { DISCORD_URL } from "../consts";
 import { Image } from "astro:assets";
+import { productFromUrl } from "../lib/products";
+import ProductNav from "../components/nav/product/Nav.astro";
+
+const product = productFromUrl(Astro.url);
 
 type Props = CollectionEntry<"blog">["data"] & {
 	id: CollectionEntry<"blog">["id"];
@@ -32,6 +36,7 @@ if (subtitle) {
 ---
 
 <Shell title={titleAndSubtitle} {description} image={heroImage?.src}>
+	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
 			href="/blog"
