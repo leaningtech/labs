@@ -37,7 +37,7 @@ We will concentrate now on the “middle-end”, where IR to IR transformations 
 One of the core features of the LLVM framework is the vast amount of sophisticated optimizations which are done in this stage.
 The Intermediate Representation of functions will be a graph (representing the control flow) connecting groups of statements that are executed sequentially (Basic Blocks).
 
-![Example of Control Flow Graph linking together blocks of Instructions - the IR for left_shift and cos](./images/black-Example-of-Control-Flow-Graph-linking-together-blocks-of-Instructions-the-IR-for-left_shift-and-cos.png)
+![Example of Control Flow Graph linking together blocks of Instructions - the IR for left_shift and cos](./images/Example-of-Control-Flow-Graph-linking-together-blocks-of-Instructions-the-IR-for-left_shift-and-cos.webp)
 
 <figcaption>Example of Control Flow Graph linking together blocks of Instructions- the IR for left_shift and cos</figcaption>
 
@@ -88,7 +88,7 @@ And can we generalize the approach so that it works on any function?
 
 It turns out the answer to all 3 questions is “Yes”.
 
-![Control Flow Graph of printf, before and after running PartialExecuter](./images/black-Example-of-Control-Flow-Graph.png)
+![Control Flow Graph of printf, before and after running PartialExecuter](./images/Example-of-Control-Flow-Graph.webp)
 
 <figcaption>Control Flow Graph of printf, before and after running PartialExecuter</figcaption>
 
@@ -258,7 +258,7 @@ What we will be doing is basically visiting loops in depth, hoping that they ter
 
 To guarantee termination, we will use the same approach as step 1: we keep a counter of how many times a given Basic Block is visited, bailing out if greater than a fixed amount. This bounds the total running time of this optimization to linear in the number of Instructions. (_waving hands_)
 
-![Before and after PartialExecuter has been performed on printf.](./images/black-before-and-after-PartialExecuter-has-been-performed-on-printf.png)
+![Before and after PartialExecuter has been performed on printf.](./images/before-and-after-PartialExecuter-has-been-performed-on-printf.webp)
 
 <figcaption>Before and after PartialExecuter has been performed on printf</figcaption>
 
