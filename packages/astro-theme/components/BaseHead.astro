@@ -9,7 +9,9 @@ export interface Props {
 	image?: string | undefined;
 }
 
-const isBlogPost = Astro.url.pathname.startsWith("/blog/") || /* CheerpJ */ Astro.url.pathname.startsWith("/docs/blog/");
+const isBlogPost =
+	Astro.url.pathname.startsWith("/blog/") ||
+	/* CheerpJ */ Astro.url.pathname.startsWith("/docs/blog/");
 
 // For blog posts, the canonical origin should always be labs
 const canonicalSite = isBlogPost
@@ -38,7 +40,8 @@ if (favicon.endsWith(".svg")) {
 const base = import.meta.env.BASE_URL;
 
 let plausibleDomains = [new URL(Astro.url).hostname];
-if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com")) plausibleDomains.push("labs.leaningtech.com");
+if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
+	plausibleDomains.push("labs.leaningtech.com");
 ---
 
 <meta charset="utf-8" />
