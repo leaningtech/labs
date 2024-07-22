@@ -12,7 +12,7 @@ import ProductNav from "../../components/nav/product/Nav.astro";
 const product = productFromUrl(Astro.url);
 
 const [post1, post2, ...restPosts] = (
-	await getCollection("blog", ({ data }) => data.draft !== true)
+	await getCollection("blog", ({ data }) => data.draft !== true && (!product || data?.tags?.includes(product.name)))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 

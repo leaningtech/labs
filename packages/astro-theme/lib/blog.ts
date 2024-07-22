@@ -1,4 +1,5 @@
 import { getEntry, type CollectionEntry, getCollection } from "astro:content";
+import { productFromUrl } from "./products";
 
 export async function resolveAuthors(
 	authors: string[],
@@ -14,10 +15,7 @@ export async function resolveAuthors(
 }
 
 export async function latestFeaturedPost(url: URL) {
-	let requiredTag: "Cheerp" | "CheerpJ" | "CheerpX" | undefined = undefined;
-	if (url.pathname.startsWith("/cheerpj")) requiredTag = "CheerpJ";
-	else if (url.pathname.startsWith("/cheerpx")) requiredTag = "CheerpX";
-	else if (url.pathname.startsWith("/cheerp")) requiredTag = "Cheerp";
+	const requiredTag = productFromUrl(url)?.name;
 
 	const posts = (
 		await getCollection(
