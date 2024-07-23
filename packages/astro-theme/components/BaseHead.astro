@@ -9,8 +9,12 @@ export interface Props {
 	image?: string | undefined;
 }
 
+const isBlogPost =
+	Astro.url.pathname.startsWith("/blog/") ||
+	/* CheerpJ */ Astro.url.pathname.startsWith("/docs/blog/");
+
 // For blog posts, the canonical origin should always be labs
-const canonicalSite = Astro.url.pathname.startsWith("/blog/")
+const canonicalSite = isBlogPost
 	? new URL("https://labs.leaningtech.com")
 	: Astro.site;
 const canonicalURL = new URL(Astro.url.pathname, canonicalSite);
@@ -34,6 +38,10 @@ if (favicon.endsWith(".svg")) {
 }
 
 const base = import.meta.env.BASE_URL;
+
+let plausibleDomains = [new URL(Astro.url).hostname];
+if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
+	plausibleDomains.push("labs.leaningtech.com");
 ---
 
 <meta charset="utf-8" />
@@ -77,7 +85,7 @@ const base = import.meta.env.BASE_URL;
 <!-- Plausible analytics -->
 <script
 	defer
-	data-domain="labs.leaningtech.com"
+	data-domain={plausibleDomains.join(",")}
 	src="https://plausible.leaningtech.com/js/script.outbound-links.js"></script>
 <script>
 	window.plausible =

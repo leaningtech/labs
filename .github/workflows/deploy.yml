@@ -45,6 +45,10 @@ jobs:
       - name: Build sites/cheerpj
         run: cd sites/cheerpj && pnpm run build
 
+      # This is included by the CheerpJ.com WP theme
+      - name: Copy global-navbar include.html to dist
+        run: cp packages/global-navbar/include.html sites/cheerpj/dist/_global-navbar.html
+
       - name: Deploy
         uses: burnett01/rsync-deployments@7.0.1
         with:
