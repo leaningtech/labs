@@ -1,0 +1,11 @@
+{
+	"name": "@leaningtech/global-navbar",
+	"version": "1.0.0",
+	"description": "",
+	"exports": {
+		"./include.html": "./include.html"
+	},
+	"keywords": [],
+	"author": "Leaning Technologies",
+	"license": "Apache-2.0"
+}
