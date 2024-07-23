@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import BlogPostCard from "../../components/BlogPostCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
-import BlogDoodle from "./blog-doodle.png";
 import { productFromUrl } from "../../lib/products";
 import ProductNav from "../../components/nav/product/Nav.astro";
+import Accordion from "../../components/Accordion.astro"
+import AccordionItem from "../../components/AccordionItem.astro"
+import Card from "../../components/ShowcaseCard.astro"
 
 const product = productFromUrl(Astro.url);
 
@@ -18,30 +18,71 @@ const [post1, post2, ...restPosts] = (
 	)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-
 <Shell
-	title={`${product?.name ?? "Engineering"} showcase`}
-	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
+	title={`showcase`}
+	description="Leaning Technologies Showcase"
 >
 	{product && <ProductNav {product} />}
 	<header class="text-center text-stone-100 py-16">
 		<div class="flex justify-center items-center">
-			<Image
-				src={BlogDoodle}
-				width="150"
-				height="129"
-				class="invisible md:visible"
-				alt="person reading a newspaper"
-			/>
+
 		</div>
 
 		<h1 class="text-5xl font-semibold text-balance">
-			{product?.name ?? "Engineering"} blog
+			Showcase
 		</h1>
 		<p class="text-lg text-balance my-8 text-stone-400">
-			News, technical writeups, and announcements directly from the development
-			team.
+			Including demos, other products and case studies.
 		</p>
+
+
+		<div class="container">
+			<div class="left-column">
+			  <Accordion>
+				<AccordionItem header="Demos">
+				  <ul>
+					<li><button onclick="showDemo('Cheerp')">Cheerp</button></li>
+					<li><button onclick="showDemo('CheerpJ')">CheerpJ</button></li>
+					<li><button onclick="showDemo('CheerpX')">CheerpX</button></li>
+				  </ul>
+				</AccordionItem>
+			  </Accordion>
+			</div>
+			<div class="right-column">
+
+				
+				<div id="initialText" class="patterns">
+					<svg width="100%" height="100%">
+					  <defs>
+						<pattern id="polka-dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+						  <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
+						</pattern>  
+					  </defs>
+				   <text x="50%" y="60%"  text-anchor="middle"  >
+					 Please choose 
+					 one on the left
+				   </text>
+				   </svg>
+				</div>
+
+
+
+				
+			  <div id="demoContent" style="display: none;">
+				<Card
+				  url="#"
+				  img='https://images.unsplash.com/photo-1647118762210-393b52e96fbc?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+				  title="My Awesome Post"
+				  footer="Test"
+				>
+				  Lorem ipsum dolor sit amet.
+				</Card>
+			  </div>
+			</div>
+		  </div>
+
+
+
 		<div
 			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
 		>
@@ -49,26 +90,83 @@ const [post1, post2, ...restPosts] = (
 		</div>
 	</header>
 
-	<section class="pb-24 px-6 mx-auto w-full max-w-screen-xl">
-		<ul class="grid md:grid-cols-2 gap-8 mb-8">
-			{
-				[post1, post2].map((post) => (
-					<li class="flex md:justify-stretch md:items-stretch">
-						{post && <BlogPostCard {post} showMetadata size="wide" />}
-					</li>
-				))
-			}
-		</ul>
-		<ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-			{
-				restPosts.map((post) => (
-					<li class="flex md:justify-stretch md:items-stretch">
-						<BlogPostCard {post} showMetadata />
-					</li>
-				))
-			}
-		</ul>
-	</section>
-
 	<Footer />
 </Shell>
+
+<script type="text/javascript">
+	function showDemo(demoName) {
+	  const initialText = document.getElementById('initialText');
+	  const demoContent = document.getElementById('demoContent');
+	  
+	  // Hide original text
+	  initialText.style.display = 'none';
+	  
+	  // Show card
+	  demoContent.style.display = 'block';
+	  demoContent.dataset.demo = demoName;
+	}
+</script>
+  
+<style>
+  .container {
+    display: flex;
+    width: 100%;
+	max-width: 1200px;  
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .left-column {
+    width: 20%;
+	
+  }
+  .right-column {
+    width: 80%;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 4rem;
+  }
+  body .card {
+    color: purple;
+    a {
+      color: gold;
+    }
+  }
+  .patterns {
+  display: block;
+  height: 10vh;
+}
+
+
+
+svg text {
+  letter-spacing: 10px;
+  stroke: #8ccce7;
+  font-size: 2rem;
+  font-weight: 400;
+  stroke-width: 1;
+  animation: textAnimate 4s infinite alternate;
+  
+}
+
+@keyframes textAnimate {
+  0% {
+    stroke-dasharray: 0 50%;
+    stroke-dashoffset:  20%;
+    fill:hsl(327, 66%, 35%)
+
+  }
+  
+  100% {
+    stroke-dasharray: 50% 0;
+    stroke-dashoffstet: -20%;
+    fill: hsla(189, 68%, 75%,0%)
+  }
+  
+}
+
+
+
+</style>
