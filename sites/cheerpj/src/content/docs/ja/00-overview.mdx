@@ -28,14 +28,17 @@ import { DISCORD_URL } from "@/consts.ts";
 </div>
 
 <div class="text-lg">
-	CheerpJはWebAssemblyベースの **ブラウザ用Java仮想マシン**です。Java 8との広範な互換性が
-	あり、Javaアプリケーション、アプレット、ライブラリ、およびJava Web Start / JNLPアプリケーション
+	CheerpJはWebAssemblyベースの **ブラウザ用Java仮想マシン**です。Java
+	8との広範な互換性が
+	あり、Javaアプリケーション、アプレット、ライブラリ、およびJava Web Start /
+	JNLPアプリケーション
 	をプラグインなしでブラウザで実行するための完全なランタイム環境[^compat]を提供します。
 </div>
 
 <div class="m-4 flex justify-center">
 	[始める](/docs/getting-started) · [例](/docs/tutorials) ·
-	[APIリファレンス](/docs/reference) · [GitHubリポジトリ](https://github.com/leaningtech/cheerpj-meta)
+	[APIリファレンス](/docs/reference) ·
+	[GitHubリポジトリ](https://github.com/leaningtech/cheerpj-meta)
 </div>
 
 ```html
@@ -61,17 +64,14 @@ CheerpJを使用すると、次のことが可能です：
 - JavaとJavaScriptのライブラリ間で相互運用
 
 CheerpJは、完全なOpenJDKランタイム環境に基づいており、次の機能をサポートします：
+
 - [ネットワーキング]
 - [仮想ファイルシステム]
 - [クリップボード]
 - オーディオ
 - 印刷
 
-<LinkButton
-	label="始める"
-	type="primary"
-	href="/docs/getting-started"
-/>
+<LinkButton label="始める" type="primary" href="/docs/getting-started" />
 
 ## 始め方
 
@@ -109,6 +109,7 @@ CheerpJは、完全なOpenJDKランタイム環境に基づいており、次の
 ## CheerpJの仕組み
 
 CheerpJは、以下の2つのコンポーネントの組み合わせです：
+
 1. 最適化されたJava-to-JavaScript JITコンパイラ。
 2. OpenJDKに基づいた完全なJava SE 8ランタイム。
 

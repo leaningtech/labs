@@ -86,13 +86,11 @@ const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Localised versions of this page -->
-{Object.entries(localised).map(([lang, url]) => (
-	<link
-		rel="alternate"
-		hreflang={lang}
-		href={url}
-	/>
-))}
+{
+	Object.entries(localised).map(([lang, url]) => (
+		<link rel="alternate" hreflang={lang} href={url} />
+	))
+}
 
 <!-- Plausible analytics -->
 <script

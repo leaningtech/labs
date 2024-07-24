@@ -37,14 +37,12 @@ const hasMultipleLocales = !!Astro.currentLocale;
 	{hasMultipleLocales && <LocaleSwitcher />}
 
 	{
-		entries.length > 0 && (
-		entries.length && (
+		entries.length > 0 && entries.length && (
 			<ol class="text-balance">
 				{entries.map((entry) => (
 					<DocsSidebarNavEntry {entry} />
 				))}
 			</ol>
-		)
 		)
 	}
 </aside>
