@@ -9,6 +9,7 @@ import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
 import { getLocalisedProductNav, getRootNav } from "../../../lib/nav";
+import { t } from "../../../lib/i18n";
 
 interface Props {
 	product: ProductData;
@@ -48,8 +49,8 @@ if (!firstDocsEntry) throw new Error("must have a docs entry");
 		<Search filterProductId={product.id} />
 
 		<div class="flex items-stretch gap-2 ml-auto px-2">
-			<Link label="Docs" href={firstDocsEntry.href} />
-			<Link label="Blog" href="/blog" />
+			<Link label={t("Docs", Astro.currentLocale)} href={firstDocsEntry.href} />
+			<Link label={t("Blog", Astro.currentLocale)} href="/blog" />
 		</div>
 
 		<div class="flex items-center gap-4 flex-none text-stone-200">

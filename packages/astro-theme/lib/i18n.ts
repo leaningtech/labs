@@ -1,4 +1,5 @@
 import assert from "assert";
+import translationsJa from "../../../translations/ja.json";
 
 // NOTE: we cannot import astro:i18n anywhere, because it only works for sites with localisation
 // enabled. Some sites may not have localisation enabled, and will raise an error. The error
@@ -45,4 +46,17 @@ export function getLocalisedPaths(
 		obj[locale] = base + pathWithoutBase;
 	}
 	return obj;
+}
+
+/** Translates the given English string, falling back to English if it's not found. */
+export function t(english: string, currentLocale: string | undefined): string {
+	if (currentLocale === "ja") {
+		const translation = translationsJa[english as keyof typeof translationsJa];
+		if (translation) return translation;
+		else if (import.meta.env.DEV) {
+			return "MISSING TRANSLATION";
+		} else throw new Error(`Missing Japanese translation for: ${english}`);
+	}
+
+	return english;
 }
