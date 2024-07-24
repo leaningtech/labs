@@ -1,7 +1,16 @@
-import { getAbsoluteLocaleUrlList } from "astro:i18n";
 import assert from "assert";
 
+// NOTE: we cannot import astro:i18n anywhere, because it only works for sites with localisation
+// enabled. Some sites may not have localisation enabled, and will raise an error. The error
+// cannot be caught via dynamic import.
+
 export const locales = ["en", "ja"];
+
+/** Join two paths with a slash between. */
+function join(a: string, b: string): string {
+	if (a.endsWith("/")) return a + b;
+	return a + "/" + b;
+}
 
 /** Gets the base paths for all locales. */
 function getLocaleBasePaths(currentLocale: string | undefined): {
@@ -9,18 +18,8 @@ function getLocaleBasePaths(currentLocale: string | undefined): {
 } {
 	if (!currentLocale) return {};
 
-	const bases = getAbsoluteLocaleUrlList().map(
-		(a: string) => new URL(a).pathname,
-	);
-	assert(bases.length === locales.length);
-
-	const obj: { [locale: string]: string } = {};
-	for (let i = 0; i < bases.length; i++) {
-		const locale = locales[i]!;
-		const base = bases[i]!;
-		obj[locale] = base;
-	}
-	return obj;
+	const base = import.meta.env.BASE_URL;
+	return { en: base, ja: join(base, "ja") };
 }
 
 /**
