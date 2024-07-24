@@ -5,6 +5,7 @@ import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 import type { ProductData } from "../lib/products";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
 
 interface Props {
 	product: ProductData | undefined;
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const { product, entries } = Astro.props;
+
+const hasMultipleLocales = !!Astro.currentLocale;
 ---
 
 <aside
@@ -31,14 +34,13 @@ const { product, entries } = Astro.props;
 		)
 	}
 
+	{hasMultipleLocales && <LocaleSwitcher />}
+
 	{
 		entries.length > 0 && (
 		entries.length && (
 			<ol class="text-balance">
-				{entries.filter(entry => {
-					if (entry.type === "directory" && entry.isLanguageDirectory) return false;
-					else return true;
-				}).map((entry) => (
+				{entries.map((entry) => (
 					<DocsSidebarNavEntry {entry} />
 				))}
 			</ol>

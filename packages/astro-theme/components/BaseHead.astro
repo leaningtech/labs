@@ -2,7 +2,8 @@
 import { SITE_TITLE } from "../consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
-import { getAbsoluteLocaleUrlList } from "astro:i18n";
+import { getLocalisedPaths } from "../lib/i18n";
+
 export interface Props {
 	title: string;
 	description: string;
@@ -43,8 +44,7 @@ let plausibleDomains = [new URL(Astro.url).hostname];
 if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 	plausibleDomains.push("labs.leaningtech.com");
 
-// Get urls of this page in other locales
-const alternates = getAbsoluteLocaleUrlList(Astro.url.pathname.replace(base, "")); // TODO: write our own function for this
+const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
 ---
 
 <meta charset="utf-8" />
@@ -86,8 +86,13 @@ const alternates = getAbsoluteLocaleUrlList(Astro.url.pathname.replace(base, "")
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Localised versions of this page -->
-<link rel="alternate" hreflang="en" href={alternates[0]} />
-<link rel="alternate" hreflang="ja" href={alternates[1]} />
+{Object.entries(localised).map(([lang, url]) => (
+	<link
+		rel="alternate"
+		hreflang={lang}
+		href={url}
+	/>
+))}
 
 <!-- Plausible analytics -->
 <script
