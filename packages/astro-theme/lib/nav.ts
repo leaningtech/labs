@@ -18,6 +18,7 @@ export interface NavDirectory {
 	dirname: string; // the last component of the path
 	title: string;
 	entries: NavEntry[];
+	isLanguageDirectory: boolean;
 }
 
 export type NavEntry = NavDirectory | NavFile;
@@ -111,6 +112,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
+			isLanguageDirectory: path === "ja",
 		};
 		parentEntries.push(me);
 		dirPathToEntries[path] = myEntries;

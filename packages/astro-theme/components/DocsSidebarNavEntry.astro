@@ -1,5 +1,6 @@
 ---
 import type { NavEntry } from "../lib/nav";
+import { getRootNav } from "../lib/nav";
 
 export interface Props {
 	entry: NavEntry;
@@ -11,6 +12,15 @@ const { entry, depth = 0 } = Astro.props;
 const pathname = Astro.url.pathname.replace(".html", "");
 
 // TODO: use Markdown for entry title - this is really slow for some reason
+
+async function getLocalisedEntryTitle(entry: NavEntry): string {
+	// TODO: get access to the current localised entry and grab its title
+
+	if (entry.type === "file" && entry.isIndex) return "Overview"; // TODO: change based on language
+	return entry.title;
+}
+
+const title = await getLocalisedEntryTitle(entry);
 ---
 
 {
@@ -28,7 +38,7 @@ const pathname = Astro.url.pathname.replace(".html", "");
 			data-is-active={entry.href === pathname}
 		>
 			<a href={entry.href} class="block">
-				{entry.isIndex ? "Overview" : entry.title}
+				{title}
 			</a>
 		</li>
 	)
@@ -51,7 +61,7 @@ const pathname = Astro.url.pathname.replace(".html", "");
 						},
 					]}
 				>
-					{entry.title}
+					{title}
 				</a>
 			</h5>
 			<ol>

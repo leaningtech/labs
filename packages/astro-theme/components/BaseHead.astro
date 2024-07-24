@@ -2,7 +2,7 @@
 import { SITE_TITLE } from "../consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
-
+import { getAbsoluteLocaleUrlList } from "astro:i18n";
 export interface Props {
 	title: string;
 	description: string;
@@ -42,6 +42,9 @@ const base = import.meta.env.BASE_URL;
 let plausibleDomains = [new URL(Astro.url).hostname];
 if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 	plausibleDomains.push("labs.leaningtech.com");
+
+// Get urls of this page in other locales
+const alternates = getAbsoluteLocaleUrlList(Astro.url.pathname.replace(base, "")); // TODO: write our own function for this
 ---
 
 <meta charset="utf-8" />
@@ -81,6 +84,10 @@ if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Localised versions of this page -->
+<link rel="alternate" hreflang="en" href={alternates[0]} />
+<link rel="alternate" hreflang="ja" href={alternates[1]} />
 
 <!-- Plausible analytics -->
 <script

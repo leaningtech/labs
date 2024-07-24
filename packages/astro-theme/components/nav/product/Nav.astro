@@ -8,6 +8,7 @@ import ProductVersionSwitcher from "../../ProductVersionSwitcher.astro";
 import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
 
 interface Props {
 	product: ProductData;
@@ -40,7 +41,7 @@ const { product } = Astro.props;
 		<Search filterProductId={product.id} />
 
 		<div class="flex items-stretch gap-2 ml-auto px-2">
-			<Link label="Docs" href="/docs" />
+			<Link label="Docs" href={getAbsoluteLocaleUrl(Astro.currentLocale, "docs" /* FIXME */)} />
 			<Link label="Blog" href="/blog" />
 		</div>
 

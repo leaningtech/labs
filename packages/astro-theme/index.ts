@@ -96,7 +96,10 @@ export default function ThemeIntegration(
 					pattern: `${docsPrefix}/[...slug]`,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
 				});
-
+				params.injectRoute({
+					pattern: `${docsPrefix}/ja/[...slug]`,
+					entrypoint: "@leaningtech/astro-theme/pages/docs/ja/[...slug].astro",
+				});
 				params.updateConfig({
 					markdown: {
 						remarkPlugins: [[remarkObsidianCallout, {}]],
