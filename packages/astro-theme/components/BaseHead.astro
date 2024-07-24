@@ -1,0 +1,89 @@
+---
+import { SITE_TITLE } from "../consts";
+import companyFavicon from "../assets/branding/company/tower.svg";
+import { productFromUrl } from "../lib/products";
+
+export interface Props {
+	title: string;
+	description: string;
+	image?: string | undefined;
+}
+
+// For blog posts, the canonical origin should always be labs
+const canonicalSite = Astro.url.pathname.startsWith("/blog/")
+	? new URL("https://labs.leaningtech.com")
+	: Astro.site;
+const canonicalURL = new URL(Astro.url.pathname, canonicalSite);
+
+const { title, description, image = "/social/common@2x.png" } = Astro.props;
+
+const product = productFromUrl(canonicalURL);
+const favicon = product?.favicon ?? companyFavicon.src;
+
+// Sniff mime type from favicon extension
+let faviconType: string;
+if (favicon.endsWith(".svg")) {
+	faviconType = "image/svg+xml";
+} else if (favicon.endsWith(".ico")) {
+	faviconType = "image/x-icon";
+} else if (favicon.endsWith(".png")) {
+	faviconType = "image/png";
+} else {
+	console.warn(`Unknown MIME type for favicon "${favicon}"`);
+	faviconType = "image/png";
+}
+
+const base = import.meta.env.BASE_URL;
+---
+
+<meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+	rel="stylesheet"
+/>
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type={faviconType} href={favicon} />
+<meta name="generator" content={Astro.generator} />
+<link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="theme-color" content="#e62755" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:site_name" content={SITE_TITLE} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Plausible analytics -->
+<script
+	defer
+	data-domain="labs.leaningtech.com"
+	src="https://plausible.leaningtech.com/js/script.outbound-links.js"></script>
+<script>
+	window.plausible =
+		window.plausible ||
+		function () {
+			// @ts-ignore
+			(window.plausible.q = window.plausible.q || []).push(arguments);
+		};
+</script>

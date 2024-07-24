@@ -1,0 +1,44 @@
+---
+// Docs page
+
+import DirectoryListing from "../../components/DirectoryListing.astro";
+import DocsArticle from "../../layouts/DocsArticle.astro";
+import { getRootNav, flattenNav, type NavEntry } from "../../lib/nav";
+
+export async function getStaticPaths() {
+	const entries = flattenNav(await getRootNav());
+	return entries.map((entry) => {
+		return {
+			params: {
+				slug: entry.slug,
+			},
+			props: entry,
+		};
+	});
+}
+
+type Props = NavEntry;
+
+const navEntry = Astro.props;
+
+const collectionEntry =
+	navEntry.type === "file" ? navEntry.collectionEntry : undefined;
+const rendered = await collectionEntry?.render();
+---
+
+<DocsArticle
+	title={collectionEntry?.data.title ?? navEntry.title}
+	description={collectionEntry?.data.description}
+	id={navEntry.id}
+	headings={rendered?.headings}
+	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
+>
+	{rendered && <rendered.Content />}
+	{
+		/* TODO: display when index.md is used */ navEntry.type === "directory" && (
+			<div class="not-prose mt-4">
+				<DirectoryListing dir={navEntry} />
+			</div>
+		)
+	}
+</DocsArticle>

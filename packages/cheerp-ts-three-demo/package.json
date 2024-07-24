@@ -1,0 +1,14 @@
+{
+	"name": "@leaningtech/cheerp-ts-three-demo",
+	"private": true,
+	"version": "0.1.0",
+	"exports": {
+		".": "./ThreeDemo.svelte"
+	},
+	"dependencies": {
+		"svelte": "*",
+		"three": "^0.162.0"
+	},
+	"author": "Leaning Technologies",
+	"license": "Apache-2.0"
+}

@@ -1,0 +1,330 @@
+---
+title: Clientlib migration guide
+description: How to use the updated Clientlib
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+> [!warning] Cheerp nightly only
+
+Clientlib (`clientlib.h`) has been updated with improved type information, addition of modern APIs, integration with C++ coroutines, and more.
+For more information, see [this blog post](/blog/cheerp-typescript#clientlib).
+This guide shows you how to migrate to the updated Clientlib.
+
+## Common errors
+
+This is not a complete list, but it should provide plenty of information to
+get you started.
+
+### Class type parameters must be pointer types
+
+For template classes, such as `client::TArray`, if the type parameter is a
+class type, it must be a pointer. Primitive types must not be pointers.
+
+```cpp del={1-3} ins={5-7}
+client::TArray<client::String>*
+client::TArray<int*>*
+client::TArray<int>
+
+client::TArray<client::String*>*
+client::TArray<client::TArray<client::String*>*>*
+client::TArray<int>*
+```
+
+Any attempt to use a non-pointer class type as a type parameter will result in
+an error.
+
+```
+error: static assertion failed due to requirement 'cheerp::CheckTemplate<client::String>'
+        static_assert(cheerp::CheckTemplate<_T0>);
+        ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+### Issues with `static_cast`
+
+Using `static_cast` to cast between client types may result in an error.
+
+```
+error: cannot cast 'client::Object *' to 'client::Element *' via virtual base 'client::Node'
+    static_cast<client::Element*>(object);
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+Most of these issues can be fixed by replacing `static_cast<T*>(object)` with
+`object->cast<T*>()`. If `object` has a dependent type, you may need to use
+`object->template cast<T*>()` instead.
+
+```cpp del={1} ins={3-4}
+static_cast<client::Element*>(object)
+
+object->cast<client::Element*>()
+object->template cast<client::Element*>()
+```
+
+### Class template requires template arguments
+
+Some types that were type erased before now require template arguments.
+
+```
+error: use of class template 'Promise' requires template arguments; argument deduction not allowed in function return type
+client::Promise* getName() {
+^~~~~~
+```
+
+The best way to resolve these errors is to add the appropriate type parameter.
+For example, `getName` should probably return
+`client::Promise<client::String*>*`.
+
+When the appropriate type is unclear, or when the template type must stay type
+erased for other reasons, you may choose to use
+`client::Promise<client::_Any*>*` or `client::Promise<client::Object*>*`.
+
+Some of the types that now require type parameters are listed below.
+
+```cpp
+client::Set
+client::Map
+client::Promise
+client::MessageEvent
+client::ReadableStream
+```
+
+### No type named `TMap`
+
+```
+error: no template named 'TMap' in namespace 'client'; did you mean 'Map'?
+client::TMap<int, int>* getName() {
+~~~~~~~^~~~
+        Map
+```
+
+`client::TMap` has been removed. Use `client::Map` (without the `T`) instead.
+
+`client::TArray` still exists, and `client::Array` is still type erased, for
+now. This is likely to change in a future release.
+
+```cpp del={1-2} ins={4}
+client::TMap<int, int>*
+client::Map*
+
+client::Map<int, int>*
+```
+
+### Cannot initialize with value of type `_Union<T...>*`
+
+Some functions that used to return a concrete type now return
+`client::_Union<T...>*` instead.
+
+One example of this is the `get_buffer` function on typed arrays. This
+function used to return `client::ArrayBuffer*`, but it now returns
+`client::_Union<client::ArrayBuffer*, client::SharedArrayBuffer*>*`.
+
+```
+error: cannot initialize a variable of type 'client::ArrayBuffer *' with an rvalue of type '_Union<ArrayBuffer *, SharedArrayBuffer *> *'
+    client::ArrayBuffer* buffer = array->get_buffer();
+                         ^        ~~~~~~~~~~~~~~~~~~~
+```
+
+To fix this, simply cast the union type using `->cast<T>()`. Depending on where
+the result is being used, it may be possible to omit the type parameter to
+`cast`.
+
+For example, for the above error, we could instead write:
+
+```cpp
+client::ArrayBuffer* buffer = array->get_buffer()->cast();
+```
+
+### No known conversion to `ArrayLike<double>*`
+
+Functions that take `ArrayLike<T>` used to be defined as template functions, so
+they could take any type of parameter. These functions are no longer template
+functions, they instead use the new `client::ArrayLike<T>` template class.
+`client::TArray<T>` and typed arrays do not inherit from
+`client::ArrayLike<T>`.
+
+One example of this is the `set` function on typed arrays.
+
+```
+error: no matching member function for call to 'set'
+    array->set(array);
+    ~~~~~~~^~~
+note: candidate function not viable: no known conversion from 'client::Uint8Array *' to 'ArrayLike<double> *' for 1st argument
+        void set(ArrayLike<double>* array);
+             ^
+note: candidate function not viable: requires 2 arguments, but 1 was provided
+        void set(ArrayLike<double>* array, double offset);
+             ^
+```
+
+To pass an array to a function that expects `client::ArrayLike<T>*`, you can
+use `->cast<T>()` or `->cast()`.
+
+```cpp
+array->set(array->cast());
+```
+
+### Functions with different template parameters
+
+Functions whose return type is not known at compile time were defined as
+template functions. Some of these functions are no longer template functions,
+and return a specific type instead.
+
+One example of this is the `client::JSON.parse` function. This function
+now returns `client::Object*`. The error you will get is slightly confusing.
+
+```
+error: expected '(' for function-style cast or type construction
+    client::Object* object = client::JSON.parse<client::Object*>(string);
+                                                ~~~~~~~~~~~~~~^
+error: expected expression
+    client::Object* object = client::JSON.parse<client::Object*>(string);
+                                                               ^
+```
+
+To fix the error, simply remove the type parameter. Use `->cast<T>()` or
+`->cast()` if you need a type that is more specific than what the function
+returns.
+
+```cpp
+client::Object* object = client::JSON.parse(string);
+```
+
+### Redefinition of client class
+
+The old Clientlib was missing some modern JavaScript types. To use these types,
+you may have defined them yourself in the `client` namespaces.
+
+The new Clientlib already contains many of these modern types. Attempting to
+redefine them yourself results in an error.
+
+```
+error: redefinition of 'Set' as different kind of symbol
+    class Set { /* ... */ };
+          ^
+note: previous definition is here
+    class Set: public Object {
+          ^
+```
+
+To fix this, simply remove your definition of the duplicate class. The one in
+Clientlib should have all the methods you need.
+
+### Renamed classes
+
+Some classes have been replaced with newer classes that have a different name.
+
+For example, `client::Element::getBoundingClientRect` now returns
+`client::DOMRect*` instead of `client::ClientRect*`.
+
+```
+error: cannot initialize a variable of type 'client::ClientRect *' with an rvalue of type 'DOMRect *'
+    client::ClientRect* rect = element->getBoundingClientRect();
+                        ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+In this case, the error can be fixed by simply replacing `client::ClientRect*`
+with `client::DOMRect*`.
+
+```cpp
+client::DOMRect* rect = element->getBoundingClientRect();
+```
+
+### Ambiguous overloads
+
+Some functions have added overloads that cause previously valid code to now be
+ambiguous. This often happens when passing an integer to a function that has
+overloads for both `double` and some pointer type, or when a function has
+overloads for `const String&` and `const _Union<T...>&`.
+
+```
+error: call to constructor of 'client::Date' is ambiguous
+    new client::Date(0);
+        ^            ~
+note: candidate constructor
+        Date(double value);
+        ^
+note: candidate constructor
+        Date(VarDate* vd);
+        ^
+```
+
+To fix the error, change the type of the argument to match the overload that
+you intend to call.
+
+```cpp
+new client::Date(0.0); // calls double constructor
+new client::Date(nullptr); // calls VarDate* constructor
+```
+
+## New features
+
+### `_Any`, `_Union`, and `_Function`
+
+These are 3 new types to help improve the type safety of programs that interact
+with JavaScript code. The types do not exist in JavaScript, they only exist to
+help define accurate function signatures.
+
+`_Any` is similar to `Object`, except that `_Any` is also compatible with
+primitive types, such as `double` and `int`. `_Any` can be constructed on the
+fly from any type. `_Any` is roughly equivalent to `any` in TypeScript.
+
+`_Union` is used to describe values whose type is unknown, but limited to a set
+of known types. `_Union` types can be constructed on the fly for any type in
+the union. `_Union` types can also be cast to a real type using `->cast()` or
+`->cast<T>()`. `_Union<T...>` is roughly equivalent to `T | ...` in TypeScript.
+
+`_Function` is a type safe first-class function type that replaces
+`EventListener*` when passing functions to higher order functions. `_Function`
+can be constructed on the fly from raw function pointers and C++11 lambdas.
+`cheerp::Callback()` can still be used to get an `EventListener*`, but prefer
+constructing a `_Function` instead.
+
+`_Union` and `_Function` support many conversions to help keep your code clean.
+For example, `_Union<double>` can be converted to `_Union<double, String*>`,
+and `_Function<void(Object*)>` can be converted to `_Function<void(String*)>`.
+
+### `->cast<T>()` and `->cast()`
+
+These functions have no effect other than to change the type of a value.
+They differ from other pointer casts in that they mimic the rules of casting
+objects in TypeScript, rather than in C++.
+
+`static_cast` has many restrictions that make in unsuitable for use with client
+types. You cannot use it to cast through virtual base classes, which are used
+to define some client types. `static_cast` also cannot be used to perform many
+casts involving `_Union` and `_Function`. Because, in the eyes of
+`static_cast`, `_Union<String*>` and `_Union<Object*>` are two completely
+distinct and unrelated types. `->cast<T>()` and `->cast()` do allow you to
+perform these casts.
+
+`->cast<T>()` does exactly what you'd expect, it returns a value of type `T`.
+`->cast()` returns an intermediate object that implements a conversion operator
+`operator T();`. In many cases, the compiler can infer the type `T` of the
+conversion operator, and it doesn't need to be specified explicitly.
+
+```cpp
+auto* string = object->cast<client::String*>(); // auto cannot be inferred
+client::String* string = object->cast(); // type can be inferred
+```
+
+## Easing migration with `-DUSE_OLD_CLIENTLIB`
+
+During migration, it can be useful to temporarily switch back to the old
+Clientlib. This can be done by adding `-DUSE_OLD_CLIENTLIB` to your compiler
+flags. This flag only exists to ease migration to the new Clientlib. Do **not**
+rely on this flag to build your project. It will be removed in a future
+release.
+
+## Ask for help
+
+If you have some code that cannot be migrated, or encounter any other issues
+with the new Clientlib, please reach out to us on Discord.
+
+<LinkButton
+	type="discord"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Join our Discord server"
+/>

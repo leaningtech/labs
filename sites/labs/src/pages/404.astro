@@ -1,0 +1,24 @@
+---
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+---
+
+<Shell>
+	<main
+		class="grow flex items-center justify-center bg-[url('/404/bg.svg')] bg-center bg-[length:100px]"
+	>
+		<div class="space-y-6">
+			<h1 class="text-6xl font-medium italic">Page not found!</h1>
+			<LinkButton label="Take me home" href="/" />
+		</div>
+	</main>
+
+	<Footer includeGrow={false} />
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			plausible("404", { props: { path: document.location.pathname } });
+		});
+	</script>
+</Shell>

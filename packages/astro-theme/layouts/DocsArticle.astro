@@ -1,0 +1,166 @@
+---
+import Shell from "./Shell.astro";
+import DocsSidebar from "../components/DocsSidebar.astro";
+import { getRootNav, findNavDirectory } from "../lib/nav";
+import { productFromUrl } from "../lib/products";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+import TableOfContents from "../components/TableOfContents.astro";
+import type { Heading } from "../components/TableOfContentsHeading.astro";
+import DocsPagination from "../components/DocsPagination.astro";
+import Footer from "../components/Footer.astro";
+import ProductNav from "../components/nav/product/Nav.astro";
+import WasThisHelpful from "../components/WasThisHelpful.astro";
+import Callout from "../components/Callout.astro";
+import BentoGrid from "../components/patterns/BentoGrid.astro";
+import { Markdown } from "@astropub/md";
+
+interface Props {
+	id?: string | undefined;
+	title: string;
+	description?: string | undefined;
+	headings?: Heading[] | undefined;
+	fullWidthLayout: boolean;
+}
+
+const { id, title, description, headings, fullWidthLayout } = Astro.props;
+
+const nav = await getRootNav();
+const product = productFromUrl(Astro.url);
+
+const entries = product
+	? findNavDirectory(nav, [product.id])?.entries ?? nav
+	: [];
+
+function getEditHref(id: string): string {
+	let site;
+	if (Astro.site?.hostname === "labs.leaningtech.com") site = "labs";
+	if (Astro.site?.hostname === "cheerp.io") site = "cheerp";
+	if (Astro.site?.hostname === "cheerpj.com") site = "cheerpj";
+	if (Astro.site?.hostname === "cheerpx.io") site = "cheerpx";
+	if (!site) throw new Error("unable to derive site dirname from Astro.site");
+	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
+}
+---
+
+<Shell
+	title={[
+		title === product?.name ? undefined : title,
+		(product?.name ?? "Leaning Technologies") + " Documentation",
+	]
+		.filter(Boolean)
+		.join(" - ")}
+	description={description ?? product?.description}
+>
+	<BentoGrid />
+	{product ? <ProductNav {product} /> : null}
+	{
+		fullWidthLayout ? (
+			<slot />
+		) : (
+			<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
+				<div
+					data-sidebar-wrapper
+					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
+				>
+					<DocsSidebar {product} {entries} />
+				</div>
+				<div
+					data-backdrop
+					class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
+				/>
+				<div class="overflow-x-hidden w-full">
+					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20">
+						{entries && (
+							<button data-sidebar-toggle class="lg:hidden">
+								<span class="sr-only">Open navigation menu</span>
+								<Icon name="mi:menu" class="w-8 h-8 text-white" />
+							</button>
+						)}
+						{id && <Breadcrumbs current={id} />}
+					</div>
+
+					<main
+						data-pagefind-body
+						data-pagefind-filter={
+							product ? `productId:${product.id}` : undefined
+						}
+						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]"
+					>
+						{title === product?.name ? (
+							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
+								<h1>
+									<Image alt={product.name} src={product.logotype} />
+								</h1>
+								<p class="text-xl font-medium text-stone-500">
+									{description && <Markdown.Inline of={description} />}
+								</p>
+							</div>
+						) : (
+							<>
+								<h1 class="mb-2 font-bold">
+									<Markdown.Inline of={title} />
+								</h1>
+								{description && (
+									<p class="mt-0 mb-8 text-stone-500 text-xl">
+										<Markdown.Inline of={description} />
+									</p>
+								)}
+							</>
+						)}
+						{product?.id === "cheerpj2" ? (
+							<Callout title="Deprecation notice" variant="warning">
+								CheerpJ 2 is deprecated. Consider{" "}
+								<a href="/cheerpj3/migrating-from-cheerpj2">
+									migrating to CheerpJ 3
+								</a>
+								.
+							</Callout>
+						) : null}
+						<slot />
+					</main>
+
+					<div class="py-3 px-6 md:px-8">
+						{id && <WasThisHelpful editHref={getEditHref(id)} />}
+						<div class="py-5">
+							{entries.length > 0 && id && <DocsPagination activeId={id} />}
+						</div>
+					</div>
+				</div>
+				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
+					{headings && <TableOfContents {headings} />}
+				</aside>
+			</docs-article>
+		)
+	}
+	<Footer />
+</Shell>
+
+<script>
+	class DocsArticle extends HTMLElement {
+		constructor() {
+			super();
+			const button = this.querySelector("[data-sidebar-toggle]");
+			const backdrop = this.querySelector("[data-backdrop]");
+			const close = this.querySelector("[data-sidebar-close]");
+			button!.addEventListener("click", this.toggleSidebar.bind(this));
+			backdrop!.addEventListener("click", this.toggleSidebar.bind(this));
+			close!.addEventListener("click", this.toggleSidebar.bind(this));
+		}
+
+		toggleSidebar() {
+			const sidebar = this.querySelector("[data-sidebar-wrapper]");
+			const backdrop = this.querySelector("[data-backdrop]");
+			sidebar!.classList.toggle("hidden");
+			backdrop!.classList.toggle("hidden");
+			sidebar!.querySelector("a")?.focus();
+		}
+	}
+
+	customElements.define("docs-article", DocsArticle);
+
+	import "../lib/callout";
+	import "../lib/terminal-os-tabs";
+	import "../lib/code-replace";
+</script>

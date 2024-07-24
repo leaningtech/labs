@@ -1,0 +1,26 @@
+---
+title: Community showcase
+---
+
+import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+Become a member of our community today!
+
+<LinkButton
+	type="discord"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Join our Discord server"
+/>
+
+## Projects built with CheerpJ
+
+The CheerpJ community has built some amazing projects. Here are some of our favorites.
+
+<ShowcaseList />
+
+Are you using CheerpJ in a project? [Let us know][submit] and we'll feature it!
+
+[submit]: https://github.com/leaningtech/labs/issues/new?labels=documentation&projects=&template=project-submission.md&title=Project+submission

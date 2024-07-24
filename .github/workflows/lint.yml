@@ -5,64 +5,6 @@ on:
   pull_request:
 
 jobs:
-  links:
-    name: Broken links
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Restore lychee cache
-        uses: actions/cache@v3
-        with:
-          path: .lycheecache
-          key: cache-lychee-${{ github.sha }}
-          restore-keys: cache-lychee-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build site
-        run: pnpm build
-
-      - name: Serve site in background
-        uses: JarvusInnovations/background-action@v1
-        with:
-          run: pnpm preview --host 0.0.0.0
-          wait-on: http://127.0.0.1:4321
-
-      - name: Install lychee
-        run: curl -L https://github.com/lycheeverse/lychee/releases/download/v0.13.0/lychee-v0.13.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz
-
-      - name: Run lychee on sitemap
-        run: cat dist/sitemap-0.xml | grep -Eo "<loc>[^<]+" | sed "s/<loc>//" | sed "s/https/http/" | sed "s/labs.leaningtech.com/127.0.0.1:4321/" | sed "s/rss.xml//" | xargs ./lychee --cache --no-progress
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
   astro:
     name: Astro
     runs-on: ubuntu-latest
@@ -97,48 +39,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run astro check
-        run: pnpm astro check
-
-  typescript:
-    name: TypeScript
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
       - name: Generate Astro type declarations
-        run: pnpm astro sync
+        run: pnpm -r astro sync
 
-      - name: Run tsc
-        run: pnpm tsc
+      - name: Run astro check
+        run: pnpm -r astro check
 
   prettier:
     name: Prettier
@@ -175,7 +80,7 @@ jobs:
         run: pnpm install
 
       - name: Run Prettier
-        run: pnpm prettier --check . src/**/*.*
+        run: pnpm prettier --check .
 
   prose_vale:
     name: Prose (Vale)

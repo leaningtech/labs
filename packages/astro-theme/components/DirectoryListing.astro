@@ -1,0 +1,39 @@
+---
+import type { NavDirectory, NavEntry } from "../lib/nav";
+import { Markdown } from "@astropub/md";
+
+interface Props {
+	dir: NavDirectory;
+}
+
+const { dir } = Astro.props;
+
+function getEntryDescription(entry: NavEntry): string | undefined {
+	if (entry.type === "file") {
+		return entry.collectionEntry.data.description;
+	}
+	return undefined;
+}
+---
+
+<ul class="grid grid-cols-1 gap-4">
+	{
+		dir.entries.map((entry) => {
+			return (
+				<li>
+					<a
+						href={entry.href}
+						class="block group rounded-md border bg-stone-950 px-4 py-3 shadow border-stone-800 hover:border-stone-700 transition-colors"
+					>
+						<div class="text-lg font-semibold text-stone-300 group-hover:text-stone-50 transition-colors">
+							<Markdown.Inline of={entry.title} />
+						</div>
+						<div class="text-ellipsis whitespace-nowrap overflow-hidden text-stone-400 text-sm">
+							<Markdown.Inline of={getEntryDescription(entry) ?? ""} />
+						</div>
+					</a>
+				</li>
+			);
+		})
+	}
+</ul>

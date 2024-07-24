@@ -1,0 +1,52 @@
+---
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import AnimatedText from "./AnimatedText.svelte";
+import Doodle from "./Doodle.svelte";
+import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
+import ClientCarousel from "./ClientCarousel.svelte";
+import Wrapper from "@leaningtech/hero/Hero.astro";
+---
+
+<Wrapper>
+	<div
+		class="w-full max-w-screen-xl px-4 sm:px-8 py-16 space-y-4 md:grid grid-cols-3"
+	>
+		<div class="flex items-center col-span-2">
+			<div>
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold"
+				>
+					Run
+					<span class="font-bold text-primary-500">
+						<AnimatedText client:idle />
+					</span>
+					<br />in the browser.
+				</h1>
+				<p class="text-xl mt-8 text-stone-400 leading-6">
+					Client-side developer tools built with WebAssembly.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<LinkButton
+						href="#ecosystem"
+						label="Explore technologies"
+						type="primary"
+						iconRight="mdi:arrow-right"
+					/>
+					<LinkButton
+						href={DISCORD_URL}
+						label="Join the Discord server"
+						type="discord"
+						iconLeft="fa-brands:discord"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-center">
+			<Doodle client:idle />
+		</div>
+	</div>
+
+	<div class="p-16 w-full relative overflow-x-hidden">
+		<ClientCarousel client:idle />
+	</div>
+</Wrapper>
