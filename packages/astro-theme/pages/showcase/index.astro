@@ -17,24 +17,30 @@ const product = productFromUrl(Astro.url);
 	{product && <ProductNav {product} />}
 	<header class="text-center text-stone-100 py-16">
 		<h1 class="text-5xl font-semibold text-balance">
-			Showcase
+			Cheerp Showcase
 		</h1>
 		<p class="text-lg text-balance my-8 text-stone-400">
-			Including demos, other products and case studies.
+			Including demos, related products and case studies.
 		</p>
 
 
 		<div class="container">
 			<div class="left-column">
 				<Accordion>
-					<AccordionItem header="Demos" onclick="toggleDemoContent()">
-					  <ul>
-						<button onclick="showContent('demo', 'Cheerp'); event.stopPropagation();">Cheerp</button>
-						<button onclick="showContent('product', 'CheerpJ'); event.stopPropagation();">CheerpJ</button>
-						<button onclick="showContent('studyCase', 'CheerpX'); event.stopPropagation();">CheerpX</button>
-					  </ul>
+					<AccordionItem header="Demos" onclick="toggleContent('demo')">
+						<ul>
+							<button onclick="showContent('demo', 'TeeWorlds'); event.stopPropagation();">TeeWorlds</button>
+							<button onclick="showContent('demo', 'HomeByMe'); event.stopPropagation();">HomeByMe</button>
+						</ul>
 					</AccordionItem>
-				  </Accordion>
+				</Accordion>
+				<Accordion>
+					<AccordionItem header="Case Studies" onclick="toggleContent('product')">
+						<ul>
+							<button onclick="showContent('CaseStudies', 'digital-identity'); event.stopPropagation();">Digital identity verification solution</button>
+						</ul>
+					</AccordionItem>
+				</Accordion>
 			</div>
 
 			<div class="right-column">
@@ -51,31 +57,32 @@ const product = productFromUrl(Astro.url);
 				   </svg>
 				</div>
 
-			  <div id="demoContent" style="display: none;">
-				<Card
-				  url="#"
-				  img='https://images.unsplash.com/photo-1647118762210-393b52e96fbc?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-				  title="My Awesome Post"
-				  footer="Test"
-				>
-				  Lorem ipsum dolor sit amet.
-				</Card>
-			  </div>
-
-			  <div id="productContent" style="display: none;">
-				<Card
-				  url="#"
-				  img='https://images.pexels.com/photos/2531709/pexels-photo-2531709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-				  title="My Awesome Post"
-				  footer="Test"
-				>
-				  Lorem ipsum dolor sit amet.
-				</Card>
-			  </div>
+				<div id="teeworlds" class="content" style="display: none;">
+					<Card
+					  url="https://medium.com/leaningtech/porting-a-c-multiplayer-game-to-the-web-with-cheerp-webrtc-and-firebase-29fbbc62c5ca"
+					  img='https://images.unsplash.com/photo-1647118762210-393b52e96fbc?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+					  title="My Awesome Post"
+					  footer="Test"
+					>
+					  Lorem ipsum dolor sit amet.
+					</Card>
+				</div>
+				
+				<div id="homebyme" class="content" style="display: none;">
+					<Card
+					  url="https://cheerpjdemos.leaningtech.com/iTextDemo.html"
+					  img='https://images.pexels.com/photos/2531709/pexels-photo-2531709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+					  title="My Awesome Post"
+					  footer="Test"
+					>
+					  Lorem ipsum dolor sit amet.
+					</Card>
+				</div>
+				
 			
-			  <div id="studycaseContent" style="display: none;">
+			  <div id="digital-identity" class="content" style="display: none;">
 				<Card
-				  url="#"
+				  url="https://leaningtech.com/digital-identity-verification-solution-powered-by-cheerp/"
 				  img='https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 				  title="My Awesome Post"
 				  footer="Test"
@@ -84,14 +91,11 @@ const product = productFromUrl(Astro.url);
 				</Card>
 			  </div>
 
+
 			</div>
 		  </div>
 
-
-
-		<div
-			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
-		>
+		<div class="bg-gradient-to-b from-secondary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10">
 			<!-- cool background -->
 		</div>
 	</header>
@@ -100,39 +104,47 @@ const product = productFromUrl(Astro.url);
 </Shell>
 
 <script type="text/javascript">
-	function showContent(contentType, contentName) {
-	  const initialText = document.getElementById('initialText');
-	  const contentIds = {
-		demo: 'demoContent',
-		product: 'productContent',
-		studyCase: 'studycaseContent'
+	function toggleContent(contentType) {
+	  const contentMappings = {
+		'demo': ['TeeWorlds', 'HomeByMe'],  // Array of IDs under "Demos"
+		'CaseStudies': ['digital-identity'] // Array of IDs under "Case Studies"
 	  };
   
-	  const contentDiv = document.getElementById(contentIds[contentType]);
-  
-	  if (contentDiv && contentDiv.style.display === 'block') {
-		contentDiv.style.display = 'none';
-		initialText.style.display = 'block';
-		return; 
-	  }
-  
-	  if (initialText) {
-		initialText.style.display = 'none';
-	  }
-  
-	  Object.values(contentIds).forEach(id => {
-		const element = document.getElementById(id);
-		if (element) {
-		  element.style.display = 'none';
-		}
+	  // Hide all content, show initial text if nothing specific is displayed
+	  let anyVisible = false;
+	  Object.keys(contentMappings).forEach(type => {
+		contentMappings[type].forEach(name => {
+		  const element = document.getElementById(name);
+		  if (element && element.style.display === 'block') {
+			element.style.display = 'none';
+		  } else {
+			anyVisible = true;
+		  }
+		});
 	  });
   
+	  document.getElementById('initialText').style.display = anyVisible ? 'none' : 'block';
+	}
+  
+	function showContent(contentType, contentName) {
+	  const initialText = document.getElementById('initialText');
+	  const targetId = contentName.replace(/\s+/g, '-').toLowerCase(); // Normalize the contentName to create IDs
+	  const contentDiv = document.getElementById(targetId);
+  
+	  // Hide initial text and all other content sections
+	  initialText.style.display = 'none';
+	  document.querySelectorAll('.content').forEach(div => {
+		div.style.display = 'none';
+	  });
+  
+	  // Display the selected content
 	  if (contentDiv) {
 		contentDiv.style.display = 'block';
-		contentDiv.dataset.demo = contentName; 
 	  }
 	}
   </script>
+  
+  
   
   
 
