@@ -29,15 +29,15 @@ const product = productFromUrl(Astro.url);
 				<Accordion>
 					<AccordionItem header="Demos" onclick="toggleContent('demo')">
 						<ul>
-							<button onclick="showContent('demo', 'TeeWorlds'); event.stopPropagation();">TeeWorlds</button>
-							<button onclick="showContent('demo', 'HomeByMe'); event.stopPropagation();">HomeByMe</button>
+							<button class="showcase-btn" onclick="showContent('demo', 'TeeWorlds'); event.stopPropagation();">TeeWorlds</button>
+							<button class="showcase-btn" onclick="showContent('demo', 'HomeByMe'); event.stopPropagation();">HomeByMe</button>
 						</ul>
 					</AccordionItem>
 				</Accordion>
 				<Accordion>
 					<AccordionItem header="Case Studies" onclick="toggleContent('product')">
 						<ul>
-							<button onclick="showContent('CaseStudies', 'digital-identity'); event.stopPropagation();">Digital identity verification solution</button>
+							<button class="showcase-btn" onclick="showContent('CaseStudies', 'digital-identity'); event.stopPropagation();">Digital identity verification solution</button>
 						</ul>
 					</AccordionItem>
 				</Accordion>
@@ -181,7 +181,7 @@ const product = productFromUrl(Astro.url);
   }
   .patterns {
   display: block;
-  height: 10vh;
+  height: 12vh;
 }
 
 
@@ -211,6 +211,53 @@ svg text {
   }
   
 }
-
-
+.showcase-btn {
+  color: #FFF;
+  transition: all 0.3s;
+  position: relative;
+  padding: 1rem;
+}
+.showcase-btn span {
+  transition: all 0.3s;
+}
+.showcase-btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: rgba(216, 68, 189, 0.5);
+  border-bottom-color: rgba(37, 196, 207, 0.5);
+  transform: scale(0.1, 1);
+}
+.showcase-btn:hover span {
+  letter-spacing: 2px;
+}
+.showcase-btn:hover::before {
+  opacity: 1; 
+  transform: scale(1, 1); 
+}
+.showcase-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+  background-color: rgba(234, 137, 197, 0.07);
+}
+.showcase-btn:hover::after {
+  opacity: 0; 
+  transform: scale(0.1, 1);
+}
 </style>
