@@ -16,11 +16,9 @@ const { url = '#', img = 'https://fakeimg.pl/640x360', title = 'Default title', 
   </div>
   <div class="card__content">
     <h3>
-      <a href={url}>{title}</a>
+      <a href={url} target="_blank">{title}</a>
     </h3>
-    <p>
-      <slot>Default description.</slot>
-    </p>
+
     <small>
       {footer}
     </small>
@@ -50,7 +48,7 @@ const { url = '#', img = 'https://fakeimg.pl/640x360', title = 'Default title', 
   }
 
   .card__image {
-    height: 10rem;
+    height: 16rem;
   }
 
   .card__image img {
