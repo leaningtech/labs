@@ -2,23 +2,24 @@
 interface Props {
   url?: string
   img?: string
+  alt?: string
   title?: string
   footer: string
-  children?: string | HTMLElement | HTMLElement[]
 }
 
-const { url = '#', img = 'https://fakeimg.pl/640x360', title = 'Default title', footer = 'Your name' } = Astro.props
+// Set up default props
+const { url = '#', img = '', alt = 'image', title = 'Default title', footer = 'author' } = Astro.props
 ---
 
 <div class="card">
   <div class="card__image">
-    <img src={img} alt="" />
+    <img src={img} alt={alt} />
   </div>
   <div class="card__content">
     <h3>
       <a href={url} target="_blank">{title}</a>
     </h3>
-
+    {Astro.slots.default}
     <small>
       {footer}
     </small>
@@ -26,19 +27,23 @@ const { url = '#', img = 'https://fakeimg.pl/640x360', title = 'Default title', 
 </div>
 
 <style is:global>
+  
   .card {
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    border: 3px solid rgb(185, 29, 97);
     border-radius: 0.5rem;
     position: relative;
     overflow: hidden;
     transition: box-shadow 0.15s ease-in-out;
   }
+  #default-display .card:hover {
+    cursor: default; /* 设置为默认的箭头指针 */
+  }
 
   .card:hover,
   .card:focus-within {
-    box-shadow: 0 0 0 0.25rem;
+    box-shadow: 0 0 0 0.3rem;
   }
 
   .card:focus-within a:focus {
@@ -82,4 +87,17 @@ const { url = '#', img = 'https://fakeimg.pl/640x360', title = 'Default title', 
     margin-top: auto;
     padding-top: 2rem;
   }
+
+
+  #default-display .card__image {
+      height: 10rem; 
+  }
+  #default-display .card__content {
+      padding: 0.5rem;  
+      padding-top: 1rem;  
+  }
+
+
+
+
 </style>

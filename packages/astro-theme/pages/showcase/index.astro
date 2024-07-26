@@ -24,7 +24,7 @@ const product = productFromUrl(Astro.url);
                     </pattern>  
                 </defs>
                 <text x="50%" y="60%"  text-anchor="middle">
-                    Cheerp Showcase
+                    {product?.name} Showcase
                 </text>
             </svg>
         </div>
@@ -43,24 +43,30 @@ const product = productFromUrl(Astro.url);
                     </AccordionItem>
                 </Accordion>
                 <Accordion>
-                    <AccordionItem header="Case Studies" onclick="toggleContent('product')">
+                    <AccordionItem header="Case Studies" onclick="toggleContent('case-study')">
                         <ul>
                             <button class="showcase-btn" onclick="showContent('CaseStudies', 'digital-identity'); event.stopPropagation();">Digital identity verification solution</button>
                         </ul>
                     </AccordionItem>
                 </Accordion>
+				<Accordion>
+                    <AccordionItem header="Related Products" onclick="toggleContent('product')">
+                        <ul>
+                            <button class="showcase-btn" onclick="showContent('RelatedProducts', 'sample-video'); event.stopPropagation();">Sample Video</button>
+                        </ul>
+                    </AccordionItem>
+                </Accordion>
             </div>
 
-            <div class="right-column">
+            <div class="right-column flex flex-col justify-center items-center w-4/5 ml-8 mt-4">
                 <div id="teeworlds" class="content" style="display: none;">
-                    <Card
-                        url="https://medium.com/leaningtech/porting-a-c-multiplayer-game-to-the-web-with-cheerp-webrtc-and-firebase-29fbbc62c5ca"
-                        img='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4q7USA2rp0o_pU4VyhYGfg.png'
-                        title="A 2D Multiplayer Platformer/Shooter, ported to the web."
-                        footer="Yuri Iozzelli"
-                    >
-                    </Card>
-                </div>
+					<Card
+					  url="https://medium.com/leaningtech/porting-a-c-multiplayer-game-to-the-web-with-cheerp-webrtc-and-firebase-29fbbc62c5ca"
+					  img='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4q7USA2rp0o_pU4VyhYGfg.png'
+					  title="A 2D Multiplayer Platformer/Shooter, ported to the web."
+					  footer="Yuri Iozzelli"
+					/>
+				  </div>
 
                 <div id="homebyme" class="content" style="display: none;">
                     <Card
@@ -91,7 +97,17 @@ const product = productFromUrl(Astro.url);
                     >
                     </Card>
                 </div>
-
+				<section id="sample-video" class="content flex justify-center items-center w-full" style="display: none;">
+					<iframe
+						title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
+						src="https://youtube.com/embed/VqrbVycTXmw?start=151"
+						class="w-full max-w-[720px] h-auto aspect-video rounded-xl shadow-lg border-2 border-stone-700"
+						frameborder="0"
+						allowfullscreen="allowfullscreen">
+					</iframe>
+				</section>
+				
+				
             </div>
         </div>
 
@@ -107,7 +123,8 @@ const product = productFromUrl(Astro.url);
     function toggleContent(contentType) {
         const contentMappings = {
             'demo': ['TeeWorlds', 'HomeByMe'],  // Array of IDs under "Demos"
-            'CaseStudies': ['digital-identity'] // Array of IDs under "Case Studies"
+            'CaseStudies': ['digital-identity'], // Array of IDs under "Case Studies"
+			'RelatedProducts': ['sample-video'] // Array of IDs under "Related Products"
         };
 
         // Hide all content
@@ -146,9 +163,7 @@ const product = productFromUrl(Astro.url);
     });
 
 	document.addEventListener('DOMContentLoaded', function() {
-    // 获取要显示的内容元素
     var defaultDisplay = document.getElementById('default-display');
-    // 将该元素的 display 属性设置为 'block' 以显示它
     if (defaultDisplay) {
         defaultDisplay.style.display = 'block';
     }
@@ -158,14 +173,10 @@ const product = productFromUrl(Astro.url);
 </script>
 
   
-  
-  
-  
 
   
-  
-  
 <style>
+	
   .container {
     display: flex;
     width: 100%;
@@ -179,21 +190,27 @@ const product = productFromUrl(Astro.url);
   }
   .right-column {
     width: 80%;
-	margin-left: 2rem;
-	margin-top: 1.1rem;
-  }
+    margin-left: 2rem;
+    margin-top: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: block;
+    width: 90%; 
+    max-width: 720px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem; 
+}
 
   ul {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 4rem;
   }
-  body .card {
-    color: purple;
-    a {
-      color: gold;
-    }
-  }
+  
   .patterns {
   display: block;
   height: 10vh;
@@ -249,8 +266,8 @@ svg text {
   border-bottom-width: 1px;
   border-top-style: solid;
   border-bottom-style: solid;
-  border-top-color: rgba(216, 68, 189, 0.5);
-  border-bottom-color: rgba(37, 196, 207, 0.5);
+  border-top-color: white;
+  border-bottom-color: white;
   transform: scale(0.1, 1);
 }
 .showcase-btn:hover span {
@@ -287,6 +304,5 @@ svg text {
   opacity: 0;
   transform: scale(0.1, 1);
 }
-
 
 </style>

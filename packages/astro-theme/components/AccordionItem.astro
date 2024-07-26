@@ -51,17 +51,17 @@ const { header } = Astro.props
 
   .accordion__item .accordion__header:focus {
     outline-offset: -6px;
-    box-shadow: inset 0 0 0 2px white;
+    box-shadow: 0px 0px 5px 2px rgba(202, 227, 234, 0.689)
   }
 
   .accordion__item:only-of-type .accordion__header,
   .accordion__item:last-of-type .accordion__header {
-    border: 2px solid #8c1f4e;
+    border: 2px solid rgb(185, 29, 97);
   }
 
   .accordion__item:only-of-type .accordion__panel,
   .accordion__item:last-of-type .accordion__panel {
-    border-bottom: 2px solid #29ece2;
+    border-bottom: 2px solid rgb(185, 29, 97);
   }
 
   .header__toggle-indicator {
@@ -72,8 +72,8 @@ const { header } = Astro.props
     visibility: hidden;
     overflow: hidden;
     height: 0;
-    border-left: 2px solid #29ece2;
-    border-right: 2px solid #29ece2;
+    border-left: 2px solid rgb(185, 29, 97);
+    border-right: 2px solid rgb(185, 29, 97);
     transition: height 0.3s ease-in-out, visibility 0s 0.3s;
   }
 
