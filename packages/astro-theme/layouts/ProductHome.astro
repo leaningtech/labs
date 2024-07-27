@@ -6,6 +6,7 @@ import BentoGrid from "../components/patterns/BentoGrid.astro";
 import { productFromUrl } from "../lib/products";
 
 const product = productFromUrl(Astro.url)!;
+const {style = "px-6 py-10 w-full  mx-auto bg-gradient-to-b to-[#ffffff44] from-stone-900"}= Astro.props;
 ---
 
 <Shell
@@ -14,7 +15,8 @@ const product = productFromUrl(Astro.url)!;
 >
 	<BentoGrid />
 	<ProductNav {product} />
-	<div class="px-6 py-10 w-full max-w-screen-2xl mx-auto">
+	
+	<div class= {style}>
 		<slot />
 	</div>
 	<Footer />
