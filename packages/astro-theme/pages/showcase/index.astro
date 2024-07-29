@@ -4,305 +4,37 @@ import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import { productFromUrl } from "../../lib/products";
 import ProductNav from "../../components/nav/product/Nav.astro";
-import Accordion from "../../components/Accordion.astro"
-import AccordionItem from "../../components/AccordionItem.astro"
-import Card from "../../components/ShowcaseCard.astro"
+import FilterGrid from "../../components/showcase/FilterGrid.svelte";
 
 const product = productFromUrl(Astro.url);
+
+const items = (
+	await getCollection(
+		"showcase",
+		({ data }) => !product || data.tags.includes(product.name),
+	)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// When we pass props to FilterGrid, we only want to pass data that is actually needed
+// because Astro will serialize all props to JSON for client hydration.
+const itemsData = items.map(item => ({ ...item.data, slug: item.slug }));
 ---
+
 <Shell
-    title={`showcase`}
-    description="Leaning Technologies Showcase"
+    title={["Showcase", product?.name ?? "Leaning Technologies"].join(" - ")}
+    description={"Meet dozens of impressive projects built with " + (product?.name ?? "Leaning Technologies") + "."}
 >
     {product && <ProductNav {product} />}
     <header class="text-center text-stone-100 py-16">
-        <div id="initialText" class="patterns">
-            <svg width="100%" height="100%">
-                <defs>
-                    <pattern id="polka-dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                        <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
-                    </pattern>  
-                </defs>
-                <text x="50%" y="60%"  text-anchor="middle">
-                    {product?.name} Showcase
-                </text>
-            </svg>
-        </div>
+        <h1 class="text-4xl">
+			Showcase
+		</h1>
         <p class="text-lg text-balance my-8 text-stone-400">
             Including demos, related products and case studies.
         </p>
-
-        <div class="container">
-            <div class="left-column">
-                <Accordion>
-                    <AccordionItem header="Demos" onclick="toggleContent('demo')">
-                        <ul>
-                            <button class="showcase-btn" onclick="showContent('demo', 'TeeWorlds'); event.stopPropagation();">TeeWorlds</button>
-                            <button class="showcase-btn" onclick="showContent('demo', 'HomeByMe'); event.stopPropagation();">HomeByMe</button>
-                        </ul>
-                    </AccordionItem>
-                </Accordion>
-                <Accordion>
-                    <AccordionItem header="Case Studies" onclick="toggleContent('case-study')">
-                        <ul>
-                            <button class="showcase-btn" onclick="showContent('CaseStudies', 'digital-identity'); event.stopPropagation();">Digital identity verification solution</button>
-                        </ul>
-                    </AccordionItem>
-                </Accordion>
-				<Accordion>
-                    <AccordionItem header="Related Products" onclick="toggleContent('product')">
-                        <ul>
-                            <button class="showcase-btn" onclick="showContent('RelatedProducts', 'sample-video'); event.stopPropagation();">Sample Video</button>
-                        </ul>
-                    </AccordionItem>
-                </Accordion>
-            </div>
-
-            <div class="right-column flex flex-col justify-center items-center w-4/5 ml-8 mt-4">
-                <div id="teeworlds" class="content" style="display: none;">
-					<Card
-					  url="https://medium.com/leaningtech/porting-a-c-multiplayer-game-to-the-web-with-cheerp-webrtc-and-firebase-29fbbc62c5ca"
-					  img='https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4q7USA2rp0o_pU4VyhYGfg.png'
-					  title="A 2D Multiplayer Platformer/Shooter, ported to the web."
-					  footer="Yuri Iozzelli"
-					/>
-				  </div>
-
-                <div id="homebyme" class="content" style="display: none;">
-                    <Card
-                        url="https://cheerpjdemos.leaningtech.com/iTextDemo.html"
-                        img='https://images.pexels.com/photos/2531709/pexels-photo-2531709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                        title="A home design application, compiled to the web with Cheerp."
-                        footer="HomeByMe"
-                    >
-                    </Card>
-                </div>
-
-                <div id="digital-identity" class="content" style="display: none;">
-                    <Card
-                        url="https://leaningtech.com/digital-identity-verification-solution-powered-by-cheerp/"
-                        img='https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                        title="Client is a market leader in AI and ML solutions for digital identity verification via real-time processing of ID images. Their core Web solution is powered by Cheerp."
-                        footer="AI and ML Solutions"
-                    >
-                    </Card>
-                </div>
-
-				<div id="default-display" class="content" style="display: none;">
-                    <Card
-                        url=""
-                        img='https://images.pexels.com/photos/920220/pexels-photo-920220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                        title="Please select one on the left."
-						footer=""
-                    >
-                    </Card>
-                </div>
-				<section id="sample-video" class="content flex justify-center items-center w-full" style="display: none;">
-					<iframe
-						title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-						src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-						class="w-full max-w-[720px] h-auto aspect-video rounded-xl shadow-lg border-2 border-stone-700"
-						frameborder="0"
-						allowfullscreen="allowfullscreen">
-					</iframe>
-				</section>
-				
-				
-            </div>
-        </div>
-
-        <div class="bg-gradient-to-b from-secondary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10">
-            <!-- cool background -->
-        </div>
     </header>
-
+	<main class="container mx-auto p-3">
+		<FilterGrid items={itemsData} client:load />
+	</main>
     <Footer />
 </Shell>
-
-<script type="text/javascript">
-    function toggleContent(contentType) {
-        const contentMappings = {
-            'demo': ['TeeWorlds', 'HomeByMe'],  // Array of IDs under "Demos"
-            'CaseStudies': ['digital-identity'], // Array of IDs under "Case Studies"
-			'RelatedProducts': ['sample-video'] // Array of IDs under "Related Products"
-        };
-
-        // Hide all content
-        Object.keys(contentMappings).forEach(type => {
-            contentMappings[type].forEach(name => {
-                const element = document.getElementById(name);
-                if (element && element.style.display === 'block') {
-                    element.style.display = 'none';
-                }
-            });
-        });
-    }
-
-    function showContent(contentType, contentName) {
-        const targetId = contentName.replace(/\s+/g, '-').toLowerCase(); // Normalize the contentName to create IDs
-        const contentDiv = document.getElementById(targetId);
-
-        // Hide all other content sections
-        document.querySelectorAll('.content').forEach(div => {
-            div.style.display = 'none';
-        });
-
-        // Display the selected content
-        if (contentDiv) {
-            contentDiv.style.display = 'block';
-        }
-    }
-
-    document.querySelectorAll('.showcase-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.showcase-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            this.classList.add('active');
-        });
-    });
-
-	document.addEventListener('DOMContentLoaded', function() {
-    var defaultDisplay = document.getElementById('default-display');
-    if (defaultDisplay) {
-        defaultDisplay.style.display = 'block';
-    }
-});
-
-
-</script>
-
-  
-
-  
-<style>
-	
-  .container {
-    display: flex;
-    width: 100%;
-	max-width: 1200px;  
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  .left-column {
-    width: 20%;
-	
-  }
-  .right-column {
-    width: 80%;
-    margin-left: 2rem;
-    margin-top: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.content {
-    display: block;
-    width: 90%; 
-    max-width: 720px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem; 
-}
-
-  ul {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 4rem;
-  }
-  
-  .patterns {
-  display: block;
-  height: 10vh;
-}
-
-
-
-svg text {
-  letter-spacing: 10px;
-  stroke: #8ccce7;
-  font-size: 3rem;
-  font-weight: 400;
-  stroke-width: 1;
-  animation: textAnimate 4s infinite alternate;
-  
-}
-
-@keyframes textAnimate {
-  0% {
-    stroke-dasharray: 0 50%;
-    stroke-dashoffset:  20%;
-    fill:hsl(327, 66%, 35%)
-
-  }
-  
-  100% {
-    stroke-dasharray: 50% 0;
-    stroke-dashoffstet: -20%;
-    fill: hsla(189, 69%, 75%, 0.414)
-  }
-  
-}
-.showcase-btn {
-  color: #FFF;
-  transition: all 0.3s;
-  position: relative;
-  padding: 1rem;
-}
-.showcase-btn span {
-  transition: all 0.3s;
-}
-.showcase-btn::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-top-color: white;
-  border-bottom-color: white;
-  transform: scale(0.1, 1);
-}
-.showcase-btn:hover span {
-  letter-spacing: 2px;
-}
-.showcase-btn:hover::before {
-  opacity: 1; 
-  transform: scale(1, 1); 
-}
-.showcase-btn::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.3s;
-  background-color: rgba(234, 137, 197, 0.07);
-}
-.showcase-btn:hover::after {
-  opacity: 0; 
-  transform: scale(0.1, 1);
-}
-
-.showcase-btn.active span {
-  letter-spacing: 2px;
-}
-.showcase-btn.active::before {
-  opacity: 1;
-  transform: scale(1, 1);
-}
-.showcase-btn.active::after {
-  opacity: 0;
-  transform: scale(0.1, 1);
-}
-
-</style>

@@ -4,19 +4,6 @@ const productTags = z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"]));
 
 export type ProductTag = z.infer<typeof productTags>[0];
 
-export const showcaseSchema = z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    type: z.enum(["demos", "product", "case-study"]),
-    videoLink: z.string().optional(), 
-    liveSiteLink: z.string().optional(), 
-    tags: productTags, 
-    featured: z.boolean().default(false),
-    draft: z.boolean().default(false),
-    pubDate: z.string().or(z.date()).transform((val) => new Date(val)), 
-    updatedDate: z.string().optional().transform((str) => str ? new Date(str) : undefined),
-});
-
 export function defineCommonCollections() {
 	return {
 		docs: defineCollection({
@@ -64,8 +51,22 @@ export function defineCommonCollections() {
 					tags: productTags.optional(),
 				}),
 		}),
+
 		showcase: defineCollection({
-            schema: showcaseSchema,
-        }),
+			schema: ({ image }) =>
+				z.object({
+					title: z.string(),
+					description: z.string().optional(),
+					image: image().optional(),
+					videoLink: z.string().optional(),
+					url: z.string().optional(),
+					sourceCode: z.string().optional(),
+					tags: productTags,
+					pubDate: z
+						.string()
+						.or(z.date())
+						.transform((val) => new Date(val)),
+				}),
+		}),
 	};
 }
