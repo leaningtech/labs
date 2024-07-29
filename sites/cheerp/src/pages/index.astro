@@ -5,12 +5,13 @@ import heroAsset from "../assets/cheerpcube.png";
 import { Image } from "astro:assets";
 ---
 
-<ProductHome style = "px-6 py-10 w-full  mx-auto bg-gradient-to-b to-[#2f8f8a] from-stone-900">
+<ProductHome style = "w-full  pt-8   md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60  bg-gradient-to-b to-[#2f8f8a] from-stone-900">
 
-	<section class="px-48 flex col-span-2 items-center">
-		<div class="mx-auto max-w-[56em] text-center space-y-12">
+	<section class="flex grid-cols-3 items-center px-4">
+		
+		<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
 			<h1
-				class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left"
+				class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
 			>
 				How <span class="text-[#8e88ff]">C++ engineers</span>  build web applications
 			</h1>
@@ -20,6 +21,7 @@ import { Image } from "astro:assets";
 					>compile C/C++ into efficient WebAssembly and JavaScript</b>. It is open source, liberally licensed, and actively developed by
 				Leaning Technologies.
 			</p>
+	
 			<div class="flex gap-4 justify-left mt-12">
 				<LinkButton
 					type="primary-cheerp"
@@ -33,9 +35,9 @@ import { Image } from "astro:assets";
 					label="Install Cheerp"
 				/>
 			</div>
-			
-		</div>
-		<div class="p-12 lg:py-16">
+		</div>	
+		
+		<div class="hidden md:block flex justify-center">
 			<Image src={heroAsset} alt="Cheerp Logo in a cube">
 		</div>
 		
