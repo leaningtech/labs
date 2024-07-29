@@ -7,6 +7,11 @@ import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/j
 import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
 import appletrunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-appletrunner-large.png";
 
+let baseWithSlash = import.meta.env.BASE_URL;
+if (!baseWithSlash.endsWith("/")) {
+	baseWithSlash += "/";
+}
+
 export interface ProductData {
 	id: Product;
 	type: "technology" | "extension" | "tool";
@@ -40,7 +45,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ",
 		href: "/docs/cheerpj2",
 		logotype: cheerpjLogotype,
-		favicon: import.meta.env.BASE_URL + "cheerpj2/favicon.ico",
+		favicon: baseWithSlash + "cheerpj2/favicon.ico",
 		subtitle: "Java Virtual Machine replacement for the browser",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
@@ -53,7 +58,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpJ",
 		href: "https://cheerpj.com",
 		logotype: cheerpjLogotype,
-		favicon: import.meta.env.BASE_URL + "cheerpj3/favicon.ico",
+		favicon: baseWithSlash + "cheerpj3/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
@@ -66,7 +71,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpX",
 		href: "https://cheerpx.io",
 		logotype: cheerpxLogotype,
-		favicon: import.meta.env.BASE_URL + "cheerpx/favicon.ico",
+		favicon: baseWithSlash + "cheerpx/favicon.ico",
 		subtitle: "Virtual machines in your web app",
 		description:
 			"CheerpX is a JavaScript library that enables secure client-side execution of x86 binaries on any browser. Coming soon.",
@@ -79,7 +84,7 @@ export const products: { [product in Product]: ProductData } = {
 		name: "CheerpX for Flash",
 		href: "/docs/cheerpx-for-flash",
 		logotype: cheerpxLogotype,
-		favicon: import.meta.env.BASE_URL + "cheerpx/favicon.ico",
+		favicon: baseWithSlash + "cheerpx/favicon.ico",
 		subtitle: "Run Flash content without the Adobe Flash plugin",
 		description:
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",

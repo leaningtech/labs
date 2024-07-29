@@ -18,7 +18,8 @@ const { product } = Astro.props;
 
 <nav
 	aria-label="Product navigation"
-	class="sticky top-0 z-40 bg-stone-900 bg-opacity-70 backdrop-blur-md text-white font-medium leading-6"
+	class="sticky top-0 z-40 bg-stone-900 text-white font-medium leading-6 border-b border-b-transparent shadow-none transition-all duration-200"
+	id="product-nav"
 >
 	<div
 		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden"
@@ -38,7 +39,13 @@ const { product } = Astro.props;
 
 		<Search filterProductId={product.id} />
 
-		<div class="flex items-center gap-4 ml-auto flex-none text-stone-200">
+		<div class="flex items-stretch gap-2 ml-auto px-2">
+			<Link label="Docs" href="/docs" />
+			<Link label="Blog" href="/blog" />
+			<Link label="Showcase" href="/showcase" />
+		</div>
+
+		<div class="flex items-center gap-4 flex-none text-stone-200">
 			<a
 				href={DISCORD_URL}
 				class="flex items-center gap-1.5 hover:text-white group"
@@ -72,12 +79,23 @@ const { product } = Astro.props;
 					/>
 				</span>
 			</a>
-
-			<div class="flex items-stretch gap-1">
-				<Link label="Showcase" href="/showcase" />
-				<Link label="Docs" href="/docs" />
-				<Link label="Blog" href="/blog" />
-			</div>
 		</div>
 	</div>
 </nav>
+
+<script>
+	// add shadow and border when scrolling
+
+	const nav = document.getElementById("product-nav")!;
+	const classes = ["!border-b-stone-800", "!shadow-lg"];
+
+	function handleScroll() {
+		if (window.scrollY > 64) {
+			nav.classList.add(...classes);
+		} else {
+			nav.classList.remove(...classes);
+		}
+	}
+
+	window.addEventListener("scroll", handleScroll, { passive: true });
+</script>

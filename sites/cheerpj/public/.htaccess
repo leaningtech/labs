@@ -5,5 +5,5 @@ ErrorDocument 403 /docs/index.html
 
 DirectorySlash off
 
-RewriteCond %{REQUEST_URI} ^/docs/([^.]*)$
+RewriteCond %{REQUEST_URI} ^/(docs|blog)/([^.]*)$
 RewriteRule ^(.*)$ $1\.html [L]
