@@ -38,7 +38,6 @@ export type Options = {
 };
 
 const contentDir = joinPath(dirname, "../../content");
-const showcaseDir = joinPath(dirname, "../../showcase");
 
 export default function ThemeIntegration(
 	options: Options = {},
@@ -91,7 +90,6 @@ export default function ThemeIntegration(
 					entrypoint: "@leaningtech/astro-theme/pages/showcase/[...slug].astro",
 				});
 				cpSync(contentDir, "src/content", { recursive: true }); // Needed until Astro Content Layer implemented
-				cpSync(showcaseDir, "src/content", { recursive: true });
 				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
 					pattern: docsPrefix,
