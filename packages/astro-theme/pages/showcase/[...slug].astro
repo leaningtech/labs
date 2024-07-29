@@ -1,20 +1,66 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
+import Footer from "../../components/Footer.astro";
+import Shell from "../../layouts/Shell.astro";
+import { productFromUrl } from "../../lib/products";
+import ProductNav from "../../components/nav/product/Nav.astro";
+import LinkButton from "../../components/LinkButton.astro";
+
+const product = productFromUrl(Astro.url);
 
 export async function getStaticPaths() {
-	const posts = await getCollection("showcase");
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
+	const items = await getCollection("showcase");
+	return items.map((item) => ({
+		params: { slug: item.slug },
+		props: item,
 	}));
 }
+
 type Props = CollectionEntry<"showcase">;
 
-const post = Astro.props;
-const { Content, headings } = await post.render();
+const item = Astro.props;
+const { Content } = await item.render();
 ---
 
-<BlogPost {...post.data} {headings} id={post.id}>
-	<Content />
-</BlogPost>
+<Shell
+	title={item.data.title}
+	description={item.data.description}
+	image={item.data.image?.src}
+>
+	{product && <ProductNav {product} />}
+	<div class="mx-auto w-full max-w-screen-lg px-4 py-10 flex flex-col lg:flex-row gap-10 justify-around">
+		<div class="grow">
+			<header>
+				<h1 class="text-5xl font-semibold text-balance">{item.data.title}</h1>
+				<div class="flex gap-4 flex-wrap my-6">
+					{item.data.url && <LinkButton href={item.data.url} type="primary" label="Try in your browser" iconRight="mdi:arrow-top-right" />}
+					{item.data.sourceCode && <LinkButton href={item.data.sourceCode} type="github" label="View source code" iconLeft="mdi:github" />}
+				</div>
+			</header>
+			<main class="max-w-prose">
+				<div
+					class="prose prose-stone md:prose-lg dark:prose-invert"
+					data-pagefind-body
+					data-pagefind-filter="productId:showcase"
+				>
+					<Content />
+				</div>
+			</main>
+		</div>
+		<div>
+			<aside class="sticky top-10 w-64 border border-stone-700 rounded-xl px-6 py-5">
+				<p class="mb-4 font-semibold text-balance">Looking to integrate {item.data.tags.join(" + ")} in your product?</p>
+				<LinkButton href="https://leaningtech.com/contact-us" type="primary" label="Talk to an expert" />
+			</aside>
+		</div>
+	</div>
+	<section class="border-t border-b border-stone-700 px-4 py-10">
+		<div class="mx-auto w-full max-w-screen-lg flex justify-between">
+			<h2 class="text-3xl font-semibold text-balance">Build with Cheerp</h2>
+			<div>
+				<LinkButton href="/docs" type="primary" label="Get started" />
+			</div>
+		</div>
+	</section>
+	<Footer />
+</Shell>
