@@ -64,7 +64,6 @@ export default function ThemeIntegration(
 					pagefind(),
 					svelte(),
 					publicDir({
-						// FIXME claims directory does not exist
 						dir: "public",
 						cwd: dirname,
 					}),

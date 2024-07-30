@@ -17,24 +17,27 @@ const items = (
 
 // When we pass props to FilterGrid, we only want to pass data that is actually needed
 // because Astro will serialize all props to JSON for client hydration.
-const itemsData = items.map(item => ({ ...item.data, slug: item.slug }));
+const itemsData = items.map((item) => ({ ...item.data, slug: item.slug }));
+
+const description =
+	"Discover dozens of amazing projects built with " +
+	(product?.name ?? "Leaning Technologies") +
+	".";
 ---
 
 <Shell
-    title={["Showcase", product?.name ?? "Leaning Technologies"].join(" - ")}
-    description={"Meet dozens of impressive projects built with " + (product?.name ?? "Leaning Technologies") + "."}
+	title={["Showcase", product?.name ?? "Leaning Technologies"].join(" - ")}
+	{description}
 >
-    {product && <ProductNav {product} />}
-    <header class="text-center text-stone-100 py-16">
-        <h1 class="text-4xl">
-			Showcase
-		</h1>
-        <p class="text-lg text-balance my-8 text-stone-400">
-            Including demos, related products and case studies.
-        </p>
-    </header>
-	<main class="container mx-auto p-3">
-		<FilterGrid items={itemsData} client:load />
+	{product && <ProductNav {product} />}
+	<header class="text-center text-stone-100 py-16">
+		<h1 class="text-6xl font-semibold">Showcase</h1>
+		<p class="text-lg text-balance my-8 text-stone-400">
+			{description}
+		</p>
+	</header>
+	<main class="container mx-auto p-3 pb-16">
+		<FilterGrid items={itemsData} enableTechnologyFilterGroup={!product} client:load />
 	</main>
-    <Footer />
+	<Footer />
 </Shell>

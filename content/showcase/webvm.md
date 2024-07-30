@@ -6,7 +6,7 @@ url: https://webvm.io/
 sourceCode: https://github.com/leaningtech/webvm
 tags:
  - CheerpX
-pubDate: 2024-01-01
+pubDate: 2022-01-31
 ---
 
 WebVM is a server-less virtual Linux environment running fully client-side in HTML5/WebAssembly. 

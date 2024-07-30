@@ -91,6 +91,10 @@ export default function makeConfig(): Config {
 					xl: { css: disabledCss },
 					"2xl": { css: disabledCss },
 				}),
+				backgroundImage: {
+					"pattern-diagonal-lines":
+						"image-set(url(/patterns/diagonal-lines-16x16.png) 1x,url(/patterns/diagonal-lines-16x16@2x.png) 2x)",
+				},
 			},
 		},
 		plugins: [require("@tailwindcss/typography"), exportColorsAsCssVariables],

@@ -2,6 +2,7 @@
 import { CollectionEntry, getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Icon from "astro-icon";
+import FormattedDate from "../../components/FormattedDate.astro";
 import Footer from "../../components/Footer.astro";
 import Shell from "../../layouts/Shell.astro";
 import { productFromUrl } from "../../lib/products";
@@ -22,6 +23,8 @@ type Props = CollectionEntry<"showcase">;
 
 const item = Astro.props;
 const { Content } = await item.render();
+
+const productNames = item.data.tags.join(" + ");
 ---
 
 <Shell
@@ -30,8 +33,8 @@ const { Content } = await item.render();
 	image={item.data.image?.src}
 >
 	{product && <ProductNav {product} />}
-	<div class="mx-auto w-full max-w-screen-xl md:grid grid-cols-8 justify-around py-10">
-		<div class="md:border-r border-stone-800 col-span-3">
+	<div class="mx-auto w-full max-w-screen-xl md:grid grid-cols-8 justify-around">
+		<div class="md:border-r border-stone-800 col-span-3 py-10">
 			<div class="md:sticky top-32 px-10">
 				<a
 					href="/showcase"
@@ -40,22 +43,38 @@ const { Content } = await item.render();
 					<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to Showcase
 				</a>
 				<header>
-					<h1 class="text-4xl md:text-5xl xl:text-6xl text-white font-semibold text-balance">{item.data.title}</h1>
+					<h1 class="text-4xl md:text-5xl text-white font-semibold text-balance">{item.data.title}</h1>
 					<p class="text-base text-stone-300 py-5">{item.data.description}</p>
 					<div class="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-5 pb-5">
-						{item.data.url && <LinkButton href={item.data.url} type="primary2" label="View demo" iconRight="mdi:arrow-top-right" center />}
+						{item.data.url && <LinkButton href={item.data.url} type="primary2" label="Go to website" iconRight="mdi:arrow-right" center />}
 						{item.data.sourceCode && <LinkButton href={item.data.sourceCode} type="github" label="View source" iconLeft="mdi:github" center />}
 					</div>
+					<table class="w-full text-stone-400 leading-loose my-6">
+						<tbody>
+							<tr class="border-b border-stone-700">
+								<td class="font-semibold">Technologies</td>
+								<td class="text-right">{item.data.tags.join(", ")}</td>
+							</tr>
+							{item.data.url && <tr class="border-b border-stone-700">
+								<td class="font-semibold">URL</td>
+								<td class="text-right"><a href={item.data.url}>{new URL(item.data.url).hostname}</a></td>
+							</tr>}
+							{item.data.pubDate && <tr>
+								<td class="font-semibold">Date</td>
+								<td class="text-right"><FormattedDate date={item.data.pubDate} /></td>
+							</tr>}
+						</tbody>
+					</table>
 				</header>
 				<aside class="w-64 border border-stone-700 rounded-xl mt-10 px-6 py-5 hidden md:block">
-					<p class="mb-4 font-semibold text-balance">Looking to integrate {item.data.tags.join(" + ")} in your product?</p>
+					<p class="mb-4 font-semibold text-balance">Looking to integrate {productNames} in your product?</p>
 					<LinkButton href="https://leaningtech.com/contact-us" type="primary" label="Get in touch" />
 				</aside>
 			</div>
 		</div>
 		<div class="col-span-5">
-			<main class="px-10">
-				<a href={item.data.url} title="View demo">
+			<main class="p-10">
+				<a href={item.data.url} title="Go to website">
 					<Image src={item.data.image} alt="" class="rounded-xl border border-stone-800 w-full mb-8" />
 				</a>
 				<div
@@ -68,12 +87,13 @@ const { Content } = await item.render();
 			</main>
 		</div>
 	</div>
-	<section class="border-t border-b border-stone-700 px-4 py-10">
-		<div class="mx-auto w-full max-w-screen-lg flex justify-between">
-			<h2 class="text-3xl font-semibold text-balance">Build with Cheerp</h2>
-			<div>
-				<LinkButton href="/docs" type="primary" label="Get started" />
-			</div>
+	<section class="border-t border-stone-700 px-4 py-20 bg-pattern-diagonal-lines">
+		<div class="mx-auto w-full max-w-screen-lg flex flex-col items-center justify-center">
+			<h2 class="text-4xl font-semibold text-balance">Ready to try {productNames}?</h2>
+			<p class="py-5 text-lg text-stone-400">
+				<!-- TODO --> Lorem ipsum
+			</p>
+			<LinkButton href="/docs" type="primary" label="Get started now" iconRight="mi:arrow-right" center />
 		</div>
 	</section>
 	<Footer />
