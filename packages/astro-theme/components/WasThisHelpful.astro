@@ -14,13 +14,13 @@ interface Props {
 	<button
 		class="rounded-lg px-4 py-1 text-base border border-stone-700 hover:border-green-400 text-stone-300 hover:text-green-400"
 	>
-		😄 Yes
+		😄 {t("Yes", Astro.currentLocale)}
 	</button>
 
 	<button
 		class="rounded-lg px-4 py-1 text-base border border-stone-700 hover:border-red-400 text-stone-300 hover:text-red-400"
 	>
-		😕 No
+		😕 {t("No", Astro.currentLocale)}
 	</button>
 	<div class="grow"></div>
 	<a
