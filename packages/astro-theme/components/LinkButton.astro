@@ -6,9 +6,10 @@ interface Props {
 	type?: "primary" | "primary2" | "secondary" | "discord" | "github";
 	iconLeft?: string;
 	iconRight?: string;
+	center?: boolean;
 }
 
-const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
+const { href, label, type = "secondary", iconLeft, iconRight, center } = Astro.props;
 ---
 
 <a
@@ -18,14 +19,15 @@ const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 		{
 			"border-primary-300 bg-primary-500 text-white hover:border-primary-200":
 				type === "primary",
-			"border-white bg-white text-primary-500 hover:border-primary-400":
+			"border-stone-300 bg-white text-stone-900 hover:border-primary-500":
 				type === "primary2",
 			"border-stone-600 text-primary-400 hover:border-primary-300":
 				type === "secondary",
 			"border-white border-opacity-30 bg-blurple text-white hover:border-opacity-80":
 				type === "discord",
-			"border-stone-400 bg-stone-950 text-white hover:border-stone-500":
+			"border-stone-800 bg-stone-950 text-white hover:border-stone-500":
 				type === "github",
+			"text-center justify-center": center,
 		},
 	]}
 >

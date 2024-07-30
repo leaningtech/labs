@@ -1,5 +1,7 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Icon from "astro-icon";
 import Footer from "../../components/Footer.astro";
 import Shell from "../../layouts/Shell.astro";
 import { productFromUrl } from "../../lib/products";
@@ -28,30 +30,42 @@ const { Content } = await item.render();
 	image={item.data.image?.src}
 >
 	{product && <ProductNav {product} />}
-	<div class="mx-auto w-full max-w-screen-lg px-4 py-10 flex flex-col lg:flex-row gap-10 justify-around">
-		<div class="grow">
-			<header>
-				<h1 class="text-5xl font-semibold text-balance">{item.data.title}</h1>
-				<div class="flex gap-4 flex-wrap my-6">
-					{item.data.url && <LinkButton href={item.data.url} type="primary" label="Try in your browser" iconRight="mdi:arrow-top-right" />}
-					{item.data.sourceCode && <LinkButton href={item.data.sourceCode} type="github" label="View source code" iconLeft="mdi:github" />}
-				</div>
-			</header>
-			<main class="max-w-prose">
+	<div class="mx-auto w-full max-w-screen-xl md:grid grid-cols-8 justify-around py-10">
+		<div class="md:border-r border-stone-800 col-span-3">
+			<div class="md:sticky top-32 px-10">
+				<a
+					href="/showcase"
+					class="mb-8 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+				>
+					<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to Showcase
+				</a>
+				<header>
+					<h1 class="text-4xl md:text-5xl xl:text-6xl text-white font-semibold text-balance">{item.data.title}</h1>
+					<p class="text-base text-stone-300 py-5">{item.data.description}</p>
+					<div class="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-5 pb-5">
+						{item.data.url && <LinkButton href={item.data.url} type="primary2" label="View demo" iconRight="mdi:arrow-top-right" center />}
+						{item.data.sourceCode && <LinkButton href={item.data.sourceCode} type="github" label="View source" iconLeft="mdi:github" center />}
+					</div>
+				</header>
+				<aside class="w-64 border border-stone-700 rounded-xl mt-10 px-6 py-5 hidden md:block">
+					<p class="mb-4 font-semibold text-balance">Looking to integrate {item.data.tags.join(" + ")} in your product?</p>
+					<LinkButton href="https://leaningtech.com/contact-us" type="primary" label="Get in touch" />
+				</aside>
+			</div>
+		</div>
+		<div class="col-span-5">
+			<main class="px-10">
+				<a href={item.data.url} title="View demo">
+					<Image src={item.data.image} alt="" class="rounded-xl border border-stone-800 w-full mb-8" />
+				</a>
 				<div
-					class="prose prose-stone md:prose-lg dark:prose-invert"
+					class="prose prose-stone dark:prose-invert leading-loose text-stone-300 max-w-none"
 					data-pagefind-body
 					data-pagefind-filter="productId:showcase"
 				>
 					<Content />
 				</div>
 			</main>
-		</div>
-		<div>
-			<aside class="sticky top-10 w-64 border border-stone-700 rounded-xl px-6 py-5">
-				<p class="mb-4 font-semibold text-balance">Looking to integrate {item.data.tags.join(" + ")} in your product?</p>
-				<LinkButton href="https://leaningtech.com/contact-us" type="primary" label="Talk to an expert" />
-			</aside>
 		</div>
 	</div>
 	<section class="border-t border-b border-stone-700 px-4 py-10">
