@@ -1,66 +1,117 @@
 ---
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
-import heroAsset from "../assets/cheerpcube.png";
+import HeroAsset from "../assets/cheerpcube.png";
+import IconArrows from "../assets/update.png";
+import IconSparkle from "../assets/sparkle.png";
+import IconBox from "../assets/box.png";
+import IconLayers from "../assets/layers.png";
+import DrawingReading from "../assets/reading.png";
 import { Image } from "astro:assets";
+
 ---
 
-<ProductHome style = "w-full  pt-8   md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60  bg-gradient-to-b to-[#2f8f8a] from-stone-900">
-
-	<section class="flex grid-cols-3 items-center px-4">
+<ProductHome style = "w-full  pt-8     bg-gradient-to-b to-[#2f8f8a] from-stone-900">
+	<div class = "pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
+		<section class="flex grid-cols-3 items-center px-4">
 		
-		<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
-			<h1
-				class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
-			>
-				How <span class="text-[#8e88ff]">C++ engineers</span>  build web applications
-			</h1>
-			<p class="text-lg text-balance text-white text-left">
-				Cheerp is an <b>enterprise-grade</b> compiler toolchain
-				that can <b
-					>compile C/C++ into efficient WebAssembly and JavaScript</b>. It is open source, liberally licensed, and actively developed by
-				Leaning Technologies.
-			</p>
-	
-			<div class="flex gap-4 justify-left mt-12">
-				<LinkButton
-					type="primary-cheerp"
-					href="/docs/getting-started/tour"
-					label="Take a 5-minute tour"
-				/>
-				<LinkButton
-					type="secondary-cheerp"
-					href="/docs/getting-started/installation"
-					iconLeft="mi:download"
-					label="Install Cheerp"
-				/>
+			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
+				>
+					How <span class="text-[#8e88ff]">C++ engineers</span>  build web applications
+				</h1>
+				<p class="text-lg text-balance text-white text-left">
+					Cheerp is an <b>enterprise-grade</b> compiler toolchain
+					that can <b
+						>compile C/C++ into efficient WebAssembly and JavaScript</b>. It is open source, liberally licensed, and actively developed by
+					Leaning Technologies.
+				</p>
+		
+				<div class="flex gap-4 justify-left mt-12">
+					<LinkButton
+						type="primary-cheerp"
+						href="/docs/getting-started/tour"
+						label="Take a 5-minute tour"
+					/>
+					<LinkButton
+						type="secondary-cheerp"
+						href="/docs/getting-started/installation"
+						iconLeft="mi:download"
+						label="Install Cheerp"
+					/>
+				</div>
+			</div>	
+			
+			<div class="hidden md:block flex justify-center">
+				<Image src={HeroAsset} alt="Cheerp Logo in a cube">
 			</div>
-		</div>	
+			
+			
+		</section>
+	</div>
+	
+	<div></div>
+	<section class="justify-center py-20 bg-stone-900 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
 		
-		<div class="hidden md:block flex justify-center">
-			<Image src={heroAsset} alt="Cheerp Logo in a cube">
+		<p class="text-center text-3xl pb-20"> <b>Why Cheerp?</b> </p>
+		
+		<div class = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4 text-center place-content-center">
+			<div class = " bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
+				<div class="flex justify-center pb-4">
+					<Image src={IconArrows} alt="arrows" class="w-12"></Image>
+				</div>
+				
+				<p class="text-2xl pb-4"> <b>JavaScript interoperability</b></p>
+				<p>Expressive intefacing with JavaScript libraries and the DOM, without wrappers or any overhead.</p>
+			</div>
+			<div class = "bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
+				<div class="flex justify-center pb-4">
+					<Image src={IconLayers} alt="arrows" class="w-12"></Image>
+				</div>
+				
+				<p class="text-2xl pb-2"> <b>Export C++ with [[cheerp::jsexport]]</b></p>
+				<p>Expose a C++ API to be called from external JavaScript libraries or interfaces, or directly from your page.</p>
+			</div>
+			<div class = "bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
+				<div class="flex justify-center pb-4">
+					<Image src={IconBox} alt="arrows" class="w-12"></Image>
+				</div>
+				
+				<p class="text-2xl pb-2"> <b>Combine memory models</b></p>
+				<p>Combine fast linear memory with garbage collectible JavaScript objects, the best of both worlds.</p>
+			</div>
+			<div class = "bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
+				<div class="flex justify-center pb-4">
+					<Image src={IconSparkle} alt="arrows" class="w-12"></Image>
+				</div>
+				
+				<p class="text-2xl pb-2"> <b>Maintain one code base</b></p>
+				<p>Cheerp automatically generates both a WebAssembly module & a highly compatible JavaScript module, from one single code base.</p>
+			</div>
+
 		</div>
-		
-		
+
 	</section>
+
 	<!-- TODO: video -->
 	<!-- TODO: client company logos -->
-	<section class="py-16 max-w-[60em] mx-auto">
-		<h2 class="text-4xl font-semibold text-center pb-8">Benefits</h2>
-		<div class="grid grid-cols-2 gap-8">
-			<div>JavaScript interoperability</div>
-			<div>
-				Export C++ with <code>[[cheerp::jsexport]]</code>
-			</div>
-			<div>Combine memory models</div>
-			<div>Maintain one code base</div>
-		</div>
-	</section>
 	<!-- TODO: how it works (user story) -->
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
-	<section class="py-16 text-center">
-		<h2 class="text-4xl font-semibold text-center pb-8">Give it a try!</h2>
+	<section class="bg-gradient-to-b from-stone-900 to-[#474484] py-16 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
+		<h2 class="text-4xl font-semibold text-center pb-8">Get started!</h2>
+
+		<div class = "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3  gap-4 text-center place-content-center">
+			<div class = " justify-center p-16">
+				<div class="flex justify-center pb-4">
+					<Image src={DrawingReading} alt="arrows" class="w-248"></Image>
+				</div>
+				
+				<p class="text-2xl pb-4"> <b>Read the docs</b></p>
+				<p>Search our documentation for answers to your queries.</p>
+			</div>
+		</div>
 		<LinkButton
 			type="primary-cheerp"
 			href="/docs"
