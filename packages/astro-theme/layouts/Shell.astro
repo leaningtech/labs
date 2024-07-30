@@ -1,6 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import GlobalNav from "../components/GlobalNav.astro";
+import GlobalNavbar from "../components/nav/global/GlobalNavbar.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 interface Props {
@@ -100,7 +100,7 @@ const { title, description, image } = Astro.props;
 	<body
 		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-stone-900 text-stone-200"
 	>
-		<GlobalNav />
+		<GlobalNavbar />
 		<slot />
 	</body>
 </html>

@@ -1,3 +1,7 @@
+<!-- TODO: make this Svelte-like -->
+<!-- TODO: collapse to dropdown on small widths -->
+<!-- TODO: polyfill popover / dont use -->
+
 <nav aria-label="Primary" id="global-navbar">
 	<ul>
 		<li>
@@ -180,7 +184,7 @@
 		height: 2.5rem;
 		border-bottom: 1px solid rgb(68 64 60);
 
-		> ul {
+		& > ul {
 			display: flex;
 			height: 100%;
 			align-items: center;
@@ -191,15 +195,15 @@
 
 			gap: 1rem;
 
-			> li {
+			& > li {
 				height: 1.5rem;
 
 				&:empty {
 					flex: 1;
 				}
 
-				> a,
-				> button {
+				& > a,
+				& > button {
 					display: flex;
 					align-items: center;
 					height: 100%;
@@ -213,7 +217,7 @@
 
 					cursor: pointer;
 
-					svg {
+					& svg {
 						height: 100%;
 
 						&.global-navbar-social-icon {
@@ -236,7 +240,7 @@
 
 		padding: 1.5rem;
 
-		ul {
+		& ul {
 			padding: 0;
 			margin: 0;
 			list-style: none;
@@ -245,7 +249,7 @@
 			flex-direction: column;
 			gap: 0.5rem;
 
-			a {
+			& a {
 				color: white;
 				text-decoration: none;
 
@@ -259,13 +263,13 @@
 					align-items: center;
 					gap: 0.5rem;
 
-					svg {
+					& svg {
 						grid-row: span 2;
 						width: 80%;
 						height: 100%;
 					}
 
-					span {
+					& span {
 						color: rgb(168 162 158);
 					}
 				}

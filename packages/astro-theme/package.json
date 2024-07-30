@@ -22,7 +22,8 @@
 		"./components/BlogPostCardSet.astro": "./components/BlogPostCardSet.astro",
 		"./components/LatestBlogPostPill.astro": "./components/LatestBlogPostPill.astro",
 		"./components/ShowcaseList.astro": "./components/ShowcaseList.astro",
-		"./components/Callout.astro": "./components/Callout.astro"
+		"./components/Callout.astro": "./components/Callout.astro",
+		"./components/nav/global/GlobalNavbar.astro": "./components/nav/global/GlobalNavbar.astro"
 	},
 	"scripts": {},
 	"peerDependencies": {
@@ -38,7 +39,6 @@
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.2",
 		"@astropub/md": "^0.4.0",
-		"@leaningtech/global-navbar": "workspace:^",
 		"@tailwindcss/typography": "^0.5.10",
 		"astro-expressive-code": "^0.23.0",
 		"astro-icon": "^0.8.1",
