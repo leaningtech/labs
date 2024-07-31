@@ -13,9 +13,10 @@ export default defineConfig({
 	],
 	i18n: {
 		defaultLocale: "en",
-		locales: ["en", "ja"],
+		locales: ["en", "ja", "zh"],
 		fallback: {
 			ja: "en",
+			zh: "en",
 		},
 	},
 	vite: {
