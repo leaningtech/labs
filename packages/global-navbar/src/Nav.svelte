@@ -3,6 +3,8 @@
 <!-- TODO: polyfill popover / dont use -->
 
 <script>
+	import "@oddbird/popover-polyfill";
+
 	// test that scripts are being executed
 	import { onMount } from 'svelte';
 	let name;
