@@ -18,6 +18,7 @@
 </script>
 
 <select on:change={change}>
+	<option selected disabled>Leaning Technologies</option>
 	{#each Object.entries(menu) as [label, items]}
 		<optgroup {label}>
 			{#each items as { title }}
