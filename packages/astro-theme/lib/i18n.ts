@@ -16,14 +16,13 @@ function join(a: string, b: string): string {
 
 /** Gets the base paths for all locales. */
 function getLocaleBasePaths(currentLocale: string | undefined): {
-    [locale: string]: string;
+	[locale: string]: string;
 } {
-    if (!currentLocale) return {};
+	if (!currentLocale) return {};
 
-    const base = import.meta.env.BASE_URL;
-    return { en: base, ja: join(base, "ja"), zh: join(base, "zh") };
+	const base = import.meta.env.BASE_URL;
+	return { en: base, ja: join(base, "ja"), zh: join(base, "zh") };
 }
-
 
 /**
  * Returns paths representing the given one in supported locales.
@@ -52,20 +51,19 @@ export function getLocalisedPaths(
 
 /** Translates the given English string, falling back to English if it's not found. */
 export function t(english: string, currentLocale: string | undefined): string {
-    if (currentLocale === "ja") {
-        const translation = translationsJa[english as keyof typeof translationsJa];
-        if (translation) return translation;
-        else if (import.meta.env.DEV) {
-            return "MISSING TRANSLATION";
-        } else throw new Error(`Missing Japanese translation for: ${english}`);
-    } else if (currentLocale === "zh") {
-        const translation = translationsZh[english as keyof typeof translationsZh];
-        if (translation) return translation;
-        else if (import.meta.env.DEV) {
-            return "MISSING TRANSLATION";
-        } else throw new Error(`Missing Chinese translation for: ${english}`);
-    }
+	if (currentLocale === "ja") {
+		const translation = translationsJa[english as keyof typeof translationsJa];
+		if (translation) return translation;
+		else if (import.meta.env.DEV) {
+			return "MISSING TRANSLATION";
+		} else throw new Error(`Missing Japanese translation for: ${english}`);
+	} else if (currentLocale === "zh") {
+		const translation = translationsZh[english as keyof typeof translationsZh];
+		if (translation) return translation;
+		else if (import.meta.env.DEV) {
+			return "MISSING TRANSLATION";
+		} else throw new Error(`Missing Chinese translation for: ${english}`);
+	}
 
-    return english;
+	return english;
 }
-
