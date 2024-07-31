@@ -2,6 +2,15 @@
 <!-- TODO: collapse to dropdown on small widths -->
 <!-- TODO: polyfill popover / dont use -->
 
+<script>
+	// test that scripts are being executed
+	import { onMount } from 'svelte';
+	let name;
+	onMount(() => {
+		console.log(name)
+	})
+</script>
+
 <nav aria-label="Primary" id="global-navbar">
 	<ul>
 		<li>
@@ -12,7 +21,7 @@
 						d="m0,75.94c6.68-1.36,13.67-1.62,20.46-1.7,6.87.08,13.68.34,20.46,1.7v.2c-10.2.09-30.72.09-40.91,0v-.2h-.01Z"
 					/>
 				</svg>
-				Leaning Technologies
+				<span bind:this={name}>Leaning Technologies</span>
 			</a>
 		</li>
 		<li></li>

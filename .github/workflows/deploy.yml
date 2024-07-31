@@ -42,15 +42,32 @@ jobs:
       - name: Install dependencies
         run: cd sites/cheerpj && pnpm install
 
+      - name: Build global-navbar
+        run: cd packages/global-navbar && pnpm run build
+
       - name: Build sites/cheerpj
         run: cd sites/cheerpj && pnpm run build
 
-      - name: Deploy
+      - name: Deploy cheerpj.com/docs
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: sites/cheerpj/dist/
           remote_path: ${{ secrets.RSYNC_DEPLOY_PATH }}
+          remote_host: ${{ secrets.RSYNC_DEPLOY_HOST }}
+          remote_port: ${{ secrets.RSYNC_DEPLOY_PORT }}
+          remote_user: ${{ secrets.RSYNC_DEPLOY_USER }}
+          remote_key: ${{ secrets.RSYNC_DEPLOY_KEY }}
+
+      - name: Copy global-navbar dist to WordPress plugin
+        run: cp -r packages/global-navbar/dist packages/global-navbar/wordpress-plugin/global-navbar
+
+      - name: Deploy global-navbar WordPress plugin
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: packages/global-navbar/wordpress-plugin/global-navbar/
+          remote_path: ${{ secrets.RSYNC_DEPLOY_PATH_GLOBAL_NAVBAR }}
           remote_host: ${{ secrets.RSYNC_DEPLOY_HOST }}
           remote_port: ${{ secrets.RSYNC_DEPLOY_PORT }}
           remote_user: ${{ secrets.RSYNC_DEPLOY_USER }}

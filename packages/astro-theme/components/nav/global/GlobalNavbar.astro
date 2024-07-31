@@ -1,9 +1,7 @@
 ---
 import EventBanner from "./EventBanner.svelte";
-import Nav from "./GlobalNavbar.svelte";
+import Nav from "@leaningtech/global-navbar/Wrapper.astro";
 ---
 
-{"" /* required for page partial for some reason */}
-
 <EventBanner client:idle />
-<Nav client:idle />
+<Nav />

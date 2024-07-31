@@ -1,0 +1,25 @@
+{
+	"name": "@leaningtech/global-navbar",
+	"version": "0.0.1",
+	"scripts": {
+		"build": "npm run build:client && npm run build:server",
+		"build:client": "vite build --ssrManifest --outDir dist/client",
+		"build:server": "vite build --ssr src/entry-server.js --outDir dist/server && node ssr.js"
+	},
+	"exports": {
+		".": "./dist/client/index.js",
+		"./Wrapper.astro": "./src/Wrapper.astro"
+	},
+	"files": [
+		"dist"
+	],
+	"peerDependencies": {
+		"svelte": "^4.0.0"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"svelte": "^4.2.7",
+		"vite": "^5.3.5"
+	},
+	"type": "module"
+}
