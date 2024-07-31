@@ -10,7 +10,7 @@
 </script>
 
 <Item>
-	<button {popovertarget} on:click={evt => dispatch("click", evt)}>
+	<button {popovertarget} on:click={(evt) => dispatch("click", evt)}>
 		{title}
 		<svg aria-hidden="true" viewBox="0 0 24 24">
 			<path

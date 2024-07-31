@@ -13,11 +13,5 @@
 	<rect x="35.24" y="46.58" width="8.89" height="32.39" />
 	<rect fill="#ebeaea" x="35.24" y="9.38" width="4.45" height="32.39" />
 	<rect fill="#ebeaea" x="23.49" y="58.33" width="16.2" height="8.89" />
-	<rect
-		fill="#ebeaea"
-		x="35.24"
-		y="46.58"
-		width="4.45"
-		height="32.39"
-	/>
+	<rect fill="#ebeaea" x="35.24" y="46.58" width="4.45" height="32.39" />
 </svg>

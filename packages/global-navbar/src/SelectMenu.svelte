@@ -7,7 +7,7 @@
 
 		// Look up selected item and navigate to it
 		for (const items of Object.values(menu)) {
-			const item = items.find(item => item.title === title);
+			const item = items.find((item) => item.title === title);
 
 			if (item) {
 				window.location.href = item.href;
@@ -19,7 +19,7 @@
 
 <select on:change={change}>
 	{#each Object.entries(menu) as [label, items]}
-		<optgroup label={label}>
+		<optgroup {label}>
 			{#each items as { title }}
 				<option>{title}</option>
 			{/each}

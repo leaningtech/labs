@@ -4,7 +4,7 @@
 </script>
 
 <li>
-	<a href={href}>
+	<a {href}>
 		{#if icon == "x"}
 			<svg
 				title="X"
@@ -27,4 +27,3 @@
 		{/if}
 	</a>
 </li>
-

@@ -14,7 +14,7 @@
 	import CheerpXLogo from "./logos/cheerpx.svg.svelte";
 
 	const mobileMenu = {
-		"Technology": [
+		Technology: [
 			{
 				href: "https://cheerp.io/",
 				title: "Cheerp",
@@ -28,7 +28,7 @@
 				title: "CheerpX",
 			},
 		],
-		"Resources": [
+		Resources: [
 			{
 				href: "https://labs.leaningtech.com/",
 				title: "Developer Hub",
@@ -63,13 +63,25 @@
 
 <nav popover aria-label="Technology" id="global-navbar-technology">
 	<ul>
-		<BigIconItem href="https://cheerp.io/" title="Cheerp" description="C++ to Wasm/JS compiler">
+		<BigIconItem
+			href="https://cheerp.io/"
+			title="Cheerp"
+			description="C++ to Wasm/JS compiler"
+		>
 			<CheerpLogo />
 		</BigIconItem>
-		<BigIconItem href="https://cheerpj.com/" title="CheerpJ" description="Java runtime for browsers">
+		<BigIconItem
+			href="https://cheerpj.com/"
+			title="CheerpJ"
+			description="Java runtime for browsers"
+		>
 			<CheerpJLogo />
 		</BigIconItem>
-		<BigIconItem href="https://cheerpx.io/" title="CheerpX" description="Virtual machines for the web">
+		<BigIconItem
+			href="https://cheerpx.io/"
+			title="CheerpX"
+			description="Virtual machines for the web"
+		>
 			<CheerpXLogo />
 		</BigIconItem>
 	</ul>
