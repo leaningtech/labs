@@ -145,6 +145,11 @@ export default function ThemeIntegration(
 					image: {
 						service: squooshImageService(),
 					},
+					vite: {
+						ssr: {
+							noExternal: ["@leaningtech/global-navbar"],
+						},
+					},
 				});
 			},
 		},
