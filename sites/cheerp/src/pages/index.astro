@@ -7,6 +7,8 @@ import IconSparkle from "../assets/sparkle.png";
 import IconBox from "../assets/box.png";
 import IconLayers from "../assets/layers.png";
 import DrawingReading from "../assets/reading.png";
+import DrawingMagnifier from "../assets/magnifier.png";
+import DrawingRocket from "../assets/rocket.png";
 import { Image } from "astro:assets";
 
 ---
@@ -102,21 +104,70 @@ import { Image } from "astro:assets";
 	<section class="bg-gradient-to-b from-stone-900 to-[#474484] py-16 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
 		<h2 class="text-4xl font-semibold text-center pb-8">Get started!</h2>
 
-		<div class = "grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3  gap-4 text-center place-content-center">
-			<div class = " justify-center p-16">
-				<div class="flex justify-center pb-4">
-					<Image src={DrawingReading} alt="arrows" class="w-248"></Image>
+		<div class = "flex items-center px-72">
+			
+				<div class="justify-end">
+					<Image src={DrawingReading} alt="Reading text" class="w-64"></Image>
 				</div>
 				
-				<p class="text-2xl pb-4"> <b>Read the docs</b></p>
-				<p>Search our documentation for answers to your queries.</p>
+				<div class="">
+					<p class="text-3xl text-left"> <b>Read the docs</b></p>
+					<p class="text-left">Browse our documentation for answers to your queries. Find useful tutorials, guides and reference.</p>
+					<div class = "flex justify-start py-2">
+						<LinkButton
+							type="primary-cheerp"
+							href="/docs"
+							iconRight="mi:arrow-right"
+							label="View documentation"
+					/>
+					</div>
+				</div>
+					
+				
+		</div>
+		<div class = "flex items-center justify-end px-72">
+			
+			
+			
+			<div class="">
+				<p class="text-3xl text-right"> <b>Find your license</b></p>
+				<p class="text-right">With options to suit all, choose the license that fits you best and get started with Cheerp today!</p>
+				<div class = "flex justify-end py-2">
+					<LinkButton
+						type="primary-cheerp"
+						href="/docs"
+						iconRight="mi:arrow-right"
+						label="View licensing"
+				/>
+				</div>
+			</div>
+			<div class="justify-end">
+				<Image src={DrawingMagnifier} alt="Person holding a magnifier" class="w-48"></Image>
+			</div>
+				
+			
+	</div>
+	<div class = "flex items-center px-72">
+			
+		<div class="justify-end">
+			<Image src={DrawingRocket} alt="Rocket" class="w-32"></Image>
+		</div>
+		
+		<div class="">
+			<p class="text-3xl text-left"> <b>Read the docs</b></p>
+			<p class="text-left">Browse our documentation for answers to your queries. Find useful tutorials, guides and reference.</p>
+			<div class = "flex justify-start py-2">
+				<LinkButton
+					type="primary-cheerp"
+					href="/docs"
+					iconRight="mi:arrow-right"
+					label="View documentation"
+			/>
 			</div>
 		</div>
-		<LinkButton
-			type="primary-cheerp"
-			href="/docs"
-			iconRight="mi:arrow-right"
-			label="View documentation"
-		/>
+			
+		
+</div>
+		
 	</section>
 </ProductHome>
