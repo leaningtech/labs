@@ -9,13 +9,13 @@ JavaソースコードはCheerpJを使用するために必要ありません。
 
 **始めるために必要なもの：**
 
-- Your Java application file(s). You can also use this [TextDemo.jar](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/TextDemoProject/TextDemo.jar) sample.
-- An HTML file where your Java app will be wrapped
-- A simple HTTP server to test your webpage locally
+- Javaアプリケーションファイル。こちらの[TextDemo.jar](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/TextDemoProject/TextDemo.jar)サンプルも使用できます。
+- JavaアプリをラップするHTMLファイル
+- ウェブページをローカルでテストするための簡単なHTTPサーバー
 
-## 1. Create a project directory
+## 1. プロジェクトディレクトリを作成する
 
-Let's start by creating a project folder where all your files will be. Please copy your java and future HTML files here.
+まず、すべてのファイルを置くプロジェクトフォルダーを作成します。Javaファイルと将来のHTMLファイルをここにコピーしてください。
 
 ```shell
 
@@ -23,9 +23,9 @@ mkdir directory_name
 
 ```
 
-## 2. Create a basic HTML file
+## 2. 基本的なHTMLファイルを作成する
 
-Let's create a basic HTML file like the following example. Please notice the CheerpJ runtime environment has been integrated and initialized. In this example we are assuming your HTML file and your `.jar` files are under the project directory you just created.
+次に、以下の例のような基本的なHTMLファイルを作成します。CheerpJランタイム環境が統合され、初期化されていることに注意してください。この例では、HTMLファイルと`.jar`ファイルが先ほど作成したプロジェクトディレクトリにあると仮定しています。
 
 ```html title="index.html" {6, 9-15}
 <!doctype html>
@@ -47,7 +47,8 @@ Let's create a basic HTML file like the following example. Please notice the Che
 </html>
 ```
 
-Alternatively, if your application is not designed to be executed with the command `java -jar` you can replace `cheerpjRunJar()` for `cheerpjRunMain()` and pass your qualified class name as an argument. For example:
+代わりに、アプリケーションが`java -jar`コマンドで実行されるように設計されていない場合は、`cheerpjRunJar()`を
+`cheerpjRunMain()`に置き換え、修飾クラス名を引数として渡すことができます。例えば：
 
 ```js
 cheerpjRunMain(
@@ -56,46 +57,46 @@ cheerpjRunMain(
 );
 ```
 
-> [!help] Don't forget to use the /app/ prefix
-> It is common for first-time users to forget to add the prefix “/app/” when passing the application location to cheerpJRunJar() or cheerpjRunMain().
+> [!help] /app/プレフィックスを使用することを忘れないでください
+> 初めてのユーザーがアプリケーションの場所をcheerpjRunJar()やcheerpjRunMain()に渡すときに、プレフィックス「/app/」を追加し忘れることがよくあります。
 
-## 3. Host your page
+## 3. ページをホストする
 
-You can now serve this web page on a simple HTTP server, such as the http-server utility.
+これでhttp-serverユーティリティのようなシンプルなHTTPサーバーで、このウェブページを提供できるようになります。
 
 ```shell
 npx http-server -p 8080
 ```
 
 > [!tip]
-> Opening the page directly from the disk (for example, by double-clicking on it) is not supported.
+> ページをディスクから直接開く（例えば、ダブルクリックする）ことはサポートされていません。
 
-## What's going on?
+## 何が起こっているのか？
 
-- The `<head>` script loads CheerpJ.
-- [`cheerpjInit`] initialises the CheerpJ runtime environment.
-- [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
-- [`cheerpjRunJar`] executes your application!
-- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
+- `<head>`スクリプトがCheerpJを読み込みます。
+- [`cheerpjInit`]がCheerpJランタイム環境を初期化します。
+- [`cheerpjCreateDisplay`]がすべてのJavaウィンドウを含むグラフィカル環境を作成します。
+- [`cheerpjRunJar`]がアプリケーションを実行します！
+- `/app/`は、このページがロードされているウェブサーバーのルートを参照する[仮想ファイルシステム]マウントポイントです。
 
-## The result
+## 結果
 
-You will see the CheerpJ display on your browser with some loading messages before showing your application running. Depending on your application and the optimizations applied, this could take just a few seconds.
+ブラウザにCheerpJディスプレイが表示され、いくつかの読み込みメッセージの後にアプリケーションが実行されるのが見えます。アプリケーションと適用された最適化に応じて、数秒しかかからないかもしれません。
 
-### Is your application not working?
+### アプリケーションが動作しない場合
 
-Please try these checks:
+以下のチェックを試してください：
 
-- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
-- Your Java application works normally on your machine without CheerpJ.
-- You are not opening the page by double clicking on it and you are using an http-server instead.
+- [`cheerpjRunJar`]または[`cheerpjRunMain`]に渡すときにプレフィックス`/app/`が追加されていることを確認します。詳細については[仮想ファイルシステム]ガイドを参照してください。
+- JavaアプリケーションがCheerpJなしで正常に動作することを確認します。
+- ページをダブルクリックで開かず、http-serverを使用していることを確認します。
 
-## Further reading
+## さらに読む
 
-- [Runtime API reference](/docs/reference)
+- [ランタイムAPIリファレンス](/docs/reference)
 
 [`cheerpjInit`]: /docs/reference/cheerpjInit
 [`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
-[virtual filesystem]: /docs/guides/File-System-support
+[仮想ファイルシステム]: /docs/guides/File-System-support
