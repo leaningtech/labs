@@ -10,17 +10,12 @@ import DrawingReading from "../assets/reading.png";
 import DrawingMagnifier from "../assets/magnifier.png";
 import DrawingRocket from "../assets/rocket.png";
 import { Image } from "astro:assets";
-
 ---
-
 <ProductHome style = "w-full  pt-8     bg-gradient-to-b to-[#2f8f8a] from-stone-900">
 	<div class = "pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
 		<section class="flex grid-cols-3 items-center px-4">
-		
 			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
-				<h1
-					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
-				>
+				<h1 class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap">
 					How <span class="text-[#8e88ff]">C++ engineers</span>  build web applications
 				</h1>
 				<p class="text-lg text-balance text-white text-left">
@@ -29,7 +24,6 @@ import { Image } from "astro:assets";
 						>compile C/C++ into efficient WebAssembly and JavaScript</b>. It is open source, liberally licensed, and actively developed by
 					Leaning Technologies.
 				</p>
-		
 				<div class="flex gap-4 justify-left mt-12">
 					<LinkButton
 						type="primary-cheerp"
@@ -44,21 +38,16 @@ import { Image } from "astro:assets";
 					/>
 				</div>
 			</div>	
-			
 			<div class="hidden md:block flex justify-center">
 				<Image src={HeroAsset} alt="Cheerp Logo in a cube">
 			</div>
-			
-			
 		</section>
 	</div>
-	
-	<div></div>
-	<section class="justify-center py-20 bg-stone-900 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
+	<section class="justify-center py-20 bg-stone-900 sm:px-2  md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
 		
-		<p class="text-center text-3xl pb-20"> <b>Why Cheerp?</b> </p>
+		<p class="text-center text-4xl pb-20"> <b>Why Cheerp?</b> </p>
 		
-		<div class = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4 text-center place-content-center">
+		<div class = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-4 text-center place-content-center">
 			<div class = " bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
 				<div class="flex justify-center pb-4">
 					<Image src={IconArrows} alt="arrows" class="w-12"></Image>
@@ -72,8 +61,8 @@ import { Image } from "astro:assets";
 					<Image src={IconLayers} alt="arrows" class="w-12"></Image>
 				</div>
 				
-				<p class="text-2xl pb-2"> <b>Export C++ with [[cheerp::jsexport]]</b></p>
-				<p>Expose a C++ API to be called from external JavaScript libraries or interfaces, or directly from your page.</p>
+				<p class="text-2xl pb-2"> <b>Export C++</b></p>
+				<p>Expose a C++ API to be called from external JavaScript libraries or interfaces, or directly from your page with [[cheerp::jsexport]].</p>
 			</div>
 			<div class = "bg-gradient-to-b from-stone-900 to-[#474484]  rounded-lg justify-center p-16">
 				<div class="flex justify-center pb-4">
@@ -102,72 +91,45 @@ import { Image } from "astro:assets";
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
 	<section class="bg-gradient-to-b from-stone-900 to-[#474484] py-16 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32  xl:pt-42 xl:px-28  2xl:px-60 2xl:pt-60">
-		<h2 class="text-4xl font-semibold text-center pb-8">Get started!</h2>
-
-		<div class = "flex items-center px-72">
-			
-				<div class="justify-end">
-					<Image src={DrawingReading} alt="Reading text" class="w-64"></Image>
-				</div>
-				
-				<div class="">
-					<p class="text-3xl text-left"> <b>Read the docs</b></p>
-					<p class="text-left">Browse our documentation for answers to your queries. Find useful tutorials, guides and reference.</p>
-					<div class = "flex justify-start py-2">
-						<LinkButton
-							type="primary-cheerp"
-							href="/docs"
-							iconRight="mi:arrow-right"
-							label="View documentation"
-					/>
+		<p class="text-center text-4xl pb-20"> <b>Get started</b> </p>
+		<div class="grid grid-cols-1 md:grid-cols-3">
+			<a href="/docs">
+				<div class = "px-16 col-span-1 items-baseline hover:rounded-xl hover:text-cheerp hover:bg-stone-900 hover:bg-opacity-50  p-4 ">
+					<div class="">
+						<div class="flex justify-center">
+							<Image src={DrawingReading} alt="Reading text" class=""></Image>
+						</div>
+						<p class="text-2xl text-center "> <b>Read the docs</b></p>
+						<p class="text-center">Browse our documentation for answers to your queries.</p>
+						
 					</div>
 				</div>
-					
-				
-		</div>
-		<div class = "flex items-center justify-end px-72">
-			
-			
-			
-			<div class="">
-				<p class="text-3xl text-right"> <b>Find your license</b></p>
-				<p class="text-right">With options to suit all, choose the license that fits you best and get started with Cheerp today!</p>
-				<div class = "flex justify-end py-2">
-					<LinkButton
-						type="primary-cheerp"
-						href="/docs"
-						iconRight="mi:arrow-right"
-						label="View licensing"
-				/>
+			</a>
+			<a href="https://leaningtech.com/cheerp/#licencing">
+				<div class = "px-16 col-span-1 items-baseline hover:rounded-xl  hover:text-cheerp hover:bg-stone-900 hover:bg-opacity-50  p-4 ">
+					<div class="">
+						<div class="flex justify-center">
+							<Image src={DrawingMagnifier} alt="Person holding a magnifier" class=""></Image>
+						</div>
+						<p class="text-2xl text-center"> <b>Find your license</b></p>
+						<p class="text-center">With options to suit all, choose the license that fits you best.</p>
+						
+					</div>
 				</div>
-			</div>
-			<div class="justify-end">
-				<Image src={DrawingMagnifier} alt="Person holding a magnifier" class="w-48"></Image>
-			</div>
-				
-			
-	</div>
-	<div class = "flex items-center px-72">
-			
-		<div class="justify-end">
-			<Image src={DrawingRocket} alt="Rocket" class="w-32"></Image>
+			</a>
+			<a href="/docs/getting-started/installation">
+				<div class = "px-16 col-span-1 items-baseline hover:rounded-xl  hover:text-cheerp hover:bg-stone-900 hover:bg-opacity-50  p-4 ">
+
+					<div class="">
+						<div class="flex justify-center items-baseline">
+							<Image src={DrawingRocket} alt="Rocket" class=""></Image>
+						</div>
+						<p class="text-2xl text-center"> <b>Start now</b></p>
+						<p class="text-center">Download Cheerp and test it with your application today.</p>
+						
+					</div>
+				</div>
+			</a>
 		</div>
-		
-		<div class="">
-			<p class="text-3xl text-left"> <b>Read the docs</b></p>
-			<p class="text-left">Browse our documentation for answers to your queries. Find useful tutorials, guides and reference.</p>
-			<div class = "flex justify-start py-2">
-				<LinkButton
-					type="primary-cheerp"
-					href="/docs"
-					iconRight="mi:arrow-right"
-					label="View documentation"
-			/>
-			</div>
-		</div>
-			
-		
-</div>
-		
 	</section>
 </ProductHome>
