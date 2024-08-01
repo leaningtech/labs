@@ -24,3 +24,24 @@
 		</svg>
 	</button>
 </Item>
+
+<style>
+	button {
+		display: flex;
+		align-items: center;
+		height: 100%;
+
+		color: rgb(168 162 158);
+		background: none;
+		border: 0;
+		font: inherit;
+		text-decoration: none;
+		font-weight: 600;
+
+		cursor: pointer;
+	}
+
+	svg {
+		height: 100%;
+	}
+</style>

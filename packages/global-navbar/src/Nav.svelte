@@ -123,39 +123,6 @@
 		gap: 1rem;
 
 		position: relative; /* for .select */
-
-		/* TODO: make this more modular */
-		& > li {
-			height: 1.5rem;
-
-			&:empty {
-				flex: 1;
-			}
-
-			& > a,
-			& > button {
-				display: flex;
-				align-items: center;
-				height: 100%;
-
-				color: rgb(168 162 158);
-				background: none;
-				border: 0;
-				font: inherit;
-				text-decoration: none;
-				font-weight: 600;
-
-				cursor: pointer;
-
-				& svg {
-					height: 100%;
-
-					&.global-navbar-social-icon {
-						height: 1rem;
-					}
-				}
-			}
-		}
 	}
 
 	#global-navbar-technology,

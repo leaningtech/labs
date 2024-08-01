@@ -15,6 +15,20 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
+		height: 100%;
+
+		color: rgb(168 162 158);
+		background: none;
+		border: 0;
+		font: inherit;
+		text-decoration: none;
+		font-weight: 600;
+
+		cursor: pointer;
+
+		& :global(svg) {
+			height: 100%;
+		}
 	}
 
 	.company-name {
