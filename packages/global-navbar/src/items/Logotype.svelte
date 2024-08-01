@@ -25,12 +25,10 @@
 		font-weight: 600;
 
 		cursor: pointer;
-
-		& :global(svg) {
-			height: 100%;
-		}
 	}
-
+	a :global(svg) {
+		height: 100%;
+	}
 	.company-name {
 		color: white;
 		white-space: nowrap;
