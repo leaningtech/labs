@@ -24,7 +24,8 @@
 		padding: 1rem;
 		border-radius: 8px;
 
-		&:global(:has(svg)) { /* <slot /> */
+		&:global(:has(svg)) {
+			/* <slot /> */
 			display: grid;
 			grid-template-rows: 1fr 1fr;
 			grid-template-columns: 3rem 1fr;
