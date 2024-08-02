@@ -23,7 +23,7 @@ function global_navbar_inject_head() {
 add_action('wp_body_open', 'global_navbar_inject_body');
 function global_navbar_inject_body() {
 	$target_id = json_encode("global-navbar");
-	$js = json_encode(plugins_url('dist/client/index.js', __FILE__));
+	$js = json_encode(plugins_url('dist/client/global-navbar.js', __FILE__));
 
 	echo "<div id='$target_id' style='display: contents'>";
 	include 'dist/server/body.html';
