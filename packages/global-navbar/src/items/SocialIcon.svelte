@@ -32,5 +32,6 @@
 	svg {
 		color: rgb(168 162 158);
 		height: 1rem;
+		margin: 0 !important;
 	}
 </style>
