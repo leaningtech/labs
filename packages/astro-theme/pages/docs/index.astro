@@ -1,7 +1,7 @@
 ---
-import { flattenNav, getRootNav } from "../../lib/nav";
+import { getRootNav } from "../../lib/nav";
 
-const entry = flattenNav(await getRootNav())[0];
+const entry = (await getRootNav())[0];
 if (!entry) throw new Error("must have a docs entry");
 ---
 

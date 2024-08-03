@@ -49,8 +49,10 @@ export default function makeConfig(): Config {
 			extend: {
 				fontFamily: {
 					sans: [
-						"Archivo",
+						"Archivo", //English default
 						"DM Sans",
+						"Noto Sans",
+						"Noto Sans JP", // Japanese default
 						"Inter",
 						"system-ui",
 						"-apple-system",
@@ -59,7 +61,9 @@ export default function makeConfig(): Config {
 						"Roboto",
 						"Helvetica Neue",
 						"Arial",
-						"Noto Sans",
+						"Yu Gothic", // Japanese for windows users
+						"Hiragino Sans", // Japanese for mac users
+						"Noto Sans CJK JP", // Japanese for linux users
 						"sans-serif",
 					],
 					mono: ["Monaspace Argon", "monospace"],
