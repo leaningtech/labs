@@ -20,7 +20,7 @@ Cheerp is designed to give you full access to all browser APIs, including WebWor
 
 ## Using WebWorkers with Cheerp
 
-You can use Cheerp to generate JavaScript running in the Worker, JavaScript in the main page that run a Worker, or both. Below you find a trivial example ported from http://www.html5rocks.com/en/tutorials/workers/basics/.
+You can use Cheerp to generate JavaScript running in the Worker, JavaScript in the main page that run a Worker, or both. Below you find a trivial example.
 
 ```cpp title="cheerpWorkerHost.cpp"
 // cheerpWorkerHost.cpp: Code to include in the HTML page
@@ -33,26 +33,25 @@ using namespace client;
 void webMain()
 {
         Worker* w = new Worker("cheerpWorker.js");
-        w->addEventListener("message", cheerp::Callback([](MessageEvent* e) {
-                                        console.log((String*)(e->get_data())); }));
-        w->postMessage("Hello World");
+
+        w->addEventListener("message", [](Object* e) {
+                String* data = e->cast<MessageEvent<String*>*>()->get_data();
+                console.log((new String("worker message: "))->concat(data));
+        });
 }
 ```
 
 ```cpp title="cheerpWorker.cpp"
 // cheerpWorker.cpp: Code that runs inside the worker
 #include <cheerp/clientlib.h>
-#include <cheerp/client.h>
 
 using namespace client;
 
 [[cheerp::genericjs]]
 void webMain()
 {
-       addEventListener("message", cheerp::Callback([](MessageEvent* e) {
-                               postMessage(e->get_data());
-                               postMessage(e->get_data());
-                               }));
+        postMessage(new String("hello, world!"));
+        postMessage(new String("hello, world!"));
 }
 ```
 
