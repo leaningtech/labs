@@ -21,7 +21,9 @@ Let's start by reviewing the Java application we will be testing. This is a simp
 
 You can type the full URL of a website in the input field and press enter to load the page. Note that the Swing web browser is fairly old, so sites may not display the same as in modern browsers.
 
-<img class="w-1/2" src="/cheerpj2/assets/tinybrowserloaded.png"></img>
+<div class="w-1/2">
+![Tiny Browser Loaded](../labs/public/cheerpj2/assets/tinybrowserloaded.png)
+</div>
 
 In this scenario, the page is loading because the machine you are running this application on has an active connection to the internet and Java is installed.
 
@@ -79,7 +81,7 @@ npx http-server -p 8080
 
 You will be able to see the page in a modern browser running with CheerpJ. Let's type `https://github.com` in the Java browser client and press enter. Nothing will load and you will find this error in the console log:
 
-<img src="/cheerpj2/assets/errorconsolelog.png"></img>
+![Error in the Console Log](../labs/public/cheerpj2/assets/errorconsolelog.png)
 
 Now try loading a page that is hosted on the local server. Let's add the following file to the project directory:
 
@@ -98,7 +100,7 @@ Now try loading a page that is hosted on the local server. Let's add the followi
 
 In the Java browser application type the following address: `http://127.0.0.1:8080/hello.html` (or any address that corresponds to your local host).
 
-<img src="/cheerpj2/assets/hello_sameorigin.png" width="600"></img>
+![Hello From Same Origin](../labs/public/cheerpj2/assets/hello_sameorigin.png)
 
 **CheerpJ can only do same-origin requests when is not connected to a Tailscale Network.** The convenience of this scenario is that, even when the app is running in the browser, it is completely isolated from the wider internet.
 

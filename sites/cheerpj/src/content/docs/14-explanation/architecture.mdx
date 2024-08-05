@@ -24,7 +24,7 @@ CheerpJ is made of the following building blocks:
 - A virtualized file system
 - A module for networking support
 
-![CheerpJ 3.0 architecture diagram](/docs/assets/cheerpj-3-arch.png)
+![CheerpJ 3.0 architecture diagram](/public/cheerpj3/assets/cheerpj-3-arch.png)
 
 ### The CheerpJ Java Runtime Environment
 
@@ -37,7 +37,7 @@ The most important component of the CheerpJ Java runtime environment is its JVM 
 
 The interpreter does not only deal with initialization and rarely-used code, but also gathers necessary information for JIT-ting. The generated code is very efficient, and the internal optimizer can, among other things, inline and devirtualize calls, which is extremely important for a language such as Java.
 
-![CheerpJ 3.0 JRE diagram](/docs/assets/JRE.png)
+![CheerpJ 3.0 JRE diagram](/public/cheerpj3/assets/JRE.png)
 
 Alongside being able to run Java applications in the browser, CheerpJ runtime also provides advanced, bidirectional Java-JavaScript interoperability. Meaning you can access DOM from Java by [implementing `native` methods directly in JavaScript](/docs/guides/Implementing-Java-native-methods-in-JavaScript). You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API](/docs/reference/cheerpjRunLibrary).
 
@@ -51,7 +51,7 @@ Swing applications, will render exactly as they do in native. Swing Look&Feel is
 
 CheepJ provides multiple filesystem backends to accommodate different application needs, including access to server-hosted files and persistent local storage.
 
-![](/cheerpj2/assets/filesystem.png)
+![](../labs/public/cheerpj2/assets/filesystem.png)
 
 <LinkButton
 	type="secondary"
@@ -63,7 +63,7 @@ CheepJ provides multiple filesystem backends to accommodate different applicat
 ### Networking support
 
 For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided *exit node*.
-![CheerpJ 3.0 general networking](/docs/assets/general_networking.png)
+![CheerpJ 3.0 general networking](/public/cheerpj3/assets/general_networking.png)
 
 <LinkButton
 	type="secondary"
