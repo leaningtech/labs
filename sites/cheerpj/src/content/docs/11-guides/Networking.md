@@ -20,7 +20,7 @@ CheerpJ supports wider networking scenarios via Tailscale, which is a VPN techno
 
 [Tailscale](https://tailscale.com/) is based on the [WireGuard](https://www.wireguard.com/) protocol. It includes a control plane that manages the WireGuard keys of all the machines in the network and takes care of authenticating users. Using this service provides more control over the network, user connections, authentication, security etc.
 
-![CheerpJ 3.0 general networking](/public/cheerpj3/assets/general_networking.png)
+![CheerpJ 3.0 general networking](/docs/cheerpj3/assets/general_networking.png)
 
 ### Why Tailscale?
 
