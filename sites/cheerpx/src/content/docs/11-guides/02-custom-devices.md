@@ -38,7 +38,7 @@ Click **Run workflow** and fill out the form:
 
 Then click the **Run workflow** button.
 
-![Screenshot of the GitHub user interface](/public/cheerpx/guides/create-images/run-workflow.png)
+![Screenshot of the GitHub user interface](/cheerpx/guides/create-images/run-workflow.png)
 
 The workflow may take up to 10 minutes to complete depending on the complexity of your Dockerfile.
 
