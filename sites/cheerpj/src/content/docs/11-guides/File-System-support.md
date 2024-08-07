@@ -11,7 +11,7 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 | `/files/` | A persistent read-write file system                                | Java only | Yes  |
 | `/str/`   | A filesystem for passing JavaScript strings or binary data to Java | JS only   | Yes  |
 
-![](/cheerpj2/assets/filesystem.png)
+![](/docs/cheerpj3/assets/filesystem.png)
 
 > [!info] Local files
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. Accessing local files directly is forbidden for browser security reasons.
