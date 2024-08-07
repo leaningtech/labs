@@ -7,7 +7,7 @@ This tutorial will take you step by step over a networking scenario of communica
 
 If you are not familiar with how CheerpJ and Tailscale work together, we invite you to take a look at our [Networking guide]. You can download the full template of this tutorial [here](/docs/tutorials/ServerClientTutorial.zip).
 
-<img src="/docs/assets/Tailscale_P2P.png"></img>
+<img src="/docs/cheerpj3/assets/Tailscale_P2P.png"></img>
 
 ## Pre-requisites:
 
@@ -22,7 +22,7 @@ The applications we will be running in this tutorial consist of a Java Server ap
 
 The idea is to run both applications in the browser with the help of CheerpJ and no Java installations on your machine!
 
-<img src="/cheerpj2/assets/client-server.png"></img>
+![Client Server](/docs/cheerpj3/assets/client-server.png)
 
 ## 2. Tailscale
 
@@ -170,8 +170,13 @@ http-server -p 8081
 Now that you have both Client and Server applications running with CheerpJ, you should be able to input an username and connect in both apps to establish the connection. Test by sending messages from one application to the other one.
 
 <div class="flex flex-row">
-	<img class="w-1/2" src="/cheerpj2/assets/server-browser.png"></img>
-	<img class="w-1/2" src="/cheerpj2/assets/client-browser.png"></img>
+	<div class="w-1/2 mr-1 md:mr-2">
+		![Server Browser](/docs/cheerpj3/assets/server-browser.png)
+	</div>
+
+  <div class="w-1/2 ml-1 md:ml-2">
+  	![Client Browser](/docs/cheerpj3/assets/client-browser.png)
+  </div>
 </div>
 
 You can download the full template of this tutorial [here](/docs/tutorials/ServerClientTutorial.zip) or visit the [GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Server-Client).
