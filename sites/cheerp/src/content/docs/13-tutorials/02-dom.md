@@ -26,7 +26,7 @@ using namespace client;
 
 ## The document object
 
-You can access the `document` global object directly from C++ code. In the next example we will add an event handler to run our code after the DOM is fully loaded. ([dom.cpp](/docs/tutorials/dom_access/dom.cpp))
+You can access the `document` global object directly from C++ code. In the next example we will add an event handler to run our code after the DOM is fully loaded. ([dom.cpp](/cheerp/tutorials/dom_access/dom.cpp))
 
 ```cpp
 #include <cheerp/client.h> //Misc client side stuff
@@ -68,7 +68,7 @@ Compiling with:
 /opt/cheerp/bin/clang++ -O3 dom.cpp -o dom.js
 ```
 
-Now we need a [html file](/docs/tutorials/dom_access/dom.html):
+Now we need a [html file](/cheerp/tutorials/dom_access/dom.html):
 
 ```html title="dom.html"
 <!doctype html>
@@ -172,11 +172,11 @@ void setupInputAndDisplay()
 
 Now placing a call to `setupInputAndDisplay()` from inside `loadCallback()` will add the two elements to the body.
 
-(feel free to modify the previous `dom.cpp`. The `dom.html` file will remain the same, [link](/docs/tutorials/dom_manipulation/dom.cpp))
+(feel free to modify the previous `dom.cpp`. The `dom.html` file will remain the same, [link](/cheerp/tutorials/dom_manipulation/dom.cpp))
 
 ## Even more `cheerp::Callback`: buttons & mouse
 
-[buttons.cpp](/docs/tutorials/dom_buttons/buttons.cpp) is an example of various uses for the `cheerp::Callback` to generate buttons, text elements, check mouse position, etc. Compile it to JavaScript, keep using the same `dom.html` as before, click on a few buttons.
+[buttons.cpp](/cheerp/tutorials/dom_buttons/buttons.cpp) is an example of various uses for the `cheerp::Callback` to generate buttons, text elements, check mouse position, etc. Compile it to JavaScript, keep using the same `dom.html` as before, click on a few buttons.
 
 # Recap
 
