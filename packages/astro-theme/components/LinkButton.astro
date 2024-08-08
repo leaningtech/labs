@@ -3,7 +3,13 @@ import { Icon } from "astro-icon";
 interface Props {
 	href: string;
 	label: string;
-	type?: "primary" | "primary2" | "secondary" | "primary-cheerp" |"secondary-cheerp"| "discord";
+	type?:
+		| "primary"
+		| "primary2"
+		| "secondary"
+		| "primary-cheerp"
+		| "secondary-cheerp"
+		| "discord";
 	iconLeft?: string;
 	iconRight?: string;
 }
