@@ -1,7 +1,6 @@
 ---
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
-import { DISCORD_URL } from "@/consts.ts";
 import HeroAsset from "../assets/cheerpcube.png";
 import IconArrows from "../assets/update.png";
 import IconSparkle from "../assets/sparkle.png";
@@ -9,6 +8,8 @@ import IconBox from "../assets/box.png";
 import IconLayers from "../assets/layers.png";
 import DrawingSourcerer from "../assets/sourcerer.png";
 import { Image } from "astro:assets";
+import { DISCORD_URL } from "@/consts.ts";
+
 ---
 
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-cheerp">
@@ -71,7 +72,9 @@ import { Image } from "astro:assets";
 					Expressive intefacing with JavaScript libraries and the DOM, without
 					wrappers or any overhead.
 				</p>
-				<p class="text-cheerp py-2 hover:text-white"><a href="/docs/guides/js-interop">Learn more</a></p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/guides/js-interop">Learn more</a>
+				</p>
 			</div>
 			<div
 				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
@@ -85,8 +88,9 @@ import { Image } from "astro:assets";
 					Expose a C++ API to be called from external JavaScript libraries or
 					interfaces, or directly from your page with [[cheerp::jsexport]].
 				</p>
-				<p class="text-cheerp py-2 hover:text-white"><a href="/docs/reference/attributes/jsexport">Learn more</a></p>
-
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/reference/attributes/jsexport">Learn more</a>
+				</p>
 			</div>
 			<div
 				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
@@ -100,7 +104,10 @@ import { Image } from "astro:assets";
 					Combine fast linear memory with garbage collectible JavaScript
 					objects, the best of both worlds.
 				</p>
-				<p class="text-cheerp py-2 hover:text-white"><a href="/docs/reference/sections/genericjs/memory-model">Learn more</a></p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/reference/sections/genericjs/memory-model"
+						>Learn more</a>
+				</p>
 			</div>
 			<div
 				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
@@ -114,7 +121,9 @@ import { Image } from "astro:assets";
 					Cheerp automatically generates both a WebAssembly module & a highly
 					compatible JavaScript module, from one single code base.
 				</p>
-				<p class="text-cheerp py-2 hover:text-white"><a href="/docs/reference/sections">Learn more</a></p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/reference/sections">Learn more</a>
+				</p>
 			</div>
 		</div>
 	</section>
@@ -166,7 +175,7 @@ import { Image } from "astro:assets";
 					</a>
 				</div>
 				<div class="text-center hover:text-cheerp">
-					<a href="https://discord.gg/sRRF72Bk">
+					<a href={DISCORD_URL}>
 						<p class="text-2xl font-bold">900+</p>
 						<p>Discord members</p>
 					</a>
