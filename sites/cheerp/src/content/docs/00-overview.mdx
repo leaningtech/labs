@@ -1,0 +1,129 @@
+---
+title: Cheerp
+shortTitle: Overview
+description: C/C++ compiler for modern web browsers
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+<div class="not-prose flex gap-2 mb-2">
+	<img
+		src="https://img.shields.io/badge/version-3.0-orange"
+		alt="Version 3.0"
+	/>
+	<a href="https://discord.leaningtech.com/">
+		<img
+			src="https://img.shields.io/discord/988743885121548329?color=%237289DA&logo=discord&logoColor=ffffff"
+			alt="Discord server"
+		/>
+	</a>
+	<a href="https://github.com/leaningtech/cheerp-meta/issues">
+		<img
+			src="https://img.shields.io/github/issues/leaningtech/cheerp-meta.svg?logo=github"
+			alt="GitHub issues"
+		/>
+	</a>
+</div>
+
+Cheerp is an innovative compiler designed to transform **C++ code into WebAssembly and JavaScript**, enabling the seamless creation of high-performance web applications. It uniquely supports direct integration with JavaScript, efficient memory management, and compatibility across all major web browsers, bridging the gap between native performance and web-based accessibility.
+
+<div class="m-4 flex justify-center">
+	[Get started](/docs/getting-started) · [Examples](/docs/tutorials) · [API
+	Reference](/docs/reference) · [GitHub
+	repository](https://github.com/leaningtech/cheerp-meta/)
+</div>
+
+<div class="mx-24">![](/cheerp/assets/white_diagram_browser.png)</div>
+
+<div class="text-stone-400">
+	Not a developer? Check out our [product
+	website](https://leaningtech.com/cheerp/).
+</div>
+
+## Features
+
+With Cheerp, you can:
+
+- Seamlessly run existing C/C++ applications in the browser with no changes to the source code
+- Embed C/C++ libraries in web pages without requiring any plugins.
+- [Transition Legacy C/C++ Applications]
+- Utilize C/C++ libraries within JavaScript/[TypeScript] environments smoothly.
+- Optimize web application performance with comprehensive memory management options, combining efficient linear memory with JavaScript's garbage-collected objects.
+
+Cheerp also supports:
+
+- Direct DOM manipulation and [Browser APIs] like WebGL, allowing enhanced graphics and web functionality.
+- [Handling Complex Data Types]
+- [Web workers]
+
+<div class="mt-5 mx-24 mx-auto p-4 bg-stone-800 rounded-lg shadow-md">
+	<h2 class="mt-5">Contribute to Our Open Source Project</h2>
+	Have something in mind? Your contributions make a big difference. Dive into
+	our project on GitHub and start making an impact today.
+	<LinkButton
+		type="secondary"
+		href="https://github.com/leaningtech/cheerp-meta/"
+		label="Visit GitHub Repository"
+		iconLeft="mdi:github"
+	/>
+</div>
+
+## Getting started
+
+Know what you need? Jump straight to the relevant section:
+
+<div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
+	<a
+		href="/docs/getting-started/usage"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		Installation
+	</a>
+	<a
+		href="/docs/tutorials"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		Detailed Tutorials
+	</a>
+	<a
+		href="/docs/reference"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		Reference
+	</a>
+	<a
+		href="/docs/guides/clientlib-migration"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		Clientlib Migration
+	</a>
+</div>
+
+## Community
+
+Cheerp is used effectively by a diverse range of development teams to enhance their web applications. For insights into how various organizations are using Cheerp, check out the case studies [here](https://leaningtech.com/case-studies/).
+
+We have a vibrant Discord community where you can ask questions, share your projects, and get community support.
+
+<LinkButton
+	type="secondary"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Join our Discord server"
+/>
+
+<LinkButton
+	type="secondary"
+	href="https://twitter.com/leaningtech"
+	iconLeft="fa-brands:twitter"
+	label="Follow us on Twitter"
+/>
+
+---
+
+[Transition Legacy C/C++ Applications]: /blog/modernising-legacy-cpp-mfc-applications
+[TypeScript]: /docs/guides/typescript
+[Browser APIs]: /docs/reference/browser-apis
+[Handling Complex Data Types]: /docs/guides/js-interop
+[Web workers]: /docs/tutorials/webworkers
