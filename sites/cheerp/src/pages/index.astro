@@ -1,61 +1,255 @@
 ---
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import HeroAsset from "../assets/cheerpcube.png";
+import IconArrows from "../assets/update.png";
+import IconSparkle from "../assets/sparkle.png";
+import IconBox from "../assets/box.png";
+import IconLayers from "../assets/layers.png";
+import DrawingSourcerer from "../assets/sourcerer.png";
+import { Image } from "astro:assets";
+import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 ---
 
-<ProductHome>
-	<section class="py-16">
-		<div class="mx-auto max-w-[56em] text-center space-y-12">
-			<h1
-				class="text-7xl font-semibold text-balance bg-gradient-to-b from-cheerp via-cheerp to-white text-transparent bg-clip-text"
-			>
-				How <b>C++ engineers</b> build web applications
-			</h1>
-			<p class="text-lg text-balance text-stone-400">
-				Cheerp is an <span class="text-white">enterprise-grade</span> compiler toolchain
-				that can <span class="text-white"
-					>compile C/C++ into efficient WebAssembly and JavaScript</span
-				>. It is open source, liberally licensed, and actively developed by
-				Leaning Technologies.
-			</p>
-		</div>
-		<div class="flex items-center gap-4 justify-center mt-12">
-			<LinkButton
-				type="primary"
-				href="/docs/getting-started/tour"
-				label="Take a 5-minute tour"
-			/>
-			<LinkButton
-				type="secondary"
-				href="/docs/getting-started/installation"
-				iconLeft="mi:download"
-				label="Install Cheerp"
-			/>
+<ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-cheerp">
+	<section>
+		<div
+			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		>
+			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
+				>
+					How <span
+						class="text-[#8e88ff] bg-gradient-to-r from-cheerp to-[#8e88ff] via-[#8e88ff] text-transparent bg-clip-text"
+						>C++ engineers</span
+					> build web applications
+				</h1>
+				<p class="text-lg text-balance text-white text-left">
+					Cheerp is an <b>enterprise-grade</b> compiler toolchain that can <b
+						>compile C/C++ into efficient WebAssembly and JavaScript</b
+					>. It is open source, liberally licensed, and actively developed by
+					Leaning Technologies.
+				</p>
+				<div class="flex gap-4 justify-left mt-12">
+					<LinkButton
+						type="primary-cheerp"
+						href="/docs/getting-started/tour"
+						label="Take a 5-minute tour"
+					/>
+					<LinkButton
+						type="secondary-cheerp"
+						href="/docs/getting-started/installation"
+						iconLeft="mi:download"
+						label="Install Cheerp"
+					/>
+				</div>
+			</div>
+			<div class="hidden md:block flex justify-center 2xl:pl-56">
+				<Image src={HeroAsset} alt="Cheerp Logo in a cube" class="" />
+			</div>
 		</div>
 	</section>
+
+	<section
+		class="justify-center py-20 bg-stone-900 px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+	>
+		<p class="text-center text-4xl pb-20">Why Cheerp?</p>
+
+		<div
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center place-content-center"
+		>
+			<div
+				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
+			>
+				<div class="flex justify-center pb-4">
+					<Image src={IconArrows} alt="arrows" class="w-12" />
+				</div>
+
+				<p class="text-2xl pb-4"><b>JavaScript interoperability</b></p>
+				<p>
+					Expressive intefacing with JavaScript libraries and the DOM, without
+					wrappers or any overhead.
+				</p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/guides/js-interop">Learn more</a>
+				</p>
+			</div>
+			<div
+				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
+			>
+				<div class="flex justify-center pb-4">
+					<Image src={IconLayers} alt="arrows" class="w-12" />
+				</div>
+
+				<p class="text-2xl pb-2"><b>Export C++</b></p>
+				<p>
+					Expose a C++ API to be called from external JavaScript libraries or
+					interfaces, or directly from your page with [[cheerp::jsexport]].
+				</p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/reference/attributes/jsexport">Learn more</a>
+				</p>
+			</div>
+			<div
+				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
+			>
+				<div class="flex justify-center pb-4">
+					<Image src={IconSparkle} alt="arrows" class="w-12" />
+				</div>
+
+				<p class="text-2xl pb-2"><b>Legacy modernization</b></p>
+				<p>
+					Seamless transition of legacy C/C++ applications into the modern
+					browser.
+				</p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/blog/modernising-legacy-cpp-mfc-applications">Learn more</a>
+				</p>
+			</div>
+			<div
+				class="bg-gradient-to-b from-stone-900 to-[#474484] rounded-lg justify-center p-16"
+			>
+				<div class="flex justify-center pb-4">
+					<Image src={IconBox} alt="arrows" class="w-12" />
+				</div>
+
+				<p class="text-2xl pb-2"><b>Maintain one code base</b></p>
+				<p>
+					Cheerp automatically generates both a WebAssembly module & a highly
+					compatible JavaScript module, from one single code base.
+				</p>
+				<p class="text-cheerp py-2 hover:text-white">
+					<a href="/docs/reference/sections">Learn more</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
 	<!-- TODO: video -->
 	<!-- TODO: client company logos -->
-	<section class="py-16 max-w-[60em] mx-auto">
-		<h2 class="text-4xl font-semibold text-center pb-8">Benefits</h2>
-		<div class="grid grid-cols-2 gap-8">
-			<div>JavaScript interoperability</div>
-			<div>
-				Export C++ with <code>[[cheerp::jsexport]]</code>
-			</div>
-			<div>Combine memory models</div>
-			<div>Maintain one code base</div>
-		</div>
-	</section>
 	<!-- TODO: how it works (user story) -->
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
-	<section class="py-16 text-center">
-		<h2 class="text-4xl font-semibold text-center pb-8">Give it a try!</h2>
-		<LinkButton
-			type="primary"
-			href="/docs"
-			iconRight="mi:arrow-right"
-			label="View documentation"
-		/>
+	<section class="bg-stone-900 py-16">
+		<div
+			class="justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
+		>
+			<div class="flex justify-center items-center">
+				<Image src={DrawingSourcerer} alt="Sourcerer" class="w-64" />
+			</div>
+			<h1
+				class="text-6xl text-center bg-gradient-to-r from-cheerp to-[#8e88ff] text-transparent bg-clip-text"
+			>
+				We love open sourcerers
+			</h1>
+			<p class="text-center text-4xl text-stone-300 py-4">
+				Cheerp is licensed under Apache 2.0 License with LLVM exceptions. We're
+				grateful for your contributions.
+			</p>
+
+			<div class="flex justify-center items-center">
+				<LinkButton
+					type="primary-cheerp"
+					href="https://github.com/leaningtech/cheerp-meta"
+					label="Contribute"
+				/>
+			</div>
+			<div
+				class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:-px-72 2xl:px-96"
+			>
+				<div class="text-center hover:text-cheerp">
+					<a
+						href="https://github.com/leaningtech/cheerp-meta?tab=License-1-ov-file#readme"
+					>
+						<p class="text-2xl font-bold">Apache 2.0</p>
+						<p>We are open source!</p>
+					</a>
+				</div>
+				<div class="text-center hover:text-cheerp">
+					<a href="https://github.com/leaningtech/cheerp-meta/stargazers">
+						<p class="text-2xl font-bold">1,000+</p>
+						<p>Stars on our GitHub repository</p>
+					</a>
+				</div>
+				<div class="text-center hover:text-cheerp">
+					<a href={DISCORD_URL}>
+						<p class="text-2xl font-bold">900+</p>
+						<p>Discord members</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section
+		class="bg-gradient-to-b from-stone-900 to-[#474484] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+	>
+		<p class="text-center text-bold text-5xl pb-20">
+			The enterprise-grade C/C++ compiler for the Web
+		</p>
+
+		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
+			<div class="col-span-2 text-left font-bold text-2xl py-4">
+				<p>
+					<span class="text-white">Do you need more?</span> Explore <span
+						class="text-cheerp"
+					>
+						Cheerp Enterprise</span
+					>
+				</p>
+				<ul class="list-inside list-disc font-normal text-wrap text-lg py-4">
+					<li>Technical support with tailored SLAs.</li>
+					<li>Feature prioritisation and sponsored development available.</li>
+					<li>
+						Access to our development team for compilation log reviews, video
+						calls and consulting.
+					</li>
+				</ul>
+				<LinkButton
+					type="primary-cheerp"
+					href="https://leaningtech.com/contact-us/?subject=Cheerp%20Enterprise%20Licence#mailus"
+					label="Contact us"
+				/>
+			</div>
+			<div class="col-span-1 border-solid border-l text-left py-4">
+				<p class="text-left text-2xl font-bold text-stone-300 pl-8">
+					<span class="text-white">Ready to build?</span> Get started today by browsing
+					our
+					<a
+						href="/docs"
+						class="text-cheerp hover:text-white inline-flex items-center"
+						target="_blank"
+						>documentation
+						<svg
+							class="w-4 h-4 ml-1"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+							></path>
+							<path
+								d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+							></path>
+						</svg>
+					</a>
+				</p>
+				<div class="pl-8 py-4 space-y-2 inline-flex flex-col">
+					<LinkButton
+						type="primary-cheerp"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
+					<LinkButton
+						href="/docs"
+						label="Documentation"
+						type="secondary-cheerp"
+						iconLeft="iconoir:google-docs"
+					/>
+				</div>
+			</div>
+		</div>
 	</section>
 </ProductHome>
