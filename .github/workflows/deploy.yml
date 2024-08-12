@@ -72,7 +72,7 @@ jobs:
           remote_port: ${{ secrets.RSYNC_DEPLOY_PORT }}
           remote_user: ${{ secrets.RSYNC_DEPLOY_USER }}
           remote_key: ${{ secrets.RSYNC_DEPLOY_KEY }}
-      - name: Deploy global-navbar WordPress plugin
+      - name: Deploy global-navbar WordPress plugin (staging)
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
