@@ -34,4 +34,8 @@
 		height: 1rem;
 		margin: 0 !important;
 	}
+
+	li {
+		margin: 0 !important;
+	}
 </style>
