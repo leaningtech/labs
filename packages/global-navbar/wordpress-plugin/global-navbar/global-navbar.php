@@ -22,7 +22,7 @@ function global_navbar_inject_head() {
 
 add_action('wp_body_open', 'global_navbar_inject_body');
 function global_navbar_inject_body() {
-	$target_id = json_encode("global-navbar");
+	$target_id = "global-navbar";
 	$js = json_encode(plugins_url('dist/client/global-navbar.js', __FILE__));
 
 	echo "<div id='$target_id' style='display: contents'>";
@@ -33,7 +33,7 @@ function global_navbar_inject_body() {
 	echo "<script type='module' defer>";
 	echo     "import Nav from $js;";
 	echo     "new Nav({";
-	echo         "target: document.getElementById($target_id),";
+	echo         "target: document.getElementById('$target_id'),";
 	echo 				 "hydrate: true,";
 	echo     "});";
 	echo "</script>";
