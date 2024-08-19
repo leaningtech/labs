@@ -6,6 +6,7 @@ import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
 import appletrunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-appletrunner-large.png";
+import gamesrunnerLogotypeLarge from "../assets/branding/products/cheerpx-extensions/cheerpx-gamesrunner-white.png";
 
 let baseWithSlash = import.meta.env.BASE_URL;
 if (!baseWithSlash.endsWith("/")) {
@@ -14,7 +15,7 @@ if (!baseWithSlash.endsWith("/")) {
 
 export interface ProductData {
 	id: Product;
-	type: "technology" | "extension" | "tool";
+	type: "technology" | "extension" | "tool" | "extension-beta";
 	name: string;
 	href: string;
 	logotype: ImageMetadata;
@@ -115,6 +116,18 @@ export const products: { [product in Product]: ProductData } = {
 		description: "Run Java Applets in modern browsers without plugins",
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
 		repositoryName: "cheerpj-applet-runner",
+	},
+	"cheerpx-games-runner": {
+		id: "cheerpx-games-runner",
+		type: "extension-beta",
+		name: "CheerpX Games Runner",
+		href: "https://cheerpx.io",
+		logotype: gamesrunnerLogotypeLarge,
+		favicon: baseWithSlash + "cheerpx/favicon.ico",
+		subtitle: "Run Games in the modern browser",
+		description: "Run Games in the modern browser",
+		github: "https://github.com/leaningtech/cheerpx-games-runner",
+		repositoryName: "cheerpx-games-runner",
 	},
 };
 
