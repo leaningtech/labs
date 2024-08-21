@@ -1,6 +1,6 @@
 ---
 title: Javaアプレットの実行
-description: 最新のブラウザでJavaアプレットの実行
+description: 最新のブラウザでJavaアプレットを実行する
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
@@ -20,7 +20,7 @@ CheerpJを使用すると、Javaアプレットをシームレスにブラウザ
 - アプレットを表示するためのHTMLファイル
 - ローカルでテストするための基本的なHTTPサーバー
 
-### 1. HTMLファイルにCheerpJを統合
+### 1. HTMLファイルにCheerpJを統合する
 
 このチュートリアルでは、すでに`<applet>`、`<object>`または`<embed>`タグを含むHTMLファイルがあると仮定しています。
 
@@ -64,22 +64,23 @@ CheerpJを統合するには、次の手順を実行するだけです：
 </html>
 ```
 
-### 2. ページをローカルでホスト
+### 2. ページをローカルでホストする
 
-You can now serve this web page on a simple HTTP server, such as the http-server utility.
+このウェブページを簡単なHTTPサーバー、例えばhttp-serverユーティリティで提供できます。
 
 ```shell
 npm install http-server
 http-server -p 8080
 ```
 
-> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
+> ユーザーがネイティブのJavaプラグインをインストールしている場合、元のHTMLタグを `cheerpj-` プレフィックスバージョンに置き換えることができます。`<cheerpj-applet>`、`<cheerpj-object>`、および`<cheerpj-embed>`がすべてサポートされています。
 
-## Running a public applet
 
-### 1. Install the CheerpJ applet runner
+## 公開アプレットを実行する
 
-CheerpJ Applet Runner is available for Chrome and Edge.
+### 1. CheerpJアプレットランナーをインストールする
+
+CheerpJアプレットランナーは、ChromeおよびEdgeで利用可能です。
 
 <div class="flex flex-wrap gap-3">
   <LinkButton
@@ -98,17 +99,17 @@ CheerpJ Applet Runner is available for Chrome and Edge.
 
 </div>
 
-### 2. Go to a website with an applet
+### 2. アプレットがあるウェブサイトにアクセスする
 
-Visit a page with a Java applet, [such as this one](http://www.neilwallis.com/projects/java/water/index.php) and click on the CheerpJ Applet Runner icon in the toolbar and enable CheerpJ.
+Javaアプレットが含まれているページを訪問し、[例えばこのページ](http://www.neilwallis.com/projects/java/water/index.php)で、ツールバーにあるCheerpJアプレットランナーアイコンをクリックしてCheerpJを有効にします。
 
-![](/cheerpj2/assets/cheerpj_applet_demo.gif)
+![](/docs/cheerpj3/assets/cheerpj_applet_demo.gif)
 
-## The result
+## 結果
 
-You will see the CheerpJ display on your browser with some loading messages before showing your applet running. Depending on your application and the optimizations applied, this could take just a few seconds.
+ブラウザにCheerpJディスプレイが表示され、いくつかのロードメッセージの後、アプレットが実行されるのが見えます。アプリケーションと適用される最適化によっては、これが数秒で完了する場合があります。
 
-## Further reading
+## さらに読む
 
 - [Runtime API reference](/docs/reference)
 
