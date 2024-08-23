@@ -1,9 +1,9 @@
 ---
 title: cheerpjInit
-description: Set up and initialize the CheerpJ runtime environment
+description: CheerpJランタイム環境の設定と初期化
 ---
 
-`cheerpjInit` must be called once in the page to setup and initialise the CheerpJ runtime environment.
+`cheerpjInit`は、CheerpJランタイム環境を設定と初期化するためにページで一度呼び出される必要があります。
 
 ```ts
 async function cheerpjInit(options?: {
@@ -29,17 +29,17 @@ async function cheerpjInit(options?: {
 }): Promise<void>;
 ```
 
-## Parameters
+## パラメーター
 
-- **options (`object`, _optional_)** - Used to configure different settings of the CheerpJ runtime environment in the form `{ option: "value" }`.
+- **options (`object`, _optional_)** - CheerpJランタイム環境のさまざまな設定を`{ option: "value" }`の形式で指定するために使用されます。
 
-## Returns
+## 戻り値
 
-`cheerpjInit` returns a [Promise] which is resolved when the CheerpJ runtime environment is ready to be used.
+`cheerpjInit` は、CheerpJの実行環境が使用可能になったときに解決される[Promise]を返します。
 
-## Options
+## オプション
 
-A description of each `cheerpjInit()` option with brief examples are given below.
+`cheerpjInit()` の各オプションの説明と簡単な例を以下に示します。
 
 ### `version`
 
@@ -47,7 +47,7 @@ A description of each `cheerpjInit()` option with brief examples are given below
 version?: number;
 ```
 
-The Java runtime version to use. `8` is the only supported value at the moment.
+使用するJavaランタイムバージョンを指定します。現在サポートされている値は`8` のみです。
 
 ### `status`
 
@@ -56,13 +56,13 @@ status?: "splash" | "none" | "default";
 
 ```
 
-This option determines the level of verbosity of CheerpJ in reporting status updates.
+このオプションは、CheerpJがステータス更新を報告する際の詳細度を決定します。
 
-- `"default"`: Enables status reporting during initialization and short-lived "Loading..." messages every time new runtime code is being downloaded.
-- `"splash"`: Enabled status reporting only during initialization. There will be no feedback after the first window is shown on screen.
-- `"none"`: Disable all status reporting.
+- `"default"`: 初期化中のステータス報告と、新しいランタイムコードがダウンロードされるたびに短時間表示される「Loading...」メッセージを有効にします。
+- `"splash"`: 初期化中のみステータス報告を有効にします。最初のウィンドウが画面に表示された後はフィードバックがありません。
+- `"none"`: すべてのステータス報告を無効にします。
 
-Example:
+例:
 
 ```js
 cheerpjInit({ status: "splash" });
@@ -74,9 +74,9 @@ cheerpjInit({ status: "splash" });
 logCanvasUpdates?: boolean;
 ```
 
-When set to `true`, it enables logs on the console about the display areas which are being updated. Useful to debug overdrawing.
+`true`に設定すると、更新されている表示エリアに関するログをコンソールに出力します。オーバードローイングをデバッグする際に役立ちます。
 
-Example:
+例:
 
 ```js
 cheerpjInit({ logCanvasUpdates: true });
@@ -88,15 +88,15 @@ cheerpjInit({ logCanvasUpdates: true });
 preloadResources?: { [key: string]: number[] };
 ```
 
-By using `preloadResources`, you can provide CheerpJ with a list of runtime files which you know in advance will be required for the specific application. The list should be given as a JavaScript array of strings.
+`preloadResources`を使用することで、特定のアプリケーションに必要となるランタイムファイルのリストをCheerpJに提供できます。このリストは、文字列のJavaScript配列として指定する必要があります。
 
-Example:
+例:
 
 ```js
 cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]} });
 ```
 
-See also [cjGetRuntimeResources].
+こちらの[cjGetRuntimeResources]も参照してください。
 
 ### `preloadProgress`<a name="preloadProgress"></a>
 
@@ -104,9 +104,9 @@ See also [cjGetRuntimeResources].
 preloadProgress?: (preloadDone: number, preloadTotal: number) => void;
 ```
 
-This callback may be used in combination with [`preloadResources`](#preloadresources) to monitor the loading of an application. The information provided is useful, for example, to display a loading/progress bar.
+このコールバックは [`preloadResources`](#preloadresources)と組み合わせて使用することで、アプリケーションの読み込みを監視できます。 提供される情報は、たとえば、ロード/進行状況バーを表示するのに役立ちます。
 
-Example:
+例:
 
 ```js
 function showPreloadProgress(preloadDone, preloadTotal) {
@@ -122,33 +122,33 @@ await cheerpjInit({ preloadProgress: showPreloadProgress });
 clipboardMode?: "permission" | "system" | "java";
 ```
 
-This option allows you to configure how the clipboard will behave. Supported clipboard modes are [`java`], [`system`] and [`permission`].
+このオプションを使用すると、クリップボードの動作を設定できます。サポートされているクリップボードモードは、[`java`]、[`system`] 、および [`permission`]です。
 
-Example:
+例:
 
 ```js
 cheerpjInit({ clipboardMode: "system" });
 ```
 
-#### `java` mode
+#### `java` モード
 
-This is the default setting. CheerpJ supports an internal clipboard which is local to the Java application and is not integrated with the system clipboard.
+これはデフォルト設定です。CheerpJは、Javaアプリケーション内でローカルに使用される内部クリップボードをサポートしており、システムクリップボードとは統合されていません。
 
-#### `system` mode
+#### `system` モード
 
-In `system` mode CheerpJ will share the clipboard with the system. Browsers enforce serious limitations on how the system clipboard can be accessed. In practice it is generally accessible when the `Ctrl+C` and `Ctrl+V` shortcuts are used (`Cmd+C` and `Cmd+V` on MacOSX). Due to these limitations the UX when using `clipboardMode:"system"` is:
+`system` モードでは、CheerpJはシステムとクリップボードを共有します。 ただし、ブラウザではシステムクリップボードへのアクセスに厳しい制限があります。実際には、通常 `Ctrl+C` および `Ctrl+V` ショートカット（MacOSXでは`Cmd+C` および `Cmd+V`）が使用された場合にアクセスできます。この制限により、`clipboardMode:"system"` を使用する際のUX（ユーザーエクスペリエンス）は次のようになります：
 
-- `Ctrl+C`/`Cmd+C`: the user has to press the shortcut twice to give CheerpJ access to the system clipboard. CheerpJ will block the execution while waiting for the second `Ctrl+C`.
-- `Ctrl+V`/`Cmd+V`: this shortcut behaves normally, there is no difference with native execution.
-- Menu based Copy/Paste: `Ctrl+C`/`Ctrl+V` are needed to access the clipboard. CheerpJ will block the execution while waiting the appropriate shortcut.
+- `Ctrl+C`/`Cmd+C`: ユーザーは、システムクリップボードへのアクセスを許可するためにショートカットを2回押す必要があります。2回目の`Ctrl+C`を待機している間、CheerpJは実行をブロックします。
+- `Ctrl+V`/`Cmd+V`: このショートカットは通常通り動作し、ネイティブ実行との違いはありません。
+- メニュー構造に基づいたコピー/ペースト: クリップボードにアクセスするには `Ctrl+C`/`Ctrl+V` が必要です。適切なショートカットを待機している間、CheerpJは実行をブロックします。
 
-#### `permission` mode
+#### `permission` モード
 
-With `permission` mode enabled, CheerpJ offers a more seamless integration than `system` mode. This includes support for images and HTML on top of plain text. Another important feature is that pressing extra `Ctrl+C`/`Ctrl+V` to perform copying and pasting operations is not required.
+`permission` モードを有効にすると、CheerpJは`system`モードよりもシームレスな統合を提供します。このモードでは、プレーンテキストに加えて画像やHTMLのサポートも含まれます。 もう一つの重要な特徴は、コピー＆ペースト操作を行う際に、2回目に`Ctrl+C`/`Ctrl+V` を押す必要がありません。
 
-The first time an operation is requested, the user will be asked for permission to use the clipboard. If this permission is refused, a message will be prompted explaining this permission is necessary to continue.
+最初に操作が要求されたときに、ユーザーにクリップボードの使用許可が求められます。この許可が拒否された場合、続行するためにこの許可が必要であることを説明するメッセージが表示されます。
 
-> This mode is experimental and might show a few inconsistencies in some browsers. [`See more`](https://caniuse.com/mdn-api_permissions_permission_clipboard-read).
+> このモードは実験的であり、一部のブラウザではいくつかの不一致が発生する場合があります。 [`詳細はこちら`](https://caniuse.com/mdn-api_permissions_permission_clipboard-read).
 
 ### `beepCallback`
 
@@ -156,9 +156,9 @@ The first time an operation is requested, the user will be asked for permission 
 beepCallback?: () => void;
 ```
 
-This callback runs when `java.awt.Toolkit.getDefaultToolkit().beep()` is called in Java. It corresponds to the system's _beep_ sound.
+このコールバックは、Javaで `java.awt.Toolkit.getDefaultToolkit().beep()` が呼び出されたときに実行され、システムの_ビープ音_に対応します。
 
-Example of usage:
+使用例:
 
 ```js
 cheerpjInit({
@@ -174,7 +174,7 @@ cheerpjInit({
 enableInputMethods?: boolean;
 ```
 
-When this option is set to `true` CheerpJ will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
+このオプションが`true` に設定されると、CheerpJはプラットフォームの入力メソッドフレームワークからのテキスト入力を受け取ることができます。これは、中国語、日本語、韓国語などの言語のテキスト入力をサポートするのに便利です。
 
 ```js
 cheerpjInit({ enableInputMethods: true });
@@ -186,16 +186,16 @@ cheerpjInit({ enableInputMethods: true });
 overrideShortcuts?: (evt: KeyboardEvent) => boolean;
 ```
 
-Some applications needs to internally handle keyboard shortcuts which are also used by the browser, for example Ctrl+F. Most users expect the standard browser behavior for these shortcuts and CheerpJ does not, by default, override them in any way.
+一部のアプリケーションでは、ブラウザでも使用されているキーボードショートカット（例えば、Ctrl+F）を内部で処理する必要があります。ほとんどのユーザーは、これらのショートカットに対して標準的なブラウザの動作を期待しており、CheerpJはデフォルトではそれらを上書きしません。
 
-A CheerpJ-compiled application can take control of additional shortcuts by providing a callback function as the `overrideShortcuts` options of `cheerpjInit`. This callback receives the `KeyboardEvent` coming from the browser and should return `true` if the default browser behaviour should be prevented.
+CheerpJでコンパイルされたアプリケーションは、`cheerpjInit`の `overrideShortcuts`オプションとしてコールバック関数を提供することで、追加のショートカットをコントロールできます。このコールバックはブラウザからの`KeyboardEvent` を受け取り、ブラウザのデフォルトの動作を防ぐ必要がある場合は`true`を返します。
 
-Whenever possible we recommend _not_ to use browser reserved shortcuts, to maintain a consistent user experience. In any case, the following limitations apply:
+可能な限り、一貫したユーザー体験を維持するために、ブラウザ予約済みのショートカットは_使用しない_ことをお勧めします。いずれの場合も、以下の制限が適用されます：
 
-- Some shortcuts (Ctrl+T, Ctrl+N, Ctrl+W) are reserved by the browser and never received by the page itself. These _cannot_ be overridden
-- Overriding (Ctrl+C/Ctrl+V) will prevent `clipboardMode:"system"` from working correctly.
+- 一部のショートカット（Ctrl+T、Ctrl+N、Ctrl+W）はブラウザに予約されており、ページ自体で受け取ることはできません。これらは_上書きできません_。
+-（Ctrl+C/Ctrl+V）を上書きすると、`clipboardMode:"system"` が正しく機能しなくなります。
 
-Example:
+例:
 
 ```js
 cheerpjInit({
@@ -213,9 +213,9 @@ cheerpjInit({
 appletParamFilter?: (originalName: string, paramValue: string) => string;
 ```
 
-Some applications may need to have some parameter modified before getting those inside the applet.
+一部のアプリケーションでは、アプレット内にパラメーターを渡す前に、そのパラメーターを変更する必要がある場合があります。
 
-Example:
+例:
 
 ```js
 cheerpjInit({
@@ -232,9 +232,9 @@ cheerpjInit({
 natives?: { [method: string]: Function };
 ```
 
-This option is used to implement native methods from an AOT-compiled language in JavaScript.
+このオプションは、AOTコンパイルされた言語のネイティブメソッドをJavaScriptで実装するために使用されます。
 
-Example usage:
+使用例:
 
 ```js
 cheerpjInit({
@@ -246,7 +246,7 @@ cheerpjInit({
 });
 ```
 
-Read more about implementing native methods [here](/docs/guides/Implementing-Java-native-methods-in-JavaScript).
+ネイティブメソッドの実装について詳しくは[こちら](/docs/guides/Implementing-Java-native-methods-in-JavaScript)を参照してください。
 
 ### `overrideDocumentBase`
 
@@ -254,9 +254,9 @@ Read more about implementing native methods [here](/docs/guides/Implementing-Jav
 overrideDocumentBase?: string;
 ```
 
-Replaces the current `<base>` URL of the document with the URL passed as a `string`.
+現在の`<base>` URL を、渡された`文字列`のURLに置き換えます。
 
-Example usage:
+使用例:
 
 ```js
 cheerpjInit({ overrideDocumentBase: "YourNewURLHere" });
@@ -268,9 +268,9 @@ cheerpjInit({ overrideDocumentBase: "YourNewURLHere" });
 javaProperties?: string[];
 ```
 
-An array of Java properties in the form `"key=value"`. They will be defined on the System object (System properties). This option should be used if command line arguments in the form `-Dkey=value` are required when using native Java.
+Javaプロパティの配列で、形式は`"key=value"`です。 これらはSystemオブジェクト（システムプロパティ）に定義されます。ネイティブJavaを使用する際に`-Dkey=value` 形式のコマンドライン引数が必要な場合にこのオプションを使用してください。
 
-Example usage:
+使用例:
 
 ```js
 cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
@@ -282,9 +282,9 @@ cheerpjInit({ javaProperties: ["prop1=value1", "prop2=value2"] });
 tailscaleControlUrl?: string;
 ```
 
-This option expects a string URL of the Tailscale control plane. The control plane verifies the user's identity and validates various keys among the connected peers in the network. Only pass this option if you are [self-hosting Tailscale](https://github.com/leaningtech/headscale), if omitted, it will point to the Tailscale control plane.
+このオプションには、TailscaleコントロールプレーンのURL文字列が必要です。コントロールプレーンは、ユーザーの身元を確認し、ネットワーク内の接続されたピア間でさまざまなキーを検証します。このオプションは、[Tailscaleをセルフホスティング](https://github.com/leaningtech/headscale)している場合にのみ指定してください。省略された場合、Tailscaleのコントロールプレーンが指定されます。
 
-Example usage:
+使用例:
 
 ```js
 cheerpjInit({ tailscaleControlUrl: "https://my.url.com/" });
@@ -296,9 +296,9 @@ cheerpjInit({ tailscaleControlUrl: "https://my.url.com/" });
  tailscaleDnsUrl?: string;
 ```
 
-Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitted, the default IP address is "8.8.8.8".
+DNSクエリに使用するIPv4またはIPv6アドレスの文字列を指定します。省略された場合、デフォルトのIPアドレスは「8.8.8.8」となります。
 
-Example usage:
+使用例:
 
 ```js
 cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
@@ -310,14 +310,14 @@ cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
 tailscaleAuthKey?: string;
 ```
 
-This option expects a string that contains a Tailscale auth key. Using auth keys allows one to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys). This option is mutually exclusive with [`tailscaleLoginUrlCb`](#tailscaleloginurlcb)
+このオプションには、Tailscale認証キーを含む文字列を指定します。認証キーを使うことで、事前に認証された新しいユーザー/デバイスを登録することができます。認証キーは[こちら](https://login.tailscale.com/admin/settings/keys)で作成できます。このオプションは[`tailscaleLoginUrlCb`](#tailscaleloginurlcb)とは相互排他的です。
 
-> [!info] Info
-> A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
+> [!info] 情報
+> Tailscaleの用語では、Tailscaleネットワークに接続されたユーザーとデバイスの組み合わせを _"ノード"_ と呼びます。
 
-For more information about auth keys visit the [Tailscale auth keys documentation](https://tailscale.com/kb/1085/auth-keys/).
+認証キーに関する詳細については [Tailscale認証キーのドキュメント](https://tailscale.com/kb/1085/auth-keys/)を参照してください。
 
-Example of usage:
+使用例:
 
 ```js
 cheerpjInit({ tailscaleAuthKey: "AuthKeyStringGoesHere" });
@@ -329,9 +329,9 @@ cheerpjInit({ tailscaleAuthKey: "AuthKeyStringGoesHere" });
 tailscaleLoginUrlCb?: (url: string) => void;
 ```
 
-This option is used to login into a Tailscale network and it is mutually exclusive with [`tailscaleAuthKey`](#tailscaleauthkey). It expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to login to Tailscale via the UI.
+このオプションは、Tailscaleネットワークにログインするために使用され、[`tailscaleAuthKey`](#tailscaleauthkey)とは相互排他的です。ログインプロセスを続行および完了するためには、コントロールサーバーのベースURLが必要です。このコールバックは、UIからTailscaleへのログインをユーザに指示するときに実行されます。
 
-For more information visit the [Tailscale documentation](https://tailscale.com/kb/1080/cli/#login).
+詳細については、[Tailscaleのドキュメント](https://tailscale.com/kb/1080/cli/#login)をご覧ください。
 
 ```js
 cheerpjInit({
@@ -347,9 +347,9 @@ cheerpjInit({
 tailscaleIpCb?: (ip: string) => void;
 ```
 
-This callback is used to retrieve the IP address of the client once the connection with the Tailscale network is established.
+このコールバックは、Tailscaleネットワークとの接続が確立された後に、クライアントのIPアドレスを取得するために使用されます。
 
-Example of usage:
+使用例:
 
 ```js
 cheerpjInit({
@@ -365,9 +365,9 @@ cheerpjInit({
 licenseKey?: string;
 ```
 
-This option expects a license key. The non-commercial license message will be removed from the CheerpJ display if a valid license key is used. Please visit our [licensing guide](/docs/licensing) for more information.
+このオプションにはライセンスキーが必要です。有効なライセンスキーが使用されている場合、CheerpJの表示から非商用ライセンスメッセージが削除されます。詳細については、[ライセンスガイド](/docs/licensing) をご覧ください。
 
-Example of usage:
+使用例:
 
 ```js
 cheerpjInit({ licenseKey: "YourLicenseKey" });

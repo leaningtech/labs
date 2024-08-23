@@ -1,25 +1,25 @@
 ---
 title: cheerpjRunLibrary
-description: Load a Java Library
+description: Javaライブラリをロードする
 ---
 
-Loads a Java library for use in JavaScript. See [library mode](/docs/guides/library-mode) for more information.
+JavaScriptで使用するためにJavaライブラリをロードします。詳細については[ライブラリモード](/docs/guides/library-mode)を参照してください。
 
 ```ts
 async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
 ```
 
-## Parameters
+## パラメーター
 
-- **classPath (`string`)** - The path to the library's jar file in the [virtual filesystem]. Pass an empty string to load the standard library only.
+- **classPath (`string`)** - [仮想ファイルシステム]内のライブラリのjarファイルへのパス。標準ライブラリのみをロードする場合は空の文字列を渡します。
 
-## Returns
+## 戻り値
 
-`cheerpjRunLibrary` returns a [Promise] which resolves to a [CJ3Library] object.
+`cheerpjRunLibrary` は、[CJ3Library]オブジェクトに解決される[Promise] を返します。
 
-## Examples
+## 例
 
-### Using the standard library
+### 標準ライブラリの使用
 
 ```js
 await cheerpjInit();
@@ -29,9 +29,9 @@ const System = await lib.java.lang.System;
 await System.out.println("Hello from Java");
 ```
 
-### Using a custom library
+### カスタムライブラリの使用
 
-Let's say we had a library called `example.jar` compiled from the following class:
+以下のクラスからコンパイルされた `example.jar`というライブラリがあるとします:
 
 ```java
 package com.example;
@@ -44,7 +44,7 @@ public class Example {
 }
 ```
 
-With `example.jar` being available on the web server at `/example.jar`, we could use it like so:
+`example.jar` がウェブサーバーの`/example.jar`にある場合、次のように使用できます：
 
 ```js
 await cheerpjInit();
@@ -56,5 +56,5 @@ await example.hello(); // Example says hello!
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[virtual filesystem]: /docs/guides/File-System-support
+[仮想ファイルシステム]: /docs/guides/File-System-support
 [CJ3Library]: /docs/reference/CJ3Library

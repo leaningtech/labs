@@ -1,6 +1,6 @@
 ---
 title: cheerpjRunJar
-description: Execute the main class of a JAR
+description: JARのメインクラスを実行する
 ---
 
 ```ts
@@ -10,30 +10,30 @@ async function cheerpjRunJar(
 ): Promise<number>;
 ```
 
-## Parameters
+## パラメーター
 
-- **jarName (`string`)** - The location of the jar in the [virtual filesystem].
-- **..args (`string[]`, _optional)_** - Arguments to pass to the main method.
+- **jarName (`string`)** - [仮想ファイルシステム]内のjarの場所。
+- **..args (`string[]`, _optional_)** - mainメソッドに渡す引数。
 
-## Returns
+## 戻り値
 
-`cheerpjRunJar` returns a [Promise] which resolves with the [exit code] of the program. `0` indicates success, any other value indicates failure.
+`cheerpjRunJar` は、プログラムの[終了コード]で解決される[Promise]を返します。`0`は成功を示し、それ以外の値は失敗を示します。
 
-## Examples
+## 例
 
-### Basic usage
+### 基本的な使用法
 
 ```js
 const exitCode = await cheerpjRunJar("/app/application.jar");
 console.log(`Program exited with code ${exitCode}`);
 ```
 
-### Command line arguments
+### コマンドライン引数
 
 ```js
 await cheerpjRunJar("/app/application.jar", ["--version"]);
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[exit code]: https://en.wikipedia.org/wiki/Exit_status#Java
-[virtual filesystem]: /docs/guides/File-System-support
+[終了コード]: https://en.wikipedia.org/wiki/Exit_status#Java
+[仮想ファイルシステム]: /docs/guides/File-System-support

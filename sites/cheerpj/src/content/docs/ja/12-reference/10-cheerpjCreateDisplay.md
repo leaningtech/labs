@@ -1,9 +1,9 @@
 ---
 title: cheerpjCreateDisplay
-description: Display GUI elements
+description: GUI要素の表示
 ---
 
-`cheerpjCreateDisplay` adds an element to the DOM which will be used for graphical rendering.
+`cheerpjCreateDisplay` は、グラフィカルレンダリングに使用される要素をDOMに追加します。
 
 ```ts
 function cheerpjCreateDisplay(
@@ -13,35 +13,35 @@ function cheerpjCreateDisplay(
 ): HTMLElement;
 ```
 
-## Parameters
+## パラメーター
 
-- **width (`number`)** - The width of the display area in CSS pixels, or `-1` to match parent width.
-- **height (`number`)** - The height of the display area in CSS pixels, or `-1` to match parent height.
-- **parent (`HTMLElement`, _optional_)** - Element to add display as a child of.
+- **width (`number`)** - 表示エリアの幅をCSSピクセル単位で指定します。親の幅に合わせる場合は`-1` を指定します。
+- **height (`number`)** - 表示エリアの高さをCSSピクセル単位で指定します。親の高さに合わせる場合は`-1` を指定します。
+- **parent (`HTMLElement`, _optional_)** - 表示エリアを子要素として追加する親要素を指定します。
 
-## Returns
+## 戻り値
 
-`cheerpjCreateDisplay` returns an [`HTMLElement`] representing the created display.
+`cheerpjCreateDisplay` は、作成された表示エリアを表す[`HTMLElement`] を返します。
 
-## Examples
+## 例
 
-### Create a display
+### 表示エリアの作成
 
 ```js
 cheerpjCreateDisplay(800, 600);
 ```
 
-This creates a 800x600 display for rendering, and appends it to the document body.
+これにより、800x600の表示エリアが作成され、ドキュメントのボディに追加されます。
 
-### Take up the whole page
+### ページ全体の使用
 
 ```js
 cheerpjCreateDisplay(-1, -1, document.body);
 ```
 
-This creates a display that takes up the whole page, and responds to changes in the page size.
+これにより、ページ全体を占有し、ページサイズの変更に対応する表示エリアが作成されます。
 
-### Usage with React
+### Reactでの使用例
 
 ```jsx
 import { useRef, useEffect } from "react";

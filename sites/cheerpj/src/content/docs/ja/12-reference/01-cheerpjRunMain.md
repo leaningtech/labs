@@ -1,6 +1,6 @@
 ---
 title: cheerpjRunMain
-description: Starts an application by executing the static main method of a Java class
+description: Javaクラスの静的mainメソッドを実行してアプリケーションを起動します
 ---
 
 ```ts
@@ -11,17 +11,17 @@ async function cheerpjRunMain(
 ): Promise<number>;
 ```
 
-## Parameters
+## パラメーター
 
-- **className (`string`)** - The fully-qualified name of the class with a static main method to execute. For example, `com.application.MyClassName`.
-- **classPath (`string`)** - The location of the class's jar in the [virtual filesystem], with its dependencies separated by `:`.
-- **..args (`string[]`, _optional)_** - Arguments to pass to the main method.
+- **className (`string`)** - 実行する静的mainメソッドを持つクラスの完全修飾名。例えば、 `com.application.MyClassName`。
+- **classPath (`string`)** - [仮想ファイルシステム]におけるクラスのjarの場所。`:`で区切られた依存関係。
+- **..args (`string[]`, _optional_)** - mainメソッドに渡す引数。
 
-## Returns
+## 戻り値
 
-`cheerpjRunMain` returns a [Promise] which resolves with the [exit code] of the program. `0` indicates success, any other value indicates failure.
+`cheerpjRunMain`は、プログラムの[終了コード]で解決される[Promise]を返します。`0`は成功を示し、それ以外の値は失敗を示します。
 
-## Example
+## 例
 
 ```js
 const exitCode = await cheerpjRunMain(
@@ -34,5 +34,5 @@ console.log(`Program exited with code ${exitCode}`);
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[exit code]: https://en.wikipedia.org/wiki/Exit_status#Java
-[virtual filesystem]: /docs/guides/File-System-support
+[終了コード]: https://en.wikipedia.org/wiki/Exit_status#Java
+[仮想ファイルシステム]: /docs/guides/File-System-support

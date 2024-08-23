@@ -15,7 +15,7 @@ async function cheerpjRunMain(
 
 - **className (`string`)** - The fully-qualified name of the class with a static main method to execute. For example, `com.application.MyClassName`.
 - **classPath (`string`)** - The location of the class's jar in the [virtual filesystem], with its dependencies separated by `:`.
-- **..args (`string[]`, _optional)_** - Arguments to pass to the main method.
+- **..args (`string[]`, _optional_)** - Arguments to pass to the main method.
 
 ## Returns
 

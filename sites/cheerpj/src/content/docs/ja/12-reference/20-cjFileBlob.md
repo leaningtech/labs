@@ -1,25 +1,25 @@
 ---
 title: cjFileBlob
-description: Read a file from the virtual filesystem
+description: 仮想ファイルシステムからファイルを読み取る
 ---
 
-Used to read files from the CheerpJ virtual filesystem.
+CheerpJ仮想ファイルシステムからファイルを読み取るために使用されます。
 
 ```ts
 async function cjFileBlob(path: string): Promise<Blob>;
 ```
 
-## Parameters
+## パラメーター
 
-- **path (`string`)** - The path to the file to be read. Must begin with `/files/`, `/app/` or `/str/`.
+- **path (`string`)** - 読み取るファイルへのパス。 `/files/`、`/app/` 、または`/str/`で始まる必要があります。
 
-## Returns
+## 戻り値
 
-`cjFileBlob` returns a [Promise] which resolves to a [Blob] of the file contents.
+`cjFileBlob`は、ファイル内容の[Blob] に解決される[Promise] を返します。
 
-## Examples
+## 例
 
-### Read a text file
+### テキストファイルの読み取り
 
 ```js
 const blob = await cjFileBlob("/files/file1.txt");
@@ -27,7 +27,7 @@ const text = await blob.text();
 console.log(text);
 ```
 
-### Read a binary file
+### バイナリファイルの読み取り
 
 ```js
 const blob = await cjFileBlob("/files/file2.bin");

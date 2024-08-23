@@ -78,7 +78,7 @@ cheerpjInit({
 
 ここで何が起こっているのか？
 
-- `tailscaleLoginUrlCb` は、ログインプロセスを続行および完了するためのコントロールサーバーのベースURLを期待します。このコールバックは、UIからTailscaleへのログインをユーザに指示するときに実行されます。
+- `tailscaleLoginUrlCb` は、ログインプロセスを続行および完了するために、コントロールサーバーのベースURLを取得する必要があります。このコールバックは、UIからTailscaleへのログインをユーザに指示するときに実行されます。
 
 > [!info] 情報
 > `tailscaleLoginUrlCb` と `tailscaleAuthKey` は相互に排他的です。

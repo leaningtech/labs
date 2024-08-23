@@ -1,33 +1,33 @@
 ---
 title: cjGetProguardConfiguration
-description: Download a ProGuard configuration file
+description: ProGuard設定ファイルをダウンロードする
 ---
 
-Triggers download of a configuration file which can be used to tree-shake JARs using [ProGuard].
+これは設定ファイルのダウンロードをトリガーし、[ProGuard]を使用してJARファイルをツリーシェイク（tree shaking）するために使用できます。
 
 ```ts
 function cjGetProguardConfiguration(): void;
 ```
 
-> [!note] Note
-> This function is intended for use in the browser console. It is not intended to be called from within your application.
+> [!note] 注意
+> この関数はブラウザコンソールでの使用を意図しています。アプリケーション内から呼び出すことは想定されていません
 
-## Parameters
+## パラメーター
 
-`cjGetProguardConfiguration` does not take any parameters.
+`cjGetProguardConfiguration` はパラメーターを受け取りません。
 
-## Returns
+## 戻り値
 
-`cjGetProguardConfiguration` does not return a value. It triggers a download of a `cheerpj.pro` file.
+`cjGetProguardConfiguration` は値を返しませんが、ファイルのダウンロードがトリガーされます。
 
-## Example
+## 例
 
-On the browser console type:
+ブラウザのコンソールで次のように入力します:
 
 ```shell
 cjGetProguardConfiguration();
 ```
 
-This will trigger the download of `cheerpj.pro` file.
+これにより、 `cheerpj.pro` ファイルのダウンロードがトリガーされます。
 
 [ProGuard]: https://github.com/Guardsquare/proguard

@@ -1,41 +1,41 @@
 ---
 title: CJ3Library
-description: A library mode session
+description: ライブラリモードセッション
 ---
 
-This class represents a [library mode](/docs/guides/library-mode) session. It can be used to access the classes and methods of the loaded library.
+このクラスは、[ライブラリモード](/docs/guides/library-mode) セッションを表します。ロードされたライブラリのクラスやメソッドにアクセスするために使用できます。
 
-You can get a CJ3Library instance by:
+インスタンスは以下の方法で取得できます:
 
-- Calling [`cheerpjRunLibrary`] to load a library from a JAR.
-- Implementing a [native method](/docs/guides/Implementing-Java-native-methods-in-JavaScript) - the first parameter is a CJ3Library instance.
+- [`cheerpjRunLibrary`]を呼び出して、JARからライブラリをロードする。
+- [ネイティブメソッド](/docs/guides/Implementing-Java-native-methods-in-JavaScript)を実装する。 - 最初のパラメータはCJ3Libraryインスタンスです。
 
-## Usage
+## 使用方法
 
-- To load a class, access it and await it.
-- To call a static method, call it as a method on a loaded class and await it.
-- To construct a class into an instance, use `await new`.
-- To call an instance method, call it as a method on an instance of a loaded class and await it.
-- To read/write a public field, do so normally.
-- `instanceof` is supported.
+- クラスをロードするには、それにアクセスし、`await`します。
+- 静的メソッドを呼び出すには、ロードされたクラスのメソッドとして呼び出し、`await`します。
+- クラスをインスタンスに構築するには、`await new`を使用します。
+- インスタンスメソッドを呼び出すには、ロードされたクラスのインスタンスのメソッドとして呼び出し、`await`します。
+- パブリックフィールドの読み取り/書き込みは通常どおり行います。
+- `instanceof` がサポートされています。
 
-## Conversion rules
+## 変換ルール
 
-Type conversions adhere to the [LiveConnect specification](https://web.archive.org/web/20110204185537/http://jdk6.java.net/plugin2/liveconnect/#JS_JAVA_CONVERSIONS). There are some extensions:
+型変換は、[LiveConnect仕様書](https://web.archive.org/web/20110204185537/http://jdk6.java.net/plugin2/liveconnect/#JS_JAVA_CONVERSIONS)に準拠しています。いくつかの拡張があります:
 
-| JavaScript type | Java type                      | Note             |
+| JavaScript 型 | Java 型                      | 備考             |
 | --------------- | ------------------------------ | ---------------- |
-| `Uint8Array`    | `boolean[]`                    | By reference     |
-| `Int8Array`     | `byte[]`                       | By reference     |
-| `Uint16Array`   | `char[]`                       | By reference     |
-| `Int16Array`    | `short[]`                      | By reference     |
-| `Int32Array`    | `int[]`                        | By reference     |
-| `BigInt64Array` | `long[]`                       | By reference     |
-| `Float32Array`  | `float[]`                      | By reference     |
-| `Float64Array`  | `double[]`                     | By reference     |
-| `any`           | `netscape.javascript.JSObject` | Opaque reference |
+| `Int8Array`     | `byte[]`                       | 参照渡し     |
+| `Uint16Array`   | `char[]`                       | 参照渡し     |
+| `Int16Array`    | `short[]`                      | 参照渡し     |
+| `Uint8Array`    | `boolean[]`                    | 参照渡し     |
+| `Int32Array`    | `int[]`                        | 参照渡し     |
+| `BigInt64Array` | `long[]`                       | 参照渡し     |
+| `Float32Array`  | `float[]`                      | 参照渡し     |
+| `Float64Array`  | `double[]`                     | 参照渡し     |
+| `any`           | `netscape.javascript.JSObject` | 不透明な参照 |
 
-For other types, refer to the LiveConnect specification.
+その他の型については、LiveConnect仕様書を参照してください。
 
 ## `CJ3Library#getJNIDataView`
 
@@ -45,6 +45,6 @@ class CJ3Library {
 }
 ```
 
-Returns a `DataView` of the library's raw JNI memory.
+ライブラリの生のJNIメモリの`DataView` を返します。
 
 [`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary

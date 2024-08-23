@@ -1,38 +1,38 @@
 ---
 title: cjGetRuntimeResources
-description: List resources that were loaded
+description: 読み込まれたリソースの一覧を取得する
 ---
 
-Returns a JavaScript string representing the data that should be passed to [preloadResources]. Once parsed, it is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
+この関数は、[preloadResources]に渡すデータを表すJavaScript文字列を返します。この関数が呼び出された時点までにランタイムから読み込まれたファイル名を含むオブジェクトになります。
 
-See [startup time optimization](/docs/guides/Startup-time-optimization) for more information.
+詳細については、[起動時間の最適化](/docs/guides/Startup-time-optimization) を参照してください。
 
 ```ts
 function cjGetRuntimeResources(): string;
 ```
 
-> [!note] Note
-> This function is intended for use in the browser console. It is not intended to be called from within your application.
+> [!note] 注意
+> この関数はブラウザコンソールでの使用を意図しています。アプリケーション内から呼び出すことは想定されていません
 
-## Parameters
+## パラメーター
 
-`cjGetRuntimeResources` does not take any parameters.
+`cjGetRuntimeResources` はパラメーターを受け取りません。
 
-## Returns
+## 戻り値
 
-`cjGetRuntimeResources` returns a string representing the files that have been loaded from the runtime.
+`cjGetRuntimeResources` は、ランタイムから読み込まれたファイルを表す文字列を返します。
 
-Parse this string with [JSON.parse] and pass it as [preloadResources] in future page loads.
+この文字列を[JSON.parse]で解析し、次回以降のページ読み込み時に[preloadResources] として渡します。
 
-## Example
+## 例
 
-In the browser console, type:
+ブラウザのコンソールで次のように入力します:
 
 ```shell
 cjGetRuntimeResources();
 ```
 
-The output would look like this:
+出力は次のようになります:
 
 ```js
 '{"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]}';
