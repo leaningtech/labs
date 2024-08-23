@@ -1,60 +1,136 @@
 ---
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import HeroAsset from "../assets/cheerpx_illustration.png";
+import { Image } from "astro:assets";
+import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 ---
 
-<ProductHome>
-	<section class="py-16">
-		<div class="mx-auto max-w-[56em] text-center space-y-12">
-			<h1
-				class="text-7xl font-semibold text-balance bg-gradient-to-tr from-cheerpx to-stone-200 text-transparent bg-clip-text fly-in-b"
-			>
-				<b>Virtual machines</b> in your web app.
-			</h1>
-			<p class="text-lg text-balance">
-				CheerpX is a JavaScript library that enables secure client-side
-				execution of x86 binaries on any browser.
-			</p>
-			<p class="text-lg text-balance text-stone-400">Coming soon.</p>
-		</div>
-		<div class="flex items-center gap-4 justify-center mt-12">
-			<LinkButton
-				type="discord"
-				href="https://discord.leaningtech.com"
-				iconLeft="fa-brands:discord"
-				label="Subscribe for updates"
-			/>
-			<LinkButton
-				type="secondary"
-				href="https://webvm.io"
-				iconRight="mi:arrow-right"
-				label="Try the demo"
-			/>
+<ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-[#00254d]">
+	<section>
+		<div
+			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		>
+			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
+				>
+					Run <span
+						class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+						>virtual machines</span
+					> in your web apps
+				</h1>
+				<p class="text-lg text-balance text-white text-left">
+					CheerpX is a JavaScript library that enables secure <b>client-side execution of x86 binaries</b> on any browser. Currently available only on its beta version and developed by Leaning Technologies.
+				</p>
+				<div class="flex gap-4 justify-left mt-12">
+					<LinkButton
+						type="primary-cheerp"
+						href="/docs/getting-started/tour"
+						label="Try the demo"
+					/>
+					<LinkButton
+						type="secondary-cheerp"
+						href="/docs/getting-started/installation"
+						iconLeft="mi:download"
+						label="Install CheerpX"
+					/>
+				</div>
+			</div>
+			<div class="hidden md:block flex justify-center 2xl:pl-56">
+				<Image src={HeroAsset} alt="Cheerp Logo in a cube" class="" />
+			</div>
 		</div>
 	</section>
-	<section class="flex justify-center">
-		<iframe
-			title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-			src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-			class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
-			frameborder="0"
-			allowfullscreen="allowfullscreen"></iframe>
+
+	<section
+		class="justify-center py-20 bg-stone-900 px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+	>
+		
+		</div>
+	</section>
+
+	<!-- TODO: video -->
+	<!-- TODO: client company logos -->
+	<!-- TODO: how it works (user story) -->
+	<!-- TODO: testimonials -->
+	<!-- TODO: FAQ -->
+	<section class="bg-stone-900 py-16">
+		<div
+			class="justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
+		>
+			
+		</div>
+	</section>
+	<section
+		class="bg-gradient-to-b from-stone-900 to-[#474484] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+	>
+		<p class="text-center text-bold text-5xl pb-20">
+			The enterprise-grade C/C++ compiler for the Web
+		</p>
+
+		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
+			<div class="col-span-2 text-left font-bold text-2xl py-4">
+				<p>
+					<span class="text-white">Do you need more?</span> Explore <span
+						class="text-cheerp"
+					>
+						Cheerp Enterprise</span
+					>
+				</p>
+				<ul class="list-inside list-disc font-normal text-wrap text-lg py-4">
+					<li>Technical support with tailored SLAs.</li>
+					<li>Feature prioritisation and sponsored development available.</li>
+					<li>
+						Access to our development team for compilation log reviews, video
+						calls and consulting.
+					</li>
+				</ul>
+				<LinkButton
+					type="primary-cheerp"
+					href="https://leaningtech.com/contact-us/?subject=Cheerp%20Enterprise%20Licence#mailus"
+					label="Contact us"
+				/>
+			</div>
+			<div class="col-span-1 border-solid border-l text-left py-4">
+				<p class="text-left text-2xl font-bold text-stone-300 pl-8">
+					<span class="text-white">Ready to build?</span> Get started today by browsing
+					our
+					<a
+						href="/docs"
+						class="text-cheerp hover:text-white inline-flex items-center"
+						target="_blank"
+						>documentation
+						<svg
+							class="w-4 h-4 ml-1"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+							></path>
+							<path
+								d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+							></path>
+						</svg>
+					</a>
+				</p>
+				<div class="pl-8 py-4 space-y-2 inline-flex flex-col">
+					<LinkButton
+						type="primary-cheerp"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
+					<LinkButton
+						href="/docs"
+						label="Documentation"
+						type="secondary-cheerp"
+						iconLeft="iconoir:google-docs"
+					/>
+				</div>
+			</div>
+		</div>
 	</section>
 </ProductHome>
-
-<style>
-	@keyframes flyFadeScaleIn {
-		0% {
-			opacity: 0;
-			transform: translateY(70px) scale(0.6);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.fly-in-b {
-		animation: flyFadeScaleIn 300ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-	}
-</style>
