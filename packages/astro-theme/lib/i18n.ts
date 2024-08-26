@@ -55,7 +55,7 @@ export function t(english: string, currentLocale: string | undefined): string {
 		const translation = translationsJa[english as keyof typeof translationsJa];
 		if (translation) return translation;
 		else if (import.meta.env.DEV) {
-			return "MISSING TRANSLATION";
+			return "このコンテンツはまだ日本語訳がありませんので、英語版をご参照ください。";
 		} else throw new Error(`Missing Japanese translation for: ${english}`);
 	} else if (currentLocale === "zh") {
 		const translation = translationsZh[english as keyof typeof translationsZh];

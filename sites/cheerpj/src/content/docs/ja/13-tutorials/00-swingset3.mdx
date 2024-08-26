@@ -1,20 +1,20 @@
 ---
 title: SwingSet3
-description: Porting a Swing application to the web
+description: SwingアプリケーションをWebに移植する
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-In this tutorial, we'll run the SwingSet3 application in the browser.
+このチュートリアルでは、SwingSet3アプリケーションをブラウザで実行する手順を説明します。
 
 <LinkButton label="View demo" href="#the-result" />
 
-## Prerequisites
+## 前提条件
 
-- [Download the template project](/docs/cheerpj3/tutorials/swingset3-template.zip) and unzip it
+- [テンプレートプロジェクトをダウンロード](/docs/cheerpj3/tutorials/swingset3-template.zip)して、解凍してください。
 - [Node.js](https://nodejs.org/en/) (>= 18)
 
-The starting point of this example is an empty HTML page, the SwingSet3 jar, and its dependencies:
+この例の出発点は、空のHTMLページ、SwingSet3のJAR、およびその依存関係です：
 
 ```
 .
@@ -32,27 +32,27 @@ The starting point of this example is an empty HTML page, the SwingSet3 jar, and
     └── swingx.jar
 ```
 
-## 1. Run a web server
+## 1. Webサーバーを起動する
 
-To view the example, we need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+この例を表示するには、ファイルをWebサーバーでホストする必要があります。[Vite](https://vitejs.dev/) は便利なツールで、ファイルが変更されると自動的にページをリロードしてくれます。
 
 ```sh
 npx vite
 ```
 
-Visit the URL shown in the terminal and you should see a blank page. Leave Vite running in the background for the remainder of this tutorial.
+ターミナルに表示されたURLにアクセスすると、空白のページが表示されるはずです。このチュートリアルの残りの部分では、Viteをバックグラウンドで実行しておいてください。
 
-## 2. Add CheerpJ to the document
+## 2. CheerpJをドキュメントに追加する
 
-Let's add CheerpJ to the page by adding this script tag to the `<head>`:
+次に、`<head>`に以下のスクリプトタグを追加して、CheerpJをページに追加しましょう:
 
 ```html title="index.html"
 <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
-## 3. Initialise CheerpJ and run the jar
+## 3. CheerpJを初期化し、jarを実行する
 
-Add the following script tag to the `<body>`:
+次のスクリプトタグを`<body>`に追加しましょう:
 
 ```html title="index.html"
 <script type="module">
@@ -62,27 +62,27 @@ Add the following script tag to the `<body>`:
 </script>
 ```
 
-This will initialise CheerpJ, create a 800x600 display, and run the SwingSet3 jar. We use `type="module"` so that we can use [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#top_level_await).
+これにより、CheerpJが初期化され、800x600の表示エリアが作成され、SwingSet3のjarが実行されます。`type="module"`を使用することで、[最上位のawait](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#top_level_await)を利用できます。
 
-> [!question] What is `/app/SwingSet3.jar`?
-> This is a [virtual filesystem](/docs/guides/File-System-support) which represents the root of the web server.
+> [!question] `/app/SwingSet3.jar`とは？
+> これは、ウェブサーバーのルートを表す[仮想ファイルシステム](/docs/ja/guides/File-System-support)です。
 
-Save the file and you should see SwingSet3 load and run in the browser. 🥳
+ファイルを保存すると、SwingSet3がブラウザで読み込まれ、実行されるはずです 🥳
 
-## 4. Make the application take up the whole page
+## 4. アプリケーションをページ全体に表示する
 
-The application takes up a small portion of the page, but for many applications we want to take up the whole page.
+現在、アプリケーションはページの一部しか占有していませんが、多くのアプリケーションではページ全体を使用したい場合があります。
 
-To do this, we'll add a new element to the `<body>`:
+これを実現するために、新しい要素を`<body>`に追加しましょう：
 
 ```html title="index.html"
 <div id="container"></div>
 ```
 
-> [!note] Note
-> Make sure you add the container element **before** the script which calls `cheerpjCreateDisplay`.
+> [!note] 注意
+> `cheerpjCreateDisplay`を呼び出すスクリプトの**前**に、コンテナ要素を追加してください。
 
-And then add some CSS:
+次に、CSSを追加しましょう：
 
 ```html title="index.html"
 <style>
@@ -98,7 +98,7 @@ And then add some CSS:
 </style>
 ```
 
-Finally, update the script to use the container element:
+最後に、スクリプトを更新してコンテナ要素を使用するようにしましょう：
 
 ```html title="index.html" {3}
 <script type="module">
@@ -108,19 +108,19 @@ Finally, update the script to use the container element:
 </script>
 ```
 
-Passing `-1` as the width and height tells CheerpJ to use the full size of the container element, and listen for resize events.
+幅と高さに`-1` を渡すことで、CheerpJがコンテナ要素の全サイズを使用し、リサイズイベントを監視します。
 
-View the page again, and you should see the application take up the entire window. Also notice that resizing the window resizes the application.
+再度ページを表示すると、アプリケーションがウィンドウ全体を占有するのが確認できるはずです。また、ウィンドウをリサイズすると、アプリケーションもリサイズされることに気づくでしょう。
 
 ---
 
-## The result
+## 結果
 
 <iframe
 	src="https://cheerpj-example-swingset3.leaningtech.com/"
 	class="w-full aspect-square"
 ></iframe>
 
-## Source code
+## ソースコード
 
-[View full source code on GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/SwingSet3)
+[GitHubでソースコード全体を見る](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/SwingSet3)

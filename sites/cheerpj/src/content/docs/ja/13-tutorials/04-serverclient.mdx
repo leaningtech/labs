@@ -1,58 +1,58 @@
 ---
-title: Server-Client (Networking)
-description: Communication between two Java apps using CheerpJ and Tailscale.
+title: サーバークライアント (ネットワーキング)
+description: CheerpJとTailscaleを使用した2つのJavaアプリケーション間の通信
 ---
 
-This tutorial will take you step by step over a networking scenario of communication between two Java applications running in the browser with CheerpJ. You will learn how to set up CheerpJ and Tailscale to run a Java Client application in the browser that requires communication via `java.netSocket` and `java.net.ServerSocket` with a Server application.
+このチュートリアルでは、ブラウザでCheerpJを使用して実行される2つのJavaアプリケーション間の通信シナリオについてステップバイステップで説明します。`java.netSocket` と `java.net.ServerSocket` を介して通信が必要なJavaクライアントアプリケーションをブラウザで実行するためのCheerpJとTailscaleのセットアップ方法を学びましょう。
 
-If you are not familiar with how CheerpJ and Tailscale work together, we invite you to take a look at our [Networking guide]. You can download the full template of this tutorial [here](/docs/cheerpj3/tutorials/ServerClientTutorial.zip).
+CheerpJとTailscaleがどのように連携するかについて詳しくない場合は、[ネットワーキングガイド]をご覧になることをお勧めします。このチュートリアルの完全なテンプレートは[こちら](/docs/cheerpj3/tutorials/ServerClientTutorial.zip)からダウンロードできます。
 
 <img src="/docs/cheerpj3/assets/Tailscale_P2P.png"></img>
 
-## Pre-requisites:
+## 前提条件:
 
-- A text editor to create and edit an HTML file
-- A simple HTTP server to host your page locally.
-- A modern browser like Chrome, Firefox or Safari.
-- A Tailscale account (explanation later in this tutorial)
+- HTMLファイルを作成および編集するためのテキストエディタ
+- ページをローカルでホストするための簡単なHTTPサーバー
+- Chrome、Firefox、Safariなどのモデム・ブラウザー
+- Tailscaleアカウント（このチュートリアルの後半で説明します）
 
-## 1. The Java applications
+## 1. Javaアプリケーション
 
-The applications we will be running in this tutorial consist of a Java Server app and a Java Client app that communicate with each other via Sockets simulating a chat room. This application example has been based on [TechVidvan] tutorial and you can find the source code extensively explained [here](https://techvidvan.com/tutorials/java-chat-application/).
+このチュートリアルで実行するアプリケーションは、JavaサーバーアプリケーションとJavaクライアントアプリケーションで構成され、ソケットを介して通信し、チャットルームをシミュレートします。このアプリケーションの例は、[TechVidvan] チュートリアルに基づいており、詳細なソースコードの説明は[こちら](https://techvidvan.com/tutorials/java-chat-application/)で確認できます。
 
-The idea is to run both applications in the browser with the help of CheerpJ and no Java installations on your machine!
+このチュートリアルの目的は、CheerpJを使用して、マシンにJavaをインストールせずに、両方のアプリケーションをブラウザで実行することです！
 
 ![Client Server](/docs/cheerpj3/assets/client-server.png)
 
 ## 2. Tailscale
 
-If you have read our [Networking Guide], you learned that enabling non-HTTP (s) networking when using CheerpJ requires a third-party VPN service. This is very easy to do using Tailscale, which is extensively supported by CheerpJ.
+私たちの[ネットワーキングガイド]をお読みになった方は、CheerpJを使用する際に非HTTP (s)ネットワークを有効にするには、サードパーティのVPNサービスが必要であることをご存知でしょう。これは、CheerpJがサポートするTailscaleを使用することで非常に簡単に行えます。
 
-### 2.1 Setting up Tailscale
+### 2.1 Tailscaleの設定
 
-You will be creating a Tailscale network and connecting both Java apps to this network as _nodes_. A Tailscale _node_ is a term that refers to a combination of a user/machine connected to Tailscale network.
+Tailscaleネットワークを作成し、両方のJavaアプリケーションを＊ノード＊としてこのネットワークに接続します。Tailscaleの＊ノード＊とは、Tailscaleネットワークに接続されたユーザー/マシンの組み合わせを指す用語です。
 
-1.  Create a Tailscale account and [log in](https://login.tailscale.com/). By creating an account you will be creating a Network.
-2.  Create the appropriate auth keys [here](https://login.tailscale.com/admin/settings/keys) and reserve, you will be using these keys to authenticate the Java applications into your Tailscale network later.
+1.  Tailscaleアカウントを作成して[ログイン](https://login.tailscale.com/)してください。 アカウントを作成すると、ネットワークが作成されます。
+2.  適切な認証キーを[こちら](https://login.tailscale.com/admin/settings/keys)で作成して保存してください。 これらのキーを使用して、後でJavaアプリケーションをTailscaleネットワークに認証できます。
 
-> [!tip] Tailscale auth keys
-> You can create the type of auth key that works best for you by mixing and matching the options in the Tailscale keys menu. If you care about the Tailscale quota keep in mind to remove the unused devices manually or by using ephemeral keys.
+> [!tip] Tailscale認証キー
+> Tailscaleキーのメニューでオプションを組み合わせて、自分に最適なタイプの認証キーを作成できます。Tailscaleのクォータを気にする場合は、未使用のデバイスを手動で削除するか、またはエフェメラルキーを使用して削除することをお勧めします。
 
-## 3. Setting up the project
+## 3. プロジェクトの設定
 
-Let's create a project directory with two subdirectories inside, one for the Client and one for the Server and place the corresponding files:
+クライアント用とサーバー用の2つのサブディレクトリを持つプロジェクトディレクトリを作成し、それぞれに対応するファイルを配置しましょう：
 
-1. Create the project directory tree:
+1. プロジェクトディレクトリツリーの作成：
 
 ```bash
 mkdir -p ServerClientTutorial/{Server, Client}
 ```
 
-2. Paste the application's JARs inside the corresponding folder.
-   - [Download the Server JAR](/docs/cheerpj3/tutorials/Server.jar)
-   - [Download the Client JAR](/docs/cheerpj3/tutorials/Client.jar)
-1. Create an HTML file inside each subdirectory, let's name it `client.html` and `server.html`
-   Your project tree should look like this:
+2. アプリケーションのJARファイルを対応するフォルダに貼り付けてください：
+   - [サーバーJARをダウンロード](/docs/cheerpj3/tutorials/Server.jar)
+   - [クライアントJARをダウンロード](/docs/cheerpj3/tutorials/Client.jar)
+1. 各サブディレクトリ内にHTMLファイルを作成してください。ファイル名は`client.html` と `server.html`にしましょう。
+   プロジェクトツリーは次のようになります：
 
 ```
 └──ServerClientTutorial
@@ -64,9 +64,9 @@ mkdir -p ServerClientTutorial/{Server, Client}
 		    └── client.html
 ```
 
-### 3.1 The Server application
+### 3.1 サーバーアプリケーション
 
-1. Open the `server.html` file and paste the following:
+1. `server.html` ファイルを開き、以下を貼り付けてください：
 
 ```html title="server.html" {6, 12-20}
 <!doctype html>
@@ -95,30 +95,30 @@ mkdir -p ServerClientTutorial/{Server, Client}
 </html>
 ```
 
-**_What is happening here?_**
+**_ここで何が起こっているのか?_**
 
-- The `<head>` script loads CheerpJ.
-- [`cheerpjInit`] initialises the CheerpJ runtime environment. The Tailscale auth key is passed for authentication.
-- [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
-- [`cheerpjRunJar`] executes your application!
-- [`tailscaleIpCb`] is used to retrieve the IP address once the application is connected to the Tailscale network. We are using it to clearly display the IP address on the document.
-- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
+- `<head>`内のスクリプトタグはCheerpJをロードします。
+- [`cheerpjInit`]はCheerpJランタイム環境を初期化します。Tailscale認証キーが認証のために渡されます。
+- [`cheerpjCreateDisplay`] は、すべてのJavaウィンドウを含むグラフィカルな環境を作成します。
+- [`cheerpjRunJar`] はアプリケーションを実行します。
+- [`tailscaleIpCb`] は、アプリケーションがTailscaleネットワークに接続された後にIPアドレスを取得するために使用されます。IPアドレスを明確に表示するために使用しているのです。
+- `/app/` は、ページが読み込まれるウェブサーバーのルートを参照する[仮想ファイルシステム]のマウントポイントです。
 
-2. Copy the first auth key you generated in the previous step and paste it as a string replacing _"PasteYourKeyHere"_.
-3. Now you are ready to serve this page and run the Server application in the browser. Simply run a http-server **inside** the `Server` directory. For example:
+2. 前のステップで生成した最初の認証キーをコピーし、「*PasteYourKeyHere*」の部分を置き換えて文字列として貼り付けてください。
+3. これで、サーバーアプリケーションをブラウザで実行する準備が整いました。あとは「Server」ディレクトリの中でhttp-serverを実行するだけだ。 例えば：
 
 ```bash
 cd ServerClientTutorial/Server
 http-server -p 8080
 ```
 
-4. Now open a browser tab and visit the address you are serving. It should be something similar to `http://127.0.0.1:8080/server.html`.
-5. Above the application display you will see the assigned IP address for the Server app. Please reserve it as you will need it later to connect the client with the server. You can also consult the IP address by visiting the [Tailscale Dashboard](https://login.tailscale.com/admin/machines).
-6. You will see the CheerpJ loading animation for a brief moment and your application should show.
+4. 新しいブラウザタブを開き、提供しているアドレスにアクセスしましょう。`http://127.0.0.1:8080/server.html`のようなアドレスになるはずです。
+5. アプリケーションの表示の上に、サーバーアプリの割り当てられたIPアドレスが表示されます。このIPアドレスは後でクライアントをサーバーに接続するために必要となるので、覚えておいてください。IPアドレスは[Tailscaleダッシュボード](https://login.tailscale.com/admin/machines)でも確認できます。
+6. 短時間のCheerpJ読み込みアニメーションの後、アプリケーションが表示されるはずです。
 
-### 3.2 The Client application
+### 3.2 クライアントアプリケーション
 
-1. Open the `client.html` file and paste the following code:
+1. `client.html`ファイルを開き、以下を貼り付けてください：
 
 ```html title="client.html" {16}
 <!doctype html>
@@ -149,25 +149,25 @@ http-server -p 8080
 </html>
 ```
 
-**What is happening here?**
+**ここで何が起こっているのか?**
 
-- [`cheerpjRunJar`] The second parameter corresponds to the _args_ object which is an argument for the Java Main method. we are passing the API address of the Server application so the Client can communicate with it.
+- [`cheerpjRunJar`] の2番目のパラメーターは、Javaのメインメソッドの引数である _args_ オブジェクトに対応します。ここでは、クライアントがサーバーと通信できるように、サーバーアプリケーションのAPIアドレスを渡しています。
 
-2. Copy the second auth key you generated previously and paste it as a string replacing _"PasteYourKeyHere"_.
-3. Now you are ready to serve this page and run the Client application in the browser. Simply run a HTTP server **inside** the `Client` directory with a different port than the one used for the Server app. For example:
+2. 前に生成した2つ目の認証キーをコピーし、「*PasteYourKeyHere*」の部分を置き換えて文字列として貼り付けてください。
+3. これで、クライアントアプリケーションをブラウザで実行する準備が整いました。サーバーアプリケーションで使用したものとは異なるポートを指定して、`Client` ディレクトリ**内**でHTTPサーバーを実行してください。例えば：
 
 ```bash
 cd ServerClientTutorial/Client
 http-server -p 8081
 ```
 
-4. Now open a browser tab and visit the address you are serving. It should be something similar to `http://127.0.0.1:8081/client.html`.
-5. Copy the Server's IP address and paste it in the input field and hit enter. The Client app will try to connect to the Server app this way.
-6. Once provided the IP address, you will see the CheerpJ loading animation for a brief moment and your application should show.
+4. 新しいブラウザタブを開き、提供しているアドレスにアクセスしましょう。`http://127.0.0.1:8081/client.html`のようなアドレスになるはずです。
+5. サーバーのIPアドレスをコピーして入力フィールドに貼り付け、Enterキーを押してみてください。この方法でクライアントアプリケーションがサーバーアプリケーションに接続しようとします。
+6. IPアドレスを指定すると、短時間のCheerpJ読み込みアニメーションの後、アプリケーションが表示されるはずです。
 
-## 4. Final test
+## 4. 最終テスト
 
-Now that you have both Client and Server applications running with CheerpJ, you should be able to input an username and connect in both apps to establish the connection. Test by sending messages from one application to the other one.
+クライアントとサーバーの両方のアプリケーションがCheerpJで正常に動作しているので、両方のアプリケーションでユーザー名を入力して接続を試みることができるはずです。一方のアプリケーションからもう一方のアプリケーションにメッセージを送信してみてください：
 
 <div class="flex flex-row">
 	<div class="w-1/2 mr-1 md:mr-2">
@@ -179,23 +179,22 @@ Now that you have both Client and Server applications running with CheerpJ, you 
   </div>
 </div>
 
-You can download the full template of this tutorial [here](/docs/cheerpj3/tutorials/ServerClientTutorial.zip) or visit the [GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Server-Client).
+プロジェクトテンプレートを[こちら](/docs/cheerpj3/tutorials/ServerClientTutorial.zip)からダウンロードするか、このチュートリアルの[GitHubリポジトリ][GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Server-Client)にアクセスしてください。
 
-## Credits
+## クレジット
 
-The Java applications used in this networking tutorial belong to [TechVidvan]. You can find their tutorial with the source code [here](https://techvidvan.com/tutorials/java-chat-application/). Some minor edits have been made to adapt to this tutorial.
+このネットワーキングチュートリアルで使用されたJavaアプリケーションは[TechVidvan]に属します。ソースコード付きのチュートリアルは[こちら](https://techvidvan.com/tutorials/java-chat-application/)で確認できます。このチュートリアルに対応するため、若干の修正が加えられました。
 
-## Further reading
+## さらに読む
 
-- [Networking guide]
-- [Visit the reference](/docs/reference)
+- [ネットワーキングガイド]
+- [リファレンスを参照](/docs/reference)
 
-[Networking guide]: /docs/guides/Networking
+[ネットワーキングガイド]: /docs/guides/Networking
 [TechVidvan]: https://techvidvan.com/tutorials/
-[Run a Java app]: /docs/getting-started/Java-app
 [`cheerpjInit`]: /docs/reference/cheerpjInit
 [`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
-[virtual filesystem]: /docs/guides/File-System-support
+[仮想ファイルシステム]: /docs/guides/File-System-support
 [`tailscaleAuthKey`]: /docs/reference/cheerpjInit#tailscaleauthkey
 [`tailscaleIpCb`]: /docs/reference/cheerpjInit#tailscaleipcb

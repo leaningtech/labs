@@ -1,39 +1,39 @@
 ---
-title: Swing Browser (Networking)
-description: Run a Java application with Internet connection
+title: Swing Browser (ネットワーキング)
+description: Javaアプリケーションをインターネット接続で実行する
 ---
 
-This tutorial will show you how to use CheerpJ and Tailscale to run a web browser application written in Java. The same approach can be used to give any application running in CheerpJ wider internet access.
+このチュートリアルでは、CheerpJとTailscaleを使用して、Javaで作成されたウェブブラウザアプリケーションを実行する方法を紹介します。同じ方法を使用して、CheerpJで実行される任意のアプリケーションに広範なインターネットアクセスを提供できます。
 
-If you're not familiar with how CheerpJ and Tailscale work together, [read the networking guide][Networking guide].
+CheerpJとTailscaleがどのように連携するかに詳しくない場合は、[ネットワーキングガイド][ネットワーキングガイド]をご覧ください。
 
-## Pre-requisites
+## 前提条件
 
-- [Download `SwingHTMLBrowser.jar`](/docs/cheerpj3/tutorials/SwingHTMLBrowser.jar)
-- A simple HTTP server to host your page locally.
-- A text editor to create and edit an HTML file.
-- A modern browser like Chrome, Firefox or Safari.
-- A Tailscale account (explanation later in this tutorial)
+- [`SwingHTMLBrowser.jar`のダウンロード](/docs/cheerpj3/tutorials/SwingHTMLBrowser.jar)
+- ページをローカルでホストするための簡単なHTTPサーバー
+- HTMLファイルを作成および編集するためのテキストエディタ
+- Chrome、Firefox、Safariなどのモデム・ブラウザー
+- Tailscaleアカウント（このチュートリアルの後半で説明します）
 
-## 1. The Java application
+## 1. Javaアプリケーション
 
-Let's start by reviewing the Java application we will be testing. This is a simple Swing HTML browser written in Java. You can run this JAR locally if you have Java installed on your machine, but feel free to skip this step.
+まず、テストするJavaアプリケーションを確認しましょう。これは、Javaで作成されたシンプルなSwing HTMLブラウザです。 もしお使いのマシンにJavaがインストールされている場合、このJARをローカルで実行できますが、このステップはスキップしても構いません。
 
-You can type the full URL of a website in the input field and press enter to load the page. Note that the Swing web browser is fairly old, so sites may not display the same as in modern browsers.
+入力フィールドにウェブサイトの完全なURLを入力し、Enterキーを押すとページが読み込まれます。 ただし、Swingウェブブラウザはかなり古いため、サイトが最新のブラウザと同じように表示されない場合があります。
 
 <div class="w-1/2">
 	![Tiny Browser Loaded](/docs/cheerpj3/assets/tinybrowserloaded.png)
 </div>
 
-In this scenario, the page is loading because the machine you are running this application on has an active connection to the internet and Java is installed.
+このシナリオでは、このアプリケーションを実行しているマシンがインターネットに接続されており、Javaがインストールされているため、ページが読み込まれます。
 
-## 2. Run the application in the browser with CheerpJ
+## 2. CheerpJを使用してブラウザでアプリケーションを実行する
 
-Now we want to run this Java application in the browser with CheerpJ with no Java installation on your machine! To do so, we will follow similar steps as in the [Run a Java app] tutorial.
+次に、このJavaアプリケーションを、マシンにJavaをインストールせずにCheerpJを使用してブラウザで実行しましょう。そのためには、[Javaアプリケーションの実行] チュートリアルで行ったのと同様の手順に従います。
 
-### 2.1 The project files
+### 2.1 プロジェクトファイル
 
-Let's create a project directory, place the application JAR in this folder and create an HTML file. Your project directory should look something like this:
+まず、プロジェクトディレクトリを作成し、アプリケーションJARをこのフォルダに配置して、HTMLファイルを作成しましょう。プロジェクトディレクトリは次のようになります：
 
 ```
 └──browserTutorial
@@ -41,7 +41,7 @@ Let's create a project directory, place the application JAR in this folder and c
     └── browser.html
 ```
 
-Copy and paste this code in your `browser.html` file:
+次に、以下のコードをコピーして`browser.html`ファイルにペーストしてください：
 
 ```html title="browser.html" {6, 9-15}
 <!doctype html>
@@ -63,27 +63,27 @@ Copy and paste this code in your `browser.html` file:
 </html>
 ```
 
-#### What's going on?
+#### 何が起こっているのか？
 
-- The script tag in the `<head>` loads CheerpJ.
-- [`cheerpjInit`] initialises the CheerpJ runtime environment.
-- [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
-- [`cheerpjRunJar`] executes the application.
-- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
+- `<head>` 内のスクリプトタグはCheerpJをロードします。
+- [`cheerpjInit`] はCheerpJランタイム環境を初期化します。
+- [`cheerpjCreateDisplay`] は、すべてのJavaウィンドウを含むグラフィカルな環境を作成します。
+- [`cheerpjRunJar`] はアプリケーションを実行します。
+- `/app/`は、ページが読み込まれるウェブサーバーのルートを参照する[仮想ファイルシステム]のマウントポイントです。
 
-### 2.2 Serving the application
+### 2.2 アプリケーションの提供
 
-You can now serve this page from an HTTP server, such as [http-server](https://npm.im/http-server).
+このページを[http-server](https://npm.im/http-server)のようなHTTPサーバーから提供できるようになります。
 
 ```shell
 npx http-server -p 8080
 ```
 
-You will be able to see the page in a modern browser running with CheerpJ. Let's type `https://github.com` in the Java browser client and press enter. Nothing will load and you will find this error in the console log:
+これで、CheerpJを使用して実行されているページを最新のブラウザで表示できます。 Javaブラウザクライアントに`https://github.com`と入力し、Enterキーを押してみましょう。何も読み込まれず、コンソールログに次のようなエラーが表示されるはずです：
 
 ![Error in the Console Log](/docs/cheerpj3/assets/errorconsolelog.png)
 
-Now try loading a page that is hosted on the local server. Let's add the following file to the project directory:
+次に、ローカルサーバーにホストされているページを読み込んでみましょう。また、プロジェクトディレクトリに次のファイルを追加しましょう:
 
 ```html title="hello.html"
 <!doctype html>
@@ -98,33 +98,33 @@ Now try loading a page that is hosted on the local server. Let's add the followi
 </html>
 ```
 
-In the Java browser application type the following address: `http://127.0.0.1:8080/hello.html` (or any address that corresponds to your local host).
+Javaブラウザアプリケーションで、次のアドレスを入力してみてください：`http://127.0.0.1:8080/hello.html` （あるいはローカルホストに対応するアドレス）。
 
 ![Hello From Same Origin](/docs/cheerpj3/assets/hello_sameorigin.png)
 
-**CheerpJ can only do same-origin requests when is not connected to a Tailscale Network.** The convenience of this scenario is that, even when the app is running in the browser, it is completely isolated from the wider internet.
+**CheerpJは、Tailscaleネットワークに接続されていない場合、同一オリジンリクエストのみを実行できます。** このシナリオの利便性は、アプリケーションがブラウザで実行されている場合でも、インターネット全体から完全に隔離されていることです。
 
-...but we want the application to be able to load web pages that aren't on localhost.
+...しかし、私たちはアプリケーションがlocalhost以外のウェブページを読み込めるようにしたいと考えています。
 
-## 3. Connect the application to the internet
+## 3. アプリケーションをインターネットに接続する
 
-The easiest way to grant your application access to the internet is via a Tailscale network (_Tailnet_ in Tailscale terminology). A Tailscale network is a VPN made of machines/users (_Nodes_ in Tailscale terminology) connected to this network.
-A Tailscale network by default is isolated from the internet, so it is necessary to configure an _exit node_ that routes all the internet traffic in and out of your VPN.
+アプリケーションにインターネットへのアクセスを許可する最も簡単な方法は、Tailscaleネットワーク (Tailscale用語では*Tailnet*)を介して行うことです。 Tailscaleネットワークは、このネットワークに接続されたマシン/ユーザー(Tailscale用語では*ノード*)で構成されたVPNです。
+Tailscaleネットワークはデフォルトでインターネットから隔離されているため、VPN内外のすべてのインターネットトラフィックをルーティングする *出口ノード* を設定する必要があります。
 
-### 3.1 Set up Tailscale
+### 3.1 Tailscaleの設定
 
-Creating a network with an _exit node_ is very simple:
+出口ノードを持つネットワークを作成するのは非常に簡単です：
 
-1.  Create an account and log in to the [Tailscale portal](https://login.tailscale.com/).
-2.  [Install Tailscale](https://tailscale.com/kb/installation) in your machine, you will be configuring this machine as an _exit node_ later.
-3.  Set up your machine as an _exit node_ following the instructions [here](https://tailscale.com/kb/1103/exit-nodes).
+1.  [Tailscaleポータルサイト](https://login.tailscale.com/)でアカウントを作成し、ログインします。
+2.  [Tailscaleをインストール](https://tailscale.com/kb/installation)し、このマシンを後で*出口ノード*として設定します。
+3.  [こちらの手順](https://tailscale.com/kb/1103/exit-nodes)に従って、マシンを出口ノードとして設定します。
 
-### 3.2 Authenticate your Java application
+### 3.2 Javaアプリケーションの認証
 
-Connecting to a Tailscale network requires an authorization key.
+Tailscaleネットワークに接続するには、認証キーが必要です。
 
-1. Generate an auth key [here](https://login.tailscale.com/admin/settings/keys) We recommend creating an _ephemeral_ one-time use auth key for this tutorial.
-2. Copy your key and pass it to CheerpJ via [`cheerpjInit`] and [`tailscaleAuthKey`] by modifying your `browser.html` as follows:
+1. [こちら](https://login.tailscale.com/admin/settings/keys)で認証キーを生成できます。このチュートリアルでは、＊ephemeral＊ （一時的）な使い捨て認証キーの作成をお勧めします。
+2. キーをコピーして、`browser.html`を次のように変更して、[`cheerpjInit`] と [`tailscaleAuthKey`]を通じてCheerpJに渡します：
 
 ```js
 await cheerpjInit({
@@ -132,25 +132,25 @@ await cheerpjInit({
 });
 ```
 
-## 4. Final test
+## 4. 最終テスト
 
-Now reload your page and try loading `https://www.google.com/` or `https://www.github.com/` in the Java browser application. This time you should be able to open the website with no problems.
+ページを再読み込みして、Javaブラウザアプリケーションで`https://www.google.com/`や`https://www.github.com/`を読み込んでみましょう。今度は問題なくウェブサイトを開けるはずです。
 
-You can also verify and supervise the connections in the [Tailscale dashboard](https://login.tailscale.com/admin/machines).
+[Tailscaleダッシュボード](https://login.tailscale.com/admin/machines)で接続を確認および監視することもできます。
 
-Download the project template [here](/docs/cheerpj3/tutorials/browserTutorial.zip) or visit the [GitHub repository](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Swing-Browser) for this tutorial.
+プロジェクトテンプレートを[こちら](/docs/cheerpj3/tutorials/browserTutorial.zip)からダウンロードするか、このチュートリアルの[GitHubリポジトリ](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Swing-Browser)にアクセスしてください。
 
-> [!tip] Disclaimer
-> Remember that granting your application access to the internet involves several risks. The methodology shown in this tutorial aims to give a general understanding of a very simple networking scenario for learning purposes only. We recommend being careful about how you manage your authentication methods, exit nodes and overall administration of your network. CheerpJ is not responsible for this.
+> [!tip] 免責事項
+> アプリケーションにインターネットアクセスを許可することは、いくつかのリスクを伴います。このチュートリアルで紹介した方法は、非常に単純なネットワーキングシナリオを学習目的で一般的に理解することを目的としています。認証方法、出口ノード、およびネットワークの全体的な管理には十分注意することをお勧めします。CheerpJはこれに関して責任を負いません。
 
-## Further reading
+## さらに読む
 
-- [Networking guide]
+- [ネットワーキングガイド]
 
-  [Networking guide]: /docs/guides/Networking
-  [Run a Java app]: /docs/getting-started/Java-app
+  [ネットワーキングガイド]: /docs/guides/Networking
+  [Javaアプリケーションの実行]: /docs/getting-started/Java-app
   [`cheerpjInit`]: /docs/reference/cheerpjInit
   [`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
   [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
-  [virtual filesystem]: /docs/guides/File-System-support
+  [仮想ファイルシステム]: /docs/guides/File-System-support
   [`tailscaleAuthKey`]: /docs/reference/cheerpjInit#tailscaleauthkey

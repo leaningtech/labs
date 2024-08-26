@@ -93,10 +93,10 @@ npx http-server -p 8080
 
 ## さらに読む
 
-- [ランタイムAPIリファレンス](/docs/reference)
+- [ランタイムAPIリファレンス](/docs/ja/reference)
 
-[`cheerpjInit`]: /docs/reference/cheerpjInit
-[`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
-[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
-[`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
-[仮想ファイルシステム]: /docs/guides/File-System-support
+[`cheerpjInit`]: /docs/ja/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /docs/ja/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /docs/ja/reference/cheerpjRunJar
+[`cheerpjRunMain`]: /docs/ja/reference/cheerpjRunMain
+[仮想ファイルシステム]: /docs/ja/guides/File-System-support
