@@ -10,6 +10,7 @@ const { style } = Astro.props;
 ---
 
 <Shell
+	class="scroll-smooth"
 	title={product.name + " － " + product?.subtitle}
 	description={product?.description}
 >
@@ -20,8 +21,6 @@ const { style } = Astro.props;
 		class:list={[
 			product.name === "Cheerp" && style,
 			product.name === "CheerpX" && style,
-			product.name !== "Cheerp" &&
-				"px-6 py-10 w-full  mx-auto bg-gradient-to-b to-[#ffffff44] from-stone-900",
 		]}
 	>
 		<slot />

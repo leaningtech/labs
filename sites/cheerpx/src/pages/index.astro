@@ -2,6 +2,7 @@
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import HeroAsset from "../assets/cheerpx_illustration.png";
+import CalendarAsset from "../assets/calendar.png";
 import { Image } from "astro:assets";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 ---
@@ -25,15 +26,15 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				</p>
 				<div class="flex gap-4 justify-left mt-12">
 					<LinkButton
-						type="primary-cheerp"
-						href="/docs/getting-started/tour"
+						type="primary-cheerpx"
+						href="https://webvm.io/"
 						label="Try the demo"
 					/>
 					<LinkButton
-						type="secondary-cheerp"
-						href="/docs/getting-started/installation"
-						iconLeft="mi:download"
-						label="Install CheerpX"
+						type="secondary-cheerpx"
+						href="/docs/getting-started"
+						iconRight="mi:arrow-right"
+						label="Get started"
 					/>
 				</div>
 			</div>
@@ -44,10 +45,59 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 	</section>
 
 	<section
-		class="justify-center py-20 bg-stone-900 px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
 	>
-		
+		<h1
+		class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold  text-center text-wrap"
+	>	<div class="flex justify-center items-center">
+		<Image src={CalendarAsset} alt="Sourcerer" class="w-48" />
+	</div>
+		<span
+			class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+			>Coming soon</span
+		> 
+			</h1>
+			<p class="text-center text-xl font-light text-stone-300 py-4 px-30">
+				CheerpX official release is expected for late 2024. <br>
+				For now, enjoy the beta trial and our popular WebVM demo. 
+			</p>
 		</div>
+		
+		<div
+			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:-px-72 2xl:px-96"
+		>
+			<div class="text-center hover:text-yellow-600">
+				<a
+					href="https://github.com/leaningtech/webvm/forks"
+				>
+					<p class="text-2xl font-bold">900+</p>
+					<p>Forks on our WebVM repository</p>
+				</a>
+			</div>
+			<div class="text-center hover:text-yellow-600">
+				<a href="https://github.com/leaningtech/webvm/stargazers">
+					<p class="text-2xl font-bold">4.5k+</p>
+					<p>Stars on our demo GitHub</p>
+				</a>
+			</div>
+			<div class="text-center hover:text-yellow-600">
+				<a href={DISCORD_URL}>
+					<p class="text-2xl font-bold">1k+</p>
+					<p>Discord members</p>
+				</a>
+			</div>
+			
+			
+		</div>
+		<div class="flex justify-center items-center">
+			<LinkButton
+						type="primary-cheerpx"
+						href="#youtube"
+						label="Learn more"
+					/>
+		</div>
+		
+		
 	</section>
 
 	<!-- TODO: video -->
@@ -55,28 +105,33 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 	<!-- TODO: how it works (user story) -->
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
-	<section class="bg-stone-900 py-16">
+	<section id="youtube" class="bg-black py-32">
+		<p class="text-center text-bold text-5xl">
+			x86 virtualization in the browser
+		</p>
 		<div
-			class="justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
+			class="flex justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
 		>
-			
+		<iframe
+		title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
+		src="https://youtube.com/embed/VqrbVycTXmw?start=151"
+		class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
+		frameborder="0"
+		allowfullscreen="allowfullscreen"></iframe>
 		</div>
 	</section>
 	<section
-		class="bg-gradient-to-b from-stone-900 to-[#474484] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		class="bg-gradient-to-b from-stone-900 to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
 	>
 		<p class="text-center text-bold text-5xl pb-20">
-			The enterprise-grade C/C++ compiler for the Web
+			Native code virtualization as a JavaScript library
 		</p>
 
 		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
 			<div class="col-span-2 text-left font-bold text-2xl py-4">
 				<p>
-					<span class="text-white">Do you need more?</span> Explore <span
-						class="text-cheerp"
-					>
-						Cheerp Enterprise</span
-					>
+					<span class="text-white">Do you have a commercial use case?</span>
+					
 				</p>
 				<ul class="list-inside list-disc font-normal text-wrap text-lg py-4">
 					<li>Technical support with tailored SLAs.</li>
@@ -87,7 +142,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					</li>
 				</ul>
 				<LinkButton
-					type="primary-cheerp"
+					type="primary-cheerpx"
 					href="https://leaningtech.com/contact-us/?subject=Cheerp%20Enterprise%20Licence#mailus"
 					label="Contact us"
 				/>
@@ -98,7 +153,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					our
 					<a
 						href="/docs"
-						class="text-cheerp hover:text-white inline-flex items-center"
+						class="text-yellow-600 hover:text-white inline-flex items-center"
 						target="_blank"
 						>documentation
 						<svg
@@ -118,7 +173,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				</p>
 				<div class="pl-8 py-4 space-y-2 inline-flex flex-col">
 					<LinkButton
-						type="primary-cheerp"
+						type="primary-cheerpx"
 						href={DISCORD_URL}
 						iconLeft="fa-brands:discord"
 						label="Join us on Discord"
@@ -126,7 +181,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					<LinkButton
 						href="/docs"
 						label="Documentation"
-						type="secondary-cheerp"
+						type="secondary-cheerpx"
 						iconLeft="iconoir:google-docs"
 					/>
 				</div>
