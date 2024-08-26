@@ -22,7 +22,10 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					> in your web apps
 				</h1>
 				<p class="text-lg text-balance text-white text-left">
-					CheerpX is a JavaScript library that enables secure <b>client-side execution of x86 binaries</b> on any browser. Currently available only on its beta version and developed by Leaning Technologies.
+					CheerpX is a JavaScript library that enables secure <b
+						>client-side execution of x86 binaries</b
+					> on any browser. Currently available only on its beta version and developed
+					by Leaning Technologies.
 				</p>
 				<div class="flex gap-4 justify-left mt-12">
 					<LinkButton
@@ -43,33 +46,29 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			</div>
 		</div>
 	</section>
-
 	<section
-		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-56 2xl:px-60 2xl:pt-60"
 	>
-		<h1
-		class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold  text-center text-wrap"
-	>	<div class="flex justify-center items-center">
-		<Image src={CalendarAsset} alt="Sourcerer" class="w-48" />
-	</div>
-		<span
-			class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
-			>Coming soon</span
-		> 
-			</h1>
-			<p class="text-center text-xl font-light text-stone-300 py-4 px-30">
-				CheerpX official release is expected for late 2024. <br>
-				For now, enjoy the beta trial and our popular WebVM demo. 
-			</p>
+		<div class="flex justify-center items-center">
+			<Image src={CalendarAsset} alt="Sourcerer" class="w-48" />
 		</div>
-		
+		<h1
+			class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center text-wrap"
+		>
+			<span
+				class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+				>Coming soon</span
+			>
+		</h1>
+		<p class="text-center text-xl font-light text-stone-300 py-4 px-30">
+			CheerpX official release is expected for late 2024. For now, enjoy the
+			beta trial and our popular WebVM demo.
+		</p>
 		<div
-			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:-px-72 2xl:px-96"
+			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:px-28 2xl:px-72"
 		>
 			<div class="text-center hover:text-yellow-600">
-				<a
-					href="https://github.com/leaningtech/webvm/forks"
-				>
+				<a href="https://github.com/leaningtech/webvm/forks">
 					<p class="text-2xl font-bold">900+</p>
 					<p>Forks on our WebVM repository</p>
 				</a>
@@ -86,18 +85,10 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					<p>Discord members</p>
 				</a>
 			</div>
-			
-			
 		</div>
 		<div class="flex justify-center items-center">
-			<LinkButton
-						type="primary-cheerpx"
-						href="#youtube"
-						label="Learn more"
-					/>
+			<LinkButton type="primary-cheerpx" href="#youtube" label="Learn more" />
 		</div>
-		
-		
 	</section>
 
 	<!-- TODO: video -->
@@ -105,25 +96,27 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 	<!-- TODO: how it works (user story) -->
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
-	<section id="youtube" class="bg-black py-32">
-		<p class="text-center text-bold text-5xl">
+	<section id="youtube" class="bg-black py-32 px-8">
+		<p class="text-center text-bold text-5xl py-2">
 			x86 virtualization in the browser
 		</p>
 		<div
 			class="flex justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
 		>
-		<iframe
-		title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-		src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-		class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
-		frameborder="0"
-		allowfullscreen="allowfullscreen"></iframe>
+			<iframe
+				title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
+				src="https://youtube.com/embed/VqrbVycTXmw?start=151"
+				class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
+				frameborder="0"
+				allowfullscreen="allowfullscreen"
+			>
+			</iframe>
 		</div>
 	</section>
 	<section
-		class="bg-gradient-to-b from-stone-900 to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
 	>
-		<p class="text-center text-bold text-5xl pb-20">
+		<p class="text-center text-bold text-5xl py-20">
 			Native code virtualization as a JavaScript library
 		</p>
 
@@ -131,7 +124,6 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			<div class="col-span-2 text-left font-bold text-2xl py-4">
 				<p>
 					<span class="text-white">Do you have a commercial use case?</span>
-					
 				</p>
 				<ul class="list-inside list-disc font-normal text-wrap text-lg py-4">
 					<li>Technical support with tailored SLAs.</li>
