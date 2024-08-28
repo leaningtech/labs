@@ -3,6 +3,8 @@ import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import HeroAsset from "../assets/cheerpx_illustration.png";
 import CalendarAsset from "../assets/calendar.png";
+import GamePadAsset from "../assets/HDgamepad.png";
+import Screenshot from "../assets/screenshots.png";
 import { Image } from "astro:assets";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 ---
@@ -10,7 +12,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-[#00254d]">
 	<section>
 		<div
-			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
 		>
 			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
 				<h1
@@ -50,7 +52,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-56 2xl:px-60 2xl:pt-60"
 	>
 		<div class="flex justify-center items-center">
-			<Image src={CalendarAsset} alt="Sourcerer" class="w-48" />
+			<Image src={CalendarAsset} alt="Calendar" class="w-48" />
 		</div>
 		<h1
 			class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center text-wrap"
@@ -60,26 +62,26 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				>Coming soon</span
 			>
 		</h1>
-		<p class="text-center text-xl font-light text-stone-300 py-4 px-30">
+		<p class="text-center text-2xl font-light text-stone-300 py-4 px-30">
 			CheerpX official release is expected for late 2024. For now, enjoy the
 			beta trial and our popular WebVM demo.
 		</p>
 		<div
-			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:px-28 2xl:px-72"
+			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:px-28 2xl:px-60"
 		>
-			<div class="text-center hover:text-yellow-600">
+			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/forks">
 					<p class="text-2xl font-bold">900+</p>
-					<p>Forks on our WebVM repository</p>
+					<p>Repository forks</p>
 				</a>
 			</div>
-			<div class="text-center hover:text-yellow-600">
+			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/stargazers">
 					<p class="text-2xl font-bold">4.5k+</p>
-					<p>Stars on our demo GitHub</p>
+					<p>Stars on GitHub</p>
 				</a>
 			</div>
-			<div class="text-center hover:text-yellow-600">
+			<div class="text-center hover:text-[#6386a5]">
 				<a href={DISCORD_URL}>
 					<p class="text-2xl font-bold">1k+</p>
 					<p>Discord members</p>
@@ -87,7 +89,11 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			</div>
 		</div>
 		<div class="flex justify-center items-center">
-			<LinkButton type="primary-cheerpx" href="#youtube" label="Learn more" />
+			<LinkButton
+				type="primary-cheerpx"
+				href="https://webvm.io/"
+				label="Try WebVM"
+			/>
 		</div>
 	</section>
 
@@ -96,30 +102,84 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 	<!-- TODO: how it works (user story) -->
 	<!-- TODO: testimonials -->
 	<!-- TODO: FAQ -->
-	<section id="youtube" class="bg-black py-32 px-8">
-		<p class="text-center text-bold text-5xl py-2">
-			x86 virtualization in the browser
-		</p>
+
+	<section
+		id="gamesrunner"
+		class="bg-gradient-to-b from-black to-black via-stone-900 py-32 px-8"
+	>
+		<div class="items-center px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-32"></div>
 		<div
-			class="flex justify-center px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60"
+			class="flex grid grid-cols-1 px-4 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-3 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-56"
 		>
-			<iframe
-				title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-				src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-				class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
-				frameborder="0"
-				allowfullscreen="allowfullscreen"
-			>
-			</iframe>
+			<div class="col-span-2">
+				<Image src={GamePadAsset} alt="Game pad" class="w-32 sm:w-48" />
+				<div class=""></div>
+				<h1 class="font-semibold text-3xl sm:text-4xl lg:text-5xl py-2">
+					CheerpX Games Runner
+				</h1>
+				<p class="text-xl sm:text-xl">
+					CheerpX Games Runner is an open-source Chrome extension to run your
+					games directly in the browser.
+				</p>
+				<ul class="list-inside list-disc font-normal text-wrap text-xl py-4">
+					<li>
+						Play historical games from your collection directly in your browser.
+					</li>
+					<li>
+						Works on any platform, even if not officially supported by the game.
+					</li>
+					<li>No local installation required.</li>
+				</ul>
+				<div class="flex gap-4 justify-left py-2">
+					<LinkButton
+						type="primary-cheerpx"
+						href="https://webvm.io/"
+						label="Install now"
+						iconRight="teenyicons:chrome-solid"
+					/>
+					<LinkButton
+						type="secondary-cheerpx"
+						href="/docs/getting-started"
+						iconRight="bi:github"
+						label="Contribute"
+					/>
+				</div>
+			</div>
+			<div class="col-span-1 flex items-center sm:items-end px-4">
+				<Image src={Screenshot} alt="screenshots" class="" />
+			</div>
+		</div>
+	</section>
+	<section id="youtube" class="bg-black py-32 px-8">
+		<div
+			class="grid grid-cols-1 items-center sm:grid-cols-1 xl:grid-cols-2 px-4 sm:px-8 md:px-16 lg:px-28 xl:px-32 2xl:px-48"
+		>
+			<div class="w-full col-span-1">
+				<iframe
+					title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
+					src="https://youtube.com/embed/VqrbVycTXmw?start=151"
+					class="w-full max-w-[1080px] aspect-video rounded-xl shadow-lg border-2 border-stone-900"
+					frameborder="0"
+					allowfullscreen="allowfullscreen"
+				>
+				</iframe>
+			</div>
+			<div class="col-span-1 pl-8">
+				<h1
+					class="text-white text-5xl xl:text-5xl 2xl:text-6xl font-semibold py-4 text-left text-wrap md:text-balance"
+				>
+					Crafting the impossible:
+					<span
+						class="bg-gradient-to-r from-[#909090] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+						>x86 virtualization in the browser</span
+					> with WebAssembly
+				</h1>
+			</div>
 		</div>
 	</section>
 	<section
 		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
 	>
-		<p class="text-center text-bold text-5xl py-20">
-			Native code virtualization as a JavaScript library
-		</p>
-
 		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
 			<div class="col-span-2 text-left font-bold text-2xl py-4">
 				<p>
@@ -145,7 +205,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					our
 					<a
 						href="/docs"
-						class="text-yellow-600 hover:text-white inline-flex items-center"
+						class="text-[#6386a5] hover:text-white inline-flex items-center"
 						target="_blank"
 						>documentation
 						<svg
