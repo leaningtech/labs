@@ -5,7 +5,7 @@ description: ブラウザでJWS/JNLPアプリケーションを実行する
 
 このクイックスタートチュートリアルでは、ブラウザでCheerpJを使用してJNLPアプリ（Java Web Startアプリケーションとしても知られています）を実行する手順を説明します。
 
-Java Web Startアプリケーションを実行するためのすぐに使えるツールに興味がある場合は、[CheerpJ JNLP Runner](/cheerpj-jnlp-runner)ブラウザ拡張機能をご覧ください。
+Java Web Startアプリケーションを実行するためのすぐに使えるツールに興味がある場合は、[CheerpJ JNLP Runner](/cheerpj-jnlp-runner) ブラウザ拡張機能をご覧ください。
 
 必要なもの：
 
@@ -86,7 +86,7 @@ JARファイルを移動すると、次のようになるはずです:
 ### 3.1 アプリケーションの種類を特定する
 
 JNLPアプリは、**スタンドアロンアプリケーション**または**アプレット**のいずれかです。これは、`.jnlp`ファイル内
-の　**`<application-desc>`**　または　**`<applet-desc>`**タグで簡単に確認できます。
+の **`<application-desc>`** または **`<applet-desc>`** タグで簡単に確認できます。
 
 CheerpJランタイムが統合され、Javaアプリケーションが表示される基本的なHTMLファイルを作成します。このファイルをプロジェクトフォルダのルートに作成してください。アプリケーションがスタンドアロンアプリかアプレットかによって、アプリの読み込み方法が異なる場合があります。次の手順では、それぞれの場合におけるHTMLの構造について説明します。
 
@@ -171,7 +171,7 @@ cheerpjRunMain(
 ```
 
 
-アプレットのパラメーターは、通常通り`<applet>`タグ内の`<param>` として渡す必要があります。
+アプレットのパラメーターは、通常通り`<applet>`タグ内の`<param>`として渡す必要があります。
 
 ```html {7}
 <applet
@@ -188,7 +188,7 @@ cheerpjRunMain(
 
 ## 4. ページをホストする
 
-最終的なプロジェクトディレクトリの構成は、以下のようになります。
+最終的なプロジェクトディレクトリの構成は、以下のようになります：
 
 ```
 └── directory_name
@@ -198,7 +198,7 @@ cheerpjRunMain(
         └── my_dependency.jar
 ```
 
-これで、プロジェクトディレクトリに移動し、http-serverユーティリティのようなシンプルなHTTPサーバーでこのウェブページを提供することができる。
+これで、プロジェクトディレクトリに移動し、http-serverユーティリティのようなシンプルなHTTPサーバーでこのウェブページを提供することができます。
 
 ```sh
 cd directory_name
@@ -212,20 +212,18 @@ http-server -p 8080
 
 <div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
 	<a
-		href="/docs/getting-started/Java-app"
+		href="/docs/ja/getting-started/Java-app"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		アプリケーション
 	</a>
 	<a
-		href="/docs/getting-started/Java-applet"
+		href="/docs/ja/getting-started/Java-applet"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		アプレット
 	</a>
 </div>
 
-[run a Java application]: /docs/getting-started/Java-app
-[run a Java applet]: /docs/getting-started/Java-applet
-[`cheerpjRunJar()`]: /docs/reference/cheerpjRunJar
-[`cheerpjRunMain()`]: /docs/reference/cheerpjRunMain
+[`cheerpjRunJar()`]: /docs/ja/reference/cheerpjRunJar
+[`cheerpjRunMain()`]: /docs/ja/reference/cheerpjRunMain

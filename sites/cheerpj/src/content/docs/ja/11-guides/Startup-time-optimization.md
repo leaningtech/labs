@@ -1,5 +1,5 @@
 ---
-title: リソースのプリロード
+title: 起動時間の最適化
 description: アプリケーションの起動時間を改善する
 ---
 
@@ -34,7 +34,7 @@ cjGetRuntimeResources();
 document.write(cjGetRuntimeResources());
 ```
 
-JavaScriptコンソールは文字列を引用符「`"`」で囲むことがありますが、これは無視してください。詳細については[こちら](/docs/reference/cjGetRuntimeResources)をご覧ください。
+JavaScriptコンソールは文字列を引用符「`"`」で囲むことがありますが、これは無視してください。詳細については[こちら](/docs/ja/reference/cjGetRuntimeResources)をご覧ください。
 
 2. CheerpJの統合を修正して、プリロードを有効にします。`cheerpjInit`の呼び出しを変更し、`preloadResources`オプションを渡すだけです。例えば：
 
@@ -45,6 +45,6 @@ cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.j
 > [!note] 重要
 > これを2つのステップで実行する必要があることに注意してください。リソースは、ワークフロー全体とは別のセッションでロードされます。
 
-詳細は[こちら](/docs/reference/cheerpjInit#preloadresources) をご覧ください。
+詳細は[こちら](/docs/ja/reference/cheerpjInit#preloadresources)をご覧ください。
 
 プリロードを有効にすると、CheerpJはプログラムの実行と並行して複数のリソースをダウンロードできるようになります。これにより、ロード時間が大幅に改善されます。

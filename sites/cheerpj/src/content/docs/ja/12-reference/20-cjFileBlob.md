@@ -35,5 +35,5 @@ const data = new Uint8Array(await blob.arrayBuffer());
 console.log(data);
 ```
 
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[Blob]: https://developer.mozilla.org/en-US/docs/Web/API/Blob
+[Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Blob]: https://developer.mozilla.org/ja/docs/Web/API/Blob

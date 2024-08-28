@@ -5,7 +5,7 @@ description: CheerpJはどのように動作するのか？
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-CheerpJは、WebAssemblyベースの **ブラウザ用Java仮想マシン**です。これにより、Javaアプリケーションをブラウザから直接実行でき、Javaのインストールが不要になります。驚きですよね？でも、どうやって動作するのでしょうか？
+CheerpJは、WebAssemblyベースの **ブラウザ用Java仮想マシン**です。これにより、Javaアプリケーションをブラウザから直接実行でき、Javaのインストールが不要になります。驚きですよね？しかし、どうやって動作するのでしょうか？
 
 ## 概要
 
@@ -13,7 +13,7 @@ CheerpJは、WebAssembly、JavaScript、およびHTML5などの標準的なWeb�
 
 CheerpJは非常に使いやすく、スタンドアロンのJavaアプリケーション、アプレット、Java Web Start、およびJavaライブラリをブラウザ内で完全に実行するためのAPIを公開しています。CheerpJの強みの一つは、 Javaバイトコード/JARと直接連携し、アプリケーションのソースコードを変更したりアクセスしたりする必要がないことです。
 
-CheerpJのアセットは静的であり、簡単にセルフホストできます。また、[CheerpJコミュニティライセンス](/docs/licensing) (個人プロジェクトや技術評価での無料利用が可能)でクラウド版も提供しています。
+CheerpJのアセットは静的であり、簡単にセルフホストできます。また、[CheerpJコミュニティライセンス](/docs/ja/licensing) (個人プロジェクトや技術評価での無料利用が可能)でクラウド版も提供しています。
 
 ## CheerpJのコンポーネント
 
@@ -39,13 +39,13 @@ CheerpJのJavaランタイム環境の最も重要なコンポーネントは、
 
 ![CheerpJ 3.0 JRE diagram](/docs/cheerpj3/assets/JRE.png)
 
-CheerpJランタイムは、ブラウザ内でJavaアプリケーションを実行できるだけでなく、JavaとJavaScriptの間で高度な双方向の相互運用性も提供します。つまり、JavaからDOMにアクセスすることができ、[`native` メソッドを直接JavaScriptで実装](/docs/guides/Implementing-Java-native-methods-in-JavaScript)することができます。また、新しい [`cheerpjRunLibrary` API](/docs/reference/cheerpjRunLibrary)を使用することで、JavaScriptから直接Javaのメソッド、オブジェクト、および配列と相互作用することもできます。
+CheerpJランタイムは、ブラウザ内でJavaアプリケーションを実行できるだけでなく、JavaとJavaScriptの間で高度な双方向の相互運用性も提供します。つまり、JavaからDOMにアクセスすることができ、[`native` メソッドを直接JavaScriptで実装](/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript)することができます。また、新しい [`cheerpjRunLibrary` API](/docs/ja/reference/cheerpjRunLibrary)を使用することで、JavaScriptから直接Javaのメソッド、オブジェクト、および配列と相互作用することもできます。
 
 ### 仮想化されたウィンドウマネージャー
 
 グラフィカルなUIがないアプリケーションなんてありえないでしょう。CheerpJのウィンドウマネージャーは、ウィンドウをHTML要素とHTML5キャンバスの階層に変換することで、Java AWT/Swingをサポートしています。
 
-Swingアプリケーションは、ネイティブ環境と同様にレンダリングされます。 SwingのLook&Feelもサポートされており、サードパーティ製のものも含まれます。マルチウィンドウアプリケーションもサポートされており、キーボードフォーカスも期待通りに管理されます。システムクリップボードとの統合は、初期化オプションで有効にすることができます。 Integration with the system clipboard can be enabled via an initialization option.
+Swingアプリケーションは、ネイティブ環境と同様にレンダリングされます。 SwingのLook&Feelもサポートされており、サードパーティ製のものも含まれます。マルチウィンドウアプリケーションもサポートされており、キーボードフォーカスも期待通りに管理されます。システムクリップボードとの統合は、初期化オプションで有効にすることができます。
 
 ### 仮想化されたファイルシステム
 
@@ -55,9 +55,9 @@ CheerpJは、サーバーホストファイルへのアクセスや持続的な�
 
 <LinkButton
 	type="secondary"
-	href="/docs/guides/File-System-support"
+	href="/docs/ja/guides/File-System-support"
 	iconRight="ep:arrow-right-bold"
-	label="File System guide"
+	label="ファイルシステムガイド"
 />
 
 ### ネットワーキングサポート
@@ -67,11 +67,11 @@ CheerpJは、サーバーホストファイルへのアクセスや持続的な�
 
 <LinkButton
 	type="secondary"
-	href="/docs/guides/Networking"
+	href="/docs/ja/guides/Networking"
 	iconRight="ep:arrow-right-bold"
 	label="ネットワークガイド"
 />
 
-[cheerp]: /cheerp
-[ネットワークガイド]: /docs/guides/Networking
-[licensing]: /docs/licensing
+[cheerp]: https://cheerp.io/
+[ネットワークガイド]: /docs/ja/guides/Networking
+[licensing]: /docs/ja/licensing

@@ -45,5 +45,5 @@ OEMまたは再販業者のライセンスについては、[直接お問い合�
 
 ライセンスが必要かどうか不明な場合は、 [お問い合わせください][contact]。
 
-[licensing]: https://cheerpj.com/licensing/
-[contact]: https://cheerpj.com/contact/
+[licensing]: https://cheerpj.com/ja/licensing/
+[contact]: https://cheerpj.com/ja/contact/

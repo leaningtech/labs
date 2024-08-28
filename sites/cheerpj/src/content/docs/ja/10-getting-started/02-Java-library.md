@@ -31,4 +31,4 @@ await obj.myMethod();
 
 ## さらに読む
 
-- [`cheerpjRunLibrary` reference](/docs/reference/cheerpjRunLibrary)
+- [`cheerpjRunLibrary` リファレンス](/docs/ja/reference/cheerpjRunLibrary)

@@ -20,7 +20,7 @@ CheerpJとTailscaleがどのように連携するかについて詳しくない�
 
 このチュートリアルで実行するアプリケーションは、JavaサーバーアプリケーションとJavaクライアントアプリケーションで構成され、ソケットを介して通信し、チャットルームをシミュレートします。このアプリケーションの例は、[TechVidvan] チュートリアルに基づいており、詳細なソースコードの説明は[こちら](https://techvidvan.com/tutorials/java-chat-application/)で確認できます。
 
-このチュートリアルの目的は、CheerpJを使用して、マシンにJavaをインストールせずに、両方のアプリケーションをブラウザで実行することです！
+このチュートリアルの目的は、CheerpJを使用して、マシンにJavaをインストールせずに、両方のアプリケーションをブラウザで実行することです。
 
 ![Client Server](/docs/cheerpj3/assets/client-server.png)
 
@@ -30,7 +30,7 @@ CheerpJとTailscaleがどのように連携するかについて詳しくない�
 
 ### 2.1 Tailscaleの設定
 
-Tailscaleネットワークを作成し、両方のJavaアプリケーションを＊ノード＊としてこのネットワークに接続します。Tailscaleの＊ノード＊とは、Tailscaleネットワークに接続されたユーザー/マシンの組み合わせを指す用語です。
+Tailscaleネットワークを作成し、両方のJavaアプリケーションを＊ノード＊としてこのネットワークに接続します。Tailscaleの **ノード** とは、Tailscaleネットワークに接続されたユーザー/マシンの組み合わせを指す用語です。
 
 1.  Tailscaleアカウントを作成して[ログイン](https://login.tailscale.com/)してください。 アカウントを作成すると、ネットワークが作成されます。
 2.  適切な認証キーを[こちら](https://login.tailscale.com/admin/settings/keys)で作成して保存してください。 これらのキーを使用して、後でJavaアプリケーションをTailscaleネットワークに認証できます。
@@ -95,7 +95,7 @@ mkdir -p ServerClientTutorial/{Server, Client}
 </html>
 ```
 
-**_ここで何が起こっているのか?_**
+**ここで何が起こっているのか?**
 
 - `<head>`内のスクリプトタグはCheerpJをロードします。
 - [`cheerpjInit`]はCheerpJランタイム環境を初期化します。Tailscale認証キーが認証のために渡されます。
@@ -188,13 +188,13 @@ http-server -p 8081
 ## さらに読む
 
 - [ネットワーキングガイド]
-- [リファレンスを参照](/docs/reference)
+- [リファレンスを参照](/docs/ja/reference)
 
-[ネットワーキングガイド]: /docs/guides/Networking
+[ネットワーキングガイド]: /docs/ja/guides/Networking
 [TechVidvan]: https://techvidvan.com/tutorials/
-[`cheerpjInit`]: /docs/reference/cheerpjInit
-[`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
-[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
-[仮想ファイルシステム]: /docs/guides/File-System-support
-[`tailscaleAuthKey`]: /docs/reference/cheerpjInit#tailscaleauthkey
-[`tailscaleIpCb`]: /docs/reference/cheerpjInit#tailscaleipcb
+[`cheerpjInit`]: /docs/ja/reference/cheerpjInit
+[`cheerpjCreateDisplay`]: /docs/ja/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /docs/ja/reference/cheerpjRunJar
+[仮想ファイルシステム]: /docs/ja/guides/File-System-support
+[`tailscaleAuthKey`]: /docs/ja/reference/cheerpjInit#tailscaleauthkey
+[`tailscaleIpCb`]: /docs/ja/reference/cheerpjInit#tailscaleipcb

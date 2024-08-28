@@ -95,5 +95,5 @@ async function iTextExample() {
 
 ライブラリモードは、JavaScriptで実装された[`native`メソッド][JNI]にも使用されます。`native`メソッドは、実質的に短いライブラリモードセッションです。
 
-[JNI]: /docs/guides/Implementing-Java-native-methods-in-JavaScript
-[`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
+[JNI]: /docs/ja/guides/Implementing-Java-native-methods-in-JavaScript
+[`cheerpjRunLibrary`]: /docs/ja/reference/cheerpjRunLibrary

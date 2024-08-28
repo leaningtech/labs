@@ -92,6 +92,6 @@ const text = await blob.text();
 console.log(text);
 ```
 
-[`cjFileBlob`]: /docs/reference/cjFileBlob
-[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
-[`cheerpOSAddStringFile`]: /docs/reference/cheerpOSAddStringFile
+[`cjFileBlob`]: /docs/ja/reference/cjFileBlob
+[`cheerpjRunJar`]: /docs/ja/reference/cheerpjRunJar
+[`cheerpOSAddStringFile`]: /docs/ja/reference/cheerpOSAddStringFile

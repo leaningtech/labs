@@ -17,7 +17,7 @@ function cheerpjCreateDisplay(
 
 - **width (`number`)** - 表示エリアの幅をCSSピクセル単位で指定します。親の幅に合わせる場合は`-1` を指定します。
 - **height (`number`)** - 表示エリアの高さをCSSピクセル単位で指定します。親の高さに合わせる場合は`-1` を指定します。
-- **parent (`HTMLElement`, _optional_)** - 表示エリアを子要素として追加する親要素を指定します。
+- **parent (`HTMLElement`, _optional_ )** - 表示エリアを子要素として追加する親要素を指定します。
 
 ## 戻り値
 
@@ -55,4 +55,4 @@ function Display({ width, height }) {
 }
 ```
 
-[`HTMLElement`]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+[`HTMLElement`]: https://developer.mozilla.org/ja/docs/Web/API/HTMLElement

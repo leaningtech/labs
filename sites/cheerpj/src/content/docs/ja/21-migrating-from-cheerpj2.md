@@ -34,7 +34,7 @@ JavaからJavaScript関数を呼び出すには、`cheerpjInit`の`natives` オ�
 
 ### `CheerpJWorker` の置き換え
 
-CheerpJは、特別な設定なしでWeb Workerにインポートできるようになりました。単にワーカーから[`importScripts`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts) を呼び出してCheerpJをロードし、通常通りCheerpJを使用してください。`CheerpJWorker` クラスは削除されました。
+CheerpJは、特別な設定なしでWeb Workerにインポートできるようになりました。単にワーカーから[`importScripts`](https://developer.mozilla.org/ja/docs/Web/API/WorkerGlobalScope/importScripts) を呼び出してCheerpJをロードし、通常通りCheerpJを使用してください。`CheerpJWorker` クラスは削除されました。
 
 ```js
 importScripts("https://cjrtnc.leaningtech.com/3.0/cj3loader.js");
@@ -93,7 +93,7 @@ CheerpJ 2.3ではClassLoaderのサポートが非常に限られていました�
 
 `cheerpjAddStringFile` 関数は、その動作をより適切に反映し、CheerpXと統一するために`cheerpOSAddStringFile`に名前が変更されました。旧名は後方互換性のために引き続き使用可能です。
 
-[`cheerpjInit`]: /docs/reference/cheerpjInit
-[`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
-[`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
-[JNIガイド]: /docs/guides/Implementing-Java-native-methods-in-JavaScript
+[`cheerpjInit`]: /docs/ja/reference/cheerpjInit
+[`cheerpjRunLibrary`]: /docs/ja/reference/cheerpjRunLibrary
+[`cheerpjRunMain`]: /docs/ja/reference/cheerpjRunMain
+[JNIガイド]: /docs/ja/guides/Implementing-Java-native-methods-in-JavaScript

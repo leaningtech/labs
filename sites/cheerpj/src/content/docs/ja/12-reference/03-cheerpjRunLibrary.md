@@ -15,7 +15,7 @@ async function cheerpjRunLibrary(classPath: string): Promise<CJ3Library>;
 
 ## 戻り値
 
-`cheerpjRunLibrary` は、[CJ3Library]オブジェクトに解決される[Promise] を返します。
+`cheerpjRunLibrary` は、[CJ3Library]オブジェクトに解決される[Promise]を返します。
 
 ## 例
 
@@ -55,6 +55,6 @@ const example = await new Example();
 await example.hello(); // Example says hello!
 ```
 
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[仮想ファイルシステム]: /docs/guides/File-System-support
-[CJ3Library]: /docs/reference/CJ3Library
+[Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[仮想ファイルシステム]: /docs/ja/guides/File-System-support
+[CJ3Library]: /docs/ja/reference/CJ3Library

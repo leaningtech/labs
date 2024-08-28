@@ -12,7 +12,7 @@ CheerpJは、以下の2つのカテゴリーに分けられるさまざまなネ
 
 ブラウザでCheerpJを使用して実行されるJavaアプリケーションは、HTTP/HTTPSプロトコルを介してフェッチを使用してローカルサーバー（同一オリジン）にリソースをリクエストできます。当然のことながら、これらのリクエストは非同期で行われます。リクエストが同一オリジンと見なされるためには、リクエスターとレシーバーの間でスキーム、ホスト名、およびポートが一致している必要があることを覚えておいてください。
 
-CheerpJを使用すると、通常通り[ブラウザのfetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)を使って`fetch()`リクエストを実行できます。
+CheerpJを使用すると、通常通り[ブラウザのfetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)を使って`fetch()`リクエストを実行できます。
 
 ## 一般的なネットワーキング
 
@@ -50,11 +50,11 @@ cheerpjInit({
 ```
 
 > [!info] 情報
-> Tailscaleの用語では、Tailscaleネットワークに接続されたユーザーとデバイスの組み合わせを _"ノード"_ と呼びます。
+> Tailscaleの用語では、Tailscaleネットワークに接続されたユーザーとデバイスの組み合わせを _「ノード」_ と呼びます。
 
 ここで何が起こっているのか？
 
-- `tailscaleControlUrl` は、ユーザーの身元を確認するTailscaleコントロールプレーンのURL文字列です。このオプションは、[Tailscaleをセルフホスティングする](/docs/guides/Networking#self-hosting-headscale)場合にのみ渡します。
+- `tailscaleControlUrl` は、ユーザーの身元を確認するTailscaleコントロールプレーンのURL文字列です。このオプションは、[Tailscaleをセルフホスティングする](/docs/ja/guides/Networking#headscaleのセルフホスティング)場合にのみ渡します。
 - `tailscaleAuthKey`は、事前認証済みの新規ユーザー/デバイスを登録する際に使用する認証キーの文字列です。認証キーは[こちら](https://login.tailscale.com/admin/settings/keys)で作成できます。
 
 別タブでユーザーに手動ログインを指示する例:
@@ -83,7 +83,7 @@ cheerpjInit({
 > [!info] 情報
 > `tailscaleLoginUrlCb` と `tailscaleAuthKey` は相互に排他的です。
 
-CheerpJのTailscale APIの詳細については、[こちらのリファレンス](/docs/reference/cheerpjInit#tailscalecontrolurl)をご覧ください。
+CheerpJのTailscale APIの詳細については、[こちらのリファレンス](/docs/ja/reference/cheerpjInit#tailscalecontrolurl)をご覧ください。
 
 ### Headscaleのセルフホスティング
 

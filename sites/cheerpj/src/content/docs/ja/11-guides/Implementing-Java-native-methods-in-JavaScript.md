@@ -1,6 +1,6 @@
 ---
 title: ネイティブメソッドとライブラリの実装
-description: CheerpJでのJavaネイティブインターフェース（JNI）
+description: CheerpJでのJavaネイティブインターフェース (JNI)
 ---
 
 CheerpJを使用すると、通常C/C++や他のAOTコンパイル言語で実装されるJavaの「ネイティブ」メソッドを、Java Native Interface（JNI）を使用するのと同様に、JavaScriptで実装することができます。
@@ -82,6 +82,6 @@ await cheerpjInit({ javaProperties: ["java.library.path=/app/"] });
 await cheerpjRunMain("Example", "/app/");
 ```
 
-[`CJ3Library`]: /docs/reference/CJ3Library
-[変換ルール]: /docs/reference/cheerpjRunLibrary#conversion-rules
+[`CJ3Library`]: /docs/ja/reference/CJ3Library
+[変換ルール]: /docs/ja/reference/cheerpjRunLibrary#conversion-rules
 [`System.loadLibrary(String libname)`]: https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-

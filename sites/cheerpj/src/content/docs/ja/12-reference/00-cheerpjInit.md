@@ -31,7 +31,7 @@ async function cheerpjInit(options?: {
 
 ## パラメーター
 
-- **options (`object`, _optional_)** - CheerpJランタイム環境のさまざまな設定を`{ option: "value" }`の形式で指定するために使用されます。
+- **options (`object`, _optional_ )** - CheerpJランタイム環境のさまざまな設定を`{ option: "value" }`の形式で指定するために使用されます。
 
 ## 戻り値
 
@@ -156,7 +156,7 @@ cheerpjInit({ clipboardMode: "system" });
 beepCallback?: () => void;
 ```
 
-このコールバックは、Javaで `java.awt.Toolkit.getDefaultToolkit().beep()` が呼び出されたときに実行され、システムの_ビープ音_に対応します。
+このコールバックは、Javaで `java.awt.Toolkit.getDefaultToolkit().beep()` が呼び出されたときに実行され、システムの _ビープ音_ に対応します。
 
 使用例:
 
@@ -190,9 +190,9 @@ overrideShortcuts?: (evt: KeyboardEvent) => boolean;
 
 CheerpJでコンパイルされたアプリケーションは、`cheerpjInit`の `overrideShortcuts`オプションとしてコールバック関数を提供することで、追加のショートカットをコントロールできます。このコールバックはブラウザからの`KeyboardEvent` を受け取り、ブラウザのデフォルトの動作を防ぐ必要がある場合は`true`を返します。
 
-可能な限り、一貫したユーザー体験を維持するために、ブラウザ予約済みのショートカットは_使用しない_ことをお勧めします。いずれの場合も、以下の制限が適用されます：
+可能な限り、一貫したユーザー体験を維持するために、ブラウザ予約済みのショートカットは _使用しない_ ことをお勧めします。いずれの場合も、以下の制限が適用されます：
 
-- 一部のショートカット（Ctrl+T、Ctrl+N、Ctrl+W）はブラウザに予約されており、ページ自体で受け取ることはできません。これらは_上書きできません_。
+- 一部のショートカット（Ctrl+T、Ctrl+N、Ctrl+W）はブラウザに予約されており、ページ自体で受け取ることはできません。これらは _上書きできません_ 。
 -（Ctrl+C/Ctrl+V）を上書きすると、`clipboardMode:"system"` が正しく機能しなくなります。
 
 例:
@@ -246,7 +246,7 @@ cheerpjInit({
 });
 ```
 
-ネイティブメソッドの実装について詳しくは[こちら](/docs/guides/Implementing-Java-native-methods-in-JavaScript)を参照してください。
+ネイティブメソッドの実装について詳しくは[こちら](/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript)を参照してください。
 
 ### `overrideDocumentBase`
 
@@ -313,7 +313,7 @@ tailscaleAuthKey?: string;
 このオプションには、Tailscale認証キーを含む文字列を指定します。認証キーを使うことで、事前に認証された新しいユーザー/デバイスを登録することができます。認証キーは[こちら](https://login.tailscale.com/admin/settings/keys)で作成できます。このオプションは[`tailscaleLoginUrlCb`](#tailscaleloginurlcb)とは相互排他的です。
 
 > [!info] 情報
-> Tailscaleの用語では、Tailscaleネットワークに接続されたユーザーとデバイスの組み合わせを _"ノード"_ と呼びます。
+> Tailscaleの用語では、Tailscaleネットワークに接続されたユーザーとデバイスの組み合わせを _「ノード」_ と呼びます。
 
 認証キーに関する詳細については [Tailscale認証キーのドキュメント](https://tailscale.com/kb/1085/auth-keys/)を参照してください。
 
@@ -365,7 +365,7 @@ cheerpjInit({
 licenseKey?: string;
 ```
 
-このオプションにはライセンスキーが必要です。有効なライセンスキーが使用されている場合、CheerpJの表示から非商用ライセンスメッセージが削除されます。詳細については、[ライセンスガイド](/docs/licensing) をご覧ください。
+このオプションにはライセンスキーが必要です。有効なライセンスキーが使用されている場合、CheerpJの表示から非商用ライセンスメッセージが削除されます。詳細については、[ライセンスガイド](/docs/ja/licensing) をご覧ください。
 
 使用例:
 
@@ -373,8 +373,8 @@ licenseKey?: string;
 cheerpjInit({ licenseKey: "YourLicenseKey" });
 ```
 
-[cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[`java`]: /docs/reference/cheerpjInit#java-mode
-[`system`]: /docs/reference/cheerpjInit#system-mode
-[`permission`]: /docs/reference/cheerpjInit#permission-mode
+[cjGetRuntimeResources]: /docs/ja/reference/cjGetRuntimeResources
+[Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[`java`]: /docs/ja/reference/cheerpjInit#java-モード
+[`system`]: /docs/ja/reference/cheerpjInit#system-モード
+[`permission`]: /docs/ja/reference/cheerpjInit#permission-モード
