@@ -39,14 +39,16 @@ const hasMultipleLocales = !!Astro.currentLocale;
 	{
 		entries.length > 0 && entries.length && (
 			<ol class="text-balance">
-				{entries.filter(entry => {
-					if (entry.type === "directory" && entry.isLanguageDirectory) return false;
-					else return true;
-				}).map((entry) => (
-					<DocsSidebarNavEntry {entry} />
-				))}
+				{entries
+					.filter((entry) => {
+						if (entry.type === "directory" && entry.isLanguageDirectory)
+							return false;
+						else return true;
+					})
+					.map((entry) => (
+						<DocsSidebarNavEntry {entry} />
+					))}
 			</ol>
-		)
 		)
 	}
 </aside>

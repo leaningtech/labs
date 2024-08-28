@@ -170,7 +170,6 @@ cheerpjRunMain(
 </html>
 ```
 
-
 アプレットのパラメーターは、通常通り`<applet>`タグ内の`<param>`として渡す必要があります。
 
 ```html {7}

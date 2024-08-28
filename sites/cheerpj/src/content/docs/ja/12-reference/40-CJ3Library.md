@@ -23,8 +23,8 @@ description: ライブラリモードセッション
 
 型変換は、[LiveConnect仕様書](https://web.archive.org/web/20110204185537/http://jdk6.java.net/plugin2/liveconnect/#JS_JAVA_CONVERSIONS)に準拠しています。いくつかの拡張があります:
 
-| JavaScript 型 | Java 型                      | 備考             |
-| --------------- | ------------------------------ | ---------------- |
+| JavaScript 型   | Java 型                        | 備考         |
+| --------------- | ------------------------------ | ------------ |
 | `Int8Array`     | `byte[]`                       | 参照渡し     |
 | `Uint16Array`   | `char[]`                       | 参照渡し     |
 | `Int16Array`    | `short[]`                      | 参照渡し     |
