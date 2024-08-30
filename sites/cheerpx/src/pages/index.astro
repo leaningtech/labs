@@ -16,20 +16,20 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 		>
 			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
 				<h1
-					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-left text-wrap"
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-center sm:text-left text-wrap"
 				>
 					Run <span
 						class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
 						>virtual machines</span
 					> in your web apps
 				</h1>
-				<p class="text-lg text-balance text-white text-left">
+				<p class="text-lg text-balance text-white text-center sm:text-left">
 					CheerpX is a JavaScript library that enables secure <b
 						>client-side execution of x86 binaries</b
 					> on any browser. Currently available only on its beta version and developed
 					by Leaning Technologies.
 				</p>
-				<div class="flex gap-4 justify-left mt-12">
+				<div class="flex gap-4 justify-center sm:justify-start mt-12">
 					<LinkButton
 						type="primary-cheerpx"
 						href="https://webvm.io/"
@@ -62,7 +62,9 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				>Coming soon</span
 			>
 		</h1>
-		<p class="text-center text-2xl font-light text-stone-300 py-4 px-30">
+		<p
+			class="text-center text-2xl sm:text-3xl font-light text-stone-300 py-4 px-30"
+		>
 			CheerpX official release is expected for late 2024. For now, enjoy the
 			beta trial and our popular WebVM demo.
 		</p>
@@ -72,19 +74,19 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/forks">
 					<p class="text-2xl font-bold">900+</p>
-					<p>Repository forks</p>
+					<p class="text-sm sm:text-lg">Repository forks</p>
 				</a>
 			</div>
 			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/stargazers">
 					<p class="text-2xl font-bold">4.5k+</p>
-					<p>Stars on GitHub</p>
+					<p class="text-sm sm:text-lg">Stars on GitHub</p>
 				</a>
 			</div>
 			<div class="text-center hover:text-[#6386a5]">
 				<a href={DISCORD_URL}>
 					<p class="text-2xl font-bold">1k+</p>
-					<p>Discord members</p>
+					<p class="text-sm sm:text-lg">Discord members</p>
 				</a>
 			</div>
 		</div>
@@ -114,7 +116,9 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			<div class="col-span-2">
 				<Image src={GamePadAsset} alt="Game pad" class="w-32 sm:w-48" />
 				<div class=""></div>
-				<h1 class="font-semibold text-3xl sm:text-4xl lg:text-5xl py-2">
+				<h1
+					class="font-semibold text-3xl sm:text-4xl lg:text-5xl py-2 text-[#87A2BD]"
+				>
 					CheerpX Games Runner
 				</h1>
 				<p class="text-xl sm:text-xl">
@@ -130,7 +134,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					</li>
 					<li>No local installation required.</li>
 				</ul>
-				<div class="flex gap-4 justify-left py-2">
+				<div class="flex gap-4 justify-center sm:justify-start py-2">
 					<LinkButton
 						type="primary-cheerpx"
 						href="https://chromewebstore.google.com/detail/cheerpx-games-runner-beta/kpjhccfibjgklihcmaddjecaenppaahg"
@@ -150,27 +154,18 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 			</div>
 		</div>
 	</section>
-	<section id="youtube" class="bg-black py-32 px-8">
-		<div
-			class="grid grid-cols-1 items-center sm:grid-cols-1 xl:grid-cols-2 px-4 sm:px-8 md:px-16 lg:px-28 xl:px-32 2xl:px-48"
-		>
-			<div class="w-full col-span-1">
-				<iframe
-					title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-					src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-					class="w-full max-w-[1080px] aspect-video rounded-xl shadow-lg border-2 border-stone-900"
-					frameborder="0"
-					allowfullscreen="allowfullscreen"
-				>
-				</iframe>
-			</div>
-			<div class="col-span-1 pl-8">
+	<section
+		id="youtube"
+		class="bg-gradient-to-r from-[#446887] to-[#00254d] py-32 px-8"
+	>
+		<div class="items-center px-4 sm:px-8 md:px-16 lg:px-28 xl:px-32 2xl:px-48">
+			<div class="">
 				<h1
-					class="text-white text-5xl xl:text-5xl 2xl:text-6xl font-semibold py-4 text-left text-wrap md:text-balance"
+					class="text-white text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl font-semibold py-4 text-center text-wrap md:text-balance"
 				>
 					Crafting the impossible:
 					<span
-						class="bg-gradient-to-r from-[#909090] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+						class="bg-gradient-to-r from-stone-300 to-stone-400 text-transparent bg-clip-text"
 						>x86 virtualization in the browser</span
 					> with WebAssembly
 				</h1>
@@ -178,14 +173,16 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 		</div>
 	</section>
 	<section
-		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 pt-12 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
 	>
 		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
 			<div class="col-span-2 text-left font-bold text-2xl py-4">
 				<p>
 					<span class="text-white">Do you have a commercial use case?</span>
 				</p>
-				<ul class="list-inside list-disc font-normal text-wrap text-lg py-4">
+				<ul
+					class="list-inside list-disc font-normal text-wrap text-base sm:text-lg py-4"
+				>
 					<li>Technical support with tailored SLAs.</li>
 					<li>Feature prioritisation and sponsored development available.</li>
 					<li>
@@ -199,8 +196,12 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					label="Contact us"
 				/>
 			</div>
-			<div class="col-span-1 border-solid border-l text-left py-4">
-				<p class="text-left text-2xl font-bold text-stone-300 pl-8">
+			<div
+				class="col-span-1 border-solid border-t md:border-l md:border-t-0 text-center md:text-left mt-8 md:pt-0 py-8 md:py-4"
+			>
+				<p
+					class="text-center md:text-left text-2xl font-bold text-stone-300 md:pl-8"
+				>
 					<span class="text-white">Ready to build?</span> Get started today by browsing
 					our
 					<a
@@ -223,7 +224,9 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 						</svg>
 					</a>
 				</p>
-				<div class="pl-8 py-4 space-y-2 inline-flex flex-col">
+				<div
+					class="md:pl-8 py-4 space-y-2 inline-flex flex-col justify-center md:justify-start"
+				>
 					<LinkButton
 						type="primary-cheerpx"
 						href={DISCORD_URL}
