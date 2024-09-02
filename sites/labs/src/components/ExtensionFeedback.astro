@@ -31,6 +31,15 @@ const product = products[productId];
 					moment to fill out the form on the right and let us know why you
 					decided to uninstall the extension.
 				</p>
+				<br />
+				<p class="text-base">
+					Found a bug? Report it via
+					<a
+						href={product.github}
+						target="_blank"
+						class="text-white hover:text-gray-300 font-bold">GitHub</a
+					>
+				</p>
 			</div>
 			<div class="w-1/2 p-4 box-border">
 				<iframe class="w-full h-[600px] border-none" src={formUrl}> </iframe>
