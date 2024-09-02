@@ -9,6 +9,8 @@ categories:
 authors:
   - stefano
 heroImage: ./flash-to-html5.webp
+tags:
+  - CheerpX
 ---
 
 Today we are proud to announce CheerpX for Flash , a solution to run existing Flash applications on any browser after December 2020.

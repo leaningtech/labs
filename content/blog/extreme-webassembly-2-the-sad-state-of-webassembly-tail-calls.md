@@ -8,6 +8,8 @@ categories:
 authors:
   - alessandro
 heroImage: ./extreme-wasm.webp
+tags:
+  - CheerpX
 ---
 
 Here at Leaning Technologies, we use WebAssembly daily to create unique and seemingly impossible technologies, like [CheerpX](https://leaningtech.com/pages/cheerpx.html) (a WebAssembly virtual machine designed to safely run arbitrary x86 libraries and applications in browser) and [CheerpJ](https://leaningtech.com/pages/cheerpj.html) (a solution to compile and run Java applications in the browser).

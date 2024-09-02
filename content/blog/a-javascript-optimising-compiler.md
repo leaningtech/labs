@@ -8,6 +8,8 @@ categories:
 authors:
   - carlo
 heroImage: ./javascript-optimising-compiler.webp
+tags:
+  - Cheerp
 ---
 
 Carlo, a Leaning Technologies compiler engineer, has tried something bold.

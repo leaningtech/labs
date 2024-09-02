@@ -8,6 +8,8 @@ categories:
 authors:
   - carlo
 heroImage: ./jsexport-output.webp
+tags:
+  - Cheerp
 ---
 
 Here at Leaning Technologies we build compilers for the Web (which output a combination of JavaScript and WebAssembly).

@@ -8,6 +8,8 @@ categories:
 authors:
   - yuri
 heroImage: ./cheerp-int64.webp
+tags:
+  - Cheerp
 ---
 
 I recently improved support for 64-bit integers in [Cheerp](https://leaningtech.com/pages/cheerp.html), a C/C++ to WebAssembly/JavaScript compiler.
