@@ -2,7 +2,7 @@
 title: Changelog
 ---
 
-## [3.0](https://cheerpj.com/cheerpj-3-now-generally-available/) - February 1, 2024
+## [3.0](/blog/cheerpj-3.0) - February 1, 2024
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
@@ -18,7 +18,7 @@ title: Changelog
 - Optimized font handling
 - Improved error message when server does not support content ranges
 
-## [3.0rc2](https://labs.leaningtech.com/blog/cheerpj-3-deep-dive) - November 29, 2023
+## [3.0rc2](/blog/cheerpj-30rc2) - November 29, 2023
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
@@ -37,7 +37,7 @@ title: Changelog
 - Support for `ClassCastException`
 - `cheerpjAddStringFile` deprecated, renamed to `cheerpOSAddStringFile`
 
-## [3.0rc1](https://cheerpj.com/announcing-cheerpj-3-0rc1-help-us-test-and-improve/) - October 18, 2023
+## [3.0rc1](/blog/cheerpj-30rc1) - October 18, 2023
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
@@ -57,6 +57,6 @@ title: Changelog
 
 ## Previous versions
 
-[CheerpJ 3.0 was a major architectural rewrite of CheerpJ](https://labs.leaningtech.com/blog/announcing-cheerpj-3).
+[CheerpJ 3.0 was a major architectural rewrite of CheerpJ](/blog/cheerpj-3-deep-dive).
 
-For previous versions, see the [CheerpJ 2.x changelog](https://labs.leaningtech.com/docs/cheerpj2/changelog).
+For previous versions, see the [CheerpJ 2.x changelog](/cheerpj2/changelog).

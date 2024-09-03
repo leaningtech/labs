@@ -3,7 +3,6 @@
 	import Result from "./Result.svelte";
 
 	export let productId: string | undefined;
-	export let placeholder: string;
 
 	let pagefind: Pagefind;
 	let results: PagefindResult[] = [];
@@ -60,7 +59,7 @@
 	</div>
 	<input
 		type="search"
-		{placeholder}
+		placeholder="Type to search..."
 		class="w-full text-lg pl-10 pr-4 py-3 rounded-md border border-stone-700 outline-none bg-stone-900 text-white placeholder-stone-400"
 		on:input={search}
 	/>
