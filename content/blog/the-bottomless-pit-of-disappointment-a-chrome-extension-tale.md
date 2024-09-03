@@ -9,6 +9,8 @@ categories:
 authors:
   - alessandro
 heroImage: ./applet-runner.webp
+tags:
+  - CheerpJ
 ---
 
 A bit of a “learn from our pain” / rant / sharing our experience-type blogpost, but here goes.

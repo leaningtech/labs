@@ -9,6 +9,8 @@ categories:
 authors:
   - alessandro
 heroImage: ./extreme-wasm.webp
+tags:
+  - CheerpX
 ---
 
 ![](/blog/1*gDXCXEYEhWvNQpNxEgkB9A.gif)_Python3 running client side using CheerpX. File access and blocking primitives (i.e. sleep) are demonstrated._

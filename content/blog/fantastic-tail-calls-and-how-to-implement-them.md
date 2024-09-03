@@ -9,6 +9,8 @@ categories:
 authors:
   - tom
 heroImage: ./tail-calls.webp
+tags:
+  - CheerpX
 ---
 
 Recursion is one of the fundamental primitives of computer science. Many algorithms came to life by simplifying a general problem into recursive sub-problems. From the perspective of code, recursion implies that a function would call itself as part of its logic. Since stack is consumed for each instance of the function, excessive recursion depth will cause what is known as a stack overflow: a problem significant enough to become the namesake of the biggest programming Q&A platform on the planet!

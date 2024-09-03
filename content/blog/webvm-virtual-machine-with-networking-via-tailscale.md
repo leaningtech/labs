@@ -8,6 +8,8 @@ categories:
 authors:
   - yuri
 heroImage: ./webvm-tailscale.png
+tags:
+  - CheerpX
 ---
 
 [WebVM](https://webvm.io/) is a virtual Linux environment running fully client-side in the browser.

@@ -9,6 +9,8 @@ categories:
 authors:
   - "lorenzo-marsicano"
 heroImage: ./cheerpj.png
+tags:
+  - CheerpJ
 ---
 
 CheerpJ is a solution to run unmodified Java applications on the browser, in WebAssembly and JavaScript.
