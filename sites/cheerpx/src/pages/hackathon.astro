@@ -1,0 +1,43 @@
+---
+import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { Image } from "astro:assets";
+import HeroDoodle from "../assets/hero_illustration.png";
+---
+<ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-black">
+    <section>
+        <div
+        class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
+    >
+        <div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+            <h1
+                class="font-mono text-white text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-center sm:text-left text-wrap"
+            >
+                The browser terminal tools challenge!
+            </h1>
+            <p class="font-mono text-xl text-balance text-white text-center sm:text-left ">11th - 14th October, 2024</p>
+            <p class=" font-mono text-md text-balance text-white text-center sm:text-left">
+                WebVM: the hackathon; is a hybrid event that all developers can join!<b
+                    > The challenge consists on creating terminal-based solutions using CheerpX, a tool for client-side execution of x86 binaries</b
+                > on the browser.
+            </p>
+            <div class="flex gap-4 justify-center sm:justify-start mt-12">
+                <LinkButton
+                    type="primary-cheerpx"
+                    href="https://webvm.io/"
+                    label="Register"
+                />
+                <LinkButton
+                    type="secondary-cheerpx"
+                    href="/docs/getting-started"
+                    iconRight="mi:arrow-right"
+                    label="Learn more"
+                />
+            </div>
+        </div>
+        <div class="hidden md:block flex justify-center 2xl:pl-56">
+            <Image src={HeroDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+    </div>
+    </section>
+</ProductHome>
