@@ -15,10 +15,10 @@ CheerpJ is free to use for personal projects, most non-commercial applications, 
 
 ## Examples
 
-- Example 1: You are using CheerpJ for a personal open-source project. **Free license**.
+- Example 1: You are using CheerpJ for a personal open-source project. **Free license.**
 - Example 2: You are a company and you want to use CheerpJ to build a free customer-facing application. [You require a license][licensing].
 - Example 3: You are a company and you want to use CheerpJ to build a web application for internal use. [You require a license][licensing].
-- Example 4: You are a company and are evaluating CheerpJ to be used for a future commercial project. **Free license**.
+- Example 4: You are a company and are evaluating CheerpJ to be used for a future commercial project. **Free license.**
 - Example 5: You are a public sector, not-for-profit, or academic organisation. [Contact us][contact].
 - Example 6: You are an individual developer building a commercial project. **Free license**.
 

@@ -1,7 +1,7 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getRootNav, getLocalisedProductNav } from "../lib/nav";
+import { getRootNav, findNavDirectory } from "../lib/nav";
 import { productFromUrl } from "../lib/products";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon";
@@ -30,7 +30,7 @@ const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
 
 const entries = product
-	? getLocalisedProductNav(nav, product.id, Astro.currentLocale)
+	? findNavDirectory(nav, [product.id])?.entries ?? nav
 	: [];
 
 function getEditHref(id: string): string {

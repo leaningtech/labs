@@ -7,19 +7,14 @@ import { getRootNav, flattenNav, type NavEntry } from "../../lib/nav";
 
 export async function getStaticPaths() {
 	const entries = flattenNav(await getRootNav());
-	return entries
-		.filter((entry) => {
-			if (entry.type === "directory" && entry.isLanguageDirectory) return false;
-			return true;
-		})
-		.map((entry) => {
-			return {
-				params: {
-					slug: entry.slug,
-				},
-				props: entry,
-			};
-		});
+	return entries.map((entry) => {
+		return {
+			params: {
+				slug: entry.slug,
+			},
+			props: entry,
+		};
+	});
 }
 
 type Props = NavEntry;

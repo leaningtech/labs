@@ -13,7 +13,7 @@ async function cheerpjRunJar(
 ## Parameters
 
 - **jarName (`string`)** - The location of the jar in the [virtual filesystem].
-- **..args (`string[]`, _optional_)** - Arguments to pass to the main method.
+- **..args (`string[]`, _optional)_** - Arguments to pass to the main method.
 
 ## Returns
 

@@ -1,6 +1,4 @@
 ---
-import { t } from "../lib/i18n";
-
 interface Props {
 	editHref: string;
 }
@@ -9,18 +7,18 @@ interface Props {
 <was-this-helpful
 	class="flex items-center gap-3 text-sm text-stone-400 whitespace-nowrap flex-wrap"
 >
-	<span class="mr-4">{t("Was this page helpful?", Astro.currentLocale)}</span>
+	<span class="mr-4">Was this page helpful?</span>
 
 	<button
 		class="rounded-lg px-4 py-1 text-base border border-stone-700 hover:border-green-400 text-stone-300 hover:text-green-400"
 	>
-		😄 {t("Yes", Astro.currentLocale)}
+		😄 Yes
 	</button>
 
 	<button
 		class="rounded-lg px-4 py-1 text-base border border-stone-700 hover:border-red-400 text-stone-300 hover:text-red-400"
 	>
-		😕 {t("No", Astro.currentLocale)}
+		😕 No
 	</button>
 	<div class="grow"></div>
 	<a
@@ -29,7 +27,7 @@ interface Props {
 		target="_blank"
 		rel="noopener"
 	>
-		{t("Suggest changes", Astro.currentLocale)}
+		Suggest changes
 	</a>
 </was-this-helpful>
 

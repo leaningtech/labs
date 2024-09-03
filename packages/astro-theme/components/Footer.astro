@@ -5,7 +5,6 @@ import { Image } from "astro:assets";
 import logotype from "../assets/branding/company/logotype-white.svg";
 import awardA from "../assets/awards/uk-business-tech-awards.webp";
 import awardB from "../assets/awards/national-technology-awards.webp";
-import { t } from "../lib/i18n";
 
 const today = new Date();
 
@@ -24,7 +23,7 @@ interface Section {
 
 const sections: Section[] = [
 	{
-		name: t("Technology", Astro.currentLocale),
+		name: "Technology",
 		links: [
 			{ text: "Cheerp", href: "https://cheerp.io" },
 			{ text: "CheerpJ", href: "https://cheerpj.com" },
@@ -36,7 +35,7 @@ const sections: Section[] = [
 		],
 	},
 	{
-		name: t("Browser extensions", Astro.currentLocale),
+		name: "Browser extensions",
 		links: [
 			{
 				text: "CheerpJ Applet Runner",
@@ -49,47 +48,35 @@ const sections: Section[] = [
 		],
 	},
 	{
-		name: t("Resources", Astro.currentLocale),
+		name: "Resources",
 
 		links: [
 			{
-				text: t("Documentation", Astro.currentLocale),
+				text: "Documentation",
 				href: "https://labs.leaningtech.com/#ecosystem",
 			},
-			{
-				text: t("Blog", Astro.currentLocale),
-				href: "https://labs.leaningtech.com/blog",
-			},
+			{ text: "Blog", href: "https://labs.leaningtech.com/blog" },
 			{ text: "GitHub", href: "https://github.com/leaningtech" },
 			{
-				text: t("Contributing", Astro.currentLocale),
+				text: "Contributing",
 				href: "https://labs.leaningtech.com/docs/contributing",
 			},
 		],
 	},
 	{
-		name: t("Company", Astro.currentLocale),
+		name: "Company",
 		links: [
+			{ text: "About us", href: "https://leaningtech.com/about-us/" },
+			{ text: "News", href: "https://leaningtech.com/news/" },
 			{
-				text: t("About us", Astro.currentLocale),
-				href: "https://leaningtech.com/about-us/",
-			},
-			{
-				text: t("News", Astro.currentLocale),
-				href: "https://leaningtech.com/news/",
-			},
-			{
-				text: t("Partner program", Astro.currentLocale),
+				text: "Partner program",
 				href: "https://leaningtech.com/partner-programs/",
 			},
 			{
-				text: t("Privacy policy", Astro.currentLocale),
+				text: "Privacy policy",
 				href: "https://leaningtech.com/privacy-policy/",
 			},
-			{
-				text: t("Careers", Astro.currentLocale),
-				href: "https://leaningtech.freshteam.com/jobs",
-			},
+			{ text: "Careers", href: "https://leaningtech.freshteam.com/jobs" },
 		],
 	},
 ];
