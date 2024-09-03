@@ -1,60 +1,246 @@
 ---
 import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import HeroAsset from "../assets/cheerpx_illustration.png";
+import CalendarAsset from "../assets/calendar.png";
+import GamePadAsset from "../assets/HDgamepad.png";
+import Screenshot from "../assets/screenshots.png";
+import { Image } from "astro:assets";
+import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 ---
 
-<ProductHome>
-	<section class="py-16">
-		<div class="mx-auto max-w-[56em] text-center space-y-12">
-			<h1
-				class="text-7xl font-semibold text-balance bg-gradient-to-tr from-cheerpx to-stone-200 text-transparent bg-clip-text fly-in-b"
-			>
-				<b>Virtual machines</b> in your web app.
-			</h1>
-			<p class="text-lg text-balance">
-				CheerpX is a JavaScript library that enables secure client-side
-				execution of x86 binaries on any browser.
-			</p>
-			<p class="text-lg text-balance text-stone-400">Coming soon.</p>
+<ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-[#00254d]">
+	<section>
+		<div
+			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
+		>
+			<div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+				<h1
+					class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-center sm:text-left text-wrap"
+				>
+					Run <span
+						class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+						>virtual machines</span
+					> in your web apps
+				</h1>
+				<p class="text-lg text-balance text-white text-center sm:text-left">
+					CheerpX is a JavaScript library that enables secure <b
+						>client-side execution of x86 binaries</b
+					> on any browser. Currently available only on its beta version and developed
+					by Leaning Technologies.
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-12">
+					<LinkButton
+						type="primary-cheerpx"
+						href="https://webvm.io/"
+						label="Try the demo"
+					/>
+					<LinkButton
+						type="secondary-cheerpx"
+						href="/docs/getting-started"
+						iconRight="mi:arrow-right"
+						label="Get started"
+					/>
+				</div>
+			</div>
+			<div class="hidden md:block flex justify-center 2xl:pl-56">
+				<Image src={HeroAsset} alt="Cheerp Logo in a cube" class="" />
+			</div>
 		</div>
-		<div class="flex items-center gap-4 justify-center mt-12">
+	</section>
+	<section
+		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-56 2xl:px-60 2xl:pt-60"
+	>
+		<div class="flex justify-center items-center">
+			<Image src={CalendarAsset} alt="Calendar" class="w-48" />
+		</div>
+		<h1
+			class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center text-wrap"
+		>
+			<span
+				class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
+				>Coming soon</span
+			>
+		</h1>
+		<p
+			class="text-center text-2xl sm:text-3xl font-light text-stone-300 py-4 px-30"
+		>
+			CheerpX official release is expected for late 2024. For now, enjoy the
+			beta trial and our popular WebVM demo.
+		</p>
+		<div
+			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:px-28 2xl:px-60"
+		>
+			<div class="text-center hover:text-[#6386a5]">
+				<a href="https://github.com/leaningtech/webvm/forks">
+					<p class="text-2xl font-bold">900+</p>
+					<p class="text-sm sm:text-lg">Repository forks</p>
+				</a>
+			</div>
+			<div class="text-center hover:text-[#6386a5]">
+				<a href="https://github.com/leaningtech/webvm/stargazers">
+					<p class="text-2xl font-bold">4.5k+</p>
+					<p class="text-sm sm:text-lg">Stars on GitHub</p>
+				</a>
+			</div>
+			<div class="text-center hover:text-[#6386a5]">
+				<a href={DISCORD_URL}>
+					<p class="text-2xl font-bold">1k+</p>
+					<p class="text-sm sm:text-lg">Discord members</p>
+				</a>
+			</div>
+		</div>
+		<div class="flex justify-center items-center">
 			<LinkButton
-				type="discord"
-				href="https://discord.leaningtech.com"
-				iconLeft="fa-brands:discord"
-				label="Subscribe for updates"
-			/>
-			<LinkButton
-				type="secondary"
-				href="https://webvm.io"
-				iconRight="mi:arrow-right"
-				label="Try the demo"
+				type="primary-cheerpx"
+				href="https://webvm.io/"
+				label="Try WebVM"
 			/>
 		</div>
 	</section>
-	<section class="flex justify-center">
-		<iframe
-			title="CheerpX: a WebAssembly-based x86 virtual machine in the browser, Yuri Iozzelli"
-			src="https://youtube.com/embed/VqrbVycTXmw?start=151"
-			class="w-full max-w-[720px] aspect-video rounded-xl shadow-lg border-2 border-stone-700"
-			frameborder="0"
-			allowfullscreen="allowfullscreen"></iframe>
+
+	<!-- TODO: video -->
+	<!-- TODO: client company logos -->
+	<!-- TODO: how it works (user story) -->
+	<!-- TODO: testimonials -->
+	<!-- TODO: FAQ -->
+
+	<section
+		id="gamesrunner"
+		class="bg-gradient-to-b from-black to-black via-stone-900 py-32 px-8"
+	>
+		<div class="items-center px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-32"></div>
+		<div
+			class="flex grid grid-cols-1 px-4 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-3 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-56"
+		>
+			<div class="col-span-2">
+				<Image src={GamePadAsset} alt="Game pad" class="w-32 sm:w-48" />
+				<div class=""></div>
+				<h1
+					class="font-semibold text-3xl sm:text-4xl lg:text-5xl py-2 text-[#87A2BD]"
+				>
+					CheerpX Games Runner
+				</h1>
+				<p class="text-xl sm:text-xl">
+					CheerpX Games Runner is an open-source Chrome extension to run your
+					games directly in the browser.
+				</p>
+				<ul class="list-inside list-disc font-normal text-wrap text-xl py-4">
+					<li>
+						Play historical games from your collection directly in your browser.
+					</li>
+					<li>
+						Works on any platform, even if not officially supported by the game.
+					</li>
+					<li>No local installation required.</li>
+				</ul>
+				<div class="flex gap-4 justify-center sm:justify-start py-2">
+					<LinkButton
+						type="primary-cheerpx"
+						href="https://chromewebstore.google.com/detail/cheerpx-games-runner-beta/kpjhccfibjgklihcmaddjecaenppaahg"
+						label="Install now"
+						iconRight="teenyicons:chrome-solid"
+					/>
+					<LinkButton
+						type="secondary-cheerpx"
+						href="https://github.com/leaningtech/cheerpx-games-runner"
+						iconRight="bi:github"
+						label="Contribute"
+					/>
+				</div>
+			</div>
+			<div class="col-span-1 flex items-center sm:items-end px-4">
+				<Image src={Screenshot} alt="screenshots" class="" />
+			</div>
+		</div>
+	</section>
+	<section
+		id="youtube"
+		class="bg-gradient-to-r from-[#446887] to-[#00254d] py-32 px-8"
+	>
+		<div class="items-center px-4 sm:px-8 md:px-16 lg:px-28 xl:px-32 2xl:px-48">
+			<div class="">
+				<h1
+					class="text-white text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl font-semibold py-4 text-center text-wrap md:text-balance"
+				>
+					Crafting the impossible:
+					<span
+						class="bg-gradient-to-r from-stone-300 to-stone-400 text-transparent bg-clip-text"
+						>x86 virtualization in the browser</span
+					> with WebAssembly
+				</h1>
+			</div>
+		</div>
+	</section>
+	<section
+		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 pt-12 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
+	>
+		<div class="px-16 grid sm:grid-cols-1 md:grid-cols-3 space-x-4">
+			<div class="col-span-2 text-left font-bold text-2xl py-4">
+				<p>
+					<span class="text-white">Do you have a commercial use case?</span>
+				</p>
+				<ul
+					class="list-inside list-disc font-normal text-wrap text-base sm:text-lg py-4"
+				>
+					<li>Technical support with tailored SLAs.</li>
+					<li>Feature prioritisation and sponsored development available.</li>
+					<li>
+						Access to our development team for compilation log reviews, video
+						calls and consulting.
+					</li>
+				</ul>
+				<LinkButton
+					type="primary-cheerpx"
+					href="https://leaningtech.com/contact-us/?subject=Cheerp%20Enterprise%20Licence#mailus"
+					label="Contact us"
+				/>
+			</div>
+			<div
+				class="col-span-1 border-solid border-t md:border-l md:border-t-0 text-center md:text-left mt-8 md:pt-0 py-8 md:py-4"
+			>
+				<p
+					class="text-center md:text-left text-2xl font-bold text-stone-300 md:pl-8"
+				>
+					<span class="text-white">Ready to build?</span> Get started today by browsing
+					our
+					<a
+						href="/docs"
+						class="text-[#6386a5] hover:text-white inline-flex items-center"
+						target="_blank"
+						>documentation
+						<svg
+							class="w-4 h-4 ml-1"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
+							></path>
+							<path
+								d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+							></path>
+						</svg>
+					</a>
+				</p>
+				<div
+					class="md:pl-8 py-4 space-y-2 inline-flex flex-col justify-center md:justify-start"
+				>
+					<LinkButton
+						type="primary-cheerpx"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
+					<LinkButton
+						href="/docs"
+						label="Documentation"
+						type="secondary-cheerpx"
+						iconLeft="iconoir:google-docs"
+					/>
+				</div>
+			</div>
+		</div>
 	</section>
 </ProductHome>
-
-<style>
-	@keyframes flyFadeScaleIn {
-		0% {
-			opacity: 0;
-			transform: translateY(70px) scale(0.6);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	.fly-in-b {
-		animation: flyFadeScaleIn 300ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-	}
-</style>
