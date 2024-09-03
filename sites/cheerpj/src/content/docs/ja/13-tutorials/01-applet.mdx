@@ -1,0 +1,205 @@
+---
+title: FoilSim アプレット
+description: CheerpJを使用してアプレットを実行する
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+このチュートリアルでは、CheerpJをページに統合して、最新のブラウザでJavaアプレットを実行する方法を説明します。
+
+<LinkButton label="デモを確認する" href="#結果" />
+
+このチュートリアルでは、NASAの[航空工学入門](https://www.grc.nasa.gov/WWW/K-12/airplane/)からFoilSimアプレットを使用します。このアプレットは、航空機の翼に働く空力をシミュレーションするインタラクティブなアプリケーションを表示します。[詳細はこちら](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/foilsimu/)。
+
+## 前提条件
+
+- [テンプレートプロジェクトをダウンロード](/docs/cheerpj3/tutorials/FoilSim-Applet.zip)して、解凍してください。
+- [Node.js](https://nodejs.org/en/) (>= 18)
+
+テンプレートプロジェクトの構造は次のようになっています:
+
+```
+.
+├── index.html
+└──  FoilSim.jar
+```
+
+## 1. Webサーバーを起動する
+
+この例を表示するには、ファイルをWebサーバーでホストする必要があります。[Vite](https://ja.vitejs.dev/) は便利なツールで、ファイルが変更されると自動的にページをリロードしてくれます。
+
+```sh
+npx vite
+```
+
+または、http-serverユーティリティを使用することもできます：
+
+```sh
+npm install http-server
+http-server -p 8080
+```
+
+ブラウザで`http://127.0.0.1:8080/`のようなlocalhostのURLを開いてください。
+
+## 2. 古典的なHTMLドキュメントを作成する
+
+提供されたテンプレートには、最終的な`index.html` ファイルが含まれています。次の手順に従うために、その内容を削除して最初から始めることができます。
+
+基本的なHTMLファイルは次のようになります:
+
+```html title="index.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body></body>
+</html>
+```
+
+## 3. アプレットのコンテンツを追加する
+
+次に、アプレットタグとそのパラメータを追加しましょう。これは、以前にウェブページに統合されていたものと同じです。また、タイトル、説明、およびスタイルも追加しましょう：
+
+```html {25-32} title="index.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>FoilSim applet (CheerpJ)</title>
+	</head>
+	<style>
+		div {
+			max-width: 1000px;
+			margin: auto;
+			text-align: center;
+		}
+		h1 {
+			margin-bottom: 50px;
+		}
+		h5 {
+			margin-top: 20px;
+		}
+	</style>
+
+	<body>
+		<div>
+			<h1>Applet example with CheerpJ</h1>
+			<div>
+				<cheerpj-applet
+					archive="FoilSim.jar"
+					code="Foil.class"
+					height="450"
+					width="950"
+				>
+					Your browser cannot handle the applet tag!
+				</cheerpj-applet>
+			</div>
+			<h5>
+				The applet shown in this example belongs to the NASA's
+				<a href="https://www.grc.nasa.gov/WWW/K-12/airplane/"
+					>Beginner's Guide to Aeronautics</a
+				>
+				and it is available at their
+				<a href="https://github.com/nasa/BGA/tree/main">GitHub repository</a>.
+			</h5>
+			<h5>
+				Applet is running with
+				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://leaningtech.com/">©Leaning Technologies</a>
+			</h5>
+		</div>
+	</body>
+</html>
+```
+
+ブラウザに戻ってページを更新すると、追加したタイトルとテキストが表示されます。当然のことながら、アプレットは表示されず、代わりに _**お使いのブラウザはアプレットタグを処理できません！**_ のようなメッセージが表示されます。
+
+## 4. CheerpJの統合
+
+ページにCheerpJを統合するのは、CheerpJローダーのURLを含む`<script>` タグを追加するだけで簡単に行えます。これをドキュメントの`<head>` タグ内に配置します。次に、別のスクリプトブロックで`cheerpjInit()` を呼び出す必要があります。
+
+ドキュメントは次のようになります:
+
+```html {6, 49-51} title="index.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>FoilSim applet (CheerpJ)</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+	</head>
+	<style>
+		div {
+			max-width: 1000px;
+			margin: auto;
+			text-align: center;
+		}
+		h1 {
+			margin-bottom: 50px;
+		}
+		h5 {
+			margin-top: 20px;
+		}
+	</style>
+
+	<body>
+		<div>
+			<h1>Applet example with CheerpJ</h1>
+			<div>
+				<cheerpj-applet
+					archive="FoilSim.jar"
+					code="Foil.class"
+					height="450"
+					width="950"
+				>
+					Your browser cannot handle the applet tag!
+				</cheerpj-applet>
+			</div>
+			<h5>
+				The applet shown in this example belongs to the NASA's
+				<a href="https://www.grc.nasa.gov/WWW/K-12/airplane/"
+					>Beginner's Guide to Aeronautics</a
+				>
+				and it is available at their
+				<a href="https://github.com/nasa/BGA/tree/main">GitHub repository</a>.
+			</h5>
+			<h5>
+				Applet is running with
+				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://leaningtech.com/">©Leaning Technologies</a>
+			</h5>
+		</div>
+		<script type="module">
+			await cheerpjInit();
+		</script>
+	</body>
+</html>
+```
+
+ページを更新すると、アプレットが動作しているのが見えるはずです！
+
+> ネイティブJavaとの潜在的な競合を避けるために、 `applet` タグを`<cheerpj-applet>`に置き換えることもできます。
+
+## 結果
+
+最終的なページは次のようになります:
+
+<iframe
+	src="https://leaningtech.github.io/cheerpj-meta/examples/FoilSim-Applet/"
+	class="w-full aspect-square"
+></iframe>
+
+## ソースコード
+
+[GitHubでソースコード全体を確認](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/FoilSim-Applet)
+
+## クレジット
+
+このチュートリアルで使用されたアプレットは、NASAの[航空工学入門](https://www.grc.nasa.gov/WWW/K-12/airplane/)に属し、[GitHubリポジトリ](https://github.com/nasa/BGA/tree/main)で利用可能です。
+
+## さらに読む
+
+CheerpJについてさらに学ぶには、[リファレンス](/docs/ja/reference)をご覧ください。

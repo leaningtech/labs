@@ -1,0 +1,156 @@
+---
+title: Swing Browser (ネットワーキング)
+description: Javaアプリケーションをインターネット接続で実行する
+---
+
+このチュートリアルでは、CheerpJとTailscaleを使用して、Javaで作成されたウェブブラウザアプリケーションを実行する方法を紹介します。同じ方法を使用して、CheerpJで実行される任意のアプリケーションに広範なインターネットアクセスを提供できます。
+
+CheerpJとTailscaleがどのように連携するかに詳しくない場合は、[ネットワーキングガイド][ネットワーキングガイド]をご覧ください。
+
+## 前提条件
+
+- [`SwingHTMLBrowser.jar`のダウンロード](/docs/cheerpj3/tutorials/SwingHTMLBrowser.jar)
+- ページをローカルでホストするための簡単なHTTPサーバー
+- HTMLファイルを作成および編集するためのテキストエディタ
+- Chrome、Firefox、Safariなどのモデム・ブラウザー
+- Tailscaleアカウント（このチュートリアルの後半で説明します）
+
+## 1. Javaアプリケーション
+
+まず、テストするJavaアプリケーションを確認しましょう。これは、Javaで作成されたシンプルなSwing HTMLブラウザです。 もしお使いのマシンにJavaがインストールされている場合、このJARをローカルで実行できますが、このステップはスキップしても構いません。
+
+入力フィールドにウェブサイトの完全なURLを入力し、Enterキーを押すとページが読み込まれます。 ただし、Swingウェブブラウザはかなり古いため、サイトが最新のブラウザと同じように表示されない場合があります。
+
+<div class="w-1/2">
+	![Tiny Browser Loaded](/docs/cheerpj3/assets/tinybrowserloaded.png)
+</div>
+
+このシナリオでは、このアプリケーションを実行しているマシンがインターネットに接続されており、Javaがインストールされているため、ページが読み込まれます。
+
+## 2. CheerpJを使用してブラウザでアプリケーションを実行する
+
+次に、このJavaアプリケーションを、マシンにJavaをインストールせずにCheerpJを使用してブラウザで実行しましょう。そのためには、[Javaアプリケーションの実行] チュートリアルで行ったのと同様の手順に従います。
+
+### 2.1 プロジェクトファイル
+
+まず、プロジェクトディレクトリを作成し、アプリケーションJARをこのフォルダに配置して、HTMLファイルを作成しましょう。プロジェクトディレクトリは次のようになります：
+
+```
+└──browserTutorial
+    ├── SwingHTMLBrowser.jar
+    └── browser.html
+```
+
+次に、以下のコードをコピーして`browser.html`ファイルにペーストしてください：
+
+```html title="browser.html" {6, 9-15}
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Browser</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+	</head>
+	<body>
+		<script>
+			(async function () {
+				await cheerpjInit();
+				cheerpjCreateDisplay(800, 600);
+				await cheerpjRunJar("/app/SwingHTMLBrowser.jar");
+			})();
+		</script>
+	</body>
+</html>
+```
+
+#### 何が起こっているのか？
+
+- `<head>` 内のスクリプトタグはCheerpJをロードします。
+- [`cheerpjInit`] はCheerpJランタイム環境を初期化します。
+- [`cheerpjCreateDisplay`] は、すべてのJavaウィンドウを含むグラフィカルな環境を作成します。
+- [`cheerpjRunJar`] はアプリケーションを実行します。
+- `/app/`は、ページが読み込まれるウェブサーバーのルートを参照する[仮想ファイルシステム]のマウントポイントです。
+
+### 2.2 アプリケーションの提供
+
+このページを[http-server](https://npm.im/http-server)のようなHTTPサーバーから提供できるようになります。
+
+```shell
+npx http-server -p 8080
+```
+
+これで、CheerpJを使用して実行されているページを最新のブラウザで表示できます。 Javaブラウザクライアントに`https://github.com`と入力し、Enterキーを押してみましょう。何も読み込まれず、コンソールログに次のようなエラーが表示されるはずです：
+
+![Error in the Console Log](/docs/cheerpj3/assets/errorconsolelog.png)
+
+次に、ローカルサーバーにホストされているページを読み込んでみましょう。また、プロジェクトディレクトリに次のファイルを追加しましょう:
+
+```html title="hello.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello world</title>
+	</head>
+	<body>
+		<h1>Hello from the same origin!</h1>
+	</body>
+</html>
+```
+
+Javaブラウザアプリケーションで、次のアドレスを入力してみてください：`http://127.0.0.1:8080/hello.html` （あるいはローカルホストに対応するアドレス）。
+
+![Hello From Same Origin](/docs/cheerpj3/assets/hello_sameorigin.png)
+
+**CheerpJは、Tailscaleネットワークに接続されていない場合、同一オリジンリクエストのみを実行できます。** このシナリオの利便性は、アプリケーションがブラウザで実行されている場合でも、インターネット全体から完全に隔離されていることです。
+
+...しかし、私たちはアプリケーションがlocalhost以外のウェブページを読み込めるようにしたいと考えています。
+
+## 3. アプリケーションをインターネットに接続する
+
+アプリケーションにインターネットへのアクセスを許可する最も簡単な方法は、Tailscaleネットワーク (Tailscale用語では*Tailnet*)を介して行うことです。 Tailscaleネットワークは、このネットワークに接続されたマシン/ユーザー(Tailscale用語では*ノード*)で構成されたVPNです。
+Tailscaleネットワークはデフォルトでインターネットから隔離されているため、VPN内外のすべてのインターネットトラフィックをルーティングする _出口ノード_ を設定する必要があります。
+
+### 3.1 Tailscaleの設定
+
+出口ノードを持つネットワークを作成するのは非常に簡単です：
+
+1.  [Tailscaleポータルサイト](https://login.tailscale.com/)でアカウントを作成し、ログインします。
+2.  [Tailscaleをインストール](https://tailscale.com/kb/installation)し、このマシンを後で*出口ノード*として設定します。
+3.  [こちらの手順](https://tailscale.com/kb/1103/exit-nodes)に従って、マシンを出口ノードとして設定します。
+
+### 3.2 Javaアプリケーションの認証
+
+Tailscaleネットワークに接続するには、認証キーが必要です。
+
+1. [こちら](https://login.tailscale.com/admin/settings/keys)で認証キーを生成できます。このチュートリアルでは、＊ephemeral＊ （一時的）な使い捨て認証キーの作成をお勧めします。
+2. キーをコピーして、`browser.html`を次のように変更して、[`cheerpjInit`] と [`tailscaleAuthKey`]を通じてCheerpJに渡します：
+
+```js
+await cheerpjInit({
+	tailscaleAuthKey: "PasteYourKeyHere",
+});
+```
+
+## 4. 最終テスト
+
+ページを再読み込みして、Javaブラウザアプリケーションで`https://www.google.com/`や`https://www.github.com/`を読み込んでみましょう。今度は問題なくウェブサイトを開けるはずです。
+
+[Tailscaleダッシュボード](https://login.tailscale.com/admin/machines)で接続を確認および監視することもできます。
+
+プロジェクトテンプレートを[こちら](/docs/cheerpj3/tutorials/browserTutorial.zip)からダウンロードするか、このチュートリアルの[GitHubリポジトリ](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Swing-Browser)にアクセスしてください。
+
+> [!tip] 免責事項
+> アプリケーションにインターネットアクセスを許可することは、いくつかのリスクを伴います。このチュートリアルで紹介した方法は、非常に単純なネットワーキングシナリオを学習目的で一般的に理解することを目的としています。認証方法、出口ノード、およびネットワークの全体的な管理には十分注意することをお勧めします。CheerpJはこれに関して責任を負いません。
+
+## さらに読む
+
+- [ネットワーキングガイド]
+
+  [ネットワーキングガイド]: /docs/ja/guides/Networking
+  [Javaアプリケーションの実行]: /docs/ja/getting-started/Java-app
+  [`cheerpjInit`]: /docs/ja/reference/cheerpjInit
+  [`cheerpjCreateDisplay`]: /docs/ja/reference/cheerpjCreateDisplay
+  [`cheerpjRunJar`]: /docs/ja/reference/cheerpjRunJar
+  [仮想ファイルシステム]: /docs/ja/guides/File-System-support
+  [`tailscaleAuthKey`]: /docs/ja/reference/cheerpjInit#tailscaleauthkey

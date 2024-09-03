@@ -1,0 +1,126 @@
+---
+title: SwingSet3
+description: SwingアプリケーションをWebに移植する
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+このチュートリアルでは、SwingSet3アプリケーションをブラウザで実行する手順を説明します。
+
+<LinkButton label="デモを確認する" href="#結果" />
+
+## 前提条件
+
+- [テンプレートプロジェクトをダウンロード](/docs/cheerpj3/tutorials/swingset3-template.zip)して、解凍してください。
+- [Node.js](https://nodejs.org/en/) (>= 18)
+
+この例の出発点は、空のHTMLページ、SwingSet3のJAR、およびその依存関係です：
+
+```
+.
+├── index.html
+├── SwingSet3.jar
+└── lib
+    ├── AnimatedTransitions.jar
+    ├── AppFramework.jar
+    ├── Filters.jar
+    ├── MultipleGradientPaint.jar
+    ├── TimingFramework.jar
+    ├── javaws.jar
+    ├── swing-layout-1.0.jar
+    ├── swing-worker.jar
+    └── swingx.jar
+```
+
+## 1. Webサーバーを起動する
+
+この例を表示するには、ファイルをWebサーバーでホストする必要があります。[Vite](https://ja.vitejs.dev/) は便利なツールで、ファイルが変更されると自動的にページをリロードしてくれます。
+
+```sh
+npx vite
+```
+
+ターミナルに表示されたURLにアクセスすると、空白のページが表示されるはずです。このチュートリアルの残りの部分では、Viteをバックグラウンドで実行しておいてください。
+
+## 2. CheerpJをドキュメントに追加する
+
+次に、`<head>`に以下のスクリプトタグを追加して、CheerpJをページに追加しましょう:
+
+```html title="index.html"
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+```
+
+## 3. CheerpJを初期化し、jarを実行する
+
+次のスクリプトタグを`<body>`に追加しましょう:
+
+```html title="index.html"
+<script type="module">
+	await cheerpjInit();
+	cheerpjCreateDisplay(800, 600);
+	await cheerpjRunJar("/app/SwingSet3.jar");
+</script>
+```
+
+これにより、CheerpJが初期化され、800x600の表示エリアが作成され、SwingSet3のjarが実行されます。`type="module"`を使用することで、[最上位のawait](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules#最上位の_await)を利用できます。
+
+> [!question] `/app/SwingSet3.jar`とは？
+> これは、ウェブサーバーのルートを表す[仮想ファイルシステム](/docs/ja/guides/File-System-support)です。
+
+ファイルを保存すると、SwingSet3がブラウザで読み込まれ、実行されるはずです 🥳
+
+## 4. アプリケーションをページ全体に表示する
+
+現在、アプリケーションはページの一部しか占有していませんが、多くのアプリケーションではページ全体を使用したい場合があります。
+
+これを実現するために、新しい要素を`<body>`に追加しましょう：
+
+```html title="index.html"
+<div id="container"></div>
+```
+
+> [!note] 注意
+> `cheerpjCreateDisplay`を呼び出すスクリプトの**前**に、コンテナ要素を追加してください。
+
+次に、CSSを追加しましょう：
+
+```html title="index.html"
+<style>
+	html,
+	body {
+		margin: 0;
+	}
+
+	#container {
+		width: 100vw;
+		height: 100svh;
+	}
+</style>
+```
+
+最後に、スクリプトを更新してコンテナ要素を使用するようにしましょう：
+
+```html title="index.html" {3}
+<script type="module">
+	await cheerpjInit();
+	cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
+	await cheerpjRunJar("/app/SwingSet3.jar");
+</script>
+```
+
+幅と高さに`-1` を渡すことで、CheerpJがコンテナ要素の全サイズを使用し、リサイズイベントを監視します。
+
+再度ページを表示すると、アプリケーションがウィンドウ全体を占有するのが確認できるはずです。また、ウィンドウをリサイズすると、アプリケーションもリサイズされることに気づくでしょう。
+
+---
+
+## 結果
+
+<iframe
+	src="https://cheerpj-example-swingset3.leaningtech.com/"
+	class="w-full aspect-square"
+></iframe>
+
+## ソースコード
+
+[GitHubでソースコード全体を確認](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/SwingSet3)

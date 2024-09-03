@@ -1,0 +1,77 @@
+---
+title: アーキテクチャ
+description: CheerpJはどのように動作するのか？
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+CheerpJは、WebAssemblyベースの **ブラウザ用Java仮想マシン**です。これにより、Javaアプリケーションをブラウザから直接実行でき、Javaのインストールが不要になります。驚きですよね？しかし、どうやって動作するのでしょうか？
+
+## 概要
+
+CheerpJは、WebAssembly、JavaScript、およびHTML5などの標準的なWeb技術を使用して、現代のどのブラウザでも動作できます。JavaScriptライブラリのように、単に`<script>`タグを追加するだけで、Webページに統合できます。特別な実行可能コンポーネント、プラグイン、またはサーバー側のバックエンドは必要ありません。
+
+CheerpJは非常に使いやすく、スタンドアロンのJavaアプリケーション、アプレット、Java Web Start、およびJavaライブラリをブラウザ内で完全に実行するためのAPIを公開しています。CheerpJの強みの一つは、 Javaバイトコード/JARと直接連携し、アプリケーションのソースコードを変更したりアクセスしたりする必要がないことです。
+
+CheerpJのアセットは静的であり、簡単にセルフホストできます。また、[CheerpJコミュニティライセンス](/docs/ja/licensing) (個人プロジェクトや技術評価での無料利用が可能)でクラウド版も提供しています。
+
+## CheerpJのコンポーネント
+
+CheerpJは以下の構成要素で構成されています：
+
+- JVMの実装とJava-to-JavaScript JITコンパイラを含む、完全なJavaランタイム環境
+- 仮想化されたウィンドウマネージャー
+- 仮想化されたファイルシステム
+- ネットワーキングサポート用のモジュール
+
+![CheerpJ 3.0 architecture diagram](/docs/cheerpj3/assets/cheerpj-3-arch.png)
+
+### CheerpJのJavaランタイム環境
+
+CheerpJの背後にある魔法は、OpenJDKに基づく完全なJava SE 8ランタイムをコンパイルするために使用された[Cheerp]にあります。 このランタイムはもともとC++で書かれ、WebAssemblyとJavaScriptにコンパイルされ、100%ブラウザ互換性を持つように設計されています。 CheerpJのアーキテクチャは、複数のJavaバージョンやカスタムランタイムをサポートするように設計されています。将来のバージョンのCheerpJでは、Java 11や新しいLTSバージョンのJavaをサポートする予定です。
+
+CheerpJのJavaランタイム環境の最も重要なコンポーネントは、そのJVM実装です。CheerpJのJVM実装は、_インタープリタ_ と _実行時コンパイラ_（JIT）で構成されており、これらが2段階で連携して動作します：
+
+1. Javaバイトコードはインタープリタ内で実行されます。
+2. その後、このバイトコードが実行時に最適化されたJavaScriptにコンパイルされます。
+
+インタープリタは、初期化やあまり使用されないコードの処理を行うだけでなく、JITコンパイルに必要な情報も収集します。生成されたコードは非常に効率的であり、内部の最適化機能により、インライン化や呼び出しの非仮想化などが行われます。これは、Javaのような言語にとって非常に重要です。
+
+![CheerpJ 3.0 JRE diagram](/docs/cheerpj3/assets/JRE.png)
+
+CheerpJランタイムは、ブラウザ内でJavaアプリケーションを実行できるだけでなく、JavaとJavaScriptの間で高度な双方向の相互運用性も提供します。つまり、JavaからDOMにアクセスすることができ、[`native` メソッドを直接JavaScriptで実装](/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript)することができます。また、新しい [`cheerpjRunLibrary` API](/docs/ja/reference/cheerpjRunLibrary)を使用することで、JavaScriptから直接Javaのメソッド、オブジェクト、および配列と相互作用することもできます。
+
+### 仮想化されたウィンドウマネージャー
+
+グラフィカルなUIがないアプリケーションなんてありえないでしょう。CheerpJのウィンドウマネージャーは、ウィンドウをHTML要素とHTML5キャンバスの階層に変換することで、Java AWT/Swingをサポートしています。
+
+Swingアプリケーションは、ネイティブ環境と同様にレンダリングされます。 SwingのLook&Feelもサポートされており、サードパーティ製のものも含まれます。マルチウィンドウアプリケーションもサポートされており、キーボードフォーカスも期待通りに管理されます。システムクリップボードとの統合は、初期化オプションで有効にすることができます。
+
+### 仮想化されたファイルシステム
+
+CheerpJは、サーバーホストファイルへのアクセスや持続的なローカルストレージなど、さまざまなアプリケーションの要求に対応するための複数のファイルシステムバックエンドを提供しています。
+
+![](/docs/cheerpj3/assets/filesystem.png)
+
+<LinkButton
+	type="secondary"
+	href="/docs/ja/guides/File-System-support"
+	iconRight="ep:arrow-right-bold"
+	label="ファイルシステムガイド"
+/>
+
+### ネットワーキングサポート
+
+同一オリジンのHTTP/HTTPSリクエストについては、CheerpJは`fetch`を透過的に使用できます。より一般的なネットワーキングは、WebSocketをトランスポート層として使用するVPN技術であるTailscaleを通じてサポートされます。 これにより、プライベートネットワークサービスへのアクセス、ユーザー間のピアツーピア接続、ユーザーやアプリケーションが提供する**出口ノード**を介したインターネットへのアクセスなど、さまざまなネットワーキングシナリオに対応できます。
+![CheerpJ 3.0 general networking](/docs/cheerpj3/assets/general_networking.png)
+
+<LinkButton
+	type="secondary"
+	href="/docs/ja/guides/Networking"
+	iconRight="ep:arrow-right-bold"
+	label="ネットワークガイド"
+/>
+
+[cheerp]: https://cheerp.io/
+[ネットワークガイド]: /docs/ja/guides/Networking
+[licensing]: /docs/ja/licensing

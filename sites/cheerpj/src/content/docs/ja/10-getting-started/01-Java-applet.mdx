@@ -1,0 +1,115 @@
+---
+title: Javaアプレットの実行
+description: 最新のブラウザでJavaアプレットを実行する
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+CheerpJを使用すると、Javaアプレットをシームレスにブラウザで実行できます。このページでは、Javaアプレット向けのCheerpJの使い方を紹介します。
+
+**ブラウザでJavaアプレットを実行するには、2つの異なる方法があります：**
+
+- CheerpJランタイム環境を使って、自分のウェブページで[自分のJavaアプレットを実行する](/docs/ja/getting-started/Java-applet#独自のアプレットの実行)。
+- 公開ウェブサイトの`<applet>`タグと統合されたアプレット用の[CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein)Chrome拡張機能を使用して、[公開アプレットを実行する](/docs/ja/getting-started/Java-applet#公開アプレットを実行する)。
+
+## 独自のアプレットの実行
+
+**必要なもの：**
+
+- アプレットファイル
+- アプレットを表示するためのHTMLファイル
+- ローカルでテストするための基本的なHTTPサーバー
+
+### 1. HTMLファイルにCheerpJを統合する
+
+このチュートリアルでは、すでに`<applet>`、`<object>`または`<embed>`タグを含むHTMLファイルがあると仮定しています。
+
+CheerpJを統合するには、次の手順を実行するだけです：
+
+1.  ページの`<head>`内にCheerpJランタイムローダーを含むシンプルな`<script>`を追加します。
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+```
+
+2.  CheerpJのランタイム環境を初期化するために、2番目の`<script>`で[`cheerpjInit()`]を呼び出します。
+
+```html
+<script>
+	cheerpjInit();
+</script>
+```
+
+例：
+
+```html title="index.html" {6, 15-17}
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpJ applet test</title>
+		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+	</head>
+	<body>
+		<applet
+			archive="Example.jar"
+			code="ExamplePath.ExampleApplet"
+			height="900"
+			width="900"
+		></applet>
+		<script>
+			cheerpjInit();
+		</script>
+	</body>
+</html>
+```
+
+### 2. ページをローカルでホストする
+
+このウェブページを簡単なHTTPサーバー、例えば http-server ユーティリティで提供できます。
+
+```shell
+npm install http-server
+http-server -p 8080
+```
+
+> ユーザーがネイティブのJavaプラグインをインストールしている場合、元のHTMLタグを `cheerpj-` プレフィックスバージョンに置き換えることができます。`<cheerpj-applet>`、`<cheerpj-object>`、および`<cheerpj-embed>`がすべてサポートされています。
+
+## 公開アプレットを実行する
+
+### 1. CheerpJアプレットランナーをインストールする
+
+CheerpJアプレットランナーは、ChromeおよびEdgeで利用可能です。
+
+<div class="flex flex-wrap gap-3">
+  <LinkButton
+    type="primary"
+    href="https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
+    label="Chromeに追加"
+    iconLeft="openmoji:chrome"
+  />
+
+<LinkButton
+	type="primary"
+	href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic"
+	label="Microsoft Edgeに追加"
+	iconLeft="openmoji:edge"
+/>
+
+</div>
+
+### 2. アプレットがあるウェブサイトにアクセスする
+
+Javaアプレットが含まれているページを訪問し、[例えばこのページ](http://www.neilwallis.com/projects/java/water/index.php)で、ツールバーにあるCheerpJアプレットランナーアイコンをクリックしてCheerpJを有効にします。
+
+![](/docs/cheerpj3/assets/cheerpj_applet_demo.gif)
+
+## 結果
+
+ブラウザにCheerpJディスプレイが表示され、いくつかのロードメッセージの後、アプレットが実行されるのが見えます。アプリケーションと適用される最適化によっては、これが数秒で完了する場合があります。
+
+## さらに読む
+
+- [ランタイムAPIリファレンス](/docs/ja/reference)
+
+[`cheerpjInit()`]: /docs/ja/reference/cheerpjInit
