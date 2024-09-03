@@ -18,7 +18,7 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 
 ## `/app/` mount point
 
-The /app/ mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
+The `/app/` mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
 
 The `/app/` mount point refers to the root of your web server. When a file is read from `/app/`, CheerpJ will make an HTTP(S) request to fetch the file.
 
@@ -35,7 +35,7 @@ cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
 > [!tip] JAR file locations
-> The /app/ mount point is the most common location to store the application's JARs but this is not mandatory. For example, you could write a JAR file into `/str/` with JS and then run that.
+> The `/app/` mount point is the most common location to store the application's JARs but this is not mandatory. For example, you could write a JAR file into `/str/` with JS and then run that.
 
 ## `/files/` mount point
 

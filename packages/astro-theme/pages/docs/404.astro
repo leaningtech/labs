@@ -1,15 +1,17 @@
 ---
 import DocsArticle from "../../layouts/DocsArticle.astro";
+import { t } from "../../lib/i18n";
 ---
 
 <DocsArticle
-	title="Not found"
-	description="This page doesn't exist!"
+	title={t("Page Not Found", Astro.currentLocale)}
+	description={t("This page doesn't exist!", Astro.currentLocale)}
 	fullWidthLayout={false}
 >
 	<p>
-		If this is a mistake, <a
-			href="https://github.com/leaningtech/labs/issues/new">let us know</a
-		> so we can fix it.
+		{t("If this is a mistake,", Astro.currentLocale)}
+		<a href="https://github.com/leaningtech/labs/issues/new">
+			{t("let us know so we can fix it.", Astro.currentLocale)}
+		</a>
 	</p>
 </DocsArticle>

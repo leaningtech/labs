@@ -1,0 +1,188 @@
+---
+title: CheerpJ
+shortTitle: 概要
+description: 現代のウェブブラウザ向けJava仮想マシン
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+<div class="not-prose flex gap-2 mb-2">
+	<img
+		src="https://img.shields.io/badge/version-3.0-orange"
+		alt="Version 3.0"
+	/>
+	<a href="https://discord.leaningtech.com/">
+		<img
+			src="https://img.shields.io/discord/988743885121548329?color=%237289DA&logo=discord&logoColor=ffffff"
+			alt="Discord server"
+		/>
+	</a>
+	<a href="https://github.com/leaningtech/cheerpj-meta/issues">
+		<img
+			src="https://img.shields.io/github/issues/leaningtech/cheerpj-meta.svg?logo=github"
+			alt="GitHub issues"
+		/>
+	</a>
+</div>
+
+<div class="text-lg">
+	CheerpJは、WebAssembly ベースの**ブラウザ用Java仮想マシン**です。Java
+	8との広範な互換性が あり、Javaアプリケーション、アプレット、ライブラリ、および
+	Java Web Start / JNLPアプリケーション
+	をプラグインなしでブラウザで実行するための完全なランタイム環境
+	<a href="#footnote" id="ref">[1]</a>を提供します。
+</div>
+
+<div class="m-4 flex justify-center">
+	[始める](/docs/ja/getting-started) · [例](/docs/ja/tutorials) ·
+	[APIリファレンス](/docs/ja/reference) ·
+	[GitHubリポジトリ](https://github.com/leaningtech/cheerpj-meta)
+</div>
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+```
+
+<div class="text-stone-400">
+	開発者ではありません？ [製品サイト](https://cheerpj.com/ja/)と、Java Web Start
+	アプリケーションを実行するためのすぐに使える[ブラウザ拡張機能](https://cheerpj.com/cheerpj-jnlp-runner/)
+	をご覧ください。
+</div>
+
+<div class="mx-24">![](../explanation-diagram.png)</div>
+
+## 機能
+
+CheerpJを使用すると、次のことが可能です：
+
+- 既存の **[Javaアプリケーション]** を変更なしでブラウザで実行
+- **[Javaアプレット]** をレガシープラグインなしでページに含める
+- **[Java Web Start / JNLP]** アプリケーションを現代のシステムで動作するように移行
+- **[Javaライブラリ]** をJavaScript/TypeScriptでシームレスに使用
+- JavaとJavaScriptのライブラリ間で相互運用
+
+CheerpJは、完全なOpenJDKランタイム環境に基づいており、次の機能をサポートすることができます：
+
+- [ネットワーキング]
+- [仮想ファイルシステム]
+- [クリップボード]
+- オーディオ
+- 印刷
+
+<LinkButton label="始める" type="primary" href="/docs/ja/getting-started" />
+
+## 始め方
+
+{/* TODO: move to getting-started */}
+
+作成するものが決まっている場合は、該当するチュートリアルに直接進んでください：
+
+<div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
+	<a
+		href="/docs/ja/getting-started/Java-app"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		アプリケーション
+	</a>
+	<a
+		href="/docs/ja/getting-started/Java-applet"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		アプレット
+	</a>
+	<a
+		href="/docs/ja/getting-started/Java-library"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		ライブラリ
+	</a>
+	<a
+		href="/docs/ja/getting-started/JNLP"
+		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
+	>
+		JWS/JNLP
+	</a>
+</div>
+
+## CheerpJの仕組み
+
+CheerpJは、以下の2つのコンポーネントの組み合わせです：
+
+1. 最適化されたJava-to-JavaScript JITコンパイラ。
+2. OpenJDKに基づいた完全なJava SE 8ランタイム。
+
+これらは両方ともC++で書かれており、[Cheerp](https://cheerp.io/)を使用してWebAssemblyとJavaScriptにコンパイルされています。
+
+## CheerpJの特徴
+
+1. Swing、リフレクション、および動的クラスロードを含むJava 8に対する広範なサポートがあり、コードに対する手動介入は不要です。
+2. CheerpJはJavaバイトコードに直接動作し、Javaソースコードへのアクセスを必要としません。
+3. CheerpJはSwing/AWTを含む完全なJava SEランタイムを備えています。オーディオ、印刷、およびその他のJava SE機能をサポートします。ランタイムは最適なパフォーマンスとサイズのためにWebAssemblyをサポートします。
+4. CheerpJ JITによって生成されたJavaScriptコードは高度に最適化され、ガベージコレクションが可能です。
+5. CheerpJは双方向のJava-JavaScript相互運用性を可能にします。JavaからJavaScriptライブラリやDOMを呼び出して操作することができます。また、JavaScriptからJavaモジュールを呼び出すこともできます。
+6. CheerpJはJavaのマルチスレッドをサポートします。さらに、Web Workersを使用して並行アプリケーションを作成することもできます。
+
+## ライセンス
+
+CheerpJは個人使用および技術評価のために無料です。詳細については[ライセンス](/docs/ja/licensing)をご覧ください。
+
+## デモ
+
+CheerpJのいくつかのデモは[こちら](https://leaningtech.com/demo/)で見ることができます。
+
+また、[JavaFiddle](https://javafiddle.leaningtech.com/)でCheerpJを実際に見ることもできます：
+
+<iframe
+	src="https://javafiddle.leaningtech.com/N4IgLglmA2CmIC4QAlbWgewAQHcMCdoATXKACywGUcIA7AcxABoQBXAByIEMxYjEQAJgAMggMwBaAIzCJwgKwAVKQBYEqhPOEA6MVMEAtZiABmEOAGdEAbVDseZAQFkudbQCsuANy7GAxhi0vEECEAC27ARgWJ4+2lw4YNoAYoFgANwAOrThkfjRsVwAHtoWNAzaAFLJ+FxhsFk5EVEx3sWl5fRVADJcAEZojbkthSVldF2VAApctIPZw-mtPmOd2tQTAKqQ0FAQsBZDzUujHRPafQREsPjaAKIRYACeAEJXN43ZftBcFhZYLjoWFycHqQX+ACVWLRaP04FhgNksMisOxWH1dn4sBYwDwIFivBgICQwq5aAAKShgfATawAXSwXHw9AsAEoEUiUVyNgxtuY9gdtHRCQBrWC9Xj4clzHAAsnk1msxpcgC+2U5yLRGPxWEJxKw+GhCo5tC5XOmszQqKwAF4sDKsBa5tAFcqzZrSrAwG98NcpQ6Huxnj6-eSZEwsOHI8IIzJFZ9Te7Hb0BtAsGm7Q7Kim0OTMig0JgIwBhMiwG7sSoAQnzSo1ZugnrAqSC0tgspbYDzIEoNwgJnzEc72im3QAggBJAByEZUgnj9a57HiRCI5Ogddoi5R1Vq9SwJlt9vbjpqdVg3Z59CwsCKdXYcFrbvdJhXa-Ym6TB+09j8Itd27Iq+Fhet0GB+HigQQmgeJeLAigYNKrDoJ+SbAV6ABqEAWBAGIXtSrCwKhyJqrQpEgCqdIqkAA/embed?theme=dark"
+	class="border border-stone-700 rounded-md w-full h-[40rem]"
+></iframe>
+
+## コミュニティ
+
+CheerpJは、NASA、Siemens、UBS、および[その他](https://leaningtech.com/case-studies/)多くのチームによって本番環境で使用されています。
+
+CheerpJを使用しているコミュニティプロジェクトには、次のようなものがあります：
+
+<ShowcaseList tag="CheerpJ" limit={2} />
+
+<div class="flex justify-end pt-4">
+	<LinkButton
+		type="secondary"
+		href="/docs/ja/community"
+		label="さらに多くのコミュニティプロジェクトを見る"
+		iconRight="mi:arrow-right"
+	/>
+</div>
+
+活気に満ちたDiscordコミュニティがあり、そこで質問をしたり、プロジェクトを共有したり、コミュニティのサポートを受けることができます。
+
+<LinkButton
+	type="discord"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Discordサーバーに参加する"
+/>
+
+<LinkButton
+	type="secondary"
+	href="https://twitter.com/leaningtech"
+	iconLeft="fa-brands:twitter"
+	label="Twitterでフォローする"
+/>
+
+---
+
+<div id="footnote">
+	[1]: CheerpJは、Oracle Forms、EBS、Swing、AWT、および多数のフレームワークやライブラリでテストされています。
+	Javaランタイム環境が必要なJavaSEアプリケーションを実行できるはずです。<a href="#ref">↩</a>
+</div>
+
+[Javaアプリケーション]: /docs/ja/getting-started/Java-app
+[Javaアプレット]: /docs/ja/getting-started/Java-applet
+[Java Web Start / JNLP]: /docs/ja/getting-started/JNLP
+[Javaライブラリ]: /docs/ja/getting-started/Java-library
+[ネットワーキング]: /docs/ja/guides/Networking
+[仮想ファイルシステム]: /docs/ja/guides/File-System-support
+[クリップボード]: /docs/ja/reference/cheerpjInit#clipboardmode
