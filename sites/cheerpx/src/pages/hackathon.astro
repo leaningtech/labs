@@ -6,6 +6,9 @@ import HeroDoodle from "../assets/hero_illustration.png";
 import CatboxDoodle from "../assets/cat-box.png";
 import KeyboardcatDoodle from "../assets/keyboard-cat.png";
 import TicketDoodle from "../assets/ticket.png";
+import UFODoodle from "../assets/ufo-cat.png";
+import ShoeDoodle from "../assets/shoe-cat.png";
+import WizardDoodle from "../assets/wizard-cat.png";
 ---
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-black">
     <section>
@@ -144,6 +147,108 @@ import TicketDoodle from "../assets/ticket.png";
 
         </div>
 
+    </div>
+    <div class="grid grid-cols-5">
+       
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 4: Dive into the hands-on weekend adventure!
+
+            </h1>
+            <p class="font-mono">
+                
+                On the event's kick-off day (Friday, October 11th, 2024), we'll unveil the hackathon theme that will spark your creativity. Stay tuned on Discord for the big reveal—it could be a single word, several keywords, or a catchy phrase!
+
+                <br>
+                Whether you're joining us in-person or fully online, fear not! We've got your back with technical support through our dedicated Discord channel. 
+
+            </p>
+            
+            <div class="flex gap-4 justify-center sm:justify-start mt-2">
+                <LinkButton
+                    type="secondary-mono"
+                    href=""
+                    label="See itinerary"
+                />
+        </div>
+        </div>
+        <div class="col-span-2 px-4">
+            <Image src={UFODoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+    </div>
+    <div class="grid grid-cols-5 py-8">
+        <div class="col-span-2 px-4">
+            <Image src={WizardDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 5: Submit your creation!
+
+            </h1>
+            
+            <p class="font-mono">
+                It's showtime, folks! Each team must submit their masterpiece by the deadline — any late submissions will sadly be left in the dust.
+                <br>
+                To throw your project into the ring, simply drop a message in the submission channel with the following deets:
+
+            </p>
+            <ul class="list-disc list-inside font-mono text-pretty">
+                <li>
+                    Team Name (which should already be registered)
+                </li>
+                <li>
+                    Team members (just in case someone bails on you!)
+                </li>
+                <li>
+                    Public Github repository URL with a stellar project description in your readme.txt
+
+                </li>
+                <li>
+                    If your project's up and running, toss in the deployment URL (like GitHub pages or another platform)
+
+                </li>
+                <li>
+                    Spice it up with a presentation file sporting 1-2 juicy slides
+
+                </li>
+            </ul>
+            
+            <div class="flex gap-4 justify-center sm:justify-start mt-2">
+                    <LinkButton
+                        type="primary-mono"
+                        href="https://webvm.io/"
+                        label="Submit"
+                    />
+            </div>
+
+        </div>
+
+    </div>
+    <div class="grid grid-cols-5">
+       
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 6: Await Judgement Day
+            </h1>
+            <p class="font-mono">
+                
+                Get ready for the big reveal! Our judges will meticulously review each submission. Stay tuned for the results on Discord and our website on November 31st. Best of luck to everyone!
+                <br>
+                Standout projects earn a prime spot on our documentation site. Who knows, your creation might even star in a blog post, showcasing your journey. And, the cherry on top? The first-place winner walks away with a fabulous 500 GBP prize! 🏆
+                
+            </p>
+            
+            <div class="flex gap-4 justify-center sm:justify-start mt-2">
+                <LinkButton
+                    type="secondary-mono"
+                    href=""
+                    label="See itinerary"
+                />
+        </div>
+        </div>
+        <div class="col-span-2 px-4">
+            <Image src={ShoeDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
     </div>
     </section>
 </ProductHome>
