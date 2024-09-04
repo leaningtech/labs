@@ -6,7 +6,7 @@ description: |
 authors:
   - yuri
 pubDate: "April 11 2019"
-heroImage: "./cfg-irreducible-fixed.webp"
+heroImage: "./cfg-bn.png"
 tags:
   - Cheerp
 ---
