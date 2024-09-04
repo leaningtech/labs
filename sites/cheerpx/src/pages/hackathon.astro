@@ -3,41 +3,147 @@ import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { Image } from "astro:assets";
 import HeroDoodle from "../assets/hero_illustration.png";
+import CatboxDoodle from "../assets/cat-box.png";
+import KeyboardcatDoodle from "../assets/keyboard-cat.png";
+import TicketDoodle from "../assets/ticket.png";
 ---
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-black">
     <section>
         <div
         class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
     >
-        <div class="mx-auto max-w-[56em] text-center space-y-12 sm:px-8">
+        <div class="col-span-2 mx-auto max-w-[56em] text-center space-y-8 sm:px-8">
             <h1
-                class="font-mono text-white text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold my-4 text-center sm:text-left text-wrap"
+                class="font-mono text-white text-2xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold  text-center sm:text-left  text-wrap text-balance"
             >
-                The browser terminal tools challenge!
+                The <span class="text-[#e2bace]">browser</span> terminal tools challenge!
             </h1>
-            <p class="font-mono text-xl text-balance text-white text-center sm:text-left ">11th - 14th October, 2024</p>
-            <p class=" font-mono text-md text-balance text-white text-center sm:text-left">
-                WebVM: the hackathon; is a hybrid event that all developers can join!<b
-                    > The challenge consists on creating terminal-based solutions using CheerpX, a tool for client-side execution of x86 binaries</b
-                > on the browser.
+            <p class="font-mono text-xl text-balance text-[#e2bace] text-center sm:text-left ">11th - 14th October, 2024</p>
+            <p class=" font-mono text-md text-wrap text-balance text-white text-center sm:text-left">
+                <b>WebVM: the hackathon</b>, a global hybrid event open to all developers! Dive into the world of terminal-based solutions by leveraging <b>CheerpX, a WebAssembly-powered tool for executing x86 binaries on the browser.</b> Let your creativity flow and showcase your coding skills in this exciting event.
             </p>
             <div class="flex gap-4 justify-center sm:justify-start mt-12">
                 <LinkButton
-                    type="primary-cheerpx"
+                    type="primary-mono"
                     href="https://webvm.io/"
                     label="Register"
                 />
                 <LinkButton
-                    type="secondary-cheerpx"
+                    type="secondary-mono"
                     href="/docs/getting-started"
                     iconRight="mi:arrow-right"
                     label="Learn more"
                 />
             </div>
         </div>
-        <div class="hidden md:block flex justify-center 2xl:pl-56">
+        <div class="hidden md:block flex justify-center 2xl:pl-18">
             <Image src={HeroDoodle} alt="Cheerp Logo in a cube" class="" />
         </div>
+    </div>
+    </section>
+    <section class="py-16 px-4  md:px-8  lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]">
+        <div class="px-8">
+            <h1 class="pb-4 font-bold text-black font-mono text-3xl text-center">How Does it all work?
+               
+            </h1>
+            <p class="font-mono text-xl text-black text-pretty text-center">In a nutshell: assemble your tech squad together, immerse yourself in a tech project frenzy for a whole weekend. <b>The winner team gets a sweet 500 GBP!</b>
+                And just in case you need more guidance, here's a detailed walkthrough explained using adorable cats 🐱💻🚀.
+            </p>
+        </div>
+    </section>
+    <section class="py-16 px-4  md:px-8  lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black">
+    <div class="grid grid-cols-5 py-8">
+        <div class="col-span-2 px-4">
+            <Image src={CatboxDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 1: Find your squad
+            </h1>
+            
+            <p class="font-mono">
+                    Gather your friends and colleagues, and get ready to dive into the challenge. <span class="italic font-bold">Teams can range from 2 to 5 members.</span>
+                <br>
+                    Are you a lone coder flying solo? No worries! Connect with potential team members in our Discord server or on-site during the opening day!
+               
+                
+                    Ptss, pro-tip: Enrich your squad by bringing in folks with diverse skill sets such as programming, UX, graphic design, front-end, and more!
+
+              
+                </p>
+
+        </div>
+
+    </div>
+    <div class="grid grid-cols-5">
+       
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 2: Registration time is here!
+            </h1>
+            <p class="font-mono">
+                
+                To sign up your team, head over to the <a href="" class="italic font-bold text-[#e2bace] hover:underline">registration</a> channel in our Discord Server and drop us a message with the following details:
+
+            </p>
+            <ul class="list-disc list-inside font-mono text-pretty">
+                <li>
+                    Team name
+
+                </li>
+                <li>
+                    Team leader: Discord username (tag it with @)
+
+                </li>
+                <li>
+                    Team members: Discord usernames (tag them with @) 
+                </li>
+            </ul>
+            <p class="font-mono">
+                <span class="font-bold italic">
+                    Registrations are now open and will close on Friday 11th 17:00 UK time. 
+                </span>
+                <br> 
+                 Once we get your message, we'll shoot back a confirmation and set up your own exclusive text and voice channels! Let the games begin! 🚀🎮
+                
+            </p>
+            <div class="flex gap-4 justify-center sm:justify-start mt-2">
+                <LinkButton
+                    type="primary-mono"
+                    href=""
+                    label="Register"
+                />
+        </div>
+        </div>
+        <div class="col-span-2 px-4">
+            <Image src={KeyboardcatDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+    </div>
+    <div class="grid grid-cols-5 py-8">
+        <div class="col-span-2 px-4">
+            <Image src={TicketDoodle} alt="Cheerp Logo in a cube" class="" />
+        </div>
+        <div class="col-span-3">
+            <h1 class="font-bold text-2xl font-mono">
+                Step 3: Secure your spot at the venue
+            </h1>
+            
+            <p class="font-mono">
+                This event offers a hybrid experience - you can fully engage online or, if you fancy, join us at one of our two vibrant in-person locations in Amsterdam, NL, or Leeds, UK.
+                <br>
+                To snag your spot, each attendee should grab a free individual ticket on Eventbrite. Remember, space is limited, so if you reserve, be sure to show up!
+            </p>
+            
+            <div class="flex gap-4 justify-center sm:justify-start mt-2">
+                    <LinkButton
+                        type="primary-mono"
+                        href="https://webvm.io/"
+                        label="Get tickets"
+                    />
+            </div>
+
+        </div>
+
     </div>
     </section>
 </ProductHome>
