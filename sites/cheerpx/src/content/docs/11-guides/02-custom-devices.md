@@ -54,23 +54,23 @@ For example, if you're using Vite, put the `ext2` file in the `public` directory
 
 ## 6. Add the image as a CheerpX device
 
-Add the image to the `devices` array in the [`CheerpXApp.create`] options object.
+Add the image to the `devices` array in the [`CheerpX.Linux.create`] options object.
 
 For example, if the image was available at `/image.ext2`, you would add the following to your HTML:
 
-```js {3-7}
-const cx = await CheerpXApp.create({
-	devices: [
-		{
-			name: "block1",
-			type: "bytes",
-			url: "/image.ext2",
-		},
-	],
-	mounts: [{ type: "ext2", dev: "block1", path: "/" }],
+```js {2-5}
+// Create an overlay device with the ext2 image and a backing IndexedDB device
+const overlayDevice = await CheerpX.OverlayDevice.create(
+	await CheerpX.HttpBytesDevice.create("/image.ext2"),
+	await CheerpX.IDBDevice.create("block1"),
+);
+
+// Initialize CheerpX with the overlay device
+const cx = await CheerpX.Linux.create({
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });
 ```
 
 Make sure to use `type: "bytes"` when hosting your own images.
 
-[`CheerpXApp.create`]: /docs/reference/CheerpXApp-create
+[`CheerpX.Linux.create`]: /docs/reference/CheerpX-Linux-create

@@ -1,0 +1,159 @@
+---
+title: CheerpX.Linux.create
+description: Create a CheerpX application instance
+---
+
+```ts
+namespace CheerpX {
+	class Linux {
+		static async create(options?: {
+			mounts?: MountPointConfiguration[];
+			networkInterface?: NetworkInterface;
+			activityInterface?: ActivityInterface;
+			bridgeURL?: string;
+		}): Promise<CheerpX.Linux>;
+	}
+}
+
+interface MountPointConfiguration {
+	type: "ext2" | "tree" | "devs" | "proc";
+	// Specifies the filesystem type
+	// 'ext2' for Linux ext2
+	// 'tree' for a hierarchical file system
+	// 'devs' for device files
+	// 'proc' for process info files.
+	name: string; // A unique identifier for the mount configuration.
+	path: string; // First mount must be "/" (root)
+	dev: string; // overlayDevice / webDevice / dataDevice / idbDevice
+}
+
+interface NetworkInterface {
+	authKey?: string;
+	controlUrl?: string;
+	loginUrlCb?: (url: string) => void;
+	stateUpdateCb?: (state: number) => void;
+	netmapUpdateCb?: (map: any) => void;
+}
+
+interface ActivityInterface {
+	cpu?: (state: "ready" | "wait") => void;
+	// Callback for CPU state changes:
+	//'ready' when CPU is active, 'wait' when idle.
+	dev?: (state: "ready" | "wait") => void;
+	// Callback for device state changes:
+	//'ready' when device is active, 'wait' when idle.
+}
+```
+
+## Parameters
+
+- **options (`object`, _optional_)** - Used to configure different settings of the CheerpX Linux environment. This object may include settings for mounts, network interfaces, and other features, structured as `{ option: "value" }`.
+
+## Returns
+
+`CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use.
+
+## Options
+
+A description of each `CheerpX.Linux.create` option with brief examples are given below.
+
+### `mounts`
+
+```ts
+mounts?: MountPointConfiguration[];
+```
+
+This option configures the filesystems that will be available in the CheerpX environment. Each mount point configures a device and specifies where it should be accessible within the virtual filesystem.
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: [
+		{ type: "ext2", path: "/", dev: overlayDevice },
+		{ type: "tree", path: "/app", dev: webDevice },
+	],
+});
+```
+
+### `networkInterface`
+
+```ts
+networkInterface?: NetworkInterface;
+```
+
+This option configures network settings, which allows CheerpX to communicate over networks.
+
+### `activityInterface`
+
+```ts
+activityInterface?: ActivityInterface;
+```
+
+This option allows monitoring of CPU and device activity within CheerpX, useful for handling state changes and resource management.
+
+### `bridgeURL`
+
+```ts
+bridgeURL?: string;
+```
+
+This option specifies the URL of a bridge server for communication between the CheerpX environment and external servers.
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	bridgeURL: "https://yourbridgeurl.com/api",
+});
+```
+
+### Device Options for `overlayDevice`
+
+CheerpX supports various types of devices that can be configured as overlayDevice. Here’s how you can create them:
+
+- HttpBytesDevice: bytes - Loads filesystem images via HTTP.
+- CloudDevice: block - Integrates with cloud storage solutions.
+- GitHubDevice: split - Loads files directly from GitHub repositories.
+- IDBDevice: Creates a persistent storage device using IndexedDB.
+- OverlayDevice: Combines multiple devices into a single filesystem.
+
+Example:
+
+```js
+const overlayDevice = await CheerpX.OverlayDevice.create(
+	await CheerpX.HttpBytesDevice.create("https://yourserver.com/image.ext2"),
+	await CheerpX.IDBDevice.create("block1"),
+);
+```
+
+### Using `IDBDevice` in Mounts
+
+`CheerpX.IDBDevice` allows you to create a persistent storage device that can be mounted and accessed like a filesystem within the CheerpX environment.
+
+Example:
+
+```js
+const idbDevice = await CheerpX.IDBDevice.create("dbName");
+
+const cx = await CheerpX.Linux.create({
+	mounts: [{ type: "tree", path: "/files", dev: idbDevice }],
+});
+```
+
+This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
+
+### `dataDevice.writeFile`
+
+CheerpX also provides a method to write data to files within the mounted devices. This utility is limited to creating or updating files at the root level. Note that this feature is still subject to review.
+
+Example:
+
+```js
+const dataDevice = await CheerpX.DataDevice.create();
+await dataDevice.writeFile("/filename", "contents");
+```
+
+This command writes "contents" to a file named "filename" at the root of dataDevice. Currently, it does not support creating subdirectories or modifying existing files in subdirectories.
+
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
