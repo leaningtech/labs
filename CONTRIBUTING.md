@@ -1,1 +1,1 @@
-src/content/docs/CONTRIBUTING.md
+sites/labs/src/content/docs/CONTRIBUTING.md
