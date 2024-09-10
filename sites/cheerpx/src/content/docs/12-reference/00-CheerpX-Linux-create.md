@@ -16,15 +16,19 @@ namespace CheerpX {
 }
 
 interface MountPointConfiguration {
-	type: "ext2" | "tree" | "devs" | "proc";
 	// Specifies the filesystem type
 	// 'ext2' for Linux ext2
 	// 'tree' for a hierarchical file system
 	// 'devs' for device files
 	// 'proc' for process info files.
-	name: string; // A unique identifier for the mount configuration.
-	path: string; // First mount must be "/" (root)
-	dev: string; // overlayDevice / webDevice / dataDevice / idbDevice
+	type: "ext2" | "tree" | "devs" | "proc";
+
+	// A unique identifier for the mount configuration.
+	name: string;
+	// First mount must be "/" (root)
+	path: string;
+	// overlayDevice / webDevice / dataDevice / idbDevice
+	dev: string;
 }
 
 interface NetworkInterface {
@@ -36,12 +40,13 @@ interface NetworkInterface {
 }
 
 interface ActivityInterface {
-	cpu?: (state: "ready" | "wait") => void;
 	// Callback for CPU state changes:
 	//'ready' when CPU is active, 'wait' when idle.
-	dev?: (state: "ready" | "wait") => void;
+	cpu?: (state: "ready" | "wait") => void;
+
 	// Callback for device state changes:
 	//'ready' when device is active, 'wait' when idle.
+	dev?: (state: "ready" | "wait") => void;
 }
 ```
 
@@ -108,17 +113,16 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-### Device Options for `overlayDevice`
+### Device Configuration Options for CheerpX
 
 CheerpX supports various types of devices that can be configured as overlayDevice. Here’s how you can create them:
 
-- HttpBytesDevice: bytes - Loads filesystem images via HTTP.
-- CloudDevice: block - Integrates with cloud storage solutions.
-- GitHubDevice: split - Loads files directly from GitHub repositories.
-- IDBDevice: Creates a persistent storage device using IndexedDB.
-- OverlayDevice: Combines multiple devices into a single filesystem.
+- HttpBytesDevice (bytes): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
+- CloudDevice (block): Optimized for use with Cloudflare, enhancing performance and reliability through cloud storage solutions.
+- GitHubDevice (split): Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
+- IDBDevice: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
 
-Example:
+Example: Creating an Overlay Device
 
 ```js
 const overlayDevice = await CheerpX.OverlayDevice.create(
@@ -131,7 +135,7 @@ const overlayDevice = await CheerpX.OverlayDevice.create(
 
 `CheerpX.IDBDevice` allows you to create a persistent storage device that can be mounted and accessed like a filesystem within the CheerpX environment.
 
-Example:
+Example: Mounting IDBDevice
 
 ```js
 const idbDevice = await CheerpX.IDBDevice.create("dbName");

@@ -58,14 +58,12 @@ Add the image to the `devices` array in the [`CheerpX.Linux.create`] options obj
 
 For example, if the image was available at `/image.ext2`, you would add the following to your HTML:
 
-```js {2-5}
-// Create an overlay device with the ext2 image and a backing IndexedDB device
+```js
 const overlayDevice = await CheerpX.OverlayDevice.create(
 	await CheerpX.HttpBytesDevice.create("/image.ext2"),
 	await CheerpX.IDBDevice.create("block1"),
 );
 
-// Initialize CheerpX with the overlay device
 const cx = await CheerpX.Linux.create({
 	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });

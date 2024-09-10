@@ -25,14 +25,12 @@ namespace CheerpX {
 const cx = await CheerpX.Linux.create(/* ... */);
 
 const cxActivateFunc = cx.setActivateConsole((idx) => {
-	// Complete the VT activation
 	activateVt(idx);
 });
 
 const activateVt = (idx) => {
 	// Perform any additional front-end logic
-	console.log(`Activating VT ${idx}`);
-
+	// ...
 	// Call the function returned by setActivateConsole to complete the activation
 	cxActivateFunc(idx);
 };

@@ -19,7 +19,7 @@ CheerpX's API is still in the works, so we are not tagging releases yet. All [ni
 
 ## 2. Create an application instance
 
-To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpXApp-create) method, which is available globally once the script is included.
+To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX-Linux-create) method, which is available globally once the script is included.
 
 The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large)[^compat], but you can also [create your own images](/docs/guides/custom-devices).
 
@@ -64,7 +64,7 @@ During development, you don't need to set these headers if you're using `localho
 
 ## 4. Attach and interact with a console
 
-To be able to see the output printed by the program, use [`setConsole`](/docs/reference/CheerpXApp-setConsole) method to use an HTML element as a console.
+To be able to see the output printed by the program, use [`setConsole`](/docs/reference/CheerpX-Linux-setConsole) method to use an HTML element as a console.
 
 ```html {1,4}
 <pre id="console"></pre>
@@ -74,7 +74,7 @@ To be able to see the output printed by the program, use [`setConsole`](/docs/re
 </script>
 ```
 
-To be able to interact with the console, integrate with [xterm.js](https://xtermjs.org/) or similar software, and use [`setCustomConsole`](/docs/reference/CheerpXApp-setCustomConsole) method. The following example shows how this can be achieved using `xterm.js` in [WebVM](https://webvm.io).
+To be able to interact with the console, integrate with [xterm.js](https://xtermjs.org/) or similar software, and use [`setCustomConsole`](/docs/reference/CheerpX-Linux-setCustomConsole) method. The following example shows how this can be achieved using `xterm.js` in [WebVM](https://webvm.io).
 
 ```js
 const term = new Terminal({ convertEol: true });
@@ -96,7 +96,7 @@ term.onData((str) => {
 
 ## 5. Run an executable
 
-Now let's include this script inside a <script type="module"> tag to [`run`](/docs/reference/CheerpXApp-run) bash using CheerpX!
+Now let's include this script inside a <script type="module"> tag to [`run`](/docs/reference/CheerpX-Linux-run) bash using CheerpX!
 
 ```js
 await cx.run("/bin/bash", ["--login"], {

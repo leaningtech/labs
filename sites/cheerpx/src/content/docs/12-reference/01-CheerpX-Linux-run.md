@@ -36,7 +36,7 @@ namespace CheerpX {
 
 ## Example
 
-Let us try running a bash script
+Let us try running a bash script:
 
 ```js
 const result = await cx.run("/bin/bash", [
@@ -45,3 +45,5 @@ const result = await cx.run("/bin/bash", [
 ]);
 console.log("Bash script exit status:", result3.status);
 ```
+
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
