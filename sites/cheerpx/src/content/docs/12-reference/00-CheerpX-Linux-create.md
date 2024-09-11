@@ -156,7 +156,7 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 Example:
 
 ```js
-const webDevice = await CheerpX.WebDevice.create("/path/to/local/directory");
+const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
 	mounts: [{ type: "tree", path: "/app", dev: webDevice }],
@@ -183,7 +183,7 @@ This creates an in-memory filesystem mounted at `/data`.
 
 ### `dataDevice.writeFile`
 
-CheerpX provides a method to write data to new files within the mounted devices. This utility is limited to creating files at the root level of the device.
+`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
 
 ```js
 await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
