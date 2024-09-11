@@ -1,0 +1,73 @@
+---
+title: Packing the extension in Chrome
+description: Tutorial for packing the CheerpJ JNLP Runner Extension in Chrome for deployment
+---
+
+This tutorial will walk you through the steps to pack the CheerpJ JNLP Runner extension in Chrome, making it ready for distribution and deployment, particularly useful in enterprise environments like deploying through Group Policy Objects (GPOs).
+
+## Prerequisites
+
+- You have the unpacked extension files ready in a directory on your computer.
+- Google Chrome is installed on your system.
+
+## Step 1: Open Chrome Extensions Settings
+    
+Let us access the Chrome extensions settings by clicking the three dots in the upper-right corner of the Chrome browser, going to `Extensions` and then selecting `Manage Extensions`.
+
+<div>
+	![](/assets/manual-common-screenshots/chrome_nav_to_manage_extensions.png)
+</div>
+
+Alternatively, you can type `chrome://extensions/` in the address bar to go directly there.
+
+## Step 2: Enable Developer Mode
+
+Let us now toggle the `Developer mode` switch to enable it at the top-right of the Extensions page. This allows you to pack extensions.
+
+<div>
+	![](/assets/manual-common-screenshots/chrome-pack.png)
+</div>
+
+## Step 3: Pack the Extension
+
+Click on the "Pack extension" button that appears after enabling Developer mode. In the dialog that opens:
+
+1. Click "Browse" next to "Extension root directory" and select the folder containing your unpacked extension files.
+2. Leave the "Private key file" field empty.
+3. Click "Pack extension".
+
+<div class="mx-24">
+	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-select.png)
+</div>
+
+Click Pack extension - Chrome will create two files in the parent directory of your extension:
+     - A `.crx` file (the packed extension)
+     - A `.pem` file (the private key, if you didn't provide one)
+
+A dialog will appear confirming the location of these files:
+
+<div class="mx-24">
+	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-created.png)
+</div>
+
+## Step 4: Verify the Packed Extension
+
+To double check if it worked correctly, you can install the extension by navigating to the folder that contains the .crx file, and dragging it into the extension page to upload it.
+
+<div>
+	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-drag.png)
+</div>
+
+Click on `Add extension`:
+
+<div>
+	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-confirm.png)
+</div>
+
+Now you should see the extension has been successfully installed:
+
+<div>
+	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-success.png)
+</div>
+
+By following these steps, you will have successfully packed your CheerpJ JNLP Runner extension for Chrome, ready for deployment or testing.
