@@ -11,6 +11,8 @@ interface Props {
 		| "secondary-cheerp"
 		| "primary-cheerpx"
 		| "secondary-cheerpx"
+		| "primary-mono"
+		| "secondary-mono"
 		| "discord";
 	iconLeft?: string;
 	iconRight?: string;
@@ -37,6 +39,10 @@ const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 				type === "primary-cheerpx",
 			"border-white text-white hover:border-[#909090] hover:text-[#909090]":
 				type === "secondary-cheerpx",
+			"border-white bg-white text-black font-mono hover:bg-[#e2bace] hover:text-white hover:border-[#e2bace]":
+				type === "primary-mono",
+			"border-white text-white font-mono hover:border-[#e2bace] hover:text-[#e2bace]":
+				type === "secondary-mono",
 			"border-white border-opacity-30 bg-blurple text-white hover:border-opacity-80":
 				type === "discord",
 		},
