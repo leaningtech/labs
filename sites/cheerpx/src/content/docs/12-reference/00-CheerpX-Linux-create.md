@@ -23,12 +23,10 @@ interface MountPointConfiguration {
 	// 'proc' for process info files.
 	type: "ext2" | "tree" | "devs" | "proc";
 
-	// A unique identifier for the mount configuration.
-	name: string;
 	// First mount must be "/" (root)
 	path: string;
-	// overlayDevice / webDevice / dataDevice / idbDevice
-	dev: string;
+	// Can be one of: overlayDevice / webDevice / dataDevice / idbDevice
+	dev: CheerpX.Device;
 }
 
 interface NetworkInterface {
@@ -131,11 +129,15 @@ const overlayDevice = await CheerpX.OverlayDevice.create(
 );
 ```
 
-### Using `IDBDevice` in Mounts
+### Using Different Device Types in Mounts
 
-`CheerpX.IDBDevice` allows you to create a persistent storage device that can be mounted and accessed like a filesystem within the CheerpX environment.
+CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment.
 
-Example: Mounting IDBDevice
+#### IDBDevice
+
+`CheerpX.IDBDevice` allows you to create a persistent storage device backed by IndexedDB.
+
+Example:
 
 ```js
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
@@ -147,9 +149,54 @@ const cx = await CheerpX.Linux.create({
 
 This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
+#### WebDevice
+
+`CheerpX.WebDevice` allows you to mount a directory from your local server.
+
+Example:
+
+```js
+const webDevice = await CheerpX.WebDevice.create("/path/to/local/directory");
+
+const cx = await CheerpX.Linux.create({
+	mounts: [{ type: "tree", path: "/app", dev: webDevice }],
+});
+```
+
+This mounts the specified local directory at `/app` in the CheerpX environment.
+
+#### DataDevice
+
+`CheerpX.DataDevice` provides a simple in-memory filesystem.
+
+Example:
+
+```js
+const dataDevice = await CheerpX.DataDevice.create();
+
+const cx = await CheerpX.Linux.create({
+	mounts: [{ type: "tree", path: "/data", dev: dataDevice }],
+});
+```
+
+This creates an in-memory filesystem mounted at `/data`.
+
 ### `dataDevice.writeFile`
 
-CheerpX also provides a method to write data to files within the mounted devices. This utility is limited to creating or updating files at the root level. Note that this feature is still subject to review.
+CheerpX provides a method to write data to new files within the mounted devices. This utility is limited to creating files at the root level of the device.
+
+```js
+await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
+```
+
+**Parameters**:
+
+- **filename**: A string representing the absolute path to the file, starting with a `/` (e.g., "/filename").
+- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
+
+**Returns**:
+
+The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
 
 Example:
 
@@ -158,6 +205,9 @@ const dataDevice = await CheerpX.DataDevice.create();
 await dataDevice.writeFile("/filename", "contents");
 ```
 
-This command writes "contents" to a file named "filename" at the root of dataDevice. Currently, it does not support creating subdirectories or modifying existing files in subdirectories.
+Note:
+
+- This is the only way to create files in this device.
+- Modifying existing files or creating files in subdirectories is not possible.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

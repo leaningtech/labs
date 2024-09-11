@@ -52,11 +52,11 @@ Make sure the `ext2` file is available on your web server so that CheerpX can ac
 
 For example, if you're using Vite, put the `ext2` file in the `public` directory.
 
-## 6. Add the image as a CheerpX device
+## 6. Create a device and mount it in CheerpX
 
-Add the image to the `devices` array in the [`CheerpX.Linux.create`] options object.
+Create a device based on the image and mount it when creating a CheerpX.Linux instance.
 
-For example, if the image was available at `/image.ext2`, you would add the following to your HTML:
+For example, if the image was available at `/image.ext2`, you would add the following to your JavaScript:
 
 ```js
 const overlayDevice = await CheerpX.OverlayDevice.create(
@@ -69,6 +69,6 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-Make sure to use `type: "bytes"` when hosting your own images.
+Make sure to use `CheerpX.HttpBytesDevice.create()` when hosting your own images.
 
 [`CheerpX.Linux.create`]: /docs/reference/CheerpX-Linux-create
