@@ -1,9 +1,9 @@
 ---
 title: Packing the extension in Chrome
-description: Tutorial for packing the CheerpJ JNLP Runner Extension in Chrome for deployment
+description: Tutorial for packing the CheerpJ Applet Runner Extension in Chrome for deployment
 ---
 
-This tutorial will walk you through the steps to pack the CheerpJ JNLP Runner extension in Chrome, making it ready for distribution and deployment, particularly useful in enterprise environments like deploying through Group Policy Objects (GPOs).
+This tutorial will walk you through the steps to pack the CheerpJ Applet Runner extension in Chrome, making it ready for distribution and deployment, particularly useful in enterprise environments like deploying through Group Policy Objects (GPOs).
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Click on the "Pack extension" button that appears after enabling Developer mode.
 3. Click "Pack extension".
 
 <div class="mx-24">
-	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-select.png)
+	![](/assets/chrome-applet-pack-screenshots/chrome-pack-applet-select.png)
 </div>
 
 Click Pack extension - Chrome will create two files in the parent directory of your extension: - A `.crx` file (the packed extension) - A `.pem` file (the private key, if you didn't provide one)
@@ -43,25 +43,27 @@ Click Pack extension - Chrome will create two files in the parent directory of y
 A dialog will appear confirming the location of these files:
 
 <div class="mx-24">
-	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-created.png)
+	![](/assets/chrome-applet-pack-screenshots/chrome-pack-applet-created.png)
 </div>
 
 ## Step 4: Verify the Packed Extension
 
 To double check if it worked correctly, you can install the extension by navigating to the folder that contains the .crx file, and dragging it into the extension page to upload it.
 
-<div>![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-drag.png)</div>
+<div>
+	![](/assets/chrome-applet-pack-screenshots/chrome-pack-applet-drag.png)
+</div>
 
 Click on `Add extension`:
 
 <div>
-	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-confirm.png)
+	![](/assets/chrome-applet-pack-screenshots/chrome-pack-applet-confirm.png)
 </div>
 
 Now you should see the extension has been successfully installed:
 
 <div>
-	![](/assets/chrome-jnlp-pack-screenshots/chrome-pack-jnlp-success.png)
+	![](/assets/chrome-applet-pack-screenshots/chrome-pack-applet-success.png)
 </div>
 
-By following these steps, you will have successfully packed your CheerpJ JNLP Runner extension for Chrome, ready for deployment or testing.
+By following these steps, you will have successfully packed your CheerpJ Applet Runner extension for Chrome, ready for deployment or testing.
