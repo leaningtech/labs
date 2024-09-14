@@ -1,0 +1,66 @@
+---
+title: Packing the extension in Edge
+description: Tutorial for packing the CheerpJ JNLP Runner Extension in Edge for deployment
+---
+
+This tutorial will walk you through the steps to pack the CheerpJ JNLP Runner extension in Edge, making it ready for distribution and deployment, particularly useful in enterprise environments like deploying through Group Policy Objects (GPOs).
+
+## Prerequisites
+
+- You have the unpacked extension files ready in a directory on your computer.
+- Microsoft Edge is installed on your system.
+
+## Step 1: Open Edge Extensions Settings
+
+Let us access the Edge extensions settings by clicking the three dots in the upper-right corner of the Edge browser, going to `Extensions` and then selecting `Manage extensions`.
+
+<div>
+	![](/assets/manual-common-screenshots/edge_nav_to_manage_extensions.png)
+</div>
+<div>
+	![](/assets/manual-common-screenshots/edge_nav_to_manage_extensions2.png)
+</div>
+
+Alternatively, you can type `edge://extensions/` in the address bar to go directly there.
+
+## Step 2: Enable Developer Mode
+
+Let us now toggle the `Developer mode` switch to enable it at the bottom-left of the Extensions page. This allows you to pack extensions.
+
+<div>![](/assets/manual-common-screenshots/edge-pack.png)</div>
+
+## Step 3: Pack the Extension
+
+Click on the "Pack extension" button that appears after enabling Developer mode. In the dialog that opens:
+
+1. Click "Browse" next to "Extension root directory" and select the folder containing your unpacked extension files.
+2. Leave the "Private key file" field empty.
+3. Click "Pack extension".
+
+<div class="mx-24">
+	![](/assets/edge-jnlp-pack-screenshots/edge-pack-jnlp-select.png)
+</div>
+
+Edge will create two files in the parent directory of your extension: - A `.crx` file (the packed extension) - A `.pem` file (the private key, if you didn't provide one)
+
+A dialog will appear confirming the location of these files:
+
+<div class="mx-24">
+	![](/assets/edge-jnlp-pack-screenshots/edge-pack-jnlp-created.png)
+</div>
+
+## Step 4: Verify the Packed Extension
+
+To double check if it worked correctly, you can install the extension by navigating to the folder that contains the .crx file, and dragging it into the extension page to upload it.
+
+<div>![](/assets/edge-jnlp-pack-screenshots/edge-pack-jnlp-drag.png)</div>
+
+Click on `Add extension`:
+
+<div>![](/assets/edge-jnlp-pack-screenshots/edge-pack-jnlp-confirm.png)</div>
+
+Now you should see the extension has been successfully installed:
+
+<div>![](/assets/edge-jnlp-pack-screenshots/edge-pack-jnlp-success.png)</div>
+
+By following these steps, you will have successfully packed your CheerpJ JNLP Runner extension for Edge, ready for deployment or testing.
