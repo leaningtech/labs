@@ -38,7 +38,10 @@ Click **Run workflow** and fill out the form:
 
 Then click the **Run workflow** button.
 
-![Screenshot of the GitHub user interface](/cheerpx/guides/create-images/run-workflow.png)
+<div class="mx-48">
+	![Screenshot of the GitHub user
+	interface](/cheerpx/guides/create-images/run-workflow.png)
+</div>
 
 The workflow may take up to 10 minutes to complete depending on the complexity of your Dockerfile.
 
@@ -52,25 +55,23 @@ Make sure the `ext2` file is available on your web server so that CheerpX can ac
 
 For example, if you're using Vite, put the `ext2` file in the `public` directory.
 
-## 6. Add the image as a CheerpX device
+## 6. Create a device and mount it in CheerpX
 
-Add the image to the `devices` array in the [`CheerpXApp.create`] options object.
+Create a device based on the image and mount it when creating a CheerpX.Linux instance.
 
-For example, if the image was available at `/image.ext2`, you would add the following to your HTML:
+For example, if the image was available at `/image.ext2`, you would add the following to your JavaScript:
 
-```js {3-7}
-const cx = await CheerpXApp.create({
-	devices: [
-		{
-			name: "block1",
-			type: "bytes",
-			url: "/image.ext2",
-		},
-	],
-	mounts: [{ type: "ext2", dev: "block1", path: "/" }],
+```js
+const overlayDevice = await CheerpX.OverlayDevice.create(
+	await CheerpX.HttpBytesDevice.create("/image.ext2"),
+	await CheerpX.IDBDevice.create("block1"),
+);
+
+const cx = await CheerpX.Linux.create({
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });
 ```
 
-Make sure to use `type: "bytes"` when hosting your own images.
+Make sure to use `CheerpX.HttpBytesDevice.create()` when hosting your own images.
 
-[`CheerpXApp.create`]: /docs/reference/CheerpXApp-create
+[`CheerpX.Linux.create`]: /docs/reference/CheerpX-Linux-create

@@ -1,20 +1,29 @@
 ---
-title: CheerpXApp#setCustomConsole
+title: CheerpX.Linux#setCustomConsole
+description: Configure custom console behavior for handling keyboard input and output display
 ---
 
 ```ts
-class CheerpXApp {
-	setCustomConsole(
-		writeFunc: (buf: Buffer) => void,
-		cols: number,
-		rows: number,
-	): (keyCode: number) => void;
+namespace CheerpX {
+	class Linux {
+		setCustomConsole(
+			writeFunc: (buf: Buffer) => void,
+			cols: number,
+			rows: number,
+		): (keyCode: number) => void;
+	}
 }
 ```
 
+## Parameters
+
+- **writeFunc (`(buf: Buffer) => void`)** - Function to handle the output sent to the console.
+- **cols (`number`)** - Number of columns for the console.
+- **rows (`number`)** - Number of rows for the console.
+
 ## Returns
 
-`setCustomConsole` returns a function that you can use to send individual keypresses to the console, as if a user typed them.
+`setCustomConsole` returns a function that receives key codes to simulate user typing in the console.
 
 ## Examples
 
@@ -63,4 +72,4 @@ This is what [WebVM](https://webvm.io) uses.
 
 ## See also
 
-- [`setConsole`](/docs/reference/CheerpXApp-setConsole)
+- [`setConsole`](/docs/reference/CheerpX-Linux-setConsole)
