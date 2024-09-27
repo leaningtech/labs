@@ -18,10 +18,10 @@ namespace CheerpX {
 interface MountPointConfiguration {
 	// Specifies the filesystem type
 	// 'ext2' for Linux ext2
-	// 'tree' for a hierarchical file system
+	// 'dir' for a hierarchical file system
 	// 'devs' for device files
 	// 'proc' for process info files.
-	type: "ext2" | "tree" | "devs" | "proc";
+	type: "ext2" | "dir" | "devs" | "proc";
 
 	// First mount must be "/" (root)
 	path: string;
@@ -74,7 +74,7 @@ Example:
 const cx = await CheerpX.Linux.create({
 	mounts: [
 		{ type: "ext2", path: "/", dev: overlayDevice },
-		{ type: "tree", path: "/app", dev: webDevice },
+		{ type: "dir", path: "/app", dev: webDevice },
 	],
 });
 ```
@@ -143,7 +143,7 @@ Example:
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "tree", path: "/files", dev: idbDevice }],
+	mounts: [{ type: "dir", path: "/files", dev: idbDevice }],
 });
 ```
 
@@ -159,7 +159,7 @@ Example:
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "tree", path: "/app", dev: webDevice }],
+	mounts: [{ type: "dir", path: "/app", dev: webDevice }],
 });
 ```
 
@@ -175,7 +175,7 @@ Example:
 const dataDevice = await CheerpX.DataDevice.create();
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "tree", path: "/data", dev: dataDevice }],
+	mounts: [{ type: "dir", path: "/data", dev: dataDevice }],
 });
 ```
 
