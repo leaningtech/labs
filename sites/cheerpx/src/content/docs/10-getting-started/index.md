@@ -15,6 +15,9 @@ No installation is needed. Simply include CheerpX by adding the following script
 <script src="%CHEERPX_LATEST%"></script>
 ```
 
+> [!note]
+> When you hover the mouse pointer over the code, a ‘copy to clipboard’ button appears on the right. Please do NOT click on this button as it may cause the copied content to become `src="%CHEERPX_LATEST%"`. Please copy the line of code manually.
+
 CheerpX's API is still in the works, so we are not tagging releases yet. All [nightly builds](https://t2informatik.de/en/smartpedia/nightly-build/) are immutable so you can trust that the URL above will not break.
 
 ## 2. Create an application instance
