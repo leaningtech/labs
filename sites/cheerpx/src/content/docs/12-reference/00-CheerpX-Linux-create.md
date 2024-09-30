@@ -9,7 +9,6 @@ namespace CheerpX {
 		static async create(options?: {
 			mounts?: MountPointConfiguration[];
 			networkInterface?: NetworkInterface;
-			activityInterface?: ActivityInterface;
 			bridgeURL?: string;
 		}): Promise<CheerpX.Linux>;
 	}
@@ -36,16 +35,6 @@ interface NetworkInterface {
 	stateUpdateCb?: (state: number) => void;
 	netmapUpdateCb?: (map: any) => void;
 }
-
-interface ActivityInterface {
-	// Callback for CPU state changes:
-	//'ready' when CPU is active, 'wait' when idle.
-	cpu?: (state: "ready" | "wait") => void;
-
-	// Callback for device state changes:
-	//'ready' when device is active, 'wait' when idle.
-	dev?: (state: "ready" | "wait") => void;
-}
 ```
 
 ## Parameters
@@ -54,7 +43,7 @@ interface ActivityInterface {
 
 ## Returns
 
-`CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use.
+`CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use. The resolved value is a `CheerpX.Linux` instance that provides methods for interacting with the CheerpX environment.
 
 ## Options
 
@@ -86,14 +75,6 @@ networkInterface?: NetworkInterface;
 ```
 
 This option configures network settings, which allows CheerpX to communicate over networks.
-
-### `activityInterface`
-
-```ts
-activityInterface?: ActivityInterface;
-```
-
-This option allows monitoring of CPU and device activity within CheerpX, useful for handling state changes and resource management.
 
 ### `bridgeURL`
 
@@ -209,5 +190,62 @@ Note:
 
 - This is the only way to create files in this device.
 - Modifying existing files or creating files in subdirectories is not possible.
+
+## Activity Callbacks
+
+The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity.
+
+### `registerCallback`
+
+```ts
+registerCallback(eventName: string, callback: (state: string) => void): void
+```
+
+Registers a callback function for a specific event type.
+
+**Parameters**:
+
+- **eventName**: A string specifying the event type. Can be either "cpuActivity" or "diskActivity".
+- **callback**: A function that will be called when the event occurs. It receives a `state` parameter which can be either "ready" (active) or "wait" (idle).
+
+### `unregisterCallback`
+
+```ts
+unregisterCallback(eventName: string, callback: (state: string) => void): void
+```
+
+Unregisters a previously registered callback function for a specific event type.
+
+**Parameters**:
+
+- **eventName**: A string specifying the event type. Can be either "cpuActivity" or "diskActivity".
+- **callback**: The function to be unregistered.
+
+Example usage:
+
+```js
+function hddCallback(state) {
+	var h = document.getElementById("hddactivity");
+	if (state == "ready") h.textContent = "\u{1F7E2}";
+	else h.textContent = "\u{1F7E0}";
+}
+
+function cpuCallback(state) {
+	var h = document.getElementById("cpuactivity");
+	if (state == "ready") h.textContent = "\u{1F7E2}";
+	else h.textContent = "\u{1F7E0}";
+}
+
+const cx = await CheerpX.Linux.create(/* options */);
+
+cx.registerCallback("cpuActivity", cpuCallback);
+cx.registerCallback("diskActivity", diskCallback);
+
+// Later, if needed:
+// cx.unregisterCallback("cpuActivity", cpuCallback);
+// cx.unregisterCallback("diskActivity", diskCallback);
+```
+
+This example demonstrates how to register callbacks for CPU and disk activity, updating UI elements based on the activity state.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
