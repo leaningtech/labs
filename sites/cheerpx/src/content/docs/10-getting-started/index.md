@@ -37,8 +37,8 @@ The example below demonstrates how to set up the file system and devices using [
 	const cx = await CheerpX.Linux.create({
 		mounts: [
 			{ type: "ext2", path: "/", dev: overlayDevice },
-			{ type: "tree", path: "/app", dev: webDevice },
-			{ type: "tree", path: "/data", dev: dataDevice },
+			{ type: "dir", path: "/app", dev: webDevice },
+			{ type: "dir", path: "/data", dev: dataDevice },
 			{ type: "devs", path: "/dev" },
 		],
 	});
