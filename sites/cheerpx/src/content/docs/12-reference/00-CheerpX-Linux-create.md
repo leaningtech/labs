@@ -94,10 +94,9 @@ const cx = await CheerpX.Linux.create({
 
 ### Device Configuration Options for CheerpX
 
-CheerpX supports various types of devices that can be configured as overlayDevice. Here’s how you can create them:
+CheerpX supports various types of devices that can be configured as overlayDevice. Here's how you can create them:
 
 - HttpBytesDevice (bytes): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-- CloudDevice (block): Optimized for use with Cloudflare, enhancing performance and reliability through cloud storage solutions.
 - GitHubDevice (split): Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
 - IDBDevice: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
 
