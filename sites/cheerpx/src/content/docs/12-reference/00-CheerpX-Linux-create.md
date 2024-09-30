@@ -9,7 +9,6 @@ namespace CheerpX {
 		static async create(options?: {
 			mounts?: MountPointConfiguration[];
 			networkInterface?: NetworkInterface;
-			bridgeURL?: string;
 		}): Promise<CheerpX.Linux>;
 	}
 }
@@ -75,22 +74,6 @@ networkInterface?: NetworkInterface;
 ```
 
 This option configures network settings, which allows CheerpX to communicate over networks.
-
-### `bridgeURL`
-
-```ts
-bridgeURL?: string;
-```
-
-This option specifies the URL of a bridge server for communication between the CheerpX environment and external servers.
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	bridgeURL: "https://yourbridgeurl.com/api",
-});
-```
 
 ### Device Configuration Options for CheerpX
 
