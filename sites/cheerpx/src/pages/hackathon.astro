@@ -11,6 +11,10 @@ import ShoeDoodle from "../assets/bishop-shoe.png";
 import WizardDoodle from "../assets/wizard-cat.png";
 import CalendarAsset from "../assets/calendar.png";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
+import Alessandro from "../assets/judges/alessandro.jpeg";
+import Jules from "../assets/judges/jules.jpeg";
+import Martin from "../assets/judges/martin.jpeg";
+import Luca from "../assets/judges/luca.jpeg";
 ---
 
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-black">
@@ -51,12 +55,17 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					event.
 				</p>
 				<div class="flex gap-4 justify-center sm:justify-start mt-12">
-					<LinkButton type="primary-mono" href="#guide" label="Register" />
+					<LinkButton
+						type="primary-mono"
+						href="#guide"
+						label="Register"
+						iconRight="mdi:register"
+					/>
 					<LinkButton
 						type="secondary-mono"
 						href="/docs"
-						iconRight="mi:arrow-right"
-						label="Learn CheerpX"
+						iconRight=""
+						label="CheerpX docs"
 					/>
 				</div>
 			</div>
@@ -76,553 +85,6 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					>Codam Coding College</a
 				>.
 			</p>
-
-			<section
-				id="guide"
-				class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
-			>
-				<div class="px-8">
-					<h1
-						class="pb-4 font-bold text-black font-mono text-xl sm:text-2xl md:text-3xl text-center"
-					>
-						How Does it all work?
-					</h1>
-					<p
-						class="font-mono text-lg sm:text-xl text-black text-pretty text-center"
-					>
-						In a nutshell: assemble your tech squad together, immerse yourself
-						in a tech project frenzy for a whole weekend. <b
-							>The winner team gets a sweet 500 GBP!</b
-						>
-						And just in case you need more guidance, here's a detailed walkthrough
-						explained using adorable cats 🐱💻🚀.
-					</p>
-				</div>
-			</section>
-
-			<!-- Guide section -->
-			<section
-				class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
-			>
-				<!-- Step1: Find your squad -->
-				<div class="sm:grid sm:grid-cols-5 py-16">
-					<div class="col-span-2 flex justify-center items-center">
-						<Image
-							src={CatboxDoodle}
-							alt="Cats in a box"
-							class="max-w-96 px-16 md:px-8"
-						/>
-					</div>
-					<div
-						id="team"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 1: Find your squad
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							Gather your friends and colleagues, and get ready to dive into the
-							challenge. <span class="italic font-bold"
-								>Teams can range from 2 to 5 members.</span
-							>
-						</p>
-
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							Are you a lone coder flying solo? No worries! Connect with
-							potential team members in our Discord server or on-site during the
-							opening day! Ptss, pro-tip: Enrich your squad by bringing in folks
-							with diverse skill sets such as programming, UX, graphic design,
-							front-end, and more!
-						</p>
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="secondary-mono"
-								href={DISCORD_URL}
-								label="Join Discord"
-								iconRight="simple-icons:discord"
-							/>
-						</div>
-					</div>
-				</div>
-				<!-- Step 2: Registration -->
-				<div class="sm:grid grid-cols-5 py-6">
-					<div
-						class="sm:hidden col-span-2 flex justify-center items-center content-center"
-					>
-						<Image
-							src={KeyboardcatDoodle}
-							alt="cat typing"
-							class="max-w-96 px-16 md:px-8"
-						/>
-					</div>
-					<div
-						id="register"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 2: Registration time is here!
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							To sign up your team, head over to the <a
-								href=""
-								class="italic font-bold text-[#e2bace] hover:underline"
-								>registration</a
-							> channel in our Discord Server and drop us a message with the following
-							details:
-						</p>
-						<ul
-							class="list-disc list-inside font-mono text-pretty text-left text-sm sm:text-md 2xl:text-lg"
-						>
-							<li>Team name</li>
-							<li>Team leader: Discord username (tag it with @)</li>
-							<li>Team members: Discord usernames (tag them with @)</li>
-							<li>
-								Server channels: Do you want your own exclusive team's text and
-								voice channels in this server? (Yes/No)
-							</li>
-						</ul>
-						<p
-							class="font-mono text-sm sm:text-md 2xl:text-lg py-2 font-bold italic"
-						>
-							Registrations are now open and will close on Friday 11th of
-							October 17:00 UK time.
-						</p>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							Once we get your message, we'll shoot back a confirmation and set
-							up your own exclusive text and voice channels! Let the games
-							begin! 🚀🎮
-						</p>
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="primary-mono"
-								href="https://discord.com/channels/988743885121548329/1283045661549531177"
-								label="Register"
-								iconRight="mdi:register"
-							/>
-						</div>
-					</div>
-					<div
-						class="hidden sm:block col-span-2 flex justify-center items-center content-center"
-					>
-						<Image
-							src={KeyboardcatDoodle}
-							alt="cat typing"
-							class="max-w-96 sm:pr-32"
-						/>
-					</div>
-				</div>
-				<!-- Step 3:Tickets -->
-				<div class="sm:grid grid-cols-5 py-16">
-					<div
-						class="col-span-2 flex justify-center items-center content-center"
-					>
-						<Image
-							src={TicketDoodle}
-							alt="Ticket"
-							class="max-w-96 px-16 md:px-8"
-						/>
-					</div>
-					<div
-						id="tickets"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 3: Secure your spot at the venue
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							This event offers a hybrid experience - you can fully engage
-							online or, if you fancy, join us at one of our two vibrant
-							in-person locations in Amsterdam (Codam students only), or Leeds,
-							UK (open to everyone!).
-						</p>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							To snag your spot, each attendee should grab a free individual
-							ticket on Eventbrite. Remember, space is limited, so if you
-							reserve, be sure to show up!
-						</p>
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="primary-mono"
-								href="https://www.eventbrite.co.uk/o/leaning-technologies-91629557263"
-								label="Get tickets"
-								iconRight="ion:ticket"
-							/>
-						</div>
-					</div>
-				</div>
-				<!-- Step 4: Weekend adventure -->
-				<div class="sm:grid grid-cols-5 py-16">
-					<div class="sm:hidden col-span-2 flex justify-center items-center">
-						<Image src={UFODoodle} alt="UFO" class="max-w-96 px-16 md:px-8" />
-					</div>
-					<div
-						id="weekend"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 4: Dive into the hands-on weekend adventure!
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							On the event's kick-off day (Friday, October 11th, 2024), we'll
-							unveil the hackathon theme that will spark your creativity. Stay
-							tuned on Discord for the big reveal—it could be a single word,
-							several keywords, or a catchy phrase!
-						</p>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							Whether you're joining us in-person or fully online, fear not!
-							We've got your back with technical support through our dedicated
-							Discord channel.
-						</p>
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="secondary-mono"
-								href="#agenda"
-								label="See agenda"
-								iconRight="mdi:calendar"
-							/>
-						</div>
-					</div>
-					<div
-						class="hidden sm:block col-span-2 flex justify-center items-center content-center"
-					>
-						<Image src={UFODoodle} alt="UFO" class="max-w-96 sm:pr-16" />
-					</div>
-				</div>
-				<!-- Step 5: Submission -->
-				<div class="sm:grid grid-cols-5 py-6">
-					<div class="col-span-2 col-span-2 flex justify-center items-center">
-						<Image
-							src={WizardDoodle}
-							alt="Wizard cat"
-							class="max-w-96 px-16 md:px-8"
-						/>
-					</div>
-					<div
-						id="submission"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 5: Submit your creation!
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							It's showtime, folks! Each team must submit their masterpiece by
-							the deadline — any late submissions will sadly be left in the
-							dust.
-						</p>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							To throw your project into the ring, simply drop a message in the
-							submission channel with the following deets:
-						</p>
-						<ul
-							class="list-disc list-inside font-mono text-pretty text-sm sm:text-md 2xl:text-lg text-left"
-						>
-							<li>Team Name (which should already be registered)</li>
-							<li>Team members (just in case someone bails on you!)</li>
-							<li>
-								Public Github repository URL with a stellar project description
-								in your readme.txt
-							</li>
-							<li>
-								If your project's up and running, toss in the deployment URL
-								(like GitHub pages or another platform)
-							</li>
-							<li>
-								Spice it up with a presentation file sporting 1-2 juicy slides
-							</li>
-						</ul>
-
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="primary-mono"
-								href="https://discord.com/channels/988743885121548329/1283088783599861793"
-								label="Submit"
-								iconRight="fa:send"
-							/>
-						</div>
-					</div>
-				</div>
-				<!-- Step 6: Jugdment day -->
-				<div class="sm:grid grid-cols-5 py-6">
-					<div class="sm:hidden col-span-2 flex justify-center items-center">
-						<Image
-							src={ShoeDoodle}
-							alt="Cat in a shoe"
-							class="max-w-96 px-16 md:px-8"
-						/>
-					</div>
-					<div
-						id="evaluation"
-						class="col-span-3 text-center sm:text-left content-center px-8"
-					>
-						<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
-							Step 6: Await Judgement Day
-						</h1>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-							Get ready for the big reveal! Our judges will meticulously review
-							each submission. Stay tuned for the results on Discord and our
-							website on November 10th. Best of luck to everyone!
-						</p>
-						<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-							Standout projects earn a prime spot on our documentation site. Who
-							knows, your creation might even star in a blog post, showcasing
-							your journey. And, the cherry on top? The first-place winner walks
-							away with a fabulous 500 GBP prize! 🏆
-						</p>
-						<div class="flex gap-4 justify-center sm:justify-start mt-2">
-							<LinkButton
-								type="secondary-mono"
-								href="#agenda"
-								label="See agenda"
-								iconRight="mdi:calendar"
-							/>
-						</div>
-					</div>
-					<div
-						class="hidden sm:block ccol-span-2 flex justify-center items-center"
-					>
-						<Image
-							src={ShoeDoodle}
-							alt="Cat stuck in a shoe"
-							class="max-w-96 sm:pr-28"
-						/>
-					</div>
-				</div>
-			</section>
-
-			<!-- Agenda section -->
-			<section
-				id="agenda"
-				class="text-black py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
-			>
-				<div class="flex justify-center items-center">
-					<Image src={CalendarAsset} alt="Calendar" class="w-48 invert" />
-				</div>
-				<h1 class="font-mono font-bold text-3xl text-center">Agenda</h1>
-				<p class="font-mono text-center">
-					Please consider this agenda is subject to change, stay tuned!
-				</p>
-				<div class="py-6">
-					<h2 class="font-mono text-md sm:text-lg font-bold">
-						Friday <span class="italic font-normal">11/October/2024</span>
-					</h2>
-					<div class="border border-black px-2">
-						<div class="relative overflow-x-auto">
-							<table
-								class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
-							>
-								<thead>
-									<tr class="">
-										<th class="pr-2 px-2">UK Time</th>
-										<th class="pr-2 px-2">NL Time</th>
-										<th class="pr-2 px-2">Event</th>
-										<th class="pr-2 px-2">On-site</th>
-										<th class="pr-2 px-2">Discord</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">10:00</td>
-										<td class="pr-2 px-2">11:00</td>
-										<td class="pr-2 px-2">Reception</td>
-										<td class="pr-2 px-2">Venue opens</td>
-										<td class="pr-2 px-2">Welcome Message</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">10:30</td>
-										<td class="pr-2 px-2">11:30</td>
-										<td class="pr-2 px-2">Welcome talk</td>
-										<td class="pr-2 px-2">Welcome message</td>
-										<td class="pr-2 px-2">Welcome video</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">11:00</td>
-										<td class="pr-2 px-2">12:00</td>
-										<td class="pr-2 px-2">Team building</td>
-										<td class="pr-2 px-2">In-person dynamic</td>
-										<td class="pr-2 px-2">Online dynamic</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">12:00</td>
-										<td class="pr-2 px-2">13:00</td>
-										<td class="pr-2 px-2">Theme revelation</td>
-										<td class="pr-2 px-2">in-person</td>
-										<td class="pr-2 px-2">Hackathon announcements channel</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">12:15</td>
-										<td class="pr-2 px-2">13:15</td>
-										<td class="pr-2 px-2">Lunch break</td>
-										<td class="pr-2 px-2">Food & soft drinks</td>
-										<td class="pr-2 px-2">-</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">13:00</td>
-										<td class="pr-2 px-2">14:00</td>
-										<td class="pr-2 px-2">Work starts</td>
-										<td class="pr-2 px-2">Work at the venue</td>
-										<td class="pr-2 px-2">Support starts</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">16:00</td>
-										<td class="pr-2 px-2">17:00</td>
-										<td class="pr-2 px-2">End of day</td>
-										<td class="pr-2 px-2">Closing remarks</td>
-										<td class="pr-2 px-2">Support ends</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">17:00</td>
-										<td class="pr-2 px-2">18:00</td>
-										<td class="pr-2 px-2">Registration ends</td>
-										<td class="pr-2 px-2">Venue closes</td>
-										<td class="pr-2 px-2">Registration channel is disabled</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="py-6">
-					<h2 class="font-mono text-md sm:text-lg font-bold">
-						Saturday <span class="italic font-normal">12/October/2024</span>
-					</h2>
-					<div class="border border-black px-2">
-						<div class="relative overflow-x-auto">
-							<table
-								class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
-							>
-								<thead>
-									<tr class="">
-										<th class="pr-2 px-2">UK Time</th>
-										<th class="pr-2 px-2">NL Time</th>
-										<th class="pr-2 px-2">Event</th>
-										<th class="pr-2 px-2">On-site</th>
-										<th class="pr-2 px-2">Discord</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">11:00 - 16:00</td>
-										<td class="pr-2 px-2">12:00 - 17:00</td>
-										<td class="pr-2 px-2">Technical support</td>
-										<td class="pr-2 px-2">(venue is closed)</td>
-										<td class="pr-2 px-2">Online support</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="py-6">
-					<h2 class="font-mono text-md sm:text-lg font-bold">
-						Sunday <span class="italic font-normal">13/October/2024</span>
-					</h2>
-					<div class="border border-black px-2">
-						<div class="relative overflow-x-auto">
-							<table
-								class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
-							>
-								<thead>
-									<tr class="">
-										<th class="pr-2 px-2">UK Time</th>
-										<th class="pr-2 px-2">NL Time</th>
-										<th class="pr-2 px-2">Event</th>
-										<th class="pr-2 px-2">On-site</th>
-										<th class="pr-2 px-2">Discord</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">11:00 - 16:00</td>
-										<td class="pr-2 px-2">12:00 - 17:00</td>
-										<td class="pr-2 px-2">Technical support</td>
-										<td class="pr-2 px-2">(venue is closed)</td>
-										<td class="pr-2 px-2">Online support</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="py-6">
-					<h2 class="font-mono text-md sm:text-lg font-bold">
-						Monday <span class="italic font-normal">14/October/2024</span>
-					</h2>
-					<div class="border border-black px-2">
-						<div class="relative overflow-x-auto">
-							<table
-								class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
-							>
-								<thead>
-									<tr class="">
-										<th class="pr-2 px-2">UK Time</th>
-										<th class="pr-2 px-2">NL Time</th>
-										<th class="pr-2 px-2">Event</th>
-										<th class="pr-2 px-2">On-site</th>
-										<th class="pr-2 px-2">Discord</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">10:00</td>
-										<td class="pr-2 px-2">11:00</td>
-										<td class="pr-2 px-2">Submission opens</td>
-										<td class="pr-2 px-2">Venue opens</td>
-										<td class="pr-2 px-2"
-											>Submission channel is active, technical support starts</td
-										>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">12:00</td>
-										<td class="pr-2 px-2">13:00</td>
-										<td class="pr-2 px-2">Lunch break</td>
-										<td class="pr-2 px-2">Food & soft drinks</td>
-										<td class="pr-2 px-2">-</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">14:45</td>
-										<td class="pr-2 px-2">15:45</td>
-										<td class="pr-2 px-2">Submissions close</td>
-										<td class="pr-2 px-2">-</td>
-										<td class="pr-2 px-2">Submissions channel is disabled</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">15:00</td>
-										<td class="pr-2 px-2">16:00</td>
-										<td class="pr-2 px-2">Projects presentations</td>
-										<td class="pr-2 px-2">5min talks by volunteers</td>
-										<td class="pr-2 px-2">-</td>
-									</tr>
-									<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
-										<td class="pr-2 px-2">16:00</td>
-										<td class="pr-2 px-2">17:00</td>
-										<td class="pr-2 px-2">Closing remarks</td>
-										<td class="pr-2 px-2">Closing talk</td>
-										<td class="pr-2 px-2">Closing message</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<h2 class="font-mono text-md sm:text-lg font-bold text-center">
-					Winning team will be announced on November 10th, 2024 🏆
-				</h2>
-			</section>
-			<section
-				class="text-white py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
-			>
-				<h1 class="font-mono font-bold text-2xl text-center">
-					More information coming soon!
-				</h1>
-				<div class="flex gap-4 justify-center items-center mt-2">
-					<LinkButton
-						type="primary-mono"
-						href="https://discord.com/channels/988743885121548329/1283045661549531177"
-						label="Register your team"
-						iconRight="mdi:register"
-					/>
-				</div>
-			</section>
 			<style>
 				#scroll-container {
 					overflow: hidden;
@@ -672,6 +134,673 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 					}
 				}
 			</style>
+		</div>
+	</section>
+
+	<section
+		id="guide"
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
+	>
+		<div class="px-8">
+			<h1
+				class="pb-4 font-bold text-black font-mono text-xl sm:text-2xl md:text-3xl text-center"
+			>
+				How Does it all work?
+			</h1>
+			<p
+				class="font-mono text-lg sm:text-xl text-black text-pretty text-center"
+			>
+				In a nutshell: assemble your tech squad together, immerse yourself in a
+				tech project frenzy for a whole weekend. <b
+					>The winner team gets a sweet 500 GBP!</b
+				>
+				And just in case you need more guidance, here's a detailed walkthrough explained
+				using adorable cats 🐱💻🚀.
+			</p>
+		</div>
+	</section>
+
+	<!-- Guide section -->
+	<section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
+	>
+		<!-- Step1: Find your squad -->
+		<div class="sm:grid sm:grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center">
+				<Image
+					src={CatboxDoodle}
+					alt="Cats in a box"
+					class="max-w-96 px-16 md:px-8"
+				/>
+			</div>
+			<div
+				id="team"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 1: Find your squad
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					Gather your friends and colleagues, and get ready to dive into the
+					challenge. <span class="italic font-bold"
+						>Teams can range from 2 to 5 members.</span
+					>
+				</p>
+
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Are you a lone coder flying solo? No worries! Connect with potential
+					team members in our Discord server or on-site during the opening day!
+					Ptss, pro-tip: Enrich your squad by bringing in folks with diverse
+					skill sets such as programming, UX, graphic design, front-end, and
+					more!
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono"
+						href={DISCORD_URL}
+						label="Join Discord"
+						iconRight="simple-icons:discord"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 2: Registration -->
+		<div class="sm:grid grid-cols-5 py-6">
+			<div
+				class="sm:hidden col-span-2 flex justify-center items-center content-center"
+			>
+				<Image
+					src={KeyboardcatDoodle}
+					alt="cat typing"
+					class="max-w-96 px-16 md:px-8"
+				/>
+			</div>
+			<div
+				id="register"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 2: Registration time is here!
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					To sign up your team, head over to the <a
+						href=""
+						class="italic font-bold text-[#e2bace] hover:underline"
+						>registration</a
+					> channel in our Discord Server and drop us a message with the following
+					details:
+				</p>
+				<ul
+					class="list-disc list-inside font-mono text-pretty text-left text-sm sm:text-md 2xl:text-lg"
+				>
+					<li>Team name</li>
+					<li>Team leader: Discord username (tag it with @)</li>
+					<li>Team members: Discord usernames (tag them with @)</li>
+					<li>
+						Server channels: Do you want your own exclusive team's text and
+						voice channels in this server? (Yes/No)
+					</li>
+				</ul>
+				<p
+					class="font-mono text-sm sm:text-md 2xl:text-lg py-2 font-bold italic"
+				>
+					Registrations are now open and will close on Friday 11th of October
+					17:00 UK time.
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Once we get your message, we'll shoot back a confirmation and set up
+					your own exclusive text and voice channels! Let the games begin! 🚀🎮
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono"
+						href="https://discord.com/channels/988743885121548329/1283045661549531177"
+						label="Register"
+						iconRight="mdi:register"
+					/>
+				</div>
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image
+					src={KeyboardcatDoodle}
+					alt="cat typing"
+					class="max-w-96 sm:pr-32"
+				/>
+			</div>
+		</div>
+		<!-- Step 3:Tickets -->
+		<div class="sm:grid grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center content-center">
+				<Image src={TicketDoodle} alt="Ticket" class="max-w-96 px-16 md:px-8" />
+			</div>
+			<div
+				id="tickets"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 3: Secure your spot at the venue
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					This event offers a hybrid experience - you can fully engage online
+					or, if you fancy, join us at one of our two vibrant in-person
+					locations in Amsterdam (Codam students only), or Leeds, UK (open to
+					everyone!).
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					To snag your spot, each attendee should grab a free individual ticket
+					on Eventbrite. Remember, space is limited, so if you reserve, be sure
+					to show up!
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono"
+						href="https://www.eventbrite.co.uk/o/leaning-technologies-91629557263"
+						label="Get tickets"
+						iconRight="ion:ticket"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 4: Weekend adventure -->
+		<div class="sm:grid grid-cols-5 py-16">
+			<div class="sm:hidden col-span-2 flex justify-center items-center">
+				<Image src={UFODoodle} alt="UFO" class="max-w-96 px-16 md:px-8" />
+			</div>
+			<div
+				id="weekend"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 4: Dive into the hands-on weekend adventure!
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					On the event's kick-off day (Friday, October 11th, 2024), we'll unveil
+					the hackathon theme that will spark your creativity. Stay tuned on
+					Discord for the big reveal—it could be a single word, several
+					keywords, or a catchy phrase!
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Whether you're joining us in-person or fully online, fear not! We've
+					got your back with technical support through our dedicated Discord
+					channel.
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono"
+						href="#agenda"
+						label="See agenda"
+						iconRight="mdi:calendar"
+					/>
+				</div>
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image src={UFODoodle} alt="UFO" class="max-w-96 sm:pr-16" />
+			</div>
+		</div>
+		<!-- Step 5: Submission -->
+		<div class="sm:grid grid-cols-5 py-6">
+			<div class="col-span-2 col-span-2 flex justify-center items-center">
+				<Image
+					src={WizardDoodle}
+					alt="Wizard cat"
+					class="max-w-96 px-16 md:px-8"
+				/>
+			</div>
+			<div
+				id="submission"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 5: Submit your creation!
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					It's showtime, folks! Each team must submit their masterpiece by the
+					deadline — any late submissions will sadly be left in the dust.
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					To throw your project into the ring, simply drop a message in the
+					submission channel with the following deets:
+				</p>
+				<ul
+					class="list-disc list-inside font-mono text-pretty text-sm sm:text-md 2xl:text-lg text-left"
+				>
+					<li>Team Name (which should already be registered)</li>
+					<li>Team members (just in case someone bails on you!)</li>
+					<li>
+						Public Github repository URL with a stellar project description in
+						your readme.txt
+					</li>
+					<li>
+						If your project's up and running, toss in the deployment URL (like
+						GitHub pages or another platform)
+					</li>
+					<li>
+						Spice it up with a presentation file sporting 1-2 juicy slides
+					</li>
+				</ul>
+
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono"
+						href="https://discord.com/channels/988743885121548329/1283088783599861793"
+						label="Submit"
+						iconRight="fa:send"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 6: Jugdment day -->
+		<div class="sm:grid grid-cols-5 py-6">
+			<div class="sm:hidden col-span-2 flex justify-center items-center">
+				<Image
+					src={ShoeDoodle}
+					alt="Cat in a shoe"
+					class="max-w-96 px-16 md:px-8"
+				/>
+			</div>
+			<div
+				id="evaluation"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#e2bace]">
+					Step 6: Await Judgement Day
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					Get ready for the big reveal! Our judges will meticulously review each
+					submission. Stay tuned for the results on Discord and our website on
+					November 10th. Best of luck to everyone!
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Standout projects earn a prime spot on our documentation site. Who
+					knows, your creation might even star in a blog post, showcasing your
+					journey. And, the cherry on top? The first-place winner walks away
+					with a fabulous 500 GBP prize! 🏆
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono"
+						href="#agenda"
+						label="See agenda"
+						iconRight="mdi:calendar"
+					/>
+				</div>
+			</div>
+			<div class="hidden sm:block ccol-span-2 flex justify-center items-center">
+				<Image
+					src={ShoeDoodle}
+					alt="Cat stuck in a shoe"
+					class="max-w-96 sm:pr-28"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- Agenda section -->
+	<section
+		id="agenda"
+		class="text-black py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
+	>
+		<div class="flex justify-center items-center">
+			<Image src={CalendarAsset} alt="Calendar" class="w-48 invert" />
+		</div>
+		<h1 class="font-mono font-bold text-3xl text-center">Agenda</h1>
+		<p class="font-mono text-center">
+			Please consider this agenda is subject to change, stay tuned!
+		</p>
+		<div class="py-6">
+			<h2 class="font-mono text-md sm:text-lg font-bold">
+				Friday <span class="italic font-normal">11/October/2024</span>
+			</h2>
+			<div class="border border-black px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">NL Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">On-site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">10:00</td>
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Reception</td>
+								<td class="pr-2 px-2">Venue opens</td>
+								<td class="pr-2 px-2">Welcome Message</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">10:30</td>
+								<td class="pr-2 px-2">11:30</td>
+								<td class="pr-2 px-2">Welcome talk</td>
+								<td class="pr-2 px-2">Welcome message</td>
+								<td class="pr-2 px-2">Welcome video</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">12:00</td>
+								<td class="pr-2 px-2">Team building</td>
+								<td class="pr-2 px-2">In-person dynamic</td>
+								<td class="pr-2 px-2">Online dynamic</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">12:00</td>
+								<td class="pr-2 px-2">13:00</td>
+								<td class="pr-2 px-2">Theme revelation</td>
+								<td class="pr-2 px-2">in-person</td>
+								<td class="pr-2 px-2">Hackathon announcements channel</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">12:15</td>
+								<td class="pr-2 px-2">13:15</td>
+								<td class="pr-2 px-2">Lunch break</td>
+								<td class="pr-2 px-2">Food & soft drinks</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">13:00</td>
+								<td class="pr-2 px-2">14:00</td>
+								<td class="pr-2 px-2">Work starts</td>
+								<td class="pr-2 px-2">Work at the venue</td>
+								<td class="pr-2 px-2">Support starts</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">16:00</td>
+								<td class="pr-2 px-2">17:00</td>
+								<td class="pr-2 px-2">End of day</td>
+								<td class="pr-2 px-2">Closing remarks</td>
+								<td class="pr-2 px-2">Support ends</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">17:00</td>
+								<td class="pr-2 px-2">18:00</td>
+								<td class="pr-2 px-2">Registration ends</td>
+								<td class="pr-2 px-2">Venue closes</td>
+								<td class="pr-2 px-2">Registration channel is disabled</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="py-6">
+			<h2 class="font-mono text-md sm:text-lg font-bold">
+				Saturday <span class="italic font-normal">12/October/2024</span>
+			</h2>
+			<div class="border border-black px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">NL Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">On-site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">11:00 - 16:00</td>
+								<td class="pr-2 px-2">12:00 - 17:00</td>
+								<td class="pr-2 px-2">Technical support</td>
+								<td class="pr-2 px-2">(venue is closed)</td>
+								<td class="pr-2 px-2">Online support</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="py-6">
+			<h2 class="font-mono text-md sm:text-lg font-bold">
+				Sunday <span class="italic font-normal">13/October/2024</span>
+			</h2>
+			<div class="border border-black px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">NL Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">On-site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">11:00 - 16:00</td>
+								<td class="pr-2 px-2">12:00 - 17:00</td>
+								<td class="pr-2 px-2">Technical support</td>
+								<td class="pr-2 px-2">(venue is closed)</td>
+								<td class="pr-2 px-2">Online support</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="py-6">
+			<h2 class="font-mono text-md sm:text-lg font-bold">
+				Monday <span class="italic font-normal">14/October/2024</span>
+			</h2>
+			<div class="border border-black px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">NL Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">On-site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">10:00</td>
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Submission opens</td>
+								<td class="pr-2 px-2">Venue opens</td>
+								<td class="pr-2 px-2"
+									>Submission channel is active, technical support starts</td
+								>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">12:00</td>
+								<td class="pr-2 px-2">13:00</td>
+								<td class="pr-2 px-2">Lunch break</td>
+								<td class="pr-2 px-2">Food & soft drinks</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">14:45</td>
+								<td class="pr-2 px-2">15:45</td>
+								<td class="pr-2 px-2">Submissions close</td>
+								<td class="pr-2 px-2">-</td>
+								<td class="pr-2 px-2">Submissions channel is disabled</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">15:00</td>
+								<td class="pr-2 px-2">16:00</td>
+								<td class="pr-2 px-2">Projects presentations</td>
+								<td class="pr-2 px-2">5min talks by volunteers</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#e2bace] odd:bg-[#e9c4d6]">
+								<td class="pr-2 px-2">16:00</td>
+								<td class="pr-2 px-2">17:00</td>
+								<td class="pr-2 px-2">Closing remarks</td>
+								<td class="pr-2 px-2">Closing talk</td>
+								<td class="pr-2 px-2">Closing message</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<h2 class="font-mono text-md sm:text-lg font-bold text-center">
+			Winning team will be announced on November 10th, 2024 🏆
+		</h2>
+	</section>
+	<section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
+	>
+		<h1 class="font-mono font-bold text-4xl text-center text-white py-12">
+			Judging panel
+		</h1>
+		<div
+			id="judges-grid"
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 space-x-2 font-mono text-center"
+		>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Alessandro}
+						alt="Alessandro Pignotti"
+						class="rounded-full"
+					/>
+					<a href="https://www.linkedin.com/in/alessandro-pignotti-10719617/">
+						<p
+							class="font-semibold text-lg text-[#e2bace] hover:text-white pt-4"
+						>
+							Alessandro Pignotti
+						</p>
+					</a>
+					<p class="text-xs text-white">Chief Technology Officer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Martin} alt="Martin Nyaga" class="rounded-full" />
+					<a href="https://www.linkedin.com/in/martin-nyaga/">
+						<h2
+							class="font-semibold text-lg text-[#e2bace] hover:text-white pt-4"
+						>
+							Martin Nyaga
+						</h2>
+					</a>
+					<p class="text-xs text-white">Lead Software Developer</p>
+					<p class="italic text-xs text-white">DRS Software</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Jules}
+						alt="Jules Saarikoski"
+						class="items-center rounded-full"
+					/>
+					<a href="https://www.linkedin.com/in/saarikoskijules/">
+						<p
+							class="font-semibold text-lg text-[#e2bace] hover:text-white pt-4"
+						>
+							Jules Saarikoski
+						</p>
+					</a>
+					<p class="text-xs text-white">Compilers Software Engineer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Luca} alt="Luca Invernizzi" class="rounded-full" />
+					<a href="https://www.linkedin.com/in/lucainvernizzi/">
+						<p
+							class="font-semibold text-lg text-[#e2bace] hover:text-white pt-4"
+						>
+							Luca Invernizzi
+						</p>
+					</a>
+					<p class="text-xs text-white">Research Scientist Manager</p>
+					<p class="italic text-xs text-white">Google</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section
+		class="text-black py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
+	>
+		<h1 class="font-mono font-bold text-4xl text-center text-black py-8">
+			Rules of the game
+		</h1>
+		<div class="flex gap-4 justify-center items-center px-10">
+			<p class="font-mono italic font-semibold">
+				Just like a perfectly executed code, a game isn't the same without its
+				rules. Delve into these commandments with the precision of a seasoned
+				developer and make sure to stay looped in with them.
+			</p>
+		</div>
+		<div class="py-6 px-16">
+			<ul class="list-decimal font-mono space-y-4 text-pretty">
+				<li>
+					Project submissions must be made in the form of a GitHub public
+					repository to the <a
+						class="font-bold"
+						href="https://discord.gg/zsWV3CgW">submissions Discord channel</a
+					>.
+				</li>
+				<li>
+					There should be no further commits after the deadline; otherwise, the
+					submission will not be accepted.
+				</li>
+				<li>
+					If you intend to continue working on your project after the deadline,
+					please fork your repository.
+				</li>
+				<li>All projects must incorporate CheerpX.</li>
+				<li>
+					In case of using third-party components, ensure the proper licensing
+					and give due credit to the authors.
+				</li>
+				<li>
+					If generative AI is utilized in the project, appropriate credits must
+					be provided.
+				</li>
+				<li>
+					The submitted repository should not have more than 5 contributors.
+				</li>
+				<li>
+					The winning team will receive a total reward of £500 in form of a gift
+					card. Splitting the prize between members will be the team's
+					responsibility.
+				</li>
+				<li>
+					The judges reserve the right to disqualify projects that do not align
+					with human rights, or promote violence, hate, discrimination, or
+					disrupt moral values.
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<section
+		class="text-white py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
+	>
+		<h1 class="font-mono font-bold text-2xl text-center">Ready, steady, go!</h1>
+		<div class="flex gap-4 justify-center items-center mt-2">
+			<LinkButton
+				type="primary-mono"
+				href="https://discord.com/channels/988743885121548329/1283045661549531177"
+				label="Register your team"
+				iconRight="mdi:register"
+			/>
 		</div>
 	</section>
 </ProductHome>
