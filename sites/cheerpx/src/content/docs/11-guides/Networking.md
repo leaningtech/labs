@@ -42,10 +42,10 @@ Example for pre-authenticated users/devices:
 
 ```js
 const cx = await CheerpX.Linux.create({
-    networkInterface: {
-        authKey: "AuthKeyStringGoesHere",
-        controlUrl: "https://my.url.com/"
-    }
+	networkInterface: {
+		authKey: "AuthKeyStringGoesHere",
+		controlUrl: "https://my.url.com/",
+	},
 });
 ```
 
@@ -67,14 +67,14 @@ Example to prompt the user for manual login on a different tab:
 const loginElem = document.getElementById("loginLink");
 
 const cx = await CheerpX.Linux.create({
-    networkInterface: {
-        controlUrl: "https://my.url.com/",
-        loginUrlCb: function (url) {
-            loginElem.href = url;
-            loginElem.target = "_blank";
-            // continue with login
-        }
-    }
+	networkInterface: {
+		controlUrl: "https://my.url.com/",
+		loginUrlCb: function (url) {
+			loginElem.href = url;
+			loginElem.target = "_blank";
+			// continue with login
+		},
+	},
 });
 ```
 
