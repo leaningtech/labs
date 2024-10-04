@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 ---
 
-## 1. How can I capture stdout from a program running in CheerpX?
+## How can I capture stdout from a program running in CheerpX?
 
 Currently, CheerpX doesn't directly support capturing stdout from running programs. However, there's a workaround that allows you to capture the output, albeit with some limitations.
 
@@ -27,7 +27,7 @@ console.log(output);
 
 This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
 
-## 2. Why can't CheerpX find files in my device?
+## Why can't CheerpX find files in my device?
 
 When using WebDevice, keep in mind:
 
@@ -43,3 +43,7 @@ Use browser's DevTools:
 3. Filter for your application's requests.
 4. Look for 404 (Not Found) errors.
 5. Check the full URL of these 404 requests to see the exact path CheerpX is trying to access.
+
+## Why can't I execute files directly from a DataDevice?
+
+DataDevice in CheerpX is write-only. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a writable filesystem, such as an IDB (IndexedDB) or ext2 filesystem.
