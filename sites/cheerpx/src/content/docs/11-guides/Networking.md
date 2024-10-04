@@ -26,9 +26,25 @@ To support networking beyond same origin requests, it is necessary to host a pro
 
 When it comes to generalised networking scenarios, there are some browser-enforced limitations to enhance users' security. These limitations are bound to the browser not exposing access to lower-level protocols such as UDP and TCP. The browser only allows one to perform HTTP(S) requests ruled by CORS policies.
 
-A good example of this scenario is when an application uses WebSockets, where there is a two-way interaction between two end-points in an event-driven manner. A WebSocket connection starts with a request from the browser via HTTP that when accepted, this connection is upgraded and does not conform to the HTTP protocol anymore. This way the user and the server (or any other end-point) can keep a connection and send bidirectional messages until this connection is closed from one of the end-points. Upgrading the WebSocket connection protocol and unwrapping packets before sending them to the destinations requires a proxy server.
+Native networking in the browser is extremely limited, only allowing HTTP connections to the same domain as the page. While WebSockets exist, they are not actual sockets but rather an extension to HTTP. This limitation makes it impossible to use the browser's `fetch` API for general networking purposes in CheerpX applications.
 
-These limitations have been overcome by supporting networking via Tailscale, which allows one to use its VPN via its WebSocket proxy, meaning the perfect solution for the limitations described above.
+#### Limitations of using fetch for HTTPS/stack
+
+Using `fetch` for HTTPS connections in CheerpX is not feasible due to several reasons:
+
+1. Applications inside the VM would perform their own encryption, making it impossible to recover the requested URL.
+2. The browser expects to handle HTTPS connections itself, which conflicts with the VM's networking stack.
+3. HTTPS is even more challenging than HTTP in this context, as it requires managing certificates and encryption at the VM level.
+
+These limitations necessitate a more comprehensive networking solution that can provide a full TCP/IP stack.
+
+#### The need for a VPN solution
+
+To overcome these limitations, CheerpX uses Tailscale, which provides a VPN solution via WebSockets. This approach allows CheerpX to implement a complete TCP/IP stack, enabling applications inside the VM to perform networking operations as they would on a regular machine.
+
+Networking with WebVM always happens via Tailscale. To give access to your machine as part of the Tailscale internal network, you need to install Tailscale locally. The setup is effectively the same as with internet-enabled configurations; you can just skip enabling the exit node if you only need internal network access.
+
+For a more detailed explanation of why Tailscale was chosen and how it works with WebVM, you can read our [blog post on WebVM networking via Tailscale](https://labs.leaningtech.com/blog/webvm-virtual-machine-with-networking-via-tailscale).
 
 ### Installing Tailscale
 
