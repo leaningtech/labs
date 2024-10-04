@@ -47,3 +47,7 @@ Use browser's DevTools:
 ## Why can't I execute files directly from a DataDevice?
 
 DataDevice in CheerpX is write-only. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a writable filesystem, such as an IDB (IndexedDB) or ext2 filesystem.
+
+## Can I use third-party origins with WebDevice?
+
+Yes, WebDevice can handle third-party origins as paths, but it's important to consider the implications of Cross-Origin Resource Sharing (CORS) when doing so. To ensure smooth functioning, the server hosting these third-party resources must have the appropriate CORS headers configured. If the CORS settings are not properly arranged, browsers might block these requests to third-party resources, which can lead to files being inaccessible in CheerpX.
