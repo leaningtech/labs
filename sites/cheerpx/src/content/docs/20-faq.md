@@ -38,6 +38,7 @@ When using WebDevice, keep in mind:
 ### Debugging Path Issues
 
 Use browser's DevTools:
+
 1. Open DevTools (F12 or right-click and "Inspect").
 2. Go to "Network" tab.
 3. Filter for your application's requests.
@@ -51,3 +52,19 @@ DataDevice in CheerpX is write-only. This means you can write data to it, but yo
 ## Can I use third-party origins with WebDevice?
 
 Yes, WebDevice can handle third-party origins as paths, but it's important to consider the implications of Cross-Origin Resource Sharing (CORS) when doing so. To ensure smooth functioning, the server hosting these third-party resources must have the appropriate CORS headers configured. If the CORS settings are not properly arranged, browsers might block these requests to third-party resources, which can lead to files being inaccessible in CheerpX.
+
+## Why can't CheerpX do what v86 does in terms of disk access and networking?
+
+CheerpX's architecture and use case differ significantly from v86, which affects how it handles disk access and networking:
+
+### Disk Access
+
+CheerpX is powered by an extremely sophisticated JIT engine, which allows it to support large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
+
+We acknowledge that some users may experience slower disk access. Our team is actively investigating these issues and working on optimizations to enhance performance across all use cases.
+
+### Networking
+
+While v86 might use an open proxy to the internet, this approach is not feasible for CheerpX due to its scale of use. An open proxy can pose significant security risks when used at scale.
+
+Instead, CheerpX supports Tailscale-based networking, which can accommodate many use cases. It's important to note that developers using CheerpX are responsible for implementing appropriate security measures and preventing potential abuse.
