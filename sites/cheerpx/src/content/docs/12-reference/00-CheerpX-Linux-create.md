@@ -94,84 +94,30 @@ const overlayDevice = await CheerpX.OverlayDevice.create(
 
 ### Using Different Device Types in Mounts
 
-CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment.
+CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment. The main types are:
 
-#### IDBDevice
+- **IDBDevice**: Persistent storage backed by IndexedDB
+- **WebDevice**: Mounts a directory from your local server
+- **DataDevice**: Simple in-memory filesystem
 
-`CheerpX.IDBDevice` allows you to create a persistent storage device backed by IndexedDB.
-
-Example:
+Example of mounting different device types:
 
 ```js
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
-
-const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/files", dev: idbDevice }],
-});
-```
-
-This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
-
-#### WebDevice
-
-`CheerpX.WebDevice` allows you to mount a directory from your local server.
-
-Example:
-
-```js
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
-
-const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/app", dev: webDevice }],
-});
-```
-
-This mounts the specified local directory at `/app` in the CheerpX environment.
-
-#### DataDevice
-
-`CheerpX.DataDevice` provides a simple in-memory filesystem.
-
-Example:
-
-```js
 const dataDevice = await CheerpX.DataDevice.create();
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/data", dev: dataDevice }],
+	mounts: [
+		{ type: "dir", path: "/files", dev: idbDevice },
+		{ type: "dir", path: "/app", dev: webDevice },
+		{ type: "dir", path: "/data", dev: dataDevice },
+	],
 });
 ```
 
-This creates an in-memory filesystem mounted at `/data`.
-
-### `dataDevice.writeFile`
-
-`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
-
-```js
-await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the absolute path to the file, starting with a `/` (e.g., "/filename").
-- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
-
-**Returns**:
-
-The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
-
-Example:
-
-```js
-const dataDevice = await CheerpX.DataDevice.create();
-await dataDevice.writeFile("/filename", "contents");
-```
-
-Note:
-
-- This is the only way to create files in this device.
-- Modifying existing files or creating files in subdirectories is not possible.
+> [!note]
+> For detailed information on each device type, including usage examples and specific methods like `dataDevice.writeFile`, please refer to the <a href="../guides/File-System-support">Files and filesystems</a> guide.
 
 ## Activity Callbacks
 
