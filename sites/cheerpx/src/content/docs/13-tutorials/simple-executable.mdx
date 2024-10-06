@@ -1,0 +1,194 @@
+---
+title: Simple Executable
+description: Running a 32-bit Statically Linked Executable using CheerpX
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+This tutorial will guide you through the process of creating a simple 32-bit statically linked Linux executable and running it in a browser using CheerpX. We'll use Docker as an optional method to compile the executable if you're on macOS or another system that cannot directly compile Linux executables. Additionally, we'll configure nginx to serve the necessary files.
+
+## Prerequisites
+
+- **nginx** installed on your system.
+
+The starting point of this example is an empty HTML page, an empty nginx configuration, and an empty C file.
+
+```
+.
+├── index.html
+├── nginx.conf
+└── hello_cheerpx.c
+```
+
+## 1. Write a Hello CheerpX C program
+
+First, create a simple C program that will print "hello cheerpx". This will be our executable to run using CheerpX.
+
+Open `hello_cheerpx.c` and add the following content:
+
+```c title="hello_cheerpx.c"
+#include <stdio.h>
+
+int main() {
+    printf("hello cheerpx\n");
+    return 0;
+}
+```
+
+## 2. Compile a Statically Linked Executable
+
+To compile the C program into a 32-bit statically linked Linux executable, you can use a standard Linux environment if available. If you're on macOS or another system that cannot directly compile Linux executables, you can use Docker to create a suitable Linux environment. Alternatively, you can use [WebVM](https://webvm.io) to create a Debian 32-bit environment. Alternatively, you could also download a pre-compiled executable from [here](/cheerpx/tutorials/simple-executable/hello_cheerpx).Remember to put it in the root of your project.
+
+### Using Docker to Compile (Optional)
+
+If you cannot compile directly on your system, use Docker to create a 32-bit statically linked executable. Open your terminal, navigate to your project directory, and run the following command:
+
+```sh
+docker run --rm -v "$(pwd)":/src -w /src i386/debian bash -c "apt-get update && apt-get install -y gcc && gcc -static -m32 -o hello_cheerpx hello_cheerpx.c"
+```
+
+Explanation:
+
+- `docker run --rm`: Runs a Docker container and removes it after execution.
+- `-v "$(pwd)":/src`: Mounts your current directory into /src inside the container.
+- `-w /src`: Sets the working directory inside the container to /src.
+- `i386/debian`: Uses a 32-bit Debian image as the base.
+- `bash -c "..."`: Executes a series of commands inside the container.
+- `apt-get update && apt-get install -y gcc`: Updates the package list and installs gcc.
+- `gcc -static -m32 -o hello_cheerpx hello_cheerpx.c`: Compiles the C program into a 32-bit statically linked executable named hello_cheerpx.
+
+## 3. Verify the Executable
+
+After the compilation, verify that the hello_cheerpx file is a 32-bit statically linked ELF executable.
+
+Run the following command in your terminal:
+
+```sh
+file hello_cheerpx
+```
+
+The output should be similar to:
+
+```
+hello_cheerpx: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, ...
+```
+
+This confirms that the executable is 32-bit and statically linked.
+
+## 3. Modify HTML for Running CheerpX
+
+Let's set up your `index.html` file to load CheerpX, run your executable, and include some basic styling to improve the page's appearance.
+
+Open `index.html` and add the following content:
+
+```html title="index.html"
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Hello CheerpX</title>
+		<script src="https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
+		<style>
+			body {
+				background-color: #5d7c86;
+			}
+			#console {
+				padding: 20px;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Hello CheerpX</h1>
+		<pre id="console"></pre>
+
+		<!-- Initialize and Run CheerpX -->
+		<script type="module">
+			const cx = await CheerpX.Linux.create();
+			cx.setConsole(document.getElementById("console"));
+
+			await cx.run("/hello_cheerpx", []);
+		</script>
+	</body>
+</html>
+```
+
+## 4. Configure nginx
+
+Create an nginx.conf file in your project directory to configure nginx for serving the files. Here is a sample configuration:
+
+```
+user nobody;
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /full/path/to/your/mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+
+    server {
+        listen       8080;
+        server_name  localhost;
+
+        gzip on;
+        gzip_types application/javascript application/wasm text/plain application/octet-stream;
+
+        charset utf-8;
+
+        location / {
+            root /path/to/your/project;
+            index  index.html index.htm;
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length' always;
+            add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+            add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+            add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
+        }
+    }
+}
+```
+
+Remember to replace `/full/path/to/your/mime.types` with the actual path to your mime.types file and `/path/to/your/project` with the actual path to your project directory.
+
+## 5. Start or Restart nginx
+
+To apply the new configuration, start or restart nginx using your custom configuration file:
+
+```sh
+sudo nginx -c /path/to/your/nginx.conf
+```
+
+If nginx is already running, you may need to stop it first:
+
+```sh
+nginx -s stop
+```
+
+Then restart with the updated configuration:
+
+```sh
+nginx -c /path/to/your/nginx.conf
+```
+
+## 6. Access and Verify Output
+
+Open your web browser and navigate to:
+
+```
+http://localhost:8080
+```
+
+You should see similar to this:
+
+<div class="mx-48">
+	![Screenshot of executable
+	result](/cheerpx/tutorials/simple-executable/hello_cheerpx_result.png)
+</div>
+
+This means that your 32-bit statically linked executable has successfully run within CheerpX in your browser!
