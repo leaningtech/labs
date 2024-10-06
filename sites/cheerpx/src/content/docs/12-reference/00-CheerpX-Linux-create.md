@@ -121,32 +121,34 @@ const cx = await CheerpX.Linux.create({
 
 ## Activity Callbacks
 
-The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity.
+The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity, as well as disk latency.
 
 ### `registerCallback`
 
 ```ts
-registerCallback(eventName: string, callback: (state: string) => void): void
+registerCallback(eventName: string, callback: (state: string | number) => void): void
 ```
 
 Registers a callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be either "cpuActivity" or "diskActivity".
-- **callback**: A function that will be called when the event occurs. It receives a `state` parameter which can be either "ready" (active) or "wait" (idle).
+- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
+  - For "cpuActivity" and "diskActivity": `state` can be either "ready" (active) or "wait" (idle).
+  - For "diskLatency": `latency` is a number representing the latency in milliseconds.
 
 ### `unregisterCallback`
 
 ```ts
-unregisterCallback(eventName: string, callback: (state: string) => void): void
+unregisterCallback(eventName: string, callback: (state: string | number) => void): void
 ```
 
 Unregisters a previously registered callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be either "cpuActivity" or "diskActivity".
+- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
 - **callback**: The function to be unregistered.
 
 Example usage:
@@ -164,16 +166,25 @@ function cpuCallback(state) {
 	else h.textContent = "\u{1F7E0}";
 }
 
+function latencyCallback(latency) {
+	console.log(`Last disk block download latency: ${latency}ms`);
+}
+
 const cx = await CheerpX.Linux.create(/* options */);
 
 cx.registerCallback("cpuActivity", cpuCallback);
-cx.registerCallback("diskActivity", diskCallback);
+cx.registerCallback("diskActivity", hddCallback);
+cx.registerCallback("diskLatency", latencyCallback);
 
 // Later, if needed:
 // cx.unregisterCallback("cpuActivity", cpuCallback);
-// cx.unregisterCallback("diskActivity", diskCallback);
+// cx.unregisterCallback("diskActivity", hddCallback);
+// cx.unregisterCallback("diskLatency", latencyCallback);
 ```
 
-This example demonstrates how to register callbacks for CPU and disk activity, updating UI elements based on the activity state.
+This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks update UI elements based on the activity state, while the disk latency callback logs the latency of the last downloaded disk block.
+
+> [!note]
+> The `diskLatency` event works for any type of network block device and provides real-time information about the latency of disk block downloads.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
