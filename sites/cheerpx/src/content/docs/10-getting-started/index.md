@@ -12,8 +12,10 @@ description: Getting started with CheerpX
 No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML:
 
 ```html
-<script src="%https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
+<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
 ```
+
+The CheerpX's API is stable and breaking changes can only be introduced on a new major version. All CheerpX builds are immutable so you can trust that, if your application works today, it is going to work identically forever.
 
 ### ES6 Module Compatibility
 

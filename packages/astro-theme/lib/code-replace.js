@@ -1,11 +1,4 @@
 const replacements = [
-	[
-		"%CHEERPX_LATEST%",
-		() =>
-			fetch("https://cheerpxdemos.leaningtech.com/publicdeploy/LATEST.txt")
-				.then((r) => r.text())
-				.then((s) => s.trim()),
-	],
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
