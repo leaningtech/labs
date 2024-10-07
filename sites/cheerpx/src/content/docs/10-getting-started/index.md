@@ -40,25 +40,37 @@ To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create
 The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large)[^compat], but you can also [create your own images](/docs/guides/custom-devices).
 
 ```html
-<script type="module">
-	const overlayDevice = await CheerpX.OverlayDevice.create(
-		await CheerpX.HttpBytesDevice.create(
-			"https://disks.webvm.io/debian_large_20230522_5044875331.ext2",
-		),
-		await CheerpX.IDBDevice.create("block1"),
-	);
-	const webDevice = await CheerpX.WebDevice.create("");
-	const dataDevice = await CheerpX.DataDevice.create();
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CheerpX test</title>
+    <script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
+    <script type="module">
+      // The read-only disk image from Leaning Technologies' fast cloud backend
+      const cloudDevice = await CheerpX.CloudDevice.create("wss://disks.webvm.io/debian_large_20230522_5044875331.ext2");
+      // Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
+      const idbDevice = await CheerpX.IDBDevice.create("block1");
+      // A device to overlay the local changes to the disk with the remote read-only image
+      const overlayDevice = await CheerpX.OverlayDevice.create(idbDevice, cloudDevice);
+      // Direct acces to files in your HTTP server
+      const webDevice = await CheerpX.WebDevice.create("");
+      // Convenient access to JavaScript binary data and strings
+      const dataDevice = await CheerpX.DataDevice.create();
 
-	const cx = await CheerpX.Linux.create({
-		mounts: [
-			{ type: "ext2", path: "/", dev: overlayDevice },
-			{ type: "dir", path: "/app", dev: webDevice },
-			{ type: "dir", path: "/data", dev: dataDevice },
-			{ type: "devs", path: "/dev" },
-		],
-	});
-</script>
+      const cx = await CheerpX.Linux.create({
+        mounts: [
+          { type: "ext2", path: "/", dev: overlayDevice },
+          { type: "dir", path: "/app", dev: webDevice },
+          { type: "dir", path: "/data", dev: dataDevice },
+          { type: "devs", path: "/dev" },
+        ],
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
 ```
 
 > [!tip]
