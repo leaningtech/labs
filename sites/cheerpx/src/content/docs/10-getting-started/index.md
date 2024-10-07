@@ -74,7 +74,7 @@ The example below demonstrates how to set up the file system and devices using [
 ```
 
 > [!tip]
-> You can just call CheerpX.Linux.create(); It will create a WebDevice to the root of your server, which will be mounted as root. It is then possible to call cx.run() with a program stored in the root of your server, as long as it is a statically linked executable that doesn't do anything fancy with the filesystem, such as write files etc.
+> This example is inteded to quickly get you up-and-running using a pre-deployed disk image from our cloud backend, for a much more self-contained example please see the [Simple Executable tutorial](/docs/tutorials/simple-executable)
 
 ## 3. Enable cross-origin isolation
 
