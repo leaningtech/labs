@@ -42,7 +42,7 @@ The example below demonstrates how to set up the file system and devices using [
 <html lang="en" style="heigth: 100%;">
 	<head>
 		<meta charset="utf-8" />
-		<title>CheerpX test</title>
+		<title>CheerpX Getting Started</title>
 		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
@@ -71,7 +71,7 @@ The example below demonstrates how to set up the file system and devices using [
 			});
 		</script>
 	</head>
-	<body style="heigth: 100%;background: black;">
+	<body style="heigth: 100%; background: black;">
 		<pre id="console" style="heigth: 100%;"></pre>
 	</body>
 </html>
