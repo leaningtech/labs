@@ -5,9 +5,21 @@ description: Run bash in a filesystem
 
 This tutorial will explain how to create a full custom filesystem and work in it using CheerpX from scratch.
 
-## 1. Create an ext2 image to use as the filesystem
+## Table of Contents
+- [1. Creating a ext2 image](#1-creating-a-ext2-image)
+- [2. Include CheerpX](#2-include-cheerpx)
+- [3. Serve the filesystem and index.html](#3-serve-the-filesystem-and-index.html)
+- [4. Create a device for the filesystem ](#4-create-a-device-for-the-filesystem)
+- [5. Create a CheerpX instance ](#5-create-a-cheerpx-instance)
+- [6. Attach a console ](#6-attach-a-console)
+- [7. Execute a program ](#7-execute-a-program)
 
-Create an ext2 image that can be used with CheerpX from a Dockerfile. First create a Dockerfile in i386
+
+## 1. Creating a ext2 image
+We're going to create a ext2 image. This image will be used as a filesystem. The image is going to be used with CheerpX from a Dockerfile.
+
+First create a Dockerfile in i386:
+
 ```dockerfile
 FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
@@ -34,9 +46,9 @@ mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
 
 
-## 2. Include CheerpX in the page
+## 2. Include CheerpX
 
-Create an index.html file and add this line to index.html `<head>` section
+Create an index.html file and add this line to index.html `<head>` section to include CheerpX.
 
 ```html
 <script src="https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
@@ -44,7 +56,9 @@ Create an index.html file and add this line to index.html `<head>` section
 
 ## 3. Serve the filesystem and index.html
 
-The ext2 image needs to be served with cors headers. This example nginx.conf is set up with the correct headers.
+The ext2 image needs to be served with [CORS] headers.
+
+This example nginx.conf is set up with the correct headers.
 
 
 ```nginx
@@ -133,7 +147,9 @@ Move cheerpXImage.ext2 into a directory called images, so that this nginx config
 
 ## 4. Create a device for the filesystem
 
-Add a new script tag with the type module into the index.html. Create a HttpBytesDevice(link) from the ext2 image that was just created. OverlayDevice(link) makes it possible to make make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
+Add a new `<script>` tag with the type module into the index.html. 
+
+Create a `HttpBytesDevice(link)` from the ext2 image that was just created. `OverlayDevice(link)` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
 
 ```html
 <script type="module">
@@ -162,13 +178,12 @@ Create a console element
 <pre id="console"></pre>
 ```
 
-Bring in a terminal software of your choice. This example is done with xterm.js(link https://xtermjs.org/)
+Bring in a terminal software of your choice. This example is done with [xterm.js]
 
 Install xterm.js:
 
 ```bash
 npm install @xterm/xterm
-
 ```
 
 Add headers to index.html
@@ -200,9 +215,10 @@ term.onData((data) => {
 });
 ```
 
-## Execute a program
+## 7. Execute a program
 
-This `cx.run` command will execute bash in the terminal that was created. Its now possible to interact in the filesystem.
+The `cx.run` command will execute bash in the terminal that was created. 
+
 
 ```js
 await cx.run("/bin/bash", ["--login"], {
@@ -220,3 +236,7 @@ await cx.run("/bin/bash", ["--login"], {
 	gid: "1000"
 });
 ```
+From now you're able to interact with the filesystem. 
+
+[CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[xterm.js]: https://xtermjs.org/
