@@ -21,8 +21,8 @@ CheerpX is also available as an ES6 JavaScript module. If you prefer to use the 
 
 ```html
 <script type="module">
-   import * as CheerpX from 'https://cxrtnc.leaningtech.com/0.9.0/cx.esm.js';
-   self.CheerpX = CheerpX;
+	import * as CheerpX from "https://cxrtnc.leaningtech.com/0.9.0/cx.esm.js";
+	self.CheerpX = CheerpX;
 </script>
 ```
 
