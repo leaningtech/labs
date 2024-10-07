@@ -1,5 +1,4 @@
-const replacements = [
-];
+const replacements = [];
 
 document.addEventListener("DOMContentLoaded", () => {
 	const spans = document.querySelectorAll(".expressive-code code span");

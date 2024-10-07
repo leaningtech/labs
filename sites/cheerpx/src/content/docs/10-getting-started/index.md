@@ -40,35 +40,40 @@ The example below demonstrates how to set up the file system and devices using [
 ```html
 <!doctype html>
 <html lang="en" style="heigth: 100%;">
-  <head>
-    <meta charset="utf-8" />
-    <title>CheerpX test</title>
-    <script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
-    <script type="module">
-      // The read-only disk image from Leaning Technologies' fast cloud backend
-      const cloudDevice = await CheerpX.CloudDevice.create("wss://disks.webvm.io/debian_large_20230522_5044875331.ext2");
-      // Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
-      const idbDevice = await CheerpX.IDBDevice.create("block1");
-      // A device to overlay the local changes to the disk with the remote read-only image
-      const overlayDevice = await CheerpX.OverlayDevice.create(cloudDevice, idbDevice);
-      // Direct acces to files in your HTTP server
-      const webDevice = await CheerpX.WebDevice.create("");
-      // Convenient access to JavaScript binary data and strings
-      const dataDevice = await CheerpX.DataDevice.create();
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX test</title>
+		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
+		<script type="module">
+			// The read-only disk image from Leaning Technologies' fast cloud backend
+			const cloudDevice = await CheerpX.CloudDevice.create(
+				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+			);
+			// Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
+			const idbDevice = await CheerpX.IDBDevice.create("block1");
+			// A device to overlay the local changes to the disk with the remote read-only image
+			const overlayDevice = await CheerpX.OverlayDevice.create(
+				cloudDevice,
+				idbDevice,
+			);
+			// Direct acces to files in your HTTP server
+			const webDevice = await CheerpX.WebDevice.create("");
+			// Convenient access to JavaScript binary data and strings
+			const dataDevice = await CheerpX.DataDevice.create();
 
-      const cx = await CheerpX.Linux.create({
-        mounts: [
-          { type: "ext2", path: "/", dev: overlayDevice },
-          { type: "dir", path: "/app", dev: webDevice },
-          { type: "dir", path: "/data", dev: dataDevice },
-          { type: "devs", path: "/dev" },
-        ],
-      });
-    </script>
-  </head>
-  <body style="heigth: 100%;background: black;">
-    <pre id="console" style="heigth: 100%;"></pre>
-  </body>
+			const cx = await CheerpX.Linux.create({
+				mounts: [
+					{ type: "ext2", path: "/", dev: overlayDevice },
+					{ type: "dir", path: "/app", dev: webDevice },
+					{ type: "dir", path: "/data", dev: dataDevice },
+					{ type: "devs", path: "/dev" },
+				],
+			});
+		</script>
+	</head>
+	<body style="heigth: 100%;background: black;">
+		<pre id="console" style="heigth: 100%;"></pre>
+	</body>
 </html>
 ```
 

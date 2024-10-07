@@ -5,13 +5,13 @@ description: Virtual filesystems and how to use them
 
 CheerpX implements UNIX-style virtual filesystems with multiple mount points, providing a flexible and secure way to manage files and data in your web-based Linux environment:
 
-| Filesystem Type    | Description                                                | Write | Read |
-| ------------------ | ---------------------------------------------------------- | ----- | ---- |
-| WebDevice          | HTTP-based filesystem for loading files from web server    | No    | Yes  |
-| IDBDevice          | Persistent read-write filesystem using IndexedDB           | Yes   | Yes  |
-| DataDevice         | In-memory filesystem for temporary data storage            | Yes   | Yes  |
-| HttpBytesDevice    | A block device with a Linux filesystem inside (ext2)       | No    | Yes  |
-| OverlayDevice      | A writable persistent overlay on another block device      | Yes   | Yes  |
+| Filesystem Type | Description                                             | Write | Read |
+| --------------- | ------------------------------------------------------- | ----- | ---- |
+| WebDevice       | HTTP-based filesystem for loading files from web server | No    | Yes  |
+| IDBDevice       | Persistent read-write filesystem using IndexedDB        | Yes   | Yes  |
+| DataDevice      | In-memory filesystem for temporary data storage         | Yes   | Yes  |
+| HttpBytesDevice | A block device with a Linux filesystem inside (ext2)    | No    | Yes  |
+| OverlayDevice   | A writable persistent overlay on another block device   | Yes   | Yes  |
 
 > [!info] Virtual Environment
 > CheerpX provides access to a virtualized filesystem environment, which does not correspond to the local user's computer. Direct access to local files is restricted due to browser security constraints.
