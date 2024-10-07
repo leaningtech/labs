@@ -1,0 +1,39 @@
+---
+title: Custom disk images
+description: How to create custom ext2 images to use as a filesystem for CheerpX
+---
+
+This guide will show you how to configure a Docker container and build it into an `ext2` image for use with CheerpX.
+
+## 1. Create a Dockerfile
+
+For example, the following Dockerfile installs the `curl` command-line tool:
+
+```dockerfile
+FROM --platform=i386 i386/debian:buster
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get -y upgrade && apt-get -y install curl
+```
+
+Note that the base image's architecture must be 32-bit x86 (for example, `i386` or `i686`).
+
+## 2. Create a container out of your Dockerfile
+
+```bash
+buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
+podman create --name cheerpxcontainer cheerpximage
+```
+
+## 3. Copy the filesystem from the container into a local directory
+
+```bash
+mkdir cheerpXFS
+podman cp cheerpxcontainer:/ cheerpXFS/
+```
+
+## 4. Create an ext2 image from the specified directory
+
+```bash
+mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+```
