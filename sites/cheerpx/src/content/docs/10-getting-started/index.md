@@ -12,13 +12,24 @@ description: Getting started with CheerpX
 No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML:
 
 ```html
-<script src="%CHEERPX_LATEST%"></script>
+<script src="%https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
 ```
 
-> [!note]
-> When you hover the mouse pointer over the code, a ‘copy to clipboard’ button appears on the right. Please do NOT click on this button as it may cause the copied content to become `src="%CHEERPX_LATEST%"`. Please copy the line of code manually.
+### ES6 Module Compatibility
 
-CheerpX's API is still in the works, so we are not tagging releases yet. All [nightly builds](https://t2informatik.de/en/smartpedia/nightly-build/) are immutable so you can trust that the URL above will not break.
+CheerpX is also available as an ES6 JavaScript module. If you prefer to use the ES6 module version, you can include it like this:
+
+```html
+<script type="module">
+   import * as CheerpX from 'https://cxrtnc.leaningtech.com/0.9.0/cx.esm.js';
+   self.CheerpX = CheerpX;
+</script>
+```
+
+This approach allows you to use CheerpX as an ES6 module in your project. Note that when using the ES6 module version, you'll need to adjust your code slightly to use the imported `CheerpX` object.
+
+> [!tip]
+> The examples in this documentation use the traditional script inclusion method. If you're using the ES6 module version, you may need to adapt the code examples accordingly.
 
 ## 2. Create an application instance
 
