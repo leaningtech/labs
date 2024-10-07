@@ -9,8 +9,6 @@ namespace CheerpX {
 		static async create(options?: {
 			mounts?: MountPointConfiguration[];
 			networkInterface?: NetworkInterface;
-			activityInterface?: ActivityInterface;
-			bridgeURL?: string;
 		}): Promise<CheerpX.Linux>;
 	}
 }
@@ -36,16 +34,6 @@ interface NetworkInterface {
 	stateUpdateCb?: (state: number) => void;
 	netmapUpdateCb?: (map: any) => void;
 }
-
-interface ActivityInterface {
-	// Callback for CPU state changes:
-	//'ready' when CPU is active, 'wait' when idle.
-	cpu?: (state: "ready" | "wait") => void;
-
-	// Callback for device state changes:
-	//'ready' when device is active, 'wait' when idle.
-	dev?: (state: "ready" | "wait") => void;
-}
 ```
 
 ## Parameters
@@ -54,7 +42,7 @@ interface ActivityInterface {
 
 ## Returns
 
-`CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use.
+`CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use. The resolved value is a `CheerpX.Linux` instance that provides methods for interacting with the CheerpX environment.
 
 ## Options
 
@@ -87,36 +75,11 @@ networkInterface?: NetworkInterface;
 
 This option configures network settings, which allows CheerpX to communicate over networks.
 
-### `activityInterface`
-
-```ts
-activityInterface?: ActivityInterface;
-```
-
-This option allows monitoring of CPU and device activity within CheerpX, useful for handling state changes and resource management.
-
-### `bridgeURL`
-
-```ts
-bridgeURL?: string;
-```
-
-This option specifies the URL of a bridge server for communication between the CheerpX environment and external servers.
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	bridgeURL: "https://yourbridgeurl.com/api",
-});
-```
-
 ### Device Configuration Options for CheerpX
 
-CheerpX supports various types of devices that can be configured as overlayDevice. Here’s how you can create them:
+CheerpX supports various types of devices that can be configured as overlayDevice. Here's how you can create them:
 
 - HttpBytesDevice (bytes): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-- CloudDevice (block): Optimized for use with Cloudflare, enhancing performance and reliability through cloud storage solutions.
 - GitHubDevice (split): Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
 - IDBDevice: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
 
@@ -131,83 +94,97 @@ const overlayDevice = await CheerpX.OverlayDevice.create(
 
 ### Using Different Device Types in Mounts
 
-CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment.
+CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment. The main types are:
 
-#### IDBDevice
+- **IDBDevice**: Persistent storage backed by IndexedDB
+- **WebDevice**: Mounts a directory from your local server
+- **DataDevice**: Simple in-memory filesystem
 
-`CheerpX.IDBDevice` allows you to create a persistent storage device backed by IndexedDB.
-
-Example:
+Example of mounting different device types:
 
 ```js
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
-
-const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/files", dev: idbDevice }],
-});
-```
-
-This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
-
-#### WebDevice
-
-`CheerpX.WebDevice` allows you to mount a directory from your local server.
-
-Example:
-
-```js
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
-
-const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/app", dev: webDevice }],
-});
-```
-
-This mounts the specified local directory at `/app` in the CheerpX environment.
-
-#### DataDevice
-
-`CheerpX.DataDevice` provides a simple in-memory filesystem.
-
-Example:
-
-```js
 const dataDevice = await CheerpX.DataDevice.create();
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/data", dev: dataDevice }],
+	mounts: [
+		{ type: "dir", path: "/files", dev: idbDevice },
+		{ type: "dir", path: "/app", dev: webDevice },
+		{ type: "dir", path: "/data", dev: dataDevice },
+	],
 });
 ```
 
-This creates an in-memory filesystem mounted at `/data`.
+> [!note]
+> For detailed information on each device type, including usage examples and specific methods like `dataDevice.writeFile`, please refer to the <a href="../guides/File-System-support">Files and filesystems</a> guide.
 
-### `dataDevice.writeFile`
+## Activity Callbacks
 
-`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
+The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity, as well as disk latency.
 
-```js
-await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
+### `registerCallback`
+
+```ts
+registerCallback(eventName: string, callback: (state: string | number) => void): void
 ```
+
+Registers a callback function for a specific event type.
 
 **Parameters**:
 
-- **filename**: A string representing the absolute path to the file, starting with a `/` (e.g., "/filename").
-- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
+- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
+  - For "cpuActivity" and "diskActivity": `state` can be either "ready" (active) or "wait" (idle).
+  - For "diskLatency": `latency` is a number representing the latency in milliseconds.
 
-**Returns**:
+### `unregisterCallback`
 
-The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
-
-Example:
-
-```js
-const dataDevice = await CheerpX.DataDevice.create();
-await dataDevice.writeFile("/filename", "contents");
+```ts
+unregisterCallback(eventName: string, callback: (state: string | number) => void): void
 ```
 
-Note:
+Unregisters a previously registered callback function for a specific event type.
 
-- This is the only way to create files in this device.
-- Modifying existing files or creating files in subdirectories is not possible.
+**Parameters**:
+
+- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **callback**: The function to be unregistered.
+
+Example usage:
+
+```js
+function hddCallback(state) {
+	var h = document.getElementById("hddactivity");
+	if (state == "ready") h.textContent = "\u{1F7E2}";
+	else h.textContent = "\u{1F7E0}";
+}
+
+function cpuCallback(state) {
+	var h = document.getElementById("cpuactivity");
+	if (state == "ready") h.textContent = "\u{1F7E2}";
+	else h.textContent = "\u{1F7E0}";
+}
+
+function latencyCallback(latency) {
+	console.log(`Last disk block download latency: ${latency}ms`);
+}
+
+const cx = await CheerpX.Linux.create(/* options */);
+
+cx.registerCallback("cpuActivity", cpuCallback);
+cx.registerCallback("diskActivity", hddCallback);
+cx.registerCallback("diskLatency", latencyCallback);
+
+// Later, if needed:
+// cx.unregisterCallback("cpuActivity", cpuCallback);
+// cx.unregisterCallback("diskActivity", hddCallback);
+// cx.unregisterCallback("diskLatency", latencyCallback);
+```
+
+This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks update UI elements based on the activity state, while the disk latency callback logs the latency of the last downloaded disk block.
+
+> [!note]
+> The `diskLatency` event works for any type of network block device and provides real-time information about the latency of disk block downloads.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
