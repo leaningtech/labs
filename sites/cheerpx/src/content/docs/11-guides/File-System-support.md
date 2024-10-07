@@ -115,22 +115,24 @@ await dataDevice.writeFile("/filename", "contents");
 > - This is the only way to create files in this device.
 > - Modifying existing files or creating files in subdirectories is not possible.
 
-## ext2 Filesystem
+## Block devices with ext2
 
 CheerpX supports ext2 filesystems, which can be configured as an overlay device. This allows for a flexible setup that can combine different storage types.
 
 ### Usage
 
-Create an ext2 filesystem using the `CheerpX.OverlayDevice.create()` method:
+Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
 
 ```javascript
-// Create an HttpBytesDevice for loading the filesystem image via HTTP
+// Create an HttpBytesDevice for streaming disk blocks via HTTP
 const httpDevice = await CheerpX.HttpBytesDevice.create(
 	"https://yourserver.com/image.ext2",
 );
 
 // Create an IDBDevice for persistent local storage
 const idbDevice = await CheerpX.IDBDevice.create("block1");
+
+const overlayDevice = await CheerpX.OverlayDevice.create(httpDevice, idbDevice);
 
 const cx = await CheerpX.Linux.create({
 	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
@@ -144,8 +146,8 @@ This setup creates an ext2 filesystem that loads its initial data from an HTTP s
 CheerpX supports various types of devices that can be used in the OverlayDevice configuration:
 
 1. **HttpBytesDevice**: The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-2. **GitHubDevice**: Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
-3. **IDBDevice**: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
+2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
+3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
 ## Best Practices
 
