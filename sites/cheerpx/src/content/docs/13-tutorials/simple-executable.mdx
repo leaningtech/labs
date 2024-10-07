@@ -89,23 +89,26 @@ Open `index.html` and add the following content:
 ```html title="index.html"
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>CheerpX Simple Executable Test</title>
-    <script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
-  </head>
-  <body style="background-color: #5d7c86;">
-    <h1>CheerpX Simple Executable Test</h1>
-    <pre id="console" style="padding: 20px; border-radius: 5px; margin-top: 20px;"></pre>
+	<head>
+		<meta charset="UTF-8" />
+		<title>CheerpX Simple Executable Test</title>
+		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
+	</head>
+	<body style="background-color: #5d7c86;">
+		<h1>CheerpX Simple Executable Test</h1>
+		<pre
+			id="console"
+			style="padding: 20px; border-radius: 5px; margin-top: 20px;"
+		></pre>
 
-    <script type="module">
-      // Initialize CheerpX
-      const cx = await CheerpX.Linux.create();
-      cx.setConsole(document.getElementById("console"));
-      // Run the compiled executable
-      await cx.run("/hello_cheerpx", []);
-    </script>
-  </body>
+		<script type="module">
+			// Initialize CheerpX
+			const cx = await CheerpX.Linux.create();
+			cx.setConsole(document.getElementById("console"));
+			// Run the compiled executable
+			await cx.run("/hello_cheerpx", []);
+		</script>
+	</body>
 </html>
 ```
 
