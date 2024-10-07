@@ -28,18 +28,18 @@ To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/app", dev: webDevice }],
+	mounts: [{ type: "dir", path: "/web", dev: webDevice }],
 });
 ```
 
-This mounts the specified local directory at `/app` in the CheerpX filesystem.
+This mounts the specified local directory at `/web` in the CheerpX filesystem.
 
 ### Accessing Files
 
 Files in the WebDevice are accessed relative to the current page's URL. For example, if your current page is `https://host/dir1/dir2/page.html`, then:
 
-- `/app/example.txt` would correspond to `https://host/dir1/dir2/path/to/local/directory/example.txt`
-- `/app/images/logo.png` would correspond to `https://host/dir1/dir2/path/to/local/directory/images/logo.png`
+- `/web/example.txt` would correspond to `https://host/dir1/dir2/path/to/local/directory/example.txt`
+- `/web/images/logo.png` would correspond to `https://host/dir1/dir2/path/to/local/directory/images/logo.png`
 
 > [!note]
 > It's important to note that this behavior depends on the current page's URL, as it uses a relative path. For more predictable results, it's recommended to use absolute paths when possible.
