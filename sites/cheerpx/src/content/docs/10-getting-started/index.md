@@ -23,15 +23,13 @@ CheerpX is also available as an ES6 JavaScript module. If you prefer to use the 
 
 ```html
 <script type="module">
-	import * as CheerpX from "https://cxrtnc.leaningtech.com/0.9.0/cx.esm.js";
+	import * as CheerpX from "https://cxrtnc.leaningtech.com/0.9.1/cx.esm.js";
 	self.CheerpX = CheerpX;
 </script>
 ```
 
-This approach allows you to use CheerpX as an ES6 module in your project. Note that when using the ES6 module version, you'll need to adjust your code slightly to use the imported `CheerpX` object.
-
 > [!tip]
-> The examples in this documentation use the traditional script inclusion method. If you're using the ES6 module version, you may need to adapt the code examples accordingly.
+> When using the ES6 module version, you don't have to assign the imported `CheerpX` to the global scope. This example is intended to keep compatibility with the traditional script inclusion method used in this documentation.
 
 ## 2. Create an application instance
 
