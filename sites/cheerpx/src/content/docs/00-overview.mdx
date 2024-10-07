@@ -23,22 +23,22 @@ import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
 CheerpX enables you to run existing 32-bit x86 native binaries and Linux distributions:
 
-- without modifications;
-- without recompilation;
-- without source-code;
-- fully client-side.
+- Without modifications
+- Without recompilation
+- Without source-code
+- Fully client-side
 
-CheerpX is perfect for web-based IDEs, programming tutorials, virtual machines, and interactive demos. It can also be used to provide a secure sandbox for untrusted code. CheerpX is used by [WebVM](https://webvm.io/), [PythonFiddle](https://pythonfiddle.leaningtech.com/), and has been fully tested in production as part of [CheerpX for Flash](/cheerpx-for-flash), an enterprise solution to run legacy Adobe Flash content in the browser.
+CheerpX is perfect for web-based IDEs, programming tutorials, virtual machines, and interactive demos. It can also be used to provide a secure sandbox for untrusted code. CheerpX is very robust and deployed as part of [WebVM](https://webvm.io/) and [PythonFiddle](https://pythonfiddle.leaningtech.com/). It is also used in production environments as part of [CheerpX for Flash](/cheerpx-for-flash), an enterprise solution to run legacy Adobe Flash content in the browser.
 
-If you're looking to run Java in the browser, check out [CheerpJ](/cheerpj).
+If you're looking to run Java in the browser, please check out our specialized solution: [CheerpJ](/cheerpj).
 
 ## Comparisons
 
 ### CheerpX versus cloud VMs
 
-Cloud based solutions are trivial to implement but also have significant drawbacks in terms of computational costs and user data ownership.
+Cloud VMs are the most common solution to run native logic for use by a Web application, but also have significant drawbacks in terms of computational costs and user data ownership.
 
-CheerpX is a client-side solution, which means that the code is executed directly in the browser, without any server-side component. This has several advantages:
+CheerpX is a client-side solution, which means that code is executed directly in the browser, without any server-side component. This has several advantages:
 
 - **Cost effective.** No need to pay by the minute for cloud VMs.
 - **Improved user experience.** No latency. Works offline.
@@ -54,23 +54,23 @@ WebContainers [can only execute languages that are natively supported on the Web
 
 ### CheerpX versus porting to WebAssembly
 
-[Porting a large C/C++ codebase to WebAssembly](/cheerp) is not necessarily a simple endeavor. For instance, a programming language implementation will most likely have multiple target-dependent code paths or definition, so the effort required is not dissimilar from porting the language to a new native architecture.
+[Porting a large C/C++ codebase to WebAssembly](/cheerp) is not necessarily a simple endeavor. For instance, a complex application will most likely have multiple target-dependent code paths or definition, so the effort required is not dissimilar from porting the application to a new native architecture.
 
 ### CheerpX versus v86/JSLinux
 
-CheerpX virtualises at a higher level. v86 and JSLinux emulate specific hardware peripherals, whereas CheerpX implements Linux system calls.
+CheerpX virtualization the system as a higher level. While v86 and JSLinux emulate specific hardware peripherals, CheerpX implements Linux system calls.
 
-They also require the entire disk image to be downloaded ahead-of-time (so [full 600MB Debian](https://webvm.io) is not really an option). CheerpX can stream the disk image from the server as needed.
+They also require the entire disk image to be downloaded ahead-of-time. A [2GB complete Debian system](https://webvm.io) would not be a practical option. CheerpX can stream the disk image from the server as needed.
 
-v86 and JSLinux are hobby projects, whereas CheerpX is a commercial product with a dedicated team of engineers. If you're shipping with CheerpX, you can [rely on us to provide support and maintenance](https://leaningtech.com/contact-us).
+Moreover, v86 and JSLinux are hobby projects, whereas CheerpX is a commercial product with a dedicated team of engineers. If you're shipping with CheerpX, you can [rely on us to provide support and maintenance](https://leaningtech.com/contact-us).
 
 ## How it works
 
-At its core, CheerpX is a two-tier emulator for the x86 architecture [implemented in C++ and compiled to JavaScript and WebAssembly](/cheerp). There is both an interpreter and a sophisticated JIT compiler that is able to generate efficient WebAssembly representations for hot code. The whole process is 100% automated and requires no metadata or assumptions whatsoever. The system is so robust that it can deal with applications that generate new code internally at runtime, and even with self-modifying code.
+At its core, CheerpX is a two-tier emulator for the x86 architecture [implemented in C++ and compiled to JavaScript and WebAssembly](/cheerp). There is both an interpreter and a sophisticated JIT compiler that is able to generate efficient WebAssembly representations for hot code. The whole process is 100% automated and requires no metadata or preprocessing steps. The system is so robust that it can deal with applications that generate new code internally at runtime, and even with self-modifying code.
 
-This means that you can actually run things like Node.js, including the full V8 engine with its remarkable JIT and code garbage collection. [Demo.](https://repl.leaningtech.com/?nodejs)
+This means that you can actually run things like Node.js, including the full V8 engine with its remarkable JIT and code garbage collection.
 
-CheerpX currently focuses on user mode (ring 3), and does not fully emulate the kernel (ring 0). We do, however, implement a subset of the Linux system call interface, which is enough to run most applications. We are working on a full system emulation mode - DOS already works.
+CheerpX currently focuses on user mode (ring 3), and does not fully emulate the kernel (ring 0). We do, however, implement an extended subset of the Linux system call interface, which is sufficient to run most applications. We are also working on a full system emulation mode, with DOS-era applications and games already supported.
 
 <iframe
 	width="560"
