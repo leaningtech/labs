@@ -67,6 +67,9 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
+> [!note]
+> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-base persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
+
 ### `networkInterface`
 
 ```ts
@@ -74,50 +77,6 @@ networkInterface?: NetworkInterface;
 ```
 
 This option configures network settings, which allows CheerpX to communicate over networks.
-
-### Device Configuration Options for CheerpX
-
-CheerpX supports various types of devices that can be configured as overlayDevice. Here's how you can create them:
-
-- HttpBytesDevice (bytes): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-- GitHubDevice (split): Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
-- IDBDevice: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
-
-Example: Creating an Overlay Device
-
-```js
-const overlayDevice = await CheerpX.OverlayDevice.create(
-	await CheerpX.HttpBytesDevice.create("https://yourserver.com/image.ext2"),
-	await CheerpX.IDBDevice.create("block1"),
-);
-```
-
-### Using Different Device Types in Mounts
-
-CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment. The main types are:
-
-- **IDBDevice**: Persistent storage backed by IndexedDB
-- **WebDevice**: Mounts a directory from your local server
-- **DataDevice**: Simple in-memory filesystem
-
-Example of mounting different device types:
-
-```js
-const idbDevice = await CheerpX.IDBDevice.create("dbName");
-const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
-const dataDevice = await CheerpX.DataDevice.create();
-
-const cx = await CheerpX.Linux.create({
-	mounts: [
-		{ type: "dir", path: "/files", dev: idbDevice },
-		{ type: "dir", path: "/app", dev: webDevice },
-		{ type: "dir", path: "/data", dev: dataDevice },
-	],
-});
-```
-
-> [!note]
-> For detailed information on each device type, including usage examples and specific methods like `dataDevice.writeFile`, please refer to the <a href="../guides/File-System-support">Files and filesystems</a> guide.
 
 ## Activity Callbacks
 
