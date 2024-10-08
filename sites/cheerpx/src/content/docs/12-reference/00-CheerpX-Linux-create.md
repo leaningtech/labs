@@ -67,7 +67,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-> [!note]
+> [!note] Note
 > CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-base persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
 
 ### `networkInterface`
@@ -143,7 +143,7 @@ cx.registerCallback("diskLatency", latencyCallback);
 
 This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks update UI elements based on the activity state, while the disk latency callback logs the latency of the last downloaded disk block.
 
-> [!note]
+> [!note] Note
 > The `diskLatency` event works for any type of network block device and provides real-time information about the latency of disk block downloads.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
