@@ -6,6 +6,7 @@ description: Run bash in a filesystem
 This tutorial will explain how to create a full custom filesystem and work in it using CheerpX from scratch.
 
 ## Table of Contents
+
 - [1. Creating a ext2 image](#1-creating-a-ext2-image)
 - [2. Include CheerpX](#2-include-cheerpx)
 - [3. Serve the filesystem and index.html](#3-serve-the-filesystem-and-index.html)
@@ -14,8 +15,8 @@ This tutorial will explain how to create a full custom filesystem and work in it
 - [6. Attach a console ](#6-attach-a-console)
 - [7. Execute a program ](#7-execute-a-program)
 
-
 ## 1. Creating a ext2 image
+
 We're going to create a ext2 image. This image will be used as a filesystem. The image is going to be used with CheerpX from a Dockerfile.
 
 First create a Dockerfile in i386:
@@ -29,22 +30,24 @@ CMD [ "/bin/bash" ]
 ```
 
 Create a container out of your Dockerfile:
+
 ```bash
 buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
 podman create --name cheerpxcontainer cheerpximage
 ```
 
 Copy the filesystem from the container into a local directory:
+
 ```bash
 mkdir cheerpXFS
 podman cp cheerpxcontainer:/ cheerpXFS/
 ```
 
 create an ext2 image from the specified directory:
+
 ```bash
 mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
-
 
 ## 2. Include CheerpX
 
@@ -59,7 +62,6 @@ Create an index.html file and add this line to index.html `<head>` section to in
 The ext2 image needs to be served with [CORS] headers.
 
 This example nginx.conf is set up with the correct headers.
-
 
 ```nginx
 worker_processes  1;
@@ -144,17 +146,21 @@ You can now see your page at `http://localhost:8081`
 
 Move cheerpXImage.ext2 into a directory called images, so that this nginx configuration will serve it correctly.
 
-
 ## 4. Create a device for the filesystem
 
-Add a new `<script>` tag with the type module into the index.html. 
+Add a new `<script>` tag with the type module into the index.html.
 
 Create a `HttpBytesDevice(link)` from the ext2 image that was just created. `OverlayDevice(link)` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
 
 ```html
 <script type="module">
-	var blockDevice = await CheerpX.HttpBytesDevice.create("images/cheerpXImage.ext2");
-	var overlayDevice = await CheerpX.OverlayDevice.create(blockDevice, await CheerpX.IDBDevice.create("block1"));
+	var blockDevice = await CheerpX.HttpBytesDevice.create(
+		"images/cheerpXImage.ext2",
+	);
+	var overlayDevice = await CheerpX.OverlayDevice.create(
+		blockDevice,
+		await CheerpX.IDBDevice.create("block1"),
+	);
 </script>
 ```
 
@@ -164,9 +170,7 @@ Pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` meth
 
 ```js
 const cx = await CheerpX.Linux.create({
-	mounts: [
-		{ type: "ext2", path: "/", dev: overlayDevice }
-	],
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });
 ```
 
@@ -196,29 +200,30 @@ Add headers to index.html
 Create a new terminal instance
 
 ```js
-var term = new Terminal({convertEol:true});
+var term = new Terminal({ convertEol: true });
 term.open(document.getElementById("console"));
 ```
 
 Pass xterm.js to the CheerpX instance
 
 ```js
-const readFunc = cx.setCustomConsole((data) => {
-	term.write(new Uint8Array(data));
-}, term.cols, term.rows);
+const readFunc = cx.setCustomConsole(
+	(data) => {
+		term.write(new Uint8Array(data));
+	},
+	term.cols,
+	term.rows,
+);
 
 term.onData((data) => {
-	if (readFunc == null)
-		return;
-	for (let i = 0; i < data.length; i++)
-		readFunc(data.charCodeAt(i));
+	if (readFunc == null) return;
+	for (let i = 0; i < data.length; i++) readFunc(data.charCodeAt(i));
 });
 ```
 
 ## 7. Execute a program
 
-The `cx.run` command will execute bash in the terminal that was created. 
-
+The `cx.run` command will execute bash in the terminal that was created.
 
 ```js
 await cx.run("/bin/bash", ["--login"], {
@@ -229,14 +234,15 @@ await cx.run("/bin/bash", ["--login"], {
 		"SHELL=/bin/bash",
 		"EDITOR=vim",
 		"LANG=en_US.UTF-8",
-		"LC_ALL=C"
+		"LC_ALL=C",
 	],
 	cwd: "/home/user",
 	uid: "1000",
-	gid: "1000"
+	gid: "1000",
 });
 ```
-From now you're able to interact with the filesystem. 
+
+From now you're able to interact with the filesystem.
 
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [xterm.js]: https://xtermjs.org/
