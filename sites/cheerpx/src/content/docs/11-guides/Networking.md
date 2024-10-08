@@ -17,9 +17,10 @@ Native networking in the browser is extremely limited, only allowing HTTP connec
 
 > [!question] Why can't CheerpX at least support HTTP/HTTPS traffic using `fetch`>
 > Using `fetch` for HTTP/HTTPS connections in CheerpX is not feasible for two reasons:
+>
 > 1. In the common case of HTTPS, applications inside the VM would perform their own encryption, making it impossible to recover the requested URL.
 > 2. The browser always enforces cross-origin rules and cross-domain requests are only allowed by a small subset of domains, making it very unlikely that an aribitrary application could work when attempting HTTP traffic via fetch.
-> These limitations necessitate a more comprehensive networking solution that can provide a full TCP/IP stack.
+>    These limitations necessitate a more comprehensive networking solution that can provide a full TCP/IP stack.
 
 #### The need for a VPN solution
 
