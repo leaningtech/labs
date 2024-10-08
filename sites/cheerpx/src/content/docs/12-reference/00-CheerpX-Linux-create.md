@@ -67,6 +67,9 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
+> [!note] Note
+> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-base persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
+
 ### `networkInterface`
 
 ```ts
@@ -75,53 +78,9 @@ networkInterface?: NetworkInterface;
 
 This option configures network settings, which allows CheerpX to communicate over networks.
 
-### Device Configuration Options for CheerpX
+## Event callbacks
 
-CheerpX supports various types of devices that can be configured as overlayDevice. Here's how you can create them:
-
-- HttpBytesDevice (bytes): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-- GitHubDevice (split): Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
-- IDBDevice: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
-
-Example: Creating an Overlay Device
-
-```js
-const overlayDevice = await CheerpX.OverlayDevice.create(
-	await CheerpX.HttpBytesDevice.create("https://yourserver.com/image.ext2"),
-	await CheerpX.IDBDevice.create("block1"),
-);
-```
-
-### Using Different Device Types in Mounts
-
-CheerpX supports various device types that can be mounted and accessed like filesystems within the CheerpX environment. The main types are:
-
-- **IDBDevice**: Persistent storage backed by IndexedDB
-- **WebDevice**: Mounts a directory from your local server
-- **DataDevice**: Simple in-memory filesystem
-
-Example of mounting different device types:
-
-```js
-const idbDevice = await CheerpX.IDBDevice.create("dbName");
-const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
-const dataDevice = await CheerpX.DataDevice.create();
-
-const cx = await CheerpX.Linux.create({
-	mounts: [
-		{ type: "dir", path: "/files", dev: idbDevice },
-		{ type: "dir", path: "/app", dev: webDevice },
-		{ type: "dir", path: "/data", dev: dataDevice },
-	],
-});
-```
-
-> [!note]
-> For detailed information on each device type, including usage examples and specific methods like `dataDevice.writeFile`, please refer to the <a href="../guides/File-System-support">Files and filesystems</a> guide.
-
-## Activity Callbacks
-
-The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity, as well as disk latency.
+The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks to monitor CPU and disk activity, as well as disk latency.
 
 ### `registerCallback`
 
@@ -133,10 +92,10 @@ Registers a callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **eventName**: A string specifying the event type. Can be `"cpuActivity"`, `"diskActivity"`, or `"diskLatency"`.
 - **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
-  - For "cpuActivity" and "diskActivity": `state` can be either "ready" (active) or "wait" (idle).
-  - For "diskLatency": `latency` is a number representing the latency in milliseconds.
+  - For `"cpuActivity"` and `"diskActivity"`: `state` can be either "ready" (active) or "wait" (idle).
+  - For `"diskLatency"`: `state` is a number representing the time in milliseconds between requesting and receiving the last disk block.
 
 ### `unregisterCallback`
 
@@ -148,7 +107,7 @@ Unregisters a previously registered callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **eventName**: A string specifying the event type. See the `registerCallback` reference above for the supported event types.
 - **callback**: The function to be unregistered.
 
 Example usage:
@@ -184,7 +143,7 @@ cx.registerCallback("diskLatency", latencyCallback);
 
 This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks update UI elements based on the activity state, while the disk latency callback logs the latency of the last downloaded disk block.
 
-> [!note]
+> [!note] Note
 > The `diskLatency` event works for any type of network block device and provides real-time information about the latency of disk block downloads.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

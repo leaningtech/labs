@@ -23,7 +23,7 @@ namespace CheerpX {
 
 ## Returns
 
-`setCustomConsole` returns a function that receives key codes to simulate user typing in the console.
+`setCustomConsole` returns a function tha should be called to simulate user typing in the console.
 
 ## Examples
 
@@ -42,10 +42,10 @@ const send = cx.setCustomConsole(
 );
 
 // Send a string
-for (let i = 0; i < "Hello, world!".length; i++) {
-	send("Hello, world!".charCodeAt(i));
+const str = "Hello, world!\n";
+for (let i = 0; i < str.length; i++) {
+	send(str.charCodeAt(i));
 }
-send(0x000d); // Carriage return (Enter)
 ```
 
 ### Use with [Xterm.js](https://xtermjs.org/)
@@ -63,12 +63,12 @@ const send = cx.setCustomConsole(
 );
 term.onData((str) => {
 	for (let i = 0; i < str.length; i++) {
-		send?.(str.charCodeAt(i));
+		send(str.charCodeAt(i));
 	}
 });
 ```
 
-This is what [WebVM](https://webvm.io) uses.
+This is what [WebVM](https://webvm.io) uses for its interactive terminal.
 
 ## See also
 
