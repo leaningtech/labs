@@ -34,6 +34,8 @@ const cx = await CheerpX.Linux.create({
 
 This mounts the specified local directory at `/web` in the CheerpX filesystem.
 
+To be able to list the files, CheerpX will look for a file called index.list in the directory and each of its subdirectories. The file should contain a newline separated list of all files and folders contained in the directory.
+
 ### Accessing Files
 
 Files in the WebDevice are accessed relative to the current page's URL. For example, if your current page is `https://host/dir1/dir2/page.html`, then:
