@@ -15,7 +15,7 @@ When it comes to generalised networking scenarios, there are some browser-enforc
 
 Native networking in the browser is extremely limited, only allowing HTTP connections to the same domain as the page. While WebSockets exist, they are not actual sockets but rather an extension to HTTP. This limitation makes it impossible to use the browser's `fetch` API for general networking purposes in CheerpX applications.
 
-> [!question] Why can't CheerpX at least support HTTP/HTTPS traffic using `fetch`>
+> [!question] Why can't CheerpX at least support HTTP/HTTPS traffic using `fetch`
 > Using `fetch` for HTTP/HTTPS connections in CheerpX is not feasible for two reasons:
 >
 > 1. In the common case of HTTPS, applications inside the VM would perform their own encryption, making it impossible to recover the requested URL.
