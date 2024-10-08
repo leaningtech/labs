@@ -78,9 +78,9 @@ networkInterface?: NetworkInterface;
 
 This option configures network settings, which allows CheerpX to communicate over networks.
 
-## Activity Callbacks
+## Event callbacks
 
-The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks for monitoring CPU and disk activity, as well as disk latency.
+The `CheerpX.Linux` instance returned by `create` provides methods to register and unregister callbacks to monitor CPU and disk activity, as well as disk latency.
 
 ### `registerCallback`
 
@@ -92,10 +92,10 @@ Registers a callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **eventName**: A string specifying the event type. Can be `"cpuActivity"`, `"diskActivity"`, or `"diskLatency"`.
 - **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
-  - For "cpuActivity" and "diskActivity": `state` can be either "ready" (active) or "wait" (idle).
-  - For "diskLatency": `latency` is a number representing the latency in milliseconds.
+  - For `"cpuActivity"` and `"diskActivity"`: `state` can be either "ready" (active) or "wait" (idle).
+  - For `"diskLatency"`: `state` is a number representing the time in milliseconds between requesting and receiving the last disk block.
 
 ### `unregisterCallback`
 
@@ -107,7 +107,7 @@ Unregisters a previously registered callback function for a specific event type.
 
 **Parameters**:
 
-- **eventName**: A string specifying the event type. Can be "cpuActivity", "diskActivity", or "diskLatency".
+- **eventName**: A string specifying the event type. See the `registerCallback` reference above for the supported event types.
 - **callback**: The function to be unregistered.
 
 Example usage:
