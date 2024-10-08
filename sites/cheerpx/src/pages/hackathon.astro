@@ -15,6 +15,8 @@ import Alessandro from "../assets/judges/alessandro.jpeg";
 import Jules from "../assets/judges/jules.jpeg";
 import Martin from "../assets/judges/martin.jpeg";
 import Luca from "../assets/judges/luca.jpeg";
+import RuleBook from "../assets/rulebook.png";
+import Directions from "../assets/direction.png";
 ---
 
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-black">
@@ -152,11 +154,59 @@ import Luca from "../assets/judges/luca.jpeg";
 			>
 				In a nutshell: assemble your tech squad together, immerse yourself in a
 				tech project frenzy for a whole weekend. <b
-					>The winner team gets a sweet 500 GBP!</b
+					>The winner team gets a sweet 500 GBP gift card!</b
 				>
 				And just in case you need more guidance, here's a detailed walkthrough explained
 				using adorable cats 🐱💻🚀.
 			</p>
+		</div>
+	</section>
+	<section
+		class="text-white py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
+	>
+		<div class="flex justify-center items-center">
+			<Image src={Directions} alt="Wizzard cat in the mountains" class="w-72" />
+		</div>
+		<h1 class="font-mono font-bold text-4xl text-center text-white py-8">
+			Adventure directions
+		</h1>
+		<div class="flex gap-4 justify-center items-center px-10">
+			<p class="font-mono italic font-semibold">
+				If you find yourself lost in the boundless possibilities of CheerpX,
+				fear not. Here are some guiding lights to illuminate your hackathon
+				odyssey and give you some direction about all the cool things you can
+				create during this event.
+			</p>
+		</div>
+		<div class="py-6 px-16">
+			<ul class="list-decimal font-mono space-y-4 text-pretty">
+				<li>
+					In-browser development environments: running native development tools
+					(compilers, interpreters, etc.) client-side, with no need for cloud
+					infrastructure.
+				</li>
+				<li>
+					Client-server applications running both components in the browser:
+					using CheerpX and its <a
+						class="text-[#e2bace] font-bold hover:underline"
+						href="https://cheerpx.io/docs/guides/Networking"
+						>Tailscale integration</a
+					> to run application clients and servers on the same browser, or on multiple
+					browsers
+				</li>
+				<li>
+					Linux virtual machines for educational and training purposes in
+					security, operating systems, etc.
+				</li>
+				<li>
+					Vintage video games and applications: terminal games, terminal
+					applications or software archeology.
+				</li>
+				<li>Web applications that include native library components.</li>
+				<li>
+					All the above can be terminal-based or you can create a fancy web UI!
+				</li>
+			</ul>
 		</div>
 	</section>
 
@@ -164,6 +214,9 @@ import Luca from "../assets/judges/luca.jpeg";
 	<section
 		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
 	>
+		<h1 class="font-mono font-bold text-4xl text-center text-white py-8">
+			The step by step
+		</h1>
 		<!-- Step1: Find your squad -->
 		<div class="sm:grid sm:grid-cols-5 py-16">
 			<div class="col-span-2 flex justify-center items-center">
@@ -197,7 +250,7 @@ import Luca from "../assets/judges/luca.jpeg";
 				<div class="flex gap-4 justify-center sm:justify-start mt-2">
 					<LinkButton
 						type="secondary-mono"
-						href={DISCORD_URL}
+						href="https://discord.com/channels/988743885121548329/1293197837114277959"
 						label="Join Discord"
 						iconRight="simple-icons:discord"
 					/>
@@ -436,6 +489,26 @@ import Luca from "../assets/judges/luca.jpeg";
 					class="max-w-96 sm:pr-28"
 				/>
 			</div>
+		</div>
+		<div class="flex gap-4 justify-center items-center px-10 pt-4">
+			<p class="font-mono text-center italic font-semibold">
+				For more useful information and guidance, don't forget to read the docs
+				or ask any technical questions on our Discord Server.
+			</p>
+		</div>
+		<div class="flex gap-4 justify-center mt-12">
+			<LinkButton
+				type="primary-mono"
+				href="https://discord.com/channels/988743885121548329/1283057350638571581"
+				label="Support"
+				iconRight="simple-icons:discord"
+			/>
+			<LinkButton
+				type="secondary-mono"
+				href="/docs"
+				iconRight=""
+				label="CheerpX docs"
+			/>
 		</div>
 	</section>
 
@@ -737,6 +810,9 @@ import Luca from "../assets/judges/luca.jpeg";
 	<section
 		class="text-black py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#e2bace]"
 	>
+		<div class="flex justify-center items-center">
+			<Image src={RuleBook} alt="Rule book" class="w-48" />
+		</div>
 		<h1 class="font-mono font-bold text-4xl text-center text-black py-8">
 			Rules of the game
 		</h1>
