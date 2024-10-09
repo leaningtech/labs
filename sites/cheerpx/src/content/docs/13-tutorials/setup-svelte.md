@@ -39,7 +39,9 @@ For this to work all top level imports used by the CheerpX NPM module need to be
 
 We'll also need to enable Cross origin isolation. It's required since CheerpX uses SharedArrayBuffer.
 
-```vite.config.ts
+Add the following code in vite.config.ts:
+
+```
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
