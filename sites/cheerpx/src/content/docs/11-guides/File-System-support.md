@@ -28,7 +28,7 @@ To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/web", dev: webDevice }],
+	mounts: [ ... , { type: "dir", path: "/web", dev: webDevice }],
 });
 ```
 
@@ -58,15 +58,50 @@ Create an IDBDevice using the `CheerpX.IDBDevice.create()` method:
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/files", dev: idbDevice }],
+	mounts: [ ... , { type: "dir", path: "/files", dev: idbDevice }],
 });
 ```
 
 This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
+### Reading Files from JavaScript
+
+You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
+
+```javascript
+await idbDevice.readFileAsBlob("/filename");
+```
+
+### `idbDevice.readFileAsBlob`
+
+`CheerpX.IDBDevice` provides a method to read back files as JavaScript accessible data.
+
+```js
+await idbDevice.readFileAsBlob(filename: string): Promise<Blob>
+```
+
+**Parameters**:
+
+- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
+
+**Returns**:
+
+The method returns a Promise that resolves to a standard JavaScript Blob object.
+
+Example:
+
+```js
+const idbDevice = await CheerpX.IDBDevice.create("files");
+// Use CheerpX to write something to the device
+const outputBlob = await dataDevice.readFileAsBlob("/filename");
+```
+
+> [!note] Note
+> The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
+
 ## DataDevice
 
-DataDevice is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
+`DataDevice` is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
 
 ### Usage
 
@@ -76,7 +111,7 @@ Create a DataDevice using the `CheerpX.DataDevice.create()` method:
 const dataDevice = await CheerpX.DataDevice.create();
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/temp", dev: dataDevice }],
+	mounts: [ ... , { type: "dir", path: "/data", dev: dataDevice }],
 });
 ```
 
@@ -98,7 +133,7 @@ await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Pro
 
 **Parameters**:
 
-- **filename**: A string representing the absolute path to the file, starting with a `/` (e.g., "/filename").
+- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
 - **contents**: The data to write to the file. Can be either a string or a Uint8Array.
 
 **Returns**:
