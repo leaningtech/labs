@@ -66,7 +66,7 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
 ### Reading Files from JavaScript
 
-You can read files from an IDBDevice in JavaScript using the `readFileAsBlob` method:
+You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
 
 ```javascript
 await dataDevice.readFileAsBlob("/filename");
@@ -96,12 +96,12 @@ const idbDevice = await CheerpX.IDBDevice.create("files");
 const outputBlob = await dataDevice.readFileAsBlob("/filename");
 ```
 
-> [!note] > [!note] Note
+> [!note] Note
 > The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
 
 ## DataDevice
 
-DataDevice is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
+`DataDevice` is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
 
 ### Usage
 
