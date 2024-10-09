@@ -1,17 +1,17 @@
 ---
 title: Full OS
-description: Run bash in a filesystem
+description: Run bash on a custom disk image
 ---
 
-This tutorial will explain how to create a full custom filesystem and work in it using CheerpX from scratch.
+This tutorial will guide you through creating a custom filesystem from scratch and using it with CheerpX.
 
-## 1. Creating a ext2 image
+## 1. Create an Ext2 image
 
-We're going to create a ext2 image. This image will be used as a filesystem. The image is going to be used with CheerpX from a Dockerfile.
+We will create an Ext2 image, which will serve as the root filesystem for CheerpX.
 
-First create a Dockerfile in i386:
+To ensure consistency in preparing the image contents, we will use a Dockerfile, you can edit the Dockerfile to add custom packages or change the base to the distro of your choosing. It's important to select the `i386` architecture, since CheerpX does not currently support 64-bit executables.
 
-```dockerfile
+```dockerfile title=Dockerfile
 FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN useradd -m user && echo "user:password" | chpasswd
@@ -39,88 +39,59 @@ Create an ext2 image from the specified directory:
 mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
 
-## 2. Include CheerpX
+## 2. Load CheerpX from your index.html
 
-Create an index.html file and add this line to index.html `<head>` section to include CheerpX.
+Loading CheerpX is very simple. Create a new file called `index.html` and populate it with the following HTML code.
 
-```html
-<script src="https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
+```html title=index.html
+<!doctype html>
+<html lang="en" style="heigth: 100%;">
+	<head>
+		<meta charset="UTF-8" />
+		<title>CheerpX Test</title>
+		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+	</head>
+	<body style="heigth: 100%; background: black;"></body>
+</html>
 ```
 
-## 3. Serve the filesystem and index.html
+## 3. Setup a Web server
 
-The ext2 image needs to be served with [CORS] headers.
+We recommend always choosing `nginx` as your Web server when using with CheerpX.
 
-This example nginx.conf is set up with the correct headers.
+This basic configuration should get you up and running. Please note that CheerpX requires cross-origin isolation, which is enabled via the `Cross-Origin-Opener-Policy' and 'Cross-Origin-Embedder-Policy` headers. For more information see the dedicated [Nginx](/docs/guides/nginx) guide.
 
 ```nginx
 worker_processes  1;
+error_log   nginx_main_error.log info;
+pid nginx_user.pid;
+daemon off;
 
 events {
     worker_connections  1024;
 }
 
-error_log   nginx_main_error.log info;
-pid nginx_user.pid;
-daemon off;
-
 http {
-    access_log  nginx_access.log;
-    error_log   nginx_error.log info;
-
-    include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
+    access_log nginx_access.log;
+    error_log nginx_error.log info;
 
-    sendfile        on;
+    sendfile on;
 
     server {
-	listen       8081;
-        server_name  localhost;
+        listen 8080;
+        server_name localhost;
 
-	gzip on;
-        # Enable compression for .wasm, .js and .txt files (used for the runtime chunks)
-	gzip_types      application/javascript application/wasm text/plain application/octet-stream;
+        gzip on;
+        gzip_types application/javascript application/wasm text/plain application/octet-stream;
 
         charset utf-8;
 
         location / {
             root .;
-            autoindex on;
             index  index.html index.htm;
-            add_header 'Access-Control-Allow-Origin' '*' always;
-            add_header 'Access-Control-Expose-Headers' 'content-length' always;
             add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
             add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
-            add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
-        }
-
-        location /images/ {
-            root .;
-            if ($arg_s != "") {
-                rewrite ^/images/(.*)$ $1 break;
-            }
-            if ($arg_s = "") {
-                gzip off;
-            }
-            error_page 404 =200 /images_slicer/$uri?$args;
-        }
-
-        location /images_slicer/ {
-            proxy_pass       http://localhost:8082/images/;
-            proxy_http_version 1.0;
-            proxy_set_header Range bytes=$arg_s-$arg_e;
-            proxy_hide_header Content-Range;
-        }
-    }
-
-    server {
-	listen       127.0.0.1:8082;
-        server_name  localhost;
-
-        charset utf-8;
-
-        location / {
-            root .;
         }
     }
 }
@@ -132,21 +103,19 @@ Run nginx with the following command:
 nginx -p . -c nginx.conf
 ```
 
-You can now see your page at `http://localhost:8081`
+You can now see your page at `http://localhost:8080`
 
-Move ´cheerpXImage.ext2´ into a directory called images, so that this nginx configuration will serve it correctly.
+Make sire the `cheerpXImage.ext2` and the `index.html` files are both into the same directory where `nginx` was started.
 
 ## 4. Create a device for the filesystem
 
-Add a new `<script>` tag with the type module into the index.html.
+Add a new `<script>` tag with the `type="module"`. Having the script as a module is convenient to use top-level awaits.
 
-Create a `HttpBytesDevice(link)` from the ext2 image that was just created. `OverlayDevice(link)` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
+Create a `HttpBytesDevice` from the just created Ext2 image. `OverlayDevice` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB persisted by the browser.
 
 ```html
 <script type="module">
-	var blockDevice = await CheerpX.HttpBytesDevice.create(
-		"images/cheerpXImage.ext2",
-	);
+	var blockDevice = await CheerpX.HttpBytesDevice.create("/cheerpXImage.ext2");
 	var overlayDevice = await CheerpX.OverlayDevice.create(
 		blockDevice,
 		await CheerpX.IDBDevice.create("block1"),
@@ -156,7 +125,7 @@ Create a `HttpBytesDevice(link)` from the ext2 image that was just created. `Ove
 
 ## 5. Create a CheerpX instance
 
-Pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will tell CheerpX to take the device that was just created and mount it to `/`.
+In the same script tag, pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will initialize CheerpX with the newly created device mounted as `/`.
 
 ```js
 const cx = await CheerpX.Linux.create({
@@ -166,60 +135,26 @@ const cx = await CheerpX.Linux.create({
 
 ## 6. Attach a console
 
-Create a console element
+Create a console element for the output of your program.
 
 ```html
-<pre id="console"></pre>
+<pre id="console" style="heigth: 100%;"></pre>
 ```
 
-Bring in a terminal software of your choice. This example is done with [xterm.js]
-
-Install xterm.js:
-
-```bash
-npm install @xterm/xterm
-```
-
-Add headers to `index.html`
-
-```html
-<link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
-<script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
-```
-
-Create a new terminal instance
+And configure CheerpX to use it by adding this snippet at the end of the script.
 
 ```js
-var term = new Terminal({ convertEol: true });
-term.open(document.getElementById("console"));
+cx.setConsole(document.getElementById("console"));
 ```
 
-Pass xterm.js to the CheerpX instance
+## 7. Execute a shell
 
-```js
-const readFunc = cx.setCustomConsole(
-	(data) => {
-		term.write(new Uint8Array(data));
-	},
-	term.cols,
-	term.rows,
-);
-
-term.onData((data) => {
-	if (readFunc == null) return;
-	for (let i = 0; i < data.length; i++) readFunc(data.charCodeAt(i));
-});
-```
-
-## 7. Execute a program
-
-The `cx.run` command will execute bash in the terminal that was created.
+Use the `cx.run` API to execute the `bash` shell. This setup is very similar to what we use for [WebVM](https://webvm.io)!
 
 ```js
 await cx.run("/bin/bash", ["--login"], {
 	env: [
 		"HOME=/home/user",
-		"TERM=xterm",
 		"USER=user",
 		"SHELL=/bin/bash",
 		"EDITOR=vim",
@@ -227,12 +162,7 @@ await cx.run("/bin/bash", ["--login"], {
 		"LC_ALL=C",
 	],
 	cwd: "/home/user",
-	uid: "1000",
-	gid: "1000",
+	uid: 1000,
+	gid: 1000,
 });
 ```
-
-From now you're able to interact with the filesystem.
-
-[CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[xterm.js]: https://xtermjs.org/
