@@ -28,7 +28,7 @@ To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/web", dev: webDevice }],
+	mounts: [ ... , { type: "dir", path: "/web", dev: webDevice }],
 });
 ```
 
@@ -58,7 +58,7 @@ Create an IDBDevice using the `CheerpX.IDBDevice.create()` method:
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/files", dev: idbDevice }],
+	mounts: [ ... , { type: "dir", path: "/files", dev: idbDevice }],
 });
 ```
 
@@ -76,7 +76,7 @@ Create a DataDevice using the `CheerpX.DataDevice.create()` method:
 const dataDevice = await CheerpX.DataDevice.create();
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/temp", dev: dataDevice }],
+	mounts: [ ... , { type: "dir", path: "/data", dev: dataDevice }],
 });
 ```
 
@@ -98,7 +98,7 @@ await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Pro
 
 **Parameters**:
 
-- **filename**: A string representing the absolute path to the file, starting with a `/` (e.g., "/filename").
+- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
 - **contents**: The data to write to the file. Can be either a string or a Uint8Array.
 
 **Returns**:
