@@ -69,7 +69,7 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
 
 ```javascript
-await dataDevice.readFileAsBlob("/filename");
+await idbDevice.readFileAsBlob("/filename");
 ```
 
 ### `idbDevice.readFileAsBlob`
