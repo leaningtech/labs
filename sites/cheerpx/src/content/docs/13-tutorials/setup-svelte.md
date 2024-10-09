@@ -1,7 +1,7 @@
 ---
 title: Svelte setup
 description: Setting up Svelte app
---- 
+---
 
 This tutorial will explain how to create a application with Svelte that works together with CheerpX.
 
@@ -13,7 +13,7 @@ First create a new Svelte app by running:
 npm create svelte@latest my-app
 ```
 
-1. Select the Skeleton Project option. 
+1. Select the Skeleton Project option.
 2. Enable Typescript if needed.
 3. There are no additional options required for this tutorial.
 
@@ -33,10 +33,9 @@ We're able to test the development server by visiting: http://localhost:5173/
 
 Next, let's install CheerpX.
 
-This [link] will direct you to the installation page of CheerpX.   
+This [link] will direct you to the installation page of CheerpX.
 
 For this to work all top level imports used by the CheerpX NPM module need to be enabled.
-
 
 We'll also need to enable Cross origin isolation. It's required since CheerpX uses SharedArrayBuffer.
 
@@ -70,7 +69,9 @@ Add src/routes/+page.ts and disable [SSR]. CheerpX code needs to run on the side
 ```src/routes/+page.ts
 export const ssr = false;
 ```
+
 ## Script
+
 Add the following code to src/routes/+page.svelte to run bash using CheerpX. for a more detailed explanation click the following [instructions].
 
 ```js
@@ -118,6 +119,6 @@ Add the following code to src/routes/+page.svelte to run bash using CheerpX. for
 </script>
 ```
 
-[link]:https://github.com/leaningtech/labs/blob/main/sites/cheerp/src/content/docs/10-getting-started/01-installation.md
-[SSR]:https://www.heavy.ai/technical-glossary/server-side-rendering
-[instructions]:https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
+[link]: https://github.com/leaningtech/labs/blob/main/sites/cheerp/src/content/docs/10-getting-started/01-installation.md
+[SSR]: https://www.heavy.ai/technical-glossary/server-side-rendering
+[instructions]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
