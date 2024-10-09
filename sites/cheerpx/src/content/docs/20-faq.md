@@ -54,13 +54,13 @@ Use browser's DevTools:
 4. Look for 404 (Not Found) errors.
 5. Check the full URL of these 404 requests to see the exact path CheerpX is trying to access.
 
+## Can I use third-party origins with WebDevice?
+
+Yes, WebDevice can handle third-party origins as paths, but it's important to consider the implications of Cross-Origin Resource Sharing (CORS) when doing so. To ensure smooth functioning, the server hosting these third-party resources must have the appropriate CORS headers configured. If the CORS settings are not properly arranged, browsers will block these requests, which will lead to files being inaccessible in CheerpX.
+
 ## Why can't I execute files directly from a DataDevice?
 
 DataDevice in CheerpX does not have full support for Linux mode bits, and in particular it lacks the "executable" bit. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a filesystem with complete support for mode bits, such as IDB (IndexedDB) or Ext2.
-
-## Can I use third-party origins with WebDevice?
-
-Yes, WebDevice can handle third-party origins as paths, but it's important to consider the implications of Cross-Origin Resource Sharing (CORS) when doing so. To ensure smooth functioning, the server hosting these third-party resources must have the appropriate CORS headers configured. If the CORS settings are not properly arranged, browsers might block these requests to third-party resources, which can lead to files being inaccessible in CheerpX.
 
 ## Why can't CheerpX do what v86 does in terms of disk access and networking?
 
