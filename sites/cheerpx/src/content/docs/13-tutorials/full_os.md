@@ -5,16 +5,6 @@ description: Run bash in a filesystem
 
 This tutorial will explain how to create a full custom filesystem and work in it using CheerpX from scratch.
 
-## Table of Contents
-
-- [1. Creating a ext2 image](#1-creating-a-ext2-image)
-- [2. Include CheerpX](#2-include-cheerpx)
-- [3. Serve the filesystem and index.html](#3-serve-the-filesystem-and-index.html)
-- [4. Create a device for the filesystem ](#4-create-a-device-for-the-filesystem)
-- [5. Create a CheerpX instance ](#5-create-a-cheerpx-instance)
-- [6. Attach a console ](#6-attach-a-console)
-- [7. Execute a program ](#7-execute-a-program)
-
 ## 1. Creating a ext2 image
 
 We're going to create a ext2 image. This image will be used as a filesystem. The image is going to be used with CheerpX from a Dockerfile.
