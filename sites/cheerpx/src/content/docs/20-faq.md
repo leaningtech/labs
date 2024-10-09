@@ -40,13 +40,9 @@ console.log(await outputBlob.text());
 
 This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
 
-## Why can't CheerpX find files in my device?
+## Why can't CheerpX find files in my WebDevice backend?
 
-When using WebDevice, keep in mind:
-
-1. WebDevice uses absolute paths from the root of the mounted directory.
-2. Do not include the first slash `/` of the path.
-3. The path is relative to the root of the mounted WebDevice, not the current working directory.
+We know from experience that the interaction between mount points and `WebDevice` can be confusing for some users. The best solution to identify why a file can't be found is to use the "Network" tab to see the final URLs that CheerpX is ttying to access. With this information you should be able to fix the incorrect paths.
 
 ### Debugging Path Issues
 
