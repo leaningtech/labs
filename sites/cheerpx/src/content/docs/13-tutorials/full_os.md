@@ -39,56 +39,55 @@ Create an ext2 image from the specified directory:
 mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
 
-## 2. Include CheerpX
+## 2. Include CheerpX in index.html
 
-Create an index.html file and add this line to index.html `<head>` section to include CheerpX.
+Create an index.html file and include CheerpX as a script.
 
 ```html
-<script src="https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
+<!doctype html>
+<html lang="en" style="heigth: 100%;">
+	<head>
+		<meta charset="UTF-8" />
+		<title>CheerpX Test</title>
+		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
+	</head>
+	<body style="heigth: 100%; background: black;"></body>
+</html>
 ```
 
 ## 3. Serve the filesystem and index.html
 
-The ext2 image needs to be served with [CORS] headers.
-
-This example nginx.conf is set up with the correct headers.
+This example nginx.conf is set up to serve the index.html with the correct headers for CheerpX, and the ext2 image with byte ranges set.
 
 ```nginx
 worker_processes  1;
+error_log   nginx_main_error.log info;
+pid nginx_user.pid;
+daemon off;
 
 events {
     worker_connections  1024;
 }
 
-error_log   nginx_main_error.log info;
-pid nginx_user.pid;
-daemon off;
-
 http {
+    default_type  application/octet-stream;
     access_log  nginx_access.log;
     error_log   nginx_error.log info;
-
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
 
     sendfile        on;
 
     server {
-	listen       8081;
+        listen       8080;
         server_name  localhost;
 
-	gzip on;
-        # Enable compression for .wasm, .js and .txt files (used for the runtime chunks)
-	gzip_types      application/javascript application/wasm text/plain application/octet-stream;
+        gzip on;
+        gzip_types application/javascript application/wasm text/plain application/octet-stream;
 
         charset utf-8;
 
         location / {
             root .;
-            autoindex on;
             index  index.html index.htm;
-            add_header 'Access-Control-Allow-Origin' '*' always;
-            add_header 'Access-Control-Expose-Headers' 'content-length' always;
             add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
             add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
             add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
@@ -132,15 +131,15 @@ Run nginx with the following command:
 nginx -p . -c nginx.conf
 ```
 
-You can now see your page at `http://localhost:8081`
+You can now see your page at `http://localhost:8080`
 
-Move ´cheerpXImage.ext2´ into a directory called images, so that this nginx configuration will serve it correctly.
+Move ´cheerpXImage.ext2 into a directory called images, so that this nginx configuration will serve it correctly.
 
 ## 4. Create a device for the filesystem
 
 Add a new `<script>` tag with the type module into the index.html.
 
-Create a `HttpBytesDevice(link)` from the ext2 image that was just created. `OverlayDevice(link)` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
+Create a `HttpBytesDevice` from the ext2 image that was just created. `OverlayDevice` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
 
 ```html
 <script type="module">
@@ -166,73 +165,24 @@ const cx = await CheerpX.Linux.create({
 
 ## 6. Attach a console
 
-Create a console element
+Create a console element to see the output of your program
 
 ```html
-<pre id="console"></pre>
+<pre id="console" style="heigth: 100%;"></pre>
 ```
 
-Bring in a terminal software of your choice. This example is done with [xterm.js]
-
-Install xterm.js:
-
-```bash
-npm install @xterm/xterm
-```
-
-Add headers to `index.html`
-
-```html
-<link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
-<script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
-```
-
-Create a new terminal instance
+Tell CheerpX to use the element as a console to write the program output to.
 
 ```js
-var term = new Terminal({ convertEol: true });
-term.open(document.getElementById("console"));
-```
-
-Pass xterm.js to the CheerpX instance
-
-```js
-const readFunc = cx.setCustomConsole(
-	(data) => {
-		term.write(new Uint8Array(data));
-	},
-	term.cols,
-	term.rows,
-);
-
-term.onData((data) => {
-	if (readFunc == null) return;
-	for (let i = 0; i < data.length; i++) readFunc(data.charCodeAt(i));
-});
+cx.setConsole(document.getElementById("console"));
 ```
 
 ## 7. Execute a program
 
-The `cx.run` command will execute bash in the terminal that was created.
+Use `cx.run` to execute a program of your choosing.
 
 ```js
-await cx.run("/bin/bash", ["--login"], {
-	env: [
-		"HOME=/home/user",
-		"TERM=xterm",
-		"USER=user",
-		"SHELL=/bin/bash",
-		"EDITOR=vim",
-		"LANG=en_US.UTF-8",
-		"LC_ALL=C",
-	],
-	cwd: "/home/user",
-	uid: "1000",
-	gid: "1000",
-});
+await cx.run("/bin/echo", ["Hello CheerpX!"]);
 ```
 
-From now you're able to interact with the filesystem.
-
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[xterm.js]: https://xtermjs.org/
