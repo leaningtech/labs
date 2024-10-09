@@ -96,8 +96,7 @@ const idbDevice = await CheerpX.IDBDevice.create("files");
 const outputBlob = await dataDevice.readFileAsBlob("/filename");
 ```
 
-> [!note]
-> [!note] Note
+> [!note] > [!note] Note
 > The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
 
 ## DataDevice

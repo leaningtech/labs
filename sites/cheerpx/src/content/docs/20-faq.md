@@ -26,7 +26,10 @@ const cx = await CheerpX.Linux.create({
 2. Run your program using `bash -c`, redirecting stdout to a file:
 
 ```js
-await cx.run("/bin/bash", ["-c", "echo 'Output to capture' > /files/output.txt"]);
+await cx.run("/bin/bash", [
+	"-c",
+	"echo 'Output to capture' > /files/output.txt",
+]);
 ```
 
 3. After the program finishes, read the contents of the file using JavaScript:
