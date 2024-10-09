@@ -134,7 +134,7 @@ nginx -p . -c nginx.conf
 
 You can now see your page at `http://localhost:8081`
 
-Move cheerpXImage.ext2 into a directory called images, so that this nginx configuration will serve it correctly.
+Move ´cheerpXImage.ext2´ into a directory called images, so that this nginx configuration will serve it correctly.
 
 ## 4. Create a device for the filesystem
 
