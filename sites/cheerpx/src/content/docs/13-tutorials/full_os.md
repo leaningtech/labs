@@ -61,7 +61,7 @@ We recommend always choosing `nginx` as your Web server when using with CheerpX.
 
 This basic configuration should get you up and running. Please note that CheerpX requires cross-origin isolation, which is enabled via the `Cross-Origin-Opener-Policy' and 'Cross-Origin-Embedder-Policy` headers. For more information see the dedicated [Nginx](/docs/guides/nginx) guide.
 
-```nginx
+```nginx title=nginx.conf
 worker_processes  1;
 error_log   nginx_main_error.log info;
 pid nginx_user.pid;
