@@ -56,7 +56,7 @@ Use browser's DevTools:
 
 ## Why can't I execute files directly from a DataDevice?
 
-DataDevice in CheerpX is write-only. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a writable filesystem, such as an IDB (IndexedDB) or ext2 filesystem.
+DataDevice in CheerpX does not have full support for Linux mode bits, and in particular it lacks the "executable" bit. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a filesystem with complete support for mode bits, such as IDB (IndexedDB) or Ext2.
 
 ## Can I use third-party origins with WebDevice?
 
