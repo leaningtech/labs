@@ -1,12 +1,4 @@
-const replacements = [
-	[
-		"%CHEERPX_LATEST%",
-		() =>
-			fetch("https://cheerpxdemos.leaningtech.com/publicdeploy/LATEST.txt")
-				.then((r) => r.text())
-				.then((s) => s.trim()),
-	],
-];
+const replacements = [];
 
 document.addEventListener("DOMContentLoaded", () => {
 	const spans = document.querySelectorAll(".expressive-code code span");

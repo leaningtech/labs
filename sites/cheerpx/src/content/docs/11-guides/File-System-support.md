@@ -10,7 +10,8 @@ CheerpX implements UNIX-style virtual filesystems with multiple mount points, pr
 | WebDevice       | HTTP-based filesystem for loading files from web server | No    | Yes  |
 | IDBDevice       | Persistent read-write filesystem using IndexedDB        | Yes   | Yes  |
 | DataDevice      | In-memory filesystem for temporary data storage         | Yes   | Yes  |
-| ext2            | Traditional Linux filesystem (in-memory or persistent)  | Yes   | Yes  |
+| HttpBytesDevice | A block device with a Linux filesystem inside (ext2)    | No    | Yes  |
+| OverlayDevice   | A writable persistent overlay on another block device   | Yes   | Yes  |
 
 > [!info] Virtual Environment
 > CheerpX provides access to a virtualized filesystem environment, which does not correspond to the local user's computer. Direct access to local files is restricted due to browser security constraints.
@@ -27,18 +28,20 @@ To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "dir", path: "/app", dev: webDevice }],
+	mounts: [{ type: "dir", path: "/web", dev: webDevice }],
 });
 ```
 
-This mounts the specified local directory at `/app` in the CheerpX filesystem.
+This mounts the specified local directory at `/web` in the CheerpX filesystem.
+
+To be able to list the files, CheerpX will look for a file called index.list in the directory and each of its subdirectories. The file should contain a newline separated list of all files and folders contained in the directory.
 
 ### Accessing Files
 
 Files in the WebDevice are accessed relative to the current page's URL. For example, if your current page is `https://host/dir1/dir2/page.html`, then:
 
-- `/app/example.txt` would correspond to `https://host/dir1/dir2/path/to/local/directory/example.txt`
-- `/app/images/logo.png` would correspond to `https://host/dir1/dir2/path/to/local/directory/images/logo.png`
+- `/web/example.txt` would correspond to `https://host/dir1/dir2/path/to/local/directory/example.txt`
+- `/web/images/logo.png` would correspond to `https://host/dir1/dir2/path/to/local/directory/images/logo.png`
 
 > [!note]
 > It's important to note that this behavior depends on the current page's URL, as it uses a relative path. For more predictable results, it's recommended to use absolute paths when possible.
@@ -114,22 +117,24 @@ await dataDevice.writeFile("/filename", "contents");
 > - This is the only way to create files in this device.
 > - Modifying existing files or creating files in subdirectories is not possible.
 
-## ext2 Filesystem
+## Block devices with ext2
 
 CheerpX supports ext2 filesystems, which can be configured as an overlay device. This allows for a flexible setup that can combine different storage types.
 
 ### Usage
 
-Create an ext2 filesystem using the `CheerpX.OverlayDevice.create()` method:
+Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
 
 ```javascript
-// Create an HttpBytesDevice for loading the filesystem image via HTTP
+// Create an HttpBytesDevice for streaming disk blocks via HTTP
 const httpDevice = await CheerpX.HttpBytesDevice.create(
 	"https://yourserver.com/image.ext2",
 );
 
 // Create an IDBDevice for persistent local storage
 const idbDevice = await CheerpX.IDBDevice.create("block1");
+
+const overlayDevice = await CheerpX.OverlayDevice.create(httpDevice, idbDevice);
 
 const cx = await CheerpX.Linux.create({
 	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
@@ -143,8 +148,8 @@ This setup creates an ext2 filesystem that loads its initial data from an HTTP s
 CheerpX supports various types of devices that can be used in the OverlayDevice configuration:
 
 1. **HttpBytesDevice**: The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
-2. **GitHubDevice**: Ideal for projects integrated with GitHub Actions, allowing direct file loading from GitHub repositories.
-3. **IDBDevice**: Provides persistent local storage using the browser's IndexedDB, perfect for applications requiring data retention across sessions.
+2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
+3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
 ## Best Practices
 

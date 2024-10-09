@@ -32,7 +32,7 @@ namespace CheerpX {
 
 ## Returns
 
-`CheerpX.Linux.run` returns a [Promise] which is resolved containing the exit status of the process once it completes.
+`CheerpX.Linux.run` returns a [Promise] which resolves when the process terminates. The returned object contains the exit status.
 
 ## Example
 
@@ -43,7 +43,7 @@ const result = await cx.run("/bin/bash", [
 	"-c",
 	"for i in {1..5}; do echo $i; done",
 ]);
-console.log("Bash script exit status:", result3.status);
+console.log("Bash script exit status:", result.status);
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

@@ -11,7 +11,7 @@ This tutorial will guide you through the process of creating a simple 32-bit sta
 
 - **nginx** installed on your system.
 
-The starting point of this example is an empty HTML page, an empty nginx configuration, and an empty C file.
+During this step-by-step example will be populate the following filesystem structure.
 
 ```
 .
@@ -30,14 +30,20 @@ Open `hello_cheerpx.c` and add the following content:
 #include <stdio.h>
 
 int main() {
-    printf("hello cheerpx\n");
+    printf("Hello CheerpX\n");
     return 0;
 }
 ```
 
 ## 2. Compile a Statically Linked Executable
 
-To compile the C program into a 32-bit statically linked Linux executable, you can use a standard Linux environment if available. If you're on macOS or another system that cannot directly compile Linux executables, you can use Docker to create a suitable Linux environment. Alternatively, you can use [WebVM](https://webvm.io) to create a Debian 32-bit environment. Alternatively, you could also download a pre-compiled executable from [here](/cheerpx/tutorials/simple-executable/hello_cheerpx).Remember to put it in the root of your project.
+To compile the C program into a 32-bit statically linked Linux executable, you can use a standard Linux environment if available. If you're on macOS or another system that cannot directly compile Linux executables, you can use Docker to create a suitable Linux environment. Alternatively, you can download a pre-compiled executable from [here](/cheerpx/tutorials/simple-executable/hello_cheerpx). Remember to put it in the root of your project.
+
+In case you have a Linux environment available, the following command can be use to generate a statically linked executable from the source file above. Please note that you might need to install `gcc-multilib` or a similarly named package to support 32-bit compilation.
+
+```sh
+gcc -static -m32 -o hello_cheerpx hello_cheerpx.c
+```
 
 ### Using Docker to Compile (Optional)
 
@@ -55,7 +61,6 @@ Explanation:
 - `i386/debian`: Uses a 32-bit Debian image as the base.
 - `bash -c "..."`: Executes a series of commands inside the container.
 - `apt-get update && apt-get install -y gcc`: Updates the package list and installs gcc.
-- `gcc -static -m32 -o hello_cheerpx hello_cheerpx.c`: Compiles the C program into a 32-bit statically linked executable named hello_cheerpx.
 
 ## 3. Verify the Executable
 
@@ -83,31 +88,20 @@ Open `index.html` and add the following content:
 
 ```html title="index.html"
 <!doctype html>
-<html lang="en">
+<html lang="en" style="heigth: 100%;">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Hello CheerpX</title>
-		<script src="https://cxrtnc.leaningtech.com/0.8.4/cx.js"></script>
-		<style>
-			body {
-				background-color: #5d7c86;
-			}
-			#console {
-				padding: 20px;
-				border-radius: 5px;
-				margin-top: 20px;
-			}
-		</style>
+		<title>CheerpX Simple Executable Test</title>
+		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
 	</head>
-	<body>
-		<h1>Hello CheerpX</h1>
-		<pre id="console"></pre>
+	<body style="heigth: 100%; background: black;">
+		<pre id="console" style="heigth: 100%;"></pre>
 
-		<!-- Initialize and Run CheerpX -->
 		<script type="module">
+			// Initialize CheerpX
 			const cx = await CheerpX.Linux.create();
 			cx.setConsole(document.getElementById("console"));
-
+			// Run the compiled executable
 			await cx.run("/hello_cheerpx", []);
 		</script>
 	</body>
@@ -116,19 +110,22 @@ Open `index.html` and add the following content:
 
 ## 4. Configure nginx
 
-Create an nginx.conf file in your project directory to configure nginx for serving the files. Here is a sample configuration:
+Open the nginx.conf file in your project directory to configure nginx for serving the files. Here is a sample configuration:
 
 ```
-user nobody;
 worker_processes  1;
+error_log   nginx_main_error.log info;
+pid nginx_user.pid;
+daemon off;
 
 events {
     worker_connections  1024;
 }
 
 http {
-    include       /full/path/to/your/mime.types;
     default_type  application/octet-stream;
+    access_log  nginx_access.log;
+    error_log   nginx_error.log info;
 
     sendfile        on;
 
@@ -142,10 +139,8 @@ http {
         charset utf-8;
 
         location / {
-            root /path/to/your/project;
+            root .;
             index  index.html index.htm;
-            add_header 'Access-Control-Allow-Origin' '*' always;
-            add_header 'Access-Control-Expose-Headers' 'Content-Length' always;
             add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
             add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
             add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
@@ -154,26 +149,12 @@ http {
 }
 ```
 
-Remember to replace `/full/path/to/your/mime.types` with the actual path to your mime.types file and `/path/to/your/project` with the actual path to your project directory.
+## 5. Start nginx
 
-## 5. Start or Restart nginx
-
-To apply the new configuration, start or restart nginx using your custom configuration file:
+Start nginx from the project directory to serve the files on port 8080
 
 ```sh
-sudo nginx -c /path/to/your/nginx.conf
-```
-
-If nginx is already running, you may need to stop it first:
-
-```sh
-nginx -s stop
-```
-
-Then restart with the updated configuration:
-
-```sh
-nginx -c /path/to/your/nginx.conf
+nginx -c nginx.conf -p $PWD
 ```
 
 ## 6. Access and Verify Output

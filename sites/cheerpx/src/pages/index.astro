@@ -7,6 +7,7 @@ import GamePadAsset from "../assets/HDgamepad.png";
 import Screenshot from "../assets/screenshots.png";
 import { Image } from "astro:assets";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
+import MonitorDoodle from "../assets/hero_illustration.png";
 ---
 
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-[#00254d]">
@@ -97,6 +98,39 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				label="Try WebVM"
 			/>
 		</div>
+	</section>
+	<section
+		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-56 2xl:px-60 2xl:pt-60"
+	>
+		<div class="col-span-1 flex items-center justify-center px-4">
+			<Image src={MonitorDoodle} alt="Monitor" class="min-w-56 max-w-80" />
+		</div>
+		<h1
+			class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center text-wrap"
+		>
+			<span
+				class="text-center bg-gradient-to-r from-[#e2bace] to-[#909090] via-white text-transparent bg-clip-text"
+				>WebVM: The hackathon!</span
+			>
+
+			<p
+				class="text-center text-2xl sm:text-3xl font-light text-stone-300 px-2 px-30"
+			>
+				Join us for a weekend of coding fun and amazing prizes! <b
+					class="font-bold">WebVM: The hackathon!</b
+				> is a global hybrid event open to all developers! Dive into the world of
+				terminal-based solutions by leveraging the power of CheerpX.
+			</p>
+
+			<div class="flex gap-4 justify-center py-2">
+				<LinkButton
+					type="primary-cheerpx"
+					href="/hackathon"
+					label="Register"
+					iconRight="mdi:register"
+				/>
+			</div>
+		</h1>
 	</section>
 
 	<!-- TODO: video -->
