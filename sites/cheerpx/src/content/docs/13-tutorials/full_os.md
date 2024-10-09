@@ -180,7 +180,7 @@ Install xterm.js:
 npm install @xterm/xterm
 ```
 
-Add headers to index.html
+Add headers to `index.html`
 
 ```html
 <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
