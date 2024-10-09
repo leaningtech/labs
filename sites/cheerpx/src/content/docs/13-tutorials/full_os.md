@@ -1,17 +1,17 @@
 ---
 title: Full OS
-description: Run bash in a filesystem
+description: Run bash on a custom disk image
 ---
 
-This tutorial will explain how to create a full custom filesystem and work in it using CheerpX from scratch.
+This tutorial will guide you through creating a custom filesystem from scratch and using it with CheerpX.
 
-## 1. Creating a ext2 image
+## 1. Create an Ext2 image
 
-We're going to create a ext2 image. This image will be used as a filesystem. The image is going to be used with CheerpX from a Dockerfile.
+We will create an Ext2 image, which will serve as the root filesystem for CheerpX.
 
-First create a Dockerfile in i386:
+To ensure consistency in preparing the image contents, we will use a Dockerfile, you can edit the Dockerfile to add custom packages or change the base to the distro of your choosing. It's important to select the `i386` architecture, since CheerpX does not currently support 64-bit executables.
 
-```dockerfile
+```dockerfile title=Dockerfile
 FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN useradd -m user && echo "user:password" | chpasswd
@@ -39,11 +39,11 @@ Create an ext2 image from the specified directory:
 mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
 
-## 2. Include CheerpX in index.html
+## 2. Load CheerpX from your index.html
 
-Create an index.html file and include CheerpX as a script.
+Loading CheerpX is very simple. Create a new file called `index.html` and populate it with the following HTML code.
 
-```html
+```html title=index.html
 <!doctype html>
 <html lang="en" style="heigth: 100%;">
 	<head>
@@ -55,9 +55,11 @@ Create an index.html file and include CheerpX as a script.
 </html>
 ```
 
-## 3. Serve the filesystem and index.html
+## 3. Setup a Web server
 
-This example nginx.conf is set up to serve the index.html with the correct headers for CheerpX.
+We recommend always choosing `nginx` as your Web server when using with CheerpX.
+
+This basic configuration should get you up and running. Please note that CheerpX requires cross-origin isolation, which is enabled via the `Cross-Origin-Opener-Policy' and 'Cross-Origin-Embedder-Policy` headers. For more information see the dedicated [Nginx](/docs/guides/nginx) guide.
 
 ```nginx
 worker_processes  1;
@@ -71,14 +73,14 @@ events {
 
 http {
     default_type  application/octet-stream;
-    access_log  nginx_access.log;
-    error_log   nginx_error.log info;
+    access_log nginx_access.log;
+    error_log nginx_error.log info;
 
-    sendfile        on;
+    sendfile on;
 
     server {
-        listen       8080;
-        server_name  localhost;
+        listen 8080;
+        server_name localhost;
 
         gzip on;
         gzip_types application/javascript application/wasm text/plain application/octet-stream;
@@ -90,7 +92,6 @@ http {
             index  index.html index.htm;
             add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
             add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
-            add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
         }
     }
 }
@@ -104,18 +105,18 @@ nginx -p . -c nginx.conf
 
 You can now see your page at `http://localhost:8080`
 
-Move ´cheerpXImage.ext2 into a directory called images, so that this nginx configuration will serve it correctly.
+Make sire the `cheerpXImage.ext2` and the `index.html` files are both into the same directory where `nginx` was started.
 
 ## 4. Create a device for the filesystem
 
-Add a new `<script>` tag with the type module into the index.html.
+Add a new `<script>` tag with the `type="module"`. Having the script as a module is convenient to use top-level awaits.
 
-Create a `HttpBytesDevice` from the ext2 image that was just created. `OverlayDevice` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB layer that's persisted in the browser.
+Create a `HttpBytesDevice` from the just created Ext2 image. `OverlayDevice` makes it possible to make changes to the image, that are overlayed and saved in an IndexedDB persisted by the browser.
 
 ```html
 <script type="module">
 	var blockDevice = await CheerpX.HttpBytesDevice.create(
-		"images/cheerpXImage.ext2",
+		"/cheerpXImage.ext2",
 	);
 	var overlayDevice = await CheerpX.OverlayDevice.create(
 		blockDevice,
@@ -126,7 +127,7 @@ Create a `HttpBytesDevice` from the ext2 image that was just created. `OverlayDe
 
 ## 5. Create a CheerpX instance
 
-In the same script tag, pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will tell CheerpX to take the device that was just created and mount it to `/`.
+In the same script tag, pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will initialize CheerpX with the newly created device mounted as `/`.
 
 ```js
 const cx = await CheerpX.Linux.create({
@@ -136,24 +137,34 @@ const cx = await CheerpX.Linux.create({
 
 ## 6. Attach a console
 
-Create a console element to see the output of your program.
+Create a console element for the output of your program.
 
 ```html
 <pre id="console" style="heigth: 100%;"></pre>
 ```
 
-Tell CheerpX to use the element as a console to write the program output to by adding this snippet at the end of the script.
+And configure CheerpX to use it by adding this snippet at the end of the script.
 
 ```js
 cx.setConsole(document.getElementById("console"));
 ```
 
-## 7. Execute a program
+## 7. Execute a shell
 
-Use `cx.run` to execute a program of your choosing.
+Use the `cx.run` API to execute the `bash` shell. This setup is very similar to what we use for [WebVM](https://webvm.io)!
 
 ```js
-await cx.run("/bin/echo", ["Hello CheerpX!"]);
+await cx.run("/bin/bash", ["--login"], {
+	env: [
+		"HOME=/home/user",
+		"USER=user",
+		"SHELL=/bin/bash",
+		"EDITOR=vim",
+		"LANG=en_US.UTF-8",
+		"LC_ALL=C",
+	],
+	cwd: "/home/user",
+	uid: 1000,
+	gid: 1000,
+});
 ```
-
-[CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
