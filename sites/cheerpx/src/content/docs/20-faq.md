@@ -10,17 +10,17 @@ Currently, CheerpX doesn't directly support capturing stdout from running progra
 
 You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
 
-1. Make sure to mount an IDBDevice for a writable and JavaScript accessible file storage
+1. Make sure to mount an IDBDevice for a writable and JavaScript-accessible file storage
 
-```
+```js
 const filesDevice = await CheerpX.IDBDevice.create("files");
 const cx = await CheerpX.Linux.create({
-        mounts: [
-          // This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
-          { type: "ext2", path: "/", dev: overlayDevice },
-          { type: "dir", path: "/files", dev: filesDevice },
-        ],
-      });
+	mounts: [
+		// This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
+		{ type: "ext2", path: "/", dev: overlayDevice },
+		{ type: "dir", path: "/files", dev: filesDevice },
+	],
+});
 ```
 
 2. Run your program using `bash -c`, redirecting stdout to a file:
@@ -63,7 +63,7 @@ Yes, `WebDevice` can handle third-party origins as paths, but it's important to 
 
 ## Why can't I execute files directly from a `DataDevice`?
 
-`DataDevice` in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can write data to it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a filesystem with complete support for mode bits, such as IDB (IndexedDB) or Ext2.
+`DataDevice` in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can read data from it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a filesystem with complete support for mode bits, such as `IDBDevice` (IndexedDB) or Ext2.
 
 ## Why can't CheerpX do what v86 does in terms of disk access and networking?
 
@@ -71,7 +71,7 @@ CheerpX's architecture and use case differ significantly from v86, which affects
 
 ### Disk Access
 
-CheerpX is designed to support large scale applications and complete Operating Systems, to achieve those objectives to support large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
+CheerpX is designed to support large scale applications and complete Operating Systems, to achieve those objectives it needs to handle large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for its smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
 
 Our cloud disk backend is based on WebSocket and distributed across a global CDN, which should provides low latency disk access to users everywhere in the world. We are aware that some users in mainland China might experience slower disk access at the moment due to local networking constraints.
 
