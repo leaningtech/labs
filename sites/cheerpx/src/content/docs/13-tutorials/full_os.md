@@ -33,7 +33,7 @@ mkdir cheerpXFS
 podman cp cheerpxcontainer:/ cheerpXFS/
 ```
 
-create an ext2 image from the specified directory:
+Create an ext2 image from the specified directory:
 
 ```bash
 mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
