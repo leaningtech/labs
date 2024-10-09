@@ -68,7 +68,7 @@ export default defineConfig({
 
 Add src/routes/+page.ts and disable [SSR]. CheerpX code needs to run on the side:
 
-```src/routes/+page.ts
+```
 export const ssr = false;
 ```
 
