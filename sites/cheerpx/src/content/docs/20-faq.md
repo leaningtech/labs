@@ -68,12 +68,12 @@ CheerpX's architecture and use case differ significantly from v86, which affects
 
 ### Disk Access
 
-CheerpX is powered by an extremely sophisticated JIT engine, which allows it to support large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
+CheerpX is designed to support large scale applications and complete Operating Systems, to achieve those objectives to support large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
 
-We acknowledge that some users may experience slower disk access. Our team is actively investigating these issues and working on optimizations to enhance performance across all use cases.
+Our cloud disk backend is based on WebSocket and distributed across a global CDN, which should provides low latency disk access to users everywhere in the world. We are aware that some users in mainland China might experience slower disk access at the moment due to local networking constraints.
 
 ### Networking
 
-While v86 might use an open proxy to the internet, this approach is not feasible for CheerpX due to its scale of use. An open proxy can pose significant security risks when used at scale.
+While v86 might use an open proxy to the internet, this approach is not feasible for CheerpX due to its scale of use. An open proxy can pose significant security and abuse risks when used at scale.
 
 Instead, CheerpX supports Tailscale-based networking, which can accommodate many use cases. It's important to note that developers using CheerpX are responsible for implementing appropriate security measures and preventing potential abuse.
