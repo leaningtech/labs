@@ -10,17 +10,30 @@ Currently, CheerpX doesn't directly support capturing stdout from running progra
 
 You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
 
-1. Run your program using `bash -c`, redirecting stdout to a file:
+1. Make sure to mount an IDBDevice for a writable and JavaScript accessible file storage
 
-```js
-await cx.run(["bash", "-c", "your_executable > output.txt"]);
+```
+const filesDevice = await CheerpX.IDBDevice.create("files");
+const cx = await CheerpX.Linux.create({
+        mounts: [
+          // This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
+          { type: "ext2", path: "/", dev: overlayDevice },
+          { type: "dir", path: "/files", dev: filesDevice },
+        ],
+      });
 ```
 
-2. After the program finishes, read the contents of the file using JavaScript:
+2. Run your program using `bash -c`, redirecting stdout to a file:
+
+```js
+await cx.run("/bin/bash", ["-c", "echo 'Output to capture' > /files/output.txt"]);
+```
+
+3. After the program finishes, read the contents of the file using JavaScript:
 
 ```javascript
-const output = await cx.readFile("output.txt");
-console.log(output);
+const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
+console.log(await outputBlob.text());
 ```
 
 ### Limitation
