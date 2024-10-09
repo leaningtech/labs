@@ -49,7 +49,7 @@ Create an index.html file and include CheerpX as a script.
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Test</title>
-		<script src="https://cxrtnc.leaningtech.com/0.9.1/cx.js"></script>
+		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
 	</head>
 	<body style="heigth: 100%; background: black;"></body>
 </html>
@@ -57,7 +57,7 @@ Create an index.html file and include CheerpX as a script.
 
 ## 3. Serve the filesystem and index.html
 
-This example nginx.conf is set up to serve the index.html with the correct headers for CheerpX, and the ext2 image with byte ranges set.
+This example nginx.conf is set up to serve the index.html with the correct headers for CheerpX.
 
 ```nginx
 worker_processes  1;
@@ -91,35 +91,6 @@ http {
             add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
             add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
             add_header 'Cross-Origin-Resource-Policy' 'cross-origin' always;
-        }
-
-        location /images/ {
-            root .;
-            if ($arg_s != "") {
-                rewrite ^/images/(.*)$ $1 break;
-            }
-            if ($arg_s = "") {
-                gzip off;
-            }
-            error_page 404 =200 /images_slicer/$uri?$args;
-        }
-
-        location /images_slicer/ {
-            proxy_pass       http://localhost:8082/images/;
-            proxy_http_version 1.0;
-            proxy_set_header Range bytes=$arg_s-$arg_e;
-            proxy_hide_header Content-Range;
-        }
-    }
-
-    server {
-	listen       127.0.0.1:8082;
-        server_name  localhost;
-
-        charset utf-8;
-
-        location / {
-            root .;
         }
     }
 }
@@ -155,7 +126,7 @@ Create a `HttpBytesDevice` from the ext2 image that was just created. `OverlayDe
 
 ## 5. Create a CheerpX instance
 
-Pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will tell CheerpX to take the device that was just created and mount it to `/`.
+In the same script tag, pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will tell CheerpX to take the device that was just created and mount it to `/`.
 
 ```js
 const cx = await CheerpX.Linux.create({
@@ -165,13 +136,13 @@ const cx = await CheerpX.Linux.create({
 
 ## 6. Attach a console
 
-Create a console element to see the output of your program
+Create a console element to see the output of your program.
 
 ```html
 <pre id="console" style="heigth: 100%;"></pre>
 ```
 
-Tell CheerpX to use the element as a console to write the program output to.
+Tell CheerpX to use the element as a console to write the program output to by adding this snippet at the end of the script.
 
 ```js
 cx.setConsole(document.getElementById("console"));
