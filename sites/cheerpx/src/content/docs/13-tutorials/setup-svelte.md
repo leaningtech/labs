@@ -25,9 +25,11 @@ npm install
 npm run dev
 ```
 
-At this point, the development server will run from another terminal in the background.
+At this point, the development server will run from the current terminal.
 
-We're able to test the development server by visiting: http://localhost:5173/
+Click on the `localhost` link in your terminal window to test the development server.
+
+(Vite uses `http://localhost:5173/` by default if port `5173` is available.)
 
 ## Install Cheerpx
 
@@ -37,7 +39,7 @@ Next, let's install CheerpX:
 npm install @leaningtech/cheerpx
 ```
 
-For this to work top level awaits must be enabled by setting the build target to es2020. Top level awaits are by the CheerpX NPM.
+For this to work top level awaits must be enabled by setting the build target to es2020. Top level awaits are used by the CheerpX NPM package.
 
 We'll also need to enable [Cross origin isolation]. It's required since CheerpX uses [SharedArrayBuffer].
 
@@ -123,8 +125,12 @@ We will now modify `src/routes/+page.svelte` to replace the Svelte example with 
 </script>
 ```
 
+Your web page should refresh automatically and you should see the bash prompt in your web page after a few seconds.
+
+![](../../../assets/bash_prompt.png)
+
 [SSR]: https://en.wikipedia.org/wiki/Server-side_scripting#Server-side_rendering
 [instructions]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
-[Cross origin isolation]: https://blog.stackblitz.com/posts/cross-browser-with-coop-coep/
+[Cross origin isolation]: https://web.dev/articles/why-coop-coep
 [Getting Started]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
