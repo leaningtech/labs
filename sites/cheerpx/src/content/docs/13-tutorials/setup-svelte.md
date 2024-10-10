@@ -1,6 +1,6 @@
 ---
-title: Svelte setup
-description: Setting up Svelte app
+title: CheerpX with NPM
+description: Using CheerpX together with Svelte
 ---
 
 This tutorial will explain how to create a application with Svelte that works together with CheerpX.
@@ -31,15 +31,17 @@ We're able to test the development server by visiting: http://localhost:5173/
 
 ## Install Cheerpx
 
-Next, let's install CheerpX.
+Next, let's install CheerpX:
 
-This [link] will direct you to the installation page of CheerpX.
+```
+npm install @leaningtech/cheerpx
+```
 
-For this to work all top level imports used by the CheerpX NPM module need to be enabled.
+For this to work top level awaits must be enabled by setting the build target to es2020. Top level awaits are by the CheerpX NPM.
 
-We'll also need to enable Cross origin isolation. It's required since CheerpX uses SharedArrayBuffer.
+We'll also need to enable [Cross origin isolation]. It's required since CheerpX uses [SharedArrayBuffer].
 
-Add the following code in vite.config.ts:
+Replace the following content in vite.config.ts with:
 
 ```
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -66,7 +68,7 @@ export default defineConfig({
 });
 ```
 
-Add src/routes/+page.ts and disable [SSR]. CheerpX code needs to run on the side:
+Create a new file named src/routes/+page.ts to disable Server-Side Rendering ([SSR]). CheerpX code needs to be executed on the client side.
 
 ```
 export const ssr = false;
@@ -74,7 +76,7 @@ export const ssr = false;
 
 ## Script
 
-Add the following code to src/routes/+page.svelte to run bash using CheerpX. for a more detailed explanation click the following [instructions].
+We will now modify `src/routes/+page.svelte` to replace the Svelte example with a full-screen console running `bash` using CheerpX. For more details on the CheerpX logic itself, please see our [Getting Started] guide.
 
 ```js
 <style>
@@ -121,6 +123,8 @@ Add the following code to src/routes/+page.svelte to run bash using CheerpX. for
 </script>
 ```
 
-[link]: https://github.com/leaningtech/labs/blob/main/sites/cheerp/src/content/docs/10-getting-started/01-installation.md
-[SSR]: https://www.heavy.ai/technical-glossary/server-side-rendering
+[SSR]: https://en.wikipedia.org/wiki/Server-side_scripting#Server-side_rendering
 [instructions]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
+[SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
+[Cross origin isolation]: https://blog.stackblitz.com/posts/cross-browser-with-coop-coep/
+[Getting Started]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
