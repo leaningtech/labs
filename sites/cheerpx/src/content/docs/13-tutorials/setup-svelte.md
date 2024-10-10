@@ -9,7 +9,7 @@ This tutorial will explain how to create a application with Svelte that works to
 
 First create a new Svelte app by running:
 
-```
+```bash
 npm create svelte@latest my-app
 ```
 
@@ -19,7 +19,7 @@ npm create svelte@latest my-app
 
 Next, navigate to your project directory and install the dependencies:
 
-```
+```bash
 cd my-app
 npm install
 npm run dev
@@ -33,7 +33,7 @@ We're able to test the development server by visiting: http://localhost:5173/
 
 Next, let's install CheerpX:
 
-```
+```bash
 npm install @leaningtech/cheerpx
 ```
 
@@ -43,34 +43,34 @@ We'll also need to enable [Cross origin isolation]. It's required since CheerpX 
 
 Replace the following content in vite.config.ts with:
 
-```
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+```ts title="vite.config.ts"
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
 const viteServerConfig = () => ({
-    name: 'add-headers',
-    configureServer: (server) => {
-        server.middlewares.use((req, res, next) => {
-            res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-            res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-            next();
-        });
-    }
+	name: "add-headers",
+	configureServer: (server) => {
+		server.middlewares.use((req, res, next) => {
+			res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+			res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+			next();
+		});
+	},
 });
 
 export default defineConfig({
-  optimizeDeps:{
-    esbuildOptions: {
-      target: "es2022",
-    }
-  },
-        plugins: [sveltekit(), viteServerConfig()]
+	optimizeDeps: {
+		esbuildOptions: {
+			target: "es2022",
+		},
+	},
+	plugins: [sveltekit(), viteServerConfig()],
 });
 ```
 
 Create a new file named src/routes/+page.ts to disable Server-Side Rendering ([SSR]). CheerpX code needs to be executed on the client side.
 
-```
+```ts title="src/routes/+page.ts"
 export const ssr = false;
 ```
 
