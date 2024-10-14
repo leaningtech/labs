@@ -3,14 +3,6 @@ title: input and output CheerpX
 description: Summarization on how to get data in and out of CheerpX VM
 ---
 
-## CheerpX
-
-**CheerpX is an x86 virtualization technology for running executables and operating systems entirely client-side.** It’s an always available, zero-cost virtual machine with guaranteed data privacy, powered by a WebAssembly JIT engine.
-
-CheerpX is perfect for web-based IDEs, programming tutorials, virtual machines, and interactive demos. CheerpX is very robust and deployed as part of [WebVM] and [PythonFiddle].
-
-For more information on Cheerpx: [CheerpX documentations].
-
 ## CheerpX console input and output
 
 CheerpX provides two options for handling console input and output: the `built-in` console and a `custom` console. The purpose of these consoles are to interact with the running application, execute commands and, view output. The custom console allows you to create an interface that fits the specific needs of your application.
