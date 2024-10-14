@@ -1,21 +1,29 @@
 ---
-title: input and output CheerpX
-description: Summarization on how to get data in and out of CheerpX VM
+title: Input and output
+description: Techniques for getting data in and out of CheerpX virtual machine
 ---
 
 ## CheerpX console input and output
 
-CheerpX provides two options for handling console input and output: the `built-in` console and a `custom` console. The purpose of these consoles are to interact with the running application, execute commands and, view output. The custom console allows you to create an interface that fits the specific needs of your application.
+CheerpX provides two options for handling console input and output: the _built-in_ console and a _custom_ console. The purpose of the console is to interact with the running application via standard input and output.
 
-**Built-in console**
+### Built-in console
 
-The CheerpX VM comes with a `built-in` console that mimics traditional console behavior. The `built-in` console in CheerpX allows for standard input and output operations, similar to typical command-line environments. You can use standard I/O functions like printf and scanf within your C/C++ programs.
+CheerpX comes with a _built-in_ console that mimics traditional console behavior. The _built-in_ console in CheerpX allows for standard input and output operations, similar to typical command-line environments. You can use standard I/O functions like printf and scanf within your C/C++ programs.
 
-For more information, visit the [CheerpX console].
+For more information, visit the [CheerpX console] reference.
 
-**Custom console**
+### Custom console
 
-CheerpX also supports a `custom` console that allows developers to capture output programmatically. This feature enables you to accumulate program output into a JavaScript string. You can implement your `custom` logging mechanism to redirect the output to a variable, which can be manipulated or displayed as needed.
+---
+
+CheerpX also supports a _custom_ console that allows developers to capture output, and provide input, programmatically. This feature is useful to integrate with a more complete terminal implementation such as [xterm.js]. We use xterm.js ourselves for our public WebVM environment.
+
+Another possible use for the custom console it accumulating program output into a JavaScript string. You can achieve this with the following snippet:
+
+[ADD CODE]
+
+---
 
 For more details on customizing the console, see [CheerpX Custom console].
 
@@ -23,13 +31,19 @@ For more details on customizing the console, see [CheerpX Custom console].
 
 `IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an IDBDevice as Blob objects.
 
-You can copy files from various filesystems into the `IDBDevice`. This allows you to make these files accesible.
+---
+
+If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible.
+
+[ADD AN EXAMPLE]
+
+---
 
 For more on IDBDevice operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The `DataDevice` in CheerpX allows access to JavaScript data in the filesystem. This device can interact with data stored in memory or other JavaScript objects. It is particularly useful for transferring data between JavaScript and the compiled C/C++ code.
+The `DataDevice` in CheerpX allows access to JavaScript data from the filesystem. This device can read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to processes running in CheerpX.
 
 For more information, see the [CheerpX DataDevice].
 
@@ -47,3 +61,4 @@ For more information on capturing stdout, see [Frequently Asked Questions].
 [CheerpX DataDevice]: https://cheerpx.io/docs/guides/File-System-support#datadevice
 [CheerpX IDBDevice]: https://cheerpx.io/docs/guides/File-System-support#idbdevice
 [Frequently Asked Questions]: https://cheerpx.io/docs/faq
+[xterm.js]: https://xtermjs.org/
