@@ -17,29 +17,29 @@ CheerpX provides two options for handling console input and output: the `built-i
 
 **Built-in console**
 
-The CheerpX VM comes with a built-in console that mimics traditional console behavior. The built-in console in CheerpX allows for standard input and output operations, similar to typical command-line environments. You can use standard I/O functions like printf and scanf within your C/C++ programs.
+The CheerpX VM comes with a `built-in` console that mimics traditional console behavior. The `built-in` console in CheerpX allows for standard input and output operations, similar to typical command-line environments. You can use standard I/O functions like printf and scanf within your C/C++ programs.
 
 For more information, visit the [CheerpX console].
 
 **Custom console**
 
-CheerpX also supports a custom console that allows developers to capture output programmatically. This feature enables you to accumulate program output into a JavaScript string. You can implement your custom logging mechanism to redirect the output to a variable, which can be manipulated or displayed as needed.
+CheerpX also supports a `custom` console that allows developers to capture output programmatically. This feature enables you to accumulate program output into a JavaScript string. You can implement your `custom` logging mechanism to redirect the output to a variable, which can be manipulated or displayed as needed.
 
 For more details on customizing the console, see [CheerpX Custom console].
 
 ## Reading Data from the Filesystem using IDBDevice.readFileAsBlob
 
-IDBDevice provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the readFileAsBlob method to read files from an IDBDevice as Blob objects.
+`IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an IDBDevice as Blob objects.
 
-You can copy files from various filesystems into the IDBDevice. This allows you to make these files accesible.
+You can copy files from various filesystems into the `IDBDevice`. This allows you to make these files accesible.
 
-For more on IDBDevice operations, see the [CheerpX IDBDevice] section.
+For more on IDBDevice operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The DataDevice in CheerpX allows access to JavaScript data in the filesystem. This device can interact with data stored in memory or other JavaScript objects. It is particularly useful for transferring data between JavaScript and the compiled C/C++ code.
+The `DataDevice` in CheerpX allows access to JavaScript data in the filesystem. This device can interact with data stored in memory or other JavaScript objects. It is particularly useful for transferring data between JavaScript and the compiled C/C++ code.
 
-For more information, see the [CheerpX DataDevice] section.
+For more information, see the [CheerpX DataDevice].
 
 ## Capture stdout from a program running in CheerpX
 
