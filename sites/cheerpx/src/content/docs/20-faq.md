@@ -2,47 +2,6 @@
 title: Frequently Asked Questions
 ---
 
-## How can I capture stdout from a program running in CheerpX?
-
-Currently, CheerpX doesn't directly support capturing stdout from running programs. However, there's a workaround that allows you to capture the output, albeit with some limitations.
-
-### Workaround: Redirecting to a File
-
-You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
-
-1. Make sure to mount an IDBDevice for a writable and JavaScript-accessible file storage
-
-```js
-const filesDevice = await CheerpX.IDBDevice.create("files");
-const cx = await CheerpX.Linux.create({
-	mounts: [
-		// This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
-		{ type: "ext2", path: "/", dev: overlayDevice },
-		{ type: "dir", path: "/files", dev: filesDevice },
-	],
-});
-```
-
-2. Run your program using `bash -c`, redirecting stdout to a file:
-
-```js
-await cx.run("/bin/bash", [
-	"-c",
-	"echo 'Output to capture' > /files/output.txt",
-]);
-```
-
-3. After the program finishes, read the contents of the file using JavaScript:
-
-```javascript
-const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
-console.log(await outputBlob.text());
-```
-
-### Limitation
-
-This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
-
 ## Why can't CheerpX find files in my `WebDevice` backend?
 
 We know from experience that the interaction between mount points and `WebDevice` can be confusing for some users. The best solution to identify why a file can't be found is to use the _**Network**_ tab to see the final URLs that CheerpX is trying to access. With this information you should be able to fix the incorrect paths.
@@ -80,3 +39,18 @@ Our cloud disk backend is based on WebSocket and distributed across a global CDN
 While v86 might use an open proxy to the internet, this approach is not feasible for CheerpX due to its scale of use. An open proxy can pose significant security and abuse risks when used at scale.
 
 Instead, CheerpX supports Tailscale-based networking, which can accommodate many use cases. It's important to note that developers using CheerpX are responsible for implementing appropriate security measures and preventing potential abuse.
+
+## Missing cross-origin isolation
+
+If you encounter the following error message:
+
+`Uncaught CheerpX initialization failed: DataCloneError: DedicatedWorkerGlobalScope.postMessage: The SharedArrayBuffer object cannot be serialized. The Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy HTTP headers can be used to enable this.`
+
+This error occurs because CheerpX relies on SharedArrayBuffer, which requires the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
+
+```HTTP
+Cross-Origin-Embedder-Policy: require-corp
+Cross-Origin-Opener-Policy: same-origin
+```
+
+By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
