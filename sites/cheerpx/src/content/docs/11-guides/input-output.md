@@ -15,15 +15,25 @@ For more information, visit the [CheerpX console] reference.
 
 ### Custom console
 
----
-
 CheerpX also supports a _custom_ console that allows developers to capture output, and provide input, programmatically. This feature is useful to integrate with a more complete terminal implementation such as [xterm.js]. We use xterm.js ourselves for our public WebVM environment.
 
 Another possible use for the custom console it accumulating program output into a JavaScript string. You can achieve this with the following snippet:
 
-[ADD CODE]
+```js
+    <script>
+      let consoleOutput = '';
 
----
+      // Function to capture output from C++
+      window.setConsoleOutput = (output) => {
+        consoleOutput += output;
+        document.getElementById('console').textContent = consoleOutput; // Display in the console element
+      };
+
+      // Initialize CheerpX
+      const cx = await CheerpX.Linux.create();
+      cx.setConsole(document.getElementById("console")); // Set the console element
+    </script>
+```
 
 For more details on customizing the console, see [CheerpX Custom console].
 
@@ -31,13 +41,11 @@ For more details on customizing the console, see [CheerpX Custom console].
 
 `IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an IDBDevice as Blob objects.
 
----
+If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible. for example:
 
-If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible.
-
-[ADD AN EXAMPLE]
-
----
+```js
+await cx.run("cp", ["Source_file", "Destination_file"]);
+```
 
 For more on IDBDevice operations, see the [CheerpX IDBDevice].
 
@@ -49,12 +57,41 @@ For more information, see the [CheerpX DataDevice].
 
 ## Capture stdout from a program running in CheerpX
 
-Currently, CheerpX doesn't directly support capturing stdout from running programs. Therefore, The IDBDevice allows you to use `.readFileAsBlob()` for capturing stdout after redirecting stdout to a file in `bash`. You can then read this file as a Blob.
+Currently, CheerpX doesn't directly support capturing stdout from running programs. However, there's a workaround that allows you to capture the output, albeit with some limitations.
 
-For more information on capturing stdout, see [Frequently Asked Questions].
+### Workaround: Redirecting to a File
 
-[WebVM]: https://webvm.io/
-[PythonFiddle]: https://pythonfiddle.leaningtech.com/#A4JwlgdgLgFARACQKYBsUHsAEB1dIUAmAhHAJQBQQA
+You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
+
+1. Make sure to mount an IDBDevice for a writable and JavaScript-accessible file storage
+
+```js
+const filesDevice = await CheerpX.IDBDevice.create("files");
+const cx = await CheerpX.Linux.create({
+	mounts: [
+		// This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
+		{ type: "ext2", path: "/", dev: overlayDevice },
+		{ type: "dir", path: "/files", dev: filesDevice },
+	],
+});
+```
+
+2. Run your program using `bash -c`, redirecting stdout to a file:
+
+```js
+await cx.run("/bin/bash", [
+	"-c",
+	"echo 'Output to capture' > /files/output.txt",
+]);
+```
+
+3. After the program finishes, read the contents of the file using JavaScript:
+
+```javascript
+const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
+console.log(await outputBlob.text());
+```
+
 [CheerpX documentations]: https://cheerpx.io/docs/overview
 [CheerpX console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setConsole
 [CheerpX Custom console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setCustomConsole
