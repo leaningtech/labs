@@ -1,23 +1,23 @@
 ---
 title: Input and output
-description: Techniques for getting data in and out of CheerpX virtual machine
+description: Techniques for getting data in and out of the CheerpX virtual machine
 ---
 
 ## CheerpX console input and output
 
-CheerpX provides two options for handling console input and output: the _built-in_ console and a _custom_ console. The purpose of the console is to interact with the running application via standard input and output.
+CheerpX provides two options for handling console input and output: a _built-in_ console and a _custom_ console. The purpose of the console is to interact with the running application via standard input and output.
 
 ### Built-in console
 
-CheerpX comes with a _built-in_ console that mimics traditional console behavior. The _built-in_ console in CheerpX allows for standard input and output operations, similar to typical command-line environments. You can use standard I/O functions like printf and scanf within your C/C++ programs.
+CheerpX comes with a _built-in_ console that mimics traditional console behavior. The _built-in_ console supports standard input and output over a HTML `<pre>` (pre-formatted) element. Keyboard input works provided the element is in focus.
 
 For more information, visit the [CheerpX console] reference.
 
 ### Custom console
 
-CheerpX also supports a _custom_ console that allows developers to capture output, and provide input, programmatically. This feature is useful to integrate with a more complete terminal implementation such as [xterm.js]. We use xterm.js ourselves for our public WebVM environment.
+CheerpX also supports a _custom_ console that allows developers to programmatically capture output and provide input. This feature is useful to integrate with a more complete terminal implementation such as [xterm.js]. We use xterm.js ourselves for our public WebVM environment.
 
-Another possible use for the custom console it accumulating program output into a JavaScript string. You can achieve this with the following snippet:
+Another possible use for the custom console is accumulating program output into a JavaScript string. You can achieve this with the following snippet:
 
 ```js
     <script>
@@ -37,11 +37,11 @@ Another possible use for the custom console it accumulating program output into 
 
 For more details on customizing the console, see [CheerpX Custom console].
 
-## Reading Data from the Filesystem using IDBDevice.readFileAsBlob
+## Reading files using IDBDevice.readFileAsBlob
 
 `IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an IDBDevice as Blob objects.
 
-If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible. for example:
+If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible. For example:
 
 ```js
 await cx.run("cp", ["Source_file", "Destination_file"]);
@@ -51,7 +51,7 @@ For more on IDBDevice operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The `DataDevice` in CheerpX allows access to JavaScript data from the filesystem. This device can read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to processes running in CheerpX.
+The `DataDevice` in CheerpX exposes JavaScript data in the filesystem. This device provides read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
 
 For more information, see the [CheerpX DataDevice].
 
@@ -91,6 +91,10 @@ await cx.run("/bin/bash", [
 const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
 console.log(await outputBlob.text());
 ```
+
+### Limitation
+
+This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
 
 [CheerpX documentations]: https://cheerpx.io/docs/overview
 [CheerpX console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setConsole

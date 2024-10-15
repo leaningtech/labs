@@ -2,10 +2,6 @@
 title: Frequently Asked Questions
 ---
 
-### Limitation
-
-This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
-
 ## Why can't CheerpX find files in my `WebDevice` backend?
 
 We know from experience that the interaction between mount points and `WebDevice` can be confusing for some users. The best solution to identify why a file can't be found is to use the _**Network**_ tab to see the final URLs that CheerpX is trying to access. With this information you should be able to fix the incorrect paths.
@@ -50,13 +46,13 @@ If you encounter the following error message:
 
 `Uncaught CheerpX initialization failed: DataCloneError: DedicatedWorkerGlobalScope.postMessage: The SharedArrayBuffer object cannot be serialized. The Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy HTTP headers can be used to enable this.`
 
-This error occurs because CheerpX relies on the [SharedArrayBuffer], which necessitates the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
+This error occurs because CheerpX relies on [SharedArrayBuffer], which requires the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
 
-```yaml
+```HTTP
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-By adding these headers, you can facilitate the necessary cross-origin isolation for CheerpX to function smoothly.
+By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
 
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
