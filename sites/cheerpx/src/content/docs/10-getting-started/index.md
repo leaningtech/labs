@@ -128,4 +128,4 @@ Now you can interact with the console to run commands. Make sure to give focus t
 
 ---
 
-[Nginx configuration guide]: http://nginx.org/en/docs/beginners_guide.html
+[Nginx configuration guide]: https://cheerpx.io/docs/guides/nginx
