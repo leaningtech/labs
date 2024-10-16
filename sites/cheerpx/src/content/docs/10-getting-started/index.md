@@ -84,10 +84,12 @@ The example below demonstrates how to set up the file system and devices using [
 
 CheerpX requires [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer), which itself requires the site to be cross-origin isolated. To enable cross-origin isolation, serve over HTTPS and set the following headers:
 
-```yaml
+```
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
+
+For detailed instructions on how to configure headers in Nginx, check out the [Nginx configuration guide].
 
 During development, you don't need to use HTTPS if you're using `localhost` as the origin, the `COEP` and `COOP` headers are always required though. You'll need to make sure you serve over HTTPS when you deploy.
 
@@ -125,3 +127,5 @@ await cx.run("/bin/bash", ["--login"], {
 Now you can interact with the console to run commands. Make sure to give focus to the `console` element by clicking on the page if what you type on your keyboard is not displayed.
 
 ---
+
+[Nginx configuration guide]: http://nginx.org/en/docs/beginners_guide.html
