@@ -39,7 +39,7 @@ For more details on customizing the console, see [CheerpX Custom console].
 
 ## Reading files using IDBDevice.readFileAsBlob
 
-`IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an IDBDevice as Blob objects.
+`IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an `IDBDevice` as Blob objects.
 
 If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible. For example:
 
@@ -47,11 +47,11 @@ If the file you want to read is not yet in an `IDBDevice`, you can copy files by
 await cx.run("cp", ["Source_file", "Destination_file"]);
 ```
 
-For more on IDBDevice operations, see the [CheerpX IDBDevice].
+For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The `DataDevice` in CheerpX exposes JavaScript data in the filesystem. This device provides read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
+The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
 
 For more information, see the [CheerpX DataDevice].
 
@@ -63,7 +63,7 @@ Currently, CheerpX doesn't directly support capturing stdout from running progra
 
 You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
 
-1. Make sure to mount an IDBDevice for a writable and JavaScript-accessible file storage
+1. Make sure to mount an `IDBDevice` for a writable and JavaScript-accessible file storage
 
 ```js
 const filesDevice = await CheerpX.IDBDevice.create("files");
