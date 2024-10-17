@@ -89,7 +89,7 @@ Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-For detailed instructions on how to configure headers in Nginx, check out the [Nginx configuration guide].
+For detailed instructions on how to configure headers in Nginx, check out our [Nginx configuration guide].
 
 During development, you don't need to use HTTPS if you're using `localhost` as the origin, the `COEP` and `COOP` headers are always required though. You'll need to make sure you serve over HTTPS when you deploy.
 
@@ -128,4 +128,4 @@ Now you can interact with the console to run commands. Make sure to give focus t
 
 ---
 
-[Nginx configuration guide]: https://cheerpx.io/docs/guides/nginx
+[Nginx configuration guide]: /docs/guides/nginx
