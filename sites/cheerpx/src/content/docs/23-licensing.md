@@ -41,11 +41,11 @@ If you wish to self-host CheerpX, you will need a license. [Contact us][contact]
 
 Please [contact us directly][contact] to discuss OEM or Reseller licences.
 
-For more detailed licensing information, please visit our [Licensing Page].
+For any doubt, please check the [Complete License].
 
 ---
 
 If you are not sure whether you require a license, [contact us][contact].
 
 [contact]: https://leaningtech.com/contact-us/?subject=CheerpX%20Enterprise%20Licence#mailus
-[Licensing Page]: https://github.com/leaningtech/cheerpx-meta/blob/main/LICENSE.txt
+[Complete License]: https://github.com/leaningtech/cheerpx-meta/blob/main/LICENSE.txt
