@@ -20,19 +20,27 @@ CheerpX also supports a _custom_ console that allows developers to programmatica
 Another possible use for the custom console is accumulating program output into a JavaScript string. You can achieve this with the following snippet:
 
 ```js
-    <script>
-      let consoleOutput = '';
+const encoder = new TextEncoder("utf-8");
 
-      // Function to capture output from C++
-      window.setConsoleOutput = (output) => {
-        consoleOutput += output;
-        document.getElementById('console').textContent = consoleOutput; // Display in the console element
-      };
+let accumulatedOutput = ""; // Initialize an empty string to accumulate output
 
-      // Initialize CheerpX
-      const cx = await CheerpX.Linux.create();
-      cx.setConsole(document.getElementById("console")); // Set the console element
-    </script>
+const send = cx.setCustomConsole(
+  (buf) => {
+    const string = new TextDecoder("utf-8").decode(buf);
+    accumulatedOutput += string; // Accumulate the output
+    console.log(accumulatedOutput); //log the accumulated output
+  },
+  40,
+  60,
+);
+
+// Send a string
+const str = "Hello, custom console!\n";
+const encodedStr = encoder.encode(str);
+
+for (let i = 0; i < encodedStr.length; i++) {
+  send(encodedStr[i]);
+}
 ```
 
 For more details on customizing the console, see [CheerpX Custom console].
