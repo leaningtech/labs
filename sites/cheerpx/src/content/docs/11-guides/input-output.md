@@ -25,13 +25,13 @@ const encoder = new TextEncoder("utf-8");
 let accumulatedOutput = ""; // Initialize an empty string to accumulate output
 
 const send = cx.setCustomConsole(
-  (buf) => {
-    const string = new TextDecoder("utf-8").decode(buf);
-    accumulatedOutput += string; // Accumulate the output
-    console.log(accumulatedOutput); //log the accumulated output
-  },
-  40,
-  60,
+	(buf) => {
+		const string = new TextDecoder("utf-8").decode(buf);
+		accumulatedOutput += string; // Accumulate the output
+		console.log(accumulatedOutput); //log the accumulated output
+	},
+	40,
+	60,
 );
 
 // Send a string
@@ -39,21 +39,70 @@ const str = "Hello, custom console!\n";
 const encodedStr = encoder.encode(str);
 
 for (let i = 0; i < encodedStr.length; i++) {
-  send(encodedStr[i]);
+	send(encodedStr[i]);
 }
 ```
 
 For more details on customizing the console, see [CheerpX Custom console].
 
-## Reading files using IDBDevice.readFileAsBlob
+## Reading Files Using IDBDevice and Redirecting Output
 
 `IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an `IDBDevice` as Blob objects.
 
-If the file you want to read is not yet in an `IDBDevice`, you can copy files by running commands inside the virtual machine to make them accessible. For example:
+To make a file accessible, you can copy files using commands within the virtual machine. Here’s an example on how to do it:
 
 ```js
-await cx.run("cp", ["Source_file", "Destination_file"]);
+const filesDevice = await CheerpX.IDBDevice.create("files");
+const cx = await CheerpX.Linux.create({
+	// Mount the IDBDevice
+	mounts: [
+		{ type: "ext2", path: "/", dev: overlayDevice },
+		{ type: "dir", path: "/files", dev: filesDevice },
+	],
+});
 ```
+
+Now, you can copy files as follows:
+
+```js
+await cx.run("/bin/cp", ["/source_file", "/files/destination_file"], {
+	env: [
+		"HOME=/home/user",
+		"USER=user",
+		"SHELL=/bin/bash",
+		"EDITOR=vim",
+		"LANG=en_US.UTF-8",
+		"LC_ALL=C",
+	],
+	cwd: "/home/user",
+});
+```
+
+### Redirecting Output to a File
+
+To capture output from a program, you can redirect it to a file. Here’s how to do that:
+
+1. Run your program using `bash -c`, redirecting stdout to a file:
+
+```js
+await cx.run("/bin/bash", [
+	"-c",
+	"echo 'Output to capture' > /files/output.txt",
+]);
+```
+
+2. Read the Output File:
+
+After the program finishes, you can read the contents of the output file:
+
+```js
+const outputBlob = await filesDevice.readFileAsBlob("/files/output.txt");
+console.log(await outputBlob.text());
+```
+
+### Limitation
+
+This method has a significant limitation: it doesn't provide streaming output. The entire program must finish execution before you can read the output file, meaning real-time output isn't available.
 
 For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 
