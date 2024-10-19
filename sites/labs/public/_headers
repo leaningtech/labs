@@ -1,2 +1,4 @@
 /*.html
 	CDN-Cache-Control: private, no-cache
+/*.png
+	Cross-Origin-Resource-Policy: cross-origin
