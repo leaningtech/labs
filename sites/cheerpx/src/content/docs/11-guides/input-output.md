@@ -83,7 +83,7 @@ const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
 console.log(await outputBlob.text());
 ```
 
-> [!note]
+> [!note] Note
 > This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results. For real-time output, consider using the _custom_ console approach, which allows for streaming output.
 
 For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
