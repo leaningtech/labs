@@ -23,7 +23,7 @@ namespace CheerpX {
 
 ## Returns
 
-`setCustomConsole` returns a function tha should be called to simulate user typing in the console.
+`setCustomConsole` returns a function that should be called to simulate user typing in the console.
 
 ## Examples
 
