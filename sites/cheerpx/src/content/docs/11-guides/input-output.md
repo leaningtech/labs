@@ -61,17 +61,7 @@ const cx = await CheerpX.Linux.create({
 Now, you can copy files as follows:
 
 ```js
-await cx.run("/bin/cp", ["/source_file", "/files/destination_file"], {
-	env: [
-		"HOME=/home/user",
-		"USER=user",
-		"SHELL=/bin/bash",
-		"EDITOR=vim",
-		"LANG=en_US.UTF-8",
-		"LC_ALL=C",
-	],
-	cwd: "/home/user",
-});
+await cx.run("/bin/cp", ["/source_file", "/destination_file"]);
 ```
 
 ### Redirecting Output to a File
@@ -81,10 +71,7 @@ To capture output from a program, you can redirect it to a file. Here’s how to
 1. Run your program using `bash -c`, redirecting stdout to a file:
 
 ```js
-await cx.run("/bin/bash", [
-	"-c",
-	"echo 'Output to capture' > /files/output.txt",
-]);
+await cx.run("/bin/bash", ["-c", "echo 'Output to capture' > /output.txt"]);
 ```
 
 2. Read the Output File:
@@ -92,19 +79,18 @@ await cx.run("/bin/bash", [
 After the program finishes, you can read the contents of the output file:
 
 ```js
-const outputBlob = await filesDevice.readFileAsBlob("/files/output.txt");
+const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
 console.log(await outputBlob.text());
 ```
 
-### Limitation
-
-This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results. For real-time output, consider using the _custom_ console approach, which allows for streaming output.
+> [!NOTE]
+> This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results. For real-time output, consider using the _custom_ console approach, which allows for streaming output.
 
 For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
+The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to a `Uint8Array` and a JavaScript `String`. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
 
 For more information, see the [CheerpX DataDevice].
 
