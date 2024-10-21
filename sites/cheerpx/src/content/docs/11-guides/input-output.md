@@ -24,15 +24,11 @@ const encoder = new TextEncoder("utf-8");
 
 let accumulatedOutput = ""; // Initialize an empty string to accumulate output
 
-const send = cx.setCustomConsole(
-	(buf) => {
-		const string = new TextDecoder("utf-8").decode(buf);
-		accumulatedOutput += string; // Accumulate the output
-		console.log(accumulatedOutput); //log the accumulated output
-	},
-	40,
-	60,
-);
+const send = cx.setCustomConsole((buf) => {
+	const string = new TextDecoder("utf-8").decode(buf);
+	accumulatedOutput += string; // Accumulate the output
+	console.log(accumulatedOutput); // log the accumulated output
+});
 
 // Send a string
 const str = "Hello, custom console!\n";
@@ -102,7 +98,7 @@ console.log(await outputBlob.text());
 
 ### Limitation
 
-This method has a significant limitation: it doesn't provide streaming output. The entire program must finish execution before you can read the output file, meaning real-time output isn't available.
+This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results. For real-time output, consider using the _custom_ console approach, which allows for streaming output.
 
 For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 
@@ -111,47 +107,6 @@ For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to `Uint8Array`s and JavaScript `Strings`s. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
 
 For more information, see the [CheerpX DataDevice].
-
-## Capture stdout from a program running in CheerpX
-
-Currently, CheerpX doesn't directly support capturing stdout from running programs. However, there's a workaround that allows you to capture the output, albeit with some limitations.
-
-### Workaround: Redirecting to a File
-
-You can redirect the output of a program to a file and then read that file from JavaScript. Here's how:
-
-1. Make sure to mount an `IDBDevice` for a writable and JavaScript-accessible file storage
-
-```js
-const filesDevice = await CheerpX.IDBDevice.create("files");
-const cx = await CheerpX.Linux.create({
-	mounts: [
-		// This example assumes using `overlayDevice` as the root, please adapt accordingly to your needs
-		{ type: "ext2", path: "/", dev: overlayDevice },
-		{ type: "dir", path: "/files", dev: filesDevice },
-	],
-});
-```
-
-2. Run your program using `bash -c`, redirecting stdout to a file:
-
-```js
-await cx.run("/bin/bash", [
-	"-c",
-	"echo 'Output to capture' > /files/output.txt",
-]);
-```
-
-3. After the program finishes, read the contents of the file using JavaScript:
-
-```javascript
-const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
-console.log(await outputBlob.text());
-```
-
-### Limitation
-
-This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results.
 
 [CheerpX documentations]: https://cheerpx.io/docs/overview
 [CheerpX console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setConsole
