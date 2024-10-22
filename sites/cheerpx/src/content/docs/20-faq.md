@@ -39,3 +39,18 @@ Our cloud disk backend is based on WebSocket and distributed across a global CDN
 While v86 might use an open proxy to the internet, this approach is not feasible for CheerpX due to its scale of use. An open proxy can pose significant security and abuse risks when used at scale.
 
 Instead, CheerpX supports Tailscale-based networking, which can accommodate many use cases. It's important to note that developers using CheerpX are responsible for implementing appropriate security measures and preventing potential abuse.
+
+## Missing cross-origin isolation
+
+If you encounter the following error message:
+
+`Uncaught CheerpX initialization failed: DataCloneError: DedicatedWorkerGlobalScope.postMessage: The SharedArrayBuffer object cannot be serialized. The Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy HTTP headers can be used to enable this.`
+
+This error occurs because CheerpX relies on SharedArrayBuffer, which requires the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
+
+```
+Cross-Origin-Embedder-Policy: require-corp
+Cross-Origin-Opener-Policy: same-origin
+```
+
+By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
