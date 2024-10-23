@@ -77,3 +77,5 @@ networkInterface?: NetworkInterface;
 ```
 
 This option configures network settings, which allows CheerpX to communicate over networks.
+
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

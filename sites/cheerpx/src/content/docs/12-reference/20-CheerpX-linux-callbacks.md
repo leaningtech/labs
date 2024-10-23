@@ -17,8 +17,8 @@ Registers a callback function for a specific event type.
 
 - **eventName**: A string specifying the event type. Can be `"cpuActivity"`, `"diskActivity"`, or `"diskLatency"`.
 - **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
-  - For `"cpuActivity"` and `"diskActivity"`: `state` can be either "ready" (active) or "wait" (idle).
-  - For `"diskLatency"`: `state` is a number representing the time in milliseconds between requesting and receiving the last disk block.
+  - For `"cpuActivity"` and `"diskActivity"`: `state` can be either "ready" (idle, no activity at this time) or "wait" (active, currently in use).
+  - For `"diskLatency"`: `state` is a number representing the time in milliseconds between requesting and receiving the last disk block from the backend.
 
 ### `unregisterCallback`
 
@@ -37,26 +37,45 @@ Example usage:
 
 ```js
 function hddCallback(state) {
-	var h = document.getElementById("hddactivity");
-	if (state == "ready") h.textContent = "\u{1F7E2}";
-	else h.textContent = "\u{1F7E0}";
+	if (state === "ready") {
+		console.log("Disk Activity: Ready");
+	} else {
+		console.log("Disk Activity: Busy");
+	}
 }
 
 function cpuCallback(state) {
-	var h = document.getElementById("cpuactivity");
-	if (state == "ready") h.textContent = "\u{1F7E2}";
-	else h.textContent = "\u{1F7E0}";
+	if (state === "ready") {
+		console.log("CPU Status: Ready");
+	} else {
+		console.log("CPU Status: Busy");
+	}
 }
 
 function latencyCallback(latency) {
-	console.log(`Last disk block download latency: ${latency}ms`);
+	console.log(`Last Disk Latency: ${latency} ms`);
 }
 
-const cx = await CheerpX.Linux.create(/* options */);
+if (cx) {
+	cx.registerCallback("cpuActivity", cpuCallback);
+	cx.registerCallback("diskActivity", hddCallback);
+	cx.registerCallback("diskLatency", latencyCallback);
 
-cx.registerCallback("cpuActivity", cpuCallback);
-cx.registerCallback("diskActivity", hddCallback);
-cx.registerCallback("diskLatency", latencyCallback);
+	// Simulate CPU, disk activity, and latency logs for testing purposes
+	setInterval(() => {
+		// Simulate CPU activity
+		const state = Math.random() > 0.5 ? "ready" : "busy";
+		cpuCallback(state);
+
+		// Simulate disk activity
+		const diskState = Math.random() > 0.5 ? "ready" : "busy";
+		hddCallback(diskState);
+
+		// Random latency between 0 and 99 ms
+		const simulatedLatency = Math.floor(Math.random() * 100);
+		latencyCallback(simulatedLatency);
+	}, 3000);
+}
 
 // Later, if needed:
 // cx.unregisterCallback("cpuActivity", cpuCallback);
@@ -64,9 +83,5 @@ cx.registerCallback("diskLatency", latencyCallback);
 // cx.unregisterCallback("diskLatency", latencyCallback);
 ```
 
-This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks update UI elements based on the activity state, while the disk latency callback logs the latency of the last downloaded disk block.
-
-> [!note] Note
-> The `diskLatency` event works for any type of network block device and provides real-time information about the latency of disk block downloads.
-
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks log the current state (either "ready" or "busy") to the console, while the disk latency callback logs the latency of the last downloaded disk block.
+Additionally, the simulated events are generated for testing purposes, allowing you to see output for all three types of activity.
