@@ -33,14 +33,26 @@ public class Example {
 To provide an implementation of `alert`, pass it to the `cheerpjInit` function as a property of the `natives` object:
 
 ```js
-await cheerpjInit({
-	natives: {
-		async Java_Example_alert(lib, str) {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CheerpJ Natives Test</title>
+	<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+</head>
+<body>
+	<script>
+		async function Java_myClass_nativeAlert(lib, str)
+		{
 			window.alert(str);
-		},
-	},
-});
-await cheerpjRunMain("Example", "/app/");
+		}
+		(async  () => {
+			await cheerpjInit({version:8,natives:{Java_myClass_nativeAlert}});
+			await cheerpjRunMain("myClass", "/app/natives/"); 
+		})();
+	</script>
+</body>
+</hmtl>
 ```
 
 The `lib` parameter is a [`CJ3Library`]. It can be used to access other classes and methods of the library.
