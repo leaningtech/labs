@@ -54,3 +54,19 @@ Cross-Origin-Opener-Policy: same-origin
 ```
 
 By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
+
+## Why Can't I Use the `file://` Protocol?
+
+CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here are the key reasons:
+
+### 1. Security Restrictions
+
+Modern browsers enforce strict security policies that limit how local files can interact with web technologies. Accessing files through `file://` doesn’t allow the necessary cross-origin headers to be enabled, which are crucial for CheerpX to function properly.
+
+### 2. Cross-Origin Headers
+
+CheerpX relies on cross-origin isolation, which requires specific HTTP headers. These headers can only be set when serving content over HTTP or HTTPS, not from the filesystem.
+
+### 3. Local Web Server Requirement
+
+To ensure proper functionality, you need to run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary configurations and headers are correctly applied.
