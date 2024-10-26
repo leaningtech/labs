@@ -3,9 +3,15 @@ title: Basic server setup
 description: Serve your own project using nginx
 ---
 
-CheerpX requires [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer), which itself requires the site to be cross-origin isolated. This means that the server must set the appropriate headers.
+## Overview
 
-Here's an example of a basic nginx configuration that allows CheerpX to run.
+This guide will help you set up a basic server using nginx to run your project with CheerpX. CheerpX requires [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer), which itself requires the site to be cross-origin isolated. This means that the server must set the appropriate headers.
+
+## Configuration Steps
+
+### 1. Prepare Your Nginx Configuration
+
+Create a file named `nginx.conf` and add the following configuration:
 
 ```nginx
 worker_processes  1;
@@ -43,9 +49,16 @@ http {
 }
 ```
 
-This configuration will work over localhost in a development environment. When the application is deployed, it must be served over HTTPS.
+This is a basic nginx configuration that allows CheerpX to run.
 
-Then run nginx using this configuration with the following command line.
+### 2. Important notes
+
+- This setup works in a **development environment** on `localhost`
+- **For production**, always use **HTTPS** to ensure security.
+
+### 3. Run Nginx
+
+Use the following command to start nginx with your configuration:
 
 ```bash
 nginx -c nginx.conf -p .
