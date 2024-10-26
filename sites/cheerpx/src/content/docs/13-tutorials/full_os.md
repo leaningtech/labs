@@ -45,13 +45,13 @@ Loading CheerpX is very simple. Create a new file called `index.html` and popula
 
 ```html title=index.html
 <!doctype html>
-<html lang="en" style="heigth: 100%;">
+<html lang="en" style="height: 100%;">
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Test</title>
 		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
 	</head>
-	<body style="heigth: 100%; background: black;"></body>
+	<body style="height: 100%; background: black;"></body>
 </html>
 ```
 
@@ -59,7 +59,7 @@ Loading CheerpX is very simple. Create a new file called `index.html` and popula
 
 We recommend always choosing `nginx` as your Web server when using with CheerpX.
 
-This basic configuration should get you up and running. Please note that CheerpX requires cross-origin isolation, which is enabled via the `Cross-Origin-Opener-Policy' and 'Cross-Origin-Embedder-Policy` headers. For more information see the dedicated [Nginx](/docs/guides/nginx) guide.
+This basic configuration should get you up and running. Please note that CheerpX requires cross-origin isolation, which is enabled via the `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers. For more information see the dedicated [Nginx](/docs/guides/nginx) guide.
 
 ```nginx title=nginx.conf
 worker_processes  1;
@@ -105,7 +105,7 @@ nginx -p . -c nginx.conf
 
 You can now see your page at `http://localhost:8080`
 
-Make sire the `cheerpXImage.ext2` and the `index.html` files are both into the same directory where `nginx` was started.
+Make sure the `cheerpXImage.ext2` and the `index.html` files are both in the same directory where `nginx` was started.
 
 ## 4. Create a device for the filesystem
 
@@ -123,6 +123,8 @@ Create a `HttpBytesDevice` from the just created Ext2 image. `OverlayDevice` mak
 </script>
 ```
 
+For more information on `HttpBytesDevice` and `OverlayDevice`, see our [Files and filesystem] guide.
+
 ## 5. Create a CheerpX instance
 
 In the same script tag, pass the `overlayDevice` as a new mount point to the `Cheerpx.Linux.create` method. This option will initialize CheerpX with the newly created device mounted as `/`.
@@ -133,12 +135,14 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
+To learn more about `Cheerpx.Linux.create`, see the [CheerpX.Linux.create] reference.
+
 ## 6. Attach a console
 
 Create a console element for the output of your program.
 
 ```html
-<pre id="console" style="heigth: 100%;"></pre>
+<pre id="console" style="height: 100%;"></pre>
 ```
 
 And configure CheerpX to use it by adding this snippet at the end of the script.
@@ -146,6 +150,8 @@ And configure CheerpX to use it by adding this snippet at the end of the script.
 ```js
 cx.setConsole(document.getElementById("console"));
 ```
+
+Learn more about the console setup in the [setConsole] reference.
 
 ## 7. Execute a shell
 
@@ -166,3 +172,10 @@ await cx.run("/bin/bash", ["--login"], {
 	gid: 1000,
 });
 ```
+
+Learn more about `cx.run` in the [CheerpX.Linux.run] reference.
+
+[Files and filesystem]: docs/guides/File-System-support
+[CheerpX.Linux.create]: docs/reference/CheerpX-Linux-create
+[setConsole]: docs/reference/CheerpX-Linux-setConsole
+[CheerpX.Linux.run]: docs/reference/CheerpX-Linux-run
