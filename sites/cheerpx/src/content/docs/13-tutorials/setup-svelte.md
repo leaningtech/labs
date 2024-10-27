@@ -5,7 +5,7 @@ description: Using CheerpX together with Svelte
 
 This tutorial will explain how to create a application with Svelte that works together with CheerpX.
 
-## Install Svelte
+## Step 1: Install Svelte
 
 First create a new Svelte app by running:
 
@@ -31,7 +31,7 @@ Click on the `localhost` link in your terminal window to test the development se
 
 (Vite uses `http://localhost:5173/` by default if port `5173` is available.)
 
-## Install Cheerpx
+## Step 2: Install CheerpX
 
 Next, let's install CheerpX:
 
@@ -76,7 +76,7 @@ Create a new file named src/routes/+page.ts to disable Server-Side Rendering ([S
 export const ssr = false;
 ```
 
-## Script
+## Step 3: Modify the Svelte Page
 
 We will now modify `src/routes/+page.svelte` to replace the Svelte example with a full-screen console running `bash` using CheerpX. For more details on the CheerpX logic itself, please see our [Getting Started] guide.
 
@@ -133,4 +133,4 @@ Your web page should refresh automatically and you should see the bash prompt in
 [instructions]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
 [Cross origin isolation]: https://web.dev/articles/why-coop-coep
-[Getting Started]: https://github.com/leaningtech/labs/blob/main/sites/cheerpx/src/content/docs/10-getting-started/index.md
+[Getting Started]: /docs/getting-started
