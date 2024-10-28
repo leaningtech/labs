@@ -46,7 +46,7 @@ If you encounter the following error message:
 
 `Uncaught CheerpX initialization failed: DataCloneError: DedicatedWorkerGlobalScope.postMessage: The SharedArrayBuffer object cannot be serialized. The Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy HTTP headers can be used to enable this.`
 
-This error occurs because CheerpX relies on SharedArrayBuffer, which requires the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
+This error occurs because CheerpX relies on [SharedArrayBuffer], which requires the site to be [cross-origin isolated]. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
 
 ```
 Cross-Origin-Embedder-Policy: require-corp
@@ -55,16 +55,22 @@ Cross-Origin-Opener-Policy: same-origin
 
 By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
 
+For more information on server configurations, please see our [server setup guide].
+
 ## Why Can't I Use the `file://` Protocol?
 
 CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here’s an explanation of the issue and the recommended solution:
 
 ### Security Restrictions and Cross-Origin Headers
 
-Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` poses a security risk, as it could allow untrusted HTML files to interact with local resources. For instance, if you open a random HTML file received via email, it could potentially access sensitive files on your disk, leading to data breaches.
-
-Additionally, CheerpX relies on cross-origin isolation, which requires specific HTTP headers that can only be set when serving content over HTTP or HTTPS. Without these headers, the necessary security mechanisms cannot be enforced. This is particularly important for CheerpX, as it needs to download multiple resources from its origin, including the WASM file.
+Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it could allow untrusted HTML files to interact with local resources. For instance, if you open a random HTML file received via email, it could potentially access sensitive files on your disk, leading to data breaches. Additionally, CheerpX needs to download multiple resources from its origin, including the WASM file, and relies on cross-origin isolation, which requires specific HTTP headers that can only be set when serving content over HTTP or HTTPS. Without these headers, the necessary security mechanisms cannot be enforced.
 
 ### Recommended Solution: Local Web Server Requirement
 
-To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary security configurations and headers are correctly applied.
+To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation are correctly applied.
+
+For more information on server setups, please see our [server setup guide].
+
+[server setup guide]: :/docs/guides/nginx
+[SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
+[cross-origin isolated]: https://web.dev/articles/why-coop-coep
