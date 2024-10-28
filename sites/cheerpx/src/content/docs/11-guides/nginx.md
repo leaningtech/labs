@@ -53,8 +53,8 @@ This is a basic nginx configuration that allows CheerpX to run.
 
 ### 2. Important notes
 
-- This setup works in a **development environment** on `localhost`
-- **For production**, always use **HTTPS** to ensure security.
+- This setup is suitable for a **development environment** on `localhost`, which is an exception to the usual cross-origin requirements.
+- For **production environments**, it is important to use **HTTPS** to ensure cross-origin isolation and overall securitity, since cross-origin isolation cannot be achieved without **HTTPS** (with the exception of localhost).
 
 ### 3. Run Nginx
 
