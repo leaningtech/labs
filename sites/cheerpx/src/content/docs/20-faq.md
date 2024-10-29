@@ -63,9 +63,9 @@ CheerpX requires certain browser capabilities that are not available when access
 
 ### Security Restrictions and Cross-Origin Headers
 
-Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it can allow untrusted HTML files to interact with local resources. For example, opening random HTML files can access sensitive files on your disk, which may lead to data breaches.
+Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted files to interact with local resources. Which may lead to data breaches.
 
-Additionally, CheerpX needs to download multiple resources from its origin, including the WASM file, and relies on cross-origin isolation. This requires specific HTTP headers that can only be set when serving content over HTTP or HTTPS. Without these headers, the necessary security mechanisms cannot be enforced.
+Additionally, SharedArrayBuffer requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol restricts the ability to set crucial HTTP headers, such as `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
 
 ### Recommended Solution: Local Web Server Requirement
 
