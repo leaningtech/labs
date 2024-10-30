@@ -63,13 +63,13 @@ CheerpX requires certain browser capabilities that are not available when access
 
 ### Security Restrictions and Cross-Origin Headers
 
-Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted files to interact with local resources. Which may lead to data breaches.
+Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted HTML files to interact with local resources and cause to data breaches.
 
-Additionally, SharedArrayBuffer requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol restricts the ability to set crucial HTTP headers, such as `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
+Additionally, [SharedArrayBuffer] requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol restricts the ability to set crucial HTTP headers, such as `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
 
 ### Recommended Solution: Local Web Server Requirement
 
-To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation are correctly applied.
+To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation can be correctly applied.
 
 For more information on server setups, please see our [server setup guide].
 
