@@ -186,7 +186,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 </html>
 ```
 
-## Result
+## The result
 
 If everything is set up correctly, you should be able to see and perform the following actions:
 
@@ -195,3 +195,7 @@ If everything is set up correctly, you should be able to see and perform the fol
 ---
 
 [Nginx configuration guide]: /docs/guides/nginx
+
+## Have Questions?
+
+We're here to help! If you have any questions or concerns, feel free to explore our [guides](/docs/guides) or [reference](/docs/reference) section or check out our [frequently asked questions](/docs/faq). You can also connect with our supportive community on [Discord](https://discord.com/invite/yzZJzpaxXT), and reach out whenever you’d like!
