@@ -46,7 +46,7 @@ If you encounter the following error message:
 
 `Uncaught CheerpX initialization failed: DataCloneError: DedicatedWorkerGlobalScope.postMessage: The SharedArrayBuffer object cannot be serialized. The Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy HTTP headers can be used to enable this.`
 
-This error occurs because CheerpX relies on SharedArrayBuffer, which requires the site to be cross-origin isolated. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
+This error occurs because CheerpX relies on [SharedArrayBuffer], which requires the site to be [cross-origin isolated]. To activate cross-origin isolation, ensure your site is served over HTTPS and include the following headers in your responses:
 
 ```
 Cross-Origin-Embedder-Policy: require-corp
@@ -54,3 +54,25 @@ Cross-Origin-Opener-Policy: same-origin
 ```
 
 By adding these headers to your server configuration you will enable cross-origin isolation and CheerpX will be able to start.
+
+For more information on server configurations, please see our [server setup guide].
+
+## Why Can't I Use the `file://` Protocol?
+
+CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here’s an explanation of the issue and the recommended solution.
+
+### Security Restrictions and Cross-Origin Headers
+
+Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted HTML files to interact with local resources and cause data breaches.
+
+Additionally, [SharedArrayBuffer] requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol does not support setting the required HTTP headers: `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
+
+### Recommended Solution: Local Web Server Requirement
+
+To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, for example `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation can be correctly applied.
+
+For more information on how to setup a HTTP server, please see our [server setup guide].
+
+[server setup guide]: /docs/guides/nginx
+[SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
+[cross-origin isolated]: https://web.dev/articles/why-coop-coep
