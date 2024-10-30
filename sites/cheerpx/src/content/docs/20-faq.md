@@ -59,19 +59,19 @@ For more information on server configurations, please see our [server setup guid
 
 ## Why Can't I Use the `file://` Protocol?
 
-CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here’s an explanation of the issue and the recommended solution:
+CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here’s an explanation of the issue and the recommended solution.
 
 ### Security Restrictions and Cross-Origin Headers
 
-Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted HTML files to interact with local resources and cause to data breaches.
+Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted HTML files to interact with local resources and cause data breaches.
 
-Additionally, [SharedArrayBuffer] requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol restricts the ability to set crucial HTTP headers, such as `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
+Additionally, [SharedArrayBuffer] requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol does not support setting the required HTTP headers: `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
 
 ### Recommended Solution: Local Web Server Requirement
 
-To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, such as `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation can be correctly applied.
+To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, for example `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation can be correctly applied.
 
-For more information on server setups, please see our [server setup guide].
+For more information on how to setup a HTTP server, please see our [server setup guide].
 
 [server setup guide]: /docs/guides/nginx
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
