@@ -186,7 +186,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 </html>
 ```
 
-## Example
+## Result
 
 If everything is set up correctly, you should be able to see and perform the following actions:
 
