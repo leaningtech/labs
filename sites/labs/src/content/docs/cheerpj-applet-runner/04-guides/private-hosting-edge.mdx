@@ -1,0 +1,225 @@
+---
+title: Private hosting (Edge)
+description: Deploy the Applet Runner extension via Group Policy (Windows).
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+
+If your organisation requires you to use our extension on multiple devices, we have amazing news for you! Our Applet Runner extension is available for private hosting and deployment via Group Policies. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
+
+Requirements:
+
+- The appropriate IT permissions at your organisation.
+- The Applet Runner extension CRX file.
+
+## The CRX File and `DownloadURL`
+
+The CRX file is a compressed format for extensions of browsers belonging to the Chromium family (such as Google Chrome and Edge). To obtain the CRX file of the Applet Runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you.
+
+You will need to host the extension CRX file in the appropriate location of your IT infrastructure and create a DownloadURL to access it. You will need this URL later in the tutorial.
+
+> [!info] About `DownloadURL`
+> You can also use the Edge add-ons store `DownloadURL`, but you won't be self-hosting the extension and it will be retrieved from the Edge store for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
+
+## The extension ID
+
+The extension ID is a unique identifier you can easily retrieve from the [extension URL of Edge's Add-ons store](https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic) (last 32 characters):
+
+```
+https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic
+```
+
+The extension ID is:
+
+```
+ebfcpaoldmijengghefpohddmfpndmic
+```
+
+Or if you use a custom extension build, navigate to `edge://extensions/` in Edge, and retrieve it from there.
+
+<div class="flex justify-center">
+	<img
+		src="/assets/applet-screenshots/edge_id.png"
+		class="m-0"
+		alt="Edge manage extension page"
+	/>
+</div>
+
+You can find more information on how to pack and manually install the Applet Runner extension in our [documentation](/docs/cheerpj-applet-runner/getting-started/packing-extension-edge).
+
+## The policy string
+
+Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX Download URL separated by a semicolon:
+`ID;DownloadURL`
+It must look something like this:
+`ebfcpaoldmijengghefpohddmfpndmic;https://some.download.url.file.crx`
+
+> [!warning] Hypothetical policy string
+> The example above contains hypothetical URL, please do not use this policy string.
+
+## Policy templates
+
+You need to install the Microsoft Edge Administrative template to configure policies for Edge. Please follow [this tutorial by Microsoft](https://learn.microsoft.com/en-us/deployedge/configure-microsoft-edge#1-download-and-install-the-microsoft-edge-administrative-template)
+
+<LinkButton
+	href="https://learn.microsoft.com/en-us/deployedge/configure-microsoft-edge#1-download-and-install-the-microsoft-edge-administrative-template"
+	label="Edge policies"
+	type="primary"
+	iconRight="ri:edge-fill"
+/>
+## Creating a new group policy
+
+Now you have everything you need to create a new GPO, please follow these final steps to create a Group Policy. You can skip this step and just edit an existing one.
+
+1. Open the Group Policy Management interface
+2. Go to your desired domain and right click to display the options menu.
+3. Click on _**Create a GPO in this domain, and Link it here...**_
+4. Name your policy object and hit _**Ok**_.
+
+## Force-install
+
+You can now configure your Group Policy to force install the extension in all your organisation browsers. To do so, you will need the Policy String from the previous step and follow this [force-install tutorial by Microsoft](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-policies#force-install-an-extension)
+
+## Group policy settings
+
+This step is optional and allows you to define additional settings for the Applet Runner Group Policy.
+
+1. Open the _**Group Policy Management**_ interface, find the Applet Runner group policy you created previously (or your existing policy) and click _**Edit**_.
+2. Find _**Microsoft Edge**_ > _**Extensions**_ > _**Configure Extension management setting policy**_.
+3. On the right side menu click on _**Configure Extension management settings**_.
+
+In this window you can configure all the settings relevant for your organisation when using the Applet runner extension. To do so you need to input the relevant settings in JSON format into the editor. This is done by editing the JSON string shown in the interface using the format:
+
+```json
+{ "*": { "FieldKey": "FieldValue" } }
+```
+
+They Key **(_\*_)** will apply the settings to all extensions or apps under this policy.
+Remember to use the extension ID for those settings that you want to apply only for the Applet Runner extension.
+
+```json
+{ "ExtensionIDHere": { "Setting1": "Value1", "Setting2": "Value2" } }
+```
+
+You can find all the edge specific Group policy settings in the official [Microsoft documentation](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-ref-guide).
+
+Next we will show you some examples of settings that you can configure to further enhance the user experience when using the Applet Runner extension. For example, you can enable the extension on specific URLs by default.
+
+### Enable the extension for certain URLs
+
+If you want the Applet Runner extension to be enabled by default on certain URLs, you can use the `"runtime_allowed_hosts"` setting to achieve this. This way, users won’t need to click the extension icon anymore to enable it.
+
+```json
+{ "ExtensionIDHere": { "runtime_allowed_hosts": ["*://an.example.com"] } }
+```
+
+### Pin the extension to the toolbar by default
+
+With this setting, users won’t need to manually pin the extension anymore.
+
+```json
+{ "ExtensionIDHere": { "toolbar_state": "force_shown" } }
+```
+
+## Applet Runner specific settings
+
+These Group Policy settings are specific to the Applet Runner extension and do not originate from Edge itself. They allow you to further configure and customize the behavior of the Applet Runner extension.
+
+### Configure clipboard behaviour
+
+```ts
+"clipboardMode" : "permission" | "system" | "java"
+```
+
+This option allows you to configure how the clipboard will behave. Supported clipboard modes are [`java`], [`system`] and [`permission`]. You can find more information about the clipboard modes in our CheerpJ [documentation](https://cheerpj.com/docs/reference/cheerpjInit#clipboardmode).
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "clipboardMode": "permission" } }
+```
+
+### Enable input methods
+
+```ts
+"enableInputMethods": boolean
+```
+
+When this option is set to `true` the Applet Runner extension will be able to receive text input from the input method framework of the platform. This is useful to support text input for languages such as Chinese, Japanese and Korean.
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "enableInputMethods": true } }
+```
+
+### Override browser keyboard shortcuts
+
+```ts
+"overrideAllShortcuts": boolean
+```
+
+Some applications need to internally handle keyboard shortcuts which are also used by the browser, for example Ctrl+F. Most users expect the standard browser behavior for these shortcuts but the Applet Runner extension does not override them by default. Setting this option to `true` will override all browser specific keyboard shortcuts.
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "overrideAllShortcuts": true } }
+```
+
+### Set the license key
+
+```ts
+"licenseKey": string
+```
+
+This option is for paying enterprise users of the CheerpJ Applet Runner extension to remove the license text seen at the bottom of the Applet loading screen and enable full support of CheerpJ.
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "licenseKey": "exampleLicenseString" } }
+```
+
+### Set the Tailscale Control Url
+
+```ts
+"tailscaleControlUrl": string
+```
+
+This option expects a string URL of the Tailscale control plane. The control plane verifies the user's identity and validates various keys among the connected peers in the network. Only pass this option if you are [self-hosting Tailscale](https://github.com/leaningtech/headscale), if omitted, it will point to the Tailscale control plane.
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "tailscaleControlUrl": "https://my.url.com/" } }
+```
+
+### Set Tailscale authentication key
+
+```ts
+"tailscaleAuthKey": string
+```
+
+This option expects a string that contains a Tailscale auth key. Using auth keys allows one to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+
+> [!info] Info
+> A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
+
+For more information about auth keys visit the [Tailscale auth keys documentation](https://tailscale.com/kb/1085/auth-keys/).
+
+Example:
+
+```json
+{ "ExtensionIDHere": { "tailscaleAuthKey": "AuthKeyStringGoesHere" } }
+```
+
+## Update your changes
+
+Once you are happy with your group policy configuration, you can apply these changes to see them reflected on your user's Edge clients by running the shell command:
+
+```shell
+ gpupdate
+```
+
+Now your users should be able to see the extension installed in their Edge browser.
