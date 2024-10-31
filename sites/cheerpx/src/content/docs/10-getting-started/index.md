@@ -126,6 +126,76 @@ await cx.run("/bin/bash", ["--login"], {
 
 Now you can interact with the console to run commands. Make sure to give focus to the `console` element by clicking on the page if what you type on your keyboard is not displayed.
 
+## Complete code
+
+```html
+<!doctype html>
+<html lang="en" style="heigth: 100%;">
+	<head>
+		<meta charset="utf-8" />
+		<title>CheerpX Getting Started</title>
+		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+		<script type="module">
+			// The read-only disk image from Leaning Technologies' fast cloud backend
+			const cloudDevice = await CheerpX.CloudDevice.create(
+				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+			);
+			// Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
+			const idbDevice = await CheerpX.IDBDevice.create("block1");
+			// A device to overlay the local changes to the disk with the remote read-only image
+			const overlayDevice = await CheerpX.OverlayDevice.create(
+				cloudDevice,
+				idbDevice,
+			);
+			// Direct acces to files in your HTTP server
+			const webDevice = await CheerpX.WebDevice.create("");
+			// Convenient access to JavaScript binary data and strings
+			const dataDevice = await CheerpX.DataDevice.create();
+
+			const cx = await CheerpX.Linux.create({
+				mounts: [
+					{ type: "ext2", path: "/", dev: overlayDevice },
+					{ type: "dir", path: "/app", dev: webDevice },
+					{ type: "dir", path: "/data", dev: dataDevice },
+					{ type: "devs", path: "/dev" },
+				],
+			});
+
+			// Interact with a console
+			cx.setConsole(document.getElementById("console"));
+
+			// Run a full-featured shell in your browser.
+			await cx.run("/bin/bash", ["--login"], {
+				env: [
+					"HOME=/home/user",
+					"USER=user",
+					"SHELL=/bin/bash",
+					"EDITOR=vim",
+					"LANG=en_US.UTF-8",
+					"LC_ALL=C",
+				],
+				cwd: "/home/user",
+				uid: 1000,
+				gid: 1000,
+			});
+		</script>
+	</head>
+	<body style="heigth: 100%; background: black;">
+		<pre id="console" style="heigth: 100%;"></pre>
+	</body>
+</html>
+```
+
+## The result
+
+If everything is set up correctly, you should be able to see and perform the following actions:
+
+![](../../../assets/getting_started.png)
+
 ---
 
 [Nginx configuration guide]: /docs/guides/nginx
+
+## Have Questions?
+
+We're here to help! If you have any questions or concerns, feel free to explore our [guides](/docs/guides) or [reference](/docs/reference) section or check out our [frequently asked questions](/docs/faq). You can also connect with our supportive community on [Discord](https://discord.com/invite/yzZJzpaxXT), and reach out whenever you’d like!
