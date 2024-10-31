@@ -52,7 +52,7 @@ Alternatively, if your application is not designed to be executed with the comma
 ```js
 cheerpjRunMain(
 	"com.application.MyClassName",
-	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
+	"/app/my_application_archive.jar:/app/my_dependency_archive.jar"
 );
 ```
 

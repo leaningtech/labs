@@ -74,9 +74,9 @@ fetchBuffer("pong.wasm")
 		(bytes) =>
 			WebAssembly.compile(bytes).then(
 				(m) => new WebAssembly.Instance(m, importObject),
-				console.log,
+				console.log
 			),
-		console.log,
+		console.log
 	)
 	.then((instance) => {
 		HEAP8 = new Uint8Array(instance.exports.memory.buffer);

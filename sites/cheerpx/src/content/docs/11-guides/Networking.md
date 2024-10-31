@@ -46,8 +46,8 @@ Example for pre-authenticated users/devices:
 const cx = await CheerpX.Linux.create({
 	networkInterface: {
 		authKey: "AuthKeyStringGoesHere",
-		controlUrl: "https://my.url.com/",
-	},
+		controlUrl: "https://my.url.com/"
+	}
 });
 ```
 
@@ -75,8 +75,8 @@ const cx = await CheerpX.Linux.create({
 			loginElem.href = url;
 			loginElem.target = "_blank";
 			// continue with login
-		},
-	},
+		}
+	}
 });
 ```
 

@@ -81,7 +81,7 @@ function e(c, d) {
 }
 var h;
 var C = new Uint8Array([
-	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0,
+	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0
 ]);
 var j;
 var B;
@@ -106,17 +106,17 @@ function __dummy() {
 var importObject = {
 	imports: {
 		__ZN8Graphics11debugOutputEPKc: _asm_t,
-		__ZN8Graphics16initializeCanvasEii: _asm_u,
-	},
+		__ZN8Graphics16initializeCanvasEii: _asm_u
+	}
 };
 fetchBuffer("pong.wasm")
 	.then(
 		(bytes) =>
 			WebAssembly.compile(bytes).then(
 				(m) => new WebAssembly.Instance(m, importObject),
-				console.log,
+				console.log
 			),
-		console.log,
+		console.log
 	)
 	.then((instance) => {
 		HEAP8 = new Uint8Array(instance.exports.memory.buffer);

@@ -37,7 +37,7 @@ const authors = await resolveAuthors(post.data.authors);
 		class:list={{
 			"font-bold text-balance text-white group-hover:text-primary-400 grow": true,
 			"text-2xl leading-7": size === "wide",
-			"text-xl leading-6": size === "narrow",
+			"text-xl leading-6": size === "narrow"
 		}}
 	>
 		{post.data.title}
@@ -56,7 +56,7 @@ const authors = await resolveAuthors(post.data.authors);
 									loading="lazy"
 									decoding="async"
 								/>
-							) : undefined,
+							) : undefined
 						)}
 					</div>
 					<span class="overflow-hidden text-ellipsis">

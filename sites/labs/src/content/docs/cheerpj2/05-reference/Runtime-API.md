@@ -157,7 +157,7 @@ cheerpjInit({
 		// Let Java handle Ctrl+F
 		if (e.ctrlKey && e.keyCode == 70) return true;
 		return false;
-	},
+	}
 });
 ```
 
@@ -198,7 +198,7 @@ cheerpjInit({
 	appletParamFilter: function (name, value) {
 		if (name === "httpServer") return value.replace("http", "https");
 		return value;
-	},
+	}
 });
 ```
 
@@ -241,7 +241,7 @@ cheerpjRunMain(
 	"fully.qualified.class.name",
 	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
 	arg1,
-	arg2,
+	arg2
 );
 ```
 
@@ -269,7 +269,7 @@ cheerpjRunJarWithClasspath(
 	"/app/my_application_archive.jar",
 	"/app/my_dependency_archive.jar",
 	arg1,
-	arg2,
+	arg2
 );
 ```
 
@@ -296,7 +296,7 @@ var returnVal = cjCall(
 	"method",
 	argument1,
 	argument2,
-	argument3,
+	argument3
 );
 ```
 
@@ -334,12 +334,12 @@ Examples:
 var promise1 = cjResolveCall("com.something.ClassName", "methodName", [
 	"java.lang.String",
 	"int",
-	"double",
+	"double"
 ]);
 var promise2 = cjResolveNew("com.something.ClassName", [
 	"java.lang.String",
 	"int",
-	"double",
+	"double"
 ]);
 ```
 
@@ -349,7 +349,7 @@ var promise2 = cjResolveNew("com.something.ClassName", [
 var promise = cjResolveCall(
 	"com.something.ClassName",
 	"uniqueMethodName",
-	null,
+	null
 );
 ```
 

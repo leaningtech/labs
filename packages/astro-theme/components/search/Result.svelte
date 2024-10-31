@@ -7,7 +7,7 @@
 	function thinSubResults(
 		pageUrl: string,
 		results: PagefindSubResult[],
-		limit: number,
+		limit: number
 	) {
 		results = results.filter((r) => r.url !== pageUrl);
 

@@ -85,7 +85,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 
 	// Map of directory name to its entries. The root directory is "".
 	const dirPathToEntries: { [path: string]: NavEntry[] } = {
-		"": root,
+		"": root
 	};
 
 	// Sort so shortest dir names are first
@@ -116,7 +116,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
-			isLanguageDirectory: locales.includes(path),
+			isLanguageDirectory: locales.includes(path)
 		};
 		parentEntries.push(me);
 		dirPathToEntries[path] = myEntries;
@@ -131,7 +131,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 		const parentDirEntries = dirPathToEntries[parentDir];
 		if (!parentDirEntries) {
 			throw new Error(
-				`panic: parent directory ${parentDir} not found for file ${filename}`,
+				`panic: parent directory ${parentDir} not found for file ${filename}`
 			);
 		}
 		const slug = idToSlug(file.id); // note: we don't allow slug override
@@ -142,7 +142,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			href: "/docs/" + slug,
 			title: file.data.shortTitle ?? file.data.title,
 			collectionEntry: file,
-			isIndex: slug === idToSlug(parentDir),
+			isIndex: slug === idToSlug(parentDir)
 		});
 	}
 
@@ -181,7 +181,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 	}
 	if (numFiles !== files.length) {
 		throw new Error(
-			`panic: number of files in root nav (${numFiles}) does not match number of files in collection (${files.length})`,
+			`panic: number of files in root nav (${numFiles}) does not match number of files in collection (${files.length})`
 		);
 	}
 
@@ -190,11 +190,11 @@ export async function getRootNav(): Promise<NavEntry[]> {
 
 export function findNavDirectory(
 	nav: NavEntry[],
-	pathComponents: string[],
+	pathComponents: string[]
 ): NavDirectory | undefined {
 	if (pathComponents.length === 0) {
 		throw new Error(
-			"pathComponents must not be empty; use getRootNav() to get the entries of the root directory",
+			"pathComponents must not be empty; use getRootNav() to get the entries of the root directory"
 		);
 	}
 
@@ -212,7 +212,7 @@ export function findNavDirectory(
 }
 
 export async function findParentDirectoryOfId(
-	id: string,
+	id: string
 ): Promise<NavDirectory | undefined> {
 	const [parentDir] = splitPath(id);
 	return findNavDirectory(await getRootNav(), parentDir.split("/"));
@@ -284,7 +284,7 @@ export function flattenNav(entries: NavEntry[]): NavEntry[] {
 /** Returns an array of NavEntries that path to the given entry ID. */
 export function findEntryPath(
 	nav: NavEntry[],
-	id: string,
+	id: string
 ): NavEntry[] | undefined {
 	function dfsVisit(entry: NavEntry, path: NavEntry[]): NavEntry[] | undefined {
 		if (entry.id === id) {
@@ -316,7 +316,7 @@ export function findEntry(nav: NavEntry[], id: string): NavEntry | undefined {
 export function getLocalisedProductNav(
 	nav: NavEntry[],
 	product: Product,
-	locale: string | undefined,
+	locale: string | undefined
 ) {
 	nav = findNavDirectory(nav, [product])?.entries ?? nav; // for labs (multiple products on one site)
 
@@ -341,7 +341,7 @@ export function getLocalisedProductNav(
 
 	// Remove all language directories
 	nav = nav.filter(
-		(entry) => entry.type !== "directory" || !entry.isLanguageDirectory,
+		(entry) => entry.type !== "directory" || !entry.isLanguageDirectory
 	);
 
 	return nav;

@@ -20,7 +20,7 @@ const { product } = Astro.props;
 const firstDocsEntry = getLocalisedProductNav(
 	await getRootNav(),
 	product.id,
-	Astro.currentLocale,
+	Astro.currentLocale
 )[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
 ---

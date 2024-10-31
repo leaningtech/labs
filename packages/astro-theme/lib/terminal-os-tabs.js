@@ -6,9 +6,9 @@ const replacements = [
 		{
 			win: "C:\\cheerp\\bin\\$1.exe",
 			mac: "/Applications/cheerp/bin/$1",
-			linux: "/opt/cheerp/bin/$1",
-		},
-	],
+			linux: "/opt/cheerp/bin/$1"
+		}
+	]
 ];
 
 let os = localStorage.getItem("os") ?? getOs();
@@ -22,7 +22,7 @@ function getOs() {
 document.addEventListener("DOMContentLoaded", () => {
 	const figures = document.querySelectorAll(
 		// ```shell blocks
-		".expressive-code figure.is-terminal",
+		".expressive-code figure.is-terminal"
 	);
 
 	const updateFuncs = [];

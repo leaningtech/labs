@@ -47,14 +47,14 @@ The example below demonstrates how to set up the file system and devices using [
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
-				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
 			);
 			// Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
 			const idbDevice = await CheerpX.IDBDevice.create("block1");
 			// A device to overlay the local changes to the disk with the remote read-only image
 			const overlayDevice = await CheerpX.OverlayDevice.create(
 				cloudDevice,
-				idbDevice,
+				idbDevice
 			);
 			// Direct acces to files in your HTTP server
 			const webDevice = await CheerpX.WebDevice.create("");
@@ -66,8 +66,8 @@ The example below demonstrates how to set up the file system and devices using [
 					{ type: "ext2", path: "/", dev: overlayDevice },
 					{ type: "dir", path: "/app", dev: webDevice },
 					{ type: "dir", path: "/data", dev: dataDevice },
-					{ type: "devs", path: "/dev" },
-				],
+					{ type: "devs", path: "/dev" }
+				]
 			});
 		</script>
 	</head>
@@ -116,11 +116,11 @@ await cx.run("/bin/bash", ["--login"], {
 		"SHELL=/bin/bash",
 		"EDITOR=vim",
 		"LANG=en_US.UTF-8",
-		"LC_ALL=C",
+		"LC_ALL=C"
 	],
 	cwd: "/home/user",
 	uid: 1000,
-	gid: 1000,
+	gid: 1000
 });
 ```
 

@@ -187,7 +187,7 @@ async function iTextExample() {
 		const document = await new Document();
 		const writer = await PdfWriter.getInstance(
 			document,
-			await new FileOutputStream("/files/HelloIText.pdf"),
+			await new FileOutputStream("/files/HelloIText.pdf")
 		);
 
 		await document.open();

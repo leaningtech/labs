@@ -80,7 +80,7 @@ instantiateFunction({ absPath: "/absolute/path/to/yourModule.wasm" }).then(
 	(module) => {
 		console.log("Module has been instantiated!");
 		module.someJSExportedFunc();
-	},
+	}
 );
 ```
 
@@ -102,7 +102,7 @@ fetch('/absolute/path/to/yourModule.wasm').then(buffer => {
 ```js
 import instantiateFunction from "./yourModule.js";
 instantiateFunction({
-	absPath: new URL("/relative/path/to/yourModule.wasm", import.meta.url),
+	absPath: new URL("/relative/path/to/yourModule.wasm", import.meta.url)
 }).then((module) => {
 	console.log("Module has been instantiated!");
 	module.someJSExportedFunc();

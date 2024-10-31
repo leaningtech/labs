@@ -10,7 +10,7 @@ Let's say, for the sake of example, that you have a JavaScript function that exp
 jsFuncWithObjectParam({
 	requiredParam1: 42,
 	requiredParam2: "String",
-	optionalParam1: null,
+	optionalParam1: null
 });
 ```
 

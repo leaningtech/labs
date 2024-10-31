@@ -9,7 +9,7 @@ namespace CheerpX {
 		setCustomConsole(
 			writeFunc: (buf: Buffer) => void,
 			cols: number,
-			rows: number,
+			rows: number
 		): (keyCode: number) => void;
 	}
 }
@@ -38,7 +38,7 @@ const send = cx.setCustomConsole(
 		console.log(string);
 	},
 	40,
-	60,
+	60
 );
 
 // Send a string
@@ -59,7 +59,7 @@ const send = cx.setCustomConsole(
 		term.write(new Uint8Array(buf));
 	},
 	term.cols,
-	term.rows,
+	term.rows
 );
 term.onData((str) => {
 	for (let i = 0; i < str.length; i++) {

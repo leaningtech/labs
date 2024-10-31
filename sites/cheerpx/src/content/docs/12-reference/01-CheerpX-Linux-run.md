@@ -14,7 +14,7 @@ namespace CheerpX {
 				cwd?: string; // Current working directory
 				uid?: number; // User ID
 				gid?: number; // Group ID
-			},
+			}
 		): Promise<{ status: number }>;
 	}
 }
@@ -41,7 +41,7 @@ Let us try running a bash script:
 ```js
 const result = await cx.run("/bin/bash", [
 	"-c",
-	"for i in {1..5}; do echo $i; done",
+	"for i in {1..5}; do echo $i; done"
 ]);
 console.log("Bash script exit status:", result.status);
 ```

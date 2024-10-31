@@ -155,17 +155,17 @@ function __dummy() {
 var importObject = {
 	imports: {
 		__ZN8Graphics8drawRectEiiiii: _asm_p,
-		__ZN8Graphics16initializeCanvasEii: _asm_E,
-	},
+		__ZN8Graphics16initializeCanvasEii: _asm_E
+	}
 };
 fetchBuffer("pong.wasm")
 	.then(
 		(bytes) =>
 			WebAssembly.compile(bytes).then(
 				(m) => new WebAssembly.Instance(m, importObject),
-				console.log,
+				console.log
 			),
-		console.log,
+		console.log
 	)
 	.then((instance) => {
 		HEAP8 = new Uint8Array(instance.exports.memory.buffer);
