@@ -157,7 +157,7 @@ cheerpjInit({
 		// Let Java handle Ctrl+F
 		if (e.ctrlKey && e.keyCode == 70) return true;
 		return false;
-	}
+	},
 });
 ```
 
@@ -198,7 +198,7 @@ cheerpjInit({
 	appletParamFilter: function (name, value) {
 		if (name === "httpServer") return value.replace("http", "https");
 		return value;
-	}
+	},
 });
 ```
 
@@ -334,12 +334,12 @@ Examples:
 var promise1 = cjResolveCall("com.something.ClassName", "methodName", [
 	"java.lang.String",
 	"int",
-	"double"
+	"double",
 ]);
 var promise2 = cjResolveNew("com.something.ClassName", [
 	"java.lang.String",
 	"int",
-	"double"
+	"double",
 ]);
 ```
 

@@ -8,25 +8,25 @@ export default defineConfig({
 	base: "/docs",
 	integrations: [
 		theme({
-			baseIsDocs: true
-		})
+			baseIsDocs: true,
+		}),
 	],
 	i18n: {
 		defaultLocale: "en",
 		locales: ["en", "ja", "zh"],
 		fallback: {
 			ja: "en",
-			zh: "en"
-		}
+			zh: "en",
+		},
 	},
 	vite: {
 		resolve: {
 			alias: [
 				{
 					find: "@",
-					replacement: resolve("./src/")
-				}
-			]
-		}
-	}
+					replacement: resolve("./src/"),
+				},
+			],
+		},
+	},
 });

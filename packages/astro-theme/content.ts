@@ -13,8 +13,8 @@ export function defineCommonCollections() {
 				description: z.string().optional(),
 				shortTitle: z.string().optional(), // Used for nav only
 				fullWidthLayout: z.boolean().default(false),
-				draft: z.boolean().default(false)
-			})
+				draft: z.boolean().default(false),
+			}),
 		}),
 
 		blogauthors: defineCollection({
@@ -24,9 +24,9 @@ export function defineCommonCollections() {
 					jobTitle: z.string().optional(),
 					avatar: image().optional(),
 					url: z.string().optional(),
-					guest: z.boolean().default(false)
+					guest: z.boolean().default(false),
 				}),
-			type: "data"
+			type: "data",
 		}),
 
 		blog: defineCollection({
@@ -48,8 +48,8 @@ export function defineCommonCollections() {
 					heroImage: image().optional(),
 					featured: z.boolean().default(false),
 					draft: z.boolean().default(false),
-					tags: productTags.optional()
-				})
-		})
+					tags: productTags.optional(),
+				}),
+		}),
 	};
 }

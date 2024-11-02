@@ -13,7 +13,7 @@ const isActive = Astro.url.pathname.startsWith(href);
 	class:list={[
 		"flex items-center px-3 h-10 rounded-full",
 		{ "hover:bg-stone-800": !isActive },
-		{ "text-primary-500 bg-primary-600 bg-opacity-10": isActive }
+		{ "text-primary-500 bg-primary-600 bg-opacity-10": isActive },
 	]}
 >
 	{label}

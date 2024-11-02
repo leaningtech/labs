@@ -172,7 +172,7 @@ const idbDevice = await CheerpX.IDBDevice.create("block1");
 const overlayDevice = await CheerpX.OverlayDevice.create(httpDevice, idbDevice);
 
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }]
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });
 ```
 

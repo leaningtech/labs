@@ -7,15 +7,15 @@ export default defineConfig({
 		svelte({
 			compilerOptions: {
 				dev: process.env.NODE_ENV !== "production",
-				hydratable: true
-			}
-		})
+				hydratable: true,
+			},
+		}),
 	],
 	build: {
 		lib: {
 			formats: ["es"],
 			entry: resolve(__dirname, "src/index.js"),
-			fileName: "global-navbar"
-		}
-	}
+			fileName: "global-navbar",
+		},
+	},
 });

@@ -164,7 +164,7 @@ beepCallback?: () => void;
 cheerpjInit({
 	beepCallback: function () {
 		alert("Beep!");
-	}
+	},
 });
 ```
 
@@ -202,7 +202,7 @@ cheerpjInit({
 		// Let Java handle Ctrl+F
 		if (e.ctrlKey && e.keyCode == 70) return true;
 		return false;
-	}
+	},
 });
 ```
 
@@ -221,7 +221,7 @@ cheerpjInit({
 	appletParamFilter: function (name, value) {
 		if (name === "httpServer") return value.replace("http", "https");
 		return value;
-	}
+	},
 });
 ```
 
@@ -240,8 +240,8 @@ cheerpjInit({
 	natives: {
 		async Java_MyClass_myMethod(lib, str) {
 			window.alert(str);
-		}
-	}
+		},
+	},
 });
 ```
 
@@ -336,7 +336,7 @@ tailscaleLoginUrlCb?: (url: string) => void;
 cheerpjInit({
 	tailscaleLoginUrlCb(url) {
 		// your function code here to continue with login
-	}
+	},
 });
 ```
 
@@ -354,7 +354,7 @@ tailscaleIpCb?: (ip: string) => void;
 cheerpjInit({
 	tailscaleIpCb: function (ip) {
 		console.log("IP address " + ip);
-	}
+	},
 });
 ```
 

@@ -25,7 +25,7 @@ For JavaScript modules, you can pass the arguments through the initialization fu
 import init from "./example.js";
 
 await init({
-	argv: ["a", "b", "c"]
+	argv: ["a", "b", "c"],
 });
 ```
 

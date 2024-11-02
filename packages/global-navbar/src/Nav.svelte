@@ -17,31 +17,31 @@
 		Technology: [
 			{
 				href: "https://cheerp.io/",
-				title: "Cheerp"
+				title: "Cheerp",
 			},
 			{
 				href: "https://cheerpj.com/",
-				title: "CheerpJ"
+				title: "CheerpJ",
 			},
 			{
 				href: "https://cheerpx.io/",
-				title: "CheerpX"
-			}
+				title: "CheerpX",
+			},
 		],
 		Resources: [
 			{
 				href: "https://labs.leaningtech.com/",
-				title: "Developer Hub"
+				title: "Developer Hub",
 			},
 			{
 				href: "https://labs.leaningtech.com/blog",
-				title: "Blog"
+				title: "Blog",
 			},
 			{
 				href: "https://github.com/leaningtech",
-				title: "GitHub"
-			}
-		]
+				title: "GitHub",
+			},
+		],
 	};
 </script>
 

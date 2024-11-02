@@ -62,8 +62,8 @@ Example:
 const cx = await CheerpX.Linux.create({
 	mounts: [
 		{ type: "ext2", path: "/", dev: overlayDevice },
-		{ type: "dir", path: "/app", dev: webDevice }
-	]
+		{ type: "dir", path: "/app", dev: webDevice },
+	],
 });
 ```
 

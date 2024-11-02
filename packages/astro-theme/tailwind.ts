@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import type {
 	CSSRuleObject,
 	PluginAPI,
-	RecursiveKeyValuePair
+	RecursiveKeyValuePair,
 } from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
 
@@ -25,7 +25,7 @@ const exportColorsAsCssVariables = plugin(({ addBase, theme }) => {
 	}
 
 	addBase({
-		":root": extractColorVars(theme("colors"))
+		":root": extractColorVars(theme("colors")),
 	});
 });
 
@@ -36,14 +36,14 @@ const disabledCss = {
 	"code::before": false,
 	"code::after": false,
 	"blockquote p:first-of-type::before": false,
-	"blockquote p:last-of-type::after": false
+	"blockquote p:last-of-type::after": false,
 };
 
 export default function makeConfig(): Config {
 	return {
 		content: [
 			"./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-			"../../packages/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"
+			"../../packages/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
 		],
 		theme: {
 			extend: {
@@ -64,9 +64,9 @@ export default function makeConfig(): Config {
 						"Yu Gothic", // Japanese for windows users
 						"Hiragino Sans", // Japanese for mac users
 						"Noto Sans CJK JP", // Japanese for linux users
-						"sans-serif"
+						"sans-serif",
 					],
-					mono: ["Monaspace Argon", "monospace"]
+					mono: ["Monaspace Argon", "monospace"],
 				},
 				colors: {
 					primary: {
@@ -76,28 +76,28 @@ export default function makeConfig(): Config {
 						300: "#f07d99",
 						200: "#f5a9bb",
 						100: "#fad4dd",
-						50: "#fde9ee"
+						50: "#fde9ee",
 					},
 					cheerp: "#56f4ec",
 					cheerpx: "#3b516d",
-					blurple: "#5865F2" // https://discord.com/branding
+					blurple: "#5865F2", // https://discord.com/branding
 				},
 				typography: (theme: PluginAPI["theme"]) => ({
 					stone: {
 						css: {
 							"--tw-prose-links": theme("colors.cheerp"),
-							"--tw-prose-invert-links": theme("colors.primary[400]")
-						}
+							"--tw-prose-invert-links": theme("colors.primary[400]"),
+						},
 					},
 					DEFAULT: { css: disabledCss },
 					sm: { css: disabledCss },
 					lg: { css: disabledCss },
 					xl: { css: disabledCss },
-					"2xl": { css: disabledCss }
-				})
-			}
+					"2xl": { css: disabledCss },
+				}),
+			},
 		},
 		plugins: [require("@tailwindcss/typography"), exportColorsAsCssVariables],
-		darkMode: "class"
+		darkMode: "class",
 	};
 }

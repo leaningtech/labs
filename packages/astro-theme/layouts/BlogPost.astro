@@ -5,7 +5,7 @@ import Icon from "astro-icon";
 import { SocialShare } from "astro-social-share";
 import FormattedDate from "../components/FormattedDate.astro";
 import TableOfContents, {
-	type BasicHeading
+	type BasicHeading,
 } from "../components/TableOfContents.astro";
 import Footer from "../components/Footer.astro";
 import BlogPostCardSet from "../components/BlogPostCardSet.astro";
@@ -131,7 +131,7 @@ if (subtitle) {
 							<TableOfContents
 								headings={[
 									{ depth: 2, slug: "introduction", text: "Introduction" },
-									...headings
+									...headings,
 								]}
 							/>
 						</div>
