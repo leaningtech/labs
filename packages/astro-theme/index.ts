@@ -28,7 +28,7 @@ theme.styleOverrides.frames = {
 	editorTabBarBackground: "transparent",
 	editorActiveTabBackground: "transparent",
 	editorActiveTabBorderBottom: "transparent",
-	shadowColor: "transparent",
+	shadowColor: "transparent"
 };
 
 const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
@@ -54,8 +54,8 @@ export default function ThemeIntegration(
 							codeBackground: "transparent",
 							borderColor: "rgb(41, 37, 36)", // border-stone-800
 							// doesn't work?
-							frames: {},
-						},
+							frames: {}
+						}
 					}),
 					mdx(),
 					sitemap(),
@@ -66,8 +66,8 @@ export default function ThemeIntegration(
 					publicDir({
 						// FIXME claims directory does not exist
 						dir: "public",
-						cwd: dirname,
-					}),
+						cwd: dirname
+					})
 				];
 				for (const integration of integrations) {
 					addIntegration(params, { integration });
@@ -75,26 +75,26 @@ export default function ThemeIntegration(
 
 				params.injectRoute({
 					pattern: "blog",
-					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro",
+					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro"
 				});
 				params.injectRoute({
 					pattern: "blog/[...slug]",
-					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
+					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro"
 				});
 				cpSync(contentDir, "src/content", { recursive: true }); // Needed until Astro Content Layer implemented
 
 				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
 					pattern: docsPrefix,
-					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro"
 				});
 				params.injectRoute({
 					pattern: `${docsPrefix}/404`,
-					entrypoint: "@leaningtech/astro-theme/pages/docs/404.astro",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/404.astro"
 				});
 				params.injectRoute({
 					pattern: `${docsPrefix}/[...slug]`,
-					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
+					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro"
 				});
 				params.updateConfig({
 					markdown: {
@@ -112,11 +112,11 @@ export default function ThemeIntegration(
 											className:
 												"not-prose inline-block align-middle heading-link-icon",
 											style: "margin-left: 8px",
-											src: base + "/icons/heading-link.svg",
+											src: base + "/icons/heading-link.svg"
 										},
-										children: [],
-									},
-								},
+										children: []
+									}
+								}
 							],
 							[
 								rehypeExternalLinks,
@@ -127,31 +127,31 @@ export default function ThemeIntegration(
 										properties: {
 											className: "not-prose inline-block align-middle",
 											style: "margin-left: 2px",
-											src: base + "/icons/external-link.svg",
+											src: base + "/icons/external-link.svg"
 										},
-										children: [],
+										children: []
 									},
-									target: "_blank",
-								},
-							],
-						],
+									target: "_blank"
+								}
+							]
+						]
 					},
 					compressHTML: prod,
 					build: {
 						format: "file",
-						inlineStylesheets: "always",
+						inlineStylesheets: "always"
 					},
 					trailingSlash: "never",
 					image: {
-						service: squooshImageService(),
+						service: squooshImageService()
 					},
 					vite: {
 						ssr: {
-							noExternal: ["@leaningtech/global-navbar"],
-						},
-					},
+							noExternal: ["@leaningtech/global-navbar"]
+						}
+					}
 				});
-			},
-		},
+			}
+		}
 	};
 }

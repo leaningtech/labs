@@ -14,7 +14,7 @@
 		{ src: Siemens, alt: "Siemens" },
 		{ src: Euronext, alt: "Euronext" },
 		{ src: Uscustoms, alt: "Uscustoms" },
-		{ src: Dalkia, alt: "Dalkia" },
+		{ src: Dalkia, alt: "Dalkia" }
 	];
 
 	// To do the scroll animation, we need to repeat the images

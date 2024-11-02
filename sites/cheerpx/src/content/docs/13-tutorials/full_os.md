@@ -131,7 +131,7 @@ In the same script tag, pass the `overlayDevice` as a new mount point to the `Ch
 
 ```js
 const cx = await CheerpX.Linux.create({
-	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }]
 });
 ```
 
@@ -165,11 +165,11 @@ await cx.run("/bin/bash", ["--login"], {
 		"SHELL=/bin/bash",
 		"EDITOR=vim",
 		"LANG=en_US.UTF-8",
-		"LC_ALL=C",
+		"LC_ALL=C"
 	],
 	cwd: "/home/user",
 	uid: 1000,
-	gid: 1000,
+	gid: 1000
 });
 ```
 

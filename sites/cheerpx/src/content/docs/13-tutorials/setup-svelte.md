@@ -57,16 +57,16 @@ const viteServerConfig = () => ({
 			res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
 			next();
 		});
-	},
+	}
 });
 
 export default defineConfig({
 	optimizeDeps: {
 		esbuildOptions: {
-			target: "es2022",
-		},
+			target: "es2022"
+		}
 	},
-	plugins: [sveltekit(), viteServerConfig()],
+	plugins: [sveltekit(), viteServerConfig()]
 });
 ```
 

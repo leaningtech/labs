@@ -37,8 +37,8 @@ await cheerpjInit({
 	natives: {
 		async Java_Example_alert(lib, str) {
 			window.alert(str);
-		},
-	},
+		}
+	}
 });
 await cheerpjRunMain("Example", "/app/");
 ```
@@ -73,7 +73,7 @@ public class Example {
 export default {
 	async Java_Example_alert(lib, self, message) {
 		window.alert(message);
-	},
+	}
 };
 ```
 

@@ -9,7 +9,7 @@
 		day: "numeric",
 		hour: "numeric",
 		minute: "numeric",
-		hour12: true,
+		hour12: true
 	}).format(date);
 </script>
 

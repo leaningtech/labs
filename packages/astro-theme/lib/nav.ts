@@ -85,7 +85,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 
 	// Map of directory name to its entries. The root directory is "".
 	const dirPathToEntries: { [path: string]: NavEntry[] } = {
-		"": root,
+		"": root
 	};
 
 	// Sort so shortest dir names are first
@@ -116,7 +116,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
-			isLanguageDirectory: locales.includes(path),
+			isLanguageDirectory: locales.includes(path)
 		};
 		parentEntries.push(me);
 		dirPathToEntries[path] = myEntries;
@@ -142,7 +142,7 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			href: "/docs/" + slug,
 			title: file.data.shortTitle ?? file.data.title,
 			collectionEntry: file,
-			isIndex: slug === idToSlug(parentDir),
+			isIndex: slug === idToSlug(parentDir)
 		});
 	}
 

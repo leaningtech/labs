@@ -45,7 +45,7 @@ Example for pre-authenticated users/devices:
 ```js
 cheerpjInit({
 	tailscaleControlUrl: "https://my.url.com/",
-	tailscaleAuthKey: "AuthKeyStringGoesHere",
+	tailscaleAuthKey: "AuthKeyStringGoesHere"
 });
 ```
 
@@ -72,7 +72,7 @@ cheerpjInit({
 		loginElem.href = url;
 		loginElem.target = "_blank";
 		// continue with login
-	},
+	}
 });
 ```
 

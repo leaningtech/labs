@@ -44,8 +44,8 @@ const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 			"border-white text-white font-mono hover:border-[#e2bace] hover:text-[#e2bace]":
 				type === "secondary-mono",
 			"border-white border-opacity-30 bg-blurple text-white hover:border-opacity-80":
-				type === "discord",
-		},
+				type === "discord"
+		}
 	]}
 >
 	{iconLeft && <Icon name={iconLeft} class="w-5 h-5" />}

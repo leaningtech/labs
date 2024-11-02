@@ -32,7 +32,7 @@
 
 		const response = await pagefind.debouncedSearch(query, {
 			filters: { productId },
-			baseUrl: import.meta.env.BASE_URL,
+			baseUrl: import.meta.env.BASE_URL
 		});
 		if (response === null) {
 			// Debounce.
@@ -43,7 +43,7 @@
 		noResultsForQuery = query.length > 0 && results.length === 0;
 
 		plausible("Search", {
-			props: { query, resultsCount: results.length, productId },
+			props: { query, resultsCount: results.length, productId }
 		});
 	}
 </script>

@@ -39,7 +39,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Cheerp is an enterprise-grade compiler toolchain that can compile C/C++ into efficient WebAssembly and JavaScript. It is open source, liberally licensed, and actively developed by Leaning Technologies.",
 		github: "https://github.com/leaningtech/cheerp-meta",
-		repositoryName: "cheerp-meta",
+		repositoryName: "cheerp-meta"
 	},
 	cheerpj2: {
 		id: "cheerpj2",
@@ -52,7 +52,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 		github: "https://github.com/leaningtech/cheerpj-meta",
-		repositoryName: "cheerpj-meta",
+		repositoryName: "cheerpj-meta"
 	},
 	cheerpj3: {
 		id: "cheerpj3",
@@ -65,7 +65,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
 		github: "https://github.com/leaningtech/cheerpj-meta",
-		repositoryName: "cheerpj-meta",
+		repositoryName: "cheerpj-meta"
 	},
 	cheerpx: {
 		id: "cheerpx",
@@ -78,7 +78,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"CheerpX is a JavaScript library that enables secure client-side execution of x86 binaries on any browser. Coming soon.",
 		github: "https://github.com/leaningtech/webvm", // TODO
-		repositoryName: "webvm",
+		repositoryName: "webvm"
 	},
 	"cheerpx-for-flash": {
 		id: "cheerpx-for-flash",
@@ -91,7 +91,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"An HTML5 Flash emulator that allows your Flash content to run seamlessly on browsers, after the end of life of the Flash player.",
 		github: "https://github.com/leaningtech/cheerpx-flash",
-		repositoryName: "cheerpx-flash",
+		repositoryName: "cheerpx-flash"
 	},
 	"cheerpj-jnlp-runner": {
 		id: "cheerpj-jnlp-runner",
@@ -104,7 +104,7 @@ export const products: { [product in Product]: ProductData } = {
 		description:
 			"Run Java Web Start Applications without a Java Desktop installation.",
 		github: "https://github.com/leaningtech/cheerpj-jnlp-runner",
-		repositoryName: "cheerpj-jnlp-runner",
+		repositoryName: "cheerpj-jnlp-runner"
 	},
 	"cheerpj-applet-runner": {
 		id: "cheerpj-applet-runner",
@@ -116,7 +116,7 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Run Java Applets in the modern browser",
 		description: "Run Java Applets in modern browsers without plugins",
 		github: "https://github.com/leaningtech/cheerpj-applet-runner",
-		repositoryName: "cheerpj-applet-runner",
+		repositoryName: "cheerpj-applet-runner"
 	},
 	"cheerpx-games-runner": {
 		id: "cheerpx-games-runner",
@@ -128,8 +128,8 @@ export const products: { [product in Product]: ProductData } = {
 		subtitle: "Run Games in the modern browser",
 		description: "Run Games in the modern browser",
 		github: "https://github.com/leaningtech/cheerpx-games-runner",
-		repositoryName: "cheerpx-games-runner",
-	},
+		repositoryName: "cheerpx-games-runner"
+	}
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {

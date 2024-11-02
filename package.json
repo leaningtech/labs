@@ -10,7 +10,7 @@
 		"typescript": "^5.2.2"
 	},
 	"prettier": {
-		"trailingComma": "es5",
+		"trailingComma": "none",
 		"useTabs": true,
 		"plugins": [
 			"prettier-plugin-astro",

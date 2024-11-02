@@ -15,9 +15,9 @@ export async function getStaticPaths() {
 		.map((entry) => {
 			return {
 				params: {
-					slug: entry.slug,
+					slug: entry.slug
 				},
-				props: entry,
+				props: entry
 			};
 		});
 }

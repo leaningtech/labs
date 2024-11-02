@@ -41,7 +41,7 @@ Let us try running a bash script:
 ```js
 const result = await cx.run("/bin/bash", [
 	"-c",
-	"for i in {1..5}; do echo $i; done",
+	"for i in {1..5}; do echo $i; done"
 ]);
 console.log("Bash script exit status:", result.status);
 ```

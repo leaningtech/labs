@@ -42,7 +42,7 @@ JavaScript Strings are not used directly by Cheerp, but they are accessible to t
 ```js
 var a = [
 	{ x: 0, y: 1 },
-	{ x: 2, y: 3 },
+	{ x: 2, y: 3 }
 ];
 var typedA = new Int32Array(10);
 ```
@@ -74,7 +74,7 @@ JavaScript references support equality comparison, but they have no ordering and
 ```js
 var a = [
 	{ x: 0, y: [1] },
-	{ x: 2, y: [3] },
+	{ x: 2, y: [3] }
 ];
 var typedA = new Int32Array(10);
 var objPtr = { d: a, o: 1 };

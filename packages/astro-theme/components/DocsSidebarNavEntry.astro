@@ -32,8 +32,8 @@ const title = await getLocalisedEntryTitle(entry);
 					"font-semibold !text-primary-500 !border-primary-600":
 						entry.href === pathname,
 					"px-4 border-l border-stone-800": depth > 0,
-					"bg-primary-600 bg-opacity-5": depth > 0 && entry.href === pathname,
-				},
+					"bg-primary-600 bg-opacity-5": depth > 0 && entry.href === pathname
+				}
 			]}
 			data-is-active={entry.href === pathname}
 		>
@@ -48,7 +48,7 @@ const title = await getLocalisedEntryTitle(entry);
 		<li
 			class:list={[
 				"py-4 first:pt-2",
-				{ "pl-4 border-l border-stone-800": depth > 0 },
+				{ "pl-4 border-l border-stone-800": depth > 0 }
 			]}
 		>
 			<h5 class="mb-1 font-semibold text-stone-300 hover:text-white">
@@ -57,8 +57,8 @@ const title = await getLocalisedEntryTitle(entry);
 					class:list={[
 						"block",
 						{
-							"!text-primary-500": entry.href === pathname,
-						},
+							"!text-primary-500": entry.href === pathname
+						}
 					]}
 				>
 					{title}

@@ -2,7 +2,7 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import {
 	SITE_TITLE,
-	SITE_DESCRIPTION,
+	SITE_DESCRIPTION
 } from "../../../../packages/astro-theme/consts";
 
 export async function get(context) {
@@ -13,7 +13,7 @@ export async function get(context) {
 		site: context.site,
 		items: posts.map((post) => ({
 			...post.data,
-			link: `/blog/${post.slug}/`,
-		})),
+			link: `/blog/${post.slug}/`
+		}))
 	});
 }
