@@ -47,7 +47,7 @@ function getEditHref(id: string): string {
 <Shell
 	title={[
 		title === product?.name ? undefined : title,
-		(product?.name ?? "Leaning Technologies") + " Documentation"
+		(product?.name ?? "Leaning Technologies") + " Documentation",
 	]
 		.filter(Boolean)
 		.join(" - ")}

@@ -19,8 +19,8 @@ const { heading } = Astro.props;
 		class:list={[
 			"block py-1 text-stone-400 hover:text-stone-200",
 			{
-				"font-medium": heading.depth <= 2
-			}
+				"font-medium": heading.depth <= 2,
+			},
 		]}
 	>
 		{heading.text}

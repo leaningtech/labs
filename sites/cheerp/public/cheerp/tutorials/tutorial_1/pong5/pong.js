@@ -174,10 +174,10 @@ var ac = new Uint8Array([114, 103, 98, 40, 0]);
 var ab = new Uint8Array([44, 0]);
 var af = new Uint8Array([41, 0]);
 var ae = new Uint8Array([
-	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0
+	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0,
 ]);
 var Z = new Uint8Array([
-	114, 103, 98, 40, 50, 53, 53, 44, 50, 53, 53, 44, 50, 53, 53, 41, 0
+	114, 103, 98, 40, 50, 53, 53, 44, 50, 53, 53, 44, 50, 53, 53, 41, 0,
 ]);
 var HEAP8 = null;
 var HEAP16 = null;
@@ -214,8 +214,8 @@ var importObject = {
 		__ZN8Graphics8drawRectEiiiii: _asm_w,
 		__ZN8Graphics10drawCircleEiiii: _asm_j,
 		__ZN8Graphics11debugOutputEPKc: _asm_U,
-		__ZN8Graphics16initializeCanvasEii: _asm_S
-	}
+		__ZN8Graphics16initializeCanvasEii: _asm_S,
+	},
 };
 fetchBuffer("pong.wasm")
 	.then(

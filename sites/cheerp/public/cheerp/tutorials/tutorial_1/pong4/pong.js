@@ -155,8 +155,8 @@ function __dummy() {
 var importObject = {
 	imports: {
 		__ZN8Graphics8drawRectEiiiii: _asm_p,
-		__ZN8Graphics16initializeCanvasEii: _asm_E
-	}
+		__ZN8Graphics16initializeCanvasEii: _asm_E,
+	},
 };
 fetchBuffer("pong.wasm")
 	.then(

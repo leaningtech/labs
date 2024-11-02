@@ -53,8 +53,8 @@ const cx = await CheerpX.Linux.create({
 	// Mount the IDBDevice
 	mounts: [
 		{ type: "ext2", path: "/", dev: overlayDevice },
-		{ type: "dir", path: "/files", dev: filesDevice }
-	]
+		{ type: "dir", path: "/files", dev: filesDevice },
+	],
 });
 ```
 

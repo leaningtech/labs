@@ -30,7 +30,7 @@ async function getNextPrev(): Promise<{
 
 	return {
 		next: findValidEntry(directory.entries, activeIndex, 1),
-		prev: findValidEntry(directory.entries, activeIndex, -1)
+		prev: findValidEntry(directory.entries, activeIndex, -1),
 	};
 }
 

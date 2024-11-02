@@ -66,8 +66,8 @@ The example below demonstrates how to set up the file system and devices using [
 					{ type: "ext2", path: "/", dev: overlayDevice },
 					{ type: "dir", path: "/app", dev: webDevice },
 					{ type: "dir", path: "/data", dev: dataDevice },
-					{ type: "devs", path: "/dev" }
-				]
+					{ type: "devs", path: "/dev" },
+				],
 			});
 		</script>
 	</head>
@@ -116,11 +116,11 @@ await cx.run("/bin/bash", ["--login"], {
 		"SHELL=/bin/bash",
 		"EDITOR=vim",
 		"LANG=en_US.UTF-8",
-		"LC_ALL=C"
+		"LC_ALL=C",
 	],
 	cwd: "/home/user",
 	uid: 1000,
-	gid: 1000
+	gid: 1000,
 });
 ```
 
@@ -157,8 +157,8 @@ Now you can interact with the console to run commands. Make sure to give focus t
 					{ type: "ext2", path: "/", dev: overlayDevice },
 					{ type: "dir", path: "/app", dev: webDevice },
 					{ type: "dir", path: "/data", dev: dataDevice },
-					{ type: "devs", path: "/dev" }
-				]
+					{ type: "devs", path: "/dev" },
+				],
 			});
 
 			// Interact with a console
@@ -172,11 +172,11 @@ Now you can interact with the console to run commands. Make sure to give focus t
 					"SHELL=/bin/bash",
 					"EDITOR=vim",
 					"LANG=en_US.UTF-8",
-					"LC_ALL=C"
+					"LC_ALL=C",
 				],
 				cwd: "/home/user",
 				uid: 1000,
-				gid: 1000
+				gid: 1000,
 			});
 		</script>
 	</head>

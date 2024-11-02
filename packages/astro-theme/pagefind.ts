@@ -21,7 +21,7 @@ export default function pagefind(): AstroIntegration {
 			"astro:server:setup": ({ server }) => {
 				const serve = sirv(outDir, {
 					dev: true,
-					etag: true
+					etag: true,
 				});
 				server.middlewares.use((req, res, next) => {
 					if (req.url?.startsWith("/pagefind/")) {
@@ -36,10 +36,10 @@ export default function pagefind(): AstroIntegration {
 					spawn("npx", ["-y", "pagefind", "--site", outDir], {
 						stdio: "inherit",
 						shell: true,
-						cwd
+						cwd,
 					}).on("close", () => resolve());
 				});
-			}
-		}
+			},
+		},
 	};
 }

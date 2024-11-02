@@ -5,12 +5,12 @@
 	let images = [
 		{
 			src: "/cheerpj3/assets/jnlp-screenshots/screenshot_1.png",
-			alt: "Run Java Web Start applications. No Java installations. Easy to use. Sandboxed."
+			alt: "Run Java Web Start applications. No Java installations. Easy to use. Sandboxed.",
 		},
 		{
 			src: "/cheerpj3/assets/jnlp-screenshots/screenshot_2.png",
-			alt: "Extensive Java compatibility. Swing. Oracle Forms. Oracle EBS. File System. Clipboard. Networking. Printing."
-		}
+			alt: "Extensive Java compatibility. Swing. Oracle Forms. Oracle EBS. File System. Clipboard. Networking. Printing.",
+		},
 	];
 
 	function back() {

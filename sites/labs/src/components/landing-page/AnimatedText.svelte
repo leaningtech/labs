@@ -3,7 +3,7 @@
 		// TODO consider making these links to relevant docs/guides
 		"C and C++",
 		"Java",
-		"native code"
+		"native code",
 	];
 
 	let index = 0;
@@ -14,7 +14,7 @@
 	enum Direction {
 		Typing,
 		Deleting,
-		Waiting
+		Waiting,
 	}
 
 	let direction = Direction.Typing;

@@ -79,7 +79,7 @@ var stdlib = {
 	Uint16Array: Uint16Array,
 	Int32Array: Int32Array,
 	Float32Array: Float32Array,
-	Float64Array: Float64Array
+	Float64Array: Float64Array,
 };
 function X(d) {
 	var c = -0,
@@ -277,10 +277,10 @@ var p = 200;
 var n = -2;
 var o = 200;
 var ac = new Uint8Array([
-	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0
+	50, 52, 112, 120, 32, 115, 97, 110, 115, 45, 115, 101, 114, 105, 102, 0,
 ]);
 var ab = new Uint8Array([
-	114, 103, 98, 40, 50, 53, 53, 44, 50, 53, 53, 44, 50, 53, 53, 41, 0
+	114, 103, 98, 40, 50, 53, 53, 44, 50, 53, 53, 44, 50, 53, 53, 41, 0,
 ]);
 var aa = new Uint8Array([89, 111, 117, 32, 108, 111, 115, 116, 33, 0]);
 var $ = [0];

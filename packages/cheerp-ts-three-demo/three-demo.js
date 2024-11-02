@@ -41,7 +41,7 @@ function aJ(aK) {
 		a1: nullArray,
 		a2: nullArray,
 		a3: nullArray,
-		a4: nullArray
+		a4: nullArray,
 	};
 	c = [null];
 	a.a0 = c;
@@ -134,8 +134,8 @@ function aC(e, d) {
 			a1: nullArray,
 			a2: nullArray,
 			a3: nullArray,
-			a4: nullArray
-		}
+			a4: nullArray,
+		},
 	];
 	c = d.a0;
 	a[0].a0 = c;
