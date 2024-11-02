@@ -43,7 +43,7 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 - `/web/example.txt` would correspond to `https://host/dir1/dir2/path/to/local/directory/example.txt`
 - `/web/images/logo.png` would correspond to `https://host/dir1/dir2/path/to/local/directory/images/logo.png`
 
-> [!note]
+> [!note] Note
 > It's important to note that this behavior depends on the current page's URL, as it uses a relative path. For more predictable results, it's recommended to use absolute paths when possible.
 
 ## IDBDevice
@@ -147,7 +147,7 @@ const dataDevice = await CheerpX.DataDevice.create();
 await dataDevice.writeFile("/filename", "contents");
 ```
 
-> [!note]
+> [!note] Note
 >
 > - This is the only way to create files in this device.
 > - Modifying existing files or creating files in subdirectories is not possible.
