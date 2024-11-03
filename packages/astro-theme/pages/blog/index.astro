@@ -14,7 +14,7 @@ const [post1, post2, ...restPosts] = (
 	await getCollection(
 		"blog",
 		({ data }) =>
-			data.draft !== true && (!product || data?.tags?.includes(product.name)),
+			data.draft !== true && (!product || data?.tags?.includes(product.name))
 	)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---

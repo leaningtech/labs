@@ -10,7 +10,7 @@ function transition(cb) {
 
 document.addEventListener("DOMContentLoaded", () => {
 	const callouts = document.querySelectorAll(
-		"blockquote[data-callout][data-expandable=true]",
+		"blockquote[data-callout][data-expandable=true]"
 	);
 	for (const callout of callouts) {
 		const title = callout.querySelector(".callout-title");

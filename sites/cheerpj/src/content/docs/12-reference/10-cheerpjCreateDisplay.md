@@ -9,7 +9,7 @@ description: Display GUI elements
 function cheerpjCreateDisplay(
 	width: number,
 	height: number,
-	parent?: HTMLElement,
+	parent?: HTMLElement
 ): HTMLElement;
 ```
 

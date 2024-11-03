@@ -28,7 +28,7 @@ const exitCode = await cheerpjRunMain(
 	"fully.qualified.ClassName",
 	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
 	arg1,
-	arg2,
+	arg2
 );
 console.log(`Program exited with code ${exitCode}`);
 ```

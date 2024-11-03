@@ -46,7 +46,7 @@ interface Props {
 					{
 						t(
 							"If you have a question, please ask it in our Discord server.",
-							Astro.currentLocale,
+							Astro.currentLocale
 						)
 					}
 				</p>
@@ -61,7 +61,7 @@ interface Props {
 		constructor() {
 			super();
 			const openBtn = this.querySelector<HTMLButtonElement>(
-				"button[data-open-modal]",
+				"button[data-open-modal]"
 			);
 			const dialog = this.querySelector<HTMLDialogElement>("dialog");
 

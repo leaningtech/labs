@@ -10,7 +10,7 @@ import plugin from "tailwindcss/plugin";
 const exportColorsAsCssVariables = plugin(({ addBase, theme }) => {
 	function extractColorVars(
 		colorObj: RecursiveKeyValuePair,
-		colorGroup = "",
+		colorGroup = ""
 	): CSSRuleObject {
 		return Object.keys(colorObj).reduce((vars, colorKey) => {
 			const value = colorObj[colorKey]!;

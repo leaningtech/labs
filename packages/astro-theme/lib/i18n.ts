@@ -30,7 +30,7 @@ function getLocaleBasePaths(currentLocale: string | undefined): {
  */
 export function getLocalisedPaths(
 	path: string,
-	currentLocale: string | undefined,
+	currentLocale: string | undefined
 ): { [locale: string]: string } {
 	if (!currentLocale) return {};
 

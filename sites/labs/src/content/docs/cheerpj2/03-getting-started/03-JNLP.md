@@ -122,7 +122,7 @@ Alternatively, if the class name is in the `.jnlp` file but not in the manifest,
 ```js
 cheerpjRunMain(
 	"com.application.MyClassName",
-	"/app/my_application_archive.jar:/app/lib/my_dependency_archive.jar",
+	"/app/my_application_archive.jar:/app/lib/my_dependency_archive.jar"
 );
 ```
 

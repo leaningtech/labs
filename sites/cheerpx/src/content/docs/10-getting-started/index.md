@@ -47,14 +47,14 @@ The example below demonstrates how to set up the file system and devices using [
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
-				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
 			);
 			// Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
 			const idbDevice = await CheerpX.IDBDevice.create("block1");
 			// A device to overlay the local changes to the disk with the remote read-only image
 			const overlayDevice = await CheerpX.OverlayDevice.create(
 				cloudDevice,
-				idbDevice,
+				idbDevice
 			);
 			// Direct acces to files in your HTTP server
 			const webDevice = await CheerpX.WebDevice.create("");
@@ -138,14 +138,14 @@ Now you can interact with the console to run commands. Make sure to give focus t
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
-				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2",
+				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
 			);
 			// Read-write local storage for disk blocks, it is used both as a cache and as persisteny writable storage
 			const idbDevice = await CheerpX.IDBDevice.create("block1");
 			// A device to overlay the local changes to the disk with the remote read-only image
 			const overlayDevice = await CheerpX.OverlayDevice.create(
 				cloudDevice,
-				idbDevice,
+				idbDevice
 			);
 			// Direct acces to files in your HTTP server
 			const webDevice = await CheerpX.WebDevice.create("");

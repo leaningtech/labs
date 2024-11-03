@@ -40,7 +40,7 @@ export type Options = {
 const contentDir = joinPath(dirname, "../../content");
 
 export default function ThemeIntegration(
-	options: Options = {},
+	options: Options = {}
 ): AstroIntegration {
 	const base = options.baseIsDocs ? "/docs" : "";
 	return {

@@ -17,7 +17,7 @@ const currentLocale = Astro.currentLocale;
 		selector.addEventListener("change", () => {
 			const newLocale = selector.value;
 			const { href } = document.querySelector(
-				`link[rel=alternate][hreflang=${newLocale}]`,
+				`link[rel=alternate][hreflang=${newLocale}]`
 			); // from BaseHead
 			window.location.href = href;
 		});

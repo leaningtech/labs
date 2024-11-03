@@ -22,7 +22,7 @@ function getOs() {
 document.addEventListener("DOMContentLoaded", () => {
 	const figures = document.querySelectorAll(
 		// ```shell blocks
-		".expressive-code figure.is-terminal",
+		".expressive-code figure.is-terminal"
 	);
 
 	const updateFuncs = [];

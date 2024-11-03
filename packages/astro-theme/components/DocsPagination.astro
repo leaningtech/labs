@@ -23,7 +23,7 @@ async function getNextPrev(): Promise<{
 	const activeIndex = directory.entries.findIndex(({ id }) => id === activeId);
 	if (activeIndex === -1) {
 		console.warn(
-			`ContentPagination: could not find activeId "${activeId}" in given directory`,
+			`ContentPagination: could not find activeId "${activeId}" in given directory`
 		);
 		return { next: undefined, prev: undefined };
 	}
@@ -37,7 +37,7 @@ async function getNextPrev(): Promise<{
 function findValidEntry(
 	entries: NavEntry[],
 	index: number,
-	direction: number,
+	direction: number
 ): NavEntry | undefined {
 	for (
 		let i = index + direction;

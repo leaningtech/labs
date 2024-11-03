@@ -80,7 +80,7 @@ instantiateFunction({ absPath: "/absolute/path/to/yourModule.wasm" }).then(
 	(module) => {
 		console.log("Module has been instantiated!");
 		module.someJSExportedFunc();
-	},
+	}
 );
 ```
 

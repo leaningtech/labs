@@ -53,7 +53,7 @@ mkdir directory_name
 ```js
 cheerpjRunMain(
 	"com.application.MyClassName",
-	"/app/my_application_archive.jar:/app/my_dependency_archive.jar",
+	"/app/my_application_archive.jar:/app/my_dependency_archive.jar"
 );
 ```
 

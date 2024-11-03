@@ -14,7 +14,7 @@ namespace CheerpX {
 				cwd?: string; // Current working directory
 				uid?: number; // User ID
 				gid?: number; // Group ID
-			},
+			}
 		): Promise<{ status: number }>;
 	}
 }

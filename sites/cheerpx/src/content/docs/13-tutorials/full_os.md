@@ -118,7 +118,7 @@ Create a `HttpBytesDevice` from the just created Ext2 image. `OverlayDevice` mak
 	var blockDevice = await CheerpX.HttpBytesDevice.create("/cheerpXImage.ext2");
 	var overlayDevice = await CheerpX.OverlayDevice.create(
 		blockDevice,
-		await CheerpX.IDBDevice.create("block1"),
+		await CheerpX.IDBDevice.create("block1")
 	);
 </script>
 ```

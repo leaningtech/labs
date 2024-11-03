@@ -25,11 +25,11 @@ interface Pagefind {
 	destroy: () => Promise<void>;
 	search: (
 		query: string | null,
-		options?: PagefindSearchOptions,
+		options?: PagefindSearchOptions
 	) => Promise<PagefindResponse>;
 	debouncedSearch: (
 		query: string | null,
-		options?: PagefindSearchOptions,
+		options?: PagefindSearchOptions
 	) => Promise<PagefindResponse>;
 }
 

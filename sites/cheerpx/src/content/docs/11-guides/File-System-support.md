@@ -163,7 +163,7 @@ Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks,
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP
 const httpDevice = await CheerpX.HttpBytesDevice.create(
-	"https://yourserver.com/image.ext2",
+	"https://yourserver.com/image.ext2"
 );
 
 // Create an IDBDevice for persistent local storage

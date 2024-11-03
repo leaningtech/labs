@@ -127,7 +127,7 @@ CheerpJランタイムが統合され、Javaアプリケーションが表示さ
 ```js
 cheerpjRunMain(
 	"com.application.MyClassName",
-	"/app/my_application_archive.jar:/app/lib/my_dependency_archive.jar",
+	"/app/my_application_archive.jar:/app/lib/my_dependency_archive.jar"
 );
 ```
 
