@@ -1,0 +1,59 @@
+---
+title: Debugging CheerpJ
+description: How to properly debug CheerpJ in the browser
+---
+
+import { DISCORD_URL } from "@/consts.ts";
+
+Sometimes, you might encounter issues or experience unexpected behavior when using CheerpJ. Don’t worry if that happens — this guide will help you troubleshoot the problem and gather essential resources, in case you need further assistance with debugging.
+
+## What to do if my application does not work with CheerpJ?
+
+The reason your application isn't working could be quite simple. Try these checks to ensure you've deployed and integrated CheerpJ correctly:
+
+- You integrated CheerpJ into your web page by adding a `<script>` tag like this:
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+```
+
+- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
+- Your Java application functions normally on your local machine without CheerpJ.
+- You are not opening the page by double-clicking on it; instead, you are using an HTTP server.
+- Your application files are hosted using an HTTP server and are accessible through the browser.
+
+If your application passes all these checks but still isn't working correctly, you may need additional assistance from us. You can request help through our <a href={DISCORD_URL} target="_blank">Discord</a> server.
+
+If you do so, make sure to provide additional context, such as a HAR file and the browser's console output. This will make it easier for us to assist you. Instructions on how to generate these are provided in the following steps.
+
+## Saving the browser console output
+
+You can follow these steps to save the browser console output:
+
+- Open your browser and navigate to the application that you are testing with CheerpJ.
+- Open the developer tools in your browser. You can do that by pressing **F12** on your keyboard. Alternatively you can click on the three dots on the top right corner of your browser, select **More tools** and then click **Developer Tools**.
+  ![Open the developer tools](/docs/cheerpj3/assets/open-dev-tools.png)
+- Once the developer tools are open, navigate to the **Console** tab. If you can't see the **Console** tab, you might need to clik on the **+** symbol in Edge, or the **>>** symbol in Chrome, and then select **Console**.
+- If needed, trigger the error in your application.
+- To save the console output, right click on any message in the console tab and select **Save as…**
+  ![Open the developer tools](/docs/cheerpj3/assets/save-console.png)
+- You can now save the console log to a file and forward it to us.
+
+## Extracting a HAR file
+
+A HAR file (HTTP Archive file) is a log of a web browser's interaction with a website. They are very useful for debugging web applications, as they help us diagnose issues related to loading times, network errors, or incorrect responses from a server.
+
+You can save a HAR following these steps:
+
+- Open the developer tools in your browser. You can do that by pressing **F12** on your keyboard. Alternatively you can click on the three dots on the top right corner of your browser, select **More tools** and then click **Developer Tools**.
+  ![Open the developer tools](/docs/cheerpj3/assets/open-dev-tools.png)
+- Now navigate to the application that you are testing with CheerpJ. Or if you already visited the page, reload it. This is to make sure the HAR file will be complete and no entries are missing.
+- Navigate to the **Network** tab in the developer tools. If you can't see the **Network** tab, you might need to clik on the **+** symbol in Edge, or the **>>** symbol in Chrome, and then select **Network**.
+- If needed, trigger the error in your application.
+- To download the HAR file you need to click the download icon **↓** at the top right of the networking tab.
+  ![Open the developer tools](/docs/cheerpj3/assets/network-tab.png)
+- You can now save the HAR file and forward it to us to us in Discord or via Github.
+
+[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
+[`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
+[virtual filesystem]: /docs/guides/File-System-support
