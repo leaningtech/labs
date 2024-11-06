@@ -4,6 +4,7 @@ description: Running a 32-bit Statically Linked Executable using CheerpX
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { VERSION } from "@/consts.ts";
 
 This tutorial will guide you through the process of creating a simple 32-bit statically linked Linux executable and running it in a browser using CheerpX. We'll use Docker as an optional method to compile the executable if you're on macOS or another system that cannot directly compile Linux executables. Additionally, we'll configure nginx to serve the necessary files.
 
@@ -84,6 +85,13 @@ This confirms that the executable is 32-bit and statically linked.
 
 Let's set up your `index.html` file to load CheerpX, run your executable, and include some basic styling to improve the page's appearance.
 
+### Latest version of CheerpX
+
+<pre>
+	&lt;script src=`https://cxrtnc.leaningtech.com/`{VERSION}
+	`/cx.js`&gt;&lt;/script&gt;
+</pre>
+
 Open `index.html` and add the following content:
 
 ```html title="index.html"
@@ -92,7 +100,7 @@ Open `index.html` and add the following content:
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Simple Executable Test</title>
-		<script src="https://cxrtnc.leaningtech.com/1.0.4/cx.js"></script>
+		<script src="https://cxrtnc.leaningtech.com/{VERSION_NUMBER}/cx.esm.js"></script>
 	</head>
 	<body style="height: 100%; background: black;">
 		<pre id="console" style="height: 100%;"></pre>

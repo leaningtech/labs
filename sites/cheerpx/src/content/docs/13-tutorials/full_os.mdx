@@ -3,6 +3,8 @@ title: Full OS
 description: Run bash on a custom disk image
 ---
 
+import { VERSION } from "@/consts.ts";
+
 This tutorial will guide you through creating a custom filesystem from scratch and using it with CheerpX.
 
 ## 1. Create an Ext2 image
@@ -41,6 +43,13 @@ mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 
 ## 2. Load CheerpX from your index.html
 
+## Latest version CheerpX
+
+<pre>
+	&lt;script src=`https://cxrtnc.leaningtech.com/`{VERSION}
+	`/cx.js`&gt;&lt;/script&gt;
+</pre>
+
 Loading CheerpX is very simple. Create a new file called `index.html` and populate it with the following HTML code.
 
 ```html title=index.html
@@ -49,7 +58,8 @@ Loading CheerpX is very simple. Create a new file called `index.html` and popula
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Test</title>
-		<script src="https://cxrtnc.leaningtech.com/1.0.4/cx.js"></script>
+		<!-- Add CheerpX and insert the latest version number -->
+		<script src="https://cxrtnc.leaningtech.com/{VERSION_NUMBER}/cx.js"></script>
 	</head>
 	<body style="height: 100%; background: black;"></body>
 </html>

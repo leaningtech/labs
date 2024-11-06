@@ -5,12 +5,12 @@ description: Native code virtualization as a JavaScript library
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
-import { DISCORD_URL } from "@/consts.ts";
+import { DISCORD_URL, VERSION } from "@/consts.ts";
 
 <div class="not-prose flex gap-2 mb-2">
 	<img
-		src="https://img.shields.io/badge/version-1.0.4-blue"
-		alt="Version 1.0.4"
+		src={`https://img.shields.io/badge/version-${VERSION}-blue`}
+		alt={`Version ${VERSION}`}
 	/>
 	<a href="https://discord.leaningtech.com/" target="_blank">
 		<img
@@ -40,9 +40,10 @@ import { DISCORD_URL } from "@/consts.ts";
 	repository](https://github.com/leaningtech/cheerpx-meta/)
 </div>
 
-```html
-<script src="https://cxrtnc.leaningtech.com/1.0.4/cx.js"></script>
-```
+<pre>
+	&lt;script src=`https://cxrtnc.leaningtech.com/`{VERSION}
+	`/cx.js`&gt;&lt;/script&gt;
+</pre>
 
 {/* TODO: add a img */}
 
