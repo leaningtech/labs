@@ -11,14 +11,14 @@ import { VERSION } from "@/consts.ts";
 
 ## 1. Include CheerpX on your page
 
-No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML:
+No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML.
 
-### Latest version of CheerpX
+**Latest version of CheerpX:**
 
-<pre>
+<div style={{ margin: "0 auto", color: "#ff6347" }}>
 	&lt;script src=`https://cxrtnc.leaningtech.com/`{VERSION}
 	`/cx.js`&gt;&lt;/script&gt;
-</pre>
+</div>
 
 The CheerpX's API is stable and breaking changes can only be introduced on a new major version. All CheerpX builds are immutable so you can trust that, if your application works today, it is going to work identically forever.
 
@@ -34,7 +34,7 @@ CheerpX is also available as an ES6 JavaScript module. If you prefer to use the 
 </script>
 ```
 
-> [!tip]
+> [!note] Note
 > When using the ES6 module version, you don't have to assign the imported `CheerpX` to the global scope. This example is intended to keep compatibility with the traditional script inclusion method used in this documentation.
 
 ## 2. Create an application instance
@@ -49,6 +49,7 @@ The example below demonstrates how to set up the file system and devices using [
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
+		<!-- Add CheerpX and insert the latest version number -->
 		<script src="https://cxrtnc.leaningtech.com/{VERSION_NUMBER}/cx.esm.js"></script>
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
@@ -83,7 +84,7 @@ The example below demonstrates how to set up the file system and devices using [
 </html>
 ```
 
-> [!tip]
+> [!note] Note
 > A virtual system image, such as `debian_large`, is a complete snapshot of an operating system's files and configurations. CheerpX uses this image to simulate a Linux environment within your browser, allowing it to execute applications as if they were running on a native Linux system. This example is inteded to quickly get you up-and-running using a pre-deployed disk image from our cloud backend, for a much more self-contained example please see the [Simple Executable tutorial](/docs/tutorials/simple-executable)
 
 ## 3. Enable cross-origin isolation
@@ -140,6 +141,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
+		<!-- Add CheerpX and insert the latest version number -->
 		<script src="https://cxrtnc.leaningtech.com/{VERSION_NUMBER}/cx.esm.js"></script>
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
