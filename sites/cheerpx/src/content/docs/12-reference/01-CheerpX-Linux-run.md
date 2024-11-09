@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux.run
+title: CheerpX.Linux#run
 description: Run a command
 ---
 
