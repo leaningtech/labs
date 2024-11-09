@@ -35,7 +35,7 @@ CheerpX is also available as an ES6 JavaScript module. If you prefer to use the 
 
 To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX-Linux-create) method, which is available globally once the script is included.
 
-The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/docs/guides/custom-devices).
+The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/docs/guides/custom-images).
 
 ```html
 <!doctype html>
