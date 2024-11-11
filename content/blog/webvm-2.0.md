@@ -24,7 +24,7 @@ The first version of WebVM was released in 2022. Since then, we have been workin
 
 ## How does WebVM work?
 
-\[ASSET ARCHITECTURE\]
+![Overview of Architecture](./webvm_architecture_1.png)
 
 WebVM is composed of four main building blocks: The CheerpX virtualization engine, a virtual storage backend, a networking layer, and the emulated graphical device.
 
