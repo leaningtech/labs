@@ -20,7 +20,7 @@ The first version of WebVM was released in 2022. Since then, we have been workin
 
 \[VIDEO PREVIEW\]
 
-[WebVM](https://github.com/leaningtech/webvm) 2.0 is a liberally licensed FOSS project for anyone in the community to use, modify and improve. This release marks another important milestone in our vision of running *any* application in the browser, including those that can't be recompiled to WebAssembly.
+[WebVM](https://github.com/leaningtech/webvm) 2.0 is a liberally licensed FOSS project for anyone in the community to use, modify and improve. This release marks another important milestone in our vision of running _any_ application in the browser, including those that can't be recompiled to WebAssembly.
 
 ## How does WebVM work?
 
@@ -30,7 +30,7 @@ WebVM is composed of four main building blocks: The CheerpX virtualization engin
 
 CheerpX is a unique WebAssembly-based virtualization engine for x86 binary code. This engine is based on an efficient Just-In-Time compiler from x86 instructions into WebAssembly, plus an emulation layer for Linux system calls. This combination makes it possible to run unmodified Linux x86 binaries in the browser, and it is robust and scalable enough to run whole Linux distributions.
 
-The second main component of WebVM is its streaming disk backend. One of the key benchmarks of success of WebVM is to be able to boot full, unmodified Linux distributions, *without requiring the preloading of the full file system*. This implies the ability to support 1GB+ root filesystems and to dynamically load disk blocks with low-latency, a critical concern for the overall performance of the VM. 
+The second main component of WebVM is its streaming disk backend. One of the key benchmarks of success of WebVM is to be able to boot full, unmodified Linux distributions, _without requiring the preloading of the full file system_. This implies the ability to support 1GB+ root filesystems and to dynamically load disk blocks with low-latency, a critical concern for the overall performance of the VM.
 
 Finally, the picture is completed by the private networking layer, implemented [via Tailscale](https://cheerpx.io/docs/guides/Networking) and Xorg support using the KMS Linux API. More on these in later sections.
 
@@ -64,15 +64,15 @@ Adding support for general networking was another thorny problem in developing W
 
 Over time, we realized that the actual technical complexities in doing so are compounded with a lot of confusion around browser-based networking, resulting in some very frequently asked questions:
 
-* **Can’t you just use WebSockets?** WebSockets are _not_ low-level sockets, but just an extension to the high-level HTTP protocol. A useful extension, of course, but not a replacement for TCP sockets.
-* **Can you support HTTPS traffic originating from the VM by using fetch?** This is also not possible. The traffic CheerpX receives is _already_ encrypted by the application or SSL library by the time it reaches the syscalls. While we _could_ install our own root CA certificate and effectively man-in-the-middle every connection, this strategy seems like a profound breach of user trust, and we strongly decided against it. Moreover, it would not have helped much, see the next question.
-* **Ok, no HTTPS, but what about plain HTTP?** In this case it could be possible to reconstruct a valid HTTP request from low-level socket traffic, but it would be of little use. The browser only allows HTTP traffic to the same origin, or to origins that are configured to allow cross-origin traffic using CORS headers. Very few websites use these headers, which means that this solution will not actually work in the vast majority of cases.
+- **Can’t you just use WebSockets?** WebSockets are _not_ low-level sockets, but just an extension to the high-level HTTP protocol. A useful extension, of course, but not a replacement for TCP sockets.
+- **Can you support HTTPS traffic originating from the VM by using fetch?** This is also not possible. The traffic CheerpX receives is _already_ encrypted by the application or SSL library by the time it reaches the syscalls. While we _could_ install our own root CA certificate and effectively man-in-the-middle every connection, this strategy seems like a profound breach of user trust, and we strongly decided against it. Moreover, it would not have helped much, see the next question.
+- **Ok, no HTTPS, but what about plain HTTP?** In this case it could be possible to reconstruct a valid HTTP request from low-level socket traffic, but it would be of little use. The browser only allows HTTP traffic to the same origin, or to origins that are configured to allow cross-origin traffic using CORS headers. Very few websites use these headers, which means that this solution will not actually work in the vast majority of cases.
 
 The “easy” solution to this problem is to maintain a WebSocket-based proxy that relays all user traffic to the internet. This is a very poor solution for the following reasons:
 
-* **Scale and cost:** With the level of use we see daily with WebVM, this would not be just a matter of spinning up a VPS, but would require a distributed and scalable solution. Moreover, we would need to bear the cost of all the bandwidth of WebVM users globally.
-* **Privacy:** We care a lot about the privacy of our users. We have designed our disk backends to be fully private and local, and we would certainly not be comfortable in siphoning all their internet traffic to our servers.
-* **Abuse:** Finally, if we had an open relay to the internet, we could also be considered responsible for any nefarious or malicious activity of our users.
+- **Scale and cost:** With the level of use we see daily with WebVM, this would not be just a matter of spinning up a VPS, but would require a distributed and scalable solution. Moreover, we would need to bear the cost of all the bandwidth of WebVM users globally.
+- **Privacy:** We care a lot about the privacy of our users. We have designed our disk backends to be fully private and local, and we would certainly not be comfortable in siphoning all their internet traffic to our servers.
+- **Abuse:** Finally, if we had an open relay to the internet, we could also be considered responsible for any nefarious or malicious activity of our users.
 
 To solve this last problem in particular, we would need to force users to register accounts and keep track of their traffic as required by regulations. We would need, effectively, to build a VPN provider. Since we are not in the business of making VPNs, we decided to delegate this responsibility to an established solution instead.
 
@@ -90,7 +90,7 @@ Finally, using Tailscale also makes it possible for us to support the self-deplo
 
 ## The Linux KMS API and Xorg support
 
-The last big improvement to WebVM for this release has been support for graphical applications, including booting a complete desktop environment. For now we have settled on using *i3*, a minimalistic desktop environment, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
+The last big improvement to WebVM for this release has been support for graphical applications, including booting a complete desktop environment. For now we have settled on using _i3_, a minimalistic desktop environment, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
 
 The desktop environment runs on top of the traditional Xorg server which, like any other application, runs completely unmodified with CheerpX. This works by implementing the `/dev/dri/card0` device and the _KMS_ kernel API. _KMS_ stands for Kernel Modesetting and it provides standardized and uniform access to GPU framebuffers. Thanks to _KMS_ it's possible, for example, for a Linux system to move from the early kernel messages, the boot animation and Xorg without flickering, since access to the GPU is coordinated across all these steps.
 
@@ -110,7 +110,7 @@ On the other hand the new [Alpine i3 environment](https://webvm.io/alpine.html) 
 
 Releasing WebVM 2.0 and the CheerpX 1.0 stable API represents a big milestone for us, but it’s far from being the end of the road.
 
-CheerpX will continue to evolve and improve performance across all the various components discussed above. These efforts will close the gap required to run even more complex graphical environments, such as the aforementioned XFCE. 
+CheerpX will continue to evolve and improve performance across all the various components discussed above. These efforts will close the gap required to run even more complex graphical environments, such as the aforementioned XFCE.
 
 Furthermore we plan to improve CheerpX to support running Docker containers, making it possible to build a new generation of development environments that runs client side.
 
