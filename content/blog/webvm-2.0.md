@@ -1,5 +1,5 @@
 ---
-title: "WWebVM 2.0: A complete Linux Desktop Environment in the browser"
+title: "WebVM 2.0: A complete Linux Desktop Environment in the browser"
 description: |
   [WebVM](https://webvm.io/alpine.html) is a full Linux environment running in the browser, client-side. It is a complete virtual machine, with support for persistent data storage, networking and, as of today’s release, Xorg and complete desktop environments.
 
