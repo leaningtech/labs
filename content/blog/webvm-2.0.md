@@ -90,7 +90,7 @@ Finally, using Tailscale also makes it possible for us to support the self-deplo
 
 ## The Linux KMS API and Xorg support
 
-The last big improvement to WebVM for this release has been support for graphical applications, including booting a complete desktop environment. For now we have settled on using _i3_, a minimalistic desktop environment, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
+The last big improvement to WebVM for this release has been support for graphical applications, including booting a complete desktop environment. For now we have settled on using _i3_, a minimalistic window manager, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
 
 The desktop environment runs on top of the traditional Xorg server which, like any other application, runs completely unmodified with CheerpX. This works by implementing the `/dev/dri/card0` device and the _KMS_ kernel API. _KMS_ stands for Kernel Modesetting and it provides standardized and uniform access to GPU framebuffers. Thanks to _KMS_ it's possible, for example, for a Linux system to move from the early kernel messages, the boot animation and Xorg without flickering, since access to the GPU is coordinated across all these steps.
 
