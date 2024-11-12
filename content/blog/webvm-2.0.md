@@ -133,7 +133,11 @@ For any question, you can find Leaning Technologies engineers, including myself,
 You can also find us at the following links. See you soon, and enjoy our tech.
 
 [X.com / Alessandro Pignotti](https://x.com/alexpignotti)
+
 [X.com / Leaning Technologies](https://x.com/leaningtech)
+
 [Leaning Technologies Labs](https://labs.leaningtech.com/)
+
 [LinkedIn](https://www.linkedin.com/company/2739659/)
+
 [Email](mailto:info@leaningtech.com)
