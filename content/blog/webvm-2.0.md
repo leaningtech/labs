@@ -62,7 +62,7 @@ CheerpX also supports a plain HTTP disk backend that uses byte ranges to downloa
 
 ## Private networking via your own VPN
 
-![Networking Architecture](./webvm_architecture_networking.png)
+![Networking Architecture](./webvm_architecture_network.png)
 
 Adding support for general networking was another thorny problem in developing WebVM. Modern browsers do not provide access to low-level TCP/UDP sockets, which are the fundamental building block for most other networking protocols. This means that some form of network virtualization is required.
 
