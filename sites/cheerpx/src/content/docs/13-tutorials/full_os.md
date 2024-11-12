@@ -49,7 +49,7 @@ Loading CheerpX is very simple. Create a new file called `index.html` and popula
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Test</title>
-		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 	</head>
 	<body style="height: 100%; background: black;"></body>
 </html>

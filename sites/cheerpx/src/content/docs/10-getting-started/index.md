@@ -12,7 +12,7 @@ description: Getting started with CheerpX
 No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML:
 
 ```html
-<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 ```
 
 The CheerpX's API is stable and breaking changes can only be introduced on a new major version. All CheerpX builds are immutable so you can trust that, if your application works today, it is going to work identically forever.
@@ -23,7 +23,7 @@ CheerpX is also available as an ES6 JavaScript module. If you prefer to use the 
 
 ```html
 <script type="module">
-	import * as CheerpX from "https://cxrtnc.leaningtech.com/1.0.0/cx.esm.js";
+	import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.esm.js";
 	self.CheerpX = CheerpX;
 </script>
 ```
@@ -43,7 +43,7 @@ The example below demonstrates how to set up the file system and devices using [
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
-		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
@@ -134,7 +134,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
-		<script src="https://cxrtnc.leaningtech.com/1.0.0/cx.js"></script>
+		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 		<script type="module">
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
