@@ -38,7 +38,7 @@ Finally, the picture is completed by the private networking layer, implemented [
 
 ## CheerpX: secure x86 virtualization in WebAssembly
 
-\[ASSET? ENGINE WITH FILES ISOLATED?\]
+![CheerpX Architecture](./webvm_architecture_engine.png)
 
 CheerpX is an x86 virtualization engine in WebAssembly, designed to be robust, scalable, and performant. Since CheerpX is implemented exclusively using standard JavaScript / WebAssembly and Browser APIs, it is also extremely secure. CheerpX can be used like any other JavaScript library, either from our CDN or using the [NPM package](https://www.npmjs.com/package/@leaningtech/cheerpx).
 
@@ -50,6 +50,8 @@ CheerpX has been in development since 2017, and was first announced in 2020. Its
 
 ## Low-latency disk backend with private and local storage
 
+![Streaming Disk Backend Architecture](./webvm_architecture_disk.png)
+
 One of the primary ambitions of WebVM is to be scalable enough to support large, unmodified Linux distributions with good performance on arbitrary workflows. Working with large disk images was one of the main challenges we faced in the development of WebVM. The most common solution when trying to solve similar problems, is to prefetch the subset of the disk known to be useful for the specific demo, ahead of time. However, since the purpose of WebVM is to give complete control to the user, we cannot predict which, of the many available applications, REPLs or compilers will be started. In this scenario the whole model of pre-fetching breaks down.
 
 After several iterations, we settled on a solution that achieves our goals at scale. WebVM implements a streaming disk device that downloads 128kb disk blocks on-demand from a Cloudflare Worker backend, using WebSockets. The worker is executed in the nearest datacenter from the globally distributed CloudFlare CDN, ensuring the lowest possible latency. Using WebSockets further helps in maintaining a stable latency from challenging networking environments. This solution has proved to be performant, scalable and very cheap, providing per-block latencies measured to be around 20-40ms.
@@ -60,7 +62,7 @@ CheerpX also supports a plain HTTP disk backend that uses byte ranges to downloa
 
 ## Private networking via your own VPN
 
-\[ASSET NETWORKING\]
+![Networking Architecture](./webvm_architecture_networking.png)
 
 Adding support for general networking was another thorny problem in developing WebVM. Modern browsers do not provide access to low-level TCP/UDP sockets, which are the fundamental building block for most other networking protocols. This means that some form of network virtualization is required.
 
@@ -91,6 +93,8 @@ A very interesting use case that does not require an exit node is WebVM-to-WebVM
 Finally, using Tailscale also makes it possible for us to support the self-deployment scenarios and private networks common in the enterprise sector. A self-hostable open source implementation of the Tailscale protocol, called [Headscale](https://github.com/leaningtech/headscale), can be used in such cases to completely remove the need for third party networking infrastructure.
 
 ## The Linux KMS API and Xorg support
+
+![Graphics Architecture](./webvm_architecture_display.png)
 
 The last big improvement to WebVM for this release has been support for graphical applications, including booting a complete desktop environment. For now we have settled on using _i3_, a minimalistic window manager, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
 
