@@ -86,7 +86,7 @@ Tailscale is designed to build private VPNs across your devices anywhere on the 
 
 WebVM is directly integrated with Tailscale, and it’s possible to connect to your network in just a few clicks. Creating an account is trivial, since Tailscale supports logging-in with the major OAuth providers. To access the wider internet the user also needs to set up an “Exit Node”, to relay traffic beyond the Tailscale network. The whole process is documented [here](https://tailscale.com/kb/1103/exit-nodes).
 
-This latter step, although not difficult, introduces more friction that we would like. We are hopeful that future integration between Tailscale and VPN providers such as [Mullvad](https://tailscale.com/mullvad) will make it possible to use ready-made exit nodes.
+This latter step, although not difficult, introduces more friction than we would like. We are hopeful that future integration between Tailscale and VPN providers such as [Mullvad](https://tailscale.com/mullvad) will make it possible to use ready-made exit nodes.
 
 A very interesting use case that does not require an exit node is WebVM-to-WebVM traffic. For example, a security Capture-The-Flag competition could be hosted completely inside WebVMs, with traffic never requiring access to the wider internet.
 
