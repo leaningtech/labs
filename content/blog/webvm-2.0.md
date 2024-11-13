@@ -7,7 +7,7 @@ description: |
 authors:
   - alessandro
 pubDate: "November 13 2024"
-heroImage: "./hackathon-banner.png"
+heroImage: "./Webvm2.png"
 tags:
   - CheerpX
 ---
