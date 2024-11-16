@@ -3,7 +3,7 @@ title: Custom disk images
 description: How to create custom ext2 images to use as a filesystem for CheerpX
 ---
 
-This guide demonstrates how to create a custom `ext2` image for use with CheerpX while ensuring that the root ownership of files is maintained.
+This guide will show you how to configure a Docker container and build it into an `ext2` image for use with CheerpX.
 
 ## 1. Create a Dockerfile
 
@@ -35,32 +35,27 @@ Now, create a container from the image using `podman`. Ensure the image name mat
 podman create --name cheerpxcontainer cheerpximage
 ```
 
-## 4. Copy the Filesystem from the Container into a Local directory
+## 4. Copy the Filesystem from the Container into a local directory
 
-Create the local directory for the filesystem:
+Create a directory for the filesystem:
 
 ```bash
 mkdir cheerpXFS
 ```
 
-Now copy the files from the container into the directory. This should preserve root ownership when executed from within a root user environment.
+Use the podman cp command to copy the container’s filesystem into the local directory:
 
 ```bash
-podman cp cheerpxcontainer:/ cheerpXFS/
+podman unshare podman cp cheerpxcontainer:/ cheerpXFS/
 ```
 
-If you are running `podman cp` as a non-root user and face any issues with permissions, you might need to adjust the directory ownership after the copy by using `chown`:
+> [!note] Note
+> The podman unshare command helps avoid permission problems by running the operation in a special mode where you act like the container's "root user."
+
+## 5. Create an ext2 Image from the local directory
+
+Now that you have the local directory, you can create an `ext2` image from it:
 
 ```bash
-sudo chown -R root:root cheerpXFS
-```
-
-This step will ensure that the files in the local `cheerpXFS` directory are owned by `root`.
-
-## 5. Create an ext2 Image from the Local Directory
-
-Now that you have the local directory with the proper ownership, you can create an `ext2` image from it. You need to run the `mkfs.ext2` command in a way that keeps the ownership intact.
-
-```bash
-mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+sudo mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
