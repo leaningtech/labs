@@ -7,33 +7,77 @@ This guide will show you how to configure a Docker container and build it into a
 
 ## 1. Create a Dockerfile
 
-For example, the following Dockerfile installs the `curl` command-line tool:
+First, create your `Dockerfile` to define the environment. Here's an example of how to build a Docker image that installs the `curl` command:
 
 ```dockerfile
-FROM --platform=i386 i386/debian:buster
+FROM --platform=i386 docker.io/i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y install curl
 ```
 
-Note that the base image's architecture must be 32-bit x86 (for example, `i386` or `i686`).
+> [!note] Note
+> The base image's architecture must be 32-bit x86 (for example, `i386` or `i686`).
 
 ## 2. Create a container out of your Dockerfile
 
+Once the `Dockerfile` is ready, build the image. Use `buildah` to create a container image for your filesystem.
+
 ```bash
 buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
+```
+
+## 3. Create a container from the Docker Image
+
+Now, create a container from the image using `podman`. Ensure the image name matches the on you built in the previous step.
+
+```bash
 podman create --name cheerpxcontainer cheerpximage
 ```
 
-## 3. Copy the filesystem from the container into a local directory
+## 4. Copy the Filesystem from the Container into a local directory
+
+Create a directory for the filesystem:
 
 ```bash
 mkdir cheerpXFS
-podman cp cheerpxcontainer:/ cheerpXFS/
 ```
 
-## 4. Create an ext2 image from the specified directory
+Use the podman cp command to copy the container’s filesystem into the local directory:
 
 ```bash
-mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+podman unshare podman cp cheerpxcontainer:/ cheerpXFS/
+```
+
+> [!note] Note
+> The podman unshare command helps avoid permission problems by running the operation in a special mode where you act like the container's "root user."
+
+## 5. Create an ext2 Image from the local directory
+
+Now that you have the local directory, you can create an `ext2` image from it:
+
+```bash
+podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+```
+
+## 6. Clean up unused resources
+
+After creating your `ext2` image, it's a good practice to clean up unused resources to free up space:
+
+Remove the container:
+
+```bash
+podman rm cheerpxcontainer
+```
+
+Remove the image:
+
+```bash
+buildah rmi cheerpximage
+```
+
+Remove temporary directories:
+
+```bash
+rm -rf cheerpXFS
 ```
