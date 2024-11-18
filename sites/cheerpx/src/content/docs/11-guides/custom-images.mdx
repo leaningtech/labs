@@ -59,3 +59,25 @@ Now that you have the local directory, you can create an `ext2` image from it:
 ```bash
 podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
+
+## 6. Clean up unused resources
+
+After creating your `ext2` image, it's a good practice to clean up unused resources to free up space:
+
+Remove the Container:
+
+```bash
+podman rm cheerpxcontainer
+```
+
+Remove the image:
+
+```bash
+buildah rmi cheerpximage
+```
+
+Remove temporary directories:
+
+```bash
+rm -rf cheerpXFS
+```
