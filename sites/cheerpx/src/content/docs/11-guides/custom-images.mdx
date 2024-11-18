@@ -57,5 +57,5 @@ podman unshare podman cp cheerpxcontainer:/ cheerpXFS/
 Now that you have the local directory, you can create an `ext2` image from it:
 
 ```bash
-sudo mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
