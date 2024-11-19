@@ -30,14 +30,16 @@ Copy the filesystem from the container into a local directory:
 
 ```bash
 mkdir cheerpXFS
-podman cp cheerpxcontainer:/ cheerpXFS/
+podman unshare podman cp cheerpxcontainer:/ cheerpXFS/
 ```
 
 Create an ext2 image from the specified directory:
 
 ```bash
-mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
+podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 ```
+
+Learn more about creating a image in the [custom-disk-images] guide.
 
 ## 2. Load CheerpX from your index.html
 
@@ -179,3 +181,4 @@ Learn more about `cx.run` in the [CheerpX.Linux.run] reference.
 [CheerpX.Linux.create]: docs/reference/CheerpX-Linux-create
 [setConsole]: docs/reference/CheerpX-Linux-setConsole
 [CheerpX.Linux.run]: docs/reference/CheerpX-Linux-run
+[custom-disk-images]: /docs/guides/custom-images
