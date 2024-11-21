@@ -106,7 +106,7 @@ async function Java_Example_alert(lib, str) {
 
 Here, we provide an implementation for the `alert` method in the `Example` class, by creating a function named `Java_Example_alert`. The function displays an alert dialog with the message using `window.alert`.
 
-3. Initialize CheerpJ with the `natives` option and pass the native method implementation to `cheerpjInit`:
+3. Initialize CheerpJ with the `natives` option and pass the native method implementation to [`cheerpjInit`]:
 
 ```html title="index.html" {13}
 <!doctype html>
