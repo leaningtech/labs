@@ -133,3 +133,4 @@ In this setup, `cheerpjInit` loads `Java_Example_alert` as the native method imp
 [`natives`]: /docs/reference/cheerpjInit#natives
 [`CJ3Library`]: /docs/reference/CJ3Library
 [`conversion rules`]: /docs/reference/CJ3Library#conversion-rules
+[`cheerpjInit`]: /docs/reference/cheerpjInit
