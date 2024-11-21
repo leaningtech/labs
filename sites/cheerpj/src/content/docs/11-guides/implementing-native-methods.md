@@ -33,7 +33,7 @@ The method is defined in the Java class but is not implemented in Java. Instead,
 
 ## Implementing Native Methods in JavaScript
 
-To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if com.foo.Bar has a native method called baz, its object key is Java_com_foo_Bar_baz. The function takes:
+To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, its object key is `Java_com_foo_Bar_baz`. The function takes:
 
 - A [`CJ3Library`] object `lib` as the first parameter (which provides access to other classes and methods within the library).
 - `self` as the second parameter, the instance of the Java class calling the native method. This parameter can be omitted for static native methods.
