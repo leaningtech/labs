@@ -52,7 +52,7 @@ async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1
 
 ## Passing Native Functions to CheerpJ
 
-To use the native method in CheerpJ, pass the function to the `cheerpjInit` function as a property of the [`natives`] option. You can pass:
+To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] function as a property of the [`natives`] option. You can pass:
 
 1. **The function definition directly**:
 
