@@ -128,7 +128,7 @@ Here, we provide an implementation for the `alert` method in the `Example` class
 </html>
 ```
 
-In this setup, `cheerpjInit` loads `Java_Example_alert` as the native method implementation. When `Example.alert` is called in Java, it triggers the JavaScript `Java_Example_alert` function, displaying an alert dialog with the message.
+In this setup, [`cheerpjInit`] loads `Java_Example_alert` as the native method implementation. When `Example.alert` is called in Java, it triggers the JavaScript `Java_Example_alert` function, displaying an alert dialog with the message.
 
 [`natives`]: /docs/reference/cheerpjInit#natives
 [`CJ3Library`]: /docs/reference/CJ3Library
