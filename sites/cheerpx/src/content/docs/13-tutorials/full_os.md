@@ -12,7 +12,7 @@ We will create an Ext2 image, which will serve as the root filesystem for Cheerp
 To ensure consistency in preparing the image contents, we will use a Dockerfile, you can edit the Dockerfile to add custom packages or change the base to the distro of your choosing. It's important to select the `i386` architecture, since CheerpX does not currently support 64-bit executables.
 
 ```dockerfile title=Dockerfile
-FROM --platform=i386 i386/debian:buster
+FROM --platform=i386 docker.io/i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN useradd -m user && echo "user:password" | chpasswd
 RUN echo 'root:password' | chpasswd
@@ -47,13 +47,13 @@ Loading CheerpX is very simple. Create a new file called `index.html` and popula
 
 ```html title=index.html
 <!doctype html>
-<html lang="en" style="height: 100%;">
+<html lang="en" style="heigth: 100%;">
 	<head>
 		<meta charset="UTF-8" />
 		<title>CheerpX Test</title>
 		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 	</head>
-	<body style="height: 100%; background: black;"></body>
+	<body style="heigth: 100%; background: black;"></body>
 </html>
 ```
 
@@ -144,7 +144,7 @@ To learn more about `Cheerpx.Linux.create`, see the [CheerpX.Linux.create] refer
 Create a console element for the output of your program.
 
 ```html
-<pre id="console" style="height: 100%;"></pre>
+<pre id="console" style="heigth: 100%;"></pre>
 ```
 
 And configure CheerpX to use it by adding this snippet at the end of the script.
