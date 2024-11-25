@@ -91,7 +91,16 @@ function getEditHref(id: string): string {
 						{title === product?.name ? (
 							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
 								<h1>
-									<Image alt={product.name} src={product.logotype} />
+									<Image
+										alt={product.name}
+										src={product.logotype}
+										class={
+											product.name === "cheerpj-applet-runner" ||
+											"cheerpj-jnlp-runner"
+												? "w-[344px]"
+												: null
+										}
+									/>
 								</h1>
 								<p class="text-xl font-medium text-stone-500">
 									{description && <Markdown.Inline of={description} />}
