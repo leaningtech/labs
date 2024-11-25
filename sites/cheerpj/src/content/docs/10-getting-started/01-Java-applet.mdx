@@ -4,13 +4,22 @@ description: Run a java applet in modern browsers
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
 
-CheerpJ can run Java applets in the browser seamlessly. This page will help you getting started with CheerpJ for Java applets.
+CheerpJ can run Java applets in the browser seamlessly. This page will help you getting started with CheerpJ for Java applets using the CheerpJ runtime environment on your own webpage.
 
-**There are two different ways to run a Java Applet in the browser:**
+{/* <p class="m-0 text-md font-semibold text-gray-900 dark:text-white"> */}
 
-- [Running your own Java applet](/docs/getting-started/Java-applet#running-your-own-applet) using the CheerpJ runtime environment in your own webpage.
-- [Running a public applet](/docs/getting-started/Java-applet#running-a-public-applet) using the [CheerpJ Applet Runner](https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein) Chrome extension for applets integrated with the applet tag `<applet>` on public websites.
+<div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+	<div class="-mb-2 flex-grow text-left">
+		<div class="-my-1 font-sans text-lg font-semibold">Not a Developer?</div>
+		<p class="-my-3 text-base text-gray-600 dark:text-gray-400">
+			Check out our browser extension for running Java Applets while you browse
+			in modern browsers.
+		</p>
+	</div>
+	<AppletRunnerButton />
+</div>
 
 ## Running your own applet
 
@@ -74,35 +83,6 @@ http-server -p 8080
 ```
 
 > In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
-
-## Running a public applet
-
-### 1. Install the CheerpJ applet runner
-
-CheerpJ Applet Runner is available for Chrome and Edge.
-
-<div class="flex flex-wrap gap-3">
-  <LinkButton
-    type="primary"
-    href="https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
-    label="Add to Chrome"
-    iconLeft="openmoji:chrome"
-  />
-
-<LinkButton
-	type="primary"
-	href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic"
-	label="Add to Microsoft Edge"
-	iconLeft="openmoji:edge"
-/>
-
-</div>
-
-### 2. Go to a website with an applet
-
-Visit a page with a Java applet, [such as this one](http://schubart.net/rc/) and click on the CheerpJ Applet Runner icon in the toolbar and enable CheerpJ.
-
-![](/docs/cheerpj3/assets/applet_runner_demo.gif)
 
 ## The result
 
