@@ -19,7 +19,7 @@ WebVM runs on any modern browser, including mobile ones, thanks to WebAssembly, 
 The first version of WebVM was released in 2022. Since then, we have been working relentlessly to improve the technology and it is with great pride that we are now releasing WebVM 2.0. This new release keeps pushing the boundaries of what can run on modern browsers, thanks to a vastly improved virtualization engine, support for Xorg, and a new UX design. Try out our [Alpine Linux / Xorg / i3 environment](https://webvm.io/alpine.html) now\!
 
 <video controls autoplay loop muted playsinline>
-	<source src="/blog/alpine-mines.mp4" type="video/mp4" />
+	<source src="./alpine-mines.mp4" type="video/mp4" />
 </video>
 
 [WebVM](https://github.com/leaningtech/webvm) 2.0 is a liberally licensed FOSS project for anyone in the community to use, modify and improve. This release marks another important milestone in our vision of running _any_ application in the browser, including those that can't be recompiled to WebAssembly.
