@@ -20,7 +20,7 @@ function sortCalc(post: CollectionEntry<"blog">): number {
 	if (post.data.featured) {
 		relevancy *= 2;
 	}
-	return post.data.pubDate.valueOf() * relevancy;
+	return post.data.pubDate.valueOf();
 }
 
 const posts = (
