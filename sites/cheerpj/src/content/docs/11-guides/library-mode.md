@@ -93,7 +93,7 @@ async function iTextExample() {
 
 ## See also
 
-Library mode is also used for [`native` methods implemented in JavaScript][JNI]. A `native` is effectively just a shorter library mode session.
+Library mode is also used for [native methods implemented in JavaScript][JNI]. A `native` is effectively just a shorter library mode session.
 
-[JNI]: /docs/guides/Implementing-Java-native-methods-in-JavaScript
+[JNI]: /docs/guides/implementing-native-methods
 [`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
