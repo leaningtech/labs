@@ -76,6 +76,6 @@ const cx = await CheerpX.Linux.create({
 networkInterface?: NetworkInterface;
 ```
 
-This option configures network settings, which allows CheerpX to communicate over networks.
+This option configures network settings, which allows CheerpX to communicate over networks. For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
