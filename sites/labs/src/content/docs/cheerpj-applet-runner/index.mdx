@@ -1,109 +1,88 @@
 ---
 title: CheerpJ Applet Runner
+shortTitle: Overview
 description: Run Java Applets in modern browser without plugins
-fullWidthLayout: true
 ---
 
-import { DISCORD_URL } from "@/consts";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
-import {
-	Hero,
-	Card,
-	sparkleIcon,
-	networkIcon,
-	lockIcon,
-	browserIcon,
-	layersIcon,
-	rocketIcon,
-} from "@leaningtech/cheerpj-applet-page";
+import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro";
+import { DISCORD_URL } from "@/consts.ts";
 
-<Hero />
-
-<section class="w-full max-w-prose mx-auto text-lg leading-normal px-2 py-16 text-pretty">
-	<h2 class="text-3xl font-semibold text-primary-500 mb-4">
-		What is CheerpJ Applet Runner?
-	</h2>
-	<p>
-		The CheerpJ Applet Runner, available as a browser extension for Chrome and
-		Edge, empowers users to seamlessly run Java applets within modern web
-		browsers without requiring a local Java installation. Leveraging the
-		innovative CheerpJ technology, this extension facilitates the revival of
-		legacy Java applets, ensuring their functionality in a contemporary browsing
-		environment without the need for traditional Java plugins.
-	</p>
-</section>
-
-<section
-	class="w-full max-w-screen-2xl mx-auto px-4 sm:px-8 space-y-4 flex flex-wrap items-center justify-center p-10"
-	id="features"
->
-	<Card
-		title="Applets without Java Desktop"
-		iconSrc={sparkleIcon}
-		iconAlt="Sparkles doodle"
-		description="Run Java Applets without a local Java installation, all within your browser."
+<div class="not-prose flex gap-2 mb-2">
+	<img
+		src="https://img.shields.io/badge/version-3.0-orange"
+		alt="Version 3.0"
 	/>
-	<Card
-		title="Easy to Use"
-		iconSrc={rocketIcon}
-		iconAlt="Rocket doodle"
-		description="CheerpJ Applet Runner offers a straightforward, one-click solution for both end-users and organizations, simplifying the use of legacy Java applications with minimal setup."
-	/>
+	<a href="https://discord.leaningtech.com/">
+		<img
+			src="https://img.shields.io/discord/988743885121548329?color=%237289DA&logo=discord&logoColor=ffffff"
+			alt="Discord server"
+		/>
+	</a>
+	<a href="https://github.com/leaningtech/cheerpj-meta/issues">
+		<img
+			src="https://img.shields.io/github/issues/leaningtech/cheerpj-meta.svg?logo=github"
+			alt="GitHub issues"
+		/>
+	</a>
+</div>
 
-    <Card
-    	title="Runs on Modern Browsers"
-    	iconSrc={lockIcon}
-    	iconAlt="Lock doodle"
-    	description="Compatible with Chrome and Edge, runs securely within the browser sandbox."
-    />
+CheerpJ Applet Runner is a browser extension that enables you to **run Java Applets directly in modern browsers**, without the need for a Java plugin or a Java installation. Designed for individual users and organizations, it requires no technical knowledge or setup.
 
-    <Card
-    	title="Battle Tested"
-    	iconSrc={layersIcon}
-    	iconAlt="Layers doodle"
-    	description="Based on CheerpJ, a JVM replacement in WebAssembly and JavaScript, tested on thousands of Java applications, and trusted by many of the world largest private and public sector organizations."
-    />
-    <Card
-    	title="Cost Effective"
-    	iconSrc={browserIcon}
-    	iconAlt="Bill doodle"
-    	description="CheerpJ Applet Runner is free for personal, non-business use and remains economical for business applications, simplifying the maintenance of legacy Java applications without costly migrations."
-    />
-    <Card
-    	title="Extensive Compatibility"
-    	iconSrc={networkIcon}
-    	iconAlt="Globe doodle representing network"
-    	description="CheerpJ supports most Java 8 features, including networking, file systems, clipboard access, and Swing/AWT, ensuring broad compatibility for various Java applications."
-    />
+Are you a developer? If you are interested in a more advanced usage, explore CheerpJ Core, the technology behind the CheerpJ Applet Runner. Check out our [product website](https://cheerpj.com/) and the [CheerpJ documentation](https://cheerpj.com/docs/overview.html) to learn more.
 
-</section>
-<section class="px-4 sm:px-8 py-16 space-y-4 m-auto mb-10 flex col-span-1 items-center justify-center rounded-lg">
-	<div>
-		<h3 class="font-semibold sm:text-3xl md:text-4xl">Community</h3>
-		<p class="pt-4 text-stone-400 leading-7">
-			We have an amazing community of developers and users. <br />
-			Join us today to stay up to date with the latest news, to share your experience
-			with our technologies or to report any bugs.
-		</p>
-		<div class="mt-4 flex flex-wrap gap-4 pt-5">
-			<LinkButton
-				href="https://github.com/leaningtech/cheerpj-applet-runner"
-				label="Report a bug"
-				type="primary"
-				iconRight="mdi:github"
-			/>
-			<LinkButton
-				href={DISCORD_URL}
-				label="Join the community"
-				type="discord"
-				iconRight="ic:baseline-discord"
-			/>
-			<LinkButton
-				href="/docs/cheerpj-applet-runner/getting-started"
-				label="Documentation"
-				type="secondary"
-				iconRight="iconoir:google-docs"
-			/>
-		</div>
-	</div>
-</section>
+<div class="flex flex-wrap gap-3"> 
+  <LinkButton
+    type="primary"
+    href="https://chrome.google.com/webstore/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
+    label="Add to Chrome"
+    iconLeft="openmoji:chrome"
+  />
+
+<LinkButton
+	type="primary"
+	href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic"
+	label="Add to Microsoft Edge"
+	iconLeft="openmoji:edge"
+/>
+</div>
+
+## Features
+
+- Runs Java Applets without modifying the code or installing Java.
+- Compatible with Chrome and Edge.
+- Easy to use, no technical knowledge required.
+- Group Policy Object (GPO) support for enterprise environments.
+
+## Getting started
+
+To get started with CheerpJ Applet Runner, you need to install the extension from the Chrome Web Store or the Edge Add-ons store. For step-by-step instructions, see our [Chrome Installation] and [Edge Installation] pages.
+
+Once installed, you can run Java Applets on any website. Visit our [using the extension for the first time] page for more information.
+
+## Licensing
+
+CheerpJ is free for personal use and technical evaluation. See [licensing](/docs/cheerpj-applet-runner/licensing) for details.
+
+## Community
+
+We have an amazing community of developers and users.
+Join us today to stay up to date with the latest news, to share your experience with our technologies or to report any bugs.
+
+<LinkButton
+	type="discord"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Join our Discord server"
+/>
+
+<LinkButton
+	type="secondary"
+	href="https://twitter.com/leaningtech"
+	iconLeft="fa-brands:twitter"
+	label="Follow us on Twitter"
+/>
+
+[Chrome Installation]: /docs/cheerpj-applet-runner/getting-started/install-chrome
+[Edge Installation]: /docs/cheerpj-applet-runner/getting-started/install-edge
+[using the extension for the first time]: /docs/cheerpj-applet-runner/getting-started/using-first-time
