@@ -79,7 +79,7 @@ Using the HTTP server as the filesystem root it’s a convenient default for sho
 
 This snippet of code will start a complete interactive shell in your browser.
 
-Complete self-contained code for this example, and all the later ones, is also available [https://github.com/leaningtech/cheerpx-meta/tree/main/examples](https://github.com/leaningtech/cheerpx-meta/tree/main/examples)
+Complete self-contained code for this example, and all the later ones, is also available at our [GitHub repository](https://github.com/leaningtech/cheerpx-meta/tree/main/examples)
 
 ```javascript
 // Create a read-only block device for a disk image stored on the HTTP server
