@@ -3,6 +3,7 @@ import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import HeroAsset from "../assets/cheerpx_illustration.png";
 import CalendarAsset from "../assets/calendar.png";
+import RocketAsset from "../assets/rocket_launch.png";
 import GamePadAsset from "../assets/HDgamepad.png";
 import Screenshot from "../assets/screenshots.png";
 import { Image } from "astro:assets";
@@ -53,49 +54,54 @@ import MonitorDoodle from "../assets/hero_illustration.png";
 		class="justify-center py-20 bg-black px-2 sm:px-2 md:pt-16 md:px-8 lg:px-4 lg:pt-32 xl:pt-42 xl:px-56 2xl:px-60 2xl:pt-60"
 	>
 		<div class="flex justify-center items-center">
-			<Image src={CalendarAsset} alt="Calendar" class="w-48" />
+			<Image src={RocketAsset} alt="Calendar" class="w-48" />
 		</div>
 		<h1
 			class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center text-wrap"
 		>
 			<span
 				class="bg-gradient-to-r from-[#446887] to-[#909090] via-[#6386a5] text-transparent bg-clip-text"
-				>Coming soon</span
+				>CheerpX 1.0</span
 			>
 		</h1>
 		<p
 			class="text-center text-2xl sm:text-3xl font-light text-stone-300 py-4 px-30"
 		>
-			CheerpX official release is expected for late 2024. For now, enjoy the
-			beta trial and our popular WebVM demo.
+			All the power of CheerpX 1.0 now available. <br />
+			Want to see it in action? Check out WebVM, now with graphical support.
 		</p>
 		<div
 			class="grid grid-cols-3 py-8 text-stone-300 px-2 sm:px-8 md:px-16 lg:px-32 xl:px-28 2xl:px-60"
 		>
 			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/forks">
-					<p class="text-2xl font-bold">1.3k+</p>
+					<p class="text-2xl font-bold">1.6k+</p>
 					<p class="text-sm sm:text-lg">Repository forks</p>
 				</a>
 			</div>
 			<div class="text-center hover:text-[#6386a5]">
 				<a href="https://github.com/leaningtech/webvm/stargazers">
-					<p class="text-2xl font-bold">6.7k+</p>
+					<p class="text-2xl font-bold">10.7k+</p>
 					<p class="text-sm sm:text-lg">Stars on GitHub</p>
 				</a>
 			</div>
 			<div class="text-center hover:text-[#6386a5]">
 				<a href={DISCORD_URL}>
-					<p class="text-2xl font-bold">1.2k+</p>
+					<p class="text-2xl font-bold">1.3k+</p>
 					<p class="text-sm sm:text-lg">Discord members</p>
 				</a>
 			</div>
 		</div>
-		<div class="flex justify-center items-center">
+		<div class="flex justify-center items-center gap-4">
 			<LinkButton
 				type="primary-cheerpx"
-				href="https://webvm.io/"
-				label="Try WebVM"
+				href="/blog/cx-10"
+				label="CheerpX 1.0 blogpost"
+			/>
+			<LinkButton
+				type="secondary-cheerpx"
+				href="https://webvm.io/alpine.html"
+				label="Try WebVM 2.0"
 			/>
 		</div>
 	</section>
