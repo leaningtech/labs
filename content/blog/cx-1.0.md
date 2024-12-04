@@ -110,6 +110,8 @@ await cx.run("/bin/bash", []);
 
 The shell will now start and show its prompt in the provided HTML element. The user can type commands and run them as expected with no further changes to the JavaScript code.
 
+![Bash in the browser](./images/cx10_bash.png)
+
 The binary code for the shell, and any library the shell uses, is loaded on demand from the disk image. This is implemented using HTTP byte ranges and makes it possible to support large disk images, including complete Linux distributions, without requiring the user to download large amounts of data on the first access. Any downloaded chunk, and any user modification, is stored locally to the IndexedDB overlay, which acts both as a caching-layer and as privacy-preserving persistent local storage for user data..
 
 Disk images can be customized arbitrarily and conveniently built from Dockerfiles. For full information see our [Custom image guide](https://cheerpx.io/docs/guides/custom-images)
@@ -135,7 +137,7 @@ await cx.run("/usr/bin/python3", []);
 
 That’s it. The user will now be able to try Python code in the browser. The basic _builtin console_ is sufficient for quick experimentation, but you should consider using the full-fledged [xterm.js](https://xtermjs.org/) terminal emulator for better results. You can do so using the [`cx.setCustomConsole` API](https://cheerpx.io/docs/reference/CheerpX-Linux-setCustomConsole)
 
-\[SCREENSHOT\]
+![Python in the browser](./images/cx10_python.png)
 
 ## Use case: An environment to learn C++
 
@@ -179,7 +181,7 @@ await compileAndRun(cx, dataDevice, srcCode, “hello.cpp”, “hello”);
 
 The output of the _hello world_ program will appear in the console when the binary is ready. For a more integrated experience you can convert the stdout to a string with the approach documented [here](https://cheerpx.io/docs/guides/input-output#custom-console).
 
-\[SCREENSHOT\]
+![C++ in the browser](./images/cx10_cpp.png)
 
 ## Use case: Hosting a HTTP server in the browser
 
@@ -218,7 +220,7 @@ You can now reach this server from any device connected to Tailscale from a stan
 
 This latter case is especially interesting, since a Web developer can easily configure its own Tailscale account so that every user visiting a page is "connected" in a virtual network. In this scenario all the WebVM instances will be able to communicate via Tailscale, forming a completely browser hosted VPN.
 
-\[SCREENSHOTS\]
+![HTTP server in the browser](./images/cx10_http.png)
 
 ## Use case: Organize a Capture-The-Flag competition
 
@@ -248,7 +250,7 @@ await cx.run("/bin/bash", ["-c", "printf 'AAAAAAAAAAAAAAAAAAAAAAAAAAAA\\xa0\\x83
 
 Since CheerpX is a secure sandbox the user can confidently play with the challenges without any risk of corrupting his local system. A compelling UX could be built around the challenges by tracking the attempts of the user while providing real time scoring or hints if appropriate.
 
-[SCREENSHOT]
+![CTF in the browser](./images/cx10_ctf.png)
 
 ## Use case: Graphical applications
 
@@ -270,7 +272,7 @@ await cx.run("/usr/bin/Xorg", ["-retro"]);
 
 The commands above will start an Xorg server with the “classic” stipple pattern and cursor. The `-retro` option is of course not required but it’s a simple way of demonstrating that Xorg is working as expected.
 
-[SCREENSHOT]
+![Xorg in the browser](./images/cx10_xorg.png)
 
 For an example of what can be achieved by combining a KMS with a complete distro, check out the [WebVM Alpine demo](https://webvm.io/alpine.html) booting into a fully fledged i3 desktop.
 
