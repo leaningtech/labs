@@ -320,7 +320,7 @@ After many months spent polishing the API and making the CheerpX virtualization 
 
 Our priorities are currently in three areas:
 
-- **Running Windows applications via WINE:** We see the virtualization of Windows applications as one of the main drivers of adoption for CheerpX, not only for professional/business applications, but also for games, especially when paired with accelerated 3D graphics via WebGPU. This line of work will tie back into the CheerpX Games Runner extension \[LINK\], currently in Beta, to significantly expand the scope of supported games.
+- **Running Windows applications via WINE:** We see the virtualization of Windows applications as one of the main drivers of adoption for CheerpX, not only for professional/business applications, but also for games, especially when paired with accelerated 3D graphics via WebGPU. This line of work will tie back into the [CheerpX Games Runner](https://chromewebstore.google.com/detail/cheerpx-games-runner-beta/kpjhccfibjgklihcmaddjecaenppaahg) extension, currently in Beta, to significantly expand the scope of supported games.
 
 - **Support for Docker containers:** Starting existing containers in the browser, including exposing their services to the host web page, could allow a new generation of privacy-first Web applications, low-cost development environments and IDEs.
 
