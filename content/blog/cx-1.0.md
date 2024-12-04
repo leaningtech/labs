@@ -228,7 +228,7 @@ CTF competitions are often organized by the security community as a fun way of c
 
 Any application exploit that works on native, will also work in CheerpX. This is an real-world example from the [University of Waterloo CTF S22 Contest](https://ctf.csclub.uwaterloo.ca/)
 
-```
+```javascript
 ...
 // Add a device to expose a directory on the HTTP server in the VM
 const webDevice = await CheerpX.WebDevice.create("/ctf");
