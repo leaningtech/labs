@@ -44,10 +44,16 @@ Example for pre-authenticated users/devices:
 
 ```js
 const cx = await CheerpX.Linux.create({
-	networkInterface: {
-		authKey: "AuthKeyStringGoesHere",
-		controlUrl: "https://my.url.com/",
-	},
+    networkInterface: {
+        authKey: "AuthKeyStringGoesHere",
+        controlUrl: "https://my.url.com/",
+        stateUpdateCb: (state) => {
+            console.log("Network state changed to:", state);
+        },
+        netmapUpdateCb: (map) => {
+            console.log("Network mapping updated:", map);
+        }
+    },
 });
 ```
 
@@ -58,6 +64,8 @@ What is happening here?
 
 - `controlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
 - `authKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+- `stateUpdateCb` is a callback function that receives the current state of the network. It is required for monitoring changes in the network status.
+- `netmapUpdateCb` is a callback function that receives updates about the network map. This callback is also necessary for receiving network mapping information.
 
 Example to prompt the user for manual login on a different tab:
 
@@ -66,23 +74,28 @@ Example to prompt the user for manual login on a different tab:
 ```
 
 ```js
-const loginElem = document.getElementById("loginLink");
-
 const cx = await CheerpX.Linux.create({
-	networkInterface: {
-		controlUrl: "https://my.url.com/",
-		loginUrlCb: function (url) {
-			loginElem.href = url;
-			loginElem.target = "_blank";
-			// continue with login
-		},
-	},
+    networkInterface: {
+        controlUrl: "https://my.url.com/",
+        loginUrlCb: function (url) {
+            loginElem.href = url;
+            loginElem.target = "_blank";
+            // continue with login
+        },
+        stateUpdateCb: (state) => {
+            console.log("Network state changed:", state);
+        },
+        netmapUpdateCb: (map) => {
+            console.log("Received network map:", map);
+        }
+    },
 });
 ```
 
 What is happening here?
 
 - `loginUrlCb` expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to log in to Tailscale via the UI.
+- `stateUpdateCb` and `netmapUpdateCb` are necessary for tracking network status and updates to network maps.
 
 ### Self-hosting Headscale
 
