@@ -23,6 +23,8 @@
 		"./components/LatestBlogPostPill.astro": "./components/LatestBlogPostPill.astro",
 		"./components/ShowcaseList.astro": "./components/ShowcaseList.astro",
 		"./components/Callout.astro": "./components/Callout.astro",
+		"./components/JNLPRunnerButton.astro": "./components/JNLPRunnerButton.astro",
+		"./components/AppletRunnerButton.astro": "./components/AppletRunnerButton.astro",
 		"./components/nav/global/GlobalNavbar.astro": "./components/nav/global/GlobalNavbar.astro"
 	},
 	"scripts": {},

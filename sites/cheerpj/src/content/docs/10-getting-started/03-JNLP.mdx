@@ -3,9 +3,20 @@ title: Run a JNLP
 description: Run a JWS/JNLP application in the browser
 ---
 
+import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButton.astro";
+
 This quickstart tutorial will take you step by step on how to run your JNLP app (also known as Java Web Start application) in the browser with CheerpJ.
 
-If you are interested in a ready-to-use tool for running Java Web Start applications, we recommend taking a look at our [CheerpJ JNLP Runner](/cheerpj-jnlp-runner) browser extension.
+<div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+	<div class="flex-grow text-left ">
+		<div class="-my-1 font-sans text-lg font-semibold">Not a Developer?</div>
+		<p class="-my-3 text-base text-gray-600 dark:text-gray-400">
+			Check out our browser extension for running Java Web Start applications
+			while you browse in modern browsers.
+		</p>
+	</div>
+	<JNLPRunnerButton />
+</div>
 
 You will need:
 
