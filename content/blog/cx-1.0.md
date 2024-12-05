@@ -1,5 +1,5 @@
 ---
-title: "CheerpX 1.0: high performance x86 virtualization in the browser via WebAssembly"
+title: "CheerpX 1.0: High performance x86 virtualization in the browser via WebAssembly"
 description: |
   CheerpX is a WebAssembly-based virtualization engine for x86 binaries. It is built on top of standard Web technologies, and runs fully in the browser, with no need for server side execution of any sort.
 
