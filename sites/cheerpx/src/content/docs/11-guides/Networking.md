@@ -44,16 +44,16 @@ Example for pre-authenticated users/devices:
 
 ```js
 const cx = await CheerpX.Linux.create({
-    networkInterface: {
-        authKey: "AuthKeyStringGoesHere",
-        controlUrl: "https://my.url.com/",
-        stateUpdateCb: (state) => {
-            console.log("Network state changed to:", state);
-        },
-        netmapUpdateCb: (map) => {
-            console.log("Network mapping updated:", map);
-        }
-    },
+	networkInterface: {
+		authKey: "AuthKeyStringGoesHere",
+		controlUrl: "https://my.url.com/",
+		stateUpdateCb: (state) => {
+			console.log("Network state changed to:", state);
+		},
+		netmapUpdateCb: (map) => {
+			console.log("Network mapping updated:", map);
+		},
+	},
 });
 ```
 
@@ -75,20 +75,20 @@ Example to prompt the user for manual login on a different tab:
 
 ```js
 const cx = await CheerpX.Linux.create({
-    networkInterface: {
-        controlUrl: "https://my.url.com/",
-        loginUrlCb: function (url) {
-            loginElem.href = url;
-            loginElem.target = "_blank";
-            // continue with login
-        },
-        stateUpdateCb: (state) => {
-            console.log("Network state changed:", state);
-        },
-        netmapUpdateCb: (map) => {
-            console.log("Received network map:", map);
-        }
-    },
+	networkInterface: {
+		controlUrl: "https://my.url.com/",
+		loginUrlCb: function (url) {
+			loginElem.href = url;
+			loginElem.target = "_blank";
+			// continue with login
+		},
+		stateUpdateCb: (state) => {
+			console.log("Network state changed:", state);
+		},
+		netmapUpdateCb: (map) => {
+			console.log("Received network map:", map);
+		},
+	},
 });
 ```
 
