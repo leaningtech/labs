@@ -22,10 +22,10 @@ To declare a native method in Java, use the `native` keyword in the method decla
 ```java title="Example.java"
 public class Example {
   public static void main(String[] args) {
-    alert("Hello, world!");
+    nativeAlert("Hello, world!");
   }
 
-  public static native void alert(String message);
+  public static native void nativeAlert(String message);
 }
 ```
 
@@ -35,7 +35,7 @@ The method is defined in the Java class but is not implemented in Java. Instead,
 
 To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, its object key is `Java_com_foo_Bar_baz`. The function takes:
 
-- A [`CJ3Library`] object `lib` as the first parameter (which provides access to other classes and methods within the library).
+- A [`CJ3Library`] object `lib` as the first parameter, which provides access to other classes and methods within the library. The `lib` parameter can be used to call back into the Java class that calls the native method.
 - `self` as the second parameter, the instance of the Java class calling the native method. This parameter can be omitted for static native methods.
 - The native method’s parameters as subsequent parameters.
 
@@ -50,6 +50,38 @@ async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1
 > [!info] Handling Static Native Methods
 > If the native method is static, the `self` parameter can be omitted.
 
+## Calling back into Java from JavaScript
+
+It is possible to call back into Java using the `lib` parameter received in the JavaScript implementation of the native Java method.
+
+Let’s take this simple Java class as an example:
+
+```java title="Example.java"
+public class Example {
+  public static native void nativeFunction();
+
+  public static void printJava() {
+    System.out.println("Hello from Java!");
+  }
+
+  public static void main(String[] args) {
+    nativeFunction();
+  }
+}
+```
+
+The `Example` class includes a `native` function that will be implemented in JavaScript, and a public print function that outputs `Hello from Java!`.
+In the JavaScript implementation of `nativeFunction`, we can use the `lib` parameter to call back into the `Example` Java class and invoke the `printJava()` function from JavaScript.
+
+```js
+async function Java_Example_nativeFunction(lib) {
+	const Example = await lib.Example;
+	await Example.printJava();
+}
+```
+
+This functionality is useful when you need to call back into the Java class in response to a native function call. If you need to call back into Java outside the context of a native function, you can use a long-running Java thread. You can learn more about how to achieve this in our [`Java and JavaScript Interoperability`] tutorial.
+
 ## Passing Native Functions to CheerpJ
 
 To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] function as a property of the [`natives`] option. You can pass:
@@ -59,7 +91,7 @@ To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] fu
 ```js
 await cheerpjInit({
 	natives: {
-		async Java_Example_alert(lib, str) {
+		async Java_Example_nativeAlert(lib, str) {
 			window.alert(str);
 		},
 	},
@@ -69,11 +101,11 @@ await cheerpjInit({
 2. **Or just the function name if it was defined earlier**:
 
 ```js
-async function Java_Example_alert(lib, str) {
+async function Java_Example_nativeAlert(lib, str) {
 	window.alert(str);
 }
 
-await cheerpjInit({ natives: { Java_Example_alert } });
+await cheerpjInit({ natives: { Java_Example_nativeAlert } });
 ```
 
 ## Converting Parameters and Return Values
@@ -89,22 +121,22 @@ Here’s a full example that demonstrates the native method setup in Java and it
 ```java title="Example.java"
 public class Example {
   public static void main(String[] args) {
-    alert("Hello, world!");
+    nativeAlert("Hello, world!");
   }
 
-  public static native void alert(String message);
+  public static native void nativeAlert(String message);
 }
 ```
 
 2. Implement the native method by creating an `async` function in JavaScript that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`.
 
 ```js title="index.html"
-async function Java_Example_alert(lib, str) {
+async function Java_Example_nativeAlert(lib, str) {
 	window.alert(str);
 }
 ```
 
-Here, we provide an implementation for the `alert` method in the `Example` class, by creating a function named `Java_Example_alert`. The function displays an alert dialog with the message using `window.alert`.
+Here, we provide an implementation for the `nativeAlert` method in the `Example` class, by creating a function named `Java_Example_nativeAlert`. The function displays an alert dialog with the message using `window.alert`.
 
 3. Initialize CheerpJ with the `natives` option and pass the native method implementation to [`cheerpjInit`]:
 
@@ -117,20 +149,21 @@ Here, we provide an implementation for the `alert` method in the `Example` class
 	</head>
 	<body>
 		<script>
-			async function Java_Example_alert(lib, str) {
+			async function Java_Example_nativeAlert(lib, str) {
 			  window.alert(str);
 			}
 
-			await cheerpjInit({ natives: { Java_Example_alert } });
+			await cheerpjInit({ natives: { Java_Example_nativeAlert } });
 			await cheerpjRunMain("Example", "/app/");
 		</script>
 	</body>
 </html>
 ```
 
-In this setup, [`cheerpjInit`] loads `Java_Example_alert` as the native method implementation. When `Example.alert` is called in Java, it triggers the JavaScript `Java_Example_alert` function, displaying an alert dialog with the message.
+In this setup, [`cheerpjInit`] loads `Java_Example_nativeAlert` as the native method implementation. When `Example.nativeAlert` is called in Java, it triggers the JavaScript `Java_Example_nativeAlert` function, displaying an alert dialog with the message.
 
 [`natives`]: /docs/reference/cheerpjInit#natives
 [`CJ3Library`]: /docs/reference/CJ3Library
 [`conversion rules`]: /docs/reference/CJ3Library#conversion-rules
 [`cheerpjInit`]: /docs/reference/cheerpjInit
+[`Java and JavaScript Interoperability`]: /docs/tutorials/interoperability-tutorial
