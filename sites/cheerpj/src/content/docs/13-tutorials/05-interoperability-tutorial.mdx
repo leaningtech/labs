@@ -9,6 +9,8 @@ With CheerpJ, a Java application can interact with JavaScript in a browser envir
 
 In this tutorial, we’ll teach you how to create a two-way communication channel between Java and JavaScript using CheerpJ. This setup will allow a Java class to access JavaScript functions and vice versa, enabling data exchange between the two environments.
 
+We will use a long-running Java thread to enable callbacks into our Java application at any time. It is also possible to call back into Java using native methods, which we explain further in our [`native methods guide`].
+
 ## Prerequisites
 
 - [Download the template project](/docs/cheerpj3/tutorials/CheerpJInteroperabilityTutorial.zip) and unzip it.
@@ -202,3 +204,4 @@ npx http-server -p 8080
 [`http-server`]: https://www.npmjs.com/package/http-server
 [`native`]: /docs/guides/implementing-native-methods
 [`native method`]: /docs/guides/implementing-native-methods
+[`native methods guide`]: /docs/guides/implementing-native-methods#calling-back-into-java-from-javascript
