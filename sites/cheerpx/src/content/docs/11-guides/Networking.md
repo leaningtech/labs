@@ -74,6 +74,8 @@ Example to prompt the user for manual login on a different tab:
 ```
 
 ```js
+const loginElem = document.getElementById("loginLink");
+
 const cx = await CheerpX.Linux.create({
 	networkInterface: {
 		controlUrl: "https://my.url.com/",
