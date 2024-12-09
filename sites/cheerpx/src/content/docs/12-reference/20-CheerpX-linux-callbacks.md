@@ -85,3 +85,30 @@ if (cx) {
 
 This example demonstrates how to register callbacks for CPU activity, disk activity, and disk latency. The CPU and disk activity callbacks log the current state (either "ready" or "busy") to the console, while the disk latency callback logs the latency of the last downloaded disk block.
 Additionally, the simulated events are generated for testing purposes, allowing you to see output for all three types of activity.
+
+### `processCreated` Event
+
+The `processCreated` event is triggered by the **CheerpX engine** whenever a native process is created. This includes actions such as running a command within the WebVM terminal. The event provides a mechanism to track the number of processes created during the session.
+
+**How it works**
+
+Here's how the `processCreated` event is utilized in the code:
+
+1. **Callback Registration:**
+
+During the initialization of the CheerpX environment, the event is registered with the callback `handleProcessCreated`.
+
+```js
+cx.registerCallback("processCreated", handleProcessCreated);
+```
+
+2. **Callback implementation**
+
+```js
+function handleProcessCreated() {
+	processCount++;
+	console.log(`Process count: ${processCount}`);
+}
+```
+
+The `handleProcessCreated` function will now increment the `processCount` variable each time it's called.
