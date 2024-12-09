@@ -7,6 +7,8 @@ description: Java Virtual Machine for modern web browsers
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro";
 import { DISCORD_URL } from "@/consts.ts";
+import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButton.astro";
+import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
 
 <div class="not-prose flex gap-2 mb-2">
 	<img
@@ -44,13 +46,17 @@ import { DISCORD_URL } from "@/consts.ts";
 <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
 ```
 
-<div class="text-stone-400">
-	Not a developer? Check out our [product website](https://cheerpj.com/) and our
-	ready-to-use [browser extension](/cheerpj-jnlp-runner) for running Java Web
-	Start applications.
-</div>
-
 <div class="mx-24">![](./explanation-diagram.png)</div>
+
+### **Not a developer?**
+
+Check out our browser extensions for running Java Applets and Web Start applications. Designed for individual users and organizations, they require no technical knowledge or setup.
+{/* Check out our browser extensions for **running Java Applets and Web Start applications directly in modern browsers**, without the need for a Java plugin or a Java installation. */}
+
+<div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+	<AppletRunnerButton />
+	<JNLPRunnerButton />
+</div>
 
 ## Features
 
