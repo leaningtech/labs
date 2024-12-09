@@ -106,10 +106,9 @@ cx.registerCallback("processCreated", handleProcessCreated);
 
 ```js
 function handleProcessCreated() {
-    processCount++;
-    console.log(`Process count: ${processCount}`);
+	processCount++;
+	console.log(`Process count: ${processCount}`);
 }
-
 ```
 
 The `handleProcessCreated` function will now increment the `processCount` variable each time it's called.
