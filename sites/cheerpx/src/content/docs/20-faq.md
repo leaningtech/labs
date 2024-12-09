@@ -77,8 +77,8 @@ For more information on how to setup a HTTP server, please see our [server setup
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
 [cross-origin isolated]: https://web.dev/articles/why-coop-coep
 
-## Do I need an Exit Node for WebVM networking?
+## When Do I Need an Exit Node for WebVM Networking?
 
-You do not need to create an exit node for WebVM. WebVM relies on tailscale to handle networking, allowing acces to your local or development machine as part of the Tailscale network.
+You do **not** need to create an exit node for WebVM if your goal is to access other devices within your Tailscale network, including other WebVM instances and your local development machine. Tailscale takes care of routing and connecting your WebVM to other devices on the Tailscale network seamlessly.
 
-For a detailed overview of WebVM networking and setup instructions, refer to our [Networking Guide](/docs/guides/Networking).
+For a detailed overview of WebVM networking and setup instructions, refer to our [Networking Guide](/docs/guides/Networking#setting-up-an-exit-node).
