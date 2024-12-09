@@ -9,11 +9,11 @@ The index.list file serves as a directory index for a WebDevice in CheerpX. It l
 
 ## Purpose of index.list
 
-The primary purpose of index.list is to:
+The primary purpose of index.list are:
 
-- Enable the use of functions like os.listdir() to list directory contents.
-- Provide seamless navigation of nested directories and files in the WebDevice.
-- Ensure that CheerpX can recognize and display file structures for applications running in the virtual Linux environment.
+- To enable the use of functions like os.listdir() to list directory contents.
+- To provide seamless navigation of nested directories and files in the WebDevice.
+- To ensure that CheerpX can recognize and display file structures for applications running in the virtual Linux environment.
 
 ## Structure of `index.list`
 
@@ -24,40 +24,34 @@ The `index.list` file contains a newline-separated list of all files and directo
 Assume the directory structure is as follows:
 
 ```bash
-/web/
-├── index.list
-├── main.py
-├── data.txt
-└── scripts/
+.
+├── cheerpXImage.ext2
+├── Dockerfile
+├── index.html
+├── index.list.py
+├── nginx.conf
+└── web_root
     ├── index.list
-    └── helper.py
+    ├── main.py
+    ├── script1.py
+    └── scripts
+        ├── index.list
+        └── script2.py
 ```
 
-**Content of** `/web/index.list`:
+**Content of** `/web_root/index.list`:
 
 ```
 main.py
-data.txt
+script1.py
 scripts
 ```
 
 **Content of** `/web/scripts/index.list`:
 
 ```
-helper.py
+script2.py
 ```
-
-## How `index.list` Works
-
-1. Root Directory (/web/):
-
-- The `index.list` in the root directory lists `main.py`, `data.txt`, and the `scripts` subdirectory.
-- This allows `os.listdir('/web')` to return the contents of the root directory.
-
-2. Subdirectory (`/web/scripts/`):
-
-- The `index.list` in the `scripts` directory lists `helper.py`.
-- This lets `os.listdir('/web/scripts')` return the contents of the `scripts` directory.
 
 ## How to Use index.list
 
@@ -65,25 +59,12 @@ helper.py
 
 To generate `index.list` files, use the `index.list.py` script that goes over the given directory structure and creates `index.list` files where needed.
 
-**index.list.py**
-
-```py
-import os
-
-def generate_index_list(root_dir):
-    for dirpath, dirnames, filenames in os.walk(root_dir):
-        index_path = os.path.join(dirpath, 'index.list')
-        with open(index_path, 'w') as index_file:
-            # Write sorted directory and file names to index.list
-            for name in sorted(dirnames + filenames):
-                index_file.write(name + '\n')
-    print(f'index.list files created under {root_dir}')
-
-# Usage
-generate_index_list('./web_root')
+```bash
+python3 index.list.py
 ```
 
-This script will walk through the `web_root` directory, create `index.list` files in each directory, and list the subdirectories and files within.
+> [!note] Note
+> You need to create the `web_root` directory to use this script effectively.
 
 2. Accessing Files in CheerpX
 
@@ -95,13 +76,14 @@ Once `index.list` files are created, you can access and interact with the files 
 import os
 
 # List contents of the root directory in WebDevice
-print(os.listdir('/web'))  # Output: ['main.py', 'data.txt', 'scripts']
+print(os.listdir('/web'))
+# Output: ['main.py', 'data.txt', 'scripts']
 
 ```
 
 3. Integrating with Your HTML
 
-The index.html file, when served by an NGINX server configured with nginx.conf, will allow users to interact with the Python REPL through a browser:
+The following index.html file, when served by an NGINX server configured with nginx.conf, will allow you to interact with the Python REPL through a browser:
 
 ```html
 <!doctype html>
@@ -145,3 +127,10 @@ The index.html file, when served by an NGINX server configured with nginx.conf, 
 	</body>
 </html>
 ```
+
+> [!note] Note
+> Make sure to create your custom disk image and start the NGINX server. For more information, refer to the guides on Custom disk images and Basic server setup.
+
+### Visual example:
+
+![](../../../assets/index_list_example.png)
