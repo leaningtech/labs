@@ -36,7 +36,7 @@ This mounts the specified local directory at `/web` in the CheerpX filesystem.
 
 To be able to list the files, CheerpX will look for a file called index.list in the directory and each of its subdirectories. The file should contain a newline separated list of all files and folders contained in the directory.
 
-For detailed information about the purpose and usage of index.list, refer to the [index.list](/docs/index_list) reference.
+For detailed information about the purpose and usage of index.list, refer to the [index.list](/docs/reference/index.list) reference.
 
 ### Accessing Files
 
