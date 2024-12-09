@@ -104,13 +104,12 @@ cx.registerCallback("processCreated", handleProcessCreated);
 
 2. **Callback implementation**
 
-The `handleProcessCreated` function increments a `processCount` variable and triggers a callback if one is set via the processCallback function.
-
 ```js
 function handleProcessCreated() {
-	processCount++;
-	if (processCallback) processCallback(processCount);
+    processCount++;
+    console.log(`Process count: ${processCount}`);
 }
+
 ```
 
-The purpose of the `processCreated` event is to maintain an up-to-date count of created processes. This information can be used to monitor system activity.
+The `handleProcessCreated` function will now increment the `processCount` variable each time it's called.
