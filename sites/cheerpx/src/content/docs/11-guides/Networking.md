@@ -39,9 +39,9 @@ An exit node is a device on the Tailscale network that routes internet traffic f
 
 ### When do you need an exit node?
 
-You only need an exit node if you want to:
+You need an exit node if you want to:
 
-- Access the internet and appear as if it's coming from a specific location.
+- Access the internet, which always requires an exit node in CX.
 - Enhance security by routing traffic through a trusted system.
 - Connect to services that restrict access based on a certain IP address or region.
 
@@ -60,24 +60,6 @@ sudo tailscale up --advertise-exit-node
 ```
 
 This makes the device available as an exit node for other Tailscale devices.
-
-2. Use the exit node
-
-To route traffic through the exit node, use the following command:
-
-```bash
-sudo tailscale set --exit-node=<exit-node-ip>
-```
-
-Replace `<exit-node-ip>` with the Tailscale IP address of your exit node.
-
-3. Stop using an exit Node (Optional)
-
-If you want to disconnect from the exit node and use a direct connection instead, run:
-
-```bash
-sudo tailscale up --exit-node=
-```
 
 For more details on configuring and using exit nodes, refer to Tailscale’s [Exit nodes](https://tailscale.com/kb/1103/exit-nodes) documentation.
 
