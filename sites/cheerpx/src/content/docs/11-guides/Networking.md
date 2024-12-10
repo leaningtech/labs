@@ -96,8 +96,8 @@ const cx = await CheerpX.Linux.create({
 
 What is happening here?
 
-- `loginUrlCb` expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to log in to Tailscale via the UI.
-- `stateUpdateCb` and `netmapUpdateCb` are necessary for tracking network status and updates to network maps.
+- [`loginUrlCb`](/docs/reference/CheerpX-Linux-create#loginurlcb) expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to log in to Tailscale via the UI.
+- [`stateUpdateCb`](/docs/reference/CheerpX-Linux-create#stateupdatecb) and [`netmapUpdateCb`](/docs/reference/CheerpX-Linux-create#netmapupdatecb) are necessary for tracking network status and updates to network maps.
 
 ### Self-hosting Headscale
 
