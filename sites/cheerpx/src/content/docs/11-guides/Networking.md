@@ -62,8 +62,8 @@ const cx = await CheerpX.Linux.create({
 
 What is happening here?
 
-- `controlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
-- `authKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+- [`controlUrl`](/docs/reference/CheerpX-Linux-create#controlurl) is a string URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
+- [`authKey`](/docs/reference/CheerpX-Linux-create#authkey) is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
 - [`stateUpdateCb`](/docs/reference/CheerpX-Linux-create#stateupdatecb) is a callback function that receives the current state of the network. It is required for monitoring changes in the network status.
 - [`netmapUpdateCb`](/docs/reference/CheerpX-Linux-create#netmapupdatecb) is a callback function that receives updates about the network map. This callback is also necessary for receiving network mapping information.
 

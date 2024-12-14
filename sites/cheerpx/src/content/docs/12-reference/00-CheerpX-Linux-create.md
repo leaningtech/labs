@@ -80,6 +80,59 @@ This option configures network settings, which allows CheerpX to communicate ove
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
+### `authKey`
+
+```ts
+authKey?: string;
+```
+
+The `authKey` is an optional string used for authentication. It is usually taken from the URL, allowing the CheerpX Linux environment to be set up automatically without the user needing to enter it manually.
+
+**Example of usage:**
+
+```js
+let authKey = undefined;
+if (browser) {
+	let params = new URLSearchParams("?" + window.location.hash.substr(1));
+	authKey = params.get("authKey") || undefined;
+}
+const networkInterface = { authKey };
+```
+
+**Explanation**
+
+1. The `authKey` is taken from the URL, allowing the application to automatically use the authentication key provided by the browser.
+
+2. The `authKey` is added to the `networkInterface` object, ensuring the application can access the authentication data whenever needed in the CheerpX environment.
+
+### `controlUrl`
+
+```ts
+controlUrl?: string;
+```
+
+The `controlUrl` is an optional string parameter representing a URL used to manage or monitor the connection. It is typically fetched from the URL parameters and can be utilized for dashboard or configuration purposes.
+
+**Example of usage:**
+
+```js
+let controlUrl = undefined;
+if (browser) {
+	let params = new URLSearchParams("?" + window.location.hash.substr(1));
+	controlUrl = params.get("controlUrl") || undefined;
+}
+const dashboardUrl = controlUrl
+	? null
+	: "https://login.tailscale.com/admin/machines";
+const networkInterface = { controlUrl };
+```
+
+**Explanation**
+
+1. The `controlUrl` is taken from the URL and added to the `networkInterface` object, making it easy to connect to the appropriate control dashboard.
+
+2. If `controlUrl` isn’t provided, the app automatically uses a default URL (`dashboardUrl`) for monitoring or setup.
+
 ### `loginUrlCb`
 
 ```ts
