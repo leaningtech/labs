@@ -81,3 +81,49 @@ Remove temporary directories:
 ```bash
 rm -rf cheerpXFS
 ```
+
+## Edit `/etc/subgid` (Debian PID 65534)
+
+The `/etc/subgid` file defines which ranges of subordinate group IDs are allocated to specific user accounts for managing user namespaces in containers. For PID 65534 (commonly associated with the "nobody" user), you might need to edit this file to avoid conflicts or customize ranges for container compatibility.
+
+### 1. Open `/etc/subgid` for editing
+
+```bash
+sudo nano /etc/subgid
+```
+
+### 2. Locate the entry for PID 65534
+
+You will see lines in the format of:
+
+```
+<username>:<start_id>:<count>
+```
+
+- `<username>` is the name of the user,
+- `<start_id>` is the starting ID of the range of subgroups assigned to the user,
+- `<count>` is how many consecutive subgroup IDs the user is assigned.
+
+For user with PID 65534 (typically the nobody user), the entry would look something like:
+
+```
+nobody:100000:65536
+```
+
+### 3. Modify the file
+
+If you need to change the subgid range for the user associated with PID 65534, modify the start_id and/or count as needed.
+
+For example, if you want to assign a new range starting at 200000 with a count of 65536, you would change it to:
+
+```
+nobody:200000:65536
+```
+
+### 4. Save and apply changes
+
+Save the file and ensure changes are recognized by restarting your container service:
+
+```bash
+sudo systemctl restart podman
+```
