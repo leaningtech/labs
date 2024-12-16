@@ -1,6 +1,9 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BlogPostCard from "./BlogPostCard.astro";
+import { productFromUrl } from "../lib/products";
+
+
 
 interface Props {
 	// Only show posts if they have at least one of these tags
@@ -11,6 +14,8 @@ interface Props {
 }
 
 const { tags, exclude } = Astro.props;
+const product = productFromUrl(Astro.url);
+
 
 function sortCalc(post: CollectionEntry<"blog">): number {
 	let relevancy =
@@ -25,7 +30,7 @@ function sortCalc(post: CollectionEntry<"blog">): number {
 
 const posts = (
 	await getCollection("blog", (post) => {
-		if (post.data.draft || exclude?.includes(post.id)) {
+		if (post.data.draft || exclude?.includes(post.id) || !post.data?.tags?.includes(product.name)) {
 			return false;
 		}
 		return true;
