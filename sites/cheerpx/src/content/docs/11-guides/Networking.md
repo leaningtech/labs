@@ -33,17 +33,16 @@ Networking with WebVM always happens via Tailscale. To give access to your local
 
 For a more detailed explanation of why Tailscale was chosen and how it works with WebVM, you can read our [blog post on WebVM networking via Tailscale](https://labs.leaningtech.com/blog/webvm-virtual-machine-with-networking-via-tailscale).
 
-## Setting up an exit node
+## Exit node
 
-An exit node is a device on the Tailscale network that routes internet traffic from other Tailscale devices through its connection, making it appear as if the traffic originates from the exit node's location. This can be useful for security purposes or to access content that is restricted to certain regions.
+An exit node is a device on the Tailscale network that allows other Tailscale devices to access the internet by routing their traffic through its connection. This makes it possible for traffic to reach the internet.
 
 ### When do you need an exit node?
 
 You need an exit node if you want to:
 
-- Access the internet, which always requires an exit node in CX.
-- Enhance security by routing traffic through a trusted system.
-- Connect to services that restrict access based on a certain IP address or region.
+- `Access the internet` from devices connected to your Tailscale network.
+- `Route traffic through a trusted device` to improve privacy or security.
 
 If your use case only involves internal access within the Tailscale network (for example, WebVM-to-WebVM communication or connecting to local network services), you do **not** need to set up an exit node.
 

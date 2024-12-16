@@ -79,7 +79,7 @@ For more information on how to setup a HTTP server, please see our [server setup
 
 ## When do I need an exit node for WebVM networking?
 
-You **do** need to create an exit node if you want your WebVM to access the public internet. An exit node routes traffic from your WebVM to the internet, making it possible to connect to online services. This is particularly important in scenarios where WebVM needs to interact with resources outside your Tailscale network or when you need the traffic to come from a specific location.
+You **do** need to create an exit node if you want your WebVM to access the public internet. An exit node routes traffic from your WebVM to the internet, making it possible to connect to online services. This is particularly important in scenarios where WebVM needs to interact with resources outside your Tailscale network.
 
 You do **not** need to create an exit node for WebVM if your goal is to access other devices within your Tailscale network, including other WebVM instances and your local development machine. Tailscale takes care of routing and connecting your WebVM to other devices on the Tailscale network seamlessly.
 
