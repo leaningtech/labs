@@ -82,48 +82,44 @@ Remove temporary directories:
 rm -rf cheerpXFS
 ```
 
-## Edit `/etc/subgid` (Debian PID 65534)
+## Edit `/etc/subgid` (for the host user)
 
-The `/etc/subgid` file defines which ranges of subordinate group IDs are allocated to specific user accounts for managing user namespaces in containers. For PID 65534 (commonly associated with the "nobody" user), you might need to edit this file to avoid conflicts or customize ranges for container compatibility.
+The `/etc/subgid` file defines which ranges of subordinate group IDs are allocated to specific user accounts on the host for managing user namespaces in containers. This file needs to be configured for the host user running container commands to ensure proper namespace mapping and avoid conflicts.
 
-### 1. Open `/etc/subgid` for editing
+### 1. Identify your host user
+
+Run the following command to determine the host user running container commands:
+
+```bash
+whoami
+```
+
+### 2. Check `/etc/subgid` for your user
+
+Open `/etc/subgid` and look for an entry matching your user:
 
 ```bash
 sudo nano /etc/subgid
 ```
 
-### 2. Locate the entry for PID 65534
-
-You will see lines in the format of:
+The file should contain lines in the format:
 
 ```
 <username>:<start_id>:<count>
 ```
 
-- `<username>` is the name of the user,
-- `<start_id>` is the starting ID of the range of subgroups assigned to the user,
-- `<count>` is how many consecutive subgroup IDs the user is assigned.
-
-For user with PID 65534 (typically the nobody user), the entry would look something like:
+For example, for the user `johndoe`:
 
 ```
-nobody:100000:65536
+johndoe:100000:65536
 ```
 
 ### 3. Modify the file
 
-If you need to change the subgid range for the user associated with PID 65534, modify the start_id and/or count as needed.
-
-For example, if you want to assign a new range starting at 200000 with a count of 65536, you would change it to:
+If you need to change the `subgid` range for the host user, modify the `start_id` and/or `count` as needed. For example, if you want to assign a new range starting at 200000 with a count of 65536, you would change it to:
 
 ```
-nobody:200000:65536
+johndoe:200000:65536
 ```
 
-### 4. Save and apply changes
-
-Save the file and ensure changes are recognized by restarting your container service:
-
-```bash
-sudo systemctl restart podman
-```
+For more information about `subgid`, refer to the [subgid documententation](https://man7.org/linux/man-pages/man5/subgid.5.html).
