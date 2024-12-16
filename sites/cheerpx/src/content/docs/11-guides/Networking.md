@@ -62,10 +62,10 @@ const cx = await CheerpX.Linux.create({
 
 What is happening here?
 
-- [`controlUrl`](/docs/reference/CheerpX-Linux-create#controlurl) is a string URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
-- [`authKey`](/docs/reference/CheerpX-Linux-create#authkey) is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
-- [`stateUpdateCb`](/docs/reference/CheerpX-Linux-create#stateupdatecb) is a callback function that receives the current state of the network. It is required for monitoring changes in the network status.
-- [`netmapUpdateCb`](/docs/reference/CheerpX-Linux-create#netmapupdatecb) is a callback function that receives updates about the network map. This callback is also necessary for receiving network mapping information.
+- [controlUrl] is the URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
+- [authKey] is a string containing an authentication key used to register new users or devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+- [stateUpdateCb] is a callback function that receives the current state of the network, and is required for monitoring any changes in the network status.
+- [netmapUpdateCb] is a callback function that receives updates regarding the network map, and is necessary for obtaining network mapping information.
 
 Example to prompt the user for manual login on a different tab:
 
@@ -96,9 +96,15 @@ const cx = await CheerpX.Linux.create({
 
 What is happening here?
 
-- [`loginUrlCb`](/docs/reference/CheerpX-Linux-create#loginurlcb) expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to log in to Tailscale via the UI.
-- [`stateUpdateCb`](/docs/reference/CheerpX-Linux-create#stateupdatecb) and [`netmapUpdateCb`](/docs/reference/CheerpX-Linux-create#netmapupdatecb) are necessary for tracking network status and updates to network maps.
+- [loginUrlCb] expects the base URL of a control server that will continue and finish the login process. This callback is executed when prompting the user to log in interactively with Tailscale.
+- [stateUpdateCb] and [netmapUpdateCb] are necessary for tracking network status and updates to network maps.
 
 ### Self-hosting Headscale
 
 Headscale is an open-source and self-hosted implementation of the Tailscale control server. The upstream version of Headscale does not yet properly support the WebSocket transport. For the time being, please use [our fork](https://github.com/leaningtech/headscale).
+
+[controlUrl]: /docs/reference/CheerpX-Linux-create#controlurl
+[authKey]: /docs/reference/CheerpX-Linux-create#authkey
+[stateUpdateCb]: /docs/reference/CheerpX-Linux-create#stateupdatecb
+[netmapUpdateCb]: /docs/reference/CheerpX-Linux-create#netmapupdatecb
+[loginUrlCb]: /docs/reference/CheerpX-Linux-create#loginurlcb
