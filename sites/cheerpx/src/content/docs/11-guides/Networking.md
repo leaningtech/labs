@@ -39,10 +39,7 @@ An exit node is a device on the Tailscale network that allows other Tailscale de
 
 ### When do you need an exit node?
 
-You need an exit node if you want to:
-
-- `Access the internet` from devices connected to your Tailscale network.
-- `Route traffic through a trusted device` to improve privacy or security.
+You need an exit node if you want to access the internet from devices connected to your Tailscale network.
 
 If your use case only involves internal access within the Tailscale network (for example, WebVM-to-WebVM communication or connecting to local network services), you do **not** need to set up an exit node.
 
