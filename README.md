@@ -30,7 +30,7 @@ pnpm install
 
 ## Run a site
 
-The sites under this repository must be run individually. Pick a site you want to run, for example [Cheerp.io](Cheerp.io):
+The sites under this repository must be run individually. Pick a site you want to run, for example [Cheerp.io](https://cheerp.io/):
 
 ```shell
 cd /sites/cheerp
