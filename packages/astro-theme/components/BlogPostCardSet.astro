@@ -15,6 +15,7 @@ interface Props {
 
 const { tags, exclude } = Astro.props;
 const product = productFromUrl(Astro.url);
+const productName = typeof product === "undefined"? "Labs": product.name;
 
 
 function sortCalc(post: CollectionEntry<"blog">): number {
@@ -30,10 +31,13 @@ function sortCalc(post: CollectionEntry<"blog">): number {
 
 const posts = (
 	await getCollection("blog", (post) => {
-		if (post.data.draft || exclude?.includes(post.id) || !post.data?.tags?.includes(product.name)) {
+		if (post.data.draft || exclude?.includes(post.id) || !(post.data?.tags?.includes(productName) || productName === "Labs")) {
 			return false;
+			
+		} else {
+			return true;
 		}
-		return true;
+		
 	})
 )
 	.sort((a, b) => sortCalc(b) - sortCalc(a))

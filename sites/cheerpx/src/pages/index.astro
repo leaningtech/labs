@@ -214,20 +214,23 @@ import BlogPostCardSet from "@leaningtech/astro-theme/components/BlogPostCardSet
 			</div>
 		</div>
 	</section>
-	<section class="w-full max-w-screen-2xl mx-auto px-6 py-10">
-		<div class="mb-8">
-			<p class="text-lg text-stone-400">CheerpX blog</p>
-			<h2 class="text-4xl font-bold text-white">Latest news</h2>
+	<section class="bg-black py-16">
+		<div class="px-4 sm:p-8 md:px-16 lg:px-32 xl:px-56 2xl:px-60">
+			<div class="mb-8">
+				<p class="text-lg text-stone-400">CheerpX blog</p>
+				<h2 class="text-4xl font-bold text-white">Latest news</h2>
+			</div>
+			<BlogPostCardSet/>
+			<div class="mt-8">
+				<LinkButton
+					type="secondary-cheerpx"
+					href="/blog"
+					label="View all blog posts"
+					iconRight="mi:arrow-right"
+				/>
+			</div>
 		</div>
-		<BlogPostCardSet tags = "CheerpX"/>
-		<div class="mt-8">
-			<LinkButton
-				type="cheerpx-secondary"
-				href="/blog"
-				label="View all blog posts"
-				iconRight="mi:arrow-right"
-			/>
-		</div>
+		
 	</section>
 	<section
 		class="bg-gradient-to-b from-black to-[#00254d] pb-48 text-center pb-28 md:px-8 md:pt-16 lg:px-32 pt-12 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-60 2xl:pt-60"
