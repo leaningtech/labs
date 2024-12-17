@@ -62,10 +62,10 @@ const cx = await CheerpX.Linux.create({
 
 What is happening here?
 
-- [controlUrl] is the URL of the Tailscale control plane which verifies the user's identity. You only need to pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
-- [authKey] is a string containing an authentication key used to register new users or devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
-- [stateUpdateCb] is a callback function that receives the current state of the network, and is required for monitoring any changes in the network status.
-- [netmapUpdateCb] is a callback function that receives updates regarding the network map, and is necessary for obtaining network mapping information.
+- [authKey]: A string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
+- [controlUrl]: The Tailscale control plane URL for identity verification. This is only needed if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
+- [stateUpdateCb]: A required callback function that monitors and reports changes in network status.
+- [netmapUpdateCb]: A callback function that provides updates on the network map, enabling access to network mapping information.
 
 Example to prompt the user for manual login on a different tab:
 
