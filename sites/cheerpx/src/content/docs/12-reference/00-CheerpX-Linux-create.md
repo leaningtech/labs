@@ -115,7 +115,7 @@ const cx = await CheerpX.Linux.create({
 ```
 Here, the `controlUrl` is used to point the CheerpX instance to a custom self-hosted server.
 
-<!-- ### `loginUrlCb`
+### `loginUrlCb`
 
 ```ts
 loginUrlCb?: (url: string) => void;
@@ -129,7 +129,7 @@ The `loginUrlCb` is a callback function designed to handle login URLs during the
 
 ```
 
-**Explanation** -->
+**Explanation**
 
 ### StateUpdateCb
 
