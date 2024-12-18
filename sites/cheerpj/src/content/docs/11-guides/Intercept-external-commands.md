@@ -40,7 +40,7 @@ public class Example
 }
 ```
 
-In this example, the Java program uses `Runtime.getRuntime().exec(command)` to open a URL in the default web browser on a Linux system. The command `xdg-open` is typically used to launch a URL in the browser.On Windows, a similar behavior is achieved with the command `cmd /c start`.
+In this example, the Java program uses `Runtime.getRuntime().exec(command)` to open a URL in the default web browser on a Linux system. The command `xdg-open` is typically used to launch a URL in the browser. On Windows, a similar behavior is achieved with the command `cmd /c start`.
 
 We can now implement the same behavior in JavaScript, here’s how:
 
@@ -57,7 +57,7 @@ function execCb(cmdPath, argsArray) {
 
 In this JavaScript function, we check if the incoming command is `xdg-open`. If it matches, we use `window.open()` to open a new browser tab with the specified URL.
 
-We can now pass this function to `cheerpjInit` using the [`execCallback`] option. This ensures that the function is invoked whenever an external command is executed in Java.
+We can now pass this function to [`cheerpjInit`] using the [`execCallback`] option. This ensures that the function is invoked whenever an external command is executed in Java.
 
 ```ts title="index.html"
 function execCb(cmdPath, argsArray) {

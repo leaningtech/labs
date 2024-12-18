@@ -26,7 +26,8 @@ async function cheerpjInit(options?: {
 	tailscaleLoginUrlCb?: (url: string) => void;
 	tailscaleIpCb?: (ip: string) => void;
 	licenseKey?: string;
-	execCallback?: function(cmdPath, argsArray) {};
+	execCallback?: (cmdPath: string, argsArray: string[]) => void;
+	enableDebug?: boolean;
 }): Promise<void>;
 ```
 
@@ -377,7 +378,7 @@ cheerpjInit({ licenseKey: "YourLicenseKey" });
 ### `execCallback`
 
 ```ts
-execCallback?: function(cmdPath, argsArray) {};
+execCallback?: (cmdPath: string, argsArray: string [])  => void;
 ```
 
 > [!note] Important
@@ -401,6 +402,25 @@ cheerpjInit({
 ```
 
 Learn more about the `execCallback` option in our [intercept external commands guide](/docs/guides/Intercept-external-commands).
+
+### `enableDebug`
+
+```ts
+enableDebug?: boolean;
+```
+
+> [!note] Important
+> The `enableDebug` option is supported in CheerpJ 3.1 and later versions.
+
+This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ.
+
+Example of usage:
+
+```js
+cheerpjInit({ enableDebug: true });
+```
+
+Learn more about how to debug CheerpJ in our [Debugging CheerpJ guide](/docs/guides/cheerpj-debug).
 
 [cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
