@@ -28,7 +28,7 @@ Yes, `WebDevice` can handle third-party origins as paths, but it's important to 
 
 CheerpX's architecture and use case differ significantly from v86, which affects how it handles disk access and networking:
 
-### Disk Access
+### Disk access
 
 CheerpX is designed to support large scale applications and complete Operating Systems, to achieve those objectives it needs to handle large disk images (up to 2GB at the time). This means we cannot simply download the entire disk image before starting execution, as v86 might do for its smaller images. Instead, CheerpX uses a chunk-based, on-demand downloading system.
 
@@ -57,21 +57,29 @@ By adding these headers to your server configuration you will enable cross-origi
 
 For more information on server configurations, please see our [server setup guide].
 
-## Why Can't I Use the `file://` Protocol?
+## Why can't I use the `file://` protocol?
 
 CheerpX requires certain browser capabilities that are not available when accessing files directly using the `file://` protocol. Here’s an explanation of the issue and the recommended solution.
 
-### Security Restrictions and Cross-Origin Headers
+### Security restrictions and Cross-Origin Headers
 
 Modern browsers enforce strict security policies to protect users from potentially harmful actions. Accessing files through the `file://` protocol poses a security risk, as it may allow untrusted HTML files to interact with local resources and cause data breaches.
 
 Additionally, [SharedArrayBuffer] requires cross-origin isolation to function properly, which cannot be established when serving files with the `file://` protocol. This protocol does not support setting the required HTTP headers: `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy`.
 
-### Recommended Solution: Local Web Server Requirement
+### Recommended solution: local web server requirement
 
 To properly utilize CheerpX, you must run a local web server. This allows you to access your HTML files with a URL that starts with `http://` or `https://`, for example `http://localhost:8080/`. Using a web server ensures that all necessary HTTP headers for cross-origin isolation can be correctly applied.
 
 For more information on how to setup a HTTP server, please see our [server setup guide].
+
+## When do I need an exit node for WebVM networking?
+
+You **do** need to create an exit node if you want your WebVM to access the public internet. An exit node routes traffic from your WebVM to the internet, making it possible to connect to online services. This is particularly important in scenarios where WebVM needs to interact with resources outside your Tailscale network.
+
+You do **not** need to create an exit node for WebVM if your goal is to access other devices within your Tailscale network, including other WebVM instances and your local development machine. Tailscale takes care of routing and connecting your WebVM to other devices on the Tailscale network seamlessly.
+
+For detailed instructions on WebVM networking and setting up an exit node, check out our [Networking Guide](/docs/guides/Networking#exit-node).
 
 [server setup guide]: /docs/guides/nginx
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer
