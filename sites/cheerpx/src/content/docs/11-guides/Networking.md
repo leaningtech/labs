@@ -45,9 +45,11 @@ If your use case only involves internal access within the Tailscale network (for
 
 ### How to set up an exit node
 
-Tailscale can be downloaded, installed, and updated in different ways depending on your system. For detailed instructions, refer to the [install Tailscale](https://tailscale.com/kb/1347/installation) guide and choose the appropriate method for your system.
+1. **Install Tailscale**
 
-1. Advertise a device as an exit node
+First, download and install Tailscale on the device you want to use as the exit node. For detailed instructions, refer to the [install Tailscale](https://tailscale.com/kb/1347/installation) guide and choose the appropriate method for your system.
+
+2. **Enable the exit node**
 
 On the device you want to use as the exit node, run:
 
@@ -55,9 +57,9 @@ On the device you want to use as the exit node, run:
 sudo tailscale up --advertise-exit-node
 ```
 
-This makes the device available as an exit node for other Tailscale devices.
+This command advertises the device as an exit node, making it available for other Tailscale devices to use.
 
-For more details on configuring and using exit nodes, refer to Tailscale’s [Exit nodes](https://tailscale.com/kb/1103/exit-nodes) documentation.
+For more details on configuring and using exit nodes, refer to Tailscale’s [exit nodes](https://tailscale.com/kb/1103/exit-nodes) documentation.
 
 ## Client applications with existing backends
 
