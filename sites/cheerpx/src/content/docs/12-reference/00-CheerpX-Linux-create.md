@@ -86,13 +86,16 @@ authKey?: string;
 
 The `authKey` is an optional string used for authentication and should be passed directly in the `create` call.
 
-**Example of usage:**
+**Example:**
 
 ```js
-
+const cx = await CheerpX.Linux.create({
+  mounts: mountPoints,
+  networkInterface: { authKey: "YOUR KEY" },
+});
 ```
 
-**Explanation**
+In this example, the `authKey` is included in the `networkInterface` object to enable authentication for the CheerpX instance.
 
 ### `controlUrl`
 
@@ -102,15 +105,17 @@ controlUrl?: string;
 
 The `controlUrl` is an optional string used to specify the URL of a self-hosted server.
 
-**Example of usage:**
+**Example**
 
 ```js
-
+const cx = await CheerpX.Linux.create({
+  mounts: mountPoints,
+  networkInterface: { controlUrl: "YOUR URL" },
+});
 ```
+Here, the `controlUrl` is used to point the CheerpX instance to a custom self-hosted server.
 
-**Explanation**
-
-### `loginUrlCb`
+<!-- ### `loginUrlCb`
 
 ```ts
 loginUrlCb?: (url: string) => void;
@@ -118,13 +123,13 @@ loginUrlCb?: (url: string) => void;
 
 The `loginUrlCb` is a callback function designed to handle login URLs during the authentication process. It plays a critical role in the connection flow by setting the application's state to indicate readiness for login and resolving the URL required for the login process.
 
-**Example of usage:**
+**Example**
 
 ```js
 
 ```
 
-**Explanation**
+**Explanation** -->
 
 ### StateUpdateCb
 
@@ -132,15 +137,24 @@ The `loginUrlCb` is a callback function designed to handle login URLs during the
 stateUpdateCb?: (state: number) => void;
 ```
 
-This callback function is invoked whenever the connection state changes, enabling you to react dynamically to transitions such as connecting, disconnecting, or successfully establishing a connection. The `state` parameter is an integer representing the current state.
+The `stateUpdateCb` is a callback that runs when the connection state changes. The `state` parameter represents the connection status.
 
-**Example of usage:**
+**Example**
 
 ```js
+const cx = await CheerpX.Linux.create({
+  mounts: mountPoints,
+  networkInterface: { stateUpdateCb },
+});
 
+function stateUpdateCb(state) {
+  if (state === 6) {
+    console.log("Connected");
+  }
+}
 ```
 
-**Explanation**
+This example checks if the state indicates a "connected" status (state = 6) and logs "Connected" when the connection is established.
 
 ### NetmapUpdateCb
 
@@ -148,14 +162,22 @@ This callback function is invoked whenever the connection state changes, enablin
 netmapUpdateCb?: (map: any) => void;
 ```
 
-This callback is triggered whenever the network map is updated. The `map` parameter contains the full network configuration, including information about the current IP address and peers.
+The `netmapUpdateCb` is a callback triggered whenever the network configuration updates. It gives you information about the current IP.
 
-**Example of usage:**
+**Example**
 
 ```ts
+const cx = await CheerpX.Linux.create({
+  mounts: mountPoints,
+  networkInterface: { netmapUpdateCb },
+});
 
+function netmapUpdateCb(map) {
+  const currentIp = map.self.addresses[0];
+  console.log(`Current IP: ${currentIp}`);
+}
 ```
 
-**Explanation**
+In this example, the `netmapUpdateCb` logs the current IP address whenever the network configuration changes.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
