@@ -86,12 +86,12 @@ authKey?: string;
 
 The `authKey` is an optional string used for authentication and should be passed directly in the `create` call.
 
-**Example:**
+Example:
 
 ```js
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints,
-  networkInterface: { authKey: "YOUR KEY" },
+	mounts: mountPoints,
+	networkInterface: { authKey: "YOUR KEY" },
 });
 ```
 
@@ -105,14 +105,15 @@ controlUrl?: string;
 
 The `controlUrl` is an optional string used to specify the URL of a self-hosted server.
 
-**Example**
+Example:
 
 ```js
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints,
-  networkInterface: { controlUrl: "YOUR URL" },
+	mounts: mountPoints,
+	networkInterface: { controlUrl: "YOUR URL" },
 });
 ```
+
 Here, the `controlUrl` is used to point the CheerpX instance to a custom self-hosted server.
 
 ### `loginUrlCb`
@@ -121,17 +122,26 @@ Here, the `controlUrl` is used to point the CheerpX instance to a custom self-ho
 loginUrlCb?: (url: string) => void;
 ```
 
-The `loginUrlCb` is a callback function designed to handle login URLs during the authentication process. It plays a critical role in the connection flow by setting the application's state to indicate readiness for login and resolving the URL required for the login process.
+The `loginUrlCb` is a callback function that handles login URLs during the authentication process. It provides the URL needed to continue the login process, such as authenticating with Tailscale.
 
-**Example**
+Example:
 
 ```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { loginUrlCb },
+});
 
+function loginUrlCb(url) {
+	console.log("Login URL is ready:", url);
+	// Open the login URL in a new tab or window
+	window.open(url, "_blank");
+}
 ```
 
-**Explanation**
+The `loginUrlCb` provides the user with a login URL for authentication. It logs the URL and opens it in a new tab or window. You can also adapt it to display the URL within your app or handle it differently as needed.
 
-### StateUpdateCb
+### stateUpdateCb
 
 ```ts
 stateUpdateCb?: (state: number) => void;
@@ -139,45 +149,45 @@ stateUpdateCb?: (state: number) => void;
 
 The `stateUpdateCb` is a callback that runs when the connection state changes. The `state` parameter represents the connection status.
 
-**Example**
+Example:
 
 ```js
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints,
-  networkInterface: { stateUpdateCb },
+	mounts: mountPoints,
+	networkInterface: { stateUpdateCb },
 });
 
 function stateUpdateCb(state) {
-  if (state === 6) {
-    console.log("Connected");
-  }
+	if (state === 6) {
+		console.log("Connected");
+	}
 }
 ```
 
-This example checks if the state indicates a "connected" status (state = 6) and logs "Connected" when the connection is established.
+This example checks if the `state` indicates a "connected" status (`state = 6`) and logs "Connected" when the connection is established.
 
-### NetmapUpdateCb
+### netmapUpdateCb
 
 ```ts
 netmapUpdateCb?: (map: any) => void;
 ```
 
-The `netmapUpdateCb` is a callback triggered whenever the network configuration updates. It gives you information about the current IP.
+The `netmapUpdateCb` is a callback triggered whenever the network configuration updates. It provides details about the current network configuration.
 
-**Example**
+Example:
 
 ```ts
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints,
-  networkInterface: { netmapUpdateCb },
+	mounts: mountPoints,
+	networkInterface: { netmapUpdateCb },
 });
 
 function netmapUpdateCb(map) {
-  const currentIp = map.self.addresses[0];
-  console.log(`Current IP: ${currentIp}`);
+	const currentIp = map.self.addresses[0];
+	console.log(`Current IP: ${currentIp}`);
 }
 ```
 
-In this example, the `netmapUpdateCb` logs the current IP address whenever the network configuration changes.
+In this example, the `netmapUpdateCb` logs the current IP address (`map.self.addresses[0]`) whenever the network configuration changes.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
