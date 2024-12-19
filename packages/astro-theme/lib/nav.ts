@@ -235,7 +235,8 @@ export function idToTitle(id: string): string {
 
 	// Strip extension
 	const dotIndex = filename.lastIndexOf(".");
-	if (dotIndex !== -1) {
+	const supportedExt = [".md", ".mdx"]; //to include dir names with dots
+	if (dotIndex !== -1 && supportedExt.includes(filename.slice(dotIndex, -1))) {
 		filename = filename.slice(0, dotIndex);
 	}
 
