@@ -84,7 +84,7 @@ This option configures network settings, which allows CheerpX to communicate ove
 authKey?: string;
 ```
 
-The `authKey` is an optional string used for authentication and should be passed directly in the `create` call.
+The `authKey` is a string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
 
 Example:
 
@@ -103,7 +103,7 @@ In this example, the `authKey` is included in the `networkInterface` object to e
 controlUrl?: string;
 ```
 
-The `controlUrl` is an optional string used to specify the URL of a self-hosted server.
+The `controlUrl` is an optional string used to specify the URL of a [self-hosted Headscale server](/docs/guides/Networking#self-hosting-headscale).
 
 Example:
 
@@ -122,7 +122,7 @@ Here, the `controlUrl` is used to point the CheerpX instance to a custom self-ho
 loginUrlCb?: (url: string) => void;
 ```
 
-The `loginUrlCb` is a callback function that handles login URLs during the authentication process. It provides the URL needed to continue the login process, such as authenticating with Tailscale.
+The `loginUrlCb` is a callback function that handles login URLs during the authentication process. It receives the URL that should be visited to continue the login process. This is necessary when authenticating with Tailscale.
 
 Example:
 

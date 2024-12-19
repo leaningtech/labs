@@ -65,7 +65,7 @@ What is happening here?
 - [authKey]: A string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
 - [controlUrl]: The Tailscale control plane URL for identity verification. This is only needed if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
 - [stateUpdateCb]: A required callback function that monitors and reports changes in network status.
-- [netmapUpdateCb]: A callback function that provides updates on the network map, enabling access to network mapping information.
+- [netmapUpdateCb]: A required callback function that provides updates on the network map, enabling access to the list of devices for the network.
 
 Example to prompt the user for manual login on a different tab:
 
