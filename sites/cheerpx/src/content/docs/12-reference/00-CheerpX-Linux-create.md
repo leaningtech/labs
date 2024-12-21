@@ -95,8 +95,6 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-In this example, the `authKey` is included in the `networkInterface` object to enable authentication for the CheerpX instance.
-
 ### `controlUrl`
 
 ```ts
@@ -113,8 +111,6 @@ const cx = await CheerpX.Linux.create({
 	networkInterface: { controlUrl: "YOUR URL" },
 });
 ```
-
-Here, the `controlUrl` is used to point the CheerpX instance to a custom self-hosted server.
 
 ### `loginUrlCb`
 
@@ -139,8 +135,6 @@ function loginUrlCb(url) {
 }
 ```
 
-The `loginUrlCb` provides the user with a login URL for authentication. It logs the URL and opens it in a new tab or window. You can also adapt it to display the URL within your app or handle it differently as needed.
-
 ### stateUpdateCb
 
 ```ts
@@ -164,15 +158,13 @@ function stateUpdateCb(state) {
 }
 ```
 
-This example checks if the `state` indicates a "connected" status (`state = 6`) and logs "Connected" when the connection is established.
-
 ### netmapUpdateCb
 
 ```ts
 netmapUpdateCb?: (map: any) => void;
 ```
 
-The `netmapUpdateCb` is a callback triggered whenever the network configuration updates. It provides details about the current network configuration.
+The `netmapUpdateCb` is a callback that runs whenever the network configuration updates. It provides details about the current network configuration.
 
 Example:
 
@@ -187,7 +179,5 @@ function netmapUpdateCb(map) {
 	console.log(`Current IP: ${currentIp}`);
 }
 ```
-
-In this example, the `netmapUpdateCb` logs the current IP address (`map.self.addresses[0]`) whenever the network configuration changes.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
