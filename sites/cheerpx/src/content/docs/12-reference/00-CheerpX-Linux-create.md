@@ -78,4 +78,106 @@ networkInterface?: NetworkInterface;
 
 This option configures network settings, which allows CheerpX to communicate over networks. For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
 
+### `authKey`
+
+```ts
+authKey?: string;
+```
+
+The `authKey` is a string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { authKey: "YOUR KEY" },
+});
+```
+
+### `controlUrl`
+
+```ts
+controlUrl?: string;
+```
+
+The `controlUrl` is an optional string used to specify the URL of a [self-hosted Headscale server](/docs/guides/Networking#self-hosting-headscale).
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { controlUrl: "YOUR URL" },
+});
+```
+
+### `loginUrlCb`
+
+```ts
+loginUrlCb?: (url: string) => void;
+```
+
+The `loginUrlCb` is a callback function that handles login URLs during the authentication process. It receives the URL that should be visited to continue the login process. This is necessary when authenticating with Tailscale.
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { loginUrlCb },
+});
+
+function loginUrlCb(url) {
+	console.log("Login URL is ready:", url);
+	// Open the login URL in a new tab or window
+	window.open(url, "_blank");
+}
+```
+
+### stateUpdateCb
+
+```ts
+stateUpdateCb?: (state: number) => void;
+```
+
+The `stateUpdateCb` is a callback that runs when the connection state changes. The `state` parameter represents the connection status.
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { stateUpdateCb },
+});
+
+function stateUpdateCb(state) {
+	if (state === 6) {
+		console.log("Connected");
+	}
+}
+```
+
+### netmapUpdateCb
+
+```ts
+netmapUpdateCb?: (map: any) => void;
+```
+
+The `netmapUpdateCb` is a callback that runs whenever the network configuration updates. It provides details about the current network configuration.
+
+Example:
+
+```ts
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: { netmapUpdateCb },
+});
+
+function netmapUpdateCb(map) {
+	const currentIp = map.self.addresses[0];
+	console.log(`Current IP: ${currentIp}`);
+}
+```
+
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
