@@ -36,33 +36,28 @@ This will mount the specified directory at `/web` in the CheerpX filesystem. To 
 
 ### Why use an `index.list` file?
 
-The `index.list` file enables CheerpX to provide directory listing functionality in its WebDevice. It ensures seamless navigation of directories, compatibility with Linux-based tools, and support for navigating directories operations like `os.listdir()`. Since browsers restrict direct access to local files, `index.list` helps simulate a directory structure for virtual environments, making it essential for managing and accessing files effectively.
+The `index.list` file enables CheerpX to provide directory listing functionality in its WebDevice. Since HTTP does not have native support for file listing, `index.list` is essential for managing and accessing files effectively.
 
 ### Creating an `index.list` file
 
 To generate an `index.list` in every directory without including it in the directory listing, use the following command:
 
 ```bash
-find . -type d -exec sh -c 'cd "{}" && ls > .index.list && mv .index.list index.list' \;
+find . -type d -exec sh -c 'ls "{}" > "{}"/.index.list && mv "{}"/.index.list "{}"/index.list' \;
 ```
 
 **Explanation**:
 
-1. `find . -type d`: This part of the command finds all directories (`-type d`) starting from the current directory (`.`).
+1. `find . -type d`: finds all directories starting from the current directory (`.`).
 
-2. `exec`: The `-exec` option runs the provided command for each directory found by `find`.
+2. `-exec sh -c`: executes the following shell commands for each directory found.
 
-3. `sh -c 'cd "{}" && ls > .index.list && mv .index.list index.list'`:
+3. `ls "{}" > "{}"/.index.list`: lists the directory contents and saves it to `.index.list`.
 
-- `sh -c`: Runs the following string as a shell command.
-- `cd "{}"`: Changes the current directory to the directory being processed ({} is replaced with the directory path by find).
-- `ls > .index.list`: Lists all files and directories in the current directory and writes the output to a temporary file named .index.list.
-- `mv .index.list index.list`: Renames .index.list to index.list.
-
-4. `\;`: This marks the end of the -exec command for find.
+4. `&& mv "{}"/.index.list "{}"/index.list`: renames `.index.list` to `index.list` in the same directory.
 
 > [!warning] Warning
-> Be careful when using this command. It will overwrite existing index.list files in every directory it processes. Ensure you run it only in the intended directory and back up any important data before execution. Misuse in the wrong directory could cause unintentional data loss.
+> Be careful when using this command. It will overwrite any existing index.list files in every directory it processes. Ensure you run it only in the intended directory and back up any important data before execution. Misuse in the wrong directory could cause unintentional data loss.
 
 ### Accessing files
 
