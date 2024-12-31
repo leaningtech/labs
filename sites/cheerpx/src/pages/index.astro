@@ -9,6 +9,7 @@ import Screenshot from "../assets/screenshots.png";
 import { Image } from "astro:assets";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 import MonitorDoodle from "../assets/hero_illustration.png";
+import BlogPostCardSet from "@leaningtech/astro-theme/components/BlogPostCardSet.astro";
 ---
 
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-stone-900 to-[#00254d]">
@@ -210,6 +211,23 @@ import MonitorDoodle from "../assets/hero_illustration.png";
 						>x86 virtualization in the browser</span
 					> with WebAssembly
 				</h1>
+			</div>
+		</div>
+	</section>
+	<section class="bg-black py-16">
+		<div class="w-full max-w-screen-2xl mx-auto px-16">
+			<div class="mb-8">
+				<p class="text-lg text-stone-400">CheerpX blog</p>
+				<h2 class="text-4xl font-bold text-white">Latest news</h2>
+			</div>
+			<BlogPostCardSet />
+			<div class="mt-8">
+				<LinkButton
+					type="secondary-cheerpx"
+					href="/blog"
+					label="View all blog posts"
+					iconRight="mi:arrow-right"
+				/>
 			</div>
 		</div>
 	</section>

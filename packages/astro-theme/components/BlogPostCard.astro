@@ -3,6 +3,9 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
 import { Image } from "astro:assets";
+import { productFromUrl } from "../lib/products";
+
+const product = productFromUrl(Astro.url);
 
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
@@ -16,6 +19,9 @@ const post =
 		? await getEntry("blog", postOrSlug)
 		: postOrSlug;
 const authors = await resolveAuthors(post.data.authors);
+
+//choose hover link color based on product
+const productName = typeof product === "undefined" ? "Labs" : product.name;
 ---
 
 <a
@@ -35,7 +41,10 @@ const authors = await resolveAuthors(post.data.authors);
 	}
 	<h3
 		class:list={{
-			"font-bold text-balance text-white group-hover:text-primary-400 grow": true,
+			"font-bold text-balance text-white grow": true,
+			"group-hover:text-cheerp grow": productName === "Cheerp",
+			"group-hover:text-[#6386a5] grow": productName === "CheerpX",
+			"group-hover:text-primary-400 grow": productName === "Labs",
 			"text-2xl leading-7": size === "wide",
 			"text-xl leading-6": size === "narrow",
 		}}
