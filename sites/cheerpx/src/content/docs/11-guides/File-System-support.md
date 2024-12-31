@@ -143,7 +143,7 @@ const cx = await CheerpX.Linux.create({
 You can add files to a DataDevice from JavaScript using the `writeFile` method:
 
 ```javascript
-await dataDevice.writeFile("/filename", "file content here");
+await dataDevice.writeFile("/filename", "File content here");
 ```
 
 ### `dataDevice.writeFile`
