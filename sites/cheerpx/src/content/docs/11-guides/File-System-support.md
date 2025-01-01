@@ -93,7 +93,7 @@ Example:
 ```js
 const idbDevice = await CheerpX.IDBDevice.create("files");
 // Use CheerpX to write something to the device
-const outputBlob = await dataDevice.readFileAsBlob("/filename");
+const outputBlob = await idbDevice.readFileAsBlob("/filename");
 ```
 
 > [!note] Note
