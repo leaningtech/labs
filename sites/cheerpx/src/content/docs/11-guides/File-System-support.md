@@ -32,11 +32,34 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-This mounts the specified local directory at `/web` in the CheerpX filesystem.
+This will mount the specified directory at `/web` in the CheerpX filesystem. To enable listing the directory contents, CheerpX looks for an `index.list` file in the directory and any subdirectories. This file should contain a newline-separated list of all files and subdirectories within the directory.
 
-To be able to list the files, CheerpX will look for a file called index.list in the directory and each of its subdirectories. The file should contain a newline separated list of all files and folders contained in the directory.
+### Why use an `index.list` file?
 
-### Accessing Files
+The `index.list` file enables CheerpX to provide directory listing functionality in its WebDevice. Since HTTP does not have native support for file listing, `index.list` is essential for managing and accessing files effectively.
+
+### Creating an `index.list` file
+
+To generate an `index.list` in every directory without including it in the directory listing, use the following command:
+
+```bash
+find . -type d -exec sh -c 'ls "{}" > "{}"/.index.list && mv "{}"/.index.list "{}"/index.list' \;
+```
+
+**Explanation**:
+
+1. `find . -type d`: finds all directories starting from the current directory (`.`).
+
+2. `-exec sh -c`: executes the following shell commands for each directory found.
+
+3. `ls "{}" > "{}"/.index.list`: lists the directory contents and saves it to `.index.list`.
+
+4. `&& mv "{}"/.index.list "{}"/index.list`: renames `.index.list` to `index.list` in the same directory.
+
+> [!warning] Warning
+> Be careful when using this command. It will overwrite any existing index.list files in every directory it processes. Ensure you run it only in the intended directory and back up any important data before execution. Misuse in the wrong directory could cause unintentional data loss.
+
+### Accessing files
 
 Files in the WebDevice are accessed relative to the current page's URL. For example, if your current page is `https://host/dir1/dir2/page.html`, then:
 
@@ -64,7 +87,7 @@ const cx = await CheerpX.Linux.create({
 
 This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
-### Reading Files from JavaScript
+### Reading files from JavaScript
 
 You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
 
@@ -115,7 +138,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-### Adding Files
+### Adding files
 
 You can add files to a DataDevice from JavaScript using the `writeFile` method:
 
@@ -178,7 +201,7 @@ const cx = await CheerpX.Linux.create({
 
 This setup creates an ext2 filesystem that loads its initial data from an HTTP source and uses IndexedDB for persistent storage of changes.
 
-### Device Configuration Options
+### Device configuration options
 
 CheerpX supports various types of devices that can be used in the OverlayDevice configuration:
 
@@ -186,7 +209,7 @@ CheerpX supports various types of devices that can be used in the OverlayDevice 
 2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
 3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
-## Best Practices
+## Best practices
 
 1. Use WebDevice for read-only access to server-side files.
 2. Utilize IDBDevice for persistent storage of user data or application state.
