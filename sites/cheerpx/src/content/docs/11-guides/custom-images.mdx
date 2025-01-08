@@ -29,7 +29,7 @@ buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
 
 ## 3. Create a container from the Docker Image
 
-Now, create a container from the image using `podman`. Ensure the image name matches the on you built in the previous step.
+Now, create a container from the image using `podman`. Ensure the image name matches the one you built in the previous step.
 
 ```bash
 podman create --name cheerpxcontainer cheerpximage
@@ -62,7 +62,7 @@ podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
 
 ## 6. Clean up unused resources
 
-After creating your `ext2` image, it's a good practice to clean up unused resources to free up space:
+After creating your `ext2` image, it's good practice to clean up unused resources to free up space:
 
 Remove the container:
 
@@ -81,3 +81,49 @@ Remove temporary directories:
 ```bash
 rm -rf cheerpXFS
 ```
+
+## Optional: edit `/etc/subgid` (for the host user)
+
+The `/etc/subgid` file defines the ranges of subordinate group IDs allocated to specific user accounts on the host for managing user namespaces in containers. This step is **optional** and not necessary for most use cases. However, you may choose to configure it if you encounter namespace-related conflicts.
+
+### 1. Identify your host user
+
+Run the following command to determine the host user running container commands:
+
+```bash
+whoami
+```
+
+### 2. Check `/etc/subgid` for your user
+
+Open `/etc/subgid` and look for an entry matching your user:
+
+```bash
+sudo nano /etc/subgid
+```
+
+The file should contain lines in the format:
+
+```
+<username>:<start_id>:<count>
+```
+
+For example, for the user `johndoe`:
+
+```
+johndoe:100000:65536
+```
+
+### 3. Modify the file
+
+If you need to change the `subgid` range for the host user, modify the `start_id` and/or `count` as needed. For example, if you want to assign a new range starting at 200000 with a count of 65536, you would change it to:
+
+```
+johndoe:200000:65536
+```
+
+For more information about `subgid`, refer to the [subgid documentation](https://man7.org/linux/man-pages/man5/subgid.5.html).
+
+## Conclusion
+
+Congratulations! You have successfully created a custom `ext2` image that can be used as a filesystem for CheerpX. This image is now ready to be loaded into your CheerpX environment for further testing and deployment.
