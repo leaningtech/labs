@@ -69,6 +69,31 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 > [!note] Note
 > It's important to note that this behavior depends on the current page's URL, as it uses a relative path. For more predictable results, it's recommended to use absolute paths when possible.
 
+### Using `application/octet-stream` for WebDevice directories
+
+To handle files from WebDevices properly, set default_type `application/octet-stream`. This ensures that files are treated as binary data. **Only apply this to WebDevice directories**, or it may cause issues like broken images or malfunctioning scripts.
+
+**Nginx configuration example**:
+
+```nginx
+http {
+    # Set default type to application/octet-stream for WebDevice directories
+    default_type application/octet-stream;
+
+    server {
+        listen 8080;
+        server_name localhost;
+
+        gzip on;
+        gzip_types application/javascript application/wasm text/plain application/octet-stream;
+
+        # Other configurations go here (see full basic server guide for details)
+    }
+}
+```
+
+For a full server setup and additional details, check our [basic server guide](/docs/guides/nginx).
+
 ## IDBDevice
 
 IDBDevice provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
