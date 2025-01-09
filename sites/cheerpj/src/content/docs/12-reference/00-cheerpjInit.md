@@ -26,6 +26,8 @@ async function cheerpjInit(options?: {
 	tailscaleLoginUrlCb?: (url: string) => void;
 	tailscaleIpCb?: (ip: string) => void;
 	licenseKey?: string;
+	execCallback?: (cmdPath: string, argsArray: string[]) => void;
+	enableDebug?: boolean;
 }): Promise<void>;
 ```
 
@@ -371,6 +373,48 @@ Example of usage:
 
 ```js
 cheerpjInit({ licenseKey: "YourLicenseKey" });
+```
+
+### `execCallback`
+
+```ts
+execCallback?: (cmdPath: string, argsArray: string [])  => void;
+```
+
+> [!note] Important
+> The `execCallback` option is supported in CheerpJ 3.1 and later versions.
+
+This option allows you to intercept and handle external system commands or program executions that initiated from a Java application. Such commands are typically executed using methods like `Runtime.getRuntime().exec(command)` or `new ProcessBuilder(command)` in Java.
+
+The callback function accepts two parameters:
+
+- `cmdPath`: The command that would have been executed in Java.
+- `argsArray`: An array of additional arguments passed to that command.
+
+Example of usage:
+
+```js
+cheerpjInit({
+	execCallback: function (cmdPath, argsArray) {
+		debugger;
+	},
+});
+```
+
+Learn more about the `execCallback` option in our [intercept external commands guide](/docs/guides/Intercept-external-commands).
+
+### `enableDebug`
+
+```ts
+enableDebug?: boolean;
+```
+
+This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ.
+
+Example of usage:
+
+```js
+cheerpjInit({ enableDebug: true });
 ```
 
 [cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
