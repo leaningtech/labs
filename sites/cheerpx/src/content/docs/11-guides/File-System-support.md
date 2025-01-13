@@ -76,6 +76,7 @@ To handle files from WebDevices properly, set default_type `application/octet-st
 **Creating the Webdevice:**
 
 ```js
+// The path must match the nginx location block (e.g., /webdevice in the nginx configuration)
 const webDevice = await CheerpX.WebDevice.create("/webdevice");
 ```
 
