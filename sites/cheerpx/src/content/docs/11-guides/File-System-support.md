@@ -71,26 +71,63 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 
 ### Using `application/octet-stream` for WebDevice directories
 
-To handle files from WebDevices properly, set default_type `application/octet-stream`. This ensures that files are treated as binary data. **Only apply this to WebDevice directories**, or it may cause issues like broken images or malfunctioning scripts.
+To handle files from WebDevices properly, set default_type `application/octet-stream`. This ensures that files are treated as binary data. **Only apply this to WebDevice directories**, or it may cause issues with image loading and JavaScript execution.
+
+**Creating the Webdevice:**
+
+```js
+const webDevice = await CheerpX.WebDevice.create("/webdevice");
+```
 
 **Nginx configuration example**:
 
 ```nginx
+worker_processes  1;
+error_log   nginx_main_error.log info;
+pid nginx_user.pid;
+daemon off;
+
+events {
+    worker_connections  1024;
+}
+
 http {
-    # Set default type to application/octet-stream for WebDevice directories
-    default_type application/octet-stream;
+    default_type  application/octet-stream;
+    access_log  nginx_access.log;
+    error_log   nginx_error.log info;
+
+    sendfile        on;
 
     server {
-        listen 8080;
-        server_name localhost;
+        listen       8080;
+        server_name  localhost;
 
         gzip on;
         gzip_types application/javascript application/wasm text/plain application/octet-stream;
 
-        # Other configurations go here (see full basic server guide for details)
+        charset utf-8;
+
+        location / {
+            root .;
+            index  index.html index.htm;
+            add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+            add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+        }
+
+        location /webdevice/ {
+            root .;
+            autoindex on;
+            types { }
+            default_type application/octet-stream;
+            add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+            add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+        }
+
     }
 }
 ```
+
+To verify it's working, simply navigate to `http://localhost:8080/webdevice/` in your browser.
 
 For a full server setup and additional details, check our [basic server guide](/docs/guides/nginx).
 
