@@ -99,6 +99,9 @@ http {
 
     sendfile        on;
 
+	add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+    add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+
     server {
         listen       8080;
         server_name  localhost;
@@ -111,8 +114,6 @@ http {
         location / {
             root .;
             index  index.html index.htm;
-            add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
-            add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
         }
 
         location /webdevice/ {
@@ -120,15 +121,10 @@ http {
             autoindex on;
             types { }
             default_type application/octet-stream;
-            add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
-            add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
         }
-
     }
 }
 ```
-
-To verify it's working, simply navigate to `http://localhost:8080/webdevice/` in your browser.
 
 For a full server setup and additional details, check our [basic server guide](/docs/guides/nginx).
 
