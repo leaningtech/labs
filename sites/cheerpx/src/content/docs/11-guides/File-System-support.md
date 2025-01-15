@@ -100,7 +100,7 @@ http {
     sendfile        on;
 
 	add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
-    add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+	add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
 
     server {
         listen       8080;
