@@ -71,9 +71,9 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 
 ### Using `application/octet-stream` for WebDevice directories
 
-`application/octet-stream` is a MIME type used to indicate that a file is binary data. It tells the server and client to treat the file as raw bytes, rather than interpreting it as text or any specific format. This is important for files like images or videos, ensuring they are delivered correctly without being changed.
+`application/octet-stream` is a MIME type used to indicate that a file is binary data, instructing the server and client to treat the file as raw bytes instead of interpreting it as text or any other format.
 
-In CheerpX, **you must use this MIME type for WebDevice directories** to handle files properly as binary data, preventing issues with images, scripts, and other non-text files.
+In CheerpX, **make sure to apply the `application/octet-stream` MIME type** to WebDevice directories to handle files correctly as binary data, preventing issues with images, scripts, and other non-text files.
 
 **Creating the Webdevice:**
 
