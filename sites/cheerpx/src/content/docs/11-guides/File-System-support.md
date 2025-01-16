@@ -71,7 +71,9 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 
 ### Using `application/octet-stream` for WebDevice directories
 
-To handle files from WebDevices properly, set default_type `application/octet-stream`. This ensures that files are treated as binary data. **Only apply this to WebDevice directories**, or it may cause issues with image loading and JavaScript execution.
+`application/octet-stream` is a MIME type used to indicate that a file is binary data. It tells the server and client to treat the file as raw bytes, rather than interpreting it as text or any specific format. This is important for files like images or videos, ensuring they are delivered correctly without being changed.
+
+In CheerpX, **you must use this MIME type for WebDevice directories** to handle files properly as binary data, preventing issues with images, scripts, and other non-text files.
 
 **Creating the Webdevice:**
 
@@ -99,15 +101,15 @@ http {
 
     sendfile        on;
 
-	add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
-	add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+    add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+    add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
 
     server {
         listen       8080;
         server_name  localhost;
 
         gzip on;
-        gzip_types application/javascript application/wasm text/plain application/octet-stream;
+        gzip_types application/javascript application/wasm text/plain;
 
         charset utf-8;
 
@@ -116,6 +118,7 @@ http {
             index  index.html index.htm;
         }
 
+        # Create the WebDevice for handling files in the /webdevice directory
         location /webdevice/ {
             root .;
             autoindex on;
