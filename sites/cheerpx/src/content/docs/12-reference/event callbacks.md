@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux event callbacks
+title: Event callbacks
 description: Event Callbacks for CPU and Disk Monitoring
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux#setActivateConsole
+title: setActivateConsole
 description: Manage virtual terminal switching within CheerpX
 ---
 

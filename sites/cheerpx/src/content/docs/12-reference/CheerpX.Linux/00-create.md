@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux.create
+title: create
 description: Create a CheerpX application instance
 ---
 
@@ -135,7 +135,7 @@ function loginUrlCb(url) {
 }
 ```
 
-### stateUpdateCb
+### `stateUpdateCb`
 
 ```ts
 stateUpdateCb?: (state: number) => void;
@@ -158,7 +158,7 @@ function stateUpdateCb(state) {
 }
 ```
 
-### netmapUpdateCb
+### `netmapUpdateCb`
 
 ```ts
 netmapUpdateCb?: (map: any) => void;

@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux#setCustomConsole
+title: setCustomConsole
 description: Configure custom console behavior for handling keyboard input and output display
 ---
 
@@ -67,9 +67,3 @@ term.onData((str) => {
 	}
 });
 ```
-
-This is what [WebVM](https://webvm.io) uses for its interactive terminal.
-
-## See also
-
-- [`setConsole`](/docs/reference/CheerpX-Linux-setConsole)

@@ -1,6 +1,6 @@
 ---
-title: CheerpX.Linux#setKmsCanvas
-Description: Configure the KMS canvas for rendering graphical output in a CheerpX Linux instance.
+title: setKmsCanvas
+description: Configure the KMS canvas for rendering graphical output in a CheerpX Linux instance.
 ---
 
 ```ts
@@ -17,11 +17,11 @@ namespace CheerpX {
 
 ## Parameters
 
-- **canvas: HTMLCanvasElement** - The `canvas` element in your HTML document that serves as the rendering surface. This is where graphical output is displayed.
+- **canvas: (`HTMLCanvasElement`)** - The `canvas` element in your HTML document that serves as the rendering surface. This is where graphical output is displayed.
 
-- **width: number** - The desired width of the canvas in pixels.
+- **width: (`number`)** - The desired width of the canvas in pixels.
 
-- **height: number** - The desired height of the canvas in pixels.
+- **height: (`number`)** - The desired height of the canvas in pixels.
 
 ## Description
 
