@@ -56,10 +56,6 @@ Many first time users get stuck at this point. The most common issues are:
 
 Not yet. The main problem is that RuneScape requires low level network connections primitives (sockets) which are not provided by browsers at this time due to security concerns. In the future we might provide a paid add-on to the CheerpJ Applet Runner extension to support this use case via tunneling.
 
-## Do I need to install anything to use CheerpJ?
-
-No, there is nothing to download or install on your computer. CheerpJ runs entirely within the browser, so you don’t need an executable file (e.g., `.exe`).
-
 ## What is the status of CheerpJ?
 
 CheerpJ is actively developed by [Leaning Technologies Ltd](https://leaningtech.com), a British-Dutch company focused on compile-to-JavaScript and compile-to-WebAssembly solutions.

@@ -6,9 +6,7 @@ description: Create a CheerpX WebDevice instance, representing a read-only HTTP-
 ```ts
 namespace CheerpX {
 	class WebDevice {
-		static async create(
-			path: string
-		): Promise<WebDevice>;
+		static async create(path: string): Promise<WebDevice>;
 	}
 }
 ```
@@ -31,11 +29,11 @@ const webDevice = await CheerpX.WebDevice.create("/webdevice");
 
 // Initialize the CheerpX environment
 const mountPoints = [
-  // Mount the WebDevice to a known location
-  { type: "dir", path: "/webdevice", dev: webDevice },  
+	// Mount the WebDevice to a known location
+	{ type: "dir", path: "/webdevice", dev: webDevice },
 ];
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints,
+	mounts: mountPoints,
 });
 ```
 
