@@ -21,7 +21,7 @@ async function cheerpjInit(options?: {
 	overrideDocumentBase?: string;
 	javaProperties?: string[];
 	tailscaleControlUrl?: string;
-	tailscaleDnsUrl?: string;
+	tailscaleDnsIp?: string;
 	tailscaleAuthKey?: string;
 	tailscaleLoginUrlCb?: (url: string) => void;
 	tailscaleIpCb?: (ip: string) => void;
