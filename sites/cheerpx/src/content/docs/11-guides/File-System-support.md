@@ -69,6 +69,68 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 > [!note] Note
 > It's important to note that this behavior depends on the current page's URL, as it uses a relative path. For more predictable results, it's recommended to use absolute paths when possible.
 
+### Using `application/octet-stream` for WebDevice directories
+
+`application/octet-stream` is a MIME type used to indicate that a file is binary data, instructing the server and client to treat the file as raw bytes instead of interpreting it as text or any other format.
+
+In CheerpX, **make sure to apply the `application/octet-stream` MIME type** to WebDevice directories to handle files correctly as binary data, preventing issues with images, scripts, and other non-text files.
+
+**Creating the Webdevice:**
+
+```js
+// The path must match the nginx location block (e.g., /webdevice in the nginx configuration)
+const webDevice = await CheerpX.WebDevice.create("/webdevice");
+```
+
+**Nginx configuration example**:
+
+```nginx
+worker_processes  1;
+error_log   nginx_main_error.log info;
+pid nginx_user.pid;
+daemon off;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    default_type  application/octet-stream;
+    access_log  nginx_access.log;
+    error_log   nginx_error.log info;
+
+    sendfile        on;
+
+    add_header 'Cross-Origin-Opener-Policy' 'same-origin' always;
+    add_header 'Cross-Origin-Embedder-Policy' 'require-corp' always;
+
+    server {
+        listen       8080;
+        server_name  localhost;
+
+        gzip on;
+        gzip_types application/javascript application/wasm text/plain;
+
+        charset utf-8;
+
+        location / {
+            root .;
+            index  index.html index.htm;
+        }
+
+        # Create the WebDevice for handling files in the /webdevice directory
+        location /webdevice/ {
+            root .;
+            autoindex on;
+            types { }
+            default_type application/octet-stream;
+        }
+    }
+}
+```
+
+For a full server setup and additional details, check our [basic server guide](/docs/guides/nginx).
+
 ## IDBDevice
 
 IDBDevice provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
