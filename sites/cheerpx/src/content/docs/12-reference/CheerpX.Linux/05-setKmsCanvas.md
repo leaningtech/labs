@@ -17,11 +17,15 @@ namespace CheerpX {
 
 ## Parameters
 
-- **canvas: (`HTMLCanvasElement`)** - The `canvas` element in your HTML document that serves as the rendering surface. This is where graphical output is displayed.
+- **canvas (`HTMLCanvasElement`)** - The `canvas` element in your HTML document that serves as the rendering surface. This is where graphical output is displayed.
 
-- **width: (`number`)** - The desired width of the canvas in pixels.
+- **width (`number`)** - The desired width of the canvas in pixels.
 
-- **height: (`number`)** - The desired height of the canvas in pixels.
+- **height (`number`)** - The desired height of the canvas in pixels.
+
+## Returns
+
+`setKmsCanvas` does not return a value.
 
 ## Description
 

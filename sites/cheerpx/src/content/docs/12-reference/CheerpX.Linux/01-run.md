@@ -24,6 +24,7 @@ namespace CheerpX {
 
 - **fileName (`string`)** - The path to the executable file.
 - **args (`string[]`)** - Arguments to pass to the executable.
+- **options (`object`, optional)** - Used to configure different settings of the runtime in the form {`option: "value"`}. This can include environment variables, working directory, user ID, group ID, and other related options.
 
 ## Options
 

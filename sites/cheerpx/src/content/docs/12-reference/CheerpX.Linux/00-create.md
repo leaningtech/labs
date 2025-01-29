@@ -12,28 +12,6 @@ namespace CheerpX {
 		}): Promise<CheerpX.Linux>;
 	}
 }
-
-interface MountPointConfiguration {
-	// Specifies the filesystem type
-	// 'ext2' for Linux ext2
-	// 'dir' for a hierarchical file system
-	// 'devs' for device files
-	// 'proc' for process info files.
-	type: "ext2" | "dir" | "devs" | "proc";
-
-	// First mount must be "/" (root)
-	path: string;
-	// Can be one of: overlayDevice / webDevice / dataDevice / idbDevice
-	dev: CheerpX.Device;
-}
-
-interface NetworkInterface {
-	authKey?: string;
-	controlUrl?: string;
-	loginUrlCb?: (url: string) => void;
-	stateUpdateCb?: (state: number) => void;
-	netmapUpdateCb?: (map: any) => void;
-}
 ```
 
 ## Parameters
@@ -43,6 +21,8 @@ interface NetworkInterface {
 ## Returns
 
 `CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use. The resolved value is a `CheerpX.Linux` instance that provides methods for interacting with the CheerpX environment.
+
+Additionally, this instance allows you to register and monitor system events, such as CPU and disk activity. For more details, see the [`event callbacks`](/docs/reference/CheerpX.Linux/event%20callbacks) page.
 
 ## Options
 
@@ -56,6 +36,24 @@ mounts?: MountPointConfiguration[];
 
 This option configures the filesystems that will be available in the CheerpX environment. Each mount point configures a device and specifies where it should be accessible within the virtual filesystem.
 
+Each mount configuration must follow this structure:
+
+```ts
+interface MountPointConfiguration {
+	// Specifies the filesystem type
+	// 'ext2' for Linux ext2
+	// 'dir' for a hierarchical file system
+	// 'devs' for device files
+	// 'proc' for process info files.
+	type: "ext2" | "dir" | "devs" | "proc";
+
+	// First mount must be "/" (root)
+	path: string;
+	// Can be one of: overlayDevice / webDevice / dataDevice / idbDevice
+	dev: CheerpX.Device;
+}
+```
+
 Example:
 
 ```js
@@ -68,7 +66,7 @@ const cx = await CheerpX.Linux.create({
 ```
 
 > [!note] Note
-> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-base persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
+> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-based persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
 
 ### `networkInterface`
 
@@ -76,7 +74,21 @@ const cx = await CheerpX.Linux.create({
 networkInterface?: NetworkInterface;
 ```
 
-This option configures network settings, which allows CheerpX to communicate over networks. For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
+This option configures network settings, which allows CheerpX to communicate over networks.
+
+Each Configuration must follow this structure:
+
+```ts
+interface NetworkInterface {
+	authKey?: string;
+	controlUrl?: string;
+	loginUrlCb?: (url: string) => void;
+	stateUpdateCb?: (state: number) => void;
+	netmapUpdateCb?: (map: any) => void;
+}
+```
+
+The following sections provide details on each available option within `NetworkInterface`, along with example usages.
 
 ### `authKey`
 
@@ -179,5 +191,7 @@ function netmapUpdateCb(map) {
 	console.log(`Current IP: ${currentIp}`);
 }
 ```
+
+For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
