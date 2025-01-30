@@ -27,15 +27,18 @@ Create an `IDBDevice` instance for persistent storage.
 // Create a read-only block device for a disk image stored on the HTTP server
 const blockDevice = await CheerpX.HttpBytesDevice.create("/cheerpXImage.ext2");
 // Make the block device read-write using a persistent IndexedDB overlay
-const idbDevice = await CheerpX.IDBDevice.create("idbDevice");
-const overlayDevice = await CheerpX.OverlayDevice.create(blockDevice, idbDevice);
+const idbDevice = await CheerpX.IDBDevice.create("block_idbDevice");
+const overlayDevice = await CheerpX.OverlayDevice.create(
+	blockDevice,
+	idbDevice
+);
 // Initialize the CheerpX environment
 const mountPoints = [
-  // Use the disk image as the filesystem root
-  { type: "ext2", path: "/", dev: overlayDevice },
+	// Use the disk image as the filesystem root
+	{ type: "ext2", path: "/", dev: overlayDevice },
 ];
 const cx = await CheerpX.Linux.create({
-  mounts: mountPoints, 
+	mounts: mountPoints,
 });
 ```
 
