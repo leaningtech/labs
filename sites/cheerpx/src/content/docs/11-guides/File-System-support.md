@@ -186,11 +186,11 @@ const outputBlob = await idbDevice.readFileAsBlob("/filename");
 
 ## DataDevice
 
-`DataDevice` is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
+[`DataDevice`](/docs/reference/CheerpX.DataDevice) is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
 
 ### Usage
 
-Create a DataDevice using the `CheerpX.DataDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.DataDevice/create) a [`DataDevice`](/docs/reference/CheerpX.DataDevice) using the `CheerpX.DataDevice.create()` method:
 
 ```javascript
 const dataDevice = await CheerpX.DataDevice.create();
@@ -202,7 +202,7 @@ const cx = await CheerpX.Linux.create({
 
 ### Adding files
 
-You can add files to a DataDevice from JavaScript using the `writeFile` method:
+You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from JavaScript using the [`writeFile`](/docs/reference/CheerpX.DataDevice/writeFIle) method:
 
 ```javascript
 await dataDevice.writeFile("/filename", "File content here");

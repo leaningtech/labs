@@ -90,14 +90,11 @@ For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
 
 ## Accessing JS Data in the Filesystem via DataDevice
 
-The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to a `Uint8Array` and a JavaScript `String`. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
-
-For more information, see the [CheerpX DataDevice].
+The [`DataDevice`](/docs/reference/CheerpX.DataDevice) API exposes JavaScript data via the filesystem. This device provides read-only access to a `Uint8Array` and a JavaScript `String`. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
 
 [CheerpX documentations]: https://cheerpx.io/docs/overview
 [CheerpX console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setConsole
 [CheerpX Custom console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setCustomConsole
-[CheerpX DataDevice]: https://cheerpx.io/docs/guides/File-System-support#datadevice
 [CheerpX IDBDevice]: https://cheerpx.io/docs/guides/File-System-support#idbdevice
 [Frequently Asked Questions]: https://cheerpx.io/docs/faq
 [xterm.js]: https://xtermjs.org/

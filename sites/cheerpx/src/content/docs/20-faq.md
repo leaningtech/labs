@@ -22,7 +22,7 @@ Yes, `WebDevice` can handle third-party origins as paths, but it's important to 
 
 ## Why can't I execute files directly from a `DataDevice`?
 
-`DataDevice` in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can read data from it, but you cannot execute files directly from it. To execute files that are in a DataDevice, you need to first copy the files to a filesystem with complete support for mode bits, such as `IDBDevice` (IndexedDB) or Ext2.
+[`DataDevice`](/docs/reference/CheerpX.DataDevice) in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can read data from it, but you cannot execute files directly from it. To execute files that are in a [`DataDevice`](/docs/reference/CheerpX.DataDevice), you need to first copy the files to a filesystem with complete support for mode bits, such as `IDBDevice` (IndexedDB) or Ext2.
 
 ## Why can't CheerpX do what v86 does in terms of disk access and networking?
 
