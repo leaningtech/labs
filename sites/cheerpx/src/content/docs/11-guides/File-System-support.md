@@ -71,11 +71,11 @@ Files in the WebDevice are accessed relative to the current page's URL. For exam
 
 ## IDBDevice
 
-IDBDevice provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
+[`IDBDevice`](/docs/reference/CheerpX.IDBDevice) provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
 
 ### Usage
 
-Create an IDBDevice using the `CheerpX.IDBDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.IDBDevice/create) an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) using the `CheerpX.IDBDevice.create()` method:
 
 ```javascript
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
@@ -89,7 +89,7 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
 ### Reading files from JavaScript
 
-You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
+You can read files from an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) in JavaScript using the [`readFileAsBlob`](/docs/reference/CheerpX.IDBDevice/readFileAsBlob) method:
 
 ```javascript
 await idbDevice.readFileAsBlob("/filename");
@@ -181,7 +181,7 @@ CheerpX supports ext2 filesystems, which can be configured as an overlay device.
 
 ### Usage
 
-Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
+Create an ext2 filesystem by combining a `HttpBytesDevice` to access disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
 
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP
