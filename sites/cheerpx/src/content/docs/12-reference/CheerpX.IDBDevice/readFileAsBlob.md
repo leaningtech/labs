@@ -44,6 +44,6 @@ console.log(outputBlob);
 ```
 
 > [!tip] View stored files in DevTools
-> To see your stored files, open Developer Tools, go to the Application tab, and check storage > IndexedDB. Here, you can browse and inspect your files easily!
+> To see your stored files, open Developer Tools, go to the Application tab, and check Storage > IndexedDB. Here, you can browse and inspect your files easily!
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
