@@ -90,7 +90,7 @@ interface NetworkInterface {
 
 The following sections provide details on each available option within `NetworkInterface`, along with example usages.
 
-### `authKey`
+#### `authKey`
 
 ```ts
 authKey?: string;
@@ -107,7 +107,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-### `controlUrl`
+#### `controlUrl`
 
 ```ts
 controlUrl?: string;
@@ -124,7 +124,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-### `loginUrlCb`
+#### `loginUrlCb`
 
 ```ts
 loginUrlCb?: (url: string) => void;
@@ -147,7 +147,7 @@ function loginUrlCb(url) {
 }
 ```
 
-### `stateUpdateCb`
+#### `stateUpdateCb`
 
 ```ts
 stateUpdateCb?: (state: number) => void;
@@ -170,7 +170,7 @@ function stateUpdateCb(state) {
 }
 ```
 
-### `netmapUpdateCb`
+#### `netmapUpdateCb`
 
 ```ts
 netmapUpdateCb?: (map: any) => void;
