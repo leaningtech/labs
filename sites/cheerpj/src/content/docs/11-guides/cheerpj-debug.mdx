@@ -26,6 +26,16 @@ If your application passes all these checks but still isn't working correctly, y
 
 If you do so, make sure to provide additional context, such as a HAR file and the browser's console output. This will make it easier for us to assist you. Instructions on how to generate these are provided in the following steps.
 
+## Enable advanced debug logs in CheerpJ
+
+Before saving the browser console output, it's important to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
+
+```js
+cheerpjInit({ enableDebug: true });
+```
+
+This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ. It provides a lot of extra information in case an actual error occurs and will speed up the process of solving the problem you are encountering.
+
 ## Saving the browser console output
 
 You can follow these steps to save the browser console output:
@@ -57,3 +67,5 @@ You can save a HAR following these steps:
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
 [virtual filesystem]: /docs/guides/File-System-support
+[`enableDebug`]: /docs/reference/cheerpjInit#enableDebug
+[`initOption`]: /docs/reference/cheerpjInit
