@@ -1,0 +1,4 @@
+---
+title: create
+description: Create a CheerpX HttpBytesDevice instance to stream disk blocks via HTTP.
+---
