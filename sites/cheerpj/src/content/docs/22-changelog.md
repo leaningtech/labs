@@ -3,6 +3,7 @@ title: Changelog
 ---
 
 <!-- Change links to blog page when released -->
+
 ## [3.1](https://cheerpj.com/blog/) - February 5, 2025
 
 ```html
