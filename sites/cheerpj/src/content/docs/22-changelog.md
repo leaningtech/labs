@@ -5,7 +5,7 @@ title: Changelog
 ## [3.0](https://cheerpj.com/cheerpj-3-now-generally-available/) - February 1, 2024
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 - Support all Java opcodes in the JIT
@@ -21,7 +21,7 @@ title: Changelog
 ## [3.0rc2](https://labs.leaningtech.com/blog/cheerpj-3-deep-dive) - November 29, 2023
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 - Reduced verbosity of debug messages
@@ -40,7 +40,7 @@ title: Changelog
 ## [3.0rc1](https://cheerpj.com/announcing-cheerpj-3-0rc1-help-us-test-and-improve/) - October 18, 2023
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1rc1/cj3loader.js"></script>
 ```
 
 - Completely new JIT-based architecture

@@ -5,7 +5,7 @@ title: 更新履歴
 ## [3.0](https://cheerpj.com/cheerpj-3-now-generally-available/) - 2024年2月1日
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 - JITでのすべてのJavaオペコードをサポート
@@ -21,7 +21,7 @@ title: 更新履歴
 ## [3.0rc2](https://labs.leaningtech.com/blog/cheerpj-3-deep-dive) - 2023年11月29日
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 - デバッグメッセージの冗長性を削減
@@ -40,7 +40,7 @@ title: 更新履歴
 ## [3.0rc1](https://cheerpj.com/announcing-cheerpj-3-0rc1-help-us-test-and-improve/) - 2023年10月18日
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0rc1/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1rc1/cj3loader.js"></script>
 ```
 
 - 新しいJITベースのアーキテクチャを導入
