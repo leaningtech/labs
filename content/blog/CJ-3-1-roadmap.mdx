@@ -21,7 +21,8 @@ In this post, we’ll provide an overview of CheerpJ, the capabilities of the cu
 <div class="flex items-center gap-2 flex-wrap">
   <LinkButton
     type="primary"
-    href="/cheerpj3/getting-started"
+    href="https://cheerpj.com/docs/getting-started"
+    target="_blank"
     label="Get started"
     iconRight="mi:arrow-right"
   />
@@ -29,12 +30,13 @@ In this post, we’ll provide an overview of CheerpJ, the capabilities of the cu
   <LinkButton
     type="discord"
     href={DISCORD_URL}
+    target="_blank"
     iconLeft="fa-brands:discord"
     label="Join the Discord server"
   />
 </div>
 
-CheerpJ 3.1 is the latest stable release of the new CheerpJ architecture introduced as part of CheerpJ 3.0, first announced in [May 9th, 2023](/blog/announcing-cheerpj-3) and released in [February 1st, 2024](/blog/cheerpj-3.0).
+CheerpJ 3.1 is the latest stable release of the new CheerpJ architecture introduced as part of CheerpJ 3.0, first announced in [May 9th, 2023](https://labs.leaningtech.com/blog/announcing-cheerpj-3) and released in [February 1st, 2024](https://labs.leaningtech.com/blog/cheerpj-3.0).
 
 The new architecture, built around a pure-JIT JVM in WebAssembly, has been an outstanding success, delivering on its promise of making CheerpJ faster, simpler to use and compatible with the vast majority of Java applications and applets. Virtually all users of CheerpJ core, as well as of our browser extensions, have seamlessly transitioned to the new architecture in the span of the last six months.
 
@@ -87,7 +89,7 @@ It is a sophisticated tool with many moving parts, the main ones being:
   - Seamless clipboard integration using the [Clipboard API](https://cheerpj.com/docs/reference/cheerpjInit#clipboardmode).
   - A window manager, to support multiple Java windows and multiple Java applications in the same Web page.
 
-For more details about the design of CheerpJ, please refer to [the deep dive](/blog/cheerpj-3-deep-dive) we published at the time of the initial CheerpJ 3.0 release. You can also read the [architecture page](https://cheerpj.com/docs/explanation/architecture) in the CheerpJ documentation.
+For more details about the design of CheerpJ, please refer to [the deep dive](https://labs.leaningtech.com/blog/cheerpj-3-deep-dive) we published at the time of the initial CheerpJ 3.0 release. You can also read the [architecture page](https://cheerpj.com/docs/explanation/architecture) in the CheerpJ documentation.
 
 ## The Roadmap for Modern Java in the browser
 
@@ -177,11 +179,12 @@ We believe that CheerpJ and WebAssembly will enable Java to become a first-class
 await cheerpjInit();
 ```
 
-CheerpJ is [extensively documented](/cheerpj3), ranging from basic tutorials to the detailed API reference.
+CheerpJ is [extensively documented](https://cheerpj.com/docs), ranging from basic tutorials to the detailed API reference.
 
 <LinkButton
 	type="primary"
-	href="/cheerpj3/getting-started"
+	href="https://cheerpj.com/docs/getting-started"
+  target="_blank"
 	label="Get started"
 	iconRight="mi:arrow-right"
 />
@@ -196,6 +199,7 @@ CheerpJ is a product built with passion and a lot of coffee by Leaning Technolog
 
 <LinkButton
 	href="https://github.com/leaningtech/cheerpj-meta"
+  target="_blank"
 	type="secondary"
 	label="Star CheerpJ on GitHub"
 	iconLeft="fa:star"
