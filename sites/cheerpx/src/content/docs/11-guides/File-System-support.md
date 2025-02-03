@@ -18,11 +18,11 @@ CheerpX implements UNIX-style virtual filesystems with multiple mount points, pr
 
 ## WebDevice
 
-WebDevice is a read-only, HTTP-based filesystem in CheerpX. It's primarily used for accessing files from your web server.
+[`WebDevice`](/docs/reference/CheerpX.WebDevice) is a read-only, HTTP-based filesystem in CheerpX. It's primarily used for accessing files from your web server.
 
 ### Usage
 
-To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
+To [create](/docs/reference/CheerpX.WebDevice/create) a [`WebDevice`](/docs/reference/CheerpX.WebDevice), use the `CheerpX.WebDevice.create()` method:
 
 ```js
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
