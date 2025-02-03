@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux event callbacks
+title: event callbacks
 description: Event Callbacks for CPU and Disk Monitoring
 ---
 
@@ -13,10 +13,10 @@ registerCallback(eventName: string, callback: (state: string | number) => void):
 
 Registers a callback function for a specific event type.
 
-**Parameters**:
+**Parameters**
 
-- **eventName**: A string specifying the event type. Can be `"cpuActivity"`, `"diskActivity"`, or `"diskLatency"`.
-- **callback**: A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
+- **eventName (`string`)** - A string specifying the event type. Can be `"cpuActivity"`, `"diskActivity"`, or `"diskLatency"`.
+- **callback (`(state: string | number) => void`)** - A function that will be called when the event occurs. It receives a parameter which varies based on the event type:
   - For `"cpuActivity"` and `"diskActivity"`: `state` can be either "ready" (idle, no activity at this time) or "wait" (active, currently in use).
   - For `"diskLatency"`: `state` is a number representing the time in milliseconds between requesting and receiving the last disk block from the backend.
 
@@ -28,10 +28,10 @@ unregisterCallback(eventName: string, callback: (state: string | number) => void
 
 Unregisters a previously registered callback function for a specific event type.
 
-**Parameters**:
+**Parameters**
 
-- **eventName**: A string specifying the event type. See the `registerCallback` reference above for the supported event types.
-- **callback**: The function to be unregistered.
+- **eventName (`string`)** - A string specifying the event type. See the `registerCallback` reference above for the supported event types.
+- **callback (`(state: string | number) => void`)** - The function to be unregistered.
 
 Example usage:
 
@@ -94,7 +94,7 @@ The `processCreated` event is triggered by the **CheerpX engine** whenever a nat
 
 Here's how the `processCreated` event is utilized in the code:
 
-1. **Callback Registration:**
+1. **Callback Registration**
 
 During the initialization of the CheerpX environment, the event is registered with the callback `handleProcessCreated`.
 

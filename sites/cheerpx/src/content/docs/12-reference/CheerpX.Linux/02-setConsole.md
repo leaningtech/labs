@@ -1,9 +1,7 @@
 ---
-title: CheerpX.Linux#setConsole
+title: setConsole
 description: Configure an HTML element as the console output for CheerpX Linux applications
 ---
-
-Sets up an HTML element to be used as the console for the application. The element will be focused and styled.
 
 ```ts
 namespace CheerpX {
@@ -30,7 +28,3 @@ namespace CheerpX {
 	cx.setConsole(document.getElementById("console"));
 </script>
 ```
-
-## See also
-
-If you'd prefer to capture output yourself, use [`setCustomConsole`](/docs/reference/CheerpX-Linux-setCustomConsole).

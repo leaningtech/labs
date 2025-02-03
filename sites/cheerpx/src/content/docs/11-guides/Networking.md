@@ -132,8 +132,8 @@ What is happening here?
 
 Headscale is an open-source and self-hosted implementation of the Tailscale control server. The upstream version of Headscale does not yet properly support the WebSocket transport. For the time being, please use [our fork](https://github.com/leaningtech/headscale).
 
-[controlUrl]: /docs/reference/CheerpX-Linux-create#controlurl
-[authKey]: /docs/reference/CheerpX-Linux-create#authkey
-[stateUpdateCb]: /docs/reference/CheerpX-Linux-create#stateupdatecb
-[netmapUpdateCb]: /docs/reference/CheerpX-Linux-create#netmapupdatecb
-[loginUrlCb]: /docs/reference/CheerpX-Linux-create#loginurlcb
+[controlUrl]: /docs/reference/CheerpX.Linux/create#controlurl
+[authKey]: /docs/reference/CheerpX.Linux/create#authkey
+[stateUpdateCb]: /docs/reference/CheerpX.Linux/create#stateupdatecb
+[netmapUpdateCb]: /docs/reference/CheerpX.Linux/create#netmapupdatecb
+[loginUrlCb]: /docs/reference/CheerpX.Linux/create#loginurlcb

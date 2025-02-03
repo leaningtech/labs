@@ -11,7 +11,7 @@ CheerpX provides two options for handling console input and output: a _built-in_
 
 CheerpX comes with a _built-in_ console that mimics traditional console behavior. The _built-in_ console supports standard input and output over a HTML `<pre>` (pre-formatted) element. Keyboard input works provided the element is in focus.
 
-For more information, visit the [CheerpX console] reference.
+For more information, visit the [CheerpX console](/docs/reference/CheerpX.Linux/setConsole) reference.
 
 ### Custom console
 
@@ -39,7 +39,7 @@ for (let i = 0; i < encodedStr.length; i++) {
 }
 ```
 
-For more details on customizing the console, see [CheerpX Custom console].
+For more details on customizing the console, see [CheerpX Custom console](/docs/reference/CheerpX.Linux/setCustomConsole).
 
 ## Reading Files Using IDBDevice and Redirecting Output
 
@@ -95,8 +95,6 @@ The `DataDevice` API exposes JavaScript data via the filesystem. This device pro
 For more information, see the [CheerpX DataDevice].
 
 [CheerpX documentations]: https://cheerpx.io/docs/overview
-[CheerpX console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setConsole
-[CheerpX Custom console]: https://cheerpx.io/docs/reference/CheerpX-Linux-setCustomConsole
 [CheerpX DataDevice]: https://cheerpx.io/docs/guides/File-System-support#datadevice
 [CheerpX IDBDevice]: https://cheerpx.io/docs/guides/File-System-support#idbdevice
 [Frequently Asked Questions]: https://cheerpx.io/docs/faq

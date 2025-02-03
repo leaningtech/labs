@@ -1,5 +1,5 @@
 ---
-title: CheerpX.Linux#setCustomConsole
+title: setCustomConsole
 description: Configure custom console behavior for handling keyboard input and output display
 ---
 
@@ -23,7 +23,7 @@ namespace CheerpX {
 
 ## Returns
 
-`setCustomConsole` returns a function that should be called to simulate user typing in the console.
+`setCustomConsole` returns a function of type `(keyCode: number) => void`. This function should be called to simulate user input by sending key codes to the console.
 
 ## Examples
 
@@ -67,9 +67,3 @@ term.onData((str) => {
 	}
 });
 ```
-
-This is what [WebVM](https://webvm.io) uses for its interactive terminal.
-
-## See also
-
-- [`setConsole`](/docs/reference/CheerpX-Linux-setConsole)
