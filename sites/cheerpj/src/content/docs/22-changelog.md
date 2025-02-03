@@ -2,7 +2,7 @@
 title: Changelog
 ---
 
-## [3.1](https://cheerpj.com/blog/) - February 5, 2025
+## [3.1](https://cheerpj.com/cheerpj-3.1) - February 5, 2025
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
@@ -15,7 +15,6 @@ title: Changelog
 - Improved font behavior
 - Improved debugging options
 - Improved performance
-
 
 ## [3.0](https://cheerpj.com/cheerpj-3-now-generally-available/) - February 1, 2024
 
