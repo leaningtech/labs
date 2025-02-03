@@ -17,7 +17,7 @@ namespace CheerpX {
 
 ## Returns
 
-`CheerpX.WebDevice.create` returns a [Promise] that gives you a WebDevice instance. You can use this instance to mount the specified directory in the CheerpX filesystem.
+`CheerpX.WebDevice.create` returns a [Promise] that gives you a `WebDevice` instance. You can use this instance to mount the specified directory in the CheerpX filesystem.
 
 ## Example
 
@@ -36,5 +36,7 @@ const cx = await CheerpX.Linux.create({
 	mounts: mountPoints,
 });
 ```
+
+For more information, please check out the [Files and File system guide](/docs/guides/File-System-support). This guide provides more details on how to work with files and directories in CheerpX.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
