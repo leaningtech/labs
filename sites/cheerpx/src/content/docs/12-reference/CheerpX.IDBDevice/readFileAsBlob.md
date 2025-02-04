@@ -13,7 +13,7 @@ namespace CheerpX {
 
 ## Parameters
 
-- **filename (`string`)** - The path to the file within the `IDBDevice`, starting with a `/` (e.g., “/filename”). Do not include the mount point.
+- **filename (`string`)** - The path to the file within the `IDBDevice`, starting with a `/` (e.g., `/filename`). Do not include the mount point.
 
 ## Returns
 
@@ -44,6 +44,9 @@ console.log(outputBlob);
 ```
 
 > [!tip] View stored files in DevTools
-> To see your stored files, open Developer Tools, go to the Application tab, and check Storage > IndexedDB. Here, you can browse and inspect your files easily!
+> To see your stored files, open Developer Tools, go to the Application tab, and check Storage > IndexedDB. Here, you can browse and inspect your files easily! <br>
+> Want to learn more? Check out these related guides: <br>
+> - [Files and filesystems](/docs/guides/File-System-support) <br>
+> - [Input and output](/docs/guides/input-output)
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

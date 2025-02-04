@@ -95,32 +95,7 @@ You can read files from an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) in J
 await idbDevice.readFileAsBlob("/filename");
 ```
 
-### `idbDevice.readFileAsBlob`
-
-`CheerpX.IDBDevice` provides a method to read back files as JavaScript accessible data.
-
-```js
-await idbDevice.readFileAsBlob(filename: string): Promise<Blob>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-
-**Returns**:
-
-The method returns a Promise that resolves to a standard JavaScript Blob object.
-
-Example:
-
-```js
-const idbDevice = await CheerpX.IDBDevice.create("files");
-// Use CheerpX to write something to the device
-const outputBlob = await idbDevice.readFileAsBlob("/filename");
-```
-
-> [!note] Note
-> The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
+For more details on reading files using [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) and redirecting output, see the [Input/Output](/docs/guides/input-output#reading-files-using-idbdevice-and-redirecting-output) guide.
 
 ## DataDevice
 
