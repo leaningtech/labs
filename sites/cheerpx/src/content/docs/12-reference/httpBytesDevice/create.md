@@ -13,7 +13,7 @@ namespace CheerpX {
 
 ## Parameters
 
-- url (`string`): The URL of the disk image to be streamed via HTTP.
+- **url (`string`)** - The URL of the disk image to be streamed via HTTP.
 
 ## Returns
 
@@ -21,7 +21,7 @@ namespace CheerpX {
 
 ## Example
 
-Create an HttpBytesDevice instance for remote filesystem streaming.
+Create an `HttpBytesDevice` instance for remote filesystem streaming.
 
 ```ts {2, 6, 12}
 // Create a read-only block device for a disk image stored on an HTTP server
@@ -42,7 +42,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-In this example, the HttpBytesDevice is created using `CheerpX.HttpBytesDevice.create()` and used as the base layer for an ext2 filesystem in the CheerpX system.
+In this example, the `HttpBytesDevice` is created using `CheerpX.HttpBytesDevice.create()` and used as the base layer for an ext2 filesystem in the CheerpX system.
 
 To learn more about virtual filesystems in CheerpX, check out our [Files and filesystems](/docs/guides/File-System-support) guide.
 
