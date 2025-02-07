@@ -5,9 +5,12 @@ description: Create a writable persistent overlay device on top of another block
 
 ```ts
 namespace CheerpX {
-  class OverlayDevice {
-    static async create(baseDevice: Device, overlayDevice: Device): Promise<OverlayDevice>;
-  }
+	class OverlayDevice {
+		static async create(
+			baseDevice: Device,
+			overlayDevice: Device
+		): Promise<OverlayDevice>;
+	}
 }
 ```
 
@@ -37,9 +40,10 @@ const overlayDevice = await CheerpX.OverlayDevice.create(httpDevice, idbDevice);
 
 // Mount the overlay device in the CheerpX environment as an ext2 filesystem
 const cx = await CheerpX.Linux.create({
-  mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
+	mounts: [{ type: "ext2", path: "/", dev: overlayDevice }],
 });
 ```
+
 In this example, the `OverlayDevice` provides a writable layer on top of the `HttpBytesDevice` (which serves as a read-only block device for streaming), allowing changes to be stored locally via the `IDBDevice`.
 
 <!-- Add links when rest of the references are added -->
