@@ -86,7 +86,7 @@ In this example:
 
 The `writeFile` method is used to write source code (`srcCode`) into a file (`hello.cpp`) on the `DataDevice`.
 
-After that, the CheerpX environment runs a `g++` command to compile the source code, and then executes the compiled file to output __Hello World__.
+After that, the CheerpX environment runs a `g++` command to compile the source code, and then executes the compiled file to output **Hello World**.
 
 If you’d like to learn more about related topics, check out these guides:
 
