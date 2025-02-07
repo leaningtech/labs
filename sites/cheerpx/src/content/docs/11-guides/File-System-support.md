@@ -239,11 +239,11 @@ await dataDevice.writeFile("/filename", "contents");
 
 ## Block devices with ext2
 
-CheerpX supports ext2 filesystems, which can be configured as an overlay device. This allows for a flexible setup that can combine different storage types.
+CheerpX supports ext2 filesystems, which can be configured as an [`OverlayDevice`](/docs/reference/CheerpX.OverlayDevice). This allows for a flexible setup that can combine different storage types.
 
 ### Usage
 
-Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
+Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a [`OverlayDevice`](/docs/reference/CheerpX.OverlayDevice) to combine the two.
 
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP
