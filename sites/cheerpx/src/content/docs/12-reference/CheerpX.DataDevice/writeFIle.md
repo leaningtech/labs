@@ -86,6 +86,12 @@ In this example:
 
 The `writeFile` method is used to write source code (`srcCode`) into a file (`hello.cpp`) on the `DataDevice`.
 
-After that, the CheerpX environment runs a `g++` command to compile the source code, and then executes the compiled file to output "Hello World".
+After that, the CheerpX environment runs a `g++` command to compile the source code, and then executes the compiled file to output __Hello World__.
+
+If you’d like to learn more about related topics, check out these guides:
+
+- [Files and filesystems](/docs/guides/File-System-support) – Managing files and storage in CheerpX.
+- [Custom disk images](/docs/guides/custom-images) – Creating and using custom disk images.
+- [Input and output](/docs/guides/input-output) – Handling data flow in your environment.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

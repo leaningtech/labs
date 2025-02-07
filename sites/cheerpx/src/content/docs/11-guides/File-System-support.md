@@ -208,35 +208,6 @@ You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from J
 await dataDevice.writeFile("/filename", "File content here");
 ```
 
-### `dataDevice.writeFile`
-
-`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
-
-```js
-await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
-
-**Returns**:
-
-The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
-
-Example:
-
-```js
-const dataDevice = await CheerpX.DataDevice.create();
-await dataDevice.writeFile("/filename", "contents");
-```
-
-> [!note] Note
->
-> - This is the only way to create files in this device.
-> - Modifying existing files or creating files in subdirectories is not possible.
-
 ## Block devices with ext2
 
 CheerpX supports ext2 filesystems, which can be configured as an overlay device. This allows for a flexible setup that can combine different storage types.

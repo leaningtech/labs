@@ -48,4 +48,10 @@ const cx = await CheerpX.Linux.create({
 
 In this example, the `DataDevice` is created using `CheerpX.DataDevice.create()` and mounted at `/data` in the Linux environment inside the CheerpX system.
 
+If you’d like to learn more about related topics, check out these guides:
+
+- [Files and filesystems](/docs/guides/File-System-support) – Managing files and storage in CheerpX.
+- [Custom disk images](/docs/guides/custom-images) – Creating and using custom disk images.
+- [Input and output](/docs/guides/input-output) – Handling data flow in your environment.
+
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
