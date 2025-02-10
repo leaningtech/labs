@@ -23,12 +23,12 @@ None.
 
 Reset an `IDBDevice` instance before mounting it.
 
-```ts
+```ts {8}
 // Create a read-only block device for a disk image stored on the HTTP server
 const blockDevice = await CheerpX.HttpBytesDevice.create("/cheerpXImage.ext2");
 
 // Make the block device read-write using a persistent IndexedDB overlay
-const idbDevice = await CheerpX.IDBDevice.create("block_bash");
+const idbDevice = await CheerpX.IDBDevice.create("block_idbDevice");
 
 // Reset the IndexedDB storage
 await idbDevice.reset();
