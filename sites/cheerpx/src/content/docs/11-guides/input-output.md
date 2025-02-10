@@ -43,7 +43,7 @@ For more details on customizing the console, see [CheerpX Custom console](/docs/
 
 ## Reading Files Using IDBDevice and Redirecting Output
 
-`IDBDevice` provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the `readFileAsBlob` method to read files from an `IDBDevice` as Blob objects.
+[`IDBDevice`](/docs/reference/CheerpX.IDBDevice) provides a persistent, read-write filesystem using the browser’s IndexedDB. It’s ideal for storing data that should persist between sessions. You can use the [`readFileAsBlob`](/docs/reference/CheerpX.IDBDevice/readFileAsBlob) method to read files from an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) as Blob objects.
 
 To make a file accessible, you can copy files using commands within the virtual machine. Here’s an example on how to do it:
 
@@ -86,8 +86,6 @@ console.log(await outputBlob.text());
 > [!note] Note
 > This method has a significant limitation: it doesn't provide streaming output. The entire program needs to finish execution before you can read the output file. This means you won't see real-time output, and for long-running programs, you'll have to wait until completion to see any results. For real-time output, consider using the _custom_ console approach, which allows for streaming output.
 
-For more on `IDBDevice` operations, see the [CheerpX IDBDevice].
-
 ## Accessing JS Data in the Filesystem via DataDevice
 
 The `DataDevice` API exposes JavaScript data via the filesystem. This device provides read-only access to a `Uint8Array` and a JavaScript `String`. It is particularly useful for transferring data from JavaScript to programs running in CheerpX.
@@ -96,6 +94,5 @@ For more information, see the [CheerpX DataDevice].
 
 [CheerpX documentations]: https://cheerpx.io/docs/overview
 [CheerpX DataDevice]: https://cheerpx.io/docs/guides/File-System-support#datadevice
-[CheerpX IDBDevice]: https://cheerpx.io/docs/guides/File-System-support#idbdevice
 [Frequently Asked Questions]: https://cheerpx.io/docs/faq
 [xterm.js]: https://xtermjs.org/
