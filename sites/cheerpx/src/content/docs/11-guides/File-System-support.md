@@ -18,11 +18,11 @@ CheerpX implements UNIX-style virtual filesystems with multiple mount points, pr
 
 ## WebDevice
 
-WebDevice is a read-only, HTTP-based filesystem in CheerpX. It's primarily used for accessing files from your web server.
+[`WebDevice`](/docs/reference/CheerpX.WebDevice) is a read-only, HTTP-based filesystem in CheerpX. It's primarily used for accessing files from your web server.
 
 ### Usage
 
-To create a WebDevice, use the `CheerpX.WebDevice.create()` method:
+To [create](/docs/reference/CheerpX.WebDevice/create) a [`WebDevice`](/docs/reference/CheerpX.WebDevice), use the `CheerpX.WebDevice.create()` method:
 
 ```js
 const webDevice = await CheerpX.WebDevice.create("path/to/local/directory");
@@ -133,11 +133,11 @@ For a full server setup and additional details, check our [basic server guide](/
 
 ## IDBDevice
 
-IDBDevice provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
+[`IDBDevice`](/docs/reference/CheerpX.IDBDevice) provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
 
 ### Usage
 
-Create an IDBDevice using the `CheerpX.IDBDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.IDBDevice/create) an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) using the `CheerpX.IDBDevice.create()` method:
 
 ```javascript
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
@@ -151,38 +151,13 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
 ### Reading files from JavaScript
 
-You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
+You can read files from an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) in JavaScript using the [`readFileAsBlob`](/docs/reference/CheerpX.IDBDevice/readFileAsBlob) method:
 
 ```javascript
 await idbDevice.readFileAsBlob("/filename");
 ```
 
-### `idbDevice.readFileAsBlob`
-
-`CheerpX.IDBDevice` provides a method to read back files as JavaScript accessible data.
-
-```js
-await idbDevice.readFileAsBlob(filename: string): Promise<Blob>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-
-**Returns**:
-
-The method returns a Promise that resolves to a standard JavaScript Blob object.
-
-Example:
-
-```js
-const idbDevice = await CheerpX.IDBDevice.create("files");
-// Use CheerpX to write something to the device
-const outputBlob = await idbDevice.readFileAsBlob("/filename");
-```
-
-> [!note] Note
-> The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
+For more details on reading files using [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) and redirecting output, see the [Input/Output](/docs/guides/input-output#reading-files-using-idbdevice-and-redirecting-output) guide.
 
 ## DataDevice
 
@@ -214,7 +189,7 @@ CheerpX supports ext2 filesystems, which can be configured as an overlay device.
 
 ### Usage
 
-Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
+Create an ext2 filesystem by combining a `HttpBytesDevice` to access disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
 
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP

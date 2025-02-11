@@ -135,7 +135,7 @@ cx.setConsole(document.getElementById("console"));
 await cx.run("/usr/bin/python3", []);
 ```
 
-That’s it. The user will now be able to try Python code in the browser. The basic _builtin console_ is sufficient for quick experimentation, but you should consider using the full-fledged [xterm.js](https://xtermjs.org/) terminal emulator for better results. You can do so using the [`cx.setCustomConsole` API](https://cheerpx.io/docs/reference/CheerpX-Linux-setCustomConsole)
+That’s it. The user will now be able to try Python code in the browser. The basic _builtin console_ is sufficient for quick experimentation, but you should consider using the full-fledged [xterm.js](https://xtermjs.org/) terminal emulator for better results. You can do so using the [`cx.setCustomConsole` API](/docs/reference/CheerpX.Linux/setCustomConsole)
 
 ![Python in the browser](./images/cx10_python.png)
 
