@@ -161,11 +161,11 @@ For more details on reading files using [`IDBDevice`](/docs/reference/CheerpX.ID
 
 ## DataDevice
 
-`DataDevice` is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
+[`DataDevice`](/docs/reference/CheerpX.DataDevice) is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
 
 ### Usage
 
-Create a DataDevice using the `CheerpX.DataDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.DataDevice/create) a [`DataDevice`](/docs/reference/CheerpX.DataDevice) using the `CheerpX.DataDevice.create()` method:
 
 ```javascript
 const dataDevice = await CheerpX.DataDevice.create();
@@ -177,40 +177,11 @@ const cx = await CheerpX.Linux.create({
 
 ### Adding files
 
-You can add files to a DataDevice from JavaScript using the `writeFile` method:
+You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from JavaScript using the [`writeFile`](/docs/reference/CheerpX.DataDevice/writeFIle) method:
 
 ```javascript
 await dataDevice.writeFile("/filename", "File content here");
 ```
-
-### `dataDevice.writeFile`
-
-`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
-
-```js
-await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
-
-**Returns**:
-
-The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
-
-Example:
-
-```js
-const dataDevice = await CheerpX.DataDevice.create();
-await dataDevice.writeFile("/filename", "contents");
-```
-
-> [!note] Note
->
-> - This is the only way to create files in this device.
-> - Modifying existing files or creating files in subdirectories is not possible.
 
 ## Block devices with ext2
 
