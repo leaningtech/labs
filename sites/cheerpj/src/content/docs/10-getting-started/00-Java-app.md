@@ -33,7 +33,7 @@ Let's create a basic HTML file like the following example. Please notice the Che
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ test</title>
-		<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 	</head>
 	<body>
 		<script>

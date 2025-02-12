@@ -6,7 +6,7 @@ description: Use Java classes in JavaScript
 ## 1. Include CheerpJ on your page
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 ## 2. Initialize CheerpJ and load your Java library

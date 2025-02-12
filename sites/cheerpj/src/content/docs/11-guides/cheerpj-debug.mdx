@@ -14,7 +14,7 @@ The reason your application isn't working could be quite simple. Try these check
 - You integrated CheerpJ into your web page by adding a `<script>` tag like this:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
 ```
 
 - The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
@@ -25,6 +25,16 @@ The reason your application isn't working could be quite simple. Try these check
 If your application passes all these checks but still isn't working correctly, you may need additional assistance from us. You can request help through our <a href={DISCORD_URL} target="_blank">Discord</a> server.
 
 If you do so, make sure to provide additional context, such as a HAR file and the browser's console output. This will make it easier for us to assist you. Instructions on how to generate these are provided in the following steps.
+
+## Enable advanced debug logs in CheerpJ
+
+Before saving the browser console output, it's important to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
+
+```js
+cheerpjInit({ enableDebug: true });
+```
+
+This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ. It provides a lot of extra information in case an actual error occurs and will speed up the process of solving the problem you are encountering.
 
 ## Saving the browser console output
 
@@ -57,3 +67,5 @@ You can save a HAR following these steps:
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
 [virtual filesystem]: /docs/guides/File-System-support
+[`enableDebug`]: /docs/reference/cheerpjInit#enableDebug
+[`initOption`]: /docs/reference/cheerpjInit
