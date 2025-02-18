@@ -189,7 +189,7 @@ CheerpX supports ext2 filesystems, which can be configured as an overlay device.
 
 ### Usage
 
-Create an ext2 filesystem by combining a `HttpBytesDevice` to access disk blocks, an `IDBDevice` to cache and persist data and a `OverlayDevice` to combine the two.
+Create an ext2 filesystem by combining a [`HttpBytesDevice`](/docs/reference/httpBytesDevice) to acess disk blocks, an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) to cache and persist data and a `OverlayDevice` to combine the two.
 
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP
@@ -213,7 +213,7 @@ This setup creates an ext2 filesystem that loads its initial data from an HTTP s
 
 CheerpX supports various types of devices that can be used in the OverlayDevice configuration:
 
-1. **HttpBytesDevice**: The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
+1. [**HttpBytesDevice**](/docs/reference/httpBytesDevice): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
 2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
 3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
