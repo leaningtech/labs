@@ -1,0 +1,56 @@
+---
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+import { products } from "@leaningtech/astro-theme/products";
+import { Image } from "astro:assets";
+import { type Product } from "../../../../packages/astro-theme/lib/nav.ts";
+
+interface Props {
+	productId: Product;
+	formUrl: string;
+}
+
+const { productId, formUrl } = Astro.props;
+const product = products[productId];
+---
+
+<Shell title=`${product.name} Payment`>
+	<main
+		class="flex flex-col justify-center items-center flex-grow w-full max-w-screen-2xl mx-auto px-6 py-10 overflow-hidden"
+	>
+		<div class="flex justify-between items-center w-4/5 max-w-6xl p-4">
+			<div class="w-1/2 p-4 box-border">
+				<div class="mb-6">
+					<a href={product.href} target="_blank">
+						<Image src={product.logotype} alt={product.name} class="w-4/5" />
+					</a>
+				</div>
+				<h2 class="text-3xl font-bold mb-4">Purchase Your License</h2>
+				<p class="text-base">
+					Complete the purchase to get your license key. Once you have completed
+					the purchase, you will receive an email with the license key.
+				</p>
+				<br />
+				<p class="text-base">
+					Activate your license key
+					<a
+						href="chrome-extension://aklbimhnkloeefmeobindhkbpncelbmg/license.html"
+						target="_blank"
+						class="text-white hover:text-gray-300 font-bold">here.</a
+					>
+				</p>
+			</div>
+			<div class="w-1/2 p-4 box-border">
+				<!-- <iframe class="w-full h-[600px] border-none" src={formUrl}> </iframe> -->
+				<script
+					id="fsc-api"
+					src="https://sbl.onfastspring.com/sbl/1.0.1/fastspring-builder.min.js"
+					type="text/javascript"
+					data-storefront={formUrl.toString()}></script>
+				<div id="fsc-embedded-checkout-container"></div>
+				<script type="text/javascript">
+					fastspring.builder.add("cheerpj-jnlp-runner");
+				</script>
+			</div>
+		</div>
+	</main>
+</Shell>
