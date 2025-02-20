@@ -129,6 +129,7 @@ What is happening here?
 - [stateUpdateCb] and [netmapUpdateCb] are necessary for tracking network status and updates to network maps.
 
 After setting up the network interface, you can trigger the network login by calling.
+
 ```js
 await cx.networkLogin();
 ```
