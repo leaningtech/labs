@@ -46,12 +46,11 @@ const cx = await CheerpX.Linux.create({
 
 In this example, the `OverlayDevice` provides a writable layer on top of the `HttpBytesDevice` (which serves as a read-only block device for streaming), allowing changes to be stored locally via the `IDBDevice`.
 
-<!-- Add links when rest of the references are added -->
-<!-- ## Related sources
+## Related sources
 
-- [Cheerp.HttpBytesDevice.create]()
-- [Cheerp.IDBDevice.create]()
-- [Cheerp.Linux.create]() -->
+- [CheerpX.HttpBytesDevice](/docs/reference/httpBytesDevice)
+- [CheerpX.IDBDevice](/docs/reference/CheerpX.IDBDevice)
+- [CheerpX.Linux](/docs/reference/CheerpX.Linux)
 
 For more information, please check out the [Files and File system guide](/docs/guides/File-System-support). This guide provides more details on how to work with files and directories in CheerpX.
 
