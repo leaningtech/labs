@@ -215,7 +215,7 @@ CheerpX supports various types of devices that can be used in the OverlayDevice 
 
 1. [**HttpBytesDevice**](/docs/reference/httpBytesDevice): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
 2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
-3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
+3. [**OverlayDevice**](/docs/reference/CheerpX.OverlayDevice): `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
 ## Best practices
 
