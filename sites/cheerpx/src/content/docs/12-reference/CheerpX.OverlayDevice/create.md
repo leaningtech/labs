@@ -16,7 +16,7 @@ namespace CheerpX {
 
 ## Parameters
 
-- **baseDevice (`Device`)** - The underlying device (e.g., `HttpBytesDevice`, `IDBDevice`) that serves as the base layer for the filesystem.
+- **baseDevice (`Device`)** - The underlying device (e.g., [`HttpBytesDevice`](/docs/reference/httpBytesDevice), [`IDBDevice`](/docs/reference/CheerpX.IDBDevice)) that serves as the base layer for the filesystem.
 
 - **overlayDevice (`Device`)** - The writable layer that will overlay the base device, enabling persistent changes.
 
@@ -26,7 +26,7 @@ namespace CheerpX {
 
 ## Example
 
-Create an `OverlayDevice` instance to combine a `HttpBytesDevice` for streaming data from an HTTP source and an `IDBDevice` for caching and persistent local storage.
+Create an `OverlayDevice` instance to combine a [`HttpBytesDevice`](/docs/reference/httpBytesDevice) for streaming data from an HTTP source and an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) for caching and persistent local storage.
 
 ```ts {8, 12}
 // Create a read-only HttpBytesDevice for streaming disk blocks via HTTP
@@ -44,13 +44,7 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-In this example, the `OverlayDevice` provides a writable layer on top of the `HttpBytesDevice` (which serves as a read-only block device for streaming), allowing changes to be stored locally via the `IDBDevice`.
-
-## Related sources
-
-- [CheerpX.HttpBytesDevice](/docs/reference/httpBytesDevice)
-- [CheerpX.IDBDevice](/docs/reference/CheerpX.IDBDevice)
-- [CheerpX.Linux](/docs/reference/CheerpX.Linux)
+In this example, the `OverlayDevice` provides a writable layer on top of the [`HttpBytesDevice`](/docs/reference/httpBytesDevice) (which serves as a read-only block device for streaming), allowing changes to be stored locally via the [`IDBDevice`](/docs/reference/CheerpX.IDBDevice).
 
 For more information, please check out the [Files and File system guide](/docs/guides/File-System-support). This guide provides more details on how to work with files and directories in CheerpX.
 
