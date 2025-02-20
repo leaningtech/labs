@@ -133,11 +133,11 @@ For a full server setup and additional details, check our [basic server guide](/
 
 ## IDBDevice
 
-IDBDevice provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
+[`IDBDevice`](/docs/reference/CheerpX.IDBDevice) provides a persistent, read-write filesystem using the browser's IndexedDB. It's ideal for storing data that should persist between sessions.
 
 ### Usage
 
-Create an IDBDevice using the `CheerpX.IDBDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.IDBDevice/create) an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) using the `CheerpX.IDBDevice.create()` method:
 
 ```javascript
 const idbDevice = await CheerpX.IDBDevice.create("dbName");
@@ -151,46 +151,21 @@ This setup creates a virtual filesystem at `/files` that is backed by IndexedDB.
 
 ### Reading files from JavaScript
 
-You can read files from an `IDBDevice` in JavaScript using the `readFileAsBlob` method:
+You can read files from an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) in JavaScript using the [`readFileAsBlob`](/docs/reference/CheerpX.IDBDevice/readFileAsBlob) method:
 
 ```javascript
 await idbDevice.readFileAsBlob("/filename");
 ```
 
-### `idbDevice.readFileAsBlob`
-
-`CheerpX.IDBDevice` provides a method to read back files as JavaScript accessible data.
-
-```js
-await idbDevice.readFileAsBlob(filename: string): Promise<Blob>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-
-**Returns**:
-
-The method returns a Promise that resolves to a standard JavaScript Blob object.
-
-Example:
-
-```js
-const idbDevice = await CheerpX.IDBDevice.create("files");
-// Use CheerpX to write something to the device
-const outputBlob = await idbDevice.readFileAsBlob("/filename");
-```
-
-> [!note] Note
-> The `readFileAsBlob` API returns a standard JavaScript Blob object. You can convert it to a string if needed, but you can also convert it to an `ArrayBuffer` or to a URL via `URL.createObjectURL`.
+For more details on reading files using [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) and redirecting output, see the [Input/Output](/docs/guides/input-output#reading-files-using-idbdevice-and-redirecting-output) guide.
 
 ## DataDevice
 
-`DataDevice` is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
+[`DataDevice`](/docs/reference/CheerpX.DataDevice) is an in-memory filesystem useful for temporary data storage or passing data from JavaScript to the CheerpX environment.
 
 ### Usage
 
-Create a DataDevice using the `CheerpX.DataDevice.create()` method:
+[`Create`](/docs/reference/CheerpX.DataDevice/create) a [`DataDevice`](/docs/reference/CheerpX.DataDevice) using the `CheerpX.DataDevice.create()` method:
 
 ```javascript
 const dataDevice = await CheerpX.DataDevice.create();
@@ -202,40 +177,11 @@ const cx = await CheerpX.Linux.create({
 
 ### Adding files
 
-You can add files to a DataDevice from JavaScript using the `writeFile` method:
+You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from JavaScript using the [`writeFile`](/docs/reference/CheerpX.DataDevice/writeFIle) method:
 
 ```javascript
 await dataDevice.writeFile("/filename", "File content here");
 ```
-
-### `dataDevice.writeFile`
-
-`CheerpX.DataDevice` provides a method to write data to new files within the mounted device. This utility is limited to creating files at the root level of the device.
-
-```js
-await dataDevice.writeFile(filename: string, contents: string | Uint8Array): Promise<void>
-```
-
-**Parameters**:
-
-- **filename**: A string representing the path to the file within the device, starting with a `/` (e.g., "/filename"). Do not include the mount point.
-- **contents**: The data to write to the file. Can be either a string or a Uint8Array.
-
-**Returns**:
-
-The method returns a Promise that resolves when the file has been created and written to. It doesn't return any value.
-
-Example:
-
-```js
-const dataDevice = await CheerpX.DataDevice.create();
-await dataDevice.writeFile("/filename", "contents");
-```
-
-> [!note] Note
->
-> - This is the only way to create files in this device.
-> - Modifying existing files or creating files in subdirectories is not possible.
 
 ## Block devices with ext2
 
@@ -243,7 +189,7 @@ CheerpX supports ext2 filesystems, which can be configured as an [`OverlayDevice
 
 ### Usage
 
-Create an ext2 filesystem by combining a `HttpBytesDevice` to acess disk blocks, an `IDBDevice` to cache and persist data and a [`OverlayDevice`](/docs/reference/CheerpX.OverlayDevice) to combine the two.
+Create an ext2 filesystem by combining a [`HttpBytesDevice`](/docs/reference/httpBytesDevice) to acess disk blocks, an [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) to cache and persist data and a [`OverlayDevice`](/docs/reference/CheerpX.OverlayDevice) to combine the two.
 
 ```javascript
 // Create an HttpBytesDevice for streaming disk blocks via HTTP
@@ -267,7 +213,7 @@ This setup creates an ext2 filesystem that loads its initial data from an HTTP s
 
 CheerpX supports various types of devices that can be used in the OverlayDevice configuration:
 
-1. **HttpBytesDevice**: The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
+1. [**HttpBytesDevice**](/docs/reference/httpBytesDevice): The default choice for loading filesystem images via HTTP. Suitable for most web-hosted files.
 2. **GitHubDevice**: Ideal for projects forked from the [WebVM](https://github.com/leaningtech/webvm/) repository. The Integrated GitHub Action will take care of preparing disk chunks for efficient access.
 3. **OverlayDevice**: `OverlayDevice` supports chaining, making it possible to efficiently "fork" disk images while only storing the changes from previous versions.
 
