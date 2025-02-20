@@ -22,32 +22,32 @@ import Directions from "../assets/direction.png";
 <ProductHome style="w-full pt-8 bg-gradient-to-b from-[#0b0923] to-black">
 	<!-- Hero -->
 	<section>
-		<div class="md:hidden justify-center p-8 md:px-32">
-			<Image src={HeroDoodle} alt="WebVM logo in a screen" class="" />
+		<div class="lg:hidden justify-center px-32 py-8 sm:px-80 sm:pt-8">
+			<Image src={HeroDoodle} alt="WebVM logo in a screen" class=""/>
 		</div>
 		<div
-			class="flex grid-cols-3 items-center px-4 pb-28 md:px-8 md:pt-16 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
+			class="flex grid-cols-3 items-center px-4 pb-28 md:px-4 md:pt-4 lg:px-28 lg:pt-32 xl:pt-42 xl:px-28 2xl:px-48 3xl:px-602xl:pt-60"
 		>
 			<div
-				class="col-span-2 mx-auto max-w-[56em] text-center space-y-8 sm:px-8"
+				class="col-span-2 mx-auto max-w-[56em] text-center space-y-4 sm:px-8"
 			>
 				<h1
-					class="font-mono text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center sm:text-left text-wrap text-balance"
+					class="font-mono text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center lg:text-left text-wrap text-balance"
 				>
 					<span class="text-primary-300">WebVM:</span>The hackathon II!
 				</h1>
 				<p
-					class="font-mono text-3xl text-balance text-[#00b8a9] text-center sm:text-left"
+					class="font-mono text-xl md:text-3xl text-balance text-[#00b8a9] text-center lg:text-left"
 				>
 					Join the terminal tools challenge!
 				</p>
 				<h1
-					class="font-mono text-xl text-balance text-primary-300 text-center sm:text-left"
+					class="font-mono text-xl text-balance text-primary-300 text-center lg:text-left"
 				>
 					Coming up this spring 2025
 				</h1>
 				<p
-					class="font-mono text-md text-wrap text-balance text-white text-center sm:text-left"
+					class="font-mono text-md text-wrap text-balance text-white text-center px-2 py-4 lg:text-left"
 				>
 					<b>WebVM: The hackathon</b> is a global hybrid event open to all developers!
 					Dive into the world of terminal-based solutions by leveraging <b
@@ -56,10 +56,10 @@ import Directions from "../assets/direction.png";
 					> Let your creativity flow and showcase your coding skills in this exciting
 					event.
 				</p>
-				<div class="flex gap-4 justify-center sm:justify-start mt-12">
+				<div class="flex gap-4 justify-center lg:justify-start mt-12">
 					<LinkButton
 						type="primary-mono"
-						href=""
+						href={DISCORD_URL}
 						label="Discord"
 						iconRight="ic:baseline-discord"
 					/>
@@ -71,7 +71,7 @@ import Directions from "../assets/direction.png";
 					/>
 				</div>
 			</div>
-			<div class="hidden md:block flex justify-center 2xl:pl-18">
+			<div class="hidden lg:block flex justify-center 2xl:pl-32 2xl:px-16">
 				<Image src={HeroDoodle} alt="WebVM logo in a screen" class="" />
 			</div>
 		</div>
@@ -91,19 +91,24 @@ import Directions from "../assets/direction.png";
 				class="font-mono text-lg sm:text-xl text-white text-pretty text-center"
 			>
 				In a nutshell: assemble your tech squad together, immerse yourself in a
-				tech project frenzy for a whole week. <b
-					 class="text-primary-300">The winner team gets a sweet 500 GBP gift card!</b
+				tech project frenzy for a whole week. <b class="text-primary-300"
+					>The winner team gets a sweet 500 GBP gift card!</b
 				>
 				More information coming soon, stay tuned! 🚀.
 			</p>
-			
-			<p class="font-mono text-lg sm:text-xl text-white text-pretty text-center py-10">
-				In the mean time take a look to the 
-				<a class="text-[#00b8a9] hover:underline" href="https://github.com/leaningtech/WebVMHackathon/blob/main/results2024.md">
+
+			<p
+				class="font-mono text-lg sm:text-xl text-white text-pretty text-center py-10"
+			>
+				In the mean time take a look to the
+				<a
+					class="text-[#00b8a9] hover:underline"
+					href="https://github.com/leaningtech/WebVMHackathon/blob/main/results2024.md"
+				>
 					2024 edition repository
 				</a>
-			.</p>
+				.
+			</p>
 		</div>
 	</section>
-	
 </ProductHome>
