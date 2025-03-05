@@ -24,7 +24,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install curl
 Once the `Dockerfile` is ready, build the image. Use `buildah` to create a container image for your filesystem.
 
 ```bash
-buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
+buildah build -f Dockerfile --dns=none --platform linux/i386 -t cheerpximage
 ```
 
 ## 3. Create a container from the Docker Image

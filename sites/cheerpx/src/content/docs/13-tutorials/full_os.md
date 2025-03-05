@@ -22,7 +22,7 @@ CMD [ "/bin/bash" ]
 Create a container out of your Dockerfile:
 
 ```bash
-buildah build -f Dockerfile --platform linux/i386 -t cheerpximage
+buildah build -f Dockerfile --dns=none --platform linux/i386 -t cheerpximage
 podman create --name cheerpxcontainer cheerpximage
 ```
 
