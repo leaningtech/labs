@@ -128,6 +128,12 @@ What is happening here?
 - [loginUrlCb] expects the base URL of a control server that will continue and finish the login process. This callback is executed when prompting the user to log in interactively with Tailscale.
 - [stateUpdateCb] and [netmapUpdateCb] are necessary for tracking network status and updates to network maps.
 
+After setting up the network interface, you can trigger the network login by calling.
+
+```js
+await cx.networkLogin();
+```
+
 ## Self-hosting Headscale
 
 Headscale is an open-source and self-hosted implementation of the Tailscale control server. The upstream version of Headscale does not yet properly support the WebSocket transport. For the time being, please use [our fork](https://github.com/leaningtech/headscale).

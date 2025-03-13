@@ -43,14 +43,14 @@ interface MountPointConfiguration {
 	// Specifies the filesystem type
 	// 'ext2' for Linux ext2
 	// 'dir' for a hierarchical file system
-	// 'devs' for device files
-	// 'proc' for process info files.
+	// 'devs' for device files (no device required)
+	// 'proc' for process info files. (no device required)
 	type: "ext2" | "dir" | "devs" | "proc";
 
 	// First mount must be "/" (root)
 	path: string;
-	// Can be one of: overlayDevice / webDevice / dataDevice / idbDevice
-	dev: CheerpX.Device;
+	// Required for 'ext2' and 'dir' types, but optional for 'devs' and 'proc'
+	dev?: CheerpX.Device;
 }
 ```
 
@@ -61,6 +61,8 @@ const cx = await CheerpX.Linux.create({
 	mounts: [
 		{ type: "ext2", path: "/", dev: overlayDevice },
 		{ type: "dir", path: "/app", dev: webDevice },
+		{ type: "devs", path: "/dev" }, // No dev required
+		{ type: "proc", path: "/proc" }, // No dev required
 	],
 });
 ```
