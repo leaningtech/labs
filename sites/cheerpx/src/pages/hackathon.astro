@@ -19,7 +19,9 @@ import RuleBook from "../assets/rulebook.png";
 import Directions from "../assets/direction.png";
 ---
 
-<ProductHome style="w-full pt-8 bg-gradient-to-br from-black to-primary-500 via-[#0b0923]">
+<ProductHome
+	style="w-full pt-8 bg-gradient-to-br from-black to-primary-500 via-[#0b0923]"
+>
 	<!-- Hero -->
 	<section>
 		<div class="lg:hidden justify-center px-32 py-8 sm:px-80 sm:pt-8">
@@ -34,15 +36,17 @@ import Directions from "../assets/direction.png";
 				<h1
 					class="font-mono text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center lg:text-left text-wrap text-balance"
 				>
-					<span class="drop-shadow-[5px_0px_5px_rgba(240,125,153,0.9)]">WebVM:</span>The hackathon II!
+					<span class="drop-shadow-[5px_0px_5px_rgba(240,125,153,0.9)]"
+						>WebVM:</span
+					>The hackathon II!
 				</h1>
 				<p
-					class="font-mono text-xl md:text-3xl text-balance  text-center lg:text-left text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+					class="font-mono text-xl md:text-3xl text-balance text-center lg:text-left text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
 				>
 					Join the in-browser virtualization challenge!
 				</p>
 				<h1
-					class="font-mono text-xl text-balance text-primary-300 text-center lg:text-left "
+					class="font-mono text-xl text-balance text-primary-300 text-center lg:text-left"
 				>
 					7 - 14 of April, 2025
 				</h1>
@@ -82,14 +86,19 @@ import Directions from "../assets/direction.png";
 		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
 	>
 		<div class="px-8">
-			<h1 class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(0,190,169,0.6)] py-8">
+			<h1
+				class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(0,190,169,0.6)] py-8"
+			>
 				In a nutshell
 			</h1>
 			<p
 				class="font-mono text-lg sm:text-xl text-white text-pretty text-center"
 			>
-				Create a WebApp that integrates CheerpX following the theme: <b class="text-primary-300">Learning Linux on your Browser!</b>   <b>The winner team gets a sweet 500 GBP gift card!</b>
-				
+				Create a WebApp that integrates CheerpX following the theme: <b
+					class="text-primary-300">Learning Linux on your Browser!</b
+				>
+				<b>The winner team gets a sweet 500 GBP gift card!</b>
+
 				Happy coding! 🚀.
 			</p>
 
@@ -111,23 +120,23 @@ import Directions from "../assets/direction.png";
 	<section
 		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-gradient-to-br from-[#0b0923] to-[#0b0923] via-black"
 	>
-		<h1 class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] py-8">
+		<h1
+			class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] py-8"
+		>
 			How Does it all work?
 		</h1>
 		<!-- Step1: Find your squad -->
 		<div class="sm:grid sm:grid-cols-5 py-16">
 			<div class="col-span-2 flex justify-center items-center">
-				<Image
-					src={Team}
-					alt="Cats in a box"
-					class="max-w-96"
-				/>
+				<Image src={Team} alt="Cats in a box" class="max-w-96" />
 			</div>
 			<div
 				id="team"
 				class="col-span-3 text-center sm:text-left content-center px-8"
 			>
-				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+				>
 					Step 1: Register your team
 				</h1>
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
@@ -139,7 +148,8 @@ import Directions from "../assets/direction.png";
 
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
 					Are you a lone coder flying solo? No worries! Connect with potential
-					team members in our Discord server, DevPost or on-site during the opening day!
+					team members in our Discord server, DevPost or on-site during the
+					opening day!
 				</p>
 				<div class="flex gap-4 justify-center sm:justify-start mt-2">
 					<LinkButton
@@ -156,23 +166,21 @@ import Directions from "../assets/direction.png";
 			<div
 				class="sm:hidden col-span-2 flex justify-center items-center content-center"
 			>
-				<Image
-					src={TicketDoodle}
-					alt="cat typing"
-					class="max-w-96"
-				/>
+				<Image src={TicketDoodle} alt="cat typing" class="max-w-96" />
 			</div>
 			<div
 				id="register"
 				class="col-span-3 text-center sm:text-left content-center px-8"
 			>
-				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+				>
 					Step 2: Secure your spot at the venue
 				</h1>
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
 					This event offers a hybrid experience - you can fully engage online
-					or, if you fancy, join us at one at our vibrant in-person
-					location in Leeds, UK for the opening and closing days.
+					or, if you fancy, join us at one at our vibrant in-person location in
+					Leeds, UK for the opening and closing days.
 				</p>
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
 					To snag your spot, each attendee should grab a free individual ticket
@@ -191,11 +199,7 @@ import Directions from "../assets/direction.png";
 			<div
 				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
 			>
-				<Image
-					src={TicketDoodle}
-					alt="Ticket drawing"
-					class="max-w-96"
-				/>
+				<Image src={TicketDoodle} alt="Ticket drawing" class="max-w-96" />
 			</div>
 		</div>
 		<!-- Step 3:Dive -->
@@ -207,12 +211,16 @@ import Directions from "../assets/direction.png";
 				id="tickets"
 				class="col-span-3 text-center sm:text-left content-center px-8"
 			>
-				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+				>
 					Step 3: Dive into the hands-on week adventure!
 				</h1>
-				
+
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
-					Whether you're joining us in-person or fully online, fear not! We've got your back with technical support through our dedicated Discord channel. Use this space to ask for help and connect with others.
+					Whether you're joining us in-person or fully online, fear not! We've
+					got your back with technical support through our dedicated Discord
+					channel. Use this space to ask for help and connect with others.
 				</p>
 				<div class="flex gap-4 justify-center sm:justify-start mt-2">
 					<LinkButton
@@ -233,13 +241,17 @@ import Directions from "../assets/direction.png";
 				id="weekend"
 				class="col-span-3 text-center sm:text-left content-center px-8"
 			>
-				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+				>
 					Step 4: Submit your creation and await!
 				</h1>
 				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
-					Submit your creation by the deadline (Monday 14th of April at 15:00 UK time) on DevPost. Our panel of judges will review and score all the submissions. Await for the winner announcement on the 29th ofn April!
+					Submit your creation by the deadline (Monday 14th of April at 15:00 UK
+					time) on DevPost. Our panel of judges will review and score all the
+					submissions. Await for the winner announcement on the 29th ofn April!
 				</p>
-				
+
 				<div class="flex gap-4 justify-center sm:justify-start mt-2">
 					<LinkButton
 						type="secondary-mono"
