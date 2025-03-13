@@ -3,11 +3,11 @@ import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { Image } from "astro:assets";
 import HeroDoodle from "../assets/robot_hero.png";
-import CatboxDoodle from "../assets/box.png";
+import Team from "../assets/team.png";
 import KeyboardcatDoodle from "../assets/keyboard-cat.png";
 import TicketDoodle from "../assets/ticket.png";
-import UFODoodle from "../assets/ufo-cat.png";
-import ShoeDoodle from "../assets/bishop-shoe.png";
+import DiverDoodle from "../assets/diver.png";
+import WinnerDoodle from "../assets/winner.png";
 import WizardDoodle from "../assets/wizard-cat.png";
 import CalendarAsset from "../assets/calendar.png";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
@@ -19,7 +19,7 @@ import RuleBook from "../assets/rulebook.png";
 import Directions from "../assets/direction.png";
 ---
 
-<ProductHome style="w-full pt-8 bg-gradient-to-b from-[#0b0923] to-black">
+<ProductHome style="w-full pt-8 bg-gradient-to-br from-black to-primary-500 via-[#0b0923]">
 	<!-- Hero -->
 	<section>
 		<div class="lg:hidden justify-center px-32 py-8 sm:px-80 sm:pt-8">
@@ -34,23 +34,23 @@ import Directions from "../assets/direction.png";
 				<h1
 					class="font-mono text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center lg:text-left text-wrap text-balance"
 				>
-					<span class="text-primary-300">WebVM:</span>The hackathon II!
+					<span class="drop-shadow-[5px_0px_5px_rgba(240,125,153,0.9)]">WebVM:</span>The hackathon II!
 				</h1>
 				<p
-					class="font-mono text-xl md:text-3xl text-balance text-[#00b8a9] text-center lg:text-left"
+					class="font-mono text-xl md:text-3xl text-balance  text-center lg:text-left text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
 				>
-					Join the terminal tools challenge!
+					Join the in-browser virtualization challenge!
 				</p>
 				<h1
-					class="font-mono text-xl text-balance text-primary-300 text-center lg:text-left"
+					class="font-mono text-xl text-balance text-primary-300 text-center lg:text-left "
 				>
-					Coming up this spring 2025
+					7 - 14 of April, 2025
 				</h1>
 				<p
 					class="font-mono text-md text-wrap text-balance text-white text-center px-2 py-4 lg:text-left"
 				>
-					<b>WebVM: The hackathon</b> is a global hybrid event open to all developers!
-					Dive into the world of terminal-based solutions by leveraging <b
+					<b>WebVM: The hackathon II</b> is a global hybrid event open to all developers!
+					Dive into the world of in-browser virtualization by leveraging <b
 						>CheerpX, a WebAssembly-powered tool for executing x86 binaries on
 						the browser.</b
 					> Let your creativity flow and showcase your coding skills in this exciting
@@ -59,9 +59,9 @@ import Directions from "../assets/direction.png";
 				<div class="flex gap-4 justify-center lg:justify-start mt-12">
 					<LinkButton
 						type="primary-mono"
-						href={DISCORD_URL}
-						label="Discord"
-						iconRight="ic:baseline-discord"
+						href="https://webvm-hackathon.devpost.com/"
+						label="Register"
+						iconRight="ic:baseline-plus"
 					/>
 					<LinkButton
 						type="secondary-mono"
@@ -82,19 +82,15 @@ import Directions from "../assets/direction.png";
 		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
 	>
 		<div class="px-8">
-			<h1
-				class="pb-4 font-bold text-white font-mono text-xl sm:text-2xl md:text-3xl text-center"
-			>
-				How Does it all work?
+			<h1 class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(0,190,169,0.6)] py-8">
+				In a nutshell
 			</h1>
 			<p
 				class="font-mono text-lg sm:text-xl text-white text-pretty text-center"
 			>
-				In a nutshell: assemble your tech squad together, immerse yourself in a
-				tech project frenzy for a whole week. <b class="text-primary-300"
-					>The winner team gets a sweet 500 GBP gift card!</b
-				>
-				More information coming soon, stay tuned! 🚀.
+				Create a WebApp that integrates CheerpX following the theme: <b class="text-primary-300">Learning Linux on your Browser!</b>   <b>The winner team gets a sweet 500 GBP gift card!</b>
+				
+				Happy coding! 🚀.
 			</p>
 
 			<p
@@ -109,6 +105,175 @@ import Directions from "../assets/direction.png";
 				</a>
 				.
 			</p>
+		</div>
+	</section>
+	<!-- Guide section -->
+	<section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-gradient-to-br from-[#0b0923] to-[#0b0923] via-black"
+	>
+		<h1 class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] py-8">
+			How Does it all work?
+		</h1>
+		<!-- Step1: Find your squad -->
+		<div class="sm:grid sm:grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center">
+				<Image
+					src={Team}
+					alt="Cats in a box"
+					class="max-w-96"
+				/>
+			</div>
+			<div
+				id="team"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+					Step 1: Register your team
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					Gather your friends and colleagues, and get ready to dive into the
+					challenge. <span class="italic font-bold"
+						>Teams can range from 2 to 5 members.</span
+					>
+				</p>
+
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Are you a lone coder flying solo? No worries! Connect with potential
+					team members in our Discord server, DevPost or on-site during the opening day!
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono"
+						href="https://webvm-hackathon.devpost.com/"
+						label="Register"
+						iconRight="mdi:register"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 2: Registration -->
+		<div class="sm:grid grid-cols-5 py-6">
+			<div
+				class="sm:hidden col-span-2 flex justify-center items-center content-center"
+			>
+				<Image
+					src={TicketDoodle}
+					alt="cat typing"
+					class="max-w-96"
+				/>
+			</div>
+			<div
+				id="register"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+					Step 2: Secure your spot at the venue
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					This event offers a hybrid experience - you can fully engage online
+					or, if you fancy, join us at one at our vibrant in-person
+					location in Leeds, UK for the opening and closing days.
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					To snag your spot, each attendee should grab a free individual ticket
+					on Eventbrite. Remember, space is limited, so if you reserve, be sure
+					to show up!
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono"
+						href="https://www.eventbrite.co.uk/e/webvm-the-hackathon-ii-tickets-1277966595489"
+						label="Get tickets"
+						iconRight="ion:ticket"
+					/>
+				</div>
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image
+					src={TicketDoodle}
+					alt="Ticket drawing"
+					class="max-w-96"
+				/>
+			</div>
+		</div>
+		<!-- Step 3:Dive -->
+		<div class="sm:grid grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center content-center">
+				<Image src={DiverDoodle} alt="Ticket" class="max-w-96" />
+			</div>
+			<div
+				id="tickets"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+					Step 3: Dive into the hands-on week adventure!
+				</h1>
+				
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Whether you're joining us in-person or fully online, fear not! We've got your back with technical support through our dedicated Discord channel. Use this space to ask for help and connect with others.
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono"
+						href={DISCORD_URL}
+						label="Join Discord"
+						iconRight="ic:baseline-discord"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 4: Submission and winner -->
+		<div class="sm:grid grid-cols-5 py-16">
+			<div class="sm:hidden col-span-2 flex justify-center items-center">
+				<Image src={WinnerDoodle} alt="Winner" class="max-w-96" />
+			</div>
+			<div
+				id="weekend"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1 class="font-bold text-xl md:text-2xl font-mono text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]">
+					Step 4: Submit your creation and await!
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					Submit your creation by the deadline (Monday 14th of April at 15:00 UK time) on DevPost. Our panel of judges will review and score all the submissions. Await for the winner announcement on the 29th ofn April!
+				</p>
+				
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono"
+						href="https://webvm-hackathon.devpost.com/"
+						label="Submit"
+						iconRight="mdi:send"
+					/>
+				</div>
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image src={WinnerDoodle} alt="Winner" class="max-w-96" />
+			</div>
+		</div>
+		<div class="flex gap-4 justify-center items-center px-10 pt-4">
+			<p class="font-mono text-center italic font-semibold">
+				For more useful information and guidance, don't forget to read the docs
+				or ask any technical questions on our Discord Server.
+			</p>
+		</div>
+		<div class="flex gap-4 justify-center mt-12">
+			<LinkButton
+				type="primary-mono"
+				href="https://discord.com/channels/988743885121548329/1283057350638571581"
+				label="Support"
+				iconRight="simple-icons:discord"
+			/>
+			<LinkButton
+				type="secondary-mono"
+				href="/docs"
+				iconRight=""
+				label="CheerpX docs"
+			/>
 		</div>
 	</section>
 </ProductHome>
