@@ -180,7 +180,7 @@ Contrary to the **bash** tool, the **computer** tool has many more moving parts,
 
 While the **bash** tool only had one single action that could be used, the **computer** tool has several. We'll describe a few of them in depth, see [here](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use#computer-tool) for a complete list.
 
-### The “screenshot” action
+### The `screenshot` action
 
 WebVM virtualizes the display using a HTML5 canvas, so getting a screenshot is quite straightforward. The final implementation is somewhat more complicated though, since it needs to account for rescaling and be defensive against too many screenshots being taken in a row.
 
