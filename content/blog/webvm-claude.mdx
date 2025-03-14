@@ -68,7 +68,7 @@ import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic({apiKey: key, dangerouslyAllowBrowser: true});
 // The tool object and messages array must be already defined, see below for details
 const response = await client.beta.messages.create({
-		// Place a limit on the maximal amount of tokens to generate
+		// Place a limit on the maximum amount of tokens to generate
 		max_tokens: 2048,
 		// An array of messages between the user and the assistant
 		messages: messages,
@@ -309,7 +309,7 @@ case "wait":
 
 We hope this section will be useful to anybody planning to integrate the Claude **computer** tool in their own environment.
 
-The full code for our implementation is available [here](https://github.com/leaningtech/webvm/blob/91f68ce044d35489eaebf1703da3c408787c9c88/src/lib/anthropic.js#L286). We don’t currently support all tools, but we cover everything we have found to be used in our testing. WebVM is FOSS and contributions to make this feature more complete are welcome. If you are looking for a good first contribution, adding support for “left_mouse_down”/”left_mouse_up” could be a good starting point and allow Claude to do Drag-and-drop operations that are currently unsupported.
+The full code for our implementation is available [here](https://github.com/leaningtech/webvm/blob/91f68ce044d35489eaebf1703da3c408787c9c88/src/lib/anthropic.js#L286). We don’t currently support all tools, but we cover everything we have seen used in our testing. WebVM is FOSS and contributions to make this feature more complete are welcome. If you are looking for a good first contribution, adding support for “left_mouse_down”/”left_mouse_up” could be a good starting point and allow Claude to do Drag-and-drop operations that are currently unsupported.
 
 As a showcase we can bring two examples, one fairly successful, the second... not so much.
 
