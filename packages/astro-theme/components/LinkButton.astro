@@ -39,9 +39,10 @@ const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
 				type === "primary-cheerpx",
 			"border-white text-white hover:border-[#909090] hover:text-[#909090]":
 				type === "secondary-cheerpx",
-			"border-white bg-white text-black font-mono hover:bg-primary-300 hover:text-white hover:border-primary-300":
+
+			"border-white bg-white text-black font-mono hover:bg-primary-300 hover:text-white hover:border-primary-300 hover:drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)]":
 				type === "primary-mono",
-			"border-white text-white font-mono hover:border-primary-300 hover:text-primary-300":
+			"border-white text-white font-mono hover:border-primary-300 hover:text-primary-300 hover:drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)]":
 				type === "secondary-mono",
 			"border-white border-opacity-30 bg-blurple text-white hover:border-opacity-80":
 				type === "discord",
