@@ -104,10 +104,10 @@ The `messages` and `tool` definitions are so far left out of the discussion. The
 
 ```js
 const messages = [
-		{role: "user", content: "Hi, my name is Alessandro. What about you?"},
-		{role: "assistant", content: "Hello Alessandro! ..."},
-		{role: "user", content: "What was my name again?"}
-	];
+	{ role: "user", content: "Hi, my name is Alessandro. What about you?" },
+	{ role: "assistant", content: "Hello Alessandro! ..." },
+	{ role: "user", content: "What was my name again?" },
+];
 ```
 
 ![Conversation example](./claude-example1.png)
