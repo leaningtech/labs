@@ -5,7 +5,6 @@ description: |
   You can now use AI to control WebVM, both in terminal and graphical mode
 authors:
   - alessandro
-  - stefano
 pubDate: "March 17 2025"
 heroImage: "./CJ3-1-hero.png"
 featured: true
