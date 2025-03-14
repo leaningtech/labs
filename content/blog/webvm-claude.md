@@ -57,11 +57,12 @@ Basic integration in a Web app is extremely simple via the `@anthropic-ai/sdk` [
 ```js
 import Anthropic from '@anthropic-ai/sdk';
 ...
-// The `dangerouslyAllowBrowser` option enable CORS headers, the implied “danger”
-// is accidentally sharing private API keys on the open internet.
-// The recommended approach, that WebVM follows, is a being-your-own-key (BYOKey)
-// policy. The user will manually insert its own API key in the Web app. The key is only
-// saved locally to the browser and never sent to our servers.
+// The `dangerouslyAllowBrowser` option enable CORS headers, the implied
+// “danger" is accidentally sharing private API keys on the open internet.
+// The recommended approach, that WebVM follows, is a being-your-own-key
+// (BYOKey) policy. The user will manually insert its own API key in the
+// Web app. The key is only saved locally to the browser and never sent to
+// our servers.
 const client = new Anthropic({apiKey: key, dangerouslyAllowBrowser: true});
 // The tool object and messages array must be already defined, see below for details
 const response = await client.beta.messages.create({
@@ -292,9 +293,10 @@ This simple action has been added in Claude 3.7 and has proven extremely useful,
 ```js
 case "wait":
 {
-       // Wait 2x what the model expects to compensate for virtualization slowdown
-       await yieldHelper(tool.duration * 2 * 1000);
-       return null;
+	// Wait 2x what the model expects to compensate
+	// for virtualization slowdown
+	await yieldHelper(tool.duration * 2 * 1000);
+	return null;
 }
 
 ```
