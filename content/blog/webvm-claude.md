@@ -110,7 +110,9 @@ const messages = [
 ];
 ```
 
+<div class="float-right w-1/2">
 ![Conversation example](./claude-example1.png)
+</div>
 
 The last assistant message is the response generated from the complete conversation history. The application is responsible for keeping track of all responses and providing them as context to the API for every additional step.
 
