@@ -40,6 +40,8 @@ This post is intended not only as a showcase of WebVM, but also as a tutorial on
 
 ## Background
 
+![Functional diagram for WebVM / Claude integration](./webvm_claude_diagram.png)
+
 Claude Computer Use can be understood as a set of pre-defined _tools_ that are available to the LLM, not conceptually dissimilar from the tools used for web search or for running python. It is part of a recent wave of GenAI capabilities intended to let “agents” operate browsers or graphical operating systems to complete tasks. What makes Claude different is exposing an interface to directly control your own computer or VM, while other vendors focus on doing the operations behind the scenes in their own environment.
 
 This unique capability makes it possible to work _together_ with the model to achieve the intended results, which seems a more powerful paradigm compared to leaving the model to its own devices. Of course, there are serious risks with letting LLMs control your computer, so the explicit [recommendation from Anthropic](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) is to always use a virtual machine.
