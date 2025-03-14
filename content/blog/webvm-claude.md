@@ -16,7 +16,7 @@ tags:
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
-A few months ago we experimented with integrating the [Computer use](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) feature from Claude into [WebVM](https://webvm.io), our WebAssembly-based Linux virtual machine running in the browser. The capabilities of Claude at the time were limited, and we kept the feature under wraps. However, with the recent release of Claude 3.7 Sonnet *signicantly* improving the quality and efficiency of its VM control abilities, we are now ready to share the results of this integration, and make it available to the public.
+A few months ago we experimented with integrating the [Computer use](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) feature from Claude into [WebVM](https://webvm.io), our WebAssembly-based Linux virtual machine running in the browser. The capabilities of Claude at the time were limited, and we kept the feature under wraps. However, with the recent release of Claude 3.7 Sonnet _signicantly_ improving the quality and efficiency of its VM control abilities, we are now ready to share the results of this integration, and make it available to the public.
 
 This post is intended not only as a showcase of WebVM, but also as a tutorial on how Claude Computer Use actually works and how it can be implemented in any custom environment.
 
@@ -29,20 +29,21 @@ This post is intended not only as a showcase of WebVM, but also as a tutorial on
     label="GitHub repo"
   />
 
-  <LinkButton
+<LinkButton
     type="discord"
     href={DISCORD_URL}
     target="_blank"
     iconLeft="fa-brands:discord"
     label="Join the Discord server"
   />
+
 </div>
 
 ## Background
 
-Claude Computer Use can be understood as a set of pre-defined *tools* that are available to the LLM, not conceptually dissimilar from the tools used for web search or for running python. It is part of a recent wave of GenAI capabilities intended to let “agents” operate browsers or graphical operating systems to complete tasks. What makes Claude different is exposing an interface to directly control your own computer or VM, while other vendors focus on doing the operations behind the scenes in their own environment.
+Claude Computer Use can be understood as a set of pre-defined _tools_ that are available to the LLM, not conceptually dissimilar from the tools used for web search or for running python. It is part of a recent wave of GenAI capabilities intended to let “agents” operate browsers or graphical operating systems to complete tasks. What makes Claude different is exposing an interface to directly control your own computer or VM, while other vendors focus on doing the operations behind the scenes in their own environment.
 
-This unique capability makes it possible to work *together* with the model to achieve the intended results, which seems a more powerful paradigm compared to leaving the model to its own devices. Of course, there are serious risks with letting LLMs control your computer, so the explicit [recommendation from Anthropic](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) is to always use a virtual machine.
+This unique capability makes it possible to work _together_ with the model to achieve the intended results, which seems a more powerful paradigm compared to leaving the model to its own devices. Of course, there are serious risks with letting LLMs control your computer, so the explicit [recommendation from Anthropic](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use) is to always use a virtual machine.
 
 WebVM - our Linux virtual machine that runs completely in the browser sandbox - is a perfect fit for this and similar technologies that will certainly appear in the future. It does not require server-side execution and does not send any user data outside of the user computer. Being built completely on standard Web technologies - WebAssembly in particular - it is fully isolated from your system and your other browser tabs. Since Claude APIs can be used directly from a browser tab, it’s possible to combine them with WebVM to create a secure and private environment to experiment with Claude Computer Use capabilities.
 
@@ -108,15 +109,16 @@ const messages = [
 		{role: "user", content: "What was my name again?"}
 	];
 ```
+
 ![Conversation example](./claude-example1.png)
 
 The last assistant message is the response generated from the complete conversation history. The application is responsible for keeping track of all responses and providing them as context to the API for every additional step.
 
 Finally, the `tool` object. Normally when using tools with Claude, this object should contain the whole definition of the tool, including its detailed description and required parameters. In the case of Computer Use, the tools come [pre-defined](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use#claude-3-7-sonnet-tools) from Anthropic. We still need to choose which tool to use:
 
-* **bash**: Which supports running commands and reasoning over the textual output of them. This is integrated in WebVM terminal mode ([https://webvm.io](https://webvm.io)).
-* **computer**: Which can operate a complete graphical user interface using screenshots and mouse/keyboard control. Integrated in WebVM graphical mode ([https://webvm.io/alpine.html](https://webvm.io/alpine.html))
-* **text_editor**: Not currently used in WebVM
+- **bash**: Which supports running commands and reasoning over the textual output of them. This is integrated in WebVM terminal mode ([https://webvm.io](https://webvm.io)).
+- **computer**: Which can operate a complete graphical user interface using screenshots and mouse/keyboard control. Integrated in WebVM graphical mode ([https://webvm.io/alpine.html](https://webvm.io/alpine.html))
+- **text_editor**: Not currently used in WebVM
 
 There are several non-obvious considerations when integrating these tools into the virtualized environment. Let’s look at the simplest case, **bash**, first.
 
@@ -148,7 +150,7 @@ The expected response is the complete textual output of the command, as written 
 }
 ```
 
-When designing the integration with WebVM our objective was not only to let Claude run commands, which would have been straightforward thanks to [CheerpX APIs](https://cheerpx.io/docs/reference/CheerpX.Linux/run), but also to let the user properly collaborate with the model as part of the same terminal session. We chose to inject commands in the terminal as if they were user input, using a `# End of AI command` sentinel to mark the end of the tool output for both the model *and* the user.
+When designing the integration with WebVM our objective was not only to let Claude run commands, which would have been straightforward thanks to [CheerpX APIs](https://cheerpx.io/docs/reference/CheerpX.Linux/run), but also to let the user properly collaborate with the model as part of the same terminal session. We chose to inject commands in the terminal as if they were user input, using a `# End of AI command` sentinel to mark the end of the tool output for both the model _and_ the user.
 
 As a demonstration of the capabilities of this solution, we had Claude solve a CTF for us, with the challenge path and short instructions as the only input. The results are quite impressive. Claude will first do basic reverse-engineering of the binary using `strings` and `objdump`. After looking at the assembly code, it forges an input string that triggers the necessary buffer overflow. It is quite impressive to witness, with the caveat that similar scenarios might be in the training set.
 
@@ -158,10 +160,10 @@ As a demonstration of the capabilities of this solution, we had Claude solve a C
 
 This style of integration has lots of potential and even with the current basic capabilities it could unlock quite a few scenarios:
 
-* Helping users with sysadmin tasks, allowing them to experiment in the safety of the WebVM sandbox before applying the same commands to the real host
-* SSh-ing into real hosts from WebVM, letting Claude have temporary access to your servers.
-* Using Claude as a tutor when learning how use a Linux terminal
-* Using Claude as a companion to draft complex shell commands in place
+- Helping users with sysadmin tasks, allowing them to experiment in the safety of the WebVM sandbox before applying the same commands to the real host
+- SSh-ing into real hosts from WebVM, letting Claude have temporary access to your servers.
+- Using Claude as a tutor when learning how use a Linux terminal
+- Using Claude as a companion to draft complex shell commands in place
 
 The **bash** tool as it is currently designed has some significant limitations, in particular it can only execute commands and cannot use the current state of the terminal as context. To make a silly example, it cannot exit vim for you since it cannot “see” you are currently in a vim session. On the flipside it is quite reliable since it works purely on text input and text output which is of course what modern LLMs are the most adept at doing.
 
@@ -169,8 +171,8 @@ The **bash** tool as it is currently designed has some significant limitations, 
 
 Contrary to the **bash** tool, the **computer** tool has many more moving parts, but it’s also much more capable... when things go well. This feature depends heavily on screenshots to “see” the screen and decide how to interact with it. Although this makes it possible for the model to have full understanding of the environment, it comes with some downsides:
 
-* **Cost**: Since every interaction depends on one or more screenshots, which consumes lots of tokens, conversations can get quite expensive
-* **Reliability**: The precision of the model when clicking on UI elements is not amazing. This might be connected to the maximal resolution of the screenshot being [capped to 1024x768](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use#computer-tool), requiring rescaling of the screenshots and mouse coordinates to compensate for this.
+- **Cost**: Since every interaction depends on one or more screenshots, which consumes lots of tokens, conversations can get quite expensive
+- **Reliability**: The precision of the model when clicking on UI elements is not amazing. This might be connected to the maximal resolution of the screenshot being [capped to 1024x768](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use#computer-tool), requiring rescaling of the screenshots and mouse coordinates to compensate for this.
 
 While the **bash** tool only had one single action that could be used, the **computer** tool has several. We'll describe a few of them in depth, see [here](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use#computer-tool) for a complete list.
 
@@ -227,9 +229,9 @@ case "screenshot":
 
 This is the [actual code](https://github.com/leaningtech/webvm/blob/91f68ce044d35489eaebf1703da3c408787c9c88/src/lib/anthropic.js#L288) used in WebVM, lightly edited for clarity. The inline comments should make it fairly easy to follow. The general idea is to keep the original display at native resolution in its `<canvas>` element, and use a secondary `<canvas>` element to get screenshots, using the `toDataURL` API. The original display is copied and resized into the secondary `<canvas>` using the `drawImage` API. To avoid incurring excessive costs, we keep track of the current state of the display and only send a reply when something has actually changed. This used to be very important with Claude 3.5, but may not be necessary with Claude 3.7 thanks to the newly introduced “wait” action.
 
-### The “mouse\_move”, “left\_click” and “right\_click” actions
+### The “mouse_move”, “left_click” and “right_click” actions
 
-These actions are used to manipulate the cursor of the VM, they are all pretty straightforward with the only caveat being rescaling the mouse to compensate for the screenshot resizing described above. As an example, this is the complete code for “left\_click” handling
+These actions are used to manipulate the cursor of the VM, they are all pretty straightforward with the only caveat being rescaling the mouse to compensate for the screenshot resizing described above. As an example, this is the complete code for “left_click” handling
 
 ```js
 case "left_click":
@@ -259,8 +261,8 @@ An important detail is the 60 millisecond delay between the `mousedown` and `mou
 
 The last important bit that is missing is keyboard input. It can be provided by Claude in two different ways.
 
-* **key** action: for single keystrokes and special combination of keys
-* **type** action: For longer strings of plain text
+- **key** action: for single keystrokes and special combination of keys
+- **type** action: For longer strings of plain text
 
 As a practical example, this is how the **type** action is implemented:
 
@@ -317,7 +319,6 @@ As the second example we have tried Minesweeper. We have experimented with this 
 <video controls autoplay loop muted playsinline>
 	<source src="./webvm_claude_mines.mp4" type="video/mp4" />
 </video>
-
 
 ## Conclusions: Does the ghost fit the shell?
 
