@@ -7,7 +7,7 @@ description: Configure custom console behavior for handling keyboard input and o
 namespace CheerpX {
 	class Linux {
 		setCustomConsole(
-			writeFunc: (buf: Buffer) => void,
+			writeFunc: (buf: Uint8Array, vt: number) => void,
 			cols: number,
 			rows: number
 		): (keyCode: number) => void;
@@ -17,7 +17,7 @@ namespace CheerpX {
 
 ## Parameters
 
-- **writeFunc (`(buf: Buffer) => void`)** - Function to handle the output sent to the console.
+- **writeFunc (`(buf: Uint8Array, vt: number) => void`)** - Function to handle the output sent to the console.
 - **cols (`number`)** - Number of columns for the console.
 - **rows (`number`)** - Number of rows for the console.
 
