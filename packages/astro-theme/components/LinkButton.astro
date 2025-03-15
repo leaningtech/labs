@@ -3,6 +3,7 @@ import { Icon } from "astro-icon";
 interface Props {
 	href: string;
 	label: string;
+	target?: string;
 	type?:
 		| "primary"
 		| "primary2"
@@ -17,11 +18,19 @@ interface Props {
 	iconLeft?: string;
 	iconRight?: string;
 }
-const { href, label, type = "secondary", iconLeft, iconRight } = Astro.props;
+const {
+	href,
+	label,
+	target,
+	type = "secondary",
+	iconLeft,
+	iconRight,
+} = Astro.props;
 ---
 
 <a
 	{href}
+	{target}
 	class:list={[
 		"px-6 py-2 font-semibold border-2 rounded-md no-underline text-base transition-colors inline-flex items-center gap-2 whitespace-nowrap",
 		{
