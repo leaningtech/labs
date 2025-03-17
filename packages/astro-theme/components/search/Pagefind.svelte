@@ -10,8 +10,10 @@
 	let noResultsForQuery = false;
 
 	onMount(async () => {
-		// Vite and TypeScript hate imports from actual URLs, so we need to perform dark magic to load pagefind.
-		const url = new URL(window.origin + "/pagefind/pagefind.js").href; // Can't use import.meta.url because Vite prefixes the module with /@fs.
+		const url =
+			productId === "cheerpj3"
+				? new URL(window.origin + "/docs/pagefind/pagefind.js").href // Add /docs/ for CJ so search bar is able to link correctly
+				: new URL(window.origin + "/pagefind/pagefind.js").href; // Can't use import.meta.url because Vite prefixes the module with /@fs.
 		// @ts-ignore
 		const pf = await import(/* @vite-ignore */ url);
 		await pf.init();
