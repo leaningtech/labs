@@ -31,7 +31,7 @@ console.log(`Program exited with code ${exitCode}`);
 ### コマンドライン引数
 
 ```js
-await cheerpjRunJar("/app/application.jar", ["--version"]);
+await cheerpjRunJar("/app/application.jar", "--version");
 ```
 
 [Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
