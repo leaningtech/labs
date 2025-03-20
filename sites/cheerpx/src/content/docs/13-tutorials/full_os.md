@@ -12,12 +12,15 @@ We will create an Ext2 image, which will serve as the root filesystem for Cheerp
 To ensure consistency in preparing the image contents, we will use a Dockerfile, you can edit the Dockerfile to add custom packages or change the base to the distro of your choosing. It's important to select the `i386` architecture, since CheerpX does not currently support 64-bit executables.
 
 ```dockerfile title=Dockerfile
-FROM --platform=i386 i386/debian:buster
+FROM --platform=i386 docker.io/i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN useradd -m user && echo "user:password" | chpasswd
 RUN echo 'root:password' | chpasswd
 CMD [ "/bin/bash" ]
 ```
+
+> [!note] Note
+> Creating a user named "user" inside the Dockerfile is mandatory for WebVM to work as expected. Without this user, the environment might not function properly.
 
 Create a container out of your Dockerfile:
 
