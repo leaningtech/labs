@@ -13,8 +13,8 @@ import CalendarAsset from "../assets/calendar.png";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 import Alessandro from "../assets/judges/alessandro.jpeg";
 import Jules from "../assets/judges/jules.jpeg";
-import Martin from "../assets/judges/martin.jpeg";
-import Luca from "../assets/judges/luca.jpeg";
+import Alex from "../assets/judges/alex.png";
+import Mirko from "../assets/judges/mirko.jpeg";
 import RuleBook from "../assets/rulebook.png";
 import Directions from "../assets/direction.png";
 ---
@@ -286,6 +286,83 @@ import Directions from "../assets/direction.png";
 				iconRight=""
 				label="CheerpX docs"
 			/>
+		</div>
+	</section>
+	<section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-black"
+	>
+		<h1 class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] py-8">
+			Judging panel
+		</h1>
+		<div
+			id="judges-grid"
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 space-x-2 font-mono text-center"
+		>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Alessandro}
+						alt="Alessandro Pignotti"
+						class="rounded-full"
+					/>
+					<a href="https://www.linkedin.com/in/alessandro-pignotti-10719617/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+						
+							Alessandro Pignotti
+						</p>
+					</a>
+					<p class="text-xs text-white">Chief Technology Officer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Alex} alt="Alex Bates" class="rounded-full" />
+					<a href="https://www.linkedin.com/in/bates64/">
+						<h2
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Alex Bates
+						</h2>
+					</a>
+					<p class="text-xs text-white">Graduate Software Engineer</p>
+					<p class="italic text-xs text-white">Arm</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Jules}
+						alt="Jules Saarikoski"
+						class="items-center rounded-full"
+					/>
+					<a href="https://www.linkedin.com/in/saarikoskijules/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Jules Saarikoski
+						</p>
+					</a>
+					<p class="text-xs text-white">Compilers Software Engineer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Mirko} alt="Mirko Ferrati" class="rounded-full" />
+					<a href="https://www.linkedin.com/in/mirkoferrati/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Mirko Ferrati
+						</p>
+					</a>
+					<p class="text-xs text-white"> Software Architect</p>
+					<p class="italic text-xs text-white">Canonical</p>
+				</div>
+			</div>
 		</div>
 	</section>
 </ProductHome>
