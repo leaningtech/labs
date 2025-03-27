@@ -7,23 +7,35 @@ import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
 If your organisation requires you to use our extension on multiple devices, we have amazing news for you! Our Applet Runner extension is available for private hosting and deployment via Group Policies. This way, you can deploy our extension for multiple users under your organisation simultaneously and administrate it from a single place. This page will take you step by step on how to do this.
 
+For a comprehensive tutorial on self-hosting custom extensions, please refer to the official [Microsoft Documentation](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-webstore), which will be the primary reference for this guidance.
+
 Requirements:
 
 - The appropriate IT permissions at your organisation.
-- The Applet Runner extension CRX file.
+- For self hosting: The Applet Runner extension CRX file.
 
 ## The CRX File and `DownloadURL`
 
 The CRX file is a compressed format for extensions of browsers belonging to the Chromium family (such as Google Chrome and Edge). To obtain the CRX file of the Applet Runner extension for self-hosting, you will need to [contact us](https://cheerpj.com/contact/) and we will be happy to provide it for you.
 
-You will need to host the extension CRX file in the appropriate location of your IT infrastructure and create a DownloadURL to access it. You will need this URL later in the tutorial.
+**You will need to host the extension CRX file in the appropriate location of your IT infrastructure and the file should be accessible via a URL.** You will need this `DownloadURL` later in the tutorial.
 
 > [!info] About `DownloadURL`
 > You can also use the Edge add-ons store `DownloadURL`, but you won't be self-hosting the extension and it will be retrieved from the Edge store for all your users. This is a limitation for IT infrastructures where the organisation devices do not have connection permissions to the wider internet. For this reason we recommend the self-hosting method.
 
+The server hosting your extension's CRX files must employ appropriate HTTP headers to allow users to install the extension through a link.
+Browsers belonging to the Chromium family (such as Google Chrome and Edge) consider a file installable, if it follows conditions:
+
+- The file has the content type `"application/x-chrome-extension"`.
+- The file suffix is .crx, and both conditions are met:
+  - The file is not served with the HTTP header `"X-Content-Type-Options: nosniff"`.
+  - The file is served with one of the specified content types: `empty string`, `"text/plain"`, `"application/octet-stream"`, `"unknown/unknown"`, `"application/unknown"` or `"/"`.
+
+To fix an HTTP header issue, either change the configuration of the server or try hosting the .crx file at another server.
+
 ## The extension ID
 
-The extension ID is a unique identifier you can easily retrieve from the [extension URL of Edge's Add-ons store](https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic) (last 32 characters):
+The extension ID is a unique identifier and is used to differentiate one extension from another. You can easily retrieve the official ID from the [extension URL of Edge's Add-ons store](https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic) (last 32 characters):
 
 ```
 https://microsoftedge.microsoft.com/addons/detail/cheerpj-applet-runner/ebfcpaoldmijengghefpohddmfpndmic
@@ -35,7 +47,11 @@ The extension ID of the official Edge Add-ons store version is:
 ebfcpaoldmijengghefpohddmfpndmic
 ```
 
-Or if you use a custom extension build, navigate to `edge://extensions/` in Edge, and retrieve it from there. You will first need to enable **Developer mode** in the left menu in order to view the ID.
+If you want to deploy a custom extension build, the extension ID will be different.
+
+Either we have already provided you with the ID of the CRX file, or else you will first need to manually install the CRX file. To do that, navigate to `edge://extensions/` in Edge and enable **Developer Mode** in the left menu. You can then drag and drop the CRX file onto the page to manually install the extension. You can find the exact steps in our [documentation](/docs/cheerpj-applet-runner/guides/packing-extension-edge#step-4-verify-the-packed-extension).
+
+After installing the custom build you should be able to retrieve the extension ID of the CRX file.
 
 <div class="flex justify-center">
 	<img
@@ -48,14 +64,34 @@ Or if you use a custom extension build, navigate to `edge://extensions/` in Edge
 > [!warning] Example Extension ID
 > Custom Extension builds all have unique IDs. The version you will be installing will have a different ID than seen on the screenshot.
 
-You can find more information on how to pack and manually install the Applet Runner extension in our [documentation](/docs/cheerpj-applet-runner/getting-started/packing-extension-edge).
+## Manifest XML file
+
+If you want to self host the extension you will need to create an additional `manifest.xml` file. You can create a file like this with the app/extension ID, download URL, and version, define the following fields:
+
+- appid - The extension ID from the previous step.
+- codebase - The download URL for the CRX file.
+- version - The version of the app/extension, you can retrieve that from `edge://extensions/` again or it was provided by us.
+
+Here is an example of an XML manifest file.
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+  <app appid='ebfcpaoldmijengghefpohddmfpndmic'>
+  <updatecheck codebase='https://app.somecompany.com/extensionfolder/extension.crx' version='1.0' />
+  </app>
+</gupdate>
+```
+
+Just like with the CRX file, you will need to host the manifest.xml file and the file should be accessible via a URL. We will need this URL to create the policy string in the next step.
 
 ## The policy string
 
-Now that you have the extension's CRX file and ID, you can build the policy string by merging the extension's ID and the CRX Download URL separated by a semicolon:
-`ID;DownloadURL`
-It must look something like this:
-`ebfcpaoldmijengghefpohddmfpndmic;https://some.download.url.file.crx`
+Depending on whether you want to install a self-hosted extension or the official one from the Edge store, the string will look different. It will still follow the syntax of `ID;PATH`.
+
+For extensions hosted in the Edge store use a string such as `EXTENSION_ID;https://clients2.google.com/service/update2/crx`, where the path points to the offical update URL.
+
+In the case of a self-hosted extension, the path will point to the XML file that we are self-hosting and will resemble something like this `ebfcpaoldmijengghefpohddmfpndmic;https://some.path.manifest.xml`.
 
 > [!warning] Hypothetical policy string
 > The example above contains hypothetical URL, please do not use this policy string.
@@ -82,6 +118,14 @@ Now you have everything you need to create a new GPO, please follow these final 
 ## Force-install
 
 You can now configure your Group Policy to force install the extension in all your organisation browsers. To do so, you will need the Policy String from the previous step and follow this [force-install tutorial by Microsoft](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-policies#force-install-an-extension)
+
+## Additional policies
+
+Depending on your IT infrastructure it might be necessary to enable additionaly policies to allow users to install the a privately hosted extension.
+
+To enable users to install self-hosted extensions, you must include the CRX IDs of the extensions in the **ExtensionInstallAllowList** policy and specify the URL hosting the CRX file in the **ExtensionInstallSources** policy.
+
+You can find more information regarding these policies in the official [Microsoft Documentation](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-webstore#distribute-a-privately-hosted-extension).
 
 ## Group policy settings
 
