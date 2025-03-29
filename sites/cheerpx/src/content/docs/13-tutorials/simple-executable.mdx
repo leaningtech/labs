@@ -50,12 +50,13 @@ gcc -static -m32 -o hello_cheerpx hello_cheerpx.c
 If you cannot compile directly on your system, use Docker to create a 32-bit statically linked executable. Open your terminal, navigate to your project directory, and run the following command:
 
 ```sh
-docker run --rm -v "$(pwd)":/src -w /src i386/debian bash -c "apt-get update && apt-get install -y gcc && gcc -static -m32 -o hello_cheerpx hello_cheerpx.c"
+docker run --rm --platform=linux/amd64 -v "$(pwd)":/src -w /src i386/debian bash -c "apt-get update && apt-get install -y gcc && gcc -static -m32 -o hello_cheerpx hello_cheerpx.c"
 ```
 
 Explanation:
 
 - `docker run --rm`: Runs a Docker container and removes it after execution.
+- `--platform=linux/amd64`: Defines the platform to use inside the container.
 - `-v "$(pwd)":/src`: Mounts your current directory into /src inside the container.
 - `-w /src`: Sets the working directory inside the container to /src.
 - `i386/debian`: Uses a 32-bit Debian image as the base.
