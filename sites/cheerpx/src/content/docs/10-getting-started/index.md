@@ -39,7 +39,7 @@ The example below demonstrates how to set up the file system and devices using [
 
 ```html
 <!doctype html>
-<html lang="en" style="heigth: 100%;">
+<html lang="en" style="height: 100%;">
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
@@ -71,8 +71,8 @@ The example below demonstrates how to set up the file system and devices using [
 			});
 		</script>
 	</head>
-	<body style="heigth: 100%; background: black;">
-		<pre id="console" style="heigth: 100%;"></pre>
+	<body style="height: 100%; background: black;">
+		<pre id="console" style="height: 100%;"></pre>
 	</body>
 </html>
 ```
@@ -130,7 +130,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 
 ```html
 <!doctype html>
-<html lang="en" style="heigth: 100%;">
+<html lang="en" style="height: 100%;">
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
@@ -180,8 +180,8 @@ Now you can interact with the console to run commands. Make sure to give focus t
 			});
 		</script>
 	</head>
-	<body style="heigth: 100%; background: black;">
-		<pre id="console" style="heigth: 100%;"></pre>
+	<body style="height: 100%; background: black;">
+		<pre id="console" style="height: 100%;"></pre>
 	</body>
 </html>
 ```
