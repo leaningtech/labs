@@ -182,6 +182,9 @@ When this option is set to `true` CheerpJ will be able to receive text input fro
 cheerpjInit({ enableInputMethods: true });
 ```
 
+> [!note] Important
+> This option is enabled by default in CheerpJ 4.0 and newer, to disable it set it to `false`.
+
 ### `overrideShortcuts`
 
 ```ts
