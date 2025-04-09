@@ -180,8 +180,8 @@ await cx.run("/bin/bash", ["--login"], {
 
 Learn more about `cx.run` in the [CheerpX.Linux.run] reference.
 
-[Files and filesystem]: docs/guides/File-System-support
-[CheerpX.Linux.create]: docs/reference/CheerpX.Linux/create
-[setConsole]: docs/reference/CheerpX.Linux/setConsole
-[CheerpX.Linux.run]: docs/reference/CheerpX.Linux/run
+[Files and filesystem]: /docs/guides/File-System-support
+[CheerpX.Linux.create]: /docs/reference/CheerpX.Linux/create
+[setConsole]: /docs/reference/CheerpX.Linux/setConsole
+[CheerpX.Linux.run]: /docs/reference/CheerpX.Linux/run
 [custom-disk-images]: /docs/guides/custom-images
