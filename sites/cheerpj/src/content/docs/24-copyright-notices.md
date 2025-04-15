@@ -579,7 +579,7 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 ```
 
-## FreeType
+## freetype
 
 **Website:** http://www.freetype.org/
 
@@ -757,7 +757,7 @@ Legal Terms
 --- end of FTL.TXT ---
 ```
 
-## Expat XML Parser
+## expat
 
 **Website:** https://github.com/libexpat/libexpat
 
