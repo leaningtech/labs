@@ -38,15 +38,11 @@ In this post, we’ll provide an overview of CheerpJ, the capabilities of the cu
 
 <script src="https://cjrtnc.leaningtech.com/3_20250415_1109/cj3loader.js"></script>
 
-<script>
-	async function runDemo()
-	{
-debugger;
-		await cheerpjInit();
-		cheerpjCreateDisplay(-1, -1, document.getElementById("demoDisplay"));
-		await cheerpjRunJar("/app/blog/cj4.0/SwingSet3.jar");
-	}
-	runDemo();
+<script type="module">
+	debugger;
+	await cheerpjInit();
+	cheerpjCreateDisplay(-1, -1, document.getElementById("demoDisplay"));
+	await cheerpjRunJar("/app/blog/cj4.0/SwingSet3.jar");
 </script>
 
 <div class="w-full h-full" id="demoDisplay"></div>
