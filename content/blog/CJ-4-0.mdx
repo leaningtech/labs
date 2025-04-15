@@ -1,0 +1,68 @@
+---
+title: "CheerpJ 4.0: Demo test"
+slug: cheerpj-4.0
+description: |
+  Our state-of-the-art JVM/JDK that runs completely in the browser thanks to WebAssembly, is now available!
+authors:
+  - alessandro
+  - stefano
+pubDate: "February 5 2025"
+heroImage: "./CJ3-1-hero.png"
+featured: true
+tags:
+  - CheerpJ
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+In this post, we’ll provide an overview of CheerpJ, the capabilities of the current release, and our ambitious plans for the future of Java and OpenJDK on the browser.
+
+<div class="flex items-center gap-2 flex-wrap">
+  <LinkButton
+    type="primary"
+    href="https://cheerpj.com/docs/getting-started"
+    target="_blank"
+    label="Get started"
+    iconRight="mi:arrow-right"
+  />
+
+  <LinkButton
+    type="discord"
+    href={DISCORD_URL}
+    target="_blank"
+    iconLeft="fa-brands:discord"
+    label="Join the Discord server"
+  />
+</div>
+
+<script src="https://cjrtnc.leaningtech.com/3_20250415_1109/cj3loader.js"></script>
+
+<script>
+	async function runDemo()
+	{
+debugger;
+		await cheerpjInit();
+		cheerpjCreateDisplay(-1, -1, document.getElementById("demoDisplay"));
+		await cheerpjRunJar("/app/blog/cj4.0/SwingSet3.jar");
+	}
+	runDemo();
+</script>
+
+<div class="w-full h-full" id="demoDisplay"></div>
+
+## Community
+
+For questions, discussion, and support, [join our Discord](https://discord.leaningtech.com). It’s an active community where both Leaning Technologies developers and experienced users can provide help.
+
+---
+
+CheerpJ is a product built with passion and a lot of coffee by Leaning Technologies, an international team of WebAssembly hackers based in Amsterdam (NL) and Leeds (UK). We hope you’ll love it as much as we do.
+
+<LinkButton
+	href="https://github.com/leaningtech/cheerpj-meta"
+	target="_blank"
+	type="secondary"
+	label="Star CheerpJ on GitHub"
+	iconLeft="fa:star"
+/>
