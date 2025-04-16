@@ -175,21 +175,19 @@ demoDiv.onclick = function()
 {
 	demoDiv.requestFullscreen();
 };
-debugger;
 demoDiv.onfullscreenchange = function()
 {
-debugger;
 	var demoFullscreen = document.getElementById("demofullscreen");
 	var demoNormal = document.getElementById("demonormal");
 	if(document.fullscreenElement)
 	{
-		demoFullscreen.classList.remove("hidden");
-		demoNormal.classList.add("hidden");
+		demoNormal.classList.remove("hidden");
+		demoFullscreen.classList.add("hidden");
 	}
 	else
 	{
-		demoNormal.classList.remove("hidden");
-		demoFullscreen.classList.add("hidden");
+		demoFullscreen.classList.remove("hidden");
+		demoNormal.classList.add("hidden");
 	}
 };
 `}</script>
