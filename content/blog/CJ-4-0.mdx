@@ -162,12 +162,18 @@ For questions, discussion, and support, join our Discord [LINK]. It’s an activ
 
 ## [CLOSING LINES]
 
+<script>{`
+function demoFullscreen()
+{
+debugger;
+	demodiv.requestFullscreen();
+}
+`}</script>
 
-<iframe
-	src="https://cheerpj-example-swingset3.leaningtech.com/"
-	class="w-full aspect-square"
-></iframe>
-
+<div id="demodiv" class="w-full aspect-square relative">
+	<iframe class="absolute w-full h-full" src="https://cheerpj-example-swingset3.leaningtech.com/"></iframe>
+	<i class="absolute right-0 bottom-0 fa-solid:expand"></i>
+</div>
 ---
 
 CheerpJ is a product built with passion and a lot of coffee by Leaning Technologies, an international team of WebAssembly hackers based in Amsterdam (NL) and Leeds (UK). We hope you’ll love it as much as we do.
