@@ -36,11 +36,11 @@ In this post, we’ll provide an overview of CheerpJ, the capabilities of the cu
   />
 </div>
 
-It is with great pride that today we are releasing a new major version of CheerpJ: a WebAssembly JVM \[and OpenJDK distribution\] designed to run any Java application and library in the browser.
+It is with great pride that today we are releasing a new major version of CheerpJ: a WebAssembly JVM [and OpenJDK distribution] designed to run any Java application and library in the browser.
 
-\[CTAs\]
+[CTAs]
 
-CheerpJ 4.0 is the first version to support both Java 8 and Java 11, and it is an essential step along our roadmap \[LINK\] to bring modern Java to the browser. Support for Java 17 is the next step along this path and we expect to release it later in the year as part of the CheerpJ 5.0 milestone.
+CheerpJ 4.0 is the first version to support both Java 8 and Java 11, and it is an essential step along our roadmap [LINK] to bring modern Java to the browser. Support for Java 17 is the next step along this path and we expect to release it later in the year as part of the CheerpJ 5.0 milestone.
 
 In addition to Java 11 support, CheerpJ 4.0 also improves mobile usability, introduces support for WebAssembly JNI modules, and brings significant performance improvements.
 
@@ -56,98 +56,98 @@ CheerpJ is a complete, flexible solution to run Java on modern browsers. It is a
 
 CheerpJ can run complete Java applications from unmodified JARs. There is no need for source code or preprocessing steps. Obfuscated or encrypted JARs are supported independently of the obfuscator being used.
 
-\[SwingSet screenshot or live demo\]
+[SwingSet screenshot or live demo]
 
-Both AWT- and Swing-based applications are supported, including third-party Swing Look\&Feels. Multiple applications, each with multiple windows, can run at the same time on the same page. CheerpJ 4.0 introduced an unprecedented level of support for mobile devices, making it possible for the first time to make complex Java applications available to users across phones and tablets.
+Both AWT- and Swing-based applications are supported, including third-party Swing Look&Feels. Multiple applications, each with multiple windows, can run at the same time on the same page. CheerpJ 4.0 introduced an unprecedented level of support for mobile devices, making it possible for the first time to make complex Java applications available to users across phones and tablets.
 
-Running a Java application is straightforward, requiring just three calls to CheerpJ APIs. See our "Getting Started" \[LINK\] guide for a fully worked example.
+Running a Java application is straightforward, requiring just three calls to CheerpJ APIs. See our "Getting Started" [LINK] guide for a fully worked example.
 
-\`\`\`js  
-*await* cheerpjInit();  
+```js  
+await cheerpjInit();  
 cheerpjCreateDisplay(800, 600);  
-*await* cheerpjRunJar("/app/my\_application\_archive.jar");  
-\`\`\`
+await cheerpjRunJar("/app/my_application_archive.jar");  
+```
 
-CheerpJ is also extremely robust and can run very large applications without problems. Our internal stress test is IntelliJ IDEA, which loads around \~400MBs of JAR files.  
-\[Refresh IDEA video\]
+CheerpJ is also extremely robust and can run very large applications without problems. Our internal stress test is IntelliJ IDEA, which loads around ~400MBs of JAR files.  
+[Refresh IDEA video]
 
 ### Using Java libraries as part of Web Applications
 
-CheerpJ makes it possible to use Java libraries directly from JavaScript using a natural and expressive \`async\`/\`await\` based approach, we call this feature "*Library Mode*". The following snippet of code should give an idea about this capability, but using the popular \`iText\` library to generate a PDF completely client-side in the browser.
+CheerpJ makes it possible to use Java libraries directly from JavaScript using a natural and expressive `async`/`await` based approach, we call this feature "*Library Mode*". The following snippet of code should give an idea about this capability, but using the popular `iText` library to generate a PDF completely client-side in the browser.
 
-\`\`\`js  
+```js  
 async function iTextExample() {  
   await cheerpjInit();  
-  const lib \= await cheerpjRunLibrary("/app/itextpdf-5.5.13.3.jar");  
+  const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.3.jar");  
   try {  
-    const Document \= await lib.com.itextpdf.text.Document;  
-    const Paragraph \= await lib.com.itextpdf.text.Paragraph;  
-    const PdfWriter \= await lib.com.itextpdf.text.pdf.PdfWriter;  
-    const FileOutputStream \= await lib.java.io.FileOutputStream;  
-    const document \= await new Document();  
-    const writer \= await PdfWriter.getInstance(  
+    const Document = await lib.com.itextpdf.text.Document;  
+    const Paragraph = await lib.com.itextpdf.text.Paragraph;  
+    const PdfWriter = await lib.com.itextpdf.text.pdf.PdfWriter;  
+    const FileOutputStream = await lib.java.io.FileOutputStream;  
+    const document = await new Document();  
+    const writer = await PdfWriter.getInstance(  
       document,  
       await new FileOutputStream("/files/HelloIText.pdf")  
     );  
     await document.open();  
-    await document.add(await new Paragraph("Hello World\!"));  
+    await document.add(await new Paragraph("Hello World!"));  
     await document.close();  
     await writer.close();  
-    const blob \= await cjFileBlob("/files/HelloIText.pdf");  
-    const url \= URL.createObjectURL(blob);  
-    pdfDisplay.data \= url;  
+    const blob = await cjFileBlob("/files/HelloIText.pdf");  
+    const url = URL.createObjectURL(blob);  
+    pdfDisplay.data = url;  
   } catch (e) {  
-    const IOException \= await lib.java.io.IOException;  
+    const IOException = await lib.java.io.IOException;  
     if (e instanceof IOException) console.log("I/O error");  
-    else console.log("Unknown error: " \+ (await e.getMessage()));  
+    else console.log("Unknown error: " + (await e.getMessage()));  
   }  
 }  
-\`\`\`
+```
 
 *Library mode* provides extensive access to Java, these are the main features:
 
 * Creating new Java objects  
 * Calling static and instance methods. Overloading is supported and the correct method is resolved taking into account the argument types.  
 * Accessing static and instance fields, both for reading and for writing.  
-* Handling Java exceptions from JavaScript (via regular \`try\`/\`catch\` blocks)
+* Handling Java exceptions from JavaScript (via regular `try`/`catch` blocks)
 
 *Library mode* is a unique feature, which makes it possible to build a new generation of fully client-side Web applications that uses Java components and libraries to implement complex functionalities.
 
 It can also be used to progressively migrate a large-scale Java application to a native Web app, by rewriting the UI while keeping all the original *business logic* in Java.  
-Check out our dedicated documentation for more information \[LINK\]
+Check out our dedicated documentation for more information [LINK]
 
 ### Running legacy applets and JNLPs with a single click
 
-\[ASSET WITH BOTH EXTENSIONS\]
+[ASSET WITH BOTH EXTENSIONS]
 
 On top of the core CheerpJ technology we have built specialized browser extensions, available for Chrome and Edge, to run applets and Java Web Start applications without any manual integration steps.
 
-The extension has been wildly popular, having been used by hundreds of thousands of users all over the world. Although they are extremely convenient for end-users and during testing, it is \_not\_ necessary to use extensions for applets or Web Start, CheerpJ can be directly integrated in existing or new Web pages if preferred.
+The extension has been wildly popular, having been used by hundreds of thousands of users all over the world. Although they are extremely convenient for end-users and during testing, it is _not_ necessary to use extensions for applets or Web Start, CheerpJ can be directly integrated in existing or new Web pages if preferred.
 
 ## How does CheerpJ work
 
-\[COPY PASTE FROM CJ3.1\]
+[COPY PASTE FROM CJ3.1]
 
 ## Demo: Unmodified Minecraft in the browser
 
-\[ VIDEO\]
+[ VIDEO]
 
-As a showcase of CheerpJ capabilities we have decided to run a historical version of Minecraft, the demo is dubbed Browsercraft and it is live at \[LINK\].
+As a showcase of CheerpJ capabilities we have decided to run a historical version of Minecraft, the demo is dubbed Browsercraft and it is live at [LINK].
 
-Contrary to other approaches you might have seen, Browsercraft is not based on decompilation or reverse engineering attempts. The original \`client.jar\` is fetched directly from Mojang servers on the end-user browser and runs unmodified. The LWJGL dependency, available from Maven, is also unmodified.
+Contrary to other approaches you might have seen, Browsercraft is not based on decompilation or reverse engineering attempts. The original `client.jar` is fetched directly from Mojang servers on the end-user browser and runs unmodified. The LWJGL dependency, available from Maven, is also unmodified.
 
-LWJGL in particular is interesting, since it is only \_superficially\_ Java. Most of its value comes from JNI methods which provide direct access to each and every method exposed by OpenGL. These methods are written in C and automatically generated by the LWJGL build system from a declarative representation of the OpenGL API.
+LWJGL in particular is interesting, since it is only _superficially_ Java. Most of its value comes from JNI methods which provide direct access to each and every method exposed by OpenGL. These methods are written in C and automatically generated by the LWJGL build system from a declarative representation of the OpenGL API.
 
-CheerpJ 4.0 introduces support for these scenarios via JNI WebAssembly modules, which are loaded and executed dynamically similarly to what happens on native platforms via shared libraries. Browsercraft takes advantage of this capability for both LWJGL native code and the gl4es library \[LINK\] which provides a compatibility layer between OpenGL, used by Minecraft, and GLES as provided by WebGL.
+CheerpJ 4.0 introduces support for these scenarios via JNI WebAssembly modules, which are loaded and executed dynamically similarly to what happens on native platforms via shared libraries. Browsercraft takes advantage of this capability for both LWJGL native code and the gl4es library [LINK] which provides a compatibility layer between OpenGL, used by Minecraft, and GLES as provided by WebGL.
 
-By combining these WebAssembly modules and the unmodified JARs, CheerpJ can now correctly render Minecraft directly in the browser. It should be noted that Minecraft is a notoriously inefficient and resource intensive application, and we consider it to be a \_stress test\_ for CheerpJ. Nevertheless, thanks for recent improvements in our JIT compiler, the demo can now run with satisfactory performance on mid range machines. The situation will further improve in the future thanks to more advanced optimizations currently planned, stay tuned.
+By combining these WebAssembly modules and the unmodified JARs, CheerpJ can now correctly render Minecraft directly in the browser. It should be noted that Minecraft is a notoriously inefficient and resource intensive application, and we consider it to be a _stress test_ for CheerpJ. Nevertheless, thanks for recent improvements in our JIT compiler, the demo can now run with satisfactory performance on mid range machines. The situation will further improve in the future thanks to more advanced optimizations currently planned, stay tuned.
 
 ## What’s next?
 
 CheerpJ 4.0 greatly extends what can be achieved with CheerpJ, thanks to Java 11 support, WebAssembly JNI modules and improved support for mobile devices. The upcoming 5.0 release, scheduled for late 2025, will bring us even closer to running any modern Java application in the browser. A few highlights:
 
 * **Support for Java 17**: We are confident we will be able to deliver stable support for Java 17 as part of CheerpJ 5.0, as a matter of fact the implementation is already at the prototypical stage and we can make it available on request to interested parties. Get in touch if that sounds interesting to you.  
-* **Support for JavaFX / SWT**: WebAssembly JNI modules, as described above in the context of Browsercraft \[INTERNAL LINK\], will be a critical component to introduce support for *JavaFX* and *SWT*. Similarly to LWJGL these libraries are only superficially Java, with most of the logic being implemented as platform-specific, C and C++ code. We plan to compile all this code to WebAssembly, taking advantage of upcoming improvements to our C++ to WebAssembly and JavaScript compiler Cheerp \[LINK\].  
+* **Support for JavaFX / SWT**: WebAssembly JNI modules, as described above in the context of Browsercraft [INTERNAL LINK], will be a critical component to introduce support for *JavaFX* and *SWT*. Similarly to LWJGL these libraries are only superficially Java, with most of the logic being implemented as platform-specific, C and C++ code. We plan to compile all this code to WebAssembly, taking advantage of upcoming improvements to our C++ to WebAssembly and JavaScript compiler Cheerp [LINK].  
 * **General availability for JNI headers and libraries**: We compile WebAssembly JNI modules thanks to custom implementation of the JNI headers and libraries, specifically designed to work with the CheerpJ JVM. We plan to release these to allow users to compile their own WebAssembly JNI modules to support an even larger range of Java applications.
 
 We believe that CheerpJ and WebAssembly will enable Java to become a first-class programming language for the Web, opening the door to a new generation of Web native Java-powered client applications. We hope you find these possibilities as exciting as we do.
@@ -156,11 +156,11 @@ We believe that CheerpJ and WebAssembly will enable Java to become a first-class
 
 CheerpJ is extensively documented, ranging from basic tutorials to the detailed API reference.
 
-\[GET STARTED CTA\]
+[GET STARTED CTA]
 
-For questions, discussion, and support, join our Discord \[LINK\]. It’s an active community where both Leaning Technologies developers and experienced users can provide help.
+For questions, discussion, and support, join our Discord [LINK]. It’s an active community where both Leaning Technologies developers and experienced users can provide help.
 
-## \[CLOSING LINES\]
+## [CLOSING LINES]
 
 
 <iframe
