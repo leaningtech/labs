@@ -164,17 +164,33 @@ For questions, discussion, and support, join our Discord [LINK]. It’s an activ
 ## [CLOSING LINES]
 
 <div id="demodiv" class="w-full aspect-square relative">
-	<iframe class="absolute w-full h-full" src="https://cheerpj-example-swingset3.leaningtech.com/"></iframe>
-	<Icon class="absolute right-0 bottom-0 w-4 h-4 mx-0.5" name="fa-solid:expand" />
+	<iframe class="absolute w-full h-full focus:outline-0" src="https://cheerpj-example-swingset3.leaningtech.com/"></iframe>
+	<Icon id="demofullscreen" class="absolute right-0 bottom-0 w-8 h-8 mx-0.5 text-stone-900 cursor-pointer" name="fa-solid:expand" />
+	<Icon id="demonormal" class="hidden absolute right-0 bottom-0 w-8 h-8 mx-0.5 text-stone-900 cursor-pointer" name="fa-solid:minimize" />
 </div>
 
 <script>{`
-debugger;
 var demoDiv = document.getElementById("demodiv");
-demoDiv.onlick = function()
+demoDiv.onclick = function()
+{
+	demoDiv.requestFullscreen();
+};
+debugger;
+demoDiv.onfullscreenchange = function()
 {
 debugger;
-	demoDiv.requestFullscreen();
+	var demoFullscreen = document.getElementById("demofullscreen");
+	var demoNormal = document.getElementById("demonormal");
+	if(document.fullscreenElement)
+	{
+		demoFullscreen.classList.remove("hidden");
+		demoNormal.classList.add("hidden");
+	}
+	else
+	{
+		demoNormal.classList.remove("hidden");
+		demoFullscreen.classList.add("hidden");
+	}
 };
 `}</script>
 
