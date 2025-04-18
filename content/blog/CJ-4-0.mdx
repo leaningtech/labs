@@ -188,7 +188,20 @@ These tools are particularly suited for end-users who simply need to access lega
 
 ## How does CheerpJ work
 
-[COPY PASTE FROM CJ3.1]
+![CheerpJ architecture](./cheerpj-3-deep-dive-arch.png)
+
+CheerpJ is a Java Virtual Machine in WebAssembly for the browser, which JIT-compiles Java bytecode into JavaScript.
+It is a sophisticated tool with many moving parts, the main ones being:
+
+- A WebAssembly **JVM and Just-In-Time compiler for** Java bytecode. The code contained in class files is dynamically compiled and optimized. The JIT compiler supports advanced optimizations such as inlining and dynamic devirtualization.
+- A complete and unmodified build of **OpenJDK**.
+- **A virtualized system layer, including:**
+  - [Virtualized file systems](https://cheerpj.com/docs/guides/File-System-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data.
+  - [Virtualized networking](https://cheerpj.com/docs/guides/Networking) support via Tailscale. Both server and client applications are supported.
+  - Seamless clipboard integration using the [Clipboard API](https://cheerpj.com/docs/reference/cheerpjInit#clipboardmode).
+  - A window manager, to support multiple Java windows and multiple Java applications in the same Web page.
+
+For more details about the design of CheerpJ, please refer to [the deep dive](https://labs.leaningtech.com/blog/cheerpj-3-deep-dive) we published at the time of the initial CheerpJ 3.0 release. You can also read the [architecture page](https://cheerpj.com/docs/explanation/architecture) in the CheerpJ documentation.
 
 ## Demo: Unmodified Minecraft in the browser
 
