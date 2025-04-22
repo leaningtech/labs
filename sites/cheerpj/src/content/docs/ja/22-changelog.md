@@ -2,6 +2,32 @@
 title: 更新履歴
 ---
 
+## [4.0](https://cheerpj.com/docs/blog/cheerpj-4.0) - April 22, 2025
+
+```html
+<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+```
+
+- Support for Java 11
+- Support WebAssembly JNI modules
+- Improved mobile usability
+- Improved performance
+- Various bug fixes
+
+## [3.1](https://cheerpj.com/docs/blog/cheerpj-3.1) - February 5, 2025
+
+```html
+<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
+```
+
+- Maximise window support
+- Brand new "execCallback" option
+- Restore audio support
+- Various bug fixes
+- Improved font behavior
+- Improved debugging options
+- Improved performance
+
 ## [3.0](https://cheerpj.com/cheerpj-3-now-generally-available/) - 2024年2月1日
 
 ```html
