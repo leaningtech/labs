@@ -9,7 +9,7 @@ CheerpJ 3はCheerpJ 2の完全な再実装であり、そのため後方互換�
 CheerpJ 4をページに含めるには、以下のコードを使用してください：
 
 ```html
-<script src="hhttps://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
 ```
 
 ## 互換性の破壊的変更
