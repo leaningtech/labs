@@ -2,6 +2,18 @@
 title: Changelog
 ---
 
+## [4.0](https://cheerpj.com/docs/blog/cheerpj-4.0) - April 22, 2025
+
+```html
+<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+```
+
+- Support for Java 11
+- Support WebAssembly JNI modules
+- Improved mobile usability
+- Improved performance
+- Various bug fixes
+
 ## [3.1](https://cheerpj.com/docs/blog/cheerpj-3.1) - February 5, 2025
 
 ```html
