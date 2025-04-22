@@ -49,7 +49,10 @@ A description of each `cheerpjInit()` option with brief examples are given below
 version?: number;
 ```
 
-The Java runtime version to use. `8` is the only supported value at the moment.
+The Java runtime version to use. Java `8` and Java `11` are currently supported. Default version is Java `8` if not specified.
+
+> [!info] Java Applets and Java 8
+> Please notice that Applets are supported on Java 8 only.
 
 ### `status`
 
@@ -181,6 +184,9 @@ When this option is set to `true` CheerpJ will be able to receive text input fro
 ```js
 cheerpjInit({ enableInputMethods: true });
 ```
+
+> [!note] Important
+> This option is enabled by default in CheerpJ 4.0 and newer, to disable it set it to `false`.
 
 ### `overrideShortcuts`
 

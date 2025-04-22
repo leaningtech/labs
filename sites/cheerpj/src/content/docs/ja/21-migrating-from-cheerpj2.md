@@ -6,10 +6,10 @@ CheerpJ 3はCheerpJ 2の完全な再実装であり、そのため後方互換�
 
 ## スクリプトタグ
 
-CheerpJ 3をページに含めるには、以下のコードを使用してください：
+CheerpJ 4をページに含めるには、以下のコードを使用してください：
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
 ```
 
 ## 互換性の破壊的変更
@@ -37,7 +37,7 @@ JavaからJavaScript関数を呼び出すには、`cheerpjInit`の`natives` オ�
 CheerpJは、特別な設定なしでWeb Workerにインポートできるようになりました。単にワーカーから[`importScripts`](https://developer.mozilla.org/ja/docs/Web/API/WorkerGlobalScope/importScripts) を呼び出してCheerpJをロードし、通常通りCheerpJを使用してください。`CheerpJWorker` クラスは削除されました。
 
 ```js
-importScripts("https://cjrtnc.leaningtech.com/3.1/cj3loader.js");
+importScripts("https://cjrtnc.leaningtech.com/4.0/loader.js");
 
 // 通常通りCheerpJを使用
 (async () => {
