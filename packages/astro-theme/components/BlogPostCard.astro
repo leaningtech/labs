@@ -23,7 +23,7 @@ const authors = await resolveAuthors(post.data.authors);
 //choose hover link color based on product
 const productName = typeof product === "undefined" ? "Labs" : product.name;
 //if product is cheerpj, add prefix /docs on post url
-const blog_url = productName === "CheerpJ" ? "/docs/blog/" : "/blog/";
+const blog_url = productName === "CheerpJ" ? "https://labs.leaningtech.com/blog/" : "/blog/";
 ---
 
 <a
