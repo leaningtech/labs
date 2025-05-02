@@ -13,7 +13,7 @@ title: Changelog
 - Improved mobile usability
 - Improved performance
 - Various bug fixes
-- []`enableInputMethods`](/docs/reference/cheerpjInit#enableinputmethods) is set to `True` by default.
+- [`enableInputMethods`](/docs/reference/cheerpjInit#enableinputmethods) is set to `True` by default.
 
 ## [3.1](https://labs.leaningtech.com/blog/cheerpj-3.1) - February 5, 2025
 
