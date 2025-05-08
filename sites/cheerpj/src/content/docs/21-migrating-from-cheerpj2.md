@@ -2,7 +2,7 @@
 title: Migration from CheerpJ 2
 ---
 
-CheerpJ versions 3 and above are a complete reimplementation of CheerpJ 2, and as such, there is no backwards compatibility with CheerpJ 2. This page shows how to migrate from CheerpJ 2 to CheerpJ 3 and above, which is applicable for CheerpJ 4.
+CheerpJ version 3 (and above) is a complete reimplementation of CheerpJ 2, and as such it is not fully backward compatible. This page shows how to migrate from CheerpJ 2 to CheerpJ 3 and above, which is applicable for CheerpJ 4.
 
 ### Script tag
 
