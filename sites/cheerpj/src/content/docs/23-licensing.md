@@ -2,7 +2,7 @@
 title: Licensing
 ---
 
-CheerpJ Core is distributed for _free_ with the **CheerpJ Community License**, which makes it free to use for _personal projects_, _free_ and _open-source software_, and for _technical evaluations_.
+CheerpJ Core is distributed for _free_ with the **CheerpJ Community License**, which makes it free to use for _personal projects_, _FOSS projects_, and for _technical evaluations_.
 
 **Commercial Licenses** are available for any use that falls outside of the scope of the **Community License**, including any _business use_ (with exception of one-person companies), _redistribution_ and _OEM use_.
 
@@ -38,17 +38,17 @@ Pricing options are available for _small businesses_, _enterprises_, _public sec
 ## Examples
 
 | Use case                                                                                                                                      | Required license | Action point                                  |
-| :-------------------------------------------------------------------------------------------------------------------------------------------- | :--------------- | :-------------------------------------------- |
-| You are using CheerpJ for a personal project                                                                                                  | Community        | Give appropriate credits                      |
-| You are an individual developer building a commercial project                                                                                 | Community        | [Contact us](https://cheerpj.com/contact/)    |
-| You are a team using CheerpJ in a FOSS project                                                                                                | Community        | Give appropriate credits                      |
-| You are a company and are evaluating CheerpJ to be used for a future commercial project (see [technical evaluations](#technical-evaluations)) | Community        | [Contact sales](https://cheerpj.com/contact/) |
-| You are a public sector, non-profit, or academic organisation                                                                                 | Community        | [Contact us](https://cheerpj.com/contact/)    |
-| You are a company and you want to use CheerpJ to build a free customer-facing application.                                                    | Commercial       | [Contact sales](https://cheerpj.com/contact/) |
-| You are a company and you want to use CheerpJ to build a web application for internal use (see [self-hosting](#self-hosting))                 | Commercial       | [Contact sales](https://cheerpj.com/contact/) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------- | :---------------: | :--------------------------------------------: |
+| _You are an individual using CheerpJ for a personal project (including one generating revenue)_ | _**Community**_        | Give appropriate credits                      |
+| _You are an individual developer building a commercial project_                                                                                 | _**Community**_        | [Contact us](https://cheerpj.com/contact/)    |
+| _You are a team using CheerpJ in a FOSS project_                                                                                                | _**Community**_        | Give appropriate credits                      |
+| _You are a company and are evaluating CheerpJ to be used for a future commercial project (see [technical evaluations](#technical-evaluations))_ | _**Community**_        | [Contact sales](https://cheerpj.com/contact/) |
+| _You are a public sector, non-profit, or academic organisation and want to use CheerpJ for an internal or public-facing project_ | _**Commercial**_        | [Contact us for a special quota](https://cheerpj.com/contact/)    |
+| _You are a company and you want to use CheerpJ to build customer-facing application (paid or free)._ | _**Commercial**_ | [Contact sales](https://cheerpj.com/contact/) |
+| _You are a company and you want to use CheerpJ on an internal application_ | _**Commercial**_       | [Contact sales](https://cheerpj.com/contact/) |
 
 
-If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://cheerpj.com/contact/). Full licensing details are available [here](https://cheerpj.com/licensing/)
+If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://cheerpj.com/contact/). Full licensing details are available [here](https://cheerpj.com/licensing/).
 
 ## Technical evaluations
 
