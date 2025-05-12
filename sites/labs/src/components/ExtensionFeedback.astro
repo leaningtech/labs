@@ -17,8 +17,8 @@ const product = products[productId];
 	<main
 		class="flex flex-col justify-center items-center flex-grow w-full max-w-screen-2xl mx-auto px-6 py-10 overflow-hidden"
 	>
-		<div class="flex justify-between items-center w-4/5 max-w-6xl p-4">
-			<div class="w-1/2 p-4 box-border">
+		<div class="flex justify-between items-center w-4/5 max-w-7xl p-4">
+			<div class="w-2/5 p-4 box-border">
 				<div class="mb-6">
 					<a href={product.href} target="_blank">
 						<Image src={product.logotype} alt={product.name} class="w-4/5" />
@@ -41,8 +41,8 @@ const product = products[productId];
 					>
 				</p>
 			</div>
-			<div class="w-1/2 p-4 box-border">
-				<iframe class="w-full h-[600px] border-none" src={formUrl}> </iframe>
+			<div class="w-3/5 p-4 box-border">
+				<iframe class="w-full h-[700px] border-none" src={formUrl}> </iframe>
 			</div>
 		</div>
 	</main>
