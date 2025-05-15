@@ -28,13 +28,15 @@ If you do so, make sure to provide additional context, such as a HAR file and th
 
 ## Enable advanced debug logs in CheerpJ
 
-Before saving the browser console output, it's important to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
+Before saving the browser console output, it might be helpful to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
 
 ```js
 cheerpjInit({ enableDebug: true });
 ```
 
-This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ. It provides a lot of extra information in case an actual error occurs and will speed up the process of solving the problem you are encountering.
+This option enables advanced debug logging, which is helpful for troubleshooting certain issues with CheerpJ. It provides a lot of extra information in case an actual error occurs and will speed up the process of solving the problem you are encountering.
+
+Adding this option is not always necessary, but in some cases, these advanced logs are helpful if the normal console log does not provide any useful information.
 
 ## Saving the browser console output
 
