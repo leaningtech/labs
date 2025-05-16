@@ -2,9 +2,9 @@
 title: Migration from CheerpJ 2
 ---
 
-CheerpJ 3 is a complete reimplementation of CheerpJ 2, and as such it is not fully backwards compatible.
+CheerpJ version 3 (and above) is a complete reimplementation of CheerpJ 2, and as such it is not fully backward compatible. This page shows how to migrate from CheerpJ 2 to CheerpJ 3 (or CheerpJ 4)
 
-## Script tag
+### Script tag
 
 Include CheerpJ 4 on your page with the following snippet:
 
@@ -60,7 +60,7 @@ await cjCall(obj, "myMethod");
 ```
 
 ```js
-// CheerpJ 3
+// CheerpJ 3 (and above)
 await cheerpjInit();
 const lib = await cheerpjRunLibrary("/app/library.jar");
 const MyClass = await lib.com.library.MyClass;
@@ -74,16 +74,16 @@ await obj.myMethod();
 
 ### No Ahead-Of-Time compilation (`cheerpjify.py`)
 
-**No Ahead-Of-Time compilation:** To achieve good performance, CheerpJ required you to post-process JAR files with a custom binary compiler. The compiler would generate a `.jar.js` files for each input JAR. CheerpJ 3 features an advanced JIT engine that can generate better-performing code than CheerpJ 2.3 ever could. Removal of `.jar.js` files also significantly decreases how much data needs to be downloaded during application startup.
+**No Ahead-Of-Time compilation:** To achieve good performance, CheerpJ required you to post-process JAR files with a custom binary compiler. The compiler would generate a `.jar.js` files for each input JAR. CheerpJ 3 (and above) features an advanced JIT engine that can generate better-performing code than CheerpJ 2.3 ever could. Removal of `.jar.js` files also significantly decreases how much data needs to be downloaded during application startup.
 
-No downloads are provided with CheerpJ 3.
+No downloads are provided with CheerpJ 3 (and above).
 
-- AOT optimization: CheerpJ 3 uses a JIT compiler only, and as such it does not require any pre-processing of the JAR files, like conversion to `.jar.js`.
+- AOT optimization: CheerpJ 3 (and above) use a JIT compiler only, and as such it does not require any pre-processing of the JAR files, like conversion to `.jar.js`.
 - `--natives`: JNI function implementations should be passed to `cheerpjInit` using the `natives` option. See the [JNI guide] for more information.
 
 ### Actual support for ClassLoaders
 
-CheerpJ 2.3 had very limited support for ClassLoaders. As a consequence of requiring AOT compilation of `.jar.js` files, it could only support the standard one provided by OpenJDK. CheerpJ 3.0 radically improves the status-quo by properly using ClassLoaders as expected by Java.
+CheerpJ 2.3 had very limited support for ClassLoaders. As a consequence of requiring AOT compilation of `.jar.js` files, it could only support the standard one provided by OpenJDK. CheerpJ 3 (and above) radically improves the status-quo by properly using ClassLoaders as expected by Java.
 
 ### `com.leaningtech.handlers` HTTP handler no longer needed
 

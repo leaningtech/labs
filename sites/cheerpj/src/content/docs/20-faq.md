@@ -12,9 +12,7 @@ The CheerpJ runtime environment is a full Java SE runtime in JavaScript. Differe
 
 ## Which Java versions are supported?
 
-CheerpJ supports Java 8. We intend to add support for later LTS versions of Java in the future.
-
-The new architecture introduced in CheerpJ 3.0 is engineered to fix the gap with modern Java versions quite easily. We plan to support Java 11 (and possibly more) in a future CheerpJ 3.1 release.
+The new architecture introduced in CheerpJ 3.0 is engineered to fix the gap with modern Java versions quite easily. Currently, CheerpJ 4 supports Java 8 and Java 11 ([learn more here](/docs/reference/cheerpjInit#version)), with plans on supporting newer versions in the near future.
 
 ## Can I self-host the CheerpJ runtime?
 
