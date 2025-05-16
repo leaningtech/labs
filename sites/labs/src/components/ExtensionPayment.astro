@@ -32,9 +32,9 @@ const product = products[productId];
 				<br />
 				<p class="text-base">
 					Activate your license key by entering it in the "Manage License"
-					section of the installed JNLPRunner extension. For more information on
-					how to activate a license, please visit our <a
-						href="/cheerpj-jnlp-runner/getting-started/activate-license"
+					section of the installed {product.name} extension. For more information
+					on how to activate a license, please visit our <a
+						href=`/${product.id}/getting-started/activate-license`
 						target="_blank"
 						class="text-white hover:text-gray-300 font-bold underline"
 						>licensing page</a
@@ -48,8 +48,8 @@ const product = products[productId];
 					type="text/javascript"
 					data-storefront={formUrl.toString()}></script>
 				<div id="fsc-embedded-checkout-container"></div>
-				<script type="text/javascript">
-					fastspring.builder.add("cheerpj-jnlp-runner");
+				<script type="text/javascript" define:vars={{ productId: productId }}>
+					fastspring.builder.add(productId);
 				</script>
 			</div>
 		</div>
