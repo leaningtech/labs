@@ -2,7 +2,7 @@
 title: Changelog
 ---
 
-## [4.0](https://cheerpj.com/docs/blog/cheerpj-4.0) - April 22, 2025
+## [4.0](https://labs.leaningtech.com/blog/cheerpj-4.0) - April 22, 2025
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
@@ -13,8 +13,9 @@ title: Changelog
 - Improved mobile usability
 - Improved performance
 - Various bug fixes
+- [`enableInputMethods`](/docs/reference/cheerpjInit#enableinputmethods) is set to `True` by default.
 
-## [3.1](https://cheerpj.com/docs/blog/cheerpj-3.1) - February 5, 2025
+## [3.1](https://labs.leaningtech.com/blog/cheerpj-3.1) - February 5, 2025
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/3.1/cj3loader.js"></script>
