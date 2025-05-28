@@ -108,7 +108,7 @@ CheerpJランタイムが統合され、Javaアプリケーションが表示さ
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
 	</head>
 	<body>
 		<script>
@@ -154,7 +154,7 @@ cheerpjRunMain(
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ applet test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
 	</head>
 	<body>
 		<applet
