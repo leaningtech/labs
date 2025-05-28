@@ -6,7 +6,7 @@ description: JavaScriptでJavaクラスを使用する
 ## 1. ページにCheerpJを含める
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
 ```
 
 ## 2. CheerpJを初期化し、Javaライブラリを読み込む

@@ -117,7 +117,7 @@ export default {
 <html>
 	<head>
 		<title>Native Method Example</title>
-		<script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
 	</head>
 	<body>
 		<script>

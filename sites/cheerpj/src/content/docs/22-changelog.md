@@ -2,6 +2,19 @@
 title: Changelog
 ---
 
+## [4.1](https://labs.leaningtech.com/blog/cheerpj-4.1) - May 28, 2025
+
+```html
+<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
+```
+
+- Support for SSL and Audio in Java 11
+- Preview of Java 17 support
+- Improved networking stack
+- Improved mobile usability
+- Improved performance
+- Various bug fixes
+
 ## [4.0](https://labs.leaningtech.com/blog/cheerpj-4.0) - April 22, 2025
 
 ```html
