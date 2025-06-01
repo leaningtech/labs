@@ -1,5 +1,6 @@
 ---
 title: CheerpJ 2からの移行
+language: ja
 ---
 
 CheerpJ 3はCheerpJ 2の完全な再実装であり、そのため後方互換性はありません。

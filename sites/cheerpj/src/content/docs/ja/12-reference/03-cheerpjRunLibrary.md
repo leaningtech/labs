@@ -1,6 +1,7 @@
 ---
 title: cheerpjRunLibrary
 description: Javaライブラリをロードする
+language: ja
 ---
 
 JavaScriptで使用するためにJavaライブラリをロードします。詳細については[ライブラリモード](/docs/guides/library-mode)を参照してください。

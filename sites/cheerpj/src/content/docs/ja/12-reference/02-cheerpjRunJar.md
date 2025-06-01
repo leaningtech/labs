@@ -1,6 +1,7 @@
 ---
 title: cheerpjRunJar
 description: JARのメインクラスを実行する
+language: ja
 ---
 
 ```ts

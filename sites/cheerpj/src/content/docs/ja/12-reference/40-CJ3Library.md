@@ -1,6 +1,7 @@
 ---
 title: CJ3Library
 description: ライブラリモードセッション
+language: ja
 ---
 
 このクラスは、[ライブラリモード](/docs/ja/guides/library-mode) セッションを表します。ロードされたライブラリのクラスやメソッドにアクセスするために使用できます。

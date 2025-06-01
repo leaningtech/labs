@@ -1,5 +1,6 @@
 ---
 title: 更新履歴
+language: ja
 ---
 
 ## [4.1](https://labs.leaningtech.com/blog/cheerpj-4.1) - May 28, 2025

@@ -1,6 +1,7 @@
 ---
 title: cjGetProguardConfiguration
 description: ProGuard設定ファイルをダウンロードする
+language: ja
 ---
 
 これは設定ファイルのダウンロードをトリガーし、[ProGuard]を使用してJARファイルをツリーシェイク（tree shaking）するために使用できます。

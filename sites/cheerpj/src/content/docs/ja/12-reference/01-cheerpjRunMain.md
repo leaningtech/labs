@@ -1,6 +1,7 @@
 ---
 title: cheerpjRunMain
 description: Javaクラスの静的mainメソッドを実行してアプリケーションを起動します
+language: ja
 ---
 
 ```ts

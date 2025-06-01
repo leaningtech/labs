@@ -15,6 +15,7 @@ import WasThisHelpful from "../components/WasThisHelpful.astro";
 import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
 import { Markdown } from "@astropub/md";
+import type { LanguageContent } from "../content";
 
 interface Props {
 	id?: string | undefined;
@@ -22,9 +23,11 @@ interface Props {
 	description?: string | undefined;
 	headings?: Heading[] | undefined;
 	fullWidthLayout: boolean;
+	language: LanguageContent;
 }
 
-const { id, title, description, headings, fullWidthLayout } = Astro.props;
+const { id, title, description, headings, fullWidthLayout, language } =
+	Astro.props;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -61,6 +64,7 @@ function getEditHref(id: string): string {
 		) : (
 			<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
 				<div
+					{...(language && { "data-pagefind-filter": `language:${language}` })}
 					data-sidebar-wrapper
 					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
 				>
@@ -83,9 +87,9 @@ function getEditHref(id: string): string {
 
 					<main
 						data-pagefind-body
-						data-pagefind-filter={
-							product ? `productId:${product.id}` : undefined
-						}
+						{...(product && {
+							"data-pagefind-filter": `productId:${product.id}`,
+						})}
 						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]"
 					>
 						{title === product?.name ? (

@@ -1,6 +1,7 @@
 ---
 title: ネットワーキング
 description: CheerpJでのネットワーキング
+language: ja
 ---
 
 CheerpJは、以下の2つのカテゴリーに分けられるさまざまなネットワーキングシナリオをサポートしています:

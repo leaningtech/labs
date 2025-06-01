@@ -1,6 +1,7 @@
 ---
 title: cheerpjCreateDisplay
 description: GUI要素の表示
+language: ja
 ---
 
 `cheerpjCreateDisplay` は、グラフィカルレンダリングに使用される要素をDOMに追加します。

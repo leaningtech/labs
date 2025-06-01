@@ -1,6 +1,7 @@
 ---
 title: cheerpOSAddStringFile
 description: 仮想ファイルシステムにファイルを書き込む
+language: ja
 ---
 
 `/str/` ファイルシステムにファイルを書き込むために使用されます。ファイルがすでに存在する場合は上書きされます。

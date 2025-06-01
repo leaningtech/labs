@@ -1,6 +1,7 @@
 ---
 title: cjFileBlob
 description: 仮想ファイルシステムからファイルを読み取る
+language: ja
 ---
 
 CheerpJ仮想ファイルシステムからファイルを読み取るために使用されます。

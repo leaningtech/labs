@@ -1,6 +1,7 @@
 ---
 title: ネイティブメソッドとライブラリの実装
 description: CheerpJでのJavaネイティブインターフェース (JNI)
+language: ja
 ---
 
 CheerpJを使用すると、通常C/C++や他のAOTコンパイル言語で実装されるJavaの「ネイティブ」メソッドを、Java Native Interface（JNI）を使用するのと同様に、JavaScriptで実装することができます。
