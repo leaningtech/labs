@@ -1,0 +1,6 @@
+title: PHET Interactive Simulations
+description: Interactive physics simulations from the University of Colorado Boulder, powered by CheerpJ.
+url: https://phet.colorado.edu/en/simulations/filter?type=cheerpj
+heroImage: ./phet.png
+tags:
+  - CheerpJ

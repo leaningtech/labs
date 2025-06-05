@@ -61,6 +61,7 @@ export function defineCommonCollections() {
 					heroImage: image().refine((img) => img.width / img.height == 1.5, {
 						message: "Image must have 3:2 aspect ratio",
 					}),
+					tags: productTags.optional(),
 				}),
 		}),
 	};
