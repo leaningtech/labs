@@ -1,15 +1,21 @@
 ---
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { productFromUrl } from "../lib/products";
 
-interface Props {
+type Props = CollectionEntry<"showcase">["data"] & {
+	//redundant collection
 	limit?: number;
-}
+};
 
 const props = Astro.props;
 
-let projects = await getCollection("showcase");
+const product = productFromUrl(Astro.url);
 
+let projects = await getCollection("showcase", ({ data }) =>
+	data?.tags?.includes(product.name)
+);
 if (typeof props.limit == "number") {
 	projects = projects.slice(0, props.limit);
 }
@@ -24,14 +30,16 @@ if (typeof props.limit == "number") {
 						href={project.data.url}
 						class="block h-full p-2 border border-stone-700 text-stone-500 rounded-lg shadow-lg hover:translate-y-[-2px] hover:border-stone-600 hover:text-stone-400 transition-all"
 					>
-						<Image
-							alt={project.data.title}
-							src={project.data.image}
-							class="rounded bg-primary-500 overflow-hidden"
-							width={334 * 2}
-							height={223 * 2}
-							loading="lazy"
-						/>
+						{project.data.heroImage && (
+							<Image
+								src={project.data.heroImage}
+								alt={project.data.title}
+								class="rounded bg-primary-500 overflow-hidden"
+								width={334 * 2}
+								height={223 * 2}
+								loading="lazy"
+							/>
+						)}
 						<h5 class="font-semibold p-3 pb-1 text-stone-100">
 							{project.data.title}
 						</h5>
