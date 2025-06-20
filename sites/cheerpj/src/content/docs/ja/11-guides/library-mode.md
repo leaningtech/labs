@@ -1,6 +1,7 @@
 ---
 title: ライブラリモード
 description: JavaScriptでJavaライブラリを使用する
+language: ja
 ---
 
 ライブラリモードを使用すると、JavaScriptからJavaのメソッド、オブジェクト、配列を直接利用できます。 このAPIは、async/awaitを活用して、自然に使えるように設計されており、柔軟性を損なうことはありません。

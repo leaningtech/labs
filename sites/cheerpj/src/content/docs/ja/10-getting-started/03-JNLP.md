@@ -1,6 +1,7 @@
 ---
 title: JNLPの実行
 description: ブラウザでJWS/JNLPアプリケーションを実行する
+language: ja
 ---
 
 このクイックスタートチュートリアルでは、ブラウザでCheerpJを使用してJNLPアプリ（Java Web Startアプリケーションとしても知られています）を実行する手順を説明します。

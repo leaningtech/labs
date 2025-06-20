@@ -1,6 +1,7 @@
 ---
 title: cheerpjInit
 description: CheerpJランタイム環境の設定と初期化
+language: ja
 ---
 
 `cheerpjInit`は、CheerpJランタイム環境を設定と初期化するためにページで一度呼び出される必要があります。

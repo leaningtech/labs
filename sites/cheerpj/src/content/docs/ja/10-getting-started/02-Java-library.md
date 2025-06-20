@@ -1,6 +1,7 @@
 ---
 title: Javaライブラリの実行
 description: JavaScriptでJavaクラスを使用する
+language: ja
 ---
 
 ## 1. ページにCheerpJを含める

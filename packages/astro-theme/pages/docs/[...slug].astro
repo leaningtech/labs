@@ -37,6 +37,7 @@ const rendered = await collectionEntry?.render();
 	id={navEntry.id}
 	headings={rendered?.headings}
 	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
+	language={collectionEntry?.data?.language}
 >
 	{rendered && <rendered.Content />}
 	{

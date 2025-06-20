@@ -34,6 +34,7 @@ interface Props {
 			client:visible
 			productId={Astro.props.filterProductId}
 			placeholder={t("Type to search...", Astro.currentLocale)}
+			locale={Astro.currentLocale}
 		>
 			<div
 				slot="no-results"

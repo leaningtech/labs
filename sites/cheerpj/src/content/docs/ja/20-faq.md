@@ -1,5 +1,6 @@
 ---
 title: よくある質問
+language: ja
 ---
 
 ## CheerpJとは何ですか？
