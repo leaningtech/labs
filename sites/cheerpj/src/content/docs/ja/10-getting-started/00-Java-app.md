@@ -34,7 +34,7 @@ mkdir directory_name
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.1/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
 	</head>
 	<body>
 		<script>
