@@ -2,6 +2,16 @@
 title: Changelog
 ---
 
+## 4.2 - Jun 26, 2025
+
+```html
+<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+```
+
+- Improved Java 17 support
+- Multiple clipboard fixes
+- Various bug fixes
+
 ## [4.1](https://labs.leaningtech.com/blog/cheerpj-4.1) - May 28, 2025
 
 ```html
