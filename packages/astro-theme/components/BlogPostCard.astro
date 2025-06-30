@@ -14,6 +14,11 @@ interface Props {
 }
 
 const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
+
+if (!postOrSlug) {
+  return null;
+}
+
 const post =
 	typeof postOrSlug === "string"
 		? await getEntry("blog", postOrSlug)
