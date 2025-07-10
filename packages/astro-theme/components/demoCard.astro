@@ -42,9 +42,10 @@ const blog_url =
 			/>
 		)
 	}
-	<h3
+	<div class="grid grid-cols-5">
+		<h3
 		class:list={{
-			"font-bold text-balance text-white grow": true,
+			"col-span-3 font-bold text-balance text-white grow": true,
 			"group-hover:text-cheerp grow": productName === "Cheerp",
 			"group-hover:text-[#6386a5] grow": productName === "CheerpX",
 			"group-hover:text-primary-400 grow": productName === "Labs",
@@ -54,14 +55,27 @@ const blog_url =
 	>
 		{demo.data.title}
 	</h3>
+	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-end">
+				<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">{demo.data.projectType}</h1>
+	</div>
+	</div>
+	
+	
 	{
 		showMetadata && (
-			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
-				<div class="flex items-center gap-2 font-semibold overflow-hidden">
-					<div class="flex-none space-x-[-1rem]"></div>
-					<span class="overflow-hidden text-ellipsis"></span>
+			<div class=" flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
+				<div class="flex items-center gap-2  overflow-hidden">
+					<div class="flex-none space-x-[-1rem]">
+						{demo.data.description}
+					</div>
+					
+					
+					
 				</div>
+				
 			</div>
+			
+			
 		)
 	}
 </a>

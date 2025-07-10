@@ -1,8 +1,9 @@
 ---
 title: Linux dungeon
-description: Linux running client-side within your browser tab
+description: Browser-based fantasy puzzle game that runs entirely in a virtual Linux terminal
 url: https://webvm.io/
 heroImage: "./webvm.png"
+projectType: "Hackathon winner 2025"
 tags:
   - CheerpX
 ---
