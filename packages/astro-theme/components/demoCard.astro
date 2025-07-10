@@ -11,18 +11,20 @@ interface Props {
 	size?: "wide" | "narrow";
 }
 
-const { demo: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
-const post =
-	typeof postOrSlug === "string"
-		? await getEntry("showcase", postOrSlug)
-		: postOrSlug;
+const { demo: demoOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
 
+const demo =
+	typeof demoOrSlug === "string"
+		? await getEntry("showcase", demoOrSlug)
+		: demoOrSlug;
 
 //choose hover link color based on product
 const productName = typeof product === "undefined" ? "Labs" : product.name;
 //if product is cheerpj, add prefix /docs on post url
 const blog_url =
-	productName === "CheerpJ" ? "https://labs.leaningtech.com/showcase/" : "/showcase/";
+	productName === "CheerpJ"
+		? "https://labs.leaningtech.com/showcase/"
+		: "/showcase/";
 ---
 
 <a
@@ -30,7 +32,7 @@ const blog_url =
 	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
 >
 	{
-		post.data.heroImage && (
+		demo.data.heroImage && (
 			<Image
 				src={demo.data.heroImage}
 				width={size === "wide" ? 600 : 390}
@@ -56,15 +58,9 @@ const blog_url =
 		showMetadata && (
 			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
 				<div class="flex items-center gap-2 font-semibold overflow-hidden">
-					<div class="flex-none space-x-[-1rem]">
-						
-					</div>
-					<span class="overflow-hidden text-ellipsis">
-						
-					</span>
-					
+					<div class="flex-none space-x-[-1rem]"></div>
+					<span class="overflow-hidden text-ellipsis"></span>
 				</div>
-				
 			</div>
 		)
 	}

@@ -1,0 +1,128 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Shell from "./Shell.astro";
+import Icon from "astro-icon";
+import { SocialShare } from "astro-social-share";
+
+import TableOfContents, {
+	type BasicHeading,
+} from "../components/TableOfContents.astro";
+import Footer from "../components/Footer.astro";
+
+import LinkButton from "../components/LinkButton.astro";
+import { DISCORD_URL } from "../consts";
+import { Image } from "astro:assets";
+import { productFromUrl } from "../lib/products";
+import ProductNav from "../components/nav/product/Nav.astro";
+
+const product = productFromUrl(Astro.url);
+
+type Props = CollectionEntry<"showcase">["data"] & {
+	id: CollectionEntry<"showcase">["id"];
+	headings: BasicHeading[] | undefined;
+};
+
+const { id, title, description, projectType, heroImage, headings, tags } =
+	Astro.props;
+
+let titleAndSubtitle = title;
+if (description) {
+	titleAndSubtitle += `: ${description}`;
+}
+---
+
+<Shell title={titleAndSubtitle} {description} image={heroImage?.src}>
+	{product && <ProductNav {product} />}
+	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
+		<a
+			href="/showcase"
+			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+		>
+			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
+		</a>
+
+		{
+			heroImage && (
+				<Image
+					src={heroImage}
+					alt=""
+					class="rounded-xl w-full mx-auto mb-8 object-cover max-h-[30rem] bg-white"
+					width={1232}
+					height={480}
+					quality="max"
+				/>
+			)
+		}
+
+		<h1
+			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
+			id="introduction"
+		>
+			{title}
+			{
+				description && (
+					<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
+						{description}
+					</span>
+				)
+			}
+		</h1>
+
+		<div class="flex flex-col lg:flex-row gap-10 mt-16">
+			<aside class="lg:w-40 text-stone-400"></aside>
+
+			<article class="grow max-w-3xl">
+				<SocialShare {title} {description} via="leaningtech" />
+
+				<div
+					class="prose prose-stone md:prose-lg dark:prose-invert"
+					data-pagefind-body
+					data-pagefind-filter="productId:showcase"
+				>
+					<slot />
+				</div>
+				<div class="pt-10">
+					<LinkButton
+						type="discord"
+						href={DISCORD_URL}
+						iconLeft="fa-brands:discord"
+						label="Join us on Discord"
+					/>
+				</div>
+			</article>
+
+			<aside class="hidden lg:block w-40 grow">
+				{
+					headings && (
+						<div class="sticky top-24">
+							<TableOfContents
+								headings={[
+									{ depth: 2, slug: "introduction", text: "Introduction" },
+									...headings,
+								]}
+							/>
+						</div>
+					)
+				}
+			</aside>
+		</div>
+	</main>
+
+	<section class="px-6 w-full max-w-6xl mx-auto my-8 mb-32">
+		<h1
+			class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
+		>
+			Related posts
+		</h1>
+	</section>
+
+	<Footer />
+</Shell>
+
+<style is:global>
+	.social-share-btn {
+		display: inline-block;
+		width: 24px;
+		@apply fill-stone-400;
+	}
+</style>

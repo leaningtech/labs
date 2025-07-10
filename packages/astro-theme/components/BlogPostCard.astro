@@ -16,7 +16,7 @@ interface Props {
 const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
 
 if (!postOrSlug) {
-  return null;
+	return null;
 }
 
 const post =

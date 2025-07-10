@@ -101,6 +101,10 @@ export default function ThemeIntegration(
 					pattern: "showcase",
 					entrypoint: "@leaningtech/astro-theme/pages/showcase/index.astro",
 				});
+				params.injectRoute({
+					pattern: "showcase/[...slug]",
+					entrypoint: "@leaningtech/astro-theme/pages/showcase/[...slug].astro",
+				});
 				params.updateConfig({
 					markdown: {
 						remarkPlugins: [[remarkObsidianCallout, {}]],

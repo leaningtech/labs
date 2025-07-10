@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import demoCard from "../../components/demoCard.astro";
+import DemoCard from "../../components/DemoCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
@@ -10,12 +10,10 @@ import ProductNav from "../../components/nav/product/Nav.astro";
 
 const product = productFromUrl(Astro.url);
 
-const [demo1, demo2, ...restDemos] = (
-	await getCollection(
-		"showcase",
-		({ data }) =>
-			data.draft !== true && (!product || data?.tags?.includes(product.name))
-	)
+const [demo1, demo2, ...restDemos] = await getCollection(
+	"showcase",
+	({ data }) =>
+		data.draft !== true && (!product || data?.tags?.includes(product.name))
 );
 ---
 
@@ -35,11 +33,11 @@ const [demo1, demo2, ...restDemos] = (
 			/>
 		</div>
 
-		<h1 class="text-5xl font-semibold text-balance">
-			Demo showcase
-		</h1>
+		<h1 class="text-5xl font-semibold text-balance">Demo showcase</h1>
 		<p class="text-lg text-balance my-8 text-stone-400">
-			{`Discover amazing projects built with ${product?.name} by our community, ourselves and collaborators`}
+			{
+				`Discover amazing projects built with ${product?.name} by our community, ourselves and collaborators`
+			}
 		</p>
 		<div
 			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
@@ -53,7 +51,7 @@ const [demo1, demo2, ...restDemos] = (
 			{
 				[demo1, demo2].map((demo) => (
 					<li class="flex md:justify-stretch md:items-stretch">
-						{demo && <demoCard {demo} showMetadata size="wide" />}
+						{demo && <DemoCard {demo} showMetadata size="wide" />}
 					</li>
 				))
 			}
@@ -62,7 +60,7 @@ const [demo1, demo2, ...restDemos] = (
 			{
 				restDemos.map((demo) => (
 					<li class="flex md:justify-stretch md:items-stretch">
-						<demoCard {demo} showMetadata />
+						<DemoCard {demo} showMetadata />
 					</li>
 				))
 			}
