@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Shell from "./Shell.astro";
 import Icon from "astro-icon";
 import { SocialShare } from "astro-social-share";
-
+import DemoInfo from "../components/DemoInfo.astro";
 import TableOfContents, {
 	type BasicHeading,
 } from "../components/TableOfContents.astro";
@@ -22,7 +22,7 @@ type Props = CollectionEntry<"showcase">["data"] & {
 	headings: BasicHeading[] | undefined;
 };
 
-const { id, title, description, projectType, heroImage, headings, tags } =
+const { id, title, description, author, projectType,niche, heroImage, headings, tags } =
 	Astro.props;
 
 let titleAndSubtitle = title;
@@ -31,80 +31,60 @@ if (description) {
 }
 ---
 
-<Shell title={titleAndSubtitle} {description} image={heroImage?.src}>
+<Shell>
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
-		<a
-			href="/showcase"
-			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
-		>
-			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
-		</a>
-
-		{
-			heroImage && (
-				<Image
-					src={heroImage}
-					alt=""
-					class="rounded-xl w-full mx-auto mb-8 object-cover max-h-[30rem] bg-white"
-					width={1232}
-					height={480}
-					quality="max"
-				/>
-			)
-		}
-
-		<h1
-			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
-			id="introduction"
-		>
-			{title}
-			{
-				description && (
-					<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
-						{description}
-					</span>
-				)
-			}
-		</h1>
-
-		<div class="flex flex-col lg:flex-row gap-10 mt-16">
-			<aside class="lg:w-40 text-stone-400"></aside>
-
-			<article class="grow max-w-3xl">
-				<SocialShare {title} {description} via="leaningtech" />
-
+		<div class="h-screen grid grid-cols-10">
+			<div class="col-span-3">
+				<DemoInfo title={title} description={description} projectType={projectType} author = {author} niche={niche} tags = {tags}></DemoInfo>
+				
+			</div>
+			<div class="flex flex-1 col-span-1">
+				
 				<div
-					class="prose prose-stone md:prose-lg dark:prose-invert"
-					data-pagefind-body
-					data-pagefind-filter="productId:showcase"
-				>
-					<slot />
+					class="h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400">
 				</div>
-				<div class="pt-10">
-					<LinkButton
-						type="discord"
-						href={DISCORD_URL}
-						iconLeft="fa-brands:discord"
-						label="Join us on Discord"
-					/>
-				</div>
-			</article>
-
-			<aside class="hidden lg:block w-40 grow">
-				{
-					headings && (
-						<div class="sticky top-24">
-							<TableOfContents
-								headings={[
-									{ depth: 2, slug: "introduction", text: "Introduction" },
-									...headings,
-								]}
+			</div>
+			<div class="col-span-6 grid grid-flow-row overflow-hidden">
+				<div class="overflow-y-auto no-scrollbar">
+					<div class="">
+					{
+						heroImage && (
+							<Image
+								src={heroImage}
+								alt=""
+								class="rounded-xl mx-auto object-cover max-h-[30rem] bg-stone-300"
+								
+								quality="max"
 							/>
-						</div>
-					)
-				}
-			</aside>
+						)
+					}
+					</div>
+				<div class="">
+					<div class="flex flex-col lg:flex-row gap-10 mt-16">
+						<article class="grow max-w-3xl">
+							<div
+								class="prose prose-stone md:prose-lg dark:prose-invert"
+								data-pagefind-body
+								data-pagefind-filter="productId:showcase"
+							>
+								<slot />
+							</div>
+							<div class="pt-10">
+								<LinkButton
+									type="discord"
+									href={DISCORD_URL}
+									iconLeft="fa-brands:discord"
+									label="Join us on Discord"
+								/>
+							</div>
+						</article>
+					</div>
+				</div>
+
+				</div>
+				
+			</div>
 		</div>
 	</main>
 
@@ -125,4 +105,15 @@ if (description) {
 		width: 24px;
 		@apply fill-stone-400;
 	}
+	.no-scrollbar::-webkit-scrollbar {
+    display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+	}
+
+	
 </style>

@@ -21,14 +21,14 @@ const demo =
 //choose hover link color based on product
 const productName = typeof product === "undefined" ? "Labs" : product.name;
 //if product is cheerpj, add prefix /docs on post url
-const blog_url =
+const demo_url =
 	productName === "CheerpJ"
 		? "https://labs.leaningtech.com/showcase/"
 		: "/showcase/";
 ---
 
 <a
-	href={blog_url + demo.slug}
+	href={demo_url + demo.slug}
 	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
 >
 	{

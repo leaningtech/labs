@@ -1,6 +1,9 @@
 ---
 title: WebVM
 description: Linux running client-side within your browser tab
+projectType: Company demo
+niche: Virtual Machines
+author: Leaning Technologies
 url: https://webvm.io/
 heroImage: "./webvm.png"
 tags:
