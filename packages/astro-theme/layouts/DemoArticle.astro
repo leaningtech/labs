@@ -34,20 +34,40 @@ if (description) {
 <Shell>
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
-		<div class="h-screen grid grid-cols-10">
+		<div class="h-screen grid md:grid-cols-10">
 			<div class="col-span-3">
+				<a
+					href="/showcase"
+					class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+				>
+					<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
+				</a>
+				<div class="block md:hidden pb-4">
+					{
+						heroImage && (
+							<Image
+								src={heroImage}
+								alt=""
+								class="rounded-xl mx-auto object-cover max-h-[30rem] bg-stone-300"
+								
+								quality="max"
+							/>
+						)
+					}
+					</div>
+				
 				<DemoInfo title={title} description={description} projectType={projectType} author = {author} niche={niche} tags = {tags}></DemoInfo>
 				
 			</div>
 			<div class="flex flex-1 col-span-1">
 				
 				<div
-					class="h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400">
+					class=" hidden md:block h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400">
 				</div>
 			</div>
 			<div class="col-span-6 grid grid-flow-row overflow-hidden">
-				<div class="overflow-y-auto no-scrollbar">
-					<div class="">
+				<div class="mt-6 md:mt-2 overflow-y-auto no-scrollbar">
+					<div class="hidden md:block">
 					{
 						heroImage && (
 							<Image

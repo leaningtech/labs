@@ -20,12 +20,7 @@ const { title, description, niche, author, projectType, url, tags } = Astro.prop
 ---
 <div class="mr-10">
     <div>
-        <a
-			href="/showcase"
-			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
-		>
-			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
-		</a>
+        
     <h1
 			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
 			id="introduction"
@@ -39,7 +34,7 @@ const { title, description, niche, author, projectType, url, tags } = Astro.prop
 				)
 			}
 		</h1>
-        <div class="flex gap-4 justify-left lg:justify-start mt-5">
+        <div class="flex flex-wrap xl:flex-nowrap gap-4 justify-left lg:justify-start mt-5">
 					<LinkButton
 						type="primary"
 						href="https://webvm-hackathon.devpost.com/"
@@ -92,4 +87,5 @@ const { title, description, niche, author, projectType, url, tags } = Astro.prop
     </table>
 
 </div>
+
 </div>
