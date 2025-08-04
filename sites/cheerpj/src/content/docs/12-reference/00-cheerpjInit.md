@@ -28,6 +28,7 @@ async function cheerpjInit(options?: {
 	licenseKey?: string;
 	execCallback?: (cmdPath: string, argsArray: string[]) => void;
 	enableDebug?: boolean;
+	hostName?: string;
 }): Promise<void>;
 ```
 
@@ -427,6 +428,23 @@ cheerpjInit({ enableDebug: true });
 ```
 
 Learn more about how to debug CheerpJ in our [Debugging CheerpJ guide](/docs/guides/cheerpj-debug).
+
+### `hostName`
+
+```ts
+hostName?: string;
+```
+
+> [!note] Important
+> The `hostName` option is supported in CheerpJ 3.1 and later versions.
+
+This option will set the hostname of the JVM to the string passed as an argument. This is the value returned when calling the standard Java functions `getHostName()` or `getHostAddress()` from the `java.net.InetAddress` package. These functions are used, for instance, by Oracle's WebUtil component.
+
+Example of usage:
+
+```js
+cheerpjInit({ hostName: "10.10.90.200" });
+```
 
 [cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
