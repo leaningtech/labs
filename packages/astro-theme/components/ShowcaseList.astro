@@ -13,8 +13,9 @@ const props = Astro.props;
 
 const product = productFromUrl(Astro.url);
 
-let projects = await getCollection("showcase", ({ data }) =>
-	data?.tags?.includes(product.name)
+let projects = await getCollection(
+	"showcase",
+	({ data }) => !product || data?.tags?.includes(product.name)
 );
 if (typeof props.limit == "number") {
 	projects = projects.slice(0, props.limit);
