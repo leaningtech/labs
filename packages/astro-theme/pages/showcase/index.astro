@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import DemoCard from "../../components/DemoCard.astro";
 import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
-import BlogDoodle from "./blog-doodle.png";
+import ShowcaseDoodle from "./reflectors.png";
 import { productFromUrl } from "../../lib/products";
 import ProductNav from "../../components/nav/product/Nav.astro";
 
@@ -22,19 +22,19 @@ const [demo1, demo2, ...restDemos] = await getCollection(
 	description={`Discover projects built with ${product?.name}`}
 >
 	{product && <ProductNav {product} />}
-	<header class="text-center text-stone-100 py-16">
-		<div class="flex justify-center items-center">
+	<header class="text-center text-stone-100">
+		<div class="flex justify-center pt-10 items-center">
 			<Image
-				src={BlogDoodle}
-				width="150"
+				src={ShowcaseDoodle}
+				width="500"
 				height="129"
 				class="invisible md:visible"
-				alt="person reading a newspaper"
+				alt="reflectors"
 			/>
 		</div>
 
 		<h1 class="text-5xl font-semibold text-balance">Demo showcase</h1>
-		<p class="text-lg text-balance my-8 text-stone-400">
+		<p class="text-lg text-balance mb-8 text-stone-400">
 			{
 				`Discover projects and demos built with ${product?.name} by our developers, community and collaborators`
 			}
