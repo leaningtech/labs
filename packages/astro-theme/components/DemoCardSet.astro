@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import BlogPostCard from "./BlogPostCard.astro";
+import DemoCard from "./DemoCard.astro";
 import { productFromUrl } from "../lib/products";
 
 interface Props {
@@ -15,23 +15,23 @@ const { tags, exclude } = Astro.props;
 const product = productFromUrl(Astro.url);
 const productName = typeof product === "undefined" ? "Labs" : product.name;
 
-function sortCalc(post: CollectionEntry<"blog">): number {
+function sortCalc(demo: CollectionEntry<"showcase">): number {
 	let relevancy =
-		tags && post.data.tags
-			? post.data.tags.filter((tag) => tags.includes(tag)).length
+		tags && demo.data.tags
+			? demo.data.tags.filter((tag) => tags.includes(tag)).length
 			: 0.1;
-	if (post.data.featured) {
+	if (demo.data.featured) {
 		relevancy *= 2;
 	}
-	return post.data.pubDate.valueOf();
+	return relevancy;
 }
 
-const posts = (
-	await getCollection("blog", (post) => {
+const demos = (
+	await getCollection("showcase", (demo) => {
 		if (
-			post.data.draft ||
-			exclude?.includes(post.id) ||
-			!(post.data?.tags?.includes(productName) || productName === "Labs")
+			demo.data.draft ||
+			exclude?.includes(demo.id) ||
+			!(demo.data?.tags?.includes(productName) || productName === "Labs")
 		) {
 			return false;
 		} else {
@@ -43,11 +43,11 @@ const posts = (
 	.slice(0, 3);
 ---
 
-<ul class="grid  md:grid-cols-3 gap-8">
+<ul class="grid md:grid-cols-3 gap-8">
 	{
-		posts.map((post) => (
+		demos.map((demo) => (
 			<li class="flex justify-stretch items-stretch overflow-hidden">
-				<BlogPostCard {post} showMetadata />
+				<DemoCard {demo} showMetadata />
 			</li>
 		))
 	}

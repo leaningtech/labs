@@ -17,6 +17,8 @@ interface Props {
 }
 
 const { title, description, niche, author, projectType, url, tags } = Astro.props;
+let tag_string = " ";
+{ tags.map((tag) => (tag_string += " "+tag))}
 ---
 <div class="mr-10">
     <div>
@@ -28,7 +30,7 @@ const { title, description, niche, author, projectType, url, tags } = Astro.prop
 			{title}
 			{
 				description && (
-					<p class="block pt-10 text-xl md:text-2xl font-light text-stone-400">
+					<p class="block pt-5 text-xl md:text-2xl font-light text-stone-400">
 						{description}
 					</p>
 				)
@@ -79,7 +81,8 @@ const { title, description, niche, author, projectType, url, tags } = Astro.prop
             { tags && 
                 <tr class="">
                     <th class = "text-left font-light">Technology</th>
-                    <th class = "text-right font-medium"> {tags}</th>
+                    <th class = "text-right font-medium"> {tag_string}</th>
+                    
 
                 </tr>
             }

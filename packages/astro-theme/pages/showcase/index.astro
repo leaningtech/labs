@@ -47,7 +47,7 @@ const [demo1, demo2, ...restDemos] = await getCollection(
 	</header>
 
 	<section class="pb-24 px-6 mx-auto w-full max-w-screen-xl">
-		<ul class="grid md:grid-cols-2 gap-8 mb-8">
+		<ul class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
 			{
 				[demo1, demo2].map((demo) => (
 					<li class="flex md:justify-stretch md:items-stretch">
@@ -56,11 +56,11 @@ const [demo1, demo2, ...restDemos] = await getCollection(
 				))
 			}
 		</ul>
-		<ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{
 				restDemos.map((demo) => (
 					<li class="flex md:justify-stretch md:items-stretch">
-						<DemoCard {demo} showMetadata />
+						<DemoCard {demo} showMetadata size="wide"/>
 					</li>
 				))
 			}

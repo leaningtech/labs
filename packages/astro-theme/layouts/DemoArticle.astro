@@ -4,11 +4,8 @@ import Shell from "./Shell.astro";
 import Icon from "astro-icon";
 import { SocialShare } from "astro-social-share";
 import DemoInfo from "../components/DemoInfo.astro";
-import TableOfContents, {
-	type BasicHeading,
-} from "../components/TableOfContents.astro";
 import Footer from "../components/Footer.astro";
-
+import DemoCardSet from "../components/DemoCardSet.astro";
 import LinkButton from "../components/LinkButton.astro";
 import { DISCORD_URL } from "../consts";
 import { Image } from "astro:assets";
@@ -34,7 +31,7 @@ if (description) {
 <Shell>
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
-		<div class="h-screen grid md:grid-cols-10">
+		<div class="h-full md:h-screen grid md:grid-cols-10">
 			<div class="col-span-3">
 				<a
 					href="/showcase"
@@ -80,9 +77,9 @@ if (description) {
 						)
 					}
 					</div>
-				<div class="">
+				<section class="">
 					<div class="flex flex-col lg:flex-row gap-10 mt-16">
-						<article class="grow max-w-3xl">
+						<article class="grow w-full md:max-w-3xl">
 							<div
 								class="prose prose-stone md:prose-lg dark:prose-invert"
 								data-pagefind-body
@@ -100,7 +97,7 @@ if (description) {
 							</div>
 						</article>
 					</div>
-				</div>
+				</section>
 
 				</div>
 				
@@ -108,12 +105,13 @@ if (description) {
 		</div>
 	</main>
 
-	<section class="px-6 w-full max-w-6xl mx-auto my-8 mb-32">
+	<section class="px-6 py-10 w-full max-w-screen-xl mx-auto mb-10">
 		<h1
 			class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
 		>
 			Related posts
 		</h1>
+		<DemoCardSet {tags} exclude={[id]} />
 	</section>
 
 	<Footer />

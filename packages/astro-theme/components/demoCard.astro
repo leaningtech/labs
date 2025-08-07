@@ -55,9 +55,7 @@ const demo_url =
 	>
 		{demo.data.title}
 	</h3>
-	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-end">
-				<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">{demo.data.projectType}</h1>
-	</div>
+	
 	</div>
 	
 	
@@ -78,4 +76,13 @@ const demo_url =
 			
 		)
 	}
+	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-start">
+				<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">{demo.data.projectType}</h1>
+				{
+					demo.data.tags.map((tag) => (
+						<h1 class="text-stone-200 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-500 outline-solid text-sm">{tag}</h1>
+					))
+				}
+				
+	</div>
 </a>

@@ -3,8 +3,10 @@ title: WebVM Alpine
 description: Linux running client-side within your browser tab
 url: https://webvm.io/
 heroImage: "./webvm.png"
+projectType: Company demo
 tags:
   - CheerpX
+  - CheerpJ
 ---
 
 Praesent ut fermentum arcu, at vulputate metus. Curabitur gravida nunc bibendum auctor placerat. Etiam volutpat laoreet eleifend. Aenean dictum rutrum mattis. Maecenas sit amet semper elit. Pellentesque mattis ex at lectus sodales, et consectetur nisl posuere. Suspendisse vitae leo accumsan, ultricies nisi in, molestie mi.
