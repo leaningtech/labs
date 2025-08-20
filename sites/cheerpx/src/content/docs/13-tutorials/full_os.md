@@ -156,7 +156,7 @@ And configure CheerpX to use it by adding this snippet at the end of the script.
 cx.setConsole(document.getElementById("console"));
 ```
 
-Learn more about the console setup in the [setConsole] reference.
+Learn more about the console setup in the [setConsole] reference. To set up a fully functional interactive terminal, take a look at the [setCustomConsole] reference instead.
 
 ## 7. Execute a shell
 
@@ -183,5 +183,6 @@ Learn more about `cx.run` in the [CheerpX.Linux.run] reference.
 [Files and filesystem]: /docs/guides/File-System-support
 [CheerpX.Linux.create]: /docs/reference/CheerpX.Linux/create
 [setConsole]: /docs/reference/CheerpX.Linux/setConsole
+[setCustomConsole]: /docs/reference/CheerpX.Linux/setCustomConsole
 [CheerpX.Linux.run]: /docs/reference/CheerpX.Linux/run
 [custom-disk-images]: /docs/guides/custom-images
