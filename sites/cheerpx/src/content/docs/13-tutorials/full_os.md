@@ -156,7 +156,7 @@ And configure CheerpX to use it by adding this snippet at the end of the script.
 cx.setConsole(document.getElementById("console"));
 ```
 
-Learn more about the console setup in the [setConsole] reference. To set up a complete responsive terminal, take a look at the [setCustomConsole] reference.
+Learn more about the console setup in the [setConsole] reference. To set up a fully functional interactive terminal, take a look at the [setCustomConsole] reference instead.
 
 ## 7. Execute a shell
 
