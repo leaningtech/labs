@@ -13,9 +13,7 @@ tags:
 
 WebVM is a virtual Linux environment running in the browser via WebAssembly. WebVM is powered by the CheerpX virtualization engine, which enables safe, sandboxed client-side execution of x86 binaries, fully client-side. Being built completely on standard Web technologies - WebAssembly in particular - it is fully isolated from your system and your other browser tabs.
 
-CheerpX includes an x86-to-WebAssembly JIT compiler, a virtual block-based  file system, and a Linux syscall emulator     
-
-
+CheerpX includes an x86-to-WebAssembly JIT compiler, a virtual block-based file system, and a Linux syscall emulator
 
 ## Claude Integration
 
