@@ -1,0 +1,108 @@
+---
+import { productFromUrl } from "../lib/products";
+import LinkButton from "../components/LinkButton.astro";
+import Icon from "astro-icon";
+
+interface Props {
+	title?: string;
+	description?: string | undefined;
+	niche?: string | undefined;
+	author?: string | undefined;
+	projectType?: string | undefined;
+	url?: string;
+	repository_url?: string;
+	tags?: string | undefined;
+}
+
+const {
+	title,
+	description,
+	niche,
+	author,
+	projectType,
+	url,
+	repository_url,
+	tags,
+} = Astro.props;
+let tag_string = " ";
+{
+	tags.map((tag) => (tag_string += " " + tag));
+}
+---
+
+<div class="mr-10">
+	<div>
+		<h1
+			class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
+			id="introduction"
+		>
+			{title}
+			{
+				description && (
+					<p class="block pt-5 text-xl md:text-2xl font-light text-stone-400">
+						{description}
+					</p>
+				)
+			}
+		</h1>
+		<div
+			class="flex flex-wrap xl:flex-nowrap gap-4 justify-left lg:justify-start mt-5"
+		>
+			<LinkButton
+				type="primary"
+				href={url}
+				label="Live demo"
+				iconRight="mdi:play"
+				target="_blank"
+			/>
+			<LinkButton
+				type="secondary"
+				href={repository_url}
+				iconRight="mdi:github"
+				label="Repository"
+				target="_blank"
+			/>
+		</div>
+	</div>
+	<hr
+		class="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
+	/>
+	<div class="">
+		<table class="w-full">
+			<tbody>
+				{
+					author && (
+						<tr class="">
+							<th class="text-left font-light">Author</th>
+							<th class="text-right font-medium"> {author}</th>
+						</tr>
+					)
+				}
+				{
+					projectType && (
+						<tr class="">
+							<th class="text-left font-light">Project type</th>
+							<th class="text-right font-medium"> {projectType}</th>
+						</tr>
+					)
+				}
+				{
+					niche && (
+						<tr class="">
+							<th class="text-left font-light">Niche</th>
+							<th class="text-right font-medium"> {niche}</th>
+						</tr>
+					)
+				}
+				{
+					tags && (
+						<tr class="">
+							<th class="text-left font-light">Technology</th>
+							<th class="text-right font-medium"> {tag_string}</th>
+						</tr>
+					)
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
