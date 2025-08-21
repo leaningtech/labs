@@ -2,7 +2,8 @@
 title: ImageJ.js
 description: A web port of ImageJ, an open-source image processing tool popular in the scientific community.
 url: https://aicell.io/post/improving-imagej.js/
-# https://github.com/aicell-lab/imagej.js
+repository_url: https://github.com/aicell-lab/imagej.js
+projectType: community
 heroImage: "./imagej.webp"
 tags:
   - CheerpJ

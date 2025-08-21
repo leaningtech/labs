@@ -2,6 +2,9 @@
 title: NASA Aeronautics Simulators
 description: Interactive simulator applets for aeoronautics students, powered by CheerpJ.
 url: https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/drop-simulator/
+repository_url: https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/drop-simulator/
+niche: Education
+projectType: Community
 heroImage: "./nasa-applets.png"
 tags:
   - CheerpJ

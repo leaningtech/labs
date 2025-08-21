@@ -2,6 +2,10 @@
 title: "Dragon Court: Revived"
 description: An old-school fantasy RPG, revived with in-game trading, multiplayer clans, and competitive leaderboards.
 url: https://dragoncourt.penguinchilling.com/
+niche: Videogames
+projectType: Community
+author: Penguin Chilling
+repository_url: https://dragoncourt.penguinchilling.com/
 heroImage: "./dragoncourtrevived.png"
 tags:
   - CheerpJ

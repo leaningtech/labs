@@ -2,7 +2,9 @@
 title: iText
 description: Edit PDFs fully client side using the industry standard iText library converted to JavaScript.
 url: https://cheerpjdemos.leaningtech.com/iTextDemo.html
+repository_url: https://cheerpjdemos.leaningtech.com/iTextDemo.html
 heroImage: "./itext.png"
+projectType: Company Demo
 tags:
   - CheerpJ
 ---

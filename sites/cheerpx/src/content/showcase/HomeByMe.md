@@ -2,7 +2,11 @@
 title: HomeByME
 description: A home design application, compiled to the web with Cheerp.
 url: https://home.by.me/en/
+repository_url: https://home.by.me/en/
 heroImage: "./homebyme.png"
+projectType: Enterprise Demo
+Niche: Interior design
+
 tags:
   - Cheerp
 ---
