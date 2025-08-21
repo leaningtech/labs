@@ -1,12 +1,8 @@
 ---
-title: Boardspace
-description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
-projectType: Community
-niche: Videogames
-author: Boardspace
-url: https://boardspace.net/login.html
-repository_url: https://boardspace.net/login.html
-heroImage: "./boardspace.png"
+title: OpenAstexViewer
+description: A complex Java applet with 3D rendering running in any browser using CheerpJ.
+url: https://cheerpjdemos.leaningtech.com/OpenAstexViewer.html
+heroImage: "./openastex.png"
 tags:
   - CheerpJ
 ---

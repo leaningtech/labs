@@ -1,12 +1,8 @@
 ---
-title: Boardspace
-description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
-projectType: Community
-niche: Videogames
-author: Boardspace
-url: https://boardspace.net/login.html
-repository_url: https://boardspace.net/login.html
-heroImage: "./boardspace.png"
+title: SwingSet3
+description: Java Swing components to HTML5 with CheerpJ
+url: https://cheerpj-example-swingset3.leaningtech.com/
+heroImage: "./swingset3.png"
 tags:
   - CheerpJ
 ---

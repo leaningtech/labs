@@ -2,15 +2,20 @@
 title: Browsercraft
 description: Minecraft running unmodified in the browser!
 url: https://browsercraft.cheerpj.com/
+repository_url: https://github.com/leaningtech/browsercraft
 heroImage: "./browsercraft.png"
+projectType: Company Demo
+niche: Videogames
 tags:
   - CheerpJ
 ---
 
-Praesent ut fermentum arcu, at vulputate metus. Curabitur gravida nunc bibendum auctor placerat. Etiam volutpat laoreet eleifend. Aenean dictum rutrum mattis. Maecenas sit amet semper elit. Pellentesque mattis ex at lectus sodales, et consectetur nisl posuere. Suspendisse vitae leo accumsan, ultricies nisi in, molestie mi.
+## What is it?
+Browsercraft runs unmodified Minecraft (version 1.2.5) in the browser using CheerpJ, a Java runtime for modern browsers. The experience is intentionally limited to 3 minutes; please refer to minecraft.net for the full game.
 
-## Some subtitle
+## What this is not
+It is not a replacement for the official Minecraft, nor a reimplementation in another programming language. This is also not a modified version of the game: we do not alter the code in any way, we simply run the original JARs.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed tempus elit. Integer tempor eros elit, ut pharetra est cursus non. Curabitur gravida quis purus non convallis. Pellentesque ultricies eget quam eget aliquam. Nunc at vestibulum lectus, eu euismod nibh. Quisque fermentum nunc sed imperdiet tempus. Vivamus iaculis urna ipsum, ac vehicula neque porttitor sit amet. Duis a mauris eu leo malesuada dapibus.
+## How it works
+CheerpJ is a Java Virtual Machine written in WebAssembly that runs entirely in your browser. It can execute any Java application without modification and without requiring the source code. This demo demonstrates those capabilities by running an older version (1.2.5) of Minecraft and LWJGL entirely in the browser.
 
-Donec a nibh a diam fringilla porta. Fusce sit amet pretium enim. Donec ac massa nec nisl ultrices blandit. Aliquam cursus rutrum neque. Vestibulum eu lobortis justo, id consequat odio. Ut blandit nibh tortor, eu maximus metus tempor sit amet. Fusce vel cursus turpis, sollicitudin placerat lectus. Nullam ac tellus eu urna rutrum eleifend eu a augue. Integer dignissim lectus nulla, id faucibus quam malesuada id. Nunc ultrices neque nec risus accumsan sagittis. Proin eu augue sed urna sollicitudin ornare quis eu ex. Vestibulum commodo dictum efficitur.

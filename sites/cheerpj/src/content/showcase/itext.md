@@ -1,12 +1,8 @@
 ---
-title: Boardspace
-description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
-projectType: Community
-niche: Videogames
-author: Boardspace
-url: https://boardspace.net/login.html
-repository_url: https://boardspace.net/login.html
-heroImage: "./boardspace.png"
+title: iText
+description: Edit PDFs fully client side using the industry standard iText library converted to JavaScript.
+url: https://cheerpjdemos.leaningtech.com/iTextDemo.html
+heroImage: "./itext.png"
 tags:
   - CheerpJ
 ---

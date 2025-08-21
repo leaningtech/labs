@@ -5,6 +5,7 @@ projectType: Community
 niche: Videogames
 author: Boardspace
 url: https://boardspace.net/login.html
+repository_url: https://boardspace.net/login.html
 heroImage: "./boardspace.png"
 tags:
   - CheerpJ

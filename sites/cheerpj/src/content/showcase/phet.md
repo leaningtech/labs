@@ -1,12 +1,8 @@
 ---
-title: Boardspace
-description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
-projectType: Community
-niche: Videogames
-author: Boardspace
-url: https://boardspace.net/login.html
-repository_url: https://boardspace.net/login.html
-heroImage: "./boardspace.png"
+title: PHET Interactive Simulations
+description: Interactive physics simulations from the University of Colorado Boulder, powered by CheerpJ.
+url: https://phet.colorado.edu/en/simulations/filter?type=cheerpj
+heroImage: "./phet.png"
 tags:
   - CheerpJ
 ---

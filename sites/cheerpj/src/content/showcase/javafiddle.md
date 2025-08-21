@@ -1,12 +1,8 @@
 ---
-title: Boardspace
-description: A board game playing application using AWT. Over 100 games are available to play against human and robot opponents using WebSockets.
-projectType: Community
-niche: Videogames
-author: Boardspace
-url: https://boardspace.net/login.html
-repository_url: https://boardspace.net/login.html
-heroImage: "./boardspace.png"
+title: Java Fiddle
+description: Compile, edit and run Java, directly in the browser.
+url: https://javafiddle.leaningtech.com/
+heroImage: "./javafiddle.png"
 tags:
   - CheerpJ
 ---
