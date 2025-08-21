@@ -8,7 +8,7 @@ categories:
   - "technical-blog"
 authors:
   - "lorenzo-marsicano"
-heroImage: ./cheerpj.png
+heroImage: "./cheerpj.png"
 tags:
   - CheerpJ
 ---
