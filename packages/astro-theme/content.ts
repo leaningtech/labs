@@ -63,6 +63,7 @@ export function defineCommonCollections() {
 					niche: z.string().optional(),
 					author: z.string().optional(),
 					url: z.string(),
+					repository_url: z.string().optional(),
 					heroImage: image().optional(),
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),

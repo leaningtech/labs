@@ -12,11 +12,12 @@ interface Props {
     author?: string | undefined;
 	projectType?: string | undefined;
     url?: string;
+    repository_url?: string;
     tags?: string | undefined;
 
 }
 
-const { title, description, niche, author, projectType, url, tags } = Astro.props;
+const { title, description, niche, author, projectType, url, repository_url, tags } = Astro.props;
 let tag_string = " ";
 { tags.map((tag) => (tag_string += " "+tag))}
 ---
@@ -39,15 +40,17 @@ let tag_string = " ";
         <div class="flex flex-wrap xl:flex-nowrap gap-4 justify-left lg:justify-start mt-5">
 					<LinkButton
 						type="primary"
-						href="https://webvm-hackathon.devpost.com/"
+						href={url}
 						label="Live demo"
 						iconRight="mdi:play"
+                        target="_blank"
 					/>
 					<LinkButton
 						type="secondary"
-						href="/docs"
+						href={repository_url}
 						iconRight="mdi:github"
 						label="Repository"
+                        target="_blank"
 					/>
 		</div>
 

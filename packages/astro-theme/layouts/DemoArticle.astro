@@ -19,7 +19,7 @@ type Props = CollectionEntry<"showcase">["data"] & {
 	headings: BasicHeading[] | undefined;
 };
 
-const { id, title, description, author, projectType,niche, heroImage, headings, tags } =
+const { id, title, description, author, projectType,niche, heroImage, headings, url, repository_url, tags } =
 	Astro.props;
 
 let titleAndSubtitle = title;
@@ -53,7 +53,7 @@ if (description) {
 					}
 					</div>
 				
-				<DemoInfo title={title} description={description} projectType={projectType} author = {author} niche={niche} tags = {tags}></DemoInfo>
+				<DemoInfo title={title} description={description} projectType={projectType} author = {author} niche={niche} tags = {tags} url = {url} repository_url = {repository_url}></DemoInfo>
 				
 			</div>
 			<div class="flex flex-1 col-span-1">

@@ -5,15 +5,18 @@ projectType: Company demo
 niche: Virtual Machines
 author: Leaning Technologies
 url: https://webvm.io/
+repository_url: https://github.com/leaningtech/webvm
 heroImage: "./webvm.png"
 tags:
   - CheerpX
 ---
 
-Praesent ut fermentum arcu, at vulputate metus. Curabitur gravida nunc bibendum auctor placerat. Etiam volutpat laoreet eleifend. Aenean dictum rutrum mattis. Maecenas sit amet semper elit. Pellentesque mattis ex at lectus sodales, et consectetur nisl posuere. Suspendisse vitae leo accumsan, ultricies nisi in, molestie mi.
+WebVM is a virtual Linux environment running in the browser via WebAssembly. WebVM is powered by the CheerpX virtualization engine, which enables safe, sandboxed client-side execution of x86 binaries, fully client-side. Being built completely on standard Web technologies - WebAssembly in particular - it is fully isolated from your system and your other browser tabs.
 
-## Some subtitle
+CheerpX includes an x86-to-WebAssembly JIT compiler, a virtual block-based  file system, and a Linux syscall emulator     
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed tempus elit. Integer tempor eros elit, ut pharetra est cursus non. Curabitur gravida quis purus non convallis. Pellentesque ultricies eget quam eget aliquam. Nunc at vestibulum lectus, eu euismod nibh. Quisque fermentum nunc sed imperdiet tempus. Vivamus iaculis urna ipsum, ac vehicula neque porttitor sit amet. Duis a mauris eu leo malesuada dapibus.
 
-Donec a nibh a diam fringilla porta. Fusce sit amet pretium enim. Donec ac massa nec nisl ultrices blandit. Aliquam cursus rutrum neque. Vestibulum eu lobortis justo, id consequat odio. Ut blandit nibh tortor, eu maximus metus tempor sit amet. Fusce vel cursus turpis, sollicitudin placerat lectus. Nullam ac tellus eu urna rutrum eleifend eu a augue. Integer dignissim lectus nulla, id faucibus quam malesuada id. Nunc ultrices neque nec risus accumsan sagittis. Proin eu augue sed urna sollicitudin ornare quis eu ex. Vestibulum commodo dictum efficitur.
+
+## Claude Integration
+
+WebVM integrates The Computer Use feature from Claude. Since Claude APIs can be used directly from a browser tab, it’s possible to combine them with WebVM to create a secure and private environment to experiment with Claude Computer Use capabilities. Please read more about WebVM and Claude integration in our dedicated [blog post](https://cheerpx.io/blog/webvm-claude).

@@ -1,18 +1,16 @@
 ---
 title: WebVM Alpine
-description: Linux running client-side within your browser tab
-url: https://webvm.io/
-heroImage: "./webvm.png"
+description: Graphical Linux Alpine running client-side.
+url: https://webvm.io/alpine.html
+repository_url: https://github.com/leaningtech/webvm
+heroImage: "./webvm_alpine.png"
 projectType: Company demo
+niche: Virtual Machines
+author: Leaning Technologies
 tags:
   - CheerpX
-  - CheerpJ
 ---
 
-Praesent ut fermentum arcu, at vulputate metus. Curabitur gravida nunc bibendum auctor placerat. Etiam volutpat laoreet eleifend. Aenean dictum rutrum mattis. Maecenas sit amet semper elit. Pellentesque mattis ex at lectus sodales, et consectetur nisl posuere. Suspendisse vitae leo accumsan, ultricies nisi in, molestie mi.
-
-## Some subtitle
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed tempus elit. Integer tempor eros elit, ut pharetra est cursus non. Curabitur gravida quis purus non convallis. Pellentesque ultricies eget quam eget aliquam. Nunc at vestibulum lectus, eu euismod nibh. Quisque fermentum nunc sed imperdiet tempus. Vivamus iaculis urna ipsum, ac vehicula neque porttitor sit amet. Duis a mauris eu leo malesuada dapibus.
-
-Donec a nibh a diam fringilla porta. Fusce sit amet pretium enim. Donec ac massa nec nisl ultrices blandit. Aliquam cursus rutrum neque. Vestibulum eu lobortis justo, id consequat odio. Ut blandit nibh tortor, eu maximus metus tempor sit amet. Fusce vel cursus turpis, sollicitudin placerat lectus. Nullam ac tellus eu urna rutrum eleifend eu a augue. Integer dignissim lectus nulla, id faucibus quam malesuada id. Nunc ultrices neque nec risus accumsan sagittis. Proin eu augue sed urna sollicitudin ornare quis eu ex. Vestibulum commodo dictum efficitur.
+WebVM 2.0 came out with big improvements for graphical applications support, including booting a complete Alpine desktop environment.
+For now, we have settled on using i3, a minimalistic window manager, to make sure the demo is enjoyable by most users, even on mobile devices, without consuming excessive amounts of data. Further improvements in our roadmap will make it practical to run the much heavier XFCE environment in future releases.
+Read more about this demo at our [dedicated blog post](https://cheerpx.io/blog/webvm-20).
