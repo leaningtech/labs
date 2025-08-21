@@ -2,7 +2,10 @@
 title: Java Fiddle
 description: Compile, edit and run Java, directly in the browser.
 url: https://javafiddle.leaningtech.com/
+repository_url: https://github.com/leaningtech/javafiddle
 heroImage: "./javafiddle.png"
+author: Leaning Technologies
+projectType: Company Demo
 tags:
   - CheerpJ
 ---

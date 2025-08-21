@@ -2,6 +2,8 @@
 title: SwingSet3
 description: Java Swing components to HTML5 with CheerpJ
 url: https://cheerpj-example-swingset3.leaningtech.com/
+repository_url: https://github.com/leaningtech/cheerpj-example-swingset3/blob/main/index.html
+projectType: Company Demo
 heroImage: "./swingset3.png"
 tags:
   - CheerpJ

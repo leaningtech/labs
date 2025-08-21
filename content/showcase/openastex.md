@@ -2,6 +2,8 @@
 title: OpenAstexViewer
 description: A complex Java applet with 3D rendering running in any browser using CheerpJ.
 url: https://cheerpjdemos.leaningtech.com/OpenAstexViewer.html
+reposiutory_url: https://cheerpjdemos.leaningtech.com/OpenAstexViewer.html
+projectType: Company Demo
 heroImage: "./openastex.png"
 tags:
   - CheerpJ
