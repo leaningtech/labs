@@ -1,0 +1,152 @@
+---
+title: Configure extension for enterprises
+description: How to configure the JNLP Runner extension for enterprises
+---
+
+As an administrator, you can configure browser extensions for Chrome and Edge using the Windows Group Policy Editor or the Windows Registry.
+This applies to the CheerpJ JNLP Runner extension as well, allowing you to customize the extension to meet your users' needs.
+
+The following steps assume that you have a basic understanding of using Group Policy and editing the Windows Registry.
+
+For more detailed guidance, please refer to the official [Chrome](https://support.google.com/chrome/a/answer/7532015)
+and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-policies) documentation on configuring browser extensions for enterprise use.
+
+## The extension ID
+
+The _extension ID_ is a unique identifier used to differentiate one extension from another.
+It is required when configuring extensions using the Windows Group Policy Editor or setting them in the registry.
+
+The _extension ID_ of the official **Edge** Add-ons store version is:
+
+```
+dpleickbpchmkpkmicanfolmianepfhe
+```
+
+The _extension ID_ of the official **Chrome** Webstore version is:
+
+```
+achnhggjjhnadfapkmgallnbmemdojdi
+```
+
+If you are self-hosting a custom build of the JNLP Runner, the _extension ID_ will differ.
+We either provided you with the _extension ID_, or you will need to retrieve it yourself.
+To obtain the _extension ID_ for a custom build, drag the CRX file onto your browser's Extensions page.
+You can navigate there by clicking the three dots in the top-right corner of the browser and selecting **Extensions**. Once the extension is loaded, you can note the ID.
+
+## Configure with the Group Policies
+
+A common way to configure your extensions is by using the `ExtensionSettings` policy, which includes multiple options for admins to set up extensions for users.
+The `ExtensionSettings` policy enables you to configure multiple settings in one place using a JSON string in the Windows Group Policy Editor.
+
+For more information on the ExtensionSettings policy, please refer to the official documentation for [Chrome](https://support.google.com/chrome/a/answer/7532015)
+and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-ref-guide).
+
+### Configure `ExtensionsSettings` policy with JSON format
+
+You can access the `ExtensionSettings` policy through the Group Policy Editor. The location of the policy varies depending on the browser you are using.
+
+- **_Edge:_** In the Group Policy Editor, go to **Administrative Templates > Microsoft Edge > Extensions > Configure extension management setting policy**
+
+- **_Chrome:_** In the Group Policy Editor, go to **Administrative Templates > Google > Google Chrome > Extensions > Configure extension management setting policy**
+
+You will need to **enable** the policy and enter the policy string in JSON format as a **single line**. To validate and compress the policy into a single line, use a JSON compression tool.
+
+The policy string should include the _extension ID_ and the different policy settings you want to configure. Here is an example:
+
+```json
+{ "ExtensionIDHere": { "Setting1": "Value1", "Setting2": "Value2" } }
+```
+
+### Force install the CheerpJ JNLP Runner extension
+
+You can use the `ExtensionInstallForcelist` policy to force install an extension, or you can use`ExtensionSettings` policy.
+
+For the `ExtensionSettings` policy, you will need to use the `installation_mode` setting and set it to `force_install`.
+You will also need to add `update_url` setting, which specifies where the browser should download the extension from.
+For extensions hosted in the official browser's app store, you should use the app store's URLs.
+If you are self-hosting your extension, this setting should point to the `manifest.xml` of the extension.
+
+Policy string for **official Chrome** extension:
+
+```json
+{
+	"achnhggjjhnadfapkmgallnbmemdojdi": {
+		"installation_mode": "force_install",
+		"update_url": "https://clients2.google.com/service/update2/crx"
+	}
+}
+```
+
+Policy string for **official Edge** extension
+
+```json
+{
+	"dpleickbpchmkpkmicanfolmianepfhe": {
+		"installation_mode": "force_install",
+		"update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
+	}
+}
+```
+
+> [!info] Make sure the policy string is in a single line
+
+### Pin the CheerpJ JNLP Runner extension to the toolbar
+
+To automatically pin the extension to the toolbar you can use the `ExtensionSettings` policy, the setting property has a differnt name for
+[Chrome](https://support.google.com/chrome/a/answer/9867568?hl=en) and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-ref-guide).
+
+Policy string for **official Chrome** extension:
+
+```json
+{ "achnhggjjhnadfapkmgallnbmemdojdi": { "toolbar_pin": "forced_pin" } }
+```
+
+Policy string for **official Edge** extension
+
+```json
+{ "dpleickbpchmkpkmicanfolmianepfhe": { "toolbar_state": "force_shown" } }
+```
+
+## Configuring Extension Settings via Windows Registry (Managed Storage)
+
+The CheerpJ JNLP Runner extension supports Chrome Managed Storage, allowing certain settings to be preconfigured via the Windows registry.
+
+These values are read-only in the extension and must be set by an administrator.
+
+### Registry Path
+
+Custom settings must be stored under the following registry path, replacing `<extension-id>` with the extension’s actual ID (see previous [Extension ID](#the-extension-id) section):
+
+- **Chrome**  
+  32-bit Windows  
+  `HKEY_LOCAL_MACHINE\Software\Policies\Google\Chrome\3rdparty\extensions\<extension-id>\policy`  
+  64-bit Windows  
+  `HKEY_LOCAL_MACHINE\Software\Wow6432Node\Policies\Google\Chrome\3rdparty\extensions\<extension-id>\policy`
+
+- **Edge**  
+  32-bit Windows  
+  `HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Edge\3rdparty\extensions\<extension-id>\policy`  
+  64-bit Windows  
+  `HKEY_LOCAL_MACHINE\Software\Wow6432Node\Policies\Microsoft\Edge\3rdparty\extensions\<extension-id>\policy`
+
+### Policy Formatting
+
+Each custom setting corresponds to a property defined in the extension’s managed storage schema.
+The name, type, and structure of the registry entry must match the schema exactly.
+
+To configure a custom setting, create a new string value under the extension’s policy registry key.
+Set the value name to the setting’s name, and set the value data to the appropriate value in the format required by the schema.
+
+### `licenseToken`
+
+This setting is used to provide the enterprise license token to the extension.
+
+The schema is as follows:
+
+```json
+"licenseToken": {
+	"type": "string"
+}
+```
+
+Since this setting is a simple string, all you need to do is create a new string key named `licenseToken` and set its value to your provided token.
