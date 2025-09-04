@@ -1,4 +1,4 @@
-let CX_LATEST = "1.1.2";
+let CX_LATEST = "1.1.5";
 
 const replacements = [
 	[

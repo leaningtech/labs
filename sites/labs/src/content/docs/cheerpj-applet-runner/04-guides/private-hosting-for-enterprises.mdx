@@ -1,0 +1,90 @@
+---
+title: Private hosting for enterprises
+description: How to self host the CheerpJ Applet Runner extension
+---
+
+This guide is designed to assist enterprise users in privately hosting the CheerpJ Applet Runner extension.
+It is a general guide that applies to both Chrome and Edge browsers.
+For detailed instructions on self-hosting extensions for either browser, please refer to the official documentation for [Chrome](https://support.google.com/chrome/a/answer/9296680?hl=en&ref_topic=9023098&sjid=12568219374083512432-EU)
+and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-webstore).
+
+**Requirements:**
+
+To self-host the CheerpJ Applet Runner extension, you will need a web server to host the extension’s `CRX` and `manifest.xml` files.
+This hosting location should not require authentication and must be accessible by devices regardless of their location.
+This is important to keep in mind if you are considering hosting the files on an internal repository.
+
+The following steps assume that you have knowledge of group policy and using the Windows registry.
+
+## The CRX File
+
+The CRX file is a compressed format used for extensions in browsers that are part of the Chromium family, such as Google Chrome and Edge.
+
+For enterprise users, you may have already received the Applet Runner's CRX file from us, or we may have sent you the extension files in a compressed folder.
+In the latter case, you will need to pack the extension yourself. We provide detailed documentation on how to do this for [Chrome](/docs/cheerpj-applet-runner/guides/packing-extension-chrome) and
+[Edge](/docs/cheerpj-applet-runner/guides/packing-extension-edge).
+
+**Ensure that you host the extension CRX file in the appropriate location within your IT infrastructure and that the file is accessible via a URL.**
+
+## Extension ID
+
+The _extension ID_ is a unique identifier used to differentiate one extension from another.
+It is required when configuring extensions using the Windows Group Policy Editor or setting them in the registry.
+
+We have either already forwarded you the custom _extension ID_, or you will need to obtain it yourself. To obtain the _extension ID_ for a custom build, drag the CRX file onto your browser's extensions page.
+You can navigate there by clicking the three dots in the top-right corner of the browser and selecting **Extensions**. Once the extension is loaded, you can note the ID.
+
+## Manifest XML file
+
+To self host the extension you will also need a manifest XML file. The file contains important information of the extension:
+
+- **`appid`** - The _extension ID_ from the previous step.
+- **`codebase`** - The download URL for the CRX file.
+- **`version`** - The version of the extension. Can be retrieved from `chrome://extensions/`, `edge://extensions/` or it was provided by us.
+
+**If we provided you with the manifest.xml file you can skip this step.**
+Otherwise you can use this template to create your own:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+  <app appid='exampleid'>
+  <updatecheck codebase='https://app.somecompany.com/extension.crx' version='1.0' />
+  </app>
+</gupdate>
+```
+
+You will need to update the `appid`, `codebase` and `version` attributes to ensure it works with your custom build.
+
+The `appid` should be changed to the _extension ID_ you noted previously. The `codebase` string should be the public URL of the extension's CRX file.
+And the `version` should be changed to the actual extension version.
+
+Just like with the CRX file, you will need to host the `manifest.xml` file, and it should be accessible via a URL.
+You will need this URL to create the policy string when configuring the extension.
+
+## Hosting the extension files
+
+The server hosting your extension's CRX files must employ appropriate HTTP headers to allow users to install the extension through a link.
+Browsers belonging to the Chromium family (such as Google Chrome and Edge) consider a file installable, if it follows conditions:
+
+- The file has the content type `"application/x-chrome-extension"`.
+- The file suffix is .crx, and both conditions are met:
+  - The file is not served with the HTTP header `"X-Content-Type-Options: nosniff"`.
+  - The file is served with one of the specified content types: `empty string`, `"text/plain"`, `"application/octet-stream"`, `"unknown/unknown"`, `"application/unknown"` or `"/"`.
+
+To fix an HTTP header issue, either change the configuration of the server or try hosting the `.crx` file at another server.
+
+## Distributing the extension
+
+To allow users to install a self-hosted extensions, you need to add the extension CRX IDs to the `ExtensionInstallAllowList` policy
+and add the URL of the location where the CRX file is hosted to the `ExtensionInstallSources` policy.
+
+Alternatively, you can use group policy [`ExtensionInstallForceList`](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-policies#force-install-an-extension) to Force-install an extension on your users' devices.
+Keep in mind that for self-hosted extensions the policy string for the `ExtensionInstallForceList` policy should look like this `extension_id;update_url` where `update_url` points to the location of the manifest XML
+file. For example:
+
+```
+exampleid;https://example.net/manifest.xml
+```
+
+To further configure the extension you can follow our documentation on how to [configure extensions for enteprises](/docs/cheerpj-applet-runner/guides/configure-extension-for-enterprises).

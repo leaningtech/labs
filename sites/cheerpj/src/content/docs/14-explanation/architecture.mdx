@@ -28,7 +28,7 @@ CheerpJ is made of the following building blocks:
 
 ### The CheerpJ Java Runtime Environment
 
-The magic behind CheerpJ is [Cheerp], which was used for compiling full Java SE 8 and Java SE 11 runtimes based on OpenJDK. This runtime was originally written in C++ and compiled to WebAssembly and JavaScript, making it 100% browser compatible. The architecture is designed to support multiple versions of Java, as well as custom runtimes. Future versions of CheerpJ will support Java 11, and newer LTS Java versions.
+The magic behind CheerpJ is [Cheerp], which was used for compiling full Java SE 8, 11 and 17, runtimes based on OpenJDK. This runtime was originally written in C++ and compiled to WebAssembly and JavaScript, making it 100% browser compatible. The architecture is designed to support multiple versions of Java, as well as custom runtimes. Future versions of CheerpJ will reach parity with the current LTS Java version.
 
 The most important component of the CheerpJ Java runtime environment is its JVM implementation. CheerpJ's implementation of the JVM is made of an _interpreter_ and a _Just In Time compiler_ (JIT) that work in conjunction in a 2-tier manner:
 
@@ -55,7 +55,7 @@ CheepJ provides multiple filesystem backends to accommodate different applicat
 
 <LinkButton
 	type="secondary"
-	href="/docs/guides/File-System-support"
+	href="/docs/explanation/File-System-support"
 	iconRight="ep:arrow-right-bold"
 	label="File System guide"
 />
