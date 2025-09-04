@@ -1,0 +1,81 @@
+---
+import { getEntry, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { productFromUrl } from "../lib/products";
+
+const product = productFromUrl(Astro.url);
+
+interface Props {
+	demo: CollectionEntry<"showcase"> | CollectionEntry<"showcase">["slug"];
+	showMetadata?: boolean;
+	size?: "wide" | "narrow";
+}
+
+const { demo: demoOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
+
+const demo =
+	typeof demoOrSlug === "string"
+		? await getEntry("showcase", demoOrSlug)
+		: demoOrSlug;
+
+//choose hover link color based on product
+const productName = typeof product === "undefined" ? "Labs" : product.name;
+//if product is cheerpj, add prefix /docs on post url
+const demo_url =
+	productName === "CheerpJ"
+		? "https://labs.leaningtech.com/showcase/"
+		: "/showcase/";
+---
+
+<a
+	href={demo_url + demo.slug}
+	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
+>
+	{
+		demo.data.heroImage && (
+			<Image
+				src={demo.data.heroImage}
+				width={size === "wide" ? 600 : 390}
+				height={256}
+				alt=""
+				class="rounded-xl mb-4 bg-stone-100 object-cover w-full h-64 self-center"
+			/>
+		)
+	}
+	<div class="grid grid-cols-5">
+		<h3
+			class:list={{
+				"col-span-3 font-bold text-balance text-white grow": true,
+				"group-hover:text-cheerp grow": productName === "Cheerp",
+				"group-hover:text-[#6386a5] grow": productName === "CheerpX",
+				"group-hover:text-primary-400 grow": productName === "Labs",
+				"text-2xl leading-7": size === "wide",
+				"text-xl leading-6": size === "narrow",
+			}}
+		>
+			{demo.data.title}
+		</h3>
+	</div>
+
+	{
+		showMetadata && (
+			<div class=" flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
+				<div class="flex items-center gap-2  overflow-hidden">
+					<div class="flex-none space-x-[-1rem]">{demo.data.description}</div>
+				</div>
+			</div>
+		)
+	}
+	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-start">
+		<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">
+			{demo.data.projectType}
+		</h1>
+		{
+			demo.data.tags.map((tag) => (
+				<h1 class="text-stone-200 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-500 outline-solid text-sm">
+					{tag}
+				</h1>
+			))
+		}
+	</div>
+</a>
