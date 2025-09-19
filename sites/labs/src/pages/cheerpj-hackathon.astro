@@ -1,0 +1,48 @@
+---
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+import { Image } from "astro:assets";
+import DukeDoodle from "../assets/cj-hackathon/duke-doodle.png";
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+---
+
+<Shell>
+	<section class="w-full h-auto pt-8 bg-[#fceee1]">
+		<div class="py-32">
+			<div class="items-center py-2">
+				<Image
+					src={DukeDoodle}
+					alt="Duke holding a magnifier"
+					class="w-80 mx-auto"
+				/>
+			</div>
+			<div class="">
+				<h1
+					class="font-mono text-[#213e77] text-5xl text-center text-wrap text-balance mb-5"
+				>
+					CheerpJ: The Hackathon
+				</h1>
+				<p class="text-[#213e77] text-center">
+					The Java in the browser challenge!
+				</p>
+				<p class="text-[#213e77] text-center font-light">14 Nov - 1 Dec</p>
+
+				<div class="flex gap-4 justify-center my-8">
+					<LinkButton
+						type="primary-mono-cj"
+						href="https://cheerpj-the-hackathon.devpost.com//"
+						label="Register"
+						iconRight="ic:baseline-plus"
+					/>
+					<LinkButton
+						type="secondary-mono-cj"
+						href="https://www.cheerpj.com/docs"
+						iconRight=""
+						label="CheerpJ docs"
+					/>
+				</div>
+			</div>
+		</div>
+	</section>
+</Shell>
+<Footer />
