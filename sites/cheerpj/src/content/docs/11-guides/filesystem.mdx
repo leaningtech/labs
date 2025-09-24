@@ -10,7 +10,7 @@ CheerpJ provides a **virtual filesystem** that allows your Java applications to 
 CheerpJ's virtual filesystem has different **mounting points**, each with specific purposes:
 
 - **`/app/`**: This mount point is **read-only**. It corresponds to the root of the web server and contains all the files that are part of your Java application, including your `.jar` files and any resources bundled within them. Java can read files from `/app/`, but it **cannot write** to this location.
-- **`/files/`**: This is a **persistent, in-memory filesystem**. Files written here are accessible by your Java application and persist across sessions and page reloads until the user manually clears their browser's IndexedDB. This is useful for user-generated data, or situations where you need to move files around within the virtual filesystem.
+- **`/files/`**: This is a **persistent read-write file system**. Files written here are accessible by your Java application and persist across sessions and page reloads until the user manually clears their browser's IndexedDB. This is useful for user-generated data, or situations where you need to move files around within the virtual filesystem.
 - **`/str/`**: This mounting point is for adding string content directly from JavaScript into the virtual filesystem. This is useful for providing configuration files or initial data to your Java application without needing to package them inside your JAR.
 
 Read more about the filesystem in the [CheerpJ documentation](/docs/explanation/File-System-support).
