@@ -24,8 +24,10 @@ const firstDocsEntry = getLocalisedProductNav(
 )[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
 let blogref = "/blog";
+let showcaseref = "/showcase";
 if (product.id.includes("cheerpj")) {
 	blogref = "/docs/blog";
+	showcaseref = "/docs/showcase";
 }
 ---
 
@@ -55,6 +57,7 @@ if (product.id.includes("cheerpj")) {
 		<div class="flex items-stretch gap-2 ml-auto px-2">
 			<Link label={t("Docs", Astro.currentLocale)} href={firstDocsEntry.href} />
 			<Link label={t("Blog", Astro.currentLocale)} href={blogref} />
+			<Link label={t("Demos", Astro.currentLocale)} href={showcaseref} />
 		</div>
 
 		<div class="flex items-center gap-4 flex-none text-stone-200">

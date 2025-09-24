@@ -55,15 +55,17 @@ export function defineCommonCollections() {
 				}),
 		}),
 		showcase: defineCollection({
-			type: "data",
 			schema: ({ image }) =>
 				z.object({
 					title: z.string(),
 					description: z.string().optional(),
+					projectType: z.string().optional(),
+					niche: z.string().optional(),
+					author: z.string().optional(),
 					url: z.string(),
-					heroImage: image().refine((img) => img.width / img.height == 1.5, {
-						message: "Image must have 3:2 aspect ratio",
-					}),
+					repository_url: z.string().optional(),
+					heroImage: image().optional(),
+					draft: z.boolean().default(false),
 					tags: productTags.optional(),
 				}),
 		}),

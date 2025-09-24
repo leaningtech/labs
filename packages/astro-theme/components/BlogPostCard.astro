@@ -1,8 +1,8 @@
 ---
 import { getEntry, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
-import { Image } from "astro:assets";
 import { productFromUrl } from "../lib/products";
 
 const product = productFromUrl(Astro.url);
@@ -14,6 +14,11 @@ interface Props {
 }
 
 const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
+
+if (!postOrSlug) {
+	return null;
+}
+
 const post =
 	typeof postOrSlug === "string"
 		? await getEntry("blog", postOrSlug)
