@@ -1,6 +1,8 @@
 import { defineCollection, z } from "astro:content";
 
-const productTags = z.array(z.enum(["Cheerp", "CheerpJ", "CheerpX"]));
+const productTags = z.array(
+	z.enum(["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"])
+);
 const languages = z.enum(["en", "ja"]);
 
 export type ProductTag = z.infer<typeof productTags>[0];
