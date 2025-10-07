@@ -1,0 +1,388 @@
+---
+import ProductHome from "@leaningtech/astro-theme/layouts/ProductHome.astro";
+import CollapsableLabel from "../components/CollapsableLabel.svelte";
+
+const CSScolorLightText = "#e5e7eb";
+const CSScolorDarkText = "#0f1729";
+const CSScolorGrey = "#e8e8e8";
+const CSScolorDarkBlue = "#00254d";
+const CSScolorBlue = "#004cdc";
+const CSScolorLightBlue = "#004cdcaa";
+---
+
+<style
+	define:vars={{
+		colorLightText: CSScolorLightText,
+		colorDarkText: CSScolorDarkText,
+		colorGrey: CSScolorGrey,
+		colorDarkBlue: CSScolorDarkBlue,
+		colorBlue: CSScolorBlue,
+		colorLightBlue: CSScolorLightBlue,
+	}}
+>
+	.h1-pricing {
+		color: var(--colorDarkText);
+		font-weight: 600;
+		font-size: 1.9rem;
+		max-width: 17ch;
+	}
+	.p-pricing {
+		color: var(--colorDarkText);
+		font-size: 1.1rem;
+		line-height: 1.625;
+		letter-spacing: 0.01em;
+		max-width: 32ch;
+	}
+	.li-faq {
+		color: var(--colorDarkText);
+		line-height: 1.625;
+		font-size: 1.1rem;
+		letter-spacing: 0.01em;
+	}
+	.div-other {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		background-color: var(--colorGrey);
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.h4-other {
+		color: var(--colorDarkText);
+		font-weight: 400;
+		font-size: 1.7rem;
+		letter-spacing: 0.02em;
+	}
+	.p-other {
+		color: var(--colorDarkText);
+		letter-spacing: 0.01em;
+		font-size: 1.1rem;
+		max-width: 25ch;
+	}
+	.blue-link {
+		color: var(--colorBlue);
+	}
+	.blue-link:hover {
+		color: var(--colorLightBlue);
+	}
+</style>
+
+<ProductHome>
+	<section>
+		<div
+			class="flex flex-col gap-16 justify-center bg-gradient-to-b from-stone-900 to-[var(--colorDarkBlue)] py-16 lg:flex-row lg:gap-24 lg:justify-center lg:px-16"
+		>
+			<div class="flex flex-col gap-8 items-center lg:items-start px-8">
+				<h1
+					class="text-[var(--colorLightText)] text-7xl font-semibold text-left"
+				>
+					CheerpX<br />Licensing
+				</h1>
+				<p
+					class="text-[var(--colorLightText)] text-2xl text-left max-w-[30ch] md:max-w-[46ch] lg:text-xl lg:max-w-[60ch]"
+				>
+					From open-source to enterprise-level solutions, our diverse range of
+					licences ensures that you have the freedom to choose the best fit for
+					your product &#8217;s specific requirements.
+				</p>
+			</div>
+			<div class="flex justify-center items-center">
+				<img
+					src="cheerpx/cheerpx.svg"
+					alt="CheerpX logo"
+					class="object-contain w-[200px] h-[200px] flex-shrink-0"
+				/>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div
+			class="flex flex-col justify-center items-center gap-16 bg-white px-16 py-20 sm:px-40 md:px-52 lg:flex-row lg:items-stretch lg:px-32 xl:px-56 2xl:px-80"
+		>
+			<div
+				class="flex flex-col gap-4 rounded-md flex-2 h-auto shadow-lg p-4 bg-white border border-[var(--colorBlue)]"
+			>
+				<h1 class="h1-pricing lg:h-32">CheerpX Community Edition</h1>
+				<p class="p-pricing">
+					<strong>Free</strong>
+				</p>
+				<p class="p-pricing">
+					<strong>Best for:</strong>
+					Personal project and FOSS.
+				</p>
+				<p class="p-pricing">
+					CheerpX is free to use for personal projects, Free and Open Source
+					Software, and technical evaluations.
+				</p>
+				<p class="p-pricing">
+					✔️ Unlimited access to CheerpX<br />✔️ Commercial use allowed for
+					individuals and one-person companies
+				</p>
+				<p class="p-pricing">
+					✔️ Access to Community Support<br />✔️ Documentation &amp; Guides
+				</p>
+				<p class="p-pricing">
+					❌ Self-Hosting not allowed<br />❌ OEM/Redistribution not allowed
+				</p>
+				<p class="p-pricing">
+					Find out more about our <a
+						class="blue-link"
+						href="https://cheerpx.io/docs/licensing"
+						target="_blank"
+						rel="noopener">Community licence here.</a
+					>
+				</p>
+			</div>
+			<div
+				class="flex flex-col gap-4 rounded-md flex-2 h-auto shadow-lg p-4 bg-[var(--colorGrey)]"
+			>
+				<h1 class="h1-pricing lg:h-32">CheerpX For Small Business</h1>
+				<p class="p-pricing">
+					<strong>£100 per developer per month</strong>
+				</p>
+				<p class="p-pricing">
+					<strong>Best for:</strong>
+					Startups and small teams
+				</p>
+				<p class="p-pricing">
+					For Small Businesses using CheerpX in commercial applications or
+					internal business applications.
+				</p>
+				<p class="p-pricing">
+					✔️ Unlimited access to CheerpX<br />
+					✔️ For teams of up to 10*<br />✔️ Commercial use allowed
+				</p>
+				<p class="p-pricing">
+					✔️ Priority Support and SLAs available<br />✔️ Documentation &amp;
+					Guides
+				</p>
+				<p class="p-pricing">
+					✔️ Self-Hosting available<br />✔️ OEM/Redistribution available
+				</p>
+				<p class="p-pricing">
+					For further details regarding the Commercial licence read the FAQs
+					below or <a
+						class="blue-link"
+						href="https://leaningtech.com/contact-us/"
+						target="_blank"
+						rel="noopener">please contact us.</a
+					>
+				</p>
+			</div>
+			<div
+				class="flex flex-col gap-4 rounded-md flex-2 h-auto shadow-lg p-4 bg-[var(--colorGrey)]"
+			>
+				<h1 class="h1-pricing lg:h-32">CheerpX For Enterprise</h1>
+				<p class="p-pricing">
+					<strong
+						><a
+							class="blue-link"
+							href="https://leaningtech.com/contact-us/"
+							target="_blank"
+							rel="noopener">Get in touch</a
+						></strong
+					>
+				</p>
+				<p class="p-pricing">
+					<strong>Best for:</strong>
+					Large-scale deployments
+				</p>
+				<p class="p-pricing">
+					For larger organizations using CheerpX in commercial applications or
+					internal business applications.
+				</p>
+				<p class="p-pricing">
+					✔️ Unlimited access to CheerpX<br />
+					✔️ For teams of any size<br />✔️ Commercial use allowed
+				</p>
+				<p class="p-pricing">
+					✔️ Priority Support and SLAs<br />✔️ Custom onboarding &amp; training
+				</p>
+				<p class="p-pricing">
+					✔️ Self-Hosting included<br />✔️ OEM/Redistribution available
+				</p>
+				<p class="p-pricing">
+					For further details regarding the Commercial licence read the FAQs
+					below or <a
+						class="blue-link"
+						href="https://leaningtech.com/contact-us/"
+						target="_blank"
+						rel="noopener">please contact us.</a
+					>
+				</p>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="flex justify-center items-center bg-white pb-20">
+			<a
+				class="inline-block rounded-lg border border-[var(--colorDarkText)] bg-[var(--colorDarkText)] px-4 py-2 text-white hover:bg-[var(--colorBlue)]"
+				href="#other-licensing"
+			>
+				View Other Licensing Options
+			</a>
+		</div>
+	</section>
+	<section>
+		<div
+			class="flex flex-col gap-16 bg-[var(--colorGrey)] py-20 px-8 lg:flex-row lg:justify-center"
+		>
+			<div class="flex flex-col gap-8">
+				<h4
+					class="text-[var(--colorDarkText)] font-medium text-[1.8rem] lg:max-w-[30ch]"
+				>
+					What does the CheerpX Commercial licence allow?
+				</h4>
+				<div class="pl-8">
+					<ul class="flex flex-col gap-4 list-disc">
+						<li class="li-faq lg:max-w-[50ch]">
+							Host CheerpX on their servers (self-hosting)
+						</li>
+						<li class="li-faq lg:max-w-[50ch]">
+							Re-distribute CheerpX as part of a software product
+						</li>
+						<li class="li-faq lg:max-w-[50ch]">
+							Access dedicated pre- and post-sale support
+						</li>
+						<li class="li-faq lg:max-w-[50ch]">
+							Access to the development team for in-depth support, consulting,
+							and feature prioritisation
+						</li>
+						<li class="li-faq lg:max-w-[50ch]">
+							Request support agreements with guaranteed time to first response
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="flex flex-col gap-2">
+				<CollapsableLabel
+					labelText="How many CheerpX Licences do I need?"
+					collapsableText="CheerpX is licensed on a <b>per-application</b> basis –you will need one licence for each application where CheerpX is integrated."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Can I self-host CheerpX?"
+					collapsableText="Yes, you can self-host CheerpX with any commercial licence, or if you are performing a technical evaluation for one."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Can I host CheerpX on multiple servers?"
+					collapsableText="Yes, you are allowed to host CheerpX on more than one server (e.g. if you have a load balancer), including using a CDN, within the scope of one individual CheerpX licence."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Can I host CheerpX in an air-gapped environment?"
+					collapsableText="Yes, you can self-host CheerpX on an air-gapped environment with any commercial licence."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Are the licence(s) renewed on an annual basis, or are they granted in perpetuity (one-time charge)?"
+					collapsableText="Licences are annual subscriptions, with multi-year and perpetual options available for Enterprise customers."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Can I licence CheerpX on a per-user basis?"
+					collapsableText="We are happy to discuss custom licensing models, including per-user (rather than per-application), in any appropriate use case. Feel free to get in touch with us to discuss further."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Does the licence include software updates and support?"
+					collapsableText="The CheerpX Commercial licence includes software updates throughout the validity of a licence (or for a period of 4 years, in the case of perpetual licences). Standard support is included with any Enterprise licence."
+					client:load
+				/>
+				<CollapsableLabel
+					labelText="Can I purchase dedicated maintenance / support agreements?"
+					collapsableText="Standard support, bug fixes and updates are included with licences and are offered by default with no agreed service levels (no guarantee of response time).<br>Custom Support Agreements can be set in place with agreed-upon service levels (time-to-first-response)."
+					client:load
+				/>
+			</div>
+		</div>
+	</section>
+	<section id="other-licensing">
+		<div
+			class="flex flex-col gap-12 justify-items-center items-center bg-white py-20"
+		>
+			<div class="">
+				<h2
+					class="text-center text-[var(--colorDarkText)] font-semibold text-[2.5rem]"
+				>
+					Other licences
+				</h2>
+			</div>
+			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 md:grid-rows-2">
+				<div class="div-other">
+					<h4 class="h4-other">Non-Profit</h4>
+					<p class="p-other">
+						We offer discounts to non-profits. If you want to find out if your
+						organization is eligible for this licence <a
+							class="blue-link"
+							href="https://leaningtech.com/contact-us/"
+							target="_blank"
+							rel="noopener">please contact us</a
+						>.
+					</p>
+				</div>
+				<div class="div-other">
+					<h4 class="h4-other">Academic</h4>
+					<p class="p-other">
+						We offer discounts to educational institutions, and free or
+						heavily-discounted licences for classroom and educational content.
+						If you want to find out if your organization and project are
+						eligible for this licence <a
+							class="blue-link"
+							href="https://leaningtech.com/contact-us/"
+							target="_blank"
+							rel="noopener">please contact us</a
+						>.
+					</p>
+				</div>
+				<div class="div-other">
+					<h4 class="h4-other">Public Sector</h4>
+					<p class="p-other">
+						Public Sector organizations are welcome to discuss custom pricing
+						options for CheerpX by <a
+							class="blue-link"
+							href="https://leaningtech.com/contact-us/"
+							target="_blank"
+							rel="noopener">contacting us</a
+						>
+						or our dedicated partners in your region.
+					</p>
+				</div>
+				<div class="div-other">
+					<h4 class="h4-other">Technical Evaluation</h4>
+					<p class="p-other">
+						We offer unlimited, unmetered, no-registration access to CheerpX to
+						any individual or organization of any size for technical evaluation
+						purposes. Start working on your PoC <a
+							class="blue-link"
+							href="https://cheerpx.io/docs/getting-started/"
+							target="_blank"
+							rel="noopener">today</a
+						>!
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div
+			class="flex flex-row justify-center bg-gradient-to-b from-stone-900 to-[var(--colorDarkBlue)] p-32"
+		>
+			<div class="flex flex-col">
+				<h2 class="font-semibold text-4xl">Request a demo</h2>
+				<p class="text-lg mt-8">
+					Discover how to execute x86 binaries on any browser with CheerpX.
+				</p>
+				<p class="text-lg mt-4">
+					Schedule a free demo with our team, <a
+						class="blue-link"
+						href="https://leaningtech.com/contact-us/"
+						target="_blank"
+						rel="noopener">contact us!</a
+					>
+				</p>
+			</div>
+		</div>
+	</section>
+</ProductHome>
