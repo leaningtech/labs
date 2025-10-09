@@ -15,7 +15,7 @@ tags:
 
 > TL;DR — We made a server-less virtual Linux environment that runs unmodified Debian binaries in the browser. This is powered by CheerpX, a WebAssembly virtualization platform. Feel free to play with it and report bugs: [https://webvm.io](https://webvm.io/)
 
-![](./images/1*en0eK_11xULHPZftaG7aPQ.png)
+![](./images/1en0eK_11xULHPZftaG7aPQ.png)
 
 WebVM — a server-less virtual Linux environment running fully client-side in HTML5/WebAssembly.
 

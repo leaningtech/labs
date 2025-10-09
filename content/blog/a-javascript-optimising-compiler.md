@@ -31,7 +31,7 @@ He tried something similar, but targeting directly JavaScript instead of WebAsse
 
 TLDR: He mostly managed to succeed! Go to https://carlopi.github.io/js-opt-benchmark/ to run the benchmarks on your own device/browser of choice.
 
-![Screenshot of benchmark results](./images/1*L9XEUnBIUooQt-kRog6CNw.png)
+![Screenshot of benchmark results](./images/1L9XEUnBIUooQt-kRog6CNw.png)
 
 ### So how did he do it?
 
@@ -49,7 +49,7 @@ One of the main problems of this is that LLVM IR and JavaScript have quite diffe
 
 This affects all 3 stages: JavaScript -> IR, IR -> optimized IR, optimized IR -> optimized JavaScript in different ways.
 
-![JavaScript logo / LLVM logo (a dragon) / JavaScript logo](./images/1*h17N8vQ5CK18-pMSN1vjpA.png)
+![JavaScript logo / LLVM logo (a dragon) / JavaScript logo](./images/1h17N8vQ5CK18-pMSN1vjpA.png)
 
 ## Presentations
 
@@ -75,7 +75,7 @@ TypeScript AST has currently 300+ kinds of nodes. Like PlusToken, AsteriskEquals
 
 Given that I had access to the AST already parsed, I began implementing a recursive visit of every node of Abstract Syntax Tree, implementing one by one every node I encountered.
 
-![Implementation of visitNode(node)](./images/1*INKwvrPssseEXtpm_oaaqA.png)
+![Implementation of visitNode(node)](./images/1INKwvrPssseEXtpm_oaaqA.png)
 
 I kept adding implementations to this visitor as long as it was required to run a few benchmarks.
 
@@ -87,14 +87,14 @@ I also took another shortcut, I will require parameters and returns values to ha
 
 How does this intermediate C++ code look like?
 
-![Screenshot of original JavaScript file and generated C++ file](./images/1*vohAc0mAEowoMZR5LRgnew.png)
+![Screenshot of original JavaScript file and generated C++ file](./images/1vohAc0mAEowoMZR5LRgnew.png)
 
 It’s basically all there, taking advantages of 2 Cheerp’s features:
 
 - **namespace client** capability to map external JavaScript classes and functions by just forward declaring them (already provided by the Cheerp’s provided headers files: [link](https://github.com/leaningtech/cheerp-utils/blob/ece76d65b746384ca0848c5b1a9b8bf66b5744ec/include/client/clientlib.h))
 - [**JSExport**](https://medium.com/leaningtech/jsexport-cpp-in-the-browser-made-easy-710b2982046e) tagging to export the given classes or functions
 
-![JavaScript logo (yellow square) / C++ logo (blueish exagon)](./images/1*VTIDRdkX5u83T1RRQ81bqA.png)
+![JavaScript logo (yellow square) / C++ logo (blueish exagon)](./images/1VTIDRdkX5u83T1RRQ81bqA.png)
 
 ## C++ → JavaScript
 
@@ -104,7 +104,7 @@ Now we just have to run Cheerp on it.
 
 Cheerp is a based on clang/LLVM, so it will basically parse the C++ code into an Intermediate Representation; run various [optimization passes](https://github.com/leaningtech/cheerp-compiler/blob/6c187efc516e4db40b5a2d917d12250100bd41ef/llvm/include/llvm/InitializePasses.h#L63), (basically IR -> IR transformations) both at the translation unit level and at link time; and generate a JavaScript file that will then have equivalent semantics to the original source code.
 
-![Screenshot of minimized and non-minimized output](./images/1*fRCtSB2zZ6FqcXAF_8Esyg.png)
+![Screenshot of minimized and non-minimized output](./images/1fRCtSB2zZ6FqcXAF_8Esyg.png)
 
 Compressed and non-compressed output
 
@@ -113,7 +113,7 @@ One thing to note is that the non-readable version ends up being roughly as big 
 1. we are not shipping our own standard library but we are relying on the language functionalities
 2. Cheerp generates quite compact code
 
-![JavaScript logo / C++ logo / Javascript logo](./images/1*8M3_tRj8cf62nfbT49Y9MA.png)
+![JavaScript logo / C++ logo / Javascript logo](./images/18M3_tRj8cf62nfbT49Y9MA.png)
 
 JavaScript to C++ to optimized JavaScript, thanks to AST visitor and Cheerp
 

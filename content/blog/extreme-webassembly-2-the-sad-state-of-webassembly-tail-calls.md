@@ -53,7 +53,7 @@ Careful use of this two-tiered system would be useful for CheerpX. We generate W
 
 Unfortunately, before the newly generated Wasm bytecode can be used, the browser must compile it (another time) to generate native code, and the silent upgrade to Turbofan introduces *significant* latency. This delays the time we can finally see the return on the time invested in our JIT compiler. Using the *baseline compiler* to get a version of the code sooner could easily give a nice performance boost to our architecture. To be fair Chrome developers seems to be committed to getting this issue fixed in Q3 of 2020. Let’s wait and see.
 
-![](./images/1*UgqeZOyqZNT2lTNkurRoAg.png)
+![](./images/1UgqeZOyqZNT2lTNkurRoAg.png)
 
 Don’t feel bad if you are confused by the multiple layers of JITting. Sometimes we are as well.
 
@@ -152,9 +152,9 @@ http-server -p 8086 &
 chromium-browser --incognito --js-flags="--experimental-wasm-return-call" http://127.0.0.1:8086/index.html
 ```
 
-![](https://miro.medium.com/max/60/1*CdbFVF0GAW0erM8RGTkcWw.png?q=20)
+![](https://miro.medium.com/max/60/1CdbFVF0GAW0erM8RGTkcWw.png?q=20)
 
-![](./images/1*CdbFVF0GAW0erM8RGTkcWw.png)
+![](./images/1CdbFVF0GAW0erM8RGTkcWw.png)
 
 A minor miracle has just happened in front of your eyes.
 
