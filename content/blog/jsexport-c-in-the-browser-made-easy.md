@@ -18,7 +18,7 @@ Think taking a C++ codebase, feeding it into a LLVM/clang based compiler, and ge
 
 Recently, I have been working on one of Cheerp’s unique features, `[[cheerp::jsexport]]`, a custom attribute that allows one to create powerful interfaces between generated and ‘native’ JavaScript. Some cool things now possible thanks to this technology will be shown in this article series. Enjoy!
 
-![](/blog/0*WncSwGz75W-GAPRO.gif)
+![](/blog/0WncSwGz75W-GAPRO.gif)
 
 std::shuffle applied to [https://www.google.com/search?q=how+to+shuffle+array](https://www.google.com/search?q=how+to+shuffle+array)
 
@@ -50,7 +50,7 @@ What is this for?
 
 Now you can play with something like this directly in your browser console:
 
-![](./images/0*BEf7t0I7omc429dP.png)
+![](./images/0BEf7t0I7omc429dP.png)
 
 It works!
 
@@ -70,7 +70,7 @@ We will obtain a minified blob of characters that represent the exact same logic
 
 This is just regular JavaScript code, so it could be invoked in any environment that executes JavaScript, e.g. scrambling around elements of a web page at will:
 
-![](/blog/0*Zd-2hgTqw1743gGY.gif)
+![](/blog/0Zd-2hgTqw1743gGY.gif)
 
 My proposal for next year’s Easter’s egg
 
@@ -104,7 +104,7 @@ Then compiling with:
 
 We obtain the relative JavaScript code ([link to gist](https://gist.github.com/carlopi/12ed807f4c480627ebf1c45efc35880a)), that then can be instantiated like:
 
-![](./images/0*JMiXelZhR7G0Rwlp.png)
+![](./images/0JMiXelZhR7G0Rwlp.png)
 
 Standard Dilbert: are you sure that’s random?
 

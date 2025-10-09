@@ -102,7 +102,7 @@ Since tail calls are a variant of regular calls, we could reuse most of the exis
 
 Let’s examine the stack at `factorial 1` call site: the first time `factorial 0` recursively calls itself. For the sake of simplicity, we will abstract the call chain **print_factorial → factorial 0 → factorial 1** to **A → B → C**.
 
-![](./images/1*8tuklMtmc-G1tzJK6o_5pA.png)
+![](./images/18tuklMtmc-G1tzJK6o_5pA.png)
 
 **Figure 1.** *The stack at C (factorial 1) call site.*
 
@@ -110,7 +110,7 @@ Let’s examine the stack at `factorial 1` call site: the first time `factori
 
 We will thus merge **B** and **A**, before jumping into **C**.
 
-![](./images/1*-xRpQOiwI79zHbFfx9cFdQ.png)
+![](./images/1-xRpQOiwI79zHbFfx9cFdQ.png)
 
 **Figure 2.** *The stack after rearrangement, before tail calling into C (factorial 1).*
 
@@ -124,7 +124,7 @@ Interestingly, from the perspective of **A**, we could say that **A** and **
 
 We will now compare a deeply recursive call to factorial, both with and without using `return_call`.
 
-![](./images/1*x9de8JweKzwBZwOiB-4BQw.png)
+![](./images/1x9de8JweKzwBZwOiB-4BQw.png)
 
 **Figure 3.** *Comparison of the stack in a deeply recursive routine.*
 
@@ -134,19 +134,19 @@ It becomes apparent that with `return_call`, we only use one frame for `factor
 
 WebAssembly also supports multiple return values. This implies that the stack used by arguments equally stores the callee’s return values. This plays well with tail calls, since we can assume that **A** has enough space for **B**’s return values (Fig. 4). The tail calls specification also ensures that **B** can only tail call a function that returns the same number of values. However, this raises a concern regarding their offsets on the stack
 
-![](./images/1*d3jpYbO9TPmNtU1GxhapTw.png)
+![](./images/1d3jpYbO9TPmNtU1GxhapTw.png)
 
 **Figure 4.** *Stack at B call site. A reserved space for B’s return values*
 
 The previous convention implemented by JavaScriptCore would prepare the frame as in Fig. 4, placing the return values closer to the stack pointer. With tail calls, we introduce the possibility of the frame being reused, which changes the size of the stack in case of a chain of calls with a varying number of arguments. In such a situation, **A** won’t be able to find the return values at the expected offsets (Fig. 5).
 
-![](./images/1*oPumHN1qARa23hPPQO1dog.png)
+![](./images/1oPumHN1qARa23hPPQO1dog.png)
 
 **Figure 5.** *Stack at different stages of the* **_A_** *->* **_B_** *->* **_C_** *tail call chain.* **_C_\***’s number of arguments modified the stack size of\* **_A_\***. Even if the return count was preserved with\* **_C_\***’s signature,\* **_A_** *expects the return values at incorrect offsets when* **_C_** \*returns.\*
 
 This is due to the fact that offsets for stack values are computed statically when parsing code for a function. As a solution, we changed the convention to encode return values at the opposite side of the stack, closer to the caller’s frame pointer.
 
-![](./images/1*DcEHV1nJyX-wJZLGtVI1iA.png)
+![](./images/1DcEHV1nJyX-wJZLGtVI1iA.png)
 
 **Figure 6.** *Same depiction as in Fig. 5, with offsets that allow* **_A_** *to properly collect return values.*
 

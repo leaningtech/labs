@@ -29,7 +29,7 @@ This lets users seamlessly access fully deprecated Java Applets on modern versio
 
 Originally developed to have our tech tested as much as possible *in the wild*, it has become very widely used by people, from all walks of life, who still need to use Java applets on a daily basis. We have helped over 40,000 students, senior card players, artists, law enforcement officers and even major US federal institutions to access content that is way past its selling date. And with a 4.4/5 rating and wide adoption, I think we have been quite successful at that.
 
-![](./images/1*XGehqaRJGxpqMVqS0ZbdEA.png)
+![](./images/1XGehqaRJGxpqMVqS0ZbdEA.png)
 
 Just to be clear, we don’t buy reviews.
 
@@ -60,11 +60,11 @@ There is also the grey area of “extension acquisitions” by shady companies: 
 
 Anyway, as a form of defense in depth, the Chrome Web Store policies require that the least possible amount of permissions are requested. In this way, even a compromised extension can still do limited damage. This makes complete sense. Extensions developers are incentivized by a “warning” system: when installing an extension a worrying message is shown to the user if the extension requires heavy-handed permissions. Moreover, developers have to justify each and every requested permission when submitting an item to the store.
 
-![](./images/1*mVYJ7ntU4UYRkd70w4LkJw.png)
+![](./images/1mVYJ7ntU4UYRkd70w4LkJw.png)
 
 uBlock Origin: A very popular extension that shows quite a worrying message at install time
 
-![](./images/1*cK-3HhCa1CHcyTIgAHTs1w.png)
+![](./images/1cK-3HhCa1CHcyTIgAHTs1w.png)
 
 CheerpJ Applet Runner gets no warning at install time
 
@@ -82,13 +82,13 @@ With quite a bit of effort, we settled on the following permissions scheme, whic
 
 - **optional_permissions <all_urls>:** Our solution to let users run the extension on any domain, was to use **optional_permissions**. This feature allows extensions to declare the maximal amount of permissions needed, without having them actually granted at installation time. In terms of UX the user will need to selectively enable CheerpJ Applet Runner on his chosen useful domains, most likely just a handful. This is done via a single click in the extension popup. The extension would then be automatically enabled on any follow-up visit to the same domain, as Chrome will remember the granted permission. The user is always free to drop permissions, by using the standard Chrome UI.
 
-![](./images/1*gqU3eLHcvD6AT9yQ4jegLg.png)
+![](./images/1gqU3eLHcvD6AT9yQ4jegLg.png)
 
 The permission is only requested after a user action, and the scope is clearly stated
 
 - **declarativeContent**: This permission was used to provide a visual hint whenever a Java applet is detected, or about the status of CheerpJ when already enabled. Using the **declarativeContent** API it is possible to select different icons depending on which CSS selector matches on the page. This is fully privacy preserving, since the extension only *declares* the rules to the browser, without actually accessing the page contents. Ideally, this behavior should be specified statically in the manifest.json file, and no permission would be required. Unfortunately, specifying icons in the manifest is only possible using a [deeply undocumented base64/binary format](https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/extensions/api/declarative_content/content_action.cc;l=406;bpv=1;bpt=1?q=%5C%22imageData%5C%22&ss=chromium%2Fchromium%2Fsrc&start=21) (which I managed to figure out only recently). Not that it matters, since the whole feature [has been **completely broken** since April 2018](https://bugs.chromium.org/p/chromium/issues/detail?id=1231027), without anybody noticing.
 
-![](./images/1*udMZGEVMBbdOf1MnYmCSiw.png)
+![](./images/1udMZGEVMBbdOf1MnYmCSiw.png)
 
 The previous extension popup, describing the meaning of each icon
 
@@ -148,7 +148,7 @@ As crazy as this might sound, dropping this feature had no real cost since [_th
 
 After all these, somewhat painful, choices we are left with an extension that only requires the **activeTab** and **scripting** permissions, which work together to spoof the availability of the Java plugin, and inject the CheerpJ loader in the page. There is nothing else we can remove at this point, and we can only hope that the review deities will appreciate our sacrifices and be kind with us.
 
-![](./images/1*T6SayXjhOf9UEBSJUYp1sg.png)
+![](./images/1T6SayXjhOf9UEBSJUYp1sg.png)
 
 The new popup UI, some elements were removed to reflect the lost functionalities
 

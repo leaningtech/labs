@@ -91,11 +91,11 @@ The most straightforward use of a network-enabled WebVM is to use it as an ssh c
 
 You can access other machines in your Tailscale network (and beyond, if you have an exit node) from any browser, in a privacy-preserving way. Your keystrokes are not only encrypted, but they don’t touch our servers at all.
 
-![](/blog/1*i2Oc_qU4D2vE6khxp8xmeA.gif)
+![](/blog/1i2Oc_qU4D2vE6khxp8xmeA.gif)
 
 You can also use ssh to easily move files in and out of WebVM. This increases the scope of what you can practically do in WebVM, since you can now import code/data to execute, and export the result of your work.
 
-![](/blog/1*2HFiFR_Ilmx-FZTpQpWFKg.gif)
+![](/blog/12HFiFR_Ilmx-FZTpQpWFKg.gif)
 
 ### Full stack web development
 
@@ -107,11 +107,11 @@ In the next demo gifs, you can see me:
 
 - downloading a Python git repository from github.com
 
-![](/blog/1*zrRHnw6rv_NJ-Jjsnplo6A.gif)
+![](/blog/1zrRHnw6rv_NJ-Jjsnplo6A.gif)
 
 - installing dependencies with pip
 
-![](/blog/1*qUHuLcyMSb-Jq8XnmmMGZg.gif)
+![](/blog/1qUHuLcyMSb-Jq8XnmmMGZg.gif)
 
 - running a Flask web application that includes an Sqlite database for persistent storage, and access it from a second browser tab
 
@@ -119,11 +119,11 @@ In the next demo gifs, you can see me:
 
 - access it from another WebVM tab, with `lynx`
 
-![](/blog/1*NtYa51VuelasYzNYAEpRVw.gif)
+![](/blog/1NtYa51VuelasYzNYAEpRVw.gif)
 
 - edit the application, commit to git, and push back to github
 
-![](/blog/1*rYNrQnj6ZpclYOVJUyrb-g.gif)
+![](/blog/1rYNrQnj6ZpclYOVJUyrb-g.gif)
 
 It is certainly not fast to install the pip dependencies (some setup scripts are compiling native code there!), but thanks to our IndexedDB-backed filesystem, you only need to do that once.
 
@@ -140,7 +140,7 @@ If you want to give it a try yourself, here are the steps to enable network acce
 - Go back to the WebVM tab. You will see your IP address in the top right.
 - Start firing network requests!
 
-![](/blog/1*cnS8b9PwDO6FPfT5VZjaEQ.gif)
+![](/blog/1cnS8b9PwDO6FPfT5VZjaEQ.gif)
 
 Given the short-lived nature of WebVM, we log into Tailscale as an Ephemeral Node. This means that the node will disappear from your Tailscale Network after a period of inactivity. It also means that when you reload the tab, you need to log in again. It should be faster the second time.
 

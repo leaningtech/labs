@@ -13,7 +13,7 @@ tags:
   - CheerpX
 ---
 
-![](/blog/1*gDXCXEYEhWvNQpNxEgkB9A.gif)_Python3 running client side using CheerpX. File access and blocking primitives (i.e. sleep) are demonstrated._
+![](/blog/1gDXCXEYEhWvNQpNxEgkB9A.gif)_Python3 running client side using CheerpX. File access and blocking primitives (i.e. sleep) are demonstrated._
 
 WebAssembly is one of the hottest topics in software development right now, particularly in the web applications ecosystem.
 
@@ -84,7 +84,7 @@ And this happens in practice. I am not sure what specific component causes the p
 
 ## Wrapping up
 
-![](/blog/1*TyhAQyn2i36-C7BBHZFPMQ.gif)
+![](/blog/1TyhAQyn2i36-C7BBHZFPMQ.gif)
 
 _V8-ception: node.js running client side in Chrome. Colors courtesy of ANSI escape codes._
 
