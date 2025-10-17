@@ -25,7 +25,8 @@ import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 				<p class="text-[#213e77] text-center">
 					The Java in the browser challenge!
 				</p>
-				<p class="text-[#213e77] text-center font-light">14 Nov - 1 Dec</p>
+				<p class="text-[#213e77] text-center font-bold">14 Nov - 1 Dec</p>
+				<p class="text-[#213e77] text-center font-thin">📍Leeds & virtual</p>
 
 				<div class="flex gap-4 justify-center my-8">
 					<LinkButton
@@ -44,5 +45,53 @@ import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 			</div>
 		</div>
 	</section>
+	<!-- about the event -->
+	<section
+		id="about"
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#213e77]"
+	>
+		<div class="px-8">
+			<h1 class="font-mono font-extrabold text-4xl text-center text-white py-8">
+				About this event
+			</h1>
+
+			<p
+				class="font-mono text-lg sm:text-xl text-[#fceee1] text-pretty text-center"
+			>
+				Join this cahellenge to create a WebApp solution that integrates <a
+					href="https://www.cheerpj.com"
+					class="text-[#f76b00] hover:underline">CheerpJ</a
+				> in the context of scientific software!
+				<br />
+				<br />
+				<b>The winner team gets a sweet 500 GBP gift card 🚀!</b>
+			</p>
+
+			<br />
+			<br />
+			<p
+				class="font-mono text-lg sm:text-xl text-[#fceee1] text-pretty text-center"
+			>
+				CheerpJ is a tool to run Java code in the browser without requiring a
+				local Java installation. This allows for a wide range of applications to
+				be available in the browser client-side, which might otherwise not be
+				accessible without local installations and dependencies.
+			</p>
+
+			<p
+				class="font-mono text-lg sm:text-xl text-white text-pretty text-center py-10"
+			>
+				Read more in this
+				<a
+					class="text-[#f76b00] hover:underline"
+					href="https://labs.leaningtech.com/blog/cheerpj-hackathon"
+				>
+					blog post
+				</a>
+				.
+			</p>
+		</div>
+	</section>
 </Shell>
+
 <Footer />
