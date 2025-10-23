@@ -8,6 +8,7 @@ CheerpJ can load and run Java libraries directly in the browser, allowing you to
 Java source code is not required to use CheerpJ. If you are using your own library, you should already have its compiled `.jar` file available.
 
 **To get started you will need:**
+
 - Your `.jar` file.
 - An HTML file where your Java app will be wrapped.
 - A simple HTTP server to test your webpage locally.
@@ -55,10 +56,10 @@ Now we can load your Java library by calling cheerpjRunLibrary which will load t
 	<body>
 		<script>
 			await cheerpjInit();
-      const cj = await cheerpjRunLibrary("/app/library.jar");
-      const MyClass = await cj.com.library.MyClass;
-      const obj = await new MyClass();
-      await obj.myMethod();
+			const cj = await cheerpjRunLibrary("/app/library.jar");
+			const MyClass = await cj.com.library.MyClass;
+			const obj = await new MyClass();
+			await obj.myMethod();
 		</script>
 	</body>
 </html>
