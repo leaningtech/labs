@@ -56,7 +56,7 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 	<body>
 		<script>
 			await cheerpjInit();
-      // Example classes and methods — replace these with those from your own library
+			// Example classes and methods — replace these with those from your own library
 			const cj = await cheerpjRunLibrary("/app/library.jar");
 			const MyClass = await cj.com.library.MyClass;
 			const obj = await new MyClass();
