@@ -136,7 +136,8 @@ await cx.networkLogin();
 
 ## Self-hosting Headscale
 
-Headscale is an open-source and self-hosted implementation of the Tailscale control server. The upstream version of Headscale does not yet properly support the WebSocket transport. For the time being, please use [our fork](https://github.com/leaningtech/headscale).
+[Headscale](https://github.com/juanfont/headscale) is an open-source, self-hosted implementation of the Tailscale control server, and is supported by Webvm.
+You can find it's documentation [here](https://headscale.net/stable/)
 
 [controlUrl]: /docs/reference/CheerpX.Linux/create#controlurl
 [authKey]: /docs/reference/CheerpX.Linux/create#authkey
