@@ -23,7 +23,7 @@ mkdir directory_name
 
 ## 2. Create a Basic HTML File
 
-Let's create a basic HTML file and include and initialize CheerpJ on your page. cheerpjInit initialises the CheerpJ runtime environment.
+Let's create a basic HTML file and include and initialize CheerpJ on your page. The `cheerpjInit` command initialises the CheerpJ runtime environment.
 
 ```html title="index.html" {6, 10}
 <!doctype html>
@@ -43,9 +43,9 @@ Let's create a basic HTML file and include and initialize CheerpJ on your page. 
 
 ## 3. Load and Call the Java Library From Java
 
-Now we can load your Java library by calling cheerpjRunLibrary which will load the library from the root of your web server. We are assuming your HTML file and your .jar files are under the project directory you just created.
+Now we can load your Java library by calling `cheerpjRunLibrary` which will load the library from the root of your web server. We are assuming your HTML file and your `.jar` files are under the project directory you just created.
 
-```html title="index.html" {11-14}
+```html title="index.html" {12-15}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -56,6 +56,7 @@ Now we can load your Java library by calling cheerpjRunLibrary which will load t
 	<body>
 		<script>
 			await cheerpjInit();
+      // Example classes and methods — replace these with those from your own library
 			const cj = await cheerpjRunLibrary("/app/library.jar");
 			const MyClass = await cj.com.library.MyClass;
 			const obj = await new MyClass();
