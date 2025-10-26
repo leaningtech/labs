@@ -2,8 +2,13 @@
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import { Image } from "astro:assets";
 import DukeDoodle from "../assets/cj-hackathon/duke-doodle.png";
+import GenommaDoodle from "../assets/cj-hackathon/cj-genomma.png";
+import LabDoodle from "../assets/cj-hackathon/cj-lab.png";
+import SandDoodle from "../assets/cj-hackathon/cj-sandtimer.png";
+import TicketsDoodle from "../assets/cj-hackathon/cj-tickets.png";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import { DISCORD_URL } from "@leaningtech/astro-theme/consts"; 
 ---
 
 <Shell>
@@ -58,7 +63,7 @@ import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 			<p
 				class="font-mono text-lg sm:text-xl text-[#fceee1] text-pretty text-center"
 			>
-				Join this cahellenge to create a WebApp solution that integrates <a
+				Join this challenge to create a WebApp solution that integrates <a
 					href="https://www.cheerpj.com"
 					class="text-[#f76b00] hover:underline">CheerpJ</a
 				> in the context of scientific software!
@@ -90,6 +95,176 @@ import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 				</a>
 				.
 			</p>
+		</div>
+	</section>
+	<!-- Guide section -->
+	<section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602  bg-[#fceee1]"
+	>
+		<h1
+			class="font-mono font-bold text-4xl text-center text-[#213e77] py-8"
+		>
+			How to participate
+		</h1>
+		<!-- Step1: Register -->
+		<div class="sm:grid sm:grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center">
+				<Image src={LabDoodle} alt="Cats in a box" class="max-w-96" />
+			</div>
+			<div
+				id="team"
+				class="col-span-3 text-center sm:text-left content-center px-8 text-[#213e77]"
+			>
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#213e77] "
+				>
+					Step 1: Register & Join our Discord 
+
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2 text-[#213e77]">
+					Register your interest on <a href="https://forms.gle/ECGyMj8xzjgWQADaA" class="text-[#f76b00] font-bold  hover:underline">this form</a> and don't forget to join our <a href={DISCORD_URL} class="text-[#f76b00] font-bold hover:underline">Discord server</a> ! We use our Discord server as the main communication platform for this event, where we will be streaming live, giving technical support, and posting announcements!
+
+				</p>
+
+				<p class="font-mono italic text-sm sm:text-md 2xl:text-lg pb-2">
+					Participants can register and join a team at any time before the project submission deadline.
+
+				</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono-cj"
+						href="https://forms.gle/ECGyMj8xzjgWQADaA"
+						label="Register"
+						iconRight="ic:baseline-plus"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 2: Tickets -->
+		<div class="sm:grid grid-cols-5 py-6">
+			<div
+				class="sm:hidden col-span-2 flex justify-center items-center content-center"
+			>
+				<Image src={TicketsDoodle} alt="cat typing" class="max-w-96" />
+			</div>
+			<div
+				id="register"
+				class="col-span-3 text-center sm:text-left content-center px-8 text-[#213e77]"
+			>
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#213e77]"
+				>
+					Step 2: Secure your spot at the venue
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					This event offers a hybrid experience - <span class="italic">you can fully engage online
+					or, if you fancy, join us in-person for the opening and closing sessions.</span> If you want to attend in person, please <a href="https://www.eventbrite.co.uk/e/cheerpj-the-hackathon-tickets-1720914955959" class="text-[#f76b00] font-bold  hover:underline"> secure your free individual tickets</a>. Pssss... There will be gifts and snacks!
+
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					To fit everyone's schedule<span class="font-bold"> we will be hosting two opening sessions on Friday, 14th November</span>. You can choose to attend <span class="font-bold"> 10:00 am -13:00 pm or 14:00 pm - 17:00 pm</span> UK time.
+				</p>
+				
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="secondary-mono-cj"
+						href="https://www.eventbrite.co.uk/e/cheerpj-the-hackathon-tickets-1720914955959"
+						label="Get tickets"
+						iconRight="ion:ticket"
+					/>
+				</div>
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image src={TicketsDoodle} alt="Ticket drawing" class="max-w-96" />
+			</div>
+		</div>
+		<!-- Step 3:Team up and work on your project
+ -->
+		<div class="sm:grid grid-cols-5 py-16">
+			<div class="col-span-2 flex justify-center items-center content-center">
+				<Image src={GenommaDoodle} alt="Ticket" class="max-w-96" />
+			</div>
+			<div
+				id="tickets"
+				class="col-span-3 text-center sm:text-left content-center px-8 text-[#213e77]"
+			>
+				<h1
+					class="font-bold text-xl md:text-2xl font-mono text-[#213e77]"
+				>
+					Step 3: Team up and work on your project!
+
+				</h1>
+
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">
+					Now it’s time to put your hands on your project! <span class="italic">You can work on your project as a solo participant or in a team of up to 5 members. </span> Don't be afraid to find a team by engaging on our <a href={DISCORD_URL} class="text-[#f76b00] font-bold  hover:underline">Discord server</a>, meeting new people at the <a href="https://www.eventbrite.co.uk/e/cheerpj-the-hackathon-tickets-1720914955959" class="text-[#f76b00] font-bold  hover:underline">opening session</a>, or by inviting your friends! 
+ 
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg pb-2">Our core CheerpJ developers will be helping via Discord text channel with any technical questions during this journey. Don’t miss out on the opportunity to learn from the experts!
+</p>
+				<div class="flex gap-4 justify-center sm:justify-start mt-2">
+					<LinkButton
+						type="primary-mono-cj"
+						href={DISCORD_URL}
+						label="Join Discord"
+						iconRight="ic:baseline-discord"
+					/>
+				</div>
+			</div>
+		</div>
+		<!-- Step 4: Submission and winner -->
+		<div class="sm:grid grid-cols-5 py-16 text-[#213e77]">
+			<div class="sm:hidden col-span-2 flex justify-center items-center">
+				<Image src={SandDoodle} alt="Winner" class="max-w-96" />
+			</div>
+			<div
+				id="weekend"
+				class="col-span-3 text-center sm:text-left content-center px-8"
+			>
+				<h1
+					 class="font-bold text-xl md:text-2xl font-mono text-[#213e77]"
+				>
+					Step 4: Submit, present, and await
+
+				</h1>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+					Submit your creation by the deadline <span class=" font-bold">(Monday 1st of December at 11:00 am UK time)</span>. Instructions on how to submit coming up!
+
+				</p>
+				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">As a non-mandatory step, we encourage all teams to prepare a 5-minute presentation to share your creation with the community on the closing session! <span class="italic">Presentations do not affect your final score, so don’t worry too much and just have fun ;)</span>
+</p>
+				<p class="font-mono text-sm font-bold sm:text-md 2xl:text-lg py-2">The final results will be published on December 15th on our Discord server.
+
+</p>
+
+				
+			</div>
+			<div
+				class="hidden sm:block col-span-2 flex justify-center items-center content-center"
+			>
+				<Image src={SandDoodle} alt="Winner" class="max-w-80" />
+			</div>
+		</div>
+		<div class="flex gap-4 justify-center items-center px-10 pt-4 text-[#213e77]">
+			<p class="font-mono text-center italic font-semibold">
+				For more useful information and guidance, don't forget to <a href="https://cheerpj.com/docs" class="text-[#f76b00] font-bold  hover:underline">read the docs</a>
+				or ask any technical questions on our <a href="https://discord.com/channels/988743885121548329/1423343287242330192" class="text-[#f76b00] font-bold  hover:underline">Discord Server</a>.
+			</p>
+		</div>
+		<div class="flex gap-4 justify-center mt-12">
+			<LinkButton
+				type="primary-mono-cj"
+				href="https://discord.com/channels/988743885121548329/1423343287242330192"
+				label="Support"
+				iconRight="simple-icons:discord"
+			/>
+			<LinkButton
+				type="secondary-mono-cj"
+				href="https://cheerpj.com/docs"
+				iconRight=""
+				label="CheerpJ docs"
+			/>
 		</div>
 	</section>
 </Shell>
