@@ -49,6 +49,7 @@ Replace the following content in vite.config.ts with:
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 
+/** @returns {import("vite").Plugin} */
 const viteServerConfig = () => ({
 	name: "add-headers",
 	configureServer: (server) => {
