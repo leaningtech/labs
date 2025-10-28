@@ -1,5 +1,5 @@
 ---
-title: Run a Java application
+title: Run a Java Application
 description: Convert a desktop app to a webapp
 ---
 
@@ -10,12 +10,12 @@ Java source code is not needed to use CheerpJ. If you are building your own appl
 **To get started you will need:**
 
 - Your Java application file(s). You can also use this [TextDemo.jar](https://docs.oracle.com/javase/tutorialJWS/samples/uiswing/TextDemoProject/TextDemo.jar) sample.
-- An HTML file where your Java app will be wrapped
-- A simple HTTP server to test your webpage locally
+- An HTML file where your Java app will be wrapped.
+- A simple HTTP server to test your webpage locally.
 
 ## 1. Create a project directory
 
-Let's start by creating a project folder where all your files will be. Please copy your java and future HTML files here.
+Let's start by creating a project folder where all your files will be. Copy your java and future HTML files here.
 
 ```shell
 
@@ -32,7 +32,7 @@ Let's create a basic HTML file like the following example. Please notice the Che
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>CheerpJ test</title>
+		<title>CheerpJ Java App Example</title>
 		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
 	</head>
 	<body>
@@ -56,7 +56,7 @@ cheerpjRunMain(
 );
 ```
 
-> [!help] Don't forget to use the /app/ prefix
+> [!note] Don't forget to use the /app/ prefix
 > It is common for first-time users to forget to add the prefix “/app/” when passing the application location to cheerpJRunJar() or cheerpjRunMain().
 
 ## 3. Host your page
@@ -67,8 +67,12 @@ You can now serve this web page on a simple HTTP server, such as the http-server
 npx http-server -p 8080
 ```
 
-> [!tip]
+> [!note] Info
 > Opening the page directly from the disk (for example, by double-clicking on it) is not supported.
+
+## The result
+
+You will see the CheerpJ display on your browser with some loading messages before showing your application running. Depending on your application and the optimizations applied, this could take just a few seconds.
 
 ## What's going on?
 
@@ -78,13 +82,9 @@ npx http-server -p 8080
 - [`cheerpjRunJar`] executes your application!
 - `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
 
-## The result
-
-You will see the CheerpJ display on your browser with some loading messages before showing your application running. Depending on your application and the optimizations applied, this could take just a few seconds.
-
 ### Is your application not working?
 
-Please try these checks:
+If your application doesn't work, check the following:
 
 - The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
 - Your Java application works normally on your machine without CheerpJ.

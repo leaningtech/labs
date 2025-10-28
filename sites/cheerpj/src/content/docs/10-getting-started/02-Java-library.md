@@ -1,5 +1,5 @@
 ---
-title: Run a Java library
+title: Run a Java Library
 description: Use Java classes in JavaScript
 ---
 
@@ -13,7 +13,7 @@ Java source code is not required to use CheerpJ. If you are using your own libra
 - An HTML file where your Java app will be wrapped.
 - A simple HTTP server to test your webpage locally.
 
-## 1. Create a Project Directory
+## 1. Create a project directory
 
 Let's start by creating a project folder where all your files will be. Copy your java and future HTML files here.
 
@@ -21,7 +21,7 @@ Let's start by creating a project folder where all your files will be. Copy your
 mkdir directory_name
 ```
 
-## 2. Create a Basic HTML File
+## 2. Create a basic HTML file
 
 Let's create a basic HTML file and include and initialize CheerpJ on your page. The `cheerpjInit` command initialises the CheerpJ runtime environment.
 
@@ -41,7 +41,7 @@ Let's create a basic HTML file and include and initialize CheerpJ on your page. 
 </html>
 ```
 
-## 3. Load and Call the Java Library From Java
+## 3. Load and call the Java library from JavaScript
 
 Now we can load your Java library by calling `cheerpjRunLibrary` which will load the library from the root of your web server. We are assuming your HTML file and your `.jar` files are under the project directory you just created.
 
@@ -50,7 +50,7 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>CheerpJ Library Mode Test</title>
+		<title>CheerpJ Library Mode Example</title>
 		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
 	</head>
 	<body>
@@ -66,7 +66,7 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 </html>
 ```
 
-## 3. Host your page
+## 4. Host your page
 
 You can now serve this web page on a simple HTTP server, such as the http-server utility.
 
@@ -74,7 +74,7 @@ You can now serve this web page on a simple HTTP server, such as the http-server
 npx http-server -p 8080
 ```
 
-## The Result
+## The result
 
 You will see CheerpJ initialize in your browser and load the Java library. Once loaded, the methods from your library can be called directly from JavaScript, just as in the example above. Depending on the size of your library and the optimizations applied, this may take just a few seconds before your code begins executing.
 
