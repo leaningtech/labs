@@ -75,8 +75,8 @@ In the JavaScript implementation of `nativeMethodName`, you can use the `lib` pa
 ```js
 // Example placeholders — replace ClassName/javaMethodName with your own
 async function Java_ClassName_nativeMethodName(lib) {
-  const ClassName = await lib.ClassName;     // Access your Java class
-  await ClassName.javaMethodName();          // Call a Java static method
+	const ClassName = await lib.ClassName; // Access your Java class
+	await ClassName.javaMethodName(); // Call a Java static method
 }
 ```
 
@@ -86,7 +86,7 @@ This functionality is useful when you need to call back into the Java class in r
 
 To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] function as a property of the [`natives`] option. There are two ways in which you can do this.
 
-1. **In the function definition directly**:
+1. **In the function definition directly**
 
 ```js
 await cheerpjInit({
@@ -98,7 +98,7 @@ await cheerpjInit({
 });
 ```
 
-2. **Or just the function name if it was defined earlier**:
+2. **Or just the function name if it was defined earlier**
 
 ```js
 async function Java_Example_nativeMethodName(lib, str) {
@@ -121,22 +121,22 @@ Here’s a full example that demonstrates the native method setup in Java and it
 ```java title="Example.java"
 public class Example {
   public static void main(String[] args) {
-    nativeAlert("Hello, world!");
+    Alert("Hello, world!");
   }
 
-  public static native void nativeAlert(String message);
+  public static native void Alert(String message);
 }
 ```
 
 2. Implement the native method by creating an `async` function in JavaScript that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`.
 
 ```js title="index.html"
-async function Java_Example_nativeAlert(lib, str) {
+async function Java_Example_Alert(lib, str) {
 	window.alert(str);
 }
 ```
 
-Here, we provide an implementation for the `nativeAlert` method in the `Example` class, by creating a function named `Java_Example_nativeAlert`. The function displays an alert dialog with the message using `window.alert`.
+Here, we provide an implementation for the `Alert` method in the `Example` class, by creating a function named `Java_Example_Alert`. The function displays an alert dialog with the message using `window.alert`.
 
 3. Initialize CheerpJ with the `natives` option and pass the native method implementation to [`cheerpjInit`]:
 
@@ -148,13 +148,15 @@ Here, we provide an implementation for the `nativeAlert` method in the `Example`
 		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
 	</head>
 	<body>
-		<script>
-			async function Java_Example_nativeAlert(lib, str) {
-			  window.alert(str);
+		<script type="module">
+			async function Java_Example_Alert(lib, str) {
+				window.alert(str);
 			}
-
-			await cheerpjInit({ natives: { Java_Example_nativeAlert } });
-			await cheerpjRunMain("Example", "/app/");
+			// Init CheerpJ and register natives, then run your main
+			await cheerpjInit({
+				natives: { Java_Example_Alert },
+			});
+			await cheerpjRunMain("Example", "/app");
 		</script>
 	</body>
 </html>
