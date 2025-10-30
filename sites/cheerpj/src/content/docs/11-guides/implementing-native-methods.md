@@ -9,7 +9,7 @@ CheerpJ allows one to implement Java native methods (typically written in C/C++ 
 
 In Java, native methods are identified by the `native` keyword in their declaration. These methods are not implemented in Java but are instead defined in an external language, which in the case of CheerpJ, is JavaScript.
 
-## Overview
+## Steps to implement native methods in CheerpJ
 
 In general, we can implement native methods in CheerpJ by following these steps:
 
@@ -17,7 +17,7 @@ In general, we can implement native methods in CheerpJ by following these steps:
 2. Implement the native method in JavaScript.
 3. Pass the native function to CheerpJ.
 
-## Declaring Native Methods in Java
+### Declaring Native Methods in Java
 
 To declare a native method in Java, use the `native` keyword in the method declaration. The method is defined in the Java class but is not implemented in Java. Instead, the implementation will be provided in JavaScript.
 
@@ -28,7 +28,7 @@ public class ClassName {
 }
 ```
 
-## Implementing Native Methods in JavaScript
+### Implementing Native Methods in JavaScript
 
 To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, its object key is `Java_com_foo_Bar_baz`.
 
@@ -49,40 +49,7 @@ async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1
 > [!info] Handling Static Native Methods
 > If the native method is static, the `self` parameter can be omitted.
 
-## Calling back into Java from JavaScript
-
-You can call back into Java from a JavaScript native method implementation using the `lib` parameter. The `lib` object exposes your Java classes so you can invoke their static methods.
-
-```java
-public class ClassName {
-  // Implemented in JavaScript
-  public static native void nativeMethodName();
-
-  public static void javaMethodName() {
-    // Your Java logic here
-  }
-
-  public static void main(String[] args) {
-    nativeMethodName(); // Triggers the JS implementation
-  }
-}
-```
-
-The `ClassName` class defines a `native method` called `nativeMethodName`, which will be implemented in JavaScript. It also includes a public method, `javaMethodName`, that performs some Java logic.
-
-In the JavaScript implementation of `nativeMethodName`, you can use the `lib` parameter to access the `ClassName` Java class and call its methods from JavaScript. This allows JavaScript code to call back into Java and execute Java logic directly from the browser.
-
-```js
-// Example placeholders — replace ClassName/javaMethodName with your own
-async function Java_ClassName_nativeMethodName(lib) {
-	const ClassName = await lib.ClassName; // Access your Java class
-	await ClassName.javaMethodName(); // Call a Java static method
-}
-```
-
-This functionality is useful when you need to call back into the Java class in response to a native function call. If you need to call back into Java outside the context of a native function, you can use a long-running Java thread. You can learn more about how to achieve this in our [`Java and JavaScript Interoperability`] tutorial.
-
-## Initializing CheerpJ with the `natives` option
+### Initializing CheerpJ with the `natives` option
 
 To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] function as a property of the [`natives`] option. There are two ways in which you can do this.
 
@@ -107,10 +74,6 @@ async function Java_Example_nativeMethodName(lib, str) {
 
 await cheerpjInit({ natives: { Java_Example_nativeMethodName } });
 ```
-
-## Converting Parameters and Return Values
-
-Parameters and return values of JNI calls are automatically converted between JavaScript and Java types based on [`conversion rules`].
 
 ## Example Walkthrough
 
@@ -163,6 +126,43 @@ Here, we provide an implementation for the `nativeAlert` method in the `Example`
 ```
 
 In this setup, [`cheerpjInit`] loads `Java_Example_nativeAlert` as the native method implementation. When `Example.nativeAlert` is called in Java, it triggers the JavaScript `Java_Example_nativeAlert` function, displaying an alert dialog with the message.
+
+## Calling back into Java from JavaScript
+
+You can call back into Java from a JavaScript native method implementation using the `lib` parameter. The `lib` object exposes your Java classes so you can invoke their static methods.
+
+```java
+public class ClassName {
+  // Implemented in JavaScript
+  public static native void nativeMethodName();
+
+  public static void javaMethodName() {
+    // Your Java logic here
+  }
+
+  public static void main(String[] args) {
+    nativeMethodName(); // Triggers the JS implementation
+  }
+}
+```
+
+The `ClassName` class defines a `native method` called `nativeMethodName`, which will be implemented in JavaScript. It also includes a public method, `javaMethodName`, that performs some Java logic.
+
+In the JavaScript implementation of `nativeMethodName`, you can use the `lib` parameter to access the `ClassName` Java class and call its methods from JavaScript. This allows JavaScript code to call back into Java and execute Java logic directly from the browser.
+
+```js
+// Example placeholders — replace ClassName/javaMethodName with your own
+async function Java_ClassName_nativeMethodName(lib) {
+	const ClassName = await lib.ClassName; // Access your Java class
+	await ClassName.javaMethodName(); // Call a Java static method
+}
+```
+
+This functionality is useful when you need to call back into the Java class in response to a native function call. If you need to call back into Java outside the context of a native function, you can use a long-running Java thread. You can learn more about how to achieve this in our [`Java and JavaScript Interoperability`] tutorial.
+
+## Converting Parameters and Return Values
+
+Parameters and return values of JNI calls are automatically converted between JavaScript and Java types based on [`conversion rules`].
 
 [`natives`]: /docs/reference/cheerpjInit#natives
 [`CJ3Library`]: /docs/reference/CJ3Library
