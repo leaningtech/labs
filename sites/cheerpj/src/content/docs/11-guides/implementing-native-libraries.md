@@ -23,7 +23,7 @@ In general, we can implement native libraries in CheerpJ by following these step
 2. Create a JavaScript module that implements the native methods.
 3. Load the native library in the Java class with CheerpJ.
 
-### Loading native nibraries and declaring native methods in Java
+### Loading native libraries and declaring native methods in Java
 
 To declare a native method in Java, use the `native` keyword in the method declaration. The method is defined in the Java class but is not implemented in Java. Instead, the implementation will be provided in the native library JavaScript module which is loaded with `System.loadLibrary`.
 
@@ -39,7 +39,7 @@ public class ClassName {
 }
 ```
 
-### Creating a JavaScript module
+### Creating a JavaScript module and implementing the native methods
 
 A JavaScript module is a file that contains code which can be exported and imported by other files for better organization and reuse. You create modules using the `export` keyword to expose classes, methods, or other resources, and you can use `export default` to make a primary, easy-to-import item from the module. For more information on JavaScript modules, check out the official [`documentation`].
 
@@ -49,7 +49,7 @@ export default {
 };
 ```
 
-JavaScript functions that implement native methods should follow a specific naming convention - `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, the function will be called `Java_com_foo_Bar_baz`
+To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, the function will be called `Java_com_foo_Bar_baz`.
 
 The JavaScript function should accept the following parameters:
 
