@@ -121,22 +121,22 @@ Here’s a full example that demonstrates the native method setup in Java and it
 ```java title="Example.java"
 public class Example {
   public static void main(String[] args) {
-    Alert("Hello, world!");
+    nativeAlert("Hello, world!");
   }
 
-  public static native void Alert(String message);
+  public static native void nativeAlert(String message);
 }
 ```
 
 2. Implement the native method by creating an `async` function in JavaScript that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`.
 
 ```js title="index.html"
-async function Java_Example_Alert(lib, str) {
+async function Java_Example_nativeAlert(lib, str) {
 	window.alert(str);
 }
 ```
 
-Here, we provide an implementation for the `Alert` method in the `Example` class, by creating a function named `Java_Example_Alert`. The function displays an alert dialog with the message using `window.alert`.
+Here, we provide an implementation for the `nativeAlert` method in the `Example` class, by creating a function named `Java_Example_nativeAlert`. The function displays an alert dialog with the message using `window.alert`.
 
 3. Initialize CheerpJ with the `natives` option and pass the native method implementation to [`cheerpjInit`]:
 
@@ -154,7 +154,7 @@ Here, we provide an implementation for the `Alert` method in the `Example` class
 			}
 			// Init CheerpJ and register natives, then run your main
 			await cheerpjInit({
-				natives: { Java_Example_Alert },
+				natives: { Java_Example_nativeAlert },
 			});
 			await cheerpjRunMain("Example", "/app");
 		</script>
