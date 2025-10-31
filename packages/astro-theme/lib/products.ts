@@ -130,6 +130,19 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerpx-games-runner",
 		repositoryName: "cheerpx-games-runner",
 	},
+	browserpod: {
+		id: "browserpod",
+		type: "technology",
+		name: "browserpod",
+		href: "https://browserpod.io",
+		logotype: cheerpjLogotype,
+		favicon: baseWithSlash + "cheerpj3/favicon.ico",
+		subtitle: "Java Virtual Machine for modern web browsers",
+		description:
+			"Run Java 8, 11 and 17 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
+		github: "https://github.com/leaningtech/browserpod-meta",
+		repositoryName: "browserpod-meta",
+	},
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
@@ -141,6 +154,8 @@ export function productFromUrl(url: URL): ProductData | undefined {
 			return products.cheerpj3;
 		case "https://cheerpx.io":
 			return products.cheerpx;
+		case "https://browserpod.io":
+			return products.browserpod;
 	}
 
 	// Fallback for labs
