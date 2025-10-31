@@ -42,6 +42,7 @@ function getEditHref(id: string): string {
 	if (Astro.site?.hostname === "cheerp.io") site = "cheerp";
 	if (Astro.site?.hostname === "cheerpj.com") site = "cheerpj";
 	if (Astro.site?.hostname === "cheerpx.io") site = "cheerpx";
+	if (Astro.site?.hostname === "browserpod.io") site = "browserpod";
 	if (!site) throw new Error("unable to derive site dirname from Astro.site");
 	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
 }
