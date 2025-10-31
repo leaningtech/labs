@@ -1,0 +1,149 @@
+---
+title: BrowserPod
+shortTitle: Overview
+description: Run Dev Environments in your browser
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+<div class="not-prose flex gap-2 mb-2">
+	<img
+		src="https://img.shields.io/badge/version-0.1-orange"
+		alt="Version 0.1"
+	/>
+	<a href="https://discord.leaningtech.com/">
+		<img
+			src="https://img.shields.io/discord/988743885121548329?color=%237289DA&logo=discord&logoColor=ffffff"
+			alt="Discord server"
+		/>
+	</a>
+	<a href="https://github.com/leaningtech/browserpod-meta/issues">
+		<img
+			src="https://img.shields.io/github/issues/leaningtech/browserpod-meta.svg?logo=github"
+			alt="GitHub issues"
+		/>
+	</a>
+</div>
+
+<div class="text-lg">
+  Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.
+
+Run Node.js projects in your browser, unmodified (Python, Ruby, and more coming in the future).
+
+Access the local http server in the same page or from another tab to view, test, and iterate; or share it with others, thanks to Portals.
+
+See it in action in our [SvelteKit+Vite demo](https://vitedemo.browserpod.io)
+
+</div>
+
+<div class="m-4 flex justify-center">
+	[Get started](/docs/getting-started) · [API Reference](/docs/reference) ·
+	[GitHub repository](https://github.com/leaningtech/browserpod-meta)
+</div>
+
+```html
+<script src="https://rt.browserpod.io/20251014_102/browserpod.js"></script>
+```
+
+## Use Cases
+
+### Project showcase
+
+Run a demo of your project directly in the user's browser, without any explicit setup or installation, and secured by the browser's sandbox.
+
+### Interactive documentation / tutorials
+
+Enrich your documentation and tutorials with interactive components, without the need for any server-side infrastructure.
+
+### AI Agents environment
+
+Let AI assistants and Agents run loose on your project, but isolated from the rest of your system.
+
+## Getting started
+
+BrowserPod has a simple yet powerful [API](/docs/reference).
+
+You can get up an running with few simple steps.
+
+First, you need to boot your pod:
+
+```js
+const pod = await BrowserPod.boot({ apiKey: "...", nodeVersion: "22" /*...*/ });
+```
+
+Then, you need to add your project's files to the pod. Currently, you need to fetch the contents yourself, and re-create the directory structure inside the pod's filesystem. We will add more convenient setup methods in the future:
+
+```js
+await pod.createDirectory("/project");
+for await (const f of myfiles) {
+	const response = await fetch(f.url);
+	const buffer = await response.arrayBuffer();
+	const fd = await pod.createFile(f.path);
+	fd.write(buffer);
+	fd.close();
+}
+```
+
+Then, run any setup step required to initialize your project:
+
+```js
+await pod.run("npm", ["install"], { cwd: "/project" });
+```
+
+And finally, run the dev server (or whatever workload your project provides):
+
+```js
+await pod.run("npm", ["run", "dev"], { cwd: "/project" });
+```
+
+Listening ports are associated with a Portal, which you can embed in the page with an IFrame, or visit from another Tab, or even another device, anywhere in the World.
+To get notified when a portal is created, do:
+
+```js
+pod.onPortal(({url, port} => { /*...load iframe...*/ });
+```
+
+## How does BrowserPod work?
+
+BrowserPod is built on top of CheerpOS, an Operating System interface that provides the Linux syscall interface to Wasm programs running in the Browser.
+
+BrowserPod ships with a build of Node.js that targets CheerpOS.
+
+Instead of using an embedded V8 engine to run JavaScript, the Browser's engine is used instead.
+
+This allows BrowserPod to run your JavaScript code at native speed.
+
+Everything else (Node's builtin JS modules, libuv, and Node's internal C++ code) stays the same, to guarantee maximum compatibility.
+
+Multiple versions of Node will be supported, and we plan to support new LTS versions in a timely manner.
+
+Using the same foundation, we plan to support other languages and frameworks, like Python and Ruby (including Ruby on Rails).
+
+## Licensing
+
+BrowserPod is free for personal use and technical evaluation. See [licensing](/docs/licensing) for details.
+
+## Demos
+
+You can see BrowserPod in action in our [SvelteKit+Vite demo](https://vitedemo.browserpod.io)
+
+## Community
+
+We have a vibrant Discord community where you can ask questions, share your projects, and get community support.
+
+<LinkButton
+	type="discord"
+	href={DISCORD_URL}
+	iconLeft="fa-brands:discord"
+	label="Join our Discord server"
+/>
+
+<LinkButton
+	type="secondary"
+	href="https://twitter.com/leaningtech"
+	iconLeft="fa-brands:twitter"
+	label="Follow us on Twitter"
+/>
+
+---
