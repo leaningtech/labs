@@ -3,6 +3,7 @@ import { isProduct, type Product } from "./nav";
 import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
+import browserpodLogotype from "../assets/branding/products/browserpod/logotype-white.png";
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
 import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
@@ -130,6 +131,19 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerpx-games-runner",
 		repositoryName: "cheerpx-games-runner",
 	},
+	browserpod: {
+		id: "browserpod",
+		type: "technology",
+		name: "browserpod",
+		href: "https://browserpod.io",
+		logotype: browserpodLogotype,
+		favicon: baseWithSlash + "browserpod/favicon.png",
+		subtitle: "Run Dev Environments in your browser",
+		description:
+			"Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.",
+		github: "https://github.com/leaningtech/browserpod-meta",
+		repositoryName: "browserpod-meta",
+	},
 };
 
 export function productFromUrl(url: URL): ProductData | undefined {
@@ -141,6 +155,8 @@ export function productFromUrl(url: URL): ProductData | undefined {
 			return products.cheerpj3;
 		case "https://cheerpx.io":
 			return products.cheerpx;
+		case "https://browserpod.io":
+			return products.browserpod;
 	}
 
 	// Fallback for labs
