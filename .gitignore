@@ -23,3 +23,4 @@ pnpm-debug.log*
 # content dir copied from astro-theme
 sites/*/src/content/blog
 sites/*/src/content/blogauthors
+sites/*/src/content/showcase
