@@ -1,43 +1,37 @@
-let CX_LATEST = "1.1.5";
-
 const replacements = [
-	[
-		"%CX_LATEST%",
-		() => {
-			return Promise.resolve(CX_LATEST);
-		},
-	],
+	{ name: "%CX_LATEST%", value: "1.1.5" },
+	{ name: "%BP_LATEST%", value: "1.0" },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
 	const spans = document.querySelectorAll(".expressive-code code span");
 
-	for (const span of spans) {
-		for (const [search, replace] of replacements) {
-			if (span.innerText.includes(search)) {
-				replace().then((s) => {
-					span.innerHTML = span.innerHTML.replace(search, s);
+	for (const {name, value} of replacements) {
+		for (const span of spans) {
+			if (span.innerText.includes(name)) {
+				Promise.resolve(value).then((s) => {
+					span.innerHTML = span.innerHTML.replace(name, s);
 				});
 			}
 		}
+		const badge = document.querySelectorAll(`img[src*='${name}']`);
+		badge.forEach((img) => {
+			const newSrc = img.src.replace(name, value);
+			img.src = newSrc;
+		});
 	}
 
-	const badge = document.querySelectorAll("img[src*='%CX_LATEST%']");
-	badge.forEach((img) => {
-		const newSrc = img.src.replace("%CX_LATEST%", CX_LATEST);
-		img.src = newSrc;
-	});
 });
 
 // Function to update data-code before button click
 function updateDataCode() {
 	// Find button with data-code attribute (``` copy button)
 	document.querySelectorAll("[data-code]").forEach((btn) => {
-		let originalCode = btn.dataset.code;
-
-		// Replace the placeholder %CX_LATEST% with the newest versions of CX
-		let replacedCode = originalCode.replace(/%CX_LATEST%/g, CX_LATEST);
-
+		let replacedCode = btn.dataset.code;
+		for (const {name, value} of replacements) {
+			// Replace the placeholders
+			replacedCode = replacedCode.replace(new RegExp(`${name}/g`), value);
+		}
 		// Update the button's data-code attribute with the modified data
 		btn.dataset.code = replacedCode;
 	});
