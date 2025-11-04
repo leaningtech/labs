@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
+import { remarkReplaceVars, rehypeReplaceVars } from "./replace-variables";
 import svelte from "@astrojs/svelte";
 import astroExpressiveCode, { loadShikiTheme } from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
@@ -57,7 +58,9 @@ export default function ThemeIntegration(
 							frames: {},
 						},
 					}),
-					mdx(),
+					mdx({
+						remarkPlugins: [remarkReplaceVars],
+					}),
 					sitemap(),
 					tailwind(),
 					robotsTxt(),
@@ -98,8 +101,9 @@ export default function ThemeIntegration(
 				});
 				params.updateConfig({
 					markdown: {
-						remarkPlugins: [[remarkObsidianCallout, {}]],
+						remarkPlugins: [[remarkObsidianCallout, {}], remarkReplaceVars],
 						rehypePlugins: [
+							rehypeReplaceVars,
 							rehypeSlug, // astro does this automatically but rehype-autolink-headings needs it
 							[
 								rehypeAutolinkHeadings,

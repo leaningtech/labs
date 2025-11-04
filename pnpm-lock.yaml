@@ -49,22 +49,22 @@ importers:
         version: link:../global-navbar
       '@tailwindcss/typography':
         specifier: ^0.5.10
-        version: 0.5.10(tailwindcss@3.4.18)
+        version: 0.5.10
       astro:
         specifier: '*'
         version: 4.5.18(typescript@5.9.3)
       astro-expressive-code:
         specifier: ^0.23.0
-        version: 0.23.0(astro@4.5.18(typescript@5.9.3))
+        version: 0.23.0
       astro-icon:
         specifier: ^0.8.1
         version: 0.8.1
       astro-integration-kit:
         specifier: ^0.14.0
-        version: 0.14.0(astro@4.5.18(typescript@5.9.3))
+        version: 0.14.0
       astro-public:
         specifier: ^0.1.0
-        version: 0.1.1(astro@4.5.18(typescript@5.9.3))
+        version: 0.1.1
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
@@ -92,6 +92,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.0
         version: 3.4.18
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       sirv:
         specifier: ^2.0.4
@@ -4006,13 +4009,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tailwindcss/typography@0.5.10(tailwindcss@3.4.18)':
+  '@tailwindcss/typography@0.5.10':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.18
 
   '@trysound/sax@0.2.0': {}
 
@@ -4201,9 +4203,8 @@ snapshots:
 
   astring@1.8.6: {}
 
-  astro-expressive-code@0.23.0(astro@4.5.18(typescript@5.9.3)):
+  astro-expressive-code@0.23.0:
     dependencies:
-      astro: 4.5.18(typescript@5.9.3)
       remark-expressive-code: 0.23.0
 
   astro-icon@0.8.1:
@@ -4212,15 +4213,12 @@ snapshots:
       resolve-pkg: 2.0.0
       svgo: 2.8.0
 
-  astro-integration-kit@0.14.0(astro@4.5.18(typescript@5.9.3)):
+  astro-integration-kit@0.14.0:
     dependencies:
-      astro: 4.5.18(typescript@5.9.3)
       pathe: 1.1.2
       recast: 0.23.11
 
-  astro-public@0.1.1(astro@4.5.18(typescript@5.9.3)):
-    dependencies:
-      astro: 4.5.18(typescript@5.9.3)
+  astro-public@0.1.1: {}
 
   astro-robots-txt@1.0.0:
     dependencies:
