@@ -7,10 +7,13 @@ description: Run Dev Environments in your browser
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
+    <div class="%BP_LATEST%"
+    />
+
 <div class="not-prose flex gap-2 mb-2">
 	<img
-		src="https://img.shields.io/badge/version-0.1-orange"
-		alt="Version 0.1"
+		src="https://img.shields.io/badge/version-%BP_LATEST%-orange"
+		alt="Version %BP_LATEST%"
 	/>
 	<a href="https://discord.leaningtech.com/">
 		<img
@@ -27,7 +30,7 @@ import { DISCORD_URL } from "@/consts.ts";
 </div>
 
 <div class="text-lg">
-  Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.
+Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.
 
 Run Node.js projects in your browser, unmodified (Python, Ruby, and more coming in the future).
 
@@ -43,7 +46,7 @@ See it in action in our [SvelteKit+Vite demo](https://vitedemo.browserpod.io)
 </div>
 
 ```html
-<script src="https://rt.browserpod.io/20251014_102/browserpod.js"></script>
+<script src="https://rt.browserpod.io/%BP_LATEST%/browserpod.js"></script>
 ```
 
 ## Use Cases
@@ -64,45 +67,7 @@ Let AI assistants and Agents run loose on your project, but isolated from the re
 
 BrowserPod has a simple yet powerful [API](/docs/reference).
 
-You can get up an running with few simple steps.
-
-First, you need to boot your pod:
-
-```js
-const pod = await BrowserPod.boot({ apiKey: "...", nodeVersion: "22" /*...*/ });
-```
-
-Then, you need to add your project's files to the pod. Currently, you need to fetch the contents yourself, and re-create the directory structure inside the pod's filesystem. We will add more convenient setup methods in the future:
-
-```js
-await pod.createDirectory("/project");
-for await (const f of myfiles) {
-	const response = await fetch(f.url);
-	const buffer = await response.arrayBuffer();
-	const fd = await pod.createFile(f.path);
-	fd.write(buffer);
-	fd.close();
-}
-```
-
-Then, run any setup step required to initialize your project:
-
-```js
-await pod.run("npm", ["install"], { cwd: "/project" });
-```
-
-And finally, run the dev server (or whatever workload your project provides):
-
-```js
-await pod.run("npm", ["run", "dev"], { cwd: "/project" });
-```
-
-Listening ports are associated with a Portal, which you can embed in the page with an IFrame, or visit from another Tab, or even another device, anywhere in the World.
-To get notified when a portal is created, do:
-
-```js
-pod.onPortal(({url, port} => { /*...load iframe...*/ });
-```
+You can get up an running with few simple steps by following our [Quickstart](/docs/getting-started) page.
 
 ## How does BrowserPod work?
 
