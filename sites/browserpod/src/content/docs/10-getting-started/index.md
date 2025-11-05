@@ -38,7 +38,7 @@ You will need to pass the API key that you created earlier as an argument:
 const pod = await BrowserPod.boot({ apiKey: "your-key" });
 ```
 
-## 3. Initialize a terminal
+## 4. Initialize a terminal
 
 In order to see the output of our program, we need to set up a terminal.
 
@@ -55,7 +55,7 @@ const terminalElem = document.getElementById("console");
 const terminal = await pod.createDefaultTerminal(terminalElem);
 ```
 
-## 4. Add your script to the Pod's filesystem
+## 5. Add your script to the Pod's filesystem
 
 The pod has its own virtual filesystem. You can add files to it with the [`BrowserPod.createFile`](/docs/reference/BrowserPod/createFile) method:
 
@@ -71,7 +71,7 @@ await scriptFile.write(script);
 await scriptFile.close();
 ```
 
-## 5. Run the script
+## 6. Run the script
 
 We can finally run our script:
 
