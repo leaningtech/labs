@@ -5,9 +5,7 @@ description: Create an Xterm.js-based terminal emulator for input/output
 
 ```ts
 class BrowserPod {
-	async createDefaultTerminal(
-		consoleDiv: HTMLElement,
-	): Promise<Terminal>;
+	async createDefaultTerminal(consoleDiv: HTMLElement): Promise<Terminal>;
 }
 ```
 

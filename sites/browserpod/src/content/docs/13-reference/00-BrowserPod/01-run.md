@@ -8,7 +8,12 @@ class BrowserPod {
 	async run(
 		executable: string,
 		args: Array<string>,
-		opts: { terminal: Terminal, env?: Array<string>; cwd?: string, echo?: boolean }
+		opts: {
+			terminal: Terminal;
+			env?: Array<string>;
+			cwd?: string;
+			echo?: boolean;
+		}
 	): Promise<Process>;
 }
 ```
