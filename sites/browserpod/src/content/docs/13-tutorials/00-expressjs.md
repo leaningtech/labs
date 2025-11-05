@@ -5,7 +5,7 @@ description: In this tutorial you will set up a simple NPM projext that serves a
 
 ## Prerequisites
 
-- [Download the template project](/docs/browserpod/tutorials/expressjs.zip) and unzip it.
+- [Download the template project](/browserpod/tutorials/expressjs.zip) and unzip it.
 - [Set up an HTTP server with COEP and COOP headers](/docs/guides/nginx)
 
 ## Project structure
@@ -115,6 +115,9 @@ app.listen(port, () => {
 </html>
 ```
 
+## End result
+
+![The index.html page rendered](/browserpod/tutorials/express.png)
 
 ## Source code
 
