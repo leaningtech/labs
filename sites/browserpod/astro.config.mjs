@@ -5,10 +5,10 @@ import { resolve } from "node:path";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://browserpod.io",
-	base: "/",
+	base: "/docs",
 	integrations: [
 		theme({
-			baseIsDocs: false,
+			baseIsDocs: true,
 		}),
 	],
 	vite: {
