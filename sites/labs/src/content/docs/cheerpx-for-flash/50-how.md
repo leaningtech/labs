@@ -19,7 +19,6 @@ If you are looking to integrate CheerpX for Flash on your applications, the proc
   - Unzip the CheerpX package, and host it on your server.
   - Ensure any relevant HTTP headers are correctly set, and that the HTTP server can serve CheerpX for Flash.
 - Integrate CheerpX on any HTML page that is embedding flash content.
-
   - Reference the pp.js file within the CheerpX package within a typical Javascript tag.
 
     `<script src="https://mydomain.com/cheerpx/pp.js"></script>`
