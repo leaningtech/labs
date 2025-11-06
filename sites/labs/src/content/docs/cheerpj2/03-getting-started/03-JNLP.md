@@ -134,7 +134,6 @@ The `/app/`prefix is a virtual filesystem mount point that references the root o
 Take a close look to the `<applet-desc>` tag on your `.jnlp` and keep the following at hand:
 
 - **Any applet tag parameters:**
-
   - **The applet class name:** You can find it at the main-class attribute.
   - **The applet ideal size:** defined at `width` and `height` attributes.
   - **Applet parameters:** found as `<param>` within `<applet-desc>` if your applet requires it.
