@@ -58,9 +58,7 @@ export default function ThemeIntegration(
 							frames: {},
 						},
 					}),
-					mdx({
-						remarkPlugins: [remarkReplaceVars],
-					}),
+					mdx(),
 					sitemap(),
 					tailwind(),
 					robotsTxt(),
