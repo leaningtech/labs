@@ -1,0 +1,48 @@
+---
+title: "Inside our internship program: Our interns reflect on their experiences"
+slug: internships
+description: |
+  Our interns describe their 6 month internships at Leaning Technologies
+authors:
+  - jules
+  - oscar
+  - francesco
+pubDate: "November 6 2025"
+heroImage: "./internships.png"
+tags:
+  - CheerpJ
+  - CheerpX
+  - BrowserPod
+---
+
+Every six months we bring in new interns to work on our products. They're given large tasks that they can work on independently and manage their own workload, with senior mentorship available when needed. We put a lot of thought into the kinds of projects we assign to interns. Each project must be a real product that will actually be used after completion. The project scope should be achievable within the duration of the internship, yet it must still be possible to extend on. And finally, the projects must be interesting learning experiences for the intern.
+
+We asked our current interns to write about their experiences with us, and detail some of the challenges they faced.
+
+## Oscar Mathot - Intern Software Engineer - Compilers
+
+I got the opportunity to intern at Leaning Technologies for 6 months, where I was brought on to research and port [WebVM](http://webvm.io) to a new web standard called [Isolated Web Apps (IWAs)](https://chromeos.dev/en/web/isolated-web-apps), and leverage new features from said standard to improve upon WebVM. I was given lots of freedom in regards to how I would conduct my research and turn it into useful, actionable improvements for the VM. Throughout my internship, I’ve found myself learning lots of new skills and knowledge and I would end up tackling a wider range of problems than I had thought this research would require.
+
+I started off by researching IWAs, a yet unreleased web standard that enforces strict isolation through Content Security Policies (CSP) and other existing security features, but in return allow access to exciting new powerful APIs. One such API is [DirectSockets](https://wicg.github.io/direct-sockets/) which finally allows for the use of TCP and UDP sockets in browsers. Porting WebVM involved several key components. My initial research into IWAs and SvelteKit, WebVM’s framework, helped me understand their CSP handling which was crucial to get it running. Another hurdle was bundling CheerpX, the JavaScript and WebAssembly library that powers WebVM by securely running x86 binaries client-side in the browser. Bundling is needed to respect IWA’s strict CSPs. Beyond these challenges, I handled various details such as post-processing generated files where necessary, small tweaks to CheerpX itself, and other assorted changes. Through this process I learned lots about web-development in general, gained valuable knowledge on IWAs and it was also my first introduction to working on CheerpX.
+
+My next step was to integrate DirectSockets support to CheerpX in order to enable it for WebVM IWA. This involved reading and learning CheerpX’s codebase in more depth, mapping the DirectSockets API to C++ and writing the logic for the 3 main interfaces: TCPSocket, TCPServerSocket and UDPSocket. This is a great improvement as it means [Tailscale](https://labs.leaningtech.com/blog/webvm-virtual-machine-with-networking-via-tailscale) is no longer necessary for the VM to have internet access when running in an IWA. In the process, I found and fixed a number of network related bugs, such as a data corruption issue in datagram handling, and an issue in the devpts filesystem. This work taught me about navigating a large codebase, incrementally building a mental model of relevant sections for my work, then reinforcing or adding to my understanding.
+
+My last task was to create a wrapper that exposes the same API surface as the DirectSockets API. The wrapper contains the pre-existing Tailscale networking logic, allowing the same DirectSockets-compatible code to be reused regardless of which network stack is being used. This interface can also potentially enable individual users to run their own networking logic in CheerpX in the future by implementing their own version of the socket interfaces when it is released publicly. This was a fairly complicated task but I had a great time working on it and I’m happy with how it turned out. The main challenge of this work was the conflict between Tailscale’s message based system and DirectSockets’ stream based system. Reconciling the two took some effort and lots of experimentation with ReadableStream hooks and ReadableStreamController.
+
+In July I had the opportunity to go to the Leeds office in the UK alongside others from the Amsterdam team and gave a short presentation on IWAs which was a great experience. Throughout all these 6 months, I had amazing support from everyone around me at Leaning, and I’m really thankful for all the times they nudged me in the right direction when I was getting lost.
+
+## Francesco Aru - Intern Software Engineer - Developer Experience and Relations
+
+As a student at Codam Coding College, I completed my curriculum with an internship at Leaning Technologies, taking on the role of Developer Experience and Relations engineer.
+
+My main responsibility was the creation and maintenance of the demos for [CheerpJ](https://cheerpj.com/), a WebAssembly-based Java Virtual Machine that runs in the browser. My first project was the [JavaFiddle](https://javafiddle.leaningtech.com/) demo, a Single Page Application that provides a functional environment for writing and executing Java code, with CheerpJ that runs under the hood; JavaFiddle being a mature repository, my tasks involved some refactoring and small new feature updates.
+
+After this first introduction, I moved on to the next project: another CheerpJ demo called [Browsercraft](https://browsercraft.cheerpj.com/), which enables running Minecraft entirely in the browser. At the time it was just a simple index.html file and I ported that fragment of code to a SvelteKit application, enhancing the UI, refactoring the code and adding some tweaks.
+
+During the second half of my internship, Leaning Technologies developed a new core product called [BrowserPod](https://vitedemo.browserpod.io/), a NodeJS environment that runs directly in the browser, and my job was to develop a demo starting off with just a prototype. I got full responsibility and freedom to turn it into a demo to showcase the new product. I’m particularly proud of this project, because of the independence I was granted but also because I could clearly see my progression in my programming skills.
+
+Alongside my primary focus with demos, I contributed occasional fixes to the websites hosting our documentation. Notably, I fixed the search bar that was incorrectly showing results both in Japanese and English. While working on this assignment, the solution I came up with wasn’t viable because modifying the component itself was not an option, it was in fact an external library. I had to compromise, exploring alternatives that would work around the third-party software.
+
+Lastly, I briefly worked on the CheerpJ core to expose an API callable from the browser, for this task, building the project was a remarkable challenge: being a complex product that relies on many dependencies, CheerpJ’s building process takes several non-trivial steps.
+
+Besides coding tasks, I took part in the initial phases of application processes for potential tech conferences that Leaning Technologies considered attending. As a cherry on top, in July, my Amsterdam colleagues and I went on a work trip to Leeds, UK, where the other department of Leaning Technologies is based; the visit included, but was not limited to, strategy meetings, unconventional presentations, and painting sessions.
