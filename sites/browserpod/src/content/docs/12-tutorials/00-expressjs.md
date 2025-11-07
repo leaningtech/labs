@@ -239,7 +239,7 @@ and the `hello world` will show up in the iframe.
 
 ## End result
 
-![The index.html page rendered](/browserpod/tutorials/express.png)
+![The index.html page rendered](/docs/browserpod/tutorials/express.png)
 
 ## Source code
 
