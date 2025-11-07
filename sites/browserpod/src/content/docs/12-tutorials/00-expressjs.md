@@ -5,7 +5,7 @@ description: In this tutorial you will set up a simple NPM projext that serves a
 
 ## Prerequisites
 
-- [Download the template project](/browserpod/tutorials/expressjs.zip) and unzip it.
+- Clone the [browserpod-meta](https://github.com/leaningtech/browserpod-meta) repo and go to the `examples/expressjs` subdirectory.
 - [Set up an HTTP server with COEP and COOP headers](/docs/guides/nginx)
 
 ## Project structure
