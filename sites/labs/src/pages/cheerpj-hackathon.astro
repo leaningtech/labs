@@ -9,6 +9,12 @@ import TicketsDoodle from "../assets/cj-hackathon/cj-tickets.png";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
+import Alessandro from "../assets/judges/alessandro.jpeg";
+import Elisabeth from "../assets/judges/elisabeth.png";
+import Ethan from "../assets/judges/ethan.jpg";
+import Jeff from "../assets/judges/jeff.png";
+import RuleBook from "../assets/cj-hackathon/rule-book.png";
+import CalendarAsset from "../assets/cj-hackathon/calendar.png";
 ---
 
 <Shell>
@@ -167,7 +173,7 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 						secure your free individual tickets</a
 					>. Pssss... There will be gifts and snacks!
 				</p>
-				<p class="font-mono text-sm sm:text-md 2xl:text-lg py-2">
+				<p class="font-mono text-md sm:text-lg 2xl:text-lg py-2">
 					To fit everyone's schedule<span class="font-bold">
 						we will be hosting two opening sessions on Friday, 14th November</span
 					>. You can choose to attend <span class="font-bold">
@@ -295,6 +301,511 @@ import { DISCORD_URL } from "@leaningtech/astro-theme/consts";
 				label="CheerpJ docs"
 			/>
 		</div>
+	</section>
+	<!-- Judging Panel -->
+	 <section
+		class="py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#213e77]"
+	>
+		<h1
+			class="font-mono font-extrabold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] py-8"
+		>
+			Judging panel
+		</h1>
+		<div
+			id="judges-grid"
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 space-x-2 font-mono text-center"
+		>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Elisabeth}
+						alt="Elisabeth Panholzer"
+						class="rounded-full w-80 h-80 mx-auto"class="rounded-full object-cover mx-auto aspect-square w-40 sm:w-48 lg:w-56"
+
+					/>
+					<a href="https://www.linkedin.com/in/elisabeth-panholzer-512163209/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Elisabeth Panholzer
+						</p>
+					</a>
+					<p class="text-xs text-white">Software Engineer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Alessandro} alt="Alessandro Pignotti" class="rounded-full object-cover mx-auto aspect-square w-40 sm:w-48 lg:w-56"
+ /> <a href="https://www.linkedin.com/in/alessandro-pignotti-10719617/">
+						<h2
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Alessandro Pignotti
+						</h2>
+					</a>
+					<p class="text-xs text-white">Chief Technology Officer</p>
+					<p class="italic text-xs text-white">Leaning Technologies</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image
+						src={Ethan}
+						alt="Ethan Hale"
+						class="items-center rounded-full w-80 h-80 mx-auto"class="rounded-full object-cover mx-auto aspect-square w-40 sm:w-48 lg:w-56"
+
+					/>
+					<a href="https://www.linkedin.com/in/hale-ethan/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Ethan Hale
+						</p>
+					</a>
+					<p class="text-xs text-white">Software Engineer & creator of Logisim.app</p>
+					<p class="italic text-xs text-white">DRS Software</p>
+				</div>
+			</div>
+			<div id="profile-container">
+				<div id="picture" class="grid columns-1 justify-center py-8">
+					<Image src={Jeff} alt="Jeff Martin" class="rounded-full  w-80 h-80 mx-auto"class="rounded-full object-cover mx-auto aspect-square w-40 sm:w-48 lg:w-56"
+ />
+					<a href="https://www.linkedin.com/in/jeffmartin7/">
+						<p
+							class="font-semibold text-lg text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)] hover:text-white pt-4"
+						>
+							Jeff Martin
+						</p>
+					</a>
+					<p class="text-xs text-white">Founding Engineer & lead on SnapCode</p>
+					<p class="italic text-xs text-white">ReportMill Software</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Section: Rules -->
+	<section
+	class="text-[#213e77] py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 bg-[#fceee1]"
+	>
+	<div class="flex justify-center items-center">
+		<Image src={RuleBook} alt="Rule book" class="w-52" />
+	</div>
+
+	<h1 class="text-[#213e77] font-mono font-bold text-4xl text-center py-8">
+		Rules of the Game
+	</h1>
+
+	<div class="max-w-4xl mx-auto text-[#213e77] font-mono space-y-8">
+		<p class="italic font-semibold text-center">
+			The boring but highly important section. Please make sure to follow these rules for your project and participation to be valid.
+		</p>
+
+		<!-- Rules list -->
+		<div class="bg-white rounded-2xl shadow-md p-8">
+		<h2 class="text-2xl font-bold mb-6 text-center text-[#f76b00]">
+			The Important Stuff
+		</h2>
+		<ol class="list-decimal list-inside space-y-4 leading-relaxed">
+			<li>
+			All projects must use <strong>CheerpJ</strong> actively. Projects
+			where CheerpJ is imported but not used will be discarded.
+			</li>
+			<li>
+			Submit your project no later than
+			<strong>1st December 2025, 10:00 AM (UK time)</strong>.
+			</li>
+			<li>
+			No further commits are allowed after the deadline. Fork your
+			repository if you wish to continue working afterward.
+			</li>
+			<li>
+			All project repositories must remain <strong>public and open source</strong> on GitHub.
+			</li>
+			<li>
+			Projects must be <strong>deployed and hosted publicly</strong>
+			(e.g., GitHub Pages).
+			</li>
+			<li>
+			Credit third-party components and ensure licensing compliance.
+			</li>
+			<li>
+			If using generative AI, provide proper credit.
+			</li>
+			<li>
+			Teams must have between <strong>1 and 5 registered members</strong>.
+			</li>
+			<li>
+			Winning team: <strong>£500 gift card</strong>. The team leader will
+			be contacted via Discord to arrange delivery.
+			</li>
+			<li>
+			Projects promoting <strong>violence, hate, or discrimination</strong> will be disqualified.
+			Respect and professionalism are expected at all times.
+			</li>
+			<li>
+			Participants must be <strong>18+</strong>. Minors may join only with
+			full parental consent (contact
+			<a href="mailto:stefano@leaningtech.com" class="text-[#f76b00] hover:underline"
+				>stefano@leaningtech.com</a
+			>).
+			</li>
+			<li>
+			All qualified projects will be showcased in our official hackathon
+			repository.
+			</li>
+		</ol>
+		</div>
+	</div>
+	</section>
+
+
+
+	<!-- Agenda section -->
+	<section
+		id="agenda"
+		class="text-white py-16 px-4 md:px-8 lg:px-28 xl:px-28 2xl:px-48 3xl:px-602 bg-[#213e77]"
+	>
+		<div class="flex justify-center items-center">
+			<Image src={CalendarAsset} alt="Calendar" class="w-52" />
+		</div>
+		<h1
+			class="font-mono font-bold text-4xl text-center text-white drop-shadow-[0px_0px_5px_rgba(240,125,153,0.6)] pb-8"
+		>
+			Agenda
+		</h1>
+		<p class="text-lg font-mono text-center">
+			Please consider this agenda is subject to change, stay tuned!
+		</p>
+		<p class="text-base text-center text-[#befffa] italic max-w-2xl mx-auto mt-3 animate-pulse">
+  			We understand that our hackathletes might have other responsibilities throughout the day; therefore, we are hosting two opening sessions with the same content. Choose the one that suits you best!
+		</p>
+
+
+		<!-- Opening session 1 -->
+		<div class="py-6">
+			<h2
+				class="font-mono text-md sm:text-lg font-bold text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+			>
+				Friday <span class="italic font-normal">14/November/2025</span>
+			</h2>
+
+			<p
+				class="font-mono font-bold text-lg sm:text-xl text-[#fceee1] text-pretty text-left py-1"
+			>
+				Opening session 1 (10:00 - 13:00)
+			</p>
+
+			<div class="px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">Description</th>
+								<th class="pr-2 px-2">Leeds site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:00</td>
+								<td class="pr-2 px-2">Reception</td>
+								<td class="pr-2 px-2">Ice breaker, gifts & welcome chat!</td>
+								<td class="pr-2 px-2">Venue opens</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:30</td>
+								<td class="pr-2 px-2">Welcome talk</td>
+								<td class="pr-2 px-2">Event overivew, rules & submissions</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on Stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Introduction to CheerpJ workshop</td>
+								<td class="pr-2 px-2">Beginner session: Using CheerpJ</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128">Stream on stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">12:00</td>
+								<td class="pr-2 px-2 whitespace-normal break-words align-top">Guest talk “Building logisim.app with CherpJ” by Ethan Hale</td>
+								<td class="pr-2 px-2">Get inspired to build your own project.</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">12:30</td>
+								<td class="pr-2 px-2">Closing remarks</td>
+								<td class="pr-2 px-2">Q&A and key event reminders</td>
+								<td class="pr-2 px-2">Refreshments provided</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- Opening session 2 -->
+		<div class="py-6">
+			<p
+				class="font-mono font-bold text-lg sm:text-xl text-[#fceee1] text-pretty text-left "
+			>
+				Opening session 2 (14:00 - 17:00)
+			</p>
+
+			<div class="px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">Description</th>
+								<th class="pr-2 px-2">Leeds site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:00</td>
+								<td class="pr-2 px-2">Reception</td>
+								<td class="pr-2 px-2">Ice breaker, gifts & welcome chat!</td>
+								<td class="pr-2 px-2">Venue opens</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:30</td>
+								<td class="pr-2 px-2">Welcome talk</td>
+								<td class="pr-2 px-2">Event overivew, rules & submissions</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on Stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Introduction to CheerpJ workshop</td>
+								<td class="pr-2 px-2">Beginner session: Using CheerpJ</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128">Stream on stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">12:00</td>
+								<td class="pr-2 px-2 whitespace-normal break-words align-top">Guest talk “Building logisim.app with CherpJ” by Ethan Hale</td>
+								<td class="pr-2 px-2">Get inspired to build your own project.</td>
+								<td class="pr-2 px-2">Main venue screen (Seminar room 1)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">12:30</td>
+								<td class="pr-2 px-2">Closing remarks</td>
+								<td class="pr-2 px-2">Q&A and key event reminders</td>
+								<td class="pr-2 px-2">Refreshments provided</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- Support -->
+		<div class="py-6">
+			<h2
+				class="font-mono text-md sm:text-lg font-bold text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+			>
+				Saturday <span class="italic font-normal">15/November/2025</span> - Sunday <span
+					class="italic font-normal">30/November 2025</span
+				>
+			</h2>
+			<div class="px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">Description</th>
+								<th class="pr-2 px-2">Leeds site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Online technical support starts</td>
+								<td class="pr-2 px-2">Get help from the experts!</td>
+								<td class="pr-2 px-2">-</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1423343287242330192"
+										>#hackathletes-support channel</a
+									></td
+								>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="py-6">
+			<h2
+				class="font-mono text-md sm:text-lg font-bold text-[#befffa] drop-shadow-[0px_0px_5px_rgba(0,190,169,0.9)]"
+			>
+				Monday <span class="italic font-normal">1/December/2025</span>
+			</h2>
+			<p
+				class="font-mono font-bold text-lg sm:text-xl text-[#fceee1] text-pretty text-left py-1"
+			>
+				Closing day (10:30 am - 17:00)
+			</p>
+			<div class="px-2">
+				<div class="relative overflow-x-auto">
+					<table
+						class="min-w-96 w-full text-xs sm:text-sm text-left text-nowrap font-mono border border-transparent border-spacing-2"
+					>
+						<thead>
+							<tr class="">
+								<th class="pr-2 px-2">UK Time</th>
+								<th class="pr-2 px-2">Event</th>
+								<th class="pr-2 px-2">Description</th>
+								<th class="pr-2 px-2">Leeds site</th>
+								<th class="pr-2 px-2">Discord</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:00</td>
+								<td class="pr-2 px-2">Submissions Closed</td>
+								<td class="pr-2 px-2">Make sure to submit your project before this time</td>
+								<td class="pr-2 px-2">-</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">10:30</td>
+								<td class="pr-2 px-2">Venue doors open</td>
+								<td class="pr-2 px-2">Come to the venue, grab your seat, and chit-chat.</td>
+								<td class="pr-2 px-2">Seminar 1</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">11:00</td>
+								<td class="pr-2 px-2">Presentations block 1</td>
+								<td class="pr-2 px-2">-</td>
+								<td class="pr-2 px-2">Seminar 1 (Main Screen)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">13:00</td>
+								<td class="pr-2 px-2">Lunch break and Networking</td>
+								<td class="pr-2 px-2">(food is on us!)</td>
+								<td class="pr-2 px-2">Seminar 1</td>
+								<td class="pr-2 px-2">-</td>
+							</tr>
+							<tr class="even:bg-[#213e77] odd:bg-[#49659e]">
+								<td class="pr-2 px-2">15:00</td>
+								<td class="pr-2 px-2">Presentations block 2</td>
+								<td class="pr-2 px-2">-</td>
+								<td class="pr-2 px-2">Seminar 1 (Main Screen)</td>
+								<td class="pr-2 px-2"
+									><a
+										target="_blank"
+										class="text-primary-300 hover:underline"
+										href="https://discord.com/channels/988743885121548329/1131533743748825128"
+										>Stream on stage</a
+									></td
+								>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<h1 class="font-mono text-md sm:text-lg font-bold text-center py-8">
+			Monday 15/December/2025: <a
+					class="text-[#f76b00] font-bold hover:underline">Winner Announcement!</a
+				>
+		</h1>
+		<h2 class="font-mono text-md sm:text-lg font-bold text-center pb-8">
+			We will announce the winning team as well as the scoring for all qualified projects. Team leaders will receive feedback via private message on Discord :) Stay tuned! 🏆
+		</h2>
 	</section>
 </Shell>
 
