@@ -5,17 +5,9 @@ description: Interacting with the virtual filesystem in CheerpJ
 
 CheerpJ provides a **virtual filesystem** that allows your Java applications to perform file operations like reading and writing, just as they would on a desktop. This guide will explain how to effectively use CheerpJ's virtual filesystem, demonstrating how to transfer files between your Java application and the local JavaScript environment by focusing on common use cases.
 
-## CheerpJ's Virtual Filesystem: Mounting Points Explained
+> For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
-CheerpJ's virtual filesystem has different **mounting points**, each with specific purposes:
-
-- **`/app/`**: This mount point is **read-only**. It corresponds to the root of the web server and contains all the files that are part of your Java application, including your `.jar` files and any resources bundled within them. Java can read files from `/app/`, but it **cannot write** to this location.
-- **`/files/`**: This is a **persistent read-write file system**. Files written here are accessible by your Java application and persist across sessions and page reloads until the user manually clears their browser's IndexedDB. This is useful for user-generated data, or situations where you need to move files around within the virtual filesystem.
-- **`/str/`**: This mounting point is for adding string content directly from JavaScript into the virtual filesystem. This is useful for providing configuration files or initial data to your Java application without needing to package them inside your JAR.
-
-Read more about the filesystem in the [CheerpJ documentation](/docs/explanation/File-System-support).
-
-> [\!info] Local files
+> [!info] Local files
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. For browser security reasons, direct access to local files is forbidden. This means your Java code running in CheerpJ cannot directly read or write files on the user's physical hard drive. All file interactions happen within this secure, virtual environment.
 
 ## 1\. Loading Files from JavaScript into the Virtual Filesystem
