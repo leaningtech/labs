@@ -10,7 +10,7 @@ CheerpJ provides a **virtual filesystem** that allows your Java applications to 
 > [!info] Local files
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. For browser security reasons, direct access to local files is forbidden. This means your Java code running in CheerpJ cannot directly read or write files on the user's physical hard drive. All file interactions happen within this secure, virtual environment.
 
-## 1\. Loading Files from JavaScript into the Virtual Filesystem
+## Loading the files from JavaScript (i.e. local file system) to the virtual file system
 
 Often, you might have files on your web page (e.g., uploaded by a user) that your Java application needs to process. You can transfer these files from the JavaScript environment into CheerpJ's virtual filesystem. This is useful for:
 
@@ -93,7 +93,7 @@ copyFileToFilesMountPoint();
 - **`Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING])`**: This copies the file from the `/app/` mount point to the `/files/` mount point. The `REPLACE_EXISTING` option ensures that if the target file already exists, it will be overwritten.
 - **Accessing the File in Java**: After copying, your Java application can access the file simply by using `new File("notes_tmp.txt")`, without needing to specify the `/app/` prefix.
 
-## 2\. Getting Files from the Virtual Filesystem to the Local Filesystem (Java to JavaScript)
+## Getting the file from the virtual file system to the local file system (i.e JavaScript)
 
 This is a very common requirement: your Java application generates or modifies a file, and you need to access the file locally. It's important to note that when your Java application saves a file while running with CheerpJ, this file will be written to CheerpJ's virtual filesystem (the /files/ mount point) rather than directly to the user's local file system. The general workflow for then making this file available to the user is as follows:
 
@@ -175,7 +175,7 @@ cj3init();
 - **Blob and Download**: Once you have the `Blob`, standard browser techniques are used to create a temporary download link and simulate a click, prompting the user to save the file. `URL.createObjectURL(blob)` generates a temporary URL for the blob, and `link.download` suggests a filename to the browser.
 - **`natives` Object in `cheerpjInit`**: This is where you register all your custom JavaScript native methods with CheerpJ, making them accessible from your Java code.
 
-## 3\. Using Java's `JFileChooser` with CheerpJ
+## Using Java's `JFileChooser` with CheerpJ
 
 Java applications often use `JFileChooser` for "Save As..." dialogues. CheerpJ supports `JFileChooser`, and when a user selects a file name, that name is used within the virtual filesystem. You can then use this name to trigger a download using the native method approach described in Section 2.
 
@@ -224,7 +224,7 @@ chooseDownloadButton.addActionListener((ActionEvent e) -> {
 
 The HTML and JavaScript for handling the download are essentially the **same as in Section 2**.
 
-## 4\. Special Case: Applets and `showDocument()`
+## Special Case: For Applets using `showDocument()`
 
 For **Applets**, `AppletContext.showDocument()` can be used as a workaround for downloads, although native methods are generally more flexible.
 
