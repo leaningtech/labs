@@ -10,88 +10,88 @@ CheerpJ provides a **virtual filesystem** that allows your Java applications to 
 > [!info] Local files
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. For browser security reasons, direct access to local files is forbidden. This means your Java code running in CheerpJ cannot directly read or write files on the user's physical hard drive. All file interactions happen within this secure, virtual environment.
 
-## Loading the files from JavaScript (i.e. local file system) to the virtual file system
+## Loading the files from JavaScript to the virtual file system
 
-Often, you might have files on your web page (e.g., uploaded by a user) that your Java application needs to process. You can transfer these files from the JavaScript environment into CheerpJ's virtual filesystem. This is useful for:
+Sometimes, your web page may have files (for example, uploaded by a user) that your Java application needs to read or process. You can transfer these files from JavaScript into CheerpJ’s virtual file system. This is useful in several scenarios:
 
-- **External Applications:** Sometimes, your Java application expects files to be in a specific location (e.g., a hardcoded path like "filename.txt"). If you load a file into `/app/`, your Java code would need to reference it as `/app/filename.txt`. However, if your Java application is an external application that you cannot modify, it might not be able to change this prefix. Loading the file into `/files/` allows Java to access it using just "filename.txt", as `/files/` behaves more like a default working directory.
-- **Dynamic Content (e.g., Configuration Files):** You can provide dynamic content, such as configuration files, to your Java application directly from JavaScript, without recompiling your Java code.
-- **Binary Data:** The `cheerpOSAddStringFile` API (and the underlying `lib.java.nio.file.Files.copy` method) can handle binary data, making it useful for providing various file types to Java.
+- **External Applications:** Some Java applications expect files in specific paths (e.g., a hardcoded path like `filename.txt`). If you load a file into `/app/`, your Java code must reference it as  `/app/filename.txt`. But if you can’t modify the Java code, for example in an external application, loading the file into `/files/` makes it accessible simply as `"filename.txt"`. The `/files/` directory acts as a default working directory.
+- **Dynamic Content:** You can provide configuration files or other runtime data from JavaScript directly to your Java application, without recompiling or modifying the Java code.
+- **Binary Data:** The `cheerpOSAddStringFile` API (and the underlying `java.nio.file.Files.copy` method) supports binary files as well, allowing you to provide any file type to Java.
 
-### Method 1: Using `cheerpOSAddStringFile` API (for string or binary data)
+### Method 1: Using `cheerpOSAddStringFile` (string or binary).
 
-This is the simplest way to add a file from JavaScript to the virtual filesystem. It's particularly useful for providing string content, but can also handle binary data.
+The quickest way to place a file into CheerpJ’s virtual filesystem from JavaScript is `cheerpOSAddStringFile`. It’s ideal for string content and also supports binary data.
 
-**Important:** `cheerpOSAddStringFile` must be called after `cheerpjInit()` has completed (i.e., its Promise has resolved), as it relies on the CheerpJ runtime environment and its virtual filesystem being initialized.
+**When to call it:** Invoke `cheerpOSAddStringFile` after `cheerpjInit()` finishes (i.e., once its Promise resolves). The API depends on the runtime and VFS being fully initialized.
 
-The `cheerpOSAddStringFile` API allows you to create a file in the `/str/` mount point, which can then be accessed by your Java application as if it were a regular file.
+**Where the file goes:** The call creates a file under the `/str/` mount. Your Java code can then read it like any normal file path inside the application.
 
-Example:
-
-```js title="index.html"
-// Function to add a string file to /str/ from JavaScript
+```js
+// Call this only after cheerpjInit() has resolved.
 async function addStringFileToCheerpJ() {
-	const fileName =
-		document.getElementById("jsFileName").value.trim() || "default.txt";
-	const content =
-		document.getElementById("jsFileContent").value || "Default content.";
-	const messageDiv = document.getElementById("jsMessage");
+  const fileName = 
+    document.getElementById("jsFileName").value.trim() || "default.txt";
+  const content =
+    document.getElementById("jsFileContent").value || "Default content.";
+  const messageDiv = document.getElementById("jsMessage");
 
-	try {
-		// Using cheerpOSAddStringFile to add content to /str/
-		await cheerpOSAddStringFile("/str/" + fileName, content);
-		messageDiv.textContent = `File "${fileName}" added successfully to /str/.`;
-		console.log(`File "${fileName}" added to /str/.`);
-	} catch (e) {
-		messageDiv.textContent = `Error adding file to /str/: ${e.message}`;
-		console.error("Error writing file to /str/:", e);
-	}
+  try {
+    // Using cheerpOSAddStringFile to add content to /str/
+    await cheerpOSAddStringFile(`/str/${fileName}`, content);
+    messageDiv.textContent = `Saved /str/${fileName}. (overwrites if existing)`;
+    console.log(`Saved ${fileName} to /str/`);
+  } catch (e) {
+    messageDiv.textContent = `Failed to save /str/${fileName}: ${e.message}`;
+    console.error("Error Writing file to /str/:", e);
+  }
 }
 ```
 
 ### Method 2: Using library mode
 
-If you have a file that's already part of your `/app/` mount point, but your Java application needs to access it as if it were in `/files/` (without the `/app/` prefix), you can copy it using library mode. You can use the `cheerpjRunLibrary` API to access Java's `nio.file` APIs, which allow you to copy files from one mount point to another.
+When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use library mode to copy it across mounts. With `cheerpjRunLibrary`, you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
 
-```javascript title="index.html"
+```js
 async function copyFileToFilesMountPoint() {
-	// cheerpjRunLibrary can be called before cheerpjInit
-	const lib = await cheerpjRunLibrary(""); // Create a library mode object
-	const Files = await lib.java.nio.file.Files;
-	const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
-	const Paths = await lib.java.nio.file.Paths;
+  // Library mode can be created before or after cheerpjInit
+  const lib = await cheerpjRunLibrary(""); // Create a library mode object
+  const Files = await lib.java.nio.file.Files;
+  const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
+  const Paths = await lib.java.nio.file.Paths;
 
-	// Source is a file within the /app/ mount point
-	const source = await Paths.get(`/app/notes_tmp.txt`, []);
-	// Target is the /files mount point
-	const target = await Paths.get(`/files/notes_tmp.txt`, []);
+  // Source is a file within the /app/ mount point
+  const source = await Paths.get("/app/notes_tmp.txt");
+  // Target is the /files/ mount point
+  const target = await Paths.get("/files/notes_tmp.txt");
 
-	try {
-		await Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING]);
-		console.log("File copied from /app/ to /files/ successfully!");
-	} catch (e) {
-		console.error("Error copying file:", e);
-	}
+  try {
+    await Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING]);
+    console.log("Copied /app/notes_tmp.txt to /files/notes_tmp.txt");
+  } catch (e) {
+    console.error("Error copying file:", e);
+  }
 }
 
-// Then, initialize CheerpJ and run your Java application
+// Initializing CheerpJ and run your Java Application
 async function cj3init() {
-	await cheerpjInit({
-		version: 8,
-	});
-	// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+  await cheerpjInit({ version: 8 });
+  // cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
 }
-cj3init();
-copyFileToFilesMountPoint();
+
+(async () => {
+  await cj3init();
+  await copyFileToFilesMountPoint();
+})();
+
 // Your Java app can now access "notes_tmp.txt" by simply calling `new File("notes_tmp.txt")`
 // without needing the /app/ prefix.
 ```
 
 **Explanation:**
 
-- **`cheerpjRunLibrary("")`**: This creates a library mode object that allows you to use Java's `nio.file` APIs in JavaScript. You can read more about library mode in the [CheerpJ documentation](/docs/reference/cheerpjRunLibrary).
-- **`Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING])`**: This copies the file from the `/app/` mount point to the `/files/` mount point. The `REPLACE_EXISTING` option ensures that if the target file already exists, it will be overwritten.
-- **Accessing the File in Java**: After copying, your Java application can access the file simply by using `new File("notes_tmp.txt")`, without needing to specify the `/app/` prefix.
+- **`cheerpjRunLibrary("")`** Creates a library-mode object that lets you call Java’s `java.nio.file` APIs from JavaScript. See the [CheerpJ documentation](/docs/reference/cheerpjRunLibrary) for details.
+- **`Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING])`** Copies a file from the `/app/` mount point to the `/files/` mount point. Using `REPLACE_EXISTING` ensures the target is overwritten if it already exists.
+- **Accessing the file in Java:** After copying, your Java application can read it with `new File("notes_tmp.txt")`. No /app/ prefix is needed once the file is in /files/.
 
 ## Getting the file from the virtual file system to the local file system (i.e JavaScript)
 
