@@ -83,7 +83,7 @@ You should see the following output in your terminal element:
 
 ```
 > /script.js
-hello from node 20.5.0
+hello from node v22.15.0
 my code is:
 
 const fs = require("fs");
