@@ -14,7 +14,7 @@ CheerpJ provides a **virtual filesystem** that allows your Java applications to 
 
 Sometimes, your web page may have files (for example, uploaded by a user) that your Java application needs to read or process. You can transfer these files from JavaScript into CheerpJ’s virtual file system. This is useful in several scenarios:
 
-- **External Applications:** Some Java applications expect files in specific paths (e.g., a hardcoded path like `filename.txt`). If you load a file into `/app/`, your Java code must reference it as  `/app/filename.txt`. But if you can’t modify the Java code, for example in an external application, loading the file into `/files/` makes it accessible simply as `"filename.txt"`. The `/files/` directory acts as a default working directory.
+- **External Applications:** Some Java applications expect files in specific paths (e.g., a hardcoded path like `filename.txt`). If you load a file into `/app/`, your Java code must reference it as `/app/filename.txt`. But if you can’t modify the Java code, for example in an external application, loading the file into `/files/` makes it accessible simply as `"filename.txt"`. The `/files/` directory acts as a default working directory.
 - **Dynamic Content:** You can provide configuration files or other runtime data from JavaScript directly to your Java application, without recompiling or modifying the Java code.
 - **Binary Data:** The `cheerpOSAddStringFile` API (and the underlying `java.nio.file.Files.copy` method) supports binary files as well, allowing you to provide any file type to Java.
 
@@ -29,21 +29,21 @@ The quickest way to place a file into CheerpJ’s virtual filesystem from JavaSc
 ```js
 // Call this only after cheerpjInit() has resolved.
 async function addStringFileToCheerpJ() {
-  const fileName = 
-    document.getElementById("jsFileName").value.trim() || "default.txt";
-  const content =
-    document.getElementById("jsFileContent").value || "Default content.";
-  const messageDiv = document.getElementById("jsMessage");
+	const fileName =
+		document.getElementById("jsFileName").value.trim() || "default.txt";
+	const content =
+		document.getElementById("jsFileContent").value || "Default content.";
+	const messageDiv = document.getElementById("jsMessage");
 
-  try {
-    // Using cheerpOSAddStringFile to add content to /str/
-    await cheerpOSAddStringFile(`/str/${fileName}`, content);
-    messageDiv.textContent = `Saved /str/${fileName}. (overwrites if existing)`;
-    console.log(`Saved ${fileName} to /str/`);
-  } catch (e) {
-    messageDiv.textContent = `Failed to save /str/${fileName}: ${e.message}`;
-    console.error("Error Writing file to /str/:", e);
-  }
+	try {
+		// Using cheerpOSAddStringFile to add content to /str/
+		await cheerpOSAddStringFile(`/str/${fileName}`, content);
+		messageDiv.textContent = `Saved /str/${fileName}. (overwrites if existing)`;
+		console.log(`Saved ${fileName} to /str/`);
+	} catch (e) {
+		messageDiv.textContent = `Failed to save /str/${fileName}: ${e.message}`;
+		console.error("Error Writing file to /str/:", e);
+	}
 }
 ```
 
@@ -53,34 +53,34 @@ When a file already lives under `/app/` but your Java code needs to read it as i
 
 ```js
 async function copyFileToFilesMountPoint() {
-  // Library mode can be created before or after cheerpjInit
-  const lib = await cheerpjRunLibrary(""); // Create a library mode object
-  const Files = await lib.java.nio.file.Files;
-  const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
-  const Paths = await lib.java.nio.file.Paths;
+	// Library mode can be created before or after cheerpjInit
+	const lib = await cheerpjRunLibrary(""); // Create a library mode object
+	const Files = await lib.java.nio.file.Files;
+	const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
+	const Paths = await lib.java.nio.file.Paths;
 
-  // Source is a file within the /app/ mount point
-  const source = await Paths.get("/app/notes_tmp.txt");
-  // Target is the /files/ mount point
-  const target = await Paths.get("/files/notes_tmp.txt");
+	// Source is a file within the /app/ mount point
+	const source = await Paths.get("/app/notes_tmp.txt");
+	// Target is the /files/ mount point
+	const target = await Paths.get("/files/notes_tmp.txt");
 
-  try {
-    await Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING]);
-    console.log("Copied /app/notes_tmp.txt to /files/notes_tmp.txt");
-  } catch (e) {
-    console.error("Error copying file:", e);
-  }
+	try {
+		await Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING]);
+		console.log("Copied /app/notes_tmp.txt to /files/notes_tmp.txt");
+	} catch (e) {
+		console.error("Error copying file:", e);
+	}
 }
 
 // Initializing CheerpJ and run your Java Application
 async function cj3init() {
-  await cheerpjInit({ version: 8 });
-  // cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+	await cheerpjInit({ version: 8 });
+	// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
 }
 
 (async () => {
-  await cj3init();
-  await copyFileToFilesMountPoint();
+	await cj3init();
+	await copyFileToFilesMountPoint();
 })();
 
 // Your Java app can now access "notes_tmp.txt" by simply calling `new File("notes_tmp.txt")`
@@ -132,54 +132,54 @@ Now we’ll implement the JavaScript for `downloadFileFromCheerpJ`. The function
 
 ```html "index.html"
 <script>
-// Native method implementation called from Java
-// Naming: Java_<fully-qualified-class>_<method>
-async function Java_com_App_downloadFileFromCheerpJ(
-  lib, // CheerpJ's internal library object
-  fileName // The file name passed from Java
-  ) {
-  // fileName can be "example.txt" or "/files/example.txt" (both resolve to the /files/ mount)
-  console.log(`Attempting to download file: ${fileName}`);
+	// Native method implementation called from Java
+	// Naming: Java_<fully-qualified-class>_<method>
+	async function Java_com_App_downloadFileFromCheerpJ(
+		lib, // CheerpJ's internal library object
+		fileName // The file name passed from Java
+	) {
+		// fileName can be "example.txt" or "/files/example.txt" (both resolve to the /files/ mount)
+		console.log(`Attempting to download file: ${fileName}`);
 
-  try {
-    // Read the file from CheerpJ's virtual filesystem as a Blob
-    const blob = await cjFileBlob(`${fileName}`);
+		try {
+			// Read the file from CheerpJ's virtual filesystem as a Blob
+			const blob = await cjFileBlob(`${fileName}`);
 
-    // Create a temporary object URL for the Blob so the browser can download it
-    const url = URL.createObjectURL(blob);
+			// Create a temporary object URL for the Blob so the browser can download it
+			const url = URL.createObjectURL(blob);
 
-    // Create an anchor element and set the download target
-    const a = document.createElement("a");
-    a.href = url;
+			// Create an anchor element and set the download target
+			const a = document.createElement("a");
+			a.href = url;
 
-    // Use the last path segment as the download filename
-    a.download = fileName.split("/").pop() || "download";
+			// Use the last path segment as the download filename
+			a.download = fileName.split("/").pop() || "download";
 
-    // Add to the DOM, click it programmatically to start download, then remove
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+			// Add to the DOM, click it programmatically to start download, then remove
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
 
-    // Clean up the temporary object URL
-    URL.revokeObjectURL(url);
+			// Clean up the temporary object URL
+			URL.revokeObjectURL(url);
 
-    console.log(`Successfully downloaded ${fileName}`);
-  } catch (e) {
-    console.error("Error downloading file:", e);
-    alert("Failed to download the file. See console for details.");
-  }
-}
+			console.log(`Successfully downloaded ${fileName}`);
+		} catch (e) {
+			console.error("Error downloading file:", e);
+			alert("Failed to download the file. See console for details.");
+		}
+	}
 
-// Initialize CheerpJ and register the native method
-async function cj3init() {
-  await cheerpjInit({
-    // Register native method
-    natives: { Java_com_App_downloadFileFromCheerpJ },
-  });
+	// Initialize CheerpJ and register the native method
+	async function cj3init() {
+		await cheerpjInit({
+			// Register native method
+			natives: { Java_com_App_downloadFileFromCheerpJ },
+		});
 
-  // cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
-}
-cj3init();
+		// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+	}
+	cj3init();
 </script>
 ```
 
@@ -200,8 +200,9 @@ cj3init();
 Many Java apps use `JFileChooser` for “Save As…” dialogs. CheerpJ supports `JFileChooser` and maps it to the **virtual filesystem**. When the user picks a filename, you get a VFS path (e.g., `/files/report.txt`). You can then pass that path to your **native method** to trigger a browser download as described in Section 2.
 
 ### How it behaves under CheerpJ
+
 - The chooser operates in CheerpJ’s Virtual File System.
-- The writable, persistent area is **`/files/`**.   
+- The writable, persistent area is **`/files/`**.
 - You can instantiate it with no arguments (`JFileChooser fileChooser = new JFileChooser();`), to open the dialog in the default directory: `/files/`
 
 Here is how the dialog will look like when you use `JFileChooser` in CheerpJ with the default `/files/` mount point:
@@ -239,7 +240,7 @@ chooseDownloadButton.addActionListener((ActionEvent e) -> {
 **Explanation:**
 
 - **`new JFileChooser("/files/")`:** Initializes the chooser rooted at `/files/` in CheerpJ’s virtual filesystem. This is the writable and persistent mount point.
-- **`fileChooser.showSaveDialog(this)`:** Displays the “Save” dialog so the user can pick a filename and location. *(Use `showOpenDialog(this)` when you want the user to select an existing file to open.)*
+- **`fileChooser.showSaveDialog(this)`:** Displays the “Save” dialog so the user can pick a filename and location. _(Use `showOpenDialog(this)` when you want the user to select an existing file to open.)_
 - **`fileChooser.getSelectedFile().getPath()`:** If the user confirms, returns the full VFS path they chose (e.g., `/files/myDocument.txt`).
 - **`downloadFileFromCheerpJ(filePath)`:** Invokes the JavaScript native method from Section 2. Pass it the VFS path (`filePath`), where the JavaScript side reads the file via `cjFileBlob(...)` and triggers a standard browser download to the user’s machine.
 
@@ -296,17 +297,17 @@ And in your HTML, you'd have the `downloadFromJava` JavaScript function:
 ```javascript
 // JavaScript in applet.html
 function downloadFromJava(encodedContent) {
-  const content = decodeURIComponent(encodedContent);
-  const blob = new Blob([content], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
+	const content = decodeURIComponent(encodedContent);
+	const blob = new Blob([content], { type: "text/plain" });
+	const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "applet_showdocument_dynamic.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  console.log("File downloaded via showDocument (JS)");
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = "applet_showdocument_dynamic.txt";
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
+	console.log("File downloaded via showDocument (JS)");
 }
 ```
