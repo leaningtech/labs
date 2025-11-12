@@ -245,64 +245,68 @@ chooseDownloadButton.addActionListener((ActionEvent e) -> {
 
 **HTML and JavaScript Code (`index.html`)** for handling the download are essentially the **same as in Section 2**.
 
-## Special Case: For Applets using `showDocument()`
+## Special Case: Applets using `showDocument()`
 
-For **Applets**, `AppletContext.showDocument()` can be used as a workaround for downloads, although native methods are generally more flexible.
+For **Applets**, `AppletContext.showDocument()` can be used as a lightweight workaround to trigger downloads. This can be handy, but the **native-method approach** remains more flexible and robust for most cases.
 
-- **Direct URL Download**: If the file you want to download is already available at a public URL (e.g., hosted on your server), you can simply use `showDocument()` to point to that URL, and the browser will handle the download.
+### Option A: Direct URL download
 
-  ```java
-  // Java Applet Code
-  private void downloadDirectURL() {
-      try {
-          // Assumes 'example.txt' is in the same directory as the applet JAR
-          URL fileUrl = new URL(getCodeBase().getProtocol(),
-                                getCodeBase().getHost(),
-                                getCodeBase().getPort(),
-                                "/example.txt");
-          getAppletContext().showDocument(fileUrl, "_blank"); // "_blank" will trigger download
-          System.out.println("Triggered direct URL download: " + fileUrl.toString());
-      } catch (Exception ex) {
-          ex.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Error downloading from URL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-      }
-  }
-  ```
+If the file is already available at a public URL (e.g., on your server), point `showDocument()` at that URL and let the browser handle the download.
 
-- **Executing JavaScript for Dynamic Content**: You can use `showDocument()` to execute arbitrary JavaScript code that then handles a download. This is less common but can be useful for passing dynamically generated content from Java to JavaScript for download.
+```java
+// Java Applet Code
+private void downloadDirectURL() {
+    try {
+        // Assumes 'example.txt' is in the same directory as the applet JAR
+        URL fileUrl = new URL(getCodeBase().getProtocol(),
+                              getCodeBase().getHost(),
+                              getCodeBase().getPort(),
+                              "/example.txt");
+        getAppletContext().showDocument(fileUrl, "_blank"); // "_blank" will trigger download
+        System.out.println("Triggered direct URL download: " + fileUrl.toString());
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error downloading from URL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+```
 
-  ```java
-  // Java Applet Code
-  private void downloadViaJavaScriptShowDocument() {
-      try {
-          String content = "Dynamic content generated in Java!";
-          String encodedContent = URLEncoder.encode(content, "UTF-8").replace("+", "%20"); // Encode for URL
-          AppletContext context = getAppletContext();
-          // Call a JavaScript function 'downloadFromJava' and pass content
-          context.showDocument(new URL("javascript:downloadFromJava('" + encodedContent + "')"));
-          System.out.println("Triggered JS download via showDocument.");
-      } catch (Exception ex) {
-          ex.printStackTrace();
-      }
-  }
-  ```
+### Option B: Execute JavaScript for dynamic content
 
-  And in your HTML, you'd have the `downloadFromJava` JavaScript function:
+You can use `showDocument()` to execute arbitrary JavaScript code that then handles a download. This is less common but can be useful for passing dynamically generated content from Java to JavaScript for download.
 
-  ```javascript
-  // JavaScript in applet.html
-  function downloadFromJava(encodedContent) {
-  	const content = decodeURIComponent(encodedContent);
-  	const blob = new Blob([content], { type: "text/plain" });
-  	const url = URL.createObjectURL(blob);
+```java
+// Java Applet Code
+private void downloadViaJavaScriptShowDocument() {
+    try {
+        String content = "Dynamic content generated in Java!";
+        String encodedContent = URLEncoder.encode(content, "UTF-8").replace("+", "%20"); // Encode for URL
+        AppletContext context = getAppletContext();
+        // Call a JavaScript function 'downloadFromJava' and pass content
+        context.showDocument(new URL("javascript:downloadFromJava('" + encodedContent + "')"));
+        System.out.println("Triggered JS download via showDocument.");
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+```
 
-  	const a = document.createElement("a");
-  	a.href = url;
-  	a.download = "applet_showdocument_dynamic.txt";
-  	document.body.appendChild(a);
-  	a.click();
-  	document.body.removeChild(a);
-  	URL.revokeObjectURL(url);
-  	console.log("File downloaded via showDocument (JS)");
-  }
-  ```
+And in your HTML, you'd have the `downloadFromJava` JavaScript function:
+
+```javascript
+// JavaScript in applet.html
+function downloadFromJava(encodedContent) {
+  const content = decodeURIComponent(encodedContent);
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "applet_showdocument_dynamic.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  console.log("File downloaded via showDocument (JS)");
+}
+```
