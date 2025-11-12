@@ -197,9 +197,12 @@ cj3init();
 
 ## Using Java's `JFileChooser` with CheerpJ
 
-Java applications often use `JFileChooser` for "Save As..." dialogues. CheerpJ supports `JFileChooser`, and when a user selects a file name, that name is used within the virtual filesystem. You can then use this name to trigger a download using the native method approach described in Section 2.
+Many Java apps use `JFileChooser` for “Save As…” dialogs. CheerpJ supports `JFileChooser` and maps it to the **virtual filesystem**. When the user picks a filename, you get a VFS path (e.g., `/files/report.txt`). You can then pass that path to your **native method** to trigger a browser download as described in Section 2.
 
-When you instantiate `JFileChooser` in your Java code, it operates on CheerpJ's virtual filesystem. You instantiate it without arguments (`JFileChooser fileChooser = new JFileChooser();`), to open the dialog in the default directory: `/files/`.
+### How it behaves under CheerpJ
+- The chooser operates in CheerpJ’s Virtual File System.
+- The writable, persistent area is **`/files/`**.   
+- You can instantiate it with no arguments (`JFileChooser fileChooser = new JFileChooser();`), to open the dialog in the default directory: `/files/`
 
 Here is how the dialog will look like when you use `JFileChooser` in CheerpJ with the default `/files/` mount point:
 ![](/docs/cheerpj3/assets/filechooser.png)
@@ -207,27 +210,27 @@ Here is how the dialog will look like when you use `JFileChooser` in CheerpJ wit
 **Java Source Code: Essential `JFileChooser` and Download Logic**
 
 ```java title="App.java"
-
-// (Retain the native method declaration from Section 2)
+// Retain the native method declaration from Section 2
 public static native void downloadFileFromCheerpJ(String filePath);
 
-// Button to trigger the JFileChooser
+// UI control to open the chooser
 JButton chooseDownloadButton = new JButton("Choose File to Download");
 
 chooseDownloadButton.addActionListener((ActionEvent e) -> {
-    // 1. Instantiate JFileChooser, initially pointing to the /files/ mount point.
+    // Instantiate JFileChooser, initially pointing to the /files/ mount point
     JFileChooser fileChooser = new JFileChooser("/files/");
     fileChooser.setDialogTitle("Select file to download");
-    // 2. Show the save dialog to let the user select a file.
+
+    // Show a “Save” dialog to let the user select a file
     int result = fileChooser.showSaveDialog(this);
-    // 3. Check if the user approved the selection (didn't cancel).
+
+    // If user confirmed selection (didn't cancel)
     if (result == JFileChooser.APPROVE_OPTION) {
-        // 4. Get the selected file from the file chooser.
-        // For example, if you wrote "Hello World" to /files/example.txt, "/files/example.txt" will be the selected file.
-        // 5. Get the path of the selected file.
+        // Resolve the chosen VFS path (e.g., "/files/example.txt")
         File selectedFile = fileChooser.getSelectedFile();
         String filePath = selectedFile.getPath();
-        // 6. Call the native JavaScript method to download the file from the virtual filesystem.
+
+        // Trigger the browser download via the native JavaScript method
         downloadFileFromCheerpJ(filePath);
     }
 });
@@ -235,14 +238,12 @@ chooseDownloadButton.addActionListener((ActionEvent e) -> {
 
 **Explanation:**
 
-- `new JFileChooser("/files/")`: This initializes the file chooser to start Browse from the `/files/` directory within CheerpJ's virtual filesystem. This is important because `/files/` is the writable and persistent mount point.
-- `fileChooser.showSaveDialog(this)`: This method displays the file chooser dialog, allowing the user to select a save location and filename. `showOpenDialog` would be used for opening existing files.
-- `fileChooser.getSelectedFile().getPath()`: If the user approves the selection, this returns the full path (e.g., `/files/myDocument.txt`) that the user specified.
-- `downloadFileFromCheerpJ(filePath)`: We reuse the same native method from Section 2. Once the user has selected a path, you would ensure your Java application writes its data to that `filePath` within the virtual filesystem, and then you would call this native method to trigger the download to the user's local machine.
+- **`new JFileChooser("/files/")`:** Initializes the chooser rooted at `/files/` in CheerpJ’s virtual filesystem. This is the writable and persistent mount point.
+- **`fileChooser.showSaveDialog(this)`:** Displays the “Save” dialog so the user can pick a filename and location. *(Use `showOpenDialog(this)` when you want the user to select an existing file to open.)*
+- **`fileChooser.getSelectedFile().getPath()`:** If the user confirms, returns the full VFS path they chose (e.g., `/files/myDocument.txt`).
+- **`downloadFileFromCheerpJ(filePath)`:** Invokes the JavaScript native method from Section 2. Pass it the VFS path (`filePath`), where the JavaScript side reads the file via `cjFileBlob(...)` and triggers a standard browser download to the user’s machine.
 
-**HTML and JavaScript Code (`index.html`)**
-
-The HTML and JavaScript for handling the download are essentially the **same as in Section 2**.
+**HTML and JavaScript Code (`index.html`)** for handling the download are essentially the **same as in Section 2**.
 
 ## Special Case: For Applets using `showDocument()`
 
