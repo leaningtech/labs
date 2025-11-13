@@ -6,6 +6,7 @@ description: Interacting with the virtual filesystem in CheerpJ
 CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space.
 
 > [!info] Mounting points overview
+>
 > - **`/app/`** — HTTP-based filesystem for loading files from your web server; **Write**: No, **Read**: Yes.
 > - **`/files/`** — Persistent read–write filesystem (browser-scoped, e.g., IndexedDB); **Write**: Java only, **Read**: Yes.
 > - **`/str/`** — Filesystem for passing JavaScript strings/binary data to Java; **Write**: JS only, **Read**: Yes.
@@ -26,17 +27,17 @@ The quickest way to place a file into CheerpJ’s virtual filesystem from JavaSc
 
 ```js
 // Call this only after cheerpjInit() has resolved.
-	async function addStringFileToCheerpJ() {
-		const fileName = "default.txt";
-		const content = "Default content.";
+async function addStringFileToCheerpJ() {
+	const fileName = "default.txt";
+	const content = "Default content.";
 
-    try {
-      await cheerpOSAddStringFile(`/str/${fileName}`, content);
-      console.log(`File "${fileName}" added to /str/.`);
-    } catch (e) {
-      console.error("Error writing file to /str/:", e);
-    }
+	try {
+		await cheerpOSAddStringFile(`/str/${fileName}`, content);
+		console.log(`File "${fileName}" added to /str/.`);
+	} catch (e) {
+		console.error("Error writing file to /str/:", e);
 	}
+}
 ```
 
 ### Method 2: Using library mode
@@ -68,6 +69,7 @@ async function copyFileToFilesMountPoint() {
 When Java runs under CheerpJ, files are saved in the virtual filesystem (typically under **`/files/`**), not directly to the user’s disk. To make a file available to the page (for download, upload, or preview), expose it via a **Java native method** implemented in JavaScript. The JavaScript side reads the bytes from the VFS and then uses standard browser APIs (e.g., create a `Blob`, trigger a download, or upload it).
 
 **Example flow**
+
 1. Java writes/generates the file (e.g., under **`/files/`**).
 2. Java invokes a JavaScript **native method**.
 3. JavaScript reads the file from the VFS and processes it (e.g., create a `Blob` and trigger a download).
@@ -105,33 +107,33 @@ Now we’ll implement the JavaScript for `downloadFileFromCheerpJ`. The function
 // Native method implementation called from Java
 // Naming: Java_<fully-qualified-class>_<method>
 async function Java_App_downloadFileFromCheerpJ(lib, fileName) {
-  try {
-    // Read the file from CheerpJ's virtual filesystem as a Blob
-    const blob = await cjFileBlob("/files/"+fileName);
+	try {
+		// Read the file from CheerpJ's virtual filesystem as a Blob
+		const blob = await cjFileBlob("/files/" + fileName);
 
-    // Create an invisible link
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
+		// Create an invisible link
+		const link = document.createElement("a");
+		link.href = URL.createObjectURL(blob);
+		link.download = fileName;
 
-    // Simulate a click on the link and clean up objects
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+		// Simulate a click on the link and clean up objects
+		link.click();
+		link.remove();
+		URL.revokeObjectURL(url);
 
-    console.log(`Successfully downloaded ${fileName}`);
-  } catch (e) {
-    console.error("Error downloading file:", e);
-  }
+		console.log(`Successfully downloaded ${fileName}`);
+	} catch (e) {
+		console.error("Error downloading file:", e);
+	}
 }
 
 // Initialize CheerpJ and register the native method
 async function cj3init() {
-await cheerpjInit({
-  // Register native method
-  natives: { Java_App_downloadFileFromCheerpJ },
-});
-// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+	await cheerpjInit({
+		// Register native method
+		natives: { Java_App_downloadFileFromCheerpJ },
+	});
+	// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
 }
 cj3init();
 ```
@@ -225,24 +227,24 @@ And in your HTML, you'd have the `downloadFromJava` JavaScript function:
 ```javascript
 // JavaScript in applet.html
 function downloadFromJava(encodedContent) {
-  try {
-    const content = decodeURIComponent(encodedContent);
-    const blob = new Blob([content], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
+	try {
+		const content = decodeURIComponent(encodedContent);
+		const blob = new Blob([content], { type: "text/plain" });
+		const url = URL.createObjectURL(blob);
 
-    // Create an invisible link
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "applet_showdocument_dynamic.txt";
+		// Create an invisible link
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = "applet_showdocument_dynamic.txt";
 
-    // Simulate a click on the link and clean up objects
-    link.click();
-    link.remove()
-    URL.revokeObjectURL(url);
+		// Simulate a click on the link and clean up objects
+		link.click();
+		link.remove();
+		URL.revokeObjectURL(url);
 
-	  console.log("File downloaded via showDocument");
-  } catch (e) {
-    console.error("Error downloading file:", e);
-  }
+		console.log("File downloaded via showDocument");
+	} catch (e) {
+		console.error("Error downloading file:", e);
+	}
 }
 ```
