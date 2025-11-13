@@ -65,11 +65,12 @@ async function copyFileToFilesMountPoint() {
 
 ## Getting a file from the Virtual File System to JavaScript (i.e local file system)
 
-A common scenario is that your Java application generates or updates a file and you need to make it available to the user. When running under CheerpJ, files saved by Java are written to the virtual filesystem, specifically the `/files/` mount **not** directly to the user’s local disk. The workflow for exposing the file to the browser (and then the user) is as follows:
+When Java runs under CheerpJ, files are saved in the virtual filesystem (typically under **`/files/`**), not directly to the user’s disk. To make a file available to the page (for download, upload, or preview), expose it via a **Java native method** implemented in JavaScript. The JavaScript side reads the bytes from the VFS and then uses standard browser APIs (e.g., create a `Blob`, trigger a download, or upload it).
 
-1. **Java writes/generates the file:** Your Java application creates or saves the file under the `/files/` mount within CheerpJ’s virtual filesystem.
-2. **Java invokes a JavaScript native method:** Since the file lives in the virtual filesystem, we implement a Java **native** method that is handled by JavaScript. To learn more about native methods, you can refer to the [CheerpJ tutorial on native methods](/docs/guides/implementing-native-methods.html).
-3. **JavaScript retrieves and processes the file:** In the JavaScript implementation of the native method, retrieve the file's content from the virtual filesystem. You can then process the file in any way required by your web application. For example you can trigger a download by using the `cjFileBlob()` API to get the file's content as a `Blob` and then use standard browser APIs to trigger a download (as will be explained in a later section).
+**Example flow**
+1. Java writes/generates the file (e.g., under **`/files/`**).
+2. Java invokes a JavaScript **native method**.
+3. JavaScript reads the file from the VFS and processes it (e.g., create a `Blob` and trigger a download).
 
 **Step 1 and 2: Java Writes the File and Calls a Native Method**
 
@@ -100,69 +101,45 @@ try {
 
 Now we’ll implement the JavaScript for `downloadFileFromCheerpJ`. The function receives the file path from Java, uses CheerpJ’s `cjFileBlob()` to get the file’s content, and then triggers a download using standard browser APIs.
 
-```html "index.html"
-<script>
-	// Native method implementation called from Java
-	// Naming: Java_<fully-qualified-class>_<method>
-	async function Java_com_App_downloadFileFromCheerpJ(
-		lib, // CheerpJ's internal library object
-		fileName // The file name passed from Java
-	) {
-		// fileName can be "example.txt" or "/files/example.txt" (both resolve to the /files/ mount)
-		console.log(`Attempting to download file: ${fileName}`);
+```js
+// Native method implementation called from Java
+// Naming: Java_<fully-qualified-class>_<method>
+async function Java_App_downloadFileFromCheerpJ(lib, fileName) {
+  try {
+    // Read the file from CheerpJ's virtual filesystem as a Blob
+    const blob = await cjFileBlob("/files/"+fileName);
 
-		try {
-			// Read the file from CheerpJ's virtual filesystem as a Blob
-			const blob = await cjFileBlob(`${fileName}`);
+    // Create an invisible link
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
 
-			// Create a temporary object URL for the Blob so the browser can download it
-			const url = URL.createObjectURL(blob);
+    // Simulate a click on the link and clean up objects
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
 
-			// Create an anchor element and set the download target
-			const a = document.createElement("a");
-			a.href = url;
+    console.log(`Successfully downloaded ${fileName}`);
+  } catch (e) {
+    console.error("Error downloading file:", e);
+  }
+}
 
-			// Use the last path segment as the download filename
-			a.download = fileName.split("/").pop() || "download";
-
-			// Add to the DOM, click it programmatically to start download, then remove
-			document.body.appendChild(a);
-			a.click();
-			a.remove();
-
-			// Clean up the temporary object URL
-			URL.revokeObjectURL(url);
-
-			console.log(`Successfully downloaded ${fileName}`);
-		} catch (e) {
-			console.error("Error downloading file:", e);
-			alert("Failed to download the file. See console for details.");
-		}
-	}
-
-	// Initialize CheerpJ and register the native method
-	async function cj3init() {
-		await cheerpjInit({
-			// Register native method
-			natives: { Java_com_App_downloadFileFromCheerpJ },
-		});
-
-		// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
-	}
-	cj3init();
-</script>
+// Initialize CheerpJ and register the native method
+async function cj3init() {
+await cheerpjInit({
+  // Register native method
+  natives: { Java_App_downloadFileFromCheerpJ },
+});
+// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+}
+cj3init();
 ```
 
-**Explanation:**
+**Notes:**
 
-- **Native method naming convention:** The JavaScript function name must follow `Java_<fully-qualified-class-name>_<method-name>` CheerpJ uses this pattern to bind a Java `native` method call to the correct JS implementation.
+- **Native method naming convention:** The JavaScript function name must follow `Java_<fully-qualified-class-name>_<method-name>` CheerpJ uses this pattern to bind a Java `native` method call to the correct JS implementation. To learn more about native methods, you can refer to the [CheerpJ tutorial on native methods](/docs/guides/implementing-native-methods.html).
 - **`cjFileBlob(filePath)`:** CheerpJ API that reads a file from the virtual filesystem (`/files/`, `/app/`, or `/str/`) and returns its contents as a `Blob`.
-- **Blob and download flow:** After you have the `Blob`, use standard browser APIs to trigger a download:
-  1. Create a temporary URL with `URL.createObjectURL(blob)`.
-  2. Create an `<a>` element, set `a.href` to that URL.
-  3. Set `a.download` to suggest the filename.
-  4. Click the link programmatically to start the download.
-  5. Call `URL.revokeObjectURL(...)` to release the temporary URL.
 - **Registering natives in `cheerpjInit`:** Use the `natives` option to register your JavaScript native implementations so they’re callable from your Java code.
 
 ## Using Java's `JFileChooser` with CheerpJ
