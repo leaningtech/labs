@@ -19,6 +19,7 @@
 		"@astrojs/svelte": "^5.4.0",
 		"@astrojs/tailwind": "^5.1.0",
 		"@astropub/md": "^0.4.0",
+		"@iconify/tools": "4.0.5",
 		"@leaningtech/astro-theme": "workspace:^",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
 		"@leaningtech/cheerpj-applet-page": "workspace:^",
