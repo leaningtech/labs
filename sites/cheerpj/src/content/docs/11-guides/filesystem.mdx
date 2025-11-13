@@ -3,12 +3,14 @@ title: Filesystem
 description: Interacting with the virtual filesystem in CheerpJ
 ---
 
-CheerpJ provides a **virtual filesystem** that allows your Java applications to perform file operations like reading and writing, just as they would on a desktop. This guide will explain how to effectively use CheerpJ's virtual filesystem, demonstrating how to transfer files between your Java application and the local JavaScript environment by focusing on common use cases.
+CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space.
+
+> [!info] Mounting points overview
+> - **`/app/`** — HTTP-based filesystem for loading files from your web server; **Write**: No, **Read**: Yes.
+> - **`/files/`** — Persistent read–write filesystem (browser-scoped, e.g., IndexedDB); **Write**: Java only, **Read**: Yes.
+> - **`/str/`** — Filesystem for passing JavaScript strings/binary data to Java; **Write**: JS only, **Read**: Yes.
 
 > For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
-
-> [!info] Local files
-> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. For browser security reasons, direct access to local files is forbidden. This means your Java code running in CheerpJ cannot directly read or write files on the user's physical hard drive. All file interactions happen within this secure, virtual environment.
 
 ## Loading the files from JavaScript to the Virtual File System
 
