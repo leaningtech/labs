@@ -250,6 +250,9 @@ importers:
       '@iconify-json/ic':
         specifier: ^1.2.4
         version: 1.2.4
+      '@iconify-json/iconoir':
+        specifier: ^1.2.10
+        version: 1.2.10
       '@iconify-json/ion':
         specifier: ^1.2.6
         version: 1.2.6
@@ -412,6 +415,9 @@ importers:
       '@iconify-json/simple-icons':
         specifier: ^1.2.58
         version: 1.2.58
+      '@iconify-json/teenyicons':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@leaningtech/astro-theme':
         specifier: workspace:^
         version: link:../../packages/astro-theme
@@ -1058,6 +1064,9 @@ packages:
   '@iconify-json/ic@1.2.4':
     resolution: {integrity: sha512-pzPMmrZrBQuwT7nmtrYdkttun8KalRGgZPIL1Ny9KpF2zjRGIUPN+npTfuD3lrgO/OnSwAoJWuekQwBpt/Cqrw==}
 
+  '@iconify-json/iconoir@1.2.10':
+    resolution: {integrity: sha512-NnbdB9S5G++6wE5aEZhzpFR0HRcaZFSbJJIHOGF2axaNVKnSUs4NBW2z0uhZnM00iUkiK848Sp81EZPg52DL+w==}
+
   '@iconify-json/ion@1.2.6':
     resolution: {integrity: sha512-JftEXKfjvJNn3SrGeSBrG/waRkjeTpLdMLNLwpAX4NgI14QgJoAeXEh2iZjNPqioAkeIgErX4Bi6mnFwpjk3BQ==}
 
@@ -1081,6 +1090,9 @@ packages:
 
   '@iconify-json/simple-icons@1.2.58':
     resolution: {integrity: sha512-XtXEoRALqztdNc9ujYBj2tTCPKdIPKJBdLNDebFF46VV1aOAwTbAYMgNsK5GMCpTJupLCmpBWDn+gX5SpECorQ==}
+
+  '@iconify-json/teenyicons@1.2.2':
+    resolution: {integrity: sha512-Do08DrvNpT+pKVeyFqn7nZiIviAAY8KbduSfpNKzE1bgVekAIJ/AAJtOBSUFpV4vTk+hXw195+jmCv8/0cJSKA==}
 
   '@iconify/tools@4.0.5':
     resolution: {integrity: sha512-l8KoA1lxlN/FFjlMd3vjfD7BtcX/QnFWtlBapILMlJSBgM5zhDYak/ldw/LkKG3258q/0YmXa48sO/QpxX7ptg==}
@@ -4295,6 +4307,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/iconoir@1.2.10':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/ion@1.2.6':
     dependencies:
       '@iconify/types': 2.0.0
@@ -4324,6 +4340,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/simple-icons@1.2.58':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/teenyicons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
