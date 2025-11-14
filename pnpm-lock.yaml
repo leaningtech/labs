@@ -394,6 +394,9 @@ importers:
       '@iconify-json/ic':
         specifier: ^1.2.4
         version: 1.2.4
+      '@iconify-json/iconoir':
+        specifier: ^1.2.10
+        version: 1.2.10
       '@iconify-json/ion':
         specifier: ^1.2.6
         version: 1.2.6
