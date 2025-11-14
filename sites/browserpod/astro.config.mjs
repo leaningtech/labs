@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 import theme from "@leaningtech/astro-theme";
 import { resolve } from "node:path";
 
@@ -7,6 +8,7 @@ export default defineConfig({
 	site: "https://browserpod.io",
 	base: "/docs",
 	integrations: [
+		icon(),
 		theme({
 			baseIsDocs: true,
 		}),
