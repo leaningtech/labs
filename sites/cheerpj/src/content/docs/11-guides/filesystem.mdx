@@ -55,6 +55,8 @@ System.out.println(text);
 
 When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use library mode to copy it across mounts. With `cheerpjRunLibrary`, you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
 
+> You can read more about library mode in the [CheerpJ Native Libraries documentation](/docs/reference/cheerpjRunLibrary).
+
 ```js
 async function copyFileToFilesMountPoint() {
 	// Library mode can be created before or after cheerpjInit
@@ -73,6 +75,18 @@ async function copyFileToFilesMountPoint() {
 		console.error("Error copying file:", e);
 	}
 }
+
+// Then, initialize CheerpJ and run your Java application
+async function cj3init() {
+	await cheerpjInit({
+		version: 8,
+	});
+	// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
+}
+cj3init();
+copyFileToFilesMountPoint();
+// Your Java app can now access "notes_tmp.txt" by simply calling `new File("notes_tmp.txt")`
+// without needing the /app/ prefix.
 ```
 
 ## Getting a file from the Virtual File System to JavaScript (i.e local file system)
