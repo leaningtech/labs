@@ -5,7 +5,8 @@ description: Interacting with the virtual filesystem in CheerpJ
 
 CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space, which provides multiple mounting points so your application can behave much like it would on a regular filesystem.
 
-Mounting points overview
+**Mounting points overview**
+
 - **`/app/`** — Read-only mount mapping to your web server’s root (HTTP assets). Java can read the files using the '/app/' prefix.
 - **`/files/`** — Persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
 - **`/str/`** — Accessible mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
