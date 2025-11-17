@@ -3,7 +3,7 @@ title: Filesystem
 description: Interacting with the virtual filesystem in CheerpJ
 ---
 
-CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space.
+CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space, which provides multiple mounting points so your application can behave much like it would on a regular filesystem.
 
 Mounting points overview
 - **`/app/`** — Read-only mount mapping to your web server’s root (HTTP assets). Java can read the files using the '/app/' prefix.
@@ -12,9 +12,11 @@ Mounting points overview
 
 > For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
-## Loading the files from JavaScript to the Virtual File System
+## Loading Files from JavaScript into the Virtual Filesystem
 
 CheerpJ lets you make files available to Java by copying them into its virtual filesystem. Use `/files/` when the app expects files in its current working directory and can't change the logic. You can then open `"filename.txt"` with no prefix. Assets that are already part of your application live under `/app/` (read-only), so Java must reference them with the full path, e.g., `"/app/filename.txt"`.
+
+CheerpJ offers multiple ways to move files into its virtual file system. The next section walks through the most common approaches.
 
 ### Method 1: Using `cheerpOSAddStringFile` (string or binary).
 
@@ -91,9 +93,7 @@ copyFileToFilesMountPoint();
 
 ## Getting a file from the Virtual File System to JavaScript (i.e local file system)
 
-When Java runs under CheerpJ, files are saved in the virtual filesystem (typically under **`/files/`**), not directly to the user’s disk. To make a file available to the page (for download, upload, or preview), expose it via a **Java native method** implemented in JavaScript. The JavaScript side reads the bytes from the virtual file system and then uses standard browser APIs (e.g., create a `Blob`, trigger a download, or upload it).
-
-**Example flow**
+When Java runs under CheerpJ, files are saved in the virtual filesystem (defaults under **`/files/`**), not directly to the user’s disk. Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to extract files from the virtual file system. For a more seamless flow, define a [Native Methods](/docs/guides/implementing-native-methods) implemented in JavaScript to process the file. This can look like:
 
 1. Java writes/generates the file (e.g., under **`/files/`**).
 2. Java invokes a JavaScript **native method**.
@@ -163,12 +163,6 @@ async function cj3init() {
 cj3init();
 ```
 
-**Notes:**
-
-- **Native method naming convention:** The JavaScript function name must follow `Java_<fully-qualified-class-name>_<method-name>` CheerpJ uses this pattern to bind a Java `native` method call to the correct JS implementation. To learn more about native methods, you can refer to the [CheerpJ tutorial on native methods](/docs/guides/implementing-native-methods.html).
-- **`cjFileBlob(filePath)`:** CheerpJ API that reads a file from the virtual filesystem (`/files/`, `/app/`, or `/str/`) and returns its contents as a `Blob`.
-- **Registering natives in `cheerpjInit`:** Use the `natives` option to register your JavaScript native implementations so they’re callable from your Java code.
-
 ## Using Java's `JFileChooser` with CheerpJ
 
 `JFileChooser` works the same under CheerpJ, but it targets the **virtual filesystem**. By default the dialog opens in `/files/` mount (the writable, persistent area), so any file you open or save is referenced by a virtual file system path (e.g., /files/report.txt) rather than the user’s physical disk.
@@ -176,9 +170,9 @@ cj3init();
 Here is how the dialog will look like when you use `JFileChooser` in CheerpJ with the default `/files/` mount point:
 ![](/docs/cheerpj3/assets/filechooser.png)
 
-You can still perform normal Java file operations under CheerpJ. The paths simply refer to the virtual filesystem rather than the user’s physical disk.
+You can still perform normal Java file operations with CheerpJ. The paths simply refer to the virtual filesystem rather than the user’s physical disk.
 
-To access local files, first import them into the virtual file system (see previous section). To save or download files to the user’s machine, read the virtual file system file in a JavaScript native method (e.g., via `cjFileBlob`) and trigger a browser download after selecting a path with `JFileChooser` if needed.
+To access local files, first import them into the virtual file system (see previous section). To save or download files to the user’s machine from Java, you can utilize a JavaScript native method again.
 
 **Java Source Code: Essential `JFileChooser` and Download Logic**
 
@@ -200,7 +194,7 @@ if (result == JFileChooser.APPROVE_OPTION) {
 }
 ```
 
-**HTML and JavaScript Code (`index.html`)** for handling the download are essentially the **same as in Section 2**.
+The JavaScript code for handling the download is essentially the same as the Step 3 code of **[Getting the file from the virtual file system to JavaScript](/docs/guides/filesystem#getting-a-file-from-the-virtual-file-system-to-javascript-ie-local-file-system)**.
 
 ## Special Case: Applets using `showDocument()`
 
@@ -208,7 +202,7 @@ For **Applets**, `AppletContext.showDocument()` can be used as a lightweight wor
 
 ### Option A: Direct URL download
 
-If the file is already available at a public URL (e.g., on your server), point `showDocument()` at that URL and let the browser handle the download.
+If the file is already available at a public URL (e.g., on your server), point `showDocument()` at that URL.
 
 ```java
 // Java Applet Code
