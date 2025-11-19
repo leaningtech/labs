@@ -25,8 +25,6 @@ The quickest way to place a file into CheerpJ’s virtual filesystem from JavaSc
 
 **When to call it:** Invoke `cheerpOSAddStringFile` after `cheerpjInit()` finishes (i.e., once its Promise resolves). The API depends on the runtime and virtual file system being fully initialized.
 
-**Where the file goes:** The call creates a file under the `/str/` mount. Your Java code can then read it like any normal file path inside the application.
-
 ```js
 // Call this only after cheerpjInit() has resolved.
 async function addStringFileToCheerpJ() {
@@ -56,9 +54,7 @@ System.out.println(text);
 
 ### Method 2: Using library mode
 
-When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use library mode to copy it across mounts. With `cheerpjRunLibrary`, you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
-
-> You can read more about library mode in the [CheerpJ Native Libraries documentation](/docs/reference/cheerpjRunLibrary).
+When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use [libraries mode](/docs/guides/library-mode) to copy it across mounts. With [`cheerpjRunLibrary`](/docs/reference/cheerpjRunLibrary), you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
 
 ```js
 async function copyFileToFilesMountPoint() {
