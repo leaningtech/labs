@@ -11,13 +11,13 @@ CheerpJ provides a **virtual filesystem** that lets your Java application read a
 - **`/files/`** — Persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
 - **`/str/`** — Accessible mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
 
+If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first. Either `/str` (inject from JavaScript) or `/files` (read/write at runtime). CheerpJ provides several ways to move files into and out of this virtual filesystem.
+
 > For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
 ## Loading Files from JavaScript into the Virtual Filesystem
 
-CheerpJ lets you make files available to Java by copying them into its virtual filesystem. Use `/files/` when the app expects files in its current working directory and can't change the logic. You can then open `"filename.txt"` with no prefix. Assets that are already part of your application live under `/app/` (read-only), so Java must reference them with the full path, e.g., `"/app/filename.txt"`.
-
-CheerpJ offers multiple ways to move files into its virtual file system. The next section walks through the most common approaches.
+While your application runs under **CheerpJ**, any page-provided assets must first be placed in the **virtual filesystem** for Java to access them. Expose them from JavaScript to the `/str/` mount either through [`cheerpOSAddStringFile`](/docs/reference/cheerpOSAddStringFile) or using [Library Mode](/docs/guides/implementing-native-libraries), and then read them from your Java code like regular files.
 
 ### Method 1: Using `cheerpOSAddStringFile` (string or binary).
 
