@@ -94,15 +94,41 @@ copyFileToFilesMountPoint();
 
 ## Getting a file from the Virtual File System to JavaScript (i.e local file system)
 
-When Java runs under CheerpJ, files are saved in the virtual filesystem (defaults under **`/files/`**), not directly to the user’s disk. Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to extract files from the virtual file system. For a more seamless flow, define a [Native Methods](/docs/guides/implementing-native-methods) implemented in JavaScript to process the file. This can look like:
+When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** (default **`/files/`**), not the user’s disk. You can expose these files to the page either directly from JavaScript or by handing off from Java to JavaScript via a native method.
 
-1. Java writes/generates the file (e.g., under **`/files/`**).
-2. Java invokes a JavaScript **native method**.
-3. JavaScript reads the file from the virtual file system and processes it (e.g., create a `Blob` and trigger a download).
+### Method 1: Using `cjFileBlob`
 
-**Step 1 and 2: Java Writes the File and Calls a Native Method**
+Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to extract files from the virtual file system. Java writes the file into `/files/`, and JavaScript reads it and triggers a download.
 
-First, your Java application writes the file to CheerpJ’s virtual filesystem (the `/files/` mount). Next it calls a **native method** (implemented in JavaScript), which acts as a bridge to execute JavaScript code.
+```html title="index.html"
+<button id="download">Download file</button>
+<script type="module">
+	document.getElementById("download").addEventListener("click", async () => {
+		try {
+			const fileName = "example.txt"; // written by Java
+			const path = "/files/" + fileName;
+			const blob = await cjFileBlob(path); // read from VFS
+			const url = URL.createObjectURL(blob);
+
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = fileName;
+			link.click();
+
+			URL.revokeObjectURL(url);
+			console.log(`Successfully downloaded ${fileName}`);
+		} catch (e) {
+			console.error("Error downloading file:", e);
+		}
+	});
+</script>
+```
+
+### Method 2: Call a JavaScript native method from Java
+
+Use this when the **Java** code should decide when to save/preview/upload. Java writes the file to `/files/` and calls a native method (implemented in JavaScript) to perform the browser action.
+
+**Java Writes the File and Calls a Native Method**
 
 ```java title="App.java"
 // Declare the native method
@@ -125,9 +151,9 @@ try {
 }
 ```
 
-**Step 3: JavaScript Implements the Native Method and Downloads the File**
+**JavaScript Implements the Native Method and Downloads the File**
 
-Now we’ll implement the JavaScript for `downloadFileFromCheerpJ`. The function receives the file path from Java, uses CheerpJ’s `cjFileBlob()` to get the file’s content, and then triggers a download using standard browser APIs.
+Now we’ll implement the [native method](/docs/guides/implementing-native-methods) `downloadFileFromCheerpJ` in JavaScript to process the file. The function receives the file path from Java, uses CheerpJ’s `cjFileBlob()` to get the file’s content, and then triggers a download using standard browser APIs.
 
 ```js
 // Native method implementation called from Java
