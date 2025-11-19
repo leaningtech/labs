@@ -222,7 +222,7 @@ Let's add two new methods to `Platform`:
     	}
     	void moveRight(int Xmax)
     	{
-            x += fmin(x+10, Xmax-width);
+            x = fmin(x+10, Xmax-width);
     	}
 
 ```
