@@ -7,7 +7,7 @@ CheerpJ provides a **virtual filesystem** that lets your Java application read a
 
 **Mounting points overview**
 
-- **`/app/`** — Read-only mount mapping to your web server’s root (HTTP assets). Java can read the files using the '/app/' prefix.
+- **`/app/`** — Read-only mount that points to the root of your web server. Java can read the files using the '/app/' prefix.
 - **`/files/`** — Persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
 - **`/str/`** — Accessible mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
 
@@ -175,7 +175,7 @@ You can still perform normal Java file operations with CheerpJ. The paths simply
 
 To access local files, first import them into the virtual file system (see previous section). To save or download files to the user’s machine from Java, you can utilize a JavaScript native method again.
 
-**Java Source Code: Essential `JFileChooser` and Download Logic**
+**Java Source Code: `JFileChooser` and Download Logic**
 
 ```js title="App.java"
 public static native void downloadFileFromCheerpJ(String filePath);
@@ -216,7 +216,6 @@ private void downloadDirectURL() {
     System.out.println("Triggered direct URL download: " + fileUrl.toString());
   } catch (Exception ex) {
     ex.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error downloading from URL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
   }
 }
 ```
