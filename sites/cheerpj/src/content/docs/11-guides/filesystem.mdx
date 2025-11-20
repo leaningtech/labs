@@ -188,7 +188,7 @@ cj3init();
 
 ## Using Java's `JFileChooser` with CheerpJ
 
-`JFileChooser` works the same under CheerpJ, but it targets the **virtual filesystem**. By default the dialog opens in `/files/` mount (the writable, persistent area), so any file you open or save is referenced by a virtual file system path (e.g., /files/report.txt) rather than the user’s physical disk.
+`JFileChooser` works the same under CheerpJ, but it targets the **virtual filesystem**. By default the dialog opens in `/files/` mount (the writable, persistent area), so any file you open or save is referenced by a virtual file system path (e.g., `/files/report.txt`) rather than the user’s physical disk.
 
 Here is how the dialog will look like when you use `JFileChooser` in CheerpJ with the default `/files/` mount point:
 ![](/docs/cheerpj3/assets/filechooser.png)
@@ -223,7 +223,7 @@ The JavaScript code for handling the download is essentially the same as the Ste
 
 For **Applets**, `AppletContext.showDocument()` can be used as a lightweight workaround to trigger downloads. This can be handy, but the **native-method approach** remains more flexible and robust for most cases.
 
-### Option A: Direct URL download
+### Method 1: Direct URL download
 
 If the file is already available at a public URL (e.g., on your server), point `showDocument()` at that URL.
 
@@ -242,7 +242,7 @@ private void downloadDirectURL() {
 }
 ```
 
-### Option B: Execute JavaScript for dynamic content
+### Method 2: Execute JavaScript for dynamic content
 
 You can use `showDocument()` to execute arbitrary JavaScript code that then handles a download. This is less common but can be useful for passing dynamically generated content from Java to JavaScript for download.
 
