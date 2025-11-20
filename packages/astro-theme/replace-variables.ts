@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 
 const replacements = {
-	CX_LATEST: "1.1.5",
+	CX_LATEST: "1.2.2",
 	BP_LATEST: "0.9.2",
 };
 
