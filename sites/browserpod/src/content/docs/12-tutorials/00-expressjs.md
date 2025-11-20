@@ -161,7 +161,7 @@ file directly alongside the project files instead.
 
 ```js
 // Run the server
-await pod.run("node"["main.js"], {
+await pod.run("node", ["main.js"], {
 	terminal,
 	cwd: "/project",
 	echo: true,
