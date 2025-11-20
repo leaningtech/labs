@@ -143,7 +143,7 @@ get them from other sources, or embed them directly as strings.
 
 ```js
 // Install dependencies
-await pod.run("/npm/bin/npm.js", ["install"], {
+await pod.run("npm", ["install"], {
 	terminal,
 	cwd: "/project",
 	echo: true,
@@ -161,7 +161,7 @@ file directly alongside the project files instead.
 
 ```js
 // Run the server
-await pod.run("/project/main.js", [], {
+await pod.run("node"["main.js"], {
 	terminal,
 	cwd: "/project",
 	echo: true,
@@ -220,14 +220,14 @@ and the `hello world` will show up in the iframe.
 			await copy_file(pod, "project/package.json");
 
 			// Install dependencies
-			await pod.run("/npm/bin/npm.js", ["install"], {
+			await pod.run("npm", ["install"], {
 				terminal,
 				cwd: "/project",
 				echo: true,
 			});
 
 			// Run the server
-			await pod.run("/project/main.js", [], {
+			await pod.run("node", ["main.js"], {
 				terminal,
 				cwd: "/project",
 				echo: true,
