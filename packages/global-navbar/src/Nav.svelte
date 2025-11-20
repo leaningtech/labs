@@ -12,6 +12,7 @@
 	import CheerpLogo from "./logos/cheerp.svg.svelte";
 	import CheerpJLogo from "./logos/cheerpj.svg.svelte";
 	import CheerpXLogo from "./logos/cheerpx.svg.svelte";
+	import BrowserPodLogo from "./logos/browserpod.svg.svelte";
 
 	const mobileMenu = {
 		Technology: [
@@ -26,6 +27,10 @@
 			{
 				href: "https://cheerpx.io/",
 				title: "CheerpX",
+			},
+			{
+				href: "https://browserpod.io/",
+				title: "BrowserPod",
 			},
 		],
 		Resources: [
@@ -83,6 +88,13 @@
 			description="Virtual machines for the web"
 		>
 			<CheerpXLogo />
+		</BigIconItem>
+		<BigIconItem
+			href="https://browserpod.io/"
+			title="BrowserPod"
+			description="Dev Environments in your browser"
+		>
+			<BrowserPodLogo />
 		</BigIconItem>
 	</ul>
 </nav>
