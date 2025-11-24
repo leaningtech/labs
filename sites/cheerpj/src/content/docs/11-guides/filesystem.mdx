@@ -3,80 +3,73 @@ title: Filesystem
 description: Interacting with the virtual filesystem in CheerpJ
 ---
 
-CheerpJ provides a **virtual filesystem** that allows your Java applications to perform file operations like reading and writing, just as they would on a desktop. This guide will explain how to effectively use CheerpJ's virtual filesystem, demonstrating how to transfer files between your Java application and the local JavaScript environment by focusing on common use cases.
+CheerpJ provides a **virtual filesystem** that lets your Java application read and write files inside a secure, browser-sandboxed environment. For browser security reasons, it cannot access the user’s actual local disk. All file operations happen within this virtual space, which provides multiple mounting points so your application can behave much like it would on a regular filesystem.
 
-## CheerpJ's Virtual Filesystem: Mounting Points Explained
+**Mounting points overview**
 
-CheerpJ's virtual filesystem has different **mounting points**, each with specific purposes:
+- **`/app/`** — Read-only mount that points to the root of your web server. Java can read the files using the '/app/' prefix.
+- **`/files/`** — Persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
+- **`/str/`** — Accessible mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
 
-- **`/app/`**: This mount point is **read-only**. It corresponds to the root of the web server and contains all the files that are part of your Java application, including your `.jar` files and any resources bundled within them. Java can read files from `/app/`, but it **cannot write** to this location.
-- **`/files/`**: This is a **persistent read-write file system**. Files written here are accessible by your Java application and persist across sessions and page reloads until the user manually clears their browser's IndexedDB. This is useful for user-generated data, or situations where you need to move files around within the virtual filesystem.
-- **`/str/`**: This mounting point is for adding string content directly from JavaScript into the virtual filesystem. This is useful for providing configuration files or initial data to your Java application without needing to package them inside your JAR.
+If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first. Either `/str` (inject from JavaScript) or `/files` (read/write at runtime). CheerpJ provides several ways to move files into and out of this virtual filesystem.
 
-Read more about the filesystem in the [CheerpJ documentation](/docs/explanation/File-System-support).
+> For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
-> [\!info] Local files
-> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. For browser security reasons, direct access to local files is forbidden. This means your Java code running in CheerpJ cannot directly read or write files on the user's physical hard drive. All file interactions happen within this secure, virtual environment.
+## Loading Files from JavaScript into the Virtual Filesystem
 
-## 1\. Loading Files from JavaScript into the Virtual Filesystem
+While your application runs under **CheerpJ**, any page-provided assets must first be placed in the **virtual filesystem** for Java to access them. Expose them from JavaScript to the `/str/` mount either through [`cheerpOSAddStringFile`](/docs/reference/cheerpOSAddStringFile) or using [Library Mode](/docs/guides/implementing-native-libraries), and then read them from your Java code like regular files.
 
-Often, you might have files on your web page (e.g., uploaded by a user) that your Java application needs to process. You can transfer these files from the JavaScript environment into CheerpJ's virtual filesystem. This is useful for:
+### Method 1: Using `cheerpOSAddStringFile` (string or binary).
 
-- **External Applications:** Sometimes, your Java application expects files to be in a specific location (e.g., a hardcoded path like "filename.txt"). If you load a file into `/app/`, your Java code would need to reference it as `/app/filename.txt`. However, if your Java application is an external application that you cannot modify, it might not be able to change this prefix. Loading the file into `/files/` allows Java to access it using just "filename.txt", as `/files/` behaves more like a default working directory.
-- **Dynamic Content (e.g., Configuration Files):** You can provide dynamic content, such as configuration files, to your Java application directly from JavaScript, without recompiling your Java code.
-- **Binary Data:** The `cheerpOSAddStringFile` API (and the underlying `lib.java.nio.file.Files.copy` method) can handle binary data, making it useful for providing various file types to Java.
+The quickest way to place a file into CheerpJ’s virtual filesystem from JavaScript is `cheerpOSAddStringFile`. It’s ideal for string content and also supports binary data.
 
-### Method 1: Using `cheerpOSAddStringFile` API (for string or binary data)
+**When to call it:** Invoke `cheerpOSAddStringFile` after `cheerpjInit()` finishes (i.e., once its Promise resolves). The API depends on the runtime and virtual file system being fully initialized.
 
-This is the simplest way to add a file from JavaScript to the virtual filesystem. It's particularly useful for providing string content, but can also handle binary data.
-
-**Important:** `cheerpOSAddStringFile` must be called after `cheerpjInit()` has completed (i.e., its Promise has resolved), as it relies on the CheerpJ runtime environment and its virtual filesystem being initialized.
-
-The `cheerpOSAddStringFile` API allows you to create a file in the `/str/` mount point, which can then be accessed by your Java application as if it were a regular file.
-
-Example:
-
-```js title="index.html"
-// Function to add a string file to /str/ from JavaScript
+```js
+// Call this only after cheerpjInit() has resolved.
 async function addStringFileToCheerpJ() {
-	const fileName =
-		document.getElementById("jsFileName").value.trim() || "default.txt";
-	const content =
-		document.getElementById("jsFileContent").value || "Default content.";
-	const messageDiv = document.getElementById("jsMessage");
+	const fileName = "default.txt";
+	const content = "Default content.";
 
 	try {
-		// Using cheerpOSAddStringFile to add content to /str/
-		await cheerpOSAddStringFile("/str/" + fileName, content);
-		messageDiv.textContent = `File "${fileName}" added successfully to /str/.`;
+		await cheerpOSAddStringFile(`/str/${fileName}`, content);
 		console.log(`File "${fileName}" added to /str/.`);
 	} catch (e) {
-		messageDiv.textContent = `Error adding file to /str/: ${e.message}`;
 		console.error("Error writing file to /str/:", e);
 	}
 }
 ```
 
+Entries you create under **`/str/`** (from JavaScript) are readable from Java as regular files. Remember: `/str/` is **not persisted** and is **read-only** from Java.
+
+```java title="App.java"
+import java.nio.file.Files;
+import java.nio.file.Path;
+/*
+Rest of your Java code...
+*/
+String text = Files.readString(Path.of("/str/fileName.txt"));
+System.out.println(text);
+```
+
 ### Method 2: Using library mode
 
-If you have a file that's already part of your `/app/` mount point, but your Java application needs to access it as if it were in `/files/` (without the `/app/` prefix), you can copy it using library mode. You can use the `cheerpjRunLibrary` API to access Java's `nio.file` APIs, which allow you to copy files from one mount point to another.
+When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use [libraries mode](/docs/guides/library-mode) to copy it across mounts. With [`cheerpjRunLibrary`](/docs/reference/cheerpjRunLibrary), you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
 
-```javascript title="index.html"
+```js
 async function copyFileToFilesMountPoint() {
-	// cheerpjRunLibrary can be called before cheerpjInit
+	// Library mode can be created before or after cheerpjInit
 	const lib = await cheerpjRunLibrary(""); // Create a library mode object
 	const Files = await lib.java.nio.file.Files;
 	const StandardCopyOption = await lib.java.nio.file.StandardCopyOption;
 	const Paths = await lib.java.nio.file.Paths;
 
-	// Source is a file within the /app/ mount point
-	const source = await Paths.get(`/app/notes_tmp.txt`, []);
-	// Target is the /files mount point
-	const target = await Paths.get(`/files/notes_tmp.txt`, []);
+	const source = await Paths.get("/app/notes_tmp.txt");
+	const target = await Paths.get("/files/notes_tmp.txt");
 
 	try {
 		await Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING]);
-		console.log("File copied from /app/ to /files/ successfully!");
+		console.log("Copied /app/notes_tmp.txt to /files/notes_tmp.txt");
 	} catch (e) {
 		console.error("Error copying file:", e);
 	}
@@ -95,201 +88,204 @@ copyFileToFilesMountPoint();
 // without needing the /app/ prefix.
 ```
 
-**Explanation:**
+## Getting a file from the Virtual File System to JavaScript (i.e local file system)
 
-- **`cheerpjRunLibrary("")`**: This creates a library mode object that allows you to use Java's `nio.file` APIs in JavaScript. You can read more about library mode in the [CheerpJ documentation](/docs/reference/cheerpjRunLibrary).
-- **`Files.copy(source, target, [StandardCopyOption.REPLACE_EXISTING])`**: This copies the file from the `/app/` mount point to the `/files/` mount point. The `REPLACE_EXISTING` option ensures that if the target file already exists, it will be overwritten.
-- **Accessing the File in Java**: After copying, your Java application can access the file simply by using `new File("notes_tmp.txt")`, without needing to specify the `/app/` prefix.
+When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** (default **`/files/`**), not the user’s disk. You can expose these files to the page either directly from JavaScript or by handing off from Java to JavaScript via a native method.
 
-## 2\. Getting Files from the Virtual Filesystem to the Local Filesystem (Java to JavaScript)
+### Method 1: Using `cjFileBlob`
 
-This is a very common requirement: your Java application generates or modifies a file, and you need to access the file locally. It's important to note that when your Java application saves a file while running with CheerpJ, this file will be written to CheerpJ's virtual filesystem (the /files/ mount point) rather than directly to the user's local file system. The general workflow for then making this file available to the user is as follows:
+Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to extract files from the virtual file system. Java writes the file into `/files/`, and JavaScript reads it and triggers a download.
 
-1.  **Java writes/generates a file:** Your Java application creates or saves a file to the `/files/` mounting point within CheerpJ's virtual filesystem.
-2.  **Java calls a JavaScript native method:** Since the file is in the virtual filesystem, we can implement a native to retrieve it in JavaScript.
-    To learn more about native methods, you can refer to the [CheerpJ tutorial on native methods](/docs/guides/implementing-native-methods.html).
-3.  **JavaScript retrieves and processes the file:** The JavaScript native method retrieves the file's content from the virtual filesystem. At this point, the JavaScript native code can process the file in any way required by your web application. For example you can trigger a download by using the `cjFileBlob()` API to get the file's content as a `Blob` and then use standard browser APIs to trigger a download (as will be explained in a later section).
+```html title="index.html"
+<button id="download">Download file</button>
+<script type="module">
+	document.getElementById("download").addEventListener("click", async () => {
+		try {
+			const fileName = "example.txt"; // written by Java
+			const path = "/files/" + fileName;
+			const blob = await cjFileBlob(path); // read from VFS
+			const url = URL.createObjectURL(blob);
 
-**Step 1: Java Writes the File and Calls a Native Method**
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = fileName;
+			link.click();
 
-First, your Java application needs to write the file to CheerpJ's virtual filesystem, specifically to the `/files/` mount point. Once the file is written, Java can call a _native method_ which acts as a bridge to execute JavaScript code.
+			URL.revokeObjectURL(url);
+			console.log(`Successfully downloaded ${fileName}`);
+		} catch (e) {
+			console.error("Error downloading file:", e);
+		}
+	});
+</script>
+```
 
-```java title="App.java" {7}
-public static native void downloadFileFromCheerpJ(String filePath); // Declare the native method
+### Method 2: Call a JavaScript native method from Java
+
+Use this when the **Java** code should decide when to save/preview/upload. Java writes the file to `/files/` and calls a native method (implemented in JavaScript) to perform the browser action.
+
+**Java Writes the File and Calls a Native Method**
+
+```java title="App.java"
+// Declare the native method
+public static native void downloadFileFromCheerpJ(String filePath);
 /*
 Rest of your Java code...
 */
 try {
-    File file = new File("/files/example.txt"); // You can also use "example.txt" since it defaults to the /files/ mount point
+    // You can also use "example.txt" since it defaults to the /files/ mount point
+    File file = new File("/files/example.txt");
     FileWriter writer = new FileWriter(file);
     writer.write(content);
     writer.close();
 
-    downloadFileFromCheerpJ(filePath);
+    // Pass the actual file path to the native method
+    downloadFileFromCheerpJ(filepath);
 
 } catch (IOException e) {
     System.err.println("Error generating or writing file: " + e.getMessage());
 }
 ```
 
-**Step 2: JavaScript Implements the Native Method and Downloads the File**
+**JavaScript Implements the Native Method and Downloads the File**
 
-Now, we need to provide the JavaScript implementation for the `downloadFileFromCheerpJ` native method. This JavaScript function will receive the file path from Java, use CheerpJ's `cjFileBlob()` API to get the file's content, and then use standard browser APIs to trigger a download.
+Now we’ll implement the [native method](/docs/guides/implementing-native-methods) `downloadFileFromCheerpJ` in JavaScript to process the file. The function receives the file path from Java, uses CheerpJ’s `cjFileBlob()` to get the file’s content, and then triggers a download using standard browser APIs.
 
-```javascript title="index.html"
-// JavaScript implementation of the native method
-// The naming convention is Java_<fully-qualified-class-name>_<method-name>
-async function Java_com_App_downloadFileFromCheerpJ(
-	lib, // CheerpJ's internal library object (usually not needed here)
-	fileName // The file name passed from Java
-) {
-	console.log(`Attempting to download file: ${fileName}`);
+```js
+// Native method implementation called from Java
+// Naming: Java_<fully-qualified-class>_<method>
+async function Java_App_downloadFileFromCheerpJ(lib, fileName) {
 	try {
-		// 3. Use cjFileBlob() to get the file content as a Blob
-		const blob = await cjFileBlob(`${fileName}`);
+		// Read the file from CheerpJ's virtual filesystem as a Blob
+		const blob = await cjFileBlob("/files/" + fileName);
+
+		// Create an invisible link
 		const link = document.createElement("a");
 		link.href = URL.createObjectURL(blob);
-		// Set the downloaded file name as the last part of the path
-		link.download = fileName.split("/").pop(); // Extract the file name from the path
-		document.body.appendChild(link); // Append to body to make it clickable
-		link.click(); // Programmatically click the link to trigger download
-		document.body.removeChild(link); // Clean up
-		URL.revokeObjectURL(link.href); // Release the object URL
+		link.download = fileName;
+
+		// Simulate a click on the link and clean up objects
+		link.click();
+		link.remove();
+		URL.revokeObjectURL(url);
+
 		console.log(`Successfully downloaded ${fileName}`);
 	} catch (e) {
 		console.error("Error downloading file:", e);
-		alert("Failed to download file. Check console for details.");
 	}
 }
 
-// Initialize CheerpJ and run the Java application
+// Initialize CheerpJ and register the native method
 async function cj3init() {
 	await cheerpjInit({
-		version: 8,
-		// Register the native method
-		natives: {
-			Java_com_App_downloadFileFromCheerpJ,
-		},
+		// Register native method
+		natives: { Java_App_downloadFileFromCheerpJ },
 	});
 	// cheerpjCreateDisplay(...) and cheerpjRunMain(...) go here
 }
 cj3init();
 ```
 
-**Explanation:**
+## Using Java's `JFileChooser` with CheerpJ
 
-- **Native Method Naming Convention**: The JavaScript function name must follow the pattern `Java_<fully-qualified-class-name>_<method-name>`. This is how CheerpJ links your Java native method call to the correct JavaScript function.
-- `cjFileBlob(filePath)`: This CheerpJ API is the bridge between the virtual filesystem and JavaScript. It takes the path to a file within `/files/` (or `/app/`, `/str/`) and returns its content as a `Blob`.
-- **Blob and Download**: Once you have the `Blob`, standard browser techniques are used to create a temporary download link and simulate a click, prompting the user to save the file. `URL.createObjectURL(blob)` generates a temporary URL for the blob, and `link.download` suggests a filename to the browser.
-- **`natives` Object in `cheerpjInit`**: This is where you register all your custom JavaScript native methods with CheerpJ, making them accessible from your Java code.
-
-## 3\. Using Java's `JFileChooser` with CheerpJ
-
-Java applications often use `JFileChooser` for "Save As..." dialogues. CheerpJ supports `JFileChooser`, and when a user selects a file name, that name is used within the virtual filesystem. You can then use this name to trigger a download using the native method approach described in Section 2.
-
-When you instantiate `JFileChooser` in your Java code, it operates on CheerpJ's virtual filesystem. You instantiate it without arguments (`JFileChooser fileChooser = new JFileChooser();`), to open the dialog in the default directory: `/files/`.
+`JFileChooser` works the same under CheerpJ, but it targets the **virtual filesystem**. By default the dialog opens in `/files/` mount (the writable, persistent area), so any file you open or save is referenced by a virtual file system path (e.g., `/files/report.txt`) rather than the user’s physical disk.
 
 Here is how the dialog will look like when you use `JFileChooser` in CheerpJ with the default `/files/` mount point:
 ![](/docs/cheerpj3/assets/filechooser.png)
 
-**Java Source Code: Essential `JFileChooser` and Download Logic**
+You can still perform normal Java file operations with CheerpJ. The paths simply refer to the virtual filesystem rather than the user’s physical disk.
 
-```java title="App.java"
+To access local files, first import them into the virtual file system (see previous section). To save or download files to the user’s machine from Java, you can utilize a JavaScript native method again.
 
-// (Retain the native method declaration from Section 2)
+**Java Source Code: `JFileChooser` and Download Logic**
+
+```js title="App.java"
 public static native void downloadFileFromCheerpJ(String filePath);
+/*
+Rest of your Java code...
+*/
+JFileChooser fileChooser = new JFileChooser();
+int result = fileChooser.showOpenDialog(null);
 
-// Button to trigger the JFileChooser
-JButton chooseDownloadButton = new JButton("Choose File to Download");
+// User confirmed file selection
+if (result == JFileChooser.APPROVE_OPTION) {
+  File selectedFile = fileChooser.getSelectedFile();
+  String filePath = selectedFile.getPath();
 
-chooseDownloadButton.addActionListener((ActionEvent e) -> {
-    // 1. Instantiate JFileChooser, initially pointing to the /files/ mount point.
-    JFileChooser fileChooser = new JFileChooser("/files/");
-    fileChooser.setDialogTitle("Select file to download");
-    // 2. Show the save dialog to let the user select a file.
-    int result = fileChooser.showSaveDialog(this);
-    // 3. Check if the user approved the selection (didn't cancel).
-    if (result == JFileChooser.APPROVE_OPTION) {
-        // 4. Get the selected file from the file chooser.
-        // For example, if you wrote "Hello World" to /files/example.txt, "/files/example.txt" will be the selected file.
-        // 5. Get the path of the selected file.
-        File selectedFile = fileChooser.getSelectedFile();
-        String filePath = selectedFile.getPath();
-        // 6. Call the native JavaScript method to download the file from the virtual filesystem.
-        downloadFileFromCheerpJ(filePath);
-    }
-});
+  // Trigger the native JavaScript function that handles the file
+  downloadFileFromCheerpJ(filePath);
+}
 ```
 
-**Explanation:**
+The JavaScript code for handling the download is essentially the same as the Step 3 code of **[Getting the file from the virtual file system to JavaScript](/docs/guides/filesystem#getting-a-file-from-the-virtual-file-system-to-javascript-ie-local-file-system)**.
 
-- `new JFileChooser("/files/")`: This initializes the file chooser to start Browse from the `/files/` directory within CheerpJ's virtual filesystem. This is important because `/files/` is the writable and persistent mount point.
-- `fileChooser.showSaveDialog(this)`: This method displays the file chooser dialog, allowing the user to select a save location and filename. `showOpenDialog` would be used for opening existing files.
-- `fileChooser.getSelectedFile().getPath()`: If the user approves the selection, this returns the full path (e.g., `/files/myDocument.txt`) that the user specified.
-- `downloadFileFromCheerpJ(filePath)`: We reuse the same native method from Section 2. Once the user has selected a path, you would ensure your Java application writes its data to that `filePath` within the virtual filesystem, and then you would call this native method to trigger the download to the user's local machine.
+## Special Case: Applets using `showDocument()`
 
-**HTML and JavaScript Code (`index.html`)**
+For **Applets**, `AppletContext.showDocument()` can be used as a lightweight workaround to trigger downloads. This can be handy, but the **native-method approach** remains more flexible and robust for most cases.
 
-The HTML and JavaScript for handling the download are essentially the **same as in Section 2**.
+### Method 1: Direct URL download
 
-## 4\. Special Case: Applets and `showDocument()`
+If the file is already available at a public URL (e.g., on your server), point `showDocument()` at that URL.
 
-For **Applets**, `AppletContext.showDocument()` can be used as a workaround for downloads, although native methods are generally more flexible.
+```java
+// Java Applet Code
+private void downloadDirectURL() {
+  try {
+    // Assumes 'filename.txt' is in the same directory as the applet JAR
+    URL fileUrl = new URL(getCodeBase()+"filename.txt");
+    getAppletContext().showDocument(fileUrl, "_blank");
 
-- **Direct URL Download**: If the file you want to download is already available at a public URL (e.g., hosted on your server), you can simply use `showDocument()` to point to that URL, and the browser will handle the download.
-
-  ```java
-  // Java Applet Code
-  private void downloadDirectURL() {
-      try {
-          // Assumes 'example.txt' is in the same directory as the applet JAR
-          URL fileUrl = new URL(getCodeBase().getProtocol(),
-                                getCodeBase().getHost(),
-                                getCodeBase().getPort(),
-                                "/example.txt");
-          getAppletContext().showDocument(fileUrl, "_blank"); // "_blank" will trigger download
-          System.out.println("Triggered direct URL download: " + fileUrl.toString());
-      } catch (Exception ex) {
-          ex.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Error downloading from URL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-      }
+    System.out.println("Triggered direct URL download: " + fileUrl.toString());
+  } catch (Exception ex) {
+    ex.printStackTrace();
   }
-  ```
+}
+```
 
-- **Executing JavaScript for Dynamic Content**: You can use `showDocument()` to execute arbitrary JavaScript code that then handles a download. This is less common but can be useful for passing dynamically generated content from Java to JavaScript for download.
+### Method 2: Execute JavaScript for dynamic content
 
-  ```java
-  // Java Applet Code
-  private void downloadViaJavaScriptShowDocument() {
-      try {
-          String content = "Dynamic content generated in Java!";
-          String encodedContent = URLEncoder.encode(content, "UTF-8").replace("+", "%20"); // Encode for URL
-          AppletContext context = getAppletContext();
-          // Call a JavaScript function 'downloadFromJava' and pass content
-          context.showDocument(new URL("javascript:downloadFromJava('" + encodedContent + "')"));
-          System.out.println("Triggered JS download via showDocument.");
-      } catch (Exception ex) {
-          ex.printStackTrace();
-      }
+You can use `showDocument()` to execute arbitrary JavaScript code that then handles a download. This is less common but can be useful for passing dynamically generated content from Java to JavaScript for download.
+
+```java
+// Java Applet Code
+private void downloadViaJavaScriptShowDocument() {
+  try {
+      String content = "Dynamic content generated in Java!";
+      String encodedContent = URLEncoder.encode(content, "UTF-8").replace("+", "%20"); // Encode for URL
+      AppletContext context = getAppletContext();
+
+      // Call a JavaScript function 'downloadFromJava' and pass content
+      context.showDocument(new URL("javascript:downloadFromJava('" + encodedContent + "')"));
+      System.out.println("Triggered JS download via showDocument.");
+  } catch (Exception ex) {
+      ex.printStackTrace();
   }
-  ```
+}
+```
 
-  And in your HTML, you'd have the `downloadFromJava` JavaScript function:
+And in your HTML, you'd have the `downloadFromJava` JavaScript function:
 
-  ```javascript
-  // JavaScript in applet.html
-  function downloadFromJava(encodedContent) {
-  	const content = decodeURIComponent(encodedContent);
-  	const blob = new Blob([content], { type: "text/plain" });
-  	const url = URL.createObjectURL(blob);
+```javascript
+// JavaScript in applet.html
+function downloadFromJava(encodedContent) {
+	try {
+		const content = decodeURIComponent(encodedContent);
+		const blob = new Blob([content], { type: "text/plain" });
+		const url = URL.createObjectURL(blob);
 
-  	const a = document.createElement("a");
-  	a.href = url;
-  	a.download = "applet_showdocument_dynamic.txt";
-  	document.body.appendChild(a);
-  	a.click();
-  	document.body.removeChild(a);
-  	URL.revokeObjectURL(url);
-  	console.log("File downloaded via showDocument (JS)");
-  }
-  ```
+		// Create an invisible link
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = "applet_showdocument_dynamic.txt";
+
+		// Simulate a click on the link and clean up objects
+		link.click();
+		link.remove();
+		URL.revokeObjectURL(url);
+
+		console.log("File downloaded via showDocument");
+	} catch (e) {
+		console.error("Error downloading file:", e);
+	}
+}
+```
