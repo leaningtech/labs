@@ -1,6 +1,6 @@
 ---
 title: Set up a basic NPM-based project
-description: In this tutorial you will set up a simple NPM projext that serves an HTTP server using Express.js
+description: In this tutorial you will set up a simple NPM project that serves an HTTP server using Express.js
 ---
 
 ## Prerequisites
@@ -67,9 +67,9 @@ app.listen(port, () => {
 ## BrowserPod setup: `index.html`
 
 The index.html file is more complex, so we will describe it in multiple steps,
-and leave out irrelevant boilerplate. you can see it in full at the end.
+and leave out irrelevant boilerplate. You can see the full code at the end.
 
-### UI elements
+### 1: UI elements
 
 Our simple page has 3 main UI elements:
 
@@ -85,7 +85,7 @@ The `portal` iframe will contain an embedded view of our server.
 
 The `console` div will show the console output of our application.
 
-### Import and initialize BrowserPod
+### 2: Import and initialize BrowserPod
 
 ```js
 import { BrowserPod } from "https://rt.browserpod.io/%BP_LATEST%/browserpod.js";
@@ -97,13 +97,19 @@ This code imports BrowserPod and boots a Pod.
 
 You will need a valid API key with at least 10 tokens available for the boot to succeed.
 
-### Hook the pod to the UI
+### 3: Set up the terminal
 
 ```js
 // Create a terminal and hook it to the console div.
 const terminalDiv = document.getElementById("console");
 const terminal = await pod.createDefaultTerminal(terminalDiv);
+```
 
+This creates a Terminal that displays output in the `console` div.
+
+### 4: Set up the Portal callback
+
+```js
 // Hook the portal to the preview iframe on creation
 const portalIframe = document.getElementById("portal");
 const urlDiv = document.getElementById("url");
@@ -113,10 +119,14 @@ pod.onPortal(({ url, port }) => {
 });
 ```
 
-This code creates a Terminal to use for console output, and sets up a callback
-that populates the `url` div and `portal` iframe with the Portal data.
+**Portals** are BrowserPod's way of exposing HTTP servers running inside the Pod to the outside world. When your Node.js code starts listening on an HTTP socket (e.g., `app.listen(3000)`), BrowserPod creates a Portal — a unique subdomain of `browserportal.io` that allows anyone to connect to your server from the Internet.
 
-### Copy the project files into the Pod's filesystem
+The `onPortal` callback is triggered whenever a new Portal becomes available. In this example, we:
+
+1. Display the Portal URL in our page
+2. Load the Portal URL in an iframe to show a live preview
+
+### 5: Copy the project files into the Pod's filesystem
 
 ```js
 // Utility function to copy files from the HTTP server into the Pod's
@@ -136,10 +146,10 @@ await copy_file(pod, "project/package.json");
 
 This code copies the project files into the Pod's filesystem.
 
-In this case the files are served alongiside the index.html page, but you can
+In this case the files are served alongside the index.html page, but you can
 get them from other sources, or embed them directly as strings.
 
-### Install dependencies
+### 6: Install dependencies
 
 ```js
 // Install dependencies
@@ -154,10 +164,10 @@ We finally execute some code in the Pod.
 
 This runs `npm install` to fetch the project's dependencies from the internet.
 
-You might want to bundle the `node_modules` directory and the `package-lock.json`
-file directly alongside the project files instead.
+> [!tip] Pre-bundling dependencies for faster startup
+> Running `npm install` at runtime means dependencies are downloaded each time the page loads. For production use, you could pre-install dependencies locally and serve the `package-lock.json` and `node_modules` directory alongside your project files, and copy them into the Pod's filesystem. This would skip the install step entirely for faster startup.
 
-### Run the application
+### 7: Run the application
 
 ```js
 // Run the server

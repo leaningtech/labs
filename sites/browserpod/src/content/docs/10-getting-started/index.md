@@ -7,7 +7,10 @@ description: Getting started with BrowserPod
 
 **BrowserPod is a technology for running node.js environments entirely client-side.**
 
-Upon completing the steps below, you’ll be able to run a basic node.js script right within your web browser!
+Upon completing the steps below, you'll be able to run a basic node.js script right within your web browser!
+
+> [!note] Prerequisites
+> This quickstart assumes you already have a web page or project where you can add scripts. If you're starting from scratch or want a more complete example with server setup and hosting, see the [basic NPM project tutorial].
 
 ## 1. Register a free account
 
@@ -42,7 +45,7 @@ const pod = await BrowserPod.boot({ apiKey: "your-key" });
 
 In order to see the output of our program, we need to set up a terminal.
 
-First, add a `pre` HTML element somewhere in the page:
+First, add a [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre) HTML element somewhere in the page. This element preserves whitespace and displays text in a monospace font, making it ideal for terminal output:
 
 ```html
 <pre id="console" style="height: 100%;"></pre>
@@ -134,29 +137,34 @@ console.log(fs.readFileSync(__filename, "utf8"));
 
 ## Enable cross-origin isolation
 
-BrowserPod requires [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer), which itself requires the site to be cross-origin isolated. To enable cross-origin isolation, serve over HTTPS and set the following headers:
+BrowserPod requires [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer). For security reasons, browsers only allow `SharedArrayBuffer` on pages that are [cross-origin isolated](https://developer.mozilla.org/en-US/docs/Web/API/Window/crossOriginIsolated).
+
+To enable cross-origin isolation, your server must set the following HTTP headers:
 
 ```
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-For detailed instructions on how to configure headers in Nginx, check our [Nginx configuration guide].
+_You can use HTTP when serving from `localhost`, but make sure to serve over HTTPS when deploying._
 
-During development, you don't need to use HTTPS if you're using `localhost` as the origin, the `COEP` and `COOP` headers are always required though. You'll need to make sure you serve over HTTPS when you deploy.
+For more detailed instructions on how to configure headers in Nginx, check our [Basic server setup guide].
 
 > [!warning] Cross-origin isolation may break existing site functionality
 > Cross-origin isolation is a security feature that might impact your site in unexpected ways. For example, if you're embedding third-party iframes or opening cross-origin popup windows, you may need to make changes to your site to make them work. Test carefully!
 
 # Next steps
 
-For a more complex example that includes an integrated file editor, NPM dependencies, and hot reloading,
-see our [Vite+SvelteKit demo].
+- **Step-by-step tutorial:** For a complete walkthrough including project setup, server configuration, and working with NPM dependencies, see the [basic NPM project tutorial].
+- **Live demo:** For an interactive example with a file editor, NPM dependencies, and hot reloading, try our [Vite+SvelteKit demo].
+- **API reference:** Learn about all available methods in the [API reference].
 
 ---
 
-[Nginx configuration guide]: /docs/guides/nginx
+[basic NPM project tutorial]: /docs/tutorials/expressjs
+[Basic server setup guide]: /docs/guides/nginx
 [Vite+SvelteKit demo]: https://vitedemo.browserpod.io
+[API reference]: /docs/reference
 
 ## Have Questions?
 
