@@ -142,13 +142,13 @@ The previous convention implemented by JavaScriptCore would prepare the frame as
 
 ![](./images/1oPumHN1qARa23hPPQO1dog.png)
 
-**Figure 5.** *Stack at different stages of the* ***A*** *->* ***B*** *->* ***C*** *tail call chain.* ***C*\***’s number of arguments modified the stack size of\* ***A*\***. Even if the return count was preserved with\* ***C*\***’s signature,\* ***A*** *expects the return values at incorrect offsets when* ***C*** \*returns.\*
+**Figure 5.** *Stack at different stages of the* **_A_** *->* **_B_** *->* **_C_** *tail call chain.* **_C_\***’s number of arguments modified the stack size of\* **_A_\***. Even if the return count was preserved with\* **_C_\***’s signature,\* **_A_** *expects the return values at incorrect offsets when* **_C_** \*returns.\*
 
 This is due to the fact that offsets for stack values are computed statically when parsing code for a function. As a solution, we changed the convention to encode return values at the opposite side of the stack, closer to the caller’s frame pointer.
 
 ![](./images/1DcEHV1nJyX-wJZLGtVI1iA.png)
 
-**Figure 6.** *Same depiction as in Fig. 5, with offsets that allow* ***A*** *to properly collect return values.*
+**Figure 6.** *Same depiction as in Fig. 5, with offsets that allow* **_A_** *to properly collect return values.*
 
 When **A** restores the stack pointer as if it had called **B**, it is able to find the return values where expected.
 
