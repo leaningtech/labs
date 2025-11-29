@@ -1,3 +1,9 @@
 pnpm-lock.yaml
 src/lib/three-demo.js
 sites/cheerpj/src/content/docs/ja/00-overview.mdx
+content/blog/fantastic-tail-calls-and-how-to-implement-them.md
+sites/cheerpj/src/content/docs/10-getting-started/03-JNLP.mdx
+sites/cheerpj/src/content/docs/ja/10-getting-started/03-JNLP.md
+sites/labs/src/content/docs/cheerpj2/03-getting-started/03-JNLP.md
+sites/labs/src/content/docs/cheerpx-for-flash/10-getting-started/01-tutorial.md
+sites/labs/src/content/docs/cheerpx-for-flash/50-how.md
