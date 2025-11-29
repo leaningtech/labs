@@ -124,6 +124,7 @@ There are a few ways to do this.
   `"C:\Program Files\Google\Chrome\Application\chrome.exe" --js-flags="--experimental-wasm-return-call --experimental-wasm-compilation-hints --experimental-wasm-branch-hinting"`
 
 - **Edit your shortcut to launch with flags**. You can also add the same flags to the shortcut directly, which should allow you to run the application as normal, except with flags applied. To do this, you need to:
+
   - Exit any running instance of Chrome.
   - Right-click on your "Chrome" shortcut.
   - Choose properties.
