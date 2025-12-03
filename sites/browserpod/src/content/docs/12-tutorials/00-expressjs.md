@@ -1,6 +1,6 @@
 ---
 title: Set up a basic NPM-based project
-description: In this tutorial you will set up a simple NPM project that serves an HTTP server using Express.js
+description: In this tutorial you will set up a simple NPM project that runs an HTTP server using Express.js
 ---
 
 ## Prerequisites
