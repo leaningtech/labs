@@ -35,7 +35,7 @@ You then run the image, with the configuration options of your own choosing. The
 
 Although everyone's own Docker environments will differ, and you are at your own discretion to run the image however you may wish to, an example `docker run` command could be:
 
-`docker run -p 28083:28083 --init --rm -v /path/to/harman/binary/ppdeploy/ppfp/:/flash localhost/ppfp-deploy:v20210413`
+`docker run -p 28083:28083 --init --rm -v /path/to/harman/binary/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20251203_prod40`
 
 Here, we are using a few flags:
 

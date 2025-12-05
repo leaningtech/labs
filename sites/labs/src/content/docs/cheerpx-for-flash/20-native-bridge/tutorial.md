@@ -16,7 +16,7 @@ Once you have the bridge downloaded, load it in to Docker using `docker load`.
 
 Run the image while ensuring to mount the `ppfp/` volume to `/flash`. The location of your hosted `ppfp/` folder can be directly referenced from where you are hosting CheerpX, or copied to another location for easier access. Depending on your machine, this could differ greatly, but for this tutorial, we will run the container using the following run command:
 
-    docker run -p 28083:28083 --init --rm -v /mnt/c/xampp/htdocs/cheerpx/ppdeploy/ppfp/:/flash localhost/ppfp-deploy:v20210329
+    docker run -p 28083:28083 --init --rm -v /mnt/c/xampp/htdocs/cheerpx/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20251203_prod40
 
 The flags that we have set are:
 
