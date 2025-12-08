@@ -74,7 +74,7 @@ The simple vector program also compiles to a large JavaScript output (665 KB). P
 
 # Limitations
 
-A global constructor can be pre-executed a compile time only if it meets certain criteria:
+A global constructor can be pre-executed at compile time only if it meets certain criteria:
 
 - All the code in the constructor needs to be **type safe** and representable with the section's memory model. This is automatically true for all the code that compiles in `genericjs` mode, but [not necessarily](/cheerp/reference/sections/wasm/memory-model) for code compiled to `wasm`.
 
