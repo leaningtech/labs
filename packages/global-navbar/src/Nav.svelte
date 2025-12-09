@@ -92,7 +92,7 @@
 		<BigIconItem
 			href="https://browserpod.io/"
 			title="BrowserPod"
-			description="Dev Environments in your browser"
+			description="Code Sandboxes in your browser"
 		>
 			<BrowserPodLogo />
 		</BigIconItem>

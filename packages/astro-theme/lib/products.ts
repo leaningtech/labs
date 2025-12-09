@@ -138,7 +138,7 @@ export const products: { [product in Product]: ProductData } = {
 		href: "https://browserpod.io",
 		logotype: browserpodLogotype,
 		favicon: baseWithSlash + "browserpod/favicon.png",
-		subtitle: "Run Dev Environments in your browser",
+		subtitle: "Run Code Sandboxes in your browser",
 		description:
 			"Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.",
 		github: "https://github.com/leaningtech/browserpod-meta",
