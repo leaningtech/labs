@@ -134,7 +134,7 @@ export const products: { [product in Product]: ProductData } = {
 	browserpod: {
 		id: "browserpod",
 		type: "technology",
-		name: "browserpod",
+		name: "BrowserPod",
 		href: "https://browserpod.io",
 		logotype: browserpodLogotype,
 		favicon: baseWithSlash + "browserpod/favicon.png",
