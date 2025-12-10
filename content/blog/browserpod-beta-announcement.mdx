@@ -1,21 +1,17 @@
 ---
-title: "BrowserPod: Client-side sandboxing in the browser using WASM"
-subtitle: "BrowserPod: zero latency in-browser code sandboxes in WebAssembly"
-description: "placeholder"
+title: "BrowserPod: WebAssembly in-browser code sandboxes for Node, Python, and Rails"
+description: |
+  BrowserPod Beta is live: zero latency in-browser code sandboxes in WebAssembly for Node, Python and Rails.
 authors:
   - alessandro
   - stefano
-pubDate: "December 10 2024"
-heroImage: "./banners/BrowserPod_beta-hero.png"
+pubDate: "December 10 2025"
+heroImage: "./banners/BrowserPod_beta-hero.webp"
 tags:
   - BrowserPod
 ---
 
 TLDR: We’re beta-launching BrowserPod today, a WebAssembly-powered code sandbox for Node.js, Python and Ruby on Rails. Pods are instantly provisioned in-browser containers that use client-side compute, and can be exposed to the public internet. You can [start using BrowserPod now][BP-link], or keep reading to learn more.
-
-<video controls autoplay loop muted playsinline>
-	<source src="./browserpod_demo.mp4" type="video/mp4" />
-</video>
 
 Agentic coding, vibe coding, generative coding – different flavours of LLM-created or assisted code are everywhere, and their omnipresence are giving sandboxed computing environments a major moment in the spotlight. AI agents generate untrusted code, can introduce vulnerabilities and execute malicious instructions through prompt injection attacks or, on occasions, decide to wipe your whole filesystem. Sandboxes protect systems, local networks and data from threats by isolating agentic code in a secure virtual computing environment.
 
@@ -36,6 +32,27 @@ That’s why we’re launching today, in Beta, BrowserPod: our own solution for 
 At Leaning Technologies, we’ve been at the forefront of WebAssembly-based solutions to convert large scale traditional applications to standard compliant Web apps, . We’ve done this across multiple languages and runtimes, starting from [C/C++][Cheerp-link], moving to [Java][CJ-link] and in recent years even safely executing arbitrary [x86 binaries][WEBVM-link] via dynamic Just-In-Time recompilation.
 
 BrowserPod represents for us an opportunity to package everything we’ve learned in our 10+ years of experience to solve the problem of sandboxed computing. We can take advantage of the capabilities of modern browsers to reduce boot latency, pressure on data centers and the operational costs of provisioning virtual machines for untrusted user payloads.
+
+import BrowserPodDemo_Beta from "@/components/BrowserPodDemo_Beta.svelte";
+
+<figure class="w-full">
+	<div class="w-full relative">
+		<BrowserPodDemo_Beta
+			client:only="svelte"
+			showReplTab={true}
+			readyActions={[
+				{
+					command: "node",
+					args: [],
+					terminal: "repl"
+				}
+			]}
+		/>
+	</div>
+	<figcaption>
+		Node 22 REPL running live in BrowserPod.
+	</figcaption>
+</figure>
 
 # A bit of history
 
@@ -99,7 +116,14 @@ What this means, in practice, is that whenever a Pod is booted it is assigned a 
 
 Any port which is bound to public interfaces inside the pod will be exposed to the internet via this secret link. By sharing a link like this, you can show early adopters or clients how your application works without setting up any actual hosting. Moreover, you’ll be able to test your application from mobile devices, for example by encoding the link in a QR code on your main device screen.
 
-[VITE DEMO HERE]
+<figure class="w-full">
+	<video controls autoplay loop muted playsinline>
+		<source src="./browserpod_demo.mp4" type="video/mp4" />
+	</video>
+	<figcaption class="text-center">
+		An example of BrowserPod being used to run a full Vite+Svelte in-browser editor.
+	</figcaption>
+</figure>
 
 Caption: An example of BrowserPod being used to run a full Vite+Svelte in-browser editor
 
@@ -147,7 +171,7 @@ import { DISCORD_URL } from "@/consts.ts";
   />
 </div>
 
-We think BrowserPod has the potential to revolutionize client-side sandboxing, and we are looking to hear what you think!
+We think BrowserPod has the potential to revolutionize client-side sandboxing, and we are looking to hear what you think
 
 [BP-link]: https://browserpod.io/
 [BP-demo-link]: https://vitedemo.browserpod.io/
