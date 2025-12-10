@@ -1,6 +1,6 @@
 const JARS = {
-    demo: "/app/FlatLaf/flatlaf-demo-3.7.jar",
-    editor: "/app/FlatLaf/flatlaf-theme-editor-3.7.jar",
+	demo: "/app/FlatLaf/flatlaf-demo-3.7.jar",
+	editor: "/app/FlatLaf/flatlaf-theme-editor-3.7.jar",
 };
 
 const btnDemo = document.getElementById("btn-demo");
@@ -11,52 +11,52 @@ const statusAppName = document.getElementById("status-app-name");
 let currentApp = null;
 
 (async () => {
-    statusLabel.textContent = "Starting CheerpJ…";
+	statusLabel.textContent = "Starting CheerpJ…";
 
-    await cheerpjInit({
-        version: 17
-    });
+	await cheerpjInit({
+		version: 17,
+	});
 
-    cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
+	cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
 
-    statusLabel.textContent = "Launching Demo…";
+	statusLabel.textContent = "Launching Demo…";
 
-    runApp("demo");
+	runApp("demo");
 
-    btnDemo.addEventListener("click", () => runApp("demo"));
-    btnEditor.addEventListener("click", () => runApp("editor"));
+	btnDemo.addEventListener("click", () => runApp("demo"));
+	btnEditor.addEventListener("click", () => runApp("editor"));
 })();
 
 async function runApp(which) {
-    if (which === currentApp) {
-        return;
-}
+	if (which === currentApp) {
+		return;
+	}
 
-currentApp = which;
+	currentApp = which;
 
-btnDemo.classList.toggle("active", which === "demo");
-btnEditor.classList.toggle("active", which === "editor");
+	btnDemo.classList.toggle("active", which === "demo");
+	btnEditor.classList.toggle("active", which === "editor");
 
-statusLabel.textContent = "Launching " + labelFor(which) + "…";
-statusAppName.textContent = labelFor(which);
+	statusLabel.textContent = "Launching " + labelFor(which) + "…";
+	statusAppName.textContent = labelFor(which);
 
-console.log("Starting FlatLaf " + which);
+	console.log("Starting FlatLaf " + which);
 
-cheerpjRunJar(JARS[which])
-    .then((code) => {
-        console.log(which + " exited with code", code);
-        if (currentApp === which) {
-            statusLabel.textContent = labelFor(which) + " finished.";
-        }
-    })
-    .catch((err) => {
-        console.error(which + " failed:", err);
-        if (currentApp === which) {
-            statusLabel.textContent = "Error starting " + labelFor(which);
-        }
-    });
+	cheerpjRunJar(JARS[which])
+		.then((code) => {
+			console.log(which + " exited with code", code);
+			if (currentApp === which) {
+				statusLabel.textContent = labelFor(which) + " finished.";
+			}
+		})
+		.catch((err) => {
+			console.error(which + " failed:", err);
+			if (currentApp === which) {
+				statusLabel.textContent = "Error starting " + labelFor(which);
+			}
+		});
 }
 
 function labelFor(which) {
-    return which === "editor" ? "Theme Editor" : "Demo";
+	return which === "editor" ? "Theme Editor" : "Demo";
 }
