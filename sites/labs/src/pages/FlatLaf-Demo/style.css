@@ -244,9 +244,8 @@ body {
 }
 
 .hint code {
-	font-family:
-		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-		"Courier New", monospace;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
 	font-size: 0.75rem;
 	background: rgba(255, 255, 255, 0.06);
 	padding: 1px 4px;
