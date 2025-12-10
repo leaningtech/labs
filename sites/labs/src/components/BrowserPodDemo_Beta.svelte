@@ -179,7 +179,7 @@
 				await import("https://rt.browserpod.io/0.9.6/browserpod.js");
 			pod = await BrowserPod.boot({
 				apiKey:
-					"bp1_74c9fd5dfa63d386d410f9dad99691d4f4a0776bff3b267e72851604d7a98c46",
+					"bp1_650b51af6579eb358452af0ced948bc34a6d98693c2969af6ad1b1e74c3948ee",
 			});
 			const mainTerminalDiv = document.getElementById("main-console");
 			const replTerminalDiv = document.getElementById("repl-console");
