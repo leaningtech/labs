@@ -49,7 +49,7 @@ import BrowserPodDemo_Beta from "@/components/BrowserPodDemo_Beta.svelte";
 			]}
 		/>
 	</div>
-	<figcaption>Node 22 REPL running live in BrowserPod.</figcaption>
+	<figcaption class="text-center">Node 22 REPL running live in BrowserPod.</figcaption>
 </figure>
 
 # A bit of history
@@ -108,12 +108,6 @@ Our solution for BrowserPod is to provide edge-computing-based proxying of netwo
 
 ## From TCP ports to HTTP Portals
 
-What this means, in practice, is that whenever a Pod is booted it is assigned a globally accessible, unique and random domain name, something like:
-
-`https://randomstring-port.browserportal.io`
-
-Any port which is bound to public interfaces inside the pod will be exposed to the internet via this secret link. By sharing a link like this, you can show early adopters or clients how your application works without setting up any actual hosting. Moreover, you’ll be able to test your application from mobile devices, for example by encoding the link in a QR code on your main device screen.
-
 <figure class="w-full">
 	<video controls autoplay loop muted playsinline>
 		<source src="./browserpod_demo.mp4" type="video/mp4" />
@@ -124,7 +118,11 @@ Any port which is bound to public interfaces inside the pod will be exposed to t
 	</figcaption>
 </figure>
 
-Caption: An example of BrowserPod being used to run a full Vite+Svelte in-browser editor
+What this means, in practice, is that whenever a Pod is booted it is assigned a globally accessible, unique and random domain name, something like:
+
+`https://randomstring-port.browserportal.io`
+
+Any port which is bound to public interfaces inside the pod will be exposed to the internet via this secret link. By sharing a link like this, you can show early adopters or clients how your application works without setting up any actual hosting. Moreover, you’ll be able to test your application from mobile devices, for example by encoding the link in a QR code on your main device screen.
 
 ## BrowserPod: A multi-runtime sandbox for agentic coding and more
 
@@ -159,7 +157,6 @@ BrowserPod Beta is available right now, free for personal use and open-source pr
 If you have feedback or questions, you can reach us in our channel Discord or via GitHub issues.
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
-import { DISCORD_URL } from "@/consts.ts";
 
 <div class="flex items-center gap-2 flex-wrap">
   <LinkButton
@@ -167,13 +164,6 @@ import { DISCORD_URL } from "@/consts.ts";
     href="https://github.com/leaningtech/browserpod-meta"
     iconLeft="fa-brands:github"
     label="GitHub Issues"
-  />
-
-  <LinkButton
-    type="discord"
-    href={DISCORD_URL}
-    iconLeft="fa-brands:discord"
-    label="Join the Discord server"
   />
 </div>
 
