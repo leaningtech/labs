@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FlatLaf Demo & Theme Editor – CheerpJ + Java 17</title>
+    <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <section class="shell">
+        <header class="shell-header">
+          <div class="shell-dots">
+            <span class="shell-dot"></span>
+            <span class="shell-dot"></span>
+            <span class="shell-dot"></span>
+          </div>
+
+          <div class="shell-title-block">
+            <div class="shell-title-row">
+              <div class="shell-title">FlatLaf – Browser Demo</div>
+              <div class="shell-pill">Java 17 via CheerpJ</div>
+            </div>
+            <div class="shell-subtitle">
+							Switch between the FlatLaf Demo and Theme Editor, both running unchanged JARs inside the browser via CheerpJ (Java 17).
+						</div>
+          </div>
+
+          <div class="shell-spacer"></div>
+
+          <div class="switcher" aria-label="Choose FlatLaf application">
+            <button id="btn-demo" class="active" type="button">Demo</button>
+            <button id="btn-editor" type="button">Theme Editor</button>
+          </div>
+        </header>
+
+        <div class="shell-body">
+          <div id="container"></div>
+
+          <aside class="side-panel">
+            <div>
+              <div class="side-heading">How to use</div>
+              <ul class="step-list">
+                <li>
+                  <span class="step-badge">1</span>
+                  <span>
+                    Start with the <strong>Demo</strong> to explore FlatLaf look &amp; feel options and components.
+                  </span>
+                </li>
+                <li>
+                  <span class="step-badge">2</span>
+                  <span>
+                    Switch to the <strong>Theme Editor</strong> to create or tweak themes. Save them inside the CheerpJ virtual filesystem.
+                  </span>
+                </li>
+                <li>
+                  <span class="step-badge">3</span>
+                  <span>
+                    Go back to the <strong>Demo</strong> and load your custom theme using the FlatLaf theme selection options.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="hint">
+              This page runs the original FlatLaf JARs:
+              <br />
+              <code>flatlaf-demo-3.7.jar</code> and <code>flatlaf-theme-editor-3.7.jar</code> via <code>cheerpjRunJar</code> on a Java 17 runtime.
+            </div>
+
+            <div class="status" id="status-bar">
+              <div class="status-text">
+                <span class="status-dot"></span>
+                <span id="status-label">Runtime ready</span>
+              </div>
+              <div class="status-app">
+                Active app:
+                <span id="status-app-name">Demo</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
