@@ -190,22 +190,26 @@
 				replTerminal = await pod.createDefaultTerminal(replTerminalDiv);
 			}
 
-			for (const file of projectFiles) {
-				const content = await fetchFile(file);
-				// create (sub-)folders if they don't exist
-				const parts = file.split("/");
-				if (parts.length > 1) {
-					parts.pop();
-					const dir = parts.join("/");
-					await pod.createDirectory(`/files/${dir}`, { recursive: true });
+			if (showEditor) {
+				for (const file of projectFiles) {
+					const content = await fetchFile(file);
+					// create (sub-)folders if they don't exist
+					const parts = file.split("/");
+					if (parts.length > 1) {
+						parts.pop();
+						const dir = parts.join("/");
+						await pod.createDirectory(`/files/${dir}`, { recursive: true });
+					}
+					const f = await pod.createFile(`/files/${file}`, "binary");
+					const copy = new Uint8Array(content);
+					await f.write(copy.buffer);
+					await f.close();
 				}
-				const f = await pod.createFile(`/files/${file}`, "binary");
-				const copy = new Uint8Array(content);
-				await f.write(copy.buffer);
-				await f.close();
-			}
 
-			loadFile("src/lib/Counter.svelte");
+				loadFile("src/lib/Counter.svelte");
+			} else {
+				loading = false;
+			}
 
 			pod.onPortal(function (data) {
 				const url = data.url;
