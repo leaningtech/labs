@@ -176,7 +176,7 @@
 			window.addEventListener("resize", checkMobileView);
 
 			const { BrowserPod } =
-				await import("https://rt.browserpod.io/0.9.6/browserpod.js");
+				await import("https://rt.browserpod.io/0.9.7/browserpod.js");
 			pod = await BrowserPod.boot({
 				apiKey:
 					"bp1_650b51af6579eb358452af0ced948bc34a6d98693c2969af6ad1b1e74c3948ee",
