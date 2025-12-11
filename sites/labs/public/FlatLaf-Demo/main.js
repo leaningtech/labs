@@ -1,6 +1,6 @@
 const JARS = {
-  demo: "/app/FlatLaf-Demo/FlatLaf/flatlaf-demo-3.7.jar",
-  editor: "/app/FlatLaf-Demo/FlatLaf/flatlaf-theme-editor-3.7.jar",
+	demo: "/app/FlatLaf-Demo/FlatLaf/flatlaf-demo-3.7.jar",
+	editor: "/app/FlatLaf-Demo/FlatLaf/flatlaf-theme-editor-3.7.jar",
 };
 
 const btnDemo = document.getElementById("btn-demo");
