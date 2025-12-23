@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://cheerpj.com",
-	base: "/docs",
+	base: "/docs/",
 	integrations: [
 		icon(),
 		theme({
