@@ -12,10 +12,9 @@
 
 	onMount(async () => {
 		const base = import.meta.env.BASE_URL || "/";
-		const pagefindPath = base.endsWith("/")
-			? `${base}pagefind/pagefind.js`
-			: `${base}/pagefind/pagefind.js`;
-		const url = new URL(window.origin + pagefindPath).href;
+		const baseWithSlash = base.endsWith("/") ? base : base + "/";
+		const pagefindPath = `${baseWithSlash}pagefind/pagefind.js`;
+		const url = `${window.location.origin}${pagefindPath}`;
 		// @ts-ignore
 		const pf = await import(/* @vite-ignore */ url);
 		await pf.init();
