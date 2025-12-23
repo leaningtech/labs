@@ -11,10 +11,11 @@
 	let noResultsForQuery = false;
 
 	onMount(async () => {
-		const url =
-			productId === "cheerpj3"
-				? new URL(window.origin + "/docs/pagefind/pagefind.js").href // Add /docs/ for CJ so search bar is able to link correctly
-				: new URL(window.origin + "/pagefind/pagefind.js").href; // Can't use import.meta.url because Vite prefixes the module with /@fs.
+		const base = import.meta.env.BASE_URL || "/";
+		const pagefindPath = base.endsWith("/")
+			? `${base}pagefind/pagefind.js`
+			: `${base}/pagefind/pagefind.js`;
+		const url = new URL(window.origin + pagefindPath).href;
 		// @ts-ignore
 		const pf = await import(/* @vite-ignore */ url);
 		await pf.init();
