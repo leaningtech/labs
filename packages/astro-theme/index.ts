@@ -13,7 +13,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
-import { squooshImageService } from "astro/config";
 import { cpSync } from "fs";
 import { join as joinPath } from "path";
 
@@ -144,9 +143,7 @@ export default function ThemeIntegration(
 						inlineStylesheets: "always",
 					},
 					trailingSlash: "never",
-					image: {
-						service: squooshImageService(),
-					},
+
 					vite: {
 						ssr: {
 							noExternal: ["@leaningtech/global-navbar"],
