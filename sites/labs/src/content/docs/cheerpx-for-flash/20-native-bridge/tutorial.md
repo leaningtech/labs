@@ -67,4 +67,4 @@ Also, if the website is served through HTTPS (which it usually is), you should u
 
 # The End!
 
-And that's it! You should now see dramatic performance improvements on your Flash content. The Native Bridge is still in very early development, and should only be used in very specific scenarios. If you think it could be useful for your content, please contact us via Asana.
+And that's it! You should now see dramatic performance improvements on your Flash content.
