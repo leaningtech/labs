@@ -4,6 +4,8 @@
 	Cross-Origin-Resource-Policy: cross-origin
 /*.webp
 	Cross-Origin-Resource-Policy: cross-origin
+/*.jpg
+	Cross-Origin-Resource-Policy: cross-origin
 /blog/browserpod-beta-announcement
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
