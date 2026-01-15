@@ -63,9 +63,7 @@ export function defineCommonCollections() {
 					title: z.string(),
 					description: z.string().optional(),
 					url: z.string(),
-					heroImage: image().refine((img) => img.width / img.height == 1.5, {
-						message: "Image must have 3:2 aspect ratio",
-					}),
+					heroImage: image(),
 					tags: productTags.optional(),
 				}),
 		}),
