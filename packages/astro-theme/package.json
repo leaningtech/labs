@@ -3,6 +3,7 @@
 	"private": true,
 	"version": "0.1.0",
 	"description": "Astro theme",
+	"type": "module",
 	"exports": {
 		".": "./index.ts",
 		"./consts": "./consts.ts",
