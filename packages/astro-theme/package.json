@@ -39,7 +39,6 @@
 	"dependencies": {
 		"@astrojs/markdown-remark": "^5.0.0",
 		"@astrojs/mdx": "^4.3.13",
-		"@astrojs/prefetch": "^0.4.1",
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.2",
 		"@astropub/md": "^1.0.0",
