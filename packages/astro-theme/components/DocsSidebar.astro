@@ -19,7 +19,7 @@ const hasMultipleLocales = !!Astro.currentLocale;
 
 <aside
 	is="docs-sidebar"
-	class="bg-stone-800 lg:bg-stone-900 fixed lg:sticky top-0 h-[100dvh] lg:top-[65px] z-10 p-8 w-full md:w-80 lg:h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm"
+	class="bg-stone-800 lg:bg-stone-900 fixed lg:sticky top-0 h-[100dvh] lg:top-[65px] z-10 p-8 w-full md:w-80 lg:h-[calc(100vh-4rem)] overflow-y-auto lg:text-sm lg:border-r lg:border-stone-800/70 lg:pr-6"
 >
 	<button data-sidebar-close class="absolute top-4 right-4 lg:hidden">
 		<span class="sr-only">Close navigation</span>
@@ -38,7 +38,7 @@ const hasMultipleLocales = !!Astro.currentLocale;
 
 	{
 		entries.length > 0 && entries.length && (
-			<ol class="text-balance">
+			<ol class="text-balance space-y-1">
 				{entries
 					.filter((entry) => {
 						if (entry.type === "directory" && entry.isLanguageDirectory)

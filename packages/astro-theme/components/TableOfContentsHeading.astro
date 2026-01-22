@@ -17,7 +17,7 @@ const { heading } = Astro.props;
 	<a
 		href={"#" + heading.slug}
 		class:list={[
-			"block py-1 text-stone-400 hover:text-stone-200",
+			"block rounded-md px-2 -mx-2 py-1 text-stone-300 text-sm leading-6 border-l-2 border-transparent transition-colors hover:text-stone-200 hover:bg-stone-800/40 hover:border-stone-600/70",
 			{
 				"font-medium": heading.depth <= 2,
 			},
@@ -28,7 +28,7 @@ const { heading } = Astro.props;
 
 	{
 		heading.subheadings.length > 0 && (
-			<ol class="pl-4">
+			<ol class="pl-4 mt-1 space-y-1">
 				{heading.subheadings.map((subheading) => (
 					<Astro.self heading={subheading} />
 				))}
@@ -52,12 +52,19 @@ const { heading } = Astro.props;
 			if (!a) throw new Error("expected <a> element");
 
 			const href = a.getAttribute("href");
-			console.log(href);
 
 			if (href === location.hash) {
-				a.classList.add("!text-primary-400");
+				a.classList.add(
+					"!text-primary-400",
+					"!border-primary-500/80",
+					"bg-primary-500/10"
+				);
 			} else {
-				a.classList.remove("!text-primary-400");
+				a.classList.remove(
+					"!text-primary-400",
+					"!border-primary-500/80",
+					"bg-primary-500/10"
+				);
 			}
 		}
 	}
