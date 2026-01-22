@@ -160,8 +160,8 @@ body {
 		color 0.15s ease;
 }
 
-.switcher button.active {
-	background: var(--accent-soft);
+.switcher button:hover {
+	background: rgba(255, 255, 255, 0.08);
 	color: var(--text-main);
 }
 
@@ -272,6 +272,11 @@ body {
 	background: #17c964;
 }
 
+.status-dot.busy {
+	background: #febc2e;
+	animation: pulse 1.1s ease-in-out infinite;
+}
+
 .status-text {
 	display: flex;
 	align-items: center;
@@ -284,6 +289,16 @@ body {
 
 .status-app span {
 	color: var(--text-main);
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 0.55;
+	}
+	50% {
+		opacity: 1;
+	}
 }
 
 /* Responsive: hide side panel on narrow screens */
