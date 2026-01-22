@@ -5,7 +5,7 @@ const VFS_JARS = {
 	editor: `${VFS_DIR}/flatlaf-theme-editor-3.7.jar`,
 };
 
-// Where the jars live the website
+// Where the jars live on the website
 const WEB_JARS = {
 	demo: new URL(
 		"./FlatLaf/flatlaf-demo-3.7.jar",
@@ -20,15 +20,27 @@ const WEB_JARS = {
 const btnDemo = document.getElementById("btn-demo");
 const btnEditor = document.getElementById("btn-editor");
 const statusLabel = document.getElementById("status-label");
-const statusAppName = document.getElementById("status-app-name");
-
-let currentApp = null;
 
 // Library-mode to handle filesystem work
 let lib = null;
 
+// Status helper (auto-resets after a short delay)
+let statusTimer = null;
+
+function setStatus(text, { autoResetMs = 3500 } = {}) {
+	statusLabel.textContent = text;
+
+	if (statusTimer) clearTimeout(statusTimer);
+	if (autoResetMs > 0) {
+		statusTimer = setTimeout(() => {
+			statusLabel.textContent = "Ready — click a button to open a window";
+			statusTimer = null;
+		}, autoResetMs);
+	}
+}
+
 (async () => {
-	statusLabel.textContent = "Starting CheerpJ";
+	setStatus("Starting CheerpJ…", { autoResetMs: 0 });
 
 	await cheerpjInit({
 		version: 17,
@@ -39,20 +51,24 @@ let lib = null;
 	// Library mode to write files in the VFS
 	lib = await cheerpjRunLibrary("");
 
-	statusLabel.textContent = "Preparing demo files";
+	setStatus("Preparing demo files…", { autoResetMs: 0 });
 
 	// Ensure jars exist in VFS
 	await ensureJarInVfs("demo");
 	await ensureJarInVfs("editor");
 
-	statusLabel.textContent = "Launching Demo";
+	// Start the demo automatically
+	setStatus("Opening Demo…");
 	runApp("demo");
 
+	// Buttons act as launch actions
 	btnDemo.addEventListener("click", () => runApp("demo"));
 	btnEditor.addEventListener("click", () => runApp("editor"));
+
+	setStatus("Ready — click a button to open a window", { autoResetMs: 0 });
 })().catch((err) => {
 	console.error("Init failed:", err);
-	statusLabel.textContent = "Failed to start";
+	setStatus("Failed to start", { autoResetMs: 0 });
 });
 
 function labelFor(which) {
@@ -75,7 +91,7 @@ async function ensureJarInVfs(which) {
 	}
 
 	console.log(`[WEB] Downloading ${which} jar: ${sourceUrl}`);
-	statusLabel.textContent = `Downloading ${labelFor(which)} JAR`;
+	setStatus(`Downloading ${labelFor(which)} JAR…`, { autoResetMs: 0 });
 
 	const resp = await fetch(sourceUrl);
 	if (!resp.ok) {
@@ -100,26 +116,19 @@ async function ensureJarInVfs(which) {
 }
 
 function runApp(which) {
-	if (which === currentApp) return;
-
-	currentApp = which;
-
-	btnDemo.classList.toggle("active", which === "demo");
-	btnEditor.classList.toggle("active", which === "editor");
-
 	const label = labelFor(which);
-	statusLabel.textContent = `Launching ${label}…`;
-	statusAppName.textContent = label;
-
-	// Run the jar from VFS path
 	const jarPath = VFS_JARS[which];
 
+	setStatus(`Opening ${label}…`);
 	console.log(`Starting FlatLaf ${which} from ${jarPath}`);
 
+	// Promise resolves only when JVM exits
 	cheerpjRunJar(jarPath)
-		.then((code) => console.log(`${which} exited with code`, code))
+		.then(() => {
+			setStatus(`${label} exited`, { autoResetMs: 6000 });
+		})
 		.catch((err) => {
 			console.error(`${which} failed:`, err);
-			statusLabel.textContent = `Error starting ${label}`;
+			setStatus(`Failed to open ${label}`, { autoResetMs: 6000 });
 		});
 }
