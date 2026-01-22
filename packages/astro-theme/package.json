@@ -41,7 +41,6 @@
 		"@astrojs/mdx": "^4.3.13",
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.2",
-		"@astropub/md": "^1.0.0",
 		"@leaningtech/global-navbar": "workspace:^",
 		"@sveltejs/vite-plugin-svelte": "^5.1.1",
 		"@tailwindcss/typography": "^0.5.10",

@@ -14,7 +14,6 @@ import ProductNav from "../components/nav/product/Nav.astro";
 import WasThisHelpful from "../components/WasThisHelpful.astro";
 import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
-import { Markdown } from "@astropub/md";
 import type { LanguageContent } from "../content";
 
 interface Props {
@@ -108,18 +107,18 @@ function getEditHref(id: string): string {
 									/>
 								</h1>
 								<p class="text-xl font-medium text-stone-500">
-									{description && <Markdown.Inline of={description} />}
+									{description && <span>{description}</span>}
 								</p>
 							</div>
 						) : (
 							<>
 								<h1 class="mb-2 font-bold">
-									<Markdown.Inline of={title} />
-								</h1>
-								{description && (
-									<p class="mt-0 mb-8 text-stone-500 text-xl">
-										<Markdown.Inline of={description} />
-									</p>
+									<span>{title}</span>
+							</h1>
+							{description && (
+								<p class="mt-0 mb-8 text-stone-500 text-xl">
+									<span>{description}</span>
+								</p>
 								)}
 							</>
 						)}
