@@ -36,7 +36,7 @@
 		"@iconify-json/ri": "^1.2.6",
 		"@iconify-json/simple-icons": "^1.2.58",
 		"@iconify/svelte": "^5.1.0",
-		"@iconify/tools": "4.0.5",
+		"@iconify/tools": "^5.0.2",
 		"@leaningtech/astro-theme": "workspace:^",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
 		"@leaningtech/cheerpj-applet-page": "workspace:^",
