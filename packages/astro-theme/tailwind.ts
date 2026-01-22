@@ -88,26 +88,26 @@ export default function makeConfig(): Config {
 							"--tw-prose-links": theme("colors.cheerp"),
 							"--tw-prose-invert-links": theme("colors.primary[400]"),
 							lineHeight: "1.75",
-							"p": {
+							p: {
 								marginTop: "1.2em",
 								marginBottom: "1.2em",
 							},
-							"h1": {
+							h1: {
 								marginTop: "0",
 								marginBottom: "0.8em",
 								lineHeight: "1.2",
 							},
-							"h2": {
+							h2: {
 								marginTop: "2em",
 								marginBottom: "0.8em",
 								lineHeight: "1.25",
 							},
-							"h3": {
+							h3: {
 								marginTop: "1.6em",
 								marginBottom: "0.6em",
 								lineHeight: "1.3",
 							},
-							"h4": {
+							h4: {
 								marginTop: "1.4em",
 								marginBottom: "0.6em",
 								lineHeight: "1.35",
@@ -116,25 +116,25 @@ export default function makeConfig(): Config {
 								marginTop: "1.2em",
 								marginBottom: "1.2em",
 							},
-							"li": {
+							li: {
 								marginTop: "0.4em",
 								marginBottom: "0.4em",
 							},
-							"blockquote": {
+							blockquote: {
 								marginTop: "1.6em",
 								marginBottom: "1.6em",
 								paddingLeft: "1em",
 								borderLeftWidth: "2px",
 								borderLeftColor: theme("colors.stone[700]"),
 							},
-							"pre": {
+							pre: {
 								marginTop: "1.6em",
 								marginBottom: "1.6em",
 								borderRadius: "0.75rem",
 								border: `1px solid ${theme("colors.stone[800]")}`,
 								padding: "1.1em 1.3em",
 							},
-							"code": {
+							code: {
 								fontWeight: "500",
 							},
 						},
