@@ -30,19 +30,20 @@
 	},
 	"scripts": {},
 	"peerDependencies": {
-		"@astrojs/svelte": "^5.3.0",
+		"@astrojs/svelte": "^7.2.5",
 		"@astrojs/tailwind": "^5.1.0",
 		"astro": "*",
 		"svelte": "^5.38.6",
 		"tailwindcss": "^3.4.0"
 	},
 	"dependencies": {
-		"@astrojs/markdown-remark": "^5.0.0",
+		"@astrojs/markdown-remark": "^6.3.10",
 		"@astrojs/mdx": "^4.3.13",
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.2",
 		"@astropub/md": "^1.0.0",
 		"@leaningtech/global-navbar": "workspace:^",
+		"@sveltejs/vite-plugin-svelte": "^5.1.1",
 		"@tailwindcss/typography": "^0.5.10",
 		"astro-expressive-code": "^0.41.5",
 		"astro-icon": "^1.1.5",
