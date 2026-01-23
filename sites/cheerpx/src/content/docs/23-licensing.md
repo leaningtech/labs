@@ -2,7 +2,7 @@
 title: Licensing
 ---
 
-CheerpX is free to use for personal projects, most non-commercial applications, and for technical evaluations.
+CheerpX is free to use for _personal projects_, _FOSS projects_, and for _technical evaluations_.
 
 - Individuals can use CheerpX for **free**. This includes:
   - Most open-source projects
@@ -24,12 +24,14 @@ CheerpX is free to use for personal projects, most non-commercial applications, 
 
 ## Technical evaluations
 
-If an application is not seen by internal or external users, it is considered a technical evaluation. This includes:
+If an application is not seen by internal or external users, it is considered a technical evaluation.
+
+**This includes:**
 
 - An application that is not yet in production
 - An application that is not yet available to the public
 
-This does not include:
+**This does not include:**
 
 - An internal application that is used by employees
 
@@ -39,7 +41,7 @@ If you wish to self-host CheerpX, you will need a license. [Contact us][contact]
 
 ### System Integrators (SIs), Resellers and Distributors, OEMs
 
-Please [contact us directly][contact] to discuss OEM or Reseller licences.
+If you are a company who wants to offer CheerpJ integration as part of your software development services, you will need a special license and an agreement in place. Please [contact us directly](https://cheerpj.com/contact/) to discuss OEM or reseller licences.
 
 For any doubt, please check the [Complete License].
 
