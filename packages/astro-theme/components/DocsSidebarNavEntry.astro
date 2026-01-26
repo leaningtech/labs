@@ -27,17 +27,20 @@ const title = await getLocalisedEntryTitle(entry);
 	entry.type === "file" && (!entry.isIndex || depth === 0) && (
 		<li
 			class:list={[
-				"group py-1 text-stone-400 hover:border-stone-400 hover:text-white",
+				"group rounded-md py-1.5 transition-colors hover:border-stone-300 hover:text-stone-100",
 				{
-					"font-semibold !text-primary-500 !border-primary-600":
-						entry.href === pathname,
-					"px-4 border-l border-stone-800": depth > 0,
+					"font-semibold !text-primary-500": entry.href === pathname,
+					"font-semibold text-stone-200 text-lg": depth === 0,
+					"px-4 border-l border-stone-800 text-stone-300": depth > 0,
 					"bg-primary-600 bg-opacity-5": depth > 0 && entry.href === pathname,
 				},
 			]}
 			data-is-active={entry.href === pathname}
 		>
-			<a href={entry.href} class="block">
+			<a
+				href={entry.href}
+				class="block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+			>
 				{title}
 			</a>
 		</li>
@@ -51,7 +54,7 @@ const title = await getLocalisedEntryTitle(entry);
 				{ "pl-4 border-l border-stone-800": depth > 0 },
 			]}
 		>
-			<h5 class="mb-1 font-semibold text-stone-300 hover:text-white">
+			<h5 class="mb-1 font-semibold text-stone-200 tracking-tight hover:text-white">
 				<a
 					href={entry.href}
 					class:list={[
