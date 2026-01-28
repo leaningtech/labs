@@ -1,3 +1,7 @@
 packages:
-  - "sites/*"
-  - "packages/*"
+  - sites/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

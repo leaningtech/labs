@@ -14,10 +14,10 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"svelte": "^4.0.0 || ^5.0.0"
 	},
 	"devDependencies": {
-		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"svelte": "^4.2.7",
 		"vite": "^5.3.5"
 	},
