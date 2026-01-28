@@ -1,0 +1,189 @@
+:root {
+	color-scheme: light;
+
+	/* Layout */
+	--pad: 18px;
+	--max: 920px;
+
+	/* Typography */
+	--font: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+	--mono:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
+
+	/* Colors */
+	--fg: #0b1220;
+	--muted: #475569;
+	--bg: #ffffff;
+	--link: #2563eb;
+
+	--surface: #f7f9fc;
+	--border: #e6eaf2;
+
+	/* Radius */
+	--r-sm: 8px;
+	--r-md: 12px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--font);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Keep the preview readable on wide screens */
+body > * {
+	max-width: var(--max);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body {
+	padding: var(--pad);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1.2;
+	margin: 1.05em 0 0.4em;
+	letter-spacing: -0.01em;
+}
+
+h1 {
+	font-size: 1.65em;
+}
+h2 {
+	font-size: 1.35em;
+}
+h3 {
+	font-size: 1.15em;
+}
+
+p {
+	margin: 0.65em 0;
+}
+
+small {
+	color: var(--muted);
+}
+
+a {
+	color: var(--link);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* Lists */
+ul,
+ol {
+	margin: 0.65em 0;
+	padding-left: 1.25em;
+}
+
+li {
+	margin: 0.25em 0;
+}
+
+li > p {
+	margin: 0.35em 0;
+}
+
+/* Code */
+code,
+pre,
+kbd {
+	font-family: var(--mono);
+	font-size: 0.95em;
+}
+
+code {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	padding: 0.12em 0.38em;
+	border-radius: var(--r-sm);
+}
+
+pre {
+	background: var(--surface);
+	border: 1px solid var(--border);
+	padding: 12px 14px;
+	border-radius: var(--r-md);
+	overflow: auto;
+	line-height: 1.45;
+}
+
+/* Ensure code blocks don't double-style */
+pre code {
+	background: transparent;
+	border: none;
+	padding: 0;
+	border-radius: 0;
+}
+
+/* Quotes */
+blockquote {
+	margin: 0.9em 0;
+	padding: 0.35em 0 0.35em 14px;
+	border-left: 3px solid #d3dcf3;
+	color: var(--muted);
+}
+
+/* Tables */
+table {
+	border-collapse: collapse;
+	margin: 0.9em 0;
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid var(--border);
+	padding: 7px 10px;
+	vertical-align: top;
+}
+
+th {
+	background: #f1f5ff;
+	text-align: left;
+}
+
+/* Images and rules */
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--r-md);
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid var(--border);
+	margin: 18px 0;
+}
+
+/* Subtle selection */
+::selection {
+	background: rgba(37, 99, 235, 0.18);
+}

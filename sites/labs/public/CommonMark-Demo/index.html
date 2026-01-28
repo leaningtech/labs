@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
+		/>
+		<title>CommonMark – Library Mode</title>
+		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+
+	<body>
+		<div class="app">
+			<header class="appbar">
+				<div class="brand">
+					<div class="brand-text">
+						<div class="brand-title">CommonMark</div>
+						<div class="brand-subtitle">Java-powered Markdown rendering</div>
+					</div>
+				</div>
+
+				<div class="appbar-spacer"></div>
+
+				<div class="toolbar" role="toolbar" aria-label="CommonMark actions">
+					<label class="toggle">
+						<input id="live-toggle" type="checkbox" checked />
+						<span class="toggle-ui" aria-hidden="true"></span>
+						<span class="toggle-label">Live</span>
+					</label>
+
+					<button id="btn-render" class="btn btn-primary" type="button">
+						Render
+					</button>
+
+					<button id="btn-reset" class="btn" type="button">Reset</button>
+
+					<button id="btn-help" class="btn btn-ghost" type="button">
+						About
+					</button>
+				</div>
+			</header>
+
+			<div class="workspace" id="workspace">
+				<section class="panel panel-editor" aria-label="Markdown editor">
+					<header class="panel-header">
+						<div class="panel-title">Editor</div>
+					</header>
+
+					<div class="editor-wrap">
+						<textarea
+							id="md-input"
+							spellcheck="false"
+							autocomplete="off"
+							autocapitalize="off"
+							placeholder="Write Markdown here…"
+						></textarea>
+					</div>
+				</section>
+
+				<section class="panel panel-preview" aria-label="HTML preview">
+					<header class="panel-header">
+						<div class="panel-title">Preview</div>
+					</header>
+
+					<iframe id="preview" title="Rendered HTML preview"></iframe>
+				</section>
+
+				<aside class="side" id="side" aria-label="Explanation panel">
+					<div class="side-head">
+						<div class="side-title">Info</div>
+						<button
+							id="btn-close-side"
+							class="icon-btn"
+							type="button"
+							aria-label="Close info panel"
+						>
+							✕
+						</button>
+					</div>
+
+					<div class="side-body">
+						<details open class="accordion">
+							<summary>What this is</summary>
+							<p>
+								CommonMark JAR has been used with CheerpJ library mode to build
+								a browser-based Markdown editor. Java is used as a computation
+								engine to parse Markdown and render HTML, while JavaScript
+								handles the UI.
+							</p>
+						</details>
+
+						<details open class="accordion">
+							<summary>How it works</summary>
+							On each edit, JS passes Markdown text to CommonMark, receives
+							rendered HTML, and injects it into the page.
+							<ol class="steps">
+								<li>JS captures Markdown text from the editor</li>
+								<li>Java (CommonMark) parses + renders HTML in-browser</li>
+								<li>JS injects HTML into the preview</li>
+							</ol>
+						</details>
+
+						<details class="accordion">
+							<summary>Runtime details</summary>
+							<div class="kv">
+								<div class="k">Library</div>
+								<div class="v">commonmark-0.27.1.jar</div>
+								<div class="k">Mode</div>
+								<div class="v">cheerpjRunLibrary()</div>
+								<div class="k">Java</div>
+								<div class="v">17</div>
+							</div>
+						</details>
+
+						<div class="side-footer">
+							<a
+								class="link"
+								href="https://github.com/commonmark/commonmark-java"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Source (CommonMark)
+							</a>
+							<a
+								class="link"
+								href="https://cheerpj.com/docs/guides/library-mode"
+								target="_blank"
+								rel="noreferrer"
+							>
+								CheerpJ Library Mode
+							</a>
+						</div>
+					</div>
+				</aside>
+			</div>
+
+			<footer class="statusbar" aria-label="Status">
+				<div class="status-left">
+					<span class="dot" id="dot"></span>
+					<span id="status-label">Initializing…</span>
+				</div>
+				<div class="status-right" id="status-right">
+					CommonMark via CheerpJ using Java 17
+				</div>
+			</footer>
+		</div>
+
+		<script src="./main.js"></script>
+	</body>
+</html>
