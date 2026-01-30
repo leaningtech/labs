@@ -1,9 +1,10 @@
-// Jar location inside the CheerpJ VFS
+// Jar and theme location inside the CheerpJ VFS
 const VFS_DIR = "/files/FlatLaf-Demo";
 const VFS_JARS = {
 	demo: `${VFS_DIR}/flatlaf-demo-3.7.jar`,
 	editor: `${VFS_DIR}/flatlaf-theme-editor-3.7.jar`,
 };
+const VFS_THEME = `/files/CheerpJ Demo Theme.properties`;
 
 // Where the jars live on the website
 const WEB_JARS = {
@@ -16,6 +17,12 @@ const WEB_JARS = {
 		window.location.href
 	).toString(),
 };
+
+// Where the theme live on the website
+const WEB_THEME = new URL(
+	"./FlatLaf/demo-theme.properties",
+	window.location.href
+).toString();
 
 const btnDemo = document.getElementById("btn-demo");
 const btnEditor = document.getElementById("btn-editor");
@@ -56,6 +63,7 @@ function setStatus(text, { autoResetMs = 3500 } = {}) {
 	// Ensure jars exist in VFS
 	await ensureJarInVfs("demo");
 	await ensureJarInVfs("editor");
+	await ensureThemeInVfs();
 
 	// Start the demo automatically
 	setStatus("Opening Demo…");
@@ -105,6 +113,48 @@ async function ensureJarInVfs(which) {
 
 	console.log(
 		`[VFS] Writing ${which} jar to: ${targetPath} (${byteArr.length} bytes)`
+	);
+
+	const FileOutputStream = await lib.java.io.FileOutputStream;
+	const fos = await new FileOutputStream(targetPath);
+	await fos.write(byteArr);
+	await fos.close();
+
+	console.log(`[VFS] Done: ${targetPath}`);
+}
+
+async function ensureThemeInVfs() {
+	const targetPath = VFS_THEME;
+	const sourceUrl = WEB_THEME;
+
+	const Files = await lib.java.nio.file.Files;
+	const Paths = await lib.java.nio.file.Paths;
+
+	await Files.createDirectories(await Paths.get(VFS_DIR));
+
+	const exists = await Files.exists(await Paths.get(targetPath));
+	if (exists) {
+		console.log(`[VFS] theme already present: ${targetPath}`);
+		return;
+	}
+
+	console.log(`[WEB] Downloading theme: ${sourceUrl}`);
+	setStatus("Downloading demo theme…", { autoResetMs: 0 });
+
+	const resp = await fetch(sourceUrl);
+	if (!resp.ok) {
+		throw new Error(
+			`Failed to fetch ${sourceUrl}: ${resp.status} ${resp.statusText}`
+		);
+	}
+
+	// Fetch as text and encode to bytes
+	const themeText = await resp.text();
+	const encoded = new TextEncoder().encode(themeText);
+	const byteArr = Array.from(new Int8Array(encoded.buffer));
+
+	console.log(
+		`[VFS] Writing theme to: ${targetPath} (${byteArr.length} bytes)`
 	);
 
 	const FileOutputStream = await lib.java.io.FileOutputStream;
