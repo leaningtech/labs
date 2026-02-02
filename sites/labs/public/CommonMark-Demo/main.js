@@ -56,32 +56,25 @@ function debounceRender(ms = 300) {
 }
 
 function defaultMarkdown() {
-  return (
-    "# ![CheerpJ](./assets/cheerpj-logo.png) × CommonMark\n\n" +
-
-    "---\n\n" +
-
-    "## Hello CommonMark 👋\n\n" +
-
-    "**Java is running as a computation library inside the browser.**  \n" +
-    "**JavaScript owns the UI.**\n\n" +
-
-    "![CheerJ Logo](./assets/cheerpj-core-logo.png) " +
-    "Click [here](https://cheerpj.com/) to get to know more about CheerpJ.\n\n" +
-
-    "## Try these edits\n\n" +
-    "1) Change headings, lists, emphasis, and code blocks " +
-    "(**Bold**, _italic_, `inline code`)\n" +
-    "2) Paste a Markdown file; the parsing happens in Java\n\n" +
-
-    "### Code block\n\n" +
-
-    "```java\n" +
-    "// Java runs in your browser (CheerpJ).\n" +
-    "// CommonMark is used purely as a library.\n" +
-    'System.out.println("Markdown to HTML in Java 17, UI in JavaScript");\n' +
-    "```\n"
-  );
+	return (
+		"# ![CheerpJ](./assets/cheerpj-logo.png) × CommonMark\n\n" +
+		"---\n\n" +
+		"## Hello CommonMark 👋\n\n" +
+		"**Java is running as a computation library inside the browser.**  \n" +
+		"**JavaScript owns the UI.**\n\n" +
+		"![CheerJ Logo](./assets/cheerpj-core-logo.png) " +
+		"Click [here](https://cheerpj.com/) to get to know more about CheerpJ.\n\n" +
+		"## Try these edits\n\n" +
+		"1) Change headings, lists, emphasis, and code blocks " +
+		"(**Bold**, _italic_, `inline code`)\n" +
+		"2) Paste a Markdown file; the parsing happens in Java\n\n" +
+		"### Code block\n\n" +
+		"```java\n" +
+		"// Java runs in your browser (CheerpJ).\n" +
+		"// CommonMark is used purely as a library.\n" +
+		'System.out.println("Markdown to HTML in Java 17, UI in JavaScript");\n' +
+		"```\n"
+	);
 }
 
 async function loadJarIntoStrVfs() {

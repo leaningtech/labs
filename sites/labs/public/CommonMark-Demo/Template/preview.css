@@ -142,14 +142,14 @@ kbd {
 
 code {
 	background: rgba(15, 23, 42, 0.03);
-	border: 1px solid rgba(15, 23, 42, 0.10);
+	border: 1px solid rgba(15, 23, 42, 0.1);
 	padding: 0.12em 0.38em;
 	border-radius: var(--r-sm);
 }
 
 pre {
 	background: #f8fafc;
-	border: 1px solid rgba(15, 23, 42, 0.10);
+	border: 1px solid rgba(15, 23, 42, 0.1);
 	padding: 14px 16px;
 	border-radius: var(--r-md);
 	overflow: auto;
@@ -184,7 +184,7 @@ table {
 
 th,
 td {
-	border: 1px solid rgba(15, 23, 42, 0.10);
+	border: 1px solid rgba(15, 23, 42, 0.1);
 	padding: 7px 10px;
 	vertical-align: top;
 }
@@ -214,7 +214,7 @@ p:has(> img:first-child) {
 /* Horizontal rule as section divider */
 hr {
 	border: 0;
-	border-top: 1px solid rgba(15, 23, 42, 0.10);
+	border-top: 1px solid rgba(15, 23, 42, 0.1);
 	margin: 18px 0 22px;
 }
 
