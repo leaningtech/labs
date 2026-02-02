@@ -56,18 +56,32 @@ function debounceRender(ms = 300) {
 }
 
 function defaultMarkdown() {
-	return (
-		"# Hello CommonMark 👋\n\n" +
-		"This page uses **CheerpJ library mode** to run **Java** in the browser.\n\n" +
-		"## What to try\n\n" +
-		"- **Bold**, _italic_, `inline code`\n" +
-		"- Links: https://cheerpj.com\n" +
-		"- Code blocks:\n\n" +
-		"```js\n" +
-		"console.log('Rendered by Java (CommonMark)');\n" +
-		"```\n\n" +
-		'> Markdown is forgiving — "invalid" syntax is usually treated as text.\n'
-	);
+  return (
+    "# ![CheerpJ](./assets/cheerpj-logo.png) × CommonMark\n\n" +
+
+    "---\n\n" +
+
+    "## Hello CommonMark 👋\n\n" +
+
+    "**Java is running as a computation library inside the browser.**  \n" +
+    "**JavaScript owns the UI.**\n\n" +
+
+    "![CheerJ Logo](./assets/cheerpj-core-logo.png) " +
+    "Click [here](https://cheerpj.com/) to get to know more about CheerpJ.\n\n" +
+
+    "## Try these edits\n\n" +
+    "1) Change headings, lists, emphasis, and code blocks " +
+    "(**Bold**, _italic_, `inline code`)\n" +
+    "2) Paste a Markdown file; the parsing happens in Java\n\n" +
+
+    "### Code block\n\n" +
+
+    "```java\n" +
+    "// Java runs in your browser (CheerpJ).\n" +
+    "// CommonMark is used purely as a library.\n" +
+    'System.out.println("Markdown to HTML in Java 17, UI in JavaScript");\n' +
+    "```\n"
+  );
 }
 
 async function loadJarIntoStrVfs() {

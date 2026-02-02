@@ -23,6 +23,11 @@
 	/* Radius */
 	--r-sm: 8px;
 	--r-md: 12px;
+
+	/* CheerpJ accent */
+	--accent: #ff8a00;
+	--accent-soft: rgba(255, 138, 0, 0.16);
+	--shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
 }
 
 *,
@@ -41,9 +46,10 @@ body {
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--font);
-	line-height: 1.6;
+	line-height: 1.65;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	padding: var(--pad);
 }
 
 /* Keep the preview readable on wide screens */
@@ -51,10 +57,6 @@ body > * {
 	max-width: var(--max);
 	margin-left: auto;
 	margin-right: auto;
-}
-
-body {
-	padding: var(--pad);
 }
 
 /* Typography */
@@ -70,13 +72,30 @@ h6 {
 }
 
 h1 {
-	font-size: 1.65em;
+	font-size: 1.7em;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin-top: 0.25em;
 }
+
+h1 img {
+	height: 44px;
+	width: auto;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
 h2 {
 	font-size: 1.35em;
+	margin-top: 1.25em;
 }
+
 h3 {
 	font-size: 1.15em;
+	margin-top: 1.05em;
 }
 
 p {
@@ -88,12 +107,14 @@ small {
 }
 
 a {
-	color: var(--link);
+	color: var(--accent);
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 2px;
 }
 
 /* Lists */
@@ -104,7 +125,7 @@ ol {
 }
 
 li {
-	margin: 0.25em 0;
+	margin: 0.35em 0;
 }
 
 li > p {
@@ -120,19 +141,20 @@ kbd {
 }
 
 code {
-	background: var(--surface);
-	border: 1px solid var(--border);
+	background: rgba(15, 23, 42, 0.03);
+	border: 1px solid rgba(15, 23, 42, 0.10);
 	padding: 0.12em 0.38em;
 	border-radius: var(--r-sm);
 }
 
 pre {
-	background: var(--surface);
-	border: 1px solid var(--border);
-	padding: 12px 14px;
+	background: #f8fafc;
+	border: 1px solid rgba(15, 23, 42, 0.10);
+	padding: 14px 16px;
 	border-radius: var(--r-md);
 	overflow: auto;
 	line-height: 1.45;
+	box-shadow: var(--shadow);
 }
 
 /* Ensure code blocks don't double-style */
@@ -146,9 +168,11 @@ pre code {
 /* Quotes */
 blockquote {
 	margin: 0.9em 0;
-	padding: 0.35em 0 0.35em 14px;
-	border-left: 3px solid #d3dcf3;
-	color: var(--muted);
+	padding: 10px 12px;
+	border-left: 4px solid var(--accent);
+	background: rgba(255, 138, 0, 0.06);
+	border-radius: 10px;
+	color: #334155;
 }
 
 /* Tables */
@@ -160,30 +184,41 @@ table {
 
 th,
 td {
-	border: 1px solid var(--border);
+	border: 1px solid rgba(15, 23, 42, 0.10);
 	padding: 7px 10px;
 	vertical-align: top;
 }
 
 th {
-	background: #f1f5ff;
+	background: rgba(255, 138, 0, 0.08);
 	text-align: left;
 }
 
-/* Images and rules */
+/* Images */
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: var(--r-md);
+	vertical-align: middle;
 }
 
+/* Tighten paragraphs that start with images */
+p > img {
+	margin-right: 8px;
+}
+
+p:has(> img:first-child) {
+	margin-top: 0.5em;
+}
+
+/* Horizontal rule as section divider */
 hr {
 	border: 0;
-	border-top: 1px solid var(--border);
-	margin: 18px 0;
+	border-top: 1px solid rgba(15, 23, 42, 0.10);
+	margin: 18px 0 22px;
 }
 
 /* Subtle selection */
 ::selection {
-	background: rgba(37, 99, 235, 0.18);
+	background: rgba(255, 138, 0, 0.18);
 }
