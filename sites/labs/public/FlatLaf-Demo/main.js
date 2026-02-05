@@ -51,6 +51,7 @@ function setStatus(text, { autoResetMs = 3500 } = {}) {
 
 	await cheerpjInit({
 		version: 17,
+		maximizeWindows: true,
 	});
 
 	cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
