@@ -5,16 +5,14 @@
 	export let productId: string | undefined;
 	export let placeholder: string;
 	export let locale: string;
+	export let baseUrl: string;
 
 	let pagefind: Pagefind;
 	let results: PagefindResult[] = [];
 	let noResultsForQuery = false;
 
 	onMount(async () => {
-		const url =
-			productId === "cheerpj3"
-				? new URL(window.origin + "/docs/pagefind/pagefind.js").href // Add /docs/ for CJ so search bar is able to link correctly
-				: new URL(window.origin + "/pagefind/pagefind.js").href; // Can't use import.meta.url because Vite prefixes the module with /@fs.
+		const url = new URL(window.origin + baseUrl + "pagefind/pagefind.js").href;
 		// @ts-ignore
 		const pf = await import(/* @vite-ignore */ url);
 		await pf.init();
@@ -35,7 +33,7 @@
 
 		const response = await pagefind.debouncedSearch(query, {
 			filters: { productId, language: locale },
-			baseUrl: import.meta.env.BASE_URL,
+			baseUrl,
 		});
 		if (response === null) {
 			// Debounce.
