@@ -14,7 +14,7 @@ const { title, description, image, site } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class={`dark scroll-smooth ${site ? `site-${site}` : ''}`}>
+<html lang="en" class={`dark scroll-smooth ${site ? `site-${site}` : ""}`}>
 	<head>
 		<BaseHead
 			title={title || SITE_TITLE}
@@ -91,8 +91,6 @@ const { title, description, image, site } = Astro.props;
 			.prose a:has(> span > img) {
 				white-space: nowrap;
 			}
-
-			
 
 			p,
 			li {
