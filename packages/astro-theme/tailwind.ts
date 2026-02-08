@@ -43,13 +43,13 @@ const siteThemes = plugin(({ addBase }) => {
 		},
 		// BrowserPod theme (teal)
 		".site-browserpod": {
-			"--color-primary-600": "13 148 136", // #0d9488 (teal-600)
-			"--color-primary-500": "20 184 166", // #14b8a6 (teal-500)
-			"--color-primary-400": "45 212 191", // #2dd4bf (teal-400)
-			"--color-primary-300": "94 234 212", // #5eead4 (teal-300)
-			"--color-primary-200": "153 246 228", // #99f6e4 (teal-200)
-			"--color-primary-100": "204 251 241", // #ccfbf1 (teal-100)
-			"--color-primary-50": "240 253 250", // #f0fdfa (teal-50)
+			"--color-primary-600": "17 158 123", // #119e7b (darker, more saturated)
+			"--color-primary-500": "35 201 159", // #23c99f (medium-dark)
+			"--color-primary-400": "58 229 179", // #3ae5b3 (Browserpod logo)
+			"--color-primary-300": "104 239 199", // #68efc7 (lighter)
+			"--color-primary-200": "158 247 220", // #9ef7dc (very light)
+			"--color-primary-100": "206 252 239", // #cefcef (pale)
+			"--color-primary-50": "237 254 248", // #edfef8 (almost white)
 		},
 		// Add future site themes here, e.g.:
 		// ".site-cheerpx": { ... },
