@@ -25,7 +25,7 @@ const crumbs = path
 	});
 ---
 
-<nav aria-label="Breadcrumb" class="leading-6 text-stone-400 text-sm">
+<nav aria-label="Breadcrumb" class="leading-6 text-bg-400 text-sm">
 	<ol>
 		{
 			crumbs.map(({ title, url, isLast }) => (
@@ -37,7 +37,7 @@ const crumbs = path
 						{title}
 					</a>
 					{!isLast && (
-						<Icon name="jam:chevron-right" class="h-5 mx-2 text-stone-700" />
+						<Icon name="jam:chevron-right" class="h-5 mx-2 text-bg-700" />
 					)}
 				</li>
 			))

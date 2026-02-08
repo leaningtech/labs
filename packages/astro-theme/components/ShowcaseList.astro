@@ -28,7 +28,7 @@ if (typeof props.limit == "number") {
 				<li>
 					<a
 						href={project.data.url}
-						class="block h-full p-2 border border-stone-700 text-stone-500 rounded-lg shadow-lg hover:translate-y-[-2px] hover:border-stone-600 hover:text-stone-400 transition-all"
+						class="block h-full p-2 border border-bg-700 text-bg-500 rounded-lg shadow-lg hover:translate-y-[-2px] hover:border-bg-600 hover:text-bg-400 transition-all"
 					>
 						{project.data.heroImage && (
 							<Image
@@ -40,7 +40,7 @@ if (typeof props.limit == "number") {
 								loading="lazy"
 							/>
 						)}
-						<h5 class="font-semibold p-3 pb-1 text-stone-100">
+						<h5 class="font-semibold p-3 pb-1 text-bg-100">
 							{project.data.title}
 						</h5>
 						<p class="p-3 pt-0 leading-5">{project.data.description}</p>

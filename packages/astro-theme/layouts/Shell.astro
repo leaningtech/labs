@@ -72,7 +72,7 @@ const { title, description, image, site } = Astro.props;
 			/* inline code */
 			.prose
 				:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-				@apply bg-stone-800;
+				@apply bg-bg-800;
 
 				padding: 0.2em 0.4em;
 				font-size: 90%;
@@ -101,7 +101,7 @@ const { title, description, image, site } = Astro.props;
 		</style>
 	</head>
 	<body
-		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-stone-900 text-stone-200"
+		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-bg-900 text-bg-200"
 	>
 		<GlobalNavbar />
 		<slot />

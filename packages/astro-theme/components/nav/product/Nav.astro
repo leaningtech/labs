@@ -31,7 +31,7 @@ if (product.id.includes("cheerpj")) {
 
 <nav
 	aria-label="Product navigation"
-	class="sticky top-0 z-40 bg-stone-900 text-white font-medium leading-6 border-b border-b-transparent shadow-none transition-all duration-200"
+	class="sticky top-0 z-40 bg-bg-900 text-white font-medium leading-6 border-b border-b-transparent shadow-none transition-all duration-200"
 	id="product-nav"
 >
 	<div
@@ -65,14 +65,14 @@ if (product.id.includes("cheerpj")) {
 			}
 		</div>
 
-		<div class="flex items-center gap-4 flex-none text-stone-200">
+		<div class="flex items-center gap-4 flex-none text-bg-200">
 			<a
 				href={DISCORD_URL}
 				class="flex items-center gap-1.5 hover:text-white group"
 			>
 				<Icon name="fa-brands:discord" class="w-5 h-5" />
 				<span
-					class="hidden md:flex items-center gap-1 text-stone-400 group-hover:text-white"
+					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white"
 					title="Online Discord members"
 				>
 					<Icon
@@ -89,7 +89,7 @@ if (product.id.includes("cheerpj")) {
 			>
 				<Icon name="fa-brands:github" class="w-5 h-5" />
 				<span
-					class="hidden md:flex items-center gap-1 text-stone-400 group-hover:text-white"
+					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white"
 					title="GitHub stars"
 				>
 					<Icon name="ph:star-fill" class="w-4 h-4" />
@@ -107,7 +107,7 @@ if (product.id.includes("cheerpj")) {
 	// add shadow and border when scrolling
 
 	const nav = document.getElementById("product-nav")!;
-	const classes = ["!border-b-stone-800", "!shadow-lg"];
+	const classes = ["!border-b-bg-800", "!shadow-lg"];
 
 	function handleScroll() {
 		if (window.scrollY > 64) {
