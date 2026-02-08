@@ -30,12 +30,11 @@ const { id, title, description, headings, fullWidthLayout, language } =
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
-
 const entries = product
 	? getLocalisedProductNav(nav, product.id, Astro.currentLocale)
 	: [];
 
-function getEditHref(id: string): string {
+function getSite(): string {
 	let site;
 	if (Astro.site?.hostname === "labs.leaningtech.com") site = "labs";
 	if (Astro.site?.hostname === "cheerp.io") site = "cheerp";
@@ -43,8 +42,14 @@ function getEditHref(id: string): string {
 	if (Astro.site?.hostname === "cheerpx.io") site = "cheerpx";
 	if (Astro.site?.hostname === "browserpod.io") site = "browserpod";
 	if (!site) throw new Error("unable to derive site dirname from Astro.site");
+	console.log(site);
+	return site;
+}
+function getEditHref(id: string): string {
 	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
 }
+
+const site = getSite();
 ---
 
 <Shell
@@ -55,6 +60,7 @@ function getEditHref(id: string): string {
 		.filter(Boolean)
 		.join(" - ")}
 	description={description ?? product?.description}
+	site={site === "browserpod" ? "browserpod" : ""}
 >
 	<BentoGrid />
 	{product ? <ProductNav {product} /> : null}
@@ -90,7 +96,7 @@ function getEditHref(id: string): string {
 						{...(product && {
 							"data-pagefind-filter": `productId:${product.id}`,
 						})}
-						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]"
+						class={`prose ${site === "browserpod" ? "prose-browserpod" : "prose-stone"} dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]`}
 					>
 						{title === product?.name ? (
 							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">

@@ -7,13 +7,14 @@ interface Props {
 	title?: string;
 	description?: string | undefined;
 	image?: string | undefined;
+	site?: string; // to discriminate colour scheme by site
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, site } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class={`dark scroll-smooth ${site ? `site-${site}` : ''}`}>
 	<head>
 		<BaseHead
 			title={title || SITE_TITLE}
@@ -90,6 +91,8 @@ const { title, description, image } = Astro.props;
 			.prose a:has(> span > img) {
 				white-space: nowrap;
 			}
+
+			
 
 			p,
 			li {
