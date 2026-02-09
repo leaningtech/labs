@@ -74,7 +74,7 @@ const { heading } = Astro.props;
 					if (visibleEntries.length > 0) {
 						const firstVisible = visibleEntries[0];
 						const slug = firstVisible.target.id;
-						
+
 						if (slug !== this.activeSlug) {
 							this.activeSlug = slug;
 							this.updateAllLinks(slug);
