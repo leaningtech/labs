@@ -66,18 +66,20 @@ const siteThemes = plugin(({ addBase }) => {
 			"--color-primary-100": "206 252 239", // #cefcef
 			"--color-primary-50": "237 254 248", // #edfef8
 
-			"--color-bg-950": "2 8 6", // #020806 (nearly black with emerald tint)
-			"--color-bg-900": "4 12 10", // #040c0a (very dark emerald-tinted)
-			"--color-bg-800": "8 20 16", // #081410 (dark emerald-tinted)
-			"--color-bg-700": "12 30 24", // #0c1e18 (medium-dark)
-			"--color-bg-600": "16 40 32", // #102820 (dark-medium)
-			"--color-bg-500": "16 185 129", // #10b981 (emerald-500)
-			"--color-bg-400": "52 211 153", // #34d399 (emerald-400)
-			"--color-bg-300": "110 231 183", // #6ee7b7 (emerald-300)
-			"--color-bg-200": "167 243 208", // #a7f3d0 (emerald-200)
-			"--color-bg-100": "209 250 229", // #d1fae5 (emerald-100)
-			"--color-bg-50": "236 253 245", // #ecfdf5 (emerald-50)
+			// Background colors - Neutral palette
+			"--color-bg-950": "10 10 10", // neutral-950 #0a0a0a
+			"--color-bg-900": "23 23 23", // neutral-900 #171717
+			"--color-bg-800": "38 38 38", // neutral-800 #262626
+			"--color-bg-700": "64 64 64", // neutral-700 #404040
+			"--color-bg-600": "82 82 82", // neutral-600 #525252
+			"--color-bg-500": "115 115 115", // neutral-500 #737373
+			"--color-bg-400": "163 163 163", // neutral-400 #a3a3a3
+			"--color-bg-300": "212 212 212", // neutral-300 #d4d4d4
+			"--color-bg-200": "229 229 229", // neutral-200 #e5e5e5
+			"--color-bg-100": "245 245 245", // neutral-100 #f5f5f5
+			"--color-bg-50": "250 250 250", // neutral-50 #fafafa
 		},
+
 		// Add future site themes here, e.g.:
 		// ".site-cheerpx": { ... },
 		// ".site-cheerp": { ... },
