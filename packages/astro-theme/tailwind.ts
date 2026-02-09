@@ -42,30 +42,6 @@ const siteThemes = plugin(({ addBase }) => {
 			"--color-primary-100": "250 212 221", // #fad4dd
 			"--color-primary-50": "253 233 238", // #fde9ee
 
-			// Background colors - default to stone palette
-			"--color-bg-950": "12 10 9", // stone-950
-			"--color-bg-900": "28 25 23", // stone-900
-			"--color-bg-800": "41 37 36", // stone-800
-			"--color-bg-700": "68 64 60", // stone-700
-			"--color-bg-600": "87 83 78", // stone-600
-			"--color-bg-500": "120 113 108", // stone-500
-			"--color-bg-400": "168 162 158", // stone-400
-			"--color-bg-300": "214 211 209", // stone-300
-			"--color-bg-200": "231 229 228", // stone-200
-			"--color-bg-100": "245 245 244", // stone-100
-			"--color-bg-50": "250 250 249", // stone-50
-		},
-		// BrowserPod theme (teal + darker emerald-tinted backgrounds)
-		".site-browserpod": {
-			// Primary colors
-			"--color-primary-600": "17 158 123", // #119e7b
-			"--color-primary-500": "35 201 159", // #23c99f
-			"--color-primary-400": "58 229 179", // #3ae5b3
-			"--color-primary-300": "104 239 199", // #68efc7
-			"--color-primary-200": "158 247 220", // #9ef7dc
-			"--color-primary-100": "206 252 239", // #cefcef
-			"--color-primary-50": "237 254 248", // #edfef8
-
 			// Background colors - Neutral palette
 			"--color-bg-950": "10 10 10", // neutral-950 #0a0a0a
 			"--color-bg-900": "23 23 23", // neutral-900 #171717
@@ -78,6 +54,17 @@ const siteThemes = plugin(({ addBase }) => {
 			"--color-bg-200": "229 229 229", // neutral-200 #e5e5e5
 			"--color-bg-100": "245 245 245", // neutral-100 #f5f5f5
 			"--color-bg-50": "250 250 250", // neutral-50 #fafafa
+		},
+		// BrowserPod theme (teal + darker emerald-tinted backgrounds)
+		".site-browserpod": {
+			// Primary colors
+			"--color-primary-600": "17 158 123", // #119e7b
+			"--color-primary-500": "35 201 159", // #23c99f
+			"--color-primary-400": "58 229 179", // #3ae5b3
+			"--color-primary-300": "104 239 199", // #68efc7
+			"--color-primary-200": "158 247 220", // #9ef7dc
+			"--color-primary-100": "206 252 239", // #cefcef
+			"--color-primary-50": "237 254 248", // #edfef8
 		},
 
 		// Add future site themes here, e.g.:
