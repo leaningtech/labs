@@ -17,7 +17,7 @@ const { heading } = Astro.props;
 	<a
 		href={"#" + heading.slug}
 		class:list={[
-			"block py-1 tex-bg-400 hover:text-white",
+			"block py-1 text-bg-300 hover:text-white",
 			{
 				"font-medium": heading.depth <= 2,
 			},
@@ -38,13 +38,73 @@ const { heading } = Astro.props;
 </li>
 
 <script>
-	// Active state based on location.hash
+	// Active state based on location.hash AND scroll position
 	class TocHeading extends HTMLLIElement {
+		private static observer: IntersectionObserver | null = null;
+		private static activeSlug: string | null = null;
+
 		constructor() {
 			super();
 
+			// Create shared observer on first instance
+			if (!TocHeading.observer) {
+				TocHeading.initObserver();
+			}
+
+			// Also handle hash changes (for direct clicks)
 			this.update();
 			window.addEventListener("hashchange", () => this.update());
+		}
+
+		static initObserver() {
+			// Observe all headings in the main content (excluding H1)
+			const headings = document.querySelectorAll(
+				"main h2[id], main h3[id], main h4[id], main h5[id], main h6[id]"
+			);
+
+			this.observer = new IntersectionObserver(
+				(entries) => {
+					// Find the first visible heading
+					const visibleEntries = entries
+						.filter((entry) => entry.isIntersecting)
+						.sort((a, b) => {
+							return a.boundingClientRect.top - b.boundingClientRect.top;
+						});
+
+					if (visibleEntries.length > 0) {
+						const firstVisible = visibleEntries[0];
+						const slug = firstVisible.target.id;
+						
+						if (slug !== this.activeSlug) {
+							this.activeSlug = slug;
+							this.updateAllLinks(slug);
+						}
+					}
+				},
+				{
+					rootMargin: "-100px 0px -66%",
+					threshold: 1.0,
+				}
+			);
+
+			headings.forEach((heading) => {
+				this.observer?.observe(heading);
+			});
+		}
+
+		static updateAllLinks(activeSlug: string) {
+			// Remove active class from all TOC links
+			document.querySelectorAll("li[is='toc-heading'] a").forEach((link) => {
+				link.classList.remove("!text-primary-400");
+			});
+
+			// Add active class to link with matching href
+			const targetHref = `#${activeSlug}`;
+			document.querySelectorAll("li[is='toc-heading'] a").forEach((link) => {
+				if (link.getAttribute("href") === targetHref) {
+					link.classList.add("!text-primary-400");
+				}
+			});
 		}
 
 		update() {
@@ -52,7 +112,6 @@ const { heading } = Astro.props;
 			if (!a) throw new Error("expected <a> element");
 
 			const href = a.getAttribute("href");
-			console.log(href);
 
 			if (href === location.hash) {
 				a.classList.add("!text-primary-400");

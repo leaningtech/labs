@@ -27,7 +27,7 @@ const title = await getLocalisedEntryTitle(entry);
 	entry.type === "file" && (!entry.isIndex || depth === 0) && (
 		<li
 			class:list={[
-				"group py-1 text-bg-50 hover:border-bg-400 hover:text-white",
+				"group py-1 text-bg-300 hover:border-bg-400 hover:text-white",
 				{
 					"font-semibold !text-primary-500 !border-primary-600":
 						entry.href === pathname,
@@ -51,7 +51,7 @@ const title = await getLocalisedEntryTitle(entry);
 				{ "pl-4 border-l border-bg-800": depth > 0 },
 			]}
 		>
-			<h5 class="mb-1 font-semibold text-bg-300 hover:text-white">
+			<h5 class="mb-1 font-semibold text-bg-100 hover:text-white">
 				<a
 					href={entry.href}
 					class:list={[
