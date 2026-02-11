@@ -47,10 +47,9 @@ const socialImage = heroImage
 	: undefined;
 
 const site = getSite(Astro.site?.hostname);
-
 ---
 
-<Shell title={titleAndSubtitle} {description} image={socialImage?.src} site={site}>
+<Shell title={titleAndSubtitle} {description} image={socialImage?.src} {site}>
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
@@ -123,7 +122,8 @@ const site = getSite(Astro.site?.hostname);
 				<SocialShare {title} {description} via="leaningtech" />
 
 				<div
-					class= "prose md:prose-lg dark:prose-invert",	
+					class="prose md:prose-lg dark:prose-invert"
+					,
 					data-pagefind-body
 					data-pagefind-filter="productId:blog"
 				>

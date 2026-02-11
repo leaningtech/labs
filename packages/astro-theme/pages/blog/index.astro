@@ -6,7 +6,7 @@ import Shell from "../../layouts/Shell.astro";
 import Footer from "../../components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
 import { productFromUrl } from "../../lib/products";
-import {getSite} from "../../lib/nav";
+import { getSite } from "../../lib/nav";
 import ProductNav from "../../components/nav/product/Nav.astro";
 
 const product = productFromUrl(Astro.url);
@@ -20,14 +20,13 @@ const [post1, post2, ...restPosts] = (
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const site = getSite(Astro.site?.hostname);
-
 ---
 
 <Shell
 	title={`${product?.name ?? "Engineering"} blog`}
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
-	site={site}
-	>
+	{site}
+>
 	{product && <ProductNav {product} />}
 	<header class="text-center text-bg-100 py-16">
 		<div class="flex justify-center items-center">
