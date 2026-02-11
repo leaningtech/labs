@@ -80,7 +80,7 @@ You will see the CheerpJ display on your browser with some loading messages befo
 - [`cheerpjInit`] initialises the CheerpJ runtime environment.
 - [`cheerpjCreateDisplay`] creates a graphical environment to contain all Java windows.
 - [`cheerpjRunJar`] executes your application!
-- `/app/` is a [virtual filesystem] mount point that references the root of the web server this page is loaded from.
+- `/app/` is a [virtual filesystem] mount point that **references the root of the web server** this page is loaded from.
 
 ### Is your application not working?
 
@@ -98,4 +98,4 @@ If your application doesn't work, check the following:
 [`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
-[virtual filesystem]: /docs/guides/File-System-support
+[virtual filesystem]: /docs/guides/filesystem
