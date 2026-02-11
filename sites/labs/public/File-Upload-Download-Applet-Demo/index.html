@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>CheerpJ Upload/Download Applet Demo</title>
+
+		<style>
+			:root {
+				--header-height: 60px;
+				--bg-color: #f0f2f5;
+				--text-color: #333;
+				--header-bg: #ffffff;
+				--border-color: #ddd;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family:
+					-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+					Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: var(--bg-color);
+				color: var(--text-color);
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				/* Prevent body scroll, let applet handle it if needed */
+			}
+
+			header {
+				background-color: var(--header-bg);
+				border-bottom: 1px solid var(--border-color);
+				padding: 0 20px;
+				height: auto;
+				min-height: var(--header-height);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+				z-index: 10;
+			}
+
+			h1 {
+				margin: 10px 0 5px 0;
+				font-size: 1.5rem;
+				font-weight: 600;
+				text-align: center;
+			}
+
+			code {
+				background: #eee;
+				padding: 2px 4px;
+				border-radius: 4px;
+				font-size: 0.85em;
+				font-family:
+					ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+					"Liberation Mono", monospace;
+			}
+
+			#applet-container {
+				flex: 1;
+				/* Take remaining space */
+				position: relative;
+				width: 100%;
+				height: 100%;
+				background: #fff;
+			}
+
+			cheerpj-applet {
+				display: block;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>File Upload/Download Applet Demo</h1>
+		</header>
+
+		<div id="applet-container">
+			<cheerpj-applet
+				archive="NoteAppletDemo.jar"
+				code="NoteApplet"
+				width="100%"
+				height="100%"
+			>
+				Your browser cannot handle the applet tag!
+			</cheerpj-applet>
+		</div>
+	</body>
+</html>
