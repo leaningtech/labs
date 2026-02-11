@@ -40,16 +40,14 @@ const blog_url =
 				width={size === "wide" ? 600 : 390}
 				height={256}
 				alt=""
-				class="rounded-xl mb-4 bg-stone-100 object-cover w-full h-64 self-center"
+				class="rounded-xl mb-4 bg-bg-100 object-cover w-full h-64 self-center"
 			/>
 		)
 	}
 	<h3
 		class:list={{
 			"font-bold text-balance text-white grow": true,
-			"group-hover:text-cheerp grow": productName === "Cheerp",
-			"group-hover:text-[#6386a5] grow": productName === "CheerpX",
-			"group-hover:text-primary-400 grow": productName === "Labs",
+			"group-hover:text-primary-400 grow": true,
 			"text-2xl leading-7": size === "wide",
 			"text-xl leading-6": size === "narrow",
 		}}
@@ -58,13 +56,13 @@ const blog_url =
 	</h3>
 	{
 		showMetadata && (
-			<div class="mt-4 flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
+			<div class="mt-4 flex justify-between items-center gap-8 text-bg-400 text-base whitespace-nowrap">
 				<div class="flex items-center gap-2 font-semibold overflow-hidden">
 					<div class="flex-none space-x-[-1rem]">
 						{authors.map((author) =>
 							author.avatar ? (
 								<img
-									class="inline-block w-8 h-8 rounded-full shadow border-2 border-stone-900"
+									class="inline-block w-8 h-8 rounded-full shadow border-2 border-bg-900"
 									src={author.avatar.src}
 									alt=""
 									loading="lazy"
