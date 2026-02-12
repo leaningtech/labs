@@ -1,9 +1,10 @@
 ---
+
 ---
 
 <div class="aurora-container">
-    <div class="aurora-blob emerald-one"></div>
-    <div class="aurora-blob emerald-two"></div>
+	<div class="aurora-blob emerald-one"></div>
+	<div class="aurora-blob emerald-two"></div>
 </div>
 
 <style>
@@ -17,7 +18,7 @@
 		filter: blur(120px);
 		opacity: 0.1;
 		pointer-events: none;
-	}	
+	}
 
 	.aurora-blob {
 		position: absolute;
@@ -42,7 +43,11 @@
 	}
 
 	@keyframes drift {
-		0% { transform: translate(0, 0) scale(1); }
-		100% { transform: translate(60px, 40px) scale(1.1); }
+		0% {
+			transform: translate(0, 0) scale(1);
+		}
+		100% {
+			transform: translate(60px, 40px) scale(1.1);
+		}
 	}
 </style>

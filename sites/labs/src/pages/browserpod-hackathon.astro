@@ -9,59 +9,89 @@ import Counter from "../components/Counter.astro";
 
 <Shell>
 	<section class="relative w-full h-auto pt-8 bg-[#050b0a] overflow-hidden">
-        <AuroraBackground />
+		<AuroraBackground />
 
 		<!-- Hero -->
-        <div class="relative z-10 py-32">
-            <div class="items-center py-2">
-                <Image src={BPLogo} alt="BrowserPod Logo" class="w-40 mx-auto animate-float" />
-            </div>
-            <div class="">
-                <h1 class="font-mono text-5xl text-center text-wrap text-balance mb-5 bg-gradient-to-r from-emerald-400 to-green-500 text-transparent bg-clip-text font-bold">
-                    Agentic AI JAM - Safe Place, Wild Ideas.
-                </h1>
-                <p class="text-white/80 text-center">
+		<div class="relative z-10 py-32">
+			<div class="items-center py-2">
+				<Image
+					src={BPLogo}
+					alt="BrowserPod Logo"
+					class="w-40 mx-auto animate-float"
+				/>
+			</div>
+			<div class="">
+				<h1
+					class="font-mono text-5xl text-center text-wrap text-balance mb-5 bg-gradient-to-r from-emerald-400 to-green-500 text-transparent bg-clip-text font-bold"
+				>
+					Agentic AI JAM - Safe Place, Wild Ideas.
+				</h1>
+				<p class="text-white/80 text-center">
 					The sandbox for your wildest agentic ideas.
-                </p>
-                <p class="text-emerald-400 text-center font-bold">14 March - 15 March</p>
-                <p class="text-white text-center font-thin">📍EC Stoner Building, Leeds</p>
+				</p>
+				<p class="text-emerald-400 text-center font-bold">
+					14 March - 15 March
+				</p>
+				<p class="text-white text-center font-thin">
+					📍EC Stoner Building, Leeds
+				</p>
 
 				<!-- Countdown Timer -->
 				<Counter />
 
 				<!-- Call to Action Buttons -->
-                <div class="flex gap-4 justify-center my-8">
-                    <a href="https://forms.gle/ECGyMj8xzjgWQADaA" class="custom-button primary-button">
+				<div class="flex gap-4 justify-center my-8">
+					<a
+						href="https://forms.gle/ECGyMj8xzjgWQADaA"
+						class="custom-button primary-button"
+					>
 						<span>Register</span>
-						<svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg
+							class="button-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
 							<line x1="12" y1="5" x2="12" y2="19"></line>
 							<line x1="5" y1="12" x2="19" y2="12"></line>
 						</svg>
 					</a>
-                    <a href="https://browserpod.io/docs/overview" class="custom-button secondary-button">
+					<a
+						href="https://browserpod.io/docs/overview"
+						class="custom-button secondary-button"
+					>
 						<span>BrowserPod docs</span>
 					</a>
-                </div>
-            </div>
-        </div>
-    </section>
+				</div>
+			</div>
+		</div>
+	</section>
 </Shell>
 
 <div class="relative z-20">
-  <Footer />
+	<Footer />
 </div>
 
 <style>
 	@keyframes float {
-		0%, 100% { transform: translateY(0px); }
-		50% { transform: translateY(-15px); }
+		0%,
+		100% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(-15px);
+		}
 	}
-	
+
 	.animate-float {
 		animation: float 4s ease-in-out infinite;
 	}
-
-	
 
 	/* Button Styling */
 	.custom-button {
@@ -106,4 +136,3 @@ import Counter from "../components/Counter.astro";
 		height: 18px;
 	}
 </style>
-

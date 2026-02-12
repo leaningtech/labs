@@ -1,26 +1,30 @@
 ---
+
 ---
 
-<div id="countdown" class="flex gap-6 justify-center items-center my-8 text-white font-mono">
-    <div class="countdown-unit">
-        <span id="days" class="countdown-number">00</span>
-        <p class="countdown-label">Days</p>
-    </div>
-    <div class="countdown-separator">:</div>
-    <div class="countdown-unit">
-        <span id="hours" class="countdown-number">00</span>
-        <p class="countdown-label">Hours</p>
-    </div>
-    <div class="countdown-separator">:</div>
-    <div class="countdown-unit">
-        <span id="minutes" class="countdown-number">00</span>
-        <p class="countdown-label">Min</p>
-    </div>
-    <div class="countdown-separator">:</div>
-    <div class="countdown-unit">
-        <span id="seconds" class="countdown-number">00</span>
-        <p class="countdown-label">Sec</p>
-    </div>
+<div
+	id="countdown"
+	class="flex gap-6 justify-center items-center my-8 text-white font-mono"
+>
+	<div class="countdown-unit">
+		<span id="days" class="countdown-number">00</span>
+		<p class="countdown-label">Days</p>
+	</div>
+	<div class="countdown-separator">:</div>
+	<div class="countdown-unit">
+		<span id="hours" class="countdown-number">00</span>
+		<p class="countdown-label">Hours</p>
+	</div>
+	<div class="countdown-separator">:</div>
+	<div class="countdown-unit">
+		<span id="minutes" class="countdown-number">00</span>
+		<p class="countdown-label">Min</p>
+	</div>
+	<div class="countdown-separator">:</div>
+	<div class="countdown-unit">
+		<span id="seconds" class="countdown-number">00</span>
+		<p class="countdown-label">Sec</p>
+	</div>
 </div>
 
 <style>
@@ -89,32 +93,42 @@
 </style>
 
 <script>
-  const target = new Date("2026-03-14T12:00:00").getTime();
+	const target = new Date("2026-03-14T12:00:00").getTime();
 
-  function update() {
-    const now = Date.now();
-    const diff = target - now;
+	function update() {
+		const now = Date.now();
+		const diff = target - now;
 
-    const countdownEl = document.getElementById("countdown");
-    if (!countdownEl) return;
+		const countdownEl = document.getElementById("countdown");
+		if (!countdownEl) return;
 
-    if (diff <= 0) {
-      countdownEl.innerHTML =
-        '<span class="text-emerald-400 text-2xl font-bold">The jam has started! 🚀</span>';
-      return;
-    }
+		if (diff <= 0) {
+			countdownEl.innerHTML =
+				'<span class="text-emerald-400 text-2xl font-bold">The jam has started! 🚀</span>';
+			return;
+		}
 
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
+		const daysEl = document.getElementById("days");
+		const hoursEl = document.getElementById("hours");
+		const minutesEl = document.getElementById("minutes");
+		const secondsEl = document.getElementById("seconds");
 
-    if (daysEl) daysEl.textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
-    if (hoursEl) hoursEl.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
-    if (minutesEl) minutesEl.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-    if (secondsEl) secondsEl.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-  }
+		if (daysEl)
+			daysEl.textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
+		if (hoursEl)
+			hoursEl.textContent = String(
+				Math.floor((diff % 86400000) / 3600000)
+			).padStart(2, "0");
+		if (minutesEl)
+			minutesEl.textContent = String(
+				Math.floor((diff % 3600000) / 60000)
+			).padStart(2, "0");
+		if (secondsEl)
+			secondsEl.textContent = String(
+				Math.floor((diff % 60000) / 1000)
+			).padStart(2, "0");
+	}
 
-  update();
-  setInterval(update, 1000);
+	update();
+	setInterval(update, 1000);
 </script>
