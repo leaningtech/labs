@@ -1,0 +1,120 @@
+---
+---
+
+<div id="countdown" class="flex gap-6 justify-center items-center my-8 text-white font-mono">
+    <div class="countdown-unit">
+        <span id="days" class="countdown-number">00</span>
+        <p class="countdown-label">Days</p>
+    </div>
+    <div class="countdown-separator">:</div>
+    <div class="countdown-unit">
+        <span id="hours" class="countdown-number">00</span>
+        <p class="countdown-label">Hours</p>
+    </div>
+    <div class="countdown-separator">:</div>
+    <div class="countdown-unit">
+        <span id="minutes" class="countdown-number">00</span>
+        <p class="countdown-label">Min</p>
+    </div>
+    <div class="countdown-separator">:</div>
+    <div class="countdown-unit">
+        <span id="seconds" class="countdown-number">00</span>
+        <p class="countdown-label">Sec</p>
+    </div>
+</div>
+
+<style>
+	.countdown-unit {
+		text-align: center;
+		background: transparent;
+		border: 1px solid rgba(16, 185, 129, 0.3);
+		border-radius: 12px;
+		padding: 16px 20px;
+		min-width: 100px;
+		transition: all 0.3s ease;
+	}
+
+	.countdown-unit:hover {
+		border-color: rgba(16, 185, 129, 0.5);
+		box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+	}
+
+	.countdown-number {
+		display: block;
+		font-size: 3rem;
+		font-weight: bold;
+		background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		line-height: 1;
+		margin-bottom: 8px;
+	}
+
+	.countdown-label {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-weight: 500;
+	}
+
+	.countdown-separator {
+		font-size: 2.5rem;
+		color: rgba(16, 185, 129, 0.4);
+		font-weight: bold;
+		align-self: center;
+		margin-bottom: 28px;
+	}
+
+	@media (max-width: 768px) {
+		.countdown-unit {
+			min-width: 70px;
+			padding: 12px 16px;
+		}
+
+		.countdown-number {
+			font-size: 2rem;
+		}
+
+		.countdown-separator {
+			font-size: 1.5rem;
+			margin-bottom: 20px;
+		}
+
+		#countdown {
+			gap: 12px;
+		}
+	}
+</style>
+
+<script>
+  const target = new Date("2026-03-14T12:00:00").getTime();
+
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
+
+    const countdownEl = document.getElementById("countdown");
+    if (!countdownEl) return;
+
+    if (diff <= 0) {
+      countdownEl.innerHTML =
+        '<span class="text-emerald-400 text-2xl font-bold">The jam has started! 🚀</span>';
+      return;
+    }
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    if (daysEl) daysEl.textContent = String(Math.floor(diff / 86400000)).padStart(2, "0");
+    if (hoursEl) hoursEl.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+    if (minutesEl) minutesEl.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+    if (secondsEl) secondsEl.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>

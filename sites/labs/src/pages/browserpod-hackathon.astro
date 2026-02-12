@@ -1,0 +1,109 @@
+---
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+import { Image } from "astro:assets";
+import BPLogo from "../assets/bp-hackathon/browserpod-doodle.png";
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import AuroraBackground from "../components/AuroraBackground.astro";
+import Counter from "../components/Counter.astro";
+---
+
+<Shell>
+	<section class="relative w-full h-auto pt-8 bg-[#050b0a] overflow-hidden">
+        <AuroraBackground />
+
+		<!-- Hero -->
+        <div class="relative z-10 py-32">
+            <div class="items-center py-2">
+                <Image src={BPLogo} alt="BrowserPod Logo" class="w-40 mx-auto animate-float" />
+            </div>
+            <div class="">
+                <h1 class="font-mono text-5xl text-center text-wrap text-balance mb-5 bg-gradient-to-r from-emerald-400 to-green-500 text-transparent bg-clip-text font-bold">
+                    Agentic AI JAM - Safe Place, Wild Ideas.
+                </h1>
+                <p class="text-white/80 text-center">
+					The sandbox for your wildest agentic ideas.
+                </p>
+                <p class="text-emerald-400 text-center font-bold">14 March - 15 March</p>
+                <p class="text-white text-center font-thin">📍EC Stoner Building, Leeds</p>
+
+				<!-- Countdown Timer -->
+				<Counter />
+
+				<!-- Call to Action Buttons -->
+                <div class="flex gap-4 justify-center my-8">
+                    <a href="https://forms.gle/ECGyMj8xzjgWQADaA" class="custom-button primary-button">
+						<span>Register</span>
+						<svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="12" y1="5" x2="12" y2="19"></line>
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+						</svg>
+					</a>
+                    <a href="https://browserpod.io/docs/overview" class="custom-button secondary-button">
+						<span>BrowserPod docs</span>
+					</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Shell>
+
+<div class="relative z-20">
+  <Footer />
+</div>
+
+<style>
+	@keyframes float {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-15px); }
+	}
+	
+	.animate-float {
+		animation: float 4s ease-in-out infinite;
+	}
+
+	
+
+	/* Button Styling */
+	.custom-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 12px 24px;
+		border-radius: 8px;
+		font-family: ui-monospace, monospace;
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		cursor: pointer;
+	}
+
+	.primary-button {
+		background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+		color: white;
+		border: none;
+		box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+	}
+
+	.primary-button:hover {
+		box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+		transform: translateY(-1px);
+	}
+
+	.secondary-button {
+		background: transparent;
+		color: #10b981;
+		border: 1px solid rgba(16, 185, 129, 0.5);
+	}
+
+	.secondary-button:hover {
+		background: rgba(16, 185, 129, 0.1);
+		border-color: #10b981;
+	}
+
+	.button-icon {
+		width: 18px;
+		height: 18px;
+	}
+</style>
+
