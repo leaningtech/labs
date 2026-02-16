@@ -50,6 +50,18 @@ export function isProduct(value: unknown): value is Product {
 	);
 }
 
+export function getSite(hostname?: string): string {
+	let site;
+	if (hostname === "labs.leaningtech.com") site = "labs";
+	if (hostname === "cheerp.io") site = "cheerp";
+	if (hostname === "cheerpj.com") site = "cheerpj";
+	if (hostname === "cheerpx.io") site = "cheerpx";
+	if (hostname === "browserpod.io") site = "browserpod";
+	if (!site) throw new Error("unable to derive site dirname from Astro.site");
+	console.log(site);
+	return site;
+}
+
 /**
  * Unflattens a collection into an array of NavEntrys grouped recursively by directory.
  * For example, the collection

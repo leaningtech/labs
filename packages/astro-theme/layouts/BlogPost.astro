@@ -15,6 +15,7 @@ import { DISCORD_URL } from "../consts";
 import { Image, getImage } from "astro:assets";
 import { productFromUrl } from "../lib/products";
 import ProductNav from "../components/nav/product/Nav.astro";
+import { getSite } from "../lib/nav";
 
 const product = productFromUrl(Astro.url);
 
@@ -44,14 +45,16 @@ const socialImage = heroImage
 			format: "jpg",
 		})
 	: undefined;
+
+const site = getSite(Astro.site?.hostname);
 ---
 
-<Shell title={titleAndSubtitle} {description} image={socialImage?.src}>
+<Shell title={titleAndSubtitle} {description} image={socialImage?.src} {site}>
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
 			href="/blog"
-			class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+			class="mb-4 inline-flex items-center gap-1 text-bg-400 hover:text-primary-500"
 		>
 			<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to blog
 		</a>
@@ -119,7 +122,8 @@ const socialImage = heroImage
 				<SocialShare {title} {description} via="leaningtech" />
 
 				<div
-					class="prose prose-stone md:prose-lg dark:prose-invert"
+					class="prose md:prose-lg dark:prose-invert"
+					,
 					data-pagefind-body
 					data-pagefind-filter="productId:blog"
 				>

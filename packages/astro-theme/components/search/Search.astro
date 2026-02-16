@@ -15,13 +15,13 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 <site-search class="inline-block w-full h-10 max-w-full">
 	<button
 		data-open-modal
-		class="text-stone-400 rounded-full px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer sm:bg-stone-800"
+		class="text-bg-400 rounded-full px-1 sm:px-3 w-full h-full flex items-center gap-1.5 grow cursor-pointer sm:bg-bg-800"
 	>
 		<Icon name="fa-solid:search" class="w-4 h-4 mx-0.5" />
 		<span class="hidden sm:block">{t("Search", Astro.currentLocale)}</span>
 		<div class="grow hidden sm:block"></div>
 		<div
-			class="font-mono font-bold text-xs hidden md:block bg-stone-900 text-stone-600 w-5 h-5 leading-5 rounded"
+			class="font-mono font-bold text-xs hidden md:block bg-bg-900 text-bg-600 w-5 h-5 leading-5 rounded"
 			aria-label="Keybinding to open search"
 		>
 			/
@@ -30,7 +30,7 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 
 	<dialog
 		aria-label="Search"
-		class="bg-stone-800 shadow rounded-lg w-11/12 max-w-xl border border-stone-700"
+		class="bg-bg-800 shadow rounded-lg w-11/12 max-w-xl border border-bg-700"
 	>
 		<Pagefind
 			client:visible
@@ -46,7 +46,7 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 				<div class="text-xl">
 					👽 <span class="italic">{t("No results", Astro.currentLocale)}</span>
 				</div>
-				<p class="py-4 text-base text-stone-400 font-normal">
+				<p class="py-4 text-base text-bg-400 font-normal">
 					{
 						t(
 							"If you have a question, please ask it in our Discord server.",
@@ -116,7 +116,7 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 <style>
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.5); /* fallback if color-mix not supported */
-		background: color-mix(var(--color-stone-900), 0.5);
+		background: color-mix(var(--color-bg-900), 0.5);
 		backdrop-filter: blur(4px);
 	}
 </style>

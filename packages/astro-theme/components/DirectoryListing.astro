@@ -22,12 +22,12 @@ function getEntryDescription(entry: NavEntry): string | undefined {
 				<li>
 					<a
 						href={entry.href}
-						class="block group rounded-md border bg-stone-950 px-4 py-3 shadow border-stone-800 hover:border-stone-700 transition-colors"
+						class="block group rounded-md border bg-bg-950 px-4 py-3 shadow border-bg-800 hover:border-bg-700 transition-colors"
 					>
-						<div class="text-lg font-semibold text-stone-300 group-hover:text-stone-50 transition-colors">
+						<div class="text-lg font-semibold text-bg-300 group-hover:text-bg-50 transition-colors">
 							{entry.title}
 						</div>
-						<div class="text-ellipsis whitespace-nowrap overflow-hidden text-stone-400 text-sm">
+						<div class="text-ellipsis whitespace-nowrap overflow-hidden text-bg-400 text-sm">
 							{getEntryDescription(entry) ?? ""}
 						</div>
 					</a>

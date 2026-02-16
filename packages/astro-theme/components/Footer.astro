@@ -98,7 +98,7 @@ const sections: Section[] = [
 
 {Astro.props.includeGrow === false ? null : <div class="grow" />}
 
-<footer class="p-14 bg-black border-t border-stone-700">
+<footer class="p-14 bg-black border-t border-bg-700">
 	<div class="w-full max-w-screen-2xl mx-auto">
 		<div
 			class="grid sm:grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-14 place-content-between text-lg"
@@ -138,14 +138,14 @@ const sections: Section[] = [
 						<section class="space-y-3">
 							<h3 class="text-xl font-semibold">{section.name}</h3>
 							{section.description && (
-								<p class="text-stone-400">{section.description}</p>
+								<p class="text-bg-400">{section.description}</p>
 							)}
 							<ul class="space-y-3">
 								{section.links.map((link) => (
 									<li>
 										<a
 											href={link.href}
-											class="text-stone-400 hover:text-primary-500"
+											class="text-bg-400 hover:text-primary-500"
 										>
 											{link.text}
 										</a>
@@ -158,7 +158,7 @@ const sections: Section[] = [
 			</div>
 		</div>
 		<div
-			class="grid sm:grid-cols-1 md:grid-cols-4 border-t border-stone-800 mt-14 pt-6 gap-6"
+			class="grid sm:grid-cols-1 md:grid-cols-4 border-t border-bg-800 mt-14 pt-6 gap-6"
 		>
 			<div class="flex items-left gap-3">
 				<a href={DISCORD_URL}>
@@ -177,7 +177,7 @@ const sections: Section[] = [
 					<Icon name="mdi:linkedin" class="w-6 h-6 hover:text-primary-500" />
 				</a>
 			</div>
-			<div class="text-stone-400 text-xs md:text-right md:col-span-3">
+			<div class="text-bg-400 text-xs md:text-right md:col-span-3">
 				<p class="align-baseline">
 					© {today.getFullYear()} Leaning Technologies . All rights reserved.
 				</p>

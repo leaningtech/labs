@@ -1,7 +1,7 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getRootNav, getLocalisedProductNav } from "../lib/nav";
+import { getRootNav, getLocalisedProductNav, getSite } from "../lib/nav";
 import { productFromUrl } from "../lib/products";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon/components";
@@ -30,21 +30,15 @@ const { id, title, description, headings, fullWidthLayout, language } =
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
-
 const entries = product
 	? getLocalisedProductNav(nav, product.id, Astro.currentLocale)
 	: [];
 
 function getEditHref(id: string): string {
-	let site;
-	if (Astro.site?.hostname === "labs.leaningtech.com") site = "labs";
-	if (Astro.site?.hostname === "cheerp.io") site = "cheerp";
-	if (Astro.site?.hostname === "cheerpj.com") site = "cheerpj";
-	if (Astro.site?.hostname === "cheerpx.io") site = "cheerpx";
-	if (Astro.site?.hostname === "browserpod.io") site = "browserpod";
-	if (!site) throw new Error("unable to derive site dirname from Astro.site");
 	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
 }
+
+const site = getSite(Astro.site?.hostname);
 ---
 
 <Shell
@@ -55,6 +49,7 @@ function getEditHref(id: string): string {
 		.filter(Boolean)
 		.join(" - ")}
 	description={description ?? product?.description}
+	{site}
 >
 	<BentoGrid />
 	{product ? <ProductNav {product} /> : null}
@@ -72,10 +67,10 @@ function getEditHref(id: string): string {
 				</div>
 				<div
 					data-backdrop
-					class="hidden lg:hidden fixed inset-0 bg-stone-900 bg-opacity-50 backdrop-blur z-40"
+					class="hidden lg:hidden fixed inset-0 bg-bg-950 bg-opacity-50 backdrop-blur z-40"
 				/>
 				<div class="overflow-x-hidden w-full">
-					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-stone-600 border-opacity-20">
+					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-bg-600 border-opacity-20">
 						{entries && (
 							<button data-sidebar-toggle class="lg:hidden">
 								<span class="sr-only">Open navigation menu</span>
@@ -90,7 +85,7 @@ function getEditHref(id: string): string {
 						{...(product && {
 							"data-pagefind-filter": `productId:${product.id}`,
 						})}
-						class="prose prose-stone dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-3xl xl:max-w-[49rem]"
+						class="prose dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-4xl xl:max-w-[56rem]"
 					>
 						{title === product?.name ? (
 							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
@@ -106,7 +101,7 @@ function getEditHref(id: string): string {
 										}
 									/>
 								</h1>
-								<p class="text-xl font-medium text-stone-500">
+								<p class="text-xl font-medium text-bg-400">
 									{description && <span>{description}</span>}
 								</p>
 							</div>
@@ -116,7 +111,7 @@ function getEditHref(id: string): string {
 									<span>{title}</span>
 								</h1>
 								{description && (
-									<p class="mt-0 mb-8 text-stone-500 text-xl">
+									<p class="mt-0 mb-8 text-bg-400 text-xl">
 										<span>{description}</span>
 									</p>
 								)}

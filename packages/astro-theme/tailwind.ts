@@ -29,6 +29,85 @@ const exportColorsAsCssVariables = plugin(({ addBase, theme }) => {
 	});
 });
 
+const siteThemes = plugin(({ addBase }) => {
+	addBase({
+		// Default theme (pink/red + neutral backgrounds)
+		":root": {
+			// Primary colors
+			"--color-primary-600": "230 39 85",
+			"--color-primary-500": "232 61 102",
+			"--color-primary-400": "235 82 119",
+			"--color-primary-300": "240 125 153",
+			"--color-primary-200": "245 169 187",
+			"--color-primary-100": "250 212 221",
+			"--color-primary-50": "253 233 238",
+
+			// Background colors - Neutral palette
+			"--color-bg-950": "10 10 10",
+			"--color-bg-900": "23 23 23",
+			"--color-bg-800": "38 38 38",
+			"--color-bg-700": "64 64 64",
+			"--color-bg-600": "82 82 82",
+			"--color-bg-500": "115 115 115",
+			"--color-bg-400": "163 163 163",
+			"--color-bg-300": "212 212 212",
+			"--color-bg-200": "229 229 229",
+			"--color-bg-100": "245 245 245",
+			"--color-bg-50": "250 250 250",
+		},
+		// BrowserPod theme
+		".site-browserpod": {
+			"--color-primary-600": "17 158 123",
+			"--color-primary-500": "35 201 159",
+			"--color-primary-400": "58 229 179",
+			"--color-primary-300": "104 239 199",
+			"--color-primary-200": "158 247 220",
+			"--color-primary-100": "206 252 239",
+			"--color-primary-50": "237 254 248",
+		},
+		// CheerpJ theme
+		".site-cheerpj": {
+			"--color-primary-600": "194 98 3",
+			"--color-primary-500": "219 110 4",
+			"--color-primary-400": "243 123 4",
+			"--color-primary-300": "247 148 56",
+			"--color-primary-200": "251 179 115",
+			"--color-primary-100": "253 215 179",
+			"--color-primary-50": "254 239 229",
+		},
+		// Cheerp theme
+		".site-cheerp": {
+			"--color-primary-600": "41 174 165",
+			"--color-primary-500": "46 196 186",
+			"--color-primary-400": "81 218 206",
+			"--color-primary-300": "121 229 219",
+			"--color-primary-200": "168 240 233",
+			"--color-primary-100": "209 248 245",
+			"--color-primary-50": "237 252 251",
+		},
+		// CheerpX theme (steel blue) - only primary colors
+		".site-cheerpx": {
+			"--color-primary-600": "78 105 132", // #4e6984 (darker)
+			"--color-primary-500": "97 131 164", // #6183a4 (CheerpX gray)
+			"--color-primary-400": "122 156 189", // #7a9cbd (lighter)
+			"--color-primary-300": "156 183 209", // #9cb7d1 (light)
+			"--color-primary-200": "190 209 227", // #bed1e3 (very light)
+			"--color-primary-100": "223 232 241", // #dfe8f1 (pale)
+			"--color-primary-50": "244 247 250", // #f4f7fa (almost white)
+		},
+		// Labs theme
+		".site-labs": {
+			"--color-primary-600": "230 39 85",
+			"--color-primary-500": "232 61 102",
+			"--color-primary-400": "235 82 119",
+			"--color-primary-300": "240 125 153",
+			"--color-primary-200": "245 169 187",
+			"--color-primary-100": "250 212 221",
+			"--color-primary-50": "253 233 238",
+		},
+	});
+});
+
 const disabledCss = {
 	pre: false,
 	code: false,
@@ -49,10 +128,10 @@ export default function makeConfig(): Config {
 			extend: {
 				fontFamily: {
 					sans: [
-						"Archivo", //English default
+						"Archivo",
 						"DM Sans",
 						"Noto Sans",
-						"Noto Sans JP", // Japanese default
+						"Noto Sans JP",
 						"Inter",
 						"system-ui",
 						"-apple-system",
@@ -61,43 +140,72 @@ export default function makeConfig(): Config {
 						"Roboto",
 						"Helvetica Neue",
 						"Arial",
-						"Yu Gothic", // Japanese for windows users
-						"Hiragino Sans", // Japanese for mac users
-						"Noto Sans CJK JP", // Japanese for linux users
+						"Yu Gothic",
+						"Hiragino Sans",
+						"Noto Sans CJK JP",
 						"sans-serif",
 					],
 					mono: ["Monaspace Argon", "monospace"],
 				},
 				colors: {
 					primary: {
-						600: "#e62755",
-						500: "#e83d66",
-						400: "#eb5277",
-						300: "#f07d99",
-						200: "#f5a9bb",
-						100: "#fad4dd",
-						50: "#fde9ee",
+						600: "rgb(var(--color-primary-600) / <alpha-value>)",
+						500: "rgb(var(--color-primary-500) / <alpha-value>)",
+						400: "rgb(var(--color-primary-400) / <alpha-value>)",
+						300: "rgb(var(--color-primary-300) / <alpha-value>)",
+						200: "rgb(var(--color-primary-200) / <alpha-value>)",
+						100: "rgb(var(--color-primary-100) / <alpha-value>)",
+						50: "rgb(var(--color-primary-50) / <alpha-value>)",
+					},
+					bg: {
+						950: "rgb(var(--color-bg-950) / <alpha-value>)",
+						900: "rgb(var(--color-bg-900) / <alpha-value>)",
+						800: "rgb(var(--color-bg-800) / <alpha-value>)",
+						700: "rgb(var(--color-bg-700) / <alpha-value>)",
+						600: "rgb(var(--color-bg-600) / <alpha-value>)",
+						500: "rgb(var(--color-bg-500) / <alpha-value>)",
+						400: "rgb(var(--color-bg-400) / <alpha-value>)",
+						300: "rgb(var(--color-bg-300) / <alpha-value>)",
+						200: "rgb(var(--color-bg-200) / <alpha-value>)",
+						100: "rgb(var(--color-bg-100) / <alpha-value>)",
+						50: "rgb(var(--color-bg-50) / <alpha-value>)",
 					},
 					cheerp: "#56f4ec",
 					cheerpx: "#3b516d",
-					blurple: "#5865F2", // https://discord.com/branding
+					blurple: "#5865F2",
 				},
-				typography: (theme: PluginAPI["theme"]) => ({
-					stone: {
+				typography: {
+					DEFAULT: {
 						css: {
-							"--tw-prose-links": theme("colors.cheerp"),
-							"--tw-prose-invert-links": theme("colors.primary[400]"),
+							...disabledCss,
+							"--tw-prose-links": "rgb(var(--color-primary-500))",
+							"--tw-prose-invert-links": "rgb(var(--color-primary-400))",
+							a: {
+								color: "rgb(var(--color-primary-500))",
+								"&:hover": {
+									color: "rgb(var(--color-primary-400))",
+								},
+							},
+							".dark a": {
+								color: "rgb(var(--color-primary-400))",
+								"&:hover": {
+									color: "rgb(var(--color-primary-300))",
+								},
+							},
 						},
 					},
-					DEFAULT: { css: disabledCss },
 					sm: { css: disabledCss },
 					lg: { css: disabledCss },
 					xl: { css: disabledCss },
 					"2xl": { css: disabledCss },
-				}),
+				},
 			},
 		},
-		plugins: [require("@tailwindcss/typography"), exportColorsAsCssVariables],
+		plugins: [
+			require("@tailwindcss/typography"),
+			exportColorsAsCssVariables,
+			siteThemes,
+		],
 		darkMode: "class",
 	};
 }

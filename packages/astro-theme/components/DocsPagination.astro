@@ -57,7 +57,7 @@ const { next, prev } = await getNextPrev();
 // TODO: `"href" in X` no longer needed once NavDirectorys have href (i.e. dir listing / index pages are a thing)
 ---
 
-<div class="flex justify-between font-medium text-stone-400 text-base gap-8">
+<div class="flex justify-between font-medium text-bg-400 text-base gap-8">
 	{
 		prev && "href" in prev ? (
 			<a href={prev.href} class="flex items-center gap-2 hover:text-white p-2">
