@@ -14,4 +14,4 @@ When these headers are present, the browser allows `SharedArrayBuffer` and Brows
 
 Cross‑origin isolation is a browser‑level requirement. It applies regardless of framework or hosting provider. Localhost is the only exception where browsers allow it over HTTP; in production, it requires HTTPS.
 
-If you want configuration examples, see [Set CORS and COOP headers](/docs/13-guides/00-hosting).
+If you want configuration examples, see [Set CORS and COOP headers](/docs/guides/hosting).

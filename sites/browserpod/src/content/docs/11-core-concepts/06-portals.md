@@ -25,4 +25,4 @@ The Portal URL is the address other people can open to reach the server running 
 - **The URL is the access point.** Anyone with the Portal URL can reach the server (within the limits of your app).
 - **Ports map to Portals.** Each listening port can create its own Portal URL.
 
-If you want the setup steps or code examples, see [Set up a Portal](/docs/13-guides/setup-Portal).
+If you want the setup steps or code examples, see [Set up a Portal](/docs/guides/setup-portal).

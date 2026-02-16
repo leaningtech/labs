@@ -251,4 +251,4 @@ the main page of the project, served from inside the Pod via the Portal.
 
 ## End result
 
-![The index.html page rendered](/express.png)
+![The index.html page rendered](/docs/assets/express.png)
