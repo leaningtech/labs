@@ -3,47 +3,71 @@ title: Resource preloading
 description: Improves application startup time
 ---
 
-Traditionally, users had to have Java preinstalled on their computer in order to run Java applications and applets. CheerpJ compiles Java to HTML5/JavaScript, allowing to run applications and applets on browser without users having to install any additional dependency on their computer. Similarly to their JVM counterparts, applications compiled to JavaScript with CheerpJ require runtime components to be loaded during execution. In CheerpJ, runtime components are JavaScript modules that are loaded on demand, only if required.
+CheerpJ runs Java applications and applets directly in the browser (no local Java install needed). To do this, CheerpJ loads **runtime components** (JavaScript modules) while the app executes. By default, these modules are **loaded on demand**, only when the app needs them.
 
-The CheerpJ runtime is highly optimised to minimise the total download size of an 'average' application, totalling 10-20MB of data for a typical download (as a point of comparison, the approximate size of the Java runtime installer is over 60MB). All downloaded components of CheerpJ are cached by the browser, which reduces the download time in subsequent executions of a same application.
+This “load as needed” approach keeps the initial download small (typically **10–20MB** for many apps) and everything is **cached by the browser** for faster repeat visits. The tradeoff is that CheerpJ can’t know ahead of time which modules your specific app will need, so it loads them **one after another** at runtime.
 
-CheerpJ cannot predict which runtime resources will be required by an arbitrary application. CheerpJ runtime resources are therefore loaded on demand, one after the other, depending on the requirements of the application at run time.
+To reduce startup time in production, CheerpJ lets you **preload** the modules your app commonly uses, so they can download **in parallel** as the app starts.
 
-To take advantage of parallel downloads, and reduce download and startup time of a specific application in production, CheerpJ allows one to pre-specify a list of resources (CheerpJ runtime modules) to be loaded at startup.
+**What resource preloading does**
 
-This list of resources is to be specified manually when starting the CheerpJ environment in an HTML page. We also provide a simple profiling tool to automatically record and output a list of used resources during the execution of an application.
+- **Without preloading:** CheerpJ fetches runtime resources sequentially as they become necessary.
+- **With preloading:** CheerpJ starts downloading a pre-defined set of resources immediately, allowing parallel downloads and faster startup.
 
-By combining the use of this profiler together with the preloader, one can highly optimise the initial download and startup time of an application. Taking advantage of this is a simple 2-step process:
+**When to use it**
 
-1. Run the application normally using CheerpJ. After the application is loaded, open the JavaScript console of the browser (e.g. Ctrl+Shift+I on many browsers), and type:
+- You’re deploying an app to production and want **faster first load**
+- Your users often hit a cold cache (first visit, cleared cache, new device)
+- You want to avoid runtime “stalls” caused by sequential resource fetching
+
+# Overview of the workflow
+
+1. **Profile which runtime resources your app actually uses**
+2. **Pass those resources to `cheerpjInit` via `preloadResources`**
+
+## Step 1: Profile used runtime resources
+
+1. Run your application normally with CheerpJ.
+2. Once the app has loaded, open your browser’s JavaScript console (often `Ctrl+Shift+I`).
+3. Run:
 
 ```js
 cjGetRuntimeResources();
 ```
 
-The result will look like this:
+**The output will look like:**
 
 ```js
 {"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]}
 ```
 
-If the output is not visible fully, you can use:
+**If you can’t see the full output in the console, use:**
 
 ```js
 document.write(cjGetRuntimeResources());
 ```
 
-The JavaScript console may enclose the string between quotes (`"`), which you should ignore. See [here](/docs/reference/cjGetRuntimeResources) for more information.
+> The console may wrap the output in quotes (`"`). If it does, ignore the quotes.  
+> See [here](/docs/reference/cjGetRuntimeResources) for more information.
 
-2. Modify the CheerpJ integration to enable preloading. You will only need to change the `cheerpjInit` call, to pass the `preloadResources` option. For example:
+## Step 2: Enable preloading in your integration
+
+Update your `cheerpjInit` call to include the `preloadResources` option.
+
+Example:
 
 ```js
-cheerpjInit({ preloadResources: {"/lts/file1.jar":[int, int, ...], "/lts/file2.jar":[int,int, ...]} });
+cheerpjInit({
+  preloadResources: {
+    "/lts/file1.jar": [int, int, ...],
+    "/lts/file2.jar": [int, int, ...]
+  }
+});
 ```
 
-> [!note] Important
-> Please note that this has to be done in two steps, so the resources are loaded in a separate session from the full workflow.
+> This must be done in two steps,so the resources are loaded in a separate session from the full workflow.
+> See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
 
-See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
+# What changes after enabling preloading
 
-When preloading is enabled CheerpJ will be able to download multiple resources in parallel with the execution of the program. This will greatly improve loading time.
+When `preloadResources` is enabled, CheerpJ can download multiple resources **in parallel** with the program’s execution, which can **significantly reduce startup time**, especially on first load.
