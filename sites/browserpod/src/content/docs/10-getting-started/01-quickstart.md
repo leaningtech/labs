@@ -30,7 +30,7 @@ npm run dev
 Then, open [http://localhost:5173/](http://localhost:5173/) in your browser, and you should
 see something like this:
 
-![Output of the basic template](/docs/browserpod/tutorials/bp-quickstart.png)
+![Output of the basic template](/bp-quickstart.png)
 
 Congraturations! you just run your first BrowserPod application!
 
@@ -44,7 +44,7 @@ Feel free to modify `src/main.js`. The dev server supports hot reloading.
 
 ---
 
-[basic NPM project tutorial]: /docs/tutorials/expressjs
+[basic NPM project tutorial]: /docs/10-getting-started/expressjs
 [Basic server setup guide]: /docs/guides/nginx
 [Vite+SvelteKit demo]: https://vitedemo.browserpod.io
 [API reference]: /docs/reference
