@@ -85,15 +85,15 @@ const siteThemes = plugin(({ addBase }) => {
 			"--color-primary-100": "209 248 245",
 			"--color-primary-50": "237 252 251",
 		},
-		// CheerpX theme (bright blue)
+		// CheerpX theme (steel blue) - only primary colors
 		".site-cheerpx": {
-			"--color-primary-600": "41 98 159", // #29629f (darker, saturated blue)
-			"--color-primary-500": "59 130 246", // #3b82f6 (bright blue-500)
-			"--color-primary-400": "96 165 250", // #60a5fa (bright blue-400)
-			"--color-primary-300": "147 197 253", // #93c5fd (light blue)
-			"--color-primary-200": "191 219 254", // #bfdbfe (very light)
-			"--color-primary-100": "219 234 254", // #dbeafe (pale)
-			"--color-primary-50": "239 246 255", // #eff6ff (almost white)
+			"--color-primary-600": "78 105 132", // #4e6984 (darker)
+			"--color-primary-500": "97 131 164", // #6183a4 (CheerpX gray)
+			"--color-primary-400": "122 156 189", // #7a9cbd (lighter)
+			"--color-primary-300": "156 183 209", // #9cb7d1 (light)
+			"--color-primary-200": "190 209 227", // #bed1e3 (very light)
+			"--color-primary-100": "223 232 241", // #dfe8f1 (pale)
+			"--color-primary-50": "244 247 250", // #f4f7fa (almost white)
 		},
 		// Labs theme
 		".site-labs": {
