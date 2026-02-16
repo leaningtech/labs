@@ -7,9 +7,10 @@ description: Binary data, ArrayBuffer, and the BinaryFile API
 
 ## What “binary” means here
 
-In BrowserPod, **binary** does *not* mean “executable program.” It simply means **raw bytes** — data that is not plain text.
+In BrowserPod, **binary** does _not_ mean “executable program.” It simply means **raw bytes** — data that is not plain text.
 
 Examples of binary data:
+
 - Images (PNG, JPG)
 - Zip files
 - PDFs
@@ -21,6 +22,7 @@ Examples of binary data:
 An **ArrayBuffer** is JavaScript’s standard container for raw bytes. It is the browser’s way of holding binary data in memory.
 
 Think of it like a box of bytes:
+
 - Text files → strings
 - Binary files → ArrayBuffer
 
@@ -38,16 +40,16 @@ When you create or open a file, you choose a mode:
 ### Example: writing text
 
 ```ts
-const file = await pod.createFile('/project/readme.txt', 'text');
-await file.write('Hello BrowserPod');
+const file = await pod.createFile("/project/readme.txt", "text");
+await file.write("Hello BrowserPod");
 await file.close();
 ```
 
 ### Example: writing binary
 
 ```ts
-const file = await pod.createFile('/project/image.png', 'binary');
-const resp = await fetch('/image.png');
+const file = await pod.createFile("/project/image.png", "binary");
+const resp = await fetch("/image.png");
 const bytes = await resp.arrayBuffer();
 await file.write(bytes);
 await file.close();

@@ -2,6 +2,7 @@
 title: Licensing
 description: Personal, Pro, and Enterprise licensing for BrowserPod
 ---
+
 BrowserPod offers two subscription plans: **Personal** (free) and **Pro** (paid).
 
 ## Personal plan (free)

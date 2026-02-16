@@ -16,12 +16,12 @@ Without these headers, the browser will block `SharedArrayBuffer` and the pod wi
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  server: {
-    headers: {
-      "Cross-Origin-Embedder-Policy": "require-corp",
-      "Cross-Origin-Opener-Policy": "same-origin",
-    },
-  },
+	server: {
+		headers: {
+			"Cross-Origin-Embedder-Policy": "require-corp",
+			"Cross-Origin-Opener-Policy": "same-origin",
+		},
+	},
 });
 ```
 

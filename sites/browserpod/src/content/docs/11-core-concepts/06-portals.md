@@ -3,7 +3,7 @@ title: Understanding Portals
 description: How Portals expose Pod servers to the outside world
 ---
 
-A **Portal** is BrowserPod’s way of exposing a server running inside a Pod to the outside world. 
+A **Portal** is BrowserPod’s way of exposing a server running inside a Pod to the outside world.
 
 When code inside the Pod starts listening on a port, BrowserPod creates a public URL that forwards traffic to that internal server.
 

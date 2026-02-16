@@ -2,6 +2,7 @@
 title: FAQ
 description: Common questions about BrowserPod
 ---
+
 ## What is BrowserPod?
 
 BrowserPod runs real Node.js applications inside the browser using WebAssembly. It provides a virtual filesystem and a portal system to expose local servers via public URLs.
@@ -25,4 +26,3 @@ Not directly. Use Wasm-compatible alternatives or `package.json` overrides when 
 ## Which browsers are supported?
 
 All the major browsers on desktop and mobile (Chrome, Edge, Firefox, Safari) are supported.
-

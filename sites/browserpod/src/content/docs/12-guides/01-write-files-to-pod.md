@@ -15,7 +15,7 @@ This page explains how to write files into the BrowserPod filesystem using the A
 Pods start with a minimal filesystem, so create a project directory first:
 
 ```ts
-await pod.createDirectory('/project');
+await pod.createDirectory("/project");
 ```
 
 If you need intermediate folders, pass `{ recursive: true }`.
@@ -26,16 +26,16 @@ A common pattern is to keep your runnable project inside your web app (for examp
 
 ```ts
 async function copyFile(pod, path) {
-  const f = await pod.createFile('/' + path, 'binary');
-  const resp = await fetch(path);
-  const buf = await resp.arrayBuffer();
-  await f.write(buf);
-  await f.close();
+	const f = await pod.createFile("/" + path, "binary");
+	const resp = await fetch(path);
+	const buf = await resp.arrayBuffer();
+	await f.write(buf);
+	await f.close();
 }
 
-await pod.createDirectory('/project');
-await copyFile(pod, 'project/main.js');
-await copyFile(pod, 'project/package.json');
+await pod.createDirectory("/project");
+await copyFile(pod, "project/main.js");
+await copyFile(pod, "project/package.json");
 ```
 
 ## 3) Write a text file
@@ -43,7 +43,7 @@ await copyFile(pod, 'project/package.json');
 Text files are for plain text (ASCII or UTF-8), such as `.js`, `.json`, `.txt`, `.md`, and `.csv`.
 
 ```ts
-const file = await pod.createFile('/project/main.js', 'utf-8');
+const file = await pod.createFile("/project/main.js", "utf-8");
 await file.write("console.log('Hello BrowserPod')");
 await file.close();
 ```
@@ -53,8 +53,8 @@ await file.close();
 Binary files are for raw bytes like images, ZIPs, PDFs, or Wasm files.
 
 ```ts
-const file = await pod.createFile('/project/image.png', 'binary');
-const resp = await fetch('/image.png');
+const file = await pod.createFile("/project/image.png", "binary");
+const resp = await fetch("/image.png");
 const bytes = await resp.arrayBuffer();
 await file.write(bytes);
 await file.close();

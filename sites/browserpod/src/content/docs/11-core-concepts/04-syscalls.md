@@ -22,7 +22,7 @@ In normal Node.js, these requests go to the host OS (macOS, Windows, Linux). In 
 2. The runtime you've selected (e.g., Node, Python) translates that into syscalls (open, read, write, listen, etc.).
 3. CheerpOS intercepts those syscalls and fulfills them inside the browser using its virtual filesystem and networking layer.
 
-So the Node runtime *thinks* it’s talking to Linux, but the work is actually done by the BrowserPod runtime in the browser.
+So the Node runtime _thinks_ it’s talking to Linux, but the work is actually done by the BrowserPod runtime in the browser.
 
 - **Most standard Node APIs work** because they map cleanly to the virtual syscall layer.
 - **Native binaries can fail** because they expect a real OS kernel, not a virtual one.

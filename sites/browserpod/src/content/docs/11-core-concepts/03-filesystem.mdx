@@ -3,7 +3,7 @@ title: Understanding the Pod filesystem
 description: How the virtual filesystem is structured and how it behaves
 ---
 
-import FileTree from '@/components/FileTree.svelte';
+import FileTree from "@/components/FileTree.svelte";
 
 Each Pod includes a virtual filesystem with POSIX-style paths (for example, `/project/main.js`). This filesystem lives inside the Pod runtime and is exposed through the BrowserPod API.
 
@@ -32,45 +32,45 @@ The filesystem is still virtual; persistence is handled by the browser's Indexed
 By default, a Pod's filesystem is intentionally minimal. An empty Pod on boot contains system folders and a few runtime files:
 
 export const podFs = {
-  type: 'folder',
-  name: '/',
-  expanded: true,
-  files: [
-    { type: 'file', name: '.node_repl_history' },
-    {
-      type: 'folder',
-      name: 'etc',
-      expanded: true,
-      files: [
-        {
-          type: 'folder',
-          name: 'hosts',
-          expanded: true,
-          files: [{ type: 'file', name: '127.0.0.1 (localhost)' }],
-        },
-        { type: 'file', name: 'resolv.conf' },
-      ],
-    },
-    { type: 'folder', name: 'lost+found', expanded: false, files: [] },
-    {
-      type: 'folder',
-      name: 'npm',
-      expanded: true,
-      files: [
-        { type: 'file', name: '161.js' },
-        { type: 'file', name: '171.js' },
-        { type: 'file', name: '871.js' },
-        {
-          type: 'folder',
-          name: 'bin',
-          expanded: true,
-          files: [{ type: 'file', name: 'npm.js' }],
-        },
-        { type: 'folder', name: 'lib', expanded: false, files: [] },
-        { type: 'file', name: 'package.json' },
-      ],
-    },
-  ],
+	type: "folder",
+	name: "/",
+	expanded: true,
+	files: [
+		{ type: "file", name: ".node_repl_history" },
+		{
+			type: "folder",
+			name: "etc",
+			expanded: true,
+			files: [
+				{
+					type: "folder",
+					name: "hosts",
+					expanded: true,
+					files: [{ type: "file", name: "127.0.0.1 (localhost)" }],
+				},
+				{ type: "file", name: "resolv.conf" },
+			],
+		},
+		{ type: "folder", name: "lost+found", expanded: false, files: [] },
+		{
+			type: "folder",
+			name: "npm",
+			expanded: true,
+			files: [
+				{ type: "file", name: "161.js" },
+				{ type: "file", name: "171.js" },
+				{ type: "file", name: "871.js" },
+				{
+					type: "folder",
+					name: "bin",
+					expanded: true,
+					files: [{ type: "file", name: "npm.js" }],
+				},
+				{ type: "folder", name: "lib", expanded: false, files: [] },
+				{ type: "file", name: "package.json" },
+			],
+		},
+	],
 };
 
 <FileTree client:load node={podFs} />

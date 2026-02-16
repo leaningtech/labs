@@ -18,7 +18,7 @@ You can pass the key directly when booting the pod:
 
 ```js
 const pod = await BrowserPod.boot({
-  apiKey: "your_key_here",
+	apiKey: "your_key_here",
 });
 ```
 
@@ -34,7 +34,7 @@ VITE_BP_APIKEY=your_key_here
 
 ```js
 const pod = await BrowserPod.boot({
-  apiKey: import.meta.env.VITE_BP_APIKEY,
+	apiKey: import.meta.env.VITE_BP_APIKEY,
 });
 ```
 
@@ -43,4 +43,3 @@ This keeps the key out of source control and makes local development easier.
 ### 3) Hosting provider env variables (recommended for production)
 
 Most hosting platforms let you define environment variables (or “secrets”) at deploy time. Your build system can then expose the value to the client bundle in the same way as `.env` during local development.
-

@@ -2,6 +2,7 @@
 title: Glossary
 description: Key terms and definitions used in BrowserPod documentation
 ---
+
 ## API
 
 A set of functions or rules that let two pieces of software talk to each other.
@@ -110,7 +111,6 @@ A filesystem created and managed in software rather than on the user’s real di
 
 A binary format that allows code to run in the browser at near-native speed. See the [mdn documentation](https://developer.mozilla.org/en-US/docs/WebAssembly) for more.
 
-
 ## Terminal
 
 A virtual device used to communicate with processes spawned in a pod.
@@ -118,4 +118,3 @@ It provides input and displays output in the form of characters.
 
 The default terminal used by BrowserPod uses Xterm.js, a terminal emulator library
 for the browser.
-

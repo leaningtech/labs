@@ -3,9 +3,7 @@ title: Common errors
 description: Quick explanations for frequent BrowserPod errors
 ---
 
-
 This page maps common BrowserPod error messages to their likely causes and fixes.
-
 
 ## Treating `pod.run` like a shell
 
@@ -73,4 +71,3 @@ Native binaries do not run in the Wasm environment.
 
 Use Wasm alternatives and `package.json` overrides. See the
 [native binaries guide](/docs/guides/native-binaries).
-

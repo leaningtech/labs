@@ -29,13 +29,14 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-**BrowserPod** is a **sandbox API**. It provides in-browser runtimes for common backend languages, libraries and frameworks. 
+**BrowserPod** is a **sandbox API**. It provides in-browser runtimes for common backend languages, libraries and frameworks.
 
 Instead of provisioning a cloud server, BrowserPod's API enables a client browser to host full runtimes compiled to WebAssembly (Wasm), running at native speed.
 
 BrowserPod is ephemeral by design. Each **Pod** runs inside a browser tab and ends when the tab closes or reloads. Because BrowserPod runs inside the browser, each Pod is constrained by the browser’s security model, isolated from the user’s OS, with limited access (via syscalls) to local files or system resources unless you explicitly provide it.
 
 At a high level, BrowserPod gives you:
+
 - A **backend runtime** running in the browser (e.g., Node.js, Python, Ruby)
 - A **Linux‑like virtual filesystem** for files and folders
 - **Portals** that can expose local servers at public URLs
@@ -50,12 +51,11 @@ Everything runs client‑side within the browser sandbox, so users don’t need 
 - **Collaborative tools**: Build multi‑user apps like whiteboards, editors, or chat that run locally and sync via portals.
 - **Browser‑based “server” functions**: Run tasks that usually need cloud provisioning—like HTTP APIs, background jobs, or file processing entirely inside the user’s browser.
 
-
 ## Why pick the BrowserPod API?
 
-- **Full-stack development**: BrowserPod runs full instances of backend frameworks enabling full-stack development without cloud provisioning. 
+- **Full-stack development**: BrowserPod runs full instances of backend frameworks enabling full-stack development without cloud provisioning.
 - **Real filesystem**: Create directories and files inside a virtual POSIX‑like tree.
-- **Portal URLs**: BrowserPod Portals allow to share working applications over a temporary, private and secure URL. 
+- **Portal URLs**: BrowserPod Portals allow to share working applications over a temporary, private and secure URL.
 - **Security**: The BrowserPod API boots instances in the browser's sandbox, inheriting its security.
 - **Cost**: Because BrowserPod runs instances in the browser, it comes at a fraction of the cost of cloud sandboxes, with a generous free tier.
 
@@ -83,7 +83,6 @@ See the [hosting guide](/docs/guides/hosting) for details on headers and setup.
 - Ruby (coming soon)
 
 ## Community and support
-
 
 <LinkButton
 	type="discord"
