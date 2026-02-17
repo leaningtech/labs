@@ -1,154 +1,163 @@
 <!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>CheerpJ Demo | File Upload & Download</title>
+		<!-- <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script> -->
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CheerpJ Demo | File Upload & Download</title>
-    <!-- <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script> -->
+		<style>
+			:root {
+				--cj-primary: #ff6b00;
+				--cj-dark: #1d3557;
+				--cj-light: #f1faee;
+				--text-main: #333;
+				--header-height: 64px;
+				--footer-height: 32px;
+			}
 
-    <style>
-        :root {
-            --cj-primary: #ff6b00;
-            --cj-dark: #1d3557;
-            --cj-light: #f1faee;
-            --text-main: #333;
-            --header-height: 64px;
-            --footer-height: 32px;
-        }
+			* {
+				box-sizing: border-box;
+			}
 
-        * {
-            box-sizing: border-box;
-        }
+			body {
+				font-family:
+					"Inter",
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe UI",
+					Roboto,
+					Helvetica,
+					Arial,
+					sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: var(--cj-light);
+				color: var(--text-main);
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+			}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--cj-light);
-            color: var(--text-main);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+			header {
+				background-color: #ffffff;
+				border-bottom: 1px solid #e1e4e8;
+				height: var(--header-height);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 24px;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				z-index: 10;
+			}
 
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e1e4e8;
-            height: var(--header-height);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-        }
+			.brand {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+			.brand-logo {
+				font-weight: 800;
+				font-size: 1.5rem;
+				color: var(--cj-dark);
+				letter-spacing: -0.5px;
+			}
 
-        .brand-logo {
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--cj-dark);
-            letter-spacing: -0.5px;
-        }
+			.brand-logo span {
+				color: var(--cj-primary);
+			}
 
-        .brand-logo span {
-            color: var(--cj-primary);
-        }
+			.demo-badge {
+				background-color: var(--cj-primary);
+				color: #ffffff;
+				/* White text */
+				padding: 4px 10px;
+				border-radius: 999px;
+				/* Pill shape */
+				font-size: 0.7rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				border: none;
+			}
 
-        .demo-badge {
-            background-color: var(--cj-primary);
-            color: #ffffff;
-            /* White text */
-            padding: 4px 10px;
-            border-radius: 999px;
-            /* Pill shape */
-            font-size: 0.70rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: none;
-        }
+			.header-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+			.header-title {
+				font-size: 1.1rem;
+				font-weight: 600;
+				color: var(--cj-dark);
+				margin: 0;
+			}
 
-        .header-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--cj-dark);
-            margin: 0;
-        }
+			.header-subtitle {
+				font-size: 0.85rem;
+				color: #666;
+				margin-top: 2px;
+			}
 
-        .header-subtitle {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 2px;
-        }
+			#applet-container {
+				flex: 1;
+				position: relative;
+				width: 100%;
+				background: #fff;
+				box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+			}
 
-        #applet-container {
-            flex: 1;
-            position: relative;
-            width: 100%;
-            background: #fff;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
+			footer {
+				height: var(--footer-height);
+				background: #fff;
+				border-top: 1px solid #e1e4e8;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				padding: 0 24px;
+				font-size: 0.8rem;
+				color: #888;
+			}
 
-        footer {
-            height: var(--footer-height);
-            background: #fff;
-            border-top: 1px solid #e1e4e8;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 0 24px;
-            font-size: 0.8rem;
-            color: #888;
-        }
+			cheerpj-applet {
+				display: block;
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+		</style>
+	</head>
 
-        cheerpj-applet {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
-</head>
+	<body>
+		<header>
+			<div class="brand">
+				<div class="brand-logo">Cheerp<span>J</span></div>
+				<span class="demo-badge">Applet Demo</span>
+			</div>
+			<div class="header-content">
+				<h1 class="header-title">File Upload & Download</h1>
+				<div class="header-subtitle">Seamless Java Applet Integration</div>
+			</div>
+		</header>
 
-<body>
-    <header>
-        <div class="brand">
-            <div class="brand-logo">Cheerp<span>J</span></div>
-            <span class="demo-badge">Applet Demo</span>
-        </div>
-        <div class="header-content">
-            <h1 class="header-title">File Upload & Download</h1>
-            <div class="header-subtitle">Seamless Java Applet Integration</div>
-        </div>
-    </header>
+		<div id="applet-container">
+			<cheerpj-applet
+				archive="NoteAppletDemo.jar"
+				code="NoteApplet"
+				width="100%"
+				height="100%"
+			>
+				Your browser cannot handle the applet tag!
+			</cheerpj-applet>
+		</div>
 
-    <div id="applet-container">
-        <cheerpj-applet archive="NoteAppletDemo.jar" code="NoteApplet" width="100%" height="100%">
-            Your browser cannot handle the applet tag!
-        </cheerpj-applet>
-    </div>
+		<footer>&copy; 2026 Leaning Technologies</footer>
 
-    <footer>
-        &copy; 2026 Leaning Technologies
-    </footer>
-
-    <script type="module">
-        await cheerpjInit();
-    </script>
-</body>
-
+		<script type="module">
+			await cheerpjInit();
+		</script>
+	</body>
 </html>
