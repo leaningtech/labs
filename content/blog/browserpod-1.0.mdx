@@ -5,18 +5,18 @@ description: |
 authors:
   - alessandro
 pubDate: "February 18 2026"
-heroImage: "./banners/BrowserPod_beta-hero.png"
+heroImage: "./banners/BrowserPod-for-nodejs.jpg"
 tags:
   - BrowserPod
 ---
 
-Today we’re releasing [[BrowserPod]](https://browserpod.io) 1.0: a browser-based code sandbox for running untrusted code next to the user, with near-native speed, extremely low latency, strong data locality and very low running costs, while maintaining high fidelity with native/cloud execution.
+Today we’re releasing [BrowserPod](https://browserpod.io) 1.0: a browser-based code sandbox for running untrusted code next to the user, with near-native speed, extremely low latency, strong data locality and very low running costs, while maintaining high fidelity with native/cloud execution.
 
 This first release ships with **BrowserPod for Node.js**, the first engine in a broader, language-agnostic platform: a universal execution layer for browser-based compute. Support for Python, Ruby, Go and Rust engines will be released in the next six months. Linux-class sandboxes, powered by CheerpX, will be added by the end of 2026.
 
 BrowserPod relies on WebAssembly to provide high-fidelity, fully compiled runtime engines for multiple languages that are robust to real-world computationally heavy, multithreaded and multiprocess loads.
 
-To get an idea of what BrowserPod can do, feel free to experiment with the [Node.js](http://Node.js) REPL below, running completely on your device.
+To get an idea of what BrowserPod can do, feel free to experiment with the Node.js REPL below, running completely on your device.
 
 [ REPL DEMO ]
 
@@ -34,7 +34,7 @@ BrowserPod flips the model: **keep execution inside the browser**, leveraging We
 
 ## What you can build with it (today)
 
-BrowserPod is designed to be a universal compute platform, powered by multiple runtime engines, starting with [Node.js](http://Node.js), but expanding to other languages very rapidly.
+BrowserPod is designed to be a universal compute platform, powered by multiple runtime engines, starting with Node.js, but expanding to other languages very rapidly.
 
 This technology is the culmination of more than 10 years of unique experience that we have in building browser-based development tools and virtual machines based on WebAssembly.
 
@@ -79,7 +79,12 @@ To see Portals in action, scan the QR code (below) with your mobile device. Any 
 
 ## How does this work?
 
-[ ARCH DIAGRAM]
+<figure class="w-full">
+	![BrowserPod diagram](./images/Browserpod-diagram_2.webp)
+	<figcaption class="text-center">
+		Diagram of the BrowserPod architecture, illustrating the main components.
+	</figcaption>
+</figure>
 
 At its core, BrowserPod is built to be a high-fidelity, multi-language runtime environment.
 
@@ -90,9 +95,9 @@ Pods provide:
 - Process isolation and true concurrency via WebWorkers, suitable for real tools and workloads.
 - Controlled networking (ingress and egress) via Portals.
 
-BrowserPod builds on our previous experience in building browser-based virtual machines, with WebVM [LINK] being its spiritual predecessor. The syscall layer of WebVM, which is powerful enough to run large scale, unmodified native applications ( [LINK TO ALPINE ARTICLE]), serves as the core foundation of BrowserPod.
+BrowserPod builds on our previous experience in building browser-based virtual machines, with [WebVM](https://webvm.io) being its spiritual predecessor. The syscall layer of WebVM, which is powerful enough to run large scale, [unmodified native applications](https://labs.leaningtech.com/blog/webvm-20), serves as the core foundation of BrowserPod.
 
-## Why [Node.js](http://Node.js) first
+## Why Node.js first
 
 We started with Node.js deliberately, not as an easy first step, but because it is one of the most challenging environments to test the robustness and fidelity of BrowserPod.
 
@@ -102,7 +107,7 @@ Shipping Node.js as the first engine forces the platform to be robust from the s
 
 ## Roadmap and vision
 
-Today’s release of **BrowserPod for [Node.js](http://Node.js)** is the first step of our ambitious release plan.
+Today’s release of **BrowserPod for Node.js** is the first step of our ambitious release plan.
 
 Our roadmap includes numerous releases of new engines in the course of 2026:
 
@@ -117,15 +122,23 @@ By the end of 2026 BrowserPod will be able to run any Linux container in the bro
 
 Throughout the year, we’ll also keep shipping continuous improvements in performance, compatibility, and developer ergonomics as we learn from real usage.
 
-If you have any questions or ideas for us, get in touch. The whole Leaning Technologies team, myself included, is available on Discord [LINK]
-
-[LARGE DISCORD BUTTON]
+If you have any questions or ideas for us, get in touch. The whole Leaning Technologies team, myself included, is available on [Discord](https://discord.leaningtech.com)
 
 ## Try it out now
 
-[ LARGE LINK TO BP CONSOLE ]
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-If you want to see what BrowserPod feels like in practice, start here with two clicks ( [https://console.browserpod.io](https://console.browserpod.io)) and follow the instructions, or simply use our npm quickstart directly.
+<div class="flex items-center gap-2 flex-wrap">
+	<LinkButton
+		type="primary-browserpod"
+		href="https://console.browserpod.io"
+		label="BrowserPod Console"
+		iconRight="mi:arrow-right"
+		target="_blank"
+	/>
+</div>
+
+If you want to see what BrowserPod feels like in practice, start here: [https://console.browserpod.io](https://console.browserpod.io) and follow the instructions, or simply use our npm quickstart.
 
 `npm create browserpod-quickstart`
 
