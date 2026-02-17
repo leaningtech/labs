@@ -3,17 +3,6 @@ title: Glossary
 description: Key terms and definitions used in BrowserPod documentation
 ---
 
-## API
-
-A set of functions or rules that let two pieces of software talk to each other.
-
-## Arguments (args)
-
-Extra pieces of information passed to a command.
-
-## Await / async
-
-`async` marks a function as able to pause. `await` pauses until a promise finishes.
 
 ## Backend
 
@@ -27,69 +16,21 @@ The set of methods (like `pod.run` and file APIs) used to control the pod. New p
 
 A runtime that provides Linux-like syscalls to Wasm programs. BrowserPod's Node.js build targets CheerpOS.
 
-## Class
-
-A blueprint for creating objects.
-
-## Command
-
-A program you run inside the pod, like `node` or `npm`.
-
-## Command line
-
-A text input where you type commands and see their output.
-
 ## COOP and COEP
 
 HTTP headers required for cross-origin isolation so the browser can enable `SharedArrayBuffer`.
 
 ## Current working directory (cwd)
 
-The folder a command runs from.
+The directory used to resolve relative paths for the current process
 
-## Dependency
+## Virtual filesystem
 
-A library your project needs in order to run.
-
-## DOM element
-
-A single piece of a webpage, like a `div` or `button`.
-
-## Filesystem
-
-The structure of folders and files inside the pod.
-
-## Foreground process
-
-The currently active program attached to the terminal. It receives stdin and can control the terminal while it runs.
-
-## Function
-
-A reusable block of code that does something. You can call it to run it.
-
-## Instance
-
-A specific, working object created from a class.
-
-## Method
-
-A function that belongs to an object.
-
-## Object
-
-A container that groups related values and functions together.
-
-## Package
-
-A bundle of code you can install, usually with npm.
-
-## package.json
-
-A file that describes a Node.js project and its dependencies.
+A filesystem created and managed in software rather than on the user’s real disk.
 
 ## Pod
 
-A running BrowserPod instance that includes a Node.js runtime, virtual filesystem, and process runner.
+A running BrowserPod instance
 
 ## Portal
 
@@ -102,10 +43,6 @@ A public URL that forwards external traffic to a port inside the pod.
 ## Runtime
 
 The environment that executes your code.
-
-## Virtual filesystem
-
-A filesystem created and managed in software rather than on the user’s real disk.
 
 ## Wasm (WebAssembly)
 

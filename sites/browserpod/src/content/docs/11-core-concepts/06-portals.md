@@ -1,5 +1,5 @@
 ---
-title: Understanding Portals
+title: Portals
 description: How Portals expose Pod servers to the outside world
 ---
 

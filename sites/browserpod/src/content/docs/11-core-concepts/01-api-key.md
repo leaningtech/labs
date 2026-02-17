@@ -1,5 +1,5 @@
 ---
-title: Understanding BrowserPod API keys
+title: API keys
 description: How BrowserPod API keys work and where to place them
 ---
 

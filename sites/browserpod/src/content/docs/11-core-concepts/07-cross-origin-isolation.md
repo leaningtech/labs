@@ -1,5 +1,5 @@
 ---
-title: Understanding cross-origin isolation
+title: Cross-origin isolation
 description: Why BrowserPod requires COOP and COEP
 ---
 
