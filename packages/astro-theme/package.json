@@ -27,6 +27,8 @@
 		"./components/JNLPRunnerButton.astro": "./components/JNLPRunnerButton.astro",
 		"./components/AppletRunnerButton.astro": "./components/AppletRunnerButton.astro",
 		"./components/blog/BrowserPodDemo_Beta.svelte": "./components/blog/BrowserPodDemo_Beta.svelte",
+		"./components/blog/BrowserPodDemo_1.0.svelte": "./components/blog/BrowserPodDemo_1.0.svelte",
+		"./components/blog/BrowserPodDemo_1.0-repl.svelte": "./components/blog/BrowserPodDemo_1.0-repl.svelte",
 		"./components/nav/global/GlobalNavbar.astro": "./components/nav/global/GlobalNavbar.astro"
 	},
 	"scripts": {},
@@ -49,7 +51,9 @@
 		"@codemirror/lang-json": "^6.0.2",
 		"@codemirror/view": "^6.39.2",
 		"@iconify/svelte": "^5.1.0",
+		"@leaningtech/browserpod": "^1.0.0",
 		"@leaningtech/global-navbar": "workspace:^",
+		"@leaningtech/svelte-browserpod-editor": "^0.2.11",
 		"@replit/codemirror-lang-svelte": "^6.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.1.1",
 		"@tailwindcss/typography": "^0.5.10",

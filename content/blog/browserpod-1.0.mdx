@@ -10,6 +10,9 @@ tags:
   - BrowserPod
 ---
 
+import BrowserPodDemo from "@leaningtech/astro-theme/components/blog/BrowserPodDemo_1.0.svelte";
+import BrowserPodDemoRepl from "@leaningtech/astro-theme/components/blog/BrowserPodDemo_1.0-repl.svelte";
+
 Today we’re releasing [BrowserPod](https://browserpod.io) 1.0: a browser-based code sandbox for running untrusted code next to the user, with near-native speed, extremely low latency, strong data locality and very low running costs, while maintaining high fidelity with native/cloud execution.
 
 This first release ships with **BrowserPod for Node.js**, the first engine in a broader, language-agnostic platform: a universal execution layer for browser-based compute. Support for Python, Ruby, Go and Rust engines will be released in the next six months. Linux-class sandboxes, powered by CheerpX, will be added by the end of 2026.
@@ -18,7 +21,14 @@ BrowserPod relies on WebAssembly to provide high-fidelity, fully compiled runtim
 
 To get an idea of what BrowserPod can do, feel free to experiment with the Node.js REPL below, running completely on your device.
 
-[ REPL DEMO ]
+<figure class="w-full">
+	<div class="w-full relative">
+		<BrowserPodDemoRepl client:only="svelte" />
+	</div>
+	<figcaption class="text-center">
+		Node 22 REPL running live in BrowserPod.
+	</figcaption>
+</figure>
 
 ## Why BrowserPod — and why now?
 
@@ -73,9 +83,18 @@ All this, without computation being delegated to backend infrastructure.
 
 To see Portals in action, scan the QR code (below) with your mobile device. Any change to the code, will be reflected immediately to the device as well.
 
-[TODO LIVE LINK TO DEMO]
-
-[VITE DEMO + QR]
+<figure class="w-full">
+	<div class="w-full relative">
+		<BrowserPodDemo
+			client:only="svelte"
+			projectSource={{ type: "local", path: "vite1" }}
+			apiKey="bp1_650b51af6579eb358452af0ced948bc34a6d98693c2969af6ad1b1e74c3948ee"
+		/>
+	</div>
+	<figcaption class="text-center">
+		Svelte + Vite running live in BrowserPod.
+	</figcaption>
+</figure>
 
 ## How does this work?
 

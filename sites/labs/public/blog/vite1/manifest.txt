@@ -1,0 +1,15 @@
+public/vite.svg
+README.md
+.npmrc
+index.html
+svelte.config.js
+src/assets/svelte.svg
+src/main.js
+src/app.css
+src/vite-env.d.ts
+src/App.svelte
+src/lib/Counter.svelte
+vite.config.js
+jsconfig.json
+package.json
+package-lock.json
