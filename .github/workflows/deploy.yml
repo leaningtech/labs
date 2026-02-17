@@ -17,7 +17,7 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
+          version: 10
           run_install: false
 
       - name: Install Node.js
@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: cd sites/cheerpj && pnpm install
+        run: cd sites/cheerpj && pnpm install --frozen-lockfile
 
       - name: Build global-navbar
         run: cd packages/global-navbar && pnpm run build
