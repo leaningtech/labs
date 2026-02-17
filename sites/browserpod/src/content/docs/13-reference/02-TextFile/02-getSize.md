@@ -10,6 +10,7 @@ class TextFile {
 ```
 
 ## Parameters
+
 `getSize` does not have any parameters.
 
 ## Returns

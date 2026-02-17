@@ -19,4 +19,5 @@ class BrowserPod {
 - **port (`number`)** - The local port that is connected to the Portal.
 
 ## Returns
+
 `onPortal` does not return a value.

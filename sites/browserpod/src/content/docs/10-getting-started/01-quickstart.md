@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-Then, open your localhost  (for example, [http://localhost:5173/](http://localhost:5173/)) in your browser, and you should
+Then, open your localhost (for example, [http://localhost:5173/](http://localhost:5173/)) in your browser, and you should
 see something like this:
 
 ![Output of the basic template](/docs/assets/bp-quickstart.png)

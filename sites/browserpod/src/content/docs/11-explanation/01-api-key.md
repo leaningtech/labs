@@ -8,7 +8,7 @@ An API key is a secret code that lets your app access a BrowserPod API. It ident
 ## Register for an API key
 
 1. Register at https://console.browserpod.io
-2.  Create a key in **Keys & Domains**
+2. Create a key in **Keys & Domains**
 
 ## Where to store the API key
 

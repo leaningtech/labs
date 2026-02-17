@@ -8,8 +8,11 @@ class BinaryFile {
 	async getSize(): Promise<int>;
 }
 ```
+
 ## Parameters
+
 `getSize` does not have any parameters.
+
 ## Returns
 
 `getSize` returns a [Promise] which is resolved when the operation has succeded.

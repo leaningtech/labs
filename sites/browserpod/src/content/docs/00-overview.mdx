@@ -33,9 +33,10 @@ import { DISCORD_URL } from "@/consts.ts";
 Instead of provisioning a cloud server, BrowserPod's API enables a client browser to host full runtimes compiled to WebAssembly (Wasm), running at native speed.
 
 <div class="m-4 flex justify-center">
-	[Get started](/docs/getting-started/quickstart) · [Basic Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference) · [GitHub
-	repository](https://github.com/leaningtech/browserpod-meta)
-	· [Licensing](/docs/more/licensing)
+	[Get started](/docs/getting-started/quickstart) · [Basic
+	Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference)
+	· [GitHub repository](https://github.com/leaningtech/browserpod-meta) ·
+	[Licensing](/docs/more/licensing)
 </div>
 
 BrowserPod is ephemeral by design. Each **pod** (_see [pod](/docs/more/glossary#pod)_) runs inside a browser tab and ends when the tab closes or reloads. Because BrowserPod runs inside the browser, each Pod is constrained by the browser’s security model, isolated from the user’s OS, with limited access (via syscalls) to local files or system resources unless you explicitly provide it.
@@ -64,8 +65,6 @@ Everything runs client‑side within the browser sandbox, so users don’t need 
 - **Security**: The BrowserPod API boots instances in the browser's sandbox, inheriting its security.
 - **Cost**: Because BrowserPod runs instances in the browser, it comes at a fraction of the cost of cloud sandboxes, with a generous free tier.
 
-
-
 ## How it works (high level)
 
 - BrowserPod ships a build of Node.js that targets CheerpOS (a runtime that provides a Linux‑like syscall interface to Wasm).
@@ -78,7 +77,6 @@ See the [hosting guide](/docs/guides/hosting) for details on headers and setup.
 ## Supported runtimes
 
 BrowserPod currently supports Node.js runtime, support for Python and Ruby is coming soon.
-
 
 ## Community and support
 

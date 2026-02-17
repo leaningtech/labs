@@ -11,18 +11,19 @@ This page maps common BrowserPod error messages to their likely causes and fixes
 
 - **Causes**:
 
-    - `pod.run` is like `execve` in Linux or `child_process.spawn` in Node.
-It does not support shell features like `||` or `&&` or builtins.
+      - `pod.run` is like `execve` in Linux or `child_process.spawn` in Node.
 
-    - Bash support is on the roadmap.
+  It does not support shell features like `||` or `&&` or builtins.
+
+      - Bash support is on the roadmap.
 
 - **Solution**: Write complex behavior as a JavaScript script, and execute that.
 
 ## Missing or hidden terminal element
 
 - **Symptoms**:
-    - `The 'terminal' argument is required`
-    - Output disappears during long runs
+  - `The 'terminal' argument is required`
+  - Output disappears during long runs
 
 - **Cause**: The terminal element was never created or was unmounted.
 
@@ -33,8 +34,6 @@ const terminal = await pod.createDefaultTerminal(consoleEl);
 ...
 pod.run(..., {terminal,...});
 ```
-
-
 
 ## Using the wrong file mode
 
@@ -51,4 +50,4 @@ pod.run(..., {terminal,...});
 - **Cause**: Native binaries do not run in the Wasm environment.
 
 - **Solution**: Use Wasm alternatives and `package.json` overrides. See the
-[native binaries guide](/docs/guides/native-binaries).
+  [native binaries guide](/docs/guides/native-binaries).

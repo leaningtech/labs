@@ -3,8 +3,6 @@ title: Set up a basic NPM-based project
 description: In this tutorial you will set up a simple NPM project that runs an HTTP server using Express.js
 ---
 
-
-
 During this tutorial we will set up a basic project that uses BrowserPod to run
 a web server application entirely client side in the Browser.
 
@@ -13,7 +11,7 @@ a web server application entirely client side in the Browser.
 You can get the source by running `npm create browserpod-quickstart@latest` and
 selecting the "Web Server" template.
 
-###  Project structure
+### Project structure
 
 The project consists of the following files and directories:
 
@@ -42,6 +40,7 @@ There are two different NPM projects at play:
   that we want to run inside BrowserPod itself. It's a simple Hello World express.js application.
 
 ## 2. Get familiar with the project files
+
 Let's go through the relevant files one by one, explaining their purpose!
 
 ### Project's package.json
@@ -234,21 +233,19 @@ await pod.run("node", ["main.js"], {
 1. First, boot your Pod as usual and pass a valid Api Key as an argument.
 
 2. Then set up a terminal in the **console** element that was added to the `index.html` file,
-so that the output of the commands ran in the Pod are visible.
+   so that the output of the commands ran in the Pod are visible.
 
 3. Register a callback that will be notified every time an http server is
-started inside the Pod. The callback takes a Portal URL as an argument: a randomly generated, publicly accessible URL that you can use to show and interact with the inner project.
+   started inside the Pod. The callback takes a Portal URL as an argument: a randomly generated, publicly accessible URL that you can use to show and interact with the inner project.
 
 4. It will be shown that the page is up and running and link to it in the `#url` div,
-and display a live rendering of it in the `#portal` iframe. Which were both set
-up in the `index.html` page.
+   and display a live rendering of it in the `#portal` iframe. Which were both set
+   up in the `index.html` page.
 
-6. Then copy the project files inside the Pod, using the `copyFile` utility function.
+5. Then copy the project files inside the Pod, using the `copyFile` utility function.
 
-7. Finally, run some commands inside the Pod: `npm install` to install express.js
-and its dependencies, and `node main.js` to start the web server.
-
-
+6. Finally, run some commands inside the Pod: `npm install` to install express.js
+   and its dependencies, and `node main.js` to start the web server.
 
 ## End result
 

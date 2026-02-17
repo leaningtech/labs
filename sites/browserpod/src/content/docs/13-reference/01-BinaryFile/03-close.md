@@ -8,7 +8,9 @@ class BinaryFile {
 	async close(): Promise<void>;
 }
 ```
+
 ## Parameters
+
 `close` does not have any parameters.
 
 ## Returns
