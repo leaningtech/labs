@@ -3,15 +3,17 @@ title: Set up a basic NPM-based project
 description: In this tutorial you will set up a simple NPM project that runs an HTTP server using Express.js
 ---
 
-## Get the code
+
 
 During this tutorial we will set up a basic project that uses BrowserPod to run
 a web server application entirely client side in the Browser.
 
+## 1. Get the code
+
 You can get the source by running `npm create browserpod-quickstart@latest` and
 selecting the "Web Server" template.
 
-## Project structure
+###  Project structure
 
 The project consists of the following files and directories:
 
@@ -39,9 +41,10 @@ There are two different NPM projects at play:
 - The inner project, in the `public/project` directory, which is the web application
   that we want to run inside BrowserPod itself. It's a simple Hello World express.js application.
 
+## 2. Get familiar with the project files
 Let's go through the relevant files one by one, explaining their purpose!
 
-## Project's package.json
+### Project's package.json
 
 Let's start from the inner project. This is the NPM project that we want to run
 inside BrowserPod.
@@ -65,7 +68,7 @@ Its package.json is very simple:
 
 The only dependency is express.js, a popular web framework.
 
-## Project's main.js
+### Project's main.js
 
 This is the main code of the project. A simple hello world web server (actual content
 of the html omitted for brevity):
@@ -89,7 +92,7 @@ app.listen(port, () => {
 });
 ```
 
-## Top level package.json
+### Top level package.json
 
 The top level package.json is also very minimal. The only dependencies are Vite (used to bundle
 the code and run a development server), and BrowserPod:
@@ -113,7 +116,7 @@ the code and run a development server), and BrowserPod:
 }
 ```
 
-## vite.config.js
+### vite.config.js
 
 This file contains the Vite configuration. See [https://vitejs.dev/config](https://vitejs.dev/config)
 for all possible options. We are only interested in setting up [COEP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy)
@@ -134,7 +137,7 @@ export default defineConfig({
 });
 ```
 
-## index.html
+### index.html
 
 This is the entry point of our application. It defines a basic HTML page
 with a few elements that we will use to set up BrowserPod.
@@ -167,7 +170,7 @@ with a few elements that we will use to set up BrowserPod.
 </html>
 ```
 
-## src/utils.js
+### src/utils.js
 
 This file contains the utility function `copyFile`, that we will use in the main
 script to copy files into the Pod.
@@ -182,7 +185,7 @@ export async function copyFile(pod, path) {
 }
 ```
 
-## src/main.js
+### src/main.js
 
 The main logic of our application. Here we create our Pod and run our express.js
 project in it.
@@ -226,29 +229,30 @@ await pod.run("node", ["main.js"], {
 });
 ```
 
-We first boot our Pod, passing a valid Api Key as an argument.
+## 3. Run and setup your project
 
-Then we set up a terminal in the "console" element that we added to `index.html`,
-so that we can see the output of the commands that we are going to run in the Pod.
+1. First, boot your Pod as usual and pass a valid Api Key as an argument.
 
-Then we register a callback that will be notified every time an http server is
-started inside the Pod.
+2. Then set up a terminal in the **console** element that was added to the `index.html` file,
+so that the output of the commands ran in the Pod are visible.
 
-The callback takes a Portal URL as an argument: a randomly generated, publicly
-accessible URL that you can use to show and interact with the inner project.
+3. Register a callback that will be notified every time an http server is
+started inside the Pod. The callback takes a Portal URL as an argument: a randomly generated, publicly accessible URL that you can use to show and interact with the inner project.
 
-We will show that the page is up and running and link to it in our `#url` div,
-and display a live rendering of it in our `#portal` iframe. Which were both set
-up in our `index.html` page.
+4. It will be shown that the page is up and running and link to it in the `#url` div,
+and display a live rendering of it in the `#portal` iframe. Which were both set
+up in the `index.html` page.
 
-Then we copy the project files inside the Pod, using the `copyFile` utility function.
+6. Then copy the project files inside the Pod, using the `copyFile` utility function.
 
-Finally, we run some commands inside our Pod: `npm install` to install express.js
+7. Finally, run some commands inside the Pod: `npm install` to install express.js
 and its dependencies, and `node main.js` to start the web server.
+
+
+
+## End result
 
 Once the installation and setup are completed, you should see the iframe loading
 the main page of the project, served from inside the Pod via the Portal.
-
-## End result
 
 ![The index.html page rendered](/docs/assets/express.png)

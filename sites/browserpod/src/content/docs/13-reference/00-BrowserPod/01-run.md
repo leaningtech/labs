@@ -20,10 +20,10 @@ class BrowserPod {
 
 ## Parameters
 
-- **executable (`string`)** - The path of the program to execute
+- **executable (`string`)** - The path of the program to execute.
 
 * **args (`Array<string>`)** - The command line arguments to pass to the program.
-* **opts (`object`)** - Initialization options passed as an object
+* **opts (`object`)** - Initialization options passed as an object.
 
 ## Options
 

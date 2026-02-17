@@ -11,7 +11,7 @@ class BinaryFile {
 
 ## Parameters
 
-- **data** (`ArrayBuffer`) - Data to write into the file at the current seek position.
+- **data (`ArrayBuffer`)** - Data to write into the file at the current seek position.
 
 ## Returns
 

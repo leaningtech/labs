@@ -11,7 +11,7 @@ class TextFile {
 
 ## Parameters
 
-- **data** (`string`) - String to write into the file at the current seek position. The string is decoded to utf-8.
+- **data (`string`)** - String to write into the file at the current seek position. The string is decoded to utf-8.
 
 ## Returns
 

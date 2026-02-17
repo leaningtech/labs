@@ -27,15 +27,15 @@ The Pro plan allows you to use BrowserPod for:
 
 ## Usage limits
 
-Both plans use token-based metering tied to your API key. See the pricing policy for specific limits:
+Both plans use token-based metering tied to your API key. See the [pricing policy](https://browserpod.io/browserpod-pricing-policy) for specific limits.
 
-https://browserpod.io/browserpod-pricing-policy
+
 
 ## Enterprise
 
-For self-hosting, SSO integration, or custom deployment options, contact Leaning Technologies:
+For self-hosting, SSO integration, or custom deployment options, [contact Leaning Technologies](https://forms.leaningtech.com/leaningforms/form/BookaDemo/formperma/2zFTrXkIeE0kW_6tyq1wbmbWM0Jf8s6Tft4ot0waF0Q)
 
-https://forms.leaningtech.com/leaningforms/form/BookaDemo/formperma/2zFTrXkIeE0kW_6tyq1wbmbWM0Jf8s6Tft4ot0waF0Q
+
 
 ## Support
 

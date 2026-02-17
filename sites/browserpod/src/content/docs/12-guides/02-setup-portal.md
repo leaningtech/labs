@@ -5,7 +5,7 @@ description: Expose a local server with a BrowserPod portal URL
 
 This guide shows how to listen on a port and expose it via a portal URL.
 
-## 1) Register a Portal handler
+## 1. Register a Portal handler
 
 Register a callback so you can capture the portal URL when it appears:
 
@@ -15,7 +15,7 @@ pod.onPortal(({ url, port }) => {
 });
 ```
 
-## 2) Start a server inside the pod
+## 2. Start a server inside the pod
 
 When your server listens on a port, BrowserPod will create a portal:
 
@@ -35,7 +35,7 @@ server.listen(3000, () => {
 });
 ```
 
-## 3) Use the Portal URL
+## 3. Use the Portal URL
 
 A common pattern is to display the URL and load it in an iframe:
 
