@@ -145,7 +145,12 @@ export default function ThemeIntegration(
 					trailingSlash: "never",
 					vite: {
 						ssr: {
-							noExternal: ["@leaningtech/global-navbar"],
+							noExternal: [
+								"@leaningtech/global-navbar",
+								"@leaningtech/svelte-browserpod-editor",
+								"svelte-codemirror-editor",
+								"@iconify/svelte",
+							],
 						},
 					},
 				});

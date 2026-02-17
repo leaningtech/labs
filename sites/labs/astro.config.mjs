@@ -33,12 +33,5 @@ export default defineConfig({
 				target: "es2022",
 			},
 		},
-		ssr: {
-			noExternal: [
-				"@leaningtech/svelte-browserpod-editor",
-				"svelte-codemirror-editor",
-				"@iconify/svelte",
-			],
-		},
 	},
 });
