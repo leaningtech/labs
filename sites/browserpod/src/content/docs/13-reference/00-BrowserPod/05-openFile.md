@@ -11,8 +11,8 @@ class BrowserPod {
 
 ## Parameters
 
-- **path** (`string`) - Path to an existing file.
-- **mode** (`string`) - Opening mode. Either "binary" or "utf-8".
+- **path (`string`)** - Path to an existing file.
+- **mode (`string`)** - Opening mode. Either "binary" or "utf-8".
 
 ## Returns
 
