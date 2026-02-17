@@ -5,12 +5,12 @@ description: Use Java libraries in JavaScript
 
 Library mode allows you to directly use Java methods, objects, and arrays from JavaScript. This API has been designed to take advantage of async/await to feel more natural to use, without sacrificing any flexibility.
 
-# Getting started
+## Getting started
 
 Loading a library is as simple as calling [`cheerpjRunLibrary`].
 
 - `await cheerpjRunLibrary("")` loads **only the Java standard library**
-- `await cheerpjRunLibrary("/path/to/some.jar")` loads the Java standard library **plus** that JAR
+- `await cheerpjRunLibrary("/app/path/to/some.jar")` loads the Java standard library **plus** all the classes in the JAR
 
 An example of using the standard Java library.
 
@@ -61,7 +61,7 @@ async function libraryModeTour() {
 }
 ```
 
-# Example: generating a PDF with iText
+## Example: generating a PDF with iText
 
 Library mode can be used to integrate powerful Java libraries into your Web application. As a practical example, these few lines of code make it possible to generate a PDF from JavaScript using the popular iText library.
 
@@ -106,7 +106,7 @@ async function iTextExample() {
 }
 ```
 
-# See also
+## See also
 
 Library mode is also used for [native methods implemented in JavaScript][JNI]. A `native` is effectively just a shorter library mode session.
 
