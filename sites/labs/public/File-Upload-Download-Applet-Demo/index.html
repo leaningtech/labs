@@ -1,100 +1,154 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>CheerpJ Upload/Download Applet Demo</title>
 
-		<style>
-			:root {
-				--header-height: 60px;
-				--bg-color: #f0f2f5;
-				--text-color: #333;
-				--header-bg: #ffffff;
-				--border-color: #ddd;
-			}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CheerpJ Demo | File Upload & Download</title>
+    <!-- <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script> -->
 
-			* {
-				box-sizing: border-box;
-			}
+    <style>
+        :root {
+            --cj-primary: #ff6b00;
+            --cj-dark: #1d3557;
+            --cj-light: #f1faee;
+            --text-main: #333;
+            --header-height: 64px;
+            --footer-height: 32px;
+        }
 
-			body {
-				font-family:
-					-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-					Arial, sans-serif;
-				margin: 0;
-				padding: 0;
-				background-color: var(--bg-color);
-				color: var(--text-color);
-				height: 100vh;
-				display: flex;
-				flex-direction: column;
-				overflow: hidden;
-				/* Prevent body scroll, let applet handle it if needed */
-			}
+        * {
+            box-sizing: border-box;
+        }
 
-			header {
-				background-color: var(--header-bg);
-				border-bottom: 1px solid var(--border-color);
-				padding: 0 20px;
-				height: auto;
-				min-height: var(--header-height);
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-				z-index: 10;
-			}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cj-light);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-			h1 {
-				margin: 10px 0 5px 0;
-				font-size: 1.5rem;
-				font-weight: 600;
-				text-align: center;
-			}
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e1e4e8;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
 
-			code {
-				background: #eee;
-				padding: 2px 4px;
-				border-radius: 4px;
-				font-size: 0.85em;
-				font-family:
-					ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
-					"Liberation Mono", monospace;
-			}
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-			#applet-container {
-				flex: 1;
-				/* Take remaining space */
-				position: relative;
-				width: 100%;
-				height: 100%;
-				background: #fff;
-			}
+        .brand-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--cj-dark);
+            letter-spacing: -0.5px;
+        }
 
-			cheerpj-applet {
-				display: block;
-				width: 100%;
-				height: 100%;
-				border: none;
-			}
-		</style>
-	</head>
+        .brand-logo span {
+            color: var(--cj-primary);
+        }
 
-	<body>
-		<header>
-			<h1>File Upload/Download Applet Demo</h1>
-		</header>
+        .demo-badge {
+            background-color: var(--cj-primary);
+            color: #ffffff;
+            /* White text */
+            padding: 4px 10px;
+            border-radius: 999px;
+            /* Pill shape */
+            font-size: 0.70rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
 
-		<div id="applet-container">
-			<cheerpj-applet
-				archive="NoteAppletDemo.jar"
-				code="NoteApplet"
-				width="100%"
-				height="100%"
-			>
-				Your browser cannot handle the applet tag!
-			</cheerpj-applet>
-		</div>
-	</body>
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cj-dark);
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        #applet-container {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            background: #fff;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        footer {
+            height: var(--footer-height);
+            background: #fff;
+            border-top: 1px solid #e1e4e8;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 24px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        cheerpj-applet {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">
+            <div class="brand-logo">Cheerp<span>J</span></div>
+            <span class="demo-badge">Applet Demo</span>
+        </div>
+        <div class="header-content">
+            <h1 class="header-title">File Upload & Download</h1>
+            <div class="header-subtitle">Seamless Java Applet Integration</div>
+        </div>
+    </header>
+
+    <div id="applet-container">
+        <cheerpj-applet archive="NoteAppletDemo.jar" code="NoteApplet" width="100%" height="100%">
+            Your browser cannot handle the applet tag!
+        </cheerpj-applet>
+    </div>
+
+    <footer>
+        &copy; 2026 Leaning Technologies
+    </footer>
+
+    <script type="module">
+        await cheerpjInit();
+    </script>
+</body>
+
 </html>
