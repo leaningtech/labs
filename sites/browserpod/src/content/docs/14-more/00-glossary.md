@@ -3,7 +3,6 @@ title: Glossary
 description: Key terms and definitions used in BrowserPod documentation
 ---
 
-
 ## Backend
 
 The server-side part of a system that runs outside the browser.
