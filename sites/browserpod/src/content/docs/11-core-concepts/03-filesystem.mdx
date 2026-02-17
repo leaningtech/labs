@@ -1,0 +1,49 @@
+---
+title: Filesystem
+description: How the virtual filesystem is structured and how it behaves
+---
+
+Each Pod includes a virtual filesystem with POSIX-style paths (for example, `/project/main.js`). This filesystem lives inside the Pod runtime and is exposed through the BrowserPod API.
+
+## What the filesystem is
+
+The Pod filesystem is a virtual, Linux-like filesystem presented to the Node.js runtime running in the browser. It behaves like a typical POSIX filesystem:
+
+- Paths are absolute and use `/` as the separator.
+- Directories and files are distinct nodes.
+- Processes see a current working directory (`cwd`) when they run.
+- File handles are explicit and must be closed.
+
+It is not the same as your machine's filesystem and has no direct access to local disk. Everything exists inside the Pod runtime.
+
+## Persistence and storage
+
+The filesystem **persists via IndexedDB** in the browser. Persistence is **scoped to the origin** (for example, `http://localhost:5173`). That means:
+
+- Data can persist across page reloads and sessions for the same origin.
+- A different origin starts with a separate filesystem state.
+
+The filesystem is still virtual; persistence is handled by the browser's IndexedDB store. Data stored in IndexedDb is not human-readable.
+
+## Files, handles, and modes
+
+The API returns **file handles** when you open or create a file. A handle represents an open file descriptor inside the Pod runtime. Handles are not automatically garbage collected; you must close them explicitly to release the underlying resources.
+
+BrowserPod supports two file modes:
+
+- `"binary"` for raw bytes
+- `"utf-8"` for text
+
+These modes determine the type of file handle you receive and the type of data it reads or writes.
+
+## Process view of the filesystem
+
+Processes launched with `pod.run(...)` see the filesystem as their local disk. When a process starts, it can read and write the same filesystem tree the API exposes. The `cwd` option sets the working directory for that process. It does not change the filesystem itself; it only changes how relative paths are resolved inside that process.
+
+## Lifecycle and scope
+
+- The filesystem exists for the lifetime of the Pod instance.
+- Because it is persisted via IndexedDB, data can remain between sessions for the same origin.
+- Multiple processes in the same Pod share the same filesystem state.
+
+If you need to write files into the Pod or copy in a project, see the guide: [Write files to the pod](/docs/guides/write-files-to-pod).

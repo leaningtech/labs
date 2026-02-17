@@ -1,0 +1,260 @@
+---
+const {
+	label = "Cube",
+	type = "geojson",
+	data = "",
+	width = 320,
+	height = 220,
+	frameless = false,
+	showLabel = true,
+	showSource = false,
+} = Astro.props;
+const id = `cube-${Math.random().toString(36).slice(2)}`;
+---
+
+<div
+	class={`cube-preview ${frameless ? "is-frameless" : ""}`}
+	{id}
+	data-type={type}
+>
+	{showLabel && <div class="cube-preview-header">{label}</div>}
+	<canvas {width} {height} aria-label={`${label} preview`}></canvas>
+	<script type="application/json" data-cube set:html={data} />
+	{
+		showSource && (
+			<details class="cube-preview-source">
+				<summary>Show source</summary>
+				<pre>
+					<code>{data}</code>
+				</pre>
+			</details>
+		)
+	}
+</div>
+
+<style>
+	.cube-preview {
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 12px;
+		background: color-mix(in srgb, var(--bp-bg) 92%, transparent);
+		padding: 10px;
+		max-width: 520px;
+	}
+	.cube-preview.is-frameless {
+		border: none;
+		background: transparent;
+		padding: 0;
+	}
+	.cube-preview-header {
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin: 0 0 8px;
+		color: var(--bp-text);
+		letter-spacing: 0.01em;
+	}
+	.cube-preview.is-frameless .cube-preview-header {
+		margin-bottom: 6px;
+	}
+	.cube-preview canvas {
+		width: 100%;
+		height: auto;
+		display: block;
+		background: transparent;
+		border-radius: 8px;
+	}
+	.cube-preview.is-frameless canvas {
+		border-radius: 0;
+	}
+	.cube-preview-source {
+		margin-top: 10px;
+	}
+	.cube-preview-source summary {
+		cursor: pointer;
+		color: var(--sl-color-text-accent);
+		font-weight: 600;
+	}
+</style>
+
+<script>
+	(() => {
+		const rotate = (p, rx, ry) => {
+			const [x, y, z] = p;
+			const cosy = Math.cos(ry);
+			const siny = Math.sin(ry);
+			const cosx = Math.cos(rx);
+			const sinx = Math.sin(rx);
+			const x1 = x * cosy + z * siny;
+			const z1 = -x * siny + z * cosy;
+			const y1 = y * cosx - z1 * sinx;
+			const z2 = y * sinx + z1 * cosx;
+			return [x1, y1, z2];
+		};
+
+		const parseGeoJSON = (raw) => {
+			const data = JSON.parse(raw);
+			const edges = [];
+			const points = [];
+			const addEdge = (a, b) => edges.push([a, b]);
+			const addPoint = (p) => {
+				points.push(p);
+				return points.length - 1;
+			};
+			for (const f of data.features || []) {
+				const rings = f.geometry?.coordinates || [];
+				for (const ring of rings) {
+					let prev = null;
+					for (const coord of ring) {
+						const idx = addPoint(coord);
+						if (prev !== null) addEdge(prev, idx);
+						prev = idx;
+					}
+				}
+			}
+			return { points, edges };
+		};
+
+		const parseTopoJSON = (raw) => {
+			const data = JSON.parse(raw);
+			const arcs = data.arcs || [];
+			const points = [];
+			const edges = [];
+			const addPoint = (p) => {
+				points.push(p);
+				return points.length - 1;
+			};
+			const addEdge = (a, b) => edges.push([a, b]);
+			const resolveArc = (arcIndex) => {
+				const reversed = arcIndex < 0;
+				const arc = arcs[Math.abs(arcIndex)];
+				const coords = reversed ? [...arc].reverse() : arc;
+				return coords;
+			};
+			const geoms = data.objects?.cube?.geometries || [];
+			for (const g of geoms) {
+				for (const ring of g.arcs || []) {
+					const arc = resolveArc(ring[0]);
+					let prev = null;
+					for (const coord of arc) {
+						const idx = addPoint(coord);
+						if (prev !== null) addEdge(prev, idx);
+						prev = idx;
+					}
+				}
+			}
+			return { points, edges };
+		};
+
+		const parseSTL = (raw) => {
+			const points = [];
+			const edges = [];
+			const addPoint = (p) => {
+				points.push(p);
+				return points.length - 1;
+			};
+			const addEdge = (a, b) => edges.push([a, b]);
+			const vertices = [];
+			raw.split("\n").forEach((line) => {
+				const m = line
+					.trim()
+					.match(/^vertex\\s+([-\\d.eE]+)\\s+([-\\d.eE]+)\\s+([-\\d.eE]+)$/);
+				if (m) vertices.push([Number(m[1]), Number(m[2]), Number(m[3])]);
+			});
+			for (let i = 0; i + 2 < vertices.length; i += 3) {
+				const a = addPoint(vertices[i]);
+				const b = addPoint(vertices[i + 1]);
+				const c = addPoint(vertices[i + 2]);
+				addEdge(a, b);
+				addEdge(b, c);
+				addEdge(c, a);
+			}
+			if (!edges.length) return parseMermaid();
+			return { points, edges };
+		};
+
+		const parseMermaid = () => {
+			const points = [
+				[0, 0, 0],
+				[1, 0, 0],
+				[1, 1, 0],
+				[0, 1, 0],
+				[0, 0, 1],
+				[1, 0, 1],
+				[1, 1, 1],
+				[0, 1, 1],
+			];
+			const edges = [
+				[0, 1],
+				[1, 2],
+				[2, 3],
+				[3, 0],
+				[4, 5],
+				[5, 6],
+				[6, 7],
+				[7, 4],
+				[0, 4],
+				[1, 5],
+				[2, 6],
+				[3, 7],
+			];
+			return { points, edges };
+		};
+
+		const render = (el) => {
+			const canvas = el.querySelector("canvas");
+			const ctx = canvas.getContext("2d");
+			const raw = el.querySelector("[data-cube]")?.textContent?.trim() || "";
+			const type = el.dataset.type || "geojson";
+			let model;
+			if (type === "geojson") model = parseGeoJSON(raw);
+			else if (type === "topojson") model = parseTopoJSON(raw);
+			else if (type === "stl") model = parseSTL(raw);
+			else model = parseMermaid();
+
+			const rotated = model.points.map((p) => rotate(p, 0.6, -0.7));
+			const xs = rotated.map((p) => p[0]);
+			const ys = rotated.map((p) => p[1]);
+			const minX = Math.min(...xs);
+			const maxX = Math.max(...xs);
+			const minY = Math.min(...ys);
+			const maxY = Math.max(...ys);
+			const pad = 18;
+			const scale = Math.min(
+				(canvas.width - pad * 2) / (maxX - minX || 1),
+				(canvas.height - pad * 2) / (maxY - minY || 1)
+			);
+
+			const project = (p) => {
+				const x = (p[0] - minX) * scale + pad;
+				const y = (p[1] - minY) * scale + pad;
+				return [x, canvas.height - y];
+			};
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			const colorMap = {
+				mermaid: "rgba(64, 255, 200, 0.95)",
+				geojson: "rgba(59, 130, 246, 0.95)",
+				topojson: "rgba(16, 185, 129, 0.95)",
+				stl: "rgba(249, 115, 22, 0.95)",
+			};
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = colorMap[type] || "rgba(64, 255, 200, 0.95)";
+			for (const [a, b] of model.edges) {
+				const [x1, y1] = project(rotated[a]);
+				const [x2, y2] = project(rotated[b]);
+				ctx.beginPath();
+				ctx.moveTo(x1, y1);
+				ctx.lineTo(x2, y2);
+				ctx.stroke();
+			}
+		};
+
+		const init = () =>
+			document.querySelectorAll(".cube-preview").forEach(render);
+
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", init, { once: true });
+		} else {
+			init();
+		}
+	})();
+</script>

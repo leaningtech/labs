@@ -1,7 +1,7 @@
 ---
-title: BrowserPod
+title: BrowserPod overview
 shortTitle: Overview
-description: Run Code Sandboxes in your browser
+description: Run sandboxed backend services directly in a client browser's tab.
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
@@ -29,69 +29,60 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-<div class="text-lg">
-Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.
+**BrowserPod** is a **sandbox API**. It provides in-browser runtimes for common backend languages, libraries and frameworks.
 
-Run Node.js projects in your browser, unmodified (Python, Ruby, and more coming in the future).
+Instead of provisioning a cloud server, BrowserPod's API enables a client browser to host full runtimes compiled to WebAssembly (Wasm), running at native speed.
 
-</div>
+BrowserPod is ephemeral by design. Each **Pod** runs inside a browser tab and ends when the tab closes or reloads. Because BrowserPod runs inside the browser, each Pod is constrained by the browser’s security model, isolated from the user’s OS, with limited access (via syscalls) to local files or system resources unless you explicitly provide it.
 
-<div class="m-4 flex justify-center">
-	[Get started](/docs/getting-started) · [API Reference](/docs/reference) ·
-	[GitHub repository](https://github.com/leaningtech/browserpod-meta)
-</div>
+At a high level, BrowserPod gives you:
 
-```bash
-npm install @leaningtech/browserpod
-```
+- A **backend runtime** running in the browser (e.g., Node.js, Python, Ruby)
+- A **Linux‑like virtual filesystem** for files and folders
+- **Portals** that can expose local servers at public URLs
 
-## Use Cases
+Everything runs client‑side within the browser sandbox, so users don’t need to install anything.
 
-### Project showcase
+## What you can do with BrowserPod
 
-Run a demo of your project directly in the user's browser, without any explicit setup or installation, and secured by the browser's sandbox.
+- **Execute AI code safely**: Execute untrusted or user‑provided code in a contained environment for AI agents or automation flows.
+- **Live product demos**: Ship a demo that runs the real backend logic in the browser without backend provisioning.
+- **Interactive docs and tutorials**: Let users run actual servers, seed data, and see real responses while following along.
+- **Collaborative tools**: Build multi‑user apps like whiteboards, editors, or chat that run locally and sync via portals.
+- **Browser‑based “server” functions**: Run tasks that usually need cloud provisioning—like HTTP APIs, background jobs, or file processing entirely inside the user’s browser.
 
-### Interactive documentation / tutorials
+## Why pick the BrowserPod API?
 
-Enrich your documentation and tutorials with interactive components, without the need for any server-side infrastructure.
+- **Full-stack development**: BrowserPod runs full instances of backend frameworks enabling full-stack development without cloud provisioning.
+- **Real filesystem**: Create directories and files inside a virtual POSIX‑like tree.
+- **Portal URLs**: BrowserPod Portals allow to share working applications over a temporary, private and secure URL.
+- **Security**: The BrowserPod API boots instances in the browser's sandbox, inheriting its security.
+- **Cost**: Because BrowserPod runs instances in the browser, it comes at a fraction of the cost of cloud sandboxes, with a generous free tier.
 
-### AI Agents environment
+## Quick links
 
-Let AI assistants and Agents run loose on your project, but isolated from the rest of your system.
+- [Quickstart](/docs/getting-started/quickstart)
+- [Basic Tutorial](/docs/getting-started/expressjs)
+- [API reference](/docs/reference)
+- [Guides](/docs/guides)
+- [Licensing](/docs/more/licensing)
 
-## Getting started
+## How it works (high level)
 
-BrowserPod has a simple yet powerful [API](/docs/reference).
+- BrowserPod ships a build of Node.js that targets CheerpOS (a runtime that provides a Linux‑like syscall interface to Wasm).
+- The browser’s JavaScript engine executes the Node runtime in the page.
+- Your project files live in a virtual filesystem inside the pod.
+- When your app listens on a port, BrowserPod can open a portal URL that forwards traffic into the pod.
 
-You can get up an running with few simple steps by following our [Quickstart](/docs/getting-started) page.
+See the [hosting guide](/docs/guides/hosting) for details on headers and setup.
 
-## How does BrowserPod work?
+## Supported runtimes
 
-BrowserPod is built on top of CheerpOS, an Operating System interface that provides the Linux syscall interface to Wasm programs running in the Browser.
+- Node.js (current)
+- Python (coming soon)
+- Ruby (coming soon)
 
-BrowserPod ships with a build of Node.js that targets CheerpOS.
-
-Instead of using an embedded V8 engine to run JavaScript, the Browser's engine is used instead.
-
-This allows BrowserPod to run your JavaScript code at native speed.
-
-Everything else (Node's builtin JS modules, libuv, and Node's internal C++ code) stays the same, to guarantee maximum compatibility.
-
-Multiple versions of Node will be supported, and we plan to support new LTS versions in a timely manner.
-
-Using the same foundation, we plan to support other languages and frameworks, like Python and Ruby (including Ruby on Rails).
-
-## Licensing
-
-BrowserPod is free for personal use and technical evaluation. See [licensing](/docs/licensing) for details.
-
-## Demos
-
-You can see BrowserPod in action in our [SvelteKit+Vite demo](https://vitedemo.browserpod.io)
-
-## Community
-
-We have a vibrant Discord community where you can ask questions, share your projects, and get community support.
+## Community and support
 
 <LinkButton
 	type="discord"
