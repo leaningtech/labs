@@ -3,6 +3,8 @@ title: Set CORS and COOP headers
 description: Cross-origin isolation for BrowserPod (COOP and COEP)
 ---
 
+This guide shows how to configure cross-origin isolation headers for hosting a BrowserPod app, with examples for both Vite (development) and nginx (production) setups.
+
 BrowserPod requires **cross-origin isolation**, which depends on two headers:
 
 - `Cross-Origin-Opener-Policy: same-origin`
@@ -10,7 +12,9 @@ BrowserPod requires **cross-origin isolation**, which depends on two headers:
 
 Without these headers, the browser will block `SharedArrayBuffer` and the pod will fail to boot.
 
-## Development (Vite)
+## Development: Vite server configuration
+
+When running a BrowserPod app locally, you can set the headers directly in Vite to enable cross-origin isolation.
 
 ```js
 import { defineConfig } from "vite";
@@ -25,9 +29,9 @@ export default defineConfig({
 });
 ```
 
-## Production (nginx)
+## Production: nginx hosting setup
 
-Create a file named `nginx.conf`:
+For production hosting, configure nginx to serve the headers so BrowserPod can run with cross-origin isolation. Create a file named `nginx.conf`:
 
 ```nginx
 worker_processes  1;

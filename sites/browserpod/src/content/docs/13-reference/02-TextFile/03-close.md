@@ -9,6 +9,10 @@ class TextFile {
 }
 ```
 
+## Parameters
+
+`close` does not have any parameters.
+
 ## Returns
 
 `close` returns a [Promise] which is resolved when the operation has succeded.

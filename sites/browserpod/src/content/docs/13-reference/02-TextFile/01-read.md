@@ -11,7 +11,7 @@ class TextFile {
 
 ## Parameters
 
-- **length** (`int`) - Lenght in bytes of the data to be read and decoded as utf-8 into a string.
+- **length (`int`)** - Lenght in bytes of the data to be read and decoded as utf-8 into a string.
 
 ## Returns
 

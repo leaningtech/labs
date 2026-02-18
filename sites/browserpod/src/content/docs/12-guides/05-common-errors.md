@@ -1,5 +1,5 @@
 ---
-title: Common errors
+title: Debugging BrowserPod
 description: Quick explanations for frequent BrowserPod errors
 ---
 
@@ -7,33 +7,27 @@ This page maps common BrowserPod error messages to their likely causes and fixes
 
 ## Treating `pod.run` like a shell
 
-**Symptom**
+- **Symptom**: errors when using `&&` or `|` inside `pod.run(...)`
 
-- errors when using `&&` or `|` inside `pod.run(...)`
+- **Causes**:
 
-**Cause**
+      - `pod.run` is like `execve` in Linux or `child_process.spawn` in Node.
 
-`pod.run` is like `execve` in Linux or `child_process.spawn` in Node.
-It does not support shell features like `||` or `&&` or builtins.
+  It does not support shell features like `||` or `&&` or builtins.
 
-Bash support is on the roadmap.
+      - Bash support is on the roadmap.
 
-**Fix**
-
-Write complex behavior as a JavaScript script, and execute that
+- **Solution**: Write complex behavior as a JavaScript script, and execute that.
 
 ## Missing or hidden terminal element
 
-**Symptom**
+- **Symptoms**:
+  - `The 'terminal' argument is required`
+  - Output disappears during long runs
 
-- `The 'terminal' argument is required`
-- Output disappears during long runs
+- **Cause**: The terminal element was never created or was unmounted.
 
-**Cause**
-
-The terminal element was never created or was unmounted.
-
-**Fix**
+- **Solution**: Keep `consoleEl` mounted. You can hide it with CSS, but do not remove it.
 
 ```js
 const terminal = await pod.createDefaultTerminal(consoleEl);
@@ -41,33 +35,19 @@ const terminal = await pod.createDefaultTerminal(consoleEl);
 pod.run(..., {terminal,...});
 ```
 
-Keep `consoleEl` mounted. You can hide it with CSS, but do not remove it.
-
 ## Using the wrong file mode
 
-**Symptom**
+- **Symptom**: `Unsupported 'mode' argument`
 
-- `Unsupported 'mode' argument`
+- **Cause**: `createFile` and `openFile` only accept `"binary"` or `"utf-8"`.
 
-**Cause**
-
-`createFile` and `openFile` only accept `"binary"` or `"utf-8"`.
-
-**Fix**
-
-Use `"binary"` for ArrayBuffer writes and `"utf-8"` for string writes.
+- **Solution**: Use `"binary"` for ArrayBuffer writes and `"utf-8"` for string writes.
 
 ## Running native binaries inside the pod
 
-**Symptom**
+- **Symptom**: Install failures or runtime crashes for tools like esbuild or rollup
 
-- Install failures or runtime crashes for tools like esbuild or rollup
+- **Cause**: Native binaries do not run in the Wasm environment.
 
-**Cause**
-
-Native binaries do not run in the Wasm environment.
-
-**Fix**
-
-Use Wasm alternatives and `package.json` overrides. See the
-[native binaries guide](/docs/guides/native-binaries).
+- **Solution**: Use Wasm alternatives and `package.json` overrides. See the
+  [native binaries guide](/docs/guides/native-binaries).

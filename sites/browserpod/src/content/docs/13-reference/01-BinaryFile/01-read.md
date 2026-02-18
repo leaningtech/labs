@@ -11,7 +11,7 @@ class BinaryFile {
 
 ## Parameters
 
-- **length** (`int`) - Lenght in bytes of the data to be read.
+- **length (`int`)** - Lenght in bytes of the data to be read.
 
 ## Returns
 

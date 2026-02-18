@@ -14,7 +14,7 @@ class BrowserPod {
 
 ## Parameters
 
-- **opts** (object) - Initialization options passed as an object
+- **opts (object)** - Initialization options passed as an object.
 
 ## Options
 

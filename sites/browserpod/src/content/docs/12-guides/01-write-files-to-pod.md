@@ -10,7 +10,7 @@ This page explains how to write files into the BrowserPod filesystem using the A
 - Writing text files
 - Writing binary files
 
-## 1) Create the `/project` folder
+## Create the `/project` folder
 
 Pods start with a minimal filesystem, so create a project directory first:
 
@@ -20,7 +20,7 @@ await pod.createDirectory("/project");
 
 If you need intermediate folders, pass `{ recursive: true }`.
 
-## 2) Copy a whole project into a pod
+## Copy a whole project into a pod
 
 A common pattern is to keep your runnable project inside your web app (for example in `public/project/`), then copy those files into `/project` at runtime:
 
@@ -38,7 +38,7 @@ await copyFile(pod, "project/main.js");
 await copyFile(pod, "project/package.json");
 ```
 
-## 3) Write a text file
+## Write a text file
 
 Text files are for plain text (ASCII or UTF-8), such as `.js`, `.json`, `.txt`, `.md`, and `.csv`.
 
@@ -48,7 +48,7 @@ await file.write("console.log('Hello BrowserPod')");
 await file.close();
 ```
 
-## 4) Write a binary file
+## Write a binary file
 
 Binary files are for raw bytes like images, ZIPs, PDFs, or Wasm files.
 
@@ -60,7 +60,7 @@ await file.write(bytes);
 await file.close();
 ```
 
-## 5) Write text as binary (optional)
+## Write text as binary (optional)
 
 If you prefer to write text as raw bytes, encode the string and pass an `ArrayBuffer`:
 

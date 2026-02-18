@@ -14,8 +14,8 @@ class BrowserPod {
 
 ## Parameters
 
-- **path** (`string`) - Path of the newly-created directory
-- **opts** (`object`, _optional_) - Creation options passed as an object
+- **path (`string`)** - Path of the newly-created directory.
+- **opts (`object`, _*optional*_)** - Creation options passed as an object.
 
 ## Options
 
