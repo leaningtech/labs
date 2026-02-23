@@ -1,7 +1,18 @@
 <script lang="ts">
 	export let result: PagefindResult;
+	export let baseUrl: string = "/";
 
 	const showExcerpt = false; // Makes the UI quite busy.
+
+	// Add base path (e.g., /docs/) to search result URLs for browser routing.
+	// Only does so if base isnt root. If it is docs would be a subdir and be already in URL
+	// Also checks if url already starts with base for extra defense against /docs/docs
+	function prependBase(url: string): string {
+		if (baseUrl === "/" || url.startsWith(baseUrl)) {
+			return url;
+		}
+		return baseUrl + url;
+	}
 
 	// Based on thin_sub_results from https://github.com/CloudCannon/pagefind/blob/main/pagefind_ui/default/svelte/result_with_subs.svelte
 	function thinSubResults(
@@ -38,7 +49,7 @@
 {:then document}
 	<li class="rounded-md bg-stone-900">
 		<a
-			href={document.url}
+			href={prependBase(document.url)}
 			class="rounded-t-md block border border-transparent hover:border-stone-500 py-3 px-4 text-lg"
 			class:rounded-b-md={document.sub_results.length <= 1}
 		>
@@ -57,7 +68,7 @@
 			{#each document.sub_results as subResult, i}
 				<li>
 					<a
-						href={subResult.url}
+						href={prependBase(subResult.url)}
 						class="block border border-transparent hover:border-stone-500 text-stone-300 py-2 px-4 whitespace-nowrap text-ellipsis overflow-hidden"
 						class:rounded-b-md={i === document.sub_results.length - 1}
 					>

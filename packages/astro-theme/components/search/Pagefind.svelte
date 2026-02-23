@@ -75,7 +75,7 @@
 	{:else}
 		<ol class="flex flex-col gap-2">
 			{#each results as result (result.id)}
-				<Result {result} />
+				<Result {result} {baseUrl} />
 			{/each}
 		</ol>
 	{/if}
