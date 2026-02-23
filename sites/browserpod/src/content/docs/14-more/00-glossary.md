@@ -9,7 +9,7 @@ The server-side part of a system that runs outside the browser.
 
 ## BrowserPod API
 
-The set of methods (like `pod.run` and file APIs) used to control the pod. New processes are started through the API, not by typing in the terminal.
+The JavaScript API for controlling a Pod. Provides methods for booting pods, running processes (`pod.run`), managing the virtual filesystem, and handling Portals. Used to execute code and manage the runtime environment entirely within the browser.
 
 ## CheerpOS
 
@@ -29,11 +29,11 @@ A filesystem created and managed in software rather than on the user’s real di
 
 ## Pod
 
-A running BrowserPod instance
+A running BrowserPod instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by design—they exist only while the browser tab is active.
 
 ## Portal
 
-A public URL that forwards external traffic to a port inside the pod.
+A secure, shareable URL that routes external traffic to a service listening on a port inside the Pod. Portals are created automatically when code binds to a port, enabling features like live previews, interactive demos, and collaborative workflows without requiring dedicated backend infrastructure.
 
 ## REPL
 

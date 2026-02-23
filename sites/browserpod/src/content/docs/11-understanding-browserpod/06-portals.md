@@ -3,9 +3,19 @@ title: Portals
 description: How Portals expose Pod servers to the outside world
 ---
 
-A **Portal** is BrowserPod’s way of exposing a server running inside a Pod to the outside world.
+A **Portal** is BrowserPod's controlled networking feature that exposes services running inside a Pod through secure, shareable URLs.
 
-When code inside the Pod starts listening on a port, BrowserPod creates a public URL that forwards traffic to that internal server.
+When code inside the Pod starts listening on a port, BrowserPod automatically creates a public URL that forwards traffic to that internal server. This unlocks powerful use cases that would traditionally require provisioning dedicated backend infrastructure for each session.
+
+## What Portals enable
+
+Portals unlock use cases that typically require backend infrastructure:
+
+- **Live previews**: Run a dev server in the browser and share the preview URL with teammates or stakeholders. Changes update in real-time without deploying to staging environments.
+- **Interactive demos**: Let users interact with working applications directly in documentation or product tours, without standing up demo infrastructure.
+- **Collaborative workflows**: Enable pair programming, troubleshooting sessions, or live code reviews by sharing a running environment via a simple URL.
+- **Shareable environments**: Create "click-to-open" demos where anyone with the link can access a fully functional application running in someone else's browser.
+- **Testing across devices**: Scan a QR code on your phone to test the server running on your laptop's browser, with changes reflected instantly.
 
 ## What a Portal is
 

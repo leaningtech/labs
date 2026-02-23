@@ -3,8 +3,7 @@ title: Set up a basic NPM-based project
 description: In this tutorial you will set up a simple NPM project that runs an HTTP server using Express.js
 ---
 
-During this tutorial we will set up a basic project that uses BrowserPod to run
-a web server application entirely client side in the Browser.
+In this tutorial, we'll set up a basic project that uses BrowserPod to run a web server application entirely in the browser, with no backend infrastructure.
 
 ## 1. Get the code
 
