@@ -1,0 +1,3 @@
+/docs/:page.html /docs/:page 301
+/docs/:category/:page.html /docs/:category/:page 301
+/docs/:cat1/:cat2/:page.html /docs/:cat1/:cat2/:page 301
