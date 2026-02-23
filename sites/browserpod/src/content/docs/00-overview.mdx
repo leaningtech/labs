@@ -1,7 +1,7 @@
 ---
 title: BrowserPod
 shortTitle: Overview
-description: Run sandboxed backend services directly in a client browser's tab.
+description: A universal execution layer for running code safely in the browser
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
@@ -29,8 +29,8 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-**BrowserPod** is a **sandbox API**. It provides in-browser runtimes for common backend languages, libraries and frameworks.
-Instead of provisioning a cloud server, BrowserPod's API enables a client browser to host full runtimes compiled to WebAssembly (Wasm), running at native speed.
+**BrowserPod** is a universal execution layer for browser-based compute, providing a sandboxed runtime API for running full-stack workloads directly inside the browser.
+Instead of provisioning a cloud server, BrowserPod's API enables a client browser to host full runtimes compiled to WebAssembly (Wasm), running at near native speed.
 
 <div class="m-4 flex justify-center">
 	[Get started](/docs/getting-started/quickstart) · [Basic
@@ -43,40 +43,42 @@ BrowserPod is ephemeral by design. Each **pod** (_see [pod](/docs/more/glossary#
 
 At a high level, BrowserPod gives you:
 
-- A **backend runtime** running in the browser (e.g., Node.js, Python, Ruby)
-- A **Linux‑like virtual filesystem** for files and folders
-- **Portals** that can expose local servers at public URLs
+- A **sandboxed runtime** for executing untrusted code in the browser (starting with Node.js, with Python, Ruby, Go, and Rust coming soon)
+- A block-based streaming virtual filesystem with familiar file and directory behavior
+- **Process isolation** and true concurrency via WebWorkers
+- **Portals** for controlled networking that expose services at shareable URLs
 
-Everything runs client‑side within the browser sandbox, so users don’t need to install anything.
+Everything runs client‑side within the browser sandbox, with no backend infrastructure required.
 
 ## What you can do with BrowserPod
 
-- **Execute AI code safely**: Execute untrusted or user‑provided code in a contained environment for AI agents or automation flows.
-- **Live product demos**: Ship a demo that runs the real backend logic in the browser without backend provisioning.
-- **Interactive docs and tutorials**: Let users run actual servers, seed data, and see real responses while following along.
-- **Collaborative tools**: Build multi‑user apps like whiteboards, editors, or chat that run locally and sync via portals.
-- **Browser‑based _server_ functions**: Run tasks that usually need cloud provisioning—like HTTP APIs, background jobs, or file processing entirely inside the user’s browser.
+- **Execute AI-generated code safely**: Run code produced by AI agents or models in a contained environment next to the user, with fast startup, strong isolation, and better performance than cloud-based sandboxes. Reduce per-session costs while tightening security boundaries.
+- **Build web-based IDEs and development environments**: Power real development workflows in the browser with package installs, dev servers, build tools, and previews—all with high fidelity to native environments.
+- **Create interactive documentation and live demos**: Turn documentation into runnable environments where users can modify, execute, and share examples without leaving the page or provisioning infrastructure.
+- **Enable education at scale**: Provide high-fidelity learning environments with minimal operational overhead. Eliminate per-student sandbox costs to make hands-on education economically feasible at scale.
+- **Process sensitive data locally**: Keep user inputs and outputs in the browser by default, enabling privacy-first applications and removing jurisdictional risks associated with cloud data transfer.
 
 ## Why pick the BrowserPod API?
 
-- **Full-stack development**: BrowserPod runs full instances of backend frameworks enabling full-stack development without cloud provisioning.
-- **Real filesystem**: Create directories and files inside a virtual POSIX‑like tree.
-- **Portal URLs**: BrowserPod Portals allow to share working applications over a temporary, private and secure URL.
-- **Security**: The BrowserPod API boots instances in the browser's sandbox, inheriting its security.
-- **Cost**: Because BrowserPod runs instances in the browser, it comes at a fraction of the cost of cloud sandboxes, with a generous free tier.
+- **Economics**: BrowserPod runs on the user's device, eliminating per-session cloud infrastructure costs. This fundamental shift makes previously expensive use cases—like AI code execution, interactive demos, and education at scale—economically viable.
+- **Latency**: No cold starts, no network round trips to remote sandboxes. Code executes immediately in the browser where the user already is.
+- **Security & data locality**: BrowserPod inherits the browser's battle-tested security model. User data and code execution stay local by default, reducing your attack surface and compliance burden.
+- **High fidelity**: Full Linux-compliant environment with POSIX filesystem, process isolation, and real concurrency—not a limited simulation. Run actual frameworks and tools without modification.
+- **Portals**: Share working applications instantly via secure, temporary URLs. Enable live previews, collaborative troubleshooting, and interactive demos without standing up dedicated infrastructure.
 
 ## How it works (high level)
 
-- BrowserPod ships a build of Node.js that targets CheerpOS (a runtime that provides a Linux‑like syscall interface to Wasm).
-- The browser’s JavaScript engine executes the Node runtime in the page.
-- Your project files live in a virtual filesystem inside the pod.
-- When your app listens on a port, BrowserPod can open a portal URL that forwards traffic into the pod.
+- BrowserPod provides complete runtime engines (starting with Node.js) compiled to WebAssembly, targeting a Linux-compliant syscall interface.
+- The browser's JavaScript engine executes the runtime with near-native performance, supporting real multi-process workloads.
+- A virtual filesystem provides full POSIX compatibility, with on-demand streaming of disk images. Changes stay local and can persist across sessions.
+- When your code listens on a port, BrowserPod automatically creates a Portal—a secure URL that routes external traffic to the service running inside the browser.
+- All execution happens within the browser's security sandbox, isolated from the user's operating system.
 
 See the [hosting guide](/docs/guides/hosting) for details on headers and setup.
 
 ## Supported runtimes
 
-BrowserPod currently supports Node.js runtime, support for Python and Ruby is coming soon.
+BrowserPod currently supports Node.js. Python, Ruby, Go, and Rust support will be released throughout 2026. By the end of 2026, BrowserPod will support Linux-class workloads, enabling any Linux container to run in the browser.
 
 ## Community and support
 
