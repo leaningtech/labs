@@ -32,11 +32,11 @@ const points = await new ArrayList();
 
 // Create 4 point objects
 for (let i = 0; i < 4; i++) {
-    // Allocate the point
-    const p = await new Point(i, 0);
+	// Allocate the point
+	const p = await new Point(i, 0);
 
-    // Add the point to the list
-    await points.add(p);
+	// Add the point to the list
+	await points.add(p);
 }
 
 // Convert to list to an Object[] array
@@ -44,22 +44,21 @@ const a = await points.toArray();
 
 // Iterate on the array and set y = x
 for (let i = 0; i < a.length; i++) {
-    // Fields can be read and written directly
-    a[i].y = a[i].x;
+	// Fields can be read and written directly
+	a[i].y = a[i].x;
 }
 
 // Convert all the elements to Strings
 for (let i = 0; i < a.length; i++) {
-    // Java arrays can be read and written directly
-    a[i] = await a[i].toString();
+	// Java arrays can be read and written directly
+	a[i] = await a[i].toString();
 }
 
 // Print them out
 for (let i = 0; i < a.length; i++) {
-    // Static fields can be accessed too
-    await System.out.println(a[i]);
+	// Static fields can be accessed too
+	await System.out.println(a[i]);
 }
-
 ```
 
 Then, we’ll include that script from a minimal HTML page and run it in the browser. The output will be printed to the browser console.
@@ -76,7 +75,7 @@ Then, we’ll include that script from a minimal HTML page and run it in the bro
 	</head>
 
 	<body>
-    <h1>Library mode – Standard library</h1>
+		<h1>Library mode – Standard library</h1>
 		<p>Open the browser console to view the output.</p>
 
 		<script type="module" src="./script.js"></script>
@@ -101,41 +100,41 @@ const statusEl = document.getElementById("status");
 const pdfDisplay = document.getElementById("pdfDisplay");
 
 document.getElementById("makePdf").addEventListener("click", async () => {
-  statusEl.textContent = "Initializing CheerpJ…";
-  await cheerpjInit();
+	statusEl.textContent = "Initializing CheerpJ…";
+	await cheerpjInit();
 
-  statusEl.textContent = "Loading iText library…";
-  const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.jar");
+	statusEl.textContent = "Loading iText library…";
+	const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.jar");
 
-  try {
-    const Document = await lib.com.itextpdf.text.Document;
-    const Paragraph = await lib.com.itextpdf.text.Paragraph;
-    const PdfWriter = await lib.com.itextpdf.text.pdf.PdfWriter;
-    const FileOutputStream = await lib.java.io.FileOutputStream;
+	try {
+		const Document = await lib.com.itextpdf.text.Document;
+		const Paragraph = await lib.com.itextpdf.text.Paragraph;
+		const PdfWriter = await lib.com.itextpdf.text.pdf.PdfWriter;
+		const FileOutputStream = await lib.java.io.FileOutputStream;
 
-    const document = await new Document();
-    const writer   = await PdfWriter.getInstance(
-      document,
-      await new FileOutputStream("/files/HelloIText.pdf")
-    );
+		const document = await new Document();
+		const writer = await PdfWriter.getInstance(
+			document,
+			await new FileOutputStream("/files/HelloIText.pdf")
+		);
 
-    await document.open();
-    await document.add(await new Paragraph("Hello World!"));
-    await document.close();
-    await writer.close();
+		await document.open();
+		await document.add(await new Paragraph("Hello World!"));
+		await document.close();
+		await writer.close();
 
-    const blob = await cjFileBlob("/files/HelloIText.pdf");
-    const url  = URL.createObjectURL(blob);
-    pdfDisplay.src = url;
-    statusEl.textContent = "Done";
-  } catch (e) {
-    const IOException = await lib.java.io.IOException;
-    if (e instanceof IOException) {
-      statusEl.textContent = "I/O error while writing PDF";
-    } else {
-      statusEl.textContent = "Error: " + (await e.getMessage?.() ?? e);
-    }
-  }
+		const blob = await cjFileBlob("/files/HelloIText.pdf");
+		const url = URL.createObjectURL(blob);
+		pdfDisplay.src = url;
+		statusEl.textContent = "Done";
+	} catch (e) {
+		const IOException = await lib.java.io.IOException;
+		if (e instanceof IOException) {
+			statusEl.textContent = "I/O error while writing PDF";
+		} else {
+			statusEl.textContent = "Error: " + ((await e.getMessage?.()) ?? e);
+		}
+	}
 });
 ```
 
@@ -144,26 +143,33 @@ Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate
 ```html title="index.html"
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CheerpJ Library Mode – PDF demo</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>CheerpJ Library Mode – PDF demo</title>
 
-  <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
 
-  <style>
-    body { font: 14px, sans-serif; margin: 2rem; }
-    iframe { width: 100%; height: 70vh; border: 1px solid #ccc; }
-  </style>
-</head>
+		<style>
+			body {
+				font: 14px, sans-serif;
+				margin: 2rem;
+			}
+			iframe {
+				width: 100%;
+				height: 70vh;
+				border: 1px solid #ccc;
+			}
+		</style>
+	</head>
 
-<body>
-  <button id="makePdf">Generate PDF</button>
-  <p id="status"></p>
-  <iframe id="pdfDisplay"></iframe>
+	<body>
+		<button id="makePdf">Generate PDF</button>
+		<p id="status"></p>
+		<iframe id="pdfDisplay"></iframe>
 
-  <script type="module" src="./script.js"></script>
-</body>
+		<script type="module" src="./script.js"></script>
+	</body>
 </html>
 ```
 
