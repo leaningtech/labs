@@ -47,8 +47,7 @@ cjGetRuntimeResources();
 document.write(cjGetRuntimeResources());
 ```
 
-> The console may wrap the output in quotes (`"`). If it does, ignore the quotes.
-> See [here](/docs/reference/cjGetRuntimeResources) for more information.
+The console may wrap the output in quotes (`"`). If it does, ignore the quotes. See [here](/docs/reference/cjGetRuntimeResources) for more information.
 
 ### Step 2: Enable preloading in your integration
 
@@ -65,8 +64,7 @@ cheerpjInit({
 });
 ```
 
-> This must be done in two steps,so the resources are loaded in a separate session from the full workflow.
-> See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
+This must be done in two steps,so the resources are loaded in a separate session from the full workflow. See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
 
 ## What changes after enabling preloading
 
