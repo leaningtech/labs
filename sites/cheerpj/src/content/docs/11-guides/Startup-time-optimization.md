@@ -47,7 +47,9 @@ cjGetRuntimeResources();
 document.write(cjGetRuntimeResources());
 ```
 
-The console may wrap the output in quotes (`"`). If it does, ignore the quotes. See [here](/docs/reference/cjGetRuntimeResources) for more information.
+The console may wrap the output in quotes (`"`). If it does, ignore the quotes.
+
+> You can read more about the `cjGetRuntimeResources` [here](/docs/reference/cjGetRuntimeResources).
 
 ### Step 2: Enable preloading in your integration
 
@@ -64,7 +66,9 @@ cheerpjInit({
 });
 ```
 
-This must be done in two steps,so the resources are loaded in a separate session from the full workflow. See [here](/docs/reference/cheerpjInit#preloadresources) for more information.
+Note that profiling the resources with `cjGetRuntimeResources()` and providing the result to `preloadResources` must be done in separate sessions. First, profile the application in one session to generate the list of resources. Then, in subsequent sessions, pass this list to `cheerpjInit` to enable preloading.
+
+> You can read more about the `preloadResources` init option [here](/docs/reference/cheerpjInit#preloadresources).
 
 ## What changes after enabling preloading
 

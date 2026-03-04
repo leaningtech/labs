@@ -63,6 +63,8 @@ for (let i = 0; i < a.length; i++) {
 
 Then, we’ll include that script from a minimal HTML page and run it in the browser. The output will be printed to the browser console.
 
+> Note that the HTML page needs to include the public `loader.js` script.
+
 ```html title="index.html"
 <!doctype html>
 <html lang="en">
@@ -139,6 +141,8 @@ document.getElementById("makePdf").addEventListener("click", async () => {
 ```
 
 Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate PDF” button, and display the resulting PDF directly in the page using an `<iframe>`.
+
+> Note that the HTML page needs to include the public `loader.js` script.
 
 ```html title="index.html"
 <!doctype html>
