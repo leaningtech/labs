@@ -22,8 +22,8 @@ To reduce startup time in production, CheerpJ lets you **preload** the modules y
 
 ## Overview of the workflow
 
-1. Profile which runtime resources your app actually uses
-2. Pass those resources to `cheerpjInit` via `preloadResources`
+1. Profile which runtime resources your app actually uses using [`cjGetRuntimeResources`](/docs/reference/cjGetRuntimeResources)
+2. Pass those resources to [`cheerpjInit`](/docs/reference/cheerpjInit) via [`preloadResources`](/docs/reference/cheerpjInit#preloadresources)
 
 ### Step 1: Profile used runtime resources
 
@@ -49,11 +49,9 @@ document.write(cjGetRuntimeResources());
 
 The console may wrap the output in quotes (`"`). If it does, ignore the quotes.
 
-> You can read more about the `cjGetRuntimeResources` [here](/docs/reference/cjGetRuntimeResources).
-
 ### Step 2: Enable preloading in your integration
 
-Update your `cheerpjInit` call to include the `preloadResources` option.
+Update your [`cheerpjInit`](/docs/reference/cheerpjInit) call to include the [`preloadResources`](/docs/reference/cheerpjInit#preloadresources) option.
 
 Example:
 
@@ -66,9 +64,7 @@ cheerpjInit({
 });
 ```
 
-Note that profiling the resources with `cjGetRuntimeResources()` and providing the result to `preloadResources` must be done in separate sessions. First, profile the application in one session to generate the list of resources. Then, in subsequent sessions, pass this list to `cheerpjInit` to enable preloading.
-
-> You can read more about the `preloadResources` init option [here](/docs/reference/cheerpjInit#preloadresources).
+Note that profiling the resources with [`cjGetRuntimeResources`](/docs/reference/cjGetRuntimeResources) and providing the result to [`preloadResources`](/docs/reference/cheerpjInit#preloadresources) must be done in separate sessions. First, profile the application in one session to generate the list of resources. Then, in subsequent sessions, pass this list to `cheerpjInit` to enable preloading.
 
 ## What changes after enabling preloading
 
