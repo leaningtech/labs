@@ -12,9 +12,9 @@ type Props = CollectionEntry<"showcase">["data"] & {
 const props = Astro.props;
 
 const product = productFromUrl(Astro.url);
-
-let projects = await getCollection("showcase", ({ data }) =>
-	data?.tags?.includes(product.name)
+let projects = await getCollection(
+	"showcase",
+	({ data }) => !product || data?.tags?.includes(product.name)
 );
 if (typeof props.limit == "number") {
 	projects = projects.slice(0, props.limit);
@@ -30,9 +30,9 @@ if (typeof props.limit == "number") {
 						href={project.data.url}
 						class="block h-full p-2 border border-bg-700 text-bg-500 rounded-lg shadow-lg hover:translate-y-[-2px] hover:border-bg-600 hover:text-bg-400 transition-all"
 					>
-						{project.data.heroImage && (
+						{project.data.hero_image && (
 							<Image
-								src={project.data.heroImage}
+								src={project.data.hero_image}
 								alt={project.data.title}
 								class="rounded bg-primary-500 overflow-hidden"
 								width={334 * 2}
