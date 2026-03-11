@@ -22,4 +22,3 @@ It is not a replacement for the official Minecraft, nor a reimplementation in an
 ## How it works
 
 CheerpJ is a Java Virtual Machine written in WebAssembly that runs entirely in your browser. It can execute any Java application without modification and without requiring the source code. This demo showcases these capabilities by running an older version (1.2.5) of Minecraft and LWJGL entirely within the browser.
-
