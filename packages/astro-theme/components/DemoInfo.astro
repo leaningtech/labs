@@ -9,8 +9,8 @@ interface Props {
 	niche?: string | undefined;
 	author?: string | undefined;
 	project_type?: string | undefined;
-	url?: string;
-	repository_url?: string;
+	demo_url?: string | undefined
+	repository_url?: string | undefined
 	tags?: string | undefined;
 }
 
@@ -20,7 +20,7 @@ const {
 	niche,
 	author,
 	project_type,
-	url,
+	demo_url,
 	repository_url,
 	tags,
 } = Astro.props;
@@ -45,24 +45,26 @@ let tag_string = " ";
 				)
 			}
 		</h1>
-		<div
-			class="flex flex-wrap xl:flex-nowrap gap-4 justify-left lg:justify-start mt-5"
-		>
-			<LinkButton
-				type="primary"
-				href={url}
-				label="Live demo"
-				iconRight="mdi:play"
-				target="_blank"
-			/>
-			<LinkButton
-				type="secondary"
-				href={repository_url}
-				iconRight="mdi:github"
-				label="Repository"
-				target="_blank"
-			/>
-		</div>
+		<div class="flex flex-wrap xl:flex-nowrap gap-4 justify-left lg:justify-start mt-5">
+    {demo_url && (
+        <LinkButton
+            type="primary"
+            href={demo_url}
+            label="Live demo"
+            iconRight="mdi:play"
+            target="_blank"
+        />
+    )}
+    {repository_url && (
+        <LinkButton
+            type="secondary"
+            href={repository_url}
+            iconRight="mdi:github"
+            label="Repository"
+            target="_blank"
+        />
+    )}
+</div>
 	</div>
 	<hr
 		class="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
