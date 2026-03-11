@@ -52,9 +52,9 @@ Everything runs client‑side within the browser sandbox, with no backend infras
 
 ## What you can do with BrowserPod
 
-- **Execute AI-generated code safely**: Run code produced by AI agents or models in a contained environment next to the user, with fast startup, strong isolation, and better performance than cloud-based sandboxes. Reduce per-session costs while tightening security boundaries.
 - **Build web-based IDEs and development environments**: Power real development workflows in the browser with package installs, dev servers, build tools, and previews—all with high fidelity to native environments.
 - **Create interactive documentation and live demos**: Turn documentation into runnable environments where users can modify, execute, and share examples without leaving the page or provisioning infrastructure.
+- **Execute untrusted code safely**: Run user-provided scripts, AI-generated code, or agent-assembled programs in a sandboxed environment with strong isolation and low latency.
 - **Enable education at scale**: Provide high-fidelity learning environments with minimal operational overhead. Eliminate per-student sandbox costs to make hands-on education economically feasible at scale.
 - **Process sensitive data locally**: Keep user inputs and outputs in the browser by default, enabling privacy-first applications and removing jurisdictional risks associated with cloud data transfer.
 
@@ -63,7 +63,8 @@ Everything runs client‑side within the browser sandbox, with no backend infras
 - **Economics**: BrowserPod runs on the user's device, eliminating per-session cloud infrastructure costs. This fundamental shift makes previously expensive use cases—like AI code execution, interactive demos, and education at scale—economically viable.
 - **Latency**: No cold starts, no network round trips to remote sandboxes. Code executes immediately in the browser where the user already is.
 - **Security & data locality**: BrowserPod inherits the browser's battle-tested security model. User data and code execution stay local by default, reducing your attack surface and compliance burden.
-- **High fidelity**: Full Linux-compliant environment with POSIX filesystem, process isolation, and real concurrency—not a limited simulation. Run actual frameworks and tools without modification.
+- **High fidelity**: BrowserPod provides a full Linux-compliant syscall interface with complete POSIX filesystem semantics, real process isolation, true multi-threading, and support for actual npm packages without modification. Unlike browser-only implementations, BrowserPod runs complete, unmodified runtime engines that behave identically to their native counterparts.
+- **Multi-language by design**: BrowserPod is architected from the ground up as a language-agnostic execution platform. While it launches with Node.js, its Linux-compliant foundation supports any runtime—Python, Ruby, Go, Rust, and eventually full Linux containers—rather than being constrained to a single ecosystem.
 - **Portals**: Share working applications instantly via secure, temporary URLs. Enable live previews, collaborative troubleshooting, and interactive demos without standing up dedicated infrastructure.
 
 ## How it works (high level)
