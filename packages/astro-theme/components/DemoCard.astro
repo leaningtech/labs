@@ -20,9 +20,9 @@ const demo =
 
 //choose hover link color based on product
 const productName = typeof product === "undefined" ? "Labs" : product.name;
-//if product is cheerpj, add prefix /docs on post url
+//if product is  or browserpod, add prefix /docs on post url
 const demo_url =
-	productName === "CheerpJ"
+	productName === "CheerpJ" || productName === "BrowserPod"
 		? "https://labs.leaningtech.com/showcase/"
 		: "/showcase/";
 ---
