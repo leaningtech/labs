@@ -3,6 +3,15 @@ title: Networking
 description: Networking with CheerpX
 ---
 
+CheerpX supports networking through two primary methods:
+
+1. **Tailscale (default)** - A VPN solution using WebSockets for accessing private networks and the internet
+2. **Custom implementation** - Provide your own networking layer for specialized use cases
+
+This guide covers the default Tailscale-based networking. For information on implementing custom networking solutions, see the [Custom Networking](/docs/guides/Custom-Networking) guide.
+
+## Tailscale networking
+
 CheerpX supports networking scenarios via Tailscale, which is a VPN technology using WebSockets and a transport layer. Tailscale enables the CheerpX application to access private network services, peer-to-peer connections or connect to the wider internet.
 
 [Tailscale](https://tailscale.com/) is based on the [WireGuard](https://www.wireguard.com/) protocol. It includes a control plane that manages the WireGuard keys of all the machines in the network and takes care of authenticating users. Using this service provides extensive control over the network, user connections, authentication, security etc.
@@ -138,6 +147,25 @@ await cx.networkLogin();
 
 [Headscale](https://github.com/juanfont/headscale) is an open-source, self-hosted implementation of the Tailscale control server, and is supported by Webvm.
 You can find it's documentation [here](https://headscale.net/stable/)
+
+## Custom networking
+
+If Tailscale doesn't fit your requirements, CheerpX allows you to implement your own networking layer. This is useful when:
+
+- You have existing proxy infrastructure
+- You need custom authentication or security requirements
+- You want to route traffic through specific gateways
+- Your use case requires specialized networking protocols
+
+To use custom networking, pass your own network interface implementation to `CheerpX.Linux.create()`:
+
+```js
+const cx = await CheerpX.Linux.create({
+	networkInterface: new CustomNetworkInterface(),
+});
+```
+
+For detailed information on implementing a custom network interface, including complete example code and API specifications, see the [Custom Networking](/docs/guides/Custom-Networking) guide.
 
 [controlUrl]: /docs/reference/CheerpX.Linux/create#controlurl
 [authKey]: /docs/reference/CheerpX.Linux/create#authkey

@@ -76,9 +76,14 @@ const cx = await CheerpX.Linux.create({
 networkInterface?: NetworkInterface;
 ```
 
-This option configures network settings, which allows CheerpX to communicate over networks.
+This option configures network settings, which allows CheerpX to communicate over networks. You can pass either:
 
-Each Configuration must follow this structure:
+1. **Tailscale configuration object** - For VPN-based networking with Tailscale
+2. **Custom network implementation object** - For implementing your own networking layer
+
+#### Option 1: Tailscale configuration
+
+For Tailscale-based networking, pass a configuration object following this structure:
 
 ```ts
 interface NetworkInterface {
@@ -90,7 +95,7 @@ interface NetworkInterface {
 }
 ```
 
-The following sections provide details on each available option within `NetworkInterface`, along with example usages.
+The following sections provide details on each available option within the Tailscale `NetworkInterface`, along with example usages.
 
 #### `authKey`
 
@@ -193,6 +198,32 @@ function netmapUpdateCb(map) {
 	console.log(`Current IP: ${currentIp}`);
 }
 ```
+
+#### Option 2: Custom network implementation
+
+For advanced use cases, you can provide your own network implementation by passing an object that implements the required socket methods. This allows you to use custom proxy solutions or specialized networking configurations instead of Tailscale.
+
+Example:
+
+```js
+const cx = await CheerpX.Linux.create({
+	mounts: mountPoints,
+	networkInterface: new CustomNetworkInterface(),
+});
+```
+
+Your custom network interface must implement the following methods:
+
+- `TCPSocket(remoteAddress, remotePort)` - Create a TCP client socket
+- `TCPServerSocket(localAddress, options)` - Create a TCP server socket
+- `UDPSocket(options)` - Create a UDP socket (optional, can return `null`)
+- `up()` - Initialize the network interface
+
+Each socket method should return an object with `opened`, `closed`, and `close` properties following the [Direct Sockets API](https://wicg.github.io/direct-sockets/) pattern.
+
+For detailed information about implementing a custom network interface, including a complete example implementation, see the [Custom Networking](/docs/guides/Custom-Networking) guide.
+
+---
 
 For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
 
