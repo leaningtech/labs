@@ -76,155 +76,40 @@ const cx = await CheerpX.Linux.create({
 networkInterface?: NetworkInterface;
 ```
 
-This option configures network settings, which allows CheerpX to communicate over networks. You can pass either:
+Configures networking for CheerpX. Accepts either a Tailscale configuration object or a custom network implementation.
 
-1. **Tailscale configuration object** - For VPN-based networking with Tailscale
-2. **Custom network implementation object** - For implementing your own networking layer
-
-#### Option 1: Tailscale configuration
-
-For Tailscale-based networking, pass a configuration object following this structure:
+**Tailscale configuration:**
 
 ```ts
 interface NetworkInterface {
-	authKey?: string;
-	controlUrl?: string;
-	loginUrlCb?: (url: string) => void;
-	stateUpdateCb?: (state: number) => void;
-	netmapUpdateCb?: (map: any) => void;
+	authKey?: string; // Pre-authentication key for Tailscale
+	controlUrl?: string; // URL for self-hosted Headscale server
+	loginUrlCb?: (url: string) => void; // Callback for interactive login
+	stateUpdateCb?: (state: number) => void; // Connection state changes
+	netmapUpdateCb?: (map: any) => void; // Network configuration updates
 }
 ```
 
-The following sections provide details on each available option within the Tailscale `NetworkInterface`, along with example usages.
+**Properties:**
 
-#### `authKey`
+- **`authKey`** - Authentication key for registering pre-authenticated users or devices. Generate one at [Tailscale admin](https://login.tailscale.com/admin/settings/keys).
+- **`controlUrl`** - URL of a self-hosted Headscale server (optional).
+- **`loginUrlCb`** - Callback that receives the login URL for interactive Tailscale authentication.
+- **`stateUpdateCb`** - Callback invoked when connection state changes (e.g., state `6` indicates connected).
+- **`netmapUpdateCb`** - Callback invoked when network configuration updates, provides network details.
 
-```ts
-authKey?: string;
-```
+**Custom network implementation:**
 
-The `authKey` is a string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
+For advanced use cases, pass an object implementing these methods:
 
-Example:
+- `TCPSocket(remoteAddress, remotePort)` - Create TCP client socket
+- `TCPServerSocket(localAddress, options)` - Create TCP server socket
+- `UDPSocket(options)` - Create UDP socket (optional, can return `null`)
+- `up()` - Initialize network interface
 
-```js
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: { authKey: "YOUR KEY" },
-});
-```
+**See also:**
 
-#### `controlUrl`
-
-```ts
-controlUrl?: string;
-```
-
-The `controlUrl` is an optional string used to specify the URL of a [self-hosted Headscale server](/docs/guides/Networking#self-hosting-headscale).
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: { controlUrl: "YOUR URL" },
-});
-```
-
-#### `loginUrlCb`
-
-```ts
-loginUrlCb?: (url: string) => void;
-```
-
-The `loginUrlCb` is a callback function that handles login URLs during the authentication process. It receives the URL that should be visited to continue the login process. This is necessary when authenticating with Tailscale.
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: { loginUrlCb },
-});
-
-function loginUrlCb(url) {
-	console.log("Login URL is ready:", url);
-	// Open the login URL in a new tab or window
-	window.open(url, "_blank");
-}
-```
-
-#### `stateUpdateCb`
-
-```ts
-stateUpdateCb?: (state: number) => void;
-```
-
-The `stateUpdateCb` is a callback that runs when the connection state changes. The `state` parameter represents the connection status.
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: { stateUpdateCb },
-});
-
-function stateUpdateCb(state) {
-	if (state === 6) {
-		console.log("Connected");
-	}
-}
-```
-
-#### `netmapUpdateCb`
-
-```ts
-netmapUpdateCb?: (map: any) => void;
-```
-
-The `netmapUpdateCb` is a callback that runs whenever the network configuration updates. It provides details about the current network configuration.
-
-Example:
-
-```ts
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: { netmapUpdateCb },
-});
-
-function netmapUpdateCb(map) {
-	const currentIp = map.self.addresses[0];
-	console.log(`Current IP: ${currentIp}`);
-}
-```
-
-#### Option 2: Custom network implementation
-
-For advanced use cases, you can provide your own network implementation by passing an object that implements the required socket methods. This allows you to use custom proxy solutions or specialized networking configurations instead of Tailscale.
-
-Example:
-
-```js
-const cx = await CheerpX.Linux.create({
-	mounts: mountPoints,
-	networkInterface: new CustomNetworkInterface(),
-});
-```
-
-Your custom network interface must implement the following methods:
-
-- `TCPSocket(remoteAddress, remotePort)` - Create a TCP client socket
-- `TCPServerSocket(localAddress, options)` - Create a TCP server socket
-- `UDPSocket(options)` - Create a UDP socket (optional, can return `null`)
-- `up()` - Initialize the network interface
-
-Each socket method should return an object with `opened`, `closed`, and `close` properties following the [Direct Sockets API](https://wicg.github.io/direct-sockets/) pattern.
-
-For detailed information about implementing a custom network interface, including a complete example implementation, see the [Custom Networking](/docs/guides/Custom-Networking) guide.
-
----
-
-For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
+- [Networking guide](/docs/guides/Networking) - Detailed Tailscale setup, examples, and troubleshooting
+- [Custom Networking guide](/docs/guides/Custom-Networking) - Complete custom implementation guide with example code
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
