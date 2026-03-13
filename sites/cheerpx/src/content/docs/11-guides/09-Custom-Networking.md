@@ -11,6 +11,15 @@ By default, CheerpX uses [Tailscale](/docs/guides/Networking) for networking, wh
 
 This feature is designed for developers with networking expertise who need specific networking configurations beyond what Tailscale provides.
 
+## When to use custom networking
+
+Custom networking implementations are useful when:
+
+- You have an existing proxy infrastructure you want to leverage
+- You need to implement specific security or authentication requirements
+- You want to route traffic through custom gateways or load balancers
+- Your application requires specialized networking protocols or configurations
+
 ## Using a custom network interface
 
 To use a custom networking implementation, pass your network interface class instance as the `networkInterface` option:
@@ -86,7 +95,10 @@ Called to initialize or bring up the network interface.
 
 ## Example implementation
 
-Below is a basic example implementing TCP server and client functionality. This implementation uses in-memory streams to demonstrate the interface structure:
+> [!note] Important
+> This example creates a simple loopback network using in-memory streams for demonstration purposes. In production, you'll need to integrate with actual network transport mechanisms like WebSocket proxies or WebRTC data channels. Remember that browsers don't provide direct TCP/UDP socket access, so you must work within browser-provided APIs.
+
+Below is a basic example implementing TCP server and client functionality:
 
 ```js
 class TCPClient {
@@ -273,31 +285,6 @@ class CustomNetworkInterface {
 	}
 }
 ```
-
-## Key considerations
-
-### Implementation notes
-
-- The example above implements an in-memory connection system where clients and servers connect through internal streams
-- In a real-world implementation, you would typically integrate with WebSocket proxies, WebRTC data channels, or other browser-compatible transport mechanisms
-- Your implementation must handle the asynchronous nature of network connections using Promises
-
-### Use cases
-
-Custom networking implementations are useful when:
-
-- You have an existing proxy infrastructure you want to leverage
-- You need to implement specific security or authentication requirements
-- You want to route traffic through custom gateways or load balancers
-- Your application requires specialized networking protocols or configurations
-
-### Limitations
-
-Remember that browsers impose fundamental networking restrictions:
-
-- Direct TCP/UDP socket access is not available in standard web contexts
-- You'll need to work within browser-provided APIs (WebSockets, WebRTC, etc.)
-- CORS policies still apply to HTTP-based transports
 
 ## Further reference
 
