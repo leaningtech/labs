@@ -1,0 +1,80 @@
+---
+title: BrowserPod
+shortTitle: Overview
+description: A universal execution layer for running code safely in the browser
+---
+
+import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import { DISCORD_URL } from "@/consts.ts";
+
+<div class="%BP_LATEST%" />
+
+<div class="not-prose flex gap-2 mb-2">
+    <img src="https://img.shields.io/badge/version-%BP_LATEST%-orange" alt="Version %BP_LATEST%" />
+    <a href="https://discord.leaningtech.com/">
+        <img src="https://img.shields.io/discord/988743885121548329?color=%237289DA&logo=discord&logoColor=ffffff" alt="Discord server" />
+    </a>
+    <a href="https://github.com/leaningtech/browserpod-meta/issues">
+        <img src="https://img.shields.io/github/issues/leaningtech/browserpod-meta.svg?logo=github" alt="GitHub issues" />
+    </a>
+</div>
+
+**BrowserPod** is a universal execution layer for browser-based compute. It provides a sandboxed runtime API that enables client browsers to host full runtimes—compiled to WebAssembly (Wasm)—with near-native performance. 
+
+Instead of provisioning costly cloud servers, BrowserPod allows you to execute full-stack workloads directly within the user's browser tab. Each **pod** is ephemeral, constrained by the browser's security model, and isolated from the host operating system via a dedicated syscall layer.
+
+<div class="m-4 flex justify-center">
+    [Get started](/docs/getting-started/quickstart) · [Basic Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference) · [GitHub repository](https://github.com/leaningtech/browserpod-meta) · [Licensing](/docs/more/licensing)
+</div>
+
+## The Shift: Moving Compute to the Client
+
+Traditional sandboxed environments rely on cloud-side virtualization. While effective, this model introduces recurring infrastructure costs, network latency, and data privacy complexities.
+
+**BrowserPod flips the economics of code execution.** By leveraging the user's local CPU and the browser's security model, you eliminate per-session infrastructure overhead. This makes it financially viable to scale applications—like AI code interpreters or interactive coding platforms—to millions of users without the linear growth of a cloud bill.
+
+## Use Cases
+
+### **Development Tools & Interactive Content**
+BrowserPod is built to power the next generation of web-based IDEs and full-stack development environments. By supporting package installs, dev servers, and build tools with high fidelity, it allows developers to create "real" workflows in the browser. This extends to documentation and live demos, where you can turn static examples into runnable environments that users can modify and execute without leaving the page.
+
+### **Safe Execution of Untrusted Code**
+Whether you are running AI-generated code, user scripts, or agent-assembled programs, BrowserPod provides a secure sandbox with zero "cold start" latency. Because execution happens on the client side, you tighten security boundaries by keeping sensitive data within the user's local environment.
+
+### **Privacy-First Applications and Education**
+By keeping inputs and outputs on the user's device, BrowserPod enables privacy-conscious applications that bypass the jurisdictional risks of cloud data transfer. For educators, this model removes the operational burden of managing per-student sandboxes, making hands-on technical education economically feasible at any scale.
+
+## How it works
+
+![BrowserPod Architecture Diagram](/docs/assets/Browserpod-diagram_2.webp)
+
+To understand how BrowserPod achieves high-fidelity behavior in a browser, it helps to look at the execution flow:
+
+1.  **Runtime Loading:** BrowserPod delivers complete runtime engines (starting with Node.js) compiled to WebAssembly. These engines target a Linux-compliant syscall interface rather than a limited JavaScript shim.
+2.  **Execution:** The browser’s JavaScript engine executes the Wasm-compiled runtime using WebWorkers for true multi-threading and process isolation. This allows for complex, multi-process workloads that would normally require a full OS.
+3.  **Resource Virtualization:** A block-based streaming virtual filesystem provides full POSIX compatibility. Disk images are streamed on-demand, and any file changes stay local to the browser session.
+4.  **Networking via Portals:** When a service inside the pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
+
+## Roadmap
+
+BrowserPod currently supports **Node.js**. Our goal is to expand this into a language-agnostic platform throughout 2026, with planned milestones across the year:
+
+* Command-line tools (bash, git, coreutils), followed by **Python** and **Ruby** support.
+* Support for **Go** and **Rust** engines.
+* **Linux-class workloads** powered by CheerpX, enabling any unmodified Linux container to run in the browser.
+
+## Community and Support
+
+<LinkButton
+    type="discord"
+    href={DISCORD_URL}
+    iconLeft="fa-brands:discord"
+    label="Join our Discord server"
+/>
+
+<LinkButton
+    type="secondary"
+    href="https://twitter.com/leaningtech"
+    iconLeft="fa-brands:twitter"
+    label="Follow us on Twitter"
+/>
