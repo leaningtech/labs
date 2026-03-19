@@ -1,0 +1,68 @@
+---
+title: Changelog
+description: A changelog for BrowserPod.
+---
+
+## Version 1.1.1
+
+- Fixed a performance regression
+
+## Version 1.1.0
+
+- Support for most major frameworks: Next.js, Nuxt, Express, Svelte, React, ...
+- Support HTTP compression via portals
+- Support more system calls
+- Improvements to process spawning and PATH handling
+- Improvements to Worker support
+- Report uncaught exceptions
+
+## Version 1.0.0
+
+- Faster `BrowserPod.boot()`
+
+## Version 0.9.10
+
+- Improved overall disk performance
+- Enabled the OPFS disk backend by default
+- Bug fixes
+
+## Version 0.9.8
+
+- Fixed an internal error that could leave the kernel in a deadlocked state
+- Added support for reporting unhandled promise rejections
+
+## Version 0.9.7
+
+- Fixed a regression introduced by reducing the thread pool size
+
+## Version 0.9.6
+
+- Fixed a crash when formatting some types
+- Fixed formatting of objects with a null prototype
+
+## Version 0.9.5
+
+- Improved the look of `browserpod-quickstart` templates
+
+## Version 0.9.4
+
+- Fixed an issue with `browserpod-quickstart`
+
+## Version 0.9.3
+
+- Fixed a few issues
+- Added the `browserpod-quickstart` package
+
+## Version 0.9.2
+
+- Added support for the Node.js REPL
+- Added TypeScript types
+- First public beta release
+
+## Version 0.9.1
+
+- NPM automation
+
+## Version 0.9.0
+
+- First NPM release
