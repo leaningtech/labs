@@ -3,6 +3,10 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 1.1.2:
+
+- Fix timestamping of OPFS devices
+
 ## Version 1.1.1
 
 - Fixed a performance regression
