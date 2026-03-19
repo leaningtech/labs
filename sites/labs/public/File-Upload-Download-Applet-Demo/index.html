@@ -82,6 +82,28 @@
 				border: none;
 			}
 
+			.top-banner {
+				background-color: var(--cj-dark);
+				color: #ffffff;
+				padding: 10px 24px;
+				font-size: 0.9rem;
+				font-weight: 500;
+				text-align: center;
+				letter-spacing: 0.3px;
+			}
+
+			.top-banner a {
+				color: #4dabf7;
+				text-decoration: none;
+				font-weight: 600;
+				transition: color 0.2s;
+			}
+
+			.top-banner a:hover {
+				color: #74c0fc;
+				text-decoration: underline;
+			}
+
 			.header-content {
 				display: flex;
 				flex-direction: column;
@@ -101,12 +123,32 @@
 				margin-top: 2px;
 			}
 
-			#applet-container {
+			.app-main {
 				flex: 1;
-				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 40px 24px;
+				background: radial-gradient(
+					circle at center,
+					var(--cj-light) 0%,
+					#e2e8f0 100%
+				);
+				overflow: auto;
+			}
+
+			#applet-container {
 				width: 100%;
-				background: #fff;
-				box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+				max-width: 1100px;
+				height: 720px;
+				background: #ffffff;
+				border-radius: 16px;
+				box-shadow:
+					0 20px 40px rgba(0, 0, 0, 0.12),
+					0 8px 16px rgba(0, 0, 0, 0.08);
+				overflow: hidden;
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				position: relative;
 			}
 
 			footer {
@@ -149,16 +191,40 @@
 			</div>
 		</header>
 
-		<div id="applet-container">
-			<cheerpj-applet
-				archive="NoteAppletDemo.jar"
-				code="NoteApplet"
-				width="100%"
-				height="100%"
+		<div class="top-banner">
+			To use this demo install the AppletRunner extension (<a
+				href="https://chromewebstore.google.com/detail/cheerpj-applet-runner/bbmolahhldcbngedljfadjlognfaaein"
+				target="_blank"
+				rel="noopener noreferrer"
+				>Chrome</a
 			>
-				Your browser cannot handle the applet tag!
-			</cheerpj-applet>
+			/
+			<a
+				href="https://microsoftedge.microsoft.com/addons/search/cheerpj"
+				target="_blank"
+				rel="noopener noreferrer"
+				>Edge</a
+			>). Read more about it
+			<a
+				href="https://cheerpj.com/cheerpj-applet-runner/"
+				target="_blank"
+				rel="noopener noreferrer"
+				>here</a
+			>.
 		</div>
+
+		<main class="app-main">
+			<div id="applet-container">
+				<cheerpj-applet
+					archive="NoteAppletDemo.jar"
+					code="NoteApplet"
+					width="100%"
+					height="100%"
+				>
+					Your browser cannot handle the applet tag!
+				</cheerpj-applet>
+			</div>
+		</main>
 
 		<footer>&copy; 2026 Leaning Technologies</footer>
 	</body>
