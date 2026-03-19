@@ -129,6 +129,14 @@ clipboardMode?: "permission" | "system" | "java";
 
 This option allows you to configure how the clipboard will behave. Supported clipboard modes are [`java`], [`system`] and [`permission`].
 
+> [!warning] HTTP limitations
+> The internal browser clipboard API to access any clipboard data is only available over a secure context (HTTPS). When the application is accessed over HTTP, browsers enforce serious limitations on how the system clipboard can be accessed. Users can only copy and paste text to the page itself and will have to double press `Ctrl+C` and `Ctrl+V` (`Cmd+C` and `Cmd+V` on macOS).
+>
+> To resolve this issue:
+>
+> - Using an **HTTPS proxy**.
+> - Enable the page as a secure context using browser settings.
+
 Example:
 
 ```js
@@ -141,7 +149,7 @@ This is the default setting. CheerpJ supports an internal clipboard which is loc
 
 #### `system` mode
 
-In `system` mode CheerpJ will share the clipboard with the system. Browsers enforce serious limitations on how the system clipboard can be accessed. In practice it is generally accessible when the `Ctrl+C` and `Ctrl+V` shortcuts are used (`Cmd+C` and `Cmd+V` on MacOSX). Due to these limitations the UX when using `clipboardMode:"system"` is:
+In `system` mode CheerpJ will share the clipboard with the system. Due to the browser limitations mentioned above, it is generally only accessible when keyboard shortcuts are used. The UX when using `clipboardMode:"system"` is:
 
 - `Ctrl+C`/`Cmd+C`: the user has to press the shortcut twice to give CheerpJ access to the system clipboard. CheerpJ will block the execution while waiting for the second `Ctrl+C`.
 - `Ctrl+V`/`Cmd+V`: this shortcut behaves normally, there is no difference with native execution.
