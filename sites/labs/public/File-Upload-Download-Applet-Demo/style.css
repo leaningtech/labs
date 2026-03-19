@@ -1,0 +1,170 @@
+:root {
+	--cj-primary: #ff6b00;
+	--cj-dark: #1d3557;
+	--cj-light: #f1faee;
+	--text-main: #333;
+	--header-height: 64px;
+	--footer-height: 32px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family:
+		"Inter",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: var(--cj-light);
+	color: var(--text-main);
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+header {
+	background-color: #ffffff;
+	border-bottom: 1px solid #e1e4e8;
+	height: var(--header-height);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	z-index: 10;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.brand-logo {
+	font-weight: 800;
+	font-size: 1.5rem;
+	color: var(--cj-dark);
+	letter-spacing: -0.5px;
+}
+
+.brand-logo span {
+	color: var(--cj-primary);
+}
+
+.demo-badge {
+	background-color: var(--cj-primary);
+	color: #ffffff;
+	/* White text */
+	padding: 4px 10px;
+	border-radius: 999px;
+	/* Pill shape */
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	border: none;
+}
+
+.top-banner {
+	background-color: var(--cj-dark);
+	color: #ffffff;
+	padding: 10px 24px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	text-align: center;
+	letter-spacing: 0.3px;
+}
+
+.top-banner a {
+	color: #4dabf7;
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.2s;
+}
+
+.top-banner a:hover {
+	color: #74c0fc;
+	text-decoration: underline;
+}
+
+.header-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.header-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--cj-dark);
+	margin: 0;
+}
+
+.header-subtitle {
+	font-size: 0.85rem;
+	color: #666;
+	margin-top: 2px;
+}
+
+.app-main {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 24px;
+	background: radial-gradient(
+		circle at center,
+		var(--cj-light) 0%,
+		#e2e8f0 100%
+	);
+	overflow: auto;
+}
+
+#applet-container {
+	width: 100%;
+	max-width: 1100px;
+	height: 720px;
+	background: #ffffff;
+	border-radius: 16px;
+	box-shadow:
+		0 20px 40px rgba(0, 0, 0, 0.12),
+		0 8px 16px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	position: relative;
+}
+
+footer {
+	height: var(--footer-height);
+	background: #fff;
+	border-top: 1px solid #e1e4e8;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 24px;
+	font-size: 0.8rem;
+	color: #888;
+}
+
+cheerpj-applet {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.cjControls,
+.cjTitleBar svg {
+	transform: scale(1.8);
+	transform-origin: center;
+	cursor: pointer;
+}
