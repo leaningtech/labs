@@ -26,6 +26,15 @@ If your application passes all these checks but still isn't working correctly, y
 
 If you do so, make sure to provide additional context, such as a HAR file and the browser's console output. This will make it easier for us to assist you. Instructions on how to generate these are provided in the following steps.
 
+## HTTP limitations
+
+Some CheerpJ features require a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts) (HTTPS). When the application is accessed over HTTP, browsers enforce serious limitations on certain browser APIs. For example, the clipboard API used by [`clipboardMode: "permission"`] is only available over HTTPS. When accessed over HTTP, users can only copy and paste text to the page itself and will have to double press `Ctrl+C` and `Ctrl+V` (`Cmd+C` and `Cmd+V` on macOS).
+
+To resolve this issue:
+
+- Use an **HTTPS proxy** to serve your application.
+- Enable the page as a secure context using browser settings.
+
 ## Enable advanced debug logs in CheerpJ
 
 Before saving the browser console output, it might be helpful to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
@@ -71,3 +80,5 @@ You can save a HAR following these steps:
 [virtual filesystem]: /docs/guides/File-System-support
 [`enableDebug`]: /docs/reference/cheerpjInit#enableDebug
 [`initOption`]: /docs/reference/cheerpjInit
+[`clipboardMode: "permission"`]: /docs/reference/cheerpjInit#permission-mode
+[secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts)
