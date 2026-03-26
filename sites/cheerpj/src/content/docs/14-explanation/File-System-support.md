@@ -5,11 +5,11 @@ description: Virtual filesystems and how to use them
 
 CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
-| Mount     | Description                                                        | Write     | Read |
-| --------- | ------------------------------------------------------------------ | --------- | ---- |
-| `/app/`   | An HTTP-based filesystem for loading files from the web server     | No        | Yes  |
-| `/files/` | A persistent read-write file system                                | Java only | Yes  |
-| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java | JS only   | Yes  |
+| Mount     | Description                                                                  | Write     | Read |
+| --------- | ---------------------------------------------------------------------------- | --------- | ---- |
+| `/app/`   | An HTTP-based filesystem for loading files from the web server               | No        | Yes  |
+| `/files/` | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
+| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
 
 ![](/docs/cheerpj3/assets/filesystem.png)
 
@@ -50,6 +50,13 @@ File file = new File("/files/myfile.ext");
 OutputStream out = new FileOutputStream(file);
 out.close();
 ```
+
+### Specialized directories
+
+Within the `/files/` mount point, there are two specialized directories for interacting with the user's local machine:
+
+- **`/files/uploads/`** — When a user uploads a file using the application's file picker (via the upward arrow icon), it is automatically placed here and becomes accessible to the Java application.
+- **`/files/downloads/`** — Any file written to this directory by the Java application will be automatically downloaded by the browser to the user's local machine.
 
 > [!tip] About data persistency
 > The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
