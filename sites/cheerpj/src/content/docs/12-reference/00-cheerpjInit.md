@@ -153,7 +153,7 @@ With `permission` mode enabled, CheerpJ offers a more seamless integration than 
 
 The first time an operation is requested, the user will be asked for permission to use the clipboard. If this permission is refused, a message will be prompted explaining this permission is necessary to continue.
 
-> [!warning] HTTP limitations
+> [!warning] HTTP limitations in permission mode
 > The internal browser clipboard API to access any clipboard data is only available over a secure context (HTTPS). When the application is accessed over HTTP, browsers enforce serious limitations on how the system clipboard can be accessed. Users can only copy and paste text to the page itself and will have to double press `Ctrl+C` and `Ctrl+V` (`Cmd+C` and `Cmd+V` on macOS).
 >
 > To resolve this issue:
