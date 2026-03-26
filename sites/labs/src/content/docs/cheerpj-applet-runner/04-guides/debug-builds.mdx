@@ -1,0 +1,37 @@
+---
+title: Debug builds
+description: How to enable debug mode and collect logs for troubleshooting
+---
+
+If you encounter issues while running an applet with CheerpJ Applet Runner, enabling **Debug Mode** can provide detailed logs that help our support team identify the problem.
+
+## Enabling Debug Mode
+
+To enable the debug build of CheerpJ:
+
+1. Click the **CheerpJ Applet Runner icon** in your browser's toolbar.
+2. In the popup page, toggle the **"Enable debugging mode"** switch to **On**.
+3. The extension will now use the debug version of the runtime, which includes extensive logging.
+
+## Collecting Debug Information
+
+To help us troubleshoot, we typically need two files: the **Console log** and a **Network HAR file**.
+
+### Step 1: Open Browser DevTools
+
+You must open the browser's developer tools **before** the applet starts loading, or **reload the page** once they are open.
+
+1. Press `F12` (Windows/Linux) or `Cmd + Opt + I` (Mac) to open the DevTools.
+2. Alternatively, right-click anywhere on the page and select **Inspect**.
+
+### Step 2: Save the Browser Console Output
+
+Follow these instructions to [save the browser console output](https://cheerpj.com/docs/guides/cheerpj-debug#saving-the-browser-console-output).
+
+### Step 3: Extract a HAR File
+
+Follow these instructions to [extract a HAR file](https://cheerpj.com/docs/guides/cheerpj-debug#extracting-a-har-file).
+
+---
+
+Once you have collected these files, please attach them to your support request or bug report.
