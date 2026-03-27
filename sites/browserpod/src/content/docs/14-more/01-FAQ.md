@@ -5,7 +5,7 @@ description: Common questions about BrowserPod
 
 ## What is BrowserPod?
 
-BrowserPod runs real Node.js applications inside the browser using WebAssembly. It provides a virtual filesystem and a portal system to expose local servers via public URLs.
+BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and Portals for controlled networking.
 
 ## Do I need a backend server?
 
@@ -26,3 +26,29 @@ Not directly. Use Wasm-compatible alternatives or `package.json` overrides when 
 ## Which browsers are supported?
 
 All the major browsers on desktop and mobile (Chrome, Edge, Firefox, Safari) are supported.
+
+## Why is BrowserPod good for running untrusted code?
+
+BrowserPod is designed for executing code in a sandboxed environment, whether that's user-provided scripts, AI-generated code, or dynamically loaded modules. It provides strong isolation through the browser's security sandbox, keeping execution local to the user's device while maintaining high fidelity with native environments.
+
+## How does BrowserPod compare to cloud sandboxes?
+
+BrowserPod runs on the user's device rather than provisioning cloud infrastructure for each session. This means:
+
+- **Lower cost**: No per-session VM costs. Computation uses underutilized client resources.
+- **Lower latency**: No cold starts or network round trips to remote servers.
+- **Better data locality**: User inputs and code execution stay in the browser by default, reducing your attack surface and compliance requirements.
+- **High fidelity**: BrowserPod provides a full Linux-compliant syscall interface with complete POSIX filesystem semantics, real process isolation, and true multi-threading. It runs complete, unmodified runtime engines (like the full Node.js) that behave identically to their native counterparts, rather than browser-specific reimplementations.
+- **Multi-language support**: Unlike solutions built for a single runtime, BrowserPod is designed from the ground up as a language-agnostic platform that can support Node.js, Python, Ruby, Go, Rust, and eventually full Linux containers.
+
+## Is my data secure in BrowserPod?
+
+Yes. BrowserPod runs entirely within the browser's security sandbox, which is battle-tested and continuously hardened by browser vendors. Code running in a Pod cannot access the user's operating system, local files (unless explicitly provided), or other browser tabs. Data stays on the user's device by default unless your application specifically transmits it elsewhere.
+
+## What is the performance like?
+
+BrowserPod uses WebAssembly to run runtime engines at near-native speed. It supports real multi-process workloads with true concurrency via WebWorkers. Performance is suitable for computationally heavy tasks, including development tools, build pipelines, package managers, and code execution workflows.
+
+## What are Portals?
+
+Portals are BrowserPod's controlled networking feature. When code inside a Pod listens on a port, BrowserPod automatically creates a secure, shareable URL that routes traffic to that service. This enables live previews, interactive demos, and collaborative workflows without provisioning dedicated backend infrastructure.

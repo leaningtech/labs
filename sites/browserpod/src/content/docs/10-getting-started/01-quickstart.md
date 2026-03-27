@@ -3,6 +3,8 @@ title: Quickstart
 description: Getting started with BrowserPod
 ---
 
+BrowserPod provides a sandboxed runtime for executing code safely in the browser. This quickstart will get you running your first BrowserPod application in minutes.
+
 ## 1. Register a free account
 
 In order to use BrowserPod, you need to obtain an API key.
