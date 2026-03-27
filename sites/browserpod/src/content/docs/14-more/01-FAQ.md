@@ -27,9 +27,9 @@ Not directly. Use Wasm-compatible alternatives or `package.json` overrides when 
 
 All the major browsers on desktop and mobile (Chrome, Edge, Firefox, Safari) are supported.
 
-## Is BrowserPod good for running untrusted code?
+## Why is BrowserPod good for running untrusted code?
 
-Yes. BrowserPod is designed for executing code in a sandboxed environment, whether that's user-provided scripts, AI-generated code, or dynamically loaded modules. It provides strong isolation through the browser's security sandbox, keeping execution local to the user's device while maintaining high fidelity with native environments.
+BrowserPod is designed for executing code in a sandboxed environment, whether that's user-provided scripts, AI-generated code, or dynamically loaded modules. It provides strong isolation through the browser's security sandbox, keeping execution local to the user's device while maintaining high fidelity with native environments.
 
 ## How does BrowserPod compare to cloud sandboxes?
 
