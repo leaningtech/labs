@@ -1,0 +1,54 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import DemoCard from "./DemoCard.astro";
+import { productFromUrl } from "../lib/products";
+
+interface Props {
+	// Only show posts if they have at least one of these tags
+	tags?: string[] | undefined;
+
+	// Exclude posts with these IDs
+	exclude?: string[] | undefined;
+}
+
+const { tags, exclude } = Astro.props;
+const product = productFromUrl(Astro.url);
+const productName = typeof product === "undefined" ? "Labs" : product.name;
+
+function sortCalc(demo: CollectionEntry<"showcase">): number {
+	let relevancy =
+		tags && demo.data.tags
+			? demo.data.tags.filter((tag) => tags.includes(tag)).length
+			: 0.1;
+	if (demo.data.featured) {
+		relevancy *= 2;
+	}
+	return relevancy;
+}
+
+const demos = (
+	await getCollection("showcase", (demo) => {
+		if (
+			demo.data.draft ||
+			exclude?.includes(demo.id) ||
+			!(demo.data?.tags?.includes(productName) || productName === "Labs")
+		) {
+			return false;
+		} else {
+			return true;
+		}
+	})
+)
+	.sort((a, b) => sortCalc(b) - sortCalc(a))
+	.slice(0, 3);
+---
+
+<ul class="grid md:grid-cols-3 gap-8">
+	{
+		demos.map((demo) => (
+			<li class="flex justify-stretch items-stretch overflow-hidden">
+				<DemoCard {demo} showMetadata />
+			</li>
+		))
+	}
+</ul>
