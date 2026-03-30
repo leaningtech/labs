@@ -5,13 +5,22 @@ description: Virtual filesystems and how to use them
 
 CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
-| Mount     | Description                                                        | Write     | Read |
-| --------- | ------------------------------------------------------------------ | --------- | ---- |
-| `/app/`   | An HTTP-based filesystem for loading files from the web server     | No        | Yes  |
-| `/files/` | A persistent read-write file system                                | Java only | Yes  |
-| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java | JS only   | Yes  |
+| Mount     | Description                                                                  | Write     | Read |
+| --------- | ---------------------------------------------------------------------------- | --------- | ---- |
+| `/app/`   | An HTTP-based filesystem for loading files from the web server               | No        | Yes  |
+| `/files/` | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
+| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
+
+| Directory           | Description                                                         | Persistent | Write | Read |
+| ------------------- | ------------------------------------------------------------------- | ---------- | ----- | ---- |
+| `/files/uploads/`   | Files uploaded via the window title bar upload button               | No         | Yes   | Yes  |
+| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine | Yes        | Yes   | Yes  |
+
+<div align="center">
 
 ![](/docs/cheerpj3/assets/filesystem.png)
+
+</div>
 
 > [!info] Local files
 > CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. Accessing local files directly is forbidden for browser security reasons.
@@ -55,6 +64,20 @@ out.close();
 > The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
 
 For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
+
+### Specialized directories
+
+Within the `/files/` mount point, there are two specialized directories for interacting with the user's local machine:
+
+- **`/files/uploads/`** — When a user uploads a file using the upload icon that is present in the title bar of any decorated window in Java (via the upward arrow icon in the title bar), it is automatically placed here and becomes accessible to the Java application. Please note that this directory is **not persistent** and its contents will be gone upon browser restart.
+
+<div align="center">
+
+![Upload button](/docs/cheerpj3/assets/upload-btn.png)
+
+</div>
+
+- **`/files/downloads/`** — Any file written to this directory by the Java application will be automatically downloaded to the default download location of the browser.
 
 ## `/str/` mount point
 

@@ -3,25 +3,38 @@ title: Filesystem
 description: Interacting with the virtual filesystem in CheerpJ
 ---
 
-CheerpJ provides a **virtual filesystem** that allows Java applications to read and write files within a secure, browser-sandboxed environment. For browser security reasons, code running in the browser cannot access the user’s local disk directly. Instead, all file operations are confined to a virtual space, which provides multiple mounting points, each with a specific purpose and access model.
+CheerpJ provides a **virtual filesystem** that allows Java applications to read and write files within a secure, browser-sandboxed environment. For browser security reasons, code running in the browser cannot access the user's local disk directly. Instead, all file operations are confined to a virtual space, which provides multiple mounting points, each with a specific purpose and access model.
 
 **Mounting points overview**
 
 - **`/app/`** — Read-only mount that points to the root of your web server. Java can read files using the `/app/` prefix.
 - **`/files/`** — A persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
+  - **`/files/uploads/`** — Files uploaded from the local machine via the upload button on any Java window's title bar land here automatically.
+  - **`/files/downloads/`** — Files saved here by Java are automatically downloaded to the user's local machine (into the browser's default download directory).
 - **`/str/`** — A transient mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
 
-If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first, either via `/str` (inject from JavaScript) or `/files` (read/write at runtime). CheerpJ provides several ways to move files into and out of this virtual filesystem.
+If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first. CheerpJ provides several ways to move files into and out of this virtual filesystem, ranging from built-in UI interactions to JavaScript APIs.
 
 > For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
-## Loading Files from JavaScript into the Virtual Filesystem
+## Importing files to the virtual filesystem
 
-While your application runs under **CheerpJ**, any page-provided assets must first be placed in the **virtual filesystem** for Java to access them. Expose them from JavaScript to the `/str/` mount using [`cheerpOSAddStringFile`](/docs/reference/cheerpOSAddStringFile) or [Library Mode](/docs/guides/implementing-native-libraries), and then read them from Java like regular files.
+When the user needs to provide local files to the Java application, CheerpJ offers several methods to load them into the virtual filesystem. The simplest requires no custom code at all.
 
-### Method 1: Using `cheerpOSAddStringFile` (string or binary).
+### Method 1: Using the window title bar upload button
 
-The quickest way to place a file into CheerpJ’s virtual filesystem from JavaScript is `cheerpOSAddStringFile`. It’s ideal for string content and also supports binary data.
+Any CheerpJ window with a title bar includes an **upload button** (upward arrow icon) in the top-right corner. Clicking it opens the browser's native file picker, allowing the user to select a file from their local machine. The selected file is automatically placed into **`/files/uploads/`** and becomes available to the Java application immediately. No JavaScript is required.
+
+<div align="center">![](/docs/cheerpj3/assets/upload-btn.png)</div>
+
+> [!info] Uploads are not persistent
+> Files imported this way will be available in the virtual `/files/uploads/` directory. Please note that files imported to `/files/uploads/` are not persistent and will be gone upon browser restart.
+
+While this upload button is present on all windows with a title bar, using it from a `JFileChooser` or any file open/import dialog is often the most convenient approach, as users are already intending to interact with files in that context.
+
+### Method 2: Using `cheerpOSAddStringFile` (string or binary)
+
+The quickest way to place a file into CheerpJ's virtual filesystem from JavaScript is [`cheerpOSAddStringFile`](/docs/reference/cheerpOSAddStringFile). It's ideal for string content and also supports binary data via `Uint8Array`.
 
 **When to call it:** Invoke `cheerpOSAddStringFile` after `cheerpjInit()` finishes (i.e., once its Promise resolves). The API depends on the runtime and virtual filesystem being fully initialized.
 
@@ -52,9 +65,9 @@ String text = Files.readString(Path.of("/str/fileName.txt"));
 System.out.println(text);
 ```
 
-### Method 2: Using library mode
+### Method 3: Using library mode
 
-When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use [Library Mode](/docs/guides/library-mode) to copy it across mounts. With [`cheerpjRunLibrary`](/docs/reference/cheerpjRunLibrary), you can invoke Java’s `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
+When a file already lives under `/app/` but your Java code needs to read it as if it were in `/files/` (i.e., without the `/app/` prefix), use [Library Mode](/docs/guides/library-mode) to copy it across mounts. With [`cheerpjRunLibrary`](/docs/reference/cheerpjRunLibrary), you can invoke Java's `java.nio.file` from JavaScript to copy the file from `/app/…` to `/files/…`, after which the application can open it using just its bare filename.
 
 ```js
 async function copyFileToFilesMountPoint() {
@@ -88,13 +101,35 @@ copyFileToFilesMountPoint();
 // without needing the /app/ prefix.
 ```
 
-## Getting a file from the virtual filesystem to JavaScript (i.e. the local file system)
+## Downloading files from the virtual filesystem
 
-When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** (default **`/files/`**), not the user’s disk. You can expose these files to the page either directly from JavaScript or by handing off from Java to JavaScript via a native method.
+When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** (default **`/files/`**), not the user's disk. CheerpJ provides several ways to deliver these files to the user's local machine.
 
-### Method 1: Using `cjFileBlob`
+### Method 1: Saving to `/files/downloads/`
 
-Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to extract files from the virtual file system. Java writes the file into `/files/`, and JavaScript reads it and triggers a download.
+The simplest way to offer a file download requires no custom JavaScript. Any file that the Java application saves under **`/files/downloads/`** is **automatically downloaded** to the user's local machine (into the browser's default download directory).
+
+When saving or exporting from within the application, make sure the destination path is `/files/downloads/`. For example, from Java:
+
+```java title="App.java"
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+// Writing to /files/downloads/ triggers an automatic browser download
+File file = new File("/files/downloads/report.txt");
+try (FileWriter writer = new FileWriter(file)) {
+    writer.write("Report content here.");
+} catch (IOException e) {
+    System.err.println("Error writing file: " + e.getMessage());
+}
+```
+
+If your application uses `JFileChooser` for save/export dialogs, the user can also navigate to `/files/downloads/` manually to trigger the browser download after saving.
+
+### Method 2: Using `cjFileBlob`
+
+Use the JavaScript-accessible [`cjFileBlob` API](/docs/reference/cjFileBlob) to extract files from the virtual filesystem and trigger a browser download programmatically. Java writes the file into `/files/`, and JavaScript reads it and triggers a download.
 
 ```html title="index.html"
 <button id="download">Download file</button>
@@ -120,9 +155,9 @@ Use the JavaScript-accessible [cjFileBlob API](/docs/reference/cjFileBlob) to ex
 </script>
 ```
 
-### Method 2: Call a JavaScript native method from Java
+### Method 3: Call a JavaScript native method from Java
 
-Use this when the **Java** code should decide when to save/preview/upload. Java writes the file to `/files/` and calls a native method (implemented in JavaScript) to perform the browser action.
+Use this when the **Java** code should decide when to trigger the download. Java writes the file to `/files/` and calls a native method (implemented in JavaScript) to perform the browser action.
 
 **Java Writes the File and Calls a Native Method**
 
@@ -149,7 +184,7 @@ try {
 
 **JavaScript Implements the Native Method and Downloads the File**
 
-Now we’ll implement the [native method](/docs/guides/implementing-native-methods) `downloadFileFromCheerpJ` in JavaScript to process the file. The function receives the file path from Java, uses CheerpJ’s `cjFileBlob()` to get the file’s content, and then triggers a download using standard browser APIs.
+Now we'll implement the [native method](/docs/guides/implementing-native-methods) `downloadFileFromCheerpJ` in JavaScript to process the file. The function receives the file path from Java, uses CheerpJ's `cjFileBlob()` to get the file's content, and then triggers a download using standard browser APIs.
 
 ```js
 // Native method implementation called from Java
@@ -185,39 +220,6 @@ async function cj3init() {
 }
 cj3init();
 ```
-
-## Using Java's `JFileChooser` with CheerpJ
-
-`JFileChooser` works the same under CheerpJ, but it targets the **virtual filesystem**. By default the dialog opens in `/files/` mount (the writable, persistent area), so any file you open or save is referenced by a virtual file system path (e.g., `/files/report.txt`) rather than the user’s physical disk.
-
-Here is how the dialog looks like when you use `JFileChooser` with the default `/files/` mount point:
-![](/docs/cheerpj3/assets/filechooser.png)
-
-You can still perform normal Java file operations with CheerpJ. The paths simply refer to the virtual filesystem rather than the user’s physical disk.
-
-To access local files, first import them into the virtual file system (see previous section). To save or download files to the user’s machine from Java, you can utilize a JavaScript native method again.
-
-**Java Source Code: `JFileChooser` and Download Logic**
-
-```js title="App.java"
-public static native void downloadFileFromCheerpJ(String filePath);
-/*
-Rest of your Java code...
-*/
-JFileChooser fileChooser = new JFileChooser();
-int result = fileChooser.showOpenDialog(null);
-
-// User confirmed file selection
-if (result == JFileChooser.APPROVE_OPTION) {
-  File selectedFile = fileChooser.getSelectedFile();
-  String filePath = selectedFile.getPath();
-
-  // Trigger the native JavaScript function that handles the file
-  downloadFileFromCheerpJ(filePath);
-}
-```
-
-The JavaScript code for handling the download is essentially the same as the Step 3 code of **[Getting the file from the virtual file system to JavaScript](/docs/guides/filesystem#getting-a-file-from-the-virtual-file-system-to-javascript-ie-local-file-system)**.
 
 ## Special Case: Applets using `showDocument()`
 
