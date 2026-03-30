@@ -9,8 +9,8 @@ CheerpJ provides a **virtual filesystem** that allows Java applications to read 
 
 - **`/app/`** — Read-only mount that points to the root of your web server. Java can read files using the `/app/` prefix.
 - **`/files/`** — A persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
-  - **`/files/uploads/`** — Files uploaded from the local machine via the application's file picker land here automatically.
-  - **`/files/downloads/`** — Files saved here by Java are automatically downloaded to the user's local machine by the browser.
+  - **`/files/uploads/`** — Files uploaded from the local machine via the upload button on any Java window's title bar land here automatically.
+  - **`/files/downloads/`** — Files saved here by Java are automatically downloaded to the user's local machine (into the browser's default download directory).
 - **`/str/`** — A transient mount used to pass data from JavaScript to Java. JavaScript can read and write, Java can only read. Not persisted.
 
 If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first. CheerpJ provides several ways to move files into and out of this virtual filesystem, ranging from built-in UI interactions to JavaScript APIs.
@@ -21,15 +21,16 @@ If a file is served by your HTTP server (e.g., alongside your JARs), your Java c
 
 When the user needs to provide local files to the Java application, CheerpJ offers several methods to load them into the virtual filesystem. The simplest requires no custom code at all.
 
-### Method 1: Using the file picker upload button
+### Method 1: Using the window title bar upload button
 
-CheerpJ's built-in file picker dialog includes an **upload button** (upward arrow icon) in the top-right corner. Clicking it opens the browser's native file picker, allowing the user to select a file from their local machine. The selected file is automatically placed into **`/files/uploads/`** and becomes available to the Java application immediately. No JavaScript is required.
+Any CheerpJ window with a title bar includes an **upload button** (upward arrow icon) in the top-right corner. Clicking it opens the browser's native file picker, allowing the user to select a file from their local machine. The selected file is automatically placed into **`/files/uploads/`** and becomes available to the Java application immediately. No JavaScript is required.
 
-![Upload button](/docs/cheerpj3/assets/upload-btn.png)
+<div align="center">![](/docs/cheerpj3/assets/upload-btn.png)</div>
 
-Files imported this way will be available in the virtual `/files/uploads/` directory. Please note that files imported to `/files/uploads/` are not persistent and will be gone upon browser restart.
+> [!info] Uploads are not persistent
+> Files imported this way will be available in the virtual `/files/uploads/` directory. Please note that files imported to `/files/uploads/` are not persistent and will be gone upon browser restart.
 
-This is the recommended method for applications that already use `JFileChooser` or any file open/import dialog, since the upload functionality is provided out of the box.
+While this upload button is present on all windows with a title bar, using it from a `JFileChooser` or any file open/import dialog is often the most convenient approach, as users are already intending to interact with files in that context.
 
 ### Method 2: Using `cheerpOSAddStringFile` (string or binary)
 
@@ -106,7 +107,7 @@ When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** 
 
 ### Method 1: Saving to `/files/downloads/`
 
-The simplest way to offer a file download requires no custom JavaScript. Any file that the Java application saves under **`/files/downloads/`** is **automatically downloaded** to the user's local machine by the browser.
+The simplest way to offer a file download requires no custom JavaScript. Any file that the Java application saves under **`/files/downloads/`** is **automatically downloaded** to the user's local machine (into the browser's default download directory).
 
 When saving or exporting from within the application, make sure the destination path is `/files/downloads/`. For example, from Java:
 
