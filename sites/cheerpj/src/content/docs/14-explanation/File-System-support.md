@@ -11,6 +11,13 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 | `/files/` | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
 | `/str/`   | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
 
+### Directories
+
+| Directory           | Description                                                         | Persistent |
+| ------------------- | ------------------------------------------------------------------- | ---------- |
+| `/files/uploads/`   | Files uploaded via the application's file picker                    | No         |
+| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine | Yes        |
+
 ![](/docs/cheerpj3/assets/filesystem.png)
 
 > [!info] Local files
@@ -55,7 +62,10 @@ out.close();
 
 Within the `/files/` mount point, there are two specialized directories for interacting with the user's local machine:
 
-- **`/files/uploads/`** — When a user uploads a file using the application's file picker (via the upward arrow icon), it is automatically placed here and becomes accessible to the Java application.
+- **`/files/uploads/`** — When a user uploads a file using the application's file picker (via the upward arrow icon), it is automatically placed here and becomes accessible to the Java application. Please note that this directory is **not persistent** and its contents will be gone upon browser restart.
+
+![Upload button](/docs/cheerpj3/assets/upload-btn.png)
+
 - **`/files/downloads/`** — Any file written to this directory by the Java application will be automatically downloaded by the browser to the user's local machine.
 
 > [!tip] About data persistency

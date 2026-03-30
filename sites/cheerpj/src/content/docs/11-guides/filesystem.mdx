@@ -25,7 +25,9 @@ When the user needs to provide local files to the Java application, CheerpJ offe
 
 CheerpJ's built-in file picker dialog includes an **upload button** (upward arrow icon) in the top-right corner. Clicking it opens the browser's native file picker, allowing the user to select a file from their local machine. The selected file is automatically placed into **`/files/uploads/`** and becomes available to the Java application immediately. No JavaScript is required.
 
-To open or import an uploaded file from within the application, use the application's file picker and navigate to `/files/uploads/`, then select the file you want to load.
+![Upload button](/docs/cheerpj3/assets/upload-btn.png)
+
+Files imported this way will be available in the virtual `/files/uploads/` directory. Please note that files imported to `/files/uploads/` are not persistent and will be gone upon browser restart.
 
 This is the recommended method for applications that already use `JFileChooser` or any file open/import dialog, since the upload functionality is provided out of the box.
 
