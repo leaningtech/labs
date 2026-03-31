@@ -3,6 +3,16 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 1.2.0:
+
+- Support for /dev and /proc
+- Support larger disk images
+- Support for npx
+- Improvements to syscalls implementation
+- Improvements to terminal sizing
+- Improvements to fork and execve
+- Performance improvements
+
 ## Version 1.1.2:
 
 - Fix timestamping of OPFS devices
