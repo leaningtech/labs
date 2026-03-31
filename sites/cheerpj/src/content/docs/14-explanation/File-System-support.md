@@ -5,16 +5,16 @@ description: Virtual filesystems and how to use them
 
 CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
 
-| Mount     | Description                                                                  | Write     | Read |
-| --------- | ---------------------------------------------------------------------------- | --------- | ---- |
-| `/app/`   | An HTTP-based filesystem for loading files from the web server               | No        | Yes  |
-| `/files/` | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
-| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
+| Mount               | Description                                                                  | Write     | Read |
+| ------------------- | ---------------------------------------------------------------------------- | --------- | ---- |
+| `/app/`             | An HTTP-based filesystem for loading files from the web server               | No        | Yes  |
+| `/files/`           | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
+| `/str/`             | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
 
-| Directory           | Description                                                         | Persistent | Write | Read |
-| ------------------- | ------------------------------------------------------------------- | ---------- | ----- | ---- |
-| `/files/uploads/`   | Files uploaded via the window title bar upload button               | No         | Yes   | Yes  |
-| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine | Yes        | Yes   | Yes  |
+| Directory           | Description                                                                  | Write     | Read |
+| ------------------- | ---------------------------------------------------------------------------- | --------- | ---- |
+| `/files/uploads/`   | Files uploaded via the window title bar upload button, non persistent        | No        | Yes  |
+| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine          | Java only | Yes  |
 
 <div align="center">
 
