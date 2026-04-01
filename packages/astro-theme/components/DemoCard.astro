@@ -29,7 +29,7 @@ const demo_url =
 
 <a
 	href={demo_url + demo.slug}
-	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
+	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full p-10"
 >
 	{
 		demo.data.hero_image && (
@@ -38,7 +38,7 @@ const demo_url =
 				width={size === "wide" ? 600 : 390}
 				height={256}
 				alt=""
-				class="rounded-xl mb-4 bg-stone-100 object-cover w-full h-64 self-center"
+				class="border-stone-800 m-8 bg-stone-100 object-cover w-full h-72 self-center"
 			/>
 		)
 	}
@@ -56,16 +56,15 @@ const demo_url =
 			{demo.data.title}
 		</h3>
 	</div>
-
-	{
-		showMetadata && (
-			<div class=" flex justify-between items-center gap-8 text-stone-400 text-base whitespace-nowrap">
-				<div class="flex items-center gap-2  overflow-hidden">
-					<div class="flex-none space-x-[-1rem]">{demo.data.description}</div>
-				</div>
-			</div>
-		)
-	}
+{
+  showMetadata && (
+    <div class="flex justify-between items-start gap-8 text-stone-400 text-base">
+      <div class="flex items-start gap-2 min-w-0">
+        <div class="break-words">{demo.data.description}</div>
+      </div>
+    </div>
+  )
+}
 	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-start">
 		<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">
 			{demo.data.project_type}

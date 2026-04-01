@@ -10,7 +10,7 @@ import ProductNav from "../../components/nav/product/Nav.astro";
 
 const product = productFromUrl(Astro.url);
 
-const [demo1, demo2, ...restDemos] = await getCollection(
+const demos = await getCollection(
 	"showcase",
 	({ data }) =>
 		data.draft !== true && (!product || data?.tags?.includes(product.name))
@@ -46,26 +46,21 @@ const [demo1, demo2, ...restDemos] = await getCollection(
 		</div>
 	</header>
 
-	<section class="pb-24 px-6 mx-auto w-full max-w-screen-xl">
-		<ul class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-			{
-				[demo1, demo2].map((demo) => (
-					<li class="flex md:justify-stretch md:items-stretch">
-						{demo && <DemoCard {demo} showMetadata size="wide" />}
-					</li>
-				))
-			}
-		</ul>
-		<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-			{
-				restDemos.map((demo) => (
-					<li class="flex md:justify-stretch md:items-stretch">
-						<DemoCard {demo} showMetadata size="wide" />
-					</li>
-				))
-			}
-		</ul>
-	</section>
+	<section class="pb-24 px-12 mx-auto w-full max-w-screen-2xl">
+  <ul class="grid grid-cols-1 md:grid-cols-2">
+    {
+      demos.map((demo, i) => (
+        <li class={`flex md:justify-stretch md:items-stretch
+          ${i % 2 === 0 ? 'md:border-r' : ''}
+          ${i >= 2 ? 'md:border-t' : ''}
+          border-stone-800
+        `}>
+          <DemoCard {demo} showMetadata size="wide" />
+        </li>
+      ))
+    }
+  </ul>
+</section>
 
 	<Footer />
 </Shell>
