@@ -3,7 +3,16 @@ title: Files and filesystems
 description: Virtual filesystems and how to use them
 ---
 
-CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points:
+CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. The folder structure looks like this:
+
+```text
+/
+├── app/
+├── files/
+│   ├── downloads/
+│   └── uploads/
+└── str/
+```
 
 | Mount     | Description                                                                  | Write     | Read |
 | --------- | ---------------------------------------------------------------------------- | --------- | ---- |

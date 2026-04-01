@@ -7,6 +7,17 @@ CheerpJ provides a **virtual filesystem** that allows Java applications to read 
 
 **Mounting points overview**
 
+The virtual filesystem structure looks like this:
+
+```text
+/
+├── app/
+├── files/
+│   ├── downloads/
+│   └── uploads/
+└── str/
+```
+
 - **`/app/`** — Read-only mount that points to the root of your web server. Java can read files using the `/app/` prefix.
 - **`/files/`** — A persistent, Java read-write area and the default mounting point for Java. JavaScript can read via CheerpJ APIs.
   - **`/files/uploads/`** — Files uploaded from the local machine via the upload button on any Java window's title bar land here automatically.
