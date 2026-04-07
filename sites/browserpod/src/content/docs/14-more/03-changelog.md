@@ -3,6 +3,16 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 1.3.1:
+
+- Fix detection of WebAssembly programs
+
+## Version 1.3.0:
+
+- Improvements to syscalls implementation
+- Network performance improvements
+- Initial support for WebAssembly programs
+
 ## Version 1.2.0:
 
 - Support for /dev and /proc
