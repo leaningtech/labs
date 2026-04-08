@@ -23,28 +23,25 @@ const demos = await getCollection(
 >
 	{product && <ProductNav {product} />}
 	<header class="text-center text-stone-100">
-		<div class="flex justify-center pt-10 items-center">
-			<Image
-				src={ShowcaseDoodle}
-				width="500"
-				height="129"
-				class="invisible md:visible"
-				alt="reflectors"
-			/>
-		</div>
+  <div class="relative flex justify-center pt-10 items-center">
+    <Image
+      src={ShowcaseDoodle}
+      width="500"
+      height="129"
+      class="invisible md:visible"
+      alt="reflectors"
+    />
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full">
+      <h1 class="text-5xl font-bold tracking-tight text-balance">Demo showcase</h1>
+    </div>
+  </div>
 
-		<h1 class="text-5xl font-semibold text-balance">Demo showcase</h1>
-		<p class="text-lg text-balance mb-8 text-stone-400">
-			{
-				`Discover projects and demos built with our technologies by our developers, community and collaborators`
-			}
-		</p>
-		<div
-			class="bg-gradient-to-b from-primary-600 to-transparent opacity-20 w-full h-[40rem] absolute inset-0 -z-10"
-		>
-			<!-- cool background -->
-		</div>
-	</header>
+  <p class="md:text-xl sm:text-lg text-balance mb-8 mt-4 text-stone-300">
+    {`Discover projects and demos built with our technologies by our developers, community and collaborators`}
+  </p>
+  
+   
+</header>
 
 	<section class="pb-24 px-12 mx-auto w-full max-w-screen-2xl">
   <ul class="grid grid-cols-1 md:grid-cols-2">
