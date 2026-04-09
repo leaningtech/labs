@@ -57,13 +57,17 @@ export function defineCommonCollections() {
 				}),
 		}),
 		showcase: defineCollection({
-			type: "data",
 			schema: ({ image }) =>
 				z.object({
 					title: z.string(),
-					description: z.string().optional(),
-					url: z.string(),
-					heroImage: image(),
+					description: z.string(),
+					demo_url: z.string().optional(),
+					repository_url: z.string().optional(),
+					author: z.string(),
+					project_type: z.string(),
+					niche: z.string(),
+					hero_image: image().optional(),
+					draft: z.boolean().default(false),
 					tags: productTags.optional(),
 				}),
 		}),
