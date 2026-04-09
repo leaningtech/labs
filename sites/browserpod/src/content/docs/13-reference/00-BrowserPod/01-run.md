@@ -21,16 +21,15 @@ class BrowserPod {
 ## Parameters
 
 - **executable (`string`)** - The path of the program to execute.
-
-* **args (`Array<string>`)** - The command line arguments to pass to the program.
-* **opts (`object`)** - Initialization options passed as an object.
+- **args (`Array<string>`)** - The command line arguments to pass to the program.
+- **opts (`object`)** - Initialization options passed as an object.
 
 ## Options
 
 - **terminal (`Terminal`)** - The terminal object used by the spawned process for I/O.
 - **env (`Array<string>`, _optional_)** - The environment variables to pass to the program, in the form "KEY=value".
 - **cwd (`string`, _optional_)** - The current working directory.
-- **echo (`boolean`, _optional_)** - Wether to write the command line of the executed process to the terminal.
+- **echo (`boolean`, _optional_)** - Whether to write the command line of the executed process to the terminal.
 
 ## Returns
 
