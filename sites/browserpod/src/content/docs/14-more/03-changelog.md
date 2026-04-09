@@ -3,6 +3,13 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.0.0:
+
+- Support command-line tools: git, bash, curl, grep, openssl, vi, and many others
+- Improvements to disk performance
+- Increase available space at the `/home` mount point to 2 GB
+- Support multiple independent virtual disks via the `storageKey` init option
+
 ## Version 1.3.1:
 
 - Fix detection of WebAssembly programs
