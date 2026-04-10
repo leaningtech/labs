@@ -1,0 +1,169 @@
+---
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+---
+
+<Shell>
+	<div class="relative w-full min-h-[calc(100vh-100px)] overflow-hidden bg-[#050505] flex items-center justify-center py-24 px-6 font-sans">
+		<!-- Background Ambient Glows -->
+		<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-[150px] pointer-events-none"></div>
+		<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none"></div>
+		
+		<!-- Floating grid pattern -->
+		<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik02MCAwaE0wIDYwSDBNMCB2NjB2ME02MCAwdjYwdjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjAyKSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==')] pointer-events-none opacity-50"></div>
+
+		<div class="relative z-10 w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+			
+			<!-- Header & Branding Side -->
+			<div class="text-left space-y-6">
+				<h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-stone-500 tracking-tighter leading-[1.1]">
+					Submit your <br/>
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Project</span>
+				</h1>
+				<p class="text-lg text-stone-400 max-w-sm leading-relaxed">
+					Ready to showcase what you've built? Submit your hackathon project below for the judges to review.
+				</p>
+			</div>
+
+			<!-- Form Side -->
+			<div class="bg-black/40 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 shadow-[0_0_80px_rgba(16,185,129,0.15)] relative group">
+				
+				<!-- Inner border glow on hover -->
+				<div class="absolute inset-0 rounded-3xl border border-emerald-500/0 group-hover:border-emerald-500/30 transition-colors duration-700 pointer-events-none"></div>
+
+				<form id="submission-form" class="space-y-6 relative z-10">
+					<!-- Name and GitHub row -->
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+						<div class="relative group/input">
+							<label for="name" class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2 ml-1">Team Name</label>
+							<div class="relative">
+								<input 
+									type="text" 
+									id="name" 
+									name="Name" 
+									required 
+									placeholder="Hackathon Team 1"
+									class="w-full bg-white/5 border border-white/10 text-white text-sm rounded-xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400 focus:bg-emerald-500/5 block p-3.5 transition-all outline-none placeholder:text-stone-600 shadow-inner"
+								/>
+							</div>
+						</div>
+
+						<div class="relative group/input">
+							<label for="github" class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2 ml-1">GitHub Username</label>
+							<div class="relative flex items-center">
+								<span class="absolute left-3.5 text-stone-500 font-medium">@</span>
+								<input 
+									type="text" 
+									id="github" 
+									name="GitHub Username" 
+									required 
+									placeholder="octocat"
+									class="w-full bg-white/5 border border-white/10 text-white text-sm rounded-xl pl-8 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400 focus:bg-emerald-500/5 block p-3.5 transition-all outline-none placeholder:text-stone-600 shadow-inner"
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div class="relative group/input">
+						<label for="url" class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2 ml-1">Live Project or Repo URL</label>
+						<input 
+							type="url" 
+							id="url" 
+							name="Project URL" 
+							required
+							placeholder="https://github.com/..."
+							class="w-full bg-white/5 border border-white/10 text-white text-sm rounded-xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400 focus:bg-emerald-500/5 block p-3.5 transition-all outline-none placeholder:text-stone-600 shadow-inner"
+						/>
+					</div>
+
+					<div class="relative group/input">
+						<label for="description" class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2 ml-1">Hackathon Pitch / Description</label>
+						<textarea 
+							id="description" 
+							name="Description" 
+							rows="4" 
+							required
+							placeholder="Tell us what you built, what tech stack you used, and why it's cool..."
+							class="w-full bg-white/5 border border-white/10 text-white text-sm rounded-xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400 focus:bg-emerald-500/5 block p-3.5 transition-all outline-none placeholder:text-stone-600 shadow-inner resize-y"
+						></textarea>
+					</div>
+
+					<div class="pt-4">
+						<button 
+							type="submit" 
+							id="submit-button"
+							class="group/btn relative w-full overflow-hidden bg-gradient-to-r from-emerald-400 to-cyan-500 text-black font-bold uppercase tracking-widest text-sm rounded-xl px-5 py-4 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_0_30px_rgba(52,211,153,0.5)]"
+						>
+							<span class="relative z-10 flex items-center justify-center gap-2">
+								Submit Project
+							</span>
+							<div class="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-in-out z-0"></div>
+						</button>
+						<div id="status-message" class="text-center mt-6 text-sm font-medium min-h-[20px] transition-all duration-300"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</Shell>
+
+<Footer />
+
+<script>
+	// Run ONLY client-side
+	if (typeof window !== 'undefined') {
+		const form = document.getElementById("submission-form") as HTMLFormElement;
+		const submitButton = document.getElementById("submit-button") as HTMLButtonElement;
+		const statusMessage = document.getElementById("status-message") as HTMLDivElement;
+		const buttonLabel = submitButton?.querySelector('span');
+
+		// google scripts api
+		const scriptURL = "https://script.google.com/macros/s/AKfycbwt8-C9uFxk5s-2f4UdftCkeH5dhHTCCKSzqyMpr9EVT636hYkxcLmNIMb9U2l8SrILzg/exec";
+
+		if (form && submitButton && buttonLabel) {
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				
+
+				// Loading state
+				submitButton.disabled = true;
+				buttonLabel.innerHTML = `
+					<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+						<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+						<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+					</svg>
+					Submitting...
+				`;
+				submitButton.classList.add('opacity-80', 'cursor-not-allowed', 'scale-100');
+				statusMessage.textContent = "";
+
+				const formData = new FormData(form);
+
+				fetch(scriptURL, { 
+					method: "POST", 
+					body: formData 
+				})
+				.then((response) => {
+					form.reset();
+					submitButton.disabled = false;
+					submitButton.classList.remove('opacity-80', 'cursor-not-allowed');
+					buttonLabel.innerHTML = `
+						Submit Project
+					`;
+					statusMessage.textContent = "Project submitted. Good luck!";
+					statusMessage.className = "text-center mt-6 text-emerald-400 text-sm font-semibold tracking-wide drop-shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse";
+				})
+				.catch((error) => {
+					console.error("Error!", error.message);
+					submitButton.disabled = false;
+					submitButton.classList.remove('opacity-80', 'cursor-not-allowed');
+					buttonLabel.innerHTML = `
+						Submit Project
+					`;
+					statusMessage.textContent = "Transmission failed. Please try again.";
+					statusMessage.className = "text-center mt-6 text-rose-400 text-sm font-semibold tracking-wide drop-shadow-[0_0_8px_rgba(251,113,133,0.6)]";
+				});
+			});
+		}
+	}
+</script>
