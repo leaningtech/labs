@@ -1,0 +1,5 @@
+.gitconfig
+.scripts/welcome.sh
+.scripts/bash_demo.sh
+.scripts/git_demo.sh
+README.txt

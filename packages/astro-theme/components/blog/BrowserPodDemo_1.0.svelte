@@ -12,7 +12,7 @@
 	let { projectSource, children, apiKey } = $props();
 
 	// svelte-ignore state_referenced_locally
-	const pod = BrowserPod("1.0.0").boot({ apiKey });
+	const pod = BrowserPod("2.0.2").boot({ apiKey });
 
 	function once(fn) {
 		let done = false;
@@ -36,7 +36,7 @@
 		{
 			id: "repl",
 			label: "REPL",
-			onActivate: once((run) => run("node", [], { cwd: "/home/user" })),
+			onActivate: once((run) => run("bash", [], { cwd: "/home/user" })),
 		},
 	];
 </script>
