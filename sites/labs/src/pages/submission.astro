@@ -4,161 +4,154 @@ import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 ---
 
 <Shell>
-	<div
-		class="min-h-[calc(100vh-100px)] bg-[#050505] flex items-center justify-center px-6 py-20"
-	>
-		<div class="w-full max-w-4xl grid md:grid-cols-2 gap-12 items-center">
-			<!-- Left -->
-			<div class="space-y-5">
-				<h1
-					class="text-5xl md:text-6xl text-white leading-tight tracking-tight"
-				>
-					Submit your <br />Project.
-				</h1>
-				<p class="text-stone-400 max-w-sm">
-					Ready to showcase what you've built? Submit your hackathon project
-					below for the judges to review.
-				</p>
-			</div>
+  <div class="min-h-[calc(100vh-100px)] bg-[#050505] flex items-center justify-center px-6 py-20">
+    <div class="w-full max-w-4xl grid md:grid-cols-2 gap-12 items-center">
 
-			<!-- Form -->
-			<div class="border border-white/10 bg-white/[0.02] rounded-2xl p-8">
-				<form id="submission-form" class="space-y-6">
-					<div class="grid sm:grid-cols-2 gap-5">
-						<div>
-							<label for="name" class="block text-xs text-stone-400 mb-1">
-								Team Name
-							</label>
-							<input
-								id="name"
-								name="teamName"
-								required
-								placeholder="Hackathon Team 1"
-								class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
-							/>
-						</div>
+      <!-- Left -->
+      <div class="space-y-5">
+        <h1 class="text-5xl md:text-6xl text-white leading-tight tracking-tight">
+          Submit your <br />Project.
+        </h1>
+        <p class="text-stone-400 max-w-sm">
+          Ready to showcase what you've built? Submit your hackathon project
+          below for the judges to review.
+        </p>
+      </div>
 
-						<div>
-							<label for="github" class="block text-xs text-stone-400 mb-1">
-								GitHub Username
-							</label>
-							<div class="relative">
-								<span
-									class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500"
-								>
-									@
-								</span>
-								<input
-									id="github"
-									name="github"
-									required
-									placeholder="octocat"
-									class="w-full pl-7 pr-3 py-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
-								/>
-							</div>
-						</div>
-					</div>
+      <!-- Form -->
+      <div class="border border-white/10 bg-white/[0.02] rounded-2xl p-8">
+        <form id="submission-form" class="space-y-6">
 
-					<div>
-						<label for="url" class="block text-xs text-stone-400 mb-1">
-							Project URL
-						</label>
-						<input
-							id="url"
-							name="projectUrl"
-							type="url"
-							required
-							placeholder="https://github.com/..."
-							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
-						/>
-					</div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-xs text-stone-400 mb-1">
+                Team Name
+              </label>
+              <input
+                id="name"
+                name="teamName"
+                required
+                placeholder="Hackathon Team 1"
+                class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+              />
+            </div>
 
-					<div>
-						<label for="description" class="block text-xs text-stone-400 mb-1">
-							Description
-						</label>
-						<textarea
-							id="description"
-							name="description"
-							rows="4"
-							required
-							placeholder="What did you build?"
-							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30 resize-y"
-						></textarea>
-					</div>
+            <div>
+              <label for="github" class="block text-xs text-stone-400 mb-1">
+                GitHub Username
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500">
+                  @
+                </span>
+                <input
+                  id="github"
+                  name="github"
+                  required
+                  placeholder="octocat"
+                  class="w-full pl-7 pr-3 py-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+                />
+              </div>
+            </div>
+          </div>
 
-					<div class="pt-2">
-						<button
-							id="submit-button"
-							type="submit"
-							class="w-full py-3 rounded-lg bg-white text-black text-sm font-medium hover:bg-stone-200 active:scale-[0.98] transition"
-						>
-							<span>Submit Project</span>
-						</button>
+          <div>
+            <label for="url" class="block text-xs text-stone-400 mb-1">
+              Project URL
+            </label>
+            <input
+              id="url"
+              name="projectUrl"
+              type="url"
+              required
+              placeholder="https://github.com/..."
+              class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+            />
+          </div>
 
-						<div
-							id="status-message"
-							class="text-center mt-4 text-sm min-h-[20px]"
-						>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+          <div>
+            <label for="description" class="block text-xs text-stone-400 mb-1">
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              required
+              placeholder="What did you build?"
+              class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30 resize-y"
+            ></textarea>
+          </div>
+
+          <div class="pt-2">
+            <button
+              id="submit-button"
+              type="submit"
+              class="w-full py-3 rounded-lg bg-white text-black text-sm font-medium hover:bg-stone-200 active:scale-[0.98] transition"
+            >
+              <span>Submit Project</span>
+            </button>
+
+            <div
+              id="status-message"
+              class="text-center mt-4 text-sm min-h-[20px]"
+            ></div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
 </Shell>
 
 <Footer />
 
 <script>
-	if (typeof window !== "undefined") {
-		const form = document.getElementById("submission-form") as HTMLFormElement;
-		const button = document.getElementById(
-			"submit-button"
-		) as HTMLButtonElement;
-		const status = document.getElementById("status-message") as HTMLDivElement;
-		const label = button?.querySelector("span");
+if (typeof window !== "undefined") {
+  const form = document.getElementById("submission-form") as HTMLFormElement;
+  const button = document.getElementById("submit-button") as HTMLButtonElement;
+  const status = document.getElementById("status-message") as HTMLDivElement;
+  const label = button?.querySelector("span");
 
-		const endpoint =
-			"https://script.google.com/macros/s/AKfycbyo8URD7WB4wqY2WwoNUUE8lv51UoNEMPYM-HLBHXsu2E13tSmq4__QxTvpsZTKFs9jvQ/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycbyo8URD7WB4wqY2WwoNUUE8lv51UoNEMPYM-HLBHXsu2E13tSmq4__QxTvpsZTKFs9jvQ/exec";
 
-		if (form && button && label && status) {
-			form.addEventListener("submit", async (e) => {
-				e.preventDefault();
-				if (button.disabled) return;
+  if (form && button && label && status) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (button.disabled) return;
 
-				button.disabled = true;
-				button.classList.add("opacity-80", "cursor-not-allowed");
-				label.textContent = "Submitting...";
-				status.textContent = "";
+      button.disabled = true;
+      button.classList.add("opacity-80", "cursor-not-allowed");
+      label.textContent = "Submitting...";
+      status.textContent = "";
 
-				try {
-					await fetch(endpoint, {
-						method: "POST",
-						body: new FormData(form),
-					});
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(form),
+        });
 
-					// We assume success if fetch didn't throw a network error.
-					// Apps Script often sends opaque responses (redirects) that make res.ok false,
-					// even when successful.
 
-					form.reset();
+        form.reset();
 
-					status.textContent = "Project submitted. Good luck!";
-					status.className =
-						"text-center mt-4 text-emerald-400 text-sm font-semibold";
-				} catch (err) {
-					console.error(err);
+        status.textContent = "Project submitted. Good luck!";
+        status.className =
+          "text-center mt-4 text-emerald-400 text-sm font-semibold";
 
-					status.textContent = "Something went wrong. Try again.";
-					status.className =
-						"text-center mt-4 text-rose-400 text-sm font-semibold";
-				} finally {
-					button.disabled = false;
-					button.classList.remove("opacity-80", "cursor-not-allowed");
-					label.textContent = "Submit Project";
-				}
-			});
-		}
-	}
+      } catch (err) {
+        console.error(err);
+
+        status.textContent = "Something went wrong. Try again.";
+        status.className =
+          "text-center mt-4 text-rose-400 text-sm font-semibold";
+
+      } finally {
+        button.disabled = false;
+        button.classList.remove("opacity-80", "cursor-not-allowed");
+        label.textContent = "Submit Project";
+      }
+    });
+  }
+}
 </script>
