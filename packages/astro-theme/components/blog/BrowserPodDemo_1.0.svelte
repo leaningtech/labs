@@ -1,4 +1,5 @@
 <script>
+	import { BrowserPod } from "../../lib/browserpod.ts";
 	import {
 		BrowserPodEditorProvider,
 		EditorPanel,
@@ -10,21 +11,32 @@
 
 	let { projectSource, children, apiKey } = $props();
 
+	// svelte-ignore state_referenced_locally
+	const pod = BrowserPod("1.0.0").boot({ apiKey });
+
+	function once(fn) {
+		let done = false;
+		return (run) => {
+			if (!done) {
+				done = true;
+				fn(run);
+			}
+		};
+	}
+
 	const terminalTabs = [
 		{
 			id: "build",
 			label: "Build",
-			commands: [
-				["npm", "install"],
-				["npm", "run", "dev"],
-			],
-			autoRun: true,
+			onReady: async (run) => {
+				await run("npm", ["install"], { cwd: "/home/user" });
+				await run("npm", ["run", "dev"], { cwd: "/home/user" });
+			},
 		},
 		{
 			id: "repl",
 			label: "REPL",
-			commands: [["node"]],
-			runOnActivate: true,
+			onActivate: once((run) => run("node", [], { cwd: "/home/user" })),
 		},
 	];
 </script>
@@ -39,7 +51,7 @@
 	>
 		<BrowserPodEditorProvider
 			{projectSource}
-			{apiKey}
+			{pod}
 			ctxId="demo"
 			defaultFile="src/lib/Counter.svelte"
 		>

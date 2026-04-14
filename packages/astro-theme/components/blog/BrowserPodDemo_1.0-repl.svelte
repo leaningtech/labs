@@ -13,8 +13,7 @@
 			{
 				id: "repl-standalone",
 				label: "REPL",
-				commands: [["node"]],
-				autoRun: true,
+				onReady: (run) => run("node", [], { cwd: "/home/user" }),
 			},
 		]}
 	/>
