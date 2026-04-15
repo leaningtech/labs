@@ -17,20 +17,6 @@ No installation is needed. Simply include CheerpX by adding the following script
 
 The CheerpX's API is stable and breaking changes can only be introduced on a new major version. All CheerpX builds are immutable so you can trust that, if your application works today, it is going to work identically forever.
 
-### ES6 Module Compatibility
-
-CheerpX is also available as an ES6 JavaScript module. If you prefer to use the ES6 module version, you can include it like this:
-
-```html
-<script type="module">
-	import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.esm.js";
-	self.CheerpX = CheerpX;
-</script>
-```
-
-> [!tip]
-> When using the ES6 module version, you don't have to assign the imported `CheerpX` to the global scope. This example is intended to keep compatibility with the traditional script inclusion method used in this documentation.
-
 ## 2. Create an application instance
 
 To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX.Linux/create) method, which is available globally once the script is included.
@@ -43,8 +29,8 @@ The example below demonstrates how to set up the file system and devices using [
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
-		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 		<script type="module">
+			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js";
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
 				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
@@ -134,8 +120,8 @@ Now you can interact with the console to run commands. Make sure to give focus t
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
-		<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
 		<script type="module">
+			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js";
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
 				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
