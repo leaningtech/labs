@@ -21,67 +21,37 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
 />
 
-Today we're releasing **BrowserPod 2.0**, a major milestone in our journey toward making BrowserPod a universal in-browser execution environment. With this release, BrowserPod is no longer limited to Node.js: it now ships with **a real bash shell, git, and a full set of core Linux utilities**.
+BrowserPod 2.0 is here with a much broader toolkit for developers.
 
-## What is BrowserPod
+With 2.0, BrowserPod adds a real bash shell, git, and core Linux utilities to the browser. That makes it much easier to bring familiar developer workflows into BrowserPod, from cloning repositories and running shell scripts to inspecting files and working through a real command line environment.
 
-BrowserPod is an in-browser code sandbox that runs Linux applications compiled to WebAssembly. It aims to implement the full Linux syscall interface, allowing existing applications to be compiled with little to no code change, and multiple applications to interact with each other.
-It supports both outbound internet access, for downloading packages or calling APIs, and inbound connections, for example, to expose local development servers.
-You can use it for in-browser agentic coding, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and any other scenario benefiting from sandboxed execution within a Web application.
+## What’s new in BrowserPod 2.0?
 
-If this sounds interesting, head over to [console.browserpod.io](https://console.browserpod.io)! You can log in with your GitHub account and start using our generous free tier. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
+- Bash
+- Git
+- BusyBox with tools such as `cp`, `rm`, `ls`, `sed`, `grep`, and `vi`
+- Expanded framework support across workflows such as Next.js, Nuxt, and Vue
+- `fork`
 
-## What's new in 2.0
+### Remind me, what is BrowserPod?
 
-BrowserPod 2.0 features improvements across the board over 1.0: more syscalls implemented, faster networking and disk access, and bug fixes.
-One particular feature stands out as an enabler of many useful applications: **fork**.
+BrowserPod is an in-browser code sandbox. It aims to implement the Linux syscall interface that many applications expect, so software can be compiled to WebAssembly with little to no code change, and multiple applications can interact with each other.
 
-### Fork
+It supports outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers.
 
-Fork is a system call that creates a new process by cloning the entire state of the caller process. It returns different values to the parent and the child, which continue execution independently.
+That makes it useful for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
 
-WebAssembly lacks the primitives to support `fork()` directly: it is neither possible to clone the call stack nor to start executing a function from an arbitrary point.
-
-But fork is used ubiquitously in Linux programs, and although it can often be replaced by `posix_spawn` when used together with `execve`, doing so requires a lot of manual effort. We need it to work out of the box if we want to be able to add many utilities to BrowserPod in a way that is maintainable long term.
-
-The details of how we made it work deserve their own blog post, but in short: we use a mix of compiler-injected instrumentation, stack unwinding via exceptions, and an embedded Wasm interpreter.
-
-With fork implemented, we could start porting more applications to BrowserPod very easily.
-
-### Bash
-
-Support for some form of shell is crucial for running most non-trivial applications on Linux. Plenty of programs are invoked via a wrapper shell script that sets up the environment and forwards arguments. Even when limited to Node, we previously had to parse and emulate simple expressions like `sh -c myscript || true` for `npm install` scripts to run. This was quickly becoming a source of headaches, and we were happy to remove the hacks in favor of running a real shell.
-And even more importantly, an interactive shell session enables a new level of interactivity between the user and the Pod. It was already possible to run multiple commands in sequence or in parallel using the BrowserPod API (and it still is), but bash is the de facto standard for interacting with a Linux system. For both Humans and Agents.
-
-Bash by itself would not be very useful if you could only use it to start Node and npm, so we are also including a build of BusyBox, which provides common tools like cp, rm, ls, sed, grep, vi, ...
-
-You can try it out in the demo below:
-
-<BrowserPodTerminal
-	client:only="svelte"
-	ctxId="bp-2.0-demo"
-	description="Bash running in the Browser"
-	autoStart={false}
-	terminalTabs={[
-		{
-			id: "bash-demo",
-			label: "Bash",
-			echo: false,
-			command: "bash",
-			args: [".scripts/bash_demo.sh"],
-		},
-	]}
-/>
+ 0e0848c (Stefano and I discussed a few changes to bring the piece together. Obviously, Yuri this is your blog so feel free to reject or accept the changes.)
 
 ### Git
 
-BrowserPod's API already offered the building blocks to import a repository into a Pod's filesystem, with [BrowserPod.createDirectory()](https://browserpod.io/docs/reference/BrowserPod/createDirectory) and [BrowserPod.createFile()](https://browserpod.io/docs/reference/BrowserPod/createFile).
-This works and is still a viable solution for simple projects, but we really wanted to have a more convenient way to get up and running, without worrying about CORS or having to include the repo within the project using BrowserPod.
+We have compiled the official `git` CLI to WebAssembly and included it in the BrowserPod system image.
 
-We achieved this by compiling the official `git` CLI to WebAssembly and including it in our system image. You can now just `await pod.run("git", ["clone", "https://github.com/myorg/myrepo"], { terminal });` to clone your repo into the pod.
-But it does not stop there: you can also `git log`, `git add`, `git commit`, `git push`, ...
+Repositories are the natural starting point for many developer workflows. With git available inside BrowserPod, you can clone a repository, inspect history, create commits, and push changes using the same commands developers already know.
 
-We expect these features to be very useful for use cases like Web IDEs, feature branch previews, and AI Agent sandboxes.
+Supply chain attacks and malicious repositories are an especially prescient concern. BrowserPod’s sandboxed environment gives developers a safer place to inspect unfamiliar code without exposing their local machine.
+
+We expect this to be especially useful for web IDEs, feature branch previews, and AI agent sandboxes.
 
 Give it a try in the demo below:
 
@@ -101,26 +71,55 @@ Give it a try in the demo below:
 	]}
 />
 
+### Bash
+
+Adding a real shell is one of the most important changes in BrowserPod 2.0.
+
+Many non-trivial Linux applications depend on shell scripts for setup and orchestration. Wrapper scripts prepare the environment, forward arguments, and chain commands together. Without shell support, a lot of that logic has to be recreated elsewhere. With bash available inside the pod, those workflows become much easier to support directly.
+
+An interactive shell also makes BrowserPod much easier to use. Instead of driving everything through a narrow API surface, users and agents can work through command line conventions they already understand.
+
+You can try it below.
+
+<bash demo>
+
+### BusyBox
+
+Bash on its own would not be very useful, which is why BrowserPod 2.0 also includes BusyBox. That gives the pod a practical set of Linux utilities such as `cp`, `rm`, `ls`, `sed`, `grep`, and `vi`, which makes shell workflows genuinely usable.
+
+### Expanded framework support
+
+BrowserPod 2.0 widens support across workflows built with frameworks such as Next.js, Nuxt, and Vue.
+
+### Fork
+
+Another major addition in BrowserPod 2.0 is support for `fork`.
+
+`fork` is a system call that creates a new process by cloning the entire state of the caller process. It returns different values to the parent and the child, which then continue execution independently.
+
+Supporting `fork()` in WebAssembly is difficult. WebAssembly does not provide a direct way to clone the call stack or resume execution from an arbitrary point.
+
+We will publish a dedicated technical post on the implementation soon. In short, we made it work through a combination of compiler-injected instrumentation, stack unwinding via exceptions, and an embedded Wasm interpreter.
+
+Once `fork` was in place, porting additional utilities to BrowserPod became much easier. That is one of the reasons this release expands the practical range of software the platform can support.
+
 ## What's next
 
-BrowserPod 2.0 is the second step in an ambitious release plan for 2026:
+BrowserPod 2.0 is the second step in an ambitious release plan for 2026.
 
-- **April 2026**: Python support
-- **May 2026**: Ruby support
-- **July 2026**: Go support
-- **August 2026**: Rust support
-- **Late 2026**: Full Linux-class workloads powered by CheerpX
+- **April 2026** Python support
+- **May 2026** Ruby support
+- **July 2026** Go support
+- **August 2026** Rust support
+- **Late 2026** Full Linux-class workloads powered by CheerpX
 
-And in between these milestones, you can expect bug fixes, performance improvements, and more CLI utilities.
+Between those milestones, you can expect bug fixes, performance improvements, and more CLI utilities.
 
 ## Try it now
 
-Head to [https://console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
+Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. Documentation is available at [browserpod.io/docs](https://browserpod.io/docs).
 
-As a starting point, use our npm quickstart:
+As a starting point, use the npm quickstart.
 
 ```bash
 npm create browserpod-quickstart
-```
-
-We're excited to see what you will build with a real shell at your fingertips — entirely in the browser. If you have questions or ideas, come our developer community on [Discord](https://discord.leaningtech.com).
