@@ -31,8 +31,8 @@
 		"./components/blog/BrowserPodDemo_Beta.svelte": "./components/blog/BrowserPodDemo_Beta.svelte",
 		"./components/blog/BrowserPodDemo_1.0.svelte": "./components/blog/BrowserPodDemo_1.0.svelte",
 		"./components/blog/BrowserPodDemo_1.0-repl.svelte": "./components/blog/BrowserPodDemo_1.0-repl.svelte",
-		"./components/blog/BrowserPodTerminalMain.svelte": "./components/blog/BrowserPodTerminalMain.svelte",
-		"./components/blog/BrowserPodTerminalExtra.svelte": "./components/blog/BrowserPodTerminalExtra.svelte",
+		"./components/blog/BrowserPodProvider.svelte": "./components/blog/BrowserPodProvider.svelte",
+		"./components/blog/BrowserPodTerminal.svelte": "./components/blog/BrowserPodTerminal.svelte",
 		"./components/nav/global/GlobalNavbar.astro": "./components/nav/global/GlobalNavbar.astro"
 	},
 	"scripts": {},

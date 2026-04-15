@@ -10,8 +10,18 @@ tags:
   - BrowserPod
 ---
 
-import BrowserPodTerminalMain from "@leaningtech/astro-theme/components/blog/BrowserPodTerminalMain.svelte";
-import BrowserPodTerminalExtra from "@leaningtech/astro-theme/components/blog/BrowserPodTerminalExtra.svelte";
+import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
+import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
+
+apiKey="bp1_650b51af6579eb358452af0ced948bc34a6d98693c2969af6ad1b1e74c3948ee"
+<BrowserPodProvider
+  client:only="svelte"
+  ctxId="bp-2.0-demo"
+  version="2.0.2"
+  projectSource={{ type: "local", path: "bp-2" }}
+  apiKey="bp1_c51a99c937987eb5d885563111fc7b36998f8232a52761ef8518b8f6ec4c0b30"
+/>
+
 
 Today we're releasing **BrowserPod 2.0**, a major milestone in our journey toward making BrowserPod a universal in-browser execution environment. With this release, BrowserPod is no longer limited to Node.js: it now ships with **a real bash shell, git, and a full set of core Linux utilities**.
 
@@ -49,7 +59,12 @@ Bash by itself would not be very useful if you could only use it to start Node a
 
 You can try it out in the demo below:
 
-<bash demo>
+<BrowserPodTerminal
+  client:only="svelte"
+  ctxId="bp-2.0-demo"
+  description="Bash running in the Browser"
+  terminalTabs={[{ id: "bash-demo", label: "Bash" }]}
+/>
 
 ### Git
 
@@ -61,7 +76,12 @@ But it does not stop there: you can also `git log`, `git add`, `git commit`, `gi
 
 We expect these features to be very useful for use cases like Web IDEs, feature branch previews, and AI Agent sandboxes.
 
-<git demo>
+<BrowserPodTerminal
+  client:only="svelte"
+  ctxId="bp-2.0-demo"
+  description="Bash running in the Browser"
+  terminalTabs={[{ id: "git-demo", label: "Bash", bashCommand: "rm -rf browserpod-meta && git clone https://github.com/leaningtech/browserpod-meta && cd browserpod-meta && ls && exec bash" }]}
+/>
 
 ## What's next
 
