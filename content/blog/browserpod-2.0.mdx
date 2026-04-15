@@ -63,7 +63,8 @@ You can try it out in the demo below:
   client:only="svelte"
   ctxId="bp-2.0-demo"
   description="Bash running in the Browser"
-  terminalTabs={[{ id: "bash-demo", label: "Bash" }]}
+  autoStart={false}
+  terminalTabs={[{ id: "bash-demo", label: "Bash", echo: false, command: "bash", args: [".scripts/bash_demo.sh"] }]}
 />
 
 ### Git
@@ -76,11 +77,14 @@ But it does not stop there: you can also `git log`, `git add`, `git commit`, `gi
 
 We expect these features to be very useful for use cases like Web IDEs, feature branch previews, and AI Agent sandboxes.
 
+Give it a try in the demo below:
+
 <BrowserPodTerminal
   client:only="svelte"
   ctxId="bp-2.0-demo"
-  description="Bash running in the Browser"
-  terminalTabs={[{ id: "git-demo", label: "Bash", bashCommand: "rm -rf browserpod-meta && git clone https://github.com/leaningtech/browserpod-meta && cd browserpod-meta && ls && exec bash" }]}
+  description="Git running in the Browser"
+  autoStart={false}
+  terminalTabs={[{ id: "git-demo", label: "Bash", echo: false, command: "bash", args: [".scripts/git_demo.sh"] }]}
 />
 
 ## What's next
