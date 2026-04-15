@@ -13,15 +13,13 @@ tags:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-apiKey="bp1_650b51af6579eb358452af0ced948bc34a6d98693c2969af6ad1b1e74c3948ee"
 <BrowserPodProvider
-  client:only="svelte"
-  ctxId="bp-2.0-demo"
-  version="2.0.2"
-  projectSource={{ type: "local", path: "bp-2" }}
-  apiKey="bp1_c51a99c937987eb5d885563111fc7b36998f8232a52761ef8518b8f6ec4c0b30"
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	version="2.0.2"
+	projectSource={{ type: "local", path: "bp-2" }}
+	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
 />
-
 
 Today we're releasing **BrowserPod 2.0**, a major milestone in our journey toward making BrowserPod a universal in-browser execution environment. With this release, BrowserPod is no longer limited to Node.js: it now ships with **a real bash shell, git, and a full set of core Linux utilities**.
 
@@ -60,11 +58,19 @@ Bash by itself would not be very useful if you could only use it to start Node a
 You can try it out in the demo below:
 
 <BrowserPodTerminal
-  client:only="svelte"
-  ctxId="bp-2.0-demo"
-  description="Bash running in the Browser"
-  autoStart={false}
-  terminalTabs={[{ id: "bash-demo", label: "Bash", echo: false, command: "bash", args: [".scripts/bash_demo.sh"] }]}
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	description="Bash running in the Browser"
+	autoStart={false}
+	terminalTabs={[
+		{
+			id: "bash-demo",
+			label: "Bash",
+			echo: false,
+			command: "bash",
+			args: [".scripts/bash_demo.sh"],
+		},
+	]}
 />
 
 ### Git
@@ -80,11 +86,19 @@ We expect these features to be very useful for use cases like Web IDEs, feature 
 Give it a try in the demo below:
 
 <BrowserPodTerminal
-  client:only="svelte"
-  ctxId="bp-2.0-demo"
-  description="Git running in the Browser"
-  autoStart={false}
-  terminalTabs={[{ id: "git-demo", label: "Bash", echo: false, command: "bash", args: [".scripts/git_demo.sh"] }]}
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	description="Git running in the Browser"
+	autoStart={false}
+	terminalTabs={[
+		{
+			id: "git-demo",
+			label: "Bash",
+			echo: false,
+			command: "bash",
+			args: [".scripts/git_demo.sh"],
+		},
+	]}
 />
 
 ## What's next
