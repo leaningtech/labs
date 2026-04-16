@@ -11,7 +11,7 @@
 		"./nav": "./lib/nav.ts",
 		"./components/nav/product/Nav.astro": "./components/nav/product/Nav.astro",
 		"./layouts/BlogPost.astro": "./layouts/BlogPost.astro",
-		"./layouts/DemoArticle.astro": "/layouts/DemoArticle.astro",
+		"./layouts/DemoArticle.astro": "./layouts/DemoArticle.astro",
 		"./components/DemoCard.astro": "./components/DemoCard.astro",
 		"./content": "./content.ts",
 		"./tailwind": "./tailwind.ts",
