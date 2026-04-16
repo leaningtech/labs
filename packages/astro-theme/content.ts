@@ -8,32 +8,9 @@ const languages = z.enum(["en", "ja"]);
 export type ProductTag = z.infer<typeof productTags>[0];
 export type LanguageContent = z.infer<typeof languages>;
 
-export function defineCommonCollections() {
+export function defineLabsCollections() {
 	return {
-		docs: defineCollection({
-			// These are passed to DocsArticle.astro
-			schema: z.object({
-				title: z.string(),
-				description: z.string().optional(),
-				shortTitle: z.string().optional(), // Used for nav only
-				fullWidthLayout: z.boolean().default(false),
-				draft: z.boolean().default(false),
-				language: languages.default("en"),
-			}),
-		}),
-
-		blogauthors: defineCollection({
-			schema: ({ image }) =>
-				z.object({
-					name: z.string(),
-					jobTitle: z.string().optional(),
-					avatar: image().optional(),
-					url: z.string().optional(),
-					guest: z.boolean().default(false),
-				}),
-			type: "data",
-		}),
-
+		...defineCommonCollections(),
 		blog: defineCollection({
 			schema: ({ image }) =>
 				z.object({
@@ -56,6 +33,17 @@ export function defineCommonCollections() {
 					tags: productTags.optional(),
 				}),
 		}),
+		blogauthors: defineCollection({
+			schema: ({ image }) =>
+				z.object({
+					name: z.string(),
+					jobTitle: z.string().optional(),
+					avatar: image().optional(),
+					url: z.string().optional(),
+					guest: z.boolean().default(false),
+				}),
+			type: "data",
+		}),
 		showcase: defineCollection({
 			schema: ({ image }) =>
 				z.object({
@@ -70,6 +58,22 @@ export function defineCommonCollections() {
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),
 				}),
+		}),
+	};
+}
+
+export function defineCommonCollections() {
+	return {
+		docs: defineCollection({
+			// These are passed to DocsArticle.astro
+			schema: z.object({
+				title: z.string(),
+				description: z.string().optional(),
+				shortTitle: z.string().optional(), // Used for nav only
+				fullWidthLayout: z.boolean().default(false),
+				draft: z.boolean().default(false),
+				language: languages.default("en"),
+			}),
 		}),
 	};
 }
