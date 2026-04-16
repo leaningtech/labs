@@ -30,7 +30,7 @@ The example below demonstrates how to set up the file system and devices using [
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
 		<script type="module">
-			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js";
+			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.esm.js";
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
 				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
@@ -121,7 +121,7 @@ Now you can interact with the console to run commands. Make sure to give focus t
 		<meta charset="utf-8" />
 		<title>CheerpX Getting Started</title>
 		<script type="module">
-			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js";
+			import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.esm.js";
 			// The read-only disk image from Leaning Technologies' fast cloud backend
 			const cloudDevice = await CheerpX.CloudDevice.create(
 				"wss://disks.webvm.io/debian_large_20230522_5044875331.ext2"
