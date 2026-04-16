@@ -13,8 +13,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
-import { cpSync } from "fs";
-import { join as joinPath } from "path";
+
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -37,7 +36,6 @@ export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 };
 
-const contentDir = joinPath(dirname, "../../content");
 
 export default function ThemeIntegration(
 	options: Options = {}
@@ -73,16 +71,6 @@ export default function ThemeIntegration(
 					addIntegration(params, { integration });
 				}
 
-				params.injectRoute({
-					pattern: "blog",
-					entrypoint: "@leaningtech/astro-theme/pages/blog/index.astro",
-				});
-				params.injectRoute({
-					pattern: "blog/[...slug]",
-					entrypoint: "@leaningtech/astro-theme/pages/blog/[...slug].astro",
-				});
-				cpSync(contentDir, "src/content", { recursive: true }); // Needed until Astro Content Layer implemented
-
 				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
 					pattern: docsPrefix,
@@ -95,15 +83,6 @@ export default function ThemeIntegration(
 				params.injectRoute({
 					pattern: `${docsPrefix}/[...slug]`,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/[...slug].astro",
-				});
-				//routing for demos showcase
-				params.injectRoute({
-					pattern: "showcase",
-					entrypoint: "@leaningtech/astro-theme/pages/showcase/index.astro",
-				});
-				params.injectRoute({
-					pattern: "showcase/[...slug]",
-					entrypoint: "@leaningtech/astro-theme/pages/showcase/[...slug].astro",
 				});
 				params.updateConfig({
 					markdown: {

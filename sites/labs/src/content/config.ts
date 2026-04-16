@@ -1,3 +1,3 @@
-import { defineCommonCollections } from "@leaningtech/astro-theme/content";
+import { defineLabsCollections } from "@leaningtech/astro-theme/content";
 
-export const collections = defineCommonCollections();
+export const collections = defineLabsCollections();
