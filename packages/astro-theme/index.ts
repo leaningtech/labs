@@ -14,7 +14,6 @@ import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
 
-
 const prod = process.env.NODE_ENV === "production";
 
 const theme = await loadShikiTheme("material-theme-darker");
@@ -35,7 +34,6 @@ const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 };
-
 
 export default function ThemeIntegration(
 	options: Options = {}
