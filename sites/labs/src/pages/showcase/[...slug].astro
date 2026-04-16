@@ -1,5 +1,6 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import DemoArticle from "@leaningtech/astro-theme/layouts/DemoArticle.astro";
 
 export async function getStaticPaths() {
