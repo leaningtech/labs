@@ -128,9 +128,15 @@ export default function makeConfig(): Config {
 				// Current subrepo content
 				`./src/**/*.${CONTENT_EXT}`,
 				// Monorepo shared package source only
-				`../../packages/*/{src,components,lib}/**/*.${CONTENT_EXT}`,
+				`../../packages/**/*.${CONTENT_EXT}`,
 				// Hard excludes
-				`!../../packages/**/{node_modules,dist,build,.turbo,.next,.astro,coverage}/**`,
+				`!../../packages/**/node_modules/**`,
+				`!../../packages/**/dist/**`,
+				`!../../packages/**/build/**`,
+				`!../../packages/**/.turbo/**`,
+				`!../../packages/**/.next/**`,
+				`!../../packages/**/.astro/**`,
+				`!../../packages/**/coverage/**`,
 			],
 		},
 		theme: {
