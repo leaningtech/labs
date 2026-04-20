@@ -5,6 +5,17 @@ description: How to enable debug mode and collect logs for troubleshooting
 
 If you encounter issues while running a Java Web Start application with CheerpJ JNLP Runner, enabling **Debug Mode** can provide detailed logs that help our support team identify the problem.
 
+## Verifying the Extension is Working
+
+Before enabling debug mode, let's verify if the extension is active and properly handling JNLP files:
+
+- **Is the extension enabled?** Check your browser's extensions page (`chrome://extensions` or `edge://extensions`) to confirm it is toggled on.
+- **Are you using the correct extension?** Make sure you have the CheerpJ JNLP Runner installed (not the Applet Runner).
+- **Does the start page appear?** When you click a `.jnlp` link, you should see the intermediate CheerpJ start page.
+- **Did the JNLP file download instead?** If your browser downloads the `.jnlp` file instead of showing the start page, you can use **drag and drop** to test it—simply drag the downloaded file into the browser window.
+
+If everything above is functioning correctly but you are still experiencing issues, please reach out to us so we can assist you. To help us troubleshoot, please enable debug mode as described below and provide the resulting logs.
+
 ## Enabling Debug Mode
 
 To enable the debug build of CheerpJ:
