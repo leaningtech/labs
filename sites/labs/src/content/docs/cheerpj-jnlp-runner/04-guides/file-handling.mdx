@@ -7,42 +7,33 @@ For a deeper dive into how file systems work in CheerpJ, check out the [File Sys
 
 The CheerpJ JNLP Runner extension provides a virtual filesystem that allows Java Web Start applications to read and write files within the browser's sandbox. Since browsers cannot access your local disk directly for security reasons, CheerpJ provides two main ways to move files into and out of this virtual space.
 
-## Method 1: Using the extension popup
+## Uploading files
 
-The extension popup (accessible by clicking the CheerpJ icon in your browser's toolbar) provides direct controls for file handling.
+To import a file from your local machine to the virtual filesystem, you can use either the built-in file picker or the extension popup. In both cases, the files will be placed in the **`/files/uploads/`** virtual directory. Inside the Java application, you can navigate to `/files/uploads/` to open or use these files.
+
+**Using the built-in file picker:**
+
+The upload icon (an upward arrow) is present as part of the title bar on any Java window, frame, or File Dialog that opens.
+
+1. Click the **upload icon** in the title bar.
+2. Select a file from your local file system (your machine).
+3. In the File Dialog, navigate to `/files/uploads/` and select the file to load it into the application.
+
+**Using the extension popup:**
+
+Alternatively, you can upload files directly from the extension popup.
 
 > [!note] Pin the extension
 > If you cannot see the extension popup icon, you may need to pin the extension to your browser's toolbar.
 
-### Uploading files
+1. Ensure the Java application is currently running.
+2. Click the **CheerpJ icon** in your browser's toolbar and click the **Upload** button.
+3. Select the file(s) from your local filesystem.
 
-The upload button is only available in the extension popup **once a Java application is already running**. To import a local file to the virtual filesystem:
+## Downloading files
 
-1. Click the **Upload** button in the extension popup.
-2. Select the file(s) from your local filesystem (your machine).
-3. The files will be automatically placed in the **`/files/uploads/`** virtual directory.
+To export data from the Java application back to your local machine, simply ensure the application's save path is set to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
 
-Inside the Java application, you can then navigate to `/files/uploads/` to open or import these files.
+**Using a standard save dialog:**
 
-### Downloading files
-
-Any file that the Java application saves to the **`/files/downloads/`** virtual directory will be automatically detected and downloaded by your browser to your local machine (usually your default Downloads folder).
-
-To export data, simply ensure the application's save path is set to `/files/downloads/`.
-
-## Method 2: Using the built-in file picker
-
-If the Java application uses a standard Java File Dialog (for example, `JFileChooser`), CheerpJ provides an integrated way to handle local files without leaving the application's UI.
-
-### Integrated Upload
-
-The upload icon (an upward arrow) is present as part of the title bar on any window, frame, or File Dialog that opens.
-
-1. Click the **upload icon** in the title bar.
-2. Select a file from your local machine.
-3. The file is automatically uploaded to the virtual filesystem at **`/files/uploads/`**.
-4. In the File Dialog, navigate to `/files/uploads/` and select the file to load it into the application.
-
-### Integrated Download
-
-Similarly, if you use a "Save" File Dialog and choose a path under **`/files/downloads/`**, the browser will automatically trigger a download of the file to your local machine once the save operation is complete.
+If you use a "Save" File Dialog and choose a path under **`/files/downloads/`**, the browser will automatically trigger a download once the save operation is complete.
