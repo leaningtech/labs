@@ -3,15 +3,20 @@ title: Upload and download files
 description: How to interact with the local filesystem using the Applet Runner extension
 ---
 
+For a deeper dive into how file systems work in CheerpJ, check out the [File System explanation guide](https://cheerpj.com/docs/explanation/File-System-support).
+
 The CheerpJ Applet Runner extension provides a virtual filesystem that allows Java applets to read and write files within the browser's sandbox. Since browsers cannot access your local disk directly for security reasons, CheerpJ provides two main ways to move files into and out of this virtual space.
 
 ## Method 1: Using the extension popup
 
-The extension popup (accessible by clicking the CheerpJ icon in your browser's toolbar) provides direct controls for file handling once the extension is enabled on a page.
+The extension popup (accessible by clicking the CheerpJ icon in your browser's toolbar) provides direct controls for file handling.
+
+> [!note] Pin the extension
+> If you cannot see the extension popup icon, you may need to pin the extension to your browser's toolbar.
 
 ### Uploading files
 
-To import a local file to the virtual filesystem:
+The upload button is only available in the extension popup **once a Java applet is already running**. To import a local file to the virtual filesystem:
 
 1. Click the **Upload** button in the extension popup.
 2. Select the file(s) from your local filesystem (your machine).
@@ -25,19 +30,19 @@ Any file that the Java applet saves to the **`/files/downloads/`** virtual direc
 
 To export data, simply ensure the applet's save path is set to `/files/downloads/`.
 
-## Method 2: Using the built-in file picker (JFileChooser)
+## Method 2: Using the built-in file picker
 
-If the Java applet uses a standard `JFileChooser` dialog, CheerpJ provides an integrated way to handle local files without leaving the applet's UI.
+If the Java applet uses a standard Java File Dialog (for example, `JFileChooser`), CheerpJ provides an integrated way to handle local files without leaving the applet's UI.
 
 ### Integrated Upload
 
-The `JFileChooser` dialog in CheerpJ features an **upload button** (upward arrow icon) in the top-right corner.
+The upload icon (an upward arrow) is present as part of the title bar on any window, frame, or File Dialog that opens.
 
-1. Click the **upload button** within the file picker.
+1. Click the **upload icon** in the title bar.
 2. Select a file from your local machine.
 3. The file is automatically uploaded to the virtual filesystem at **`/files/uploads/`**.
-4. In the `JFileChooser`, navigate to `/files/uploads/` and select the file to load it into the applet.
+4. In the File Dialog, navigate to `/files/uploads/` and select the file to load it into the applet.
 
 ### Integrated Download
 
-Similarly, if you use a "Save" dialog and choose a path under **`/files/downloads/`**, the browser will automatically trigger a download of the file to your local machine once the save operation is complete.
+Similarly, if you use a "Save" File Dialog and choose a path under **`/files/downloads/`**, the browser will automatically trigger a download of the file to your local machine once the save operation is complete.

@@ -1,5 +1,5 @@
 ---
-title: Debug builds
+title: How to debug the extension
 description: How to enable debug mode and collect logs for troubleshooting
 ---
 
@@ -13,24 +13,35 @@ To enable the debug build of CheerpJ:
 2. In the popup page, toggle the **"Enable debugging mode"** switch to **On**.
 3. The extension will now use the debug version of the runtime, which includes extensive logging.
 
+> [!important] Reload Required
+> You must enable the debugging mode **before** loading your application, or **reload the page** after enabling it. Otherwise, the setting will not take effect.
+
 ## Collecting Debug Information
 
 To help us troubleshoot, we typically need two files: the **Console log** and a **Network HAR file**.
 
 ### Step 1: Open Browser DevTools
 
-You must open the browser's developer tools **before** the applet starts loading, or **reload the page** once they are open.
+To ensure we receive complete logs, **you must either reload the page after opening the developer tools, or enable the extension only after the developer tools are open**.
 
 1. Press `F12` (Windows/Linux) or `Cmd + Opt + I` (Mac) to open the DevTools.
 2. Alternatively, right-click anywhere on the page and select **Inspect**.
 
 ### Step 2: Save the Browser Console Output
 
-Follow these instructions to [save the browser console output](https://cheerpj.com/docs/guides/cheerpj-debug#saving-the-browser-console-output).
+1. With the developer tools open, navigate to the **Console** tab. (If you don’t see it, click the `+` symbol in Edge or `>>` in Chrome, then select Console).
+2. If needed, trigger the error in your application.
+3. Right-click on any message in the console tab and select **Save as…**
+4. Save the console log to a file.
 
 ### Step 3: Extract a HAR File
 
-Follow these instructions to [extract a HAR file](https://cheerpj.com/docs/guides/cheerpj-debug#extracting-a-har-file).
+A HAR (HTTP Archive) file logs your browser's network interactions and helps us diagnose loading or server responses.
+
+1. In the developer tools, navigate to the **Network** tab.
+2. **Reload your page** (or navigate to the applet) to ensure the network log captures requests from the very beginning.
+3. Trigger the error in your application if needed.
+4. Click the download icon (`↓`) at the top right of the Network tab to export and save the HAR file.
 
 ---
 
