@@ -108,7 +108,7 @@ Here, we provide an implementation for the `nativeAlert` method in the `Example`
 <html>
 	<head>
 		<title>Native Method Example</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<script type="module">

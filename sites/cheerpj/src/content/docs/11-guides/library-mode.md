@@ -73,7 +73,7 @@ Then, we’ll include that script from a minimal HTML page and run it in the bro
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>CheerpJ Library mode (Standard library)</title>
 
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 
 	<body>
@@ -152,7 +152,7 @@ Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>CheerpJ Library Mode – PDF demo</title>
 
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 
 		<style>
 			body {

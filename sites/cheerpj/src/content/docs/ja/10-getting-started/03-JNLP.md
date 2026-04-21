@@ -109,7 +109,7 @@ CheerpJランタイムが統合され、Javaアプリケーションが表示さ
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<script>
@@ -140,7 +140,6 @@ cheerpjRunMain(
 `.jnlp`ファイルの`<applet-desc>`タグをよく確認し、以下の点を把握しておいてください:
 
 - **アプレットタグのパラメーター:**
-
   - **アプレットクラス名:** `main-class` 属性に記載されています。
   - **アプレットの理想的なサイズ:** `width` および`height`属性で定義されています。
   - **アプレットパラメーター:** アプレットがそれを必要とする場合、`<applet-desc>`内の `<param>`タグとして見つけることができます。
@@ -155,7 +154,7 @@ cheerpjRunMain(
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ applet test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<applet

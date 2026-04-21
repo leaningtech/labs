@@ -117,7 +117,7 @@ export default {
 <html>
 	<head>
 		<title>Native Library Example</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<script>
