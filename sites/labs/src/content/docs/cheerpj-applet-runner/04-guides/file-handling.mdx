@@ -15,6 +15,9 @@ To import a file from your local machine to the virtual filesystem, you can use 
 
 The upload icon (an upward arrow) is present as part of the title bar on any Java window, frame, or File Dialog that opens.
 
+> [!note] Undecorated Applet frames
+> The main Applet frame is normally undecorated, meaning it will not have a title bar. If the applet does not open any additional windows or file dialogs that have a title bar, you will need to use the **extension popup** to upload files.
+
 1. Click the **upload icon** in the title bar.
 2. Select a file from your local file system (your machine).
 3. In the File Dialog, navigate to `/files/uploads/` and select the file to load it into the applet.
@@ -32,7 +35,7 @@ Alternatively, you can upload files directly from the extension popup.
 
 ## Downloading files
 
-To export data from the Java applet back to your local machine, simply ensure the applet's save path is set to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
+To export data from the Java applet back to your local machine, simply ensure files within the applet are saved to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
 
 **Using a standard save dialog:**
 
