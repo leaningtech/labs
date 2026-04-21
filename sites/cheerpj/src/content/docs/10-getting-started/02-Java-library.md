@@ -31,7 +31,7 @@ Let's create a basic HTML file and include and initialize CheerpJ on your page. 
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ Library Mode Test</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<script>
@@ -51,7 +51,7 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 	<head>
 		<meta charset="utf-8" />
 		<title>CheerpJ Library Mode Example</title>
-		<script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+		<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
 	</head>
 	<body>
 		<script>
