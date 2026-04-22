@@ -3,6 +3,18 @@ title: 更新履歴
 language: ja
 ---
 
+## 4.3 - April 21, 2026
+
+```html
+<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
+```
+
+- Added new upload icon directly to decorated java window title bars
+- introduced dedicated download virtual directory
+- Added long-press gesture support to simiulate mouse hover events for Enhanced Mobile/touch screen support.
+- General pointer event improvements
+- Runtime Improvements
+
 ## 4.2 - Jun 26, 2025
 
 ```html

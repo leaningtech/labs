@@ -45,10 +45,17 @@ Nice, the program works, we can give it a go with Cheerp.
 
 ## Cheerp JavaScript compiling
 
-<code><b>/opt/cheerp/bin/clang++ -target cheerp</b> segmented_sieve.cpp -o segmented_sieve.js -O3</code>
+Compile using the following command:
+
+```shell
+/opt/cheerp/bin/clang++ -target cheerp</b> segmented_sieve.cpp -o segmented_sieve.js -O3
+```
 
 and then we run it:
-`nodejs segmented_sieve.js`
+
+```shell
+nodejs segmented_sieve.js
+```
 
 the output to the console will be something like:
 
@@ -100,7 +107,10 @@ The command line it's basically the same, just changing the target:
 Note that we are using the **cheerp-wasm** target, not the **cheerp** target. This marks all code to be compiled into wasm (or asmjs) by default, including the C and C++ standard libraries.
 
 Now we just have to run it:
-`nodejs segmented_sieve_wasm.js`
+
+```shell
+nodejs segmented_sieve_wasm.js
+```
 
 The main file to be invoked is still a `.js` file, but a `.wasm` file is also produced, and it is loaded and run from the `.js` one.
 
@@ -138,7 +148,7 @@ Next, run a web server:
 http-server -o
 ```
 
-This will open a new tab on your favorite browser with a list of the files in the current folder. Choose `segmented_sieve.html` (or whatever name you gave to the file), way few second for the execution and open the console. You should be able to see similar results to the one computed via `nodejs`.
+This will open a new tab on your favorite browser with a list of the files in the current folder. Choose `segmented_sieve.html` (or whatever name you gave to the file), wait a few seconds for the execution and open the console. You should be able to see similar results to the one computed via `nodejs`.
 
 ## Conclusions
 
