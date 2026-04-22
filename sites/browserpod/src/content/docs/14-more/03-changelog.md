@@ -3,6 +3,14 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.2.1:
+
+- Fix a Next.js bug in production builds
+
+## Version 2.2.0:
+
+- Improvements to disk performance
+
 ## Version 2.1.0:
 
 - Initial support for Next.js 16
