@@ -46,11 +46,13 @@ Nice, the program works, we can give it a go with Cheerp.
 ## Cheerp JavaScript compiling
 
 Compile using the following command:
+
 ```shell
 /opt/cheerp/bin/clang++ -target cheerp</b> segmented_sieve.cpp -o segmented_sieve.js -O3
 ```
 
 and then we run it:
+
 ```shell
 nodejs segmented_sieve.js
 ```
@@ -105,6 +107,7 @@ The command line it's basically the same, just changing the target:
 Note that we are using the **cheerp-wasm** target, not the **cheerp** target. This marks all code to be compiled into wasm (or asmjs) by default, including the C and C++ standard libraries.
 
 Now we just have to run it:
+
 ```shell
 nodejs segmented_sieve_wasm.js
 ```
