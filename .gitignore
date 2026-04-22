@@ -20,7 +20,3 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# content dir copied from astro-theme
-sites/*/src/content/blog
-sites/*/src/content/blogauthors
-sites/*/src/content/showcase
