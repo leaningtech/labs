@@ -9,17 +9,20 @@ description: Getting started with CheerpX
 
 ## 1. Include CheerpX on your page
 
-No installation is needed. Simply include CheerpX by adding the following script tag in the `<head>` or at the end of the `<body>` section of your HTML:
+No installation is needed. Simply include CheerpX by importing the following module in your HTML:
 
 ```html
-<script src="https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.js"></script>
+<script type="module">
+	import * as CheerpX from "https://cxrtnc.leaningtech.com/%CX_LATEST%/cx.esm.js";
+	// The rest of your code
+</script>
 ```
 
 The CheerpX's API is stable and breaking changes can only be introduced on a new major version. All CheerpX builds are immutable so you can trust that, if your application works today, it is going to work identically forever.
 
 ## 2. Create an application instance
 
-To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX.Linux/create) method, which is available globally once the script is included.
+To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX.Linux/create) method, which is available globally once the module is imported.
 
 The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/docs/guides/custom-images).
 
