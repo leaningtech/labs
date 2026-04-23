@@ -48,7 +48,7 @@ Nice, the program works, we can give it a go with Cheerp.
 Compile using the following command:
 
 ```shell
-/opt/cheerp/bin/clang++ -target cheerp</b> segmented_sieve.cpp -o segmented_sieve.js -O3
+/opt/cheerp/bin/clang++ -target cheerp segmented_sieve.cpp -o segmented_sieve.js -O3
 ```
 
 and then we run it:
@@ -140,7 +140,7 @@ Here is not very relevant, I would say, since the main point of this page is sho
 
 Want to see it in your browser?
 
-Take the previous html file, and change `segmented_sieve.js` to `segmented_sieve_loader.js`. You can not open it directly on your browser, since the JavaScript loader will need a way for loading the wasm file, and allowing arbitrary loading of a file is an unsafe operation that most browsers will not allow.
+Rename `segmented_sieve.js` to `segmented_sieve_loader.js` and update the previous html file to use this loader file too. You can not open it directly on your browser, since the JavaScript loader will need a way for loading the wasm file, and allowing arbitrary loading of a file is an unsafe operation that most browsers will not allow.
 
 Next, run a web server:
 
