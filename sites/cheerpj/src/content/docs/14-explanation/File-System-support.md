@@ -25,6 +25,8 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 | `/files/uploads/`   | Files uploaded via the window title bar upload button, non persistent | No        | Yes  |
 | `/files/downloads/` | Files saved here are automatically downloaded to the user's machine   | Java only | Yes  |
 
+> [!info] The uploads and downloads directories are only available in versions CheerpJ 4.3 and higher
+
 <div align="center">
 
 ![](/docs/cheerpj3/assets/filesystem.png)
@@ -75,6 +77,8 @@ out.close();
 For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
 
 ### Specialized directories
+
+<span style="font-size: 0.97em;color:white;">_Supported in CheerpJ 4.3 and later versions_</span>
 
 Within the `/files/` mount point, there are two specialized directories for interacting with the user's local machine:
 
