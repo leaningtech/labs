@@ -48,7 +48,7 @@ Nice, the program works, we can give it a go with Cheerp.
 Compile using the following command:
 
 ```shell
-/opt/cheerp/bin/clang++ -target cheerp</b> segmented_sieve.cpp -o segmented_sieve.js -O3
+/opt/cheerp/bin/clang++ -target cheerp segmented_sieve.cpp -o segmented_sieve.js -O3
 ```
 
 and then we run it:
