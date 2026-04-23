@@ -5,7 +5,7 @@ description: Interacting with the virtual filesystem in CheerpJ
 
 CheerpJ provides a **virtual filesystem** that allows Java applications to read and write files within a secure, browser-sandboxed environment. For browser security reasons, code running in the browser cannot access the user's local disk directly. Instead, all file operations are confined to a virtual space, which provides multiple mounting points, each with a specific purpose and access model.
 
-**Mounting points overview**
+## Mounting points overview
 
 The virtual filesystem structure looks like this:
 
@@ -26,13 +26,19 @@ The virtual filesystem structure looks like this:
 
 If a file is served by your HTTP server (e.g., alongside your JARs), your Java code can read it via the `/app` prefix. For any other local files, it is necessary to load them into the virtual filesystem first. CheerpJ provides several ways to move files into and out of this virtual filesystem, ranging from built-in UI interactions to JavaScript APIs.
 
-> For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
+> [!info] The uploads and downloads directories are only available in versions CheerpJ 4.3 and higher
+
+For a detailed overview of mounting points (`/app/`, `/files/`, `/str/`) and how they work, see the **[File and Filesystem guide](/docs/explanation/File-System-support)**.
 
 ## Importing files to the virtual filesystem
 
 When the user needs to provide local files to the Java application, CheerpJ offers several methods to load them into the virtual filesystem. The simplest requires no custom code at all.
 
 ### Method 1: Using the window title bar upload button
+
+<span style="font-size: 0.97em;color:white;">
+	*Supported in CheerpJ 4.3 and later versions*
+</span>
 
 Any CheerpJ window with a title bar includes an **upload button** (upward arrow icon) in the top-right corner. Clicking it opens the browser's native file picker, allowing the user to select a file from their local machine. The selected file is automatically placed into **`/files/uploads/`** and becomes available to the Java application immediately. No JavaScript is required.
 
@@ -117,6 +123,10 @@ copyFileToFilesMountPoint();
 When Java runs under **CheerpJ**, files are saved to the **virtual filesystem** (default **`/files/`**), not the user's disk. CheerpJ provides several ways to deliver these files to the user's local machine.
 
 ### Method 1: Saving to `/files/downloads/`
+
+<span style="font-size: 0.97em;color:white;">
+	*Supported in CheerpJ 4.3 and later versions*
+</span>
 
 The simplest way to offer a file download requires no custom JavaScript. Any file that the Java application saves under **`/files/downloads/`** is **automatically downloaded** to the user's local machine (into the browser's default download directory).
 
