@@ -10,10 +10,10 @@ language: ja
 ```
 
 - Added new upload icon directly to decorated java window title bars
-- introduced dedicated download virtual directory
-- Added long-press gesture support to simiulate mouse hover events for Enhanced Mobile/touch screen support.
+- Introduced a dedicated virtual directory to download files to the local device
+- Added long-press gesture support to simiulate mouse hover events for enhanced mobile/touch screen support
 - General pointer event improvements
-- Runtime Improvements
+- Runtime improvements
 
 ## 4.2 - Jun 26, 2025
 
