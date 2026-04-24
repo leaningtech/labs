@@ -152,11 +152,8 @@ CheerpJ is not only a powerful tool for reviving legacy applications in the brow
 
 <figure class="w-full">
 	![JavaFiddle screenshot](./javafiddle.png)
-	<figcaption class="text-center">
-		JavaFiddle Demo Screenshot
-	</figcaption>
+	<figcaption class="text-center">JavaFiddle Demo Screenshot</figcaption>
 </figure>
-
 
 Since the 4.2 release, we have also continued to improve the stability and performance of our Java 11 and 17 runtimes. Full graphical applications such as the FlatLaf Demo, a popular Look and Feel for Java, now run smoothly in the browser with CheerpJ.
 
@@ -221,9 +218,9 @@ demoDivFlatLaf.onfullscreenchange = function()
 Unlike native applications, web applications running in the browser cannot access the local filesystem directly, due to the browser's sandboxed environment. To allow Java applications to interact with files as they would natively, CheerpJ provides a virtual UNIX-style filesystem with multiple mounting points, each serving a specific purpose:
 
 <div style="padding-left: 40px">
-**/app/** — Read-only access to files served from your web server  
-**/files/** — Persistent read/write storage for Java, backed by IndexedDB  
-**/str/** — A transient mount for passing data from JavaScript to Java  
+	**/app/** — Read-only access to files served from your web server **/files/**
+	— Persistent read/write storage for Java, backed by IndexedDB **/str/** — A
+	transient mount for passing data from JavaScript to Java
 </div>
 
 Whenever a Java application triggers a file operation, it is forwarded to the virtual filesystem, allowing the application to run fully within the browser without any native file system access. The /files/ mounting point also makes use of IndexedDB, a low-level browser API for storing structured data, which is what makes persistent, client-side read/write storage possible without a server-side component.

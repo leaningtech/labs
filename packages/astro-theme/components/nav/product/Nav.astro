@@ -23,12 +23,8 @@ const firstDocsEntry = getLocalisedProductNav(
 	Astro.currentLocale
 )[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
-let blogref = "/blog";
-let showcaseref = "/showcase";
-if (product.id.includes("cheerpj") || product.id.includes("browserpod")) {
-	blogref = "/docs/blog";
-	showcaseref = "/docs/showcase";
-}
+let blogref = "https://labs.leaningtech.com/blog";
+let showcaseref = "https://labs.leaningtech.com/showcase";
 ---
 
 <nav
