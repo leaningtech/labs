@@ -3,6 +3,10 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.3.1:
+
+- Multiple fixes for Gemini CLI
+
 ## Version 2.3.0:
 
 - Improvements to syscalls implementation
