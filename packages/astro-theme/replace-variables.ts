@@ -2,7 +2,7 @@ import { visit } from "unist-util-visit";
 
 const replacements = {
 	CX_LATEST: "1.2.8",
-	BP_LATEST: "2.3.0",
+	BP_LATEST: "2.3.1",
 };
 
 export function remarkReplaceVars() {
