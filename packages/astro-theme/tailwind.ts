@@ -118,12 +118,27 @@ const disabledCss = {
 	"blockquote p:last-of-type::after": false,
 };
 
+const CONTENT_EXT = "{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
+
 export default function makeConfig(): Config {
 	return {
-		content: [
-			"./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-			"../../packages/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-		],
+		content: {
+			relative: true,
+			files: [
+				// Current subrepo content
+				`./src/**/*.${CONTENT_EXT}`,
+				// Monorepo shared package source only
+				`../../packages/**/*.${CONTENT_EXT}`,
+				// Hard excludes
+				`!../../packages/**/node_modules/**`,
+				`!../../packages/**/dist/**`,
+				`!../../packages/**/build/**`,
+				`!../../packages/**/.turbo/**`,
+				`!../../packages/**/.next/**`,
+				`!../../packages/**/.astro/**`,
+				`!../../packages/**/coverage/**`,
+			],
+		},
 		theme: {
 			extend: {
 				fontFamily: {

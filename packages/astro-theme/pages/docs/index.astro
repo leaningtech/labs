@@ -5,4 +5,14 @@ const entry = (await getRootNav())[0];
 if (!entry) throw new Error("must have a docs entry");
 ---
 
-<meta http-equiv="refresh" content={`0; url=${entry.href}`} />
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="refresh" content={`0; url=${entry.href}`} />
+		<title>Redirecting...</title>
+	</head>
+	<body>
+		<p>Redirecting to <a href={entry.href}>{entry.href}</a>...</p>
+	</body>
+</html>
