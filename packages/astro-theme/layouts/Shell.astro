@@ -20,6 +20,13 @@ const { title, description, image, site } = Astro.props;
 			description={description || SITE_DESCRIPTION}
 			{image}
 		/>
+		<style is:inline is:global>
+			@font-face {
+				font-family: "Monaspace Argon";
+				src: url("/fonts/monaspace/MonaspaceArgonVarVF.woff2") format("woff2");
+				font-display: swap;
+			}
+		</style>
 		<style is:global>
 			.dark {
 				color-scheme: dark;
@@ -39,15 +46,6 @@ const { title, description, image, site } = Astro.props;
 			h4:hover .heading-link-icon,
 			h5:hover .heading-link-icon {
 				opacity: 1;
-			}
-
-			@font-face {
-				font-family: "Monaspace Argon";
-				src:
-					url("/fonts/monaspace/MonaspaceArgonVarVF[wght,wdth,slnt].otf")
-						format("woff2"),
-					url("/fonts/monaspace/MonaspaceArgonVarVF[wght,wdth,slnt].woff2")
-						format("woff2-variations");
 			}
 
 			code {
