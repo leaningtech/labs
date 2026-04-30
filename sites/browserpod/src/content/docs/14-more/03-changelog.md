@@ -3,6 +3,18 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.3.4:
+
+- Fix npm init
+
+## Version 2.3.3:
+
+- Internal testing release
+
+## Version 2.3.2:
+
+- More fixes for Gemini CLI
+
 ## Version 2.3.1:
 
 - Multiple fixes for Gemini CLI
