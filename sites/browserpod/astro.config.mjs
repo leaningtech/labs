@@ -14,6 +14,9 @@ export default defineConfig({
 		}),
 	],
 	vite: {
+		build: {
+			chunkSizeWarningLimit: 700,
+		},
 		resolve: {
 			alias: [
 				{
