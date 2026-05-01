@@ -1,0 +1,394 @@
+---
+interface Props {
+	eventName: string;
+	endpoint: string;
+	opensAt: string;
+	closesAt: string;
+}
+
+const { eventName, endpoint, opensAt, closesAt } = Astro.props;
+---
+
+<div
+	class="min-h-screen bg-[#050505] flex items-center justify-center px-6 py-20"
+>
+	<div class="w-full max-w-6xl grid md:grid-cols-2 gap-12 items-center">
+		<!-- Left -->
+		<div class="space-y-5">
+			<h1 class="text-5xl md:text-6xl text-white leading-tight tracking-tight">
+				Submit your <br />
+				{eventName} Project.
+			</h1>
+			<p class="text-stone-400 max-w-sm">
+				Ready to showcase what you've built? Submit your hackathon project below
+				for the judges to review.
+			</p>
+		</div>
+
+		<!-- Form -->
+		<div class="border border-white/10 bg-white/[0.02] rounded-2xl p-8">
+			<!-- Before submissions open -->
+			<div id="state-pending" class="hidden text-center py-12 space-y-4">
+				<p class="text-stone-400 text-sm">Submissions open in</p>
+				<p
+					id="countdown-display"
+					class="text-white text-4xl font-mono font-bold"
+				>
+					--:-:--
+				</p>
+			</div>
+			<!-- After submission closes -->
+			<div id="state-closed" class="hidden text-center py-12 space-y-4">
+				<p class="text-white text-2xl font-bold">Submissions Closed</p>
+				<p class="text-stone-400 text-sm">
+					Thank you for participating in {eventName}. Results coming soon!
+				</p>
+			</div>
+			<form
+				id="submission-form"
+				data-endpoint={endpoint}
+				data-opens-at={opensAt}
+				data-closes-at={closesAt}
+				class="space-y-6"
+			>
+				<input type="hidden" name="editId" id="edit-id" />
+				<input type="hidden" name="origin" id="site-origin" />
+				<div class="grid sm:grid-cols-2 gap-5">
+					<div>
+						<label for="name" class="block text-xs text-stone-400 mb-1">
+							Team Name
+						</label>
+						<input
+							id="name"
+							name="teamName"
+							required
+							placeholder="Hackathon Team 1"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+					<div>
+						<label for="leaderName" class="block text-xs text-stone-400 mb-1">
+							Team Leader Name
+						</label>
+						<input
+							id="leaderName"
+							name="leaderName"
+							required
+							placeholder="John Doe"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+
+					<div>
+						<label
+							for="leaderDiscord"
+							class="block text-xs text-stone-400 mb-1"
+						>
+							Team Leader Discord
+						</label>
+						<input
+							id="leaderDiscord"
+							name="leaderDiscord"
+							required
+							placeholder="johndoedev"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+					<div>
+						<label for="leaderEmail" class="block text-xs text-stone-400 mb-1">
+							Team Leader Email
+						</label>
+						<input
+							id="leaderEmail"
+							name="leaderEmail"
+							type="email"
+							required
+							placeholder="john@example.com"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+				</div>
+
+				<div class="grid sm:grid-cols-2 gap-5">
+					<div>
+						<label for="url" class="block text-xs text-stone-400 mb-1">
+							Repository URL
+						</label>
+						<input
+							id="url"
+							name="projectUrl"
+							type="url"
+							required
+							placeholder="https://github.com/..."
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+					<div>
+						<label for="liveUrl" class="block text-xs text-stone-400 mb-1">
+							Live Project URL <span class="text-stone-600">(Optional)</span>
+						</label>
+						<input
+							id="liveUrl"
+							name="liveUrl"
+							type="url"
+							placeholder="https://your-project.app"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<label for="description" class="block text-xs text-stone-400 mb-1">
+						Description / Project name
+					</label>
+					<textarea
+						id="description"
+						name="description"
+						rows="3"
+						required
+						placeholder="What did you build and what is it called?"
+						class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30 resize-y"
+					></textarea>
+				</div>
+
+				<!-- Additional Members Section -->
+				<div class="space-y-4 pt-4 border-t border-white/5">
+					<h3 class="text-sm font-medium text-white">
+						Additional Team Members <span class="text-stone-500 font-normal"
+							>(Optional, up to 3)</span
+						>
+					</h3>
+
+					<div class="space-y-3">
+						<!-- Member 2 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m2Discord"
+								placeholder="Member 2 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m2Email"
+								type="email"
+								placeholder="Member 2 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+
+						<!-- Member 3 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m3Discord"
+								placeholder="Member 3 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m3Email"
+								type="email"
+								placeholder="Member 3 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+
+						<!-- Member 4 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m4Discord"
+								placeholder="Member 4 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m4Email"
+								type="email"
+								placeholder="Member 4 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div class="pt-2">
+					<button
+						id="submit-button"
+						type="submit"
+						class="w-full py-3 rounded-lg bg-white text-black text-sm font-medium hover:bg-stone-200 active:scale-[0.98] transition"
+					>
+						<span>Submit Project</span>
+					</button>
+
+					<div
+						id="status-message"
+						class="text-center mt-4 text-sm min-h-[20px]"
+					>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	if (typeof window !== "undefined") {
+		const form = document.getElementById("submission-form") as HTMLFormElement;
+		const button = document.getElementById(
+			"submit-button"
+		) as HTMLButtonElement;
+		const status = document.getElementById("status-message") as HTMLDivElement;
+		const label = button?.querySelector("span");
+
+		const endpoint = form.dataset.endpoint!;
+		const opensAt = new Date(form.dataset.opensAt!);
+		const closesAt = new Date(form.dataset.closesAt!);
+
+		// Set the origin for dynamic email links
+		const originInput = document.getElementById(
+			"site-origin"
+		) as HTMLInputElement;
+		if (originInput) originInput.value = window.location.origin;
+
+		const statePending = document.getElementById(
+			"state-pending"
+		) as HTMLDivElement;
+		const stateClosed = document.getElementById(
+			"state-closed"
+		) as HTMLDivElement;
+
+		function checkState() {
+			const current = new Date();
+
+			if (current < opensAt) {
+				// not open yet - show countdown
+				form.classList.add("hidden");
+				stateClosed?.classList.add("hidden");
+				statePending?.classList.remove("hidden");
+				startCountdown(opensAt);
+			} else if (current > closesAt) {
+				// closed - show closed message
+				form.classList.add("hidden");
+				statePending?.classList.add("hidden");
+				stateClosed?.classList.remove("hidden");
+			} else {
+				// open - show form
+				statePending?.classList.add("hidden");
+				stateClosed?.classList.add("hidden");
+				form.classList.remove("hidden");
+			}
+		}
+
+		function startCountdown(target: Date) {
+			const display = document.getElementById(
+				"countdown-display"
+			) as HTMLDivElement;
+			const tick = () => {
+				const diff = target.getTime() - Date.now();
+				if (diff <= 0) {
+					checkState();
+					return;
+				}
+				const d = Math.floor(diff / 86400000);
+				const h = Math.floor((diff % 86400000) / 3600000);
+				const m = Math.floor((diff % 3600000) / 60000);
+				const s = Math.floor((diff % 60000) / 1000);
+				if (display) {
+					display.textContent = `${d}d ${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+				}
+			};
+			tick();
+			setInterval(tick, 1000);
+		}
+		// --- Edit Mode Logic ---
+		const urlParams = new URLSearchParams(window.location.search);
+		const editId = urlParams.get("edit");
+
+		if (editId && form && label) {
+			const editIdInput = document.getElementById(
+				"edit-id"
+			) as HTMLInputElement;
+			editIdInput.value = editId;
+			label.textContent = "Loading Submission...";
+			button.disabled = true;
+
+			// Fetch existing data from Google Sheets
+			fetch(`${endpoint}?id=${editId}`)
+				.then((res) => res.json())
+				.then((response) => {
+					if (response.ok && response.data) {
+						const data = response.data;
+						// Pre-fill each field if it exists in the data
+						Object.keys(data).forEach((key) => {
+							const input = form.elements.namedItem(key) as
+								| HTMLInputElement
+								| HTMLTextAreaElement;
+							if (input) {
+								input.value = data[key];
+							}
+						});
+						label.textContent = "Update Project";
+					} else {
+						status.textContent = "Could not load submission data.";
+						status.className =
+							"text-center mt-4 text-rose-400 text-sm font-semibold";
+						label.textContent = "Submit Project";
+					}
+				})
+				.catch((err) => {
+					console.error("Fetch error:", err);
+					label.textContent = "Submit Project";
+				})
+				.finally(() => {
+					button.disabled = false;
+				});
+		}
+
+		checkState();
+
+		if (form && button && label && status) {
+			form.addEventListener("submit", async (e) => {
+				e.preventDefault();
+				const current = new Date();
+				if (current < opensAt || current > closesAt) {
+					status.textContent = "Submissions are not open yet.";
+					status.className =
+						"text-center mt-4 text-rose-400 text-sm font-semibold";
+					return;
+				}
+				if (button.disabled) return;
+
+				button.disabled = true;
+				button.classList.add("opacity-80", "cursor-not-allowed");
+				label.textContent = "Submitting...";
+				status.textContent = "";
+
+				try {
+					const response = await fetch(endpoint, {
+						method: "POST",
+						body: new FormData(form),
+					});
+
+					const result = await response.json();
+					console.log("Google Script Result:", result);
+
+					if (result.ok) {
+						form.reset();
+						status.textContent = "Project submitted. Good luck!";
+						status.className =
+							"text-center mt-4 text-emerald-400 text-sm font-semibold";
+					} else {
+						status.textContent = "Error: " + (result.error || "Unknown error");
+						status.className =
+							"text-center mt-4 text-rose-400 text-sm font-semibold";
+					}
+				} catch (err) {
+					console.error("Fetch error:", err);
+					status.textContent = "Something went wrong. Try again.";
+					status.className =
+						"text-center mt-4 text-rose-400 text-sm font-semibold";
+				} finally {
+					button.disabled = false;
+					button.classList.remove("opacity-80", "cursor-not-allowed");
+					label.textContent = "Submit Project";
+				}
+			});
+		}
+	}
+</script>

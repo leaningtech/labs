@@ -1,0 +1,25 @@
+---
+import Footer from "@leaningtech/astro-theme/components/Footer.astro";
+import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
+import HackathonSubmission from "@leaningtech/astro-theme/components/hackathon/HackathonSubmission.astro";
+
+// TEST dates — swap these in to test different states:
+const opensAt = "2026-01-01T00:00:00Z";
+const closesAt = "2026-12-31T00:00:00Z"; //← open
+//const opensAt="2026-05-02T08:00:00Z"; const closesAt="2026-05-03T16:00:00Z";  //← pending (countdown)
+//const opensAt="2026-01-01T00:00:00Z"; const closesAt="2026-01-02T00:00:00Z";  //← closed
+
+//const opensAt  = '2026-05-02T08:00:00Z'; // 2 May, 9am BST
+//const closesAt = '2026-05-03T16:00:00Z'; // 3 May, 5pm BST
+---
+
+<Shell>
+	<HackathonSubmission
+		eventName="AI-IN-THE-BOX"
+		endpoint="https://script.google.com/macros/s/AKfycbwIyYqjOdx4FGEMeUYKKZccwBKE_pJ9RsSLe-Y65vBGBYgriUMQ7evBn09Op0c8_B6Z0A/exec"
+		{opensAt}
+		{closesAt}
+	/>
+</Shell>
+
+<Footer />
