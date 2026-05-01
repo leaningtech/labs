@@ -9,7 +9,7 @@ CheerpX implements UNIX-style virtual filesystems with multiple mount points, pr
 | --------------- | ------------------------------------------------------- | ----- | ---- |
 | WebDevice       | HTTP-based filesystem for loading files from web server | No    | Yes  |
 | IDBDevice       | Persistent read-write filesystem using IndexedDB        | Yes   | Yes  |
-| DataDevice      | In-memory filesystem for temporary data storage         | Yes   | Yes  |
+| DataDevice      | In-memory filesystem for temporary data storage         | no    | Yes  |
 | HttpBytesDevice | A block device with a Linux filesystem inside (ext2)    | No    | Yes  |
 | OverlayDevice   | A writable persistent overlay on another block device   | Yes   | Yes  |
 
