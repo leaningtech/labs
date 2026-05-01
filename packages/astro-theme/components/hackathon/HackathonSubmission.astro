@@ -12,7 +12,7 @@ const { eventName, endpoint, opensAt, closesAt } = Astro.props;
 <div
 	class="min-h-screen bg-[#050505] flex items-center justify-center px-6 py-20"
 >
-	<div class="w-full max-w-4xl grid md:grid-cols-2 gap-12 items-center">
+	<div class="w-full max-w-6xl grid md:grid-cols-2 gap-12 items-center">
 		<!-- Left -->
 		<div class="space-y-5">
 			<h1 class="text-5xl md:text-6xl text-white leading-tight tracking-tight">
@@ -109,48 +109,102 @@ const { eventName, endpoint, opensAt, closesAt } = Astro.props;
 					</div>
 				</div>
 
-				<div>
-					<label for="url" class="block text-xs text-stone-400 mb-1">
-						Project URL
-					</label>
-					<input
-						id="url"
-						name="projectUrl"
-						type="url"
-						required
-						placeholder="https://github.com/..."
-						class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
-					/>
+				<div class="grid sm:grid-cols-2 gap-5">
+					<div>
+						<label for="url" class="block text-xs text-stone-400 mb-1">
+							Repository URL
+						</label>
+						<input
+							id="url"
+							name="projectUrl"
+							type="url"
+							required
+							placeholder="https://github.com/..."
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
+					<div>
+						<label for="liveUrl" class="block text-xs text-stone-400 mb-1">
+							Live Project URL <span class="text-stone-600">(Optional)</span>
+						</label>
+						<input
+							id="liveUrl"
+							name="liveUrl"
+							type="url"
+							placeholder="https://your-project.app"
+							class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30"
+						/>
+					</div>
 				</div>
 
 				<div>
 					<label for="description" class="block text-xs text-stone-400 mb-1">
-						Description
+						Description / Project name
 					</label>
 					<textarea
 						id="description"
 						name="description"
 						rows="3"
 						required
-						placeholder="What did you build?"
+						placeholder="What did you build and what is it called?"
 						class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30 resize-y"
 					></textarea>
 				</div>
 
-				<div>
-					<label for="teamMembers" class="block text-xs text-stone-400 mb-1">
-						Team Member Discord Usernames <span class="text-stone-600"
-							>(optional, one per line)</span
+				<!-- Additional Members Section -->
+				<div class="space-y-4 pt-4 border-t border-white/5">
+					<h3 class="text-sm font-medium text-white">
+						Additional Team Members <span class="text-stone-500 font-normal"
+							>(Optional, up to 3)</span
 						>
-					</label>
-					<textarea
-						id="teamMembers"
-						name="teamMembers"
-						rows="3"
-						placeholder="janesmithdev
-johndoedev"
-						class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-white/30 resize-y"
-					></textarea>
+					</h3>
+
+					<div class="space-y-3">
+						<!-- Member 2 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m2Discord"
+								placeholder="Member 2 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m2Email"
+								type="email"
+								placeholder="Member 2 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+
+						<!-- Member 3 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m3Discord"
+								placeholder="Member 3 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m3Email"
+								type="email"
+								placeholder="Member 3 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+
+						<!-- Member 4 -->
+						<div class="grid sm:grid-cols-2 gap-3">
+							<input
+								name="m4Discord"
+								placeholder="Member 4 Discord"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+							<input
+								name="m4Email"
+								type="email"
+								placeholder="Member 4 Email"
+								class="w-full p-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs outline-none focus:border-white/30"
+							/>
+						</div>
+					</div>
 				</div>
 
 				<div class="pt-2">
