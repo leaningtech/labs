@@ -3,6 +3,10 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.4.0:
+
+- Stability improvements
+
 ## Version 2.3.4:
 
 - Fix npm init
