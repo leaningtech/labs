@@ -3,6 +3,15 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.6.0:
+
+- Introduce the onOpen callback
+- Network stability improvements
+
+## Version 2.5.0:
+
+- Stability improvements
+
 ## Version 2.4.0:
 
 - Stability improvements
