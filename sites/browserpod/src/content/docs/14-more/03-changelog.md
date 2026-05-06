@@ -3,6 +3,10 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.6.2:
+
+- Improve terminal scrolling support
+
 ## Version 2.6.1:
 
 - Improve terminal resizing support
