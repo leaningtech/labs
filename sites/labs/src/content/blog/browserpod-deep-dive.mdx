@@ -21,13 +21,18 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	apiKey="bp1_3a58fb5e1673bf18b9c7e580ac2436be66292ecacb4e24b36023915f45340bdf"
 />
 
-A few months ago we released [BrowserPod](https://browserpod.io]: an in-browser sandbox, powered by WebAssembly, that runs completely client-side. Under the hood BrowserPod provides a _WebAssembly-native kernel,_ designed from scratch to run in the browser while being compatible with many applications originally designed for Linux.
+A few months ago we released [BrowserPod](https://browserpod.io): an in-browser sandbox, powered by WebAssembly, that runs completely client-side. Under the hood BrowserPod provides a _WebAssembly-native kernel,_ designed from scratch to run in the browser while being compatible with many applications originally designed for Linux.
 
 This WebAssembly kernel is the critical feature that makes BrowserPod powerful enough to run real-world, full stack apps completely in the browser. This post is a deep-dive in the **architecture**, **capabilities** and **limitations** of our solution: we will start by highlighting the core functions of modern operating systems and how they translate in the BrowserPod design, we will then further delve into the implementation of the disk and networking subsystem, and finally discuss the current limitations and future plans.
 
-[BROWSERCODE SCREENSHOT AS PLUG]
+<figure class="w-full">
+	![BrowserCode / Claude Code](./images/BrowserCode_Claude.png)
+	<figcaption class="text-center">
+		[BrowserCode](https://browsercode.io) running Claude Code in the browser on top of BrowserPod
+	</figcaption>
+</figure>
 
-With the release of [BrowserPod 2.0](https://labs.leaningtech.com/blog/browserpod-20), the tool is now stable enough to run _Claude Code_ and other agentic CLIs completely in the browser. Check out [BrowserCode.io](http://browsercode.io) to get a quick impression of what you could build with BrowserPod today.
+With the release of [BrowserPod 2.0](https://labs.leaningtech.com/blog/browserpod-20), the tool is now stable enough to run _Claude Code_ and other agentic CLIs completely in the browser. Check out [BrowserCode](http://browsercode.io) to get a quick impression of what you could build with BrowserPod today.
 
 ## What does a _kernel_ actually do?
 
