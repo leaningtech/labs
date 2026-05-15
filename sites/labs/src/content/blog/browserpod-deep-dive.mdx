@@ -80,9 +80,7 @@ The disk and network backends of BrowserPod are especially important for compati
 
 <figure class="w-full">
 	![BrowserPod disk architecture](./images/BP_deep_dive_disk.png)
-	<figcaption class="text-center">
-		Disk and filesystem architecture.
-	</figcaption>
+	<figcaption class="text-center">Disk and filesystem architecture.</figcaption>
 </figure>
 
 BrowserPod is intended to be a generic WebAssembly-powered in-browser sandbox. As such it goes beyond running one single program and must allow users to execute a diverse set of applications, depending on their workload. As a practical example, we include git and all its utilities in the default disk images and they will be useful to many users, but we don’t want _every_ user to download all this additional code unconditionally.
@@ -201,7 +199,14 @@ subprocess.run([sys.executable])
 <BrowserPodDeepDiveDemo
 	client:only="svelte"
 	ctxId="bp-2.0-demo"
-	terminalTabs={[{ id: "python-demo", label: "Terminal", command: "python3", args: ["python/hello.py"] }]}
+	terminalTabs={[
+		{
+			id: "python-demo",
+			label: "Terminal",
+			command: "python3",
+			args: ["python/hello.py"],
+		},
+	]}
 	description="Python running in the browser"
 	height="22rem"
 />
