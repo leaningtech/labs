@@ -1,0 +1,176 @@
+---
+title: "A Linux-like kernel in a browser tab - deep dive in the BrowserPod architecture"
+description: |
+  How the BrowserPod kernel supports running many Linux applications concurrently in the browser.
+authors:
+  - alessandro
+pubDate: "May 18 2026"
+heroImage: "./banners/BP_deep_dive_hero.png"
+tags:
+  - BrowserPod
+---
+
+import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
+import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
+
+<BrowserPodProvider
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	version="2.0.3"
+	projectSource={{ type: "local", path: "bp-2" }}
+	apiKey="bp1_3a58fb5e1673bf18b9c7e580ac2436be66292ecacb4e24b36023915f45340bdf"
+/>
+
+A few months ago we released [BrowserPod](https://browserpod.io]: an in-browser sandbox, powered by WebAssembly, that runs completely client-side. Under the hood BrowserPod provides a *WebAssembly-native kernel,* designed from scratch to run in the browser while being compatible with many applications originally designed for Linux.
+
+This WebAssembly kernel is the critical feature that makes BrowserPod powerful enough to run real-world, full stack apps completely in the browser. This post is a deep-dive in the **architecture**, **capabilities** and **limitations** of our solution: we will start by highlighting the core functions of modern operating systems and how they translate in the BrowserPod design, we will then further delve into the implementation of the disk and networking subsystem, and finally discuss the current limitations and future plans.
+
+[BROWSERCODE SCREENSHOT AS PLUG]
+
+With the release of [BrowserPod 2.0](https://labs.leaningtech.com/blog/browserpod-20), the tool is now stable enough to run *Claude Code* and other agentic CLIs completely in the browser. Check out [BrowserCode.io](http://browsercode.io) to get a quick impression of what you could build with BrowserPod today.
+
+## What does a *kernel* actually do?
+
+BrowserPod is heavily inspired by traditional kernels for native hardware, and we could identify many direct parallels between the WebAssembly execution model and the principles you’d typically find in an operating system textbook.
+
+Low-level programming concepts are often misunderstood, especially by developers that are only exposed to more abstracted forms of coding. So, before getting into the details, it is a good idea to outline in broad strokes the main functions of an operating system kernel:
+
+* **Accessing and abstracting the hardware**: The kernel contains specialized code, usually called *device drivers,* that can speak the low-level protocol of the various hardware components of a device. The kernel also exposes an abstracted interface of the hardware to applications, making it possible to have multiple competing vendors and hardware designs without requiring each program to include device-specific logic.  
+* **Coordination of hardware access:** The kernel decides which application can access the hardware at any given time and, if it allows concurrent access, resolves any conflicts. As an example, consider a disk driver: only one (or a few) blocks of data can be read/written concurrently by the hardware. Any other request must be placed in a queue and served progressively. The kernel will decide the order in which requests will be processed,making sure no single application can hog all the resources. The kernel can also optimise the access patterns, for example by exploiting *locality*.  
+* **Application isolation:** A fundamental capability of modern operating systems is keeping applications isolated. This is normally achieved via a low-level CPU capability called “virtual memory”. The idea is that each application (or *process* more accurately) can only ever access a subset of the physical memory and has no access at all to address in other *processes*. In operating systems parlance it is said that each process has its own independent *address space*. A useful side-effect of this property is that a crash in one process will not affect any other process on your system, at least ideally.  
+* **Concurrent execution:** If the hardware provides multiple CPUs, the kernel can also run more than one process concurrently. In practice, this means each CPU will be configured to access a different address space and multiple instruction flows will be executed independently in parallel. An interesting special case is *multi-threading* where the CPUs will be configured to access the *same* address space while maintaining an independent execution flow.
+
+## A real kernel, but in a browser tab
+
+<figure class="w-full">
+	![BrowserPod diagram](./images/BP_deep_dive_arch.png)
+	<figcaption class="text-center">
+		Diagram of the BrowserPod architecture, illustrating the main components.
+	</figcaption>
+</figure>
+
+Our objective for the BrowserPod kernel is to move beyond the current state of the art of WebAssembly as a compilation target. Compiling a single, potentially multithreaded, program and running it in the browser is relatively easy with existing toolchains.
+
+What is missing, in our opinion, is a solution to run complete *software systems*: collections of programs that work together and interact to provide a complete user experience. Here’s a practical example: a simple `npm install && npm run dev` command actually represents a complex orchestration of multiple processes, including shells, node.js instances, install scripts, etc.
+
+All these steps need to work on a coherent and persistent view of the files and other system resources, working together without stepping on each other's toes. As we started to lay out a viable architecture to solve this problem we noticed that we had to effectively build a *kernel*, and identified many parallels between our design and native kernels.
+
+Each *program* can be represented by a single WebAssembly binary, conceptually we could talk about `bash.wasm` or `blender.wasm`, but for consistency with the Linux convention we don’t apply any file extension to executable files.
+
+*Concurrency* is provided by Workers. One is spawned for every process or thread running in the system. In the case of a single-threaded application the WebAssembly module of the program will run isolated in a single worker, with its own WebAssembly memory. Multi-threaded processes will use multiple workers, all using the same shared memory.
+
+All the applications are tied together by the BrowserPod WebAssembly kernel, which provides standard-named system calls such as `__syscall_readv`. Those syscalls can then be used from the WebAssembly apps by *importing* them into the WebAssembly instance.
+
+The BrowserPod kernel is itself a WebAssembly module, available in every Worker. The kernel is accessed concurrently by all the applications, providing a unified and coherent view of a single system.
+
+* **Hardware access and coordination**: The “hardware” in this case is of course virtual, but works similarly to the native case. Applications are unmodified and expect to use abstract interfaces to system resources: files, sockets or devices such as `/dev/tty`. The BrowserPod kernel provides a Linux API-compatible syscall interface and makes sure that all the applications have orderly access to the shared state, such as the filesystem and the underlying virtual block devices.  
+* **Application isolation**: This feature is provided *automatically* by the WebAssembly execution model. A WebAssembly module can only access the memory objects it creates or imports. Within the BrowserPod architecture all the WebAssembly processes use imported memories, which are supplied when they are started. Each instance of the same application (e.g. bash) receives a fresh memory object and can only interact with other processes via the BrowserPod kernel. When a new *thread* is started it will use the existing memory object, allowing concurrent access to the same address space.  
+* **Concurrency:** Provided via Workers as described above. It should be noted that the model here assumes an unlimited number of virtual CPUs. Proper scheduling is delegated to the underlying operating system of the user device. In the future a different model based on multiplexing multiple WebAssembly threads on top of a single Worker could also be achieved using the *Promise Integration* extension of WebAssembly.
+
+The disk and network backends of BrowserPod are especially important for compatibility with a broad range of applications, and their architectures are worth discussing more in depth.
+
+## Large disks for any device
+
+BrowserPod is intended to be a generic WebAssembly-powered in-browser sandbox. As such it goes beyond running one single program and must allow users to execute a diverse set of applications, depending on their workload. As a practical example, we include git and all its utilities in the default disk images and they will be useful to many users, but we don’t want *every* user to download all this additional code unconditionally.
+
+Real-world code can also access *thousands* of small files in normal operation. Npm-based applications are one of the worst offenders in this regard. Storing files as plain HTTP resources it’s possible but at this scale it becomes not practical due to the overhead of each request.
+
+The BrowserPod filesystem implementation has been designed to carefully balance these aspects. These are the keys ideas:
+
+* **Filesystem:** POSIX-compatible, effectively an Ext2 implementation  
+* **Block-based streaming:** The disk image is not downloaded at startup, but progressively and on-demand.  
+* **Multiple backends:** Disk images can be stored on any HTTP server, with blocks being accessed using the standard HTTP byte ranges feature. For maximum performance a WebSocket service (hosted on Cloudflare), is used for our root images.  
+* **Local-only storage:** Blocks downloaded will be cached locally using either the Origin Private File System (OPFS) API or IndexedDB. Any change to the blocks will only be saved locally, providing privacy-preserving persistence for BrowserPod sandboxes.
+
+Ext2 could be considered a legacy choice, but it is simple to implement and works well at scale. We plan to add features over time to reach an Ext3 and eventually an Ext4 (i.e. modern) feature set.
+
+## Solving networking, again
+
+While the browser might intuitively seem a network-native platform, it’s not. There is no browser API to create raw TCP / UDP sockets in the browser, with the [Direct Socket API](https://developer.chrome.com/docs/iwa/direct-sockets) only available in *Isolated Web Apps*.
+
+BrowserPod is in many ways a direct descendant of [WebVM](https://webvm.io), our x86 Debian virtual machine running in the browser. In the context of WebVM our solution was to [integrate with Tailscale](https://labs.leaningtech.com/blog/webvm-virtual-machine-with-networking-via-tailscale). This works, but it’s not a turnkey solution, and it requires the user to install the Tailscale client on their device.
+
+For BrowserPod we wanted to go one step further and make sockets work out-of-the-box. Not only that, we also wanted to make it possible to access servers inside the sandbox from anywhere on the internet with zero setup. To explain, let’s start with the latter feature. 
+
+### Portals
+
+BrowserPod introduces *Portals*, automatically generated random domains that route HTTP traffic to services inside the sandbox. A portal URL will look like this
+
+[ TODO COLOR CODE THE URL PARTS]
+
+```  
+PORTAL URL  
+```
+
+We adopted Cloudflare workers to support inbound traffic, so it was natural to use them as proxies for outbound traffic too, with a relatively straightforward implementation.
+
+This solution works very well, but it introduces some thorny additional problems to prevent users from abusing our platform: it’s never a good idea to have an open proxy to the whole internet. To make BrowserPod “just work” while preventing abuse we settled on a tradeoff:
+
+* **Limited whitelisted domains for the free tier**: BrowserPod can be used by anybody with a few clicks and offers a generous free tier, but free users can only access a few selected and whitelisted domains. The list is expected to change over time but at its core it offers access to npm package registries and major git hosting platforms such as GitHub.  
+* **Custom whitelisted domains for paying users**: Beyond the free tier, users can add custom additional domains to their whitelist, with an “unlimited” configuration also possible.
+
+We think this is the best that we can responsibly provide at this time within the limitations of the browser platform. We will of course keep looking foralternatives that might appear or further standardization of the Direct Sockets API. Networking in this field is not yet fully solved, but we think that we are inching ever closer to the right solution on every iteration.
+
+## Wasm binaries, but for Linux?
+
+We’ve explained that BrowserPod binaries are WebAssembly modules and use Linux-compatible syscalls, but we have not described yet how they are generated.
+
+For this project we have extended [Cheerp](https://cheerp.io): our existing C/C++ to WebAssembly and JavaScript compiler. We have introduced a new target: `wasm32-browserpod-linux` which directs the compiler to follow the right conventions. The idea is that this new Cheerp target can be used as a drop-in replacement for native compilers when building packages. The target naming follows established patterns for cross-compilers and can be recognized by most build-systems without custom patches.
+
+Packages are built using Nix and we are continuously expanding what we include by default in our BrowserPod release. How we use Nix is an interesting topic in its own regard and we might publish an in-detail blog post about this in the future.
+
+If you’ve heard about [WASI](https://wasi.dev/) you might wonder why we did not adopt it. Although nominally standard, WASI is paradoxically both overcomplicated in its design and too limited in scope to serve as an alternative for the Linux API. There have been attempts at expanding the feature set with [WASIX](https://wasix.org/), but we believe adopting the Linux syscalls verbatim to be simpler and more effective.
+
+Cheerp is FOSS and support for the `wasm32-browserpod-linux` target is available in public [nightly builds](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-nightly-ppa). If you're curious to see this in action please keep reading for a step-by-step tutorial.
+
+## Right, but what can I do with this?
+
+The first version of BrowserPod was released in February 2026, but the platform is already very powerful. As of today you can run node, python, bash, git and many other Linux command line utilities in the sandbox.
+
+We have prepared a few demos to showcase how the capabilities of BrowserPod can be applied to a few concrete scenarios, but the potential use cases are much, much broader than what we can show here.
+
+### A learning platform for python
+
+[SOMETHING BASIC WITH BLOCKING TERMINAL INPUT? POPEN?]
+
+### Explore git repos from Web apps
+
+[GIT CLONE + GIT SHOW -p WITH USER SELECTABLE REPO]
+
+### Full-stack node applications in the browser
+
+[[EXPRESS.JS](http://EXPRESS.JS) HELLO WORLD WITH PORTAL, LINK TO THE CONSOLE FOR MUCH MORE, LIST ALL THE FRAMEWORKS]
+
+## Current limitations and future directions
+
+As powerful as BrowserPod is, there are currently some significant limitations that are worth discussing. Good news though: we believe that we will be able to implement solutions for most of them in the medium term.
+
+* **Source code is required**: Our C/C++ compiler (Cheerp) can compile many applications and libraries that target Linux with little to no modification. We also expect the amount of required changes to shrink over time. This implies that in the a very broad set of packages could be compiled to run on BrowserPod, potentially reaching the same level of completeness as your average Linux distribution. The tradeoff here is that access to the source code is required. First-party proprietary applications can be compiled as well, but third-party binaries are currently unsupported. We plan to bridge this gap by integrating BrowserPod with our x86-to-WebAssembly virtualization engine, called [CheerpX](https://cheerpx.io). CheerpX is the engine that powers [WebVM](https://webvm.io), and it has been tested at scale over the last several years. While native WebAssembly binaries can be expected to run at almost native speed, some amount of slowdown is to be expected when virtualizing x86. This said we think the current performance of CheerpX will be sufficient for many practical use cases.  
+* **JIT engines require special treatment**: Compiling from C/C++ works perfectly for static code, but does not solve the issue of code generated at runtime by Just-In-Time (JIT) compilers. This is especially important for JavaScript and N[ode.js](http://node.js) support. The build of [Node.js](http://Node.js) that we provide has been modified to run JavaScript payloads on the underlying browser JavaScript engine and can achieve native-like performance. An interesting idea that we are considering is extending V8, the JavaScript engine used by [Node.js](http://Node.js), to target WebAssembly directly.  
+* **Lack of paging for WebAssembly binaries**: Large, complex applications will compile to large WebAssembly modules. A high quality toolchain can minimize the size, but we know that the output size is a real constraint for the adoption of WebAssembly as the distribution medium for larger apps. We believe a solution can be built on top of WebAssembly as it currently is, and we are currently looking for a partner to test our ideas on a real world large codebase.  
+* **Graphics and 3D**: Compiling command line tools for the BrowserPod target is (more or less) a solved problem. Graphical applications bring yet another level of complexity, with the major issue being support for accelerated 3D graphics API expected by desktop apps: Desktop OpenGL and Vulkan. The Web platform offers WebGL and WebGPU, but neither are immediately compatible. We have several ideas on how to solve this problem, but the solution won’t be ready for a few more months.
+
+[BLENDER SCREENSHOT + EXPLAINER IN CAPTION]
+
+Overall, we think BrowserPod has almost unbounded potential. Achieving a comprehensive solution for graphics and 3D will make it possible to realize full-desktop experiences in the browser at native speed. On the other hand integration with CheerpX will make it possible to download arbitrary containers from DockerHub and run them fully client-side while exposing internet-visible services. It will take some time to achieve all these objectives, but the right building blocks are either in place or being engineered right now.
+
+## Building for the [TARGET] target
+
+TODO
+
+## Give it a try
+
+To get an immediate feeling for what BrowserPod can do, check out [BrowserCode](https://browsercode.io/claude): Claude Code running unmodified in the browser on top of BrowserPod.
+
+You can log-in with your Anthropic credentials and run the full agentic loop in your browser. All data stay local.
+
+BrowserCode is [FOSS](https://github.com/leaningtech/browsercode) and it’s intended to be a reference integration of BrowserPod designed to showcase its capabilities. You can fork the repo to build your version, or something else entirely, by logging on the [BrowserPod console](https://github.com/leaningtech/browsercode).
+
+You will be able to test BrowserPod on multiple ready-made sandboxes running many popular Node.js frameworks (Express.js, Next.js, Nuxt, React, Svelte, …), command line tools, and build your first integration using the BrowserPod API.
+
+All BrowserPod accounts have access to a generous free tier to experiment with the technology. If you plan to use BrowserPod for your Open Source project, or startup, please get in touch. We offer extended token grants especially for these cases.
+
+If you have questions, or are interested in further details, you can find the whole developer team (myself included) on our [Discord](https://discord.leaningtech.com). Beside the BrowserPod developers you’ll also find an active and welcoming community that has recently passed the 2000 users milestone.
+
+We are looking forward to seeing what you’ll build with BrowserPod.
+
