@@ -101,11 +101,20 @@ For BrowserPod we wanted to go one step further and make sockets work out-of-the
 
 BrowserPod introduces _Portals_, automatically generated random domains that route HTTP traffic to services inside the sandbox. A portal URL will look like this
 
-[ TODO COLOR CODE THE URL PARTS]
-
-```
-PORTAL URL
-```
+<figure class="w-full">
+	<pre class="not-prose overflow-x-auto rounded-lg bg-bg-800 p-4 text-center text-sm font-mono">
+		<code class="break-all whitespace-pre-wrap">
+			<span class="text-bg-500">https://</span>
+			<span class="text-sky-600 dark:text-sky-400">rbmhk1uf4vrqwns4mizrouzchdbljdohkssfp0mktzrijk4algta</span>
+			<span class="text-amber-600 dark:text-amber-400">-4000</span>
+			<span class="text-bg-500">.browserportal.io</span>
+			<span class="text-emerald-600 dark:text-emerald-400">/path/index.html</span>
+		</code>
+	</pre>
+	<figcaption class="text-center">
+		Example of a typical portal URL: <span class="text-sky-600 dark:text-sky-400">blue</span> is the portal ID, <span class="text-amber-600 dark:text-amber-400">amber</span> is the internal port, and <span class="text-emerald-600 dark:text-emerald-400">green</span> is the request path.
+	</figcaption>
+</figure>
 
 We adopted Cloudflare workers to support inbound traffic, so it was natural to use them as proxies for outbound traffic too, with a relatively straightforward implementation.
 
