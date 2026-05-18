@@ -318,7 +318,57 @@ Overall, we think BrowserPod has almost unbounded potential. Achieving a compreh
 
 ## Building for the `wasm32-browserpod-linux` target
 
-TODO
+We'd like to share a quick primer on how to build your own WebAssembly binaries for the BrowserPod target. If this does not sound immediately interesting for you feel free to skip this section.
+
+To use the `wasm32-browserpod-linux` target you'll find need to get a nightly build of the Cheerp compiler. Nightly builds are currently distributed for Debian/Ubuntu and similar distro using a [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-nightly-ppa).
+
+```bash
+sudo add-apt-repository ppa:leaningtech-dev/cheerp-nightly-ppa
+sudo apt-get update
+sudo apt-get install cheerp-core
+```
+
+For this example we'll use a slightly elaborate "hello world", designed to showcase how BrowserPod can run multiple different programs in the same sandbox.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void) {
+    // Canonical hello world
+    printf("Hello, world!\n");
+
+    // Replace this process with a shell running the pipeline
+    char *argv[] = {
+        "sh",
+        "-c",
+        "echo Hello World | sha1sum | tr /a-z/ /A-Z/",
+        NULL
+    };
+
+    char *envp[] = {
+        "PATH=/bin",
+        NULL
+    };
+
+    execve("/bin/sh", argv, envp);
+    return 1;
+}
+```
+
+Save this file as `hello.c` and compile it with the following command:
+
+```bash
+/opt/cheerp/bin/clang -target wasm32-browserpod-linux -o hello hello.c
+```
+
+Now you need to setup a simple web application using BrowserPod, you can do so quicky using the following command:
+
+```bash
+npm create browserpod-quickstart@latest browserpod-hello --template bash
+```
+
+// TODO: POPULATE THE WASM BINARY
 
 ## Give it a try
 
