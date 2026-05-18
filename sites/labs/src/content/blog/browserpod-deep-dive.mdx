@@ -377,16 +377,18 @@ npm install
 Then put the `hello` file in the `public/` directory, and edit `src/main.js` to look like this:
 
 ```js
-import { BrowserPod } from '@leaningtech/browserpod'
+import { BrowserPod } from "@leaningtech/browserpod";
 
 // Initialize the Pod
 // VITE_BP_APIKEY is an environmental variable containing your Api Key
 // Its value is defined in the file `.env` in the project's main directory
 // To get an Api Key, visit https://console.browserpod.io
-const pod = await BrowserPod.boot({apiKey:import.meta.env.VITE_BP_APIKEY});
+const pod = await BrowserPod.boot({ apiKey: import.meta.env.VITE_BP_APIKEY });
 
 // Create a Terminal
-const terminal = await pod.createDefaultTerminal(document.querySelector("#console"));
+const terminal = await pod.createDefaultTerminal(
+	document.querySelector("#console")
+);
 
 // Add our binary to the filesystem
 const f = await pod.createFile("/home/user/hello", "binary");
@@ -396,7 +398,7 @@ await f.write(buf);
 await f.close();
 
 // Run our binary
-await pod.run("/home/user/hello", [], {terminal:terminal});
+await pod.run("/home/user/hello", [], { terminal: terminal });
 ```
 
 You will need to get a free BrowserPod API key from the [BrowserPod console](https://console.browserpod.io) and store it in the `.env` file.
@@ -415,7 +417,6 @@ And open your browser at localhost port exposed by vite, for example [https://lo
 You should see something like this:
 
 ![Our C program running in BrowserPod](./images/hello-c-bp.png)
-
 
 ## Give it a try
 
