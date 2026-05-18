@@ -126,7 +126,7 @@
 	}
 
 	.with-preview .preview-slot {
-		flex: 2 1 90%;
+		flex: 2.5 1 112%;
 	}
 
 	.with-preview .terminal-panel {
