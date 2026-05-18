@@ -203,8 +203,7 @@ subprocess.run([sys.executable])
 		{
 			id: "python-demo",
 			label: "Terminal",
-			command: "python3",
-			args: ["python/hello.py"],
+			steps: [{ command: "python3", args: ["python/hello.py"] }],
 		},
 	]}
 	description="Python running in the browser"
@@ -262,8 +261,7 @@ exec bash
 		{
 			id: "git-demo",
 			label: "Terminal",
-			command: "bash",
-			args: ["git/explore-repo.sh"],
+			steps: [{ command: "bash", args: ["git/explore-repo.sh"] }],
 		},
 	]}
 	description="Git workflow in the browser"
@@ -272,7 +270,32 @@ exec bash
 
 ### Full-stack node applications in the browser
 
-[[EXPRESS.JS](http://EXPRESS.JS) HELLO WORLD WITH PORTAL, LINK TO THE CONSOLE FOR MUCH MORE, LIST ALL THE FRAMEWORKS]
+BrowserPod also ships with Node.js and you can run full-stack applications in the browser: install dependencies, start a dev server, and expose it through a [Portal](https://browserpod.io/docs/understanding-browserpod/portals) for live previews.
+
+The demo below runs a minimal Express.js app. Click play to run `npm install` and `npm run dev`. Once the server is listening, the preview panel will automatically load the Portal URL.
+
+<BrowserPodDeepDiveDemo
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	showPreview={true}
+	previewPort={4000}
+	autoStart={false}
+	height="28rem"
+	terminalTabs={[
+		{
+			id: "express-demo",
+			label: "Terminal",
+			cwd: "/home/user/express",
+			steps: [
+				{ command: "npm", args: ["install"] },
+				{ command: "npm", args: ["run", "dev"] },
+			],
+		},
+	]}
+	description="Express.js with a live Portal preview"
+/>
+
+This is only one example. The [BrowserPod console](https://console.browserpod.io) includes ready-made playgrounds for many popular Node.js frameworks: Express.js, Next.js, Nuxt, React, Svelte and more.
 
 ## Current limitations and future directions
 

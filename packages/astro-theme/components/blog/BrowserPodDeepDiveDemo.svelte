@@ -1,6 +1,9 @@
 <script>
 	import { tick } from "svelte";
-	import { TerminalPanel } from "@leaningtech/svelte-browserpod-editor";
+	import {
+		TerminalPanel,
+		PreviewPanel,
+	} from "@leaningtech/svelte-browserpod-editor";
 
 	let {
 		id,
@@ -10,6 +13,8 @@
 		autoStart = false,
 		playCaption = "Interactive demo — click to run",
 		height = "25rem",
+		showPreview = false,
+		previewPort = undefined,
 	} = $props();
 
 	let pendingRuns = $state([]);
@@ -17,15 +22,19 @@
 	let overlayVisible = $state(!autoStart);
 
 	function makeExecutor(tab) {
-		const opts = { cwd: "/home/user", echo: tab.echo ?? true };
+		const baseOpts = { cwd: tab.cwd ?? "/home/user", echo: tab.echo ?? true };
 		return async (run) => {
-			run(tab.command ?? "bash", tab.args ?? [], opts);
+			for (const step of tab.steps) {
+				await run(step.command, step.args ?? [], {
+					...baseOpts,
+					...(step.cwd ? { cwd: step.cwd } : {}),
+				});
+			}
 		};
 	}
 
 	// onReady callbacks cannot be passed as props from MDX: Astro serializes
-	// client:only props and functions are lost in the process. We accept a
-	// serializable command/args instead and build the callback here.
+	// client:only props and functions are lost. We accept serializable steps instead.
 	// svelte-ignore state_referenced_locally
 	const tabs = terminalTabs.map((tab) => ({
 		id: tab.id,
@@ -56,8 +65,15 @@
 			style="height: {height}"
 			aria-label={description}
 		>
-			<div class="terminal-panel">
-				<TerminalPanel {ctxId} {tabs} />
+			<div class="demo-layout" class:with-preview={showPreview}>
+				<div class="terminal-panel">
+					<TerminalPanel {ctxId} {tabs} />
+				</div>
+				{#if showPreview}
+					<div class="preview-slot">
+						<PreviewPanel {ctxId} port={previewPort} />
+					</div>
+				{/if}
 			</div>
 		</div>
 		{#if overlayVisible}
@@ -87,11 +103,44 @@
 </figure>
 
 <style>
+	.demo-layout {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		min-height: 0;
+		width: 100%;
+		gap: 0.5rem;
+	}
+
+	.demo-layout.with-preview {
+		flex-direction: column;
+	}
+
 	.terminal-panel {
 		flex: 1;
 		display: flex;
 		min-width: 0;
+		min-height: 0;
 		overflow: hidden;
 		width: 100%;
+	}
+
+	.preview-slot {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	@media (min-width: 768px) {
+		.demo-layout.with-preview {
+			flex-direction: row;
+		}
+
+		.with-preview .terminal-panel,
+		.preview-slot {
+			flex: 1 1 0;
+		}
 	}
 </style>

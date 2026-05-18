@@ -1,2 +1,6 @@
 python/hello.py
 git/explore-repo.sh
+express/package-lock.json
+express/package.json
+express/public/index.html
+express/server.js
