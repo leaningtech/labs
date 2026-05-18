@@ -369,26 +369,40 @@ Save this file as `hello.c` and compile it with the following command:
 Now you need to setup a simple web application using BrowserPod, you can do so quicky using the following commands:
 
 ```bash
-npm create browserpod-quickstart@latest browserpod-hello --template bash
+npm create browserpod-quickstart@latest browserpod-hello -- --template bash
 cd browserpod-hello
 npm install
 ```
 
-Then put the `hello` file in the `public/` directory, and edit src/main.js like this:
+Then put the `hello` file in the `public/` directory, and edit `src/main.js` to look like this:
 
-```diff
-< // Run Node's REPL
-< await pod.run("bash", [], {terminal:terminal});
----
-> // Add our binary to the filesystem
-> const f = await pod.createFile("/home/user/hello", "binary");
-> const resp = await fetch("hello");
-> const buf = await resp.arrayBuffer();
-> await f.write(buf);
-> await f.close();
-> 
-> // Run our binary
-> await pod.run("/home/user/hello", [], {terminal:terminal});
+```js
+import { BrowserPod } from '@leaningtech/browserpod'
+
+// Initialize the Pod
+// VITE_BP_APIKEY is an environmental variable containing your Api Key
+// Its value is defined in the file `.env` in the project's main directory
+// To get an Api Key, visit https://console.browserpod.io
+const pod = await BrowserPod.boot({apiKey:import.meta.env.VITE_BP_APIKEY});
+
+// Create a Terminal
+const terminal = await pod.createDefaultTerminal(document.querySelector("#console"));
+
+// Add our binary to the filesystem
+const f = await pod.createFile("/home/user/hello", "binary");
+const resp = await fetch("hello");
+const buf = await resp.arrayBuffer();
+await f.write(buf);
+await f.close();
+
+// Run our binary
+await pod.run("/home/user/hello", [], {terminal:terminal});
+```
+
+You will need to get a free BrowserPod API key from the [BrowserPod console](https://console.browserpod.io) and store it in the `.env` file.
+
+```env
+VITE_BP_APIKEY=bp1_your_api_key_here
 ```
 
 Finally, run the dev server:
@@ -397,7 +411,7 @@ Finally, run the dev server:
 npm run dev
 ```
 
-And open your browser at [https://localhost:5173](https://localhost:5173).
+And open your browser at localhost port exposed by vite, for example [https://localhost:5173](https://localhost:5173).
 You should see something like this:
 
 ![Our C program running in BrowserPod](./images/hello-c-bp.png)
