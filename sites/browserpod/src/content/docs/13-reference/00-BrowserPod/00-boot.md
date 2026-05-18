@@ -9,6 +9,7 @@ class BrowserPod {
 		apiKey: string;
 		nodeVersion?: string;
 		storageKey?: string;
+		userImage?: string;
 	}): Promise<BrowserPod>;
 }
 ```
@@ -20,8 +21,9 @@ class BrowserPod {
 ## Options
 
 - **apiKey (`string`)** - The API key to use.
-- **nodeVersion (`string`, _optional_)** - The version of node to use. Currently only "22" is allowed.
+- **nodeVersion (`string`, _optional_)** - The version of Node.js to use. Currently only "22" is allowed.
 - **storageKey (`string`, _optional_)** - An arbitrary string used to support multiple pods on the same origin or multiple tabs in parallel. For example, `boot({ apiKey: "...", storageKey: "vite" })` and `boot({ apiKey: "...", storageKey: "app-12345" })` allocate two completely independent disks.
+- **userImage (`string`, _optional_)** - A URL pointing to a custom WebAssembly binary to load into the pod environment. When specified, this WebAssembly module will be loaded and made available within the pod instead of using the default environment.
 
 ## Returns
 
