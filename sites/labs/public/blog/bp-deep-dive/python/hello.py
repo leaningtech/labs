@@ -17,7 +17,7 @@ while True:
     again = input("\nRun again? (y/n) ").lower().strip()
 
     if again != "y":
-        print("\nLaunching Python REPL... bye!")
+        print("\nLaunching python REPL...")
         break
 
 subprocess.run([sys.executable])

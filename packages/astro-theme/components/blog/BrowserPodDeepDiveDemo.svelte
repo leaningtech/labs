@@ -126,11 +126,12 @@
 	}
 
 	.with-preview .preview-slot {
-		flex: 1 1 45%;
+		flex: 2 1 90%;
 	}
 
 	.with-preview .terminal-panel {
 		flex: 1 1 55%;
+		min-height: 8rem;
 	}
 
 	.preview-slot {

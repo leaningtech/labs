@@ -8,6 +8,8 @@ while true; do
 		repo_url="$DEFAULT_REPO"
 	fi
 
+	echo "Selected repository: $repo_url"
+
 	rm -rf repository
 	if ! git clone "$repo_url" repository; then
 		echo "Clone failed. Try another URL."
@@ -22,6 +24,8 @@ while true; do
 	read -r -p $'\nRun again? (y/n) ' again
 
 	if [ "$again" != "y" ] && [ "$again" != "Y" ]; then
+		echo ""
+		echo "Launching bash..."
 		break
 	fi
 done
