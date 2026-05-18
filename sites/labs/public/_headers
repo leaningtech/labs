@@ -15,3 +15,6 @@
 /blog/browserpod-20
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
+/blog/browserpod-deep-dive
+	Cross-Origin-Opener-Policy: same-origin
+	Cross-Origin-Embedder-Policy: require-corp
