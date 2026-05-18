@@ -65,8 +65,8 @@ const site = getSite(Astro.site?.hostname);
 					src={heroImage}
 					alt=""
 					class="rounded-xl w-full mx-auto mb-8 object-cover max-h-[30rem] bg-white"
-					width={1232}
-					height={480}
+					widths={[768, 1232, 2464]}
+					sizes="(max-width: 1280px) 100vw, 1232px"
 					quality="max"
 				/>
 			)
