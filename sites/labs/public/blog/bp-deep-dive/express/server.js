@@ -8,13 +8,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Express + BrowserPod!" });
+	res.json({ message: "Hello from Express + BrowserPod!" });
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+	res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Express server listening on port ${PORT}`);
+	console.log(`Express server listening on port ${PORT}`);
 });
