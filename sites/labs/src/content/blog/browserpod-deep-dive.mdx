@@ -215,7 +215,60 @@ Now, there are other options to run Python in the browser, but BrowserPod can do
 
 ### Explore git repos from Web apps
 
-[GIT CLONE + GIT SHOW -p WITH USER SELECTABLE REPO]
+BrowserPod ships with git and can reach major hosting platforms such as GitHub from the sandbox. The demo shows how git workflows can be run in the browser using BrowserPod. A shell script drives the demo loop, but you could also use the [BrowserPod API](https://browserpod.io/docs/reference/BrowserPod/run) to control each step directly from JavaScript.
+
+An important thing to note is that this is not based on some custom implementation of the git protocol. BrowserPod is running the official git tools, compiled to WebAssembly.
+
+First a repository is cloned, you can either supply a public GitHub repository URL or use the default [browserpod-meta](https://github.com/leaningtech/browserpod-meta) repo. After cloning the script will use `git show -p` to print the latest commit in patch format.
+
+You can run the loop again if you wish, or exit the loop to drop into an interactive shell to keep experimenting with the cloned repository.
+
+```bash
+#!/bin/bash
+
+DEFAULT_REPO="https://github.com/leaningtech/browserpod-meta"
+
+while true; do
+	read -r -p $'\nGitHub repository URL (Enter for default): ' repo_url
+	if [ -z "$repo_url" ]; then
+		repo_url="$DEFAULT_REPO"
+	fi
+
+	rm -rf repository
+	if ! git clone "$repo_url" repository; then
+		echo "Clone failed. Try another URL."
+		continue
+	fi
+
+	pushd .
+	cd repository
+	git show -p
+	popd
+
+	read -r -p $'\nRun again? (y/n) ' again
+
+	if [ "$again" != "y" ] && [ "$again" != "Y" ]; then
+		break
+	fi
+done
+
+exec bash
+```
+
+<BrowserPodDeepDiveDemo
+	client:only="svelte"
+	ctxId="bp-2.0-demo"
+	terminalTabs={[
+		{
+			id: "git-demo",
+			label: "Terminal",
+			command: "bash",
+			args: ["git/explore-repo.sh"],
+		},
+	]}
+	description="Git workflow in the browser"
+	height="22rem"
+/>
 
 ### Full-stack node applications in the browser
 
