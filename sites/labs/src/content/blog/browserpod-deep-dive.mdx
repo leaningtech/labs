@@ -366,13 +366,42 @@ Save this file as `hello.c` and compile it with the following command:
 /opt/cheerp/bin/clang -target wasm32-browserpod-linux -o hello hello.c
 ```
 
-Now you need to setup a simple web application using BrowserPod, you can do so quicky using the following command:
+Now you need to setup a simple web application using BrowserPod, you can do so quicky using the following commands:
 
 ```bash
 npm create browserpod-quickstart@latest browserpod-hello --template bash
+cd browserpod-hello
+npm install
 ```
 
-// TODO: POPULATE THE WASM BINARY
+Then put the `hello` file in the `public/` directory, and edit src/main.js like this:
+
+```diff
+< // Run Node's REPL
+< await pod.run("bash", [], {terminal:terminal});
+---
+> // Add our binary to the filesystem
+> const f = await pod.createFile("/home/user/hello", "binary");
+> const resp = await fetch("hello");
+> const buf = await resp.arrayBuffer();
+> await f.write(buf);
+> await f.close();
+> 
+> // Run our binary
+> await pod.run("/home/user/hello", [], {terminal:terminal});
+```
+
+Finally, run the dev server:
+
+```bash
+npm run dev
+```
+
+And open your browser at [https://localhost:5173](https://localhost:5173).
+You should see something like this:
+
+![Our C program running in BrowserPod](./images/hello-c-bp.png)
+
 
 ## Give it a try
 
