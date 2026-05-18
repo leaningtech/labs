@@ -306,7 +306,12 @@ As powerful as BrowserPod is, there are currently some significant limitations t
 - **Lack of paging for WebAssembly binaries**: Large, complex applications will compile to large WebAssembly modules. A high quality toolchain can minimize the size, but we know that the output size is a real constraint for the adoption of WebAssembly as the distribution medium for larger apps. We believe a solution can be built on top of WebAssembly as it currently is, and we are currently looking for a partner to test our ideas on a real world large codebase.
 - **Graphics and 3D**: Compiling command line tools for the BrowserPod target is (more or less) a solved problem. Graphical applications bring yet another level of complexity, with the major issue being support for accelerated 3D graphics API expected by desktop apps: Desktop OpenGL and Vulkan. The Web platform offers WebGL and WebGPU, but neither are immediately compatible. We have several ideas on how to solve this problem, but the solution won’t be ready for a few more months.
 
-[BLENDER SCREENSHOT + EXPLAINER IN CAPTION]
+<figure class="w-full">
+	![Blender booting in BrowserPod](./images/BP_deep_dive_blender.png)
+	<figcaption class="text-center">
+		[Blender](https://www.blender.org/features) booting in BrowserPod. Rendering is glitchy since there is currently no support for desktop OpenGL.
+	</figcaption>
+</figure>
 
 Overall, we think BrowserPod has almost unbounded potential. Achieving a comprehensive solution for graphics and 3D will make it possible to realize full-desktop experiences in the browser at native speed. On the other hand integration with CheerpX will make it possible to download arbitrary containers from DockerHub and run them fully client-side while exposing internet-visible services. It will take some time to achieve all these objectives, but the right building blocks are either in place or being engineered right now.
 
