@@ -66,14 +66,14 @@
 			aria-label={description}
 		>
 			<div class="demo-layout" class:with-preview={showPreview}>
-				<div class="terminal-panel">
-					<TerminalPanel {ctxId} {tabs} />
-				</div>
 				{#if showPreview}
 					<div class="preview-slot">
 						<PreviewPanel {ctxId} port={previewPort} />
 					</div>
 				{/if}
+				<div class="terminal-panel">
+					<TerminalPanel {ctxId} {tabs} />
+				</div>
 			</div>
 		</div>
 		{#if overlayVisible}
@@ -125,22 +125,18 @@
 		width: 100%;
 	}
 
+	.with-preview .preview-slot {
+		flex: 1 1 45%;
+	}
+
+	.with-preview .terminal-panel {
+		flex: 1 1 55%;
+	}
+
 	.preview-slot {
 		display: flex;
-		flex: 1;
 		min-width: 0;
 		min-height: 0;
 		overflow: hidden;
-	}
-
-	@media (min-width: 768px) {
-		.demo-layout.with-preview {
-			flex-direction: row;
-		}
-
-		.with-preview .terminal-panel,
-		.preview-slot {
-			flex: 1 1 0;
-		}
 	}
 </style>
