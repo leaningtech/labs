@@ -15,7 +15,7 @@ const demos = await getCollection(
 	title="Demo showcase"
 	description={`Discover projects built with our technologies`}
 >
-	<header class="text-center py-20">
+	<header class="text-center py-16 bg-stone-950 border-b border-stone-800">
 		<h1
 			class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
 		>
@@ -27,7 +27,7 @@ const demos = await getCollection(
 		</p>
 	</header>
 
-	<section class="pb-24 px-12 mx-auto w-full max-w-screen-2xl">
+	<section class="pb-24 px-8 mx-auto w-full max-w-screen-2xl">
 		<ProductFilter client:load />
 		<ul class="grid grid-cols-1 md:grid-cols-2" data-filter-grid="showcase">
 			{

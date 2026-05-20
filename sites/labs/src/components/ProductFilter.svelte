@@ -93,12 +93,31 @@
 		if (!grid) return;
 		const allItems = [...grid.querySelectorAll<HTMLElement>("li")];
 		const visibleItems = allItems.filter((li) => li.style.display !== "none");
+
 		allItems.forEach((li) =>
-			li.classList.remove("md:col-span-3", "md:col-span-2")
+			li.classList.remove(
+				"md:col-span-3",
+				"md:col-span-2",
+				"md:border-r",
+				"md:border-t"
+			)
 		);
-		visibleItems.forEach((li, i) =>
-			li.classList.add(i < 2 ? "md:col-span-3" : "md:col-span-2")
-		);
+
+		const featuredCount = Math.min(2, visibleItems.length);
+		const featured = visibleItems.slice(0, featuredCount);
+		const regular = visibleItems.slice(featuredCount);
+
+		featured.forEach((li) => li.classList.add("md:col-span-3"));
+		regular.forEach((li) => li.classList.add("md:col-span-2"));
+
+		// Border between the two featured items
+		if (featured.length > 1) featured[0].classList.add("md:border-r");
+
+		// Regular items: border-t on all rows, border-r between items within each row of 3
+		regular.forEach((li, i) => {
+			if (featured.length > 0 || i >= 3) li.classList.add("md:border-t");
+			if (i % 3 < 2) li.classList.add("md:border-r");
+		});
 	}
 
 	function reapplyShowcaseBorders() {
