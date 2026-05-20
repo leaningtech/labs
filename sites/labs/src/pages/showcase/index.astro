@@ -5,19 +5,11 @@ import DemoCard from "@leaningtech/astro-theme/components/DemoCard.astro";
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import ShowcaseDoodle from "./reflectors.png";
-import { productFromUrl } from "@leaningtech/astro-theme/products";
-import ProductNav from "@leaningtech/astro-theme/components/nav/product/Nav.astro";
-
-const product = productFromUrl(Astro.url);
+import ProductFilter from "../../components/ProductFilter.svelte";
 
 const demos = await getCollection(
 	"showcase",
-	({ data }) =>
-		data.draft !== true &&
-		(!product ||
-			data?.tags?.includes(
-				product.name as "Cheerp" | "CheerpJ" | "CheerpX" | "BrowserPod"
-			))
+	({ data }) => data.draft !== true
 );
 ---
 
@@ -25,7 +17,6 @@ const demos = await getCollection(
 	title="Demo showcase"
 	description={`Discover projects built with our technologies`}
 >
-	{product && <ProductNav {product} />}
 	<header class="text-center text-stone-100">
 		<div class="relative flex justify-center pt-10 items-center">
 			<Image
@@ -50,7 +41,8 @@ const demos = await getCollection(
 	</header>
 
 	<section class="pb-24 px-12 mx-auto w-full max-w-screen-2xl">
-		<ul class="grid grid-cols-1 md:grid-cols-2">
+		<ProductFilter client:load />
+		<ul class="grid grid-cols-1 md:grid-cols-2" data-filter-grid="showcase">
 			{
 				demos.map((demo, i) => (
 					<li
@@ -59,6 +51,7 @@ const demos = await getCollection(
           ${i >= 2 ? "md:border-t" : ""}
           border-stone-800
         `}
+						data-tags={demo.data.tags?.join(",") ?? ""}
 					>
 						<DemoCard {demo} showMetadata size="wide" />
 					</li>

@@ -5,33 +5,21 @@ import BlogPostCard from "@leaningtech/astro-theme/components/BlogPostCard.astro
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import BlogDoodle from "./blog-doodle.png";
-import { productFromUrl } from "@leaningtech/astro-theme/products";
 import { getSite } from "@leaningtech/astro-theme/nav";
-import ProductNav from "@leaningtech/astro-theme/components/nav/product/Nav.astro";
-
-const product = productFromUrl(Astro.url);
+import ProductFilter from "../../components/ProductFilter.svelte";
 
 const [post1, post2, ...restPosts] = (
-	await getCollection(
-		"blog",
-		({ data }) =>
-			data.draft !== true &&
-			(!product ||
-				data?.tags?.includes(
-					product.name as "Cheerp" | "CheerpJ" | "CheerpX" | "BrowserPod"
-				))
-	)
+	await getCollection("blog", ({ data }) => data.draft !== true)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const site = getSite(Astro.site?.hostname);
 ---
 
 <Shell
-	title={`${product?.name ?? "Engineering"} blog`}
+	title="Engineering blog"
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 	{site}
 >
-	{product && <ProductNav {product} />}
 	<header class="text-center text-bg-100 py-16">
 		<div class="flex justify-center items-center">
 			<Image
@@ -43,9 +31,7 @@ const site = getSite(Astro.site?.hostname);
 			/>
 		</div>
 
-		<h1 class="text-5xl font-semibold text-balance">
-			{product?.name ?? "Engineering"} blog
-		</h1>
+		<h1 class="text-5xl font-semibold text-balance">Engineering blog</h1>
 		<p class="text-lg text-balance my-8 text-bg-400">
 			News, technical writeups, and announcements directly from the development
 			team.
@@ -58,10 +44,14 @@ const site = getSite(Astro.site?.hostname);
 	</header>
 
 	<section class="pb-24 px-6 mx-auto w-full max-w-screen-xl">
+		<ProductFilter client:load />
 		<ul class="grid md:grid-cols-2 gap-8 mb-8">
 			{
 				[post1, post2].map((post) => (
-					<li class="flex md:justify-stretch md:items-stretch">
+					<li
+						class="flex md:justify-stretch md:items-stretch"
+						data-tags={post?.data.tags?.join(",") ?? ""}
+					>
 						{post && <BlogPostCard {post} showMetadata size="wide" />}
 					</li>
 				))
@@ -70,7 +60,10 @@ const site = getSite(Astro.site?.hostname);
 		<ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{
 				restPosts.map((post) => (
-					<li class="flex md:justify-stretch md:items-stretch">
+					<li
+						class="flex md:justify-stretch md:items-stretch"
+						data-tags={post.data.tags?.join(",") ?? ""}
+					>
 						<BlogPostCard {post} showMetadata />
 					</li>
 				))
