@@ -27,7 +27,9 @@ const authors = await resolveAuthors(post.data.authors);
 >
 	{
 		post.data.heroImage && (
-			<div class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-64" : "h-48"} mb-5 bg-stone-900`}>
+			<div
+				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-64" : "h-48"} mb-5 bg-stone-900`}
+			>
 				<Image
 					src={post.data.heroImage}
 					width={1170}

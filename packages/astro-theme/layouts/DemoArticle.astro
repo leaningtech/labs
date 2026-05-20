@@ -41,49 +41,17 @@ if (description) {
 
 <Shell>
 	<div class="bg-stone-950">
-	{product && <ProductNav {product} />}
-	<main class="px-12 py-10 w-full max-w-screen-2xl mx-auto">
-		<div class="h-full md:h-screen grid md:grid-cols-10">
-			<div class="col-span-3">
-				<a
-					href="/showcase"
-					class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
-				>
-					<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
-				</a>
-				<div class="block md:hidden pb-4">
-					{
-						hero_image && (
-							<Image
-								src={hero_image}
-								alt=""
-								class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
-								quality="max"
-							/>
-						)
-					}
-				</div>
-
-				<DemoInfo
-					{title}
-					{description}
-					{project_type}
-					{author}
-					{niche}
-					{tags}
-					{demo_url}
-					{repository_url}
-				/>
-			</div>
-			<div class="flex flex-1 col-span-1">
-				<div
-					class="hidden xl:block h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
-				>
-				</div>
-			</div>
-			<div class="col-span-6 grid grid-flow-row overflow-hidden">
-				<div class="mt-6 md:mt-2 overflow-y-auto no-scrollbar">
-					<div class="hidden md:block">
+		{product && <ProductNav {product} />}
+		<main class="px-12 py-10 w-full max-w-screen-2xl mx-auto">
+			<div class="h-full md:h-screen grid md:grid-cols-10">
+				<div class="col-span-3">
+					<a
+						href="/showcase"
+						class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
+					>
+						<Icon name="mdi:arrow-left" class="w-4 h-4" /> Back to showcase
+					</a>
+					<div class="block md:hidden pb-4">
 						{
 							hero_image && (
 								<Image
@@ -95,42 +63,74 @@ if (description) {
 							)
 						}
 					</div>
-					<section class="">
-						<div class="flex flex-col lg:flex-row gap-10 mt-16">
-							<article class="grow w-full md:max-w-3xl">
-								<div
-									class="prose prose-stone md:prose-lg dark:prose-invert"
-									data-pagefind-body
-									data-pagefind-filter="productId:showcase"
-								>
-									<slot />
-								</div>
-								<div class="pt-10">
-									<LinkButton
-										type="discord"
-										href={DISCORD_URL}
-										iconLeft="fa-brands:discord"
-										label="Join us on Discord"
+
+					<DemoInfo
+						{title}
+						{description}
+						{project_type}
+						{author}
+						{niche}
+						{tags}
+						{demo_url}
+						{repository_url}
+					/>
+				</div>
+				<div class="flex flex-1 col-span-1">
+					<div
+						class="hidden xl:block h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
+					>
+					</div>
+				</div>
+				<div class="col-span-6 grid grid-flow-row overflow-hidden">
+					<div class="mt-6 md:mt-2 overflow-y-auto no-scrollbar">
+						<div class="hidden md:block">
+							{
+								hero_image && (
+									<Image
+										src={hero_image}
+										alt=""
+										class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
+										quality="max"
 									/>
-								</div>
-							</article>
+								)
+							}
 						</div>
-					</section>
+						<section class="">
+							<div class="flex flex-col lg:flex-row gap-10 mt-16">
+								<article class="grow w-full md:max-w-3xl">
+									<div
+										class="prose prose-stone md:prose-lg dark:prose-invert"
+										data-pagefind-body
+										data-pagefind-filter="productId:showcase"
+									>
+										<slot />
+									</div>
+									<div class="pt-10">
+										<LinkButton
+											type="discord"
+											href={DISCORD_URL}
+											iconLeft="fa-brands:discord"
+											label="Join us on Discord"
+										/>
+									</div>
+								</article>
+							</div>
+						</section>
+					</div>
 				</div>
 			</div>
-		</div>
-	</main>
+		</main>
 
-	<section>
-		<div class="px-12 py-10 w-full max-w-screen-2xl mx-auto mb-10">
-			<h1
-				class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
-			>
-				Related Demos
-			</h1>
-			<DemoCardSet {tags} exclude={[id]} />
-		</div>
-	</section>
+		<section>
+			<div class="px-12 py-10 w-full max-w-screen-2xl mx-auto mb-10">
+				<h1
+					class="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 mb-8"
+				>
+					Related Demos
+				</h1>
+				<DemoCardSet {tags} exclude={[id]} />
+			</div>
+		</section>
 	</div>
 
 	<Footer />

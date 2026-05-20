@@ -45,15 +45,10 @@
 			}));
 	});
 
-	const showPopup = $derived(
-		inputFocused && searchQuery.trim().length >= 2
-	);
+	const showPopup = $derived(inputFocused && searchQuery.trim().length >= 2);
 
 	function esc(s: string): string {
-		return s
-			.replace(/&/g, "&amp;")
-			.replace(/</g, "&lt;")
-			.replace(/>/g, "&gt;");
+		return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	}
 
 	function highlight(text: string, query: string): string {
@@ -122,7 +117,8 @@
 
 		// Featured borders: border-r on left of each 2-item row, border-t on second row
 		featured.forEach((li, i) => {
-			if (i % 2 === 0 && i + 1 < featured.length) li.classList.add("md:border-r");
+			if (i % 2 === 0 && i + 1 < featured.length)
+				li.classList.add("md:border-r");
 			if (i >= 2) li.classList.add("md:border-t");
 		});
 
@@ -133,14 +129,17 @@
 		});
 
 		// Sync card-internal image height and title size to match promoted/demoted status
-		const [featH, regH] =
-			attr === "blog" ? ["h-64", "h-48"] : ["h-72", "h-56"];
+		const [featH, regH] = attr === "blog" ? ["h-64", "h-48"] : ["h-72", "h-56"];
 		allItems.forEach((li) => {
 			li.querySelector<HTMLElement>(".card-image")?.classList.remove(
-				"h-64", "h-48", "h-72", "h-56"
+				"h-64",
+				"h-48",
+				"h-72",
+				"h-56"
 			);
 			li.querySelector<HTMLElement>(".card-title")?.classList.remove(
-				"text-xl", "text-base"
+				"text-xl",
+				"text-base"
 			);
 		});
 		featured.forEach((li) => {
@@ -171,7 +170,9 @@
 		history.replaceState(
 			null,
 			"",
-			search ? `${window.location.pathname}?${search}` : window.location.pathname
+			search
+				? `${window.location.pathname}?${search}`
+				: window.location.pathname
 		);
 		applyProductTheme();
 		applyTagFilter();

@@ -21,7 +21,9 @@ const demo =
 >
 	{
 		demo.data.hero_image && (
-			<div class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}>
+			<div
+				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}
+			>
 				<Image
 					src={demo.data.hero_image}
 					width={600}
