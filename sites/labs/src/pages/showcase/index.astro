@@ -39,6 +39,9 @@ const demos = await getCollection(
           border-stone-800
         `}
 						data-tags={demo.data.tags?.join(",") ?? ""}
+						data-title={demo.data.title}
+						data-description={demo.data.description}
+						data-href={`/showcase/${demo.slug}`}
 					>
 						<DemoCard {demo} showMetadata size="wide" />
 					</li>

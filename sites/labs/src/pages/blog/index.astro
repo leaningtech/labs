@@ -42,6 +42,9 @@ const site = getSite(Astro.site?.hostname);
 					<li
 						class={`flex md:justify-stretch md:items-stretch ${i < 2 ? "md:col-span-3" : "md:col-span-2"}`}
 						data-tags={post.data.tags?.join(",") ?? ""}
+						data-title={post.data.title}
+						data-description={post.data.description}
+						data-href={`/blog/${post.slug}`}
 					>
 						<BlogPostCard {post} showMetadata size="wide" />
 					</li>

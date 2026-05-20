@@ -5,20 +5,83 @@
 
 	let selected = $state("");
 	let searchQuery = $state("");
-	let debounceTimer: ReturnType<typeof setTimeout>;
+	let inputFocused = $state(false);
+	let searchContainer: HTMLElement;
 
-	function applyFilter() {
-		const query = searchQuery.toLowerCase().trim();
+	interface SearchItem {
+		title: string;
+		description: string;
+		href: string;
+		tags: string[];
+	}
+
+	let searchItems: SearchItem[] = $state([]);
+
+	const searchResults = $derived.by(() => {
+		const q = searchQuery.trim().toLowerCase();
+		if (q.length < 2) return [];
+		return searchItems
+			.filter((item) => {
+				const matchesTag = !selected || item.tags.includes(selected);
+				return (
+					matchesTag &&
+					(item.title.toLowerCase().includes(q) ||
+						item.description.toLowerCase().includes(q))
+				);
+			})
+			.slice(0, 6)
+			.map((item) => ({
+				href: item.href,
+				title: highlight(item.title, q),
+				snippet: getSnippet(item.title, item.description, q),
+			}));
+	});
+
+	const showPopup = $derived(
+		inputFocused && searchQuery.trim().length >= 2
+	);
+
+	function esc(s: string): string {
+		return s
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;");
+	}
+
+	function highlight(text: string, query: string): string {
+		const i = text.toLowerCase().indexOf(query);
+		if (i === -1) return esc(text);
+		return (
+			esc(text.slice(0, i)) +
+			`<mark class="bg-primary-400/20 text-primary-300 rounded-sm not-italic">${esc(text.slice(i, i + query.length))}</mark>` +
+			esc(text.slice(i + query.length))
+		);
+	}
+
+	function getSnippet(title: string, desc: string, query: string): string {
+		// If match is in title, show a plain description preview
+		if (title.toLowerCase().includes(query)) {
+			if (!desc) return "";
+			return esc(desc.slice(0, 100)) + (desc.length > 100 ? "…" : "");
+		}
+		// Match is in description — show context window around it
+		const i = desc.toLowerCase().indexOf(query);
+		if (i === -1) return "";
+		const start = Math.max(0, i - 35);
+		const end = Math.min(desc.length, i + query.length + 60);
+		return (
+			(start > 0 ? "…" : "") +
+			highlight(desc.slice(start, end), query) +
+			(end < desc.length ? "…" : "")
+		);
+	}
+
+	function applyTagFilter() {
 		const items = document.querySelectorAll<HTMLElement>("[data-tags]");
-
 		items.forEach((item) => {
 			const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-			const matchesTag = !selected || tags.includes(selected);
-			const matchesSearch =
-				!query || (item.textContent?.toLowerCase().includes(query) ?? false);
-			item.style.display = matchesTag && matchesSearch ? "" : "none";
+			item.style.display = !selected || tags.includes(selected) ? "" : "none";
 		});
-
 		reapplyBlogLayout();
 		reapplyShowcaseBorders();
 	}
@@ -56,71 +119,108 @@
 
 	function selectTag(tag: string) {
 		selected = selected === tag ? "" : tag;
-		updateUrl();
-		applyFilter();
-	}
-
-	function handleSearchInput() {
-		clearTimeout(debounceTimer);
-		debounceTimer = setTimeout(() => {
-			updateUrl();
-			applyFilter();
-		}, 200);
-	}
-
-	function updateUrl() {
 		const params = new URLSearchParams(window.location.search);
 		if (selected) params.set("product", selected);
 		else params.delete("product");
-		if (searchQuery.trim()) params.set("q", searchQuery.trim());
-		else params.delete("q");
 		const search = params.toString();
 		history.replaceState(
 			null,
 			"",
-			search
-				? `${window.location.pathname}?${search}`
-				: window.location.pathname
+			search ? `${window.location.pathname}?${search}` : window.location.pathname
 		);
+		applyTagFilter();
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === "Escape") {
+			searchQuery = "";
+			inputFocused = false;
+			(document.activeElement as HTMLElement)?.blur();
+		}
+	}
+
+	function handleWindowClick(e: MouseEvent) {
+		if (searchContainer && !searchContainer.contains(e.target as Node)) {
+			inputFocused = false;
+		}
 	}
 
 	onMount(() => {
 		const params = new URLSearchParams(window.location.search);
 		selected = params.get("product") ?? "";
-		searchQuery = params.get("q") ?? "";
-		applyFilter();
+		applyTagFilter();
+
+		searchItems = [
+			...document.querySelectorAll<HTMLElement>("[data-tags]"),
+		].map((el) => ({
+			title: el.dataset.title ?? "",
+			description: el.dataset.description ?? "",
+			href: el.dataset.href ?? "#",
+			tags: el.dataset.tags ? el.dataset.tags.split(",") : [],
+		}));
 	});
 </script>
 
-<div class="flex flex-wrap gap-3 mb-8 items-center">
-	<div class="flex gap-2 flex-wrap">
+<svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
+
+<div class="flex flex-wrap gap-2 mb-8 items-center">
+	<button
+		onclick={() => selectTag("")}
+		class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {!selected
+			? 'bg-white text-bg-900 border-white'
+			: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
+	>
+		All
+	</button>
+	{#each TAGS as tag}
 		<button
-			onclick={() => selectTag("")}
-			class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {!selected
+			onclick={() => selectTag(tag)}
+			class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {selected ===
+			tag
 				? 'bg-white text-bg-900 border-white'
 				: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
 		>
-			All
+			{tag}
 		</button>
-		{#each TAGS as tag}
-			<button
-				onclick={() => selectTag(tag)}
-				class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {selected ===
-				tag
-					? 'bg-white text-bg-900 border-white'
-					: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
-			>
-				{tag}
-			</button>
-		{/each}
-	</div>
-	<div class="flex-1 min-w-48">
+	{/each}
+
+	<div class="relative" bind:this={searchContainer}>
 		<input
-			type="search"
-			placeholder="Search..."
+			type="text"
+			placeholder="Search…"
 			bind:value={searchQuery}
-			oninput={handleSearchInput}
-			class="w-full bg-bg-800 border border-bg-700 rounded-full px-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			onfocus={() => (inputFocused = true)}
+			class="w-40 bg-bg-800 border border-bg-700 rounded-full px-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
+
+		{#if showPopup}
+			<div
+				class="absolute top-full left-0 mt-2 w-80 md:w-96 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden"
+			>
+				{#if searchResults.length === 0}
+					<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
+				{:else}
+					{#each searchResults as result}
+						<a
+							href={result.href}
+							onclick={() => {
+								searchQuery = "";
+								inputFocused = false;
+							}}
+							class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
+						>
+							<p class="text-white text-sm font-semibold leading-snug">
+								{@html result.title}
+							</p>
+							{#if result.snippet}
+								<p class="text-bg-400 text-xs mt-1 leading-relaxed">
+									{@html result.snippet}
+								</p>
+							{/if}
+						</a>
+					{/each}
+				{/if}
+			</div>
+		{/if}
 	</div>
 </div>
