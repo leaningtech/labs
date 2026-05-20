@@ -3,6 +3,10 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.7.0:
+
+- Improve support for typed arrays
+
 ## Version 2.6.2:
 
 - Improve terminal scrolling support
