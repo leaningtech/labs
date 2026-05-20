@@ -3,6 +3,14 @@
 
 	const TAGS = ["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"] as const;
 
+	const tagToSiteClass: Record<string, string> = {
+		Cheerp: "site-cheerp",
+		CheerpJ: "site-cheerpj",
+		CheerpX: "site-cheerpx",
+		BrowserPod: "site-browserpod",
+	};
+	let originalSiteClass = "";
+
 	let selected = $state("");
 	let searchQuery = $state("");
 	let inputFocused = $state(false);
@@ -145,6 +153,15 @@
 		});
 	}
 
+	function applyProductTheme() {
+		const html = document.documentElement;
+		[...html.classList]
+			.filter((c) => c.startsWith("site-"))
+			.forEach((c) => html.classList.remove(c));
+		const target = (selected && tagToSiteClass[selected]) || originalSiteClass;
+		if (target) html.classList.add(target);
+	}
+
 	function selectTag(tag: string) {
 		selected = selected === tag ? "" : tag;
 		const params = new URLSearchParams(window.location.search);
@@ -156,6 +173,7 @@
 			"",
 			search ? `${window.location.pathname}?${search}` : window.location.pathname
 		);
+		applyProductTheme();
 		applyTagFilter();
 	}
 
@@ -174,8 +192,16 @@
 	}
 
 	onMount(() => {
+		for (const cls of document.documentElement.classList) {
+			if (cls.startsWith("site-")) {
+				originalSiteClass = cls;
+				break;
+			}
+		}
+
 		const params = new URLSearchParams(window.location.search);
 		selected = params.get("product") ?? "";
+		applyProductTheme();
 		applyTagFilter();
 
 		searchItems = [
@@ -205,7 +231,7 @@
 			onclick={() => selectTag(tag)}
 			class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {selected ===
 			tag
-				? 'bg-white text-bg-900 border-white'
+				? 'bg-primary-500 text-white border-primary-500'
 				: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
 		>
 			{tag}
