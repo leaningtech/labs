@@ -1,0 +1,59 @@
+---
+import { getEntry, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+	demo: CollectionEntry<"showcase"> | CollectionEntry<"showcase">["slug"];
+	featured?: boolean;
+}
+
+const { demo: demoOrSlug, featured = false } = Astro.props;
+
+const demo =
+	typeof demoOrSlug === "string"
+		? await getEntry("showcase", demoOrSlug)
+		: demoOrSlug;
+---
+
+<a
+	href={`/showcase/${demo.slug}`}
+	class="inline-flex flex-col group not-prose w-full p-6"
+>
+	{
+		demo.data.hero_image && (
+			<div class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}>
+				<Image
+					src={demo.data.hero_image}
+					width={600}
+					height={400}
+					alt=""
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+			</div>
+		)
+	}
+	<h3
+		class={`card-title font-bold text-balance text-white group-hover:text-primary-400 ${featured ? "text-xl" : "text-base"} leading-snug mb-2 grow`}
+	>
+		{demo.data.title}
+	</h3>
+	{
+		demo.data.description && (
+			<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
+				{demo.data.description}
+			</p>
+		)
+	}
+	<div class="flex flex-wrap gap-1.5">
+		<span class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs">
+			{demo.data.project_type}
+		</span>
+		{
+			demo.data.tags?.map((tag) => (
+				<span class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs">
+					{tag}
+				</span>
+			))
+		}
+	</div>
+</a>

@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import DemoCard from "@leaningtech/astro-theme/components/DemoCard.astro";
+import ShowcaseIndexCard from "@leaningtech/astro-theme/components/ShowcaseIndexCard.astro";
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import ProductFilter from "../../components/ProductFilter.svelte";
@@ -15,40 +15,48 @@ const demos = await getCollection(
 	title="Demo showcase"
 	description={`Discover projects built with our technologies`}
 >
-	<header class="text-center py-16 bg-stone-950 border-b border-stone-800">
-		<h1
-			class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
-		>
-			Demo showcase
-		</h1>
-		<p class="md:text-xl text-balance text-stone-400 max-w-2xl mx-auto">
-			Discover projects and demos built with our technologies by our developers,
-			community and collaborators
-		</p>
-	</header>
+	<div class="bg-stone-950">
+		<header class="text-center py-16">
+			<h1
+				class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 pb-2 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
+			>
+				Demo showcase
+			</h1>
+			<p class="md:text-xl text-balance text-stone-400 max-w-2xl mx-auto">
+				Discover projects and demos built with our technologies by our developers,
+				community and collaborators
+			</p>
+		</header>
 
-	<section class="pb-24 px-8 mx-auto w-full max-w-screen-2xl">
-		<ProductFilter client:load />
-		<ul class="grid grid-cols-1 md:grid-cols-2" data-filter-grid="showcase">
-			{
-				demos.map((demo, i) => (
-					<li
-						class={`flex md:justify-stretch md:items-stretch
-          ${i % 2 === 0 ? "md:border-r" : ""}
-          ${i >= 2 ? "md:border-t" : ""}
-          border-stone-800
-        `}
-						data-tags={demo.data.tags?.join(",") ?? ""}
-						data-title={demo.data.title}
-						data-description={demo.data.description}
-						data-href={`/showcase/${demo.slug}`}
-					>
-						<DemoCard {demo} showMetadata size="wide" />
-					</li>
-				))
-			}
-		</ul>
-	</section>
+		<section class="pb-24 px-8 mx-auto w-full max-w-screen-2xl">
+			<ProductFilter client:load />
+			<ul class="grid md:grid-cols-6" data-filter-grid="showcase">
+				{
+					demos.map((demo, i) => {
+						const featured = i < 4;
+						const rIdx = i - 4;
+						const borderR = featured ? i % 2 === 0 : rIdx % 3 < 2;
+						const borderT = featured ? i >= 2 : true;
+						return (
+							<li
+								class={`flex md:justify-stretch md:items-stretch border-stone-800
+									${featured ? "md:col-span-3" : "md:col-span-2"}
+									${borderR ? "md:border-r" : ""}
+									${borderT ? "md:border-t" : ""}
+								`}
+								data-tags={demo.data.tags?.join(",") ?? ""}
+								data-title={demo.data.title}
+								data-description={demo.data.description}
+								data-href={`/showcase/${demo.slug}`}
+							>
+								<ShowcaseIndexCard {demo} {featured} />
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
+	</div>
 
 	<Footer />
 </Shell>

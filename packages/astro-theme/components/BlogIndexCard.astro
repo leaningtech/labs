@@ -6,9 +6,10 @@ import { resolveAuthors } from "../lib/blog";
 
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
+	featured?: boolean;
 }
 
-const { post: postOrSlug } = Astro.props;
+const { post: postOrSlug, featured = false } = Astro.props;
 
 if (!postOrSlug) return null;
 
@@ -26,18 +27,20 @@ const authors = await resolveAuthors(post.data.authors);
 >
 	{
 		post.data.heroImage && (
-			<Image
-				src={post.data.heroImage}
-				width={1170}
-				height={615}
-				format="webp"
-				alt=""
-				class="border border-stone-800 rounded-sm object-cover w-full h-48 mb-5 bg-stone-900"
-			/>
+			<div class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-64" : "h-48"} mb-5 bg-stone-900`}>
+				<Image
+					src={post.data.heroImage}
+					width={1170}
+					height={615}
+					format="webp"
+					alt=""
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+			</div>
 		)
 	}
 	<h3
-		class="font-bold text-balance text-white group-hover:text-primary-400 text-base leading-snug mb-2 grow"
+		class={`card-title font-bold text-balance text-white group-hover:text-primary-400 ${featured ? "text-xl" : "text-base"} leading-snug mb-2 grow`}
 	>
 		{post.data.title}
 	</h3>

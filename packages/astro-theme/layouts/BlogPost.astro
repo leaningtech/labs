@@ -50,6 +50,7 @@ const site = getSite(Astro.site?.hostname);
 ---
 
 <Shell title={titleAndSubtitle} {description} image={socialImage?.src} {site}>
+	<div class="bg-stone-950">
 	{product && <ProductNav {product} />}
 	<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">
 		<a
@@ -208,6 +209,7 @@ const site = getSite(Astro.site?.hostname);
 		</h1>
 		<BlogPostCardSet {tags} exclude={[id]} />
 	</section>
+	</div>
 
 	<Footer />
 </Shell>

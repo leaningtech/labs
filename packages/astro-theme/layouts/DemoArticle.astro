@@ -40,6 +40,7 @@ if (description) {
 ---
 
 <Shell>
+	<div class="bg-stone-950">
 	{product && <ProductNav {product} />}
 	<main class="px-12 py-10 w-full max-w-screen-2xl mx-auto">
 		<div class="h-full md:h-screen grid md:grid-cols-10">
@@ -130,6 +131,7 @@ if (description) {
 			<DemoCardSet {tags} exclude={[id]} />
 		</div>
 	</section>
+	</div>
 
 	<Footer />
 </Shell>

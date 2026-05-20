@@ -82,13 +82,15 @@
 			const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
 			item.style.display = !selected || tags.includes(selected) ? "" : "none";
 		});
-		reapplyBlogLayout();
-		reapplyShowcaseBorders();
+		reapplyGridLayout("blog");
+		reapplyGridLayout("showcase");
 	}
 
-	function reapplyBlogLayout() {
+	// Reapplies col-span, border, and card-internal styles for a 6-col grid with 4 featured
+	// (2-per-row) followed by regular items (3-per-row).
+	function reapplyGridLayout(attr: string) {
 		const grid = document.querySelector<HTMLElement>(
-			'[data-filter-grid="blog"]'
+			`[data-filter-grid="${attr}"]`
 		);
 		if (!grid) return;
 		const allItems = [...grid.querySelectorAll<HTMLElement>("li")];
@@ -103,36 +105,43 @@
 			)
 		);
 
-		const featuredCount = Math.min(2, visibleItems.length);
+		const featuredCount = Math.min(4, visibleItems.length);
 		const featured = visibleItems.slice(0, featuredCount);
 		const regular = visibleItems.slice(featuredCount);
 
 		featured.forEach((li) => li.classList.add("md:col-span-3"));
 		regular.forEach((li) => li.classList.add("md:col-span-2"));
 
-		// Border between the two featured items
-		if (featured.length > 1) featured[0].classList.add("md:border-r");
+		// Featured borders: border-r on left of each 2-item row, border-t on second row
+		featured.forEach((li, i) => {
+			if (i % 2 === 0 && i + 1 < featured.length) li.classList.add("md:border-r");
+			if (i >= 2) li.classList.add("md:border-t");
+		});
 
-		// Regular items: border-t on all rows, border-r between items within each row of 3
+		// Regular borders: border-t on all, border-r between items within each row of 3
 		regular.forEach((li, i) => {
 			if (featured.length > 0 || i >= 3) li.classList.add("md:border-t");
 			if (i % 3 < 2) li.classList.add("md:border-r");
 		});
-	}
 
-	function reapplyShowcaseBorders() {
-		const list = document.querySelector<HTMLElement>(
-			'[data-filter-grid="showcase"]'
-		);
-		if (!list) return;
-		const allItems = [...list.querySelectorAll<HTMLElement>("li")];
-		const visibleItems = allItems.filter((li) => li.style.display !== "none");
-		allItems.forEach((li) =>
-			li.classList.remove("md:border-r", "md:border-t")
-		);
-		visibleItems.forEach((li, i) => {
-			if (i % 2 === 0) li.classList.add("md:border-r");
-			if (i >= 2) li.classList.add("md:border-t");
+		// Sync card-internal image height and title size to match promoted/demoted status
+		const [featH, regH] =
+			attr === "blog" ? ["h-64", "h-48"] : ["h-72", "h-56"];
+		allItems.forEach((li) => {
+			li.querySelector<HTMLElement>(".card-image")?.classList.remove(
+				"h-64", "h-48", "h-72", "h-56"
+			);
+			li.querySelector<HTMLElement>(".card-title")?.classList.remove(
+				"text-xl", "text-base"
+			);
+		});
+		featured.forEach((li) => {
+			li.querySelector<HTMLElement>(".card-image")?.classList.add(featH);
+			li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
+		});
+		regular.forEach((li) => {
+			li.querySelector<HTMLElement>(".card-image")?.classList.add(regH);
+			li.querySelector<HTMLElement>(".card-title")?.classList.add("text-base");
 		});
 	}
 
@@ -182,7 +191,7 @@
 
 <svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
 
-<div class="flex flex-wrap gap-2 mb-8 items-center">
+<div class="flex flex-wrap gap-2 mb-8 items-center min-w-0">
 	<button
 		onclick={() => selectTag("")}
 		class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {!selected
@@ -203,18 +212,18 @@
 		</button>
 	{/each}
 
-	<div class="relative" bind:this={searchContainer}>
+	<div class="relative w-full sm:w-auto sm:ml-auto" bind:this={searchContainer}>
 		<input
 			type="text"
 			placeholder="Search…"
 			bind:value={searchQuery}
 			onfocus={() => (inputFocused = true)}
-			class="w-40 bg-bg-800 border border-bg-700 rounded-full px-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			class="w-full sm:w-36 md:w-40 bg-bg-800 border border-bg-700 rounded-full px-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
 
 		{#if showPopup}
 			<div
-				class="absolute top-full left-0 mt-2 w-80 md:w-96 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden"
+				class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden"
 			>
 				{#if searchResults.length === 0}
 					<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>

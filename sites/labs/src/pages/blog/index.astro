@@ -18,48 +18,48 @@ const site = getSite(Astro.site?.hostname);
 	description="Read the latest updates from the Leaning Technologies development team about WebAssembly, compilers, and more."
 	{site}
 >
-	<header class="text-center py-16 bg-stone-950 border-b border-stone-800">
-		<h1
-			class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
-		>
-			Engineering blog
-		</h1>
-		<p class="text-lg text-balance text-stone-400 max-w-xl mx-auto">
-			News, technical writeups, and announcements directly from the development
-			team.
-		</p>
-	</header>
+	<div class="bg-stone-950">
+		<header class="text-center py-16">
+			<h1
+				class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 pb-2 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
+			>
+				Engineering blog
+			</h1>
+			<p class="text-lg text-balance text-stone-400 max-w-xl mx-auto">
+				News, technical writeups, and announcements directly from the development
+				team.
+			</p>
+		</header>
 
-	<section class="pb-24 px-8 mx-auto w-full max-w-screen-xl">
-		<ProductFilter client:load />
-		<ul class="grid md:grid-cols-6" data-filter-grid="blog">
-			{
-				allPosts.map((post, i) => {
-					const featured = i < 2;
-					const rIdx = i - 2;
-					const borderR = featured
-						? i === 0
-						: rIdx % 3 < 2;
-					const borderT = !featured;
-					return (
-						<li
-							class={`flex md:justify-stretch md:items-stretch border-stone-800
-								${featured ? "md:col-span-3" : "md:col-span-2"}
-								${borderR ? "md:border-r" : ""}
-								${borderT ? "md:border-t" : ""}
-							`}
-							data-tags={post.data.tags?.join(",") ?? ""}
-							data-title={post.data.title}
-							data-description={post.data.description}
-							data-href={`/blog/${post.slug}`}
-						>
-							<BlogIndexCard {post} />
-						</li>
-					);
-				})
-			}
-		</ul>
-	</section>
+		<section class="pb-24 px-8 mx-auto w-full max-w-screen-xl">
+			<ProductFilter client:load />
+			<ul class="grid md:grid-cols-6" data-filter-grid="blog">
+				{
+					allPosts.map((post, i) => {
+						const featured = i < 4;
+						const rIdx = i - 4;
+						const borderR = featured ? i % 2 === 0 : rIdx % 3 < 2;
+						const borderT = featured ? i >= 2 : true;
+						return (
+							<li
+								class={`flex md:justify-stretch md:items-stretch border-stone-800
+									${featured ? "md:col-span-3" : "md:col-span-2"}
+									${borderR ? "md:border-r" : ""}
+									${borderT ? "md:border-t" : ""}
+								`}
+								data-tags={post.data.tags?.join(",") ?? ""}
+								data-title={post.data.title}
+								data-description={post.data.description}
+								data-href={`/blog/${post.slug}`}
+							>
+								<BlogIndexCard {post} {featured} />
+							</li>
+						);
+					})
+				}
+			</ul>
+		</section>
+	</div>
 
 	<Footer />
 </Shell>
