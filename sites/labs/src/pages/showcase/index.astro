@@ -1,10 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
 import DemoCard from "@leaningtech/astro-theme/components/DemoCard.astro";
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
-import ShowcaseDoodle from "./reflectors.png";
 import ProductFilter from "../../components/ProductFilter.svelte";
 
 const demos = await getCollection(
@@ -17,26 +15,15 @@ const demos = await getCollection(
 	title="Demo showcase"
 	description={`Discover projects built with our technologies`}
 >
-	<header class="text-center text-stone-100">
-		<div class="relative flex justify-center pt-10 items-center">
-			<Image
-				src={ShowcaseDoodle}
-				width="500"
-				height="129"
-				class="invisible md:visible"
-				alt="reflectors"
-			/>
-			<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full">
-				<h1 class="text-5xl font-bold tracking-tight text-balance">
-					Demo showcase
-				</h1>
-			</div>
-		</div>
-
-		<p class="md:text-xl sm:text-lg text-balance mb-8 mt-4 text-stone-300">
-			{
-				`Discover projects and demos built with our technologies by our developers, community and collaborators`
-			}
+	<header class="text-center py-20">
+		<h1
+			class="text-6xl md:text-7xl font-bold tracking-tight text-balance mb-6 bg-gradient-to-b from-white to-stone-400 bg-clip-text text-transparent"
+		>
+			Demo showcase
+		</h1>
+		<p class="md:text-xl text-balance text-stone-400 max-w-2xl mx-auto">
+			Discover projects and demos built with our technologies by our developers,
+			community and collaborators
 		</p>
 	</header>
 

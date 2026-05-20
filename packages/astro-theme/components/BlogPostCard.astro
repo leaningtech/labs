@@ -3,9 +3,6 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
-import { productFromUrl } from "../lib/products";
-
-const product = productFromUrl(Astro.url);
 
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
@@ -24,18 +21,10 @@ const post =
 		? await getEntry("blog", postOrSlug)
 		: postOrSlug;
 const authors = await resolveAuthors(post.data.authors);
-
-//choose hover link color based on product
-const productName = typeof product === "undefined" ? "Labs" : product.name;
-//if product is cheerpj, add prefix /docs on post url
-const blog_url =
-	productName === "CheerpJ" || productName === "BrowserPod"
-		? "https://labs.leaningtech.com/blog/"
-		: "/blog/";
 ---
 
 <a
-	href={blog_url + post.slug}
+	href={`/blog/${post.slug}`}
 	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
 >
 	{
