@@ -28,9 +28,9 @@ const demos = await getCollection(
 			</p>
 		</header>
 
-		<section class="pb-24 px-8 mx-auto w-full max-w-screen-2xl">
+		<section class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-2xl">
 			<ProductFilter client:load />
-			<ul class="grid md:grid-cols-6" data-filter-grid="showcase">
+			<ul class="grid sm:grid-cols-2 md:grid-cols-6" data-filter-grid="showcase">
 				{
 					demos.map((demo, i) => {
 						const featured = i < 4;
@@ -40,7 +40,7 @@ const demos = await getCollection(
 						return (
 							<li
 								class={`flex md:justify-stretch md:items-stretch border-stone-800
-									${featured ? "md:col-span-3" : "md:col-span-2"}
+									${featured ? "sm:col-span-2 md:col-span-3" : "sm:col-span-1 md:col-span-2"}
 									${borderR ? "md:border-r" : ""}
 									${borderT ? "md:border-t" : ""}
 								`}

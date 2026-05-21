@@ -46,7 +46,16 @@ const socialImage = heroImage
 		})
 	: undefined;
 
-const site = getSite(Astro.site?.hostname);
+// Derive the site theme from the post's product tags so that links and
+// highlights on individual posts use the matching product colour palette.
+const tagToSite: Record<string, string> = {
+	BrowserPod: "browserpod",
+	Cheerp: "cheerp",
+	CheerpJ: "cheerpj",
+	CheerpX: "cheerpx",
+};
+const baseSite = getSite(Astro.site?.hostname);
+const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 ---
 
 <Shell title={titleAndSubtitle} {description} image={socialImage?.src} {site}>

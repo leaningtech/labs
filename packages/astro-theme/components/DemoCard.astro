@@ -8,58 +8,56 @@ interface Props {
 	size?: "wide" | "narrow";
 }
 
-const { demo: demoOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
+const { demo: demoOrSlug, size = "narrow" } = Astro.props;
 
 const demo =
 	typeof demoOrSlug === "string"
 		? await getEntry("showcase", demoOrSlug)
 		: demoOrSlug;
+
+const featured = size === "wide";
 ---
 
 <a
 	href={`/showcase/${demo.slug}`}
-	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full p-10"
+	class="inline-flex flex-col group not-prose w-full p-6"
 >
 	{
 		demo.data.hero_image && (
-			<Image
-				src={demo.data.hero_image}
-				width={size === "wide" ? 600 : 390}
-				height={256}
-				alt=""
-				class="border-stone-800 rounded-sm m-8 bg-stone-100 object-cover w-full h-72 self-center"
-			/>
-		)
-	}
-	<div class="grid grid-cols-5">
-		<h3
-			class:list={{
-				"col-span-3 font-bold text-balance text-white grow group-hover:text-primary-400": true,
-				"text-2xl leading-7": size === "wide",
-				"text-xl leading-6": size === "narrow",
-			}}
-		>
-			{demo.data.title}
-		</h3>
-	</div>
-	{
-		showMetadata && (
-			<div class="flex justify-between items-start gap-8 text-stone-400 text-base">
-				<div class="flex items-start gap-2 min-w-0">
-					<div class="break-words">{demo.data.description}</div>
-				</div>
+			<div
+				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}
+			>
+				<Image
+					src={demo.data.hero_image}
+					width={600}
+					height={400}
+					alt=""
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
 			</div>
 		)
 	}
-	<div class="col-span-2 flex flex-wrap gap-2 py-2 justify-start">
-		<h1 class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-sm">
+	<h3
+		class={`card-title font-bold text-balance text-white group-hover:text-primary-400 ${featured ? "text-xl" : "text-base"} leading-snug mb-2 grow`}
+	>
+		{demo.data.title}
+	</h3>
+	{
+		demo.data.description && (
+			<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
+				{demo.data.description}
+			</p>
+		)
+	}
+	<div class="flex flex-wrap gap-1.5">
+		<span class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs">
 			{demo.data.project_type}
-		</h1>
+		</span>
 		{
-			demo.data.tags.map((tag) => (
-				<h1 class="text-stone-200 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-500 outline-solid text-sm">
+			demo.data.tags?.map((tag) => (
+				<span class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs">
 					{tag}
-				</h1>
+				</span>
 			))
 		}
 	</div>

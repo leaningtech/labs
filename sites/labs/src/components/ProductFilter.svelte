@@ -1,20 +1,25 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	const TAGS = ["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"] as const;
+	const TAGS = ["BrowserPod", "Cheerp", "CheerpJ", "CheerpX"] as const;
 
 	const tagToSiteClass: Record<string, string> = {
+		BrowserPod: "site-browserpod",
 		Cheerp: "site-cheerp",
 		CheerpJ: "site-cheerpj",
 		CheerpX: "site-cheerpx",
-		BrowserPod: "site-browserpod",
 	};
 	let originalSiteClass = "";
+	let isInitialMount = true;
 
 	let selected = $state("");
 	let searchQuery = $state("");
 	let inputFocused = $state(false);
+	let filterMenuOpen = $state(false);
+	let mobileSearchOpen = $state(false);
 	let searchContainer: HTMLElement;
+	let mobileFilterRef: HTMLElement;
+	let mobileSearchRef: HTMLElement;
 
 	interface SearchItem {
 		title: string;
@@ -45,10 +50,17 @@
 			}));
 	});
 
+	// Desktop popup: close when focus leaves the search area.
 	const showPopup = $derived(inputFocused && searchQuery.trim().length >= 2);
+	// Mobile popup: autofocus is unreliable on mobile; show whenever
+	// the search bar is open and the query is long enough.
+	const showMobilePopup = $derived(mobileSearchOpen && searchQuery.trim().length >= 2);
 
 	function esc(s: string): string {
-		return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		return s
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;");
 	}
 
 	function highlight(text: string, query: string): string {
@@ -62,12 +74,10 @@
 	}
 
 	function getSnippet(title: string, desc: string, query: string): string {
-		// If match is in title, show a plain description preview
 		if (title.toLowerCase().includes(query)) {
 			if (!desc) return "";
 			return esc(desc.slice(0, 100)) + (desc.length > 100 ? "…" : "");
 		}
-		// Match is in description — show context window around it
 		const i = desc.toLowerCase().indexOf(query);
 		if (i === -1) return "";
 		const start = Math.max(0, i - 35);
@@ -81,16 +91,43 @@
 
 	function applyTagFilter() {
 		const items = document.querySelectorAll<HTMLElement>("[data-tags]");
-		items.forEach((item) => {
-			const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-			item.style.display = !selected || tags.includes(selected) ? "" : "none";
-		});
+
+		if (!isInitialMount) {
+			items.forEach((item) => {
+				const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
+				const visible = !selected || tags.includes(selected);
+				if (visible) {
+					item.style.opacity = "0";
+					item.style.display = "";
+				} else {
+					item.style.opacity = "";
+					item.style.display = "none";
+				}
+			});
+		} else {
+			items.forEach((item) => {
+				const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
+				item.style.display = !selected || tags.includes(selected) ? "" : "none";
+			});
+		}
+
 		reapplyGridLayout("blog");
 		reapplyGridLayout("showcase");
+
+		if (!isInitialMount) {
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					items.forEach((item) => {
+						if (item.style.display !== "none") item.style.opacity = "";
+					});
+				});
+			});
+		}
 	}
 
-	// Reapplies col-span, border, and card-internal styles for a 6-col grid with 4 featured
-	// (2-per-row) followed by regular items (3-per-row).
+	// Reapplies col-span, border, and card-internal styles.
+	// Blog: 2-col mobile grid + responsive image heights.
+	// Showcase: desktop-only layout unchanged.
 	function reapplyGridLayout(attr: string) {
 		const grid = document.querySelector<HTMLElement>(
 			`[data-filter-grid="${attr}"]`
@@ -99,14 +136,13 @@
 		const allItems = [...grid.querySelectorAll<HTMLElement>("li")];
 		const visibleItems = allItems.filter((li) => li.style.display !== "none");
 
-		allItems.forEach((li) =>
+		allItems.forEach((li) => {
 			li.classList.remove(
-				"md:col-span-3",
-				"md:col-span-2",
-				"md:border-r",
-				"md:border-t"
-			)
-		);
+				"md:col-span-3", "md:col-span-2", "md:border-r", "md:border-t"
+			);
+			if (attr === "blog") li.classList.remove("col-span-2", "col-span-1");
+			if (attr === "showcase") li.classList.remove("sm:col-span-2", "sm:col-span-1");
+		});
 
 		const featuredCount = Math.min(4, visibleItems.length);
 		const featured = visibleItems.slice(0, featuredCount);
@@ -115,54 +151,80 @@
 		featured.forEach((li) => li.classList.add("md:col-span-3"));
 		regular.forEach((li) => li.classList.add("md:col-span-2"));
 
-		// Featured borders: border-r on left of each 2-item row, border-t on second row
+		if (attr === "blog") {
+			featured.forEach((li) => li.classList.add("col-span-2"));
+			regular.forEach((li) => li.classList.add("col-span-1"));
+		} else if (attr === "showcase") {
+			featured.forEach((li) => li.classList.add("sm:col-span-2"));
+			regular.forEach((li) => li.classList.add("sm:col-span-1"));
+		}
+
 		featured.forEach((li, i) => {
-			if (i % 2 === 0 && i + 1 < featured.length)
-				li.classList.add("md:border-r");
+			if (i % 2 === 0 && i + 1 < featured.length) li.classList.add("md:border-r");
 			if (i >= 2) li.classList.add("md:border-t");
 		});
-
-		// Regular borders: border-t on all, border-r between items within each row of 3
 		regular.forEach((li, i) => {
 			if (featured.length > 0 || i >= 3) li.classList.add("md:border-t");
 			if (i % 3 < 2) li.classList.add("md:border-r");
 		});
 
-		// Sync card-internal image height and title size to match promoted/demoted status
-		const [featH, regH] = attr === "blog" ? ["h-64", "h-48"] : ["h-72", "h-56"];
+		const allHeightClasses = [
+			"h-64", "h-48", "h-72", "h-56", "h-32", "sm:h-64", "sm:h-48",
+		];
 		allItems.forEach((li) => {
-			li.querySelector<HTMLElement>(".card-image")?.classList.remove(
-				"h-64",
-				"h-48",
-				"h-72",
-				"h-56"
-			);
-			li.querySelector<HTMLElement>(".card-title")?.classList.remove(
-				"text-xl",
-				"text-base"
-			);
+			li.querySelector<HTMLElement>(".card-image")
+				?.classList.remove(...allHeightClasses);
+			li.querySelector<HTMLElement>(".card-title")
+				?.classList.remove("text-xl", "text-base");
 		});
-		featured.forEach((li) => {
-			li.querySelector<HTMLElement>(".card-image")?.classList.add(featH);
-			li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
-		});
-		regular.forEach((li) => {
-			li.querySelector<HTMLElement>(".card-image")?.classList.add(regH);
-			li.querySelector<HTMLElement>(".card-title")?.classList.add("text-base");
-		});
+
+		if (attr === "blog") {
+			featured.forEach((li) => {
+				li.querySelector<HTMLElement>(".card-image")
+					?.classList.add("h-48", "sm:h-64");
+				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
+			});
+			regular.forEach((li) => {
+				li.querySelector<HTMLElement>(".card-image")
+					?.classList.add("h-32", "sm:h-48");
+				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-base");
+			});
+		} else {
+			featured.forEach((li) => {
+				li.querySelector<HTMLElement>(".card-image")?.classList.add("h-72");
+				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
+			});
+			regular.forEach((li) => {
+				li.querySelector<HTMLElement>(".card-image")?.classList.add("h-56");
+				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-base");
+			});
+		}
 	}
 
 	function applyProductTheme() {
 		const html = document.documentElement;
-		[...html.classList]
-			.filter((c) => c.startsWith("site-"))
-			.forEach((c) => html.classList.remove(c));
-		const target = (selected && tagToSiteClass[selected]) || originalSiteClass;
-		if (target) html.classList.add(target);
+		const productClasses = Object.values(tagToSiteClass);
+
+		if (selected && tagToSiteClass[selected]) {
+			// Selecting a product: remove all product classes and the base site class,
+			// then apply the product-specific one so it wins without CSS-order conflicts.
+			productClasses.forEach((c) => html.classList.remove(c));
+			if (originalSiteClass) html.classList.remove(originalSiteClass);
+			html.classList.add(tagToSiteClass[selected]);
+		} else {
+			// "All" (no product): remove every product class, restore the original
+			// site class only if it is not already there to avoid pointless DOM
+			// mutations that trigger CSS transitions on the ::after underline.
+			productClasses.forEach((c) => html.classList.remove(c));
+			if (originalSiteClass && !html.classList.contains(originalSiteClass)) {
+				html.classList.add(originalSiteClass);
+			}
+		}
 	}
 
 	function selectTag(tag: string) {
 		selected = selected === tag ? "" : tag;
+		filterMenuOpen = false;
 		const params = new URLSearchParams(window.location.search);
 		if (selected) params.set("product", selected);
 		else params.delete("product");
@@ -170,9 +232,7 @@
 		history.replaceState(
 			null,
 			"",
-			search
-				? `${window.location.pathname}?${search}`
-				: window.location.pathname
+			search ? `${window.location.pathname}?${search}` : window.location.pathname
 		);
 		applyProductTheme();
 		applyTagFilter();
@@ -182,13 +242,22 @@
 		if (e.key === "Escape") {
 			searchQuery = "";
 			inputFocused = false;
+			filterMenuOpen = false;
+			mobileSearchOpen = false;
 			(document.activeElement as HTMLElement)?.blur();
 		}
 	}
 
 	function handleWindowClick(e: MouseEvent) {
-		if (searchContainer && !searchContainer.contains(e.target as Node)) {
+		if (
+			searchContainer &&
+			!searchContainer.contains(e.target as Node) &&
+			(!mobileSearchRef || !mobileSearchRef.contains(e.target as Node))
+		) {
 			inputFocused = false;
+		}
+		if (mobileFilterRef && !mobileFilterRef.contains(e.target as Node)) {
+			filterMenuOpen = false;
 		}
 	}
 
@@ -204,6 +273,7 @@
 		selected = params.get("product") ?? "";
 		applyProductTheme();
 		applyTagFilter();
+		isInitialMount = false;
 
 		searchItems = [
 			...document.querySelectorAll<HTMLElement>("[data-tags]"),
@@ -218,36 +288,160 @@
 
 <svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
 
-<div class="flex flex-wrap gap-2 mb-8 items-center min-w-0">
+<!-- ─── Mobile: filter ↔ search swap in a single row ─────────────────────── -->
+<div class="sm:hidden mb-8 flex items-center gap-3">
+	{#if mobileSearchOpen}
+		<!-- Search mode: full-width input replaces the filter button -->
+		<div class="relative flex-1" bind:this={mobileSearchRef}>
+			<span class="absolute left-3 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+					viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+				</svg>
+			</span>
+			<input
+				type="text"
+				placeholder="Search…"
+				bind:value={searchQuery}
+				onfocus={() => (inputFocused = true)}
+				autofocus
+				class="w-full bg-bg-800 border border-bg-700 rounded-lg pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			/>
+			{#if showMobilePopup}
+				<div class="absolute top-full left-0 right-0 mt-2 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
+					{#if searchResults.length === 0}
+						<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
+					{:else}
+						{#each searchResults as result}
+							<a
+								href={result.href}
+								onclick={() => { searchQuery = ""; inputFocused = false; mobileSearchOpen = false; }}
+								class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
+							>
+								<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
+								{#if result.snippet}
+									<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
+								{/if}
+							</a>
+						{/each}
+					{/if}
+				</div>
+			{/if}
+		</div>
+
+		<!-- X button occupies the spot where the search icon was -->
+		<button
+			onclick={() => { mobileSearchOpen = false; searchQuery = ""; inputFocused = false; }}
+			class="flex-none text-bg-400 hover:text-white transition-colors"
+			aria-label="Close search"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</button>
+	{:else}
+		<!-- Filter mode: dropdown button on the left, search icon on the right -->
+		<div class="relative" bind:this={mobileFilterRef}>
+			<button
+				onclick={() => (filterMenuOpen = !filterMenuOpen)}
+				class="filter-btn active flex items-center gap-1.5 text-sm font-medium text-white cursor-pointer transition-colors duration-200 whitespace-nowrap"
+			>
+				{selected || "All"}
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="w-3 h-3 transition-transform duration-200 {filterMenuOpen ? 'rotate-180' : ''}"
+					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+				</svg>
+			</button>
+
+			{#if filterMenuOpen}
+				<div class="absolute left-0 top-full mt-1 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[10rem]">
+					<button
+						onclick={() => selectTag("")}
+						class="w-full text-left px-4 py-3 text-sm transition-colors {!selected ? 'text-white font-semibold bg-bg-800' : 'text-bg-400 hover:bg-bg-800 hover:text-white'}"
+					>All</button>
+					{#each TAGS as tag}
+						<button
+							onclick={() => selectTag(tag)}
+							class="w-full text-left px-4 py-3 text-sm transition-colors border-t border-bg-800 {selected === tag ? 'text-primary-400 font-semibold bg-bg-800' : 'text-bg-400 hover:bg-bg-800 hover:text-white'}"
+						>{tag}</button>
+					{/each}
+				</div>
+			{/if}
+		</div>
+
+		<!-- Pushes search icon to the right -->
+		<div class="flex-1"></div>
+
+		<!-- Search icon: clicking swaps to search mode -->
+		<button
+			onclick={() => { mobileSearchOpen = true; filterMenuOpen = false; }}
+			class="flex-none text-bg-400 hover:text-white transition-colors"
+			aria-label="Search"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round"
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+			</svg>
+		</button>
+	{/if}
+</div>
+
+<!-- ─── Desktop: full filter row ─────────────────────────────────────────── -->
+<div class="hidden sm:flex flex-wrap gap-x-6 gap-y-3 mb-8 items-center min-w-0">
 	<button
 		onclick={() => selectTag("")}
-		class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {!selected
-			? 'bg-white text-bg-900 border-white'
-			: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
+		class="filter-btn text-sm font-medium cursor-pointer transition-colors duration-200"
+		class:active={!selected}
+		class:text-white={!selected}
+		class:text-bg-500={!!selected}
 	>
 		All
 	</button>
 	{#each TAGS as tag}
 		<button
 			onclick={() => selectTag(tag)}
-			class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors cursor-pointer {selected ===
-			tag
-				? 'bg-primary-500 text-white border-primary-500'
-				: 'text-bg-400 border-bg-700 hover:border-bg-500 hover:text-white'}"
+			class="filter-btn text-sm font-medium cursor-pointer transition-colors duration-200"
+			class:active={selected === tag}
+			class:text-white={selected === tag}
+			class:text-bg-500={selected !== tag}
 		>
 			{tag}
 		</button>
 	{/each}
 
-	<div class="relative w-full sm:w-auto sm:ml-auto" bind:this={searchContainer}>
+	<!-- Search — flows right after CheerpX, no ml-auto -->
+	<div class="relative" bind:this={searchContainer}>
+		<span
+			class="absolute left-3.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="w-4 h-4"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				stroke-width="2"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+				/>
+			</svg>
+		</span>
 		<input
 			type="text"
 			placeholder="Search…"
 			bind:value={searchQuery}
 			onfocus={() => (inputFocused = true)}
-			class="w-full sm:w-36 md:w-40 bg-bg-800 border border-bg-700 rounded-full px-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			class="w-52 md:w-60 bg-bg-800 border border-bg-700 rounded-lg pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
-
 		{#if showPopup}
 			<div
 				class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden"
@@ -279,3 +473,34 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	/* Underline indicator — absolute so it never shifts layout */
+	.filter-btn {
+		position: relative;
+		padding-bottom: 6px;
+	}
+	.filter-btn::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: rgba(255, 255, 255, 0);
+		transition: height 150ms ease, background-color 200ms ease;
+	}
+	.filter-btn:hover::after {
+		background: rgba(255, 255, 255, 0.35);
+	}
+	/* Active: 3 px solid brand colour — declared after hover so it wins */
+	.filter-btn.active::after {
+		height: 3px;
+		background: rgb(var(--color-primary-500));
+	}
+
+	/* Card fade-in on filter change */
+	:global([data-tags]) {
+		transition: opacity 250ms ease;
+	}
+</style>
