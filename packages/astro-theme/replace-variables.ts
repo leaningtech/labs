@@ -3,6 +3,8 @@ import { visit } from "unist-util-visit";
 const replacements = {
 	CX_LATEST: "1.2.8",
 	BP_LATEST: "2.7.0",
+	CJ_TUTORIALS_BASE: "/docs/cheerpj3/tutorials",
+	CJ_TUTORIALS_QUERY: "?v=2026-05-27",
 };
 
 export function remarkReplaceVars() {

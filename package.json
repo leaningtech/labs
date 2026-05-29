@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"package:cheerpj-tutorial": "node scripts/package-cheerpj-tutorial.mjs"
 	},
 	"devDependencies": {
 		"prettier": "^3.7.4",
