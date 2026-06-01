@@ -400,7 +400,7 @@
 		<div class="relative" bind:this={mobileFilterRef}>
 			<button
 				onclick={() => (filterMenuOpen = !filterMenuOpen)}
-				class="filter-btn active flex items-center gap-1.5 text-sm font-medium text-white cursor-pointer transition-colors duration-200 whitespace-nowrap"
+				class="filter-btn active flex items-center gap-1.5 text-sm font-medium cursor-pointer whitespace-nowrap"
 			>
 				{selected || "All"}
 				<svg
@@ -429,11 +429,11 @@
 
 		<!-- "Filter by" label + category chips inline with dropdown -->
 		{#if availableCategories.length > 0}
-			<span class="text-sm text-bg-500 whitespace-nowrap self-center">Filter by</span>
+			<span class="text-xs text-bg-500 whitespace-nowrap self-center">Filter by</span>
 			{#each availableCategories as cat}
 				<button
 					onclick={() => toggleCategory(cat)}
-					class="category-chip text-sm cursor-pointer transition-colors duration-150 px-3 py-1.5 rounded-md border"
+					class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-md border"
 					class:active={selectedCategories.includes(cat)}
 				>{cat}</button>
 			{/each}
@@ -455,47 +455,53 @@
 	{/if}
 </div>
 
-<!-- ─── Desktop: unified single row (products | sep | categories | search) ── -->
-<div class="hidden sm:flex flex-wrap gap-x-4 gap-y-3 mb-8 items-center min-w-0">
-	<!-- Product filter tabs -->
-	<button
-		onclick={() => selectTag("")}
-		class="filter-btn text-sm font-medium cursor-pointer transition-colors duration-200"
-		class:active={!selected}
-		class:text-white={!selected}
-		class:text-bg-500={!!selected}
-	>
-		All
-	</button>
-	{#each TAGS as tag}
-		<button
-			onclick={() => selectTag(tag)}
-			class="filter-btn text-sm font-medium cursor-pointer transition-colors duration-200"
-			class:active={selected === tag}
-			class:text-white={selected === tag}
-			class:text-bg-500={selected !== tag}
-		>
-			{tag}
-		</button>
-	{/each}
+<!--
+  Desktop: product tabs have their own border-b (baseline) that stops after the
+  last tab. Chips and search sit at the same bottom level but without the line.
+  items-end on the outer row keeps everything bottom-aligned.
+-->
+<div class="hidden sm:flex w-full justify-center items-end gap-x-3 mb-8">
 
-	<!-- Separator + "Filter by" label + category chips (only when page has categories) -->
+	<!-- Product tabs only — border-b here so the line ends with the last tab -->
+	<div class="flex items-end gap-x-1 border-b border-stone-700">
+		<button
+			onclick={() => selectTag("")}
+			class="filter-btn text-sm font-medium cursor-pointer"
+			class:active={!selected}
+		>All</button>
+		<!-- Separator after "All": hide when All or the first product tab is active -->
+		{#if selected && selected !== TAGS[0]}
+			<span class="h-4 w-px bg-stone-700 self-center mx-1" aria-hidden="true"></span>
+		{/if}
+		{#each TAGS as tag, i}
+			<button
+				onclick={() => selectTag(tag)}
+				class="filter-btn text-sm font-medium cursor-pointer"
+				class:active={selected === tag}
+			>{tag}</button>
+			<!-- Separator between this product tab and the next: hide when either neighbour is active -->
+			{#if i < TAGS.length - 1 && selected !== TAGS[i] && selected !== TAGS[i + 1]}
+				<span class="h-4 w-px bg-stone-700 self-center mx-1" aria-hidden="true"></span>
+			{/if}
+		{/each}
+	</div>
+
+	<!-- Category chips (no border-b, no leading separator) -->
 	{#if availableCategories.length > 0}
-		<span class="h-4 w-px bg-stone-700 self-center" aria-hidden="true"></span>
-		<span class="text-sm text-bg-500 whitespace-nowrap self-center">Filter by</span>
+		<span class="text-xs text-bg-500 whitespace-nowrap self-center">Filter by</span>
 		{#each availableCategories as cat}
 			<button
 				onclick={() => toggleCategory(cat)}
-				class="category-chip text-sm cursor-pointer transition-colors duration-150 px-3 py-1.5 rounded-md border"
+				class="category-chip self-center text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-md border"
 				class:active={selectedCategories.includes(cat)}
 			>{cat}</button>
 		{/each}
 	{/if}
 
-	<!-- Search — fills all remaining space after the category chips -->
-	<div class="relative flex-1 min-w-[8rem]" bind:this={searchContainer}>
-		<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
-			<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+	<!-- Search bar — fixed width so the filter row doesn't span the full container -->
+	<div class="relative shrink-0 w-36 lg:w-48 self-center pb-1" bind:this={searchContainer}>
+		<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none"
 				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round"
 					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -503,10 +509,10 @@
 		</span>
 		<input
 			type="text"
-			placeholder="Search…"
+			placeholder={searchPlaceholder}
 			bind:value={searchQuery}
 			onfocus={() => (inputFocused = true)}
-			class="w-full bg-stone-950 border border-bg-700 rounded-md pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			class="w-full bg-stone-950 border border-bg-700 rounded-md pl-8 pr-3 py-1 text-xs text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
 		{#if showPopup}
 			<div class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
@@ -532,28 +538,41 @@
 </div>
 
 <style>
-	/* Underline indicator — symmetric padding keeps text centred in the flex row */
+	/*
+	 * Classic browser-tab effect:
+	 *  - The outer container has border-bottom (the baseline)
+	 *  - Inactive tabs: flat text sitting on the baseline, no background
+	 *  - Active tab: border on left + top (coloured) + right, no bottom border,
+	 *    rounded top corners, background = page colour → visually "erases" the
+	 *    baseline beneath it and creates the open-tab cutout shape.
+	 *  - margin-bottom: -1px makes the tab overlap the 1 px baseline border.
+	 */
 	.filter-btn {
 		position: relative;
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding: 6px 14px;
+		color: rgb(120 113 108); /* stone-500 */
+		transition: color 150ms ease;
 	}
-	.filter-btn::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 3px; /* always 3 px — same thickness on hover and active */
-		background: rgba(255, 255, 255, 0);
-		transition: background-color 200ms ease;
+	.filter-btn:hover:not(.active) {
+		color: rgb(214 211 209); /* stone-300 */
 	}
-	.filter-btn:hover::after {
-		background: rgba(255, 255, 255, 0.35);
-	}
-	/* Active: brand colour */
-	.filter-btn.active::after {
-		background: rgb(var(--color-primary-500));
+	.filter-btn.active {
+		border-top: 2px solid rgb(var(--color-primary-500));
+		border-left: 1px solid rgb(68 64 60);  /* stone-700 */
+		border-right: 1px solid rgb(68 64 60);
+		border-bottom: none;
+		/*
+		 * 2 px bottom radius softens the junction with the baseline so the
+		 * side-border ends curve very slightly rather than cutting at 90°.
+		 * No pseudo-elements needed — the tiny convex arc is enough.
+		 */
+		border-radius: 8px 8px 2px 2px;
+		background-color: rgb(12 10 9); /* stone-950 — same as page bg */
+		color: white;
+		margin-bottom: -1px;
+		z-index: 1;
+		padding-top: 4px;    /* 6px − 2px border-top keeps text aligned */
+		padding-bottom: 7px; /* 6px + 1px to compensate margin-bottom offset */
 	}
 
 	/* Category chips — rectangular with rounded corners, primary fill when active */
