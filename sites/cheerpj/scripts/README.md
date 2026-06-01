@@ -2,11 +2,11 @@
 
 Use `package-cheerpj-tutorial.mjs` to build a downloadable tutorial ZIP from a source example folder.
 
-It:
+This will:
 
-- copies the example folder to a temp directory,
-- removes empty `.jar` files,
-- replaces the loader URL in HTML files,
+- copy the example folder to a temp directory,
+- remove empty `.jar` files,
+- replace the loader URL in HTML files,
 - writes a ZIP at the requested output path.
 
 Typical usage:
@@ -18,4 +18,4 @@ node scripts/package-cheerpj-tutorial.mjs \
   --loader-url https://cjrtnc.leaningtech.com/4.3/loader.js
 ```
 
-If your HTML source uses a placeholder instead of a hardcoded loader URL, the default placeholder is `__CHEERPJ_LOADER_URL__`.
+If the HTML source uses a placeholder instead of a hardcoded loader URL, the default placeholder is `__CHEERPJ_LOADER_URL__`.
