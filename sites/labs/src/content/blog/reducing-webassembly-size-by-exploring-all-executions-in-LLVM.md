@@ -9,7 +9,7 @@ heroImage: ./llvm-partialexecuter.png
 tags:
   - Cheerp
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 Partial Executer is a brand-new LLVM optimization pass that uses an Interpreter-like engine to prove some code will never be executed, making it safe to eliminate it.

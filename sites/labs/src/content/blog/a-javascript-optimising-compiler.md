@@ -9,7 +9,7 @@ heroImage: ./javascript-optimising-compiler.webp
 tags:
   - Cheerp
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 Carlo, a Leaning Technologies compiler engineer, has tried something bold.

@@ -13,7 +13,7 @@ heroImage: "./branch-hinting.png"
 tags:
   - CheerpX
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 Around a month ago, the WebAssembly Community Group voted to advance the [Branch Hinting proposal](https://github.com/WebAssembly/branch-hinting) to phase 4, effectively recommending its addition to the standard, and the Working Group formally added it to the standard by voting it into phase 5 last week.

@@ -32,7 +32,7 @@ const site = getSite(Astro.site?.hostname);
 		</header>
 
 		<section class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-xl">
-			<ProductFilter client:load />
+			<ProductFilter client:load searchPlaceholder="Search posts…" />
 			<ul class="grid grid-cols-2 md:grid-cols-6" data-filter-grid="blog">
 				{
 					allPosts.map((post, i) => {

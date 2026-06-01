@@ -9,7 +9,7 @@ heroImage: ./applet-runner.webp
 tags:
   - CheerpJ
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 A bit of a “learn from our pain” / rant / sharing our experience-type blogpost, but here goes.

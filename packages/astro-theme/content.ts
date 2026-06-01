@@ -4,7 +4,7 @@ const productTags = z.array(
 	z.enum(["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"])
 );
 const blogCategories = z.array(
-	z.enum(["Release", "Deep Dive", "Community", "Projects & Demos", "Inside LT"])
+	z.enum(["Release", "Technical", "Community", "Projects & Demos", "Inside Leaning Technologies"])
 );
 const languages = z.enum(["en", "ja"]);
 

@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
+	let { searchPlaceholder = "Search…" }: { searchPlaceholder?: string } = $props();
+
 	const TAGS = ["BrowserPod", "Cheerp", "CheerpJ", "CheerpX"] as const;
 	// Preferred display order for blog categories; unknown values sort alphabetically after.
 	const CATEGORY_ORDER = [
 		"Release",
-		"Deep Dive",
+		"Technical",
 		"Community",
 		"Projects & Demos",
-		"Inside LT",
+		"Inside Leaning Technologies",
 	];
 
 	const tagToSiteClass: Record<string, string> = {
@@ -356,11 +358,11 @@
 			</span>
 			<input
 				type="text"
-				placeholder="Search…"
+				placeholder={searchPlaceholder}
 				bind:value={searchQuery}
 				onfocus={() => (inputFocused = true)}
 				autofocus
-				class="w-full bg-bg-800 border border-bg-700 rounded-lg pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+				class="w-full bg-stone-950 border border-bg-700 rounded-md pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 			/>
 			{#if showMobilePopup}
 				<div class="absolute top-full left-0 right-0 mt-2 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
@@ -425,14 +427,17 @@
 			{/if}
 		</div>
 
-		<!-- Category chips inline with dropdown -->
-		{#each availableCategories as cat}
-			<button
-				onclick={() => toggleCategory(cat)}
-				class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2 py-0.5 rounded border"
-				class:active={selectedCategories.includes(cat)}
-			>{cat}</button>
-		{/each}
+		<!-- "Filter by" label + category chips inline with dropdown -->
+		{#if availableCategories.length > 0}
+			<span class="text-sm text-bg-500 whitespace-nowrap self-center">Filter by</span>
+			{#each availableCategories as cat}
+				<button
+					onclick={() => toggleCategory(cat)}
+					class="category-chip text-sm cursor-pointer transition-colors duration-150 px-3 py-1.5 rounded-md border"
+					class:active={selectedCategories.includes(cat)}
+				>{cat}</button>
+			{/each}
+		{/if}
 
 		<!-- Spacer + search icon at end -->
 		<div class="flex-1"></div>
@@ -474,20 +479,21 @@
 		</button>
 	{/each}
 
-	<!-- Separator + category chips (only when page has categories) -->
+	<!-- Separator + "Filter by" label + category chips (only when page has categories) -->
 	{#if availableCategories.length > 0}
 		<span class="h-4 w-px bg-stone-700 self-center" aria-hidden="true"></span>
+		<span class="text-sm text-bg-500 whitespace-nowrap self-center">Filter by</span>
 		{#each availableCategories as cat}
 			<button
 				onclick={() => toggleCategory(cat)}
-				class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-full border"
+				class="category-chip text-sm cursor-pointer transition-colors duration-150 px-3 py-1.5 rounded-md border"
 				class:active={selectedCategories.includes(cat)}
 			>{cat}</button>
 		{/each}
 	{/if}
 
-	<!-- Search — pushed to the right -->
-	<div class="relative ml-auto" bind:this={searchContainer}>
+	<!-- Search — fills all remaining space after the category chips -->
+	<div class="relative flex-1 min-w-[8rem]" bind:this={searchContainer}>
 		<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
 			<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
 				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -500,7 +506,7 @@
 			placeholder="Search…"
 			bind:value={searchQuery}
 			onfocus={() => (inputFocused = true)}
-			class="w-44 md:w-56 bg-bg-800 border border-bg-700 rounded-lg pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			class="w-full bg-stone-950 border border-bg-700 rounded-md pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
 		{#if showPopup}
 			<div class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
@@ -526,9 +532,10 @@
 </div>
 
 <style>
-	/* Underline indicator — absolute so it never shifts layout */
+	/* Underline indicator — symmetric padding keeps text centred in the flex row */
 	.filter-btn {
 		position: relative;
+		padding-top: 6px;
 		padding-bottom: 6px;
 	}
 	.filter-btn::after {
@@ -537,20 +544,19 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: 1px;
+		height: 3px; /* always 3 px — same thickness on hover and active */
 		background: rgba(255, 255, 255, 0);
-		transition: height 150ms ease, background-color 200ms ease;
+		transition: background-color 200ms ease;
 	}
 	.filter-btn:hover::after {
 		background: rgba(255, 255, 255, 0.35);
 	}
-	/* Active: 3 px solid brand colour */
+	/* Active: brand colour */
 	.filter-btn.active::after {
-		height: 3px;
 		background: rgb(var(--color-primary-500));
 	}
 
-	/* Category chips — pill style, primary colour fill when active */
+	/* Category chips — rectangular with rounded corners, primary fill when active */
 	.category-chip {
 		color: rgb(120 113 108); /* stone-500 */
 		border-color: rgb(41 37 36); /* stone-800 */

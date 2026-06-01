@@ -4,7 +4,7 @@ description: Graphical Linux Alpine running client-side in your browser.
 demo_url: https://webvm.io/alpine.html
 repository_url: https://github.com/leaningtech/webvm
 author: Leaning Technologies
-project_type: Company Demo
+project_type: Leaning Technologies Demo
 niche: Virtual Machines
 tags:
   - CheerpX

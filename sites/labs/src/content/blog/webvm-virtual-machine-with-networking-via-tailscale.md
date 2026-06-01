@@ -4,7 +4,7 @@ description: WebVM, our virtual Linux environment running fully client-side in t
 pubDate: "2022-10-05"
 categories:
   - "Projects & Demos"
-  - "Deep Dive"
+  - "Technical"
 authors:
   - yuri
 heroImage: ./webvm-tailscale.png

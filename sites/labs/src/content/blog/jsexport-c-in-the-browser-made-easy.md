@@ -10,7 +10,7 @@ heroImage: ./jsexport-output.webp
 tags:
   - Cheerp
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 Here at Leaning Technologies we build compilers for the Web (which output a combination of JavaScript and WebAssembly).

@@ -9,7 +9,7 @@ authors:
   - daan
 heroImage: ./cheerp-asan.png
 categories:
-  - "Deep Dive"
+  - "Technical"
 ---
 
 Here at Leaning Technologies, we love WebAssembly. Its safe, efficient, and fast
