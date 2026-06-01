@@ -3,9 +3,7 @@ title: "Join the WebVM: The Hackathon! - A Global Hybrid Event for Developers!"
 description: |
   WebVM: The Hackathon is a global hybrid event open to all developers. Dive into terminal-based solutions using CheerpX and showcase your coding skills for a chance to win amazing prizes.
 pubDate: "2024-10-02"
-categories:
-  - "webvm"
-  - "company-news"
+
 authors:
   - gaby
   - jules
@@ -14,6 +12,8 @@ heroImage: ./hackathon-banner.png
 tags:
   - CheerpX
   - Cheerp
+categories:
+  - "Community"
 ---
 
 Are you ready to showcase your coding skills and dive into the world of terminal-based solutions? We are thrilled to announce [**WebVM: The Hackathon**](https://cheerpx.io/hackathon), a global hybrid event open to all developers! This exciting event will take place from **October 11th to 14th, 2024**, and promises to be a weekend full of creativity, collaboration, and innovation.

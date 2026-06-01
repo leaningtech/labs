@@ -2,15 +2,14 @@
 title: "The Bottomless Pit of Disappointment: A Chrome Extension Tale"
 description: How Manifest V3 broke our Chrome extension, and how we are trying to fix it.
 pubDate: "2021-08-10"
-categories:
-  - "cheerpj"
-  - "company-news"
-  - "technical-blog"
+
 authors:
   - alessandro
 heroImage: ./applet-runner.webp
 tags:
   - CheerpJ
+categories:
+  - "Deep Dive"
 ---
 
 A bit of a “learn from our pain” / rant / sharing our experience-type blogpost, but here goes.

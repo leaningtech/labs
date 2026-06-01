@@ -3,13 +3,13 @@ title: "A JavaScript Optimising Compiler"
 description: |
   Carlo, a Leaning Technologies compiler engineer, has tried something bold. Coming up with a JavaScript to JavaScript optimizing compiler. Optimize for what metric? Performance of code execution (eg. how long does it take to calculate the n-th prime number).
 pubDate: "2021-05-12"
-categories:
-  - "technical-blog"
 authors:
   - carlo
 heroImage: ./javascript-optimising-compiler.webp
 tags:
   - Cheerp
+categories:
+  - "Deep Dive"
 ---
 
 Carlo, a Leaning Technologies compiler engineer, has tried something bold.

@@ -10,6 +10,8 @@ pubDate: "December 4 2024"
 heroImage: "./cheerpx1.0.png"
 tags:
   - CheerpX
+categories:
+  - "Release"
 ---
 
 CheerpX is a WebAssembly-based virtualization engine for x86 binaries. It is built on top of standard Web technologies, and runs fully in the browser, with no need for server side execution of any sort.

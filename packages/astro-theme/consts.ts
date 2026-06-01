@@ -4,6 +4,6 @@ export const SITE_DESCRIPTION =
 
 export const DISCORD_URL = "https://discord.leaningtech.com";
 export const GITHUB_URL = "https://github.com/leaningtech";
-export const TWITTER_URL = "https://twitter.com/leaningtech";
+export const X_URL = "https://x.com/leaningtech";
 export const LINKEDIN_URL =
 	"https://www.linkedin.com/company/leaning-technologies-ltd/";

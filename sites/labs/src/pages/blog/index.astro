@@ -48,6 +48,7 @@ const site = getSite(Astro.site?.hostname);
 									${borderT ? "md:border-t" : ""}
 								`}
 								data-tags={post.data.tags?.join(",") ?? ""}
+								data-categories={post.data.categories?.join(",") ?? ""}
 								data-title={post.data.title}
 								data-description={post.data.description}
 								data-href={`/blog/${post.slug}`}

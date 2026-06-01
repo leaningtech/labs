@@ -3,14 +3,14 @@ title: "WebVM: server-less x86 virtual machines in the browser"
 description: |
   We made a server-less virtual Linux environment that runs unmodified Debian binaries in the browser. This is powered by CheerpX, a WebAssembly virtualization platform. Feel free to play with it and report bugs: https://webvm.io
 pubDate: "2022-02-01"
-categories:
-  - "technical-blog"
-  - "webvm"
+
 authors:
   - alessandro
 heroImage: ./webvm-post.png
 tags:
   - CheerpX
+categories:
+  - "Projects & Demos"
 ---
 
 > TL;DR — We made a server-less virtual Linux environment that runs unmodified Debian binaries in the browser. This is powered by CheerpX, a WebAssembly virtualization platform. Feel free to play with it and report bugs: [https://webvm.io](https://webvm.io/)

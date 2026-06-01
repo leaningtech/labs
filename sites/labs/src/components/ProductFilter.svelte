@@ -2,6 +2,14 @@
 	import { onMount } from "svelte";
 
 	const TAGS = ["BrowserPod", "Cheerp", "CheerpJ", "CheerpX"] as const;
+	// Preferred display order for blog categories; unknown values sort alphabetically after.
+	const CATEGORY_ORDER = [
+		"Release",
+		"Deep Dive",
+		"Community",
+		"Projects & Demos",
+		"Inside LT",
+	];
 
 	const tagToSiteClass: Record<string, string> = {
 		BrowserPod: "site-browserpod",
@@ -13,6 +21,9 @@
 	let isInitialMount = true;
 
 	let selected = $state("");
+	// string[] is used instead of Set so Svelte 5 reactivity tracks it reliably.
+	let selectedCategories = $state<string[]>([]);
+	let availableCategories = $state<string[]>([]);
 	let searchQuery = $state("");
 	let inputFocused = $state(false);
 	let filterMenuOpen = $state(false);
@@ -26,6 +37,7 @@
 		description: string;
 		href: string;
 		tags: string[];
+		categories: string[];
 	}
 
 	let searchItems: SearchItem[] = $state([]);
@@ -92,10 +104,19 @@
 	function applyTagFilter() {
 		const items = document.querySelectorAll<HTMLElement>("[data-tags]");
 
+		const isVisible = (item: HTMLElement) => {
+			const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
+			const cats = item.dataset.categories ? item.dataset.categories.split(",") : [];
+			const productOk = !selected || tags.includes(selected);
+			const categoryOk =
+				selectedCategories.length === 0 ||
+				selectedCategories.some((c) => cats.includes(c));
+			return productOk && categoryOk;
+		};
+
 		if (!isInitialMount) {
 			items.forEach((item) => {
-				const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-				const visible = !selected || tags.includes(selected);
+				const visible = isVisible(item);
 				if (visible) {
 					item.style.opacity = "0";
 					item.style.display = "";
@@ -106,8 +127,7 @@
 			});
 		} else {
 			items.forEach((item) => {
-				const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-				item.style.display = !selected || tags.includes(selected) ? "" : "none";
+				item.style.display = isVisible(item) ? "" : "none";
 			});
 		}
 
@@ -222,19 +242,36 @@
 		}
 	}
 
-	function selectTag(tag: string) {
-		selected = selected === tag ? "" : tag;
-		filterMenuOpen = false;
+	function updateUrl() {
 		const params = new URLSearchParams(window.location.search);
 		if (selected) params.set("product", selected);
 		else params.delete("product");
+		if (selectedCategories.length > 0)
+			params.set("categories", selectedCategories.join(","));
+		else params.delete("categories");
 		const search = params.toString();
 		history.replaceState(
 			null,
 			"",
 			search ? `${window.location.pathname}?${search}` : window.location.pathname
 		);
+	}
+
+	function selectTag(tag: string) {
+		selected = selected === tag ? "" : tag;
+		filterMenuOpen = false;
+		updateUrl();
 		applyProductTheme();
+		applyTagFilter();
+	}
+
+	function toggleCategory(cat: string) {
+		if (selectedCategories.includes(cat)) {
+			selectedCategories = selectedCategories.filter((c) => c !== cat);
+		} else {
+			selectedCategories = [...selectedCategories, cat];
+		}
+		updateUrl();
 		applyTagFilter();
 	}
 
@@ -271,27 +308,44 @@
 
 		const params = new URLSearchParams(window.location.search);
 		selected = params.get("product") ?? "";
+		const cats = params.get("categories");
+		if (cats) selectedCategories = cats.split(",").filter(Boolean);
 		applyProductTheme();
 		applyTagFilter();
 		isInitialMount = false;
 
-		searchItems = [
-			...document.querySelectorAll<HTMLElement>("[data-tags]"),
-		].map((el) => ({
+		const allItems = [...document.querySelectorAll<HTMLElement>("[data-tags]")];
+
+		// Build the sorted list of available category values from the DOM.
+		const catSet = new Set<string>();
+		allItems.forEach((el) => {
+			el.dataset.categories?.split(",").filter(Boolean).forEach((c) => catSet.add(c));
+		});
+		availableCategories = [...catSet].sort((a, b) => {
+			const ai = CATEGORY_ORDER.indexOf(a);
+			const bi = CATEGORY_ORDER.indexOf(b);
+			if (ai >= 0 && bi >= 0) return ai - bi;
+			if (ai >= 0) return -1;
+			if (bi >= 0) return 1;
+			return a.localeCompare(b);
+		});
+
+		searchItems = allItems.map((el) => ({
 			title: el.dataset.title ?? "",
 			description: el.dataset.description ?? "",
 			href: el.dataset.href ?? "#",
 			tags: el.dataset.tags ? el.dataset.tags.split(",") : [],
+			categories: el.dataset.categories ? el.dataset.categories.split(",") : [],
 		}));
 	});
 </script>
 
 <svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
 
-<!-- ─── Mobile: filter ↔ search swap in a single row ─────────────────────── -->
-<div class="sm:hidden mb-8 flex items-center gap-3">
+<!-- ─── Mobile: unified filter row (product dropdown + category chips + search) ── -->
+<div class="sm:hidden flex flex-wrap gap-x-3 gap-y-2 mb-8 items-center">
 	{#if mobileSearchOpen}
-		<!-- Search mode: full-width input replaces the filter button -->
+		<!-- Search mode: full-width input replaces everything -->
 		<div class="relative flex-1" bind:this={mobileSearchRef}>
 			<span class="absolute left-3 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
@@ -329,8 +383,6 @@
 				</div>
 			{/if}
 		</div>
-
-		<!-- X button occupies the spot where the search icon was -->
 		<button
 			onclick={() => { mobileSearchOpen = false; searchQuery = ""; inputFocused = false; }}
 			class="flex-none text-bg-400 hover:text-white transition-colors"
@@ -342,7 +394,7 @@
 			</svg>
 		</button>
 	{:else}
-		<!-- Filter mode: dropdown button on the left, search icon on the right -->
+		<!-- Product dropdown -->
 		<div class="relative" bind:this={mobileFilterRef}>
 			<button
 				onclick={() => (filterMenuOpen = !filterMenuOpen)}
@@ -357,7 +409,6 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
 				</svg>
 			</button>
-
 			{#if filterMenuOpen}
 				<div class="absolute left-0 top-full mt-1 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[10rem]">
 					<button
@@ -374,10 +425,17 @@
 			{/if}
 		</div>
 
-		<!-- Pushes search icon to the right -->
-		<div class="flex-1"></div>
+		<!-- Category chips inline with dropdown -->
+		{#each availableCategories as cat}
+			<button
+				onclick={() => toggleCategory(cat)}
+				class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2 py-0.5 rounded border"
+				class:active={selectedCategories.includes(cat)}
+			>{cat}</button>
+		{/each}
 
-		<!-- Search icon: clicking swaps to search mode -->
+		<!-- Spacer + search icon at end -->
+		<div class="flex-1"></div>
 		<button
 			onclick={() => { mobileSearchOpen = true; filterMenuOpen = false; }}
 			class="flex-none text-bg-400 hover:text-white transition-colors"
@@ -392,8 +450,9 @@
 	{/if}
 </div>
 
-<!-- ─── Desktop: full filter row ─────────────────────────────────────────── -->
-<div class="hidden sm:flex flex-wrap gap-x-6 gap-y-3 mb-8 items-center min-w-0">
+<!-- ─── Desktop: unified single row (products | sep | categories | search) ── -->
+<div class="hidden sm:flex flex-wrap gap-x-4 gap-y-3 mb-8 items-center min-w-0">
+	<!-- Product filter tabs -->
 	<button
 		onclick={() => selectTag("")}
 		class="filter-btn text-sm font-medium cursor-pointer transition-colors duration-200"
@@ -415,24 +474,25 @@
 		</button>
 	{/each}
 
-	<!-- Search — flows right after CheerpX, no ml-auto -->
-	<div class="relative" bind:this={searchContainer}>
-		<span
-			class="absolute left-3.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="w-4 h-4"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-				stroke-width="2"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-				/>
+	<!-- Separator + category chips (only when page has categories) -->
+	{#if availableCategories.length > 0}
+		<span class="h-4 w-px bg-stone-700 self-center" aria-hidden="true"></span>
+		{#each availableCategories as cat}
+			<button
+				onclick={() => toggleCategory(cat)}
+				class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-full border"
+				class:active={selectedCategories.includes(cat)}
+			>{cat}</button>
+		{/each}
+	{/if}
+
+	<!-- Search — pushed to the right -->
+	<div class="relative ml-auto" bind:this={searchContainer}>
+		<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round"
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 			</svg>
 		</span>
 		<input
@@ -440,31 +500,22 @@
 			placeholder="Search…"
 			bind:value={searchQuery}
 			onfocus={() => (inputFocused = true)}
-			class="w-52 md:w-60 bg-bg-800 border border-bg-700 rounded-lg pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			class="w-44 md:w-56 bg-bg-800 border border-bg-700 rounded-lg pl-10 pr-4 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
 		/>
 		{#if showPopup}
-			<div
-				class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden"
-			>
+			<div class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
 				{#if searchResults.length === 0}
 					<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
 				{:else}
 					{#each searchResults as result}
 						<a
 							href={result.href}
-							onclick={() => {
-								searchQuery = "";
-								inputFocused = false;
-							}}
+							onclick={() => { searchQuery = ""; inputFocused = false; }}
 							class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
 						>
-							<p class="text-white text-sm font-semibold leading-snug">
-								{@html result.title}
-							</p>
+							<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
 							{#if result.snippet}
-								<p class="text-bg-400 text-xs mt-1 leading-relaxed">
-									{@html result.snippet}
-								</p>
+								<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
 							{/if}
 						</a>
 					{/each}
@@ -493,10 +544,26 @@
 	.filter-btn:hover::after {
 		background: rgba(255, 255, 255, 0.35);
 	}
-	/* Active: 3 px solid brand colour — declared after hover so it wins */
+	/* Active: 3 px solid brand colour */
 	.filter-btn.active::after {
 		height: 3px;
 		background: rgb(var(--color-primary-500));
+	}
+
+	/* Category chips — pill style, primary colour fill when active */
+	.category-chip {
+		color: rgb(120 113 108); /* stone-500 */
+		border-color: rgb(41 37 36); /* stone-800 */
+	}
+	.category-chip:hover {
+		color: rgb(214 211 209); /* stone-300 */
+		border-color: rgb(87 83 78); /* stone-600 */
+	}
+	/* Active: filled with the current primary colour (tracks product selection) */
+	.category-chip.active {
+		color: white;
+		background-color: rgb(var(--color-primary-500));
+		border-color: rgb(var(--color-primary-500));
 	}
 
 	/* Card fade-in on filter change */

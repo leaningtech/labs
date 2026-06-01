@@ -9,6 +9,8 @@ pubDate: "April 11 2019"
 heroImage: "./cfg-bn.png"
 tags:
   - Cheerp
+categories:
+  - "Deep Dive"
 ---
 
 I work on [Cheerp](https://www.leaningtech.com/cheerp/), a C++ to JavaScript and WebAssembly compiler based on LLVM.

@@ -3,8 +3,8 @@ title: "How we added full networking to WebVM via Tailscale"
 description: WebVM, our virtual Linux environment running fully client-side in the browser, now supports networking via Tailscale.
 pubDate: "2022-10-05"
 categories:
-  - "technical-blog"
-  - "webvm"
+  - "Projects & Demos"
+  - "Deep Dive"
 authors:
   - yuri
 heroImage: ./webvm-tailscale.png

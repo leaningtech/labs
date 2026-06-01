@@ -45,6 +45,7 @@ const demos = await getCollection(
 									${borderT ? "md:border-t" : ""}
 								`}
 								data-tags={demo.data.tags?.join(",") ?? ""}
+								data-categories={demo.data.project_type ?? ""}
 								data-title={demo.data.title}
 								data-description={demo.data.description}
 								data-href={`/showcase/${demo.slug}`}
