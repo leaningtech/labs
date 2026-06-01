@@ -11,10 +11,8 @@ In this tutorial, we'll run the SwingSet3 application in the browser.
 
 ## Prerequisites
 
-- [Download the template project](%CJ_TUTORIALS_BASE%/swingset3-template.zip%CJ_TUTORIALS_QUERY%) and unzip it
+- [Download the template project](/docs/cheerpj3/tutorials/swingset3-template.zip) and unzip it
 - [Node.js](https://nodejs.org/en/) (>= 18)
-
-> The downloadable ZIP is generated from the example source. If the CheerpJ loader URL changes, regenerate the ZIP with the packaging script.
 
 The starting point of this example is an empty HTML page, the SwingSet3 jar, and its dependencies:
 
@@ -25,13 +23,10 @@ The starting point of this example is an empty HTML page, the SwingSet3 jar, and
 └── lib
     ├── AnimatedTransitions.jar
     ├── AppFramework.jar
-    ├── Filters.jar
-    ├── MultipleGradientPaint.jar
-    ├── TimingFramework.jar
     ├── javaws.jar
-    ├── swing-layout-1.0.jar
     ├── swing-worker.jar
-    └── swingx.jar
+    ├── swingx.jar
+    └── TimingFramework.jar
 ```
 
 ## 1. Run a web server
@@ -54,7 +49,7 @@ Open a browser tab pointing to your localhost such as `http://127.0.0.1:8080/`.
 
 ## 2. Add CheerpJ to the document
 
-Let's add CheerpJ to the page by adding this script tag to the `<head:wq>`:
+Let's add CheerpJ to the page by adding this script tag to the `<head>`:
 
 ```html title="index.html"
 <script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
