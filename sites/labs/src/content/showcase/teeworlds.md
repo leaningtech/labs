@@ -4,7 +4,7 @@ description: Retro, multiplayer 2D shooting game running in the browser using Ch
 demo_url: https://teeworlds.leaningtech.com
 repository_url: https://github.com/leaningtech/cheerpnet
 author: Leaning Technologies
-project_type: Leaning Technologies
+project_type: Tech Demo
 niche: Videogames
 tags:
   - Cheerp

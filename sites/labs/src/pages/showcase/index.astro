@@ -44,7 +44,7 @@ const demos = (
 									${borderT ? "md:border-t" : ""}
 								`}
 								data-tags={demo.data.tags?.join(",") ?? ""}
-								data-categories={demo.data.project_type ?? ""}
+								data-categories={demo.data.project_type.join(",")}
 								data-title={demo.data.title}
 								data-description={demo.data.description}
 								data-href={`/showcase/${demo.slug}`}

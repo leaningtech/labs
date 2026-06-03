@@ -47,9 +47,13 @@ const demo =
 		)
 	}
 	<div class="flex flex-wrap gap-1.5">
-		<span class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs">
-			{demo.data.project_type}
-		</span>
+		{
+			demo.data.project_type.map((type) => (
+				<span class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs">
+					{type}
+				</span>
+			))
+		}
 		{
 			demo.data.tags?.map((tag) => (
 				<span class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs">

@@ -57,7 +57,10 @@ export function defineLabsCollections() {
 					demo_url: z.string().optional(),
 					repository_url: z.string().optional(),
 					author: z.string(),
-					project_type: z.string(),
+					project_type: z.preprocess(
+						(val) => (typeof val === "string" ? [val] : val),
+						z.array(z.string())
+					),
 					niche: z.string(),
 					hero_image: image().optional(),
 					draft: z.boolean().default(false),

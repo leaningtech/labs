@@ -10,6 +10,9 @@
 		"Technical",
 		"Community",
 		"Projects & Demos",
+		"Dev Tools",
+		"Tech Demo",
+		"Commercial",
 		"Leaning Technologies",
 	];
 

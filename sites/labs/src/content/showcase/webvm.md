@@ -4,7 +4,9 @@ description: Linux running client-side within your browser tab.
 demo_url: https://webvm.io/
 repository_url: https://github.com/leaningtech/webvm
 author: Leaning Technologies
-project_type: Leaning Technologies
+project_type:
+  - Tech Demo
+  - Dev Tools
 niche: Virtual Machines
 tags:
   - CheerpX

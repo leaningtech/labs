@@ -4,7 +4,7 @@ description: Minecraft running unmodified in the browser!
 demo_url: https://browsercraft.cheerpj.com/
 repository_url: https://github.com/leaningtech/browsercraft
 author: Leaning Technologies
-project_type: Leaning Technologies
+project_type: Tech Demo
 niche: Videogames
 tags:
   - CheerpJ
