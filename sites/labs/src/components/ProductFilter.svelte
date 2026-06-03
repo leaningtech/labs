@@ -644,7 +644,8 @@
 	</div>
 
 	<!-- Chips + search: single non-wrapping row. Search bar shrinks with viewport via clamp(). -->
-	<div class="flex items-center gap-x-3 overflow-hidden">
+	<!-- overflow-x-clip (not overflow-hidden) so the absolute search popup can escape vertically -->
+	<div class="flex items-center gap-x-3 overflow-x-clip">
 		{#if availableCategories.length > 0}
 			<span class="text-xs text-bg-500 whitespace-nowrap shrink-0"
 				>Filter by</span
