@@ -57,16 +57,11 @@ The quickest way to place a file into CheerpJ's virtual filesystem from JavaScri
 
 ```js
 // Call this only after cheerpjInit() has resolved.
-async function addStringFileToCheerpJ() {
+function addStringFileToCheerpJ() {
 	const fileName = "default.txt";
 	const content = "Default content.";
-
-	try {
-		cheerpOSAddStringFile(`/str/${fileName}`, content);
-		console.log(`File "${fileName}" added to /str/.`);
-	} catch (e) {
-		console.error("Error writing file to /str/:", e);
-	}
+	cheerpOSAddStringFile(`/str/${fileName}`, content);
+	console.log(`File "${fileName}" added to /str/.`);
 }
 ```
 
