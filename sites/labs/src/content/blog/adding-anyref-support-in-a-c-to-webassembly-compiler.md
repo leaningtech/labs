@@ -3,7 +3,6 @@ title: "Adding anyref support in a C++ to WebAssembly compiler"
 description: |
   WebAssembly in its current MVP form is shipped by all major browsers and is already capable of amazing things. This does not mean that its development has concluded: on the contrary, there are many post-MVP feature proposals at different stages of development.
 pubDate: "2020-05-19"
-
 authors:
   - yuri
 heroImage: "./cheerp-lines.png"

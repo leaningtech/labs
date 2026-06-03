@@ -3,7 +3,6 @@ title: "Extreme WebAssembly 1: pushing browsers to their absolute limits"
 description: |
   This is the first of a series of posts about the problems we have found on our way when using WebAssembly, and how we have solved them.
 pubDate: "2020-06-16"
-
 authors:
   - alessandro
 heroImage: ./extreme-wasm.webp

@@ -3,7 +3,6 @@ title: "CheerpJ 2.3 Released"
 description: |
   CheerpJ 2.3 is the only solution on the market to migrate real-world large-scale Java applications to modern HTML5 with pixel-perfect accuracy.
 pubDate: "2022-05-03"
-
 authors:
   - "lorenzo-marsicano"
 heroImage: ./cheerpj.png

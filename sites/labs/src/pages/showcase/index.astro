@@ -29,7 +29,10 @@ const demos = (
 
 		<section class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-2xl">
 			<ProductFilter client:load searchPlaceholder="Search demos…" />
-			<ul class="grid sm:grid-cols-2 md:grid-cols-6" data-filter-grid="showcase">
+			<ul
+				class="grid sm:grid-cols-2 md:grid-cols-6"
+				data-filter-grid="showcase"
+			>
 				{
 					demos.map((demo, i) => {
 						const featured = i < 4;
@@ -54,7 +57,11 @@ const demos = (
 						);
 					})
 				}
-				<li data-empty-state style="display:none" class="col-span-full py-24 text-center">
+				<li
+					data-empty-state
+					style="display:none"
+					class="col-span-full py-24 text-center"
+				>
 					<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
 				</li>
 			</ul>

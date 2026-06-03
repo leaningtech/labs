@@ -3,7 +3,6 @@ title: "Extreme WebAssembly 2: the sad state of WebAssembly tail calls"
 description: |
   Here at Leaning Technologies, we use WebAssembly daily to create unique and seemingly impossible technologies, like CheerpX (a WebAssembly virtual machine designed to safely run arbitrary x86 libraries and applications in browser) and CheerpJ (a solution to compile and run Java applications in the browser).
 pubDate: "2020-08-18"
-
 authors:
   - alessandro
 heroImage: ./extreme-wasm.webp

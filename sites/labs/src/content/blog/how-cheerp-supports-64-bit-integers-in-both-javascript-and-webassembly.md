@@ -3,7 +3,6 @@ title: "How Cheerp supports 64-bit integers in both JavaScript and WebAssembly"
 description: |
   Improving support for 64-bit integers in Cheerp, a C/C++ to WebAssembly/JavaScript compiler.
 pubDate: "2020-07-13"
-
 authors:
   - yuri
 heroImage: ./cheerp-int64.webp

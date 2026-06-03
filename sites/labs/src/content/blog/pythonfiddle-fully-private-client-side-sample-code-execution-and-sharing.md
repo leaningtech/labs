@@ -3,7 +3,6 @@ title: "PythonFiddle: Fully private client-side sample code execution and sharin
 description: |
   A recurrent need for anybody practising programming is running (and sharing) small snippets of code to quickly test an idea or ask for feedback. These kinds of Web applications are generally called ‘fiddles’, and there are plenty of them out there. The common use cases for fiddles are in education, but anyone can find themselves needing to use one to avoid having to set up a full native execution environment.
 pubDate: "2022-09-14"
-
 authors:
   - jules
 heroImage: ./pythonfiddle.png

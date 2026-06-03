@@ -3,7 +3,6 @@ title: "Fantastic tail calls, and how to implement them"
 description: |
   This article aims at demystifying WebAssembly tail calls while giving the reader an idea of how we have implemented the feature in WebKit.
 pubDate: "2022-07-11"
-
 authors:
   - tom
 heroImage: ./tail-calls.webp
