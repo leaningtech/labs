@@ -55,8 +55,8 @@ if (description) {
 	<div class="bg-stone-950">
 		{product && <ProductNav {product} />}
 		<main class="px-12 py-10 w-full max-w-screen-2xl mx-auto">
-			<div class="h-full md:h-screen grid md:grid-cols-10">
-				<div class="col-span-3">
+			<div class="grid md:grid-cols-10">
+				<div class="col-span-3 sticky top-10 self-start">
 					<a
 						href="/showcase"
 						class="mb-4 inline-flex items-center gap-1 text-stone-400 hover:text-primary-500"
@@ -93,8 +93,8 @@ if (description) {
 					>
 					</div>
 				</div>
-				<div class="col-span-6 grid grid-flow-row overflow-hidden">
-					<div class="mt-6 md:mt-2 overflow-y-auto no-scrollbar">
+				<div class="col-span-6">
+					<div class="mt-6 md:mt-2">
 						<div class="hidden md:block">
 							{
 								hero_image && (
