@@ -62,7 +62,7 @@ async function addStringFileToCheerpJ() {
 	const content = "Default content.";
 
 	try {
-		await cheerpOSAddStringFile(`/str/${fileName}`, content);
+		cheerpOSAddStringFile(`/str/${fileName}`, content);
 		console.log(`File "${fileName}" added to /str/.`);
 	} catch (e) {
 		console.error("Error writing file to /str/:", e);
