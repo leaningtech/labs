@@ -5,10 +5,9 @@ import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import ProductFilter from "../../components/ProductFilter.svelte";
 
-const demos = await getCollection(
-	"showcase",
-	({ data }) => data.draft !== true
-);
+const demos = (
+	await getCollection("showcase", ({ data }) => data.draft !== true)
+).sort((a, b) => b.data.score - a.data.score);
 ---
 
 <Shell
@@ -55,6 +54,9 @@ const demos = await getCollection(
 						);
 					})
 				}
+				<li data-empty-state style="display:none" class="col-span-full py-24 text-center">
+					<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
+				</li>
 			</ul>
 		</section>
 	</div>

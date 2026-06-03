@@ -10,7 +10,7 @@
 		"Technical",
 		"Community",
 		"Projects & Demos",
-		"Inside Leaning Technologies",
+		"Leaning Technologies",
 	];
 
 	const tagToSiteClass: Record<string, string> = {
@@ -28,7 +28,7 @@
 	let availableCategories = $state<string[]>([]);
 	let searchQuery = $state("");
 	let inputFocused = $state(false);
-	let filterMenuOpen = $state(false);
+	let filterPanelOpen = $state(false);
 	let mobileSearchOpen = $state(false);
 	let searchContainer: HTMLElement;
 	let mobileFilterRef: HTMLElement;
@@ -64,10 +64,9 @@
 			}));
 	});
 
-	// Desktop popup: close when focus leaves the search area.
+	// Show search popup when the input is focused and has a query.
 	const showPopup = $derived(inputFocused && searchQuery.trim().length >= 2);
-	// Mobile popup: autofocus is unreliable on mobile; show whenever
-	// the search bar is open and the query is long enough.
+	// Mobile popup: tied to the search-open state so it survives autofocus quirks.
 	const showMobilePopup = $derived(mobileSearchOpen && searchQuery.trim().length >= 2);
 
 	function esc(s: string): string {
@@ -155,8 +154,14 @@
 			`[data-filter-grid="${attr}"]`
 		);
 		if (!grid) return;
-		const allItems = [...grid.querySelectorAll<HTMLElement>("li")];
+		const allItems = [...grid.querySelectorAll<HTMLElement>("li:not([data-empty-state])")];
 		const visibleItems = allItems.filter((li) => li.style.display !== "none");
+
+		// Show/hide the empty state message
+		const emptyState = grid.querySelector<HTMLElement>("[data-empty-state]");
+		if (emptyState) {
+			emptyState.style.display = visibleItems.length === 0 ? "" : "none";
+		}
 
 		allItems.forEach((li) => {
 			li.classList.remove(
@@ -261,7 +266,6 @@
 
 	function selectTag(tag: string) {
 		selected = selected === tag ? "" : tag;
-		filterMenuOpen = false;
 		updateUrl();
 		applyProductTheme();
 		applyTagFilter();
@@ -281,7 +285,7 @@
 		if (e.key === "Escape") {
 			searchQuery = "";
 			inputFocused = false;
-			filterMenuOpen = false;
+			filterPanelOpen = false;
 			mobileSearchOpen = false;
 			(document.activeElement as HTMLElement)?.blur();
 		}
@@ -296,7 +300,7 @@
 			inputFocused = false;
 		}
 		if (mobileFilterRef && !mobileFilterRef.contains(e.target as Node)) {
-			filterMenuOpen = false;
+			filterPanelOpen = false;
 		}
 	}
 
@@ -344,125 +348,158 @@
 
 <svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
 
-<!-- ─── Mobile: unified filter row (product dropdown + category chips + search) ── -->
-<div class="sm:hidden flex flex-wrap gap-x-3 gap-y-2 mb-8 items-center">
-	{#if mobileSearchOpen}
-		<!-- Search mode: full-width input replaces everything -->
-		<div class="relative flex-1" bind:this={mobileSearchRef}>
-			<span class="absolute left-3 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+<!-- ─── Mobile: tabs row → icon controls row ──────────────────────────────────── -->
+<div class="md:hidden flex flex-col gap-y-3 mb-8">
+
+	<!-- Row 1: product browser-tabs, horizontally scrollable -->
+	<!-- pb-px gives the active tab's margin-bottom:-1px room so overflow-x:auto
+	     (which implicitly clips overflow-y) does not trim the baseline overlap. -->
+	<div class="overflow-x-auto pb-px">
+		<div class="flex items-end gap-x-1 border-b border-stone-700 min-w-max">
+			<button
+				onclick={() => selectTag("")}
+				class="filter-btn text-sm font-medium cursor-pointer"
+				class:active={!selected}
+			>All</button>
+			{#if selected && selected !== TAGS[0]}
+				<span class="h-4 w-px bg-stone-700 self-center mx-1" aria-hidden="true"></span>
+			{/if}
+			{#each TAGS as tag, i}
+				<button
+					onclick={() => selectTag(tag)}
+					class="filter-btn text-sm font-medium cursor-pointer"
+					class:active={selected === tag}
+				>{tag}</button>
+				{#if i < TAGS.length - 1 && selected !== TAGS[i] && selected !== TAGS[i + 1]}
+					<span class="h-4 w-px bg-stone-700 self-center mx-1" aria-hidden="true"></span>
+				{/if}
+			{/each}
+		</div>
+	</div>
+
+	<!-- Row 2: icon controls — collapse to full-width input when search is open -->
+	<div class="flex items-center gap-x-2 min-h-[2rem]">
+		{#if mobileSearchOpen}
+			<!-- Search expanded: full-width input + close button -->
+			<div class="relative flex-1" bind:this={mobileSearchRef}>
+				<span class="absolute left-3 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</span>
+				<input
+					type="text"
+					placeholder={searchPlaceholder}
+					bind:value={searchQuery}
+					onfocus={() => (inputFocused = true)}
+					autofocus
+					class="w-full bg-stone-950 border border-bg-700 rounded-md pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+				/>
+				{#if showMobilePopup}
+					<div class="absolute top-full left-0 right-0 mt-2 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
+						{#if searchResults.length === 0}
+							<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
+						{:else}
+							{#each searchResults as result}
+								<a
+									href={result.href}
+									onclick={() => { searchQuery = ""; inputFocused = false; mobileSearchOpen = false; }}
+									class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
+								>
+									<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
+									{#if result.snippet}
+										<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
+									{/if}
+								</a>
+							{/each}
+						{/if}
+					</div>
+				{/if}
+			</div>
+			<button
+				onclick={() => { mobileSearchOpen = false; searchQuery = ""; inputFocused = false; }}
+				class="flex-none text-bg-400 hover:text-white transition-colors p-1"
+				aria-label="Close search"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+					viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		{:else}
+			<!-- Filter icon with checkbox dropdown -->
+			{#if availableCategories.length > 0}
+				<div class="relative" bind:this={mobileFilterRef}>
+					<button
+						onclick={() => (filterPanelOpen = !filterPanelOpen)}
+						aria-expanded={filterPanelOpen}
+						class="flex items-center gap-1.5 py-1 px-2 rounded-md text-bg-400 hover:text-white transition-colors {filterPanelOpen ? 'bg-bg-800 text-white' : ''}"
+					>
+						<!-- Funnel / filter icon -->
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-none" fill="none"
+							viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round"
+								d="M3 6h18M7 12h10M11 18h2" />
+						</svg>
+						<!-- Badge: count of active filters -->
+						{#if selectedCategories.length > 0}
+							<span class="flex items-center justify-center min-w-[1.1rem] h-[1.1rem] rounded-full bg-primary-500 text-white text-[10px] font-bold leading-none px-0.5">
+								{selectedCategories.length}
+							</span>
+						{/if}
+					</button>
+
+					{#if filterPanelOpen}
+						<div class="absolute top-full left-0 mt-1.5 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[13rem]">
+							{#each availableCategories as cat}
+								<button
+									onclick={() => toggleCategory(cat)}
+									class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-left transition-colors hover:bg-bg-800 border-b border-bg-800 last:border-0"
+								>
+									<!-- Custom checkbox visual -->
+									<span class="flex flex-none items-center justify-center w-4 h-4 rounded border transition-colors {selectedCategories.includes(cat) ? 'bg-primary-500 border-primary-500' : 'border-bg-600'}">
+										{#if selectedCategories.includes(cat)}
+											<svg class="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 10 10" stroke="currentColor" stroke-width="2.5">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M1.5 5l2.5 2.5 4.5-4.5" />
+											</svg>
+										{/if}
+									</span>
+									<span class="transition-colors {selectedCategories.includes(cat) ? 'text-white' : 'text-bg-400'}">{cat}</span>
+								</button>
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/if}
+
+			<!-- Spacer pushes search icon to the right -->
+			<div class="flex-1"></div>
+
+			<!-- Search icon -->
+			<button
+				onclick={() => { mobileSearchOpen = true; filterPanelOpen = false; }}
+				class="text-bg-400 hover:text-white transition-colors p-1"
+				aria-label="Search"
+			>
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
 					viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round"
 						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 				</svg>
-			</span>
-			<input
-				type="text"
-				placeholder={searchPlaceholder}
-				bind:value={searchQuery}
-				onfocus={() => (inputFocused = true)}
-				autofocus
-				class="w-full bg-stone-950 border border-bg-700 rounded-md pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
-			/>
-			{#if showMobilePopup}
-				<div class="absolute top-full left-0 right-0 mt-2 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-					{#if searchResults.length === 0}
-						<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
-					{:else}
-						{#each searchResults as result}
-							<a
-								href={result.href}
-								onclick={() => { searchQuery = ""; inputFocused = false; mobileSearchOpen = false; }}
-								class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
-							>
-								<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
-								{#if result.snippet}
-									<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
-								{/if}
-							</a>
-						{/each}
-					{/if}
-				</div>
-			{/if}
-		</div>
-		<button
-			onclick={() => { mobileSearchOpen = false; searchQuery = ""; inputFocused = false; }}
-			class="flex-none text-bg-400 hover:text-white transition-colors"
-			aria-label="Close search"
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-			</svg>
-		</button>
-	{:else}
-		<!-- Product dropdown -->
-		<div class="relative" bind:this={mobileFilterRef}>
-			<button
-				onclick={() => (filterMenuOpen = !filterMenuOpen)}
-				class="filter-btn active flex items-center gap-1.5 text-sm font-medium cursor-pointer whitespace-nowrap"
-			>
-				{selected || "All"}
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="w-3 h-3 transition-transform duration-200 {filterMenuOpen ? 'rotate-180' : ''}"
-					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-				</svg>
 			</button>
-			{#if filterMenuOpen}
-				<div class="absolute left-0 top-full mt-1 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[10rem]">
-					<button
-						onclick={() => selectTag("")}
-						class="w-full text-left px-4 py-3 text-sm transition-colors {!selected ? 'text-white font-semibold bg-bg-800' : 'text-bg-400 hover:bg-bg-800 hover:text-white'}"
-					>All</button>
-					{#each TAGS as tag}
-						<button
-							onclick={() => selectTag(tag)}
-							class="w-full text-left px-4 py-3 text-sm transition-colors border-t border-bg-800 {selected === tag ? 'text-primary-400 font-semibold bg-bg-800' : 'text-bg-400 hover:bg-bg-800 hover:text-white'}"
-						>{tag}</button>
-					{/each}
-				</div>
-			{/if}
-		</div>
-
-		<!-- "Filter by" label + category chips inline with dropdown -->
-		{#if availableCategories.length > 0}
-			<span class="text-xs text-bg-500 whitespace-nowrap self-center">Filter by</span>
-			{#each availableCategories as cat}
-				<button
-					onclick={() => toggleCategory(cat)}
-					class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-md border"
-					class:active={selectedCategories.includes(cat)}
-				>{cat}</button>
-			{/each}
 		{/if}
-
-		<!-- Spacer + search icon at end -->
-		<div class="flex-1"></div>
-		<button
-			onclick={() => { mobileSearchOpen = true; filterMenuOpen = false; }}
-			class="flex-none text-bg-400 hover:text-white transition-colors"
-			aria-label="Search"
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-				<path stroke-linecap="round" stroke-linejoin="round"
-					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-			</svg>
-		</button>
-	{/if}
+	</div>
 </div>
 
 <!--
-  Desktop: product tabs have their own border-b (baseline) that stops after the
-  last tab. Chips and search sit at the same bottom level but without the line.
-  items-end on the outer row keeps everything bottom-aligned.
+  md+: two rows — product tabs on row 1 (with border-b baseline), chips+search on row 2.
+  items-center horizontally centres each row.
 -->
-<div class="hidden sm:flex w-full justify-center items-end gap-x-3 mb-8">
+<div class="hidden md:flex flex-col items-center gap-y-3 mb-8 w-full">
 
-	<!-- Product tabs only — border-b here so the line ends with the last tab -->
+	<!-- Product tabs — border-b ends with the last tab -->
 	<div class="flex items-end gap-x-1 border-b border-stone-700">
 		<button
 			onclick={() => selectTag("")}
@@ -479,61 +516,63 @@
 				class="filter-btn text-sm font-medium cursor-pointer"
 				class:active={selected === tag}
 			>{tag}</button>
-			<!-- Separator between this product tab and the next: hide when either neighbour is active -->
+			<!-- Separator between product tabs: hide when either neighbour is active -->
 			{#if i < TAGS.length - 1 && selected !== TAGS[i] && selected !== TAGS[i + 1]}
 				<span class="h-4 w-px bg-stone-700 self-center mx-1" aria-hidden="true"></span>
 			{/if}
 		{/each}
 	</div>
 
-	<!-- Category chips (no border-b, no leading separator) -->
-	{#if availableCategories.length > 0}
-		<span class="text-xs text-bg-500 whitespace-nowrap self-center">Filter by</span>
-		{#each availableCategories as cat}
-			<button
-				onclick={() => toggleCategory(cat)}
-				class="category-chip self-center text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-md border"
-				class:active={selectedCategories.includes(cat)}
-			>{cat}</button>
-		{/each}
-	{/if}
-
-	<!-- Search bar — fixed width so the filter row doesn't span the full container -->
-	<div class="relative shrink-0 w-36 lg:w-48 self-center pb-1" bind:this={searchContainer}>
-		<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
-			<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-				<path stroke-linecap="round" stroke-linejoin="round"
-					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-			</svg>
-		</span>
-		<input
-			type="text"
-			placeholder={searchPlaceholder}
-			bind:value={searchQuery}
-			onfocus={() => (inputFocused = true)}
-			class="w-full bg-stone-950 border border-bg-700 rounded-md pl-8 pr-3 py-1 text-xs text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
-		/>
-		{#if showPopup}
-			<div class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-				{#if searchResults.length === 0}
-					<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
-				{:else}
-					{#each searchResults as result}
-						<a
-							href={result.href}
-							onclick={() => { searchQuery = ""; inputFocused = false; }}
-							class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
-						>
-							<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
-							{#if result.snippet}
-								<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
-							{/if}
-						</a>
-					{/each}
-				{/if}
-			</div>
+	<!-- Chips + search: single non-wrapping row. Search bar shrinks with viewport via clamp(). -->
+	<div class="flex items-center gap-x-3 overflow-hidden">
+		{#if availableCategories.length > 0}
+			<span class="text-xs text-bg-500 whitespace-nowrap shrink-0">Filter by</span>
+			{#each availableCategories as cat}
+				<button
+					onclick={() => toggleCategory(cat)}
+					class="category-chip text-xs cursor-pointer transition-colors duration-150 px-2.5 py-1 rounded-md border shrink-0"
+					class:active={selectedCategories.includes(cat)}
+				>{cat}</button>
+			{/each}
 		{/if}
+
+		<!-- Search bar — shrinks proportionally, never pushed to its own row -->
+		<div class="relative shrink-0 w-[clamp(7rem,15vw,12rem)]" bind:this={searchContainer}>
+			<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-bg-500 pointer-events-none">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none"
+					viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+				</svg>
+			</span>
+			<input
+				type="text"
+				placeholder={searchPlaceholder}
+				bind:value={searchQuery}
+				onfocus={() => (inputFocused = true)}
+				class="w-full bg-stone-950 border border-bg-700 rounded-md pl-8 pr-3 py-1 text-xs text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+			/>
+			{#if showPopup}
+				<div class="absolute top-full right-0 mt-2 w-72 sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] bg-bg-900 border border-bg-700 rounded-xl shadow-2xl z-50 overflow-hidden">
+					{#if searchResults.length === 0}
+						<p class="px-4 py-3 text-bg-400 text-sm">No results found.</p>
+					{:else}
+						{#each searchResults as result}
+							<a
+								href={result.href}
+								onclick={() => { searchQuery = ""; inputFocused = false; }}
+								class="block px-4 py-3 hover:bg-bg-800 transition-colors border-b border-bg-800 last:border-0"
+							>
+								<p class="text-white text-sm font-semibold leading-snug">{@html result.title}</p>
+								{#if result.snippet}
+									<p class="text-bg-400 text-xs mt-1 leading-relaxed">{@html result.snippet}</p>
+								{/if}
+							</a>
+						{/each}
+					{/if}
+				</div>
+			{/if}
+		</div>
 	</div>
 </div>
 

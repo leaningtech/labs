@@ -4,10 +4,11 @@ description: Compile, edit, and run Java directly in the browser.
 demo_url: https://javafiddle.leaningtech.com/
 repository_url: https://github.com/leaningtech/javafiddle
 author: Leaning Technologies
-project_type: Leaning Technologies Demo
+project_type: Leaning Technologies
 niche: Dev Utilities
 tags:
   - CheerpJ
+score: 10
 hero_image: "./javafiddle.png"
 ---
 

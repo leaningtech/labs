@@ -7,6 +7,7 @@ project_type: Enterprise Use Case
 niche: Interior Design
 tags:
   - Cheerp
+score: 80
 hero_image: "./homebyme.png"
 ---
 

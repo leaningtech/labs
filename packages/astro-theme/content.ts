@@ -4,7 +4,7 @@ const productTags = z.array(
 	z.enum(["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"])
 );
 const blogCategories = z.array(
-	z.enum(["Release", "Technical", "Community", "Projects & Demos", "Inside Leaning Technologies"])
+	z.enum(["Release", "Technical", "Community", "Projects & Demos", "Leaning Technologies"])
 );
 const languages = z.enum(["en", "ja"]);
 
@@ -62,6 +62,10 @@ export function defineLabsCollections() {
 					hero_image: image().optional(),
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),
+					/** Impressiveness score. Higher values appear first on the showcase index.
+				 *  Use a wide range (e.g. 1–100) so global order can be set precisely
+				 *  without relying on alphabetical tie-breaking. */
+					score: z.number().int().min(1).default(50),
 				}),
 		}),
 	};

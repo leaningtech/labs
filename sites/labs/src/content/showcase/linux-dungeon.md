@@ -8,6 +8,7 @@ project_type: Hackathon Project
 niche: Virtual Machines and Education
 tags:
   - CheerpX
+score: 20
 hero_image: "./linux-dungeon.png"
 ---
 

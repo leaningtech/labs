@@ -7,6 +7,7 @@ project_type: Hackathon Project
 niche: Dev Utilities
 tags:
   - CheerpX
+score: 15
 hero_image: "./client-side-code-editor.png"
 ---
 

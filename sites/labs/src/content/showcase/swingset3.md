@@ -4,10 +4,11 @@ description: Java Swing components running in the browser with CheerpJ.
 demo_url: https://cheerpj-example-swingset3.leaningtech.com/
 repository_url: https://github.com/leaningtech/cheerpj-example-swingset3/blob/main/index.html
 author: Leaning Technologies
-project_type: Leaning Technologies Demo
+project_type: Leaning Technologies
 niche: Software Utilities
 tags:
   - CheerpJ
+score: 5
 hero_image: "./swingset3.png"
 ---
 

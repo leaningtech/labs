@@ -8,6 +8,7 @@ project_type: Community
 niche: Developer Tools
 tags:
   - CheerpJ
+score: 40
 hero_image: "./snapcode.png"
 ---
 

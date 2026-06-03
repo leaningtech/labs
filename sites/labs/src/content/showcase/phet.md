@@ -8,6 +8,7 @@ project_type: Community
 niche: Education
 tags:
   - CheerpJ
+score: 50
 hero_image: "./phet.png"
 ---
 

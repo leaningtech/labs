@@ -8,6 +8,7 @@ project_type: Community
 niche: Scientific Software
 tags:
   - CheerpJ
+score: 45
 hero_image: "./imagej-js.png"
 ---
 
