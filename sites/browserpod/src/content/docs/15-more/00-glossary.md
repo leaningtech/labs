@@ -29,7 +29,7 @@ A filesystem created and managed in software rather than on the user’s real di
 
 ## Pod
 
-A running BrowserPod instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by design—they exist only while the browser tab is active.
+A running [BrowserPod](/docs/reference/browserpod/) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by design—they exist only while the browser tab is active.
 
 ## Portal
 
@@ -53,4 +53,4 @@ A virtual device used to communicate with processes spawned in a pod.
 It provides input and displays output in the form of characters.
 
 The default terminal used by BrowserPod uses Xterm.js, a terminal emulator library
-for the browser.
+for the browser. See the [Terminal reference](/docs/reference/terminal/) for the API.
