@@ -8,41 +8,16 @@ This tutorial will guide you through creating a custom filesystem from scratch a
 ## 1. Create an Ext2 image
 
 We will create an Ext2 image, which will serve as the root filesystem for CheerpX.
+You can build the image by following the [Custom disk images][custom-disk-images] guide, but **Make sure these lines to the end of your dockerfile** so the image has a login user and a root password:
 
-To ensure consistency in preparing the image contents, we will use a Dockerfile, you can edit the Dockerfile to add custom packages or change the base to the distro of your choosing. It's important to select the `i386` architecture, since CheerpX does not currently support 64-bit executables.
-
-```dockerfile title=Dockerfile
-FROM --platform=i386 docker.io/i386/debian:buster
-ARG DEBIAN_FRONTEND=noninteractive
+```dockerfile
 RUN useradd -m user && echo "user:password" | chpasswd
 RUN echo 'root:password' | chpasswd
-CMD [ "/bin/bash" ]
 ```
 
-> [!note] Note
-> Creating a user named "user" inside the Dockerfile is mandatory for WebVM to work as expected. Without this user, the environment might not function properly.
+This tutorial (and webVM) run the shell as `user`, so that user must exist in the image.
 
-Create a container out of your Dockerfile:
-
-```bash
-buildah build -f Dockerfile --dns=none --platform linux/i386 -t cheerpximage
-podman create --name cheerpxcontainer cheerpximage
-```
-
-Copy the filesystem from the container into a local directory:
-
-```bash
-mkdir cheerpXFS
-podman unshare podman cp cheerpxcontainer:/ cheerpXFS/
-```
-
-Create an ext2 image from the specified directory:
-
-```bash
-podman unshare mkfs.ext2 -b 4096 -d cheerpXFS/ cheerpXImage.ext2 600M
-```
-
-Learn more about creating a image in the [custom-disk-images] guide.
+Following the guide produces a `cheerpXImage.ext2` file. Continue below to load it in the browser.
 
 ## 2. Load CheerpX from your index.html
 
