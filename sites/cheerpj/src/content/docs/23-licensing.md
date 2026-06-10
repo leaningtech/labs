@@ -45,7 +45,7 @@ Pricing options are available for _small businesses_, _enterprises_, _public sec
 |                                                             Use case                                                             |                          Action point                          |
 | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------: |
 | _You are a public sector, non-profit, or academic organisation and want to use CheerpJ for an internal or public-facing project_ | [Contact us for a special quote](https://cheerpj.com/contact/) |
-|               _You are a company and you want to use CheerpJ to build customer-facing application (paid or free)._               |         [Contact sales](https://cheerpj.com/contact/)          |
+|               _You are a company and you want to use CheerpJ to build customer-facing application (paid or free)_                |         [Contact sales](https://cheerpj.com/contact/)          |
 |                            _You are a company and you want to use CheerpJ on an internal application_                            |         [Contact sales](https://cheerpj.com/contact/)          |
 
 If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://cheerpj.com/contact/). Full licensing details are available [here](https://cheerpj.com/licensing/).

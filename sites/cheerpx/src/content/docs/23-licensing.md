@@ -45,7 +45,7 @@ Pricing options are available for _small businesses_, _enterprises_, _public sec
 |                                                             Use case                                                             |                             Action point                              |
 | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------: |
 | _You are a public sector, non-profit, or academic organisation and want to use CheerpX for an internal or public-facing project_ | [Contact us for a special quote](https://leaningtech.com/contact-us/) |
-|               _You are a company and you want to use CheerpX to build customer-facing application (paid or free)._               |            [Contact sales](https://cheerpx.io/licensing/)             |
+|               _You are a company and you want to use CheerpX to build customer-facing application (paid or free)_                |            [Contact sales](https://cheerpx.io/licensing/)             |
 |                            _You are a company and you want to use CheerpX on an internal application_                            |            [Contact sales](https://cheerpx.io/licensing/)             |
 
 If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://leaningtech.com/contact-us/). Full licensing details are available [here](https://cheerpx.io/licensing/).
