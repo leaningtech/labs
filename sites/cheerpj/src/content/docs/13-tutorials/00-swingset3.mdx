@@ -18,16 +18,16 @@ In this tutorial, we'll run the SwingSet3 application in the browser.
 	git clone https://github.com/leaningtech/cheerpj-meta.git
 ```
 
-- Navigate to the SwingSet3 tutorial directory:
+- Inside this repository, navigate to the SwingSet3 tutorial and into the projectTemplate directory:
 
 ```sh
-	cd examples/SwingSet3
+	cd examples/SwingSet3/projectTemplate
 ```
 
-The starting point of this example is an empty HTML page, the SwingSet3 jar, and its dependencies:
+The starting point of this example is an HTML page, the SwingSet3 jar, and its dependencies:
 
 ```
-.
+projectTemplate/
 ├── index.html
 ├── SwingSet3.jar
 └── lib
@@ -41,7 +41,7 @@ The starting point of this example is an empty HTML page, the SwingSet3 jar, and
 
 ## 1. Run a web server
 
-To view the example, we need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+We need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
 
 ```sh
 npx vite
@@ -57,8 +57,9 @@ npx http-server -p 8080
 
 Open a browser tab pointing to your localhost such as `http://127.0.0.1:8080/`.
 
-## 2. Add CheerpJ to the document
+## 2. Open `index.html` and add CheerpJ to the document
 
+The provided template is a basic HTML. We will guide you through what needs to be added to this file.
 Let's add CheerpJ to the page by adding this script tag to the `<head>`:
 
 ```html title="index.html"
