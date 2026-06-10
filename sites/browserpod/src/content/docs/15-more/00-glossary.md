@@ -29,7 +29,7 @@ A filesystem created and managed in software rather than on the user’s real di
 
 ## Pod
 
-A running [BrowserPod](/docs/reference/browserpod/) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by design—they exist only while the browser tab is active.
+A running [BrowserPod](/docs/reference/browserpod/) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by default. They exist only while the browser tab is active. Though if preffered you can enable file persistence across sessions by passing `storageKey` when [`booting`](/docs/reference/browserpod/boot/) the pod.
 
 ## Portal
 

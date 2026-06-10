@@ -13,9 +13,9 @@ Think of it like a lightweight virtual machine:
 
 **"Isolated"** means each Pod is self-contained:
 
-- Files don't persist between Pods by default
+- Each Pod has its own filesystem
 - Processes in one Pod cannot access another
-- Nothing runs on a separate server, it's all client-side
+- Everything runs client-side, without server-side execution
 
 ## Creating a Pod
 
@@ -29,7 +29,7 @@ const pod = await BrowserPod.boot({ apiKey: "..." });
 
 ## Pod lifecycle
 
-A Pod is created with [`BrowserPod.boot`](/docs/reference/browserpod/boot/) and exists for the lifetime of the browser session. By default, Pods are **ephemeral** — closing the tab starts a fresh environment.
+A Pod is created with [`BrowserPod.boot`](/docs/reference/browserpod/boot/) and exists for the lifetime of the browser session. By default, Pods are **ephemeral**. Closing the tab starts a fresh environment.
 
 To persist the filesystem across sessions, pass a `storageKey` to [`boot`](/docs/reference/browserpod/boot/). Rebooting with the same key resumes the same disk:
 

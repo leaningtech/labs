@@ -11,11 +11,11 @@ class BrowserPod {
 
 ## Parameters
 
-- **cb** (`function(path: string) => void`) - Callback function to invoke when a file or URL is opened within the [Pod].
+- **cb** (`function(urlOrpath: string) => void`) - Callback function to invoke when a file or URL is opened within the [Pod].
 
 ## Callback arguments
 
-- **path (`string`)** - The absolute path to the file, or URL, that was opened within the [Pod].
+- **urlOrpath (`string`)** - The absolute path to the file, or URL, that was opened within the [Pod].
 
 ## Returns
 
@@ -23,6 +23,6 @@ class BrowserPod {
 
 ## Notes
 
-`onOpen` maps to use of the [`xdg-open`](https://linux.die.net/man/1/xdg-open) utility.
+`onOpen` intercepts the use of the [`xdg-open`](https://linux.die.net/man/1/xdg-open) utility.
 
 [Pod]: /docs/reference/browserpod/
