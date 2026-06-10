@@ -17,6 +17,13 @@ You can use CheerpX for free if you fall into any of the following categories:
 - Free and Open-Source Software (FOSS) projects
 - [Technical evaluations](#technical-evaluations)
 
+|                                                                    Use case                                                                     |                  Action point                  |
+| :---------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------: |
+|                         _You are an individual using CheerpX for a personal project (including one generating revenue)_                         |            Give appropriate credits            |
+|                                         _You are an individual developer building a commercial project_                                         |            Give appropriate credits            |
+|                                                _You are a team using CheerpX in a FOSS project_                                                 |            Give appropriate credits            |
+| _You are a company and are evaluating CheerpX to be used for a future commercial project (see [technical evaluations](#technical-evaluations))_ | [Contact sales](https://cheerpx.io/licensing/) |
+
 The **CheerpX Community License** allows unlimited, unmetered use of CheerpX from the `cxrtnc.leaningtech.com` domain. For self-hosted options, see the [CheerpX Commercial License](#cheerpx-commercial-license).
 
 ## CheerpX Commercial License
@@ -35,17 +42,11 @@ The **CheerpX Commercial License** allows its usage in a commercial setting in a
 
 Pricing options are available for _small businesses_, _enterprises_, _public sector_, _academic institutions_, and _non-profit organizations_.
 
-## Examples
-
-| Use case                                                                                                                                        | Required license |                             Action point                              |
-| :---------------------------------------------------------------------------------------------------------------------------------------------- | :--------------: | :-------------------------------------------------------------------: |
-| _You are an individual using CheerpX for a personal project (including one generating revenue)_                                                 | _**Community**_  |                       Give appropriate credits                        |
-| _You are an individual developer building a commercial project_                                                                                 | _**Community**_  |                       Give appropriate credits                        |
-| _You are a team using CheerpX in a FOSS project_                                                                                                | _**Community**_  |                       Give appropriate credits                        |
-| _You are a company and are evaluating CheerpX to be used for a future commercial project (see [technical evaluations](#technical-evaluations))_ | _**Community**_  |            [Contact sales](https://cheerpx.io/licensing/)             |
-| _You are a public sector, non-profit, or academic organisation and want to use CheerpX for an internal or public-facing project_                | _**Commercial**_ | [Contact us for a special quote](https://leaningtech.com/contact-us/) |
-| _You are a company and you want to use CheerpX to build customer-facing application (paid or free)._                                            | _**Commercial**_ |            [Contact sales](https://cheerpx.io/licensing/)             |
-| _You are a company and you want to use CheerpX on an internal application_                                                                      | _**Commercial**_ |            [Contact sales](https://cheerpx.io/licensing/)             |
+|                                                             Use case                                                             |                             Action point                              |
+| :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| _You are a public sector, non-profit, or academic organisation and want to use CheerpX for an internal or public-facing project_ | [Contact us for a special quote](https://leaningtech.com/contact-us/) |
+|               _You are a company and you want to use CheerpX to build customer-facing application (paid or free)._               |            [Contact sales](https://cheerpx.io/licensing/)             |
+|                            _You are a company and you want to use CheerpX on an internal application_                            |            [Contact sales](https://cheerpx.io/licensing/)             |
 
 If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://leaningtech.com/contact-us/). Full licensing details are available [here](https://cheerpx.io/licensing/).
 
