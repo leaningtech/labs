@@ -16,6 +16,12 @@ class BrowserPod {
 
 ## Returns
 
-`createFile` returns a [Promise] which is resolved when the operation has succeded. The promise resolves to a `BinaryFile` object if `mode="binary"`, and to a `TextFile` object if `mode="utf-8"`. If the file could not be created, the [Promise] will be rejected.
+`createFile` returns a [Promise] which resolves to a [BinaryFile] object if `mode="binary"`, and to a [TextFile] object if `mode="utf-8"`.
+If the file could not be created, the [Promise] will be rejected.
+
+> [!warning]
+> Calling `createFile` on an already existing file will wipe its contents.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[BinaryFile]: /docs/reference/binaryfile/
+[TextFile]: /docs/reference/textfile/

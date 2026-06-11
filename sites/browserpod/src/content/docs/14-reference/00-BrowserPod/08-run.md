@@ -26,13 +26,15 @@ class BrowserPod {
 
 ## Options
 
-- **terminal (`Terminal`)** - The terminal object used by the spawned process for I/O.
+- **terminal (`Terminal`)** - The [Terminal] object used by the spawned process for I/O.
 - **env (`Array<string>`, _optional_)** - The environment variables to pass to the program, in the form "KEY=value".
 - **cwd (`string`, _optional_)** - The current working directory.
 - **echo (`boolean`, _optional_)** - Whether to write the command line of the executed process to the terminal.
 
 ## Returns
 
-`run` returns a [Promise] which is resolved when the command finishes running.
+`run` returns a [Promise] which resolves to a [Process] object once the command finishes running.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Terminal]: /docs/reference/terminal/
+[Process]: /docs/reference/process/

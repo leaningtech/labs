@@ -15,6 +15,7 @@ class BrowserPod {
 
 ## Returns
 
-`createDefaultTerminal` returns a [Promise] which is resolved when the terminal has been created.
+`createDefaultTerminal` returns a [Promise] which resolves to a [Terminal] object.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Terminal]: /docs/reference/terminal/

@@ -5,13 +5,13 @@ description: Set up a callback that will be invoked when a Portal is created
 
 ```ts
 class BrowserPod {
-	onPortal(cb: ({ url: string, port: int }) => void): void;
+	onPortal(cb: ({ url: string, port: number }) => void): void;
 }
 ```
 
 ## Parameters
 
-- **cb** (`function({url: string, port: int}) => void`) - Function to invoke when a Portal is created.
+- **cb** (`function({url: string, port: number}) => void`) - Function to invoke when a [Portal](/docs/understanding-browserpod/portals) is created.
 
 ## Callback arguments
 

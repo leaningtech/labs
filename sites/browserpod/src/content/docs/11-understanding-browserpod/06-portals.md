@@ -3,7 +3,7 @@ title: Portals
 description: How Portals expose Pod servers to the outside world
 ---
 
-A **Portal** is BrowserPod's controlled networking feature that exposes services running inside a Pod through secure, shareable URLs.
+A **Portal** is BrowserPod's controlled networking feature that exposes services running inside a [Pod](/docs/reference/browserpod/) through secure, shareable URLs.
 
 When code inside the Pod starts listening on a port, BrowserPod automatically creates a public URL that forwards traffic to that internal server. This unlocks powerful use cases that would traditionally require provisioning dedicated backend infrastructure for each session.
 
