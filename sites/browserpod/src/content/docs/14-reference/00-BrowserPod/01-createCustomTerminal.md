@@ -8,7 +8,7 @@ class BrowserPod {
 	createCustomTerminal(opts: {
 		cols?: number;
 		rows?: number;
-		onOutput: (buffer: Uint8Array | ArrayBuffer, vt?: unknown) => void;
+		onOutput: (buffer: ArrayBuffer, vt?: unknown) => void;
 	}): Promise<Terminal>;
 }
 ```

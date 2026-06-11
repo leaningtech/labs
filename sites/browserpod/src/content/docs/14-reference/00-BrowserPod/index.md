@@ -3,7 +3,7 @@ title: BrowserPod
 description: The BrowserPod class and what a "Pod" is
 ---
 
-`BrowserPod` is the main class and entry point of the BrowserPod SDK. An instance of `BrowserPod` is commonly called a **Pod**: a complete, isolated Linux environment running inside the browser tab.
+`BrowserPod` is the main class and entry point of the BrowserPod API. An instance of `BrowserPod` is commonly called a **Pod**: a complete, isolated Linux environment running inside the browser tab.
 
 Think of it like a lightweight virtual machine:
 

@@ -22,7 +22,9 @@ class BrowserPod {
 
 - **apiKey (`string`)** - The API key to use.
 - **nodeVersion (`string`, _optional_)** - The version of Node.js to use. Currently only "22" is allowed.
-- **storageKey (`string`, _optional_)** - An arbitrary string identifying the pod's persistent storage. _When omitted, the pod is **ephemeral**_: it boots a fresh disk each time and nothing is saved between sessions. _When provided, the filesystem persists_. Rebooting with the same key resumes the same disk.
+- **storageKey (`string`, _optional_)** - Identifies the pod's persistent storage.
+  - _Omitted_ → ephemeral: fresh disk each boot, nothing is saved between sessions.
+  - _Provided_ → persistent: the same key resumes the same disk, a different key starts a separate one.
 - **userImage (`string`, _optional_)** - A URL pointing to a custom ext2 filesystem image that will be mounted directly on the `/home` directory of the pod's filesystem.
 
 ## Returns
