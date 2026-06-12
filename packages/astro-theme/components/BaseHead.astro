@@ -45,6 +45,9 @@ if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 	plausibleDomains.push("labs.leaningtech.com");
 
 const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
+
+const gtmScript =
+	"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M4T2J9TS');";
 ---
 
 <meta charset="utf-8" />
@@ -100,12 +103,8 @@ const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
 	))
 }
 
-{
-	product?.id === "browserpod" && (
-		<!-- Google Tag Manager -->
-		<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M4T2J9TS');</script>
-	)
-}
+<!-- Google Tag Manager -->
+{product?.id === "browserpod" && <script is:inline set:html={gtmScript} />}
 
 <!-- Plausible analytics -->
 <script
