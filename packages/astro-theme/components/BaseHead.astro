@@ -32,7 +32,7 @@ const browserpodCanonicals: Record<string, string> = {
 		"https://browserpod.io/blog/browserpod-announcement/",
 };
 
-const normalisedPath = Astro.url.pathname.replace(/\/$/, "");
+const normalisedPath = Astro.url.pathname.replace(/(?:\.html|\/)$/, "");
 const canonicalURL = browserpodCanonicals[normalisedPath]
 	? new URL(browserpodCanonicals[normalisedPath])
 	: new URL(Astro.url.pathname, canonicalSite);
