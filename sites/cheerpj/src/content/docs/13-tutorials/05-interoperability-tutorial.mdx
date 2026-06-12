@@ -13,23 +13,32 @@ We will use a long-running Java thread to enable callbacks into our Java applica
 
 ## Prerequisites
 
-- [Download the template project](/docs/cheerpj3/tutorials/CheerpJInteroperabilityTutorial.zip) and unzip it.
 - [Node.js](https://nodejs.org/en/) (>= 18)
+- Clone the tutorial template [repository](https://github.com/leaningtech/cheerpj-meta.git)
+
+```sh
+	git clone https://github.com/leaningtech/cheerpj-meta.git
+```
+
+- Inside this repository, navigate to the Interoperability tutorial and into the projectTemplate directory:
+
+```sh
+	cd examples/Interoperability/projectTemplate
+```
 
 ## Project structure
 
 The project consists of the following files and directories:
 
 ```plaintext
-CheerpJInteroperabilityTutorial/
-├── com/example
+projectTemplate/
+|── com/example/
+│   └── Example.class (and other compiled .class files)
 │   └── Example.java
 │   └── manifest.txt
-│   └── Example.class (and other compiled .class files)
-├── index.html
-└── example.jar
-└── Makefile
-
+├── Makefile
+├── example.jar
+└── index.html
 ```
 
 In this tutorial, we will implement the native methods in JavaScript in the `index.html` file to enable communication between Java and JavaScript.
@@ -80,7 +89,7 @@ This Java class contains the following methods:
 
 To enable Java and JavaScript communication, we need to implement the [`native`] methods in JavaScript. These methods will handle the data exchange between the two environments.
 
-We will do this in the `index.html` file, which is part of the template project `.zip` file. In this file, you will find useful comments to guide you through the implementation process described below.
+We will do this in the `index.html` file, inside of the project template directory. In this file, you will find useful comments to guide you through the implementation process described below.
 
 ### 1. Define JavaScript native methods
 
