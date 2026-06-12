@@ -18,7 +18,24 @@ const isBlogPost =
 const canonicalSite = isBlogPost
 	? new URL("https://labs.leaningtech.com")
 	: Astro.site;
-const canonicalURL = new URL(Astro.url.pathname, canonicalSite);
+
+// BrowserPod posts that have been migrated to browserpod.io point their
+// canonical at the browserpod.io equivalent to avoid duplicate-content conflicts.
+const browserpodCanonicals: Record<string, string> = {
+	"/blog/browserpod-10": "https://browserpod.io/blog/browserpod-10/",
+	"/blog/browserpod-20": "https://browserpod.io/blog/browserpod-20/",
+	"/blog/browserpod-deep-dive":
+		"https://browserpod.io/blog/browserpod-deep-dive/",
+	"/blog/browserpod-beta-announcement":
+		"https://browserpod.io/blog/browserpod-beta-announcement/",
+	"/blog/browserpod-annoucement":
+		"https://browserpod.io/blog/browserpod-announcement/",
+};
+
+const normalisedPath = Astro.url.pathname.replace(/(?:\.html|\/)$/, "");
+const canonicalURL = browserpodCanonicals[normalisedPath]
+	? new URL(browserpodCanonicals[normalisedPath])
+	: new URL(Astro.url.pathname, canonicalSite);
 
 const { title, description, image = "/social/common@2x.png" } = Astro.props;
 
