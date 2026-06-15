@@ -3,9 +3,19 @@ import { defineCollection, z } from "astro:content";
 const productTags = z.array(
 	z.enum(["Cheerp", "CheerpJ", "CheerpX", "BrowserPod"])
 );
+const blogCategories = z.array(
+	z.enum([
+		"Release",
+		"Technical",
+		"Community",
+		"Projects & Demos",
+		"Leaning Technologies",
+	])
+);
 const languages = z.enum(["en", "ja"]);
 
 export type ProductTag = z.infer<typeof productTags>[0];
+export type BlogCategory = z.infer<typeof blogCategories>[0];
 export type LanguageContent = z.infer<typeof languages>;
 
 export function defineLabsCollections() {
@@ -31,6 +41,7 @@ export function defineLabsCollections() {
 					featured: z.boolean().default(false),
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),
+					categories: blogCategories.optional(),
 				}),
 		}),
 		blogauthors: defineCollection({
@@ -52,11 +63,18 @@ export function defineLabsCollections() {
 					demo_url: z.string().optional(),
 					repository_url: z.string().optional(),
 					author: z.string(),
-					project_type: z.string(),
+					project_type: z.preprocess(
+						(val) => (typeof val === "string" ? [val] : val),
+						z.array(z.string())
+					),
 					niche: z.string(),
 					hero_image: image().optional(),
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),
+					/** Impressiveness score. Higher values appear first on the showcase index.
+					 *  Use a wide range (e.g. 1–100) so global order can be set precisely
+					 *  without relying on alphabetical tie-breaking. */
+					score: z.number().int().min(1).default(50),
 				}),
 		}),
 	};

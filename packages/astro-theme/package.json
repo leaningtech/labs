@@ -22,6 +22,8 @@
 		"./layouts/ProductHome.astro": "./layouts/ProductHome.astro",
 		"./components/LinkButton.astro": "./components/LinkButton.astro",
 		"./components/Footer.astro": "./components/Footer.astro",
+		"./components/BlogIndexCard.astro": "./components/BlogIndexCard.astro",
+		"./components/ShowcaseIndexCard.astro": "./components/ShowcaseIndexCard.astro",
 		"./components/BlogPostCard.astro": "./components/BlogPostCard.astro",
 		"./components/BlogPostCardSet.astro": "./components/BlogPostCardSet.astro",
 		"./components/LatestBlogPostPill.astro": "./components/LatestBlogPostPill.astro",

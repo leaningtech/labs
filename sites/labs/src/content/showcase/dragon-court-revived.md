@@ -7,6 +7,7 @@ project_type: Community
 niche: Videogames
 tags:
   - CheerpJ
+score: 30
 hero_image: "./dragon-court-revived.png"
 ---
 

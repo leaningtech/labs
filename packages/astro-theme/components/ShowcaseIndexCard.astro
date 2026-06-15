@@ -4,18 +4,15 @@ import { Image } from "astro:assets";
 
 interface Props {
 	demo: CollectionEntry<"showcase"> | CollectionEntry<"showcase">["slug"];
-	showMetadata?: boolean;
-	size?: "wide" | "narrow";
+	featured?: boolean;
 }
 
-const { demo: demoOrSlug, size = "narrow" } = Astro.props;
+const { demo: demoOrSlug, featured = false } = Astro.props;
 
 const demo =
 	typeof demoOrSlug === "string"
 		? await getEntry("showcase", demoOrSlug)
 		: demoOrSlug;
-
-const featured = size === "wide";
 ---
 
 <a
@@ -25,7 +22,7 @@ const featured = size === "wide";
 	{
 		demo.data.hero_image && (
 			<div
-				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}
+				class={`card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full ${featured ? "h-72" : "h-56"} mb-5 bg-stone-900`}
 			>
 				<Image
 					src={demo.data.hero_image}
@@ -51,7 +48,7 @@ const featured = size === "wide";
 	}
 	<div class="flex flex-wrap gap-1.5">
 		{
-			demo.data.project_type?.map((type) => (
+			demo.data.project_type.map((type) => (
 				<span class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs">
 					{type}
 				</span>

@@ -3,10 +3,11 @@ title: Client-Side Code Editor
 description: Practice Python coding client-side in your browser!
 repository_url: https://github.com/rheap404/cheerpx_hack
 author: Rhea and Rida
-project_type: Hackathon Winner 2024
+project_type: Hackathon Project
 niche: Dev Utilities
 tags:
   - CheerpX
+score: 15
 hero_image: "./client-side-code-editor.png"
 ---
 

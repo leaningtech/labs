@@ -4,10 +4,11 @@ description: A modern Java Swing look-and-feel showcased running entirely in the
 demo_url: https://flatlaf-demo.labs-leaningtech-com.pages.dev/FlatLaf-Demo/
 repository_url: https://github.com/leaningtech/labs/tree/FlatLaf-Demo
 author: Leaning Technologies
-project_type: Company Demo
+project_type: Tech Demo
 niche: Graphics
 tags:
   - CheerpJ
+score: 75
 hero_image: "./flatlaf.png"
 ---
 

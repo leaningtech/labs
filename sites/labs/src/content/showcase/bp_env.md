@@ -4,10 +4,13 @@ description: A full Vite + Svelte full-stack development environment, running fu
 demo_url: https://vitedemo.browserpod.io/
 repository_url: https://github.com/leaningtech/labs/blob/main/sites/labs/src/components/BrowserPodDemo_Beta.svelte
 author: Leaning Technologies
-project_type: Company Demo
+project_type:
+  - Dev Tools
+  - Tech Demo
 niche: Dev utilities
 tags:
   - BrowserPod
+score: 85
 hero_image: "./bp_env.png"
 ---
 

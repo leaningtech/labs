@@ -10,6 +10,8 @@ pubDate: "November 13 2024"
 heroImage: "./Webvm2.png"
 tags:
   - CheerpX
+categories:
+  - "Projects & Demos"
 ---
 
 WebVM is a full Linux environment running in the browser, client-side. It is a complete virtual machine, with support for persistent data storage, networking and, as of today’s release, Xorg and complete desktop environments. In an instance of WebVM, everything executes locally within the browser sandbox.

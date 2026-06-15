@@ -8,7 +8,7 @@ interface Props {
 	description?: string | undefined;
 	niche?: string | undefined;
 	author?: string | undefined;
-	project_type?: string | undefined;
+	project_type?: string[] | undefined;
 	demo_url?: string | undefined;
 	repository_url?: string | undefined;
 	tags?: string | undefined;
@@ -90,7 +90,7 @@ let tag_string = " ";
 					project_type && (
 						<tr class="">
 							<th class="text-left font-light">Project type</th>
-							<th class="text-right font-medium"> {project_type}</th>
+							<th class="text-right font-medium"> {project_type.join(", ")}</th>
 						</tr>
 					)
 				}

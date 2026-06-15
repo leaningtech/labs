@@ -3,13 +3,13 @@ title: "JSExport: C++ in the browser made easy"
 description: |
   Here at Leaning Technologies we build compilers for the Web (which output a combination of JavaScript and WebAssembly).
 pubDate: "2020-06-30"
-categories:
-  - "technical-blog"
 authors:
   - carlo
 heroImage: ./jsexport-output.webp
 tags:
   - Cheerp
+categories:
+  - "Technical"
 ---
 
 Here at Leaning Technologies we build compilers for the Web (which output a combination of JavaScript and WebAssembly).

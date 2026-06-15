@@ -8,6 +8,7 @@ project_type: Community
 niche: Education
 tags:
   - CheerpJ
+score: 60
 hero_image: "./nasa-aeronautics.png"
 ---
 

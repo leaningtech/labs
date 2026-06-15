@@ -9,6 +9,8 @@ pubDate: "April 6 2023"
 heroImage: "./cheerp-wasi.png"
 tags:
   - CheerpJ
+categories:
+  - "Technical"
 ---
 
 At Leaning Technologies we are heavily invested in WebAssembly, and we are actively contributing to push the standard forward. Just a few months ago WebAssembly tail-calls  were [standardised](https://github.com/WebAssembly/tail-call/issues/15#issuecomment-1357278111) thanks to our [work](https://leaningtech.com/fantastic-tail-calls-and-how-to-implement-them/), and we are currently bringing the [branch-hinting](https://github.com/WebAssembly/branch-hinting) proposal to Phase 4 (with progress currently hindered by a tangential [issue](https://github.com/WebAssembly/annotations/pull/17/files) connected to the reference interpreter implementation).

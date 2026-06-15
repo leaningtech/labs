@@ -3,14 +3,13 @@ title: "Announcing CheerpX for Flash, a solution to extend the life of Flash app
 description: |
   Today we are proud to announce CheerpX for Flash, a solution to run existing Flash applications on any browser after December 2020.
 pubDate: "2020-09-21"
-categories:
-  - "technical-blog"
-  - "webvm"
 authors:
   - stefano
 heroImage: ./flash-to-html5.webp
 tags:
   - CheerpX
+categories:
+  - "Release"
 ---
 
 Today we are proud to announce CheerpX for Flash , a solution to run existing Flash applications on any browser after December 2020.

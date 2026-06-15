@@ -10,6 +10,8 @@ heroImage: "./cheerp-lines.png"
 tags:
   - Cheerp
 featured: true
+categories:
+  - "Release"
 ---
 
 Today we are very proud to announce Cheerp 3.0, the latest major release of our C++ compiler for the Web.

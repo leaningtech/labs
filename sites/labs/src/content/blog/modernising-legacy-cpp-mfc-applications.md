@@ -8,6 +8,8 @@ authors:
 heroImage: ./mfc.png
 tags:
   - Cheerp
+categories:
+  - "Technical"
 ---
 
 As the software landscape evolves over time, businesses have the challenging task of "keeping up with the times". Advancements in tooling, platforms, frameworks and languages bring with them superior developer and user experience, improve maintainability and scalability, provide greater flexibility and enable innovation.

@@ -3,9 +3,6 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import FormattedDate from "./FormattedDate.astro";
 import { resolveAuthors } from "../lib/blog";
-import { productFromUrl } from "../lib/products";
-
-const product = productFromUrl(Astro.url);
 
 interface Props {
 	post: CollectionEntry<"blog"> | CollectionEntry<"blog">["slug"];
@@ -15,60 +12,58 @@ interface Props {
 
 const { post: postOrSlug, showMetadata = false, size = "narrow" } = Astro.props;
 
-if (!postOrSlug) {
-	return null;
-}
+if (!postOrSlug) return null;
 
 const post =
 	typeof postOrSlug === "string"
 		? await getEntry("blog", postOrSlug)
 		: postOrSlug;
-const authors = await resolveAuthors(post.data.authors);
 
-//choose hover link color based on product
-const productName = typeof product === "undefined" ? "Labs" : product.name;
-//if product is cheerpj, add prefix /docs on post url
-const blog_url =
-	productName === "CheerpJ" || productName === "BrowserPod"
-		? "https://labs.leaningtech.com/blog/"
-		: "/blog/";
+const authors = await resolveAuthors(post.data.authors);
+const featured = size === "wide";
 ---
 
 <a
-	href={blog_url + post.slug}
-	class="inline-flex flex-col space-between group overflow-hidden not-prose w-full"
+	href={`/blog/${post.slug}`}
+	class="inline-flex flex-col group not-prose w-full p-3 sm:p-6"
 >
 	{
 		post.data.heroImage && (
-			<Image
-				src={post.data.heroImage}
-				width={size === "wide" ? 1800 : 1170}
-				height={size === "wide" ? 947 : 615}
-				format="webp"
-				alt=""
-				class="rounded-xl mb-4 bg-bg-100 object-cover w-full h-64 self-center"
-			/>
+			<div
+				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-48 sm:h-64" : "h-32 sm:h-48"} mb-3 sm:mb-5 bg-stone-900`}
+			>
+				<Image
+					src={post.data.heroImage}
+					width={featured ? 1170 : 780}
+					height={featured ? 615 : 410}
+					format="webp"
+					alt=""
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+			</div>
 		)
 	}
 	<h3
-		class:list={{
-			"font-bold text-balance text-white grow": true,
-			"group-hover:text-primary-400 grow": true,
-			"text-2xl leading-7": size === "wide",
-			"text-xl leading-6": size === "narrow",
-		}}
+		class={`card-title font-bold text-balance text-white group-hover:text-primary-400 ${featured ? "text-xl" : "text-base"} leading-snug mb-2 grow`}
 	>
 		{post.data.title}
 	</h3>
 	{
+		post.data.description && (
+			<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
+				{post.data.description}
+			</p>
+		)
+	}
+	{
 		showMetadata && (
-			<div class="mt-4 flex justify-between items-center gap-8 text-bg-400 text-base whitespace-nowrap">
-				<div class="flex items-center gap-2 font-semibold overflow-hidden">
-					<div class="flex-none space-x-[-1rem]">
+			<div class="flex justify-between items-center gap-4 text-stone-500 text-xs whitespace-nowrap">
+				<div class="flex items-center gap-1.5 overflow-hidden">
+					<div class="flex -space-x-1.5 flex-none">
 						{authors.map((author) =>
 							author.avatar ? (
 								<img
-									class="inline-block w-8 h-8 rounded-full shadow border-2 border-bg-900"
+									class="w-5 h-5 rounded-full border border-stone-700"
 									src={author.avatar.src}
 									alt=""
 									loading="lazy"
@@ -78,10 +73,10 @@ const blog_url =
 						)}
 					</div>
 					<span class="overflow-hidden text-ellipsis">
-						{authors.map((author) => author.name).join(", ")}
+						{authors.map((a) => a.name).join(", ")}
 					</span>
 					{authors.some((a) => a.guest) && (
-						<span class="py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+						<span class="py-0.5 px-1.5 bg-primary-400/30 border border-primary-400 text-primary-200 rounded-full text-xs font-semibold">
 							Guest
 						</span>
 					)}

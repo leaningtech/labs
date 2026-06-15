@@ -4,10 +4,13 @@ description: A full-featured Java IDE that runs in the browser.
 demo_url: https://reportmill.com/SnapCode/
 repository_url: https://github.com/reportmill/SnapCode
 author: ReportMill Software
-project_type: Community
+project_type:
+  - Community
+  - Dev Tools
 niche: Developer Tools
 tags:
   - CheerpJ
+score: 40
 hero_image: "./snapcode.png"
 ---
 

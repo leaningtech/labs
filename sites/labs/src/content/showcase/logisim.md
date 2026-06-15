@@ -8,6 +8,7 @@ project_type: Community
 niche: Scientific
 tags:
   - CheerpJ
+score: 25
 hero_image: "./logisim.png"
 ---
 

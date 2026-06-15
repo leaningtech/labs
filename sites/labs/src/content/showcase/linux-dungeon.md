@@ -4,10 +4,11 @@ description: A browser-based fantasy puzzle game that runs entirely in a virtual
 demo_url: https://jfoxuk.github.io/webvm/
 repository_url: https://github.com/JFoxUK/webvm
 author: Jonathan Fox, Ruby Tipper
-project_type: Hackathon Winner 2025
+project_type: Hackathon Project
 niche: Virtual Machines and Education
 tags:
   - CheerpX
+score: 20
 hero_image: "./linux-dungeon.png"
 ---
 

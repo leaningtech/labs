@@ -9,6 +9,8 @@ pubDate: 2023-12-14
 heroImage: "./dragon-court.png"
 tags:
   - CheerpJ
+categories:
+  - "Projects & Demos"
 ---
 
 This is the first guest post from the [CheerpJ developer community](/cheerpj3/community). Clarky Lee talks about how he used [CheerpJ](/cheerpj3) to bring back a 90s RPG, Dragon Court.

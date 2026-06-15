@@ -23,8 +23,20 @@ const firstDocsEntry = getLocalisedProductNav(
 	Astro.currentLocale
 )[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
-let blogref = "https://labs.leaningtech.com/blog";
-let showcaseref = "https://labs.leaningtech.com/showcase";
+const productFilterTag: Partial<Record<string, string>> = {
+	cheerp: "Cheerp",
+	cheerpj2: "CheerpJ",
+	cheerpj3: "CheerpJ",
+	cheerpx: "CheerpX",
+	"cheerpx-for-flash": "CheerpX",
+	"cheerpx-games-runner": "CheerpX",
+	browserpod: "BrowserPod",
+};
+const filterParam = productFilterTag[product.id]
+	? `?product=${productFilterTag[product.id]}`
+	: "";
+let blogref = `https://labs.leaningtech.com/blog${filterParam}`;
+let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 ---
 
 <nav

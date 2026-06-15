@@ -3,10 +3,11 @@ title: HomeByMe
 description: A home design application, compiled to the web with Cheerp.
 demo_url: https://home.by.me/en/
 author: HomeByMe, Leaning Technologies
-project_type: Enterprise Demo
+project_type: Commercial
 niche: Interior Design
 tags:
   - Cheerp
+score: 80
 hero_image: "./homebyme.png"
 ---
 

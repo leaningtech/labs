@@ -3,14 +3,13 @@ title: "Extreme WebAssembly 1: pushing browsers to their absolute limits"
 description: |
   This is the first of a series of posts about the problems we have found on our way when using WebAssembly, and how we have solved them.
 pubDate: "2020-06-16"
-categories:
-  - "technical-blog"
-  - "webvm"
 authors:
   - alessandro
 heroImage: ./extreme-wasm.webp
 tags:
   - CheerpX
+categories:
+  - "Technical"
 ---
 
 ![](/blog/1gDXCXEYEhWvNQpNxEgkB9A.gif)_Python3 running client side using CheerpX. File access and blocking primitives (i.e. sleep) are demonstrated._
