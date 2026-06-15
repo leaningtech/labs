@@ -111,10 +111,12 @@ const { title, description, image, site } = Astro.props;
 			})();
 		</script>
 		<style is:global>
-			[data-filter-grid] {
+			[data-filter-grid],
+			[data-filter-section] {
 				transition: opacity 0.35s ease;
 			}
-			html.filtering-pending [data-filter-grid] {
+			html.filtering-pending [data-filter-grid],
+			html.filtering-pending [data-filter-section] {
 				opacity: 0;
 				pointer-events: none;
 			}
