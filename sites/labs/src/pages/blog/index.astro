@@ -5,6 +5,7 @@ import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import { getSite } from "@leaningtech/astro-theme/nav";
 import ProductFilter from "../../components/ProductFilter.svelte";
+import FilterPaintGuard from "@leaningtech/astro-theme/components/FilterPaintGuard.astro";
 
 const allPosts = (
 	await getCollection("blog", ({ data }) => data.draft !== true)
@@ -32,6 +33,7 @@ const site = getSite(Astro.site?.hostname);
 		</header>
 
 		<section class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-xl">
+			<FilterPaintGuard />
 			<ProductFilter client:load searchPlaceholder="Search posts…" />
 			<ul class="grid grid-cols-2 md:grid-cols-6" data-filter-grid="blog">
 				{

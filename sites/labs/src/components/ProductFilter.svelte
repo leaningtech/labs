@@ -349,6 +349,7 @@
 		if (cats) selectedCategories = cats.split(",").filter(Boolean);
 		applyProductTheme();
 		applyTagFilter();
+		document.documentElement.classList.remove("filtering-pending"); // reveal, already filtered
 		isInitialMount = false;
 
 		const allItems = [...document.querySelectorAll<HTMLElement>("[data-tags]")];
