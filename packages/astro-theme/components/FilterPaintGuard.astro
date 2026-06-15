@@ -1,24 +1,4 @@
 ---
-// Hides any [data-filter-grid] before first paint when the URL carries a filter,
-// so the client filter hydrates without flashing unfiltered cards.
-// Same pattern as the classic inline no-FOUC theme script.
+// No-op: filter paint guard is handled in Shell.astro <head>.
+// This component is kept as a placeholder so existing imports compile.
 ---
-
-<script is:inline>
-	(() => {
-		try {
-			const p = new URLSearchParams(location.search);
-			if (!p.has("product") && !p.has("categories")) return;
-			const html = document.documentElement;
-			html.classList.add("filtering-pending");
-			// Failsafe: never leave the grid hidden if hydration doesn't fire.
-			setTimeout(() => html.classList.remove("filtering-pending"), 1500);
-		} catch {}
-	})();
-</script>
-
-<style is:global>
-	html.filtering-pending [data-filter-grid] {
-		display: none;
-	}
-</style>

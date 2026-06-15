@@ -94,6 +94,27 @@ const { title, description, image, site } = Astro.props;
 				text-wrap: pretty;
 			}
 		</style>
+		<script is:inline>
+			// Hide filter grids before first paint when the URL carries a filter param,
+			// preventing a flash of unfiltered cards before client-side hydration.
+			(() => {
+				try {
+					const p = new URLSearchParams(location.search);
+					if (!p.has("product") && !p.has("categories")) return;
+					document.documentElement.classList.add("filtering-pending");
+					setTimeout(
+						() =>
+							document.documentElement.classList.remove("filtering-pending"),
+						3000,
+					);
+				} catch {}
+			})();
+		</script>
+		<style is:global>
+			html.filtering-pending [data-filter-grid] {
+				display: none;
+			}
+		</style>
 	</head>
 	<body
 		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-bg-900 text-bg-200"
