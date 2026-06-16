@@ -23,5 +23,5 @@ If the file could not be created, the [Promise] will be rejected.
 > Calling `createFile` on an already existing file will wipe its contents.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[BinaryFile]: /docs/reference/binaryfile/
-[TextFile]: /docs/reference/textfile/
+[BinaryFile]: /docs/reference/BinaryFile
+[TextFile]: /docs/reference/TextFile

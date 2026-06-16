@@ -37,10 +37,14 @@ const canonicalURL = browserpodCanonicals[normalisedPath]
 	? new URL(browserpodCanonicals[normalisedPath])
 	: new URL(Astro.url.pathname, canonicalSite);
 
-const { title, description, image = "/social/common@2x.png" } = Astro.props;
-
 const product = productFromUrl(canonicalURL);
 const favicon = product?.favicon ?? companyFavicon.src;
+
+const {
+	title,
+	description,
+	image = product?.ogImage ?? "/social/common@2x.png",
+} = Astro.props;
 
 // Sniff mime type from favicon extension
 let faviconType: string;
@@ -56,6 +60,14 @@ if (favicon.endsWith(".svg")) {
 }
 
 const base = import.meta.env.BASE_URL;
+// BASE_URL ends in "/" (e.g. "/docs/"), so strip it before joining to avoid a
+// double slash. browserpod serves a hand-built sitemap at /docs/sitemap.xml;
+// other sites use the @astrojs/sitemap-generated sitemap-index.xml.
+const baseNoSlash = base.replace(/\/$/, "");
+const sitemapHref =
+	product?.id === "browserpod"
+		? `${baseNoSlash}/sitemap.xml`
+		: `${baseNoSlash}/sitemap-index.xml`;
 
 let plausibleDomains = [new URL(Astro.url).hostname];
 if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
@@ -87,7 +99,7 @@ const gtmScript =
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type={faviconType} href={favicon} />
 <meta name="generator" content={Astro.generator} />
-<link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+<link rel="sitemap" href={sitemapHref} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

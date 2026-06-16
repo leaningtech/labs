@@ -32,4 +32,4 @@ class BrowserPod {
 The `onOutput` callback is required and will be called each time data is written to the terminal. This allows you to process or display terminal output as needed.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[Terminal]: /docs/reference/terminal/
+[Terminal]: /docs/reference/Terminal

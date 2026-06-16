@@ -19,7 +19,7 @@ Think of it like a lightweight virtual machine:
 
 ## Creating a Pod
 
-Pods are created with the static [`boot`](/docs/reference/browserpod/boot/) method:
+Pods are created with the static [`boot`](/docs/reference/BrowserPod/boot) method:
 
 ```ts
 const pod = await BrowserPod.boot({ apiKey: "..." });
@@ -29,9 +29,9 @@ const pod = await BrowserPod.boot({ apiKey: "..." });
 
 ## Pod lifecycle
 
-A Pod is created with [`BrowserPod.boot`](/docs/reference/browserpod/boot/) and exists for the lifetime of the browser session. By default, Pods are **ephemeral**. Closing the tab starts a fresh environment.
+A Pod is created with [`BrowserPod.boot`](/docs/reference/BrowserPod/boot) and exists for the lifetime of the browser session. By default, Pods are **ephemeral**. Closing the tab starts a fresh environment.
 
-To persist the filesystem across sessions, pass a `storageKey` to [`boot`](/docs/reference/browserpod/boot/). Rebooting with the same key resumes the same disk:
+To persist the filesystem across sessions, pass a `storageKey` to [`boot`](/docs/reference/BrowserPod/boot). Rebooting with the same key resumes the same disk:
 
 ```ts
 const pod = await BrowserPod.boot({ apiKey: "...", storageKey: "my-project" });
@@ -41,7 +41,7 @@ const pod = await BrowserPod.boot({ apiKey: "...", storageKey: "my-project" });
 
 ### Run programs
 
-Use [`run`](/docs/reference/browserpod/run/) to execute a program and get back a [Process](/docs/reference/process/):
+Use [`run`](/docs/reference/BrowserPod/run) to execute a program and get back a [Process](/docs/reference/Process):
 
 ```ts
 const process = await pod.run("node", ["script.js"], { terminal });
@@ -49,7 +49,7 @@ const process = await pod.run("node", ["script.js"], { terminal });
 
 ### Manage the filesystem
 
-Create and read files with [`createFile`](/docs/reference/browserpod/createFile/) and [`openFile`](/docs/reference/browserpod/openFile/):
+Create and read files with [`createFile`](/docs/reference/BrowserPod/createFile) and [`openFile`](/docs/reference/BrowserPod/openFile):
 
 ```ts
 const file = await pod.createFile("/app/config.json", "text");
@@ -59,7 +59,7 @@ await file.close();
 
 ### Work with terminals
 
-Attach an interactive terminal with [`createDefaultTerminal`](/docs/reference/browserpod/createDefaultTerminal/):
+Attach an interactive terminal with [`createDefaultTerminal`](/docs/reference/BrowserPod/createDefaultTerminal):
 
 ```ts
 const terminal = await pod.createDefaultTerminal(element);

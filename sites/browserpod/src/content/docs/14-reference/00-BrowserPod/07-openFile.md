@@ -19,5 +19,5 @@ class BrowserPod {
 `openFile` returns a [Promise] which resolves to a [BinaryFile] object if `mode="binary"`, and to a [TextFile] object if `mode="utf-8"`. If the file does not exist, the [Promise] will be rejected.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[BinaryFile]: /docs/reference/binaryfile/
-[TextFile]: /docs/reference/textfile/
+[BinaryFile]: /docs/reference/BinaryFile
+[TextFile]: /docs/reference/TextFile

@@ -22,6 +22,8 @@ export interface ProductData {
 	href: string;
 	logotype: ImageMetadata;
 	favicon: string;
+	/** Absolute path (or URL) to the social preview image for this product. */
+	ogImage?: string;
 	subtitle: string;
 	description: string;
 	github: string;
@@ -137,7 +139,10 @@ export const products: { [product in Product]: ProductData } = {
 		name: "BrowserPod",
 		href: "https://browserpod.io",
 		logotype: browserpodLogotype,
-		favicon: baseWithSlash + "browserpod/favicon.png",
+		// browserpod.io serves these assets at its root, and the docs are on the
+		// same domain (browserpod.io/docs), so root-absolute paths resolve.
+		favicon: "/favicon.png",
+		ogImage: "/OpenGraph.jpg",
 		subtitle: "Run Code Sandboxes in your browser",
 		description:
 			"Instant, in-browser runtime for Node.js, Python, and Ruby on Rails to power the future of Web-based developer experiences.",

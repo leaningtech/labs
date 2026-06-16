@@ -32,7 +32,7 @@ class BrowserPod {
 `boot` returns a [Promise] which is resolved when the [Pod] is ready to be used. It returns the newly created [Pod].
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[Pod]: /docs/reference/browserpod/
+[Pod]: /docs/reference/BrowserPod
 
 ## Notes
 

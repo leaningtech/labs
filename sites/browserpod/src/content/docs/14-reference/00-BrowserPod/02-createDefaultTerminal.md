@@ -18,4 +18,4 @@ class BrowserPod {
 `createDefaultTerminal` returns a [Promise] which resolves to a [Terminal] object.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[Terminal]: /docs/reference/terminal/
+[Terminal]: /docs/reference/Terminal
