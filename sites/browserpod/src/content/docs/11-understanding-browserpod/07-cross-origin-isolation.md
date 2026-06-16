@@ -1,6 +1,6 @@
 ---
 title: Cross-origin isolation
-description: Why BrowserPod requires COOP and COEP
+description: Why BrowserPod needs cross-origin isolation, and the COOP and COEP headers your page must send to enable SharedArrayBuffer in the browser.
 ---
 
 BrowserPod uses `SharedArrayBuffer`, which modern browsers only enable on **cross‑origin isolated** pages. Cross‑origin isolation is a browser security mode that protects users from data leaks between tabs and embedded resources.

@@ -1,6 +1,6 @@
 ---
 title: openFile
-description: Open a file in the Pod's filesystem
+description: Open an existing file in a BrowserPod Pod's virtual filesystem, returning a BinaryFile or TextFile handle depending on the mode you pass.
 ---
 
 ```ts

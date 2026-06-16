@@ -1,6 +1,6 @@
 ---
 title: boot
-description: Initialize a pod instance
+description: Boot a BrowserPod Pod with your API key to start an isolated, in-browser Linux runtime, optionally persisting its filesystem with a storageKey.
 ---
 
 ```ts

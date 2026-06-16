@@ -1,6 +1,6 @@
 ---
 title: createFile
-description: Create a file in the Pod's filesystem
+description: Create a new file in a BrowserPod Pod's virtual filesystem, returning a BinaryFile or TextFile handle depending on the mode you pass.
 ---
 
 ```ts
