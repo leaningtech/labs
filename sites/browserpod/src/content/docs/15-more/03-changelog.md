@@ -3,6 +3,22 @@ title: Changelog
 description: A changelog for BrowserPod.
 ---
 
+## Version 2.11.0:
+
+- Polyfill some bun APIs
+
+## Version 2.10.0:
+
+- Simplified rust builds
+
+## Version 2.9.0:
+
+- Preliminary support for Rust
+
+## Version 2.8.0:
+
+- Introduce ephemeral mode
+
 ## Version 2.7.0:
 
 - Improve support for typed arrays
