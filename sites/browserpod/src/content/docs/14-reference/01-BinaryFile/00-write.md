@@ -1,6 +1,6 @@
 ---
 title: write
-description: Write raw bytes from an ArrayBuffer into a BinaryFile in a BrowserPod Pod, returning the number of bytes written.
+description: "Write raw bytes from an ArrayBuffer into a BinaryFile in a BrowserPod Pod, returning the number of bytes written."
 ---
 
 ```ts

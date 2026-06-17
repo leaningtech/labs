@@ -1,6 +1,6 @@
 ---
 title: run
-description: Run an executable inside a BrowserPod Pod, attach it to a terminal for input and output, and get back a Process handle for its result.
+description: "Run an executable inside a BrowserPod Pod, attach it to a terminal for input and output, and get back a Process handle for its result."
 ---
 
 ```ts

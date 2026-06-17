@@ -1,6 +1,6 @@
 ---
 title: write
-description: Write a string into a TextFile in a BrowserPod Pod's virtual filesystem, returning the number of bytes written.
+description: "Write a string into a TextFile in a BrowserPod Pod's virtual filesystem, returning the number of bytes written."
 ---
 
 ```ts

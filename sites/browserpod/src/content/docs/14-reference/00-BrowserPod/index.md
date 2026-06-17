@@ -1,6 +1,6 @@
 ---
 title: BrowserPod
-description: The BrowserPod class is the entry point to the API. An instance, called a Pod, is a complete, isolated Linux environment running in the browser tab.
+description: "The BrowserPod class is the entry point to the API. An instance, called a Pod, is a complete, isolated Linux environment running in the browser tab."
 ---
 
 `BrowserPod` is the main class and entry point of the BrowserPod API. An instance of `BrowserPod` is commonly called a **Pod**: a complete, isolated Linux environment running inside the browser tab.

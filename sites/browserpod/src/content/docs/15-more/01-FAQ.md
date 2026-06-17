@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Answers to common BrowserPod questions about API keys, backend servers, COOP and COEP headers, native binaries, browser support, and security.
+description: "Answers to common BrowserPod questions about API keys, backend servers, COOP and COEP headers, native binaries, browser support, and security."
 ---
 
 ## What is BrowserPod?
