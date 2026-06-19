@@ -4,7 +4,6 @@ import ShowcaseIndexCard from "@leaningtech/astro-theme/components/ShowcaseIndex
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import ProductFilter from "../../components/ProductFilter.svelte";
-import FilterPaintGuard from "@leaningtech/astro-theme/components/FilterPaintGuard.astro";
 
 const demos = (
 	await getCollection("showcase", ({ data }) => data.draft !== true)
@@ -32,7 +31,6 @@ const demos = (
 			class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-2xl"
 			data-filter-section
 		>
-			<FilterPaintGuard />
 			<ProductFilter client:load searchPlaceholder="Search demos…" />
 			<ul
 				class="grid sm:grid-cols-2 md:grid-cols-6"
