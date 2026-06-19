@@ -1,6 +1,6 @@
 ---
 title: run
-description: Run a program inside the Pod
+description: "Run an executable inside a BrowserPod Pod, attach it to a terminal for input and output, and get back a Process handle for its result."
 ---
 
 ```ts
@@ -36,5 +36,5 @@ class BrowserPod {
 `run` returns a [Promise] which resolves to a [Process] object once the command finishes running.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[Terminal]: /docs/reference/terminal/
-[Process]: /docs/reference/process/
+[Terminal]: /docs/reference/Terminal
+[Process]: /docs/reference/Process

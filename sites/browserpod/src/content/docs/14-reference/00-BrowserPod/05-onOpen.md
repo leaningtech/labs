@@ -25,4 +25,4 @@ class BrowserPod {
 
 `onOpen` intercepts the use of the [`xdg-open`](https://linux.die.net/man/1/xdg-open) utility.
 
-[Pod]: /docs/reference/browserpod/
+[Pod]: /docs/reference/BrowserPod

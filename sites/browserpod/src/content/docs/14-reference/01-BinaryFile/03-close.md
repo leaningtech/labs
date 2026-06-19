@@ -1,6 +1,6 @@
 ---
 title: close
-description: Close the file
+description: "Close a BinaryFile handle in a BrowserPod Pod to flush pending writes and release the file once you have finished reading or writing."
 ---
 
 ```ts

@@ -1,6 +1,6 @@
 ---
 title: read
-description: Read data from the file
+description: "Read text from a TextFile in a BrowserPod Pod, returning the requested length of data as a decoded string."
 ---
 
 ```ts

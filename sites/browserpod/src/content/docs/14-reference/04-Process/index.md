@@ -3,7 +3,7 @@ title: Process
 description: A handle to a process that ran inside a Pod
 ---
 
-A `Process` is an opaque handle to a program that ran inside a [Pod](/docs/reference/browserpod/). It is returned by [`run`](/docs/reference/browserpod/run/) once the process has exited.
+A `Process` is an opaque handle to a program that ran inside a [Pod](/docs/reference/BrowserPod). It is returned by [`run`](/docs/reference/BrowserPod/run) once the process has exited.
 
 ```ts
 class Process {}

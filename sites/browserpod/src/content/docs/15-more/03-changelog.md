@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: A changelog for BrowserPod.
+description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
 ## Version 2.11.0:

@@ -1,6 +1,6 @@
 ---
 title: getSize
-description: Get the file size
+description: "Get the size in bytes of a BinaryFile stored in a BrowserPod Pod's virtual filesystem, returned as a promise."
 ---
 
 ```ts

@@ -1,6 +1,6 @@
 ---
 title: read
-description: Read data from the file
+description: "Read raw bytes from a BinaryFile in a BrowserPod Pod, returning the requested length of data as an ArrayBuffer."
 ---
 
 ```ts
