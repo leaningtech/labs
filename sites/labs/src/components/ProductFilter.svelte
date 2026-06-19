@@ -349,7 +349,9 @@
 		if (cats) selectedCategories = cats.split(",").filter(Boolean);
 		applyProductTheme();
 		applyTagFilter();
-		document.documentElement.classList.remove("filtering-pending"); // reveal, already filtered
+		// Remove the FOUC guard class added by Shell.astro <head> script.
+		// Filtering is already applied above, so the section fades in at the correct state.
+		document.documentElement.classList.remove("filtering-pending");
 		isInitialMount = false;
 
 		const allItems = [...document.querySelectorAll<HTMLElement>("[data-tags]")];
