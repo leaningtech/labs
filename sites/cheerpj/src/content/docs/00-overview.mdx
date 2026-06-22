@@ -9,6 +9,7 @@ import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro
 import { DISCORD_URL } from "@/consts.ts";
 import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButton.astro";
 import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
+import Callout from "@leaningtech/astro-theme/components/Callout.astro";
 
 <div class="not-prose flex gap-2 mb-2">
 	<img
@@ -114,8 +115,11 @@ Know what you're building? Jump straight to the relevant tutorial:
 	</a>
 </div>
 
-> [!TIP] Debug mode
-> See Debugging CheerpJ for details. Enabling debug mode can significantly affect performance, disable it when not needed.
+<Callout variant="tip" title="Debug mode">
+	See <a href="/docs/guides/cheerpj-debug">Debugging CheerpJ</a> for details.
+	Enabling debug mode can significantly affect performance, disable it when not
+	needed.
+</Callout>
 
 ## How does CheerpJ work?
 
