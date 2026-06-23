@@ -427,7 +427,7 @@ enableDebug?: boolean;
 > [!note] Important
 > The `enableDebug` option is supported in CheerpJ 3.1 and later versions.
 
-This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ.
+This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ. Be aware it can significantly affect performance. Disable it when not needed.
 
 Example of usage:
 
