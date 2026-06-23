@@ -75,7 +75,7 @@
 				selectedCategories.length === 0 ||
 				selectedCategories.some((c) => card.categories.includes(c));
 			return productOk && categoryOk;
-		}),
+		})
 	);
 
 	// Available categories derived from card data, not the DOM.
@@ -125,7 +125,7 @@
 	const showPopup = $derived(inputFocused && searchQuery.trim().length >= 2);
 	// Mobile popup: tied to the search-open state so it survives autofocus quirks.
 	const showMobilePopup = $derived(
-		mobileSearchOpen && searchQuery.trim().length >= 2,
+		mobileSearchOpen && searchQuery.trim().length >= 2
 	);
 
 	function esc(s: string): string {
@@ -192,7 +192,7 @@
 			"",
 			search
 				? `${window.location.pathname}?${search}`
-				: window.location.pathname,
+				: window.location.pathname
 		);
 	}
 
@@ -255,7 +255,8 @@
 
 	function imageSizeClasses(i: number, total: number): string {
 		const isFeatured = i < Math.min(4, total);
-		if (gridType === "blog") return isFeatured ? "h-48 sm:h-64" : "h-32 sm:h-48";
+		if (gridType === "blog")
+			return isFeatured ? "h-48 sm:h-64" : "h-32 sm:h-48";
 		return isFeatured ? "h-72" : "h-56";
 	}
 
@@ -656,7 +657,10 @@
 				>
 					{#if card.imageSrc}
 						<div
-							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(i, visibleCards.length)} mb-5 bg-stone-900"
+							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+								i,
+								visibleCards.length
+							)} mb-5 bg-stone-900"
 						>
 							<img
 								src={card.imageSrc}
@@ -668,7 +672,10 @@
 						</div>
 					{/if}
 					<h3
-						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(i, visibleCards.length)} leading-snug mb-2 grow"
+						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+							i,
+							visibleCards.length
+						)} leading-snug mb-2 grow"
 					>
 						{card.title}
 					</h3>
@@ -699,7 +706,10 @@
 				>
 					{#if card.imageSrc}
 						<div
-							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(i, visibleCards.length)} mb-3 sm:mb-5 bg-stone-900"
+							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+								i,
+								visibleCards.length
+							)} mb-3 sm:mb-5 bg-stone-900"
 						>
 							<img
 								src={card.imageSrc}
@@ -711,7 +721,10 @@
 						</div>
 					{/if}
 					<h3
-						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(i, visibleCards.length)} leading-snug mb-2 grow"
+						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+							i,
+							visibleCards.length
+						)} leading-snug mb-2 grow"
 					>
 						{card.title}
 					</h3>

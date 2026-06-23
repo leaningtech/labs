@@ -15,7 +15,7 @@ const site = getSite(Astro.site?.hostname);
 const blogCards = await Promise.all(
 	allPosts.map(async (post) => {
 		const authorEntries = await Promise.all(
-			post.data.authors.map((id) => getEntry("blogauthors", id)),
+			post.data.authors.map((id) => getEntry("blogauthors", id))
 		);
 		const imageSrc = post.data.heroImage
 			? (
@@ -44,7 +44,7 @@ const blogCards = await Promise.all(
 					guest: a.data.guest ?? false,
 				})),
 		};
-	}),
+	})
 );
 ---
 
