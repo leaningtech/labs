@@ -100,24 +100,24 @@ const { title, description, image, site } = Astro.props;
 			Because this is a static site, ProductFilter.svelte runs client-side only
 			(client:load). When a user opens a pre-filtered URL such as
 			/showcase?product=Cheerp, the browser first paints the full SSR HTML (all
-			cards visible), then Svelte hydrates and hides the non-matching cards in
-			onMount — producing a brief flash of unfiltered content.
+			cards visible), then Svelte hydrates with the correct filter state — but
+			there is a window between initial paint and hydration where unfiltered
+			content would flash.
 
 			This inline script runs synchronously in <head>, before the browser paints
 			any body content. If the URL carries a filter param it adds
 			"filtering-pending" to <html>, which the style block below uses to hide
-			[data-filter-section] (the filter bar + grid wrapper on showcase/blog pages).
-			ProductFilter.svelte removes the class at the end of its onMount, once
-			filtering has already been applied, so the section fades in already filtered.
+			[data-filter-section] (the filter bar + card grid on showcase/blog pages).
+
+			ProductFilter.svelte initialises its filter state synchronously from the URL
+			(outside onMount), so its first rendered output already shows only matching
+			cards. A $effect removes "filtering-pending" after that first render, so the
+			section fades in already filtered.
 
 			The 3 s setTimeout is a safety net: if hydration fails or takes unusually
 			long the grid is revealed regardless, preventing a permanently blank page.
 
-			This is the same no-FOUC pattern used for dark-mode theme scripts. A
-			structural alternative (rendering cards inside Svelte so reactivity controls
-			visibility from the start) would be cleaner but requires either SSR or
-			accepting a blank grid while JS loads. See ProductFilter.svelte onMount for
-			the other half of this handshake.
+			This is the same no-FOUC pattern used for dark-mode theme scripts.
 		-->
 		<script is:inline>
 			(() => {
