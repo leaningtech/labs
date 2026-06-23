@@ -36,11 +36,13 @@ const blogCards = await Promise.all(
 			tags: post.data.tags ?? [],
 			categories: post.data.categories ?? [],
 			pubDate: post.data.pubDate.toISOString(),
-			authors: authorEntries.map((a) => ({
-				name: a?.data.name ?? "",
-				avatarSrc: a?.data.avatar?.src,
-				guest: a?.data.guest ?? false,
-			})),
+			authors: authorEntries
+				.filter((a) => a !== undefined)
+				.map((a) => ({
+					name: a.data.name,
+					avatarSrc: a.data.avatar?.src,
+					guest: a.data.guest ?? false,
+				})),
 		};
 	}),
 );

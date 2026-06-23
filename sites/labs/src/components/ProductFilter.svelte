@@ -818,5 +818,4 @@
 		background-color: rgb(var(--color-primary-500));
 		border-color: rgb(var(--color-primary-500));
 	}
-
 </style>
