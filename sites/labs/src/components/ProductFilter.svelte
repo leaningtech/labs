@@ -1,8 +1,34 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	let { searchPlaceholder = "Search…" }: { searchPlaceholder?: string } =
-		$props();
+	interface Author {
+		name: string;
+		avatarSrc?: string | undefined;
+		guest?: boolean;
+	}
+
+	interface CardData {
+		slug: string;
+		title: string;
+		description?: string;
+		href: string;
+		imageSrc?: string | undefined;
+		tags: string[]; // product tags (Cheerp, CheerpJ, etc.) — drives product filter tabs
+		categories: string[]; // project_type for showcase, blog categories for blog — drives category chips
+		// Blog-only
+		pubDate?: string;
+		authors?: Author[];
+	}
+
+	let {
+		searchPlaceholder = "Search…",
+		cards = [] as CardData[],
+		gridType = "showcase" as "showcase" | "blog",
+	}: {
+		searchPlaceholder?: string;
+		cards?: CardData[];
+		gridType?: "showcase" | "blog";
+	} = $props();
 
 	const TAGS = ["BrowserPod", "Cheerp", "CheerpJ", "CheerpX"] as const;
 	// Preferred display order for blog categories; unknown values sort alphabetically after.
@@ -24,12 +50,48 @@
 		CheerpX: "site-cheerpx",
 	};
 	let originalSiteClass = "";
-	let isInitialMount = true;
 
-	let selected = $state("");
+	// Initialise filter state synchronously from the URL so the first Svelte render
+	// already reflects the correct filtered state, without waiting for onMount.
+	function getInitialParams() {
+		if (typeof window === "undefined")
+			return { product: "", categories: [] as string[] };
+		const p = new URLSearchParams(location.search);
+		return {
+			product: p.get("product") ?? "",
+			categories: p.get("categories")?.split(",").filter(Boolean) ?? [],
+		};
+	}
+	const initial = getInitialParams();
+	let selected = $state(initial.product);
 	// string[] is used instead of Set so Svelte 5 reactivity tracks it reliably.
-	let selectedCategories = $state<string[]>([]);
-	let availableCategories = $state<string[]>([]);
+	let selectedCategories = $state<string[]>(initial.categories);
+
+	// Visible cards — purely derived from filter state, no DOM manipulation needed.
+	const visibleCards = $derived(
+		cards.filter((card) => {
+			const productOk = !selected || card.tags.includes(selected);
+			const categoryOk =
+				selectedCategories.length === 0 ||
+				selectedCategories.some((c) => card.categories.includes(c));
+			return productOk && categoryOk;
+		})
+	);
+
+	// Available categories derived from card data, not the DOM.
+	const availableCategories = $derived.by(() => {
+		const catSet = new Set<string>();
+		cards.forEach((card) => card.categories.forEach((c) => catSet.add(c)));
+		return [...catSet].sort((a, b) => {
+			const ai = CATEGORY_ORDER.indexOf(a);
+			const bi = CATEGORY_ORDER.indexOf(b);
+			if (ai >= 0 && bi >= 0) return ai - bi;
+			if (ai >= 0) return -1;
+			if (bi >= 0) return 1;
+			return a.localeCompare(b);
+		});
+	});
+
 	let searchQuery = $state("");
 	let inputFocused = $state(false);
 	let filterPanelOpen = $state(false);
@@ -38,33 +100,24 @@
 	let mobileFilterRef: HTMLElement;
 	let mobileSearchRef: HTMLElement;
 
-	interface SearchItem {
-		title: string;
-		description: string;
-		href: string;
-		tags: string[];
-		categories: string[];
-	}
-
-	let searchItems: SearchItem[] = $state([]);
-
+	// Search results derived from card data — no DOM walking required.
 	const searchResults = $derived.by(() => {
 		const q = searchQuery.trim().toLowerCase();
 		if (q.length < 2) return [];
-		return searchItems
-			.filter((item) => {
-				const matchesTag = !selected || item.tags.includes(selected);
+		return cards
+			.filter((card) => {
+				const matchesTag = !selected || card.tags.includes(selected);
 				return (
 					matchesTag &&
-					(item.title.toLowerCase().includes(q) ||
-						item.description.toLowerCase().includes(q))
+					(card.title.toLowerCase().includes(q) ||
+						(card.description ?? "").toLowerCase().includes(q))
 				);
 			})
 			.slice(0, 6)
-			.map((item) => ({
-				href: item.href,
-				title: highlight(item.title, q),
-				snippet: getSnippet(item.title, item.description, q),
+			.map((card) => ({
+				href: card.href,
+				title: highlight(card.title, q),
+				snippet: getSnippet(card.title, card.description ?? "", q),
 			}));
 	});
 
@@ -103,158 +156,6 @@
 			highlight(desc.slice(start, end), query) +
 			(end < desc.length ? "…" : "")
 		);
-	}
-
-	function applyTagFilter() {
-		const items = document.querySelectorAll<HTMLElement>("[data-tags]");
-
-		const isVisible = (item: HTMLElement) => {
-			const tags = item.dataset.tags ? item.dataset.tags.split(",") : [];
-			const cats = item.dataset.categories
-				? item.dataset.categories.split(",")
-				: [];
-			const productOk = !selected || tags.includes(selected);
-			const categoryOk =
-				selectedCategories.length === 0 ||
-				selectedCategories.some((c) => cats.includes(c));
-			return productOk && categoryOk;
-		};
-
-		if (!isInitialMount) {
-			items.forEach((item) => {
-				const visible = isVisible(item);
-				if (visible) {
-					item.style.opacity = "0";
-					item.style.display = "";
-				} else {
-					item.style.opacity = "";
-					item.style.display = "none";
-				}
-			});
-		} else {
-			items.forEach((item) => {
-				item.style.display = isVisible(item) ? "" : "none";
-			});
-		}
-
-		reapplyGridLayout("blog");
-		reapplyGridLayout("showcase");
-
-		if (!isInitialMount) {
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					items.forEach((item) => {
-						if (item.style.display !== "none") item.style.opacity = "";
-					});
-				});
-			});
-		}
-	}
-
-	// Reapplies col-span, border, and card-internal styles.
-	// Blog: 2-col mobile grid + responsive image heights.
-	// Showcase: desktop-only layout unchanged.
-	function reapplyGridLayout(attr: string) {
-		const grid = document.querySelector<HTMLElement>(
-			`[data-filter-grid="${attr}"]`
-		);
-		if (!grid) return;
-		const allItems = [
-			...grid.querySelectorAll<HTMLElement>("li:not([data-empty-state])"),
-		];
-		const visibleItems = allItems.filter((li) => li.style.display !== "none");
-
-		// Show/hide the empty state message
-		const emptyState = grid.querySelector<HTMLElement>("[data-empty-state]");
-		if (emptyState) {
-			emptyState.style.display = visibleItems.length === 0 ? "" : "none";
-		}
-
-		allItems.forEach((li) => {
-			li.classList.remove(
-				"md:col-span-3",
-				"md:col-span-2",
-				"md:border-r",
-				"md:border-t"
-			);
-			if (attr === "blog") li.classList.remove("col-span-2", "col-span-1");
-			if (attr === "showcase")
-				li.classList.remove("sm:col-span-2", "sm:col-span-1");
-		});
-
-		const featuredCount = Math.min(4, visibleItems.length);
-		const featured = visibleItems.slice(0, featuredCount);
-		const regular = visibleItems.slice(featuredCount);
-
-		featured.forEach((li) => li.classList.add("md:col-span-3"));
-		regular.forEach((li) => li.classList.add("md:col-span-2"));
-
-		if (attr === "blog") {
-			featured.forEach((li) => li.classList.add("col-span-2"));
-			regular.forEach((li) => li.classList.add("col-span-1"));
-		} else if (attr === "showcase") {
-			featured.forEach((li) => li.classList.add("sm:col-span-2"));
-			regular.forEach((li) => li.classList.add("sm:col-span-1"));
-		}
-
-		featured.forEach((li, i) => {
-			if (i % 2 === 0 && i + 1 < featured.length)
-				li.classList.add("md:border-r");
-			if (i >= 2) li.classList.add("md:border-t");
-		});
-		regular.forEach((li, i) => {
-			if (featured.length > 0 || i >= 3) li.classList.add("md:border-t");
-			if (i % 3 < 2) li.classList.add("md:border-r");
-		});
-
-		const allHeightClasses = [
-			"h-64",
-			"h-48",
-			"h-72",
-			"h-56",
-			"h-32",
-			"sm:h-64",
-			"sm:h-48",
-		];
-		allItems.forEach((li) => {
-			li.querySelector<HTMLElement>(".card-image")?.classList.remove(
-				...allHeightClasses
-			);
-			li.querySelector<HTMLElement>(".card-title")?.classList.remove(
-				"text-xl",
-				"text-base"
-			);
-		});
-
-		if (attr === "blog") {
-			featured.forEach((li) => {
-				li.querySelector<HTMLElement>(".card-image")?.classList.add(
-					"h-48",
-					"sm:h-64"
-				);
-				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
-			});
-			regular.forEach((li) => {
-				li.querySelector<HTMLElement>(".card-image")?.classList.add(
-					"h-32",
-					"sm:h-48"
-				);
-				li.querySelector<HTMLElement>(".card-title")?.classList.add(
-					"text-base"
-				);
-			});
-		} else {
-			featured.forEach((li) => {
-				li.querySelector<HTMLElement>(".card-image")?.classList.add("h-72");
-				li.querySelector<HTMLElement>(".card-title")?.classList.add("text-xl");
-			});
-			regular.forEach((li) => {
-				li.querySelector<HTMLElement>(".card-image")?.classList.add("h-56");
-				li.querySelector<HTMLElement>(".card-title")?.classList.add(
-					"text-base"
-				);
-			});
-		}
 	}
 
 	function applyProductTheme() {
@@ -299,7 +200,6 @@
 		selected = selected === tag ? "" : tag;
 		updateUrl();
 		applyProductTheme();
-		applyTagFilter();
 	}
 
 	function toggleCategory(cat: string) {
@@ -309,7 +209,6 @@
 			selectedCategories = [...selectedCategories, cat];
 		}
 		updateUrl();
-		applyTagFilter();
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -335,6 +234,51 @@
 		}
 	}
 
+	// Computes the <li> grid classes for a card at index i within the visible list.
+	function liClasses(i: number, total: number): string {
+		const featuredCount = Math.min(4, total);
+		const isFeatured = i < featuredCount;
+		const rel = isFeatured ? i : i - featuredCount;
+		const borderR = isFeatured
+			? rel % 2 === 0 && rel + 1 < featuredCount
+			: rel % 3 < 2;
+		const borderT = isFeatured ? rel >= 2 : featuredCount > 0 || rel >= 3;
+		const spanCls = isFeatured
+			? gridType === "blog"
+				? "col-span-2 md:col-span-3"
+				: "sm:col-span-2 md:col-span-3"
+			: gridType === "blog"
+				? "col-span-1 md:col-span-2"
+				: "sm:col-span-1 md:col-span-2";
+		return `flex md:justify-stretch md:items-stretch border-stone-800 ${spanCls}${borderR ? " md:border-r" : ""}${borderT ? " md:border-t" : ""}`;
+	}
+
+	function imageSizeClasses(i: number, total: number): string {
+		const isFeatured = i < Math.min(4, total);
+		if (gridType === "blog")
+			return isFeatured ? "h-48 sm:h-64" : "h-32 sm:h-48";
+		return isFeatured ? "h-72" : "h-56";
+	}
+
+	function titleSizeClass(i: number, total: number): string {
+		return i < Math.min(4, total) ? "text-xl" : "text-base";
+	}
+
+	function formatDate(isoString: string): string {
+		return new Date(isoString).toLocaleDateString("en-us", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		});
+	}
+
+	// Remove the FOUC guard (set by Shell.astro <head> script) once the component
+	// has rendered its first filtered state. $effect fires after DOM updates and
+	// does not run during SSR, so this only executes in the browser.
+	$effect(() => {
+		document.documentElement.classList.remove("filtering-pending");
+	});
+
 	onMount(() => {
 		for (const cls of document.documentElement.classList) {
 			if (cls.startsWith("site-")) {
@@ -342,41 +286,17 @@
 				break;
 			}
 		}
-
-		const params = new URLSearchParams(window.location.search);
-		selected = params.get("product") ?? "";
-		const cats = params.get("categories");
-		if (cats) selectedCategories = cats.split(",").filter(Boolean);
 		applyProductTheme();
-		applyTagFilter();
-		isInitialMount = false;
 
-		const allItems = [...document.querySelectorAll<HTMLElement>("[data-tags]")];
-
-		// Build the sorted list of available category values from the DOM.
-		const catSet = new Set<string>();
-		allItems.forEach((el) => {
-			el.dataset.categories
-				?.split(",")
-				.filter(Boolean)
-				.forEach((c) => catSet.add(c));
-		});
-		availableCategories = [...catSet].sort((a, b) => {
-			const ai = CATEGORY_ORDER.indexOf(a);
-			const bi = CATEGORY_ORDER.indexOf(b);
-			if (ai >= 0 && bi >= 0) return ai - bi;
-			if (ai >= 0) return -1;
-			if (bi >= 0) return 1;
-			return a.localeCompare(b);
-		});
-
-		searchItems = allItems.map((el) => ({
-			title: el.dataset.title ?? "",
-			description: el.dataset.description ?? "",
-			href: el.dataset.href ?? "#",
-			tags: el.dataset.tags ? el.dataset.tags.split(",") : [],
-			categories: el.dataset.categories ? el.dataset.categories.split(",") : [],
-		}));
+		const handlePopstate = () => {
+			const p = new URLSearchParams(location.search);
+			selected = p.get("product") ?? "";
+			selectedCategories =
+				p.get("categories")?.split(",").filter(Boolean) ?? [];
+			applyProductTheme();
+		};
+		window.addEventListener("popstate", handlePopstate);
+		return () => window.removeEventListener("popstate", handlePopstate);
 	});
 </script>
 
@@ -722,6 +642,142 @@
 	</div>
 </div>
 
+<ul
+	class={gridType === "blog"
+		? "grid grid-cols-2 md:grid-cols-6"
+		: "grid sm:grid-cols-2 md:grid-cols-6"}
+	data-filter-grid={gridType}
+>
+	{#each visibleCards as card, i (card.slug)}
+		<li class={liClasses(i, visibleCards.length)}>
+			{#if gridType === "showcase"}
+				<a
+					href={card.href}
+					class="inline-flex flex-col group not-prose w-full p-6"
+				>
+					{#if card.imageSrc}
+						<div
+							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+								i,
+								visibleCards.length
+							)} mb-5 bg-stone-900"
+						>
+							<img
+								src={card.imageSrc}
+								alt=""
+								loading="lazy"
+								decoding="async"
+								class="absolute inset-0 w-full h-full object-cover"
+							/>
+						</div>
+					{/if}
+					<h3
+						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+							i,
+							visibleCards.length
+						)} leading-snug mb-2 grow"
+					>
+						{card.title}
+					</h3>
+					{#if card.description}
+						<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
+							{card.description}
+						</p>
+					{/if}
+					<div class="flex flex-wrap gap-1.5">
+						{#each card.categories as type}
+							<span
+								class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs"
+								>{type}</span
+							>
+						{/each}
+						{#each card.tags as tag}
+							<span
+								class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs"
+								>{tag}</span
+							>
+						{/each}
+					</div>
+				</a>
+			{:else}
+				<a
+					href={card.href}
+					class="inline-flex flex-col group not-prose w-full p-3 sm:p-6"
+				>
+					{#if card.imageSrc}
+						<div
+							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+								i,
+								visibleCards.length
+							)} mb-3 sm:mb-5 bg-stone-900"
+						>
+							<img
+								src={card.imageSrc}
+								alt=""
+								loading="lazy"
+								decoding="async"
+								class="absolute inset-0 w-full h-full object-cover"
+							/>
+						</div>
+					{/if}
+					<h3
+						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+							i,
+							visibleCards.length
+						)} leading-snug mb-2 grow"
+					>
+						{card.title}
+					</h3>
+					{#if card.description}
+						<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
+							{card.description}
+						</p>
+					{/if}
+					<div
+						class="flex justify-between items-center gap-4 text-stone-500 text-xs whitespace-nowrap"
+					>
+						<div class="flex items-center gap-1.5 overflow-hidden">
+							<div class="flex -space-x-1.5 flex-none">
+								{#each card.authors ?? [] as author}
+									{#if author.avatarSrc}
+										<img
+											class="w-5 h-5 rounded-full border border-stone-700"
+											src={author.avatarSrc}
+											alt=""
+											loading="lazy"
+											decoding="async"
+										/>
+									{/if}
+								{/each}
+							</div>
+							<span class="overflow-hidden text-ellipsis">
+								{(card.authors ?? []).map((a) => a.name).join(", ")}
+							</span>
+							{#if card.authors?.some((a) => a.guest)}
+								<span
+									class="py-0.5 px-1.5 bg-primary-400/30 border border-primary-400 text-primary-200 rounded-full text-xs font-semibold"
+								>
+									Guest
+								</span>
+							{/if}
+						</div>
+						{#if card.pubDate}
+							<time datetime={card.pubDate}>
+								{formatDate(card.pubDate)}
+							</time>
+						{/if}
+					</div>
+				</a>
+			{/if}
+		</li>
+	{/each}
+	{#if visibleCards.length === 0}
+		<li class="col-span-full py-24 text-center">
+			<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
+		</li>
+	{/if}
+</ul>
+
 <style>
 	/*
 	 * Classic browser-tab effect:
@@ -774,10 +830,5 @@
 		color: white;
 		background-color: rgb(var(--color-primary-500));
 		border-color: rgb(var(--color-primary-500));
-	}
-
-	/* Card fade-in on filter change */
-	:global([data-tags]) {
-		transition: opacity 250ms ease;
 	}
 </style>

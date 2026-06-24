@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import ShowcaseIndexCard from "@leaningtech/astro-theme/components/ShowcaseIndexCard.astro";
+import { getImage } from "astro:assets";
 import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import ProductFilter from "../../components/ProductFilter.svelte";
@@ -8,11 +8,27 @@ import ProductFilter from "../../components/ProductFilter.svelte";
 const demos = (
 	await getCollection("showcase", ({ data }) => data.draft !== true)
 ).sort((a, b) => b.data.score - a.data.score);
+
+const showcaseCards = await Promise.all(
+	demos.map(async (demo) => ({
+		slug: demo.slug,
+		title: demo.data.title,
+		description: demo.data.description,
+		href: `/showcase/${demo.slug}`,
+		imageSrc: demo.data.hero_image
+			? (await getImage({ src: demo.data.hero_image, width: 600, height: 400 }))
+					.src
+			: undefined,
+		tags: demo.data.tags ?? [],
+		categories: demo.data.project_type,
+	}))
+);
 ---
 
 <Shell
 	title="Demo showcase"
 	description={`Discover projects built with our technologies`}
+	filterPage={true}
 >
 	<div class="bg-stone-950">
 		<header class="text-center py-16">
@@ -27,44 +43,16 @@ const demos = (
 			</p>
 		</header>
 
-		<section class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-2xl">
-			<ProductFilter client:load searchPlaceholder="Search demos…" />
-			<ul
-				class="grid sm:grid-cols-2 md:grid-cols-6"
-				data-filter-grid="showcase"
-			>
-				{
-					demos.map((demo, i) => {
-						const featured = i < 4;
-						const rIdx = i - 4;
-						const borderR = featured ? i % 2 === 0 : rIdx % 3 < 2;
-						const borderT = featured ? i >= 2 : true;
-						return (
-							<li
-								class={`flex md:justify-stretch md:items-stretch border-stone-800
-									${featured ? "sm:col-span-2 md:col-span-3" : "sm:col-span-1 md:col-span-2"}
-									${borderR ? "md:border-r" : ""}
-									${borderT ? "md:border-t" : ""}
-								`}
-								data-tags={demo.data.tags?.join(",") ?? ""}
-								data-categories={demo.data.project_type.join(",")}
-								data-title={demo.data.title}
-								data-description={demo.data.description}
-								data-href={`/showcase/${demo.slug}`}
-							>
-								<ShowcaseIndexCard {demo} {featured} />
-							</li>
-						);
-					})
-				}
-				<li
-					data-empty-state
-					style="display:none"
-					class="col-span-full py-24 text-center"
-				>
-					<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
-				</li>
-			</ul>
+		<section
+			class="pb-24 px-4 sm:px-8 mx-auto w-full max-w-screen-2xl"
+			data-filter-section
+		>
+			<ProductFilter
+				client:load
+				searchPlaceholder="Search demos…"
+				cards={showcaseCards}
+				gridType="showcase"
+			/>
 		</section>
 	</div>
 

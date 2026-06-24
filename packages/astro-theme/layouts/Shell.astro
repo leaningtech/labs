@@ -7,9 +7,10 @@ interface Props {
 	description?: string | undefined;
 	image?: string | undefined;
 	site?: string; // to discriminate colour scheme by site
+	filterPage?: boolean; // true on pages with a ProductFilter (showcase, blog)
 }
 
-const { title, description, image, site } = Astro.props;
+const { title, description, image, site, filterPage = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -92,6 +93,52 @@ const { title, description, image, site } = Astro.props;
 			p,
 			li {
 				text-wrap: pretty;
+			}
+		</style>
+		<!--
+			FOUC guard for pages with a ProductFilter (/showcase, /blog).
+
+			Because this is a static site, ProductFilter.svelte runs client-side only
+			(client:load). There is a window between initial SSR paint and Svelte
+			hydration where the filter section can flicker or shift — regardless of
+			whether a filter is active in the URL.
+
+			When filterPage={true}, this inline script runs synchronously in <head>
+			and adds "filtering-pending" to <html> before the browser paints any body
+			content. The style block below uses this class to hide [data-filter-section]
+			(the filter bar + card grid on showcase/blog pages).
+
+			ProductFilter.svelte initialises its filter state synchronously from the URL
+			(outside onMount), so its first rendered output already shows the correct
+			filtered state. A $effect removes "filtering-pending" after that first
+			render, so the section fades in cleanly.
+
+			The 3 s setTimeout is a safety net: if hydration fails or takes unusually
+			long the grid is revealed regardless, preventing a permanently blank page.
+
+			This is the same no-FOUC pattern used for dark-mode theme scripts.
+		-->
+		<script is:inline define:vars={{ filterPage }}>
+			if (filterPage) {
+				try {
+					document.documentElement.classList.add("filtering-pending");
+					setTimeout(
+						() =>
+							document.documentElement.classList.remove("filtering-pending"),
+						3000
+					);
+				} catch {}
+			}
+		</script>
+		<style is:global>
+			[data-filter-grid],
+			[data-filter-section] {
+				transition: opacity 0.35s ease;
+			}
+			html.filtering-pending [data-filter-grid],
+			html.filtering-pending [data-filter-section] {
+				opacity: 0;
+				pointer-events: none;
 			}
 		</style>
 	</head>
