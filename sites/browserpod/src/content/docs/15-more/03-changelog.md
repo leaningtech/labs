@@ -3,6 +3,15 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.12.1:
+
+- Fix a regression in the previous version
+
+## Version 2.12.0:
+
+- Fix bugs with larger DNS responses
+- Improved support for signal handlers
+
 ## Version 2.11.0:
 
 - Polyfill some bun APIs
