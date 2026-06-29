@@ -7,7 +7,7 @@ categories:
   - "Technical"
 authors:
   - yuri
-heroImage: ./webvm-tailscale.png
+heroImage: ./banners/How_we_added_full_networking_to_WebVM_via_Tailscale.webp
 tags:
   - CheerpX
 ---

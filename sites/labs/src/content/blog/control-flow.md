@@ -6,7 +6,7 @@ description: |
 authors:
   - yuri
 pubDate: "April 11 2019"
-heroImage: "./cfg-bn.png"
+heroImage: ./banners/solving-the-structured-control-flow-problem.webp
 tags:
   - Cheerp
 categories:

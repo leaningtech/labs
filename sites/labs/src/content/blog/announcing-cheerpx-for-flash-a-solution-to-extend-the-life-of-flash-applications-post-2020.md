@@ -5,7 +5,7 @@ description: |
 pubDate: "2020-09-21"
 authors:
   - stefano
-heroImage: ./flash-to-html5.webp
+heroImage: ./banners/Announcing_CheerpX_for_Flash_a_solution_to_extend_the_life_of_Flash_applications_post-2020.webp
 tags:
   - CheerpX
 categories:
