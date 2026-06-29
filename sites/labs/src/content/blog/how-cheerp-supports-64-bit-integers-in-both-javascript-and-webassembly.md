@@ -5,7 +5,7 @@ description: |
 pubDate: "2020-07-13"
 authors:
   - yuri
-heroImage: ./banners/how-cheerp-supports-64-bit.webp
+heroImage: ./how-cheerp-supports-64-bit.webp
 tags:
   - Cheerp
 categories:

@@ -5,7 +5,7 @@ description: |
 pubDate: "2021-05-12"
 authors:
   - carlo
-heroImage: ./banners/a-javascript-optimising-compiler.webp
+heroImage: ./a-javascript-optimising-compiler.webp
 tags:
   - Cheerp
 categories:

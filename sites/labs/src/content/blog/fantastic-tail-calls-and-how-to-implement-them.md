@@ -5,7 +5,7 @@ description: |
 pubDate: "2022-07-11"
 authors:
   - tom
-heroImage: ./banners/fantastic-tails.webp
+heroImage: ./fantastic-tails.webp
 tags:
   - CheerpX
 categories:
