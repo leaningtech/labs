@@ -5,7 +5,7 @@ description: |
 pubDate: "2022-05-03"
 authors:
   - "lorenzo-marsicano"
-heroImage: ./cheerpj.png
+heroImage: ./cheerpj-23-released.webp
 tags:
   - CheerpJ
 categories:

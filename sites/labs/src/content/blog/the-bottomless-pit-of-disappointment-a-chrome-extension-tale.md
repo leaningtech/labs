@@ -5,7 +5,7 @@ pubDate: "2021-08-10"
 
 authors:
   - alessandro
-heroImage: ./applet-runner.webp
+heroImage: ./The_Bottomless_Pit_of_Disappointment-_A_Chrome_Extension_Tale.webp
 tags:
   - CheerpJ
 categories:
