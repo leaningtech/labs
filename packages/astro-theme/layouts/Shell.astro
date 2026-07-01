@@ -113,21 +113,11 @@ const { title, description, image, site, filterPage = false } = Astro.props;
 			filtered state. A $effect removes "filtering-pending" after that first
 			render, so the section fades in cleanly.
 
-			The 3 s setTimeout is a safety net: if hydration fails or takes unusually
-			long the grid is revealed regardless, preventing a permanently blank page.
-
 			This is the same no-FOUC pattern used for dark-mode theme scripts.
 		-->
 		<script is:inline define:vars={{ filterPage }}>
 			if (filterPage) {
-				try {
-					document.documentElement.classList.add("filtering-pending");
-					setTimeout(
-						() =>
-							document.documentElement.classList.remove("filtering-pending"),
-						3000
-					);
-				} catch {}
+				document.documentElement.classList.add("filtering-pending");
 			}
 		</script>
 		<style is:global>
