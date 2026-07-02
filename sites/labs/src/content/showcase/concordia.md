@@ -14,7 +14,7 @@ hero_image: "./concordia.png"
 
 ## What is Concordia?
 
-Concordia is an orchestration framework that coordinates four independent, Claude-driven AI agents working together in a shared virtual space. It provides a visual and debuggable interface for multi-agent systems, using Minecraft as the rendering layer while running the underlying communication and coordination protocol inside BrowserPod.
+Concordia is an orchestration framework that coordinates four independent, Claude-driven AI agents working together in a shared virtual space. It provides a visual and debuggable interface for multi-agent systems, using Minecraft as the rendering layer while running the underlying communication and coordination protocol inside BrowserPod. The Agentic team was composed of Robert Vassallo.
 
 The project won **3rd Place** at the 2026 AI in the Box Hackathon.
 

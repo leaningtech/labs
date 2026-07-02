@@ -14,7 +14,7 @@ hero_image: "./devhub.png"
 
 ## What is DevHub?
 
-DevHub is a multi-repository developer workspace that allows developers to group multiple GitHub repositories into a single workspace, browse files, run projects safely in the browser, and perform AI-powered codebase analysis.
+DevHub is a multi-repository developer workspace that allows developers to group multiple GitHub repositories into a single workspace, browse files, run projects safely in the browser, and perform AI-powered codebase analysis. The DevHub team was composed of Yusuf Demir, Naidan Salvador, and Ilan Ramirez.
 
 The project was awarded **1st Place** and the **Software Security Award** at the 2026 AI in the Box Hackathon.
 

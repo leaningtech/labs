@@ -14,7 +14,7 @@ hero_image: "./vitalstream.png"
 
 ## What is VitalStream?
 
-VitalStream is a patient vital signs monitoring dashboard that combines real-time IoT vital simulations, alert scoring, predictive trend detection, and AI clinical decision support. The system is designed to help clinical staff identify which patients will require attention next and organize handovers safely.
+VitalStream is a patient vital signs monitoring dashboard that combines real-time IoT vital simulations, alert scoring, predictive trend detection, and AI clinical decision support. The system is designed to help clinical staff identify which patients will require attention next and organize handovers safely. The The Bellayesian Inferrers team was composed of Ella Afonso.
 
 The project won the **Accessibility & Healthcare Award** at the 2026 AI in the Box Hackathon.
 

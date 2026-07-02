@@ -15,7 +15,7 @@ hero_image: "./forklab.png"
 
 ## What is ForkLab?
 
-ForkLab is a client-side execution environment designed to bridge the trust gap when using AI coding assistants. It allows developers to safely run, inspect, and verify AI-generated patches and test suites inside isolated, disposable browser containers before adopting the code changes.
+ForkLab is a client-side execution environment designed to bridge the trust gap when using AI coding assistants. It allows developers to safely run, inspect, and verify AI-generated patches and test suites inside isolated, disposable browser containers before adopting the code changes. The Meal Deal team was composed of Sachin Sindhe and Joemugen Kirana.
 
 The project won **2nd Place** at the 2026 AI in the Box Hackathon.
 

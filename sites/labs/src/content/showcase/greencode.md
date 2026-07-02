@@ -14,7 +14,7 @@ hero_image: "./greencode.png"
 
 ## What is Greencode?
 
-Greencode is a static analysis tool designed to audit Python code for carbon intensity and energy efficiency. By identifying inefficient algorithmic patterns, it helps developers reduce their software's carbon footprint and rewards optimization progress with Carbon Credits and a digital certificate.
+Greencode is a static analysis tool designed to audit Python code for carbon intensity and energy efficiency. By identifying inefficient algorithmic patterns, it helps developers reduce their software's carbon footprint and rewards optimization progress with Carbon Credits and a digital certificate. The Team Mumbaikars was composed of Abhishek Vishwagna and Siddhant Ram.
 
 The project was awarded the **Sustainability Award** at the 2026 AI in the Box Hackathon.
 
