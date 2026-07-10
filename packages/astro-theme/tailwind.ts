@@ -57,13 +57,13 @@ const siteThemes = plugin(({ addBase }) => {
 		},
 		// BrowserPod theme
 		".site-browserpod": {
-			"--color-primary-600": "17 158 123",
-			"--color-primary-500": "35 201 159",
-			"--color-primary-400": "58 229 179",
-			"--color-primary-300": "104 239 199",
-			"--color-primary-200": "158 247 220",
-			"--color-primary-100": "206 252 239",
-			"--color-primary-50": "237 254 248",
+			"--color-primary-600": "2 9 20",
+			"--color-primary-500": "74 125 255",
+			"--color-primary-400": "110 152 255",
+			"--color-primary-300": "147 178 255",
+			"--color-primary-200": "183 205 255",
+			"--color-primary-100": "212 225 255",
+			"--color-primary-50": "240 245 255",
 		},
 		// CheerpJ theme
 		".site-cheerpj": {
@@ -143,6 +143,7 @@ export default function makeConfig(): Config {
 			extend: {
 				fontFamily: {
 					sans: [
+						"Stack Sans Text",
 						"Archivo",
 						"DM Sans",
 						"Noto Sans",
