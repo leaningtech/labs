@@ -307,10 +307,10 @@ Example usage:
 cheerpjInit({ tailscaleControlUrl: "https://my.url.com/" });
 ```
 
-### `tailscaleDnsUrl`
+### `tailscaleDnsIp`
 
 ```ts
- tailscaleDnsUrl?: string;
+ tailscaleDnsIp?: string;
 ```
 
 Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitted, the default IP address is "8.8.8.8".
@@ -318,7 +318,7 @@ Expects a string with the IPv4 or IPv6 address to use for DNS queries. If omitte
 Example usage:
 
 ```js
-cheerpjInit({ tailscaleDnsUrl: "1.1.1.1" });
+cheerpjInit({ tailscaleDnsIp: "1.1.1.1" });
 ```
 
 ### `tailscaleAuthKey`

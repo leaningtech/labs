@@ -96,4 +96,4 @@ The `cheerpjAddStringFile` function has been renamed to `cheerpOSAddStringFile` 
 [`cheerpjInit`]: /docs/reference/cheerpjInit
 [`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
-[JNI guide]: /docs/guides/Implementing-Java-native-methods-in-JavaScript
+[JNI guide]: /docs/guides/implementing-native-methods

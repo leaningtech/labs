@@ -144,6 +144,6 @@ When the Java `Example` class is run, the `alert` method is called, which trigge
 [`System.loadLibrary(String libname)`]: https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-
 [`native methods`]: /docs/guides/implementing-native-methods
 [`Implementing Native Methods guide`]: /docs/guides/implementing-native-methods
-[`virtual directory`]: /docs/guides/File-System-support
+[`virtual directory`]: /docs/explanation/File-System-support
 [`javaProperties`]: /docs/reference/cheerpjInit#javaproperties
 [`documentation`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
