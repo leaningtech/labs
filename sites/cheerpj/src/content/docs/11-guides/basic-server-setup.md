@@ -34,7 +34,7 @@ NPM server tools such as `npx serve` and `npx http-server` typically have built-
 
 ### JavaScript library files
 
-CheerpJ allows you to implement native libraries in JavaScript, more details on this can be found in our [Native Libraries Guide](/docs/guides/implementing-native-librariest).
+CheerpJ allows you to implement native libraries in JavaScript, more details on this can be found in our [Native Libraries Guide](/docs/guides/implementing-native-libraries).
 
 Depending on the size of the JavaScript library file, you may encounter an error with certain browsers, like Firefox:
 

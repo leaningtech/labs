@@ -8,7 +8,7 @@ This class represents a [library mode](/docs/guides/library-mode) session. It ca
 You can get a CJ3Library instance by:
 
 - Calling [`cheerpjRunLibrary`] to load a library from a JAR.
-- Implementing a [native method](/docs/guides/Implementing-Java-native-methods-in-JavaScript) - the first parameter is a CJ3Library instance.
+- Implementing a [native method](/docs/guides/implementing-native-methods) - the first parameter is a CJ3Library instance.
 
 ## Usage
 
