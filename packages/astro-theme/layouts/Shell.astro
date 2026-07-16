@@ -1,6 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { productFromUrl } from "../lib/products";
+import { gtmContainerId } from "../lib/gtm";
 
 interface Props {
 	title?: string;
@@ -11,6 +13,8 @@ interface Props {
 }
 
 const { title, description, image, site, filterPage = false } = Astro.props;
+
+const gtmId = gtmContainerId(productFromUrl(Astro.url));
 ---
 
 <!doctype html>
@@ -135,6 +139,20 @@ const { title, description, image, site, filterPage = false } = Astro.props;
 	<body
 		class="font-sans antialiased min-w-full min-h-screen flex flex-col m-0 p-0 bg-bg-900 text-bg-200"
 	>
+		<!-- Google Tag Manager (noscript) -->
+		{
+			gtmId && (
+				<noscript>
+					<iframe
+						src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+						height="0"
+						width="0"
+						style="display:none;visibility:hidden"
+						title="Google Tag Manager"
+					/>
+				</noscript>
+			)
+		}
 		<slot />
 	</body>
 </html>
