@@ -229,7 +229,7 @@ await pod.run("node", ["main.js"], {
 
 ## 3. Run and setup your project
 
-1. First, boot your Pod as usual and pass a valid Api Key as an argument.
+1. First, boot your Pod as usual and pass a valid API Key as an argument.
 
 2. Then set up a terminal in the **console** element that was added to the `index.html` file,
    so that the output of the commands ran in the Pod are visible.
