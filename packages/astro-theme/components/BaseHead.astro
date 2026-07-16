@@ -2,6 +2,7 @@
 import { SITE_TITLE } from "../consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
+import { gtmContainerId } from "../lib/gtm";
 import { getLocalisedPaths } from "../lib/i18n";
 
 export interface Props {
@@ -75,11 +76,16 @@ if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 
 const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
 
+const gtmId = gtmContainerId(product);
 const gtmScript =
-	"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M4T2J9TS');";
+	gtmId &&
+	`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`;
 ---
 
 <meta charset="utf-8" />
+
+<!-- Google Tag Manager -->
+{gtmScript && <script is:inline set:html={gtmScript} />}
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -131,9 +137,6 @@ const gtmScript =
 		<link rel="alternate" hreflang={lang} href={url} />
 	))
 }
-
-<!-- Google Tag Manager -->
-{product?.id === "browserpod" && <script is:inline set:html={gtmScript} />}
 
 <!-- Plausible analytics -->
 <script
