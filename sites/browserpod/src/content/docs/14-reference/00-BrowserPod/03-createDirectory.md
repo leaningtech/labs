@@ -23,6 +23,6 @@ class BrowserPod {
 
 ## Returns
 
-`createDirectory` returns a [Promise] which is resolved when the operation has succeded. If the directory could not be created, the [Promise] will be rejected.
+`createDirectory` returns a [Promise] which is resolved when the operation has succeeded. If the directory could not be created, the [Promise] will be rejected.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

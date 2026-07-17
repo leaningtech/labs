@@ -15,7 +15,7 @@ class BinaryFile {
 
 ## Returns
 
-`getSize` returns a [Promise] which is resolved when the operation has succeded.
+`getSize` returns a [Promise] which is resolved when the operation has succeeded.
 The promise resolves to the byte size of the file.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

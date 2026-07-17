@@ -34,7 +34,7 @@ see something like this:
 
 ![Output of the basic template](/docs/assets/bp-quickstart.png)
 
-Congraturations! you just run your first BrowserPod application!
+Congratulations! You just ran your first BrowserPod application!
 
 Feel free to modify `src/main.js`. The dev server supports hot reloading.
 

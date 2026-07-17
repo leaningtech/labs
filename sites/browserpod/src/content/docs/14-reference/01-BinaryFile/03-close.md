@@ -15,6 +15,6 @@ class BinaryFile {
 
 ## Returns
 
-`close` returns a [Promise] which is resolved when the operation has succeded.
+`close` returns a [Promise] which is resolved when the operation has succeeded.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
