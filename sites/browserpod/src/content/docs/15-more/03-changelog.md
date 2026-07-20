@@ -3,6 +3,15 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.14.0:
+
+- Both the kernel and the userspace programs now support resizable memory, and start with the minimum memory required
+- Fixed a bug with futex not properly removing a thread from the queue when woken up by an signal
+
+## Version 2.13.0:
+
+- Activate the Bun polyfill only under the --browserpod-polyfill-bun cli argument
+
 ## Version 2.12.1:
 
 - Fix a regression in the previous version
