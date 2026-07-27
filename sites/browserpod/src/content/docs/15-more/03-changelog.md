@@ -3,6 +3,10 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.15.0:
+
+- Support the node:sqlite module
+
 ## Version 2.14.0:
 
 - Both the kernel and the userspace programs now support resizable memory, and start with the minimum memory required
