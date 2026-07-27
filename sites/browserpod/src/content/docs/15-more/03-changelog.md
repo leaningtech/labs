@@ -3,6 +3,10 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.16.0:
+
+- Improvements to Rust support: linux-raw-sys and rustix are now automatically overridden with a patched version
+
 ## Version 2.15.0:
 
 - Support the node:sqlite module
