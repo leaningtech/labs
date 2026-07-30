@@ -3,6 +3,10 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.17.0:
+
+- Update mtime/ctime on disk writes
+
 ## Version 2.16.0:
 
 - Improvements to Rust support: linux-raw-sys and rustix are now automatically overridden with a patched version
