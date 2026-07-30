@@ -3,7 +3,7 @@ import { isProduct, type Product } from "./nav";
 import cheerpLogotype from "../assets/branding/products/cheerp/logotype-white.svg";
 import cheerpjLogotype from "../assets/branding/products/cheerpj/logotype-white.svg";
 import cheerpxLogotype from "../assets/branding/products/cheerpx/logotype-white.svg";
-import browserpodLogotype from "../assets/branding/products/browserpod/logotype-white.png";
+import browserpodLogotype from "../assets/branding/products/browserpod/Logo_full_white.png";
 import jnlprunnerLogotype from "../assets/branding/products/cheerpj-extensions/jnlp-logo.png";
 import jnlprunnerLogotypeLarge from "../assets/branding/products/cheerpj-extensions/cheerpj-jnlprunner-large.png";
 import appletrunnerLogotype from "../assets/branding/products/cheerpj-extensions/applet-logo.png";
