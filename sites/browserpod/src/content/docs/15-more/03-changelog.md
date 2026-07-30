@@ -3,6 +3,10 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 2.18.0:
+
+- Support Vite 8
+
 ## Version 2.17.0:
 
 - Update mtime/ctime on disk writes
