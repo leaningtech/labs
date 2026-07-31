@@ -16,7 +16,7 @@ In a browser app, the key will ultimately be available to the client. The main d
 
 ### Method 1: Inline in JavaScript (simple, not recommended for production)
 
-You can pass the key directly when booting the pod:
+You can pass the key directly when booting the Pod:
 
 ```js
 const pod = await BrowserPod.boot({

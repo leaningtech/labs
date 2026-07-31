@@ -1,13 +1,13 @@
 ---
 title: Set up a Portal
-description: Expose a local server with a BrowserPod portal URL
+description: Expose a local server with a BrowserPod Portal URL
 ---
 
-This guide shows how to listen on a port and expose it via a portal URL.
+This guide shows how to listen on a port and expose it via a Portal URL.
 
 ## 1. Register a Portal handler
 
-Register a callback so you can capture the portal URL when it appears:
+Register a callback so you can capture the Portal URL when it appears:
 
 ```js
 pod.onPortal(({ url, port }) => {
@@ -15,9 +15,9 @@ pod.onPortal(({ url, port }) => {
 });
 ```
 
-## 2. Start a server inside the pod
+## 2. Start a server inside the Pod
 
-When your server listens on a port, BrowserPod will create a portal:
+When your server listens on a port, BrowserPod will create a Portal:
 
 ```js
 pod.run("node", ["server.js"], {
@@ -51,6 +51,6 @@ pod.onPortal(({ url }) => {
 
 ## Notes
 
-- The portal URL is the address your users should open.
-- The `port` value is the internal port inside the pod that triggered the portal.
-- If multiple servers listen on different ports, you will receive a callback for each portal.
+- The Portal URL is the address your users should open.
+- The `port` value is the internal port inside the Pod that triggered the Portal.
+- If multiple servers listen on different ports, you will receive a callback for each Portal.

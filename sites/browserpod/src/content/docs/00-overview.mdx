@@ -68,7 +68,7 @@ To understand how BrowserPod achieves high-fidelity behavior in a browser, it he
 1.  **Runtime Loading:** BrowserPod delivers complete runtime engines (starting with Node.js) compiled to WebAssembly. These engines target a Linux-compliant syscall interface rather than a limited JavaScript shim.
 2.  **Execution:** The browser’s JavaScript engine executes the Wasm-compiled runtime using WebWorkers for true multi-threading and process isolation. This allows for complex, multi-process workloads that would normally require a full OS.
 3.  **Resource Virtualization:** A block-based streaming virtual filesystem provides full POSIX compatibility. Disk images are streamed on-demand, and any file changes stay local to the browser session.
-4.  **Networking via Portals:** When a service inside the pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
+4.  **Networking via Portals:** When a service inside the Pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
 
 ## Roadmap
 

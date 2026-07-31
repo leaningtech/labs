@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
     <html lang="en">
     ...
     </html>
-  `);
+	`);
 });
 
 app.listen(port, () => {
@@ -157,7 +157,7 @@ with a few elements that we will use to set up BrowserPod.
 				<h1>Hello BrowserPod</h1>
 			</div>
 			<p>Running Node.js in your browser</p>
-			<div id="url">Waiting for portal...</div>
+			<div id="url">Waiting for Portal...</div>
 			<div class="preview-container">
 				<iframe id="portal"></iframe>
 				<pre id="console"></pre>
@@ -200,7 +200,7 @@ const terminal = await pod.createDefaultTerminal(
 	document.querySelector("#console")
 );
 
-// Hook the portal to preview the web page in an iframe
+// Hook the Portal to preview the web page in an iframe
 const portalIframe = document.getElementById("portal");
 const urlDiv = document.getElementById("url");
 pod.onPortal(({ url, port }) => {

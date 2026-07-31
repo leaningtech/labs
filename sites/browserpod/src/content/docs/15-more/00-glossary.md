@@ -9,7 +9,7 @@ The server-side part of a system that runs outside the browser.
 
 ## BrowserPod API
 
-The JavaScript API for controlling a Pod. Provides methods for booting pods, running processes (`pod.run`), managing the virtual filesystem, and handling Portals. Used to execute code and manage the runtime environment entirely within the browser.
+The JavaScript API for controlling a Pod. Provides methods for booting Pods, running processes (`pod.run`), managing the virtual filesystem, and handling Portals. Used to execute code and manage the runtime environment entirely within the browser.
 
 ## CheerpOS
 
@@ -21,7 +21,7 @@ HTTP headers required for cross-origin isolation so the browser can enable `Shar
 
 ## Current working directory (cwd)
 
-The directory used to resolve relative paths for the current process
+The directory used to resolve relative paths for the current process.
 
 ## Virtual filesystem
 
@@ -29,7 +29,7 @@ A filesystem created and managed in software rather than on the user’s real di
 
 ## Pod
 
-A running [BrowserPod](/docs/reference/BrowserPod) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by default. They exist only while the browser tab is active. Though if preferred you can enable file persistence across sessions by passing `storageKey` when [`booting`](/docs/reference/BrowserPod/boot) the pod.
+A running [BrowserPod](/docs/reference/BrowserPod) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by default. They exist only while the browser tab is active. Though if preferred you can enable file persistence across sessions by passing `storageKey` when [`booting`](/docs/reference/BrowserPod/boot) the Pod.
 
 ## Portal
 
@@ -37,7 +37,7 @@ A secure, shareable URL that routes external traffic to a service listening on a
 
 ## REPL
 
-“Read–Evaluate–Print Loop.” An interactive prompt that reads input, runs it, and prints the result.
+“Read–eval–print Loop.” An interactive prompt that reads input, runs it, and prints the result.
 
 ## Runtime
 
@@ -45,11 +45,11 @@ The environment that executes your code.
 
 ## Wasm (WebAssembly)
 
-A binary format that allows code to run in the browser at near-native speed. See the [mdn documentation](https://developer.mozilla.org/en-US/docs/WebAssembly) for more.
+A binary format that allows code to run in the browser at near-native speed. See the [MDN documentation](https://developer.mozilla.org/en-US/docs/WebAssembly) for more.
 
 ## Terminal
 
-A virtual device used to communicate with processes spawned in a pod.
+A virtual device used to communicate with processes spawned in a Pod.
 It provides input and displays output in the form of characters.
 
 The default terminal used by BrowserPod uses Xterm.js, a terminal emulator library
