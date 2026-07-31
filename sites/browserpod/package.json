@@ -27,6 +27,7 @@
 		"@iconify-json/ri": "^1.2.6",
 		"@iconify-json/simple-icons": "^1.2.58",
 		"@leaningtech/astro-theme": "workspace:^",
+		"astro-expressive-code": "^0.41.5",
 		"@leaningtech/cheerp-ts-three-demo": "workspace:^",
 		"astro": "^5.16.7",
 		"astro-icon": "^1.1.5",
