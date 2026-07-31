@@ -15,9 +15,11 @@
 		},
 		{
 			"scope": [
-				"keyword",
-				"storage",
 				"keyword.control",
+				"keyword.other",
+				"storage",
+				"storage.type",
+				"storage.modifier",
 				"keyword.operator.word",
 			],
 			"settings": { "foreground": "#c73da6" },
@@ -48,7 +50,7 @@
 			"settings": { "foreground": "#cfdeff" },
 		},
 		{
-			"scope": ["punctuation", "meta.brace"],
+			"scope": ["keyword.operator", "punctuation", "meta.brace"],
 			"settings": { "foreground": "#d2d6db" },
 		},
 		{ "scope": ["invalid"], "settings": { "foreground": "#ff6161" } },
