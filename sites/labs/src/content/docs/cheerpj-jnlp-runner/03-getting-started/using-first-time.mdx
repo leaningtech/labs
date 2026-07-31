@@ -3,9 +3,9 @@ title: Using the extension for the first time
 description: Tutorial for first-time users
 ---
 
-This tutorial will guide you on the basic functionalities of the JNLP Runner extension. We assume you have installed the extension on [Chrome](/cheerpj-jnlp-runner/getting-started/install-chrome) or [Edge](/cheerpj-jnlp-runner/getting-started/install-edge).
+This tutorial will guide you on the basic functionalities of the JNLP Runner extension. We assume you have installed the extension on [Chrome](/docs/cheerpj-jnlp-runner/getting-started/install-chrome) or [Edge](/docs/cheerpj-jnlp-runner/getting-started/install-edge).
 
-### Running a JNLP file
+## Running a JNLP file
 
 To start an application, you need to run a JNLP file. You can do this by clicking on a link or opening a file with a JNLP extension or by dragging and dropping a JNLP file into the extension popup.
 
@@ -17,24 +17,27 @@ You can read the full license agreement [here](https://cheerpj.com/cheerpj-jnlp-
 
 <div class="mx-24">![](/assets/jnlp-screenshots/license_agreement.png)</div>
 
-## The home screen
+### The side panel
 
-When the JNLP Runner extension detects that a JNLP file has been triggered it will show the screen below in a new tab. This screen displays a few options alongside the license's owner and the JNLP filename.
+When a JNLP file is launched in the browser, the application starts automatically and a side panel appears on the left side of the screen. Hover over the panel to expand it.
 
-<div class="mx-24">![](/assets/jnlp-screenshots/homescreen.png)</div>
+<div class="mx-24">![](/assets/jnlp-screenshots/jnlp_running.png)</div>
+<div class="mx-24">![](/assets/jnlp-screenshots/jnlp_sidepanel.png)</div>
 
-### Manage license link
+The side panel provides quick access to the following:
 
-Click on this link to activate your license key or token. For more information, check the [Activate your license](/cheerpj-jnlp-runner/getting-started/activate-license) tutorial.
+#### Download .jnlp
 
-### Start application button
+Downloads the currently running JNLP file directly to your machine.
 
-If this button is selected, the JNLP Runner will start executing your Java application, you will see a loading screen and after just a few seconds you will see your application running in the browser.
+#### Settings
 
-### Download file button
+Opens the extension settings, where you can configure advanced options such as enabling a Tailscale proxy for socket connections and other runtime options.
 
-This button starts a download of your JNLP file directly to your machine.
+#### Upload file
 
-### Start automatically next time
+Uploads a local file to the CheerpJ virtual filesystem, making it accessible to the running Java application under `/files/uploads/`. This is useful for applications that need to read local files. For more information, see the [virtual filesystem docs](https://cheerpj.com/docs/explanation/File-System-support).
 
-You can skip the home screen and directly start running your Java applications next time by checking this option.
+#### Manage license
+
+Click this link to activate your license key or token. For more information, see the [Activate your license](/docs/cheerpj-jnlp-runner/getting-started/activate-license) tutorial.
