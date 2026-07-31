@@ -37,7 +37,7 @@ A secure, shareable URL that routes external traffic to a service listening on a
 
 ## REPL
 
-“Read–eval–print Loop.” An interactive prompt that reads input, runs it, and prints the result.
+“Read–eval–print loop.” An interactive prompt that reads input, runs it, and prints the result.
 
 ## Runtime
 
