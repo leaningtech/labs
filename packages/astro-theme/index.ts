@@ -6,7 +6,10 @@ import publicDir from "astro-public";
 import pagefind from "./pagefind";
 import { remarkReplaceVars, rehypeReplaceVars } from "./replace-variables";
 import svelte from "@astrojs/svelte";
-import astroExpressiveCode, { loadShikiTheme } from "astro-expressive-code";
+import astroExpressiveCode, {
+	loadShikiTheme,
+	ExpressiveCodeTheme,
+} from "astro-expressive-code";
 import remarkObsidianCallout from "remark-obsidian-callout";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
@@ -16,23 +19,11 @@ import { addIntegration } from "astro-integration-kit";
 
 const prod = process.env.NODE_ENV === "production";
 
-const theme = await loadShikiTheme("material-theme-darker");
-theme.styleOverrides.frames = {
-	editorBackground: "transparent",
-	codeBackground: "transparent",
-	terminalBackground: "transparent",
-	terminalTitlebarBackground: "transparent",
-	terminalTitlebarBorderBottom: "transparent",
-	editorTabBarBackground: "transparent",
-	editorActiveTabBackground: "transparent",
-	editorActiveTabBorderBottom: "transparent",
-	shadowColor: "transparent",
-};
-
 const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 
 export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
+	theme?: string | ExpressiveCodeTheme; // Shiki theme name, or a custom ExpressiveCodeTheme instance, defaults to material-theme-darker
 };
 
 export default function ThemeIntegration(
@@ -42,15 +33,28 @@ export default function ThemeIntegration(
 	return {
 		name: "@leaningtech/astro-theme",
 		hooks: {
-			"astro:config:setup": (params) => {
+			"astro:config:setup": async (params) => {
+				const theme =
+					typeof options.theme === "string" || options.theme === undefined
+						? await loadShikiTheme(options.theme ?? "material-theme-darker")
+						: options.theme;
+				theme.styleOverrides.frames = {
+					editorBackground: "transparent",
+					terminalBackground: "transparent",
+					terminalTitlebarBackground: "transparent",
+					terminalTitlebarBorderBottom: "transparent",
+					editorTabBarBackground: "transparent",
+					editorActiveTabBackground: "transparent",
+					editorActiveTabBorderBottom: "transparent",
+					shadowColor: "transparent",
+				};
+
 				const integrations = [
 					astroExpressiveCode({
 						theme,
 						styleOverrides: {
 							codeBackground: "transparent",
 							borderColor: "rgb(41, 37, 36)", // border-stone-800
-							// doesn't work?
-							frames: {},
 						},
 					}),
 					mdx(),
