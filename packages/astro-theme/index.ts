@@ -40,7 +40,6 @@ export default function ThemeIntegration(
 						: options.theme;
 				theme.styleOverrides.frames = {
 					editorBackground: "transparent",
-					codeBackground: "transparent",
 					terminalBackground: "transparent",
 					terminalTitlebarBackground: "transparent",
 					terminalTitlebarBorderBottom: "transparent",
@@ -56,8 +55,6 @@ export default function ThemeIntegration(
 						styleOverrides: {
 							codeBackground: "transparent",
 							borderColor: "rgb(41, 37, 36)", // border-stone-800
-							// doesn't work?
-							frames: {},
 						},
 					}),
 					mdx(),
