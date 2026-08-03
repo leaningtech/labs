@@ -10,19 +10,12 @@ Because Rust is a precompiled language, the installation instead is about instal
 _!!! Alt: less mention of host machine and/or more about cross compilation and different targets_
 !!! or more explecit mention of no rust runtime being present inside the pods
 
+### prerequisites needed
+- [rustup](https://rustup.rs/#)
+
+!!! Could add clang and llvm if C dependencies need to be added (with potential install steps or command of checking if said prerequisites are present on host machine) but not sure if overkill.
+
 # Installing the toolchain
-## 0. check your prerequisites
-
-Lets make sure all the prerequisites required are there before installing the toolchain. Those being:
-
-> [!info] prerequisites needed
->- [rustup](https://rustup.rs/#)
->- clang
->- llvm-ar (!!! potentially only if your rust dependencies compile C same w clang)
-
-!!! note on install steps based on OS? (do we support windows?)
-!!! could add presence checking commands as well
-!!! Maybe move the info box to the top of page?
 
 ## 1. install the browserpod rust compilation toolchain
 
@@ -35,6 +28,7 @@ curl https://rt.browserpod.io/%BP_LATEST%/rust/install.sh | bash
 _Alternatively you can download the script from https://rt.browserpod.io/%BP_LATEST%/rust/browserpod-rust-%BP_LATEST%.tar.gz and follow the steps of the `install.sh` contained within._
 
 This will install a  particular rust nightly version using rustup, and install the toolchain needed to compile rust to browserpod. 
+
 _If you'd like to verify the installations succes, You can run `rustup toolchain list` and see if browserpod is in the outputted list._
 
 !! what's particular about this nightly version? Could see verification step being overkill btw
@@ -44,6 +38,8 @@ _If you'd like to verify the installations succes, You can run `rustup toolchain
 ``` bash
 rustup override set browserpod-%BP_LATEST%
 ```
+
+
 
 ## 3.
 
