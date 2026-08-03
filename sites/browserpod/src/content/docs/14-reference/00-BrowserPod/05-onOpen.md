@@ -1,6 +1,6 @@
 ---
 title: onOpen
-description: Set up a callback that will be invoked when a file or URL is opened in the pod
+description: Set up a callback that will be invoked when a file or URL is opened in the Pod
 ---
 
 ```ts

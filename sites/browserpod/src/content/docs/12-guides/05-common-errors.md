@@ -43,7 +43,7 @@ pod.run(..., {terminal,...});
 
 - **Solution**: Use `"binary"` for ArrayBuffer writes and `"utf-8"` for string writes.
 
-## Running native binaries inside the pod
+## Running native binaries inside the Pod
 
 - **Symptom**: Install failures or runtime crashes for tools like esbuild or rollup
 

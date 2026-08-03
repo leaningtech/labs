@@ -10,7 +10,7 @@ BrowserPod requires **cross-origin isolation**, which depends on two headers:
 - `Cross-Origin-Opener-Policy: same-origin`
 - `Cross-Origin-Embedder-Policy: require-corp`
 
-Without these headers, the browser will block `SharedArrayBuffer` and the pod will fail to boot.
+Without these headers, the browser will block `SharedArrayBuffer` and the Pod will fail to boot.
 
 ## Development: Vite server configuration
 
