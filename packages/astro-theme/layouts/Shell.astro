@@ -24,6 +24,7 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 			title={title || SITE_TITLE}
 			description={description || SITE_DESCRIPTION}
 			{image}
+			{gtmId}
 		/>
 		<style is:inline is:global>
 			@font-face {
