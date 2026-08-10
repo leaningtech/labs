@@ -57,12 +57,12 @@ for the browser. See the [Terminal reference](/docs/reference/Terminal) for the 
 
 ## System image
 
-an exact, compressed copy of an entire computer drive, including the operating system, system settings, programs, and filesystem. In the case of browserpod, it's the prebuild filesystem that every pod boots with, that already has all the things you need like !!! Check if correct and link boot
+An exact, compressed copy of an entire computer drive, including the operating system, system settings, programs, and filesystem. In the case of browserpod, it's the prebuild filesystem that every pod boots with, that already has all the things you need like !!! Check if correct and link boot
 
 ## Target
 
-the platfrom a binary is built for !!
+The platform a program is compiled to run on. A program built for one target won't run on another. A Windows program won't run on a Mac, and a BrowserPod binary won't run on your host machine.
 
 ## Cross-compilation
 
-Compiling a binary to a target that isn't the same as your host operating system. Like compiling an .exe binary from windows from your mac computer, or compiling a browswerpod wasm binary from your linux laptop.
+Compiling a program for a platform other than the one you're compiling on. For example, building a Windows .exe on a Mac, or building a BrowserPod wasm binary on a Linux machine.

@@ -1,5 +1,5 @@
 ---
-title: 04-Working-around-native-npm-dependencies
+title: Working around native npm dependencies
 description: Using NPM packages with native components in BrowserPod
 ---
 
