@@ -1,11 +1,11 @@
 ---
 title: Installing the Rust toolchain
-description: This tutorial will guide you on installing the browserpod Rust toolchain, that allows you to compile Rust programs into a binary that can run in browserpod
+description: How to install and use the browserpod Rust toolchain.
 ---
 
-In this tutorial you will be guided in installing the **BrowserPod Rust toolchain** that allows one to compile Rust programs with BrowserPod as the target (also known as _crosscompiling_). Allowing you to run the compiled binaries in the pod.
+This guide will show you how to install and use the **BrowserPod Rust toolchain** that allows one to compile Rust programs with BrowserPod as the target. Allowing you to run the compiled binaries in the pod.
 
-Rust is a compiled language and there is no Rust runtime inside a pod, the installation instead is about installing the browserpod toolchain that enables you to compile Rust programs on your _host_ machine, into a binary that can run in browserpod.
+Rust is a compiled language and there is no Rust runtime inside a pod, the installation instead is about installing the browserpod toolchain that enables you to compile Rust programs on your _host_ machine, into a binary that can run in browserpod. (also known as [cross compiling](/docs/more/glossary#cross-compilation)).
 
 ## Installing and setting up the toolchain
 
@@ -45,9 +45,8 @@ Now we can build our browserpod wasm binary!
 cargo build --release --target wasm32-browserpod-linux-musl
 ```
 
-That's it. You now have a binary that can run your Rust program directly in a [Pod](/docs/reference/BrowserPod)! You can find the binary in `target/wasm32-browserpod-linux-musl/release/<binary name>`.
+That's it! You now have a binary that can run your Rust program directly in a [Pod](/docs/reference/BrowserPod)! You can find the binary in `target/wasm32-browserpod-linux-musl/release/<binary name>`.
 To see how to launch a wasm binary in a [Pod](/docs/reference/BrowserPod), see our [Write files to the Pod](/docs/guides/write-files-to-pod) guide!
-
 
 ## Reducing binary size
 
@@ -55,7 +54,7 @@ Rust builds, by default are both unoptimised and carry debug info. Which, while 
 This is why we add the `--release` flag when building. To reduce the build size further consider creating a custom build profile in your `Cargo.toml` and setting the following settings.
 
 | settings          | effect                                                     | cost                         |
-|-------------------|------------------------------------------------------------|------------------------------|
+| ----------------- | ---------------------------------------------------------- | ---------------------------- |
 | lto = true        | Removes unused code across crate boundaries                | longer build time            |
 | codegen-units = 1 | Combine all code in a crate into a single compilation unit | longer build time            |
 | opt-level = "z"   | Optimize binary size over runtime speed                    | Worse program performance    |
@@ -71,15 +70,13 @@ codegen-units = 1
 strip = true
 ```
 
-Then to build with said profile, use the `--profile` flag. 
+Then to build with said profile, use the `--profile` flag.
 
 ```bash
 cargo build --profile release-small --target wasm32-browserpod-linux-musl
 ```
 
 _(Note that cargo creates a different build directory per profile, so the created build will now reside in: `target/wasm32-browserpod-linux-musl/release-small/<binary name>`.)_
-
-
 
 ## Uninstalling and/or updating
 
