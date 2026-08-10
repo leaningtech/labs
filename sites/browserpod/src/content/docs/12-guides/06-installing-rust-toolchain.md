@@ -46,9 +46,40 @@ cargo build --release --target wasm32-browserpod-linux-musl
 ```
 
 That's it. You now have a binary that can run your Rust program directly in a [Pod](/docs/reference/BrowserPod)! You can find the binary in `target/wasm32-browserpod-linux-musl/release/<binary name>`.
-To see how to launch a wasm binary in a [Pod](/docs/reference/BrowserPod), see our [loading binaries in the pod](/docs/guides/native-binaries) guide!
+To see how to launch a wasm binary in a [Pod](/docs/reference/BrowserPod), see our [Write files to the Pod](/docs/guides/write-files-to-pod) guide!
 
-(also question if that warrants a full guide but might be useful for both Rust and less technical Rust users? also for future)
+
+## Reducing binary size
+
+Rust builds, by default are both unoptimised and carry debug info. Which, while helpfull for debugging and build speed, can significantly increase browser load times and worst case cause your binary to fail to load all together.
+This is why we add the `--release` flag when building. To reduce the build size further consider creating a custom build profile in your `Cargo.toml` and setting the following settings.
+
+| settings          | effect                                                     | cost                         |
+|-------------------|------------------------------------------------------------|------------------------------|
+| lto = true        | Removes unused code across crate boundaries                | longer build time            |
+| codegen-units = 1 | Combine all code in a crate into a single compilation unit | longer build time            |
+| opt-level = "z"   | Optimize binary size over runtime speed                    | Worse program performance    |
+| strip = true      | Removes debug symbols                                      | Less useful panic backtraces |
+
+A custom profile with all settings enabled would look like:
+
+```toml
+[profile.release-small]
+inherits = "release"
+lto = true
+codegen-units = 1
+strip = true
+```
+
+Then to build with said profile, use the `--profile` flag. 
+
+```bash
+cargo build --profile release-small --target wasm32-browserpod-linux-musl
+```
+
+_(Note that cargo creates a different build directory per profile, so the created build will now reside in: `target/wasm32-browserpod-linux-musl/release-small/<binary name>`.)_
+
+
 
 ## Uninstalling and/or updating
 
@@ -67,8 +98,6 @@ For updating, first uninstall, and then reinstall the updated version.
 You will need `clang` and `llvm` as added prerequisites. You can check
 
 `clang --print-targets | grep -i wasm` and `which llvm-ar` to check for their presence respectively.
-
-!! hmm maybe this can be improved.
 
 ### Build fails with "unable to create target"
 
