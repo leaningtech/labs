@@ -56,7 +56,13 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 	>
 		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
 			<a href={product.href} class="flex items-center">
-				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+				<Image
+					src={product.logotype}
+					alt={product.name}
+					class:list={[
+						product.id === "browserpod" ? "w-[110px] h-auto" : "w-auto h-8",
+					]}
+				/>
 			</a>
 			{
 				(product.id.match("cheerpj2") || product.id.match("cheerpj3")) && (
@@ -75,14 +81,27 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					<div class="active-pill" id="active-pill" />
 				)
 			}
-			<Link label={t("Docs", Astro.currentLocale)} href={firstDocsEntry.href} />
-			<Link label={t("Blog", Astro.currentLocale)} href={blogref} />
-			<Link label={t("Demos", Astro.currentLocale)} href={showcaseref} />
+			<Link
+				label={t("Docs", Astro.currentLocale)}
+				href={firstDocsEntry.href}
+				showHoverBg={product.id !== "browserpod"}
+			/>
+			<Link
+				label={t("Blog", Astro.currentLocale)}
+				href={blogref}
+				showHoverBg={product.id !== "browserpod"}
+			/>
+			<Link
+				label={t("Demos", Astro.currentLocale)}
+				href={showcaseref}
+				showHoverBg={product.id !== "browserpod"}
+			/>
 			{
 				product.id.match("cheerpx") && (
 					<Link
 						label={t("Licensing", Astro.currentLocale)}
 						href={"/licensing"}
+						showHoverBg={product.id !== "browserpod"}
 					/>
 				)
 			}
@@ -91,11 +110,11 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		<div class="flex items-center gap-4 flex-none text-bg-200">
 			<a
 				href={DISCORD_URL}
-				class="flex items-center gap-1.5 hover:text-white group"
+				class="nav-icon-link flex items-center gap-1.5 hover:text-white group"
 			>
-				<Icon name="fa-brands:discord" class="w-5 h-5" />
+				<Icon name="mingcute:discord-fill" class="w-5 h-5" />
 				<span
-					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white"
+					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="Online Discord members"
 				>
 					<Icon
@@ -108,11 +127,11 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 			</a>
 			<a
 				href={product.github}
-				class="rounded-md flex items-center justify-middle py-1 px-2 gap-2 hover:text-white group"
+				class="nav-icon-link rounded-md flex items-center justify-middle py-1 px-2 gap-2 hover:text-white group"
 			>
-				<Icon name="fa-brands:github" class="w-5 h-5" />
+				<Icon name="mingcute:github-fill" class="w-4.5 h-4.5" />
 				<span
-					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white"
+					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="GitHub stars"
 				>
 					<Icon name="ph:star-fill" class="w-4 h-4" />
@@ -131,8 +150,11 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 	const nav = document.getElementById("product-nav")!;
 	const classes = ["!border-b-bg-800", "!shadow-lg"];
+	const isBrowserpod =
+		document.documentElement.classList.contains("site-browserpod");
 
 	function handleScroll() {
+		if (isBrowserpod) return; // glass style already has its own persistent border/shadow
 		if (window.scrollY > 64) {
 			nav.classList.add(...classes);
 		} else {
@@ -204,11 +226,14 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 			width 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
 			opacity 0.25s ease;
 		z-index: 1;
+		pointer-events: none;
 	}
 
-	:global(.site-browserpod) .nav-btn {
+	:global(.site-browserpod #product-nav .nav-btn) {
 		position: relative;
 		z-index: 2;
+		font-size: 13.5px;
+		font-weight: 450;
 	}
 
 	:global(.site-browserpod) .header-glare-container {
@@ -234,5 +259,51 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 	:global(.site-browserpod) #product-nav:hover .header-glare {
 		opacity: 1;
+	}
+
+	:global(.site-browserpod #product-nav .nav-btn:not([data-active])) {
+		color: rgba(255, 255, 255, 0.45);
+	}
+
+	:global(.site-browserpod #product-nav .nav-btn:not([data-active]):hover) {
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	:global(.site-browserpod #product-nav .nav-icon-link) {
+		color: rgba(255, 255, 255, 0.45);
+		padding: 0.375rem 0.5rem;
+		border-radius: 0.375rem;
+		transition:
+			color 0.15s ease,
+			background-color 0.15s ease;
+	}
+
+	:global(.site-browserpod #product-nav .nav-icon-link:hover) {
+		color: rgba(255, 255, 255, 0.9);
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	:global(.site-browserpod #product-nav .nav-icon-count) {
+		color: inherit;
+	}
+
+	:global(.site-browserpod site-search button) {
+		font-size: 13.5px;
+	}
+
+	:global(.site-browserpod) #product-nav::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 50%;
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.15) 0%,
+			rgba(255, 255, 255, 0) 100%
+		);
+		pointer-events: none;
+		z-index: 6;
 	}
 </style>
