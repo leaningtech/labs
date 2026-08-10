@@ -2,18 +2,20 @@
 interface Props {
 	label: string;
 	href: string;
+	showHoverBg?: boolean;
 }
 
-const { label, href } = Astro.props;
+const { label, href, showHoverBg = true } = Astro.props;
 const isActive = Astro.url.pathname.startsWith(href);
 ---
 
 <a
 	{href}
 	data-navpill
+	data-active={isActive || undefined}
 	class:list={[
 		"nav-btn flex items-center px-3 h-10 rounded-full",
-		{ "hover:bg-stone-800": !isActive },
+		{ "hover:bg-stone-800": !isActive && showHoverBg },
 		{ "text-primary-500 bg-primary-600 bg-opacity-10": isActive },
 	]}
 >
