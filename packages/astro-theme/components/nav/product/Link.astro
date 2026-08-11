@@ -11,7 +11,6 @@ const isActive = Astro.url.pathname.startsWith(href);
 
 <a
 	{href}
-	data-navpill
 	data-active={isActive || undefined}
 	class:list={[
 		"nav-btn flex items-center px-3.5 py-1.5 rounded-xl",
