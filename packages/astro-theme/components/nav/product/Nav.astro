@@ -44,15 +44,21 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 	class="sticky top-0 z-40 bg-bg-900 text-white font-medium leading-6 border-b border-b-transparent shadow-none transition-all duration-200"
 	id="product-nav"
 >
-	{
-		product.id === "browserpod" && (
-			<div class="header-glare-container" aria-hidden="true">
-				<div class="header-glare" id="header-glare" />
-			</div>
-		)
-	}
+	<svg style="display: none;" aria-hidden="true">
+		<filter id="nav-glass-distortion" x="0%" y="0%" width="100%" height="100%">
+			<feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+			<feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+			<feDisplacementMap in="SourceGraphic" in2="blurred" scale="70" xChannelSelector="R" yChannelSelector="G" />
+		</filter>
+	</svg>
+	<div class="glass-filter" id="nav-glass-filter"></div>
+	<div class="glass-tint"></div>
+
 	<div
-		class="max-w-screen-2xl w-full mx-auto h-16 px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden relative z-10"
+		class:list={[
+			"max-w-screen-2xl w-full mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between gap-4 whitespace-nowrap overflow-hidden relative z-10",
+			product.id === "browserpod" ? "h-12" : "h-16 py-4",
+		]}
 	>
 		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
 			<a href={product.href} class="flex items-center">
@@ -60,7 +66,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					src={product.logotype}
 					alt={product.name}
 					class:list={[
-						product.id === "browserpod" ? "w-[110px] h-auto" : "w-auto h-8",
+						product.id === "browserpod" ? "w-[100px] h-auto" : "w-auto h-8",
 					]}
 				/>
 			</a>
@@ -73,14 +79,10 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 		<div class="grow lg:hidden"></div>
 
-		<Search filterProductId={product.id} />
+			<Search filterProductId={product.id} />
+
 
 		<div class="flex items-stretch gap-2 ml-auto px-2 relative" id="nav-items">
-			{
-				product.id === "browserpod" && (
-					<div class="active-pill" id="active-pill" />
-				)
-			}
 			<Link
 				label={t("Docs", Astro.currentLocale)}
 				href={firstDocsEntry.href}
@@ -154,7 +156,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		document.documentElement.classList.contains("site-browserpod");
 
 	function handleScroll() {
-		if (isBrowserpod) return; // glass style already has its own persistent border/shadow
+		if (isBrowserpod) return;
 		if (window.scrollY > 64) {
 			nav.classList.add(...classes);
 		} else {
@@ -163,115 +165,54 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 	}
 
 	window.addEventListener("scroll", handleScroll, { passive: true });
-	// Hover pill (browserpod only; safely no-ops elsewhere since #active-pill won't exist)
-	const navItems = document.getElementById("nav-items");
-	const activePill = document.getElementById("active-pill");
-	const navButtons = document.querySelectorAll<HTMLElement>("[data-navpill]");
 
-	function movePillTo(btn: HTMLElement) {
-		if (!activePill || !navItems) return;
-		const itemRect = navItems.getBoundingClientRect();
-		const btnRect = btn.getBoundingClientRect();
-		activePill.style.width = `${btnRect.width}px`;
-		activePill.style.transform = `translateX(${btnRect.left - itemRect.left}px)`;
-		activePill.style.opacity = "1";
+	// Liquid-glass distortion filter; Safari crashes/blanks when pairing
+	// backdrop-filter with an SVG filter reference, so feature-detect and skip there
+	const glassFilter = document.getElementById("nav-glass-filter");
+	if (glassFilter) {
+		const ua = navigator.userAgent;
+		const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+		if (!isSafari) {
+			glassFilter.style.filter = "url(#nav-glass-distortion) saturate(150%)";
+		}
 	}
 
-	navButtons.forEach((btn) => {
-		btn.addEventListener("mouseenter", () => movePillTo(btn));
-	});
-
-	navItems?.addEventListener("mouseleave", () => {
-		if (activePill) activePill.style.opacity = "0";
-	});
-
-	const glare = document.getElementById("header-glare");
-
-	nav.addEventListener("mousemove", (e) => {
-		if (!glare) return;
-		const rect = nav.getBoundingClientRect();
-		const x = e.clientX - rect.left;
-		const y = e.clientY - rect.top;
-		glare.style.setProperty("--x", `${x}px`);
-		glare.style.setProperty("--y", `${y}px`);
-	});
 </script>
 
 <style>
-	:global(.site-browserpod) #product-nav {
-		background: rgba(13, 13, 14, 0.45);
-		backdrop-filter: blur(50px) saturate(200%);
-		-webkit-backdrop-filter: blur(50px) saturate(200%);
-		box-shadow:
-			0 40px 80px -20px rgba(0, 0, 0, 0.8),
-			0 10px 30px -10px rgba(0, 0, 0, 0.8),
-			inset 0 2px 3px -1px rgba(255, 255, 255, 0.25),
-			inset 0 -2px 4px -1px rgba(255, 255, 255, 0.05),
-			inset 0 0 0 1px rgba(255, 255, 255, 0.15);
-	}
-
-	:global(.site-browserpod) .active-pill {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		opacity: 0;
-		background: rgba(255, 255, 255, 0.08);
-		border-radius: 99px;
-		box-shadow:
-			inset 0 1px 1px rgba(255, 255, 255, 0.1),
-			inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-		transition:
-			transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
-			width 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
-			opacity 0.25s ease;
-		z-index: 1;
-		pointer-events: none;
+	:global(.site-browserpod #product-nav) {
+		position: sticky;
+		background-color: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		max-width: 1024px;
+		margin: 0 auto;
+		border-radius: 16px;
+		top: 1rem;
 	}
 
 	:global(.site-browserpod #product-nav .nav-btn) {
-		position: relative;
-		z-index: 2;
-		font-size: 13.5px;
-		font-weight: 450;
+		font-size: 14px;
+		font-weight: 500;
+		color: rgba(255, 255, 255, 0.6);
+		transition:
+			color 0.15s ease,
+			background-color 0.15s ease;
 	}
 
-	:global(.site-browserpod) .header-glare-container {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		overflow: hidden;
-		z-index: 5;
+	:global(.site-browserpod #product-nav .nav-btn:hover) {
+		color: #fff;
+		background: rgba(255, 255, 255, 0.1);
 	}
 
-	:global(.site-browserpod) .header-glare {
-		position: absolute;
-		inset: 0;
-		opacity: 0;
-		transition: opacity 0.3s ease;
-		background: radial-gradient(
-			circle 90px at var(--x, 50%) var(--y, 50%),
-			rgba(255, 255, 255, 0.15) 0%,
-			transparent 100%
-		);
-		mix-blend-mode: overlay;
-	}
-
-	:global(.site-browserpod) #product-nav:hover .header-glare {
-		opacity: 1;
-	}
-
-	:global(.site-browserpod #product-nav .nav-btn:not([data-active])) {
-		color: rgba(255, 255, 255, 0.45);
-	}
-
-	:global(.site-browserpod #product-nav .nav-btn:not([data-active]):hover) {
-		color: rgba(255, 255, 255, 0.9);
+	:global(.site-browserpod #product-nav .nav-btn[data-active]) {
+		color: #fff;
+		background: rgba(255, 255, 255, 0.1);
 	}
 
 	:global(.site-browserpod #product-nav .nav-icon-link) {
-		color: rgba(255, 255, 255, 0.45);
-		padding: 0.375rem 0.5rem;
+		color: rgba(255, 255, 255, 0.6);
+		padding: 0.25rem 0.5rem;
 		border-radius: 0.375rem;
 		transition:
 			color 0.15s ease,
@@ -279,8 +220,8 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 	}
 
 	:global(.site-browserpod #product-nav .nav-icon-link:hover) {
-		color: rgba(255, 255, 255, 0.9);
-		background: rgba(255, 255, 255, 0.05);
+		color: #fff;
+		background: rgba(255, 255, 255, 0.1);
 	}
 
 	:global(.site-browserpod #product-nav .nav-icon-count) {
@@ -288,22 +229,33 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 	}
 
 	:global(.site-browserpod site-search button) {
-		font-size: 13.5px;
+		font-size: 14px;
 	}
 
-	:global(.site-browserpod) #product-nav::before {
-		content: "";
+	:global(.site-browserpod) #product-nav site-search {
+		height: 2rem !important;
+	}
+
+	:global(.site-browserpod) #product-nav {
+		isolation: isolate;
+		overflow: hidden;
+	}
+
+	:global(.site-browserpod) #product-nav .glass-filter {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 50%;
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0.15) 0%,
-			rgba(255, 255, 255, 0) 100%
-		);
+		inset: 0;
+		z-index: 0;
+		backdrop-filter: blur(1px);
+		-webkit-backdrop-filter: blur(1px);
 		pointer-events: none;
-		z-index: 6;
+	}
+
+	:global(.site-browserpod) #product-nav .glass-tint {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background-color: #d7dadd;
+		opacity: 0.06;
+		pointer-events: none;
 	}
 </style>
