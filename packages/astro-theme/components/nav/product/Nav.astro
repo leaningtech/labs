@@ -46,9 +46,20 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 >
 	<svg style="display: none;" aria-hidden="true">
 		<filter id="nav-glass-distortion" x="0%" y="0%" width="100%" height="100%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
-			<feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
-			<feDisplacementMap in="SourceGraphic" in2="blurred" scale="70" xChannelSelector="R" yChannelSelector="G" />
+			<feTurbulence
+				type="fractalNoise"
+				baseFrequency="0.008 0.008"
+				numOctaves="2"
+				seed="92"
+				result="noise"></feTurbulence>
+			<feGaussianBlur in="noise" stdDeviation="2" result="blurred"
+			></feGaussianBlur>
+			<feDisplacementMap
+				in="SourceGraphic"
+				in2="blurred"
+				scale="70"
+				xChannelSelector="R"
+				yChannelSelector="G"></feDisplacementMap>
 		</filter>
 	</svg>
 	<div class="glass-filter" id="nav-glass-filter"></div>
@@ -79,8 +90,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 		<div class="grow lg:hidden"></div>
 
-			<Search filterProductId={product.id} />
-
+		<Search filterProductId={product.id} />
 
 		<div class="flex items-stretch gap-2 ml-auto px-2 relative" id="nav-items">
 			<Link
@@ -176,13 +186,14 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 			glassFilter.style.filter = "url(#nav-glass-distortion) saturate(150%)";
 		}
 	}
-
 </script>
 
 <style>
 	:global(.site-browserpod #product-nav) {
 		position: sticky;
 		background-color: transparent;
+		isolation: isolate;
+		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 		max-width: 1024px;
@@ -234,11 +245,6 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 	:global(.site-browserpod) #product-nav site-search {
 		height: 2rem !important;
-	}
-
-	:global(.site-browserpod) #product-nav {
-		isolation: isolate;
-		overflow: hidden;
 	}
 
 	:global(.site-browserpod) #product-nav .glass-filter {
