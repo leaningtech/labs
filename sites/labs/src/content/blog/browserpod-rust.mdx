@@ -136,15 +136,8 @@ In an ideal world, this would be all we need.
 
 Unfortunately, we need to deal with the messy reality of third party dependencies.
 
-Rust has decent support for compiling to Wasm, with multiple Wasm targets:
-
-- wasm32-unknown-unknown
-- wasm32-unknown-emscripten
-- wasm32-wasip1 / wasm32-wasip2 / wasm32-wasip3
-- wasm64-unknown-unknown
-- ... and more!
-
-Many libraries can compile for one or more of the above targets, but often with reduced
+As mentioned, Rust already supports multiple Wasm targets.
+Many libraries can compile for one or more of the those targets, but often with reduced
 functionality, or with the assumption that `arch="wasm32"` means "running in the Browser's main thread",
 and other arbitrary constraints.
 
