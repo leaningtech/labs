@@ -124,7 +124,10 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				href={DISCORD_URL}
 				class="nav-icon-link flex items-center gap-1.5 hover:text-white group"
 			>
-				<Icon name="mingcute:discord-fill" class="w-5 h-5" />
+				<Icon
+					name={product.id === "browserpod" ? "mingcute:discord-fill" : "fa-brands:discord"}
+					class="w-5 h-5"
+				/>
 				<span
 					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="Online Discord members"
@@ -141,7 +144,10 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				href={product.github}
 				class="nav-icon-link rounded-md flex items-center justify-middle py-1 px-2 gap-2 hover:text-white group"
 			>
-				<Icon name="mingcute:github-fill" class="w-4.5 h-4.5" />
+				<Icon
+					name={product.id === "browserpod" ? "mingcute:github-fill" : "fa-brands:github"}
+					class="w-4.5 h-4.5"
+				/>
 				<span
 					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="GitHub stars"
