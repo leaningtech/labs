@@ -5,6 +5,7 @@ description: A universal execution layer for running code safely in the browser
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
+import FeatureBox from "@/components/FeatureBox.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
 <div class="%BP_LATEST%" />
@@ -28,53 +29,99 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-**BrowserPod** is a universal execution layer for browser-based compute. It provides a sandboxed runtime API that enables client browsers to host full runtimes, compiled to WebAssembly (Wasm), with near-native performance.
+## What is BrowserPod?
 
-Instead of provisioning costly cloud servers, BrowserPod allows you to execute full-stack workloads directly within the user's browser tab. Each **pod** is ephemeral, constrained by the browser's security model, and isolated from the host operating system via a dedicated syscall layer.
+BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual machine directly in a user's browser tab. Its in-browser Linux kernel supports a variety of sandboxed runtime environments, including Node.js, Python and Rust. BrowserPod also includes configurable networking for controlled ingress and egress.
 
-<div class="m-4 flex justify-center">
-	[Get started](/docs/getting-started/quickstart) · [Basic
-	Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference)
-	· [GitHub repository](https://github.com/leaningtech/browserpod-meta) ·
-	[Licensing](/docs/more/licensing)
+### Key features
+
+<div class="not-prose grid grid-cols-1 sm:grid-cols-2 items-start gap-3 my-6">
+
+<FeatureBox title="Kernel">
+	BrowserPod compiles full native runtimes to WebAssembly, targeting a
+	Linux-compliant syscall interface rather than a limited JavaScript shim.
+</FeatureBox>
+
+<FeatureBox title="Sandbox">
+	BrowserPod runs directly in the browser, inheriting its security boundary,
+	with additional cross-origin isolation.
+</FeatureBox>
+
+<FeatureBox title="Runtimes">
+	In-browser runtimes for Node.js, Rust and Python (currently in beta) with
+	runtimes for Ruby and Go planned for the second half of 2026.
+</FeatureBox>
+
+<FeatureBox title="Compatibility">
+	The Node.js runtime ships with npm and Vite built in, and supports most
+	frameworks (including React, Angular, Next.js and Express.js; see Node.js
+	frameworks for more). Rust launches with jj, with more tools coming to the
+	Rust and Python runtimes soon.
+</FeatureBox>
+
+<FeatureBox title="Filesystem">
+	A block-based streaming virtual filesystem provides full POSIX compatibility.
+	Disk images are streamed on demand, and any file changes stay local to the
+	browser session using either IndexedDB or the Origin Private File System
+	(OPFS).
+</FeatureBox>
+
+<FeatureBox title="Portals">
+	Ports that open in BrowserPod can be shared via a temporary private URL. This
+	secure URL routes external traffic directly to the service running in the
+	browser, enabling live previews and collaboration without any backend servers.
+</FeatureBox>
+
+<FeatureBox title="Tools">
+	BrowserPod provides a wide range of developer tools, including bash/shell and
+	git, alongside runtime-specific tooling such as npm for Node.js and jj for
+	Rust.
+</FeatureBox>
+
+<FeatureBox title="Databases">
+	SQLite3 support in BrowserPod is currently in beta.
+</FeatureBox>
+
+<FeatureBox title="Browser support">
+	Support for all major browsers, including Chrome (and Chromium browsers),
+	Firefox and Safari. For exceptionally complex or experimental use cases,
+	Chromium-based browsers are recommended for maximum compatibility.
+</FeatureBox>
+
+<FeatureBox title="Multithreading">
+	Web workers enable true multi-threading and process isolation for complex,
+	multi-process workloads that would normally require a full operating system.
+</FeatureBox>
+
 </div>
 
-## The Shift: Moving Compute to the Client
+## Uses
 
-Traditional sandboxed environments rely on cloud-side virtualization. While effective, this model introduces recurring infrastructure costs, network latency, and data privacy complexities.
+### AI agents
 
-**BrowserPod flips the economics of code execution.** By leveraging the user's local CPU and the browser's security model, you eliminate per-session infrastructure overhead. This makes it financially viable to scale applications, like AI code interpreters or interactive coding platforms, to millions of users without the linear growth of a cloud bill.
+BrowserPod provides a sandboxed, client-side environment for applications that write code using AI. You can try Claude Code in our BrowserPod application, BrowserCode.
 
-## Use Cases
+### Demos
 
-### Development Tools & Interactive Content
+BrowserPod can be used to share interactive demos over a private URL using its Portals feature.
 
-BrowserPod is built to power the next generation of web-based IDEs and full-stack development environments. By supporting package installs, dev servers, and build tools with high fidelity, it allows developers to create "real" workflows in the browser. This extends to documentation and live demos, where you can turn static examples into runnable environments that users can modify and execute without leaving the page.
+### Documentation
 
-### Safe Execution of Untrusted Code
+BrowserPod can be used to make developer tool and API documentation interactive by providing a free execution environment for tutorials, examples and code snippets to run.
 
-Whether you are running AI-generated code, user scripts, or agent-assembled programs, BrowserPod provides a secure sandbox with zero "cold start" latency. Because execution happens on the client side, you tighten security boundaries by keeping sensitive data within the user's local environment.
+### Moving server processes client-side
 
-### Privacy-First Applications and Education
+BrowserPod can run server-side processes directly in a user's browser, reducing cloud dependencies when developing web applications.
 
-By keeping inputs and outputs on the user's device, BrowserPod enables privacy-conscious applications that bypass the jurisdictional risks of cloud data transfer. For educators, this model removes the operational burden of managing per-student sandboxes, making hands-on technical education economically feasible at any scale.
+### Web IDEs
 
-## How it works
-
-![BrowserPod Architecture Diagram](/docs/assets/Browserpod-diagram_2.webp)
-
-To understand how BrowserPod achieves high-fidelity behavior in a browser, it helps to look at the execution flow:
-
-1.  **Runtime Loading:** BrowserPod delivers complete runtime engines (starting with Node.js) compiled to WebAssembly. These engines target a Linux-compliant syscall interface rather than a limited JavaScript shim.
-2.  **Execution:** The browser’s JavaScript engine executes the Wasm-compiled runtime using WebWorkers for true multi-threading and process isolation. This allows for complex, multi-process workloads that would normally require a full OS.
-3.  **Resource Virtualization:** A block-based streaming virtual filesystem provides full POSIX compatibility. Disk images are streamed on-demand, and any file changes stay local to the browser session.
-4.  **Networking via Portals:** When a service inside the Pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
+BrowserPod supports full web IDEs, with its sandbox working as a development environment that can run complete server workloads.
 
 ## Roadmap
 
-BrowserPod currently supports **Node.js**, alongside command-line tools (bash, git, coreutils, and more), and a **Rust** cross-compilation toolchain for building standalone Wasm binaries that run directly in a Pod. Our goal is to expand this into a language-agnostic platform throughout 2026, with planned milestones across the year:
+Our goal is to expand BrowserPod into a language-agnostic platform throughout 2026, with planned milestones across the year:
 
-- **Python** and **Ruby** support.
+- **Ruby** support.
 - Support for **Go**.
 - **Linux-class workloads** powered by CheerpX, enabling any unmodified Linux container to run in the browser.
 
