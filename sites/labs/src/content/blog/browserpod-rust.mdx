@@ -1,10 +1,10 @@
 ---
-title: "Rust support in BrowserPod"
+title: "Beyond WASI: Running any Rust application in the browser with BrowserPod 3.0"
 description: |
   BrowserPod can now run real Rust programs in the browser, compiled from unmodified source with stock rustc and cargo.
 authors:
   - yuri
-pubDate: "August 12 2026"
+pubDate: "August 13 2026"
 heroImage: "./banners/BrowserPod_2.0-hero.webp"
 tags:
   - BrowserPod
@@ -15,21 +15,25 @@ categories:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-{/* TODO: create the demo project under sites/labs/public/blog/bp-rust (manifest.txt + .scripts/*.sh) before publishing */}
-
 <BrowserPodProvider
 	client:only="svelte"
 	ctxId="bp-rust-demo"
-	version="2.16.0"
+	version="2.18.0"
 	projectSource={{ type: "local", path: "bp-rust" }}
-	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
+	userImage="wss://disks.browserpod.io/rust-post-demos-2.ext2"
+	apiKey="bp1_49cd98a734f3cd9b58629513256a4bc5f0be396a74edfab6a9517fbf636fe036"
 />
 
-Today we're announcing **Rust support in BrowserPod**. You can compile a Rust project with `cargo`, targeting BrowserPod, and run the resulting binary in the Browser. The program can access the filesystem, make network requests, run subprocesses, ... all without changing a single line of code!
+Today we are releaseing BrowserPod 3.0, with full support for running any Rust
+application in the browser, many fixes for Node.js, and initial Python support.
+
+Our Rust support goes beyond what can be normally achieved with the existing Wasm
+targets in terms of standard library features and third party crates compatibility.
+Programs can access the filesystem, make network requests, run subprocesses, and interact
+with concurrently running applications. All of this without changing a single line of code!
 
 In the demo below, you can see the preview version of Yarn 6 (written in Rust) installing a NPM project:
 
-```
 <BrowserPodTerminal
 	client:only="svelte"
 	ctxId="bp-rust-demo"
@@ -41,28 +45,30 @@ In the demo below, you can see the preview version of Yarn 6 (written in Rust) i
 			id: "rg-demo",
 			label: "ripgrep",
 			echo: false,
-			command: "/home/user/yarn",
-			args: ["install"],
+			command: "bash",
+			args: [],
 		},
 	]}
 />
-```
 
 ## What is BrowserPod
 
-BrowserPod is an in-browser code sandbox. It runs Linux applications compiled to WebAssembly. It aims to implement the full Linux syscall interface, allowing existing applications to be compiled with little to no code change, and multiple applications to interact with each other.
+BrowserPod is an in-browser code sandbox. It's goal is to make it possible to run any Linux application in modern browsers by compiling the application to WebAssembly and providing the full Linux syscall interface.
 
-It supports outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers.
+It provides a virtualized, locally persistent and efficient filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all purposes it can be considered a OS kernel for the Web platform, implemented in WebAssembly.
 
-That makes it useful for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
+This set of features make BrowserPod uniquely suited for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
+
+## Why Rust
+
+[...]
 
 ## What does it mean to "support" Rust
 
-When adding support for Node.js in BrowserPod, we had to compile the `node` program for the BrowserPod target (using our C++ compiler, Cheerp), and then our users can simply copy their JS project in a Pod, and run it in the Browser directly, via `node`.
+In previous releases of BrowserPod we focused on Node.js. Our users did not have to worry how to compile for the BrowserPod target, since we provide a pre-compiled Node.js build ourselves, using our C++ compiler, [Cheerp](https://cheerp.io).
 
-[REVISE]
-Rust programs don't rely on a separate program at runtime, they are themselves directly executable, but first they need to be compiled to the target architecture by the Rust compiler, `rustc`.
-We could in principle compile `rustc` itself for BrowserPod, and allow users to compile their Rust programs directly in the Browser, and we might do so in the future.
+Rust programs behave very differently, since they need to be compiled ahead of time by the Rust compiler, `rustc`.
+We could in principle compile `rustc` itself for BrowserPod, and allow users to compile their Rust programs directly in the browser, and we might do so in the future.
 For now, the intended workflow is to compile the program offline and add the resulting binary to the Pod.
 
 So "supporting Rust" means that we provide a Rust toolchain that can produce Wasm binaries that can run in a BrowserPod Pod.
@@ -73,8 +79,8 @@ Rust already support a variety of Wasm targets, namely:
 
 - `wasm32-unknown-unknown`: This target is the most barebones and platform agnostic. By itself, it makes no assumption about the environment it runs it, but crates like `wasm-bindgen` and `web-sys` make it possible to communicate with the JS and Web environment. This target makes sense if you are deliberately targeting the Web from the start. Many standard library features are missing.
 - `wasm32-unknown-emscripten`: This target is intended for standalone programs targeting the Web. It can directly interact with JavaScript code, and already wraps many Web APIs for ease of use. It also emulates some POSIX apis to an extent, but many Rust standard library features are not implemented, and in general supporting this target requires extensive rewriting.
-- `wasm32-wasip1` / `wasm32-wasip2` / `wasm32-wasip3`: These are the WASI targets. They can run in principle in any environment, although their main use is for WebAssembly outside of the Browser. As such, they don't assume the presence of JS, and they provide applications with I/O facilities like a filesystem and networking.
-- `wasm32-wali-linux-musl`: This target is intended to run existing Linux applications in a Wasm runtime, by providing the x86-64 linux syscall interface as imports. Its main use case is outside of the Browser.
+- `wasm32-wasip1` / `wasm32-wasip2` / `wasm32-wasip3`: These are the WASI targets. They can run in principle in any environment, although their main use is for WebAssembly outside of the browser. As such, they don't assume the presence of JS, and they provide applications with I/O facilities like a filesystem and networking.
+- `wasm32-wali-linux-musl`: This target is intended to run existing Linux applications in a Wasm runtime, by providing the x86-64 linux syscall interface as imports. Its main use case is outside of the browser.
 
 ## Why not just pick WASI?
 
@@ -82,13 +88,16 @@ Our original plan was to implement a WASI (WebAssembly System Interface) layer o
 
 This way we could run any program that targets it, whether it's written in Rust, Go, C, or anything else.
 
-But when trying to compile existing Rust programs to WASI, we quickly realized that it's not just a matter of switching build target: [...]
+But when trying to compile existing Rust programs to WASI, we quickly realized that it's not just a matter of switching build target.
 
-## Why not just pick WALI?
+Take `yarn` for example. Compiling it for WASI would require:
 
-The goals of WALI are actually very aligned with the goals of BrowserPod: compile Linux applications unmodified to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscalls implementations are shared with CheerpX (https://webvm.io), which is a virtual machine for x86 Linux binaries.
+- Platform-specific code to replace usage of `std::os::unix` with `std::os::wasi`: this is doable, although the mapping is not 1:1 (e.g. no absolute symlinks in WASI)
+- Removal of threads usage: `wasm32-wasip3` has some limited cooperative threading support (without real parallelism), but it's very new and not supported by either the standard library, nor tokio.
+- Accepting of reduced functionality: `yarn` relies on external programs for some functionality: in particular `git` (to fetch git dependencies) and `node` (to run lifecycle scripts) are required for basic operations.
 
-CheerpX is working towards supporting x86-64 binaries, so in the future we could simply adopt WALI as our target. For the time being, we are left with the option of making our own Rust target: `wasm32-browserpod-linux-musl`.
+BrowserPod already has a solution to these problems, so we decided to skip the middleman
+and implement our own Rust target: `wasm32-browserpod-linux-musl`.
 
 ## Making our own Rust target
 
@@ -120,7 +129,7 @@ We also need to support our target in the Rust standard library for our combinat
 This is also relatively straightforward: we want conditional compilation to select the appropriate syscalls
 (in our case, they are the same as the x86 ones), and a few smaller details (unwinding behavior, malloc alignment, enabling the Wasm intrinsics, ...).
 
-And finally, we need to override a couple of foundational libraries: `libc` and `linux-raw-sys`.
+And finally, we need to override a couple of foundational libraries:
 
 `libc` is a requirement for the standard library itself, but many crates also depend on it directly.
 We mainly need to link our own musl libc build, and to define some constants like the sizes of C types.
@@ -138,7 +147,7 @@ Unfortunately, we need to deal with the messy reality of third party dependencie
 
 As mentioned, Rust already supports multiple Wasm targets.
 Many libraries can compile for one or more of the those targets, but often with reduced
-functionality, or with the assumption that `arch="wasm32"` means "running in the Browser's main thread",
+functionality, or with the assumption that `arch="wasm32"` means "running in the browser's main thread",
 and other arbitrary constraints.
 
 To reach our goal of compiling projects without changing the code, we need to dodge all the conditional compilation that would mistakenly categorize our target as a "reduced functionality" one.
@@ -149,7 +158,7 @@ If you look closer at the json snippet of our target definition above, you will 
 
 - `arch: "wasm64"`: this is even more surprising, but unfortunately also necessary. `arch="wasm32"` is often used to detect standalone web targets (for example, `reqwest` will replace the whole http client with a `fetch()` implementation). You would think that something will break because of this, but important info like the size of pointers is defined separately, and the actual target passed to the LLVM backend is still `wasm32`, so it all works out!
 
-Of course we would love to get rid of these hacks, but it requires sending patches to multiple projects to accomodate a target that doesn't really officially exist (although other targets like WASI and WALI would also benefit from more precise conditional compilation clauses). We **will** do it, but it will take time. We want to let users run their Rust programs in BrowserPod today.
+Of course we would love to get rid of these hacks, but the proper solution requires awareness in the ecosystem that fully-featured Wasm targets exist, which will take time (but we have a [plan](#future-plans)).
 
 ## The payoff
 
@@ -173,7 +182,7 @@ VIDEO of codex
 
 Rust has one blessed build system, which makes it much easier to provide a good out-of-the-box developer experience compared to, say, C/C++.
 
-Rust also has an official way to obtain and manage multiple toolchains — **rustup**. We can't be distributed _through_ rustup yet, because we are not an officially supported target, but we can install into its directories, so you can switch a single project over to our toolchain in the usual way:
+Rust also has an official way to obtain and manage multiple toolchains: **rustup**. We can't be distributed _through_ rustup yet, because we are not an officially supported target, but we can install into its directories, so you can switch a single project over to our toolchain in the usual way:
 
 ```bash
 # manually install our toolchain (one day this could be via rustup too)
@@ -194,3 +203,20 @@ rustup toolchain uninstall browserpod-3.0.0
 Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
 
 If you have a Rust project you'd like to see running in a browser tab — especially one you expect to break — we'd genuinely like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).
+
+## Future plans
+
+I explained why the existing Wasm targets were not suitable for us, but I just glossed
+over `wasm32-wali-linux-musl`.
+
+The goals of [WALI (WebAssembly Linux Interface)](https://arxiv.org/abs/2312.03858) are actually very aligned with those of BrowserPod: compile Linux applications unmodified to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscalls implementations are shared with CheerpX (https://webvm.io), which is a virtual machine for x86 Linux binaries.
+
+CheerpX is working towards supporting x86-64 binaries, so in the future we could simply adopt WALI as our target (for both Rust and C/C++).
+
+This would have many benefits:
+
+- it is already a supported Rust target
+- we could run the same Wasm binary both inside and outside of the browser
+- we could join forces in fixing the issues with third party libraries upstream
+
+We are very excited about this direction and will say more about it in the future!
