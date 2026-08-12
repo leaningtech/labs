@@ -32,7 +32,7 @@ targets in terms of standard library features and third-party crate compatibilit
 Programs can access the filesystem, make network requests, run subprocesses, and interact
 with concurrently running applications. All of this **without changing a single line of code**!
 
-In the demo below, you can see the preview version of Yarn 6 (written in Rust) installing an NPM project:
+In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6) (written in Rust) installing an NPM project:
 
 <BrowserPodTerminal
 	client:only="svelte"
@@ -77,10 +77,10 @@ So _"supporting Rust"_ means that we provide a Rust toolchain that can produce W
 
 Rust already supports a variety of Wasm targets, namely:
 
-- `wasm32-unknown-unknown`: This target is the most barebones and platform agnostic. By itself, it makes no assumptions about the environment it runs in, but crates like `wasm-bindgen` and `web-sys` make it possible to communicate with the JS and Web environment. This target makes sense if you are deliberately targeting the Web from the start. Many standard library features are missing.
-- `wasm32-unknown-emscripten`: This target is intended for standalone programs targeting the Web. It can directly interact with JavaScript code, and already wraps many Web APIs for ease of use. It also emulates some POSIX APIs to an extent, but many Rust standard library features are not implemented, and in general supporting this target requires extensive rewriting.
-- `wasm32-wasip1` / `wasm32-wasip2` / `wasm32-wasip3`: These are the WASI targets. They can run in principle in any environment, although their main use is for WebAssembly outside of the browser. As such, they don't assume the presence of JS, and they provide applications with I/O facilities like a filesystem and networking.
-- `wasm32-wali-linux-musl`: This target is intended to run existing Linux applications in a Wasm runtime, by providing the x86-64 linux syscall interface as imports. Its main use case is outside of the browser.
+- [`wasm32-unknown-unknown`](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html): This target is the most barebones and platform agnostic. By itself, it makes no assumptions about the environment it runs in, but crates like [`wasm-bindgen`](https://wasm-bindgen.github.io/wasm-bindgen/) and [`web-sys`](https://docs.rs/web-sys) make it possible to communicate with the JS and Web environment. This target makes sense if you are deliberately targeting the Web from the start. Many standard library features are missing.
+- [`wasm32-unknown-emscripten`](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-emscripten.html): This target is intended for standalone programs targeting the Web. It can directly interact with JavaScript code, and already wraps many Web APIs for ease of use. It also emulates some POSIX APIs to an extent, but many Rust standard library features are not implemented, and in general supporting this target requires extensive rewriting.
+- [`wasm32-wasip1`](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html) / [`wasm32-wasip2`](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip2.html) / [`wasm32-wasip3`](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip3.html): These are the [WASI](https://wasi.dev) targets. They can run in principle in any environment, although their main use is for WebAssembly outside of the browser. As such, they don't assume the presence of JS, and they provide applications with I/O facilities like a filesystem and networking.
+- [`wasm32-wali-linux-musl`](https://doc.rust-lang.org/rustc/platform-support/wasm32-wali-linux.html): This target is intended to run existing Linux applications in a Wasm runtime, by providing the x86-64 linux syscall interface as imports. Its main use case is outside of the browser.
 
 ## Why not just pick WASI?
 
@@ -93,7 +93,7 @@ But when trying to compile existing Rust programs to WASI, we quickly realized t
 Take `yarn` for example. Compiling it for WASI would require:
 
 - Platform-specific code to replace usage of `std::os::unix` with `std::os::wasi`: this is doable, although the mapping is not 1:1 (e.g. no absolute symlinks in WASI)
-- Removal of thread usage: `wasm32-wasip3` has some limited cooperative threading support (without real parallelism), but it's very new and supported by neither the standard library nor tokio.
+- Removal of thread usage: `wasm32-wasip3` has some limited cooperative threading support (without real parallelism), but it's very new and supported by neither the standard library nor [tokio](https://tokio.rs).
 - Acceptance of reduced functionality: `yarn` relies on external programs for some functionality: in particular `git` (to fetch git dependencies) and `node` (to run lifecycle scripts) are required for basic operations.
 
 BrowserPod already has a solution to these problems, so we decided to skip the middleman
@@ -101,7 +101,7 @@ and implement our own Rust target: `wasm32-browserpod-linux-musl`.
 
 ## Making our own Rust target
 
-Defining a custom Rust target is _surprisingly easy_: you define your target's properties
+Defining a [custom Rust target](https://doc.rust-lang.org/rustc/targets/custom.html) is _surprisingly easy_: you define your target's properties
 in a .json file:
 
 ```json
@@ -131,10 +131,10 @@ This is also relatively straightforward: we want conditional compilation to sele
 
 And finally, we need to override a couple of foundational libraries:
 
-`libc` is a requirement for the standard library itself, but many crates also depend on it directly.
-We mainly need to link our own musl libc build, and to define some constants like the sizes of C types.
+[`libc`](https://docs.rs/libc) is a requirement for the standard library itself, but many crates also depend on it directly.
+We mainly need to link our own [musl](https://musl.libc.org) libc build, and to define some constants like the sizes of C types.
 
-`linux-raw-sys` is not strictly needed, but it's commonly found in the dependency tree of many projects, and
+[`linux-raw-sys`](https://docs.rs/linux-raw-sys) is not strictly needed, but it's commonly found in the dependency tree of many projects, and
 we need to teach it about our target and the syscalls we expose (again, mostly copying from the existing x86 code paths).
 
 A number of options to `cargo` and `rustc` are needed to tie everything together (unstable feature flags, the sysroot with the C dependencies, the cargo overrides for `libc` and `linux-raw-sys`, ...); we provide wrapper scripts for them, so the user can compile with a simple `cargo build --target wasm32-browserpod-linux-musl`.
@@ -156,7 +156,7 @@ If you look closer at the json snippet of our target definition above, you will 
 
 - `target_family: ["unix"]`: originally, we had `["unix", "wasm"]`, but many crates use the wasm target family to mean "standalone web build", "WASI", "no filesystem", or similar. Dropping "wasm" seems to be _completely harmless_.
 
-- `arch: "wasm64"`: this is even more surprising, but unfortunately also necessary. `arch="wasm32"` is often used to detect standalone web targets (for example, `reqwest` will replace the whole http client with a `fetch()` implementation). You would think that something would break because of this, but important info like the size of pointers is defined separately, and the actual target passed to the LLVM backend is still `wasm32`, so it all works out!
+- `arch: "wasm64"`: this is even more surprising, but unfortunately also necessary. `arch="wasm32"` is often used to detect standalone web targets (for example, [`reqwest`](https://docs.rs/reqwest) will replace the whole http client with a `fetch()` implementation). You would think that something would break because of this, but important info like the size of pointers is defined separately, and the actual target passed to the LLVM backend is still `wasm32`, so it all works out!
 
 Of course, we would love to get rid of these hacks, but the proper solution requires awareness in the ecosystem that fully-featured Wasm targets exist, which will take time (but we have a [plan](#future-plans)).
 
@@ -182,7 +182,7 @@ VIDEO of codex
 
 Rust has _one_ blessed build system, which makes it much easier to provide a good out-of-the-box developer experience compared to, say, C/C++.
 
-Rust also has an official way to obtain and manage multiple toolchains: **rustup**. We can't be distributed _through_ rustup yet, because we are not an officially supported target, but we can install into its directories, so you can switch a single project over to our toolchain in the usual way:
+Rust also has an official way to obtain and manage multiple toolchains: **[rustup](https://rustup.rs)**. We can't be distributed _through_ rustup yet, because we are not an officially supported target, but we can install into its directories, so you can switch a single project over to our toolchain in the usual way:
 
 ```bash
 # manually install our toolchain (one day this could be via rustup too)
@@ -209,7 +209,7 @@ If you have a Rust project you'd like to see running in a browser tab — especi
 I explained why the existing Wasm targets were not suitable for us, but I glossed
 over `wasm32-wali-linux-musl`.
 
-The goals of [WALI (WebAssembly Linux Interface)](https://arxiv.org/abs/2312.03858) are actually very aligned with those of BrowserPod: compile Linux applications _unmodified_ to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscall implementations are shared with CheerpX (https://webvm.io), which is a virtual machine for x86 Linux binaries.
+The goals of [WALI (WebAssembly Linux Interface)](https://arxiv.org/abs/2312.03858) are actually very aligned with those of BrowserPod: compile Linux applications _unmodified_ to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscall implementations are shared with [CheerpX](https://cheerpx.io), which is a virtual machine for x86 Linux binaries (you may know it from [WebVM](https://webvm.io)).
 
 CheerpX is working towards supporting x86-64 binaries, so in the future we could simply adopt WALI as our target (for both Rust and C/C++).
 
