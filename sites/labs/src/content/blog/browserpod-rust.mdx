@@ -46,7 +46,7 @@ In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpk
 			label: "yarn",
 			echo: false,
 			command: "bash",
-			args: ["-c", "set -x; cd project; yarn install; yarn info"],
+			args: ["-c", "set -x; cd project; yarn install; yarn info; exit"],
 			env: ["PATH=/home/.bin:/bin"],
 		},
 	]}
@@ -63,7 +63,7 @@ This set of features makes BrowserPod uniquely suited for safe in-browser agenti
 ## Why Rust now?
 
 BrowserPod's ambition is to run an entire Linux userspace in the browser. For the most part, this used to mean compiling a bunch of C/C++ projects.
-Interpreters and runtimes for dynamic languages are also mostly written in C/C++, and so having a C/C++ toolchain (in our case, [Cheerp](https://cheerp.io)) would get you very far.
+Most dynamic languages, such as Python, JavaScript or Ruby run on top of interpreters and runtimes that are also, most usually, written in C/C++, and so having a C/C++ toolchain (in our case, [Cheerp](https://cheerp.io)) would get you very far.
 
 Nowadays, this is less and less true. Popular languages like Rust and Go are compiled ahead of time like C/C++, and have their own toolchains.
 
