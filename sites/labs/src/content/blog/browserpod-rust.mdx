@@ -30,7 +30,7 @@ application in the browser, many fixes for Node.js, and initial Python support.
 Our Rust support goes beyond what can normally be achieved with the existing Wasm
 targets in terms of standard library features and third-party crate compatibility.
 Programs can access the filesystem, make network requests, run subprocesses, and interact
-with concurrently running applications. All of this without changing a single line of code!
+with concurrently running applications. All of this **without changing a single line of code**!
 
 In the demo below, you can see the preview version of Yarn 6 (written in Rust) installing an NPM project:
 
@@ -53,9 +53,9 @@ In the demo below, you can see the preview version of Yarn 6 (written in Rust) i
 
 ## What is BrowserPod
 
-BrowserPod is an in-browser code sandbox. Its goal is to make it possible to run any Linux application in modern browsers by compiling the application to WebAssembly and providing the full Linux syscall interface.
+BrowserPod is an in-browser code sandbox. Its goal is to make it possible to run _any_ Linux application in modern browsers by compiling the application to WebAssembly and providing the full Linux syscall interface.
 
-It provides a virtualized, locally persistent, and efficient filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all purposes, it can be considered an OS kernel for the Web platform, implemented in WebAssembly.
+It provides a virtualized, locally persistent, and efficient filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all purposes, it can be considered **an OS kernel for the Web platform**, implemented in WebAssembly.
 
 This set of features makes BrowserPod uniquely suited for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
 
@@ -71,7 +71,7 @@ Rust programs behave very differently, since they need to be compiled ahead of t
 We could in principle compile `rustc` itself for BrowserPod, and allow users to compile their Rust programs directly in the browser, and we might do so in the future.
 For now, the intended workflow is to compile the program offline and add the resulting binary to the Pod.
 
-So "supporting Rust" means that we provide a Rust toolchain that can produce Wasm binaries that can run in a BrowserPod Pod.
+So _"supporting Rust"_ means that we provide a Rust toolchain that can produce Wasm binaries that can run in a BrowserPod Pod.
 
 ## Existing Rust WebAssembly targets
 
@@ -88,7 +88,7 @@ Our original plan was to implement a WASI (WebAssembly System Interface) layer o
 
 This way we could run any program that targets it, whether it's written in Rust, Go, C, or anything else.
 
-But when trying to compile existing Rust programs to WASI, we quickly realized that it's not just a matter of switching build targets.
+But when trying to compile existing Rust programs to WASI, we quickly realized that it's _not_ just a matter of switching build targets.
 
 Take `yarn` for example. Compiling it for WASI would require:
 
@@ -101,7 +101,7 @@ and implement our own Rust target: `wasm32-browserpod-linux-musl`.
 
 ## Making our own Rust target
 
-Defining a custom Rust target is surprisingly easy: you define your target's properties
+Defining a custom Rust target is _surprisingly easy_: you define your target's properties
 in a .json file:
 
 ```json
@@ -150,11 +150,11 @@ Many libraries can compile for one or more of those targets, but often with redu
 functionality, or with the assumption that `arch="wasm32"` means "running in the browser's main thread",
 and other arbitrary constraints.
 
-To reach our goal of compiling projects without changing the code, we need to dodge all the conditional compilation that would mistakenly categorize our target as a "reduced functionality" one.
+To reach our goal of compiling projects **without changing the code**, we need to dodge all the conditional compilation that would mistakenly categorize our target as a "reduced functionality" one.
 
 If you look closer at the json snippet of our target definition above, you will notice two interesting things:
 
-- `target_family: ["unix"]`: originally, we had `["unix", "wasm"]`, but many crates use the wasm target family to mean "standalone web build", "WASI", "no filesystem", or similar. Dropping "wasm" seems to be completely harmless.
+- `target_family: ["unix"]`: originally, we had `["unix", "wasm"]`, but many crates use the wasm target family to mean "standalone web build", "WASI", "no filesystem", or similar. Dropping "wasm" seems to be _completely harmless_.
 
 - `arch: "wasm64"`: this is even more surprising, but unfortunately also necessary. `arch="wasm32"` is often used to detect standalone web targets (for example, `reqwest` will replace the whole http client with a `fetch()` implementation). You would think that something would break because of this, but important info like the size of pointers is defined separately, and the actual target passed to the LLVM backend is still `wasm32`, so it all works out!
 
@@ -180,7 +180,7 @@ VIDEO of codex
 
 ## Using it
 
-Rust has one blessed build system, which makes it much easier to provide a good out-of-the-box developer experience compared to, say, C/C++.
+Rust has _one_ blessed build system, which makes it much easier to provide a good out-of-the-box developer experience compared to, say, C/C++.
 
 Rust also has an official way to obtain and manage multiple toolchains: **rustup**. We can't be distributed _through_ rustup yet, because we are not an officially supported target, but we can install into its directories, so you can switch a single project over to our toolchain in the usual way:
 
@@ -209,7 +209,7 @@ If you have a Rust project you'd like to see running in a browser tab — especi
 I explained why the existing Wasm targets were not suitable for us, but I glossed
 over `wasm32-wali-linux-musl`.
 
-The goals of [WALI (WebAssembly Linux Interface)](https://arxiv.org/abs/2312.03858) are actually very aligned with those of BrowserPod: compile Linux applications unmodified to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscall implementations are shared with CheerpX (https://webvm.io), which is a virtual machine for x86 Linux binaries.
+The goals of [WALI (WebAssembly Linux Interface)](https://arxiv.org/abs/2312.03858) are actually very aligned with those of BrowserPod: compile Linux applications _unmodified_ to Wasm. The main difference really is that BrowserPod targets the x86 version of the Linux syscalls, while WALI targets the x86-64 version. The choice for BrowserPod comes from the fact that its syscall implementations are shared with CheerpX (https://webvm.io), which is a virtual machine for x86 Linux binaries.
 
 CheerpX is working towards supporting x86-64 binaries, so in the future we could simply adopt WALI as our target (for both Rust and C/C++).
 
