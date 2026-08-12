@@ -22,7 +22,11 @@
 	let overlayVisible = $state(!autoStart);
 
 	function makeExecutor(tab) {
-		const opts = { cwd: "/home/user", echo: tab.echo ?? true };
+		const opts = {
+			cwd: "/home/user",
+			echo: tab.echo ?? true,
+			env: tab.env ?? [],
+		};
 		return (run) => run(tab.command ?? "bash", tab.args ?? [], opts);
 	}
 
