@@ -56,14 +56,19 @@ BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual m
 </FeatureBox>
 
 <FeatureBox title="Runtimes">
-	In-browser runtimes for Node.js, Rust and Python (preview), with even more
-	coming soon. Go and Ruby are on the roadmap.
+	Node.js, Rust and Python (preview) all run inside the Pod, with even more
+	coming soon. Node.js and Python run as full runtimes; Rust has no in-Pod
+	runtime, so Rust programs are built with the [BrowserPod Rust
+	toolchain](/docs/guides/installing-rust-toolchain) and the resulting Wasm
+	binaries [run directly in a Pod](/docs/guides/run-programs-in-a-pod).
 </FeatureBox>
 
 <FeatureBox title="Compatibility">
 	The Node.js runtime ships with npm and Vite built in, and supports most
-	frameworks, including React, Angular, Next.js and Express.js. Support for more
-	tooling across the Rust and Python runtimes is on the way.
+	frameworks, including React, Angular, Next.js and Express.js. Packages that
+	ship prebuilt native binaries need [a Wasm-compatible
+	alternative](/docs/guides/Working-around-native-npm-dependencies). Support for
+	more tooling across the Rust and Python workflows is on the way.
 </FeatureBox>
 
 <FeatureBox title="Filesystem">
@@ -82,9 +87,9 @@ BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual m
 </FeatureBox>
 
 <FeatureBox title="Tools">
-	Every Pod includes a wide range of developer tools, including bash/shell and
-	git, alongside runtime-specific tooling such as npm for Node.js and jj for
-	Rust.
+	Every Pod includes a wide range of developer tools, including bash/shell, git
+	and coreutils, alongside runtime-specific tooling such as npm for Node.js and
+	jj for Rust.
 </FeatureBox>
 
 <FeatureBox title="Databases">
