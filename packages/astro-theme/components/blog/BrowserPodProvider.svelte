@@ -3,10 +3,10 @@
 	import { BrowserPodEditorProvider } from "@leaningtech/svelte-browserpod-editor";
 	import "@leaningtech/svelte-browserpod-editor/theme.css";
 
-	let { ctxId, version, projectSource, apiKey } = $props();
+	let { ctxId, version, projectSource, apiKey, userImage } = $props();
 
 	// svelte-ignore state_referenced_locally
-	const pod = BrowserPod(version).boot({ apiKey });
+	const pod = BrowserPod(version).boot({ apiKey, userImage });
 </script>
 
 <BrowserPodEditorProvider {projectSource} {pod} {ctxId} />

@@ -1,0 +1,4 @@
+project/package.json
+project/package-lock.json
+project/index.js
+.config/git/config
