@@ -18,12 +18,12 @@ It is not the same as your machine's filesystem and has no direct access to loca
 
 ## Persistence and storage
 
-The filesystem **persists via IndexedDB** in the browser. Persistence is **scoped to the origin** (for example, `http://localhost:5173`). That means:
+The filesystem **persists in browser storage**, allocated through the **Origin Private File System (OPFS)** where the browser offers it, and **IndexedDB** as a fallback. Persistence is **scoped to the origin** (for example, `http://localhost:5173`). That means:
 
 - Data can persist across page reloads and sessions for the same origin.
 - A different origin starts with a separate filesystem state.
 
-The filesystem is still virtual; persistence is handled by the browser's IndexedDB store. Data stored in IndexedDB is not human-readable.
+The filesystem is still virtual; persistence is handled by the browser's own storage. Data stored there is not human-readable.
 
 ## Files, handles, and modes
 
@@ -43,7 +43,7 @@ Processes launched with `pod.run(...)` see the filesystem as their local disk. W
 ## Lifecycle and scope
 
 - The filesystem exists for the lifetime of the Pod instance.
-- Because it is persisted via IndexedDB, data can remain between sessions for the same origin.
+- Because it is persisted in browser storage, data can remain between sessions for the same origin.
 - Multiple processes in the same Pod share the same filesystem state.
 
 If you need to write files into the Pod or copy in a project, see the guide: [Write files to the pod](/docs/guides/write-files-to-pod).

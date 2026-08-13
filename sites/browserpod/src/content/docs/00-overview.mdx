@@ -31,7 +31,14 @@ import { DISCORD_URL } from "@/consts.ts";
 
 ## What is BrowserPod?
 
-BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual machine directly in a user's browser tab. Its in-browser Linux kernel supports a variety of sandboxed runtime environments, including Node.js, Python and Rust. BrowserPod also includes configurable networking for controlled ingress and egress.
+BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual machine directly in a user's browser tab. Its in-browser Linux kernel supports a variety of sandboxed runtime environments, including Node.js, Rust and Python, and [Portals](/docs/understanding-browserpod/portals) provide configurable networking for controlled ingress and egress.
+
+<div class="m-4 flex justify-center">
+	[Get started](/docs/getting-started/quickstart) · [Basic
+	Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference)
+	· [GitHub repository](https://github.com/leaningtech/browserpod-meta) ·
+	[Licensing](/docs/more/licensing)
+</div>
 
 ### Key features
 
@@ -43,71 +50,74 @@ BrowserPod is a WebAssembly-based API that creates a lightweight Linux virtual m
 </FeatureBox>
 
 <FeatureBox title="Sandbox">
-	BrowserPod runs directly in the browser, inheriting its security boundary,
-	with additional cross-origin isolation.
+	Code runs inside the browser's own security boundary, isolated from the host
+	operating system, with additional [cross-origin
+	isolation](/docs/understanding-browserpod/cross-origin-isolation).
 </FeatureBox>
 
 <FeatureBox title="Runtimes">
-	In-browser runtimes for Node.js, Rust and Python (currently in beta) with
-	runtimes for Ruby and Go planned for the second half of 2026.
+	In-browser runtimes for Node.js, Rust and Python (preview), with even more
+	coming soon. Go and Ruby are on the roadmap.
 </FeatureBox>
 
 <FeatureBox title="Compatibility">
 	The Node.js runtime ships with npm and Vite built in, and supports most
-	frameworks (including React, Angular, Next.js and Express.js; see Node.js
-	frameworks for more). Rust launches with jj, with more tools coming to the
-	Rust and Python runtimes soon.
+	frameworks, including React, Angular, Next.js and Express.js. Support for more
+	tooling across the Rust and Python runtimes is on the way.
 </FeatureBox>
 
 <FeatureBox title="Filesystem">
-	A block-based streaming virtual filesystem provides full POSIX compatibility.
-	Disk images are streamed on demand, and any file changes stay local to the
-	browser session using either IndexedDB or the Origin Private File System
-	(OPFS).
+	A block-based streaming [virtual
+	filesystem](/docs/understanding-browserpod/filesystem) provides full POSIX
+	compatibility. Disk images are streamed on demand, and file changes stay on
+	the device, in the Origin Private File System (OPFS) where the browser offers
+	it and IndexedDB as a fallback.
 </FeatureBox>
 
 <FeatureBox title="Portals">
-	Ports that open in BrowserPod can be shared via a temporary private URL. This
-	secure URL routes external traffic directly to the service running in the
-	browser, enabling live previews and collaboration without any backend servers.
+	Any port opened inside a Pod can be shared through a temporary, private URL.
+	[Portals](/docs/understanding-browserpod/portals) route external traffic
+	directly to the service running in the browser, enabling live previews and
+	collaboration without any backend servers.
 </FeatureBox>
 
 <FeatureBox title="Tools">
-	BrowserPod provides a wide range of developer tools, including bash/shell and
+	Every Pod includes a wide range of developer tools, including bash/shell and
 	git, alongside runtime-specific tooling such as npm for Node.js and jj for
 	Rust.
 </FeatureBox>
 
 <FeatureBox title="Databases">
-	SQLite3 support in BrowserPod is currently in beta.
+	SQLite3 support is currently in beta, so a Pod can keep relational data
+	locally without a database server.
 </FeatureBox>
 
 <FeatureBox title="Browser support">
-	Support for all major browsers, including Chrome (and Chromium browsers),
-	Firefox and Safari. For exceptionally complex or experimental use cases,
-	Chromium-based browsers are recommended for maximum compatibility.
+	All major browsers are supported, including Chrome, Edge, Firefox and Safari.
+	For exceptionally complex or experimental use cases, Chromium-based browsers
+	are recommended for maximum compatibility.
 </FeatureBox>
 
 <FeatureBox title="Multithreading">
-	Web workers enable true multi-threading and process isolation for complex,
+	Web Workers enable true multithreading and process isolation, running the
 	multi-process workloads that would normally require a full operating system.
 </FeatureBox>
 
 </div>
 
-## Uses
+## Use cases
 
 ### AI agents
 
-BrowserPod provides a sandboxed, client-side environment for applications that write code using AI. You can try Claude Code in our BrowserPod application, BrowserCode.
+BrowserPod provides a sandboxed, client-side environment for applications that write code using AI. [BrowserCode](https://browsercode.io/claude), our own BrowserPod application, runs Claude Code entirely in the browser.
 
 ### Demos
 
-BrowserPod can be used to share interactive demos over a private URL using its Portals feature.
+Interactive demos can be shared over a temporary, private URL using [Portals](/docs/understanding-browserpod/portals).
 
 ### Documentation
 
-BrowserPod can be used to make developer tool and API documentation interactive by providing a free execution environment for tutorials, examples and code snippets to run.
+Developer tool and API documentation can be made interactive, running tutorials, examples and code snippets in the reader's browser with no execution infrastructure to host.
 
 ### Moving server processes client-side
 
@@ -115,7 +125,7 @@ BrowserPod can run server-side processes directly in a user's browser, reducing 
 
 ### Web IDEs
 
-BrowserPod supports full web IDEs, with its sandbox working as a development environment that can run complete server workloads.
+Web IDEs can use a Pod as their development environment, running package installs, dev servers and build tools entirely on the client.
 
 ## Roadmap
 
