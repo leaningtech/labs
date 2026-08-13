@@ -56,7 +56,7 @@ In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpk
 
 BrowserPod is an in-browser code sandbox. Its goal is to make it possible to run _any_ Linux application in modern browsers by compiling the application to WebAssembly and providing the full Linux syscall interface.
 
-It provides an efficient, locally persistent virtual filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all purposes, it can be considered **an OS kernel for the Web platform**, implemented in WebAssembly.
+It provides an efficient, locally persistent virtual filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all purposes, it can be considered [an OS kernel for the Web platform](/blog/browserpod-deep-dive), implemented in WebAssembly.
 
 This set of features makes BrowserPod uniquely suited for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
 
