@@ -3,6 +3,20 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 3.0.1:
+
+- Fix a regression on the BinaryFile.read API
+
+## Version 3.0.0:
+
+- Official support for Rust
+
+## Version 2.19.0:
+
+- Support ptys
+- Multiple fixes to Linux syscalls
+- Multiple fixes to Ext2 support
+
 ## Version 2.18.0:
 
 - Support Vite 8
