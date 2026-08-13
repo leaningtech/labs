@@ -44,4 +44,4 @@ pod.run(..., {terminal,...});
 - **Cause**: Prebuilt binaries from npm packages are compiled for your host CPU architecture, not Wasm, so they don't run in the Pod.
 
 - **Solution**: Use Wasm alternatives and `package.json` overrides. See the
-  [native npm dependencies guide](/docs/guides/Working-around-native-npm-dependencies). If you're compiling your own program rather than relying on a prebuilt package, see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain) for how to target BrowserPod directly.
+  [native npm dependencies guide](/docs/guides/working-around-native-npm-dependencies). If you're compiling your own program rather than relying on a prebuilt package, see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain) for how to target BrowserPod directly.

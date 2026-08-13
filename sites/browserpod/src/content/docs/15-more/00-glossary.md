@@ -11,10 +11,6 @@ The server-side part of a system that runs outside the browser.
 
 The JavaScript API for controlling a Pod. Provides methods for booting Pods, running processes (`pod.run`), managing the virtual filesystem, and handling Portals. Used to execute code and manage the runtime environment entirely within the browser.
 
-## CheerpOS
-
-A runtime that provides Linux-like syscalls to Wasm programs. BrowserPod's Node.js build targets CheerpOS.
-
 ## COOP and COEP
 
 HTTP headers required for cross-origin isolation so the browser can enable `SharedArrayBuffer`.
