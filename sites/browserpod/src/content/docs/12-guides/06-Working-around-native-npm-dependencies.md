@@ -1,6 +1,6 @@
 ---
-title: Running native binaries
-description: Using packages with native components in BrowserPod
+title: Working around native npm dependencies
+description: Using npm packages with native components in BrowserPod
 ---
 
 BrowserPod runs Node.js in a Wasm environment. Packages that ship native binaries for specific CPU architectures will not run in this environment unless they provide a Wasm build.

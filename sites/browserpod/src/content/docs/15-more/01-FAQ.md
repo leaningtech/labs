@@ -21,7 +21,7 @@ BrowserPod uses `SharedArrayBuffer`, which requires cross-origin isolation. COOP
 
 ## Do native binaries work?
 
-Not directly. Use Wasm-compatible alternatives or `package.json` overrides when available.
+Prebuilt native binaries from npm packages don't run directly. use Wasm-compatible alternatives or `package.json` overrides when available (see the [native npm dependencies guide](/docs/guides/Working-around-native-npm-dependencies)). If you're building your own program with rust rather than depending on a prebuilt package, you can compile it directly to BrowserPod's Wasm target instead; see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
 
 ## Which browsers are supported?
 
@@ -39,7 +39,7 @@ BrowserPod runs on the user's device rather than provisioning cloud infrastructu
 - **Lower latency**: No cold starts or network round trips to remote servers.
 - **Better data locality**: User inputs and code execution stay in the browser by default, reducing your attack surface and compliance requirements.
 - **High fidelity**: BrowserPod provides a full Linux-compliant syscall interface with complete POSIX filesystem semantics, real process isolation, and true multi-threading. It runs complete, unmodified runtime engines (like the full Node.js) that behave identically to their native counterparts, rather than browser-specific reimplementations.
-- **Multi-language support**: Unlike solutions built for a single runtime, BrowserPod is designed from the ground up as a language-agnostic platform that can support Node.js, Python, Ruby, Go, Rust, and eventually full Linux containers.
+- **Multi-language support**: Unlike solutions built for a single runtime, BrowserPod is designed from the ground up as a language-agnostic platform. It already supports **Node.js** and **Rust**, with **Python**, **Ruby**, **Go**, and eventually full Linux containers.
 
 ## Is my data secure in BrowserPod?
 

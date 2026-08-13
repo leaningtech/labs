@@ -54,3 +54,15 @@ It provides input and displays output in the form of characters.
 
 The default terminal used by BrowserPod uses Xterm.js, a terminal emulator library
 for the browser. See the [Terminal reference](/docs/reference/Terminal) for the API.
+
+## System image
+
+An exact, compressed copy of an entire computer drive, including the operating system, system settings, programs, and filesystem. In the case of browserpod, it's the prebuild filesystem that every pod boots with, that already has all the things you need like !!! Check if correct and link boot
+
+## Target
+
+The platform a program is compiled to run on. A program built for one target won't run on another. A Windows program won't run on a Mac, and a BrowserPod binary won't run on your host machine.
+
+## Cross-compilation
+
+Compiling a program for a platform other than the one you're compiling on. For example, building a Windows .exe on a Mac, or building a BrowserPod wasm binary on a Linux machine.
