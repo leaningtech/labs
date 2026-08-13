@@ -7,7 +7,7 @@ Each [Pod](/docs/reference/BrowserPod) includes a virtual filesystem with POSIX-
 
 ## What the filesystem is
 
-The Pod filesystem is a virtual, Linux-like filesystem presented to the Node.js runtime running in the browser. It behaves like a typical POSIX filesystem:
+The Pod filesystem is a virtual, Linux-like filesystem presented to processes running inside the Pod, whether that's the Node.js runtime or a compiled binary started with `pod.run(...)`. It behaves like a typical POSIX filesystem:
 
 - Paths are absolute and use `/` as the separator.
 - Directories and files are distinct nodes.

@@ -9,13 +9,7 @@ This page maps common BrowserPod error messages to their likely causes and fixes
 
 - **Symptom**: errors when using `&&` or `|` inside `pod.run(...)`
 
-- **Causes**:
-
-      - `pod.run` is like `execve` in Linux or `child_process.spawn` in Node.
-
-  It does not support shell features like `||` or `&&` or builtins.
-
-      - Bash support is on the roadmap.
+- **Cause**: `pod.run` is like `execve` in Linux or `child_process.spawn` in Node. It does not support shell features like `||` or `&&` or builtins directly.
 
 - **Solution**: Write complex behavior as a JavaScript script, and execute that.
 
@@ -47,7 +41,7 @@ pod.run(..., {terminal,...});
 
 - **Symptom**: Install failures or runtime crashes for tools like esbuild or rollup
 
-- **Cause**: Native binaries do not run in the Wasm environment.
+- **Cause**: Prebuilt binaries from npm packages are compiled for your host CPU architecture, not Wasm, so they don't run in the Pod.
 
 - **Solution**: Use Wasm alternatives and `package.json` overrides. See the
-  [native binaries guide](/docs/guides/native-binaries).
+  [native npm dependencies guide](/docs/guides/Working-around-native-npm-dependencies). If you're compiling your own program rather than relying on a prebuilt package, see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain) for how to target BrowserPod directly.
