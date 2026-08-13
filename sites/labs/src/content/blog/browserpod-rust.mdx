@@ -21,7 +21,7 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	version="3.0.0"
 	projectSource={{ type: "local", path: "bp-rust" }}
 	userImage="wss://disks.browserpod.io/rust-post-demos-2.ext2"
-	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
+	apiKey="bp1_ff7fc043f1736f5a7463a786c8983c68c53a00e4bfa3b704275e6937446d3522"
 />
 
 Today we are releasing BrowserPod 3.0, with full support for running any Rust
@@ -68,16 +68,15 @@ Most dynamic languages, such as Python, JavaScript or Ruby run on top of interpr
 Nowadays, this is less and less true. Popular languages like Rust and Go are compiled ahead of time like C/C++, and have their own toolchains.
 
 Many build tools for Node.js in particular are being written (or rewritten) in Rust.
+For these reasons, Rust was always part of our roadmap for BrowserPod, but we decided to prioritize it over Python and Ruby thanks to a concrete use case from a member of our community on [Discord](https://discord.leaningtech.com).
 
-For these reasons, Rust was always part of our roadmap for BrowserPod, but we decided to prioritize it over Python and Ruby thanks to a concrete use case from a member of our [community](https://discord.leaningtech.com) on Discord: the upcoming [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6).
-
-The maintainers would like to have an interactive documentation page, featuring a real yarn build.
+One maintainer of the Yarn package manager expressed interested in building an interactive documentation page, featuring a real yarn build, and running on BrowserPod. But contrarily to previous versions, which were JavaScript, the upcoming [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6) release is built in Rust.
 
 This is one of the use cases where we think that BrowserPod can really shine, and so we started working on it right away!
 
 ## What does it mean to "support" Rust
 
-In previous releases of BrowserPod we focused on Node.js. Our users did not have to worry about how to compile for the BrowserPod target, since we provide a pre-compiled Node.js build ourselves, using our C++ compiler, [Cheerp](https://cheerp.io).
+In previous releases of BrowserPod we focused on Node.js. Our users did not have to worry about compiling for the BrowserPod target, since we provide a pre-compiled Node.js build ourselves.
 
 Rust programs behave very differently, since they need to be compiled ahead of time using the Rust compiler, `rustc`. As things stand today, the user needs to compile the program offline and add the resulting binary to the Pod. Interestingly, `rustc` itself is written in Rust, and we could, in principle, allow users to compile their Rust programs directly in the browser. We need a few additional features to achieve this objective, but it will happen in the near future.
 
@@ -135,10 +134,8 @@ in a .json file:
 And then pass the path of this file as the `--target` argument.
 
 A few unstable features are needed, so we have to use a nightly version of the compiler.
-
 We also need to support our target in the Rust standard library for our combination of arch and os.
 Since it's modeled after x86 Linux, we can mostly copy from that.
-
 And finally, we need to override a couple of foundational libraries: `libc` (we need to link to our own musl libc build) and `linux-raw-sys` (we just select the `libc` fallback).
 
 A number of options to `cargo` and `rustc` are needed to tie everything together (unstable feature flags, the sysroot with the C dependencies, the cargo overrides for `libc` and `linux-raw-sys`, ...); we provide wrapper scripts for them, so the user can compile with a simple `cargo build --target wasm32-browserpod-linux-musl`.
@@ -228,12 +225,6 @@ cargo build --target wasm32-browserpod-linux-musl
 rustup toolchain uninstall browserpod-3.0.0
 ```
 
-## Try it now
-
-Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
-
-If you have a Rust project you'd like to see running in a browser tab — especially one you expect to break — we'd genuinely like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).
-
 ## Future plans
 
 I explained why the existing Wasm targets were not suitable for us, but I glossed
@@ -250,3 +241,9 @@ This would have many benefits:
 - we could join forces in fixing the issues with third-party libraries upstream
 
 We are very excited about this direction and will say more about it in the future!
+
+## Try it now
+
+Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
+
+If you have a Rust project you'd like to see running in a browser tab (especially one you expect to break) we'd genuinely like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).

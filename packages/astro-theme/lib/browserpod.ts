@@ -16,9 +16,9 @@ export function BrowserPod(version: string) {
 			apiKey: string;
 			nodeVersion?: string;
 		}): Promise<BrowserPodInstance> {
-			return dynImport(
-				`https://rt.browserpod.io/${version}/browserpod.js`
-			).then((m: any) => m.BrowserPod.boot(opts));
+			return dynImport(`https://127.0.0.1:8443/bp/browserpod.js`).then(
+				(m: any) => m.BrowserPod.boot(opts)
+			);
 		},
 	};
 }
