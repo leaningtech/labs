@@ -57,7 +57,24 @@ for the browser. See the [Terminal reference](/docs/reference/Terminal) for the 
 
 ## System image
 
-An exact, compressed copy of an entire computer drive, including the operating system, system settings, programs, and filesystem. In the case of browserpod, it's the prebuild filesystem that every pod boots with, that already has all the things you need like !!! Check if correct and link boot
+The prebuilt filesystem that every Pod starts with when you
+[boot](/docs/reference/BrowserPod/boot) it. It contains the software
+available inside a Pod out of the box: `bash`, `git`, Node.js and npm, and
+a set of standard Linux command-line utilities.
+
+The system image is provided by BrowserPod and is the same for every Pod.
+Anything it does not include has to be copied or installed into the Pod
+yourself, or supplied through a [user image](#user-image).
+
+## User image
+
+An optional filesystem image of your own, passed to
+[boot](/docs/reference/BrowserPod/boot) as `userImage` and mounted on the
+Pod's `/home` directory. It does not replace the system image, it sits
+alongside it, so a Pod can start with your own files already in place
+instead of copying them in at runtime.
+
+User images are ext2 images that you host yourself and reference by URL.
 
 ## Target
 
