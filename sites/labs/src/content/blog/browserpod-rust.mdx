@@ -23,7 +23,6 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	userImage="wss://disks.browserpod.io/rust-post-demos-2.ext2"
 	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
 />
-
 Today we are releasing BrowserPod 3.0, with full support for running any Rust
 application in the browser, many fixes for Node.js, and initial Python support.
 
@@ -32,7 +31,13 @@ targets in terms of standard library features and third-party crate compatibilit
 Programs can access the filesystem, make network requests, run subprocesses, and interact
 with concurrently running applications. All of this **without changing a single line of code**!
 
-In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6) (written in Rust) installing an NPM project:
+In the video below, you can see [Yarn 6](https://v6.yarnpkg.com/playground) (written in Rust) running in Yarn's [official v6 Playground](https://v6.yarnpkg.com/playground):
+
+<video controls autoplay loop muted playsinline>
+	<source src="/blog/bp-rust/yarn-playground.mp4" type="video/mp4" />
+</video>
+
+You can test Yarn in the below Terminal, or try it out in the [official Yarn 6 Playground](https://v6.yarnpkg.com/playground).
 
 <BrowserPodTerminal
 	client:only="svelte"
@@ -249,3 +254,5 @@ We are very excited about this direction and will say more about it in the futur
 Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
 
 If you have a Rust project you'd like to see running in a browser tab (especially one you expect to break) we'd genuinely like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).
+
+- This blog was amended on 17 August 2026 to mention Yarn 6 embedding BrowserPod in its official playground.
