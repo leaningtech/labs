@@ -21,7 +21,7 @@ BrowserPod uses `SharedArrayBuffer`, which requires cross-origin isolation. COOP
 
 ## Do native binaries work?
 
-Prebuilt native binaries from npm packages don't run directly. use Wasm-compatible alternatives or `package.json` overrides when available (see the [native npm dependencies guide](/docs/guides/Working-around-native-npm-dependencies)). If you're building your own program with rust rather than depending on a prebuilt package, you can compile it directly to BrowserPod's Wasm target instead; see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
+Prebuilt native binaries from npm packages don't run directly. Use Wasm-compatible alternatives or `package.json` overrides when available (see the [native npm dependencies guide](/docs/guides/working-around-native-npm-dependencies)). If you're building your own program with Rust rather than depending on a prebuilt package, you can compile it directly to BrowserPod's Wasm target instead; see [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
 
 ## Which browsers are supported?
 
