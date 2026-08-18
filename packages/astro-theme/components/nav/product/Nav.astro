@@ -135,6 +135,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="Online Discord members"
 				>
+					<Icon name="ph:circle-fill" class="w-3 h-3 text-green-500" />
 					<DiscordPresenceCount client:only="svelte" />
 				</span>
 			</a>
@@ -152,7 +153,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					class="hidden md:flex items-center gap-1 text-bg-400 group-hover:text-white nav-icon-count"
 					title="GitHub stars"
 				>
-					<Icon name="ph:star-fill" class="w-4 h-4" />
+					<Icon name="ph:star-fill" class="w-4 h-4 text-yellow-500" />
 					<GitHubStarCount
 						client:only="svelte"
 						repo={`leaningtech/${product.repositoryName}`}
