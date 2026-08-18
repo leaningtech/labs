@@ -1,7 +1,7 @@
 ---
-title: "Beyond WASI: Running any Rust application in the browser with BrowserPod 3.0"
+title: "Beyond WASI: Running any Rust application in the browser"
 description: |
-  BrowserPod can now run real Rust programs in the browser, compiled from unmodified source with stock rustc and cargo.
+  A custom rustc target, wasm32-browserpod-linux-musl, that compiles unmodified Linux Rust programs to WebAssembly and runs them in a browser.
 authors:
   - yuri
 pubDate: "August 13 2026"
@@ -10,7 +10,6 @@ tags:
   - BrowserPod
 categories:
   - "Release"
-draft: true
 ---
 
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
@@ -24,14 +23,14 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	userImage="wss://disks.browserpod.io/rust-post-demos-2.ext2"
 	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
 />
-Today we are releasing [BrowserPod 3.0](https://browserpod.io/), with full
-support for running any Rust application in the browser, many fixes for Node.js,
-and initial Python support.
+Rust programs now compile for BrowserPod and run in a browser with no source
+changes. Getting there meant building our own rustc target,
+`wasm32-browserpod-linux-musl`, instead of going through WASI.
 
-Our Rust support goes beyond what can normally be achieved with the existing Wasm
-targets in terms of standard library features and third-party crate compatibility.
-Programs can access the filesystem, make network requests, run subprocesses, and interact
-with concurrently running applications. All of this **without changing a single line of code**!
+Compared with the existing Wasm targets, more of the standard library works and
+more third-party crates compile unchanged. Programs can use the filesystem, make
+network requests, spawn subprocesses, and talk to other processes running
+alongside them, without source changes.
 
 In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6) (written in Rust) installing an NPM project:
 
@@ -53,15 +52,13 @@ In the demo below, you can see the preview version of [Yarn 6](https://v6.yarnpk
 	]}
 />
 
-BrowserPod has now been integrated in Yarn's [official v6 Playground](https://v6.yarnpkg.com/playground), check it out! [^1]
+Yarn's [v6 Playground](https://v6.yarnpkg.com/playground) now runs on BrowserPod.[^1]
 
 ## What is BrowserPod
 
 BrowserPod is an in-browser code sandbox. Its goal is to make it possible to run _any_ Linux application in modern browsers by compiling the application to WebAssembly and providing the full Linux syscall interface.
 
-It provides an efficient, locally persistent virtual filesystem, outbound internet access for downloading packages or calling APIs, and inbound connections for exposing local development servers. BrowserPod supports real parallelism by running each thread or process on an independent Worker, while providing a consistent view of the system to all the running programs. For all practical purposes, it can be considered [an OS kernel for the Web platform](/blog/browserpod-deep-dive), implemented in WebAssembly.
-
-This set of features makes BrowserPod uniquely suited for safe in-browser agentic code execution, web-based IDEs and development environments, interactive docs and live demos, educational platforms, and other applications that benefit from sandboxed execution inside a web app.
+It gives programs a persistent virtual filesystem, outbound network access, and inbound connections for exposing a local development server. It also supports real parallelism, running each thread or process on its own Worker while keeping a consistent view of the system across all of them. For all practical purposes, it can be considered [an OS kernel for the Web platform](/blog/browserpod-deep-dive), implemented in WebAssembly.
 
 ## Why Rust now?
 
@@ -75,19 +72,19 @@ For these reasons, Rust was always part of our roadmap for BrowserPod, but we de
 
 One maintainer of the Yarn package manager expressed interest in building an interactive documentation page, featuring a real yarn build, and running on BrowserPod. But unlike previous versions, which were JavaScript, the upcoming [Yarn 6](https://v6.yarnpkg.com/concepts/yarn-6) release is built in Rust.
 
-This is one of the use cases where we think that BrowserPod can really shine, and so we started working on it right away! It took us a week to get to a first prototype and we could immediately see the potential, but there were more moving parts than we expected.
+This is one of the use cases where we think BrowserPod can really shine, so we started working on it right away. It took us a week to get to a first prototype and we could immediately see the potential, but there were more moving parts than we expected.
 
 ## What does it mean to "support" Rust?
 
 In previous releases of BrowserPod we focused on Node.js. Our users did not have to worry about compiling for the BrowserPod target, since we provide a pre-compiled Node.js build ourselves.
 
-Rust programs behave very differently, since they need to be compiled ahead of time using `rustc`. As things stand today, the user needs to compile the program offline and add the resulting binary to the Pod. Interestingly, `rustc` itself is written in Rust. In principle, we could allow users to compile their Rust programs directly in the browser. We need a few additional features to achieve this objective, but it will happen in the near future.
+Rust programs behave very differently, since they need to be compiled ahead of time using `rustc`. As things stand today, the user needs to compile the program offline and add the resulting binary to the Pod. `rustc` itself is written in Rust, so in principle we could let users compile their Rust programs directly in the browser. We need a few additional features to achieve this objective, but it will happen in the near future.
 
 Effectively _"supporting Rust"_ today boils down to providing a Rust toolchain that can produce Wasm binaries for the BrowserPod target.
 
 ## Existing Rust WebAssembly targets
 
-Fortunately, we could start from solid ground. Rust already supports a variety of Wasm targets, namely:
+We could start from solid ground. Rust already supports a variety of Wasm targets:
 
 - [`wasm32-unknown-unknown`](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html): This target is the most barebones and platform agnostic. By itself, it makes no assumptions about the environment it runs in, but crates like [`wasm-bindgen`](https://wasm-bindgen.github.io/wasm-bindgen/) and [`web-sys`](https://docs.rs/web-sys) make it possible to communicate with the JS and Web environment. This target makes sense if you are deliberately targeting the Web from the start. Many standard library features are missing.
 - [`wasm32-unknown-emscripten`](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-emscripten.html): This target is intended for standalone programs targeting the Web. It can directly interact with JavaScript code, and already wraps many Web APIs for ease of use. It also emulates some POSIX APIs to an extent, but many Rust standard library features are not implemented. In general, supporting this target requires extensive rewriting.
@@ -168,7 +165,7 @@ Of course, we would love to get rid of these hacks, but the proper solution requ
 The original goal was to run `yarn`, but since our approach was completely general, we found that
 a lot of programs _just work_.
 
-Here is a (non-exhaustive) list of popular programs that we tried, but we expect most CLI applications to just work:
+Here is a non-exhaustive list of popular programs I tried; I expect most CLI applications to just work:
 
 | Project                                                     | Rust SLOCs | Changes                          | Status    |
 | ----------------------------------------------------------- | ---------- | -------------------------------- | --------- |
@@ -245,12 +242,12 @@ This would have many benefits:
 - we could run the same Wasm binary both inside and outside of the browser
 - we could join forces in fixing the issues with third-party libraries upstream
 
-We are very excited about this direction and will say more about it in the future!
+We would rather maintain one target than two, so this is the direction we are pushing.
 
-## Try it now
+## Trying it
 
-Head to [console.browserpod.io](https://console.browserpod.io) to get an API key. You can find the documentation on [browserpod.io/docs](https://browserpod.io/docs).
+If you have a Rust project you'd like to see running in a browser tab, especially one you expect to break, we'd like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).
 
-If you have a Rust project you'd like to see running in a browser tab (especially one you expect to break) we'd genuinely like to hear about it. Come find us on [Discord](https://discord.leaningtech.com).
+The toolchain install is above; the rest of the documentation is at [browserpod.io/docs](https://browserpod.io/docs).
 
 [^1]: This blog was amended on 17 August 2026 to mention Yarn 6 embedding BrowserPod in its official playground.
