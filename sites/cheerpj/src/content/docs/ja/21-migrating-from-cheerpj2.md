@@ -97,4 +97,4 @@ CheerpJ 2.3ではClassLoaderのサポートが非常に限られていました�
 [`cheerpjInit`]: /docs/ja/reference/cheerpjInit
 [`cheerpjRunLibrary`]: /docs/ja/reference/cheerpjRunLibrary
 [`cheerpjRunMain`]: /docs/ja/reference/cheerpjRunMain
-[JNIガイド]: /docs/ja/guides/Implementing-Java-native-methods-in-JavaScript
+[JNIガイド]: /docs/ja/guides/implementing-java-native-methods-in-javascript

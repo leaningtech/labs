@@ -83,6 +83,6 @@ await cheerpjInit({ javaProperties: ["java.library.path=/app/"] });
 await cheerpjRunMain("Example", "/app/");
 ```
 
-[`CJ3Library`]: /docs/ja/reference/CJ3Library
+[`CJ3Library`]: /docs/ja/reference/cj3library
 [変換ルール]: /docs/ja/reference/cheerpjRunLibrary#conversion-rules
 [`System.loadLibrary(String libname)`]: https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-

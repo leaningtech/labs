@@ -2,3 +2,8 @@
 /blog        https://labs.leaningtech.com/blog        301
 /docs/showcase   https://labs.leaningtech.com/showcase    301
 /docs/community   https://labs.leaningtech.com/showcase    301
+
+# Reference/guide pages whose URL casing changed after fixing idToSlug to
+# lowercase PascalCase path components (packages/astro-theme/lib/nav.ts).
+/docs/explanation/Cheerp-PreExecuter /docs/explanation/cheerp-preexecuter 301
+/docs/guides/js-interop/Interoperability-with-web-frameworks-(Vue,-Reactor,-Angular) /docs/guides/js-interop/interoperability-with-web-frameworks-(vue,-reactor,-angular) 301

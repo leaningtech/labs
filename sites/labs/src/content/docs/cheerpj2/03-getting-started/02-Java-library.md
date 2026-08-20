@@ -30,5 +30,5 @@ await cjCall(obj, "myMethod");
 
 ## Further reading
 
-- [API reference](/cheerpj2/reference/Runtime-API#calling-java-from-js)
-- [AOT optimization](/cheerpj2/guides/AOT-optimization)
+- [API reference](/cheerpj2/reference/runtime-api#calling-java-from-js)
+- [AOT optimization](/cheerpj2/guides/aot-optimization)

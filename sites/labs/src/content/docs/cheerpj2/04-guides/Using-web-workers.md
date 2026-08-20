@@ -4,7 +4,7 @@ title: Using Web Workers
 
 ## Using the JavaScript Web Workers API
 
-CheerpJ supports running Java code in the background using Web Workers. To use this functionality you need to include the `loader.js` script as usual (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described in [JavaScript Web Worker API](/cheerpj2/reference/WebWorker-API#javascript-web-worker-api). You can use CheerpJ in the main thread at the same time.
+CheerpJ supports running Java code in the background using Web Workers. To use this functionality you need to include the `loader.js` script as usual (e.g. `https://cjrtnc.leaningtech.com/latest/loader.js`). The script exposes the APIs described in [JavaScript Web Worker API](/cheerpj2/reference/webworker-api#javascript-web-worker-api). You can use CheerpJ in the main thread at the same time.
 
 All code in a Worker runs in parallel and asynchronously with the main thread. All the methods below return standard JavaScript `Promise`s, and you can use `.then(...)`, `.catch(...)` and `async/await` with them.
 
@@ -32,7 +32,7 @@ Web Workers do not share any memory with the main threads, and all interactions 
 | JavaScript String                            | Supported in params, not return values      |
 | Any Java object                              | Not supported in params or return values    |
 
-Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](/cheerpj2/reference/Runtime-API#cjtypedarraytojava).
+Java arrays can either come from another Java method or they can be generated from a JS TypedArray using [cjTypedArrayToJava](/cheerpj2/reference/runtime-api#cjtypedarraytojava).
 
 It is possible to move Java arrays from the main thread and others `CheerpJWorker`s. Please note that Java arrays are not copied, but _transferred_ across contexts. This increases efficiency, but also means that the data is not available any more from the calling thread. If the data needs be preserved you must manually make a copy.
 
@@ -44,7 +44,7 @@ CheerpJ exposes a custom API to access this feature directly from Java code. The
 
 The Java version of the API is also extended to support `long`s in parameters and returned values. Currently they are converted to native JS values when passed to Workers, so their range is limited to +/-2^52.
 
-See the reference for [Java Web Worker API](/cheerpj2/reference/WebWorker-API#java-web-worker-api)
+See the reference for [Java Web Worker API](/cheerpj2/reference/webworker-api#java-web-worker-api)
 
 Example usage:
 
@@ -69,4 +69,4 @@ javac -cp cheerpj_install_dir/cheerpj-public.jar WW.java
 
 ## Further reading
 
-- [Web Worker APIs (reference)](/cheerpj2/reference/WebWorker-API)
+- [Web Worker APIs (reference)](/cheerpj2/reference/webworker-api)

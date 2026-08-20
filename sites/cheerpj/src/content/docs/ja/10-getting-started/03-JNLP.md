@@ -211,13 +211,13 @@ http-server -p 8080
 
 <div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
 	<a
-		href="/docs/ja/getting-started/Java-app"
+		href="/docs/ja/getting-started/java-app"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		アプリケーション
 	</a>
 	<a
-		href="/docs/ja/getting-started/Java-applet"
+		href="/docs/ja/getting-started/java-applet"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		アプレット

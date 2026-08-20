@@ -1,3 +1,37 @@
 /docs/:page.html /docs/:page 301
 /docs/:category/:page.html /docs/:category/:page 301
 /docs/:cat1/:cat2/:page.html /docs/:cat1/:cat2/:page 301
+
+# Bypass the client-side meta-refresh stub at /docs/ with a real 301, so
+# search engines don't see a thin duplicate page with no canonical signal.
+# Both forms are listed since _redirects matches source paths literally.
+/docs /docs/overview 301
+/docs/ /docs/overview 301
+
+# Old page paths with no current equivalent, matching redirects already
+# present on cheerp/cheerpj/cheerpx.
+/docs/showcase https://labs.leaningtech.com/showcase 301
+/docs/community https://labs.leaningtech.com/showcase 301
+
+# The 13-tutorials section was renamed to getting-started in the Feb 2026
+# docs migration (#353); these paths were previously live and indexed.
+/docs/tutorials /docs/getting-started 301
+/docs/tutorials/expressjs /docs/getting-started/expressjs 301
+
+# Reference/demo pages renamed from PascalCase to lowercase to match the
+# rest of the site's URL conventions (fixes indexing conflicts).
+/docs/reference/BrowserPod /docs/reference/browserpod 301
+/docs/reference/BrowserPod/* /docs/reference/browserpod/:splat 301
+/docs/reference/BinaryFile /docs/reference/binaryfile 301
+/docs/reference/BinaryFile/* /docs/reference/binaryfile/:splat 301
+/docs/reference/TextFile /docs/reference/textfile 301
+/docs/reference/TextFile/* /docs/reference/textfile/:splat 301
+/docs/reference/Terminal /docs/reference/terminal 301
+/docs/reference/Terminal/* /docs/reference/terminal/:splat 301
+/docs/reference/Process /docs/reference/process 301
+/docs/reference/Process/* /docs/reference/process/:splat 301
+/docs/more/FAQ /docs/more/faq 301
+/docs/demos/SaySomething /docs/demos/saysomething 301
+/docs/demos/SaySomething/* /docs/demos/saysomething/:splat 301
+/docs/demos/PackagePod /docs/demos/packagepod 301
+/docs/demos/PackagePod/* /docs/demos/packagepod/:splat 301

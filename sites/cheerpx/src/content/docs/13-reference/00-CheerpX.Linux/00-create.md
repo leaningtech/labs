@@ -22,7 +22,7 @@ namespace CheerpX {
 
 `CheerpX.Linux.create` returns a [Promise] which is resolved once the CheerpX Linux environment is fully initialized and ready to use. The resolved value is a `CheerpX.Linux` instance that provides methods for interacting with the CheerpX environment.
 
-Additionally, this instance allows you to register and monitor system events, such as CPU and disk activity. For more details, see the [`event callbacks`](/docs/reference/CheerpX.Linux/event%20callbacks) page.
+Additionally, this instance allows you to register and monitor system events, such as CPU and disk activity. For more details, see the [`event callbacks`](/docs/reference/cheerpx.linux/event%20callbacks) page.
 
 ## Options
 
@@ -68,7 +68,7 @@ const cx = await CheerpX.Linux.create({
 ```
 
 > [!note] Note
-> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-based persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
+> CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-based persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/file-system-support) guide.
 
 ### `networkInterface`
 
@@ -115,7 +115,7 @@ const cx = await CheerpX.Linux.create({
 controlUrl?: string;
 ```
 
-The `controlUrl` is an optional string used to specify the URL of a [self-hosted Headscale server](/docs/guides/Networking#self-hosting-headscale).
+The `controlUrl` is an optional string used to specify the URL of a [self-hosted Headscale server](/docs/guides/networking#self-hosting-headscale).
 
 Example:
 
@@ -194,6 +194,6 @@ function netmapUpdateCb(map) {
 }
 ```
 
-For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/Networking) guide.
+For more detailed information about how CheerpX handles networking, including the use of Tailscale and overcoming browser limitations, see the [Networking](/docs/guides/networking) guide.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

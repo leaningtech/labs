@@ -54,7 +54,7 @@ cheerpjInit({
 
 What is happening here?
 
-- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
+- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/docs/guides/networking#self-hosting-headscale).
 - `tailscaleAuthKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
 
 Example to prompt the user for manual login on a different tab:

@@ -92,7 +92,7 @@ const cx = await CheerpX.Linux.create({
 What is happening here?
 
 - [authKey]: A string containing an authentication key for registering pre-authenticated users or devices. You can generate one [here](https://login.tailscale.com/admin/settings/keys).
-- [controlUrl]: The URL of the control plane, which coordinates network access and identity verification. When [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale), you need to provide the control plane URL of your Headscale server. By default, the main Tailscale control plane is used.
+- [controlUrl]: The URL of the control plane, which coordinates network access and identity verification. When [self-hosting Tailscale](/docs/guides/networking#self-hosting-headscale), you need to provide the control plane URL of your Headscale server. By default, the main Tailscale control plane is used.
 - [stateUpdateCb]: A required callback function that monitors and reports changes in network status.
 - [netmapUpdateCb]: A required callback function that provides updates on the network map, enabling access to the list of devices for the network.
 
@@ -139,8 +139,8 @@ await cx.networkLogin();
 [Headscale](https://github.com/juanfont/headscale) is an open-source, self-hosted implementation of the Tailscale control server, and is supported by Webvm.
 You can find it's documentation [here](https://headscale.net/stable/)
 
-[controlUrl]: /docs/reference/CheerpX.Linux/create#controlurl
-[authKey]: /docs/reference/CheerpX.Linux/create#authkey
-[stateUpdateCb]: /docs/reference/CheerpX.Linux/create#stateupdatecb
-[netmapUpdateCb]: /docs/reference/CheerpX.Linux/create#netmapupdatecb
-[loginUrlCb]: /docs/reference/CheerpX.Linux/create#loginurlcb
+[controlUrl]: /docs/reference/cheerpx.linux/create#controlurl
+[authKey]: /docs/reference/cheerpx.linux/create#authkey
+[stateUpdateCb]: /docs/reference/cheerpx.linux/create#stateupdatecb
+[netmapUpdateCb]: /docs/reference/cheerpx.linux/create#netmapupdatecb
+[loginUrlCb]: /docs/reference/cheerpx.linux/create#loginurlcb

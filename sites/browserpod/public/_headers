@@ -1,13 +1,13 @@
-/docs/demos/PackagePod*
+/docs/demos/packagepod*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp
-/demos/PackagePod*
+/demos/packagepod*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp
 
-/docs/demos/SaySomething*
+/docs/demos/saysomething*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp
-/demos/SaySomething*
+/demos/saysomething*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: require-corp

@@ -44,6 +44,6 @@ const cx = await CheerpX.Linux.create({
 
 In this example, the `HttpBytesDevice` is created using `CheerpX.HttpBytesDevice.create()` and used as the base layer for an ext2 filesystem in the CheerpX system.
 
-To learn more about virtual filesystems in CheerpX, check out our [Files and filesystems](/docs/guides/File-System-support) guide.
+To learn more about virtual filesystems in CheerpX, check out our [Files and filesystems](/docs/guides/file-system-support) guide.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

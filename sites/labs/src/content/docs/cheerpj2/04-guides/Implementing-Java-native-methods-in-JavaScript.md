@@ -54,4 +54,4 @@ Once all have been implemented, native methods can be packaged with the compiled
 cheerpjfy.py --natives=native/ some.jar
 ```
 
-CheerpJ uses a compression scheme to encode mangled signatures. The `CHEERPJ_COMPRESS` macro is used automatically by the `cheerpjfy.py --stub-natives=` command, but can also be used manually. For more information about macros visit [this page](/cheerpj2/reference/Command-Line-Options#--stub-nativesnativespath).
+CheerpJ uses a compression scheme to encode mangled signatures. The `CHEERPJ_COMPRESS` macro is used automatically by the `cheerpjfy.py --stub-natives=` command, but can also be used manually. For more information about macros visit [this page](/cheerpj2/reference/command-line-options#--stub-nativesnativespath).

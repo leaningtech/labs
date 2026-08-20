@@ -2,3 +2,20 @@
 /blog        https://labs.leaningtech.com/blog        301
 /docs/showcase  https://labs.leaningtech.com/showcase  301
 /docs/community   https://labs.leaningtech.com/showcase    301
+
+# Reference/guide pages whose URL casing changed after fixing idToSlug to
+# lowercase PascalCase path components (packages/astro-theme/lib/nav.ts).
+/docs/guides/File-System-support /docs/guides/file-system-support 301
+/docs/guides/Networking /docs/guides/networking 301
+/docs/reference/CheerpX.Linux /docs/reference/cheerpx.linux 301
+/docs/reference/CheerpX.Linux/* /docs/reference/cheerpx.linux/:splat 301
+/docs/reference/CheerpX.DataDevice /docs/reference/cheerpx.datadevice 301
+/docs/reference/CheerpX.DataDevice/* /docs/reference/cheerpx.datadevice/:splat 301
+/docs/reference/CheerpX.httpBytesDevice /docs/reference/cheerpx.httpbytesdevice 301
+/docs/reference/CheerpX.httpBytesDevice/* /docs/reference/cheerpx.httpbytesdevice/:splat 301
+/docs/reference/CheerpX.IDBDevice /docs/reference/cheerpx.idbdevice 301
+/docs/reference/CheerpX.IDBDevice/* /docs/reference/cheerpx.idbdevice/:splat 301
+/docs/reference/CheerpX.OverlayDevice /docs/reference/cheerpx.overlaydevice 301
+/docs/reference/CheerpX.OverlayDevice/* /docs/reference/cheerpx.overlaydevice/:splat 301
+/docs/reference/CheerpX.WebDevice /docs/reference/cheerpx.webdevice 301
+/docs/reference/CheerpX.WebDevice/* /docs/reference/cheerpx.webdevice/:splat 301

@@ -90,7 +90,7 @@ After that, the CheerpX environment runs a `g++` command to compile the source c
 
 If you’d like to learn more about related topics, check out these guides:
 
-- [Files and filesystems](/docs/guides/File-System-support) – Managing files and storage in CheerpX.
+- [Files and filesystems](/docs/guides/file-system-support) – Managing files and storage in CheerpX.
 - [Custom disk images](/docs/guides/custom-images) – Creating and using custom disk images.
 - [Input and output](/docs/guides/input-output) – Handling data flow in your environment.
 

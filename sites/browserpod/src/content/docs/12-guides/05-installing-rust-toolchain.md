@@ -59,7 +59,7 @@ Now we can build our BrowserPod Wasm binary. Don't forget to use the `--target` 
 cargo build --release --target wasm32-browserpod-linux-musl
 ```
 
-That's it! You now have a binary that can run directly in a [Pod](/docs/reference/BrowserPod). You can find the binary in `target/wasm32-browserpod-linux-musl/release/<binary name>`.
+That's it! You now have a binary that can run directly in a [Pod](/docs/reference/browserpod). You can find the binary in `target/wasm32-browserpod-linux-musl/release/<binary name>`.
 To see how to run this binary inside a Pod, see our [Running programs in the Pod](/docs/guides/run-programs-in-a-pod) guide.
 
 ## Reducing binary size

@@ -55,7 +55,7 @@ cheerpjInit({
 
 ここで何が起こっているのか？
 
-- `tailscaleControlUrl` は、ユーザーの身元を確認するTailscaleコントロールプレーンのURL文字列です。このオプションは、[Tailscaleをセルフホスティングする](/docs/ja/guides/Networking#headscaleのセルフホスティング)場合にのみ渡します。
+- `tailscaleControlUrl` は、ユーザーの身元を確認するTailscaleコントロールプレーンのURL文字列です。このオプションは、[Tailscaleをセルフホスティングする](/docs/ja/guides/networking#headscaleのセルフホスティング)場合にのみ渡します。
 - `tailscaleAuthKey`は、事前認証済みの新規ユーザー/デバイスを登録する際に使用する認証キーの文字列です。認証キーは[こちら](https://login.tailscale.com/admin/settings/keys)で作成できます。
 
 別タブでユーザーに手動ログインを指示する例:

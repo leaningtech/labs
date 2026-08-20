@@ -29,7 +29,7 @@ const terminal = await pod.createDefaultTerminal(
 
 (_If using one of the templates, you would add this to `src/main.js`_)
 
-_If you'd like to customize such as changing the size or invoking a specific callback, you can call [createCustomTerminal](/docs/reference/BrowserPod/createCustomTerminal) instead._
+_If you'd like to customize such as changing the size or invoking a specific callback, you can call [createCustomTerminal](/docs/reference/browserpod/createCustomTerminal) instead._
 
 That's it! You now have a terminal on your page. On its own it's just a display; the next section covers how to run programs in it.
 
@@ -48,7 +48,7 @@ await pod.run("bash", [], { terminal });
 
 ### Run a program
 
-If you prefer to run programs/terminal commands without manually inputting them, you can use [pod.run](/docs/reference/BrowserPod/run).
+If you prefer to run programs/terminal commands without manually inputting them, you can use [pod.run](/docs/reference/browserpod/run).
 
 You pass pod.run the program, its arguments, and an options object that contains:
 

@@ -36,7 +36,7 @@ CheerpX is a unique WebAssembly-based virtualization engine for x86 binary code.
 
 The second main component of WebVM is its streaming disk backend. One of the key benchmarks of success of WebVM is to be able to boot full, unmodified Linux distributions, _without requiring the preloading of the full file system_. This implies the ability to support 1GB+ root filesystems and to dynamically load disk blocks with low-latency, a critical concern for the overall performance of the VM.
 
-Finally, the picture is completed by the private networking layer, implemented [via Tailscale](https://cheerpx.io/docs/guides/Networking) and Xorg support using the KMS Linux API. More on these in later sections.
+Finally, the picture is completed by the private networking layer, implemented [via Tailscale](https://cheerpx.io/docs/guides/networking) and Xorg support using the KMS Linux API. More on these in later sections.
 
 ## CheerpX: secure x86 virtualization in WebAssembly
 

@@ -47,7 +47,7 @@ client::HTMLElement* newElem =  client::document.createElement(“div”);
 ```
 
 - **The \[\[cheerp::jsexport\]\] attribute:** With this feature it is possible to use C++ functions and complete classes directly from manually written JavaScript. The compiler will enforce a set of rules on the exposed interfaces to guarantee that it’s safe to do so. We have [written at length](https://leaningtech.com/jsexport-c-in-the-browser-made-easy/) about this feature previously.
-- **Advanced optimizations to reduce code size**: Cheerp heavily takes advantage of whole program optimization techniques. We have developed advanced optimization such as [PreExecuter](/cheerp/explanation/Cheerp-PreExecuter)  (convert global C++ constructors to constants), [PartialExecuter](https://medium.com/leaningtech/partialexecuter-reducing-webassembly-size-by-exploring-all-executions-in-llvm-f1ee295e8ba) (remove code that can be proven to never be run based on partial knowledge of function parameters), and a sophisticated devirtualizer. All of these contribute to a significant reduction in code size.
+- **Advanced optimizations to reduce code size**: Cheerp heavily takes advantage of whole program optimization techniques. We have developed advanced optimization such as [PreExecuter](/cheerp/explanation/cheerp-preexecuter)  (convert global C++ constructors to constants), [PartialExecuter](https://medium.com/leaningtech/partialexecuter-reducing-webassembly-size-by-exploring-all-executions-in-llvm-f1ee295e8ba) (remove code that can be proven to never be run based on partial knowledge of function parameters), and a sophisticated devirtualizer. All of these contribute to a significant reduction in code size.
 
 ## How does Cheerp compare to Emscripten?
 

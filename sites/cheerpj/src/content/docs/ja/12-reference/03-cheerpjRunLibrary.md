@@ -57,5 +57,5 @@ await example.hello(); // Example says hello!
 ```
 
 [Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[仮想ファイルシステム]: /docs/ja/guides/File-System-support
-[CJ3Library]: /docs/ja/reference/CJ3Library
+[仮想ファイルシステム]: /docs/ja/guides/file-system-support
+[CJ3Library]: /docs/ja/reference/cj3library

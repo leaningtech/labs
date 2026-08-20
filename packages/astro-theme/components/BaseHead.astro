@@ -36,7 +36,7 @@ const browserpodCanonicals: Record<string, string> = {
 const normalisedPath = Astro.url.pathname.replace(/(?:\.html|\/)$/, "");
 const canonicalURL = browserpodCanonicals[normalisedPath]
 	? new URL(browserpodCanonicals[normalisedPath])
-	: new URL(Astro.url.pathname, canonicalSite);
+	: new URL(normalisedPath || "/", canonicalSite);
 
 const product = productFromUrl(canonicalURL);
 const favicon = product?.favicon ?? companyFavicon.src;

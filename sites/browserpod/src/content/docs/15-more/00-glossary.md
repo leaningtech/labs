@@ -25,7 +25,7 @@ A filesystem created and managed in software rather than on the user’s real di
 
 ## Pod
 
-A running [BrowserPod](/docs/reference/BrowserPod) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by default. They exist only while the browser tab is active. Though if preferred you can enable file persistence across sessions by passing `storageKey` when [`booting`](/docs/reference/BrowserPod/boot) the Pod.
+A running [BrowserPod](/docs/reference/browserpod) instance. Each Pod provides a sandboxed runtime environment with its own virtual filesystem, process space, and network layer. Pods run entirely in the browser and are ephemeral by default. They exist only while the browser tab is active. Though if preferred you can enable file persistence across sessions by passing `storageKey` when [`booting`](/docs/reference/browserpod/boot) the Pod.
 
 ## Portal
 
@@ -49,12 +49,12 @@ A virtual device used to communicate with processes spawned in a Pod.
 It provides input and displays output in the form of characters.
 
 The default terminal used by BrowserPod uses Xterm.js, a terminal emulator library
-for the browser. See the [Terminal reference](/docs/reference/Terminal) for the API.
+for the browser. See the [Terminal reference](/docs/reference/terminal) for the API.
 
 ## System image
 
 The prebuilt filesystem that every Pod starts with when you
-[boot](/docs/reference/BrowserPod/boot) it. It contains the software
+[boot](/docs/reference/browserpod/boot) it. It contains the software
 available inside a Pod out of the box: `bash`, `git`, Node.js and npm, and
 a set of standard Linux command-line utilities.
 
@@ -65,7 +65,7 @@ yourself, or supplied through a [user image](#user-image).
 ## User image
 
 An optional filesystem image of your own, passed to
-[boot](/docs/reference/BrowserPod/boot) as `userImage` and mounted on the
+[boot](/docs/reference/browserpod/boot) as `userImage` and mounted on the
 Pod's `/home` directory. It does not replace the system image, it sits
 alongside it, so a Pod can start with your own files already in place
 instead of copying them in at runtime.

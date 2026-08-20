@@ -70,7 +70,7 @@ CheerpJ's main capabilities are:
 - **Full support for reflection and classloaders**, including custom ones designed to support plugins or encrypted JARs.
 - **Powerful interoperability with JavaScript**
   - [Library mode](/cheerpj3/guides/library-mode): A new solution to integrate Java libraries into Web applications using a clean `async`/`await` interface
-  - [JavaScript natives](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript), where you can implement Java `native` methods (JNI) directly in JavaScript with a convenient interface. This feature can also be used to interact with JavaScript and DOM APIs from Java.
+  - [JavaScript natives](/cheerpj3/guides/implementing-java-native-methods-in-javascript), where you can implement Java `native` methods (JNI) directly in JavaScript with a convenient interface. This feature can also be used to interact with JavaScript and DOM APIs from Java.
 
 In short, CheerpJ 3.0 can run most Java applications and libraries in the browser without any additional work or changes to the code.
 
@@ -91,8 +91,8 @@ It is a sophisticated tool with many moving parts, the main ones being:
 - A WebAssembly **JVM and Just-In-Time compiler** for Java bytecode. The code contained in class files is dynamically compiled and optimized. The JIT compiler supports advanced optimizations such as inlining and dynamic devirtualization.
 - A complete and unmodified build of **OpenJDK.**
 - **A Virtualized system layer, including:**
-  - [Virtualized file systems](/cheerpj3/guides/File-System-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data via `/str/`.
-  - [Virtualized networking](/cheerpj3/guides/Networking) support via Tailscale. Both server and client applications are supported.
+  - [Virtualized file systems](/cheerpj3/guides/file-system-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data via `/str/`.
+  - [Virtualized networking](/cheerpj3/guides/networking) support via Tailscale. Both server and client applications are supported.
 
 Readers familiar with the previous CheerpJ 2.3 architecture will notice the lack of AOT compilation, which has been removed in CheerpJ 3.0. The performance impact of this change has been vastly positive in all real-world applications tested, with a particular benefit in the reduction of startup time.
 
@@ -115,7 +115,7 @@ We call this project “**Browsercraft**.”
 
 - **Unmodified JAR file**: CheerpJ can run the JAR file exactly as provided by Mojang. No decompilation or modification is required. As a matter of fact the JAR is downloaded from Mojang servers by the end-user's browser (via `fetch`) and then stored locally in the `/files/` filesystem. We don’t host or redistribute the JAR in any way.
 - **Persistent data**: Minecraft will generate a “World” which is saved on the persistent local filesystem. If you reload the tab you will be able to continue playing from the same world.
-- **JavaScript natives**: The main difficulties in running Minecraft do not come from its Java bytecode, but from the native code shipped as part of the Open Source LWJGL library. For this demo we have implemented a subset of the LWJGL functionalities on top of WebGL using the [JavaScript natives](/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript) feature.
+- **JavaScript natives**: The main difficulties in running Minecraft do not come from its Java bytecode, but from the native code shipped as part of the Open Source LWJGL library. For this demo we have implemented a subset of the LWJGL functionalities on top of WebGL using the [JavaScript natives](/cheerpj3/guides/implementing-java-native-methods-in-javascript) feature.
 - **Networking**: Although not shown in the current demo, thanks to Tailscale networking it will be possible for multiple users to join the same minecraft world from their browser tab.
 
 CheerpJ can run Minecraft code without any issues, but further work will be required to fully support LWJGL and achieve correct rendering. The implementation is sufficient to get in-game, but it’s not complete and a keen eye will notice that the rendering is not currently accurate. We welcome user contributions to improve the LWJGL implementation to run Minecraft in the browser in all its glory. [The source code is available on GitHub](https://github.com/leaningtech/browsercraft).

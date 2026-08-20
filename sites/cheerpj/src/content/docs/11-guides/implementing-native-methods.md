@@ -165,7 +165,7 @@ This functionality is useful when you need to call back into the Java class in r
 Parameters and return values of JNI calls are automatically converted between JavaScript and Java types based on [`conversion rules`].
 
 [`natives`]: /docs/reference/cheerpjInit#natives
-[`CJ3Library`]: /docs/reference/CJ3Library
-[`conversion rules`]: /docs/reference/CJ3Library#conversion-rules
+[`CJ3Library`]: /docs/reference/cj3library
+[`conversion rules`]: /docs/reference/cj3library#conversion-rules
 [`cheerpjInit`]: /docs/reference/cheerpjInit
 [`Java and JavaScript Interoperability`]: /docs/tutorials/interoperability-tutorial

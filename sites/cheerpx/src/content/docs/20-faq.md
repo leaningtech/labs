@@ -22,7 +22,7 @@ Yes, `WebDevice` can handle third-party origins as paths, but it's important to 
 
 ## Why can't I execute files directly from a `DataDevice`?
 
-[`DataDevice`](/docs/reference/CheerpX.DataDevice) in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can read data from it, but you cannot execute files directly from it. To execute files that are in a [`DataDevice`](/docs/reference/CheerpX.DataDevice), you need to first copy the files to a filesystem with complete support for mode bits, such as [`IDBDevice`](/docs/reference/CheerpX.IDBDevice) (IndexedDB) or Ext2.
+[`DataDevice`](/docs/reference/cheerpx.datadevice) in CheerpX does not have full support for Linux mode bits, and in particular it lacks the _**executable**_ bit. This means you can read data from it, but you cannot execute files directly from it. To execute files that are in a [`DataDevice`](/docs/reference/cheerpx.datadevice), you need to first copy the files to a filesystem with complete support for mode bits, such as [`IDBDevice`](/docs/reference/cheerpx.idbdevice) (IndexedDB) or Ext2.
 
 ## Why can't CheerpX do what v86 does in terms of disk access and networking?
 
@@ -79,7 +79,7 @@ You **do** need to create an exit node if you want your WebVM to access the publ
 
 You do **not** need to create an exit node for WebVM if your goal is to access other devices within your Tailscale network, including other WebVM instances and your local development machine. Tailscale takes care of routing and connecting your WebVM to other devices on the Tailscale network seamlessly.
 
-For detailed instructions on WebVM networking and setting up an exit node, check out our [Networking Guide](/docs/guides/Networking#exit-node).
+For detailed instructions on WebVM networking and setting up an exit node, check out our [Networking Guide](/docs/guides/networking#exit-node).
 
 [server setup guide]: /docs/guides/nginx
 [SharedArrayBuffer]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer

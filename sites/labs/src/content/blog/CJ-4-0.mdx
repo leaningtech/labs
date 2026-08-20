@@ -42,7 +42,7 @@ CheerpJ 4.0 is the first version to support both Java 8 and Java 11, an essentia
 
 In addition to Java 11 support, CheerpJ 4.0 also improves mobile usability, introduces support for WebAssembly JNI modules, and brings significant performance improvements.
 
-In combination with [Library Mode](https://cheerpj.com/docs/getting-started/Java-library), which provides very advanced JavaScript-Java interoperability, we believe CheerpJ is now closer than ever to our vision of making Java a first-class programming language for the Web.
+In combination with [Library Mode](https://cheerpj.com/docs/getting-started/java-library), which provides very advanced JavaScript-Java interoperability, we believe CheerpJ is now closer than ever to our vision of making Java a first-class programming language for the Web.
 
 ## What can CheerpJ do?
 
@@ -115,7 +115,7 @@ Both AWT- and Swing-based applications are supported, including third-party Swin
 
 CheerpJ 4.0 introduces an unprecedented level of support for mobile devices, enabling for the first time to make complex Java applications available to users across phones and, especially, tablets.
 
-Running a Java application is straightforward, requiring just three calls to the CheerpJ APIs (see our [Getting Started](https://cheerpj.com/docs/getting-started/Java-app) guide for a fully worked example).
+Running a Java application is straightforward, requiring just three calls to the CheerpJ APIs (see our [Getting Started](https://cheerpj.com/docs/getting-started/java-app) guide for a fully worked example).
 
 ```js
 await cheerpjInit();
@@ -175,7 +175,7 @@ _Library Mode_ is a unique feature, which makes it possible to build a new gener
 
 In more enterprise scenarios, this approach can be used to progressively migrate large-scale Java applications to native Web apps, by rewriting the UI while keeping all or part of the original business logic in Java. This can provide significant reduction of risk, costs, and timeline to large modernisation projects.
 
-Check out our dedicated documentation for more information on [Library Mode](https://cheerpj.com/docs/getting-started/Java-library)
+Check out our dedicated documentation for more information on [Library Mode](https://cheerpj.com/docs/getting-started/java-library)
 
 ### Running legacy Java Applets and Java Web Start
 
@@ -197,8 +197,8 @@ It is a sophisticated tool with many moving parts, the main ones being:
 - A WebAssembly **JVM and Just-In-Time compiler for** Java bytecode. The code contained in class files is dynamically compiled and optimized. The JIT compiler supports advanced optimizations such as inlining and dynamic devirtualization.
 - A complete and unmodified build of **OpenJDK**.
 - **A virtualized system layer, including:**
-  - [Virtualized file systems](https://cheerpj.com/docs/guides/File-System-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data.
-  - [Virtualized networking](https://cheerpj.com/docs/guides/Networking) support via Tailscale. Both server and client applications are supported.
+  - [Virtualized file systems](https://cheerpj.com/docs/guides/file-system-support), providing access to assets over HTTP, local persistent R/W storage via IndexedDB and interaction with JavaScript data.
+  - [Virtualized networking](https://cheerpj.com/docs/guides/networking) support via Tailscale. Both server and client applications are supported.
   - Seamless clipboard integration using the [Clipboard API](https://cheerpj.com/docs/reference/cheerpjInit#clipboardmode).
   - A window manager, to support multiple Java windows and multiple Java applications in the same Web page.
 

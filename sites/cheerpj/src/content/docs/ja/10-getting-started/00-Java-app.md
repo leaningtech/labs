@@ -100,4 +100,4 @@ npx http-server -p 8080
 [`cheerpjCreateDisplay`]: /docs/ja/reference/cheerpjCreateDisplay
 [`cheerpjRunJar`]: /docs/ja/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/ja/reference/cheerpjRunMain
-[仮想ファイルシステム]: /docs/ja/guides/File-System-support
+[仮想ファイルシステム]: /docs/ja/guides/file-system-support

@@ -8,7 +8,7 @@ This JAR provides declarations for all of the relevant Java interfaces and class
 
 The `com.leaningtech.client.Global` is a representation of the global namespace in the browser context. It only contains static methods and fields.
 
-Usage examples can be found at [DOM and JavaScript interoperability](/cheerpj2/guides/DOM-and-JavaScript-interoperability).
+Usage examples can be found at [DOM and JavaScript interoperability](/cheerpj2/guides/dom-and-javascript-interoperability).
 
 ## Global.JSString
 
@@ -38,4 +38,4 @@ Calls an arbitrary JavaScript function.
 
 ## Further reading
 
-- [DOM and JavaScript interoperability](/cheerpj2/guides/DOM-and-JavaScript-interoperability)
+- [DOM and JavaScript interoperability](/cheerpj2/guides/dom-and-javascript-interoperability)
