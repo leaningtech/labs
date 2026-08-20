@@ -47,7 +47,7 @@ console.log(outputBlob);
 > To see your stored files, open Developer Tools, go to the Application tab, and check Storage > IndexedDB. Here, you can browse and inspect your files easily! <br>
 > Want to learn more? Check out these related guides: <br>
 >
-> - [Files and filesystems](/docs/guides/File-System-support) <br>
+> - [Files and filesystems](/docs/guides/file-system-support) <br>
 > - [Input and output](/docs/guides/input-output)
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

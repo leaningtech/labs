@@ -157,7 +157,7 @@ The expected response is the complete textual output of the command, as written 
 }
 ```
 
-When designing the integration with WebVM our objective was not only to let Claude run commands, which would have been straightforward thanks to [CheerpX APIs](https://cheerpx.io/docs/reference/CheerpX.Linux/run), but also to let the user properly collaborate with the model as part of the same terminal session. We chose to inject commands in the terminal as if they were user input, using a `# End of AI command` sentinel to mark the end of the tool output for both the model _and_ the user.
+When designing the integration with WebVM our objective was not only to let Claude run commands, which would have been straightforward thanks to [CheerpX APIs](https://cheerpx.io/docs/reference/cheerpx.linux/run), but also to let the user properly collaborate with the model as part of the same terminal session. We chose to inject commands in the terminal as if they were user input, using a `# End of AI command` sentinel to mark the end of the tool output for both the model _and_ the user.
 
 As a demonstration of the capabilities of this solution, we had Claude solve a CTF for us, with the challenge path and short instructions as the only input. The results are quite impressive. Claude will first do basic reverse-engineering of the binary using `strings` and `objdump`. After looking at the assembly code, it forges an input string that triggers the necessary buffer overflow. It is quite impressive to witness, with the caveat that similar scenarios might be in the training set.
 

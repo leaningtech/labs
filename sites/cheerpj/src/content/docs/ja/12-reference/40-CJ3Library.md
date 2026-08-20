@@ -9,7 +9,7 @@ language: ja
 インスタンスは以下の方法で取得できます:
 
 - [`cheerpjRunLibrary`]を呼び出して、JARからライブラリをロードする。
-- [ネイティブメソッド](/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript)を実装する。 - 最初のパラメーターはCJ3Libraryインスタンスです。
+- [ネイティブメソッド](/docs/ja/guides/implementing-java-native-methods-in-javascript)を実装する。 - 最初のパラメーターはCJ3Libraryインスタンスです。
 
 ## 使用方法
 

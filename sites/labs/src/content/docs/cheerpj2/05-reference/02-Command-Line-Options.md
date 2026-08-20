@@ -8,7 +8,7 @@ The basic usage of the `cheerpjfy.py` build script is:
 ./cheerpjfy.py application.jar
 ```
 
-For more information about this script, see [AOT optimization](/cheerpj2/guides/AOT-optimization).
+For more information about this script, see [AOT optimization](/cheerpj2/guides/aot-optimization).
 
 ### `--help`
 

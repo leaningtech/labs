@@ -416,7 +416,7 @@ cheerpjInit({
 });
 ```
 
-Learn more about the `execCallback` option in our [intercept external commands guide](/docs/guides/Intercept-external-commands).
+Learn more about the `execCallback` option in our [intercept external commands guide](/docs/guides/intercept-external-commands).
 
 ### `enableDebug`
 

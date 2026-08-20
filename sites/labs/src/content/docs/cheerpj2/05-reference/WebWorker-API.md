@@ -15,7 +15,7 @@ w.cheerpjInit().then(function (e) {
 });
 ```
 
-For more information visit the [Using Web Workers](/cheerpj2/guides/Using-web-workers) guide.
+For more information visit the [Using Web Workers](/cheerpj2/guides/using-web-workers) guide.
 
 ### CheerpJWorker.cheerpjRunMain
 
@@ -120,4 +120,4 @@ Runs the given resolved method handle in the Web Worker context, this method is 
 
 ## Further reading
 
-- [Using Web Workers (guide)](/cheerpj2/guides/Using-web-workers)
+- [Using Web Workers (guide)](/cheerpj2/guides/using-web-workers)

@@ -137,7 +137,7 @@ cx.setConsole(document.getElementById("console"));
 await cx.run("/usr/bin/python3", []);
 ```
 
-That’s it. The user will now be able to try Python code in the browser. The basic _builtin console_ is sufficient for quick experimentation, but you should consider using the full-fledged [xterm.js](https://xtermjs.org/) terminal emulator for better results. You can do so using the [`cx.setCustomConsole` API](/docs/reference/CheerpX.Linux/setCustomConsole)
+That’s it. The user will now be able to try Python code in the browser. The basic _builtin console_ is sufficient for quick experimentation, but you should consider using the full-fledged [xterm.js](https://xtermjs.org/) terminal emulator for better results. You can do so using the [`cx.setCustomConsole` API](/docs/reference/cheerpx.linux/setCustomConsole)
 
 ![Python in the browser](./images/cx10_python.png)
 
@@ -187,7 +187,7 @@ The output of the _hello world_ program will appear in the console when the bina
 
 ## Use case: Hosting a HTTP server in the browser
 
-CheerpX supports networking by integrating with [Tailscale](https://cheerpx.io/docs/guides/Networking), a private VPN service. In production you should let the user login to Tailscale interactively, but during development it might be convenient to use _Auth keys_ to connect to a testing Tailscale account.
+CheerpX supports networking by integrating with [Tailscale](https://cheerpx.io/docs/guides/networking), a private VPN service. In production you should let the user login to Tailscale interactively, but during development it might be convenient to use _Auth keys_ to connect to a testing Tailscale account.
 
 First of all [generate an auth key](https://login.tailscale.com/admin/settings/keys), and pass it to CheerpX while initializing the environment.
 

@@ -18,4 +18,4 @@ NASA has multiple educational and interactive applications that serve as a guide
 
 ## Try it yourself
 
-If you are interested in how CheerpJ can help your applets run again in the browser, please take a look at our [applet tutorial](https://cheerpj.com/docs/getting-started/Java-applet).
+If you are interested in how CheerpJ can help your applets run again in the browser, please take a look at our [applet tutorial](https://cheerpj.com/docs/getting-started/java-applet).

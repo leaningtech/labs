@@ -5,7 +5,7 @@ description: List resources that were loaded
 
 Returns a JavaScript string representing the data that should be passed to [preloadResources]. Once parsed, it is an object containing the filenames that have been loaded from the runtime up to the time this function is called.
 
-See [startup time optimization](/docs/guides/Startup-time-optimization) for more information.
+See [startup time optimization](/docs/guides/startup-time-optimization) for more information.
 
 ```ts
 function cjGetRuntimeResources(): string;

@@ -373,7 +373,7 @@ Alternatively resolvedMethod can also be used _directly as a function_, for exam
 resolvedMethod(arg1, arg2, arg3);
 ```
 
-Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/reference/WebWorker-API)
+Please note that this convenient form can unfortunately only be used on the main thread, not on Workers. For more information see [WebWorker API](/cheerpj2/reference/webworker-api)
 
 ## Data conversion
 
@@ -444,4 +444,4 @@ cheerpjAddStringFile("/str/fileName.txt", "Some text in a JS String");
 
 ### cjGetProguardConfiguration
 
-To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`). See [enableProguardTrace](/cheerpj2/reference/Runtime-API#enableproguardtrace).
+To be used on the browser console to download a ProGuard configuration file (`cheerpj.pro`). See [enableProguardTrace](/cheerpj2/reference/runtime-api#enableproguardtrace).

@@ -6,7 +6,7 @@ language: ja
 
 この関数は、[preloadResources]に渡すデータを表すJavaScript文字列を返します。この関数が呼び出された時点までにランタイムから読み込まれたファイル名を含むオブジェクトになります。
 
-詳細については、[起動時間の最適化](/docs/ja/guides/Startup-time-optimization) を参照してください。
+詳細については、[起動時間の最適化](/docs/ja/guides/startup-time-optimization) を参照してください。
 
 ```ts
 function cjGetRuntimeResources(): string;

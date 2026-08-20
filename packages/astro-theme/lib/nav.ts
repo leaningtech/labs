@@ -264,8 +264,6 @@ export function idToTitle(id: string): string {
 	return [upperFirstWord, ...words].join(" ");
 }
 
-const slugComponentOverrides = new Map([["CONTRIBUTING", "contributing"]]);
-
 function idToSlug(id: string): string {
 	return id
 		.replace(/\.mdx?$/, "")
@@ -273,7 +271,11 @@ function idToSlug(id: string): string {
 		.split("/")
 		.map((component) => {
 			const part = component.replace(/^\d+-/, "");
-			return slugComponentOverrides.get(part) ?? part;
+			// PascalCase components (BrowserPod, FAQ, CheerpX.Linux) are lowercased
+			// in full so their URLs match the rest of the site's lowercase
+			// convention. camelCase API names (createFile, cheerpjInit) start with
+			// a lowercase letter and are left untouched.
+			return /^[A-Z]/.test(part) ? part.toLowerCase() : part;
 		})
 		.join("/");
 }

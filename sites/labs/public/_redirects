@@ -1,6 +1,40 @@
 /cheerpj /cheerpj3
 /sitemap.xml /sitemap-index.xml
 /cheerpj2/getting-started/Tutorial /cheerpj2/getting-started
+
+# Reference/guide pages whose URL casing changed after fixing idToSlug to
+# lowercase PascalCase path components (packages/astro-theme/lib/nav.ts).
+# The real, indexed/canonical URL is the /docs/cheerpj2/... form (nav.ts
+# always builds hrefs as "/docs/" + slug); the bare /cheerpj2/... form below
+# is only the pretty alias handled by the generic wildcard further down.
+/docs/cheerpj2/getting-started/Java-app /docs/cheerpj2/getting-started/java-app 301
+/docs/cheerpj2/getting-started/Java-applet /docs/cheerpj2/getting-started/java-applet 301
+/docs/cheerpj2/getting-started/Java-library /docs/cheerpj2/getting-started/java-library 301
+/docs/cheerpj2/getting-started/JNLP /docs/cheerpj2/getting-started/jnlp 301
+/docs/cheerpj2/guides/AOT-optimization /docs/cheerpj2/guides/aot-optimization 301
+/docs/cheerpj2/guides/DOM-and-JavaScript-interoperability /docs/cheerpj2/guides/dom-and-javascript-interoperability 301
+/docs/cheerpj2/guides/File-System-support /docs/cheerpj2/guides/file-system-support 301
+/docs/cheerpj2/guides/Implementing-Java-native-methods-in-JavaScript /docs/cheerpj2/guides/implementing-java-native-methods-in-javascript 301
+/docs/cheerpj2/guides/Startup-time-optimization /docs/cheerpj2/guides/startup-time-optimization 301
+/docs/cheerpj2/guides/Using-web-workers /docs/cheerpj2/guides/using-web-workers 301
+/docs/cheerpj2/reference/Command-Line-Options /docs/cheerpj2/reference/command-line-options 301
+/docs/cheerpj2/reference/Java-API /docs/cheerpj2/reference/java-api 301
+/docs/cheerpj2/reference/Runtime-API /docs/cheerpj2/reference/runtime-api 301
+/docs/cheerpj2/reference/WebWorker-API /docs/cheerpj2/reference/webworker-api 301
+/cheerpj2/getting-started/Java-app /cheerpj2/getting-started/java-app 301
+/cheerpj2/getting-started/Java-applet /cheerpj2/getting-started/java-applet 301
+/cheerpj2/getting-started/Java-library /cheerpj2/getting-started/java-library 301
+/cheerpj2/getting-started/JNLP /cheerpj2/getting-started/jnlp 301
+/cheerpj2/guides/AOT-optimization /cheerpj2/guides/aot-optimization 301
+/cheerpj2/guides/DOM-and-JavaScript-interoperability /cheerpj2/guides/dom-and-javascript-interoperability 301
+/cheerpj2/guides/File-System-support /cheerpj2/guides/file-system-support 301
+/cheerpj2/guides/Implementing-Java-native-methods-in-JavaScript /cheerpj2/guides/implementing-java-native-methods-in-javascript 301
+/cheerpj2/guides/Startup-time-optimization /cheerpj2/guides/startup-time-optimization 301
+/cheerpj2/guides/Using-web-workers /cheerpj2/guides/using-web-workers 301
+/cheerpj2/reference/Command-Line-Options /cheerpj2/reference/command-line-options 301
+/cheerpj2/reference/Java-API /cheerpj2/reference/java-api 301
+/cheerpj2/reference/Runtime-API /cheerpj2/reference/runtime-api 301
+/cheerpj2/reference/WebWorker-API /cheerpj2/reference/webworker-api 301
 /cheerpj2/getting-started/applet-runner.html https://leaningtech.com/cheerpj-applet-runner/
 /blog/null /blog
 /cheerpj2/getting-started/applet-runner https://leaningtech.com/cheerpj-applet-runner/

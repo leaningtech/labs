@@ -36,4 +36,4 @@ console.log(`Program exited with code ${exitCode}`);
 
 [Promise]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [終了ステータス]: https://ja.wikipedia.org/wiki/終了ステータス
-[仮想ファイルシステム]: /docs/ja/guides/File-System-support
+[仮想ファイルシステム]: /docs/ja/guides/file-system-support

@@ -1,3 +1,24 @@
 /docs/showcase   https://labs.leaningtech.com/showcase    301
 /docs/blog       https://labs.leaningtech.com/blog        301
 /docs/community   https://labs.leaningtech.com/showcase    301
+
+# Reference/guide pages whose URL casing changed after fixing idToSlug to
+# lowercase PascalCase path components (packages/astro-theme/lib/nav.ts).
+/docs/getting-started/Java-app /docs/getting-started/java-app 301
+/docs/getting-started/Java-applet /docs/getting-started/java-applet 301
+/docs/getting-started/Java-library /docs/getting-started/java-library 301
+/docs/getting-started/JNLP /docs/getting-started/jnlp 301
+/docs/guides/Intercept-external-commands /docs/guides/intercept-external-commands 301
+/docs/guides/Networking /docs/guides/networking 301
+/docs/guides/Startup-time-optimization /docs/guides/startup-time-optimization 301
+/docs/reference/CJ3Library /docs/reference/cj3library 301
+/docs/explanation/File-System-support /docs/explanation/file-system-support 301
+/docs/ja/getting-started/Java-app /docs/ja/getting-started/java-app 301
+/docs/ja/getting-started/Java-applet /docs/ja/getting-started/java-applet 301
+/docs/ja/getting-started/Java-library /docs/ja/getting-started/java-library 301
+/docs/ja/getting-started/JNLP /docs/ja/getting-started/jnlp 301
+/docs/ja/guides/File-System-support /docs/ja/guides/file-system-support 301
+/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript /docs/ja/guides/implementing-java-native-methods-in-javascript 301
+/docs/ja/guides/Networking /docs/ja/guides/networking 301
+/docs/ja/guides/Startup-time-optimization /docs/ja/guides/startup-time-optimization 301
+/docs/ja/reference/CJ3Library /docs/ja/reference/cj3library 301

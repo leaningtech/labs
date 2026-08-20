@@ -206,20 +206,20 @@ This is the end of the tutorial. To learn more about running standalone applicat
 
 <div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
 	<a
-		href="/cheerpj2/getting-started/Java-app"
+		href="/cheerpj2/getting-started/java-app"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		Application
 	</a>
 	<a
-		href="/cheerpj2/getting-started/Java-applet"
+		href="/cheerpj2/getting-started/java-applet"
 		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
 	>
 		Applet
 	</a>
 </div>
 
-[run a Java application]: /cheerpj2/getting-started/Java-app
-[run a Java applet]: /cheerpj2/getting-started/Java-applet
-[`cheerpjRunJar()`]: /cheerpj2/reference/Runtime-API#cheerpjrunjar
-[`cheerpjRunMain()`]: /cheerpj2/reference/Runtime-API#cheerpjrunmain
+[run a Java application]: /cheerpj2/getting-started/java-app
+[run a Java applet]: /cheerpj2/getting-started/java-applet
+[`cheerpjRunJar()`]: /cheerpj2/reference/runtime-api#cheerpjrunjar
+[`cheerpjRunMain()`]: /cheerpj2/reference/runtime-api#cheerpjrunmain

@@ -37,6 +37,6 @@ const cx = await CheerpX.Linux.create({
 });
 ```
 
-For more information, please check out the [Files and File system guide](/docs/guides/File-System-support). This guide provides more details on how to work with files and directories in CheerpX.
+For more information, please check out the [Files and File system guide](/docs/guides/file-system-support). This guide provides more details on how to work with files and directories in CheerpX.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

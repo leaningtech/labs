@@ -85,15 +85,15 @@ You will see the CheerpJ display on your browser with some loading messages befo
 
 Please try these checks:
 
-- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [file system](/cheerpj2/guides/File-System-support) guide.
+- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [file system](/cheerpj2/guides/file-system-support) guide.
 - Your Java application works normally on your machine without CheerpJ.
 - You are not opening the page by double clicking on it and you are using an http-server instead.
 
 ## Further reading
 
-- [AOT optimization](/cheerpj2/guides/AOT-optimization)
-- [Runtime API](/cheerpj2/reference/Runtime-API)
+- [AOT optimization](/cheerpj2/guides/aot-optimization)
+- [Runtime API](/cheerpj2/reference/runtime-api)
 
-[`cheerpjRunJar`]: /cheerpj2/reference/Runtime-API#cheerpjrunjar
-[`cheerpjRunMain`]: /cheerpj2/reference/Runtime-API#cheerpjrunmain
-[virtual filesystem]: /cheerpj2/guides/File-System-support
+[`cheerpjRunJar`]: /cheerpj2/reference/runtime-api#cheerpjrunjar
+[`cheerpjRunMain`]: /cheerpj2/reference/runtime-api#cheerpjrunmain
+[virtual filesystem]: /cheerpj2/guides/file-system-support

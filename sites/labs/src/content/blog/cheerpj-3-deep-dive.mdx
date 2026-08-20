@@ -86,7 +86,7 @@ Developers can use their existing JAR files with no changes to your building pro
 
 **CheerpJ provides advanced, bidirectional Java-JavaScript interoperability:** You can access JavaScript and the DOM from Java by [implementing `native` methods directly in JavaScript][JNI]. You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API].
 
-[JNI]: /cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript
+[JNI]: /cheerpj3/guides/implementing-java-native-methods-in-javascript
 [`cheerpjRunLibrary` API]: /cheerpj3/reference/cheerpjRunLibrary
 
 ## How does CheerpJ 3.0 work?
@@ -101,7 +101,7 @@ At a high level, CheerpJ is composed of the following building blocks:
 
 - **A JVM implementation:** Written in C++ and [compiled](/cheerp) to WebAssembly. The CheerpJ JVM implements a 2-tier execution mode. Code runs within an interpreter before being Just-In-Time compiled to optimized JavaScript. The interpreter does not only deal with initialization and rarely-used code, but also gathers information necessary for JIT-ting. Generated code is very efficient, and the internal optimizer can, among other things, inline and devirtualize calls, which is extremely important for a language such as Java.
 - **A virtualized window manager:** Which supports AWT/Swing. Each window is converted to a hierarchy of HTML elements and HTML5 canvases.
-- **A virtualized File System:** CheepJ provides [multiple filesystem backends](/cheerpj3/guides/File-System-support) to accommodate different application needs, including access to server-hosted files and persistent local storage.
+- **A virtualized File System:** CheepJ provides [multiple filesystem backends](/cheerpj3/guides/file-system-support) to accommodate different application needs, including access to server-hosted files and persistent local storage.
 - **Networking support:** For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided _exit node_.
 
 All these capabilities are implemented as pure WebAssembly or JavaScript. CheerpJ requires no binary component, plugin or non-standard browser configuration.

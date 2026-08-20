@@ -22,7 +22,7 @@ The CheerpX's API is stable and breaking changes can only be introduced on a new
 
 ## 2. Create an application instance
 
-To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/CheerpX.Linux/create) method, which is available globally once the module is imported.
+To start using CheerpX, create an instance by calling the [`CheerpX.Linux.create`](/docs/reference/cheerpx.linux/create) method, which is available globally once the module is imported.
 
 The example below demonstrates how to set up the file system and devices using [WebVM's `debian_large` image](https://github.com/leaningtech/webvm/blob/main/dockerfiles/debian_large), but you can also [create your own images](/docs/guides/custom-images).
 
@@ -87,7 +87,7 @@ During development, you don't need to use HTTPS if you're using `localhost` as t
 
 ## 4. Attach and interact with a console
 
-To be able to see the output printed by the program, use [`setConsole`](/docs/reference/CheerpX.Linux/setConsole) method to use an HTML element as a console. Add the following code at the very end of the `<script>` tag in the example above.
+To be able to see the output printed by the program, use [`setConsole`](/docs/reference/cheerpx.linux/setConsole) method to use an HTML element as a console. Add the following code at the very end of the `<script>` tag in the example above.
 
 ```js
 cx.setConsole(document.getElementById("console"));
@@ -95,7 +95,7 @@ cx.setConsole(document.getElementById("console"));
 
 ## 5. Run an executable
 
-Executables are started using the the [`run`](/docs/reference/CheerpX.Linux/run) API. Add the following code to the `<script>` tag to run a full-featured shell in your browser.
+Executables are started using the the [`run`](/docs/reference/cheerpx.linux/run) API. Add the following code to the `<script>` tag to run a full-featured shell in your browser.
 
 ```js
 await cx.run("/bin/bash", ["--login"], {

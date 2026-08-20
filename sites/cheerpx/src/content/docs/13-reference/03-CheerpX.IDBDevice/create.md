@@ -44,7 +44,7 @@ const cx = await CheerpX.Linux.create({
 
 If you’d like to learn more about related topics, check out these guides:
 
-- [Files and filesystems](/docs/guides/File-System-support) – Managing files and storage in CheerpX.
+- [Files and filesystems](/docs/guides/file-system-support) – Managing files and storage in CheerpX.
 - [Input and output](/docs/guides/input-output) – Handling data flow in your environment.
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise

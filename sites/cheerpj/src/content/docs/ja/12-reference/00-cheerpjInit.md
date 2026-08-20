@@ -246,7 +246,7 @@ cheerpjInit({
 });
 ```
 
-ネイティブメソッドの実装について詳しくは[こちら](/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript)を参照してください。
+ネイティブメソッドの実装について詳しくは[こちら](/docs/ja/guides/implementing-java-native-methods-in-javascript)を参照してください。
 
 ### `overrideDocumentBase`
 

@@ -22,7 +22,7 @@ CheerpJ is distributed as an archive for all the platforms, you can unpack the a
 /Applications/cheerpj_2.3/cheerpjfy.py my_application_archive.jar
 ```
 
-This command will generate a file called `my_application_archive.jar.js`, which needs to be deployed in the same folder of the original `.jar` archive, and hosted on a web server. Instructions on how to serve our application on a web page are provided in our tutorials for running a [Java application](/cheerpj2/getting-started/Java-app) and a [Java applet](/cheerpj2/getting-started/Java-applet)
+This command will generate a file called `my_application_archive.jar.js`, which needs to be deployed in the same folder of the original `.jar` archive, and hosted on a web server. Instructions on how to serve our application on a web page are provided in our tutorials for running a [Java application](/cheerpj2/getting-started/java-app) and a [Java applet](/cheerpj2/getting-started/java-applet)
 
 > **Important:** The files _must_ be accessed through a Web server. Trying to open the HTML page directly from the disk is not supported. The URL must look like `http://127.0.0.1:8080/cheerpj_test.html`, if it looks like `file://c/users/Test/cheerpj_test.html` CheerpJ won't be able to start.
 
@@ -55,5 +55,5 @@ done
 
 ## Further reading
 
-- [Command line options](/cheerpj2/reference/Command-Line-Options)
-- [Startup time optimization](/cheerpj2/guides/Startup-time-optimization)
+- [Command line options](/cheerpj2/reference/command-line-options)
+- [Startup time optimization](/cheerpj2/guides/startup-time-optimization)
