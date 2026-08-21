@@ -177,7 +177,7 @@ const cx = await CheerpX.Linux.create({
 
 ### Adding files
 
-You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from JavaScript using the [`writeFile`](/docs/reference/CheerpX.DataDevice/writeFIle) method:
+You can add files to a [`DataDevice`](/docs/reference/CheerpX.DataDevice) from JavaScript using the [`writeFile`](/docs/reference/CheerpX.DataDevice/writeFile) method:
 
 ```javascript
 await dataDevice.writeFile("/filename", "File content here");

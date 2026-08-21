@@ -2,3 +2,5 @@
 /blog        https://labs.leaningtech.com/blog        301
 /docs/showcase  https://labs.leaningtech.com/showcase  301
 /docs/community   https://labs.leaningtech.com/showcase    301
+
+/docs/reference/CheerpX.DataDevice/writeFIle    /docs/reference/CheerpX.DataDevice/writeFile    301
