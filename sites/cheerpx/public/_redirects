@@ -4,3 +4,5 @@
 /docs/community   https://labs.leaningtech.com/showcase    301
 
 /docs/reference/CheerpX.DataDevice/writeFIle    /docs/reference/CheerpX.DataDevice/writeFile    301
+/docs/reference/httpBytesDevice                 /docs/reference/CheerpX.HttpBytesDevice         301
+/docs/reference/httpBytesDevice/create          /docs/reference/CheerpX.HttpBytesDevice/create  301
