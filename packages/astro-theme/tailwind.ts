@@ -64,6 +64,11 @@ const siteThemes = plugin(({ addBase }) => {
 			"--color-primary-200": "183 205 255",
 			"--color-primary-100": "212 225 255",
 			"--color-primary-50": "240 245 255",
+			"--color-bg-950": "13 13 14", // --color-bg: #0d0d0e
+			"--color-bg-900": "15 15 16", // --color-surface: #0f0f10
+			"--color-bg-800": "18 18 19", // --color-surface-elevated: #121213
+			"--color-bg-500": "113 113 122", // --color-text-muted: #71717a
+			"--color-bg-400": "161 161 170", // --color-text-secondary: #a1a1aa
 		},
 		// CheerpJ theme
 		".site-cheerpj": {
