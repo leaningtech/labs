@@ -6,7 +6,10 @@ description: Write data to a new file in the CheerpX DataDevice.
 ```ts
 namespace CheerpX {
 	class DataDevice {
-		async writeFile(filename: string, contents: string): Promise<void>;
+		async writeFile(
+			filename: string,
+			contents: string | Uint8Array
+		): Promise<void>;
 	}
 }
 ```
@@ -14,7 +17,7 @@ namespace CheerpX {
 ## Parameters
 
 - **filename (`string`)** - The path to the file within the device, starting with a `/` (e.g., `/filename`). The path should not include the mount point.
-- **contents (`string`)** - The data to write to the file.
+- **contents (`string | Uint8Array`)** - The data to write to the file. Can be either a string or a `Uint8Array`.
 
 ## Returns
 
