@@ -47,7 +47,9 @@ interface MountPointConfiguration {
 	// 'proc' for process info files. (no device required)
 	type: "ext2" | "dir" | "devs" | "proc";
 
-	// First mount must be "/" (root)
+	// First mount must be "/" (root). Every other mount's path must
+	// have a parent that already exists, either from an earlier mount
+	// or a directory inside one, following standard Linux mount conventions.
 	path: string;
 	// Required for 'ext2' and 'dir' types, but optional for 'devs' and 'proc'
 	dev?: CheerpX.Device;
@@ -66,6 +68,19 @@ const cx = await CheerpX.Linux.create({
 	],
 });
 ```
+
+> [!warning] Mount order matters
+> Because each mount's parent must already exist, mounts can't be "free floating". Mounting /app/bin before /app exists will fail, either mount /app first, or create that directory inside its parent filesystem before mounting a device on top of it.
+>
+> ```js
+> // Fails: "/app" doesn't exist yet, so "/app/bin" has no parent to mount onto
+> const cx = await CheerpX.Linux.create({
+> 	mounts: [
+> 		{ type: "dir", path: "/", dev: rootDevice },
+> 		{ type: "dir", path: "/app/bin", dev: webDevice },
+> 	],
+> });
+> ```
 
 > [!note] Note
 > CheerpX supports a variety of backends, designed to provide access to HTTP resources, IndexedDB-based persistent storage and data from JavaScript. Complete Ext2 filesystems are also supported on top of block devices. For detailed information, including usage examples and full APIs, please refer to the [Files and filesystems](/docs/guides/File-System-support) guide.
