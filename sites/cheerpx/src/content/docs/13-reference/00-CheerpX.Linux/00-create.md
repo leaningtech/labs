@@ -76,7 +76,7 @@ const cx = await CheerpX.Linux.create({
 > // Fails: "/app" doesn't exist yet, so "/app/bin" has no parent to mount onto
 > const cx = await CheerpX.Linux.create({
 > 	mounts: [
-> 		{ type: "dir", path: "/", dev: rootDevice },
+> 		{ type: "ext2", path: "/", dev: overlayDevice },
 > 		{ type: "dir", path: "/app/bin", dev: webDevice },
 > 	],
 > });
