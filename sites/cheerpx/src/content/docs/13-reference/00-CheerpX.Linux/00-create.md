@@ -48,8 +48,8 @@ interface MountPointConfiguration {
 	type: "ext2" | "dir" | "devs" | "proc";
 
 	// First mount must be "/" (root). Every other mount's path must
-	// have a parent that already exists, either from an earlier mount
-	// or a directory inside one, following standard Linux mount conventions.
+	// point to a directory that already exists inside the filesystem
+	// mounted at an ancestor path, following standard Linux mount conventions.
 	path: string;
 	// Required for 'ext2' and 'dir' types, but optional for 'devs' and 'proc'
 	dev?: CheerpX.Device;
@@ -70,13 +70,14 @@ const cx = await CheerpX.Linux.create({
 ```
 
 > [!warning] Mount order matters
-> Because each mount's parent must already exist, mounts can't be "free floating". Mounting /app/bin before /app exists will fail, either mount /app first, or create that directory inside its parent filesystem before mounting a device on top of it.
+> Because each mount's path must point to an existing directory inside an already-mounted filesystem, mounting /app/bin before /app exists will fail.
+> Mount /app first.
 >
 > ```js
-> // Fails: "/app" doesn't exist yet, so "/app/bin" has no parent to mount onto
+> // Fails: nothing has created "/app" yet, so "/app/bin" has no parent to mount onto
 > const cx = await CheerpX.Linux.create({
 > 	mounts: [
-> 		{ type: "ext2", path: "/", dev: overlayDevice },
+> 		{ type: "dir", path: "/", dev: dataDevice },
 > 		{ type: "dir", path: "/app/bin", dev: webDevice },
 > 	],
 > });
