@@ -19,21 +19,13 @@ export const GET: APIRoute = async () => {
 		return true;
 	});
 
-	// The /docs/ landing page is served by the theme's pages/docs/index.astro,
-	// not the content collection, so it isn't in `entries`. Add it explicitly.
-	const landingUrl = `${BASE}/docs/`;
-
+	// The /docs/ landing page is served by the theme's pages/docs/index.astro, and it's only an html redirect, so it's not in the nav.
 	// entry.href is already "/docs/<slug>". Normalise and drop duplicates.
 	const innerUrls = Array.from(
 		new Set(entries.map((entry) => `${BASE}${entry.href}`))
 	).sort();
 
-	const pages = [
-		{ loc: landingUrl, priority: "0.8" },
-		...innerUrls
-			.filter((u) => u !== landingUrl)
-			.map((loc) => ({ loc, priority: "0.7" })),
-	];
+	const pages = innerUrls.map((loc) => ({ loc, priority: "0.7" }));
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
