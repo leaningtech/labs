@@ -6,7 +6,7 @@ description: Reads a file from an IDBDevice and returns it as a Javascript Blob 
 ```js
 namespace CheerpX {
   class IDBDevice {
-    async readFileAsBlob(filename: string): Promise<Blob>;
+    async readFileAsBlob(filename: string): Promise<Blob | null>;
   }
 }
 ```
@@ -17,7 +17,7 @@ namespace CheerpX {
 
 ## Returns
 
-`CheerpX.IDBDevice.readFileAsBlob` returns a [Promise] that resolves to a Javascript `Blob` object. This object represents the file's data, which can be further manipulated or converted as needed.
+`CheerpX.IDBDevice.readFileAsBlob` returns a [Promise] that resolves to a Javascript `Blob` object containing the file's contents, or `null` if no file exists at the given path.
 
 ## Example
 

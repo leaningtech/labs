@@ -80,7 +80,11 @@ After the program finishes, you can read the contents of the output file:
 
 ```js
 const outputBlob = await filesDevice.readFileAsBlob("/output.txt");
-console.log(await outputBlob.text());
+if (outputBlob === null) {
+	console.log("File not found");
+} else {
+	console.log(await outputBlob.text());
+}
 ```
 
 > [!note] Note
