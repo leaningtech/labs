@@ -1,6 +1,6 @@
 ---
 title: readFileAsBlob
-description: Reads a file from an IDBDevice and returns it as a Javascript Blob object.
+description: Reads a file from an IDBDevice and returns it as a Javascript Blob, or null if the file doesn't exist.
 ---
 
 ```js
