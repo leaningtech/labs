@@ -87,4 +87,4 @@ To learn more about CheerpJ's Tailscale APIs please visit [the reference](/docs/
 
 ### Self-hosting Headscale
 
-Headscale is an open-source and self-hosted implementation of the Tailscale control server. To work with Headscale and CheerpJ we suggest using [this fork](https://github.com/leaningtech/headscale).
+Headscale is an open-source and self-hosted implementation of the Tailscale control server. To self-host Headscale for use with CheerpJ, follow the [official Headscale setup guide](https://headscale.net/stable/setup/requirements/).
