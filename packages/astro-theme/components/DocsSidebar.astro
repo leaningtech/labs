@@ -77,7 +77,9 @@ const hasMultipleLocales = !!Astro.currentLocale;
 			});
 
 			// If the active item is out of view, scroll so it is in the center
-			const activeEl = this.querySelector<HTMLLIElement>("li[data-is-active]");
+			const activeEl = this.querySelector<HTMLLIElement>(
+				'li[data-is-active="true"]'
+			);
 			if (activeEl) {
 				const scrollRect = this.getBoundingClientRect();
 				const activeRect = activeEl.getBoundingClientRect();
