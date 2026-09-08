@@ -2,6 +2,27 @@ packages:
   - sites/*
   - packages/*
 
+# Dependency build-script allowlist. Both keys below are deliberate and must
+# stay in sync until every build surface runs the same pnpm.
+#
+#   allowBuilds            - pnpm >= 10.26.0 (GitHub Actions, local dev)
+#   onlyBuiltDependencies  - pnpm <  10.26.0 (Cloudflare Pages, v3 image
+#                            default is pnpm 10.11.1, which ignores allowBuilds)
+#
+# Cloudflare offers no repo-side way to pin pnpm (no version file exists;
+# PNPM_VERSION is a dashboard-only env var), so onlyBuiltDependencies is
+# load-bearing in production. Do NOT delete it as "redundant" until
+# PNPM_VERSION >= 10.26.0 is set on every Cloudflare project, in both the
+# Production and Preview environments.
+# These two were previously only in .npmrc. pnpm 11+ reads ONLY auth and
+# registry settings from .npmrc and silently ignores everything else, with no
+# warning, so the .npmrc copies below stop working the moment pnpm is bumped.
+# Verified: pnpm 12.3.4 ignores .npmrc frozen-lockfile and happily rewrites the
+# lockfile; both keys here are honoured by pnpm 10.34.5 and 12.3.4 alike.
+# .npmrc is kept as the fallback for Cloudflare's older pnpm 10.11.1.
+frozenLockfile: true
+autoInstallPeers: true
+
 allowBuilds:
   esbuild: true
   sharp: true
