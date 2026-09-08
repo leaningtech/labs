@@ -2,6 +2,7 @@
 	"name": "labs",
 	"version": "0.0.1",
 	"private": true,
+	"packageManager": "pnpm@10.34.5",
 	"scripts": {
 		"format": "prettier --write ."
 	},
