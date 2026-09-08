@@ -5,9 +5,8 @@ on:
     branches:
       - main
 
-# Serialise deploys on the same ref. cancel-in-progress is deliberately FALSE:
-# these jobs rsync with --delete, and killing one mid-transfer can leave the
-# remote docs tree half-updated.
+# Not cancel-in-progress: rsync --delete mid-transfer leaves the remote
+# docs tree half-updated.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
@@ -20,17 +19,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      # pnpm version comes from the "packageManager" field in package.json.
-      # Must run before setup-node so pnpm is on PATH.
-      - uses: pnpm/action-setup@v6
-        name: Install pnpm
-        with:
-          run_install: false
-
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
+
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        with:
+          run_install: false
 
       - name: Get pnpm store directory
         shell: bash
