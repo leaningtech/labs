@@ -6,7 +6,6 @@ on:
       - main
   pull_request:
 
-# One run per ref: superseded runs are cancelled instead of queueing up.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -24,8 +23,6 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      # pnpm version comes from the "packageManager" field in package.json,
-      # so Actions and local dev cannot drift apart.
       - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
@@ -94,25 +91,19 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
 
-    # ADVISORY ONLY - this job must never block a merge.
-    # Three independent guards, all required:
-    #   continue-on-error  - the job cannot fail the workflow, even if Vale
-    #                        itself crashes or `vale sync` cannot reach the net
-    #   fail_on_error      - reviewdog does not exit non-zero on Vale errors
-    #   level: warning     - findings surface as warnings, never as errors
-    # Rules, vocabulary and alert level live in .vale.ini at the repo root.
+    # Advisory only, never blocks a merge. Expect MDX false positives (Vale
+    # has no native MDX format), so do not make this a required check. To prove
+    # it still runs, add "WebWorker" (deny.txt) to any .md in a test PR.
     continue-on-error: true
 
     steps:
       - uses: actions/checkout@v7
 
-      - uses: errata-ai/vale-action@v3
+      - uses: vale-cli/vale-action@v3
         with:
           version: 3.20.0
           fail_on_error: false
           level: warning
-          # Only annotate lines the PR actually touches - the repo has 300+
-          # markdown files and "file"/"nofilter" would flood every review.
           filter_mode: added
           reporter: github-pr-annotations
         env:
