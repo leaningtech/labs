@@ -138,7 +138,6 @@ export default function ThemeIntegration(
 					vite: {
 						ssr: {
 							noExternal: [
-								"@leaningtech/global-navbar",
 								"@leaningtech/svelte-browserpod-editor",
 								"svelte-codemirror-editor",
 								"@iconify/svelte",
