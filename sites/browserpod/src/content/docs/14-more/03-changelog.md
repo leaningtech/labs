@@ -3,6 +3,14 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 3.1.0:
+
+- Support for running scripts directly as executables
+- Enforcement of executable permissions required to run programs
+- Node: support for command line arguments
+- Node: support for custom loaders
+- Rust: fixed an issue with thread local storage
+
 ## Version 3.0.1:
 
 - Fix a regression on the BinaryFile.read API
