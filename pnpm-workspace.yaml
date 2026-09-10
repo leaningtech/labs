@@ -2,6 +2,16 @@ packages:
   - sites/*
   - packages/*
 
+# Moved here from .npmrc: pnpm 11+ reads only auth/registry keys from .npmrc
+# and silently ignores the rest.
+frozenLockfile: true
+
+# Keep onlyBuiltDependencies until every Cloudflare project runs pnpm
+# >= 10.26.0; older pnpm ignores allowBuilds and would skip these builds.
+allowBuilds:
+  esbuild: true
+  sharp: true
+
 onlyBuiltDependencies:
   - esbuild
   - sharp

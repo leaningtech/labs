@@ -2,7 +2,13 @@ name: Lint
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   astro:
@@ -10,17 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version-file: .nvmrc
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
-          version: 10
           run_install: false
 
       - name: Get pnpm store directory
@@ -28,7 +33,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v6
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -50,17 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version-file: .nvmrc
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
-          version: 10
           run_install: false
 
       - name: Get pnpm store directory
@@ -68,7 +72,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v6
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -85,10 +89,22 @@ jobs:
   prose_vale:
     name: Prose (Vale)
     runs-on: ubuntu-latest
-    # temporarily disabled because test is brittle: https://github.com/errata-ai/vale/issues/841
-    if: github.event_name == 'pull_request' && false
+    if: github.event_name == 'pull_request'
+
+    # Advisory only, never blocks a merge. Expect MDX false positives (Vale
+    # has no native MDX format), so do not make this a required check. To prove
+    # it still runs, add "WebWorker" (deny.txt) to any .md in a test PR.
+    continue-on-error: true
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: errata-ai/vale-action@reviewdog
+      - uses: actions/checkout@v7
+
+      - uses: vale-cli/vale-action@v3
         with:
-          version: 2.30.0
+          version: 3.20.0
+          fail_on_error: false
+          level: warning
+          filter_mode: added
+          reporter: github-pr-annotations
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
