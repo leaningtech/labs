@@ -3,6 +3,13 @@
 	"version": "0.0.1",
 	"private": true,
 	"packageManager": "pnpm@10.34.5",
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "22.23.2",
+			"onFail": "download"
+		}
+	},
 	"scripts": {
 		"format": "prettier --write ."
 	},
