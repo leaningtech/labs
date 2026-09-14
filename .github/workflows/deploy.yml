@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - CI_cleanup # TEMP
   workflow_dispatch:
 
 # Not cancel-in-progress: rsync --delete mid-transfer leaves the remote

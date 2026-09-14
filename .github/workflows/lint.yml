@@ -91,10 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
 
-    # Advisory only, never blocks a merge. Expect MDX false positives (Vale
-    # has no native MDX format), so do not make this a required check. To prove
-    # it still runs, add "WebWorker" (deny.txt) to any .md in a test PR.
-    continue-on-error: true
+    # Advisory: fail_on_error keeps prose findings from ever failing the job.
 
     steps:
       - uses: actions/checkout@v7
