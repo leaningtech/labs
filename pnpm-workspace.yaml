@@ -6,8 +6,7 @@ packages:
 # and silently ignores the rest.
 frozenLockfile: true
 
-# Keep onlyBuiltDependencies until every Cloudflare project runs pnpm
-# >= 10.26.0; older pnpm ignores allowBuilds and would skip these builds.
+
 allowBuilds:
   esbuild: true
   sharp: true
@@ -15,3 +14,5 @@ allowBuilds:
 onlyBuiltDependencies:
   - esbuild
   - sharp
+# ^Only here as fallback: Corepack gives Cloudflare the
+# packageManager pnpm (>= 10.26.0), which reads allowBuilds.
