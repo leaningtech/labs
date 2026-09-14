@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 # Not cancel-in-progress: rsync --delete mid-transfer leaves the remote
 # docs tree half-updated.
@@ -51,7 +52,9 @@ jobs:
       - name: Deploy cheerpj.com/docs
         uses: burnett01/rsync-deployments@v9
         with:
-          switches: -avzr --delete
+          # TEMPORARY: --dry-run makes this deploy a no-op. Remove it once the
+          # first run's log confirms the transfer list looks right.
+          switches: -avzr --delete --dry-run
           path: sites/cheerpj/dist/
           remote_path: ${{ secrets.RSYNC_DEPLOY_PATH }}
           remote_host: ${{ secrets.RSYNC_DEPLOY_HOST }}
