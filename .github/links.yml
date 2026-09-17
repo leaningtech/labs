@@ -11,7 +11,7 @@ jobs:
         website_url:
           - "https://labs.leaningtech.com"
           - "https://cheerp.io"
-          - "https://cheerpj.io"
+          - "https://cheerpj.com"
           - "https://cheerpx.io"
     runs-on: ubuntu-latest
     steps:
