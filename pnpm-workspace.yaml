@@ -6,7 +6,6 @@ packages:
 # and silently ignores the rest.
 frozenLockfile: true
 
-
 allowBuilds:
   esbuild: true
   sharp: true
@@ -14,5 +13,5 @@ allowBuilds:
 onlyBuiltDependencies:
   - esbuild
   - sharp
-# ^Only here as fallback: Corepack gives Cloudflare the
-# packageManager pnpm (>= 10.26.0), which reads allowBuilds.
+# ^ Fallback for pnpm < 10.26.0. Verified 2026-09-17: Cloudflare reads
+# packageManager and runs 10.34.5, so nothing needs this today.
