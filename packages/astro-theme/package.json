@@ -60,7 +60,6 @@
 		"@codemirror/lang-json": "^6.0.2",
 		"@codemirror/view": "^6.39.2",
 		"@iconify/svelte": "^5.1.0",
-		"@leaningtech/global-navbar": "workspace:^",
 		"@leaningtech/svelte-browserpod-editor": "^1.0.1",
 		"@replit/codemirror-lang-svelte": "^6.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.1.1",
