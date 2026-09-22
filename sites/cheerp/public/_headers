@@ -1,4 +1,3 @@
-
 # Cloudflare preview and branch deployments stay on *.pages.dev. Keep them out
 # of search indexes: production custom domains are unaffected by these rules.
 # First pattern covers <project>.pages.dev, second covers <branch|hash>.<project>.pages.dev.
