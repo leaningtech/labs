@@ -3,6 +3,12 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 3.2.0:
+
+- Improve networking robustness
+- Improve robustness against virtual memory exhaustion
+- Avoid keeping alive large WebAssembly Memory objects after process termination
+
 ## Version 3.1.0:
 
 - Support for running scripts directly as executables
