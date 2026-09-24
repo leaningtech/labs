@@ -10,7 +10,11 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 ## Installing Cheerp on Linux
 
+<!-- repology.org has been on a registrar verification hold since 2026-09-13
+     (its DNS resolves to 127.0.0.1), so both the badge image and the link it
+     wraps are dead. Re-enable this once the domain is restored.
 [![Packaging status](https://repology.org/badge/vertical-allrepos/cheerp.svg)](https://repology.org/project/cheerp/versions)
+-->
 
 #### Ubuntu
 
@@ -20,7 +24,7 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 Use our nightly build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-nightly-ppa)
 
-(or alternatively our stable build [PPA](<(https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa):>))
+(or alternatively our stable build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa))
 
 ```sh
 $ sudo add-apt-repository ppa:leaningtech-dev/cheerp-nightly-ppa
