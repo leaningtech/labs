@@ -1,9 +1,5 @@
 ---
 import { t } from "../lib/i18n";
-
-interface Props {
-	editHref: string;
-}
 ---
 
 <was-this-helpful
@@ -22,15 +18,6 @@ interface Props {
 	>
 		😕 {t("No", Astro.currentLocale)}
 	</button>
-	<div class="grow"></div>
-	<a
-		href={Astro.props.editHref}
-		class="rounded-lg px-4 py-1 text-base border border-stone-700 hover:border-stone-200 text-stone-400 hover:text-stone-200"
-		target="_blank"
-		rel="noopener"
-	>
-		{t("Suggest changes", Astro.currentLocale)}
-	</a>
 </was-this-helpful>
 
 <script>
