@@ -34,10 +34,6 @@ const entries = product
 	? getLocalisedProductNav(nav, product.id, Astro.currentLocale)
 	: [];
 
-function getEditHref(id: string): string {
-	return `https://github.com/leaningtech/labs/edit/main/sites/${site}/src/content/docs/${id}`;
-}
-
 const site = getSite(Astro.site?.hostname);
 ---
 
@@ -130,7 +126,7 @@ const site = getSite(Astro.site?.hostname);
 					</main>
 
 					<div class="py-3 px-6 md:px-8">
-						{id && <WasThisHelpful editHref={getEditHref(id)} />}
+						{id && <WasThisHelpful />}
 						<div class="py-5">
 							{entries.length > 0 && id && <DocsPagination activeId={id} />}
 						</div>
