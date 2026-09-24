@@ -10,11 +10,6 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 ## Installing Cheerp on Linux
 
-<!-- repology.org has been on a registrar verification hold since 2026-09-13
-     (its DNS resolves to 127.0.0.1), so both the badge image and the link it
-     wraps are dead. Re-enable this once the domain is restored.
-[![Packaging status](https://repology.org/badge/vertical-allrepos/cheerp.svg)](https://repology.org/project/cheerp/versions)
--->
 
 #### Ubuntu
 
@@ -59,6 +54,9 @@ With `<codename>` being replaced by the codename of your release
 <br>
 
 #### Arch
+
+[![cheerp-git](https://img.shields.io/aur/version/cheerp-git?label=AUR%20cheerp-git)](https://aur.archlinux.org/packages/cheerp-git)
+[![cheerp-bin](https://img.shields.io/aur/version/cheerp-bin?label=AUR%20cheerp-bin)](https://aur.archlinux.org/packages/cheerp-bin)
 
 Use our [AUR package](https://aur.archlinux.org/packages/cheerp-git):
 
