@@ -10,7 +10,6 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 ## Installing Cheerp on Linux
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/cheerp.svg)](https://repology.org/project/cheerp/versions)
 
 #### Ubuntu
 
@@ -20,7 +19,7 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 Use our nightly build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-nightly-ppa)
 
-(or alternatively our stable build [PPA](<(https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa):>))
+(or alternatively our stable build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa))
 
 ```sh
 $ sudo add-apt-repository ppa:leaningtech-dev/cheerp-nightly-ppa
@@ -55,6 +54,9 @@ With `<codename>` being replaced by the codename of your release
 <br>
 
 #### Arch
+
+[![cheerp-git](https://img.shields.io/aur/version/cheerp-git?label=AUR%20cheerp-git)](https://aur.archlinux.org/packages/cheerp-git)
+[![cheerp-bin](https://img.shields.io/aur/version/cheerp-bin?label=AUR%20cheerp-bin)](https://aur.archlinux.org/packages/cheerp-bin)
 
 Use our [AUR package](https://aur.archlinux.org/packages/cheerp-git):
 
