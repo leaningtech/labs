@@ -10,17 +10,15 @@ The first step to using Cheerp is to install the Cheerp toolchain.
 
 ## Installing Cheerp on Linux
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/cheerp.svg)](https://repology.org/project/cheerp/versions)
-
 #### Ubuntu
 
 > [!info] Releases
-> we offer both stable and nightly builds,
+> We offer both stable and nightly builds,
 > but since our stable build is at this time a few years old, we recommend using nightly
 
 Use our nightly build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-nightly-ppa)
 
-(or alternatively our stable build [PPA](<(https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa):>))
+(or alternatively our stable build [PPA](https://launchpad.net/~leaningtech-dev/+archive/ubuntu/cheerp-ppa))
 
 ```sh
 $ sudo add-apt-repository ppa:leaningtech-dev/cheerp-nightly-ppa
@@ -28,11 +26,11 @@ $ sudo apt-get update
 $ sudo apt-get install cheerp-core
 ```
 
-> [!warning] being ahead of our supported LTS builds
-> if you encounter a "the repo does not have a Release file" error
+> [!warning] Being ahead of our supported LTS builds
+> If you encounter a "the repo does not have a Release file" error
 > your Ubuntu release is most likely newer than our latest build. In this case you will need to manually edit the .sources file following the steps below.
 
-1. open the .sources file for the PPA release, which is located at:
+1. Open the .sources file for the PPA release, which is located at:
 
 ```
 /etc/apt/sources.list.d/leaningtech-dev-ubuntu-cheerp-nightly-ppa-<codename>.sources
@@ -55,6 +53,21 @@ With `<codename>` being replaced by the codename of your release
 <br>
 
 #### Arch
+
+<div class="not-prose flex flex-wrap gap-2 mb-2">
+	<a href="https://aur.archlinux.org/packages/cheerp-git">
+		<img
+			src="https://img.shields.io/aur/version/cheerp-git?label=AUR%20cheerp-git"
+			alt="AUR cheerp-git version"
+		/>
+	</a>
+	<a href="https://aur.archlinux.org/packages/cheerp-bin">
+		<img
+			src="https://img.shields.io/aur/version/cheerp-bin?label=AUR%20cheerp-bin"
+			alt="AUR cheerp-bin version"
+		/>
+	</a>
+</div>
 
 Use our [AUR package](https://aur.archlinux.org/packages/cheerp-git):
 
