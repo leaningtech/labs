@@ -13,12 +13,7 @@ interface Window {
 
 declare function plausible(event: PlausibleEvent, options?: any): void;
 
-type PlausibleEvent =
-	| "pageview"
-	| "404"
-	| "HelpfulYes"
-	| "HelpfulNo"
-	| "Search";
+type PlausibleEvent = "pageview" | "404" | "Search";
 
 interface Pagefind {
 	init: () => Promise<void>;

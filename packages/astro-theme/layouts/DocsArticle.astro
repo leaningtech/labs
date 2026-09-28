@@ -11,7 +11,6 @@ import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
 import ProductNav from "../components/nav/product/Nav.astro";
-import WasThisHelpful from "../components/WasThisHelpful.astro";
 import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
 import type { LanguageContent } from "../content";
@@ -125,11 +124,8 @@ const site = getSite(Astro.site?.hostname);
 						<slot />
 					</main>
 
-					<div class="py-3 px-6 md:px-8">
-						{id && <WasThisHelpful />}
-						<div class="py-5">
-							{entries.length > 0 && id && <DocsPagination activeId={id} />}
-						</div>
+					<div class="py-5 px-6 md:px-8">
+						{entries.length > 0 && id && <DocsPagination activeId={id} />}
 					</div>
 				</div>
 				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
