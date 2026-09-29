@@ -1,8 +1,12 @@
+/* @apply needs the theme in scope. v4 processes each stylesheet
+   separately, so it does not inherit it the way v3 did. */
+@reference "../styles/theme.css";
+
 .expressive-code {
 	@apply my-4;
 
 	& code {
-		@apply !font-mono;
+		@apply font-mono!;
 	}
 
 	& .has-tabs {

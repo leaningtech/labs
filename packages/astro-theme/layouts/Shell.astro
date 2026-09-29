@@ -1,4 +1,9 @@
 ---
+// Tailwind v4. The @tailwindcss/vite plugin does not inject a stylesheet the way
+// @astrojs/tailwind used to, so it has to be imported. Every layout in this package
+// renders through Shell, so this one import covers all five sites.
+import "../styles/theme.css";
+
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { productFromUrl } from "../lib/products";
@@ -34,6 +39,8 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 			}
 		</style>
 		<style is:global>
+			@reference "../styles/theme.css";
+
 			.dark {
 				color-scheme: dark;
 			}

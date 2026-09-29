@@ -62,7 +62,7 @@
 	<input
 		type="search"
 		{placeholder}
-		class="w-full text-lg pl-10 pr-4 py-3 rounded-md border border-stone-700 outline-none bg-stone-900 text-white placeholder-stone-400"
+		class="w-full text-lg pl-10 pr-4 py-3 rounded-md border border-stone-700 outline-hidden bg-stone-900 text-white placeholder-stone-400"
 		on:input={search}
 	/>
 </search>

@@ -1,6 +1,6 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
@@ -59,7 +59,6 @@ export default function ThemeIntegration(
 					}),
 					mdx(),
 					sitemap(),
-					tailwind(),
 					robotsTxt(),
 					pagefind(),
 					svelte(),
@@ -136,6 +135,10 @@ export default function ThemeIntegration(
 					},
 					trailingSlash: "never",
 					vite: {
+						// Tailwind v4 ships as a Vite plugin; @astrojs/tailwind was v3-only
+						// and is deprecated. Unlike that integration, this does NOT inject a
+						// stylesheet, so layouts/Shell.astro imports ./styles/theme.css.
+						plugins: [tailwindcss()],
 						ssr: {
 							noExternal: [
 								"@leaningtech/svelte-browserpod-editor",

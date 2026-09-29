@@ -30,7 +30,7 @@ const featured = size === "wide";
 	{
 		post.data.heroImage && (
 			<div
-				class={`card-image relative overflow-hidden border border-stone-800 rounded-sm w-full ${featured ? "h-48 sm:h-64" : "h-32 sm:h-48"} mb-3 sm:mb-5 bg-stone-900`}
+				class={`card-image relative overflow-hidden border border-stone-800 rounded-xs w-full ${featured ? "h-48 sm:h-64" : "h-32 sm:h-48"} mb-3 sm:mb-5 bg-stone-900`}
 			>
 				<Image
 					src={post.data.heroImage}

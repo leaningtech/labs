@@ -537,7 +537,7 @@
 								{#if isMobile}
 									<button
 										onclick={copyPortalURL}
-										class="text-xs text-white/70 hover:text-white flex items-center flex-shrink-0 cursor-pointer"
+										class="text-xs text-white/70 hover:text-white flex items-center shrink-0 cursor-pointer"
 										title="Copy portal URL"
 										aria-label="Copy portal URL"
 									>
@@ -553,7 +553,7 @@
 								{:else}
 									<button
 										onclick={togglePortalInfo}
-										class="text-xs text-white/70 hover:text-white flex items-center flex-shrink-0 cursor-pointer"
+										class="text-xs text-white/70 hover:text-white flex items-center shrink-0 cursor-pointer"
 										title={showPortalInfo
 											? "Hide portal info"
 											: "Show portal info"}
@@ -575,7 +575,7 @@
 								{/if}
 							{:else}
 								<button
-									class="text-xs text-white/70 hover:text-white/50 flex items-center flex-shrink-0 cursor-not-allowed"
+									class="text-xs text-white/70 hover:text-white/50 flex items-center shrink-0 cursor-not-allowed"
 									title={"Portal Unavailable"}
 									aria-label={"Portal Unavailable"}
 								>
@@ -639,7 +639,7 @@
 												</p>
 												<div class="flex space-x-2 justify-center">
 													<button
-														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={async () => {
 															await navigator.clipboard.writeText(portalURL);
 															copied = true;
@@ -663,7 +663,7 @@
 														{/if}
 													</button>
 													<button
-														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={togglePortalInfo}
 													>
 														<Icon
@@ -681,7 +681,7 @@
 
 									{#if showMobilePortal && isMobile && portalURL}
 										<div
-											class="fade-element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+											class="fade-element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 backdrop-blur-xs p-4"
 										>
 											<h2
 												class="text-white text-xl font-bold mb-4 tracking-wide drop-shadow-lg text-center"
@@ -705,7 +705,7 @@
 												</p>
 												<div class="flex space-x-2 justify-center">
 													<button
-														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={copyPortalURL}
 													>
 														<Icon
@@ -717,7 +717,7 @@
 														{copied ? "Copied!" : "Copy URL"}
 													</button>
 													<button
-														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={toggleMobilePortal}
 													>
 														<Icon
