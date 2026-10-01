@@ -1,7 +1,4 @@
 ---
-// Tailwind v4. The @tailwindcss/vite plugin does not inject a stylesheet the way
-// @astrojs/tailwind used to, so it has to be imported. Every layout in this package
-// renders through Shell, so this one import covers all five sites.
 import "../styles/theme.css";
 
 import BaseHead from "../components/BaseHead.astro";
@@ -41,15 +38,7 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 		<style is:global>
 			@reference "../styles/theme.css";
 
-			/*
-			 * @layer base so Tailwind utilities still outrank these.
-			 *
-			 * In v3 both this and Tailwind's output were unlayered, so specificity decided and
-			 * a utility like .text-balance beat `p, li`. In v4 Tailwind moved into @layer, and
-			 * unlayered CSS beats every layered rule regardless of specificity, so these rules
-			 * silently started winning. `p, li { text-wrap: pretty }` was overriding
-			 * .text-balance on cheerp.io's hero and shifting the page 88px.
-			 */
+			/* @layer base so Tailwind utilities still outrank these. */
 			@layer base {
 				.dark {
 					color-scheme: dark;

@@ -135,9 +135,6 @@ export default function ThemeIntegration(
 					},
 					trailingSlash: "never",
 					vite: {
-						// Tailwind v4 ships as a Vite plugin; @astrojs/tailwind was v3-only
-						// and is deprecated. Unlike that integration, this does NOT inject a
-						// stylesheet, so layouts/Shell.astro imports ./styles/theme.css.
 						plugins: [tailwindcss()],
 						ssr: {
 							noExternal: [

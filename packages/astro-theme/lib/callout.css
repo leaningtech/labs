@@ -1,5 +1,3 @@
-/* @apply needs the theme in scope. v4 processes each stylesheet
-   separately, so it does not inherit it the way v3 did. */
 @reference "../styles/theme.css";
 
 blockquote[data-callout] {

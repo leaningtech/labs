@@ -1,57 +1,27 @@
 /*
- * Tailwind v4 theme for all Leaning Tech sites.
- *
- * Replaces the v3 `tailwind.ts` JS config. Imported once by layouts/Shell.astro, which every
- * layout in this package renders through, so all five sites pick it up from here.
- *
- * Two things that were plugins in v3 are gone:
- *   - exportColorsAsCssVariables: v4 exposes every theme colour as a --color-* variable itself.
- *   - siteThemes: now plain CSS in @layer base, see "Site themes" below.
+ * Tailwind theme for all five sites. Imported by layouts/Shell.astro, which every layout in
+ * this package renders through.
  */
 
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
- * Content sources
- *
- * v4 auto-detects sources from the build's working directory, which for these Astro builds is
- * the individual site. That gives per-site scoping for free, matching v3's `relative: true`
- * with `./src/**`. Scanning all of sites/* from here instead inflated each site's CSS by ~27%.
- *
- * Only this package has to be added by hand, because it is a sibling the site root cannot see.
- * ------------------------------------------------------------------------ */
-
 /*
- * ALL sibling packages, not just this one. The v3 config scanned `../../packages/**` and
- * dropping that silently purged the hero gradient on labs.leaningtech.com, because
- * packages/hero/Hero.astro holds `to-[#e6275544] from-stone-950`. A build with missing
- * styles still succeeds, so this is only caught by looking at the page.
- *
- * packages/ is this file's grandparent: .. is astro-theme, ../.. is packages.
+ * Sites are auto-detected from each build's working directory. Sibling packages are not, so
+ * they are listed here: packages/ is this file's grandparent. Missing one silently purges its
+ * classes and the build still succeeds.
  */
+
 @source "../../*/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
 @source not "../../*/node_modules/**";
 @source not "../../*/dist/**";
 
-/* ---------------------------------------------------------------------------
- * Variants
- *
- * v3 used `darkMode: "class"`. Shell.astro hardcodes `dark` on <html>, so this is always on;
- * there is no runtime toggle to break.
- * ------------------------------------------------------------------------ */
+/* Shell.astro hardcodes `dark` on <html>, so this is always on. */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @plugin "@tailwindcss/typography";
 
-/* ---------------------------------------------------------------------------
- * Theme
- *
- * In v3 the colour scales were `rgb(var(--color-primary-600) / <alpha-value>)` pointing at
- * space-separated triples. v4 handles alpha itself via color-mix(), so these are plain colours
- * and the indirection is gone. Utilities still emit `var(--color-…)`, which is what lets the
- * site themes below override them.
- * ------------------------------------------------------------------------ */
+/* Utilities emit var(--color-*), which is what lets the site themes below override them. */
 
 @theme {
 	--font-sans:
@@ -89,15 +59,13 @@
 	--color-blurple: #5865f2;
 }
 
-/* ---------------------------------------------------------------------------
- * Site themes
+/*
+ * Site themes. Shell.astro renders <html class="... site-<name>">, derived from the hostname
+ * by getSite() in lib/nav.ts.
  *
- * Shell.astro renders <html class="dark scroll-smooth site-<name>">, and getSite() in lib/nav.ts
- * derives <name> from the hostname. These override the @theme defaults above.
- *
- * Both these selectors and :root target <html>, so specificity alone would be a tie. @layer base
- * beating @layer theme in v4's layer order is what makes these win. Do not move them into @theme.
- * ------------------------------------------------------------------------ */
+ * DO NOT move these into @theme. Both these and :root target <html>, so specificity ties;
+ * @layer base outranking @layer theme is the only reason they win.
+ */
 
 @layer base {
 	.site-browserpod {
@@ -157,14 +125,12 @@
 	}
 }
 
-/* ---------------------------------------------------------------------------
- * v3 compatibility
+/*
+ * v3 compatibility. Pins the Preflight defaults v4 changed, so any visual difference during
+ * the migration is a bug rather than a judgement call.
  *
- * v4 changed several Preflight defaults. Pinning the v3 behaviour here means any visual
- * difference during the migration is a bug rather than a judgement call.
- *
- * REMOVE THIS BLOCK IN A SEPARATE PR, one item at a time, once the migration is verified.
- * ------------------------------------------------------------------------ */
+ * REMOVE IN A SEPARATE PR, one item at a time, once the migration is verified.
+ */
 
 @layer base {
 	/* v4 default is currentColor; v3 was gray-200. 37 bare `border` utilities rely on this. */
