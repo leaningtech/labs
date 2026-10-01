@@ -21,8 +21,17 @@
  * Only this package has to be added by hand, because it is a sibling the site root cannot see.
  * ------------------------------------------------------------------------ */
 
-@source "../{components,layouts,lib,pages}/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
-@source "../*.{ts,js,mjs}";
+/*
+ * ALL sibling packages, not just this one. The v3 config scanned `../../packages/**` and
+ * dropping that silently purged the hero gradient on labs.leaningtech.com, because
+ * packages/hero/Hero.astro holds `to-[#e6275544] from-stone-950`. A build with missing
+ * styles still succeeds, so this is only caught by looking at the page.
+ *
+ * packages/ is this file's grandparent: .. is astro-theme, ../.. is packages.
+ */
+@source "../../*/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
+@source not "../../*/node_modules/**";
+@source not "../../*/dist/**";
 
 /* ---------------------------------------------------------------------------
  * Variants
