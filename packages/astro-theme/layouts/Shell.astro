@@ -78,26 +78,6 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 						"ss08" var(--ligatures, 1) !important;
 				}
 
-				/* inline code */
-				.prose
-					:where(code):not(
-						:where([class~="not-prose"], [class~="not-prose"] *)
-					) {
-					@apply bg-bg-800;
-
-					padding: 0.2em 0.4em;
-					font-size: 90%;
-
-					border-radius: 6px;
-
-					white-space: break-spaces;
-
-					/* No italics because we're already slanted */
-					& span {
-						font-style: normal !important;
-					}
-				}
-
 				/* Don't wrap between link text and the 'external link' icon */
 				.prose a:has(> span > img) {
 					white-space: nowrap;

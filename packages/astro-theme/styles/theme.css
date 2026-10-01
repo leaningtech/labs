@@ -21,6 +21,56 @@
 
 @plugin "@tailwindcss/typography";
 
+/*
+ * Typography overrides. v3 set these through the plugin's JS config; v4 needs CSS. Declared
+ * after the plugin and in its layer (utilities), so these win.
+ */
+@layer utilities {
+	/*
+	 * Only the invert variable: all three `prose` usages pair it with `dark:prose-invert`,
+	 * and setting --tw-prose-links here would clobber the plugin's invert mapping.
+	 */
+	.prose {
+		--tw-prose-invert-links: var(--color-primary-400);
+	}
+
+	.prose a:hover {
+		color: var(--color-primary-400);
+	}
+
+	.dark .prose a:hover {
+		color: var(--color-primary-300);
+	}
+
+	/*
+	 * v3 disabled the plugin's pre/code/blockquote styling entirely: expressive-code owns
+	 * code blocks, and the inline-code rule below owns the rest. Without this the plugin
+	 * wraps inline code in literal backticks.
+	 */
+	.prose :where(code)::before,
+	.prose :where(code)::after,
+	.prose :where(blockquote p:first-of-type)::before,
+	.prose :where(blockquote p:last-of-type)::after {
+		content: none;
+	}
+
+	.prose
+		:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+		background-color: var(--color-bg-800);
+		color: inherit;
+		font-weight: inherit;
+		font-size: 90%;
+		padding: 0.2em 0.4em;
+		border-radius: 6px;
+		white-space: break-spaces;
+
+		/* No italics because we're already slanted */
+		& span {
+			font-style: normal !important;
+		}
+	}
+}
+
 /* Utilities emit var(--color-*), which is what lets the site themes below override them. */
 
 @theme {
