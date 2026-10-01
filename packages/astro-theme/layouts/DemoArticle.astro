@@ -69,7 +69,7 @@ if (description) {
 								<Image
 									src={hero_image}
 									alt=""
-									class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
+									class="rounded-xs mx-auto object-cover max-h-[30rem] bg-stone-300"
 									quality="max"
 								/>
 							)
@@ -101,7 +101,7 @@ if (description) {
 									<Image
 										src={hero_image}
 										alt=""
-										class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
+										class="rounded-xs mx-auto object-cover max-h-[30rem] bg-stone-300"
 										quality="max"
 									/>
 								)
@@ -149,6 +149,8 @@ if (description) {
 </Shell>
 
 <style is:global>
+	@reference "../styles/theme.css";
+
 	.social-share-btn {
 		display: inline-block;
 		width: 24px;

@@ -1,4 +1,6 @@
 ---
+import "../styles/theme.css";
+
 import BaseHead from "../components/BaseHead.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { productFromUrl } from "../lib/products";
@@ -34,70 +36,57 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 			}
 		</style>
 		<style is:global>
-			.dark {
-				color-scheme: dark;
-			}
+			@reference "../styles/theme.css";
 
-			::selection {
-				background-color: rgba(230, 39, 85, 0.5);
-			}
-
-			.heading-link-icon {
-				opacity: 0;
-			}
-
-			h1:hover .heading-link-icon,
-			h2:hover .heading-link-icon,
-			h3:hover .heading-link-icon,
-			h4:hover .heading-link-icon,
-			h5:hover .heading-link-icon {
-				opacity: 1;
-			}
-
-			code {
-				/* Leaning Technologies ;) */
-				font-variation-settings: "slnt" -9 !important;
-
-				/* Enable texture healing and ligatures */
-				font-feature-settings:
-					"calt" var(--texture-healing, 1),
-					"dlig" var(--ligatures, 1),
-					"ss01" var(--ligatures, 1),
-					"ss02" var(--ligatures, 1),
-					"ss03" var(--ligatures, 1),
-					"ss04" var(--ligatures, 1),
-					"ss05" var(--ligatures, 1),
-					"ss06" var(--ligatures, 1),
-					"ss07" var(--ligatures, 1),
-					"ss08" var(--ligatures, 1) !important;
-			}
-
-			/* inline code */
-			.prose
-				:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-				@apply bg-bg-800;
-
-				padding: 0.2em 0.4em;
-				font-size: 90%;
-
-				border-radius: 6px;
-
-				white-space: break-spaces;
-
-				/* No italics because we're already slanted */
-				& span {
-					font-style: normal !important;
+			/* @layer base so Tailwind utilities still outrank these. */
+			@layer base {
+				.dark {
+					color-scheme: dark;
 				}
-			}
 
-			/* Don't wrap between link text and the 'external link' icon */
-			.prose a:has(> span > img) {
-				white-space: nowrap;
-			}
+				::selection {
+					background-color: rgba(230, 39, 85, 0.5);
+				}
 
-			p,
-			li {
-				text-wrap: pretty;
+				.heading-link-icon {
+					opacity: 0;
+				}
+
+				h1:hover .heading-link-icon,
+				h2:hover .heading-link-icon,
+				h3:hover .heading-link-icon,
+				h4:hover .heading-link-icon,
+				h5:hover .heading-link-icon {
+					opacity: 1;
+				}
+
+				code {
+					/* Leaning Technologies ;) */
+					font-variation-settings: "slnt" -9 !important;
+
+					/* Enable texture healing and ligatures */
+					font-feature-settings:
+						"calt" var(--texture-healing, 1),
+						"dlig" var(--ligatures, 1),
+						"ss01" var(--ligatures, 1),
+						"ss02" var(--ligatures, 1),
+						"ss03" var(--ligatures, 1),
+						"ss04" var(--ligatures, 1),
+						"ss05" var(--ligatures, 1),
+						"ss06" var(--ligatures, 1),
+						"ss07" var(--ligatures, 1),
+						"ss08" var(--ligatures, 1) !important;
+				}
+
+				/* Don't wrap between link text and the 'external link' icon */
+				.prose a:has(> span > img) {
+					white-space: nowrap;
+				}
+
+				p,
+				li {
+					text-wrap: pretty;
+				}
 			}
 		</style>
 		<!--

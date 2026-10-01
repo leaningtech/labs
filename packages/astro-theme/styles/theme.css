@@ -1,0 +1,217 @@
+/*
+ * Tailwind theme for all five sites. Imported by layouts/Shell.astro, which every layout in
+ * this package renders through.
+ */
+
+@import "tailwindcss";
+
+/*
+ * Sites are auto-detected from each build's working directory. Sibling packages are not, so
+ * they are listed here: packages/ is this file's grandparent. Missing one silently purges its
+ * classes and the build still succeeds.
+ */
+
+@source "../../*/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
+@source not "../../*/node_modules/**";
+@source not "../../*/dist/**";
+
+/* Shell.astro hardcodes `dark` on <html>, so this is always on. */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+
+/*
+ * Typography overrides. v3 set these through the plugin's JS config; v4 needs CSS. Declared
+ * after the plugin and in its layer (utilities), so these win.
+ */
+@layer utilities {
+	/*
+	 * Only the invert variable: all three `prose` usages pair it with `dark:prose-invert`,
+	 * and setting --tw-prose-links here would clobber the plugin's invert mapping.
+	 */
+	.prose {
+		--tw-prose-invert-links: var(--color-primary-400);
+	}
+
+	.prose a:hover {
+		color: var(--color-primary-400);
+	}
+
+	.dark .prose a:hover {
+		color: var(--color-primary-300);
+	}
+
+	/*
+	 * v3 disabled the plugin's pre/code/blockquote styling entirely: expressive-code owns
+	 * code blocks, and the inline-code rule below owns the rest. Without this the plugin
+	 * wraps inline code in literal backticks.
+	 */
+	.prose :where(code)::before,
+	.prose :where(code)::after,
+	.prose :where(blockquote p:first-of-type)::before,
+	.prose :where(blockquote p:last-of-type)::after {
+		content: none;
+	}
+
+	.prose
+		:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+		background-color: var(--color-bg-800);
+		color: inherit;
+		font-weight: inherit;
+		font-size: 90%;
+		padding: 0.2em 0.4em;
+		border-radius: 6px;
+		white-space: break-spaces;
+
+		/* No italics because we're already slanted */
+		& span {
+			font-style: normal !important;
+		}
+	}
+}
+
+/* Utilities emit var(--color-*), which is what lets the site themes below override them. */
+
+@theme {
+	--font-sans:
+		"Stack Sans Text", "Archivo", "DM Sans", "Noto Sans", "Noto Sans JP",
+		"Inter", system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI",
+		"Roboto", "Helvetica Neue", "Arial", "Yu Gothic", "Hiragino Sans",
+		"Noto Sans CJK JP", sans-serif;
+	--font-mono: "Monaspace Argon", monospace;
+
+	/* Default primary: pink/red */
+	--color-primary-600: rgb(230 39 85);
+	--color-primary-500: rgb(232 61 102);
+	--color-primary-400: rgb(235 82 119);
+	--color-primary-300: rgb(240 125 153);
+	--color-primary-200: rgb(245 169 187);
+	--color-primary-100: rgb(250 212 221);
+	--color-primary-50: rgb(253 233 238);
+
+	/* Backgrounds: neutral */
+	--color-bg-950: rgb(10 10 10);
+	--color-bg-900: rgb(23 23 23);
+	--color-bg-800: rgb(38 38 38);
+	--color-bg-700: rgb(64 64 64);
+	--color-bg-600: rgb(82 82 82);
+	--color-bg-500: rgb(115 115 115);
+	--color-bg-400: rgb(163 163 163);
+	--color-bg-300: rgb(212 212 212);
+	--color-bg-200: rgb(229 229 229);
+	--color-bg-100: rgb(245 245 245);
+	--color-bg-50: rgb(250 250 250);
+
+	/* Product accents */
+	--color-cheerp: #56f4ec;
+	--color-cheerpx: #3b516d;
+	--color-blurple: #5865f2;
+}
+
+/*
+ * Site themes. Shell.astro renders <html class="... site-<name>">, derived from the hostname
+ * by getSite() in lib/nav.ts.
+ *
+ * DO NOT move these into @theme. Both these and :root target <html>, so specificity ties;
+ * @layer base outranking @layer theme is the only reason they win.
+ */
+
+@layer base {
+	.site-browserpod {
+		--color-primary-600: rgb(2 9 20);
+		--color-primary-500: rgb(74 125 255);
+		--color-primary-400: rgb(110 152 255);
+		--color-primary-300: rgb(147 178 255);
+		--color-primary-200: rgb(183 205 255);
+		--color-primary-100: rgb(212 225 255);
+		--color-primary-50: rgb(240 245 255);
+		--color-bg-950: rgb(13 13 14); /* --color-bg: #0d0d0e */
+		--color-bg-900: rgb(15 15 16); /* --color-surface: #0f0f10 */
+		--color-bg-800: rgb(18 18 19); /* --color-surface-elevated: #121213 */
+		--color-bg-500: rgb(113 113 122); /* --color-text-muted: #71717a */
+		--color-bg-400: rgb(161 161 170); /* --color-text-secondary: #a1a1aa */
+	}
+
+	.site-cheerpj {
+		--color-primary-600: rgb(194 98 3);
+		--color-primary-500: rgb(219 110 4);
+		--color-primary-400: rgb(243 123 4);
+		--color-primary-300: rgb(247 148 56);
+		--color-primary-200: rgb(251 179 115);
+		--color-primary-100: rgb(253 215 179);
+		--color-primary-50: rgb(254 239 229);
+	}
+
+	.site-cheerp {
+		--color-primary-600: rgb(41 174 165);
+		--color-primary-500: rgb(46 196 186);
+		--color-primary-400: rgb(81 218 206);
+		--color-primary-300: rgb(121 229 219);
+		--color-primary-200: rgb(168 240 233);
+		--color-primary-100: rgb(209 248 245);
+		--color-primary-50: rgb(237 252 251);
+	}
+
+	/* CheerpX: steel blue, primary only */
+	.site-cheerpx {
+		--color-primary-600: rgb(78 105 132); /* #4e6984 darker */
+		--color-primary-500: rgb(97 131 164); /* #6183a4 CheerpX gray */
+		--color-primary-400: rgb(122 156 189); /* #7a9cbd lighter */
+		--color-primary-300: rgb(156 183 209); /* #9cb7d1 light */
+		--color-primary-200: rgb(190 209 227); /* #bed1e3 very light */
+		--color-primary-100: rgb(223 232 241); /* #dfe8f1 pale */
+		--color-primary-50: rgb(244 247 250); /* #f4f7fa almost white */
+	}
+
+	.site-labs {
+		--color-primary-600: rgb(230 39 85);
+		--color-primary-500: rgb(232 61 102);
+		--color-primary-400: rgb(235 82 119);
+		--color-primary-300: rgb(240 125 153);
+		--color-primary-200: rgb(245 169 187);
+		--color-primary-100: rgb(250 212 221);
+		--color-primary-50: rgb(253 233 238);
+	}
+}
+
+/*
+ * v3 compatibility. Pins the Preflight defaults v4 changed, so any visual difference during
+ * the migration is a bug rather than a judgement call.
+ *
+ * REMOVE IN A SEPARATE PR, one item at a time, once the migration is verified.
+ */
+
+@layer base {
+	/* v4 default is currentColor; v3 was gray-200. 37 bare `border` utilities rely on this. */
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+
+	/* v4 default is currentColor at 50%; v3 was gray-400. */
+	input::placeholder,
+	textarea::placeholder {
+		color: var(--color-gray-400);
+	}
+
+	/* v4 default is `default`; v3 was `pointer`. */
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+
+	/* v4 removes the centring margin. */
+	dialog {
+		margin: auto;
+	}
+}
+
+@theme {
+	/* v4 defaults are 1px and currentColor; v3 was 3px and blue-500. */
+	--default-ring-width: 3px;
+	--default-ring-color: var(--color-blue-500);
+}

@@ -14,7 +14,6 @@
 		"./layouts/DemoArticle.astro": "./layouts/DemoArticle.astro",
 		"./components/DemoCard.astro": "./components/DemoCard.astro",
 		"./content": "./content.ts",
-		"./tailwind": "./tailwind.ts",
 		"./pages/docs/index.astro": "./pages/docs/index.astro",
 		"./pages/docs/404.astro": "./pages/docs/404.astro",
 		"./pages/docs/[...slug].astro": "./pages/docs/[...slug].astro",
@@ -43,11 +42,10 @@
 	"scripts": {},
 	"peerDependencies": {
 		"@astrojs/svelte": "^7.2.5",
-		"@astrojs/tailwind": "^5.1.0",
 		"astro": "*",
 		"sharp": "^0.34.5",
 		"svelte": "^5.38.6",
-		"tailwindcss": "^3.4.0"
+		"tailwindcss": "^4.1.11"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.10",
@@ -63,7 +61,8 @@
 		"@leaningtech/svelte-browserpod-editor": "^1.0.1",
 		"@replit/codemirror-lang-svelte": "^6.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.1.1",
-		"@tailwindcss/typography": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.20",
+		"@tailwindcss/vite": "^4.1.11",
 		"astro-expressive-code": "^0.41.5",
 		"astro-icon": "^1.1.5",
 		"astro-integration-kit": "^0.19.1",

@@ -1,3 +1,5 @@
+@reference "../styles/theme.css";
+
 blockquote[data-callout] {
 	@apply p-4 px-5 my-3 rounded-md text-slate-200 border-0;
 }
@@ -40,7 +42,7 @@ blockquote[data-callout] > div:not(.callout-title) > p {
 
 /* Fallback colours */
 blockquote[data-callout] {
-	@apply bg-blue-400 bg-opacity-10;
+	@apply bg-blue-400/10;
 
 	& .callout-title {
 		@apply text-blue-400;
@@ -50,7 +52,7 @@ blockquote[data-callout] {
 blockquote[data-callout="tip"],
 blockquote[data-callout="hint"],
 blockquote[data-callout="important"] {
-	@apply bg-cyan-400 bg-opacity-10;
+	@apply bg-cyan-400/10;
 
 	& .callout-title {
 		@apply text-cyan-400;
@@ -60,7 +62,7 @@ blockquote[data-callout="important"] {
 blockquote[data-callout="success"],
 blockquote[data-callout="check"],
 blockquote[data-callout="done"] {
-	@apply bg-green-400 bg-opacity-10;
+	@apply bg-green-400/10;
 
 	& .callout-title {
 		@apply text-green-400;
@@ -70,7 +72,7 @@ blockquote[data-callout="done"] {
 blockquote[data-callout="question"],
 blockquote[data-callout="help"],
 blockquote[data-callout="faq"] {
-	@apply bg-yellow-400 bg-opacity-10;
+	@apply bg-yellow-400/10;
 
 	& .callout-title {
 		@apply text-yellow-400;
@@ -80,7 +82,7 @@ blockquote[data-callout="faq"] {
 blockquote[data-callout="warning"],
 blockquote[data-callout="caution"],
 blockquote[data-callout="attention"] {
-	@apply bg-orange-400 bg-opacity-10;
+	@apply bg-orange-400/10;
 
 	& .callout-title {
 		@apply text-orange-400;
@@ -93,7 +95,7 @@ blockquote[data-callout="missing"],
 blockquote[data-callout="danger"],
 blockquote[data-callout="error"],
 blockquote[data-callout="bug"] {
-	@apply bg-red-400 bg-opacity-10;
+	@apply bg-red-400/10;
 
 	& .callout-title {
 		@apply text-red-400;
