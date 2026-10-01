@@ -107,6 +107,32 @@
 	--color-cheerp: #56f4ec;
 	--color-cheerpx: #3b516d;
 	--color-blurple: #5865f2;
+
+	/*
+	 * Docs layout widths, as max-w-docs and max-w-measure. `docs` caps the whole page (nav,
+	 * sidebar, content, TOC, footer) so the rails sit at the edges without drifting apart on
+	 * ultra-wide screens. `measure` is the prose line length, ~80 characters at body size.
+	 */
+	--container-docs: 120rem;
+	--container-measure: 42rem;
+}
+
+/*
+ * Docs breakout. Inside the docs content column (an @container), a `.breakout` child of the
+ * centred prose spans the full column instead of the measure. Used for images and embeds.
+ * Only works on direct children of the prose element: the margin maths assumes the parent is
+ * centred in the container. Outside a docs page there is no container, so it does nothing.
+ */
+@layer utilities {
+	[data-breakout-container] .breakout {
+		width: calc(100cqw - 2 * var(--docs-gutter));
+		max-width: none;
+		margin-inline: calc(50% - 50cqw + var(--docs-gutter));
+	}
+
+	[data-breakout-container] .breakout img {
+		margin-inline: auto;
+	}
 }
 
 /*

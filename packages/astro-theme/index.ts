@@ -5,6 +5,7 @@ import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
 import { remarkReplaceVars, rehypeReplaceVars } from "./replace-variables";
+import { rehypeBreakoutImages } from "./rehype-breakout-images";
 import svelte from "@astrojs/svelte";
 import astroExpressiveCode, {
 	loadShikiTheme,
@@ -90,6 +91,7 @@ export default function ThemeIntegration(
 						remarkPlugins: [[remarkObsidianCallout, {}], remarkReplaceVars],
 						rehypePlugins: [
 							rehypeReplaceVars,
+							rehypeBreakoutImages, // before rehypeExternalLinks, which appends an icon to linked images
 							rehypeSlug, // astro does this automatically but rehype-autolink-headings needs it
 							[
 								rehypeAutolinkHeadings,
