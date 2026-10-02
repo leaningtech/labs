@@ -91,7 +91,7 @@ export default function ThemeIntegration(
 						remarkPlugins: [[remarkObsidianCallout, {}], remarkReplaceVars],
 						rehypePlugins: [
 							rehypeReplaceVars,
-							rehypeBreakoutImages, // before rehypeExternalLinks, which appends an icon to linked images
+							rehypeBreakoutImages, // must run before rehypeExternalLinks adds its icon
 							rehypeSlug, // astro does this automatically but rehype-autolink-headings needs it
 							[
 								rehypeAutolinkHeadings,

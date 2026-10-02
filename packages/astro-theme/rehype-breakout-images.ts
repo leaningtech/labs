@@ -1,8 +1,6 @@
 import { visit } from "unist-util-visit";
 
-// Markdown renders a standalone image as <p><img></p> (or <p><a><img></a></p>). Mark those
-// paragraphs `breakout` so docs pages let them span the full content column. Images inline
-// with text are left alone.
+// Adds `breakout` to paragraphs holding only an image (optionally linked).
 export function rehypeBreakoutImages() {
 	return (tree) => {
 		visit(tree, "element", (node) => {
