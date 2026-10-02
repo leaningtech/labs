@@ -13,9 +13,10 @@ interface Props {
 const { heading } = Astro.props;
 ---
 
-<li is="toc-heading">
+<li>
 	<a
 		href={"#" + heading.slug}
+		data-toc-link
 		class:list={[
 			"block py-1 text-bg-400 hover:text-white",
 			{
@@ -38,87 +39,69 @@ const { heading } = Astro.props;
 </li>
 
 <script>
-	// Active state based on location.hash AND scroll position
-	class TocHeading extends HTMLLIElement {
-		private static observer: IntersectionObserver | null = null;
-		private static activeSlug: string | null = null;
+	const ACTIVE = "!text-primary-400";
+	const links = [
+		...document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"),
+	];
+	const headings = links.map((link) =>
+		document.getElementById(decodeURIComponent(link.hash.slice(1)))
+	);
 
-		constructor() {
-			super();
-
-			// Create shared observer on first instance
-			if (!TocHeading.observer) {
-				TocHeading.initObserver();
-			}
-
-			// Also handle hash changes (for direct clicks)
-			this.update();
-			window.addEventListener("hashchange", () => this.update());
-		}
-
-		static initObserver() {
-			// Observe all headings in the main content (excluding H1)
-			const headings = document.querySelectorAll(
-				"main h2[id], main h3[id], main h4[id], main h5[id], main h6[id]"
-			);
-
-			this.observer = new IntersectionObserver(
-				(entries) => {
-					// Find the first visible heading
-					const visibleEntries = entries
-						.filter((entry) => entry.isIntersecting)
-						.sort((a, b) => {
-							return a.boundingClientRect.top - b.boundingClientRect.top;
-						});
-
-					if (visibleEntries.length > 0) {
-						const firstVisible = visibleEntries[0];
-						const slug = firstVisible.target.id;
-
-						if (slug !== this.activeSlug) {
-							this.activeSlug = slug;
-							this.updateAllLinks(slug);
-						}
-					}
-				},
-				{
-					rootMargin: "-100px 0px -66%",
-					threshold: 1.0,
-				}
-			);
-
-			headings.forEach((heading) => {
-				this.observer?.observe(heading);
-			});
-		}
-
-		static updateAllLinks(activeSlug: string) {
-			// Remove active class from all TOC links
-			document.querySelectorAll("li[is='toc-heading'] a").forEach((link) => {
-				link.classList.remove("!text-primary-400");
-			});
-
-			// Add active class to link with matching href
-			const targetHref = `#${activeSlug}`;
-			document.querySelectorAll("li[is='toc-heading'] a").forEach((link) => {
-				if (link.getAttribute("href") === targetHref) {
-					link.classList.add("!text-primary-400");
-				}
-			});
-		}
-
-		update() {
-			const a = this.querySelector("a");
-			if (!a) throw new Error("expected <a> element");
-
-			const href = a.getAttribute("href");
-
-			if (href === location.hash) {
-				a.classList.add("!text-primary-400");
-			} else {
-				a.classList.remove("!text-primary-400");
-			}
-		}
+	function setActive(index: number) {
+		links.forEach((link, i) => link.classList.toggle(ACTIVE, i === index));
 	}
-	customElements.define("toc-heading", TocHeading, { extends: "li" });
+
+	// The active section is the last heading above a reading line 1/3 down the window. Near the
+	// bottom of the page that line sweeps down to the window's bottom edge, so the last sections,
+	// which can never scroll up to 1/3, still get their turn.
+	function update() {
+		const vh = window.innerHeight;
+		const base = vh / 3;
+		const remaining =
+			document.documentElement.scrollHeight - vh - window.scrollY;
+		const sweep = vh - base;
+		const line = remaining < sweep ? base + (sweep - remaining) : base;
+
+		let active = 0;
+		headings.forEach((heading, i) => {
+			if (heading && heading.getBoundingClientRect().top <= line) active = i;
+		});
+		setActive(active);
+	}
+
+	// After a TOC click, keep the clicked section active until the user scrolls again: the page
+	// may not be able to scroll that heading up to the reading line.
+	let locked = false;
+	links.forEach((link, i) =>
+		link.addEventListener("click", () => {
+			locked = true;
+			setActive(i);
+		})
+	);
+	for (const event of ["wheel", "touchmove", "keydown", "pointerdown"]) {
+		window.addEventListener(event, () => (locked = false), { passive: true });
+	}
+
+	let queued = false;
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (locked || queued) return;
+			queued = true;
+			requestAnimationFrame(() => {
+				queued = false;
+				update();
+			});
+		},
+		{ passive: true }
+	);
+	window.addEventListener("resize", update);
+
+	const fromHash = links.findIndex((link) => link.hash === location.hash);
+	if (fromHash >= 0) {
+		locked = true;
+		setActive(fromHash);
+	} else if (links.length > 0) {
+		update();
+	}
 </script>
