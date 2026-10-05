@@ -121,7 +121,7 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 					}
 					{
 						authors.some((a) => a.guest) && (
-							<div class="inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+							<div class="inline-block py-1 px-2 bg-primary-400/50 border border-primary-400 text-white rounded-full text-xs font-semibold">
 								Guest author
 							</div>
 						)
@@ -199,7 +199,7 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 										)}
 										{author.guest && (
 											<div>
-												<div class="mt-2 inline-block py-1 px-2 bg-primary-400 bg-opacity-50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+												<div class="mt-2 inline-block py-1 px-2 bg-primary-400/50 border border-primary-400 text-white rounded-full text-xs font-semibold">
 													Guest author
 												</div>
 											</div>
@@ -227,6 +227,8 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 </Shell>
 
 <style is:global>
+	@reference "../styles/theme.css";
+
 	.social-share-btn {
 		display: inline-block;
 		width: 24px;

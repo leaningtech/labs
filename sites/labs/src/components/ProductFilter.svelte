@@ -137,7 +137,7 @@
 		if (i === -1) return esc(text);
 		return (
 			esc(text.slice(0, i)) +
-			`<mark class="bg-primary-400/20 text-primary-300 rounded-sm not-italic">${esc(text.slice(i, i + query.length))}</mark>` +
+			`<mark class="bg-primary-400/20 text-primary-300 rounded-xs not-italic">${esc(text.slice(i, i + query.length))}</mark>` +
 			esc(text.slice(i + query.length))
 		);
 	}
@@ -363,7 +363,7 @@
 					bind:value={searchQuery}
 					onfocus={() => (inputFocused = true)}
 					autofocus
-					class="w-full bg-stone-950 border border-bg-700 rounded-md pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+					class="w-full bg-stone-950 border border-bg-700 rounded-md pl-9 pr-3 py-1.5 text-sm text-white placeholder:text-bg-500 focus:outline-hidden focus:border-bg-500 transition-colors"
 				/>
 				{#if showMobilePopup}
 					<div
@@ -607,7 +607,7 @@
 				placeholder={searchPlaceholder}
 				bind:value={searchQuery}
 				onfocus={() => (inputFocused = true)}
-				class="w-full bg-stone-950 border border-bg-700 rounded-md pl-8 pr-3 py-1 text-xs text-white placeholder:text-bg-500 focus:outline-none focus:border-bg-500 transition-colors"
+				class="w-full bg-stone-950 border border-bg-700 rounded-md pl-8 pr-3 py-1 text-xs text-white placeholder:text-bg-500 focus:outline-hidden focus:border-bg-500 transition-colors"
 			/>
 			{#if showPopup}
 				<div
@@ -798,7 +798,7 @@
 		color: rgb(214 211 209); /* stone-300 */
 	}
 	.filter-btn.active {
-		border-top: 2px solid rgb(var(--color-primary-500));
+		border-top: 2px solid var(--color-primary-500);
 		border-left: 1px solid rgb(68 64 60); /* stone-700 */
 		border-right: 1px solid rgb(68 64 60);
 		border-bottom: none;
@@ -828,7 +828,7 @@
 	/* Active: filled with the current primary colour (tracks product selection) */
 	.category-chip.active {
 		color: white;
-		background-color: rgb(var(--color-primary-500));
-		border-color: rgb(var(--color-primary-500));
+		background-color: var(--color-primary-500);
+		border-color: var(--color-primary-500);
 	}
 </style>

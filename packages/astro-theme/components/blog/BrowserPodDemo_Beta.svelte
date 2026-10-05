@@ -432,7 +432,7 @@
 							class="flex flex-col shadow-2xl flex-1 min-h-0 overflow-hidden"
 						>
 							<div
-								class="flex items-center justify-between bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
+								class="flex items-center justify-between bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
 							>
 								<div
 									class="text-xs text-white/80 font-semibold tracking-wide uppercase flex items-center"
@@ -445,7 +445,7 @@
 								</div>
 							</div>
 							<div
-								class="overflow-hidden flex-1 min-h-0 h-full code-mirror-wrap bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0"
+								class="overflow-hidden flex-1 min-h-0 h-full code-mirror-wrap bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0"
 							>
 								{#if loading}
 									<div
@@ -481,7 +481,7 @@
 								{#if showTerminalTab}
 									<div
 										id="terminal-tab"
-										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-gradient-to-b from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "terminal" ? "active" : ""}`}
+										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "terminal" ? "active" : ""}`}
 										onclick={handleTerminalTabClick}
 									>
 										Terminal
@@ -490,7 +490,7 @@
 								{#if showReplTab}
 									<div
 										id="repl-tab"
-										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-gradient-to-b from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "repl" ? "active" : ""}`}
+										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "repl" ? "active" : ""}`}
 										onclick={handleReplTabClick}
 									>
 										REPL
@@ -498,7 +498,7 @@
 								{/if}
 							</div>
 							<div
-								class="flex-1 min-h-0 bg-gradient-to-b border border-white/15 rounded-b-xl shadow-2xl relative"
+								class="flex-1 min-h-0 bg-linear-to-b/srgb border border-white/15 rounded-b-xl shadow-2xl relative"
 							>
 								{#if showTerminalTab}
 									<div
@@ -526,7 +526,7 @@
 				>
 					<div class="flex flex-col shadow-2xl h-full overflow-hidden">
 						<div
-							class="flex items-center justify-between bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
+							class="flex items-center justify-between bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
 						>
 							<div
 								class="text-xs text-white/80 font-semibold tracking-wide uppercase flex items-center"
@@ -537,7 +537,7 @@
 								{#if isMobile}
 									<button
 										onclick={copyPortalURL}
-										class="text-xs text-white/70 hover:text-white flex items-center flex-shrink-0 cursor-pointer"
+										class="text-xs text-white/70 hover:text-white flex items-center shrink-0 cursor-pointer"
 										title="Copy portal URL"
 										aria-label="Copy portal URL"
 									>
@@ -553,7 +553,7 @@
 								{:else}
 									<button
 										onclick={togglePortalInfo}
-										class="text-xs text-white/70 hover:text-white flex items-center flex-shrink-0 cursor-pointer"
+										class="text-xs text-white/70 hover:text-white flex items-center shrink-0 cursor-pointer"
 										title={showPortalInfo
 											? "Hide portal info"
 											: "Show portal info"}
@@ -575,7 +575,7 @@
 								{/if}
 							{:else}
 								<button
-									class="text-xs text-white/70 hover:text-white/50 flex items-center flex-shrink-0 cursor-not-allowed"
+									class="text-xs text-white/70 hover:text-white/50 flex items-center shrink-0 cursor-not-allowed"
 									title={"Portal Unavailable"}
 									aria-label={"Portal Unavailable"}
 								>
@@ -585,7 +585,7 @@
 							{/if}
 						</div>
 						<div
-							class="flex-1 min-h-0 bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0 relative"
+							class="flex-1 min-h-0 bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0 relative"
 						>
 							{#if !portalURL && isCompatibleBrowser}
 								<div
@@ -639,7 +639,7 @@
 												</p>
 												<div class="flex space-x-2 justify-center">
 													<button
-														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={async () => {
 															await navigator.clipboard.writeText(portalURL);
 															copied = true;
@@ -663,7 +663,7 @@
 														{/if}
 													</button>
 													<button
-														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={togglePortalInfo}
 													>
 														<Icon
@@ -681,7 +681,7 @@
 
 									{#if showMobilePortal && isMobile && portalURL}
 										<div
-											class="fade-element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+											class="fade-element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/80 backdrop-blur-xs p-4"
 										>
 											<h2
 												class="text-white text-xl font-bold mb-4 tracking-wide drop-shadow-lg text-center"
@@ -705,7 +705,7 @@
 												</p>
 												<div class="flex space-x-2 justify-center">
 													<button
-														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={copyPortalURL}
 													>
 														<Icon
@@ -717,7 +717,7 @@
 														{copied ? "Copied!" : "Copy URL"}
 													</button>
 													<button
-														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded flex items-center justify-center cursor-pointer"
+														class="text-xs bg-slate-700 hover:bg-slate-600 text-white py-1 px-3 rounded-sm flex items-center justify-center cursor-pointer"
 														onclick={toggleMobilePortal}
 													>
 														<Icon
@@ -759,7 +759,7 @@
 
 		{#if !isCompatibleBrowser}
 			<div
-				class="absolute inset-0 backdrop-blur-[2px] bg-gradient-to-br from-emerald-950/40 to-slate-950/50 pointer-events-none z-20"
+				class="absolute inset-0 backdrop-blur-[2px] bg-linear-to-br/srgb from-emerald-950/40 to-slate-950/50 pointer-events-none z-20"
 			></div>
 		{/if}
 	</div>

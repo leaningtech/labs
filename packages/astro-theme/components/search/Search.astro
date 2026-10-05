@@ -21,7 +21,7 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 		<span class="hidden sm:block">{t("Search", Astro.currentLocale)}</span>
 		<div class="grow hidden sm:block"></div>
 		<div
-			class="font-mono font-bold text-xs hidden md:block bg-bg-900 text-bg-600 w-5 h-5 leading-5 rounded"
+			class="font-mono font-bold text-xs hidden md:block bg-bg-900 text-bg-600 w-5 h-5 leading-5 rounded-sm"
 			aria-label="Keybinding to open search"
 		>
 			/
@@ -30,7 +30,7 @@ const baseUrl = import.meta.env.BASE_URL || "/";
 
 	<dialog
 		aria-label="Search"
-		class="bg-bg-800 shadow rounded-lg w-11/12 max-w-xl border border-bg-700"
+		class="bg-bg-800 shadow-sm rounded-lg w-11/12 max-w-xl border border-bg-700"
 	>
 		<Pagefind
 			client:visible

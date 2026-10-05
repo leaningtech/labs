@@ -69,7 +69,7 @@ if (description) {
 								<Image
 									src={hero_image}
 									alt=""
-									class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
+									class="rounded-xs mx-auto object-cover max-h-[30rem] bg-stone-300"
 									quality="max"
 								/>
 							)
@@ -89,7 +89,7 @@ if (description) {
 				</div>
 				<div class="flex flex-1 col-span-1">
 					<div
-						class="hidden xl:block h-full min-h-[1em] w-px self-stretch bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
+						class="hidden xl:block h-full min-h-[1em] w-px self-stretch bg-linear-to-tr/srgb from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
 					>
 					</div>
 				</div>
@@ -101,7 +101,7 @@ if (description) {
 									<Image
 										src={hero_image}
 										alt=""
-										class="rounded-sm mx-auto object-cover max-h-[30rem] bg-stone-300"
+										class="rounded-xs mx-auto object-cover max-h-[30rem] bg-stone-300"
 										quality="max"
 									/>
 								)
@@ -149,6 +149,8 @@ if (description) {
 </Shell>
 
 <style is:global>
+	@reference "../styles/theme.css";
+
 	.social-share-btn {
 		display: inline-block;
 		width: 24px;
