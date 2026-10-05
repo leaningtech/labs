@@ -432,7 +432,7 @@
 							class="flex flex-col shadow-2xl flex-1 min-h-0 overflow-hidden"
 						>
 							<div
-								class="flex items-center justify-between bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
+								class="flex items-center justify-between bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
 							>
 								<div
 									class="text-xs text-white/80 font-semibold tracking-wide uppercase flex items-center"
@@ -445,7 +445,7 @@
 								</div>
 							</div>
 							<div
-								class="overflow-hidden flex-1 min-h-0 h-full code-mirror-wrap bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0"
+								class="overflow-hidden flex-1 min-h-0 h-full code-mirror-wrap bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0"
 							>
 								{#if loading}
 									<div
@@ -481,7 +481,7 @@
 								{#if showTerminalTab}
 									<div
 										id="terminal-tab"
-										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-gradient-to-b from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "terminal" ? "active" : ""}`}
+										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "terminal" ? "active" : ""}`}
 										onclick={handleTerminalTabClick}
 									>
 										Terminal
@@ -490,7 +490,7 @@
 								{#if showReplTab}
 									<div
 										id="repl-tab"
-										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-gradient-to-b from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "repl" ? "active" : ""}`}
+										class={`w-24 text-xs text-white/80 font-semibold tracking-wide uppercase bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 border-b-0 rounded-t-xl px-3 py-1.5 [&.active]:underline [&.active]:text-white [&:not(.active)]:text-white/50 [&:not(.active)]:cursor-pointer ${activeConsole === "repl" ? "active" : ""}`}
 										onclick={handleReplTabClick}
 									>
 										REPL
@@ -498,7 +498,7 @@
 								{/if}
 							</div>
 							<div
-								class="flex-1 min-h-0 bg-gradient-to-b border border-white/15 rounded-b-xl shadow-2xl relative"
+								class="flex-1 min-h-0 bg-linear-to-b/srgb border border-white/15 rounded-b-xl shadow-2xl relative"
 							>
 								{#if showTerminalTab}
 									<div
@@ -526,7 +526,7 @@
 				>
 					<div class="flex flex-col shadow-2xl h-full overflow-hidden">
 						<div
-							class="flex items-center justify-between bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
+							class="flex items-center justify-between bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-t-xl shadow-2xl px-3 py-1.5"
 						>
 							<div
 								class="text-xs text-white/80 font-semibold tracking-wide uppercase flex items-center"
@@ -585,7 +585,7 @@
 							{/if}
 						</div>
 						<div
-							class="flex-1 min-h-0 bg-gradient-to-b from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0 relative"
+							class="flex-1 min-h-0 bg-linear-to-b/srgb from-black/50 to-black/20 border border-white/15 rounded-b-xl shadow-2xl border-t-0 relative"
 						>
 							{#if !portalURL && isCompatibleBrowser}
 								<div
@@ -759,7 +759,7 @@
 
 		{#if !isCompatibleBrowser}
 			<div
-				class="absolute inset-0 backdrop-blur-[2px] bg-gradient-to-br from-emerald-950/40 to-slate-950/50 pointer-events-none z-20"
+				class="absolute inset-0 backdrop-blur-[2px] bg-linear-to-br/srgb from-emerald-950/40 to-slate-950/50 pointer-events-none z-20"
 			></div>
 		{/if}
 	</div>
