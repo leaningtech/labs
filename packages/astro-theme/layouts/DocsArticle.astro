@@ -46,6 +46,12 @@ const site = getSite(Astro.site?.hostname);
 	description={description ?? product?.description}
 	{site}
 >
+	<script is:inline>
+		try {
+			if (localStorage.getItem("docs-toc-collapsed") === "true")
+				document.documentElement.setAttribute("data-toc-collapsed", "");
+		} catch {}
+	</script>
 	<BentoGrid />
 	{product ? <ProductNav {product} wide /> : null}
 	{
@@ -67,9 +73,9 @@ const site = getSite(Astro.site?.hostname);
 				<div class="flex-1 min-w-0 flex justify-center">
 					<div
 						data-breakout-container
-						class="@container overflow-x-hidden w-full max-w-[calc(var(--container-breakout)+2*var(--docs-gutter))] [--docs-gutter:1.5rem] md:[--docs-gutter:2rem]"
+						class="@container overflow-x-clip w-full max-w-[calc(var(--container-breakout)+2*var(--docs-gutter))] [--docs-gutter:1.5rem] md:[--docs-gutter:2rem]"
 					>
-						<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 lg:box-content lg:max-w-measure lg:mx-auto flex items-center gap-4 border-b lg:border-b-0 border-bg-600/20">
+						<div class="sticky top-[65px] z-30 bg-bg-900 lg:static lg:bg-transparent p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 lg:box-content lg:max-w-measure lg:mx-auto flex items-center gap-4 border-b lg:border-b-0 border-bg-600/20">
 							{entries && (
 								<button data-sidebar-toggle class="lg:hidden">
 									<span class="sr-only">Open navigation menu</span>
@@ -134,9 +140,19 @@ const site = getSite(Astro.site?.hostname);
 					</div>
 					<aside
 						data-toc
-						class="flex-none self-start w-[clamp(12rem,14vw,16rem)] px-4 py-6 text-sm hidden min-[67.5rem]:block top-[var(--toc-top,65px)] sticky"
+						class="flex-none self-start w-[clamp(12rem,14vw,16rem)] max-xl:in-data-toc-collapsed:w-auto px-4 py-6 text-sm hidden lg:flex items-start gap-2 top-[var(--toc-top,65px)] sticky"
 					>
-						{headings && <TableOfContents {headings} />}
+						<button
+							data-toc-toggle
+							aria-expanded="true"
+							class="flex-none xl:hidden mt-0.5 text-bg-400 hover:text-white"
+						>
+							<span class="sr-only">Toggle table of contents</span>
+							<Icon name="ph:list-bullets" class="w-5 h-5" />
+						</button>
+						<div class="min-w-0 wrap-break-word max-xl:in-data-toc-collapsed:hidden">
+							{headings && <TableOfContents {headings} />}
+						</div>
 					</aside>
 				</div>
 			</docs-article>
@@ -165,6 +181,21 @@ const site = getSite(Astro.site?.hostname);
 			};
 			new ResizeObserver(updateTocTop).observe(toc);
 			window.addEventListener("resize", updateTocTop);
+
+			const tocToggle = toc.querySelector("[data-toc-toggle]")!;
+			const root = document.documentElement;
+			const setCollapsed = (collapsed: boolean) => {
+				root.toggleAttribute("data-toc-collapsed", collapsed);
+				tocToggle.setAttribute("aria-expanded", String(!collapsed));
+			};
+			setCollapsed(root.hasAttribute("data-toc-collapsed"));
+			tocToggle.addEventListener("click", () => {
+				const collapsed = !root.hasAttribute("data-toc-collapsed");
+				setCollapsed(collapsed);
+				try {
+					localStorage.setItem("docs-toc-collapsed", String(collapsed));
+				} catch {}
+			});
 		}
 
 		toggleSidebar() {
