@@ -108,26 +108,9 @@
 	--color-cheerpx: #3b516d;
 	--color-blurple: #5865f2;
 
-	/* Docs layout: prose line length, max width of .breakout elements */
+	/* Docs layout: prose line length, max width of the content column */
 	--container-measure: 50rem;
-	--container-breakout: 60rem;
-}
-
-/* Widens direct children of the docs prose past the measure. Assumes the prose is centred in the container. */
-@layer utilities {
-	[data-breakout-container] .breakout {
-		--breakout-width: min(
-			100cqw - 2 * var(--docs-gutter),
-			var(--container-breakout)
-		);
-		width: var(--breakout-width);
-		max-width: none;
-		margin-inline: calc((100% - var(--breakout-width)) / 2);
-	}
-
-	[data-breakout-container] .breakout img {
-		margin-inline: auto;
-	}
+	--container-content: 64rem;
 }
 
 /*

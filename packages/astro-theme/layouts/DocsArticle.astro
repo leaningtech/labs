@@ -71,10 +71,7 @@ const site = getSite(Astro.site?.hostname);
 					class="hidden lg:hidden fixed inset-0 bg-bg-950/50 backdrop-blur-sm z-40"
 				/>
 				<div class="flex-1 min-w-0 flex justify-center">
-					<div
-						data-breakout-container
-						class="@container overflow-x-clip w-full max-w-[calc(var(--container-breakout)+2*var(--docs-gutter))] [--docs-gutter:1.5rem] md:[--docs-gutter:2rem]"
-					>
+					<div class="overflow-x-clip w-full max-w-content">
 						<div class="sticky top-[65px] z-30 bg-bg-900 lg:static lg:bg-transparent p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 lg:box-content lg:max-w-measure lg:mx-auto flex items-center gap-4 border-b lg:border-b-0 border-bg-600/20">
 							{entries && (
 								<button data-sidebar-toggle class="lg:hidden">
