@@ -73,7 +73,12 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 			!wide && "max-w-screen-2xl",
 		]}
 	>
-		<div class="flex gap-4 flex-none lg:basis-64 lg:mr-10 justify-between">
+		<div
+			class:list={[
+				"flex gap-4 flex-none justify-between",
+				product.id === "browserpod" ? "lg:mr-4" : "lg:basis-64 lg:mr-10",
+			]}
+		>
 			<a href={product.href} class="flex items-center">
 				<Image
 					src={product.logotype}
@@ -204,6 +209,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+		width: calc(100% - 2rem);
 		max-width: 1024px;
 		margin: 0 auto;
 		border-radius: 16px;
@@ -245,6 +251,19 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 	:global(.site-browserpod #product-nav .nav-icon-count) {
 		color: inherit;
+	}
+
+	/* The pill is narrower than the full-width nav, so drop extras before it overflows */
+	@media (max-width: 1023px) {
+		:global(.site-browserpod #product-nav .nav-icon-count) {
+			display: none;
+		}
+	}
+
+	@media (max-width: 767px) {
+		:global(.site-browserpod #product-nav .nav-btn) {
+			padding-inline: 0.5rem;
+		}
 	}
 
 	:global(.site-browserpod) #product-nav site-search {
