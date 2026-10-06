@@ -82,77 +82,75 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 				)
 			}
 
-			<h1
-				class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
-				id="introduction"
-			>
-				{title}
-				{
-					subtitle && (
-						<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
-							{subtitle}
-						</span>
-					)
-				}
-			</h1>
+			<div class="flex gap-10">
+				<div class="flex-1 min-w-0 max-w-content mx-auto">
+					<article class="max-w-3xl mx-auto">
+						<h1
+							class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
+							id="introduction"
+						>
+							{title}
+							{
+								subtitle && (
+									<span class="block pt-3 text-2xl md:text-3xl font-medium text-stone-500">
+										{subtitle}
+									</span>
+								)
+							}
+						</h1>
 
-			<div class="flex flex-col lg:flex-row gap-10 mt-16">
-				<aside class="lg:w-40 text-stone-400">
-					{
-						authors.map((author) => (
-							<a
-								href={author.url}
-								class="flex items-center gap-4 lg:block mb-2"
-							>
-								{author.avatar && (
-									<img
-										class="w-16 h-16 rounded-full"
-										src={author.avatar.src}
-										alt=""
-										loading="lazy"
-										decoding="async"
-									/>
-								)}
-								<div class="font-semibold leading-5 text-lg text-stone-200 lg:mt-2">
-									{author.name}
-								</div>
-							</a>
-						))
-					}
-					{
-						authors.some((a) => a.guest) && (
-							<div class="inline-block py-1 px-2 bg-primary-400/50 border border-primary-400 text-white rounded-full text-xs font-semibold">
-								Guest author
-							</div>
-						)
-					}
-					<div class="mt-4 text-base leading-6 text-stone-400">
-						<FormattedDate date={pubDate} />
-					</div>
-				</aside>
+						<div
+							class="flex flex-wrap items-center gap-x-6 gap-y-3 mt-8 mb-10 text-stone-400"
+						>
+							{
+								authors.map((author) => (
+									<a href={author.url} class="flex items-center gap-3">
+										{author.avatar && (
+											<img
+												class="w-10 h-10 rounded-full"
+												src={author.avatar.src}
+												alt=""
+												loading="lazy"
+												decoding="async"
+											/>
+										)}
+										<span class="font-semibold text-stone-200">
+											{author.name}
+										</span>
+									</a>
+								))
+							}
+							{
+								authors.some((a) => a.guest) && (
+									<span class="py-1 px-2 bg-primary-400/50 border border-primary-400 text-white rounded-full text-xs font-semibold">
+										Guest author
+									</span>
+								)
+							}
+							<FormattedDate date={pubDate} />
+						</div>
 
-				<article class="grow max-w-3xl">
-					<SocialShare {title} {description} via="leaningtech" />
+						<SocialShare {title} {description} via="leaningtech" />
 
-					<div
-						class="prose md:prose-lg dark:prose-invert"
-						,
-						data-pagefind-body
-						data-pagefind-filter="productId:blog"
-					>
-						<slot />
-					</div>
-					<div class="pt-10">
-						<LinkButton
-							type="discord"
-							href={DISCORD_URL}
-							iconLeft="fa-brands:discord"
-							label="Join us on Discord"
-						/>
-					</div>
-				</article>
+						<div
+							class="prose md:prose-lg dark:prose-invert"
+							data-pagefind-body
+							data-pagefind-filter="productId:blog"
+						>
+							<slot />
+						</div>
+						<div class="pt-10">
+							<LinkButton
+								type="discord"
+								href={DISCORD_URL}
+								iconLeft="fa-brands:discord"
+								label="Join us on Discord"
+							/>
+						</div>
+					</article>
+				</div>
 
-				<aside class="hidden lg:block w-40 grow">
+				<aside class="hidden lg:block w-56 flex-none">
 					{
 						headings && (
 							<div class="sticky top-24">
