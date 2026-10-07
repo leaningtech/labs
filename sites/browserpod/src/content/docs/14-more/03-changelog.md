@@ -3,6 +3,21 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 3.4.0:
+
+- Add `pnpm` and `fd` to the default image
+- Fix binary messages and closing of WebSockets served through portals
+- Improve networking robustness: connections no longer hang when a request is blocked or a listening socket is closed
+- Fix terminal input when programs switch between line and raw mode
+- Properly return the signal number when a waited process is killed by a signal
+
+## Version 3.3.0:
+
+- Node: `Atomics.waitAsync` support
+- Node: improved `FinalizationRegistry` support
+- Node: fix exceptions thrown by constructors called from native code
+- Fix a memory leak when spawning many processes
+
 ## Version 3.2.0:
 
 - Improve networking robustness
