@@ -9,7 +9,7 @@ The CheerpJ JNLP Runner extension provides a virtual filesystem that allows Java
 
 ## Uploading files
 
-To import a file from your local machine to the virtual filesystem, you can use either the built-in file picker or the extension popup. In both cases, the files will be placed in the **`/files/uploads/`** virtual directory. Inside the Java application, you can navigate to `/files/uploads/` to open or use these files.
+To import a file from your local machine to the virtual filesystem, you can use either the built-in file picker or the extension side panel. In both cases, the files will be placed in the **`/files/uploads/`** virtual directory. Inside the Java application, you can navigate to `/files/uploads/` to open or use these files.
 
 **Using the built-in file picker:**
 
@@ -19,20 +19,23 @@ The upload icon (an upward arrow) is present as part of the title bar on any Jav
 2. Select a file from your local file system (your machine).
 3. In the File Dialog, navigate to `/files/uploads/` and select the file to load it into the application.
 
-**Using the extension popup:**
+**Using the extension side panel:**
 
-Alternatively, you can upload files directly from the extension popup.
-
-> [!note] Pin the extension
-> If you cannot see the extension popup icon, you may need to pin the extension to your browser's toolbar.
+Alternatively, you can upload files directly from the extension side panel that appears on the left side of the screen while an application is running.
 
 1. Ensure the Java application is currently running.
-2. Click the **CheerpJ icon** in your browser's toolbar and click the **Upload** button.
+2. Hover over the side panel to expand it and click **Upload file**.
+
+   <div class="mx-24">
+   	![Extension side panel expanded next to a running application, showing the
+   	Upload file option](/assets/jnlp-screenshots/jnlp_sidepanel.png)
+   </div>
+
 3. Select the file(s) from your local filesystem.
 
 ## Downloading files
 
-To export data from the Java application back to your local machine, simply ensure the application's save path is set to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
+To export data from the Java application back to your local machine, simply ensure files within the application are saved to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
 
 **Using a standard save dialog:**
 
