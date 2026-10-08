@@ -11,6 +11,7 @@ const today = new Date();
 
 interface Props {
 	includeGrow?: boolean; // default: true
+	wide?: boolean; // full width, aligned to the docs sidebar
 }
 
 interface Section {
@@ -94,8 +95,13 @@ const sections: Section[] = [
 
 {Astro.props.includeGrow === false ? null : <div class="grow" />}
 
-<footer class="p-14 bg-black border-t border-bg-700">
-	<div class="w-full max-w-screen-2xl mx-auto">
+<footer
+	class:list={[
+		"bg-black border-t border-bg-700",
+		Astro.props.wide ? "py-14 px-8" : "p-14",
+	]}
+>
+	<div class:list={["w-full mx-auto", !Astro.props.wide && "max-w-screen-2xl"]}>
 		<div
 			class="grid sm:grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-14 place-content-between text-lg"
 		>

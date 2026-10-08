@@ -107,6 +107,10 @@
 	--color-cheerp: #56f4ec;
 	--color-cheerpx: #3b516d;
 	--color-blurple: #5865f2;
+
+	/* Docs layout: prose line length, max width of the content column */
+	--container-measure: 50rem;
+	--container-content: 64rem;
 }
 
 /*

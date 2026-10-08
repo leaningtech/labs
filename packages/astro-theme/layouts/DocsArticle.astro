@@ -46,13 +46,19 @@ const site = getSite(Astro.site?.hostname);
 	description={description ?? product?.description}
 	{site}
 >
+	<script is:inline>
+		try {
+			if (localStorage.getItem("docs-toc-collapsed") === "true")
+				document.documentElement.setAttribute("data-toc-collapsed", "");
+		} catch {}
+	</script>
 	<BentoGrid />
-	{product ? <ProductNav {product} /> : null}
+	{product ? <ProductNav {product} wide /> : null}
 	{
 		fullWidthLayout ? (
 			<slot />
 		) : (
-			<docs-article class="max-w-[92rem] w-full mx-auto flex justify-between">
+			<docs-article class="w-full flex">
 				<div
 					{...(language && { "data-pagefind-filter": `language:${language}` })}
 					data-sidebar-wrapper
@@ -64,77 +70,92 @@ const site = getSite(Astro.site?.hostname);
 					data-backdrop
 					class="hidden lg:hidden fixed inset-0 bg-bg-950/50 backdrop-blur-sm z-40"
 				/>
-				<div class="overflow-x-hidden w-full">
-					<div class="p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 flex items-center gap-4 border-b lg:border-b-0 border-bg-600/20">
-						{entries && (
-							<button data-sidebar-toggle class="lg:hidden">
-								<span class="sr-only">Open navigation menu</span>
-								<Icon name="mi:menu" class="w-8 h-8 text-white" />
-							</button>
-						)}
-						{id && <Breadcrumbs current={id} />}
-					</div>
+				<div class="flex-1 min-w-0 flex justify-center">
+					<div class="overflow-x-clip w-full max-w-content">
+						<div class="sticky top-[65px] z-30 bg-bg-900 lg:static lg:bg-transparent p-3 lg:px-8 mb-2.5 lg:mb-0 lg:mt-2.5 lg:box-content lg:max-w-measure lg:mx-auto flex items-center gap-4 border-b lg:border-b-0 border-bg-600/20">
+							{entries && (
+								<button data-sidebar-toggle class="lg:hidden">
+									<span class="sr-only">Open navigation menu</span>
+									<Icon name="mi:menu" class="w-8 h-8 text-white" />
+								</button>
+							)}
+							{id && <Breadcrumbs current={id} />}
+						</div>
 
-					<main
-						data-pagefind-body
-						{...(product && {
-							"data-pagefind-filter": `productId:${product.id}`,
-						})}
-						class="prose dark:prose-invert p-6 md:px-8 lg:pt-0 pb-10 w-full max-w-4xl xl:max-w-[56rem]"
-					>
-						{title === product?.name ? (
-							<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
-								<h1>
-									<Image
-										alt={product.name}
-										src={product.logotype}
-										class={
-											product.name === "cheerpj-applet-runner" ||
-											"cheerpj-jnlp-runner"
-												? "w-[344px]"
-												: null
-										}
-									/>
-								</h1>
-								<p class="text-xl font-medium text-bg-400">
-									{description && <span>{description}</span>}
-								</p>
-							</div>
-						) : (
-							<>
-								<h1 class="mb-2 font-bold">
-									<span>{title}</span>
-								</h1>
-								{description && (
-									<p class="mt-0 mb-8 text-bg-400 text-xl">
-										<span>{description}</span>
+						<main
+							data-pagefind-body
+							{...(product && {
+								"data-pagefind-filter": `productId:${product.id}`,
+							})}
+							class="prose dark:prose-invert box-content max-w-measure mx-auto p-6 md:px-8 lg:pt-0 pb-10"
+						>
+							{title === product?.name ? (
+								<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
+									<h1>
+										<Image
+											alt={product.name}
+											src={product.logotype}
+											class={
+												product.name === "cheerpj-applet-runner" ||
+												"cheerpj-jnlp-runner"
+													? "w-[344px]"
+													: null
+											}
+										/>
+									</h1>
+									<p class="text-xl font-medium text-bg-400">
+										{description && <span>{description}</span>}
 									</p>
-								)}
-							</>
-						)}
-						{product?.id === "cheerpj2" ? (
-							<Callout title="Deprecation notice" variant="warning">
-								CheerpJ 2 is deprecated. Consider{" "}
-								<a href="/cheerpj3/migrating-from-cheerpj2">
-									migrating to CheerpJ 3
-								</a>
-								.
-							</Callout>
-						) : null}
-						<slot />
-					</main>
+								</div>
+							) : (
+								<>
+									<h1 class="mb-2 font-bold">
+										<span>{title}</span>
+									</h1>
+									{description && (
+										<p class="mt-0 mb-8 text-bg-400 text-xl">
+											<span>{description}</span>
+										</p>
+									)}
+								</>
+							)}
+							{product?.id === "cheerpj2" ? (
+								<Callout title="Deprecation notice" variant="warning">
+									CheerpJ 2 is deprecated. Consider{" "}
+									<a href="/cheerpj3/migrating-from-cheerpj2">
+										migrating to CheerpJ 3
+									</a>
+									.
+								</Callout>
+							) : null}
+							<slot />
+						</main>
 
-					<div class="py-5 px-6 md:px-8">
-						{entries.length > 0 && id && <DocsPagination activeId={id} />}
+						<div class="box-content max-w-measure mx-auto py-5 px-6 md:px-8">
+							{entries.length > 0 && id && <DocsPagination activeId={id} />}
+						</div>
 					</div>
+					<aside
+						data-toc
+						class="flex-none self-start w-[clamp(12rem,14vw,16rem)] max-xl:in-data-toc-collapsed:w-auto px-4 py-6 text-sm hidden lg:flex items-start gap-2 top-[var(--toc-top,65px)] sticky"
+					>
+						<button
+							data-toc-toggle
+							aria-expanded="true"
+							class="flex-none xl:hidden mt-0.5 text-bg-400 hover:text-white"
+						>
+							<span class="sr-only">Toggle table of contents</span>
+							<Icon name="ph:list-bullets" class="w-5 h-5" />
+						</button>
+						<div class="min-w-0 wrap-break-word max-xl:in-data-toc-collapsed:hidden">
+							{headings && <TableOfContents {headings} />}
+						</div>
+					</aside>
 				</div>
-				<aside class="w-32 xl:w-64 px-4 py-6 text-sm hidden xl:block h-[calc(100vh-4rem)] overflow-y-auto top-[65px] sticky">
-					{headings && <TableOfContents {headings} />}
-				</aside>
 			</docs-article>
 		)
 	}
-	<Footer />
+	<Footer wide />
 </Shell>
 
 <script>
@@ -147,6 +168,31 @@ const site = getSite(Astro.site?.hostname);
 			button!.addEventListener("click", this.toggleSidebar.bind(this));
 			backdrop!.addEventListener("click", this.toggleSidebar.bind(this));
 			close!.addEventListener("click", this.toggleSidebar.bind(this));
+
+			// Sit 10% down the window (clear of the nav); a TOC too long for that scrolls until its bottom is in view
+			const toc = this.querySelector<HTMLElement>("[data-toc]")!;
+			const updateTocTop = () => {
+				const vh = window.innerHeight;
+				const top = Math.min(Math.max(vh * 0.1, 65), vh - toc.offsetHeight);
+				toc.style.setProperty("--toc-top", `${top}px`);
+			};
+			new ResizeObserver(updateTocTop).observe(toc);
+			window.addEventListener("resize", updateTocTop);
+
+			const tocToggle = toc.querySelector("[data-toc-toggle]")!;
+			const root = document.documentElement;
+			const setCollapsed = (collapsed: boolean) => {
+				root.toggleAttribute("data-toc-collapsed", collapsed);
+				tocToggle.setAttribute("aria-expanded", String(!collapsed));
+			};
+			setCollapsed(root.hasAttribute("data-toc-collapsed"));
+			tocToggle.addEventListener("click", () => {
+				const collapsed = !root.hasAttribute("data-toc-collapsed");
+				setCollapsed(collapsed);
+				try {
+					localStorage.setItem("docs-toc-collapsed", String(collapsed));
+				} catch {}
+			});
 		}
 
 		toggleSidebar() {
