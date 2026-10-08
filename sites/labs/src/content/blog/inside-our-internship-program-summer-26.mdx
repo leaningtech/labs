@@ -1,0 +1,76 @@
+---
+title: "Inside our internship program, Summer 2026 Edition"
+slug: internships-summer26
+description: |
+  Our interns reflect on their 6 month internships at Leaning Technologies
+authors:
+  - jules
+  - sarah
+  - bell
+  - niko
+pubDate: "October 8 2026"
+heroImage: "./internships_hero_summer26.webp"
+tags:
+  - CheerpJ
+  - BrowserPod
+categories:
+  - "Leaning Technologies"
+---
+
+Over the summer we have once again had 3 fantastic interns working on our tools and websites. The projects this summer have had a real impact on our development flow and users. Niko developed a general testing suite for all our core technologies to improve the reliability of our releases and lessen the testing burden on engineers. Bell bumped [CheerpJ’s](https://cheerpj.com) supported Java versions by several versions, which has been highly requested by our users. Sarah, while helping us stay on top of our developer community and conference applications, also rebuilt the [BrowserPod](https://browserpod.io/) documentation site, and more. Read more about their experiences and the problems they faced along the way.
+
+## Sarah McLacken - Intern Software Engineer - Developer Experience and Relations
+
+Coming from an art school background before diving into programming at Codam Coding College, I had little to no idea what a Developer Relations / Experience role actually looked like. From what I'd read, though, it ticked a lot of boxes for me: creativity, communication and engagement, website development and maintenance, to name a few.
+
+My internship started with getting to know the company, including the teams, products, tools and workflows. The Developer Relations role relies heavily on being able to move across the whole organisation, whether that meant documentation and site upkeep, digging into codebases to fix bugs, managing community spaces or applying to various events.
+
+I had the freedom to choose what I worked on, and happily picked up a real mix of things, from technical writing for the products, to designing a new community website. This spread of work was exciting and often challenging, but I never found myself disliking any of it. If anything, the constant movement was what I enjoyed most. Over the six months, I was trusted to work autonomously, taking ownership of the tasks and projects I picked up, with the team always willing to give feedback and point me in the right direction when needed.
+
+One of the first things I took on was conference applications, or CFPs. This meant researching upcoming events, putting together proposals for the team, and writing the applications themselves, largely centred on CheerpJ and BrowserPod as solutions to specific problems, each pitch built around what the audience would come away having learnt and what problem was actually being solved. Keeping track of it all got unwieldy fast, so I built a small database to manage the process, covering everything from abstracts to company and speaker bios, and archived it for future reference and recycling. It was a nice payoff seeing an application through to acceptance, with Elisabeth, the main compiler engineer who works on CheerpJ, set to speak at J-Fall this November.
+
+Alongside this, I took on moderation of our Discord server, which meant creating guides, updating rules, restructuring roles and channels, and refining permissions, logging, community agreements and the onboarding process for new members. This was all new to me, and I soon found that what looks simple from the outside can get surprisingly complex once you’re actually picking away at it.
+
+Later on during my internship, I was tasked with restyling the BrowserPod documentation site, which then fed into me designing a new community website, BrowserLabs, from scratch, starting with the initial wireframe and working through layout and transitions. This meant working closely with the art & design and marketing teams, and gaining experience in web development that sat somewhere between UX/UI and front end, shaping a lot of the direction myself as it came together.
+
+This role isn't without its challenges. I quickly learnt how important task management, context switching and workload balancing are, and how easy it is to slip on all three at once. Alongside my larger, ongoing projects, I handled user-suggested changes to our repositories, updated documentation, and reviewed and collaborated on work with colleagues. Managing all these moving parts simultaneously was stimulating and occasionally daunting. Convincing others of something you’re still trying to fathom yourself is an art in itself. Through all these challenges I’ve gained real confidence, not just in the work itself, but in asking questions, giving feedback, and trusting that I can figure things out even when I'm wading through the unknown.
+
+I’ve come away from this internship with a much broader set of skills than I expected, and genuinely enjoyed the ride getting there, thanks to a team that gave me room to grow and learn.
+
+## Bell Wong – Intern Software Engineer – Compilers - CheerpJ Java Versions
+
+When I started my internship, my main task was to help bump CheerpJ's supported Java version from Java 17 towards Java 21. During the first half of my internship, a large part of the learning process was simply understanding the codebase. CheerpJ contains code written in several languages and has many layers between Java code and what eventually runs in the browser. I learned how to navigate a large existing project, read unfamiliar code, and gradually understand what was happening under the hood. At the same time, I learned more Java so that I could create small local tests and compare behaviour between native Java and CheerpJ. I also started to understand why Java changes certain internal features between releases and how those changes can affect a runtime such as CheerpJ.
+
+One of the first things I learned was that upgrading a runtime is much easier to understand when it is done step by step. Instead of jumping directly from one major version to another, comparing the smaller changes between JDK versions helped me identify where behaviour started to change and made problems easier to isolate. This also helped me understand that supporting a newer Java version is not just about adding new APIs—changes inside the JDK can affect many different parts of the runtime.
+
+Once Java 21 support was working reasonably well with our default test cases, we released it in the nightly build so that the community could try it with their own applications. One particularly interesting case involved a user running the [eXist-db](https://exist-db.org/), an open-source XML database, with CheerpJ. Since eXist-db depends on a number of Java libraries and runtime features, it gave me a much more realistic example of how CheerpJ is used outside our own test cases.
+
+Before I could debug the problem, I first had to understand what the application was trying to do, reproduce the setup locally, and determine what the expected behaviour should be. Sometimes the problem came from the way an external API was being used, while other times CheerpJ was missing support for a particular feature. These cases were challenging because there were many layers involved, and the error shown at the top was often not the actual root cause. They taught me to keep digging through those layers instead of stopping at the first exception.
+
+In the second half of my internship, I started working on moving the runtime further from Java 21 to Java 25. This introduced a different kind of challenge because Java 25 contains more significant internal structural changes rather than only new features. Some issues required me to go much deeper into how Java bytecode is executed by CheerpJ. Comparing the original Java bytecode with CheerpJ's stacklet execution became especially useful. By following the operand stack, method calls, return values, and continuation points, I could find places where the runtime's execution no longer matched what the bytecode expected. This was probably one of the most difficult parts of the internship, but it was also one of the most interesting because it gave me a much better understanding of how Java execution works internally.
+
+Another highlight of my internship was visiting the team in Leeds in July. Even as an intern, I was able to attend important meetings and see how the company discusses its strategy, priorities, and future plans. I really appreciated how transparent the team was and that I was able to take part in those conversations rather than only focusing on my assigned technical tasks. I also really enjoyed the team-building activities and getting to know everyone outside of our normal online meetings. After spending several months learning, debugging, and contributing to CheerpJ, the visit made me feel even more connected to the team, and I am very glad that I had the opportunity to be part of it.
+
+## Niko Sarmadakis – Intern Software Engineer – Compilers - Nix Based Testing Infrastructure
+
+Staring at a blank page when starting a new project is both a daunting and exciting feeling simultaneously. Having a goal and infinite ways to get there validates the sentiment "It's the journey that matters" and that is exactly how I would describe my internship at Leaning Technologies.
+
+When I first started I was scared. Scared to make a mistake, to mess up, to offer my input. As time passed and with the help of the entire team, I improved more than I thought possible in a mere 6 months. Mind you, I didn't stop making mistakes, on the contrary. I learnt that making mistakes is part of the process and the only way to progress.
+
+At Leaning each internship consists of a single project carried out from start to finish by one person. This method seemed strange at first. A lot of responsibility for us interns, but I'm proud to say all of us rose to the challenge. My task was developing the testing infrastructure. That task was divided into three big subprojects: CheerpJ, [CheerpX](https://cheerpx.io/) and BrowserPod. That means that I found myself in the privileged position of familiarising with a wide variety of tools, coding styles and languages.
+
+During the development of the testing infrastructure I used Vitest and Playwright to drive the actual test execution. Launching Chromium, running each command, and asserting on the output. The products themselves were built with Nix, a package manager that pins every dependency so the exact same build comes out no matter where or when it runs. That way a failing test meant something had actually changed rather than the environment underneath it having shifted. The results had to be deterministic.
+
+The greatest challenge was adapting the infrastructure for each use case. I tried to follow a similar approach every time: a shared Runner interface orchestrates everything and adapts to the idiosyncrasies of each tool by accepting and testing different things. JARs for CheerpJ, 32-bit ELF binaries for CheerpX, Wasm-compiled C fixtures and even Vite and Next dev apps for BrowserPod. For each case the infrastructure had to reliably handle both text and visual output. Every time I had to jump from one to the next there was a lot of research to be done, new concepts to familiarize myself with and a new set of challenges to overcome.
+
+One of the hardest parts of that work was CheerpJ, and specifically deciding what a snapshot should actually be. CheerpJ runs a JAR and draws its UI into the page, often on a canvas, and I needed a way to catch visual regressions in CI. We decided against using screenshots to validate the tests, as they're often brittle and hard to review, so the snapshot had to be something Vitest could store and compare as text.
+
+I converted each canvas into a PNG and embedded it in the HTML. Now the drawing was part of the string, so a change in the UI showed up as a change in the snapshot. When I opened the first ones in a browser, though, the colours were wrong. After some digging, I realized CheerpJ applies a CSS filter to the canvas, so the raw pixels are not what a user sees. I had to record the filter for each canvas and carry it over to the image. I also had to collect the page's styles, from inline blocks and stylesheets, skipping cross-origin ones the browser won't let you read.
+
+Knowing what to capture was only half the problem, since I also had to know when to capture it. CheerpJ had no callback or event to say the drawing had finished, one was added later, but at the time I had nothing to rely on. Capture too early and the canvas is still blank, too late and every test drags. My first attempt was a fixed sleep before capturing. After some experimentation it worked well enough on my machine to convince me it was solved. But that is a classic trap. In CI it fell apart. The timing was different and my tests started failing. I knew I had to find a different solution.
+
+Afterwards, I decided to check an actual metric instead of relying on an arbitrary waiting time. I started checking the canvas's pixels and counting how many of them were drawn. Once that number exceeded a threshold, that gave the signal that the timing was right for the snapshot to be captured. That decision moved the responsibility of deciding readiness away from my guesswork and onto the page itself. It still needed tuning, since running many tests in parallel meant several browsers were drawing at once, and how long that took varied from run to run, so I had to loosen the deadline more than once before the graphical tests stopped failing at random. It wasn't the most elegant solution, but it was mine and it was reliably working.
+
+The fix tied all of this together. After collecting all the individual pieces, I built a custom Vitest serializer that rebuilds them into a single HTML document. Each piece goes to its corresponding place and each canvas is replaced with an image element that keeps its size, classes and filters. The result is a file that can be opened and visually checked, in the case that the string comparison fails. That way we can see what changed and how that affects the end product, especially since the snapshot files ended up being quite big and manually inspecting the diff would be quite tedious and prone to mistakes.
+
+Beyond the technical work, this experience was immensely gratifying. What I like about programming is that you can have an idea and actualize it in a myriad of ways, which sometimes can be overwhelming. This internship provided me with an environment that contained guard rails alongside the path of execution from idea to the end result. This fact alone made the whole process more rewarding, since I knew that my implementation ideas would be filtered by the experience of the members of the team, while preserving the creative part. Looking back, the freedom to work through all of this my own way, mistakes included, is what made it worthwhile.
