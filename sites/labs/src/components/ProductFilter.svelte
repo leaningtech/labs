@@ -75,7 +75,8 @@
 	// through two branches of an `{#if}` that only ever differ on the client forces Svelte
 	// to detect the hydration mismatch and rebuild the grid from scratch client-side
 	// instead of reusing the stale server markup, giving every card its correct image.
-	const hasInitialFilter = initial.product !== "" || initial.categories.length > 0;
+	const hasInitialFilter =
+		initial.product !== "" || initial.categories.length > 0;
 
 	// Visible cards — purely derived from filter state, no DOM manipulation needed.
 	const visibleCards = $derived(
@@ -653,141 +654,145 @@
 </div>
 
 {#snippet grid()}
-<ul
-	class={gridType === "blog"
-		? "grid grid-cols-2 md:grid-cols-6"
-		: "grid sm:grid-cols-2 md:grid-cols-6"}
-	data-filter-grid={gridType}
->
-	{#each visibleCards as card, i (card.slug)}
-		<li class={liClasses(i, visibleCards.length)}>
-			{#if gridType === "showcase"}
-				<a
-					href={card.href}
-					class="inline-flex flex-col group not-prose w-full p-6"
-				>
-					{#if card.imageSrc}
-						<div
-							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
-								i,
-								visibleCards.length
-							)} mb-5 bg-stone-900"
-						>
-							<img
-								src={card.imageSrc}
-								alt=""
-								loading="lazy"
-								decoding="async"
-								class="absolute inset-0 w-full h-full object-cover"
-							/>
-						</div>
-					{/if}
-					<h3
-						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
-							i,
-							visibleCards.length
-						)} leading-snug mb-2 grow"
+	<ul
+		class={gridType === "blog"
+			? "grid grid-cols-2 md:grid-cols-6"
+			: "grid sm:grid-cols-2 md:grid-cols-6"}
+		data-filter-grid={gridType}
+	>
+		{#each visibleCards as card, i (card.slug)}
+			<li class={liClasses(i, visibleCards.length)}>
+				{#if gridType === "showcase"}
+					<a
+						href={card.href}
+						class="inline-flex flex-col group not-prose w-full p-6"
 					>
-						{card.title}
-					</h3>
-					{#if card.description}
-						<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
-							{card.description}
-						</p>
-					{/if}
-					<div class="flex flex-wrap gap-1.5">
-						{#each card.categories as type}
-							<span
-								class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs"
-								>{type}</span
+						{#if card.imageSrc}
+							<div
+								class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+									i,
+									visibleCards.length
+								)} mb-5 bg-stone-900"
 							>
-						{/each}
-						{#each card.tags as tag}
-							<span
-								class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs"
-								>{tag}</span
-							>
-						{/each}
-					</div>
-				</a>
-			{:else}
-				<a
-					href={card.href}
-					class="inline-flex flex-col group not-prose w-full p-3 sm:p-6"
-				>
-					{#if card.imageSrc}
-						<div
-							class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
-								i,
-								visibleCards.length
-							)} mb-3 sm:mb-5 bg-stone-900"
-						>
-							<img
-								src={card.imageSrc}
-								alt=""
-								loading="lazy"
-								decoding="async"
-								class="absolute inset-0 w-full h-full object-cover"
-							/>
-						</div>
-					{/if}
-					<h3
-						class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
-							i,
-							visibleCards.length
-						)} leading-snug mb-2 grow"
-					>
-						{card.title}
-					</h3>
-					{#if card.description}
-						<p class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4">
-							{card.description}
-						</p>
-					{/if}
-					<div
-						class="flex justify-between items-center gap-4 text-stone-500 text-xs whitespace-nowrap"
-					>
-						<div class="flex items-center gap-1.5 overflow-hidden">
-							<div class="flex -space-x-1.5 flex-none">
-								{#each card.authors ?? [] as author}
-									{#if author.avatarSrc}
-										<img
-											class="w-5 h-5 rounded-full border border-stone-700"
-											src={author.avatarSrc}
-											alt=""
-											loading="lazy"
-											decoding="async"
-										/>
-									{/if}
-								{/each}
+								<img
+									src={card.imageSrc}
+									alt=""
+									loading="lazy"
+									decoding="async"
+									class="absolute inset-0 w-full h-full object-cover"
+								/>
 							</div>
-							<span class="overflow-hidden text-ellipsis">
-								{(card.authors ?? []).map((a) => a.name).join(", ")}
-							</span>
-							{#if card.authors?.some((a) => a.guest)}
+						{/if}
+						<h3
+							class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+								i,
+								visibleCards.length
+							)} leading-snug mb-2 grow"
+						>
+							{card.title}
+						</h3>
+						{#if card.description}
+							<p
+								class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4"
+							>
+								{card.description}
+							</p>
+						{/if}
+						<div class="flex flex-wrap gap-1.5">
+							{#each card.categories as type}
 								<span
-									class="py-0.5 px-1.5 bg-primary-400/30 border border-primary-400 text-primary-200 rounded-full text-xs font-semibold"
+									class="text-white bg-stone-700 py-0.5 px-2 rounded-lg text-xs"
+									>{type}</span
 								>
-									Guest
+							{/each}
+							{#each card.tags as tag}
+								<span
+									class="text-stone-300 py-0.5 px-2 rounded-lg outline outline-1 outline-stone-600 text-xs"
+									>{tag}</span
+								>
+							{/each}
+						</div>
+					</a>
+				{:else}
+					<a
+						href={card.href}
+						class="inline-flex flex-col group not-prose w-full p-3 sm:p-6"
+					>
+						{#if card.imageSrc}
+							<div
+								class="card-image relative overflow-hidden border border-stone-800 group-hover:border-stone-500 transition-colors rounded-sm w-full {imageSizeClasses(
+									i,
+									visibleCards.length
+								)} mb-3 sm:mb-5 bg-stone-900"
+							>
+								<img
+									src={card.imageSrc}
+									alt=""
+									loading="lazy"
+									decoding="async"
+									class="absolute inset-0 w-full h-full object-cover"
+								/>
+							</div>
+						{/if}
+						<h3
+							class="card-title font-bold text-balance text-white group-hover:text-primary-400 {titleSizeClass(
+								i,
+								visibleCards.length
+							)} leading-snug mb-2 grow"
+						>
+							{card.title}
+						</h3>
+						{#if card.description}
+							<p
+								class="text-stone-400 text-sm leading-relaxed line-clamp-2 mb-4"
+							>
+								{card.description}
+							</p>
+						{/if}
+						<div
+							class="flex justify-between items-center gap-4 text-stone-500 text-xs whitespace-nowrap"
+						>
+							<div class="flex items-center gap-1.5 overflow-hidden">
+								<div class="flex -space-x-1.5 flex-none">
+									{#each card.authors ?? [] as author}
+										{#if author.avatarSrc}
+											<img
+												class="w-5 h-5 rounded-full border border-stone-700"
+												src={author.avatarSrc}
+												alt=""
+												loading="lazy"
+												decoding="async"
+											/>
+										{/if}
+									{/each}
+								</div>
+								<span class="overflow-hidden text-ellipsis">
+									{(card.authors ?? []).map((a) => a.name).join(", ")}
 								</span>
+								{#if card.authors?.some((a) => a.guest)}
+									<span
+										class="py-0.5 px-1.5 bg-primary-400/30 border border-primary-400 text-primary-200 rounded-full text-xs font-semibold"
+									>
+										Guest
+									</span>
+								{/if}
+							</div>
+							{#if card.pubDate}
+								<time datetime={card.pubDate}>
+									{formatDate(card.pubDate)}
+								</time>
 							{/if}
 						</div>
-						{#if card.pubDate}
-							<time datetime={card.pubDate}>
-								{formatDate(card.pubDate)}
-							</time>
-						{/if}
-					</div>
-				</a>
-			{/if}
-		</li>
-	{/each}
-	{#if visibleCards.length === 0}
-		<li class="col-span-full py-24 text-center">
-			<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
-		</li>
-	{/if}
-</ul>
+					</a>
+				{/if}
+			</li>
+		{/each}
+		{#if visibleCards.length === 0}
+			<li class="col-span-full py-24 text-center">
+				<p class="text-stone-500 text-lg">Nothing to show here ;(</p>
+			</li>
+		{/if}
+	</ul>
 {/snippet}
 
 {#if hasInitialFilter}
