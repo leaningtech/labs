@@ -66,6 +66,16 @@
 	let selected = $state(initial.product);
 	// string[] is used instead of Set so Svelte 5 reactivity tracks it reliably.
 	let selectedCategories = $state<string[]>(initial.categories);
+	// The prerendered HTML always shows the unfiltered grid (the static build has no
+	// knowledge of the query string), so landing directly on a filtering URL leaves the
+	// server-rendered markup out of sync with the client's initial filter state. Svelte
+	// skips re-applying `src`/`srcset` during hydration to avoid refetching images, on the
+	// assumption that server and client output match — which isn't true here, so the
+	// wrong (unfiltered) demo images stick around after hydration. Rendering the grid
+	// through two branches of an `{#if}` that only ever differ on the client forces Svelte
+	// to detect the hydration mismatch and rebuild the grid from scratch client-side
+	// instead of reusing the stale server markup, giving every card its correct image.
+	const hasInitialFilter = initial.product !== "" || initial.categories.length > 0;
 
 	// Visible cards — purely derived from filter state, no DOM manipulation needed.
 	const visibleCards = $derived(
@@ -642,6 +652,7 @@
 	</div>
 </div>
 
+{#snippet grid()}
 <ul
 	class={gridType === "blog"
 		? "grid grid-cols-2 md:grid-cols-6"
@@ -777,6 +788,16 @@
 		</li>
 	{/if}
 </ul>
+{/snippet}
+
+{#if hasInitialFilter}
+	<!-- Not a mistake: both branches render the same snippet. Forces a hydration-mismatch
+	     rebuild when the URL pre-selects a filter — see `hasInitialFilter` above. Do not
+	     collapse this into a single `{@render grid()}`. -->
+	{@render grid()}
+{:else}
+	{@render grid()}
+{/if}
 
 <style>
 	/*
