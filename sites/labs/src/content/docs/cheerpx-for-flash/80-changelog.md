@@ -2,6 +2,10 @@
 title: Changelog
 ---
 
+Version 42 - October 14th, 2026:
+
+    * Optional Native Bridge authentication: when started with a key, the bridge requires a token on every connection.
+
 Version 35 - March 28th, 2023:
 
     * Rebase on up-to-date CheerpX JIT engine.

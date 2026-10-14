@@ -16,7 +16,7 @@ Once you have the bridge downloaded, load it in to Docker using `docker load`.
 
 Run the image while ensuring to mount the `ppfp/` volume to `/flash`. The location of your hosted `ppfp/` folder can be directly referenced from where you are hosting CheerpX, or copied to another location for easier access. Depending on your machine, this could differ greatly, but for this tutorial, we will run the container using the following run command:
 
-    docker run -p 28083:28083 --init --rm -v /mnt/c/xampp/htdocs/cheerpx/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20251203_prod40
+    docker run -p 28083:28083 --init --rm -v /mnt/c/xampp/htdocs/cheerpx/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20261014_prod42
 
 The flags that we have set are:
 
@@ -26,6 +26,8 @@ The flags that we have set are:
 - `-v ...` - This mount our locally hosted ppfp folder to the /flash directory within the container.
 
 For more information about `docker run`, read the official [Docker docs](https://docs.docker.com/engine/reference/run/).
+
+This tutorial runs the bridge without authentication, so anyone who can reach port 28083 can connect to it. For a deployment reachable from outside a trusted network, start the bridge with a key and pass a token from your server, as described in [restricting who can connect](/cheerpx-for-flash/native-bridge#how-do-i-restrict-who-can-connect-to-the-native-bridge).
 
 Our Websockets server should now be running on port :28083:
 

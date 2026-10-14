@@ -35,7 +35,7 @@ You then run the image, with the configuration options of your own choosing. The
 
 Although everyone's own Docker environments will differ, and you are at your own discretion to run the image however you may wish to, an example `docker run` command could be:
 
-`docker run -p 28083:28083 --init --rm -v /path/to/harman/binary/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20251203_prod40`
+`docker run -p 28083:28083 --init --rm -v /path/to/harman/binary/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20261014_prod42`
 
 Here, we are using a few flags:
 
@@ -61,6 +61,67 @@ Simply become something that looks like this:
 `<script>window.onload = (event) => { ppInit({ bridgeURL: "ws://myWebsocketServer.mydomain.com:28083" }) }</script>`
 
 As long as the URL specified can be reached by CheerpX, your installation of CheerpX for Flash will now be talking to the Websocket server, and your performance should be massively improved.
+
+## How do I restrict who can connect to the Native Bridge?
+
+The browser of every end user must reach the Websockets server, so in most deployments anyone can connect to it. From version 42, the Native Bridge can optionally validate a token on every connection. We recommend enabling it for any bridge reachable from outside a trusted network.
+
+### Start the bridge with a key
+
+Choose a long random secret, the **key**, and pass it as the last argument of `docker run`:
+
+`docker run -p 28083:28083 --init --rm -v /path/to/harman/binary/ppdeploy/ppfp/:/flash localhost/ppfp_bridge:20261014_prod42 <key>`
+
+Without a key, the bridge accepts every connection, as in previous versions, and logs `no key given, connections are not authenticated` at startup.
+
+### Generate a token on your server
+
+When your server renders a page that uses the bridge, it generates a short-lived **token** from the key:
+
+1. Pick an expiry time, as Unix seconds, a few minutes in the future.
+2. Compute the HMAC-SHA256 of the string `v1.<expiry>`, with the expiry written in decimal, using the key.
+3. Encode the resulting string in hexadecimal
+4. The token is `v1.<expiry>.<hmac>`.
+
+For example, in JavaScript, using the Web Crypto API available in browsers, Node.js 19+, Deno, Bun and Cloudflare Workers:
+
+```js
+async function bridgeToken(key, validForSeconds = 300) {
+	const enc = new TextEncoder();
+	const payload = `v1.${Math.floor(Date.now() / 1000) + validForSeconds}`;
+	const hmacKey = await crypto.subtle.importKey(
+		"raw",
+		enc.encode(key),
+		{ name: "HMAC", hash: "SHA-256" },
+		false,
+		["sign"]
+	);
+	const mac = new Uint8Array(
+		await crypto.subtle.sign("HMAC", hmacKey, enc.encode(payload))
+	);
+	const hex = Array.from(mac, (b) => b.toString(16).padStart(2, "0")).join("");
+	return `${payload}.${hex}`;
+}
+```
+
+Or in Python:
+
+```python
+import hashlib, hmac, time
+
+def bridge_token(key: str, valid_for_seconds: int = 300) -> str:
+    payload = f"v1.{int(time.time()) + valid_for_seconds}"
+    mac = hmac.new(key.encode(), payload.encode(), hashlib.sha256).hexdigest()
+    return f"{payload}.{mac}"
+```
+
+### Pass the token to CheerpX
+
+Add the token to `bridgeURL` as the `token` query parameter:
+
+`<script>window.onload = (event) => { ppInit({ bridgeURL: "wss://myWebsocketServer.mydomain.com/?token=TOKEN_FROM_YOUR_SERVER" }) }</script>`
+
+The bridge checks the token only when the connection opens, so a token only needs to stay valid until the page has loaded the Flash content. Connections with a missing, invalid or expired token are rejected with HTTP status 403.
 
 ---
 
