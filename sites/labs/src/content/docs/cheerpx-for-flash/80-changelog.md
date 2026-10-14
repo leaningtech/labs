@@ -6,6 +6,38 @@ Version 42 - October 14th, 2026:
 
     * Optional Native Bridge authentication: when started with a key, the bridge requires a token on every connection.
 
+Version 41 - April 1st, 2026:
+
+    * Rebase on up-to-date CheerpX engine.
+    * Native Bridge updated to the reworked networking.
+    * Disk access fixes.
+    * General bug fixes.
+
+Version 40 - December 3rd, 2025:
+
+    * Native Bridge connection handling fixes.
+    * General bug fixes.
+
+Version 39 - November 21st, 2025:
+
+    * Networking fixes.
+    * General bug fixes.
+
+Version 38 - November 14th, 2025:
+
+    * Rebase on up-to-date CheerpX engine.
+    * New networking implementation.
+    * Faster communication between the Native Bridge and the Flash player.
+    * General bug fixes.
+
+Version 37 - June 17th, 2025:
+
+    * Rebase on up-to-date CheerpX engine.
+    * Improved keyboard, mouse and touch input.
+    * Workaround for a Firefox 138+ regression affecting SharedArrayBuffer and WebAssembly.
+    * Native Bridge fixes.
+    * General bug fixes.
+
 Version 35 - March 28th, 2023:
 
     * Rebase on up-to-date CheerpX JIT engine.
