@@ -123,6 +123,29 @@ Add the token to `bridgeURL` as the `token` query parameter:
 
 The bridge checks the token only when the connection opens, so a token only needs to stay valid until the page has loaded the Flash content. Connections with a missing, invalid or expired token are rejected with HTTP status 403.
 
+## How do I run the Native Bridge with the least privileges?
+
+From version 43, the Native Bridge can run under an unprivileged user in the container.
+Here is an example of a minimally privileged setup:
+
+```sh
+docker run --init --rm \
+  -p 28083:28083 \
+  --user 65534:65534 \
+  --read-only -v /tmp \
+  --cap-drop=ALL --security-opt=no-new-privileges \
+  -v /path/to/harman/binary/ppdeploy/ppfp/:/flash:ro \
+  localhost/ppfp_bridge:<version> <key>
+```
+
+Compared with the basic command, these flags:
+
+- `--user 65534:65534` runs the bridge and every Flash player as the unprivileged user `nobody` instead of root.
+- `--read-only -v /tmp` makes the image's file system read-only, except `/tmp`.
+- `--cap-drop=ALL` removes all Linux capabilities; the bridge listens on an unprivileged port and needs none.
+- `--security-opt=no-new-privileges` prevents any process in the container from gaining privileges.
+- `:ro` mounts the folder with `libHCSFP.so` read-only.
+
 ---
 
 To read more about Docker, take a look at their official docs [here](https://docs.docker.com/).

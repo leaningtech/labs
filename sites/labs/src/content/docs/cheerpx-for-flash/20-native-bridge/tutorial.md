@@ -27,7 +27,7 @@ The flags that we have set are:
 
 For more information about `docker run`, read the official [Docker docs](https://docs.docker.com/engine/reference/run/).
 
-This tutorial runs the bridge without authentication, so anyone who can reach port 28083 can connect to it. For a deployment reachable from outside a trusted network, start the bridge with a key and pass a token from your server, as described in [restricting who can connect](/cheerpx-for-flash/native-bridge#how-do-i-restrict-who-can-connect-to-the-native-bridge).
+This tutorial runs the bridge without authentication, so anyone who can reach port 28083 can connect to it. For a deployment reachable from outside a trusted network, start the bridge with a key and pass a token from your server, as described in [restricting who can connect](/cheerpx-for-flash/native-bridge#how-do-i-restrict-who-can-connect-to-the-native-bridge). It also runs the bridge as root; for production, see [running the Native Bridge with the least privileges](/cheerpx-for-flash/native-bridge#how-do-i-run-the-native-bridge-with-the-least-privileges).
 
 Our Websockets server should now be running on port :28083:
 
