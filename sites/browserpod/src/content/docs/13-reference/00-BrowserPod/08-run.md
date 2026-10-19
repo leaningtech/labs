@@ -1,6 +1,6 @@
 ---
 title: run
-description: "Run an executable inside a BrowserPod Pod, attach it to a terminal for input and output, and get back a Process handle for its result."
+description: "Run an executable inside a BrowserPod Pod, attach it to a terminal for input and output, and wait for its exit code."
 ---
 
 ```ts
@@ -14,7 +14,7 @@ class BrowserPod {
 			cwd?: string;
 			echo?: boolean;
 		}
-	): Promise<Process>;
+	): Process;
 }
 ```
 
@@ -33,8 +33,14 @@ class BrowserPod {
 
 ## Returns
 
-`run` returns a [Promise] which resolves to a [Process] object once the command finishes running.
+`run` returns a [Process], a thenable object. Awaiting it resolves to the exit code of the process once it exits, so you can check whether it succeeded or failed:
 
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+```ts
+const exitCode = await pod.run("npm", ["install"], { terminal });
+if (exitCode !== 0) {
+	console.error(`npm install failed with exit code ${exitCode}`);
+}
+```
+
 [Terminal]: /docs/reference/Terminal
 [Process]: /docs/reference/Process

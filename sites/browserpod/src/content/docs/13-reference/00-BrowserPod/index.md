@@ -41,10 +41,10 @@ const pod = await BrowserPod.boot({ apiKey: "...", storageKey: "my-project" });
 
 ### Run programs
 
-Use [`run`](/docs/reference/BrowserPod/run) to execute a program and get back a [Process](/docs/reference/Process):
+Use [`run`](/docs/reference/BrowserPod/run) to execute a program. It returns a [Process](/docs/reference/Process) that resolves to the exit code when awaited:
 
 ```ts
-const process = await pod.run("node", ["script.js"], { terminal });
+const exitCode = await pod.run("node", ["script.js"], { terminal });
 ```
 
 ### Manage the filesystem
