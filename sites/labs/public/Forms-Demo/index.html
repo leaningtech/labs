@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Forms Demo – CheerpJ + Java 8</title>
+		<link rel="preconnect" href="https://cjrtnc.leaningtech.com" crossorigin />
+		<!-- Both deferred: they run in order once the page is parsed, without blocking it -->
+		<script
+			src="https://cjrtnc.leaningtech.com/20261016_3707/loader.js"
+			defer
+		></script>
+		<script src="./main.js" defer></script>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+
+	<body>
+		<main class="page">
+			<header>
+				<h1>Forms Demo</h1>
+				<p>
+					A Forms/EBS-style purchase order screen running in the browser with
+					CheerpJ: one 20 KB plain AWT JAR, built to boot as fast as possible.
+					<a href="./README.md" target="_blank" rel="noopener">README</a>
+				</p>
+			</header>
+
+			<!-- Keep it at exactly 860x500, the size the form is laid out at -->
+			<div class="stage">
+				<div id="container"></div>
+			</div>
+
+			<div class="status">
+				<span class="status-dot busy" id="status-dot"></span>
+				<span id="status-label">Starting CheerpJ…</span>
+			</div>
+
+			<ul class="help">
+				<li>
+					Click a field and type. <strong>Tab</strong>, <strong>Enter</strong>
+					and the arrow keys move between fields and lines.
+				</li>
+				<li>
+					<strong>F9</strong> or <strong>…</strong> opens a list of values
+					(Supplier, Site, Currency, UOM).
+				</li>
+				<li>
+					Change a <strong>Quantity</strong> or <strong>Price</strong>: line
+					amounts and the total update as you type.
+				</li>
+				<li>
+					<strong>Ctrl+S</strong> saves. The toolbar arrows switch records;
+					<strong>Approve</strong> locks a PO (record 2 starts out approved).
+				</li>
+			</ul>
+		</main>
+	</body>
+</html>

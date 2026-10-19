@@ -21,3 +21,5 @@
 /blog/browserpod-rust
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
+/Forms-Demo/README.md
+	Content-Type: text/plain; charset=utf-8

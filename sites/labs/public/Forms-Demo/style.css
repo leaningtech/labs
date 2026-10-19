@@ -1,0 +1,68 @@
+body {
+	margin: 0;
+	background: #f4f5f7;
+	color: #1f2933;
+	font-family: system-ui, sans-serif;
+}
+
+.page {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 24px 16px;
+}
+
+h1 {
+	margin: 0 0 6px;
+	font-size: 1.4rem;
+}
+
+header p {
+	margin: 0 0 16px;
+	color: #52606d;
+}
+
+a {
+	color: #2e6db4;
+}
+
+/* Scrolls sideways on screens narrower than the form instead of scaling it */
+.stage {
+	overflow-x: auto;
+}
+
+/* CheerpJ display: exactly the size the form is laid out at */
+#container {
+	width: 860px;
+	height: 500px;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #c3d0e0;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 10px;
+	font-size: 0.85rem;
+	color: #52606d;
+}
+
+.status-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #17c964;
+}
+
+.status-dot.busy {
+	background: #febc2e;
+}
+
+.help {
+	margin: 14px 0 0;
+	padding-left: 20px;
+	font-size: 0.9rem;
+	color: #52606d;
+	line-height: 1.5;
+}
