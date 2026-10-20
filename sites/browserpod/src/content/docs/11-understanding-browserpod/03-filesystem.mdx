@@ -18,12 +18,17 @@ It is not the same as your machine's filesystem and has no direct access to loca
 
 ## Persistence and storage
 
-The filesystem **persists via IndexedDB** in the browser. Persistence is **scoped to the origin** (for example, `http://localhost:5173`). That means:
+By default a Pod is **ephemeral**: every boot starts from a fresh filesystem and nothing is saved. To keep the filesystem between sessions, pass a `storageKey` to [`boot`](/docs/reference/BrowserPod/boot):
 
-- Data can persist across page reloads and sessions for the same origin.
-- A different origin starts with a separate filesystem state.
+- Booting with the same key resumes the same filesystem, across page reloads and browser sessions.
+- Booting with a different key starts a separate filesystem.
 
-The filesystem is still virtual; persistence is handled by the browser's IndexedDB store. Data stored in IndexedDB is not human-readable.
+> [!warning]
+> If you change the `userImage` passed to [`boot`](/docs/reference/BrowserPod/boot), also change the `storageKey`. A Pod booted with an existing key keeps showing the image that key was first used with, and ignores the new one.
+
+Persistent data is stored in the browser's [Origin Private File System (OPFS)](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system), or in IndexedDB if the browser does not support OPFS. Storage is **scoped to the origin** (for example, `http://localhost:5173`), so a different origin never sees the same data, even with the same key.
+
+The filesystem is still virtual: the browser stores it in an internal format that is not human-readable.
 
 ## Files, handles, and modes
 
@@ -43,7 +48,7 @@ Processes launched with `pod.run(...)` see the filesystem as their local disk. W
 ## Lifecycle and scope
 
 - The filesystem exists for the lifetime of the Pod instance.
-- Because it is persisted via IndexedDB, data can remain between sessions for the same origin.
+- With a `storageKey`, data remains between sessions for the same origin.
 - Multiple processes in the same Pod share the same filesystem state.
 
 If you need to write files into the Pod or copy in a project, see the guide: [Write files to the pod](/docs/guides/write-files-to-pod).
