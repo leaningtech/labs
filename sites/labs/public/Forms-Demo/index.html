@@ -3,8 +3,37 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Forms Demo – CheerpJ + Java 8</title>
+		<title>Forms Demo – Java in the browser with CheerpJ</title>
 		<link rel="preconnect" href="https://cjrtnc.leaningtech.com" crossorigin />
+		<!-- Fetch the runtime's bootstrap files now instead of one after another once loader.js runs.
+		     Keep the build and the Java version (cj3n17.wasm) in sync with main.js. -->
+		<link
+			rel="modulepreload"
+			href="https://cjrtnc.leaningtech.com/20261016_3707/cj3.js"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			as="fetch"
+			href="https://cjrtnc.leaningtech.com/20261016_3707/cj3.wasm"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			as="fetch"
+			href="https://cjrtnc.leaningtech.com/20261016_3707/cj3n17.wasm"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			as="script"
+			href="https://cjrtnc.leaningtech.com/20261016_3707/cheerpOS.js"
+		/>
+		<link
+			rel="preload"
+			as="style"
+			href="https://cjrtnc.leaningtech.com/20261016_3707/cheerpj.css"
+		/>
 		<!-- Both deferred: they run in order once the page is parsed, without blocking it -->
 		<script
 			src="https://cjrtnc.leaningtech.com/20261016_3707/loader.js"
@@ -16,18 +45,51 @@
 
 	<body>
 		<main class="page">
-			<header>
+			<header class="intro">
 				<h1>Forms Demo</h1>
-				<p>
-					A Forms/EBS-style purchase order screen running in the browser with
-					CheerpJ: one 20 KB plain AWT JAR, built to boot as fast as possible.
-					<a href="./README.md" target="_blank" rel="noopener">README</a>
+				<p class="lead">
+					A Forms/EBS-style purchase order screen, written in Java and running
+					in your browser with CheerpJ.
+				</p>
+				<p class="meta">
+					Java draws every pixel itself, with no AWT, Swing or libraries, so it
+					starts as fast as possible.
+					<a href="./README.md" target="_blank" rel="noopener"
+						>Read the README</a
+					>
 				</p>
 			</header>
 
 			<!-- Keep it at exactly 860x500, the size the form is laid out at -->
 			<div class="stage">
-				<div id="container"></div>
+				<div id="container">
+					<!-- Shown until Java puts the form on the page (Web.open in main.js).
+					     Inline, so it costs no requests. -->
+					<div
+						class="loader"
+						id="loader"
+						role="progressbar"
+						aria-label="Loading the Java runtime"
+					>
+						<!-- The CheerpJ wordmark, from the cheerpj.com design system -->
+						<svg
+							class="loader-logo"
+							viewBox="0 0 1337 380"
+							fill="currentColor"
+							font-family="Arimo, Arial, 'Liberation Sans', sans-serif"
+							font-size="360"
+							font-weight="700"
+							aria-hidden="true"
+						>
+							<!-- prettier-ignore -->
+							<text x="62" y="288" dx="0 -22.16 -24.96 -19.16 -28.16 -15.04 -21.96">cheerpj</text>
+						</svg>
+						<div class="loader-track">
+							<div class="loader-fill indeterminate" id="loader-fill"></div>
+						</div>
+						<p class="loader-label">Loading the Java runtime</p>
+					</div>
+				</div>
 			</div>
 
 			<div class="status">
@@ -35,24 +97,21 @@
 				<span id="status-label">Starting CheerpJ…</span>
 			</div>
 
-			<ul class="help">
-				<li>
-					Click a field and type. <strong>Tab</strong>, <strong>Enter</strong>
-					and the arrow keys move between fields and lines.
-				</li>
-				<li>
-					<strong>F9</strong> or <strong>…</strong> opens a list of values
-					(Supplier, Site, Currency, UOM).
-				</li>
-				<li>
-					Change a <strong>Quantity</strong> or <strong>Price</strong>: line
-					amounts and the total update as you type.
-				</li>
-				<li>
-					<strong>Ctrl+S</strong> saves. The toolbar arrows switch records;
-					<strong>Approve</strong> locks a PO (record 2 starts out approved).
-				</li>
-			</ul>
+			<section class="help">
+				<h2>Try it</h2>
+				<dl>
+					<dt><kbd>Tab</kbd> <kbd>Enter</kbd> <kbd>↑</kbd> <kbd>↓</kbd></dt>
+					<dd>Move between fields and lines, then type to edit.</dd>
+					<dt><kbd>F9</kbd> or <kbd>…</kbd></dt>
+					<dd>Pick a Supplier, Site, Currency or UOM from a list.</dd>
+					<dt>Quantity, Price</dt>
+					<dd>Line amounts and the total update as you type.</dd>
+					<dt><kbd>Ctrl</kbd> + <kbd>S</kbd></dt>
+					<dd>Save. The toolbar arrows switch between records.</dd>
+					<dt>Approve</dt>
+					<dd>Locks the purchase order. Record 2 starts out approved.</dd>
+				</dl>
+			</section>
 		</main>
 	</body>
 </html>
