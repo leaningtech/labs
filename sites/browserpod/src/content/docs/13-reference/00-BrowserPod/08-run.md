@@ -42,5 +42,7 @@ if (exitCode !== 0) {
 }
 ```
 
+If the process cannot be started or is killed by a signal, awaiting it throws an error instead.
+
 [Terminal]: /docs/reference/Terminal
 [Process]: /docs/reference/Process
