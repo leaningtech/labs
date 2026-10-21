@@ -2,6 +2,10 @@
 title: Changelog
 ---
 
+Version 44 - October 21st, 2026:
+
+    * Native Bridge: malformed requests can no longer stop the bridge process.
+
 Version 43 - October 16th, 2026:
 
     * Native Bridge hardening: the bridge can run as an unprivileged user, on a read-only file system and without Linux capabilities. See the Native Bridge page for an example setup.
