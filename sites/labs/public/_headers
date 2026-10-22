@@ -21,3 +21,6 @@
 /blog/browserpod-rust
 	Cross-Origin-Opener-Policy: same-origin
 	Cross-Origin-Embedder-Policy: require-corp
+/blog/announcing-browsercode
+	Cross-Origin-Opener-Policy: same-origin
+	Cross-Origin-Embedder-Policy: require-corp
