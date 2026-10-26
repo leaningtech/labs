@@ -1,0 +1,234 @@
+---
+title: "BrowserCode: a browser-based coding playground, powered by WebAssembly"
+description: |
+  BrowserCode is a free, open source, fully client-side coding playground. Open a tab, pick a template, clone a repo or pick an agent and start building. No account, no installs, no servers, no setup.
+authors:
+  - gaby
+pubDate: "October 26 2026"
+heroImage: "./banners/BrowserCode-hero.webp"
+tags:
+  - BrowserPod
+categories:
+  - "Release"
+  - "Projects & Demos"
+---
+
+Today we are announcing [BrowserCode](https://browsercode.io), a browser-based playground for
+fast-prototyping and instant sharing of full-stack apps.
+
+It is free to use, [open source](https://github.com/leaningtech/browsercode), and
+it runs entirely on your device, client-side. There is no backend doing the work for you, no server spinning
+up somewhere, and nothing to install. You open a tab and you get access to a complete development
+environment.
+
+And BrowserCode can be embedded in your own web app as well, for free. The editor below is an
+example of what that looks like. Change a file, play around, and watch the preview update.
+
+<iframe
+	src="https://browsercode.io/embed?framework=vite&view=files,editor,terminal,preview"
+	allow="cross-origin-isolated"
+	title="BrowserCode running a Vite template"
+	class="border border-stone-700 rounded-md w-full h-[40rem]"
+></iframe>
+
+## What BrowserCode is
+
+BrowserCode started as a small experiment: could we run an AI coding CLI like Claude Code
+completely client-side, with no VM, no SSH session, and no cloud compute behind it?
+
+The answer was yes, and the project kept growing from there. It is now a full IDE with a file tree,
+a code editor, a search pane, a real terminal, and a live preview pane. Inside a browser tab you
+can:
+
+- boot a framework template
+- clone a GitHub repository into your workspace
+- run an AI coding agent against your code
+- share the result over a public URL
+
+Think of it as the scratchpad you reach for when you want to try something quickly. A reproduction
+for a bug report. A proof of concept you want to show a colleague before lunch. A library you just
+found on GitHub and want to poke at without cloning it to your laptop.
+
+There is no account to create. You open the page and the environment is already booting, and
+nothing gets uploaded: your files live in the tab, on your own machine.
+
+If you want to run an agent, you sign in to that agent's own provider with your own account, and
+that credential stays in your browser.
+
+## What you can do in it
+
+BrowserCode is a browser-based development environment, built on
+[BrowserPod](https://browserpod.io/), our WebAssembly sandbox, and it can already be used in
+multiple ways. Treat what follows as a preview of what BrowserCode will be, because there is a lot
+more coming.
+
+### Start from a framework template
+
+Open the IDE playground and pick a starting point. BrowserCode ships templates for
+[Vite](https://browsercode.io/ide?framework=vite),
+[React](https://browsercode.io/ide?framework=react),
+[Svelte](https://browsercode.io/ide?framework=svelte),
+[Vue](https://browsercode.io/ide?framework=vue),
+[Next.js](https://browsercode.io/ide?framework=nextjs),
+[Nuxt](https://browsercode.io/ide?framework=nuxt) and
+[Express](https://browsercode.io/ide?framework=express). Dependencies install from npm inside the
+pod, the dev server starts in the terminal, and the preview pane picks it up.
+
+It behaves the way you would expect the same setup to behave locally. Hot reload works. The
+terminal is a terminal, so you can `cd` around, `grep` through files, and commit with git.
+
+### Share what you built with a Portal
+
+This is one of the features we are the most proud of. When a server starts inside a pod,
+BrowserPod will expose it to the internet through a **Portal**, a randomly generated public URL
+that routes HTTP traffic to the service running in your tab.
+
+That means you can open your work-in-progress on your phone, send the link to a teammate for a
+quick look, or show a client a preview, without deploying anything. The server is still on your
+machine. The Portal is the tunnel to it.
+
+### Clone a repository
+
+The IDE landing page can clone a GitHub repo straight into your workspace, a feature currently in
+beta. Paste a URL, wait a moment, and you have the project open with its history, ready to install and run.
+
+It is a nice way to evaluate a library, check whether a PR actually builds, or walk through an
+unfamiliar codebase with a terminal next to it.
+
+### Run AI coding agents
+
+The original idea is still there, and it is still our favorite part. BrowserCode runs unmodified [AI
+coding CLIs](https://browsercode.io/agents) client-side. Today you can play with Claude Code, Codex CLI and Pi, with Antigravity, OpenCode and more coming soon.
+
+You sign in with your own account or API key, which stays in your browser, and the agent works on
+files inside the pod. It can read your project, run commands, install packages and start servers,
+all within the sandbox. If it breaks something, it breaks something in a tab, not in your system.
+
+Here is Claude Code itself, running in this page.
+
+<iframe
+	src="https://browsercode.io/embed?agent=claude&view=terminal,preview"
+	allow="cross-origin-isolated"
+	title="Claude Code running in BrowserCode"
+	class="border border-stone-700 rounded-md w-full h-[40rem]"
+></iframe>
+
+Signing in opens a new tab, where you will want **Copy code login**.
+
+Agents and the preview pane work well together: the agent edits a file, the dev server reloads, and
+the result is on screen before you have finished reading the diff.
+
+## How it works
+
+BrowserCode is the product, and [BrowserPod](https://browserpod.io/) is the core it is built on: a
+WebAssembly sandbox that brings server-side runtimes to the browser.
+
+A pod is similar to a tiny Linux machine running inside your tab. It gives you:
+
+- **Real runtimes:** Compiled to WebAssembly from their unmodified source code. Currently
+  BrowserPod supports Node.js v22, [Rust](/blog/browserpod-rust), and Python (in preview), with
+  more to come in the near future.
+- **A POSIX-like filesystem:** Backed by OPFS or IndexedDB, to persist your project locally across
+  sessions.
+- **Command line tools:** bash, git, npm, pnpm, curl, ripgrep, fd and many others.
+- **Multiple processes with real concurrency:** Each thread or process gets its own Worker.
+- **Restricted outbound networking:** HTTPS only, to an allowlist that covers the npm registry,
+  Yarn and GitHub. BrowserCode adds the major AI provider APIs to that list.
+
+Everything runs inside your browser on your device. Browsers are the most trusted security boundary
+available today, and the BrowserPod sandbox inherits the same level of security and isolation as
+any other web application.
+
+There is a great deal more to it than fits here. The [BrowserPod deep
+dive](/blog/browserpod-deep-dive) walks through the architecture in full.
+
+## Putting BrowserCode in your own pages
+
+BrowserCode is embeddable. If you maintain docs, a tutorial, a course, or a landing page, you can
+drop a working environment into it with an iframe, and configure the whole thing from the query
+string.
+
+```html
+<iframe
+	src="https://browsercode.io/embed?framework=vite&view=preview"
+	allow="cross-origin-isolated"
+	style="width: 100%; height: 600px; border: 0"
+></iframe>
+```
+
+You can point it at a repository, a framework template, or an agent, and choose which panes show up:
+
+```
+/embed?repo=https://github.com/user/repo/tree/main/examples/demo
+/embed?framework=nextjs&view=files,editor,terminal
+/embed?agent=claude
+```
+
+One requirement to know about: BrowserPod needs `SharedArrayBuffer`, which browsers only enable
+in cross-origin isolated pages. So the page doing the embedding has to send these two headers:
+
+```
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+The iframe will also need the `allow="cross-origin-isolated"` attribute. The
+[embedding guide](https://github.com/leaningtech/browsercode/blob/main/docs/embedding.md) covers
+every parameter and provides full integration instructions.
+
+## Free, open source, and yours to fork
+
+The hosted app at [browsercode.io](https://browsercode.io) is free to use. Open it and start
+building.
+
+The source is on [GitHub](https://github.com/leaningtech/browsercode) under Apache 2.0, so you can
+also run your own copy. You will need a BrowserPod API key, which you can get at
+[browserpod.io](https://browserpod.io/). The free plan covers personal and non-commercial projects,
+with up to 1,000 hours of compute a month, unlimited concurrent sandboxes and unlimited storage.
+
+If your project needs more than that, there are two grant programmes, both without a subscription
+fee. Open source projects can apply for [up to 100,000 tokens a
+month](https://browserpod.io/grants/open-source), renewed monthly. Early-stage startups can apply
+for [up to 10M tokens](https://browserpod.io/grants/startup), worth $10,000, renewed yearly.
+
+## A few caveats
+
+BrowserCode is launching today as we believe it is already a powerful and useful tool, but there
+are still some rough edges that might be surprising.
+
+- **Native binaries are not supported.** Packages with native dependencies may not install. There
+  is a [guide](https://browserpod.io/docs/guides/working-around-native-npm-dependencies) on working
+  around this.
+- **Outbound networking is restricted.** HTTPS on port 443 only, and limited to the allowlist.
+  Plain HTTP, SSH remotes (`git@github.com`), other ports, and `localhost` from inside a pod are
+  all refused.
+- **Agents sometimes need a nudge.** Each one gets an instructions file at launch (`CLAUDE.md` for
+  Claude Code, `AGENTS.md` for Codex CLI and Pi) explaining that it is running in a custom
+  environment, but it may try its usual behavior first.
+
+## What is coming next
+
+BrowserCode is a rapidly evolving project, and several significant features are in development at
+this very moment.
+
+**Java, through CheerpJ.** [CheerpJ](https://cheerpj.com) is our WebAssembly JVM, and we are wiring
+it into BrowserCode as another runtime, with `javac` compiling your source and a real JVM running
+it in the tab. Education is the use case we are most interested in here: a course, a tutorial or a
+bug report could then ship with an environment the reader can run directly.
+
+**Version control in the editor.** Today you can clone a repository in and drive `git` from the
+terminal. We are bringing version control into the UI itself, with the features you would expect
+from a modern editor such as VS Code, or at least the most useful of them: staging changes,
+committing, switching branches, and pushing your work back to GitHub.
+
+## Try it and tell us what breaks
+
+Go to [browsercode.io](https://browsercode.io), boot a template, and see how far you can push it.
+This is a beta, which means the most valuable thing you can do with it is find the point where it
+gives up and tell us about it. If you find a bug, a broken package, a framework that will not boot
+or a workflow that feels wrong, [open an issue](https://github.com/leaningtech/browsercode/issues)
+and we will take a look.
+
+And if you build something with it, come and share it in our community on Discord. The most
+interesting use cases for BrowserCode are certainly going to be the ones we have not thought of
+yet.
