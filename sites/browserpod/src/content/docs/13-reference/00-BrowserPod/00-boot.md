@@ -25,7 +25,7 @@ class BrowserPod {
 - **storageKey (`string`, _optional_)** - Identifies the Pod's persistent storage.
   - _Omitted_ → ephemeral: fresh disk each boot, nothing is saved between sessions.
   - _Provided_ → persistent: the same key resumes the same disk, a different key starts a separate one.
-- **userImage (`string`, _optional_)** - A URL pointing to a custom ext2 filesystem image that will be mounted directly on the `/home` directory of the Pod's filesystem. If you change the image, also change the `storageKey`; see [Filesystem](/docs/understanding-browserpod/filesystem#persistence-and-storage).
+- **userImage (`string`, _optional_)** - A URL pointing to a custom ext2 filesystem image that will be mounted directly on the `/home` directory of the Pod's filesystem. If you change the image, also change the `storageKey` if provided.
 
 ## Returns
 
