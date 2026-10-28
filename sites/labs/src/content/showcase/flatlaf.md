@@ -1,7 +1,7 @@
 ---
 title: FlatLaf
 description: A modern Java Swing look-and-feel showcased running entirely in the browser via CheerpJ.
-demo_url: https://flatlaf-demo.labs-leaningtech-com.pages.dev/FlatLaf-Demo/
+demo_url: https://leaningtech.github.io/cheerpj-demo-flatlaf/
 repository_url: https://github.com/leaningtech/cheerpj-demo-flatlaf
 author: Leaning Technologies
 project_type: Tech Demo
@@ -24,4 +24,4 @@ Users can design or modify a theme in the Theme Editor and immediately load it i
 
 ## Technical details
 
-The demo runs on the CheerpJ Java 17 runtime and executes the original, unmodified FlatLaf JARs.
+The demo runs on the CheerpJ Java 25 runtime and executes the original, unmodified FlatLaf JARs.
