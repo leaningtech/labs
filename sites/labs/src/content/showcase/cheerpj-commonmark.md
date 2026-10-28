@@ -17,4 +17,4 @@ A live Markdown editor that uses the CommonMark Java library directly in the bro
 
 This demo showcases CheerpJ’s library mode, where a web page can call into a JAR much like it would call a JavaScript library. JavaScript handles the UI and editor state, while Java performs the Markdown parsing and HTML rendering. It demonstrates how existing JVM libraries can be reused on the web without being rewritten in JavaScript.
 
-The demo runs on CheerpJ’s Java 17 WebAssembly runtime and uses `commonmark-0.27.1.jar`.
+The demo runs on CheerpJ’s Java 25 WebAssembly runtime and uses `commonmark-0.27.1.jar`.
