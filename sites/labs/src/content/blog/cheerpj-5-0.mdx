@@ -169,7 +169,38 @@ demoDivFlatLaf.onfullscreenchange = function()
 
 ## Use Java logic directly from JavaScript
 
-{TODO: Library mode}
+[Library Mode](https://cheerpj.com/docs/guides/library-mode) makes it possible to use Java libraries from JavaScript using a natural async/await-based approach, with direct access to Java methods, objects, and arrays. On top of this, native method support allows [Java native methods](https://cheerpj.com/docs/guides/implementing-native-methods) to be implemented directly in JavaScript, similar to how JNI works on standard Java platforms. Together, these features enable a level of interoperability between Java and the browser that was simply not possible before.
+
+The following snippet of code should give an idea about the capability of Library Mode. The code snippet is using the popular `iText` Java library to generate a PDF completely client-side in the browser.
+
+```js
+async function iTextExample() {
+	await cheerpjInit();
+	const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.3.jar");
+	try {
+		const Document = await lib.com.itextpdf.text.Document;
+		const Paragraph = await lib.com.itextpdf.text.Paragraph;
+		const PdfWriter = await lib.com.itextpdf.text.pdf.PdfWriter;
+		const FileOutputStream = await lib.java.io.FileOutputStream;
+		const document = await new Document();
+		const writer = await PdfWriter.getInstance(
+			document,
+			await new FileOutputStream("/files/HelloIText.pdf")
+		);
+		await document.open();
+		await document.add(await new Paragraph("Hello World!"));
+		await document.close();
+		await writer.close();
+		const blob = await cjFileBlob("/files/HelloIText.pdf");
+		const url = URL.createObjectURL(blob);
+		pdfDisplay.data = url;
+	} catch (e) {
+		const IOException = await lib.java.io.IOException;
+		if (e instanceof IOException) console.log("I/O error");
+		else console.log("Unknown error: " + (await e.getMessage()));
+	}
+}
+```
 
 ## Compile and run modern Java
 
