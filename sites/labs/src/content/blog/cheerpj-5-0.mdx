@@ -45,7 +45,7 @@ But, as strange as it might sound, modern Java is not the most impressive techni
 
 ![CheerpJ architecture diagram](./images/cj-5.0-arch.png)
 
-CheerpJ is a full JVM in WebAssembly, first released in 2017 and engineered from scratch to make Java a first-class language in the browser. Its current architecture, introduced with CheerpJ 3.0 in 2024, was rebuilt from scratch around a JIT compiler running in-browser via WebAssembly.
+CheerpJ is a full JVM in WebAssembly, first released in 2017 and engineered from scratch to make Java a first-class language in the browser. Its current architecture, introduced with CheerpJ 3.0 in 2024, was rebuilt around a JIT compiler, compiled to WebAssembly. It allowed us to remove preprocessing steps and greatly increase compatibility with real-world code.
 
 Unlike other solutions, CheerpJ is not limited to Java code written specifically for the browser. From day one it was designed to run existing, large-scale Java applications fully unmodified. That means full support for reflection, runtime class generation, custom class loaders, multithreading and synchronization. CheerpJ works exclusively at the Java bytecode level, so source code is never required. Proprietary or legacy applications whose source code is not available work with CheerpJ too, and so do obfuscated JARs. And since CheerpJ runs bytecode, _any_ JVM language, including Kotlin and Scala, works out of the box.
 
@@ -89,15 +89,15 @@ await cheerpjInit({ version: 21, wasmGC: true });
 
 The WasmGC engine requires a current browser: Chrome and Edge 137 or later, Firefox 153 or later, and Safari 27 or later (iOS and iPadOS 27 on mobile). There is no automatic fallback to the default engine yet, so please don't enable it in production. A stable WasmGC engine is the focus of CheerpJ 6.0, planned for early 2027.
 
-**General performance improvements:** Beyond the work on WasmGC, CheerpJ 5.0 also brings several performance improvements when using the stable engine. Parsing of class files has been sped up, the JIT engine has been fully re-tuned from first principles and downloading of JARs was optimized.
+**General performance improvements:** Beyond the work on WasmGC, CheerpJ 5.0 also brings several performance improvements when using the stable engine. Parsing of class files has been sped up, the JIT engine has been fully re-tuned from first principles and downloading of JARs has been optimized.
 
-**UI and mobile support:** Several improvements to Drag and Drop and clipboard integration, further improving cross-browser compatibility and multiple additional fixes to mobile support, first introduced in the previous [CheerpJ 4.3 release](https://labs.leaningtech.com/blog/cheerpj-4.3)
+**UI and mobile support:** Several improvements to Drag and Drop and clipboard integration, further improving cross-browser compatibility, and multiple additional fixes to mobile support, which was first introduced in the previous [CheerpJ 4.3 release](https://labs.leaningtech.com/blog/cheerpj-4.3).
 
 ## What can you run with CheerpJ?
 
-In short, CheerpJ can run large-scale, modern Java desktop applications in the browser without modifications. We believe that a demo is worth a thousands words, so we have select a few use cases for you.
+In short, CheerpJ can run large-scale, modern Java desktop applications in the browser without modifications. We believe that a demo is worth a thousand words, so we have selected a few use cases for you.
 
-## Large Swing apps including custom Look & Feel's
+## Large Swing apps including custom Look & Feels
 
 Full graphical applications such as the FlatLaf Demo, a popular Look and Feel for Java, can run smoothly in the browser with CheerpJ.
 
@@ -222,13 +222,13 @@ CheerpJ 5.0 completes our roadmap to bring modern Java to the browser, on schedu
 
 **Stabilize support for Java 25:** We consider Java 25 to be in preview, which means that we expect many small and medium scale use cases to work, but we also expect that small issues will need to be addressed when testing CheerpJ on very large apps. If something does not work for you, please let us know. Feedback from the community will be invaluable to reach a high level of stability for this feature.
 
-**Production-ready WasmGC in CheerpJ 6.0 :** WasmGC is available in this release as an opt-in, experimental feature, and we expect most real-world applications not to work with it just yet. CheerpJ 6.0, planned for early 2027, will make it production-ready. We will keep the current stable engine as the default for the foreseeable future.
+**Production-ready WasmGC in CheerpJ 6.0:** WasmGC is available in this release as an opt-in, experimental feature, and we expect most real-world applications not to work with it just yet. CheerpJ 6.0, planned for early 2027, will make it production-ready. We will keep the current stable engine as the default for the foreseeable future.
 
 **NPM support:** CheerpJ has always shipped as a plain JavaScript library, loaded from a CDN. This served us well while CheerpJ was mostly a tool to preserve access to legacy Java applications. Now that CheerpJ runs modern applications, we feel this model is no longer enough. We plan to make CheerpJ available as an NPM package and to modernize its interface.
 
 **Maintaining Java LTS parity:** From now on, CheerpJ will maintain LTS parity with Java with a delay of at most six months. We want our users to be comfortable that CheerpJ won’t be a limiting factor in adopting the latest Java features when developing their applications.
 
-**Integration with the BrowserPod kernel:** CheerpJ emulates a Linux system in the browser. The current implementation is robust, but fairly simplistic compared to the sophisticated WebAssembly kernel which is at the core of our other products: [CheerpX](https://cheerpx.io) and [BrowserPod](https://browserpod.io). We plan to rebuild the CheerpJ syscall layer on top of the same shared kernel, to achieve improved multi-processing support and much faster filesystem manipulation. Later on the integration will get even deeper, allowing x86 and WebAssembly native libraries and external programs to be used as part of Java applications running in CheerpJ, with every processes sharing a unified view of the same virtual system.
+**Integration with the BrowserPod kernel:** CheerpJ emulates a Linux system in the browser. The current implementation is robust, but fairly simplistic compared to the sophisticated WebAssembly kernel which is at the core of our other products: [CheerpX](https://cheerpx.io) and [BrowserPod](https://browserpod.io). We plan to rebuild the CheerpJ syscall layer on top of the same shared kernel, to achieve improved multi-processing support and much faster filesystem manipulation. In the future the integration will become even deeper, allowing x86 and WebAssembly native libraries and external programs to be used as part of Java applications running in CheerpJ, with every process sharing a unified view of the same virtual system.
 
 ## Licensing
 
@@ -240,7 +240,7 @@ For small businesses and startups, straightforward and affordable licensing opti
 
 Significant discounts are available for non-profit and educational institutions.
 
-For details see [Licensing](https://cheerpj.com/licensing/).
+For details, see [Licensing](https://cheerpj.com/licensing/).
 
 ## Getting started
 
