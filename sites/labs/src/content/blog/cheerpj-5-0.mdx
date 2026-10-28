@@ -175,22 +175,20 @@ The following snippet of code should give an idea about the capability of Librar
 
 ```js
 async function iTextExample() {
-	await cheerpjInit();
-	const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.3.jar");
+	await cheerpjInit({ version: 17 });
+	const lib = await cheerpjRunLibrary(
+		"/app/jars/layout-9.8.0.jar:/app/jars/kernel-9.8.0.jar:/app/jars/io-9.8.0.jar:/app/jars/commons-9.8.0.jar:/app/jars/slf4j-api-2.0.17.jar"
+	);
 	try {
-		const Document = await lib.com.itextpdf.text.Document;
-		const Paragraph = await lib.com.itextpdf.text.Paragraph;
-		const PdfWriter = await lib.com.itextpdf.text.pdf.PdfWriter;
-		const FileOutputStream = await lib.java.io.FileOutputStream;
-		const document = await new Document();
-		const writer = await PdfWriter.getInstance(
-			document,
-			await new FileOutputStream("/files/HelloIText.pdf")
-		);
-		await document.open();
+		const PdfWriter = await lib.com.itextpdf.kernel.pdf.PdfWriter;
+		const PdfDocument = await lib.com.itextpdf.kernel.pdf.PdfDocument;
+		const Document = await lib.com.itextpdf.layout.Document;
+		const Paragraph = await lib.com.itextpdf.layout.element.Paragraph;
+		const writer = await new PdfWriter("/files/HelloIText.pdf");
+		const pdf = await new PdfDocument(writer);
+		const document = await new Document(pdf);
 		await document.add(await new Paragraph("Hello World!"));
 		await document.close();
-		await writer.close();
 		const blob = await cjFileBlob("/files/HelloIText.pdf");
 		const url = URL.createObjectURL(blob);
 		pdfDisplay.data = url;
