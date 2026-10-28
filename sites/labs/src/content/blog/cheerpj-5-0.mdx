@@ -14,6 +14,7 @@ categories:
   - "Release"
 ---
 
+import { Icon } from "astro-icon/components";
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
 
@@ -91,12 +92,77 @@ The WasmGC engine requires a current browser: Chrome and Edge 137 or later, Fire
 
 ## What can you run with CheerpJ?
 
-{/* TODO Demos:
-- Big Swing app (flatlaf) + legacy Forms and EBS
-  - Compile and run modern Java (TODO - technical feasibility and costs)
-  - Run Java from JavaScript (library mode)
-  - Run Minecraft (mention modern minecraft with CJ6)
-*/}
+In short, CheerpJ can run large-scale, modern Java desktop applications in the browser without modifications. We believe that a demo is worth a thousands words, so we have select a few use cases for you.
+
+## Large Swing apps including custom Look & Feel's
+
+Full graphical applications such as the FlatLaf Demo, a popular Look and Feel for Java, can run smoothly in the browser with CheerpJ.
+
+<figure class="w-full aspect-square">
+	<div id="demodivFlatLaf" class="w-full aspect-square relative">
+		<iframe
+			class="absolute w-full h-full focus:outline-hidden"
+			src="https://leaningtech.github.io/cheerpj-example-flatlaf/"
+		></iframe>
+		<div id="demofullscreenFlatLaf">
+			<Icon
+				class="absolute right-0 bottom-0 w-8 h-8 m-1 text-stone-900 cursor-pointer"
+				name="fa-solid:expand"
+			/>
+			<Icon
+				class="absolute right-0 bottom-0 w-8 h-8 m-1 text-stone-900 cursor-pointer animate-ping opacity-50"
+				style="animation-duration: 3s; "
+				name="fa-solid:expand"
+			/>
+		</div>
+		<div id="demonormalFlatLaf" class="hidden">
+			<Icon
+				class="absolute right-0 bottom-0 w-8 h-8 m-1 text-stone-900 cursor-pointer"
+				name="fa-solid:compress-arrows-alt"
+			/>
+		</div>
+	</div>
+	<figcaption class="text-center">
+		FlatLaf Look and Feel demo running in the browser with CheerpJ
+	</figcaption>
+</figure>
+
+<script>{`
+var demoDivFlatLaf = document.getElementById("demodivFlatLaf");
+var demoFullscreenFlatLaf = document.getElementById("demofullscreenFlatLaf");
+var demoNormalFlatLaf = document.getElementById("demonormalFlatLaf");
+demoFullscreenFlatLaf.onclick = function()
+{
+	demoDivFlatLaf.requestFullscreen();
+};
+demoNormalFlatLaf.onclick = function()
+{
+	document.exitFullscreen();
+};
+demoDivFlatLaf.onfullscreenchange = function()
+{
+	if(document.fullscreenElement)
+	{
+		demoNormalFlatLaf.classList.remove("hidden");
+		demoFullscreenFlatLaf.classList.add("hidden");
+	}
+	else
+	{
+		demoFullscreenFlatLaf.classList.remove("hidden");
+		demoNormalFlatLaf.classList.add("hidden");
+	}
+};
+`}</script>
+
+## Run Minecraft (mention modern minecraft with CJ6)
+
+## Use Java logic directly from JavaScript
+
+{TODO: Library mode}
+
+## Compile and run modern Java
+
+{TODO: BrowerCode}
 
 ## What’s next?
 
