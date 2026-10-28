@@ -45,7 +45,7 @@ But, as strange as it might sound, modern Java is not the most impressive techni
 
 ![CheerpJ architecture diagram](./images/cj-5.0-arch.png)
 
-CheerpJ is a full JVM in WebAssembly, first released in 2017 and engineered from scratch to make Java a first-class language in the browser. Its current architecture, introduced with CheerpJ 3.0 in 2024, was rebuilt around a JIT compiler, compiled to WebAssembly. It allowed us to remove preprocessing steps and greatly increase compatibility with real-world code.
+CheerpJ is a full JVM in WebAssembly, first released in 2017 and engineered from scratch to make Java a first-class language in the browser. Its current architecture, introduced with CheerpJ 3.0 in 2024, was rebuilt around a JIT compiler compiled to WebAssembly. This allowed us to remove preprocessing steps and greatly increase compatibility with real-world code.
 
 Unlike other solutions, CheerpJ is not limited to Java code written specifically for the browser. From day one it was designed to run existing, large-scale Java applications fully unmodified. That means full support for reflection, runtime class generation, custom class loaders, multithreading and synchronization. CheerpJ works exclusively at the Java bytecode level, so source code is never required. Proprietary or legacy applications whose source code is not available work with CheerpJ too, and so do obfuscated JARs. And since CheerpJ runs bytecode, _any_ JVM language, including Kotlin and Scala, works out of the box.
 
@@ -79,7 +79,7 @@ Easily the largest rework since the JIT architecture was introduced in [CheerpJ 
 
 In the default engine, Java objects are JavaScript objects and hot code is compiled to JavaScript. In the WasmGC engine, Java objects become WasmGC objects and hot code is compiled into WebAssembly. Memory is still managed by the browser's garbage collector. We expect this to unlock significant performance improvements over the current stable engine, both at startup and at run time.
 
-As an added bonus, WasmGC simplifies the interaction with complex native (JNI) libraries that are themselves compiled to Wasm. This matters, for example, for CheerpJ's support of [LWJGL](https://www.lwjgl.org/), a fundamental building block for Minecraft and many other games written in Java. CheerpJ supports LWJGL 2 today. Running LWJGL 3 was possible, but only with a large performance overhead, which made it impractical. We expect the WasmGC engine to side-step these problems completely, paving the way for modern Minecraft and many other Java-based games.
+As an added bonus, WasmGC simplifies the interaction with complex native (JNI) libraries that are themselves compiled to Wasm. This matters, for example, for CheerpJ's support of [LWJGL](https://www.lwjgl.org/), a fundamental building block for Minecraft and many other games written in Java. CheerpJ supports LWJGL 2 today. Running LWJGL 3 was possible, but only with a large performance overhead, which made it impractical. We expect the WasmGC engine to sidestep these problems completely, paving the way for modern Minecraft and many other Java-based games.
 
 As exciting as it is, the WasmGC engine is experimental and still unstable at this stage. We don't expect real-world applications to work just yet, but we welcome early testing from the community. It is opt-in:
 
@@ -97,7 +97,7 @@ The WasmGC engine requires a current browser: Chrome and Edge 137 or later, Fire
 
 In short, CheerpJ can run large-scale, modern Java desktop applications in the browser without modifications. We believe that a demo is worth a thousand words, so we have selected a few use cases for you.
 
-## Large Swing apps including custom Look & Feels
+## Large Swing apps, including custom Look & Feels
 
 Full graphical applications such as the FlatLaf Demo, a popular Look and Feel for Java, can run smoothly in the browser with CheerpJ.
 
@@ -171,7 +171,7 @@ demoDivFlatLaf.onfullscreenchange = function()
 
 [Library Mode](https://cheerpj.com/docs/guides/library-mode) makes it possible to use Java libraries from JavaScript using a natural async/await-based approach, with direct access to Java methods, objects, and arrays. On top of this, native method support allows [Java native methods](https://cheerpj.com/docs/guides/implementing-native-methods) to be implemented directly in JavaScript, similar to how JNI works on standard Java platforms. Together, these features enable a level of interoperability between Java and the browser that was simply not possible before.
 
-The following snippet of code should give an idea about the capability of Library Mode. The code snippet is using the popular `iText` Java library to generate a PDF completely client-side in the browser.
+The following snippet of code should give an idea of the capability of Library Mode. The code snippet is using the popular `iText` Java library to generate a PDF completely client-side in the browser.
 
 ```js
 async function iTextExample() {
@@ -220,7 +220,7 @@ async function iTextExample() {
 
 CheerpJ 5.0 completes our roadmap to bring modern Java to the browser, on schedule. Now we enter a new phase, focused on performance, on expanding the use cases CheerpJ supports, and on ease of use.
 
-**Stabilize support for Java 25:** We consider Java 25 to be in preview, which means that we expect many small and medium scale use cases to work, but we also expect that small issues will need to be addressed when testing CheerpJ on very large apps. If something does not work for you, please let us know. Feedback from the community will be invaluable to reach a high level of stability for this feature.
+**Stabilize support for Java 25:** We consider Java 25 to be in preview, which means that we expect many small- and medium-scale use cases to work, but we also expect that small issues will need to be addressed when testing CheerpJ on very large apps. If something does not work for you, please let us know. Feedback from the community will be invaluable to reach a high level of stability for this feature.
 
 **Production-ready WasmGC in CheerpJ 6.0:** WasmGC is available in this release as an opt-in, experimental feature, and we expect most real-world applications not to work with it just yet. CheerpJ 6.0, planned for early 2027, will make it production-ready. We will keep the current stable engine as the default for the foreseeable future.
 
@@ -232,11 +232,11 @@ CheerpJ 5.0 completes our roadmap to bring modern Java to the browser, on schedu
 
 ## Licensing
 
-CheerpJ is commercial software, with a free Community licence for personal, educational and hobby use, for technical evaluation, and for individuals, one-person companies and non-commercial open-source projects.
+CheerpJ is commercial software, with a free Community license for personal, educational and hobby use, for technical evaluation, and for individuals, one-person companies and non-commercial open-source projects.
 
-With CheerpJ 5.0, commercial licensing is modelled after commercial OpenJDK distributions, and is based on who uses the application. **Desktop licences** cover the Java applications your organisation uses. **Application licences** cover software you build with CheerpJ for customers or the public.
+With CheerpJ 5.0, commercial licensing is modeled after commercial OpenJDK distributions, and is based on who uses the application. **Desktop licenses** cover the Java applications your organization uses. **Application licenses** cover software you build with CheerpJ for customers or the public.
 
-For small businesses and startups, straightforward and affordable licensing options are available. Enterprise licences are available that allow self-hosting, redistribution and come with different levels of support.
+For small businesses and startups, straightforward and affordable licensing options are available. Enterprise licenses are available that allow self-hosting, redistribution and come with different levels of support.
 
 Significant discounts are available for non-profit and educational institutions.
 
