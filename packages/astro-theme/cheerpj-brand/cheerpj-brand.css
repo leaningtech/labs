@@ -102,7 +102,7 @@
 		border-radius: 10px;
 		background: var(--cj-cream);
 		color: var(--cj-charcoal);
-		box-shadow: 3px 3px 0 var(--cj-ink);
+		box-shadow: 3px 3px 0 var(--cj-btn-shadow, var(--cj-ink));
 		font-family: var(--cj-font);
 		font-size: 15px;
 		line-height: 1.2;
@@ -118,7 +118,7 @@
 	}
 	.site-cheerpj .cj-btn:hover {
 		transform: translate(-2px, -2px);
-		box-shadow: 5px 5px 0 var(--cj-ink);
+		box-shadow: 5px 5px 0 var(--cj-btn-shadow, var(--cj-ink));
 	}
 	.site-cheerpj .cj-btn:active {
 		transform: translate(3px, 3px);
@@ -138,9 +138,17 @@
 		background: transparent;
 		color: inherit;
 	}
-	/* Not on cheerpj.com: its charcoal button sits on orange, the docs page is near-black */
+	/*
+	 * cheerpj.com's charcoal button (on its orange Get started block), toned down for a dark
+	 * page: a solid cream-into-charcoal edge, since a translucent one doubles up under the shadow
+	 */
 	.site-cheerpj .cj-btn-dark {
-		border-color: var(--cj-ink);
+		--cj-btn-shadow: color-mix(
+			in srgb,
+			var(--cj-cream) 35%,
+			var(--cj-charcoal)
+		);
+		border-color: var(--cj-btn-shadow);
 		background: var(--cj-dark-grey);
 		color: var(--cj-cream);
 	}
