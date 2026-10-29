@@ -85,6 +85,7 @@ export function defineCommonCollections() {
 			schema: z.object({
 				title: z.string(),
 				description: z.string().optional(),
+				descriptionHighlight: z.string().optional(), // Part of description to highlight (CheerpJ overview)
 				shortTitle: z.string().optional(), // Used for nav only
 				fullWidthLayout: z.boolean().default(false),
 				draft: z.boolean().default(false),

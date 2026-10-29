@@ -17,11 +17,19 @@ interface Props {
 	id?: string | undefined;
 	title: string;
 	description?: string | undefined;
+	descriptionHighlight?: string | undefined;
 	headings?: Heading[] | undefined;
 	fullWidthLayout: boolean;
 }
 
-const { id, title, description, headings, fullWidthLayout } = Astro.props;
+const {
+	id,
+	title,
+	description,
+	descriptionHighlight,
+	headings,
+	fullWidthLayout,
+} = Astro.props;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -29,6 +37,10 @@ const entries = product ? getProductNav(nav, product.id) : [];
 
 const site = getSite(Astro.site?.hostname);
 const isCheerpjOverview = product?.id === "cheerpj3" && title === product.name;
+const highlightAt =
+	descriptionHighlight && description
+		? description.indexOf(descriptionHighlight)
+		: -1;
 ---
 
 <Shell
@@ -113,11 +125,18 @@ const isCheerpjOverview = product?.id === "cheerpj3" && title === product.name;
 												: "text-xl font-medium text-bg-400"
 										}
 									>
-										{description && (
-											<span class:list={[product.id === "cheerpj3" && "cj-hl"]}>
-												{description}
-											</span>
-										)}
+										{description &&
+											(highlightAt >= 0 ? (
+												<span>
+													{description.slice(0, highlightAt)}
+													<span class="cj-hl">{descriptionHighlight}</span>
+													{description.slice(
+														highlightAt + descriptionHighlight!.length
+													)}
+												</span>
+											) : (
+												<span>{description}</span>
+											))}
 									</p>
 								</div>
 							) : (
