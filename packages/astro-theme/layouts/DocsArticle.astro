@@ -11,7 +11,6 @@ import type { Heading } from "../components/TableOfContentsHeading.astro";
 import DocsPagination from "../components/DocsPagination.astro";
 import Footer from "../components/Footer.astro";
 import ProductNav from "../components/nav/product/Nav.astro";
-import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
 
 interface Props {
@@ -116,15 +115,6 @@ const site = getSite(Astro.site?.hostname);
 									)}
 								</>
 							)}
-							{product?.id === "cheerpj2" ? (
-								<Callout title="Deprecation notice" variant="warning">
-									CheerpJ 2 is deprecated. Consider{" "}
-									<a href="/cheerpj3/migrating-from-cheerpj2">
-										migrating to CheerpJ 3
-									</a>
-									.
-								</Callout>
-							) : null}
 							<slot />
 						</main>
 
