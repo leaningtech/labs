@@ -31,13 +31,14 @@
 		--cj-font: Arimo, Arial, "Liberation Sans", sans-serif;
 	}
 
-	/* The /run-java/ title's type */
+	/* cheerpj.com's heading type, at its h2 size */
 	.site-cheerpj .cj-display {
+		color: var(--cj-ink);
 		font-family: var(--cj-font);
-		font-size: clamp(42px, 5.5vw, 80px);
+		font-size: clamp(30px, 3.5vw, 48px);
 		font-weight: 700;
-		letter-spacing: -0.045em;
-		line-height: 0.98;
+		letter-spacing: -0.035em;
+		line-height: 1.08;
 		text-wrap: balance;
 	}
 
