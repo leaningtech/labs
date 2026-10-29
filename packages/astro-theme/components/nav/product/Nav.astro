@@ -77,7 +77,8 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				product.id === "browserpod"
 					? "lg:mr-4"
 					: isCheerpj
-						? "mr-2"
+						? // Centred over the sidebar (DocsSidebar's width), out through the nav's padding
+							"mr-2 lg:-ml-8 lg:w-[clamp(15rem,17vw,20rem)] lg:justify-center"
 						: "lg:basis-64 lg:mr-10",
 			]}
 		>
