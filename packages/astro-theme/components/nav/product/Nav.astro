@@ -150,21 +150,10 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					<a href={DISCORD_URL} class="cj-icon-btn">
 						<span class="sr-only">Discord</span>
 						<Icon name="ri:discord-fill" aria-hidden="true" />
-						<span class="cj-icon-count" title="Online Discord members">
-							<Icon name="ph:circle-fill" class="text-green-500" />
-							<DiscordPresenceCount client:only="svelte" />
-						</span>
 					</a>
 					<a href={product.github} class="cj-icon-btn">
 						<span class="sr-only">GitHub</span>
 						<Icon name="ri:github-fill" aria-hidden="true" />
-						<span class="cj-icon-count" title="GitHub stars">
-							<Icon name="ph:star-fill" class="text-primary-500" />
-							<GitHubStarCount
-								client:only="svelte"
-								repo={`leaningtech/${product.repositoryName}`}
-							/>
-						</span>
 					</a>
 				</div>
 			) : (
