@@ -1,0 +1,55 @@
+---
+// cheerpj.com's button (cheerpj-brand.css). CheerpJ docs only: the styles need .site-cheerpj.
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	href: string;
+	label: string;
+	variant?: "primary" | "secondary" | "plain" | "dark";
+	size?: "md" | "lg";
+	// ext: cheerpj.com's ↗ icon. right: →. An iconify name puts that icon before the label.
+	arrow?: "ext" | "right" | "none";
+	icon?: string;
+	target?: string;
+	class?: string;
+}
+
+const {
+	href,
+	label,
+	variant = "secondary",
+	size = "md",
+	arrow = "ext",
+	icon,
+	target,
+	class: className,
+} = Astro.props;
+---
+
+<a
+	{href}
+	{target}
+	class:list={[
+		"cj-btn not-prose",
+		variant !== "secondary" && `cj-btn-${variant}`,
+		size === "lg" && "cj-btn-lg",
+		className,
+	]}
+>
+	{icon && <Icon name={icon} aria-hidden="true" />}
+	<span class:list={[icon && "mr-auto"]}>{label}</span>
+	{
+		arrow === "ext" && (
+			<svg viewBox="0 0 16 16" aria-hidden="true">
+				<path
+					d="M4 12 12 4M5.5 4H12v6.5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2.4"
+					stroke-linecap="square"
+				/>
+			</svg>
+		)
+	}
+	{arrow === "right" && <span aria-hidden="true">→</span>}
+</a>

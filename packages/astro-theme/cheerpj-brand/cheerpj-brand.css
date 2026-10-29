@@ -79,4 +79,76 @@
 		}
 	}
 
+	/*
+	 * cheerpj.com's .btn: charcoal border, 10px corners, a hard shadow in ink that lifts on
+	 * hover and presses in on :active. Secondary is cream, primary orange.
+	 */
+	.site-cheerpj .cj-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		min-height: 46px;
+		padding: 12px 18px;
+		border: 2px solid var(--cj-charcoal);
+		border-radius: 10px;
+		background: var(--cj-cream);
+		color: var(--cj-charcoal);
+		box-shadow: 3px 3px 0 var(--cj-ink);
+		font-family: var(--cj-font);
+		font-size: 15px;
+		line-height: 1.2;
+		font-weight: 700;
+		letter-spacing: -0.005em;
+		max-width: 100%;
+		text-wrap: balance;
+		text-decoration: none;
+		white-space: nowrap;
+		transition:
+			transform 0.14s ease,
+			box-shadow 0.14s ease;
+	}
+	.site-cheerpj .cj-btn:hover {
+		transform: translate(-2px, -2px);
+		box-shadow: 5px 5px 0 var(--cj-ink);
+	}
+	.site-cheerpj .cj-btn:active {
+		transform: translate(3px, 3px);
+		box-shadow: 0 0 0 var(--cj-ink);
+	}
+	.site-cheerpj .cj-btn svg {
+		flex: none;
+		width: 14px;
+		height: 14px;
+	}
+	.site-cheerpj .cj-btn-primary {
+		background: var(--cj-orange);
+	}
+	/* The header's uncoloured Docs button */
+	.site-cheerpj .cj-btn-plain {
+		border-color: var(--cj-ink);
+		background: transparent;
+		color: inherit;
+	}
+	/* Not on cheerpj.com: its charcoal button sits on orange, the docs page is near-black */
+	.site-cheerpj .cj-btn-dark {
+		border-color: var(--cj-ink);
+		background: var(--cj-dark-grey);
+		color: var(--cj-cream);
+	}
+	.site-cheerpj .cj-btn-lg {
+		min-height: 54px;
+		padding: 16px 22px;
+		font-size: 16px;
+	}
+	.site-cheerpj .cj-btn-lg svg {
+		width: 16px;
+		height: 16px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.site-cheerpj .cj-btn {
+			transition: none;
+		}
+	}
+
 }

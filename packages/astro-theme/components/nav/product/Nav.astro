@@ -92,16 +92,19 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				label="Docs"
 				href={firstDocsEntry.href}
 				showHoverBg={product.id !== "browserpod"}
+				cheerpj={product.id === "cheerpj3"}
 			/>
 			<Link
 				label="Blog"
 				href={blogref}
 				showHoverBg={product.id !== "browserpod"}
+				cheerpj={product.id === "cheerpj3"}
 			/>
 			<Link
 				label="Demos"
 				href={showcaseref}
 				showHoverBg={product.id !== "browserpod"}
+				cheerpj={product.id === "cheerpj3"}
 			/>
 			{
 				product.id.match("cheerpx") && (
