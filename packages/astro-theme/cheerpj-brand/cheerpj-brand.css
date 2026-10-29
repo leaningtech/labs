@@ -300,10 +300,8 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 6px;
-		min-width: 2rem;
+		width: 2rem;
 		height: 2rem;
-		padding: 0 6px;
 		border: 1px solid var(--cj-line);
 		border-radius: 6px;
 		color: var(--cj-ink);
@@ -312,26 +310,9 @@
 	.site-cheerpj .cj-icon-btn:hover {
 		border-color: var(--cj-ink);
 	}
-	.site-cheerpj .cj-icon-btn > svg {
+	.site-cheerpj .cj-icon-btn svg {
 		width: 18px;
 		height: 18px;
-	}
-	.site-cheerpj .cj-icon-count {
-		display: inline-flex;
-		align-items: center;
-		gap: 4px;
-		font-family: var(--cj-font);
-		font-size: 13px;
-		font-weight: 700;
-		font-variant-numeric: tabular-nums;
-	}
-	.site-cheerpj .cj-icon-count svg {
-		width: 10px;
-		height: 10px;
-	}
-	/* No count until it has loaded, so the box stays square */
-	.site-cheerpj .cj-icon-count:not(:has(astro-island:not(:empty))) {
-		display: none;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.site-cheerpj .cj-icon-btn {
