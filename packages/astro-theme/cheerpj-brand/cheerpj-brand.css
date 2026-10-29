@@ -172,6 +172,33 @@
 		background-color: var(--cj-dark-grey);
 	}
 
+	/* The footer, and the stepped strip above it */
+	.site-cheerpj .cj-zigzag {
+		height: 28px;
+		background: var(--cj-charcoal) url("./patterns/step-tile.svg") 0 0 / 56px
+			repeat;
+	}
+	.site-cheerpj .cj-footer {
+		border-top: 1px solid var(--cj-line);
+		color: var(--cj-ink);
+		font-family: var(--cj-font);
+	}
+	.site-cheerpj .cj-footer-bar {
+		border-top: 1px solid var(--cj-line);
+	}
+	.site-cheerpj .cj-text-label {
+		font-size: 12px;
+		line-height: 1.5;
+	}
+	.site-cheerpj .cj-text-eyebrow {
+		font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		font-size: 11px;
+		line-height: 1.4;
+		letter-spacing: 0.12em;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
 	/* The homepage's patterned quarter circle, top right of every page; it scrolls with the page */
 	.site-cheerpj .cj-splotch {
 		position: absolute;
