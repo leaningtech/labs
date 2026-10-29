@@ -44,19 +44,6 @@ export const products: { [product in Product]: ProductData } = {
 		github: "https://github.com/leaningtech/cheerp-meta",
 		repositoryName: "cheerp-meta",
 	},
-	cheerpj2: {
-		id: "cheerpj2",
-		type: "technology",
-		name: "CheerpJ",
-		href: "/docs/cheerpj2",
-		logotype: cheerpjLogotype,
-		favicon: baseWithSlash + "cheerpj2/favicon.ico",
-		subtitle: "Java Virtual Machine replacement for the browser",
-		description:
-			"Run Java 8 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
-		github: "https://github.com/leaningtech/cheerpj-meta",
-		repositoryName: "cheerpj-meta",
-	},
 	cheerpj3: {
 		id: "cheerpj3",
 		type: "technology",

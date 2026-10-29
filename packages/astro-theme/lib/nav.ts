@@ -25,7 +25,6 @@ export type NavEntry = NavDirectory | NavFile;
 
 export type Product =
 	| "cheerp"
-	| "cheerpj2"
 	| "cheerpj3"
 	| "cheerpx"
 	| "cheerpx-for-flash"
@@ -37,7 +36,6 @@ export type Product =
 export function isProduct(value: unknown): value is Product {
 	return (
 		value === "cheerp" ||
-		value === "cheerpj2" ||
 		value === "cheerpj3" ||
 		value === "cheerpx" ||
 		value === "cheerpx-for-flash" ||
