@@ -84,7 +84,11 @@ const highlightAt =
 						isCheerpj && "relative",
 					]}
 				>
-					{isCheerpj && <div class="cj-splotch" aria-hidden="true" />}
+					{isCheerpj && (
+						<div class="cj-splotch-track" aria-hidden="true">
+							<div class="cj-splotch" />
+						</div>
+					)}
 					<div
 						data-breakout-container
 						class="@container overflow-x-clip w-full max-w-content [--breakout-gutter:1.5rem] md:[--breakout-gutter:2rem]"

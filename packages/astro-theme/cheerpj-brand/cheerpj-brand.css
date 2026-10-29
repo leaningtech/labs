@@ -199,21 +199,41 @@
 		text-transform: uppercase;
 	}
 
-	/* The homepage's patterned quarter circle, top right of every page; it scrolls with the page */
-	.site-cheerpj .cj-splotch {
+	/*
+	 * The homepage's patterned quarter circle, top right of every page. The track spans the
+	 * article column, so on wide screens the splotch sticks under the nav until the article
+	 * ends, and never covers the footer. On narrow ones it scrolls away, clear of the text.
+	 */
+	.site-cheerpj .cj-splotch-track {
 		position: absolute;
-		top: 0;
-		right: 0;
+		inset: 0;
+		z-index: 1; /* over the table of contents, which scrolls under it at the article's end */
+		pointer-events: none;
+	}
+	.site-cheerpj .cj-splotch {
+		top: 65px;
 		width: 96px;
 		height: 96px;
+		margin-left: auto;
 		border-bottom-left-radius: 100%;
 		background: var(--cj-charcoal) url("./patterns/quarter-turn-tile.svg") 100%
 			0 / 120px repeat;
-		pointer-events: none;
 	}
-	/* The table of contents starts below it; once stuck it is past the splotch anyway */
-	.site-cheerpj .cj-splotch ~ [data-toc] {
-		margin-top: 80px;
+	@media (min-width: 1024px) {
+		.site-cheerpj .cj-splotch {
+			position: sticky;
+		}
+	}
+	/*
+	 * The table of contents sticks below it (nav 65px + splotch + 16px) and scrolls inside
+	 * itself when too long, rather than with the page. !important beats DocsArticle's script.
+	 */
+	@media (min-width: 1024px) {
+		.site-cheerpj .cj-splotch-track ~ [data-toc] {
+			top: 177px !important;
+			max-height: calc(100vh - 177px);
+			overflow-y: auto;
+		}
 	}
 }
 
