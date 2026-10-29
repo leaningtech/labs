@@ -151,4 +151,22 @@
 		}
 	}
 
+	/* The homepage's patterned quarter circle, here in the top-right corner of the page */
+	.site-cheerpj .cj-splotch {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 96px;
+		height: 96px;
+		border-bottom-left-radius: 100%;
+		background: var(--cj-charcoal) url("./patterns/quarter-turn-tile.svg") 100%
+			0 / 120px repeat;
+		pointer-events: none;
+	}
+	/* Below xl the table of contents reaches the page's edge, under the splotch */
+	@media (max-width: 1279px) {
+		.site-cheerpj .cj-splotch ~ [data-toc] {
+			margin-top: 80px;
+		}
+	}
 }
