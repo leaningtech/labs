@@ -172,14 +172,15 @@
 		--color-bg-400: rgb(161 161 170); /* --color-text-secondary: #a1a1aa */
 	}
 
+	/* CheerpJ: cheerpj.com's orange (#ff7c00) as both 500 (fills) and 400 (links, text) */
 	.site-cheerpj {
-		--color-primary-600: rgb(194 98 3);
-		--color-primary-500: rgb(219 110 4);
-		--color-primary-400: rgb(243 123 4);
-		--color-primary-300: rgb(247 148 56);
-		--color-primary-200: rgb(251 179 115);
-		--color-primary-100: rgb(253 215 179);
-		--color-primary-50: rgb(254 239 229);
+		--color-primary-600: rgb(224 109 0); /* #e06d00 */
+		--color-primary-500: rgb(255 124 0); /* #ff7c00 cheerpj.com orange */
+		--color-primary-400: rgb(255 124 0); /* #ff7c00 cheerpj.com orange */
+		--color-primary-300: rgb(255 154 64); /* #ff9a40 */
+		--color-primary-200: rgb(255 176 102); /* #ffb066 cheerpj.com orange-soft */
+		--color-primary-100: rgb(255 214 173); /* #ffd6ad */
+		--color-primary-50: rgb(255 241 227); /* #fff1e3 */
 	}
 
 	.site-cheerp {
