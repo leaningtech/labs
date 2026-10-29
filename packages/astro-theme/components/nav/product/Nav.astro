@@ -16,7 +16,8 @@ interface Props {
 }
 
 const { product, wide = false } = Astro.props;
-// cheerpj.com's header: logo, then the buttons, a narrow search, and boxed icons
+// cheerpj.com's header, with search beside the logo and boxed icons.
+// Every page of that site is under /docs/, so its Docs button is always active.
 const isCheerpj = product.id === "cheerpj3";
 
 const firstDocsEntry = getProductNav(await getRootNav(), product.id)[0];
@@ -101,14 +102,9 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 			</a>
 		</div>
 
-		{
-			!isCheerpj && (
-				<>
-					<div class="grow lg:hidden" />
-					<Search filterProductId={product.id} />
-				</>
-			)
-		}
+		{!isCheerpj && <div class="grow lg:hidden" />}
+		<Search filterProductId={product.id} />
+		{isCheerpj && <div class="grow" />}
 
 		<div
 			class:list={[
@@ -122,6 +118,7 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				href={firstDocsEntry.href}
 				showHoverBg={product.id !== "browserpod"}
 				cheerpj={product.id === "cheerpj3"}
+				active={isCheerpj || undefined}
 			/>
 			<Link
 				label="Blog"
@@ -147,24 +144,26 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		</div>
 
 		{
-			isCheerpj && (
-				<>
-					<div class="grow" />
-					<Search filterProductId={product.id} />
-				</>
-			)
-		}
-
-		{
 			isCheerpj ? (
 				<div class="flex items-center gap-2 flex-none">
 					<a href={DISCORD_URL} class="cj-icon-btn">
 						<span class="sr-only">Discord</span>
 						<Icon name="ri:discord-fill" aria-hidden="true" />
+						<span class="cj-icon-count" title="Online Discord members">
+							<Icon name="ph:circle-fill" class="text-green-500" />
+							<DiscordPresenceCount client:only="svelte" />
+						</span>
 					</a>
 					<a href={product.github} class="cj-icon-btn">
 						<span class="sr-only">GitHub</span>
 						<Icon name="ri:github-fill" aria-hidden="true" />
+						<span class="cj-icon-count" title="GitHub stars">
+							<Icon name="ph:star-fill" class="text-primary-500" />
+							<GitHubStarCount
+								client:only="svelte"
+								repo={`leaningtech/${product.repositoryName}`}
+							/>
+						</span>
 					</a>
 				</div>
 			) : (

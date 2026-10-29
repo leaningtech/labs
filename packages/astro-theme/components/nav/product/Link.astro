@@ -4,10 +4,17 @@ interface Props {
 	href: string;
 	showHoverBg?: boolean;
 	cheerpj?: boolean; // cheerpj.com's button (cheerpj-brand.css): orange when active
+	active?: boolean; // overrides matching the URL against href
 }
 
-const { label, href, showHoverBg = true, cheerpj = false } = Astro.props;
-const isActive = Astro.url.pathname.startsWith(href);
+const {
+	label,
+	href,
+	showHoverBg = true,
+	cheerpj = false,
+	active,
+} = Astro.props;
+const isActive = active ?? Astro.url.pathname.startsWith(href);
 ---
 
 <a
