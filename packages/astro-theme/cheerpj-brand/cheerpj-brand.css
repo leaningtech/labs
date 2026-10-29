@@ -254,6 +254,9 @@
 			font-size: 14px;
 		}
 	}
+	.site-cheerpj .cj-wordmark {
+		color: var(--cj-ink);
+	}
 
 	.site-cheerpj .cj-icon-btn {
 		display: inline-flex;
