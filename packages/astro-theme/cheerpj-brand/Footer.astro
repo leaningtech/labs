@@ -1,0 +1,192 @@
+---
+// cheerpj.com's full footer (leaningtech.com sites/cheerpj Footer.astro), with the stepped
+// strip that sits above it there. No cookie settings: the docs have no consent banner.
+// Links outside the docs are absolute, so they work from dev servers and previews too.
+import Logo from "./cheerpj-logo.svg";
+import { Icon } from "astro-icon/components";
+
+const site = "https://cheerpj.com";
+
+const socials = [
+	{
+		name: "LinkedIn",
+		href: "https://www.linkedin.com/company/leaning-technologies-ltd",
+		icon: "ri:linkedin-fill",
+	},
+	{
+		name: "X",
+		href: "https://x.com/leaningtech",
+		icon: "ri:twitter-x-fill",
+	},
+	{
+		name: "Discord",
+		href: "https://discord.leaningtech.com/",
+		icon: "ri:discord-fill",
+	},
+	{
+		name: "GitHub",
+		href: "https://github.com/leaningtech/cheerpj-meta",
+		icon: "ri:github-fill",
+	},
+];
+
+const columns = [
+	{
+		heading: "Product",
+		links: [
+			{ href: `${site}/run-java/`, text: "Run Java" },
+			{ href: `${site}/cheerpj-core/`, text: "Build with CheerpJ" },
+			{ href: `${site}/extensions/`, text: "Browser extensions" },
+			{ href: `${site}/compatibility/`, text: "Compatibility" },
+			{ href: `${site}/security/`, text: "Security" },
+			{ href: `${site}/comparison/`, text: "Comparison" },
+			{ href: `${site}/data-sheets/`, text: "Data sheet" },
+		],
+	},
+	{
+		heading: "Developers",
+		links: [
+			{ href: "/docs/", text: "Documentation" },
+			{ href: `${site}/get-started/`, text: "Get started" },
+			{ href: "/docs/guides", text: "Guides" },
+			{ href: "/docs/tutorials", text: "Tutorials" },
+			{ href: "/docs/reference", text: "API reference" },
+			{ href: "/docs/changelog", text: "Changelog" },
+			{ href: "https://javafiddle.leaningtech.com/", text: "Playground" },
+			{
+				href: "https://labs.leaningtech.com/showcase?product=CheerpJ",
+				text: "Showcase",
+			},
+			{ href: `${site}/interoperability/`, text: "Interoperability" },
+			{ href: `${site}/deployment/`, text: "Deployment" },
+			{ href: `${site}/faqs/`, text: "FAQs" },
+		],
+	},
+	{
+		heading: "Industries",
+		links: [
+			{ href: `${site}/cheerpj-for-banking/`, text: "Banking and finance" },
+			{ href: `${site}/cheerpj-for-defence/`, text: "Defence" },
+			{ href: `${site}/cheerpj-for-public-sector/`, text: "Public sector" },
+			{ href: `${site}/cheerpj-for-manufacturing/`, text: "Manufacturing" },
+			{
+				href: `${site}/cheerpj-for-ecommerce-and-retail/`,
+				text: "Ecommerce and retail",
+			},
+			{ href: `${site}/cheerpj-for-education/`, text: "Education" },
+			{ href: `${site}/cheerpj-for-gaming/`, text: "Gaming" },
+		],
+	},
+	{
+		heading: "Work with CheerpJ",
+		links: [
+			{ href: `${site}/contact/`, text: "Get in touch" },
+			{ href: `${site}/licensing/`, text: "Pricing" },
+			{ href: `${site}/customers/`, text: "Customers" },
+			{ href: `${site}/system-integrators/`, text: "For partners" },
+			{ href: `${site}/submit-rfp/`, text: "Submit an RFP" },
+		],
+	},
+	{
+		heading: "Company",
+		links: [
+			{
+				href: "https://leaningtech.com/about-us/",
+				text: "About Leaning Technologies",
+			},
+			{ href: `${site}/company-news/`, text: "Newsroom" },
+			{ href: `${site}/blog/`, text: "Blog" },
+		],
+	},
+];
+
+// Underlined on touch screens, where there is no hover to reveal it
+const link =
+	"w-fit text-[14px] leading-[1.2] underline-offset-5 hover:underline [@media(hover:none)]:underline";
+---
+
+<div class="grow"></div>
+<div class="cj-zigzag" aria-hidden="true"></div>
+<footer class="cj-footer @container">
+	<div class="mx-auto box-content max-w-[1200px] px-12 @max-[700px]:px-6">
+		<div
+			class="flex gap-10 py-16 @max-[1200px]:flex-col @max-[1200px]:gap-12 @max-[700px]:py-12"
+		>
+			<div class="flex w-fit shrink-0 flex-col items-start">
+				{
+					/* The SVG has room left of the letters (4.2% of its width): shifted so they line up with the tagline */
+				}
+				<a
+					href={`${site}/`}
+					class="inline-block w-[140px] -translate-x-[4.2%] @max-[700px]:w-[115px]"
+				>
+					<Logo role="img" aria-label="CheerpJ" class="h-auto w-full" />
+				</a>
+				<p class="cj-text-label mt-6 @max-[700px]:mt-4">
+					Real Java in the browser.
+				</p>
+				{
+					/* 36px targets pulled left by the target's 6px and the glyph's 3px, so the glyphs span the tagline */
+				}
+				<div class="mt-8 -ml-[9px] flex gap-[3px] @max-[700px]:mt-6">
+					{
+						socials.map((social) => (
+							<a
+								href={social.href}
+								target="_blank"
+								rel="noopener nofollow"
+								class="inline-flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-[var(--cj-ink)] hover:text-[var(--cj-charcoal)] motion-reduce:transition-none"
+							>
+								<span class="sr-only">{social.name}</span>
+								<Icon name={social.icon} class="size-6" />
+							</a>
+						))
+					}
+				</div>
+			</div>
+			<div
+				class="grid flex-1 grid-cols-5 gap-10 @max-[900px]:grid-cols-3 @max-[700px]:grid-cols-2"
+			>
+				{
+					columns.map((column) => (
+						<nav aria-label={column.heading} class="grid content-start gap-4">
+							<p class="cj-text-eyebrow">{column.heading}</p>
+							{column.links.map((item) => (
+								<a href={item.href} class={link}>
+									{item.text}
+								</a>
+							))}
+						</nav>
+					))
+				}
+			</div>
+		</div>
+		<div
+			class="cj-text-label cj-footer-bar flex flex-col items-center gap-6 py-6 text-center @max-[700px]:items-start @max-[700px]:text-left"
+		>
+			<span>
+				Leaning Technologies 2012-{new Date().getFullYear()}. All rights
+				reserved. Cheerp is a registered trademark of Leaning Technologies. Java
+				and OpenJDK are trademarks or registered trademarks of Oracle and/or its
+				affiliates. The CheerpJ logo is based on the HTML5 logo by <a
+					href="https://www.w3.org/"
+					class="underline underline-offset-5">W3C</a
+				> (<a
+					href="https://creativecommons.org/licenses/by/3.0/"
+					class="underline underline-offset-5">license</a
+				>).
+			</span>
+			<div class="flex gap-6">
+				<a
+					href={`${site}/privacy-policy/`}
+					class="underline underline-offset-5"
+				>
+					Privacy policy
+				</a>
+				<a href={`${site}/imprint/`} class="underline underline-offset-5">
+					Imprint
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
