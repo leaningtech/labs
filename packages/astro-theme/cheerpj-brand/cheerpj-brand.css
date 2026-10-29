@@ -56,6 +56,12 @@
 		box-decoration-break: clone;
 	}
 
+	/* Selected text as in .cj-hl; outranks Shell.astro's pink, which is in @layer base */
+	.site-cheerpj ::selection {
+		background-color: var(--cj-orange);
+		color: var(--cj-charcoal);
+	}
+
 	/* The /run-java/ cards' hover: lift up-left onto a hard shadow */
 	.site-cheerpj .cj-lift {
 		transition:
