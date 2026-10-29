@@ -1,6 +1,6 @@
 ---
-// cheerpj.com's full footer (leaningtech.com sites/cheerpj Footer.astro), with the stepped
-// strip that sits above it there. No cookie settings: the docs have no consent banner.
+// cheerpj.com's full footer (leaningtech.com sites/cheerpj Footer.astro), with what sits
+// above it on the homepage: the orange Get started block (GetStarted.astro) and the stepped strip. No cookie settings: the docs have no consent banner.
 // Links outside the docs are absolute, so they work from dev servers and previews too.
 import Logo from "./cheerpj-logo.svg";
 import { Icon } from "astro-icon/components";
@@ -106,6 +106,24 @@ const link =
 ---
 
 <div class="grow"></div>
+<section class="cj-banner @container" aria-labelledby="cj-banner-title">
+	<div
+		class="mx-auto box-content max-w-[1200px] px-12 py-16 @max-[700px]:px-6 @max-[700px]:py-12"
+	>
+		<h2 id="cj-banner-title">Build with Java for the browser.</h2>
+		<div class="mt-8 flex flex-wrap gap-3.5">
+			<a class="cj-btn cj-btn-charcoal" href={`${site}/get-started/#build`}>
+				Start building <span aria-hidden="true">→</span>
+			</a>
+			<a class="cj-btn" href={`${site}/get-started/#run`}>
+				Run your Java app <span aria-hidden="true">▶</span>
+			</a>
+			<a class="cj-btn" href={`${site}/contact/`}>
+				Talk to us <span aria-hidden="true">↗</span>
+			</a>
+		</div>
+	</div>
+</section>
 <div class="cj-zigzag" aria-hidden="true"></div>
 <footer class="cj-footer @container">
 	<div class="mx-auto box-content max-w-[1200px] px-12 @max-[700px]:px-6">

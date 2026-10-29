@@ -172,8 +172,26 @@
 		background-color: var(--cj-dark-grey);
 	}
 
-	/* The footer, and the stepped strip above it */
+	/* The footer, and the orange block and stepped strip above it */
+	.site-cheerpj .cj-banner {
+		--cj-ink: var(--cj-charcoal);
+		border-top: 1.5px solid var(--cj-charcoal);
+		background: var(--cj-orange);
+		color: var(--cj-ink);
+		font-family: var(--cj-font);
+	}
+	.site-cheerpj .cj-banner h2 {
+		font-size: clamp(34px, 4.4vw, 60px);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: -0.045em;
+	}
+	.site-cheerpj .cj-btn-charcoal {
+		background: var(--cj-charcoal);
+		color: var(--cj-cream);
+	}
 	.site-cheerpj .cj-zigzag {
+		border-top: 1.5px solid var(--cj-charcoal);
 		height: 28px;
 		background: var(--cj-charcoal) url("./patterns/step-tile.svg") 0 0 / 56px
 			repeat;
@@ -244,6 +262,9 @@
 		height: 2rem;
 		color: var(--cj-ink);
 	}
+	.site-cheerpj .cj-wordmark {
+		color: var(--cj-ink);
+	}
 
 	/*
 	 * Always shown, as on cheerpj.com. !important beats the scroll script's !border-b-bg-800:
@@ -273,9 +294,6 @@
 			padding: 4px 10px;
 			font-size: 14px;
 		}
-	}
-	.site-cheerpj .cj-wordmark {
-		color: var(--cj-ink);
 	}
 
 	.site-cheerpj .cj-icon-btn {
