@@ -1,6 +1,6 @@
 import { visit } from "unist-util-visit";
 
-// Adds `breakout` to top-level paragraphs holding only an image (optionally linked).
+// Adds `breakout-fit` to top-level paragraphs holding only an image (optionally linked).
 // Nested ones are skipped: breakout only works on direct children of the prose.
 export function rehypeBreakoutImages() {
 	return (tree) => {
@@ -19,7 +19,7 @@ export function rehypeBreakoutImages() {
 				isImage(only.children[0]);
 			if (!isImage(only) && !isLinkedImage) return;
 			const className = node.properties.className ?? [];
-			node.properties.className = [...className, "breakout"];
+			node.properties.className = [...className, "breakout-fit"];
 		});
 	};
 }
