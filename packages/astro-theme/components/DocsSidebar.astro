@@ -5,6 +5,7 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import DocsSidebarNavEntry from "./DocsSidebarNavEntry.astro";
 import type { ProductData } from "../lib/products";
+import CheerpjLogo from "../cheerpj-brand/cheerpj-logo.svg";
 
 interface Props {
 	product: ProductData | undefined;
@@ -29,7 +30,15 @@ const { product, entries } = Astro.props;
 	{
 		product && (
 			<a class="inline-block lg:hidden pb-4" href={product.href}>
-				<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+				{product.id === "cheerpj3" ? (
+					<CheerpjLogo
+						role="img"
+						aria-label={product.name}
+						class="cj-wordmark w-auto h-8"
+					/>
+				) : (
+					<Image src={product.logotype} alt={product.name} class="w-auto h-8" />
+				)}
 			</a>
 		)
 	}
