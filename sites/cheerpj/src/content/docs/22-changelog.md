@@ -120,5 +120,3 @@ title: Changelog
 ## Previous versions
 
 [CheerpJ 3.0 was a major architectural rewrite of CheerpJ](https://labs.leaningtech.com/blog/announcing-cheerpj-3).
-
-For previous versions, see the [CheerpJ 2.x changelog](https://labs.leaningtech.com/docs/cheerpj2/changelog).

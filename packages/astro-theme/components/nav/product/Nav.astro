@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import Search from "../../search/Search.astro";
 import { DISCORD_URL } from "../../../consts";
 import { Icon } from "astro-icon/components";
-import ProductVersionSwitcher from "../../ProductVersionSwitcher.astro";
 import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
@@ -26,7 +25,6 @@ const firstDocsEntry = getLocalisedProductNav(
 if (!firstDocsEntry) throw new Error("must have a docs entry");
 const productFilterTag: Partial<Record<string, string>> = {
 	cheerp: "Cheerp",
-	cheerpj2: "CheerpJ",
 	cheerpj3: "CheerpJ",
 	cheerpx: "CheerpX",
 	"cheerpx-for-flash": "CheerpX",
@@ -88,11 +86,6 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 					]}
 				/>
 			</a>
-			{
-				(product.id.match("cheerpj2") || product.id.match("cheerpj3")) && (
-					<ProductVersionSwitcher {product} />
-				)
-			}
 		</div>
 
 		<div class="grow lg:hidden"></div>
