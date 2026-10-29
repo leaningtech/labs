@@ -4,11 +4,11 @@ shortTitle: Overview
 description: Java Virtual Machine for modern web browsers
 ---
 
-import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import ShowcaseList from "@leaningtech/astro-theme/components/ShowcaseList.astro";
 import { DISCORD_URL } from "@/consts.ts";
 import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButton.astro";
 import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
+import Button from "@leaningtech/astro-theme/cheerpj-brand/Button.astro";
 
 <div class="not-prose flex gap-2 mb-2">
 	<img
@@ -69,7 +69,7 @@ CheerpJ is based on a full OpenJDK runtime environment and supports:
 - Audio
 - Printing
 
-<LinkButton label="Get started" type="primary" href="/docs/getting-started" />
+<Button label="Get started" variant="primary" href="/docs/getting-started" />
 
 ## Getting started
 
@@ -77,31 +77,35 @@ CheerpJ is based on a full OpenJDK runtime environment and supports:
 
 Know what you're building? Jump straight to the relevant tutorial:
 
-<div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
-	<a
+<div class="not-prose grid grid-cols-2 gap-4">
+	<Button
+		label="Application"
+		variant="dark"
+		size="lg"
+		arrow="right"
 		href="/docs/getting-started/Java-app"
-		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
-	>
-		Application
-	</a>
-	<a
+	/>
+	<Button
+		label="Applet"
+		variant="dark"
+		size="lg"
+		arrow="right"
 		href="/docs/getting-started/Java-applet"
-		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
-	>
-		Applet
-	</a>
-	<a
+	/>
+	<Button
+		label="Library"
+		variant="dark"
+		size="lg"
+		arrow="right"
 		href="/docs/getting-started/Java-library"
-		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
-	>
-		Library
-	</a>
-	<a
+	/>
+	<Button
+		label="JWS/JNLP"
+		variant="dark"
+		size="lg"
+		arrow="right"
 		href="/docs/getting-started/JNLP"
-		class="px-8 py-6 bg-stone-800 hover:bg-stone-700 text-lg"
-	>
-		JWS/JNLP
-	</a>
+	/>
 </div>
 
 ## How does CheerpJ work?
@@ -156,29 +160,29 @@ Check out our browser extensions for running Java Applets and Web Start applicat
 CheerpJ is used in production by teams at NASA, Siemens, UBS, and [many others](https://labs.leaningtech.com/showcase).
 
 <div class="flex justify-end pt-4">
-	<LinkButton
-		type="secondary"
+	<Button
+		variant="plain"
+		arrow="right"
 		href="/docs/community"
 		label="View more community projects"
-		iconRight="mi:arrow-right"
 	/>
 </div>
 
 We have a vibrant Discord community where you can ask questions, share your projects, and get community support.
 
-<LinkButton
-	type="discord"
-	href={DISCORD_URL}
-	iconLeft="fa-brands:discord"
-	label="Join our Discord server"
-/>
-
-<LinkButton
-	type="secondary"
-	href="https://twitter.com/leaningtech"
-	iconLeft="fa-brands:twitter"
-	label="Follow us on Twitter"
-/>
+<div class="not-prose flex flex-wrap gap-4">
+	<Button
+		variant="primary"
+		href={DISCORD_URL}
+		icon="fa-brands:discord"
+		label="Join our Discord server"
+	/>
+	<Button
+		href="https://github.com/leaningtech/cheerpj-meta"
+		icon="fa-brands:github"
+		label="Star us on GitHub"
+	/>
+</div>
 
 ---
 
