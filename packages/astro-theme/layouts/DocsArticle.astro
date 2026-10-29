@@ -99,8 +99,18 @@ const site = getSite(Astro.site?.hostname);
 											}
 										/>
 									</h1>
-									<p class="text-xl font-medium text-bg-400">
-										{description && <span>{description}</span>}
+									<p
+										class={
+											product.id === "cheerpj3"
+												? "cj-display text-center"
+												: "text-xl font-medium text-bg-400"
+										}
+									>
+										{description && (
+											<span class:list={[product.id === "cheerpj3" && "cj-hl"]}>
+												{description}
+											</span>
+										)}
 									</p>
 								</div>
 							) : (

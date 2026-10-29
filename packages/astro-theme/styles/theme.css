@@ -4,6 +4,7 @@
  */
 
 @import "tailwindcss";
+@import "../cheerpj-brand/cheerpj-brand.css";
 
 /*
  * Sites are auto-detected from each build's working directory. Sibling packages are not, so
