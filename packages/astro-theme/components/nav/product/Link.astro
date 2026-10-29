@@ -3,20 +3,23 @@ interface Props {
 	label: string;
 	href: string;
 	showHoverBg?: boolean;
+	cheerpj?: boolean; // cheerpj.com's button (cheerpj-brand.css): orange when active
 }
 
-const { label, href, showHoverBg = true } = Astro.props;
+const { label, href, showHoverBg = true, cheerpj = false } = Astro.props;
 const isActive = Astro.url.pathname.startsWith(href);
 ---
 
 <a
 	{href}
 	data-active={isActive || undefined}
-	class:list={[
-		"nav-btn flex items-center px-3.5 py-1.5 rounded-xl",
-		{ "hover:bg-stone-800": !isActive },
-		{ "text-primary-500 bg-primary-600/10": isActive },
-	]}
+	class:list={cheerpj
+		? ["cj-btn self-center", isActive ? "cj-btn-primary" : "cj-btn-plain"]
+		: [
+				"nav-btn flex items-center px-3.5 py-1.5 rounded-xl",
+				{ "hover:bg-stone-800": !isActive },
+				{ "text-primary-500 bg-primary-600/10": isActive },
+			]}
 >
 	{label}
 </a>

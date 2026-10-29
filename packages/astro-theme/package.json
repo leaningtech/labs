@@ -20,6 +20,7 @@
 		"./layouts/Shell.astro": "./layouts/Shell.astro",
 		"./layouts/ProductHome.astro": "./layouts/ProductHome.astro",
 		"./components/LinkButton.astro": "./components/LinkButton.astro",
+		"./cheerpj-brand/Button.astro": "./cheerpj-brand/Button.astro",
 		"./components/Footer.astro": "./components/Footer.astro",
 		"./components/BlogIndexCard.astro": "./components/BlogIndexCard.astro",
 		"./components/ShowcaseIndexCard.astro": "./components/ShowcaseIndexCard.astro",
