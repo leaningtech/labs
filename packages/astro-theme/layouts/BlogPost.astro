@@ -83,7 +83,10 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 			}
 
 			<div class="flex gap-10">
-				<div class="flex-1 min-w-0 max-w-content mx-auto">
+				<div
+					data-breakout-container
+					class="@container flex-1 min-w-0 max-w-content mx-auto"
+				>
 					<article class="max-w-3xl mx-auto">
 						<h1
 							class="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 dark:text-stone-200 text-balance"
