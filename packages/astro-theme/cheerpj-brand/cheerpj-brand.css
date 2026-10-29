@@ -158,7 +158,7 @@
 		}
 	}
 
-	/* The homepage's patterned quarter circle, here in the top-right corner of the page */
+	/* The homepage's patterned quarter circle, top right of every page; it scrolls with the page */
 	.site-cheerpj .cj-splotch {
 		position: absolute;
 		top: 0;
@@ -170,10 +170,8 @@
 			0 / 120px repeat;
 		pointer-events: none;
 	}
-	/* Below xl the table of contents reaches the page's edge, under the splotch */
-	@media (max-width: 1279px) {
-		.site-cheerpj .cj-splotch ~ [data-toc] {
-			margin-top: 80px;
-		}
+	/* The table of contents starts below it; once stuck it is past the splotch anyway */
+	.site-cheerpj .cj-splotch ~ [data-toc] {
+		margin-top: 80px;
 	}
 }

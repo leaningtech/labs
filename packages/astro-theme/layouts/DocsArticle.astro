@@ -36,7 +36,7 @@ const product = productFromUrl(Astro.url);
 const entries = product ? getProductNav(nav, product.id) : [];
 
 const site = getSite(Astro.site?.hostname);
-const isCheerpjOverview = product?.id === "cheerpj3" && title === product.name;
+const isCheerpj = product?.id === "cheerpj3";
 const highlightAt =
 	descriptionHighlight && description
 		? description.indexOf(descriptionHighlight)
@@ -79,10 +79,10 @@ const highlightAt =
 				<div
 					class:list={[
 						"flex-1 min-w-0 flex justify-center",
-						isCheerpjOverview && "relative",
+						isCheerpj && "relative",
 					]}
 				>
-					{isCheerpjOverview && <div class="cj-splotch" aria-hidden="true" />}
+					{isCheerpj && <div class="cj-splotch" aria-hidden="true" />}
 					<div
 						data-breakout-container
 						class="@container overflow-x-clip w-full max-w-content [--breakout-gutter:1.5rem] md:[--breakout-gutter:2rem]"
