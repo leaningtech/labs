@@ -182,6 +182,7 @@
 		--color-primary-200: rgb(255 176 102); /* #ffb066 cheerpj.com orange-soft */
 		--color-primary-100: rgb(255 214 173); /* #ffd6ad */
 		--color-primary-50: rgb(255 241 227); /* #fff1e3 */
+		--color-bg-900: rgb(30 30 30); /* #1e1e1e cheerpj.com charcoal, the page */
 	}
 
 	.site-cheerp {

@@ -159,6 +159,11 @@
 		}
 	}
 
+	/* cheerpj.com's lighter section tone */
+	.site-cheerpj .cj-sidebar {
+		background-color: var(--cj-dark-grey);
+	}
+
 	/* The homepage's patterned quarter circle, top right of every page; it scrolls with the page */
 	.site-cheerpj .cj-splotch {
 		position: absolute;
