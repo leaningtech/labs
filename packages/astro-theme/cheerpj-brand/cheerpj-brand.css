@@ -28,6 +28,7 @@
 		--cj-charcoal: #1e1e1e;
 		--cj-dark-grey: #2c2c2c;
 		--cj-ink: var(--cj-cream);
+		--cj-line: rgb(229 229 214 / 0.32);
 		--cj-font: Arimo, Arial, "Liberation Sans", sans-serif;
 	}
 
@@ -173,5 +174,68 @@
 	/* The table of contents starts below it; once stuck it is past the splotch anyway */
 	.site-cheerpj .cj-splotch ~ [data-toc] {
 		margin-top: 80px;
+	}
+}
+
+/* The product nav, after cheerpj.com's header */
+@layer components {
+	.site-cheerpj .cj-nav-logo {
+		width: auto;
+		height: 2rem;
+		color: var(--cj-ink);
+	}
+
+	/*
+	 * Always shown, as on cheerpj.com. !important beats the scroll script's !border-b-bg-800:
+	 * between important declarations, the earlier layer (components) wins.
+	 */
+	.site-cheerpj #product-nav {
+		border-bottom-color: var(--cj-line) !important;
+	}
+
+	/* !important: Search.astro's own max-w-full utility would win otherwise */
+	.site-cheerpj #product-nav site-search {
+		max-width: 16rem !important;
+	}
+
+	/* Phones: compact buttons, and no community icons (cheerpj.com drops them too) */
+	@media (max-width: 767px) {
+		.site-cheerpj #product-nav .cj-icon-btn {
+			display: none;
+		}
+	}
+	@media (max-width: 639px) {
+		.site-cheerpj .cj-nav-logo {
+			height: 1.5rem;
+		}
+		.site-cheerpj #nav-items .cj-btn {
+			min-height: 32px;
+			padding: 4px 10px;
+			font-size: 14px;
+		}
+	}
+
+	.site-cheerpj .cj-icon-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid var(--cj-line);
+		border-radius: 6px;
+		color: var(--cj-ink);
+		transition: border-color 0.15s ease;
+	}
+	.site-cheerpj .cj-icon-btn:hover {
+		border-color: var(--cj-ink);
+	}
+	.site-cheerpj .cj-icon-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.site-cheerpj .cj-icon-btn {
+			transition: none;
+		}
 	}
 }
