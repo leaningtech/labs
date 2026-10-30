@@ -116,11 +116,14 @@ const highlightAt =
 								<div class="not-prose flex flex-col items-center mt-2 mb-10 gap-4">
 									<h1>
 										{isCheerpj ? (
-											<CheerpjLogo
-												role="img"
-												aria-label={product.name}
-												class="cj-wordmark h-auto w-[300px] max-w-full"
-											/>
+											<>
+												{/* Text, not just an aria-label, so search engines read the h1 */}
+												<span class="sr-only">{product.name}</span>
+												<CheerpjLogo
+													aria-hidden="true"
+													class="cj-wordmark h-auto w-[300px] max-w-full"
+												/>
+											</>
 										) : (
 											<Image
 												alt={product.name}
