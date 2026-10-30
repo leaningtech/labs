@@ -108,9 +108,44 @@
 	--color-cheerpx: #3b516d;
 	--color-blurple: #5865f2;
 
-	/* Docs layout: prose line length, max width of the content column */
+	/* Docs layout: prose line length, max width of the content column, max width of breakout elements */
 	--container-measure: 50rem;
 	--container-content: 64rem;
+	--container-breakout: 60rem;
+}
+
+/*
+ * Widens direct children of the prose past the measure. Assumes the prose is centred in the container.
+ * .breakout always takes the full breakout width (embeds). .breakout-fit grows only as far as its
+ * content's natural width needs, so images that already fit the measure are left untouched.
+ */
+@layer utilities {
+	[data-breakout-container] :is(.breakout, .breakout-fit) {
+		--breakout-width: min(
+			100cqw - 2 * var(--breakout-gutter, 0px),
+			var(--container-breakout)
+		);
+	}
+
+	[data-breakout-container] .breakout {
+		width: var(--breakout-width);
+		max-width: none;
+		margin-inline: calc((100% - var(--breakout-width)) / 2);
+	}
+
+	[data-breakout-container] .breakout img {
+		margin-inline: auto;
+	}
+
+	/* Own width is unknown to margins, so centre on the prose with left + translate instead */
+	[data-breakout-container] .breakout-fit {
+		width: max-content;
+		max-width: var(--breakout-width);
+		min-width: 100%;
+		position: relative;
+		left: 50%;
+		translate: -50%;
+	}
 }
 
 /*
