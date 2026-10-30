@@ -1,3 +1,26 @@
+# Production (labs-cheerpj) is served from its root behind cheerpj.com's /docs/*
+# proxy, which adds /docs back onto root-relative Locations. The previews
+# project serves under /docs/, so each rule is written for both.
+
+/showcase   https://labs.leaningtech.com/showcase    301
+/blog       https://labs.leaningtech.com/blog        301
+/community  https://labs.leaningtech.com/showcase    301
 /docs/showcase   https://labs.leaningtech.com/showcase    301
 /docs/blog       https://labs.leaningtech.com/blog        301
-/docs/community   https://labs.leaningtech.com/showcase    301
+/docs/community  https://labs.leaningtech.com/showcase    301
+
+# The Japanese and Chinese docs are gone; send their old URLs to the English page
+/ja/community                                           https://labs.leaningtech.com/showcase       301
+/ja/guides/File-System-support                          /guides/filesystem                          301
+/ja/guides/Implementing-Java-native-methods-in-JavaScript  /guides/implementing-native-methods      301
+/ja      /          301
+/ja/*    /:splat    301
+/zh      /          301
+/zh/*    /:splat    301
+/docs/ja/community                                      https://labs.leaningtech.com/showcase       301
+/docs/ja/guides/File-System-support                     /docs/guides/filesystem                     301
+/docs/ja/guides/Implementing-Java-native-methods-in-JavaScript  /docs/guides/implementing-native-methods  301
+/docs/ja      /docs/          301
+/docs/ja/*    /docs/:splat    301
+/docs/zh      /docs/          301
+/docs/zh/*    /docs/:splat    301

@@ -13,14 +13,6 @@ export default defineConfig({
 			baseIsDocs: true,
 		}),
 	],
-	i18n: {
-		defaultLocale: "en",
-		locales: ["en", "ja", "zh"],
-		fallback: {
-			ja: "en",
-			zh: "en",
-		},
-	},
 	vite: {
 		resolve: {
 			alias: [
