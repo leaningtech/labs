@@ -76,7 +76,7 @@ Running modern, large-scale Java applications in the browser is now a reality. C
 
 ### The full JDK, not just the JRE
 
-CheerpJ has always shipped only the JRE components of OpenJDK, to keep download size and initialization time down. After recent optimization work on our I/O logic we are now comfortable shipping the full JDK, for every supported Java version. This makes it possible not just to run Java in the browser, but also to _compile_ it: both javac and jshell can now run client-side. That opens up a whole new range of use cases, especially in education.
+CheerpJ has always shipped only the JRE components of OpenJDK, to keep download size and initialization time down. After recent optimization work on our I/O logic we are now comfortable shipping the full JDK, for every supported Java version. This makes it possible not just to run Java in the browser, but also to _compile_ it: both `javac` and `jshell` can now run client-side. That opens up a whole new range of use cases, especially in education.
 
 ### Experimental support for WasmGC
 
@@ -168,7 +168,7 @@ demoDivFlatLaf.onfullscreenchange = function()
 	<source src="/blog/browsercraft4.mp4" type="video/mp4" />
 </video>
 
-[Browsercraft](https://browsercraft.cheerpj.com/), our web-based "embedding" of a historical Java version of Minecraft, continues to serve as one of our most demanding stress tests for CheerpJ. Unlike other approaches you may have seen, Browsercraft is not based on decompilation or reverse engineering. The original client.jar is fetched directly from Mojang's servers and runs completely unmodified in the browser. If you haven't tried it yet, it remains one of the best showcases of what CheerpJ is capable of.
+[Browsercraft](https://browsercraft.cheerpj.com/), our web-based "embedding" of a historical Java version of Minecraft, continues to serve as one of our most demanding stress tests for CheerpJ. Unlike other approaches you may have seen, Browsercraft is not based on decompilation or reverse engineering. The original `client.jar` is fetched directly from Mojang's servers and runs completely unmodified in the browser. If you haven't tried it yet, it remains one of the best showcases of what CheerpJ is capable of.
 
 {/* TODO: mention modern Minecraft with CJ6 */}
 
