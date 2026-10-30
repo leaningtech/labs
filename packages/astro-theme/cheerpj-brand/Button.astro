@@ -7,8 +7,9 @@ interface Props {
 	label: string;
 	variant?: "primary" | "secondary" | "plain" | "dark";
 	size?: "md" | "lg";
-	// ext: cheerpj.com's ↗ icon. right: →. An iconify name puts that icon before the label.
+	// ext: cheerpj.com's ↗ icon, the default for absolute links. right: →, the default otherwise.
 	arrow?: "ext" | "right" | "none";
+	// An iconify name, shown before the label
 	icon?: string;
 	target?: string;
 	class?: string;
@@ -19,7 +20,7 @@ const {
 	label,
 	variant = "secondary",
 	size = "md",
-	arrow = "ext",
+	arrow = /^https?:/.test(href) ? "ext" : "right",
 	icon,
 	target,
 	class: className,
