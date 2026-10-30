@@ -167,6 +167,12 @@
 		}
 	}
 
+	/* cheerpj.com's focus ring: 3px in the text colour, 4px clear of the element */
+	.site-cheerpj :focus-visible {
+		outline: 3px solid var(--cj-ink);
+		outline-offset: 4px;
+	}
+
 	/* cheerpj.com's lighter section tone */
 	.site-cheerpj .cj-sidebar {
 		background-color: var(--cj-dark-grey);
