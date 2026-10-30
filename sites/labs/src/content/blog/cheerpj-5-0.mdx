@@ -110,9 +110,9 @@ In short, CheerpJ can run large-scale, modern Java desktop applications in the b
 
 ## Large Swing apps, including custom Look & Feels
 
-CheerpJ has fully support for GUI apps based on _Swing_ and _AWT_, including when a custom _Look & Feel_ is used. Multiple windows, clipboard integration and printing work as well. In most cases the an application will render exacly the same as it would when using a traditional desktop JVM.
+CheerpJ has full support for GUI apps based on _Swing_ and _AWT_, including when a custom _Look & Feel_ is used. Multiple windows, clipboard integration and printing work as well. In most cases, an application will render exactly the same as it would when using a traditional desktop JVM.
 
-The FlatLaf Demo, from the popular Look and Feel, is shown here running live in your browser. You can click around to see how components behave.
+The FlatLaf Demo, from the popular Look and Feel library, is shown here running live in your browser. You can click around to see how components behave.
 
 <figure class="breakout w-full aspect-video">
 	<div id="demodivFlatLaf" class="w-full aspect-video relative">
@@ -170,7 +170,7 @@ demoDivFlatLaf.onfullscreenchange = function()
 };
 `}</script>
 
-_JavaFX_ and _SWT_ applications are not supported at this time, but these toolkit are in our pipeline. If you apps depends on them please get in touch, we might be able to share early previews.
+_JavaFX_ and _SWT_ applications are not supported at this time, but these toolkits are in our pipeline. If your app depends on them, please get in touch: we might be able to share early previews.
 
 ## Demo: Unmodified Minecraft in the browser
 
@@ -180,11 +180,11 @@ _JavaFX_ and _SWT_ applications are not supported at this time, but these toolki
 	<source src="/blog/browsercraft4.mp4" type="video/mp4" />
 </video>
 
-Minecraft keeps being a critical validation tool for our technology. We believe that support for modern Java (in this release) and a stable WasmGC engine (planned for CheerpJ 6.0), will make it possible to run modern releases of Minecraft in the browser as well.
+Minecraft is a critical validation tool for our technology. We believe that support for modern Java (in this release) and a stable WasmGC engine (planned for CheerpJ 6.0) will make it possible to run modern versions, including mods, in the browser as well.
 
 ## Use Java logic directly from JavaScript
 
-[Library Mode](https://cheerpj.com/docs/guides/library-mode) makes it possible to use Java libraries from JavaScript using a natural `async`/`await` based approach, with direct access to Java methods, objects, and arrays. On top of this, native method support allows [Java native methods](https://cheerpj.com/docs/guides/implementing-native-methods) to be implemented directly in JavaScript, similar to how JNI works on standard Java platforms. Together, these features enable a level of interoperability between Java and the browser that was simply not possible before.
+[Library Mode](https://cheerpj.com/docs/guides/library-mode) makes it possible to use Java libraries from JavaScript using a natural syntax based on `async`/`await`, with direct access to Java methods, objects, and arrays. On top of this, native method support allows [Java native methods](https://cheerpj.com/docs/guides/implementing-native-methods) to be implemented directly in JavaScript, similar to how JNI works on standard Java platforms. Together, these features enable a level of interoperability between Java and the browser that was simply not possible before.
 
 The following snippet of code should give an idea of the capability of Library Mode. The code snippet is using the popular [iText](https://itextpdf.com/) Java library to generate a PDF completely client-side in the browser.
 
