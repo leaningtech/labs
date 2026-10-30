@@ -76,7 +76,7 @@ Running modern, large-scale Java applications in the browser is now a reality. C
 
 ### The full JDK, not just the JRE
 
-CheerpJ has always shipped only the JRE components of OpenJDK, to keep download size and initialization time down. After recent optimization work on our I/O logic we are now comfortable shipping the full JDK, for every supported Java version. This makes it possible not just to run Java in the browser, but also to _compile_ it: both `javac` and `jshell` can now run client-side. That opens up a whole new range of use cases, especially in education.
+CheerpJ has always shipped only the JRE packages of OpenJDK, to keep download size and initialization time down. After recent optimization work on our I/O logic we are now comfortable shipping the full JDK, for every supported Java version. This makes it possible not just to run Java in the browser, but also to _compile_ it: both `javac` and `jshell` can now run client-side. That opens up a whole new range of use cases, especially in education.
 
 ### Experimental support for WasmGC
 
@@ -112,7 +112,7 @@ In short, CheerpJ can run large-scale, modern Java desktop applications in the b
 
 CheerpJ has full support for GUI apps based on _Swing_ and _AWT_, including when a custom _Look & Feel_ is used. Multiple windows, clipboard integration and printing work as well. In most cases, an application will render exactly the same as it would when using a traditional desktop JVM.
 
-The FlatLaf Demo, from the popular Look and Feel library, is shown here running live in your browser. You can click around to see how components behave.
+The FlatLaf Demo, from the popular Look and Feel library, is shown here running live in your browser.
 
 <figure class="breakout w-full aspect-video">
 	<div id="demodivFlatLaf" class="w-full aspect-video relative">
@@ -217,7 +217,9 @@ async function iTextExample() {
 
 ## Compile and run modern Java
 
-{/* TODO: BrowserCode text */}
+As mentioned previously, CheerpJ now ships the full JDK by default. This makes it possible to both compile and run modern Java code in the browser.
+
+To showcase this capability, we have integrated CheerpJ into [BrowserCode](https://labs.leaningtech.com/blog/announcing-browsercode), our embeddable, browser-based IDE and agent sandbox. Change the code and click `Run` to see a new version being compiled with `javac` before being executed.
 
 <figure class="breakout w-full aspect-video">
 	<div id="demodivBrowserCode" class="w-full aspect-video relative">
