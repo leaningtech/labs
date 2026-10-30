@@ -351,3 +351,52 @@
 	}
 }
 
+/*
+ * Callouts (lib/callout.css) on cheerpj.com's dark grey, with the title and edge in one colour
+ * per kind. Unlayered like callout.css, so the .site-cheerpj selectors win on specificity.
+ */
+.site-cheerpj blockquote[data-callout] {
+	--cj-callout: var(--cj-cream);
+	border-left: 3px solid var(--cj-callout);
+	border-radius: 10px;
+	background-color: var(--cj-dark-grey);
+	color: var(--cj-cream);
+}
+.site-cheerpj blockquote[data-callout] .callout-title {
+	color: var(--cj-callout);
+}
+.site-cheerpj
+	blockquote:is(
+		[data-callout="tip"],
+		[data-callout="hint"],
+		[data-callout="important"]
+	) {
+	--cj-callout: #ffb066;
+}
+.site-cheerpj
+	blockquote:is(
+		[data-callout="success"],
+		[data-callout="check"],
+		[data-callout="done"]
+	) {
+	--cj-callout: #a8cf8e;
+}
+.site-cheerpj
+	blockquote:is(
+		[data-callout="warning"],
+		[data-callout="caution"],
+		[data-callout="attention"]
+	) {
+	--cj-callout: var(--cj-orange);
+}
+.site-cheerpj
+	blockquote:is(
+		[data-callout="failure"],
+		[data-callout="fail"],
+		[data-callout="missing"],
+		[data-callout="danger"],
+		[data-callout="error"],
+		[data-callout="bug"]
+	) {
+	--cj-callout: #ff6b57;
+}
