@@ -8,7 +8,7 @@ title: Changelog
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
-- Preview of Java 21 support
+- Support for Java 21
 - Preview of Java 25 support
 - New experimental WasmGC engine that can be enabled with the [`wasmGC`](/docs/reference/cheerpjInit#wasmgc) init option
 - New [`env`](/docs/reference/cheerpjInit#env) init option to set environment variables for the Java runtime
@@ -24,7 +24,7 @@ title: Changelog
 
 - Added new upload icon directly to decorated java window title bars
 - Introduced a dedicated virtual directory to download files to the local device
-- Added long-press gesture support to simiulate mouse hover events for enhanced mobile/touch screen support
+- Added long-press gesture support to simulate mouse hover events for enhanced mobile/touch screen support
 - General pointer event improvements
 - Runtime improvements
 
@@ -62,7 +62,7 @@ title: Changelog
 - Improved mobile usability
 - Improved performance
 - Various bug fixes
-- [`enableInputMethods`](/docs/reference/cheerpjInit#enableinputmethods) is set to `True` by default.
+- [`enableInputMethods`](/docs/reference/cheerpjInit#enableinputmethods) is set to `true` by default.
 
 ## [3.1](https://labs.leaningtech.com/blog/cheerpj-3.1) - February 5, 2025
 
