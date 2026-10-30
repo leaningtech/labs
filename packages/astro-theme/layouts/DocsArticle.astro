@@ -61,7 +61,7 @@ const highlightAt =
 				document.documentElement.setAttribute("data-toc-collapsed", "");
 		} catch {}
 	</script>
-	<BentoGrid />
+	{!isCheerpj && <BentoGrid />}
 	{product ? <ProductNav {product} wide /> : null}
 	{
 		fullWidthLayout ? (
