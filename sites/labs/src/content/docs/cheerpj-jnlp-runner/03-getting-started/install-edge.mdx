@@ -1,11 +1,11 @@
 ---
 title: Edge Installation
-description: Install CheerpJ JNLP Runner for Edge
+description: Install the CheerpJ browser extension for Java Web Start in Edge
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-This tutorial will take you step by step on how to install the CheerpJ JNLP Runner extension for Edge.
+This page takes you through installing the CheerpJ browser extension for Java Web Start in Edge.
 
 <LinkButton
 	href="https://microsoftedge.microsoft.com/addons/detail/cheerpj-jnlp-runner/dpleickbpchmkpkmicanfolmianepfhe"
@@ -16,23 +16,23 @@ This tutorial will take you step by step on how to install the CheerpJ JNLP Runn
 
 ## Step 1
 
-Please start by visiting the [Edge's add-on JNLP Runner page](https://microsoftedge.microsoft.com/addons/detail/cheerpj-jnlp-runner/dpleickbpchmkpkmicanfolmianepfhe). Once there, please click on the button _**Get**_ to start the installation.
+Go to the [extension's page in Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/cheerpj-jnlp-runner/dpleickbpchmkpkmicanfolmianepfhe) and click _**Get**_.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/store_edge.png)</div>
 
-It will prompt a dialogue showing that the extension will be able to manage your downloads, then click on _**add extension**._
+Edge asks you to let the extension manage your downloads. Click _**Add extension**_.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/edge_dialogue.png)</div>
 
-> [!info]About downloads permission
-> CheerpJ JNLP Runner needs to see your downloads. This is because the classic way to run JNLP applications is by triggering the download of its corresponding JNLP file. When CheerpJ JNLP Runner detects the download of a JNLP file it will start working with your Java application.
+> [!info] About the downloads permission
+> A Java Web Start application starts when the browser downloads its `.jnlp` file. The extension watches for those downloads: when one starts, it stops the download and runs the application in a new tab instead. It leaves other downloads alone.
 
 ## Step 2
 
-Once the extension is installed you will see the small logo to the right of the browsing bar. If the logo is not there, click on the puzzle icon to see all your installed extensions, it should appear there. Here you can click on the extension's menu (three dots) and select _*Show in Toolbar*_ .
+Once the extension is installed, its icon appears to the right of the address bar. If it isn't there, click the puzzle-piece icon to list your extensions, open the extension's menu (three dots) and select _**Show in toolbar**_.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/edge_toolbar.png)</div>
 
-## Step 3
+## Next
 
-Your CheerpJ JNLP extension must be already installed on your browser. The next step is to validate your license, please visit the [activate your license](/docs/cheerpj-jnlp-runner/getting-started/activate-license) tutorial.
+[Run your first application](/docs/cheerpj-jnlp-runner/getting-started/using-first-time). If you use the extension for work, [activate your licence](/docs/cheerpj-jnlp-runner/getting-started/activate-license).
