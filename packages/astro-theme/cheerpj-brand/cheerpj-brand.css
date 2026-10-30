@@ -431,3 +431,156 @@
 .site-cheerpj .prose :where(h3, h4) {
 	letter-spacing: -0.02em;
 }
+
+/*
+ * The FAQ page: each topic a numbered, collapsible group, its questions rows of the kit's
+ * 04-05 accordion, as cheerpj.com's .faq. Unlayered, so the group heading and the rows'
+ * spacing win over the typography plugin's, which is in @layer utilities.
+ */
+.site-cheerpj .cj-faq-group {
+	counter-increment: cj-faq-group;
+	border-top: 1px solid var(--cj-line);
+	interpolate-size: allow-keywords;
+}
+.site-cheerpj .cj-faq-group:last-of-type {
+	border-bottom: 1px solid var(--cj-line);
+}
+.site-cheerpj .cj-faq-group > summary {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 24px 0;
+	cursor: pointer;
+	list-style: none;
+}
+.site-cheerpj .cj-faq-group > summary::-webkit-details-marker {
+	display: none;
+}
+/* The kit's index: 11px monospace, tracked out; orange while the group is open */
+.site-cheerpj .cj-faq-group > summary::before {
+	content: counter(cj-faq-group, decimal-leading-zero);
+	flex: none;
+	width: 32px;
+	font-family: var(--cj-font-mono);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	color: color-mix(in srgb, var(--cj-ink) 60%, transparent);
+}
+.site-cheerpj .cj-faq-group[open] > summary::before {
+	color: var(--cj-orange);
+}
+.site-cheerpj .cj-faq-group > summary h2 {
+	flex: 1;
+	margin: 0;
+	font-size: 24px;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	scroll-margin-top: 96px;
+}
+/* The kit's control: a 1.5px ink outline, 6px corners, a + that turns to × when open */
+.site-cheerpj .cj-faq-group > summary::after {
+	content: "+";
+	display: grid;
+	place-items: center;
+	flex: none;
+	width: 32px;
+	height: 32px;
+	border: 1.5px solid var(--cj-ink);
+	border-radius: 6px;
+	font-size: 20px;
+	line-height: 1;
+	transition:
+		transform 0.25s ease,
+		background-color 0.25s ease,
+		color 0.25s ease;
+}
+.site-cheerpj .cj-faq-group[open] > summary::after {
+	transform: rotate(45deg);
+	border-color: var(--cj-orange);
+	background: var(--cj-orange);
+	color: var(--cj-charcoal);
+}
+.site-cheerpj .cj-faq-group > summary:hover h2 {
+	color: var(--cj-orange);
+}
+.site-cheerpj .cj-faq-group > summary:focus-visible {
+	outline: 3px solid var(--cj-orange);
+	outline-offset: 3px;
+}
+/* The questions line up with the group's title, past the index column */
+.site-cheerpj .cj-faq-list {
+	margin: 0 0 32px 48px;
+}
+
+.site-cheerpj .cj-faq {
+	border-top: 1px solid var(--cj-line);
+	scroll-margin-top: 96px;
+}
+.site-cheerpj .cj-faq > summary {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 18px 0;
+	font-weight: 700;
+	cursor: pointer;
+	list-style: none;
+}
+.site-cheerpj .cj-faq > summary::-webkit-details-marker {
+	display: none;
+}
+.site-cheerpj .cj-faq > summary::after {
+	content: "+";
+	flex: none;
+	transition: transform 0.25s ease;
+}
+.site-cheerpj .cj-faq[open] > summary::after {
+	transform: rotate(45deg);
+	color: var(--cj-orange);
+}
+.site-cheerpj .cj-faq > summary:hover {
+	color: var(--cj-orange);
+}
+.site-cheerpj .cj-faq > summary:focus-visible {
+	outline: 3px solid var(--cj-orange);
+	outline-offset: 3px;
+}
+.site-cheerpj .cj-faq > :not(summary) {
+	max-width: 680px;
+	font-size: 15px;
+}
+.site-cheerpj .cj-faq > :first-child + * {
+	margin-top: 0;
+}
+.site-cheerpj .cj-faq > :last-child {
+	margin-bottom: 24px;
+}
+.site-cheerpj :is(.cj-faq-group, .cj-faq)::details-content {
+	block-size: 0;
+	overflow: hidden;
+	transition:
+		block-size 0.28s ease,
+		content-visibility 0.28s ease allow-discrete;
+}
+.site-cheerpj :is(.cj-faq-group, .cj-faq)[open]::details-content {
+	block-size: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+	.site-cheerpj .cj-faq-group > summary::after,
+	.site-cheerpj .cj-faq > summary::after,
+	.site-cheerpj :is(.cj-faq-group, .cj-faq)::details-content {
+		transition: none;
+	}
+}
+/* Below lg, the sticky menu bar sits under the nav */
+@media (max-width: 1023px) {
+	.site-cheerpj :is(.cj-faq-group > summary h2, .cj-faq) {
+		scroll-margin-top: 176px;
+	}
+}
+@media (max-width: 640px) {
+	.site-cheerpj .cj-faq-list {
+		margin-left: 0;
+	}
+}

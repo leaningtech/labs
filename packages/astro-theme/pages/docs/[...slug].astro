@@ -32,7 +32,6 @@ const rendered = await collectionEntry?.render();
 	descriptionHighlight={collectionEntry?.data.descriptionHighlight}
 	id={navEntry.id}
 	headings={rendered?.headings}
-	tocDepth={collectionEntry?.data.tocDepth}
 	fullWidthLayout={collectionEntry?.data.fullWidthLayout ?? false}
 >
 	{rendered && <rendered.Content />}

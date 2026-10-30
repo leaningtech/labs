@@ -21,8 +21,6 @@ interface Props {
 	description?: string | undefined;
 	descriptionHighlight?: string | undefined;
 	headings?: Heading[] | undefined;
-	/** Deepest heading level in "On this page" */
-	tocDepth?: number | undefined;
 	fullWidthLayout: boolean;
 }
 
@@ -32,12 +30,8 @@ const {
 	description,
 	descriptionHighlight,
 	headings,
-	tocDepth,
 	fullWidthLayout,
 } = Astro.props;
-const tocHeadings = tocDepth
-	? headings?.filter((h) => h.depth <= tocDepth)
-	: headings;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -200,7 +194,7 @@ const highlightAt =
 							<Icon name="ph:list-bullets" class="w-5 h-5" />
 						</button>
 						<div class="min-w-0 wrap-break-word max-xl:in-data-toc-collapsed:hidden">
-							{tocHeadings && <TableOfContents headings={tocHeadings} />}
+							{headings && <TableOfContents {headings} />}
 						</div>
 					</aside>
 				</div>
@@ -245,6 +239,23 @@ const highlightAt =
 					localStorage.setItem("docs-toc-collapsed", String(collapsed));
 				} catch {}
 			});
+
+			// A link into a collapsed <details>, such as an FAQ group or question, opens it
+			const openTarget = () => {
+				const id = decodeURIComponent(location.hash.slice(1));
+				const target = id ? document.getElementById(id) : null;
+				if (!target) return;
+				for (
+					let details = target.closest("details");
+					details;
+					details = details.parentElement?.closest("details") ?? null
+				) {
+					details.open = true;
+				}
+				target.scrollIntoView();
+			};
+			window.addEventListener("hashchange", openTarget);
+			openTarget();
 		}
 
 		toggleSidebar() {

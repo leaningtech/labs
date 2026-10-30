@@ -87,7 +87,6 @@ export function defineCommonCollections() {
 				description: z.string().optional(),
 				descriptionHighlight: z.string().optional(), // Part of description to highlight (CheerpJ overview)
 				shortTitle: z.string().optional(), // Used for nav only
-				tocDepth: z.number().int().min(2).max(6).optional(), // Deepest heading level in "On this page"
 				fullWidthLayout: z.boolean().default(false),
 				draft: z.boolean().default(false),
 			}),
