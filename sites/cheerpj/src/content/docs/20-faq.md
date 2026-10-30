@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 ---
 
-These are the same questions and answers as on [cheerpj.com/faqs](https://cheerpj.com/faqs/), grouped by topic. For anything they don't cover, ask on [Discord](https://discord.leaningtech.com) or [contact us](https://cheerpj.com/contact/).
+The questions developers and organisations ask most often about CheerpJ, grouped by topic: what it is and which product to use, building with it, Oracle Forms and EBS, the browser extensions, compatibility, files and networking, performance, deployment, security, troubleshooting and licensing.
 
 ## General
 
