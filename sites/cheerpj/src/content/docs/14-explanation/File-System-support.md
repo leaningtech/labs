@@ -29,7 +29,7 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 
 <div align="center">
 
-![](/docs/cheerpj3/assets/filesystem.png)
+![CheerpJ's virtual file system in the browser: /app/ is read-only, fetched from the JARs on the local server; /files/ is read-write and kept in IndexedDB, with uploads/ for files from the upload button and downloads/ for files that download automatically; /str/ holds strings and data passed from JavaScript to Java](/docs/cheerpj3/assets/filesystem.png)
 
 </div>
 
