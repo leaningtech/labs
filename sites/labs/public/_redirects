@@ -30,10 +30,10 @@
 
 /cheerp https://cheerp.io/
 /cheerp/* https://cheerp.io/docs/:splat
-/cheerpj2 https://cheerpj.com/docs/ 301
-/cheerpj2/* https://cheerpj.com/docs/ 301
-/docs/cheerpj2 https://cheerpj.com/docs/ 301
-/docs/cheerpj2/* https://cheerpj.com/docs/ 301
+/cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/docs/cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/docs/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
 /cheerpj3 https://cheerpj.com/
 /cheerpj3/* https://cheerpj.com/docs/:splat
 /cheerpx https://cheerpx.io/
