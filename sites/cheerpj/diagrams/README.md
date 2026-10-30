@@ -4,12 +4,12 @@ Editable SVG sources for the CheerpJ docs diagrams. The PNGs that the docs
 actually reference are exported from these — edit the SVG, re-export, commit
 both.
 
-| Source               | Exported PNG                                        | Canvas    |
-| -------------------- | --------------------------------------------------- | --------- |
-| `overview.svg`       | `src/content/docs/explanation-diagram.png`            | 2000×1000 |
-| `architecture.svg`   | `public/cheerpj3/assets/cheerpj-3-arch.png`           | 2000×1340 |
-| `networking.svg`     | `public/cheerpj3/assets/general_networking.png`       | 2000×1380 |
-| `server-client.svg`  | `public/cheerpj3/assets/Tailscale_P2P.png`            | 2000×1040 |
+| Source              | Exported PNG                                    | Canvas    |
+| ------------------- | ----------------------------------------------- | --------- |
+| `overview.svg`      | `src/content/docs/explanation-diagram.png`      | 2000×1000 |
+| `architecture.svg`  | `public/cheerpj3/assets/cheerpj-3-arch.png`     | 2000×1340 |
+| `networking.svg`    | `public/cheerpj3/assets/general_networking.png` | 2000×1380 |
+| `server-client.svg` | `public/cheerpj3/assets/Tailscale_P2P.png`      | 2000×1040 |
 
 `public/cheerpj3/assets/JRE.png` and `public/cheerpj3/assets/filesystem.png`
 have no source here — they were only edited as pixels (rounded corners, and on
