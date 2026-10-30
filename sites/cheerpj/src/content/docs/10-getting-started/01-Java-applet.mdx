@@ -6,16 +6,16 @@ description: Run a java applet in modern browsers
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
 
-CheerpJ can run Java applets in the browser seamlessly. This page will help you getting started with CheerpJ for Java applets using the CheerpJ runtime environment on your own webpage.
+CheerpJ runs Java applets in modern browsers from their existing JAR files, with no Java plug-in and no local Java installation. This page shows how to add CheerpJ to your own page so the applet on it runs in the browser.
 
 {/* <p class="m-0 text-md font-semibold text-gray-900 dark:text-white"> */}
 
 <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
 	<div class="-mb-2 grow text-left">
-		<div class="-my-1 font-sans text-lg font-semibold">Not a Developer?</div>
+		<div class="-my-1 font-sans text-lg font-semibold">Not a developer?</div>
 		<p class="-my-3 text-base text-gray-600 dark:text-gray-400">
-			Check out our browser extension for running Java Applets while you browse
-			in modern browsers.
+			The Applet Runner browser extension runs Java applets on the pages they
+			are already on, with no changes to the page.
 		</p>
 	</div>
 	<AppletRunnerButton />
@@ -25,23 +25,21 @@ CheerpJ can run Java applets in the browser seamlessly. This page will help you 
 
 **To get started you will need:**
 
-- Your applet file(s)
-- The HTML file where your applet is meant to be displayed.
-- A basic HTTP server to test locally
+- Your applet's JAR file(s).
+- The HTML page the applet is embedded in, with its `<applet>`, `<object>` or `<embed>` tag.
+- An HTTP server that supports Range requests, to test the page locally.
 
 ### 1. Integrating CheerpJ in your HTML file
 
-This tutorial assumes you already have an HTML file with an `<applet>`, `<object>` or `<embed>` tag.
+Leave the applet tag as it is and add two scripts to the page:
 
-In order to integrate CheerpJ, you just need to add:
-
-1.  A simple `<script>` within the `<head>` of your page with the CheerpJ runtime loader.
+1.  A `<script>` in the `<head>` of the page that loads the CheerpJ runtime:
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
-2.  A second script calling [`cheerpjInit()`] to initialize CheerpJ's runtime environment.
+2.  A second script that calls [`cheerpjInit()`] to initialise the CheerpJ runtime environment. CheerpJ then finds the applet tags on the page and runs the applets in them.
 
 ```html
 <script>
@@ -73,25 +71,35 @@ For example:
 </html>
 ```
 
-> [!info] Java Applets and Java 8
-> The method ´cheerpJInit´ runs Java 8 by default if the Java version is not specified. Please notice that if you change the version to Java 11 or higher, applets won't work.
+The `archive` and `code` attributes, and any `<param>` elements inside the tag, work as they do with the Java plug-in. The `archive` path is relative to the page, so it does not need the `/app/` prefix.
+
+> [!info] Java applets and Java 8
+> Applets run on Java 8 only. [`cheerpjInit()`] uses Java 8 when no version is given, so do not set the `version` option on a page with applets.
+
+If some of your users still have the native Java plug-in installed, rename the tag with a `cheerpj-` prefix so that only CheerpJ runs the applet: `<cheerpj-applet>`, `<cheerpj-object>` and `<cheerpj-embed>` are all supported.
 
 ### 2. Host your page locally
 
-You can now serve this web page on a simple HTTP server, such as the http-server utility.
+Serve the directory that holds the page and the applet's JAR files with an HTTP server, such as http-server:
 
 ```shell
 npx http-server -p 8080
 ```
 
-> In case your users have a native Java plugin installed, you can replace the original HTML tag with a `cheerpj-` prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
+Then open `http://localhost:8080` in the browser.
+
+> [!note] Info
+> Opening the page directly from disk (a `file://` URL) does not work. The server must support HTTP Range requests: `npx http-server` and `npx serve` do, Python's `http.server` does not. See [basic server setup](/docs/guides/basic-server-setup), and use HTTPS in production.
 
 ## The result
 
-You will see the CheerpJ display on your browser with some loading messages before showing your applet running. Depending on your application and the optimizations applied, this could take just a few seconds.
+The applet's area on the page shows CheerpJ's loading messages, then the applet. The first start downloads the parts of the Java runtime the applet needs, so it is slower than later starts. Depending on the applet and the optimisations applied, this takes a few seconds.
+
+If the applet does not appear, check that the page URL starts with `http://` or `https://`, that the `archive` path points to the JAR (the browser developer tools' Network tab shows a 404 if it does not) and that no `version` other than `8` is passed to [`cheerpjInit()`].
 
 ## Further reading
 
+- [Run a Java applet step by step (FoilSim)](/docs/tutorials/applet)
 - [Runtime API reference](/docs/reference)
 
 [`cheerpjInit()`]: /docs/reference/cheerpjInit

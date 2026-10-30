@@ -3,27 +3,22 @@ title: Intercept external commands
 description: How to intercept external system commands that are executed in a Java application
 ---
 
-When a Java program needs to execute an external system command, it often uses methods like `Runtime.getRuntime().exec(command)` or `ProcessBuilder(command)`. For example, a Java application might run a command to open a new browser window, launch a script, or execute a platform-specific utility. By default, these commands would execute directly on the system where the Java application runs.
+Java programs run external system commands with methods such as `Runtime.getRuntime().exec(command)` or `new ProcessBuilder(command)`. For example, a Java application might run a command to open a URL in the default browser, launch a script, or run a platform-specific utility. On the desktop, these commands start processes on the operating system.
 
-With the [`execCallback`] [`cheerpjInit`] option, you can redirect those external commands to a JavaScript callback function. This allows you to control how commands are handled, enabling you to implement equivalent functionality in JavaScript.
-
-> [!note] Important
-> The `execCallback` option is supported in CheerpJ 3.1 and later versions.
+In the browser, CheerpJ cannot start operating system processes. With the [`execCallback`] option of [`cheerpjInit`], CheerpJ passes these commands to a JavaScript function instead, so you can implement the same behaviour in JavaScript. Without it, the command is rejected.
 
 ## execCallback option
 
-The [`execCallback`] option takes a function as a parameter, which will be called by CheerpJ whenever an external command is intercepted. CheerpJ automatically forwards all the necessary information about the intercepted command to this callback, allowing you to implement its behavior in JavaScript.
+The [`execCallback`] option takes a function, which CheerpJ calls whenever the Java application runs an external command. CheerpJ passes the details of the command to the function, so it can implement the command's behaviour in JavaScript.
 
-The JavaScript callback function accepts two parameters:
+The function receives two parameters:
 
-- `cmdPath`: The command that would have been executed in Java.
-- `argsArray`: An array containing any additional arguments that were passed to the command.
-
-These parameters provide all the context you need to handle the intercepted command.
+- `cmdPath`: the command that Java tried to run.
+- `argsArray`: an array of the arguments passed to the command.
 
 ## Example walkthrough
 
-Let's walk through a simple example in Java:
+This Java program opens a URL:
 
 ```java title="Example.java"
 import java.io.IOException;
@@ -40,39 +35,39 @@ public class Example
 }
 ```
 
-In this example, the Java program uses `Runtime.getRuntime().exec(command)` to open a URL in the default web browser on a Linux system. The command `xdg-open` is typically used to launch a URL in the browser. On Windows, a similar behavior is achieved with the command `cmd /c start`.
+The program uses `Runtime.getRuntime().exec(command)` to open a URL in the default web browser on Linux, with the `xdg-open` command. On Windows, the equivalent command is `cmd /c start`.
 
-We can now implement the same behavior in JavaScript, here’s how:
+The same behaviour can be implemented in JavaScript:
 
-```ts title="Index.html"
+```js title="index.html"
 function execCb(cmdPath, argsArray) {
 	// Check for the xdg-open command
 	if (cmdPath == "xdg-open") {
-		// Open a new browser window
-		// argsArray will be "http://www.example.com" in our case
-		window.open(argsArray, "_blank");
+		// Open the URL in a new browser tab
+		// argsArray[0] is "http://www.example.com" in this example
+		window.open(argsArray[0], "_blank");
 	}
 }
 ```
 
-In this JavaScript function, we check if the incoming command is `xdg-open`. If it matches, we use `window.open()` to open a new browser tab with the specified URL.
+The function checks whether the command is `xdg-open`. If it is, it opens the URL in a new browser tab with `window.open()`.
 
-We can now pass this function to [`cheerpjInit`] using the [`execCallback`] option. This ensures that the function is invoked whenever an external command is executed in Java.
+Pass this function to [`cheerpjInit`] with the [`execCallback`] option, so that CheerpJ calls it whenever the Java application runs an external command:
 
-```ts title="index.html"
+```js title="index.html"
 function execCb(cmdPath, argsArray) {
 	if (cmdPath == "xdg-open") {
-		window.open(argsArray, "_blank");
+		window.open(argsArray[0], "_blank");
 	}
 }
 
 (async function () {
 	await cheerpjInit({ execCallback: execCb });
-	await cheerpjRunMain("/app/Example");
+	await cheerpjRunMain("Example", "/app/");
 })();
 ```
 
-By doing this, we successfully intercept the `Runtime.getRuntime().exec(command)` call from the Java application and implemented the same functionality using JavaScript to open a new browser window.
+The `Runtime.getRuntime().exec(command)` call in the Java application opens a new browser tab, implemented in JavaScript.
 
 [`execCallback`]: /docs/reference/cheerpjInit#execcallback
 [`cheerpjInit`]: /docs/reference/cheerpjInit

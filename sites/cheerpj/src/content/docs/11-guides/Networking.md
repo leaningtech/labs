@@ -3,44 +3,47 @@ title: Networking
 description: Networking with CheerpJ
 ---
 
-CheerpJ supports different networking scenarios that are divided into two categories:
+Java networking code runs unchanged with CheerpJ, which carries its connections over the browser's own networking. There are two cases:
 
-- Same-origin HTTP/HTTPS requests using fetch seamlessly.
-- Generalized networking via Tailscale (anything else that is not HTTP(S) such as opening TCP/UDP sockets).
+- HTTP and HTTPS requests, made with the browser's `fetch`.
+- Generalised networking through Tailscale, for anything that is not HTTP(S), such as TCP and UDP sockets.
 
-## Same origin HTTP/HTTPS requests
+Enterprise deployments can also connect CheerpJ to a custom networking backend, for example to go through their own proxies or to use other transports such as WebSockets. [Get in touch](https://cheerpj.com/contact/) to discuss your setup.
 
-A Java application running in the browser with CheerpJ can request resources to the local server (same origin) via fetch through the HTTP/HTTPS protocols. As expected, these requests are asynchronous. Remember that for a request to be considered same-origin, it needs to match the scheme, host name and port between the requester and the receiver.
+## HTTP and HTTPS requests
 
-With CheerpJ you can perform `fetch()` requests with the [browser fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) as usual.
+A Java application running with CheerpJ makes its HTTP and HTTPS connections, for example with `java.net.URL` and `HttpURLConnection`, through the browser's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). No changes to the Java code are needed.
 
-## Generalized networking
+Because the requests are made by the browser, the browser's security model applies:
 
-CheerpJ supports wider networking scenarios via Tailscale, which is a VPN technology using WebSockets and a transport layer. Tailscale enables the Java application to access private network services, peer-to-peer connections or connect to the wider internet.
+- Requests to the page's own origin (same scheme, host name and port) work as they do for any other web page.
+- Requests to a different origin are subject to [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS): the server must allow cross-origin requests from the page.
+- On pages served over HTTPS, HTTP requests are upgraded to HTTPS.
+- TLS, certificate checks, proxies and cookies are the browser's, so your certificate store and browser policies apply.
 
-[Tailscale](https://tailscale.com/) is based on the [WireGuard](https://www.wireguard.com/) protocol. It includes a control plane that manages the WireGuard keys of all the machines in the network and takes care of authenticating users. Using this service provides more control over the network, user connections, authentication, security etc.
+## Generalised networking
 
-![CheerpJ 3.0 general networking](/docs/cheerpj3/assets/general_networking.png)
+Browsers do not give web pages raw TCP or UDP sockets. CheerpJ provides them through Tailscale, a VPN that carries the traffic over WebSockets. With Tailscale, the Java application can reach services on a private network, make peer-to-peer connections, or connect to the wider internet.
+
+[Tailscale](https://tailscale.com/) is based on the [WireGuard](https://www.wireguard.com/) protocol. Its control plane manages the WireGuard keys of all the machines in the network and authenticates users, which gives you control over the network, user connections, authentication and security.
+
+![CheerpJ general networking](/docs/cheerpj3/assets/general_networking.png)
 
 ### Why Tailscale?
 
-To support networking beyond same origin requests, it is necessary to host a proxy server. CheerpJ cannot become responsible for the user's traffic as every application is different and its networking traffic should be managed internally and according to their needs.
+Web pages can only make HTTP(S) requests, subject to CORS, and open WebSocket connections. Lower-level protocols such as TCP and UDP are not available to them. Carrying any other traffic from the browser requires a server outside the browser that unwraps it and forwards it to its destination.
 
-When it comes to generalised networking scenarios, there are some browser-enforced limitations to enhance users' security. These limitations are bound to the browser not exposing access to lower-level protocols such as UDP and TCP. The browser only allows one to perform HTTP(S) requests ruled by CORS policies.
-
-A good example of this scenario is when an application uses WebSockets, where there is a two-way interaction between two end-points in an event-driven manner. A WebSocket connection starts with a request from the browser via HTTP that when accepted, this connection is upgraded and does not conform to the HTTP protocol anymore. This way the user and the server (or any other end-point) can keep a connection and send bidirectional messages until this connection is closed from one of the end-points. Upgrading the WebSocket connection protocol and unwrapping packets before sending them to the destinations requires a proxy server.
-
-These limitations have been overcome by supporting networking via Tailscale, which allows one to use its VPN via its WebSocket proxy, meaning the perfect solution for the limitations described above.
+CheerpJ does not carry your users' traffic itself, since every application's network traffic should be managed by its owner, according to its own needs. Tailscale provides the VPN and the WebSocket transport, so the traffic goes through a network you control.
 
 ### Installing Tailscale
 
-The easiest way to enable generalized networking on your Java application without modifying the source code is to [install Tailscale](https://tailscale.com/kb/1017/install) on your local server. This way the client can connect to your private Tailscale network via an auth key, and then talk to your server via the VPN.
+To give a Java application generalised networking without changing its code, [install Tailscale](https://tailscale.com/kb/1017/install) on the server it needs to reach. The client in the browser joins your private Tailscale network, for example with an auth key, and then talks to your server over the VPN.
 
 ### Connecting your application to a Tailscale network
 
-Connecting the Java application client to your Tailscale network is as simple as providing client authentication via `cheerpjInit()`:
+To connect the Java application to your Tailscale network, pass the client's authentication to `cheerpjInit()`.
 
-Example for pre-authenticated users/devices:
+Example for pre-authenticated users or devices:
 
 ```js
 cheerpjInit({
@@ -52,12 +55,12 @@ cheerpjInit({
 > [!info] Info
 > A combination of a user and a device connected to a Tailscale network is called a _"node"_ in Tailscale terminology.
 
-What is happening here?
+In this example:
 
-- `tailscaleControlUrl` is a string URL of the Tailscale control plane which verifies the user's identity. Only pass this option if you are [self-hosting Tailscale](/docs/guides/Networking#self-hosting-headscale).
-- `tailscaleAuthKey` is string with an auth key to register new users/devices that are pre-authenticated. You can create an auth key [here](https://login.tailscale.com/admin/settings/keys).
+- `tailscaleControlUrl` is the URL of the Tailscale control plane, which verifies the user's identity. Pass this option only if you are [self-hosting the control server](/docs/guides/Networking#self-hosting-headscale). Without it, CheerpJ uses Tailscale's own control plane.
+- `tailscaleAuthKey` is an auth key that registers pre-authenticated users or devices. You can create an auth key in the [Tailscale admin console](https://login.tailscale.com/admin/settings/keys).
 
-Example to prompt the user for manual login on a different tab:
+Example that asks the user to log in on a different tab:
 
 ```html
 <a id="loginLink">Click here to login to Tailscale</a>
@@ -76,15 +79,15 @@ cheerpjInit({
 });
 ```
 
-What is happening here?
+In this example:
 
-- `tailscaleLoginUrlCb` expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to log in to Tailscale via the UI.
+- `tailscaleLoginUrlCb` is a function that CheerpJ calls when the user needs to log in to Tailscale. It receives the URL of the control server's login page, where the user completes the login. Here, the function sets it as the target of the link.
 
 > [!info] Info
 > `tailscaleLoginUrlCb` and `tailscaleAuthKey` are mutually exclusive.
 
-To learn more about CheerpJ's Tailscale APIs please visit [the reference](/docs/reference/cheerpjInit#tailscalecontrolurl).
+The [`cheerpjInit` reference](/docs/reference/cheerpjInit#tailscalecontrolurl) describes all the Tailscale options, including `tailscaleDnsIp` to set the DNS server and `tailscaleIpCb` to get the client's IP address.
 
 ### Self-hosting Headscale
 
-Headscale is an open-source and self-hosted implementation of the Tailscale control server. To self-host Headscale for use with CheerpJ, follow the [official Headscale setup guide](https://headscale.net/stable/setup/requirements/).
+Headscale is an open-source, self-hosted implementation of the Tailscale control server. With it, the whole network stays under your control. To self-host Headscale for use with CheerpJ, follow the [official Headscale setup guide](https://headscale.net/stable/setup/requirements/).

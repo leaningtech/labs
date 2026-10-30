@@ -5,26 +5,26 @@ description: Porting a Swing application to the web
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-In this tutorial, we'll run the SwingSet3 application in the browser.
+This tutorial runs SwingSet3, the Swing demo application, in the browser with CheerpJ.
 
 <LinkButton label="View demo" href="#the-result" />
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/) (>= 18)
-- Clone the tutorial template [repository](https://github.com/leaningtech/cheerpj-meta.git)
+- A copy of the tutorial [repository](https://github.com/leaningtech/cheerpj-meta.git)
 
 ```sh
 	git clone https://github.com/leaningtech/cheerpj-meta.git
 ```
 
-- Inside this repository, navigate to the SwingSet3 tutorial and into the projectTemplate directory:
+- Go to the `projectTemplate` directory of the SwingSet3 example:
 
 ```sh
 	cd examples/SwingSet3/projectTemplate
 ```
 
-The starting point of this example is an HTML page, the SwingSet3 jar, and its dependencies:
+The starting point is an HTML page, the SwingSet3 JAR and its dependencies:
 
 ```
 projectTemplate/
@@ -41,32 +41,34 @@ projectTemplate/
 
 ## 1. Run a web server
 
-We need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+CheerpJ loads the application from a web server, so the files must be served over HTTP. [Vite](https://vitejs.dev/) works well during development because it reloads the page when the files change.
 
 ```sh
 npx vite
 ```
 
-Visit the URL shown in the terminal and you should see a blank page. Leave Vite running in the background for the remainder of this tutorial.
+Open the URL shown in the terminal. The page is blank. Leave Vite running for the rest of this tutorial.
 
-Alternatively you can also use the http-server utility.
+Alternatively, use the http-server utility:
 
 ```sh
 npx http-server -p 8080
 ```
 
-Open a browser tab pointing to your localhost such as `http://127.0.0.1:8080/`.
+Then open `http://127.0.0.1:8080/` in the browser.
+
+> [!note] Note
+> The server must support HTTP Range requests, and the page cannot be opened from `file://`. Python's `http.server` does not support Range requests. See [basic server setup](/docs/guides/basic-server-setup).
 
 ## 2. Open `index.html` and add CheerpJ to the document
 
-The provided template is a basic HTML. We will guide you through what needs to be added to this file.
-Let's add CheerpJ to the page by adding this script tag to the `<head>`:
+The template is a minimal HTML page. Add the CheerpJ loader to the `<head>`:
 
 ```html title="index.html"
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
-## 3. Initialise CheerpJ and run the jar
+## 3. Initialise CheerpJ and run the JAR
 
 Add the following script tag to the `<body>`:
 
@@ -78,18 +80,16 @@ Add the following script tag to the `<body>`:
 </script>
 ```
 
-This will initialise CheerpJ, create a 800x600 display, and run the SwingSet3 jar. We use `type="module"` so that we can use [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#top_level_await).
+This initialises CheerpJ, creates an 800x600 display and runs the SwingSet3 JAR. The script uses `type="module"` so that it can use [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#top_level_await). See [`cheerpjInit`](/docs/reference/cheerpjInit), [`cheerpjCreateDisplay`](/docs/reference/cheerpjCreateDisplay) and [`cheerpjRunJar`](/docs/reference/cheerpjRunJar) for the options each function takes.
 
 > [!question] What is `/app/SwingSet3.jar`?
-> This is a [virtual filesystem](/docs/guides/File-System-support) which represents the root of the web server.
+> `/app/` is a mount point of the CheerpJ [virtual file system](/docs/explanation/File-System-support). It maps to the root of the web server, so `/app/SwingSet3.jar` is the file served at `/SwingSet3.jar`. The JARs in `lib/` are found through the `Class-Path` entry in the manifest of `SwingSet3.jar`.
 
-Save the file and you should see SwingSet3 load and run in the browser. 🥳
+Save the file. SwingSet3 loads and runs in the browser.
 
 ## 4. Make the application take up the whole page
 
-The application takes up a small portion of the page, but for many applications we want to take up the whole page.
-
-To do this, we'll add a new element to the `<body>`:
+The application takes up a small part of the page. To make it fill the page, add a container element to the `<body>`:
 
 ```html title="index.html"
 <div id="container"></div>
@@ -98,7 +98,7 @@ To do this, we'll add a new element to the `<body>`:
 > [!note] Note
 > Make sure you add the container element **before** the script which calls `cheerpjCreateDisplay`.
 
-And then add some CSS:
+Then add some CSS to the `<head>`:
 
 ```html title="index.html"
 <style>
@@ -124,9 +124,9 @@ Finally, update the script to use the container element:
 </script>
 ```
 
-Passing `-1` as the width and height tells CheerpJ to use the full size of the container element, and listen for resize events.
+Passing `-1` as the width and height makes the display match the size of the container element and follow it when it is resized.
 
-View the page again, and you should see the application take up the entire window. Also notice that resizing the window resizes the application.
+Reload the page. The application fills the window, and resizing the window resizes the application.
 
 ---
 

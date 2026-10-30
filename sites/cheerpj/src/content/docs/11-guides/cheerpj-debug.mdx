@@ -1,82 +1,83 @@
 ---
 title: Debugging CheerpJ
-description: How to properly debug CheerpJ in the browser
+description: How to debug CheerpJ in the browser
 ---
 
 import { DISCORD_URL } from "@/consts.ts";
 
-Sometimes, you might encounter issues or experience unexpected behavior when using CheerpJ. Don’t worry if that happens — this guide will help you troubleshoot the problem and gather essential resources, in case you need further assistance with debugging.
+This guide helps you troubleshoot an application that does not behave as expected with CheerpJ, and collect the information we need if you ask us for help.
 
 ## What to do if my application does not work with CheerpJ?
 
-The reason your application isn't working could be quite simple. Try these checks to ensure you've deployed and integrated CheerpJ correctly:
+Start with these checks, which cover the most common integration and deployment problems:
 
-- You integrated CheerpJ into your web page by adding a `<script>` tag like this:
+- The page loads CheerpJ with a `<script>` tag like this:
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
-- The location of your JARs is correct and the prefix `/app/` is added when passing it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. For more information visit the [virtual filesystem] guide.
-- Your Java application functions normally on your local machine without CheerpJ.
-- You are not opening the page by double-clicking on it; instead, you are using an HTTP server.
-- Your application files are hosted using an HTTP server and are accessible through the browser.
+- The path to your JARs is correct, and starts with `/app/` when you pass it to [`cheerpjRunJar`] or [`cheerpjRunMain`]. See the [virtual filesystem] guide.
+- The Java version passed to [`cheerpjInit`][`initOption`] with `version` matches the one the application needs. Java 8 is the default, and applets run on Java 8 only.
+- The application runs normally on a desktop JVM.
+- The page is served by an HTTP server, not opened from the local disk (`file://`) by double-clicking it.
+- The HTTP server supports [Range requests], and the application files can be reached from the browser.
 
-If your application passes all these checks but still isn't working correctly, you may need additional assistance from us. You can request help through our <a href={DISCORD_URL} target="_blank">Discord</a> server.
+If the application passes all these checks and still does not work, ask us for help on our <a href={DISCORD_URL} target="_blank">Discord</a> server.
 
-If you do so, make sure to provide additional context, such as a HAR file and the browser's console output. This will make it easier for us to assist you. Instructions on how to generate these are provided in the following steps.
+Include the browser's console output and a HAR file, so we can see what happened. The sections below explain how to save them.
 
 ## HTTP limitations
 
-Some CheerpJ features require a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts) (HTTPS). When the application is accessed over HTTP, browsers enforce serious limitations on certain browser APIs. For example, the clipboard API used by [`clipboardMode: "permission"`] is only available over HTTPS. When accessed over HTTP, users can only copy and paste text to the page itself and will have to double press `Ctrl+C` and `Ctrl+V` (`Cmd+C` and `Cmd+V` on macOS).
+Some CheerpJ features require a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts) (HTTPS). When the application is accessed over HTTP, browsers restrict some of their APIs. For example, the clipboard API used by [`clipboardMode: "permission"`] is only available over HTTPS. When accessed over HTTP, users can only copy and paste text to the page itself and will have to double press `Ctrl+C` and `Ctrl+V` (`Cmd+C` and `Cmd+V` on macOS).
 
-To resolve this issue:
+To resolve this:
 
-- Use an **HTTPS proxy** to serve your application.
-- Enable the page as a secure context using browser settings.
+- Serve the application over HTTPS, for example through an **HTTPS proxy**.
+- Or, for testing, mark the page as a secure context in the browser settings.
 
 ## Enable advanced debug logs in CheerpJ
 
-Before saving the browser console output, it might be helpful to enable advanced debug logs in CheerpJ using the [`enableDebug`] CheerpJ [`initOption`].
+Before saving the browser console output, it can help to turn on advanced debug logs with the [`enableDebug`] option of [`cheerpjInit`][`initOption`].
 
 ```js
 cheerpjInit({ enableDebug: true });
 ```
 
-This option enables advanced debug logging, which is helpful for troubleshooting certain issues with CheerpJ. It provides a lot of extra information in case an actual error occurs and will speed up the process of solving the problem you are encountering.
+This option logs much more information when an error occurs, which makes the problem quicker to find.
 
-Adding this option is not always necessary, but in some cases, these advanced logs are helpful if the normal console log does not provide any useful information.
+It is not always needed. Use it when the normal console output does not show anything useful.
 
 > [!important] Heads up
 > Enabling debug mode can significantly affect performance. Disable it when not needed.
 
 ## Saving the browser console output
 
-You can follow these steps to save the browser console output:
+To save the browser console output:
 
 - Open your browser and navigate to the application that you are testing with CheerpJ.
-- Open the developer tools in your browser. You can do that by pressing **F12** on your keyboard. Alternatively you can click on the three dots on the top right corner of your browser, select **More tools** and then click **Developer Tools**.
+- Open the browser's developer tools by pressing **F12**. Alternatively, click the three dots in the top right corner of the browser, select **More tools** and then **Developer Tools**.
   ![Open the developer tools](/docs/cheerpj3/assets/open-dev-tools.png)
-- Once the developer tools are open, navigate to the **Console** tab. If you can't see the **Console** tab, you might need to clik on the **+** symbol in Edge, or the **>>** symbol in Chrome, and then select **Console**.
+- Open the **Console** tab. If it is not visible, click the **+** symbol in Edge, or the **>>** symbol in Chrome, and select **Console**.
 - If needed, trigger the error in your application.
-- To save the console output, right click on any message in the console tab and select **Save as…**
-  ![Open the developer tools](/docs/cheerpj3/assets/save-console.png)
-- You can now save the console log to a file and forward it to us.
+- Right-click any message in the **Console** tab and select **Save as…**
+  ![Save the console output](/docs/cheerpj3/assets/save-console.png)
+- Save the console log to a file and send it to us.
 
 ## Extracting a HAR file
 
-A HAR file (HTTP Archive file) is a log of a web browser's interaction with a website. They are very useful for debugging web applications, as they help us diagnose issues related to loading times, network errors, or incorrect responses from a server.
+A HAR (HTTP Archive) file is a log of the browser's network activity on a page. It shows loading times, network errors and incorrect server responses, which helps us diagnose problems.
 
-You can save a HAR following these steps:
+To save a HAR file:
 
-- Open the developer tools in your browser. You can do that by pressing **F12** on your keyboard. Alternatively you can click on the three dots on the top right corner of your browser, select **More tools** and then click **Developer Tools**.
+- Open the browser's developer tools by pressing **F12**. Alternatively, click the three dots in the top right corner of the browser, select **More tools** and then **Developer Tools**.
   ![Open the developer tools](/docs/cheerpj3/assets/open-dev-tools.png)
-- Now navigate to the application that you are testing with CheerpJ. Or if you already visited the page, reload it. This is to make sure the HAR file will be complete and no entries are missing.
-- Navigate to the **Network** tab in the developer tools. If you can't see the **Network** tab, you might need to clik on the **+** symbol in Edge, or the **>>** symbol in Chrome, and then select **Network**.
+- Open the application you are testing with CheerpJ, or reload the page if it is already open, so that the HAR file is complete.
+- Open the **Network** tab. If it is not visible, click the **+** symbol in Edge, or the **>>** symbol in Chrome, and select **Network**.
 - If needed, trigger the error in your application.
-- To download the HAR file you need to click the download icon **↓** at the top right of the networking tab.
-  ![Open the developer tools](/docs/cheerpj3/assets/network-tab.png)
-- You can now save the HAR file and forward it to us to us in Discord or via Github.
+- Click the download icon **↓** at the top right of the **Network** tab.
+  ![Download the HAR file](/docs/cheerpj3/assets/network-tab.png)
+- Save the HAR file and send it to us on Discord or GitHub.
 
 [`cheerpjRunJar`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain`]: /docs/reference/cheerpjRunMain
@@ -84,5 +85,4 @@ You can save a HAR following these steps:
 [`enableDebug`]: /docs/reference/cheerpjInit#enabledebug
 [`initOption`]: /docs/reference/cheerpjInit
 [`clipboardMode: "permission"`]: /docs/reference/cheerpjInit#permission-mode
-
-[secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts)
+[Range requests]: /docs/guides/basic-server-setup#range-requests

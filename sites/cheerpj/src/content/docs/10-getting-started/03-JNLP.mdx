@@ -5,14 +5,14 @@ description: Run a JWS/JNLP application in the browser
 
 import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButton.astro";
 
-This quickstart tutorial will take you step by step on how to run your JNLP app (also known as Java Web Start application) in the browser with CheerpJ.
+This page takes you step by step from a Java Web Start (JNLP) application to the same application running in the browser with CheerpJ. You read the JAR files and the main class from the `.jnlp` file, then start the application from your own HTML page.
 
 <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
 	<div class="grow text-left ">
-		<div class="-my-1 font-sans text-lg font-semibold">Not a Developer?</div>
+		<div class="-my-1 font-sans text-lg font-semibold">Not a developer?</div>
 		<p class="-my-3 text-base text-gray-600 dark:text-gray-400">
-			Check out our browser extension for running Java Web Start applications
-			while you browse in modern browsers.
+			The JNLP Runner browser extension opens Java Web Start applications from
+			the pages users already launch them from, with no changes to the page.
 		</p>
 	</div>
 	<JNLPRunnerButton />
@@ -20,19 +20,19 @@ This quickstart tutorial will take you step by step on how to run your JNLP app 
 
 **To get started you will need:**
 
-- The application `.jnlp` file.
-- An HTML file where your Java app will be wrapped.
-- A simple HTTP server to test your webpage locally.
+- The application's `.jnlp` file.
+- An HTML page to run the application from.
+- An HTTP server that supports Range requests, to test the page locally.
 
 ## 1. The `.jnlp` file
 
-The `.jnlp` file contains the specifics of how to launch your Java application. The usual pipeline starts when this file is triggered from a website so it is passed to the user's local JNLP client which downloads the application `.jar` files and further resources. Finally, the app is executed with the local JRE installation. **With CheerpJ it is possible to run this application in the browser sandbox, no Java installation required.**
+The `.jnlp` file describes how to launch a Java Web Start application. Normally a website serves this file, the user's local Java Web Start client downloads the JAR files it lists, and the application runs on the Java installation on the user's computer. **With CheerpJ the application runs in the browser sandbox instead, with no Java installation.**
 
-Your `.jnlp` file might look something like the example below. There are three essential elements you need to find:
+Your `.jnlp` file might look like the example below. Find these elements in it:
 
-1. The `.jar` files specified under the `<resources>` element, usually indicated with a `<jar>` or `<nativelib>` tags.
-2. Your application type. Look for an `<application-desc>` or `<applet-desc>` tag.
-3. You may need the `codebase` URL given by `<jnlp>`.
+1. The JAR files under `<resources>`, listed in `<jar>` tags.
+2. The application type: an `<application-desc>` or an `<applet-desc>` tag.
+3. The `codebase` URL in the `<jnlp>` tag, if the JAR URLs are relative.
 
 ```xml title="example.jnlp" {5, 22-23, 26}
 <?xml version="1.0" encoding="utf-8"?>
@@ -64,9 +64,16 @@ Your `.jnlp` file might look something like the example below. There are three e
 </jnlp>
 ```
 
+The other elements need no action, with two exceptions:
+
+- `<property>` elements set Java system properties. Pass them to [`cheerpjInit()`] with the [`javaProperties`] option, for example `cheerpjInit({ javaProperties: ["key=overwritten"] })`.
+- `<nativelib>` elements list JARs of pre-built native libraries (`.dll`, `.so` or `.dylib` files), which cannot run in the browser. If the application needs them, implement its native methods [in JavaScript](/docs/guides/implementing-native-methods) or compile them to WebAssembly instead.
+
+CheerpJ ignores the `<j2se>` element: the application runs on the Java version [`cheerpjInit()`] chooses, Java 8 by default. JNLP applets run on Java 8 only; a standalone JNLP application can use another version with the [`version`](/docs/reference/cheerpjInit#version) option.
+
 ## 2. Create a project directory
 
-Once you have identified where the `<jar>` or `<nativelib>` tags are in your JNLP, you can simply download these JARs by copying and pasting their URLs in the browser's navigation bar. If these URLs are relative then build the full URL by appending the `codebase` URL and the `jar` URL:
+Download each JAR listed in a `<jar>` tag by opening its URL in the browser. If the URLs are relative, build the full URL by joining the `codebase` URL and the `href` of the `<jar>` tag.
 
 For example:
 
@@ -75,18 +82,18 @@ code-base-url/my_application_archive.jar
 code-base-url/lib/my_dependency.jar
 ```
 
-Please create a directory for your project and place the JARs you just downloaded inside this folder, remember to keep the same directory structure as shown in your `.jnlp`.
+Create a directory for the project and place the downloaded JARs inside it, keeping the directory structure of the `href` paths in the `.jnlp` file.
 
 For example:
 
 ```shell
-mkdir -p directory_name/lib
+mkdir -p my-project/lib
 ```
 
-Once you moved the JARs it should look like this:
+With the JARs in place, the directory looks like this:
 
 ```
-└── directory_name
+└── my-project
     ├── my_application_archive.jar
     └── lib
         └── my_dependency.jar
@@ -96,23 +103,20 @@ Once you moved the JARs it should look like this:
 
 ### 3.1 Identify your application type
 
-A JNLP app can be a **standalone application** or an **applet**. This is easy to spot on your `.jnlp` file with the tags **`<application-desc>`** or **`<applet-desc>`** correspondingly.
+A JNLP app is either a **standalone application** or an **applet**. The `.jnlp` file shows which: it has an **`<application-desc>`** tag for an application and an **`<applet-desc>`** tag for an applet.
 
-We will create a basic HTML file where the CheerpJ runtime will be integrated and the java application displayed. Create this file in the root of the project folder. The way the app is loaded might differ if the application is a standalone app or an applet. The following steps will specify how the HTML will look like for each case.
+Create an `index.html` file in the root of the project directory. The HTML is different for each type, as the next sections show.
 
 ### 3.2 If your application is a standalone app
 
-Take a close look at content of `<application-desc>` and keep the following at hand:
+Look at the `<application-desc>` tag and note:
 
-- **The application class name:** You can find it at the `main-class` attribute. This attribute may not be there if the class name is included in the manifest.
-- **The application arguments:** If any arguments are required, you will find these with the `<argument>` tag.
+- **The application class name:** the `main-class` attribute. If it is missing, the main class is named in the manifest of the main JAR.
+- **The application arguments:** any `<argument>` elements inside the tag, in order.
 
-> [!note] Note
-> If you do not find any of the elements listed above, this means you do not need them to run your application.
+If the `.jnlp` file gives a `main-class`, start the application with [`cheerpjRunMain()`], passing the class name and all the JARs separated by `:`:
 
-Example of an HTML file for an app where the class name is included in the manifest:
-
-```html title = "index.html" {6, 9-15}
+```html title="index.html" {6, 9-16}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -121,41 +125,38 @@ Example of an HTML file for an app where the class name is included in the manif
 		<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 	</head>
 	<body>
-		<script>
-			(async function () {
-				await cheerpjInit();
-				cheerpjCreateDisplay(800, 600);
-				await cheerpjRunJar("/app/my_application_archive.jar");
-			})();
+		<script type="module">
+			await cheerpjInit();
+			cheerpjCreateDisplay(800, 600);
+			await cheerpjRunMain(
+				"com.application.MyClassName",
+				"/app/my_application_archive.jar:/app/lib/my_dependency.jar"
+			);
 		</script>
 	</body>
 </html>
 ```
 
-Alternatively, if the class name is in the `.jnlp` file but not in the manifest, then replace [`cheerpjRunJar()`] for [`cheerpjRunMain()`]:
+If there is no `main-class` attribute, use [`cheerpjRunJar()`] with the main JAR instead. This finds the main class in the JAR's manifest, as `java -jar` does, and the dependencies through the manifest's `Class-Path`:
 
 ```js
-cheerpjRunMain(
-	"com.application.MyClassName",
-	"/app/my_application_archive.jar:/app/lib/my_dependency_archive.jar"
-);
+await cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
-Any application arguments must be passed to [`cheerpjRunJar()`] or [`cheerpjRunMain()`].
-The `/app/`prefix is a virtual filesystem mount point that references the root of the web server this page is loaded from.
+Pass the application arguments to [`cheerpjRunMain()`] or [`cheerpjRunJar()`] after the class path or JAR name, one string per `<argument>`.
 
-### 3.2 If your application is an applet
+The `/app/` prefix is a [virtual filesystem] mount point for the root of the web server the page is loaded from, so `/app/lib/my_dependency.jar` is the file `lib/my_dependency.jar` in the project directory.
 
-Take a close look to the `<applet-desc>` tag on your `.jnlp` and keep the following at hand:
+### 3.3 If your application is an applet
 
-- **Any applet tag parameters:**
-  - **The applet class name:** You can find it at the main-class attribute.
-  - **The applet ideal size:** defined at `width` and `height` attributes.
-  - **Applet parameters:** found as `<param>` within `<applet-desc>` if your applet requires it.
+Look at the `<applet-desc>` tag in the `.jnlp` file and note:
 
-- **documentBase:** If you retrieve this URL, you will obtain an HTML file where the applet is wrapped. You can use it, or create your own HTML like the example below. If you use the `documentBase` HTML file, remember to add the scripts where the CheerpJ runtime is integrated and called.
+- **The applet class name:** the `main-class` attribute.
+- **The applet size:** the `width` and `height` attributes.
+- **The applet parameters:** any `<param>` elements inside `<applet-desc>`.
+- **The `documentBase` attribute**, if present: the URL of an HTML page that embeds the applet. You can start from that page, adding the CheerpJ scripts to it, or write your own HTML like the example below.
 
-The HTML for an applet would look like this:
+Put these into an `<applet>` tag. List all the JARs in the `archive` attribute, separated by commas, with paths relative to the page:
 
 ```html title="index.html" {6, 9-17}
 <!doctype html>
@@ -167,7 +168,7 @@ The HTML for an applet would look like this:
 	</head>
 	<body>
 		<applet
-			archive="my_applet_archive.jar"
+			archive="my_application_archive.jar,lib/my_dependency.jar"
 			code="com.applet.MyClassName"
 			height="900"
 			width="900"
@@ -179,11 +180,11 @@ The HTML for an applet would look like this:
 </html>
 ```
 
-Any applet parameters should be passed as `<param>` in the `<applet>` tag as usual:
+Pass any applet parameters as `<param>` elements inside the `<applet>` tag, as usual:
 
 ```html {7}
 <applet
-	archive="my_applet_archive.jar"
+	archive="my_application_archive.jar,lib/my_dependency.jar"
 	code="com.applet.MyClassName"
 	height="900"
 	width="900"
@@ -192,33 +193,40 @@ Any applet parameters should be passed as `<param>` in the `<applet>` tag as usu
 </applet>
 ```
 
-> In case your users have a native Java plugin installed, you can replace the original HTML tag with a cheerpj- prefixed version. `<cheerpj-applet>`, `<cheerpj-object>`, and `<cheerpj-embed>` are all supported.
+If some of your users still have the native Java plug-in installed, rename the tag with a `cheerpj-` prefix so that only CheerpJ runs the applet: `<cheerpj-applet>`, `<cheerpj-object>` and `<cheerpj-embed>` are all supported.
 
-> [!info] Java Applets and Java 8
-> The method ´cheerpJInit´ runs Java 8 by default if the Java version is not specified. Please notice that if you change the version to Java 11 or higher, applets won't work.
+> [!info] Java applets and Java 8
+> Applets run on Java 8 only. [`cheerpjInit()`] uses Java 8 when no version is given, so do not set the `version` option on a page with applets.
 
 ## 4. Host your page
 
-Your final project directory tree should look similar to:
+The final project directory looks like this:
 
 ```
-└── directory_name
+└── my-project
     ├── index.html
     ├── my_application_archive.jar
     └── lib
         └── my_dependency.jar
 ```
 
-You can now go to the project directory and serve this web page on a simple HTTP server, such as the http-server utility.
+Go to the project directory and serve it with an HTTP server, such as http-server:
 
 ```sh
-cd directory_name
+cd my-project
 npx http-server -p 8080
 ```
 
+Open `http://localhost:8080` in the browser. CheerpJ shows loading messages, then the application's windows or the applet. The first start downloads the parts of the Java runtime the application needs, so it is slower than later starts.
+
+> [!note] Info
+> Opening the page directly from disk (a `file://` URL) does not work. The server must support HTTP Range requests: `npx http-server` and `npx serve` do, Python's `http.server` does not. See [basic server setup](/docs/guides/basic-server-setup), and use HTTPS in production.
+
+If the application does not start, check in the browser developer tools' Network tab that every JAR downloads. A 404 means a JAR is missing from the project directory or its path is wrong.
+
 ## Further reading
 
-This is the end of the tutorial. To learn more about running standalone applications and applets with CheerpJ, you can visit the dedicated tutorials:
+To learn more about running standalone applications and applets with CheerpJ, see the dedicated getting started pages, or the [JNLP tutorial](/docs/tutorials/jnlp), which runs a real JNLP application and a JNLP applet:
 
 <div class="not-prose grid grid-cols-2 font-medium gap-2 text-stone-100">
 	<a
@@ -235,7 +243,8 @@ This is the end of the tutorial. To learn more about running standalone applicat
 	</a>
 </div>
 
-[run a Java application]: /docs/getting-started/Java-app
-[run a Java applet]: /docs/getting-started/Java-applet
+[`cheerpjInit()`]: /docs/reference/cheerpjInit
+[`javaProperties`]: /docs/reference/cheerpjInit#javaproperties
 [`cheerpjRunJar()`]: /docs/reference/cheerpjRunJar
 [`cheerpjRunMain()`]: /docs/reference/cheerpjRunMain
+[virtual filesystem]: /docs/guides/filesystem

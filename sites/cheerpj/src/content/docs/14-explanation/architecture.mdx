@@ -5,51 +5,57 @@ description: How does CheerpJ work?
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-CheerpJ is a WebAssembly-based **Java Virtual Machine for the browser**. This means Java applications can be executed from the browser with no Java installations. Amazing, right? but... How does it work?
+CheerpJ is a Java Virtual Machine and a full build of OpenJDK for the browser, implemented in WebAssembly and JavaScript. It runs Java applications in the browser tab, with no Java installation, plug-in or server-side component. This page explains how.
 
 ## Overview
 
-CheerpJ runs in any modern browser using standard Web technologies, particularly WebAssembly, JavaScript, and HTML5. It can be integrated into a web page like any JavaScript library, by simply adding a `<script>` tag. It requires no custom executable component, plugin, or server-side backend.
+CheerpJ runs in any modern browser using standard web technologies: WebAssembly, JavaScript and HTML. A page loads it like any JavaScript library, with one `<script>` tag.
 
-CheerpJ is very simple to use as it exposes an API for executing standalone Java applications, applets, Java Web Starts, and Java libraries - entirely in the browser. One of the strengths of CheerpJ is that it works directly with Java byte code/JARs, meaning no need to modify or have access to the application's source code.
+CheerpJ has a JavaScript API to run standalone Java applications, applets, Java Web Start applications and Java libraries in the browser. It works on compiled Java bytecode, so it needs the application's JARs, not its source code, and runs them unmodified.
 
-CheerpJ assets are static, which makes it easily self-hostable, and we provide a cloud version under the [CheerpJ Community Licence](/docs/licensing) (free to use for personal projects and technical evaluations).
+CheerpJ is a set of static files. Load it from the CheerpJ CDN, which the free [Community licence][licensing] covers, or serve it from your own web server or CDN, with no connection to any external server. See [licensing][licensing] for when self-hosting needs a licence.
 
 ## CheerpJ components
 
-CheerpJ is made of the following building blocks:
+CheerpJ provides a Java runtime and the operating-system services a Java application expects, built on browser APIs:
 
-- A full Java runtime environment with its implementation of the JVM and a Java-to-JavaScript JIT compiler.
-- A virtualized window manager
-- A virtualized file system
-- A module for networking support
+- **A Java runtime:** a JVM, with an interpreter and a JIT compiler, and the full OpenJDK class library of each supported Java version
+- **A window manager**, which draws AWT and Swing windows in the page
+- **Virtual file systems**, on your web server, in browser storage and in memory
+- **Networking**, over the browser's own HTTP stack, and over Tailscale for TCP and UDP
 
-![CheerpJ 3.0 architecture diagram](/docs/cheerpj3/assets/cheerpj-3-arch.png)
+![CheerpJ architecture diagram](/docs/cheerpj3/assets/cheerpj-3-arch.png)
 
-### The CheerpJ Java Runtime Environment
+### The Java runtime
 
-The magic behind CheerpJ is [Cheerp], which was used for compiling full Java SE 8, 11, 17, 21 and 25, runtimes based on OpenJDK. This runtime was originally written in C++ and compiled to WebAssembly and JavaScript, making it 100% browser compatible. The architecture is designed to support multiple versions of Java, as well as custom runtimes. Future versions of CheerpJ will reach parity with the current LTS Java version.
+The CheerpJ JVM is written in C++ and compiled to WebAssembly and JavaScript with [Cheerp], Leaning Technologies' C++ compiler for the web. Each supported Java version ships with its own full build of OpenJDK: Java 8, 11, 17 and 21, with Java 25 in preview. OpenJDK's own native code is compiled to WebAssembly, so the Java class library behaves as it does on the desktop. You choose the version with the [`version`](/docs/reference/cheerpjInit#version) option when CheerpJ starts.
 
-The most important component of the CheerpJ Java runtime environment is its JVM implementation. CheerpJ's implementation of the JVM is made of an _interpreter_ and a _Just In Time compiler_ (JIT) that work in conjunction in a 2-tier manner:
+The JVM runs bytecode in two tiers:
 
-1. The Java byte code runs within an interpreter.
-2. Then this byte code is Just-In-Time compiled to optimized JavaScript.
+1. Bytecode starts in an **interpreter**, which also counts how often each part of the code runs.
+2. Code that runs often is compiled to JavaScript by a **JIT compiler** while the application runs. The browser's JavaScript engine then runs the result.
 
-The interpreter does not only deal with initialization and rarely-used code, but also gathers necessary information for JIT-ting. The generated code is very efficient, and the internal optimizer can, among other things, inline and devirtualize calls, which is extremely important for a language such as Java.
+The JIT inlines and devirtualises calls, which matters for a language such as Java, where most calls are virtual. Bytecode is not compiled ahead of time, and no part of CheerpJ runs on a server.
 
-![CheerpJ 3.0 JRE diagram](/docs/cheerpj3/assets/JRE.png)
+![CheerpJ Java runtime diagram](/docs/cheerpj3/assets/JRE.png)
 
-Alongside being able to run Java applications in the browser, CheerpJ runtime also provides advanced, bidirectional Java-JavaScript interoperability. Meaning you can access DOM from Java by [implementing `native` methods directly in JavaScript](/docs/guides/implementing-native-methods). You can also interact with Java methods, objects and arrays directly from JavaScript by using the new [`cheerpjRunLibrary` API](/docs/reference/cheerpjRunLibrary).
+A few properties of the runtime follow from running in the browser:
 
-### The virtualized window manager
+- **Memory:** Java objects are ordinary JavaScript objects, garbage-collected by the browser. Weak references and finalizers use the browser's own mechanisms. CheerpJ 5.0 also has an experimental engine based on WebAssembly garbage collection, enabled with the [`wasmGC`](/docs/reference/cheerpjInit#wasmgc) option.
+- **Threads:** Java threads are scheduled by CheerpJ and take turns on one browser thread: the page's own, or a Web Worker's when CheerpJ is started in one.
+- **Native code:** the application's native methods can be [implemented in JavaScript](/docs/guides/implementing-native-methods) or compiled to WebAssembly, and grouped in [native libraries](/docs/guides/implementing-native-libraries) loaded with `System.loadLibrary`. Pre-built binaries, such as `.dll` and `.so` files, cannot run in a browser.
 
-What would be of an application without its graphical UI? CheerpJ's window manager supports Java AWT/Swing by converting windows to a hierarchy of HTML elements and HTML5 canvases.
+The runtime also connects Java and JavaScript in both directions. Java code reaches JavaScript and the DOM through [native methods implemented in JavaScript](/docs/guides/implementing-native-methods). JavaScript uses Java classes, objects and arrays directly in [library mode](/docs/guides/library-mode), started with [`cheerpjRunLibrary`](/docs/reference/cheerpjRunLibrary).
 
-Swing applications, will render exactly as they do in native. Swing Look&Feel is also supported, including 3rd party ones. Multi-window applications are supported, with keyboard focus being managed as expected. Integration with the system clipboard can be enabled via an initialization option.
+### The window manager
 
-### The virtualized file system
+CheerpJ's window manager draws AWT and Swing interfaces in the page. Each window is an HTML element with its own canvas, and frames and dialogs get an HTML title bar. [`cheerpjCreateDisplay`](/docs/reference/cheerpjCreateDisplay) places the display inside any element of the page.
 
-CheepJ provides multiple filesystem backends to accommodate different application needs, including access to server-hosted files and persistent local storage.
+Swing applications render as they do on the desktop, including with third-party look and feels. Multiple windows and keyboard focus work as on the desktop. The clipboard is internal to the application by default, and can be shared with the system clipboard with the [`clipboardMode`](/docs/reference/cheerpjInit#clipboardmode) option.
+
+### The virtual file systems
+
+The browser does not let web pages read or write the user's files directly, so CheerpJ gives the application virtual file systems instead: `/app/` for files on your web server, read over HTTP; `/files/` for persistent storage in the browser; and `/str/` for data passed in from JavaScript. Local files enter the application as uploads and leave it as downloads.
 
 ![CheerpJ's virtual file system in the browser: /app/ is read-only, fetched from the JARs on the local server; /files/ is read-write and kept in IndexedDB, with uploads/ for files from the upload button and downloads/ for files that download automatically; /str/ holds strings and data passed from JavaScript to Java](/docs/cheerpj3/assets/filesystem.png)
 
@@ -57,14 +63,16 @@ CheepJ provides multiple filesystem backends to accommodate different applicat
 	type="secondary"
 	href="/docs/explanation/File-System-support"
 	iconRight="ep:arrow-right-bold"
-	label="File System guide"
+	label="Files and file systems"
 />
 
-### Networking support
+### Networking
 
-For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use `fetch`. More generalized networking is supported via Tailscale, a VPN technology using WebSockets as a transport layer. It can support many different networking scenarios, including access to private network services, peer-to-peer connections between users and access to the wider internet via a user/application provided *exit node*.
+Java's HTTP and HTTPS connections are made with the browser's `fetch`, so the same-origin policy and CORS apply. Services on another domain must allow cross-origin requests from the page.
 
-![CheerpJ 3.0 general networking](/docs/cheerpj3/assets/general_networking.png)
+Browsers do not give web pages TCP or UDP sockets. CheerpJ provides them through Tailscale, a VPN based on WireGuard that carries traffic over WebSockets. Tailscale supports many networking scenarios, including access to services on a private network, peer-to-peer connections between users, and access to the internet through an _exit node_ that the user or the application provides. The Tailscale control server can be self-hosted, with Headscale.
+
+![CheerpJ networking diagram](/docs/cheerpj3/assets/general_networking.png)
 
 <LinkButton
 	type="secondary"
@@ -73,6 +81,12 @@ For same-origin HTTP/HTTPS requests, CheerpJ will be able to transparently use 
 	label="Networking guide"
 />
 
-[cheerp]: https://cheerp.io
+## Learn more
+
+- [How CheerpJ works](https://cheerpj.com/how-cheerpj-works/) on cheerpj.com, for an overview of the runtime and its deployment
+- [Compatibility](https://cheerpj.com/compatibility/), for what is supported in detail
+- [Security](https://cheerpj.com/security/), for the security model of CheerpJ deployments
+
+[cheerp]: https://cheerp.io/
 [Networking guide]: /docs/guides/Networking
 [licensing]: /docs/licensing

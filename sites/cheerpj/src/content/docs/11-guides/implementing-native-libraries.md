@@ -3,29 +3,29 @@ title: Implementing Native Libraries
 description: Java Native Interface (JNI) with CheerpJ
 ---
 
-In this guide, we’ll explore how to use **native libraries** in CheerpJ to implement Java native methods in JavaScript.
+This guide explains how to use **native libraries** in CheerpJ to implement Java native methods in JavaScript.
 
-Native libraries in Java are typically loaded with the `System.loadLibrary` method allowing a Java program to call functions implemented in another language. This function is part of the **Java Native Interface (JNI)**, the same interface used to work with Java native methods, which we covered in the [`Implementing Native Methods guide`].
+In Java, native libraries are loaded with `System.loadLibrary`, so a Java program can call functions implemented in another language. This is part of the **Java Native Interface (JNI)**, the same interface used by the native methods described in the [`Implementing Native Methods guide`].
 
-Unlike [`native methods`], native libraries are not restricted to a single Java class. They can be accessed by multiple classes and even be shared across an entire application.
+With the [`natives`] option, native method implementations are passed to `cheerpjInit` from the page. A native library instead keeps them in a separate JavaScript module, which the Java code loads itself and which any class in the application can use.
 
 ## Using `System.loadLibrary` for shared libraries
 
-[`System.loadLibrary(String libname)`] is a Java method that loads a shared library into the application, making the native methods within the library accessible to Java code. The Java runtime searches each path in `java.library.path` for the library file with the correct format for the operating system (`.so`, `.dll`, or `.dylib` on Linux, Windows, and macOS, respectively).
+[`System.loadLibrary(String libname)`] loads a shared library into the application, so that Java code can call the native methods it implements. On the desktop, the Java runtime searches each path in `java.library.path` for a library file in the operating system's format (`.so`, `.dll` or `.dylib` on Linux, Windows and macOS).
 
-CheerpJ adapts this concept to load JavaScript modules, using the same `System.loadLibrary` call to load `.js` files. These files are JavaScript modules that define implementations for the native methods associated with the library.
+Pre-built `.so`, `.dll` and `.dylib` files cannot run in the browser. In CheerpJ, the same `System.loadLibrary` call loads a `.js` file instead: a JavaScript module that implements the library's native methods. Native code can also be compiled to WebAssembly; [get in touch](https://cheerpj.com/contact/) if your application needs it.
 
 ## Steps to implement native libraries in CheerpJ
 
-In general, we can implement native libraries in CheerpJ by following these steps:
+To implement a native library in CheerpJ:
 
-1. Create a Java class that loads the JavaScript library and declares the native methods.
+1. Create a Java class that loads the library and declares the native methods.
 2. Create a JavaScript module that implements the native methods.
-3. Load the native library in the Java class with CheerpJ.
+3. Initialise CheerpJ with `java.library.path` set to the directory that contains the module.
 
 ### Loading native libraries and declaring native methods in Java
 
-To declare a native method in Java, use the `native` keyword in the method declaration. The method is defined in the Java class but is not implemented in Java. Instead, the implementation will be provided in the native library JavaScript module which is loaded with `System.loadLibrary`.
+To declare a native method in Java, use the `native` keyword in the method declaration. The method is declared in the Java class but not implemented in Java. Its implementation is in the JavaScript module loaded with `System.loadLibrary`.
 
 ```java
 public class ClassName {
@@ -41,7 +41,7 @@ public class ClassName {
 
 ### Creating a JavaScript module and implementing the native methods
 
-A JavaScript module is a file that contains code which can be exported and imported by other files for better organization and reuse. You create modules using the `export` keyword to expose classes, methods, or other resources, and you can use `export default` to make a primary, easy-to-import item from the module. For more information on JavaScript modules, check out the official [`documentation`].
+A JavaScript module is a file whose code can be exported to, and imported by, other files. The `export` keyword exposes classes, functions or other values, and `export default` sets the module's main export. CheerpJ reads the native method implementations from the object the module exports by default. For more on JavaScript modules, see the [`documentation`].
 
 ```js title="module.js"
 export default {
@@ -49,15 +49,15 @@ export default {
 };
 ```
 
-To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, the function will be called `Java_com_foo_Bar_baz`.
+To implement a native method in JavaScript, add an `async` function to that object, named after the Java method: `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, the function is called `Java_com_foo_Bar_baz`.
 
 The JavaScript function should accept the following parameters:
 
-- A [`CJ3Library`] object `lib` as the first parameter, which provides access to other classes and methods within the library.
-- `self` as the second parameter, the instance of the Java class calling the native method. This parameter can be omitted for static native methods.
-- The native method’s parameters as subsequent parameters.
+- A [`CJ3Library`] object `lib` as the first parameter, which gives access to the application's Java classes and methods.
+- `self` as the second parameter: the Java object the native method was called on. Static native methods do not have this parameter.
+- The native method's own parameters after these.
 
-The function can return a value or a Promise that resolves to a value. The function syntax is as follows:
+The function can return a value, or a Promise that resolves to a value. Parameters and return values are converted following the [`conversion rules`]. The syntax is:
 
 ```js
 async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1, param2, ...) {
@@ -65,24 +65,24 @@ async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1
 }
 ```
 
-> [!info] Handling Static Native Methods
-> If the native method is static, the `self` parameter can be omitted.
+> [!info] Handling static native methods
+> If the native method is static, there is no `self` parameter: the method's own parameters follow `lib`.
 
-### Initializing CheerpJ with the `javaProperties` option
+### Initialising CheerpJ with the `javaProperties` option
 
-To use a native library in CheerpJ, you need to set the `java.library.path` property to the directory containing the JavaScript module file that implements the native methods. This is done by passing the `javaProperties` option to the `cheerpjInit` function:
+Set the `java.library.path` property to the directory that contains the JavaScript module, with the [`javaProperties`] option of `cheerpjInit`:
 
 ```js
 await cheerpjInit({ javaProperties: ["java.library.path=/app/<path>"] });
 ```
 
-`/app/` is a [`virtual directory`] in CheerpJ that corresponds to the root directory of the application.
+`/app/` is the [`virtual directory`] that corresponds to the root of your web server.
 
 ## Example walkthrough
 
-In the following example, we’ll see how to create a native library in JavaScript, load it into Java with `System.loadLibrary`, and call a native method through this library from a Java class.
+This example creates a native library in JavaScript, loads it with `System.loadLibrary`, and calls one of its native methods from a Java class.
 
-1. Let's start with a Java class that loads a native library and declares a native method, `alert`, that displays an alert message in the browser.
+1. Start with a Java class that loads a native library and declares a native method, `alert`, that shows an alert message in the browser.
 
 ```java title="Example.java"
 public class Example {
@@ -100,17 +100,17 @@ public class Example {
 }
 ```
 
-2. Next, we create a JavaScript module, `native.js`, that implements the `alert` method to display an alert dialog in the browser.
+2. Create a JavaScript module, `native.js`, that implements the `alert` method with a browser alert dialog. `alert` is an instance method, so the function receives `self` after `lib`.
 
 ```js title="native.js"
 export default {
-	async Java_Example_alert(lib, message) {
+	async Java_Example_alert(lib, self, message) {
 		window.alert(message);
 	},
 };
 ```
 
-3. Finally, we initialize CheerpJ with the [`javaProperties`] option to set the `java.library.path` to the directory containing the `native.js` file. Then, we run the Java `Example` class.
+3. Initialise CheerpJ with the [`javaProperties`] option, setting `java.library.path` to the directory that contains `native.js`. Then run the `Example` class.
 
 ```html title="index.html" {9,10}
 <!doctype html>
@@ -120,7 +120,7 @@ export default {
 		<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 	</head>
 	<body>
-		<script>
+		<script type="module">
 			await cheerpjInit({ javaProperties: ["java.library.path=/app/"] });
 			await cheerpjRunMain("Example", "/app/");
 		</script>
@@ -128,7 +128,7 @@ export default {
 </html>
 ```
 
-In this example, we set the `java.library.path` to `/app/`, which is the directory where the JavaScript file implementing the native methods is located. The folder structure should look like this:
+Here `java.library.path` is `/app/`, the directory that contains the JavaScript module. The folder structure is:
 
 ```
 root/
@@ -137,10 +137,11 @@ root/
   ├── index.html
 ```
 
-When the Java `Example` class is run, the `alert` method is called, which triggers the `Java_Example_alert` function in `native.js`, displaying an alert dialog with the message "Hello, world!".
+When the `Example` class runs, the call to `alert` runs the `Java_Example_alert` function in `native.js`, which shows an alert dialog with the message "Hello, world!".
 
 [`CJ3Library`]: /docs/reference/CJ3Library
-[`conversion rules`]: /docs/reference/cheerpjRunLibrary#conversion-rules
+[`conversion rules`]: /docs/reference/CJ3Library#conversion-rules
+[`natives`]: /docs/reference/cheerpjInit#natives
 [`System.loadLibrary(String libname)`]: https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#loadLibrary-java.lang.String-
 [`native methods`]: /docs/guides/implementing-native-methods
 [`Implementing Native Methods guide`]: /docs/guides/implementing-native-methods
