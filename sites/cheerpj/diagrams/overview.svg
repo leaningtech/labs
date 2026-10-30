@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1000" viewBox="0 0 2000 1000">
+<style>
+@font-face{font-family:'Mono';src:url(../../../packages/astro-theme/public/fonts/monaspace/MonaspaceArgonVarVF.woff2) format('woff2');font-weight:200 800;}
+@font-face{font-family:'Sans';src:url(fonts/StackSansText-latin.woff2) format('woff2');font-weight:200 700;}
+text{font-kerning:none}
+.mono{font-family:'Mono';font-weight:600}
+.sans{font-family:'Sans';font-weight:700}
+</style>
+<rect width="2000" height="1000" rx="40" fill="#e5e5d6"/>
+<rect x="122" y="149" width="14" height="14" fill="#ff7c00"/>
+<text class="mono" x="151" y="164" font-size="20" letter-spacing="3.5" fill="#1e1e1e">JAVA</text>
+<rect x="752" y="149" width="14" height="14" fill="#ff7c00"/>
+<text class="mono" x="781" y="164" font-size="20" letter-spacing="3.5" fill="#1e1e1e">WEBASSEMBLY JVM</text>
+<rect x="1442" y="149" width="14" height="14" fill="#ff7c00"/>
+<text class="mono" x="1471" y="164" font-size="20" letter-spacing="3.5" fill="#1e1e1e">ANY MODERN BROWSER</text>
+<g transform="translate(13,13)"><path d="M224,220 H520 V760 H120 V327 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="6" stroke-linejoin="round"/></g>
+<path d="M224,220 H520 V760 H120 V327 Z" fill="#efe9e9" stroke="#1e1e1e" stroke-width="6" stroke-linejoin="round"/>
+<path d="M224,220 V327 H120 Z" fill="#cfcfc0" stroke="#1e1e1e" stroke-width="6" stroke-linejoin="round"/>
+<rect x="264" y="267" width="200" height="10" rx="5" fill="#6b6b65"/>
+<rect x="265" y="299" width="138" height="10" rx="5" fill="#b9b9ad"/>
+<rect x="264" y="327" width="170" height="10" rx="5" fill="#b9b9ad"/>
+<rect x="172" y="405" width="78.2" height="38" rx="19" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4"/>
+<text class="mono" x="211.1" y="431" font-size="20" fill="#1e1e1e" text-anchor="middle">App</text>
+<rect x="172" y="473" width="115.4" height="38" rx="19" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4"/>
+<text class="mono" x="229.7" y="499" font-size="20" fill="#1e1e1e" text-anchor="middle">Applet</text>
+<rect x="172" y="541" width="90.6" height="38" rx="19" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4"/>
+<text class="mono" x="217.3" y="567" font-size="20" fill="#1e1e1e" text-anchor="middle">JNLP</text>
+<rect x="172" y="609" width="127.8" height="38" rx="19" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4"/>
+<text class="mono" x="235.9" y="635" font-size="20" fill="#1e1e1e" text-anchor="middle">Library</text>
+<rect x="336.5" y="652.5" width="147" height="67" rx="9" fill="#ff7c00" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="410" y="699" font-size="31" letter-spacing="0.5" fill="#1e1e1e" text-anchor="middle">JAR</text>
+<line x1="564" y1="490" x2="696" y2="490" stroke="#1e1e1e" stroke-width="5" stroke-linecap="butt"/>
+<path d="M694,477 L719,490 L694,503 Z" fill="#1e1e1e"/>
+<line x1="1294" y1="490" x2="1390" y2="490" stroke="#1e1e1e" stroke-width="5" stroke-linecap="butt"/>
+<path d="M1388,477 L1413,490 L1388,503 Z" fill="#1e1e1e"/>
+<rect x="762" y="360" width="504" height="292" rx="30" fill="#ff7c00"/>
+<rect x="748" y="344" width="504" height="292" rx="30" fill="#1e1e1e"/>
+<text class="sans" x="826" y="493" font-size="92" letter-spacing="-4" fill="#e5e5d6">cheerpj</text>
+<text class="mono" x="1000" y="578" font-size="20" fill="#ff7c00" text-anchor="middle">no plugins · no local installs</text>
+<rect x="1450" y="230" width="466" height="546" rx="9" fill="#1e1e1e"/>
+<rect x="1440" y="220" width="460" height="540" rx="6" fill="#efe9e9"/>
+<path d="M1440,296 V229 a9,9 0 0 1 9,-9 H1891 a9,9 0 0 1 9,9 V296 Z" fill="#ff7c00"/>
+<line x1="1437" y1="296" x2="1903" y2="296" stroke="#1e1e1e" stroke-width="4"/>
+<circle cx="1480" cy="260" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<circle cx="1510" cy="260" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<circle cx="1540" cy="260" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<g transform="translate(10,10)"><rect x="1490" y="358" width="304" height="224" rx="5" fill="#1e1e1e"/></g>
+<rect x="1492.5" y="360.5" width="299" height="219" rx="4" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<path d="M1492.5,404 V364 a4,4 0 0 1 4,-4 H1788 a4,4 0 0 1 4,4 V404 Z" fill="#ff7c00"/>
+<line x1="1490" y1="404" x2="1794" y2="404" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="1732" y="374" width="16" height="16" fill="#1e1e1e"/>
+<rect x="1756" y="374" width="16" height="16" fill="#1e1e1e"/>
+<g transform="translate(10,10)"><rect x="1570" y="498" width="285" height="196" rx="5" fill="#1e1e1e"/></g>
+<rect x="1572.5" y="500.5" width="280" height="191" rx="4" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<path d="M1572.5,544 V504 a4,4 0 0 1 4,-4 H1849 a4,4 0 0 1 4,4 V544 Z" fill="#ff7c00"/>
+<line x1="1570" y1="544" x2="1855" y2="544" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="1792" y="514" width="16" height="16" fill="#1e1e1e"/>
+<rect x="1816" y="514" width="16" height="16" fill="#1e1e1e"/>
+<text class="sans" x="1602" y="668" font-size="32" fill="#1e1e1e">Java UI</text>
+<path d="M1588,302 V245 a5,5 0 0 1 5,-5 H1775 a5,5 0 0 1 5,5 V302" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="1616" y="280" font-size="26.5" fill="#1e1e1e">MyApp</text>
+<rect x="1440" y="220" width="460" height="540" rx="6" fill="none" stroke="#1e1e1e" stroke-width="6"/>
+<rect x="1433.4" y="820" width="113.4" height="42" rx="21.0" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<g transform="translate(1443.4,829.5) scale(0.95833)" fill="#1e1e1e"><path fill="currentColor" d="m12 20l3.46-6h-.01c.34-.6.55-1.27.55-2c0-1.2-.54-2.27-1.38-3h4.79c.38.93.59 1.94.59 3a8 8 0 0 1-8 8m-8-8c0-1.46.39-2.82 1.07-4l3.47 6h.01c.69 1.19 1.95 2 3.45 2c.45 0 .88-.09 1.29-.23l-2.4 4.14C7 19.37 4 16.04 4 12m11 0a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3m-3-8a7.98 7.98 0 0 1 6.92 4H12c-1.94 0-3.55 1.38-3.92 3.21L5.7 7.08A7.98 7.98 0 0 1 12 4m0-2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></g>
+<text class="mono" x="1473.4" y="847.0" font-size="16.5" fill="#1e1e1e">Chrome</text>
+<rect x="1556.7" y="820" width="123.6" height="42" rx="21.0" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<g transform="translate(1566.7,829.5) scale(0.95833)" fill="#1e1e1e"><path fill="currentColor" d="M6.85 6.74q.015 0 0 0M21.28 8.6c-.43-1.05-1.32-2.18-2.01-2.54c.56 1.11.89 2.22 1.02 3.04v.02c-1.13-2.82-3.05-3.96-4.62-6.44c-.08-.12-.17-.25-.24-.38c-.04-.07-.07-.14-.11-.21c-.06-.13-.12-.26-.15-.4c0-.01-.01-.02-.02-.02h-.03c-2.22 1.3-3.15 3.59-3.38 5.04c-.69.04-1.37.21-1.99.51c-.12.05-.17.19-.13.31c.05.14.21.21.34.15c.54-.26 1.14-.41 1.74-.45h.05c.08-.01.17-.01.25-.01c.5-.01.97.06 1.44.2l.06.02c.1.02.17.06.25.06c.05.04.11.06.16.08l.14.06c.07.03.14.06.2.09c.03.02.06.03.09.05c.07.04.16.07.2.11c.04.02.08.05.12.07c.73.45 1.34 1.07 1.75 1.81c-.53-.37-1.49-.74-2.41-.58c3.6 1.81 2.63 8-2.36 7.76c-.44-.01-.88-.1-1.3-.25c-.1-.03-.2-.07-.29-.12c-.05-.02-.12-.05-.17-.08c-1.23-.63-2.24-1.82-2.38-3.27c0 0 .5-1.73 3.33-1.73c.31 0 1.17-.86 1.2-1.1c0-.09-1.74-.78-2.42-1.45c-.37-.36-.54-.53-.69-.66c-.08-.07-.17-.13-.26-.19a4.63 4.63 0 0 1-.03-2.45C7.6 6.12 6.8 6.86 6.22 7.5c-.4-.5-.37-2.15-.35-2.5c-.01 0-.3.16-.33.18c-.35.25-.68.53-.98.82c-.35.37-.66.74-.94 1.14c-.62.91-1.12 1.95-1.34 3.04c0 .01-.1.41-.17.92l-.03.23c-.02.17-.04.32-.08.58v.41c0 5.53 4.5 10.01 10 10.01c4.97 0 9.08-3.59 9.88-8.33c.02-.11.03-.24.05-.37c.2-1.72-.02-3.52-.65-5.03"/></g>
+<text class="mono" x="1596.7" y="847.0" font-size="16.5" fill="#1e1e1e">Firefox</text>
+<rect x="1690.3" y="820" width="92.9" height="42" rx="21.0" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<g transform="translate(1700.3,829.5) scale(0.95833)" fill="#1e1e1e"><path fill="currentColor" d="M10.86 15.37c-.69-.77-1.16-1.69-1.31-2.72c-.3.46-.55.96-.73 1.5c-.92 2.75.68 6.18 3.4 7.18c2.34.78 4.97-.61 6.7-2.13c.26-.35 2.31-2.16 1.29-2.36c-3.02 1.55-7.02 1.11-9.35-1.47m.6-5.81c1.04-.01.04-.43-.39-.75c-1.04-.57-2.26-.85-3.44-.85C3.78 8 .995 10.41 2.3 14.4c.94 3.88 4.31 7 8.29 7.5c-2.05-1.29-3.29-3.71-3.29-6.12c.08-2.53 1.64-5.5 4.16-6.22M2.78 8.24C5.82 6 10.66 6.18 13.28 9c1.02 1.11 1.72 3 .79 4.37c-1.74 1.88 3.08 2.13 4.11 1.85c3.74-.72 4.73-5.07 2.95-8.07c-1.7-3.4-5.47-5.18-9.17-5.15c-4.06-.07-7.71 2.5-9.18 6.24"/></g>
+<text class="mono" x="1730.3" y="847.0" font-size="16.5" fill="#1e1e1e">Edge</text>
+<rect x="1793.3" y="820" width="113.4" height="42" rx="21.0" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<g transform="translate(1803.3,829.5) scale(0.95833)" fill="#1e1e1e"><path fill="currentColor" d="M12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8c0 2.09.8 4 2.11 5.41l3.77-7.53l7.53-3.77A7.93 7.93 0 0 0 12 4m0 16a8 8 0 0 0 8-8c0-2.09-.8-4-2.11-5.41l-3.77 7.53l-7.53 3.77A7.93 7.93 0 0 0 12 20m0-8l-.77-.77L9.7 14.3l3.07-1.53zm0 5.5h1V19h-1zm3.88-1.61l.71-.71l1.06 1.06l-.71.71zM17.5 12v-1H19v1zM12 6.5h-1V5h1zM8.12 8.11l-.71.71l-1.06-1.06l.71-.71zM6.5 12v1H5v-1z"/></g>
+<text class="mono" x="1833.3" y="847.0" font-size="16.5" fill="#1e1e1e">Safari</text>
+</svg>

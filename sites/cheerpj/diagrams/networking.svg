@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1380" viewBox="0 0 2000 1380">
+<style>
+@font-face{font-family:'Mono';src:url(../../../packages/astro-theme/public/fonts/monaspace/MonaspaceArgonVarVF.woff2) format('woff2');font-weight:200 800;}
+@font-face{font-family:'Sans';src:url(fonts/StackSansText-latin.woff2) format('woff2');font-weight:200 700;}
+text{font-kerning:none}
+.mono{font-family:'Mono';font-weight:600}
+.sans{font-family:'Sans';font-weight:700}
+</style>
+<rect width="2000" height="1380" rx="40" fill="#e5e5d6"/>
+<g transform="translate(12,12)"><rect x="98" y="138" width="504" height="304" rx="10" fill="#1e1e1e"/></g>
+<rect x="98" y="138" width="504" height="304" rx="10" fill="#efe9e9"/>
+<path d="M100,228 V150 a12,12 0 0 1 12,-12 H588 a12,12 0 0 1 12,12 V228 Z" fill="#ff7c00"/>
+<line x1="98" y1="228" x2="602" y2="228" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="100" y="140" width="500" height="300" rx="9" fill="none" stroke="#1e1e1e" stroke-width="4"/>
+<text class="sans" x="133" y="198" font-size="37.5" fill="#1e1e1e">A machine</text>
+<rect x="144.75" y="260.75" width="186.5" height="48.5" rx="24.25" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3.5"/>
+<text class="sans" x="238" y="297" font-size="33.3" fill="#1e1e1e" text-anchor="middle">Exit node</text>
+<line x1="132" y1="336" x2="568" y2="336" stroke="#b9b9ad" stroke-width="4"/>
+<text class="sans" x="143" y="395" font-size="33.3" fill="#1e1e1e">Private services</text>
+<g>
+<circle cx="199" cy="1119" r="74" fill="#1e1e1e"/>
+<circle cx="192" cy="1112" r="72" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<circle cx="192" cy="1112" r="44.5" fill="#ff7c00" stroke="#1e1e1e" stroke-width="3"/>
+<g fill="none" stroke="#1e1e1e" stroke-width="3" stroke-linecap="round">
+<ellipse cx="192" cy="1112" rx="20" ry="44.5"/>
+<line x1="147.5" y1="1112" x2="236.5" y2="1112"/>
+<line x1="153.3" y1="1090" x2="230.7" y2="1090"/>
+<line x1="153.3" y1="1134" x2="230.7" y2="1134"/>
+</g>
+</g>
+<text class="sans" x="192.5" y="1247" font-size="32" fill="#1e1e1e" text-anchor="middle">Internet</text>
+<path d="M126,285 H114 V420 H190 V1012" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linejoin="round"/>
+<path d="M146,285 L124,274 L124,296 Z" fill="#1e1e1e"/>
+<path d="M190,1036 L179,1010 L201,1010 Z" fill="#1e1e1e"/>
+<path d="M460,468 V696 H669" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linejoin="round"/>
+<path d="M460,442 L449,468 L471,468 Z" fill="#1e1e1e"/>
+<path d="M695,696 L669,685 L669,707 Z" fill="#1e1e1e"/>
+<rect x="388.5" y="518.5" width="143" height="43" rx="21.5" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="460.0" y="547.0" font-size="20" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">WireGuard</text>
+<rect x="710" y="610" width="444" height="196" rx="24" fill="#ff7c00"/>
+<rect x="698" y="598" width="444" height="196" rx="24" fill="#1e1e1e"/>
+<text class="sans" x="920" y="690" font-size="41.7" fill="#efe9e9" text-anchor="middle">Tailscale VPN</text>
+<text class="mono" x="919" y="738" font-size="20" letter-spacing="-1" fill="#ff7c00" text-anchor="middle">WireGuard over WebSockets</text>
+<g transform="translate(13,13)"><rect x="1237" y="117" width="646" height="406" rx="38" fill="#1e1e1e"/></g>
+<rect x="1237" y="117" width="646" height="406" rx="38" fill="#efe9e9"/>
+<path d="M1240,196 V156 a36,36 0 0 1 36,-36 H1844 a36,36 0 0 1 36,36 V196 Z" fill="#ff7c00"/>
+<line x1="1237" y1="196" x2="1883" y2="196" stroke="#1e1e1e" stroke-width="4"/>
+<circle cx="1280" cy="160" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="1310" cy="160" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="1340" cy="160" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<path d="M1388,203 V150 a10,10 0 0 1 10,-10 H1570 a10,10 0 0 1 10,10 V203" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<text class="sans" x="1416" y="180" font-size="25.8" fill="#1e1e1e">MyApp</text>
+<rect x="1240" y="120" width="640" height="400" rx="35" fill="none" stroke="#1e1e1e" stroke-width="6"/>
+<rect x="1268" y="221" width="584" height="278" rx="20" fill="none" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="1280" y="239" width="18" height="18" fill="#ff7c00" stroke="#1e1e1e" stroke-width="2"/>
+<text class="mono" x="1311" y="255" font-size="21" letter-spacing="2.5" fill="#1e1e1e">CHEERPJ</text>
+<rect x="1407" y="316" width="313" height="104" rx="52" fill="#1e1e1e"/>
+<text class="sans" x="1563.5" y="378" font-size="33.3" fill="#e5e5d6" text-anchor="middle">Java app</text>
+<g transform="translate(13,13)"><rect x="1237" y="877" width="646" height="406" rx="38" fill="#1e1e1e"/></g>
+<rect x="1237" y="877" width="646" height="406" rx="38" fill="#efe9e9"/>
+<path d="M1240,956 V916 a36,36 0 0 1 36,-36 H1844 a36,36 0 0 1 36,36 V956 Z" fill="#ff7c00"/>
+<line x1="1237" y1="956" x2="1883" y2="956" stroke="#1e1e1e" stroke-width="4"/>
+<circle cx="1280" cy="920" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="1310" cy="920" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="1340" cy="920" r="10" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4.5"/>
+<path d="M1388,963 V910 a10,10 0 0 1 10,-10 H1570 a10,10 0 0 1 10,10 V963" fill="#efe9e9" stroke="#1e1e1e" stroke-width="4"/>
+<text class="sans" x="1416" y="940" font-size="25.8" fill="#1e1e1e">MyApp</text>
+<rect x="1240" y="880" width="640" height="400" rx="35" fill="none" stroke="#1e1e1e" stroke-width="6"/>
+<rect x="1268" y="981" width="584" height="278" rx="20" fill="none" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="1280" y="999" width="18" height="18" fill="#ff7c00" stroke="#1e1e1e" stroke-width="2"/>
+<text class="mono" x="1311" y="1015" font-size="21" letter-spacing="2.5" fill="#1e1e1e">CHEERPJ</text>
+<rect x="1407" y="1076" width="313" height="104" rx="52" fill="#1e1e1e"/>
+<text class="sans" x="1563.5" y="1138" font-size="33.3" fill="#e5e5d6" text-anchor="middle">Java app</text>
+<path d="M1040,568 V292 H1284" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linejoin="round"/>
+<path d="M1040,594 L1029,568 L1051,568 Z" fill="#1e1e1e"/>
+<path d="M1310,292 L1284,281 L1284,303 Z" fill="#1e1e1e"/>
+<rect x="1091.5" y="270.5" width="120" height="43" rx="21.5" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1151.5" y="299.0" font-size="20" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">WebSocket</text>
+<path d="M1040,832 V1052 H1284" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linejoin="round"/>
+<path d="M1040,806 L1029,832 L1051,832 Z" fill="#1e1e1e"/>
+<path d="M1310,1052 L1284,1041 L1284,1063 Z" fill="#1e1e1e"/>
+<rect x="1091.5" y="1030.5" width="120" height="43" rx="21.5" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1151.5" y="1059.0" font-size="20" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">WebSocket</text>
+</svg>
