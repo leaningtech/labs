@@ -30,6 +30,12 @@
 		--cj-ink: var(--cj-cream);
 		--cj-line: rgb(229 229 214 / 0.32);
 		--cj-font: Arimo, Arial, "Liberation Sans", sans-serif;
+		--cj-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+		/* cheerpj.com's type for the whole page: the theme's utilities and code read these */
+		--font-sans: var(--cj-font);
+		--font-mono: var(--cj-font-mono);
+		--default-mono-font-family: var(--cj-font-mono);
 	}
 
 	/* cheerpj.com's heading type, at its h2 size */
@@ -229,7 +235,7 @@
 		line-height: 1.5;
 	}
 	.site-cheerpj .cj-text-eyebrow {
-		font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+		font-family: var(--cj-font-mono);
 		font-size: 11px;
 		line-height: 1.4;
 		letter-spacing: 0.12em;
@@ -407,4 +413,21 @@
 		[data-callout="bug"]
 	) {
 	--cj-callout: #ff6b57;
+}
+
+/*
+ * cheerpj.com's headings: bold (Arimo's heaviest), tracked tight. Unlayered, so they win over
+ * the typography plugin's heading weights, which are in @layer utilities.
+ */
+.site-cheerpj .prose :where(h1, h2, h3, h4) {
+	font-weight: 700;
+}
+.site-cheerpj .prose :where(h1) {
+	letter-spacing: -0.04em;
+}
+.site-cheerpj .prose :where(h2) {
+	letter-spacing: -0.035em;
+}
+.site-cheerpj .prose :where(h3, h4) {
+	letter-spacing: -0.02em;
 }
