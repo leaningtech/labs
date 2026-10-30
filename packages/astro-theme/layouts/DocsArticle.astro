@@ -21,6 +21,8 @@ interface Props {
 	description?: string | undefined;
 	descriptionHighlight?: string | undefined;
 	headings?: Heading[] | undefined;
+	/** Deepest heading level in "On this page" */
+	tocDepth?: number | undefined;
 	fullWidthLayout: boolean;
 }
 
@@ -30,8 +32,12 @@ const {
 	description,
 	descriptionHighlight,
 	headings,
+	tocDepth,
 	fullWidthLayout,
 } = Astro.props;
+const tocHeadings = tocDepth
+	? headings?.filter((h) => h.depth <= tocDepth)
+	: headings;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
@@ -39,6 +45,8 @@ const entries = product ? getProductNav(nav, product.id) : [];
 
 const site = getSite(Astro.site?.hostname);
 const isCheerpj = product?.id === "cheerpj3";
+// The description is rendered as one array, so no whitespace gets between
+// the highlight and the text around it.
 const highlightAt =
 	descriptionHighlight && description
 		? description.indexOf(descriptionHighlight)
@@ -147,11 +155,13 @@ const highlightAt =
 										{description &&
 											(highlightAt >= 0 ? (
 												<span>
-													{description.slice(0, highlightAt)}
-													<span class="cj-hl">{descriptionHighlight}</span>
-													{description.slice(
-														highlightAt + descriptionHighlight!.length
-													)}
+													{[
+														description.slice(0, highlightAt),
+														<span class="cj-hl">{descriptionHighlight}</span>,
+														description.slice(
+															highlightAt + descriptionHighlight!.length
+														),
+													]}
 												</span>
 											) : (
 												<span>{description}</span>
@@ -190,7 +200,7 @@ const highlightAt =
 							<Icon name="ph:list-bullets" class="w-5 h-5" />
 						</button>
 						<div class="min-w-0 wrap-break-word max-xl:in-data-toc-collapsed:hidden">
-							{headings && <TableOfContents {headings} />}
+							{tocHeadings && <TableOfContents headings={tocHeadings} />}
 						</div>
 					</aside>
 				</div>
