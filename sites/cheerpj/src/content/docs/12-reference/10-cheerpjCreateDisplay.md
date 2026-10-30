@@ -49,8 +49,8 @@ import { useRef, useEffect } from "react";
 function Display({ width, height }) {
 	const parent = useRef();
 	useEffect(() => {
-		cheerpjCreateDisplay(width, height, parent);
-	});
+		cheerpjCreateDisplay(width, height, parent.current);
+	}, []);
 	return <div ref={parent} />;
 }
 ```
