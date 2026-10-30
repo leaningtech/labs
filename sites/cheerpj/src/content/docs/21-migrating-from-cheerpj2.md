@@ -2,14 +2,14 @@
 title: Migration from CheerpJ 2
 ---
 
-CheerpJ version 3 (and above) is a complete reimplementation of CheerpJ 2, and as such it is not fully backward compatible. This page shows how to migrate from CheerpJ 2 to CheerpJ 3 (or CheerpJ 4)
+CheerpJ version 3 (and above) is a complete reimplementation of CheerpJ 2, and as such it is not fully backward compatible. This page shows how to migrate from CheerpJ 2 to CheerpJ 3+.
 
 ### Script tag
 
-Include CheerpJ 4 on your page with the following snippet:
+Include the newest CheerpJ loader on your page with the following snippet:
 
 ```html
-<script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
+<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
 ## Breaking changes
@@ -37,7 +37,7 @@ This feature had no real use case because when using `java -jar`, the JAR file i
 CheerpJ can now be imported in a Web Worker without any special setup. Simply call [`importScripts`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts) from a worker to load CheerpJ, then use CheerpJ as usual. The `CheerpJWorker` class has been removed.
 
 ```js
-importScripts("https://cjrtnc.leaningtech.com/4.3/loader.js");
+importScripts("https://cjrtnc.leaningtech.com/5.0/loader.js");
 
 // Use CheerpJ as usual
 (async () => {

@@ -53,7 +53,10 @@ A description of each `cheerpjInit()` option with brief examples are given below
 version?: number;
 ```
 
-The Java runtime version to use. Java `8`, `11` and `17` are currently supported. Default version is Java `8` if not specified.
+The Java runtime version to use. Java `8`, `11`, `17`, `21` and `25` are currently supported. Default version is Java `8` if not specified.
+
+> [!info] Java 21 and 25 require CheerpJ 5.0
+> Java `21` and `25` are only available from CheerpJ version `5.0`. Earlier versions support Java `8`, `11` and `17`.
 
 > [!info] Java Applets and Java 8
 > Please notice that Applets are supported on Java 8 only.
