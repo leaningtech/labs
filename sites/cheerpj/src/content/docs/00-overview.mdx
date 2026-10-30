@@ -1,8 +1,8 @@
 ---
 title: CheerpJ
 shortTitle: Overview
-description: A Java Virtual Machine and a full build of OpenJDK for the browser, in WebAssembly and JavaScript
-descriptionHighlight: Java Virtual Machine
+description: Real Java, for the browser.
+descriptionHighlight: Real Java
 ---
 
 import { DISCORD_URL } from "@/consts.ts";
@@ -10,7 +10,7 @@ import JNLPRunnerButton from "@leaningtech/astro-theme/components/JNLPRunnerButt
 import AppletRunnerButton from "@leaningtech/astro-theme/components/AppletRunnerButton.astro";
 import Button from "@leaningtech/astro-theme/cheerpj-brand/Button.astro";
 
-<div class="not-prose flex gap-2 mb-2">
+<div class="not-prose flex flex-wrap gap-2 mb-2">
 	<img
 		src="https://img.shields.io/badge/version-5.0-orange"
 		alt="Version 5.0"
@@ -29,12 +29,45 @@ import Button from "@leaningtech/astro-theme/cheerpj-brand/Button.astro";
 	</a>
 </div>
 
+<div class="not-prose flex flex-wrap gap-2 mb-2">
+	<a href="https://cheerpj.com/compatibility/">
+		<img
+			src="https://img.shields.io/badge/Java_8-8u512-e5e5d6?labelColor=1e1e1e"
+			alt="Java 8: OpenJDK 8u512"
+		/>
+	</a>
+	<a href="https://cheerpj.com/compatibility/">
+		<img
+			src="https://img.shields.io/badge/Java_11-11.0.33-e5e5d6?labelColor=1e1e1e"
+			alt="Java 11: OpenJDK 11.0.33"
+		/>
+	</a>
+	<a href="https://cheerpj.com/compatibility/">
+		<img
+			src="https://img.shields.io/badge/Java_17-17.0.21-e5e5d6?labelColor=1e1e1e"
+			alt="Java 17: OpenJDK 17.0.21"
+		/>
+	</a>
+	<a href="https://cheerpj.com/compatibility/">
+		<img
+			src="https://img.shields.io/badge/Java_21-21.0.13-e5e5d6?labelColor=1e1e1e"
+			alt="Java 21: OpenJDK 21.0.13"
+		/>
+	</a>
+	<a href="https://cheerpj.com/compatibility/">
+		<img
+			src="https://img.shields.io/badge/Java_25-25.0.5_(preview)-e5e5d6?labelColor=1e1e1e"
+			alt="Java 25: OpenJDK 25.0.5, in preview"
+		/>
+	</a>
+</div>
+
 <div class="text-lg">
 	CheerpJ is a **Java Virtual Machine and a full build of OpenJDK for the
-	browser**, implemented in WebAssembly and JavaScript. It runs Java
-	applications, applets, Java Web Start applications and libraries from their
-	compiled JARs, with no source code, recompilation, plug-in or local Java
-	installation.
+	browser**, implemented in WebAssembly and JavaScript. It runs Java 8, 11, 17
+	and 21, with Java 25 in preview: applications, applets, Java Web Start
+	applications and libraries, from their compiled JARs, with no source code,
+	recompilation, plug-in or local Java installation.
 </div>
 
 <div class="m-4 flex justify-center">
