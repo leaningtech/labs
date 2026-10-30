@@ -1,0 +1,80 @@
+// cheerpj.com's code colours (the /run-java/ page's: orange tags, soft orange functions, muted
+// cream attributes), widened to the scopes Java, JavaScript and shell use. Strings take the light
+// orange tint: the page's pale #fff6d8 is too close to the cream text in long listings.
+{
+	"name": "cheerpj",
+	"type": "dark",
+	"colors": {
+		"editor.foreground": "#e5e5d6",
+	},
+	"tokenColors": [
+		{
+			"scope": ["comment", "punctuation.definition.comment"],
+			"settings": {
+				"foreground": "rgba(229,229,214,0.5)",
+				"fontStyle": "italic",
+			},
+		},
+		{
+			"scope": [
+				"keyword",
+				"storage",
+				"storage.type",
+				"storage.modifier",
+				"keyword.operator.word",
+				"keyword.operator.new",
+				"entity.name.tag",
+			],
+			"settings": { "foreground": "#ff7c00" },
+		},
+		{
+			"scope": [
+				"string",
+				"string.regexp",
+				"punctuation.definition.string",
+				"markup.inline.raw",
+			],
+			"settings": { "foreground": "#ffd6ad" },
+		},
+		{
+			"scope": [
+				"entity.name.function",
+				"support.function",
+				"meta.function-call.generic",
+				"constant.numeric",
+				"constant.language",
+				"constant.character.escape",
+			],
+			"settings": { "foreground": "#ffb066" },
+		},
+		{
+			"scope": [
+				"entity.name.type",
+				"entity.name.class",
+				"entity.other.inherited-class",
+				"entity.name.namespace",
+				"support.class",
+				"support.type",
+				"storage.type.annotation",
+				"punctuation.definition.annotation",
+				"entity.other.attribute-name",
+				"variable.other.property",
+				"variable.other.object.property",
+				"meta.object-literal.key",
+				"support.type.property-name",
+			],
+			"settings": { "foreground": "#c9c9b4" },
+		},
+		{
+			"scope": [
+				"variable",
+				"variable.parameter",
+				"keyword.operator",
+				"punctuation",
+				"meta.brace",
+			],
+			"settings": { "foreground": "#e5e5d6" },
+		},
+		{ "scope": ["invalid"], "settings": { "foreground": "#ff6b57" } },
+	],
+}
