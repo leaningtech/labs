@@ -404,6 +404,9 @@ importers:
       astro:
         specifier: ^5.16.7
         version: 5.16.13(@types/node@25.0.10)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro-expressive-code:
+        specifier: ^0.41.6
+        version: 0.41.6(astro@5.16.13(@types/node@25.0.10)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.1)(typescript@5.9.3)(yaml@2.8.2))
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
