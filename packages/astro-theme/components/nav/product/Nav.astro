@@ -8,8 +8,7 @@ import ProductVersionSwitcher from "../../ProductVersionSwitcher.astro";
 import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
-import { getLocalisedProductNav, getRootNav } from "../../../lib/nav";
-import { t } from "../../../lib/i18n";
+import { getProductNav, getRootNav } from "../../../lib/nav";
 
 interface Props {
 	product: ProductData;
@@ -18,11 +17,7 @@ interface Props {
 
 const { product, wide = false } = Astro.props;
 
-const firstDocsEntry = getLocalisedProductNav(
-	await getRootNav(),
-	product.id,
-	Astro.currentLocale
-)[0];
+const firstDocsEntry = getProductNav(await getRootNav(), product.id)[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
 const productFilterTag: Partial<Record<string, string>> = {
 	cheerp: "Cheerp",
@@ -101,24 +96,24 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 
 		<div class="flex items-stretch gap-2 ml-auto px-2 relative" id="nav-items">
 			<Link
-				label={t("Docs", Astro.currentLocale)}
+				label="Docs"
 				href={firstDocsEntry.href}
 				showHoverBg={product.id !== "browserpod"}
 			/>
 			<Link
-				label={t("Blog", Astro.currentLocale)}
+				label="Blog"
 				href={blogref}
 				showHoverBg={product.id !== "browserpod"}
 			/>
 			<Link
-				label={t("Demos", Astro.currentLocale)}
+				label="Demos"
 				href={showcaseref}
 				showHoverBg={product.id !== "browserpod"}
 			/>
 			{
 				product.id.match("cheerpx") && (
 					<Link
-						label={t("Licensing", Astro.currentLocale)}
+						label="Licensing"
 						href={"/licensing"}
 						showHoverBg={product.id !== "browserpod"}
 					/>

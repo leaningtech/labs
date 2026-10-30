@@ -1,7 +1,7 @@
 ---
 import Shell from "./Shell.astro";
 import DocsSidebar from "../components/DocsSidebar.astro";
-import { getRootNav, getLocalisedProductNav, getSite } from "../lib/nav";
+import { getRootNav, getProductNav, getSite } from "../lib/nav";
 import { productFromUrl } from "../lib/products";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { Icon } from "astro-icon/components";
@@ -13,7 +13,6 @@ import Footer from "../components/Footer.astro";
 import ProductNav from "../components/nav/product/Nav.astro";
 import Callout from "../components/Callout.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
-import type { LanguageContent } from "../content";
 
 interface Props {
 	id?: string | undefined;
@@ -21,17 +20,13 @@ interface Props {
 	description?: string | undefined;
 	headings?: Heading[] | undefined;
 	fullWidthLayout: boolean;
-	language: LanguageContent;
 }
 
-const { id, title, description, headings, fullWidthLayout, language } =
-	Astro.props;
+const { id, title, description, headings, fullWidthLayout } = Astro.props;
 
 const nav = await getRootNav();
 const product = productFromUrl(Astro.url);
-const entries = product
-	? getLocalisedProductNav(nav, product.id, Astro.currentLocale)
-	: [];
+const entries = product ? getProductNav(nav, product.id) : [];
 
 const site = getSite(Astro.site?.hostname);
 ---
@@ -60,7 +55,6 @@ const site = getSite(Astro.site?.hostname);
 		) : (
 			<docs-article class="w-full flex">
 				<div
-					{...(language && { "data-pagefind-filter": `language:${language}` })}
 					data-sidebar-wrapper
 					class="hidden lg:block shadow-xl lg:shadow-none z-50 lg:z-30"
 				>

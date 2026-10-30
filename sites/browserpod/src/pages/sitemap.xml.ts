@@ -11,13 +11,9 @@ const BASE = "https://browserpod.io";
 // We build the URL list from the same nav functions the docs routes are
 // generated from ([...slug].astro uses flattenNav(getRootNav())), so this
 // sitemap can never drift from the pages that actually exist. getRootNav()
-// already excludes drafts in PROD; we drop language directories here the same
-// way the route generator does.
+// already excludes drafts in PROD.
 export const GET: APIRoute = async () => {
-	const entries = flattenNav(await getRootNav()).filter((entry) => {
-		if (entry.type === "directory" && entry.isLanguageDirectory) return false;
-		return true;
-	});
+	const entries = flattenNav(await getRootNav());
 
 	// The /docs/ landing page is served by the theme's pages/docs/index.astro, and it's only an html redirect, so it's not in the nav.
 	// entry.href is already "/docs/<slug>". Normalise and drop duplicates.
