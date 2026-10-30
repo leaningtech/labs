@@ -17,7 +17,7 @@ interface Props {
 
 const { product, wide = false } = Astro.props;
 // cheerpj.com's header, with search beside the logo and boxed icons.
-// Every page of that site is under /docs/, so its Docs button is always active.
+// Every page this build renders is under /docs/, so its Docs button is always active.
 const isCheerpj = product.id === "cheerpj3";
 
 const firstDocsEntry = getProductNav(await getRootNav(), product.id)[0];
