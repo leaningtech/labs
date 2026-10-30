@@ -1,17 +1,29 @@
 ---
 title: Frequently Asked Questions
-tocDepth: 2
 ---
+
+{/* Generated from cheerpj.com's src/content/faqs.yml; keep the two in step. */}
 
 The questions developers and organisations ask most often about CheerpJ, grouped by topic: what it is and which product to use, building with it, Oracle Forms and EBS, the browser extensions, compatibility, files and networking, performance, deployment, security, troubleshooting and licensing.
 
+<details class="cj-faq-group" open>
+<summary>
+
 ## General
 
-### What is CheerpJ?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="what-is-cheerpj">
+<summary>What is CheerpJ?</summary>
 
 CheerpJ is a complete Java runtime for the browser, built from OpenJDK and compiled to WebAssembly. It runs Java client-side in Chrome, Edge, Firefox and Safari, with no plug-in, no Java installation and no server-side JVM. Use it to build web applications in Java, to bring Java desktop applications and applets online, and to use any Java library from JavaScript.
 
-### Why should I use CheerpJ?
+</details>
+
+<details class="cj-faq" id="why-should-i-use-cheerpj">
+<summary>Why should I use CheerpJ?</summary>
 
 Because it runs real Java in the browser, from the JARs you already have:
 
@@ -19,11 +31,17 @@ Because it runs real Java in the browser, from the JARs you already have:
 - **If you build web applications**, you can use Java libraries client-side, from JavaScript.
 - **If your organisation runs Java applications**, such as Oracle Forms, applets or Java Web Start, they run in a modern browser, without Internet Explorer mode, a Java installation on every desktop, or a remote desktop session.
 
-### Is CheerpJ only for legacy applications?
+</details>
+
+<details class="cj-faq" id="is-cheerpj-only-for-legacy-applications">
+<summary>Is CheerpJ only for legacy applications?</summary>
 
 No. CheerpJ supports Java 8, 11, 17 and 21, with Java 25 in preview, and adds each new Java LTS release. Software vendors use it to ship current Java products on the web, and developers use it to run Java libraries in web applications. Older applications, applets and Java Web Start are one use among several.
 
-### What types of applications does CheerpJ support?
+</details>
+
+<details class="cj-faq" id="what-types-of-applications-does-cheerpj-support">
+<summary>What types of applications does CheerpJ support?</summary>
 
 CheerpJ can run:
 
@@ -33,11 +51,17 @@ CheerpJ can run:
 - Java Web Start (JNLP) applications
 - Oracle Forms and Oracle E-Business Suite
 
-### How does CheerpJ work?
+</details>
+
+<details class="cj-faq" id="how-does-cheerpj-work">
+<summary>How does CheerpJ work?</summary>
 
 CheerpJ is a Java Virtual Machine that runs in the browser, on the OpenJDK class libraries and with OpenJDK's native code compiled to WebAssembly. It loads your compiled JAR files as they are, interprets the bytecode and compiles the frequently used parts as it runs. Nothing is recompiled ahead of time, nothing runs on a server, and nothing is installed on the user's machine. The [how CheerpJ works](https://cheerpj.com/how-cheerpj-works/) page explains it in more detail.
 
-### What is the main difference between CheerpJ and other ways of putting Java on the web?
+</details>
+
+<details class="cj-faq" id="what-is-the-main-difference-between-cheerpj-and-other-ways-of-putting-java-on-the-web">
+<summary>What is the main difference between CheerpJ and other ways of putting Java on the web?</summary>
 
 CheerpJ is the real Java runtime, running locally. Compared with the alternatives:
 
@@ -47,21 +71,44 @@ CheerpJ is the real Java runtime, running locally. Compared with the alternative
 
 The [comparison page](https://cheerpj.com/comparison/) sets out each option.
 
-### Is CheerpJ a rewrite or a code conversion tool?
+</details>
+
+<details class="cj-faq" id="is-cheerpj-a-rewrite-or-a-code-conversion-tool">
+<summary>Is CheerpJ a rewrite or a code conversion tool?</summary>
 
 No. CheerpJ runs your existing bytecode. There is no conversion step and no generated code to maintain, so your application keeps its behaviour, its look and its release process.
 
-### Can CheerpJ replace Citrix or VDI for our Java applications?
+</details>
+
+<details class="cj-faq" id="can-cheerpj-replace-citrix-or-vdi-for-our-java-applications">
+<summary>Can CheerpJ replace Citrix or VDI for our Java applications?</summary>
 
 For Java applications, yes. CheerpJ runs the application in the user's browser, so you no longer need a remote session only to deliver Java. It is not a full VDI replacement: it does not deliver Windows desktops or non-Java native applications. The [Citrix and VDI page](https://cheerpj.com/replace-citrix-and-vdi-for-java-applications/) compares the two.
 
-### Who uses CheerpJ?
+</details>
+
+<details class="cj-faq" id="who-uses-cheerpj">
+<summary>Who uses CheerpJ?</summary>
 
 Software vendors, enterprises and public sector organisations worldwide, including Fortune 500 companies and government agencies. Vendors use it to deliver their Java products on the web, organisations use it for their own and their vendors' Java applications, including Oracle Forms and EBS, and developers use it for Java libraries in web applications. [See the organisations that use CheerpJ](https://cheerpj.com/customers/).
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Choosing a product
 
-### What is the difference between CheerpJ Core, the Applet Runner and the JNLP Runner?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="what-is-the-difference-between-cheerpj-core-the-applet-runner-and-the-jnlp-runner">
+<summary>What is the difference between CheerpJ Core, the Applet Runner and the JNLP Runner?</summary>
 
 They are one technology with three ways to deliver it:
 
@@ -71,7 +118,10 @@ They are one technology with three ways to deliver it:
 
 The extensions carry CheerpJ Core inside them, so the application runs and looks the same either way.
 
-### Which one do I need?
+</details>
+
+<details class="cj-faq" id="which-one-do-i-need">
+<summary>Which one do I need?</summary>
 
 If you are building a web application or a web edition of your product, use **CheerpJ Core**. For an existing application, look at how it starts today:
 
@@ -81,7 +131,10 @@ If you are building a web application or a web edition of your product, use **Ch
 
 Some sites serve an applet to some users and Java Web Start to others, so check the launch type your users actually get. For applets and Java Web Start, you can also use CheerpJ Core on the server instead of an extension. The [extensions page](https://cheerpj.com/extensions/) has more detail.
 
-### Should I use an extension or integrate CheerpJ Core on the server?
+</details>
+
+<details class="cj-faq" id="should-i-use-an-extension-or-integrate-cheerpj-core-on-the-server">
+<summary>Should I use an extension or integrate CheerpJ Core on the server?</summary>
 
 Both run the same runtime, with the same performance and appearance. Choose by who controls what:
 
@@ -90,63 +143,127 @@ Both run the same runtime, with the same performance and appearance. Choose by w
 
 Many organisations test with an extension first and then decide.
 
-### Is there a performance difference between the extensions and CheerpJ Core?
+</details>
+
+<details class="cj-faq" id="is-there-a-performance-difference-between-the-extensions-and-cheerpj-core">
+<summary>Is there a performance difference between the extensions and CheerpJ Core?</summary>
 
 No. The extensions run CheerpJ Core inside the browser, exactly as a web page that includes it does.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Building with CheerpJ
 
-### Can I build a web edition of my Java desktop product with CheerpJ?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="can-i-build-a-web-edition-of-my-java-desktop-product-with-cheerpj">
+<summary>Can I build a web edition of my Java desktop product with CheerpJ?</summary>
 
 Yes. CheerpJ runs your Swing or AWT application from the same JARs you ship today, on the Java version you build for, so the web edition comes from the same codebase as the desktop one. It runs client-side and is delivered as static files, so you can offer it as SaaS, ship it to customers who host it themselves, or run it on air-gapped networks. The [CheerpJ Core page](https://cheerpj.com/cheerpj-core/) describes the runtime.
 
-### How do I get started?
+</details>
+
+<details class="cj-faq" id="how-do-i-get-started">
+<summary>How do I get started?</summary>
 
 Add the CheerpJ loader to a web page with one script tag, serve your JARs from the same web server, and start the application with the same main class, classpath and arguments it uses today. A `java -jar app.jar` command becomes a `cheerpjRunJar` call, and a `java -cp … com.example.Main` command becomes a `cheerpjRunMain` call. The [getting started guide](/docs/getting-started/Java-app) walks through it, and technical evaluation is free.
 
-### Which Java versions can I build for?
+</details>
+
+<details class="cj-faq" id="which-java-versions-can-i-build-for">
+<summary>Which Java versions can I build for?</summary>
 
 CheerpJ Core supports Java 8, 11, 17 and 21, with Java 25 in preview, each built from that release of OpenJDK. New Java LTS releases are added as they come out, so you are not held back to an old version. You choose the version when you start CheerpJ, with the [`version`](/docs/reference/cheerpjInit#version) option.
 
-### What happens to JVM options such as -Xmx and -D?
+</details>
+
+<details class="cj-faq" id="what-happens-to-jvm-options-such-as--xmx-and--d">
+<summary>What happens to JVM options such as -Xmx and -D?</summary>
 
 System properties set with `-D` are passed with the [`javaProperties`](/docs/reference/cheerpjInit#javaproperties) option. Memory and tuning options such as `-Xmx` and `-XX` are not needed, because the browser manages memory.
 
-### Can I call Java libraries from JavaScript?
+</details>
+
+<details class="cj-faq" id="can-i-call-java-libraries-from-javascript">
+<summary>Can I call Java libraries from JavaScript?</summary>
 
 Yes. CheerpJ's library mode lets JavaScript and TypeScript load Java classes, create objects and call methods, with automatic conversion of values, so you can use any Java library inside a web application, client-side, with no backend. Java can also call JavaScript and browser APIs through native methods implemented in JavaScript. See [Java libraries](https://cheerpj.com/java-libraries/) and the [interoperability page](https://cheerpj.com/interoperability/).
 
-### Can I mix Java and web technologies in one application?
+</details>
+
+<details class="cj-faq" id="can-i-mix-java-and-web-technologies-in-one-application">
+<summary>Can I mix Java and web technologies in one application?</summary>
 
 Yes. You can keep the business logic in Java and build the user interface with a web framework such as React or Angular, or run the existing Java interface next to new web screens and replace parts of it over time. Java and JavaScript call each other directly on the same page.
 
-### How is CheerpJ different from compiling Java to JavaScript?
+</details>
+
+<details class="cj-faq" id="how-is-cheerpj-different-from-compiling-java-to-javascript">
+<summary>How is CheerpJ different from compiling Java to JavaScript?</summary>
 
 Java-to-JavaScript compilers support a subset of Java, need the source code and a port, and do not run Swing. CheerpJ runs the real OpenJDK class libraries on a JVM in the browser, so it runs the whole language and bytecode, including Swing, reflection, threads and dynamic class loading, from your compiled JARs.
 
-### How is CheerpJ different from streaming the application from a server?
+</details>
+
+<details class="cj-faq" id="how-is-cheerpj-different-from-streaming-the-application-from-a-server">
+<summary>How is CheerpJ different from streaming the application from a server?</summary>
 
 Server-side streaming runs a Java process on your servers for every user session and sends its screen to the browser. CheerpJ runs the application on the user's device, so there is no server JVM per user to provision and pay for, user data does not travel to a server to be drawn, and the application keeps working on slow connections. The [comparison page](https://cheerpj.com/comparison/) covers the options.
 
-### Is CheerpJ free for developers?
+</details>
+
+<details class="cj-faq" id="is-cheerpj-free-for-developers">
+<summary>Is CheerpJ free for developers?</summary>
 
 CheerpJ is free for personal projects, technical evaluation, one-person companies and non-commercial open-source projects, with a "Built with CheerpJ" credit where the licence asks for one. Commercial products and SaaS use an Application licence; see [licensing](https://cheerpj.com/licensing/).
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Oracle Forms
 
-### Can I use CheerpJ to run Oracle Forms, Oracle EBS, or any other Java-based Oracle product?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="can-i-use-cheerpj-to-run-oracle-forms-oracle-ebs-or-any-other-java-based-oracle-product">
+<summary>Can I use CheerpJ to run Oracle Forms, Oracle EBS, or any other Java-based Oracle product?</summary>
 
 Yes. Many organisations worldwide use CheerpJ to run Oracle Java-based products, such as Oracle Forms and Oracle EBS, in modern browsers, including Fortune 500 companies and local and federal government agencies. The [Oracle Forms and EBS page](https://cheerpj.com/run-oracle-forms-and-ebs-in-the-browser/) explains how.
 
-### How does CheerpJ run Oracle Forms?
+</details>
+
+<details class="cj-faq" id="how-does-cheerpj-run-oracle-forms">
+<summary>How does CheerpJ run Oracle Forms?</summary>
 
 The Oracle Forms client is a Java program, `frmall.jar` and your application's JARs, that talks to the Forms server over HTTP. CheerpJ runs that client, unchanged, in the browser. Your Forms server, `.fmx` modules and database stay exactly as they are, and you do not need to recompile or regenerate any form.
 
-### Which Oracle Forms versions does CheerpJ support?
+</details>
+
+<details class="cj-faq" id="which-oracle-forms-versions-does-cheerpj-support">
+<summary>Which Oracle Forms versions does CheerpJ support?</summary>
 
 CheerpJ runs the Forms client of Oracle Forms 6i, 10g, 11g and 12c, whether it is deployed as an applet, through JInitiator or through Java Web Start. If you run Forms 14c, or a heavily customised client, [ask us for a compatibility review](https://cheerpj.com/contact/?from=compatibility-review).
 
-### Do we need to change our Forms application?
+</details>
+
+<details class="cj-faq" id="do-we-need-to-change-our-forms-application">
+<summary>Do we need to change our Forms application?</summary>
 
 No. The forms themselves do not change. The usual changes are in server configuration:
 
@@ -156,11 +273,17 @@ No. The forms themselves do not change. The usual changes are in server configur
 
 With the browser extensions, nothing on the server changes beyond the first two points.
 
-### Our Forms application uses socket mode. Will it work?
+</details>
+
+<details class="cj-faq" id="our-forms-application-uses-socket-mode-will-it-work">
+<summary>Our Forms application uses socket mode. Will it work?</summary>
 
 Browsers do not let web pages open raw socket connections, so the Forms client must use HTTP mode. Set `connectMode` to `http` or `https` in `formsweb.cfg`, with `serverURL` pointing at the Forms listener servlet, usually `/forms/lservlet`. This is a standard Oracle Forms setting. In socket mode, the client typically fails with `FRM-92060` or a socket error.
 
-### Does WebUtil work?
+</details>
+
+<details class="cj-faq" id="does-webutil-work">
+<summary>Does WebUtil work?</summary>
 
 Yes. WebUtil works with CheerpJ, including file transfer, as long as you keep the browser's file model in mind:
 
@@ -169,165 +292,311 @@ Yes. WebUtil works with CheerpJ, including file transfer, as long as you keep th
 
 The [file system guide](/docs/guides/filesystem) describes where files go.
 
-### What happens to CLIENT_HOST, OLE, DDE and client-side DLLs?
+</details>
+
+<details class="cj-faq" id="what-happens-to-client_host-ole-dde-and-client-side-dlls">
+<summary>What happens to CLIENT_HOST, OLE, DDE and client-side DLLs?</summary>
 
 A browser cannot start programs on the user's machine, so `CLIENT_HOST` and `WebUtil_Host` calls run nothing by default. CheerpJ lets you intercept them in JavaScript and do the equivalent web action, such as opening a URL, or you can move the work to the server. OLE, COM and DDE automation and pre-built client DLLs cannot run in a browser, so forms that depend on them need a change. A [compatibility review](https://cheerpj.com/contact/?from=compatibility-review) finds these before a rollout.
 
-### Our PL/SQL code reads the PC's name or IP address. Does that still work?
+</details>
+
+<details class="cj-faq" id="our-plsql-code-reads-the-pcs-name-or-ip-address-does-that-still-work">
+<summary>Our PL/SQL code reads the PC's name or IP address. Does that still work?</summary>
 
 Web pages cannot see the computer's host name or IP address. When CheerpJ is integrated on the server, a value can be supplied through the `hostName` option. With the extensions, [contact us](https://cheerpj.com/contact/).
 
-### Do Oracle Reports and printing work?
+</details>
+
+<details class="cj-faq" id="do-oracle-reports-and-printing-work">
+<summary>Do Oracle Reports and printing work?</summary>
 
 Yes. Reports opened in a new window or tab work as they do today, provided the browser allows pop-ups for the Forms site. When the Forms client prints, CheerpJ opens the browser's print dialog, where the user chooses any printer installed on the machine.
 
-### Do keyboard shortcuts and function keys work?
+</details>
+
+<details class="cj-faq" id="do-keyboard-shortcuts-and-function-keys-work">
+<summary>Do keyboard shortcuts and function keys work?</summary>
 
 Yes. CheerpJ can override browser shortcuts so that the Forms keys, such as F-keys and Ctrl combinations, reach the application, and the Applet Runner ships with the common Forms and EBS shortcuts preset. You can add your own in the extensions' settings, or with the [`overrideShortcuts`](/docs/reference/cheerpjInit#overrideshortcuts) option. A few browser shortcuts, such as closing a tab, can never be overridden.
 
-### Can users open more than one Forms session?
+</details>
+
+<details class="cj-faq" id="can-users-open-more-than-one-forms-session">
+<summary>Can users open more than one Forms session?</summary>
 
 Oracle Forms tracks the session with a cookie, and browser tabs share cookies, so a second session in another tab of the same browser can clash with the first. Your WebLogic configuration can change how Forms uses the session cookie. [Contact us](https://cheerpj.com/contact/) if you need several sessions per user.
 
-### Is CheerpJ certified by Oracle?
+</details>
+
+<details class="cj-faq" id="is-cheerpj-certified-by-oracle">
+<summary>Is CheerpJ certified by Oracle?</summary>
 
 No. Oracle certifies its own Java runtime, and CheerpJ is not endorsed by Oracle. CheerpJ runs the same Forms client JARs on its own build of OpenJDK, and organisations validate it by testing their applications, usually in a proof of concept.
 
-### Can we build CheerpJ into a Forms-based product we sell or host for customers?
+</details>
+
+<details class="cj-faq" id="can-we-build-cheerpj-into-a-forms-based-product-we-sell-or-host-for-customers">
+<summary>Can we build CheerpJ into a Forms-based product we sell or host for customers?</summary>
 
 Yes. Software vendors integrate CheerpJ into the launch page of their Forms-based product, so their customers open it in the browser. Integration can also be the first step of a gradual modernisation, with Forms modules and new web screens on the same page. This is covered by an Application licence; see [licensing](https://cheerpj.com/licensing/).
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Oracle E-Business Suite
 
-### Can CheerpJ run Oracle E-Business Suite?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="can-cheerpj-run-oracle-e-business-suite">
+<summary>Can CheerpJ run Oracle E-Business Suite?</summary>
 
 Yes. The Forms-based parts of EBS use a Java client, and CheerpJ runs that client in Chrome and Edge, or in any supported browser when CheerpJ is integrated on the server. The HTML-based parts of EBS are unchanged. The [Oracle EBS page](https://cheerpj.com/oracle-ebs/) explains the options.
 
-### Which EBS releases are supported?
+</details>
+
+<details class="cj-faq" id="which-ebs-releases-are-supported">
+<summary>Which EBS releases are supported?</summary>
 
 EBS launches its Forms client either as an applet or through Java Web Start, depending on the release and configuration, and CheerpJ supports both. Organisations run CheerpJ with EBS 11i and R12. Every EBS environment is configured differently, so we recommend a short test with the browser extension, which is free for technical evaluation.
 
-### Which extension do I need for EBS?
+</details>
+
+<details class="cj-faq" id="which-extension-do-i-need-for-ebs">
+<summary>Which extension do I need for EBS?</summary>
 
 It depends on your EBS configuration. If Forms opens inside the browser page, use the Applet Runner. If the browser downloads a `.jnlp` file, use the JNLP Runner. If your DBA changes the launch mode, change the extension too.
 
-### Do we have to change our EBS configuration?
+</details>
+
+<details class="cj-faq" id="do-we-have-to-change-our-ebs-configuration">
+<summary>Do we have to change our EBS configuration?</summary>
 
 With the extensions, usually not. Check that Forms connects over HTTP or HTTPS, that the Forms servlets are not compressed, and that the EBS host is not on Edge's Internet Explorer mode site list for your users. If you do change EBS Forms settings, do it through AutoConfig with your DBA, because EBS patching overwrites manual edits.
 
-### Can we integrate CheerpJ into EBS on the server instead of using an extension?
+</details>
+
+<details class="cj-faq" id="can-we-integrate-cheerpj-into-ebs-on-the-server-instead-of-using-an-extension">
+<summary>Can we integrate CheerpJ into EBS on the server instead of using an extension?</summary>
 
 Yes, but on EBS the least invasive way is usually a reverse proxy that adds CheerpJ to the Forms launch page, instead of editing EBS templates, because patching can overwrite template edits. [Talk to us](https://cheerpj.com/contact/) before choosing this route.
 
-### Do View Output and View Log work for concurrent requests?
+</details>
+
+<details class="cj-faq" id="do-view-output-and-view-log-work-for-concurrent-requests">
+<summary>Do View Output and View Log work for concurrent requests?</summary>
 
 Yes. They open in a new window, so allow pop-ups for the EBS site.
 
-### We still use Internet Explorer mode for EBS. Can we retire it?
+</details>
+
+<details class="cj-faq" id="we-still-use-internet-explorer-mode-for-ebs-can-we-retire-it">
+<summary>We still use Internet Explorer mode for EBS. Can we retire it?</summary>
 
 Yes. That is one of the most common reasons to use CheerpJ. Remove the EBS host from the Enterprise Mode Site List, at least for the users you are testing with, because CheerpJ cannot run inside Internet Explorer mode. The [retire IE mode page](https://cheerpj.com/retire-ie-mode/) describes the move.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Applets and the Applet Runner
 
-### Where can I find the full Documentation for the CheerpJ Applet Runner?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="where-can-i-find-the-full-documentation-for-the-cheerpj-applet-runner">
+<summary>Where can I find the full Documentation for the CheerpJ Applet Runner?</summary>
 
 You can find the documentation for the CheerpJ Applet Runner [here](https://labs.leaningtech.com/docs/cheerpj-applet-runner).
 
-### What browsers does the CheerpJ Applet Runner support?
+</details>
+
+<details class="cj-faq" id="what-browsers-does-the-cheerpj-applet-runner-support">
+<summary>What browsers does the CheerpJ Applet Runner support?</summary>
 
 The CheerpJ Applet Runner is a browser extension for Chrome and Edge, and other Chromium-based browsers.
 
 To run applets in Firefox or Safari, integrate CheerpJ Core into the page that hosts the applet.
 
-### Which Java version does the Applet Runner use?
+</details>
+
+<details class="cj-faq" id="which-java-version-does-the-applet-runner-use">
+<summary>Which Java version does the Applet Runner use?</summary>
 
 Java 8. Applets were removed from Java after Java 8, so every applet was built for Java 8 or earlier, and keeping the extension to one runtime keeps its download small.
 
-### Why should I use the CheerpJ Applet Runner?
+</details>
+
+<details class="cj-faq" id="why-should-i-use-the-cheerpj-applet-runner">
+<summary>Why should I use the CheerpJ Applet Runner?</summary>
 
 CheerpJ allows you to keep running legacy Java applets that are either impossible or impractical to replace or upgrade, extending the life of your application with minimal investment.
 
 It improves security by removing the need for a local Java installation and running the applet inside the browser sandbox.
 
-### Do I need to install anything on my Desktops or Servers to use the CheerpJ Applet Runner?
+</details>
+
+<details class="cj-faq" id="do-i-need-to-install-anything-on-my-desktops-or-servers-to-use-the-cheerpj-applet-runner">
+<summary>Do I need to install anything on my Desktops or Servers to use the CheerpJ Applet Runner?</summary>
 
 No. The CheerpJ Applet Runner does not require a local Java installation on the desktop and does not require server-side integration.
 
 Your applet and server can remain unchanged.
 
-### Can I run an applet without the extension?
+</details>
+
+<details class="cj-faq" id="can-i-run-an-applet-without-the-extension">
+<summary>Can I run an applet without the extension?</summary>
 
 Yes. Add CheerpJ Core to the page that hosts the applet and it runs the `<applet>`, `<object>` and `<embed>` tags on the page. The [applet getting started guide](/docs/getting-started/Java-applet) shows how.
 
-### Our page's JavaScript talks to the applet. Does that still work?
+</details>
+
+<details class="cj-faq" id="our-pages-javascript-talks-to-the-applet-does-that-still-work">
+<summary>Our page's JavaScript talks to the applet. Does that still work?</summary>
 
 Yes. CheerpJ supports calls between the page and the applet in both directions. Pages written for Internet Explorer sometimes call the applet before it has started, or use Internet Explorer-only DOM features, and need a small change or a compatibility script. This is page behaviour, not a CheerpJ limitation, and we can help you find it.
 
-### Can I self-host the CheerpJ Applet Runner, and can I run it on air-gapped environments?
+</details>
+
+<details class="cj-faq" id="can-i-self-host-the-cheerpj-applet-runner-and-can-i-run-it-on-air-gapped-environments">
+<summary>Can I self-host the CheerpJ Applet Runner, and can I run it on air-gapped environments?</summary>
 
 Yes. We can assist you in self-hosting the CheerpJ Applet Runner so your organisation does not need access to the Chrome Web Store or the Edge Add-ons store.
 
 A self-hostable version is available for enterprise use cases, including air-gapped environments. Please get in touch with [Enterprise Sales](https://cheerpj.com/contact/) if you are interested.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Java Web Start and the JNLP Runner
 
-### Where can I find the full Documentation for the CheerpJ JNLP Runner?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="where-can-i-find-the-full-documentation-for-the-cheerpj-jnlp-runner">
+<summary>Where can I find the full Documentation for the CheerpJ JNLP Runner?</summary>
 
 You can find the documentation for the CheerpJ JNLP Runner [here](https://labs.leaningtech.com/docs/cheerpj-jnlp-runner).
 
-### What types of applications does the CheerpJ JNLP Runner support?
+</details>
+
+<details class="cj-faq" id="what-types-of-applications-does-the-cheerpj-jnlp-runner-support">
+<summary>What types of applications does the CheerpJ JNLP Runner support?</summary>
 
 The CheerpJ JNLP Runner runs Java Web Start applications described by a JNLP file. It is based on CheerpJ Core and runs existing, unmodified Java Web Start applications inside the browser, without a local Java installation. It supports JNLP extensions, versioned JARs and pack200-compressed JARs.
 
-### Which browsers does the CheerpJ JNLP Runner support?
+</details>
+
+<details class="cj-faq" id="which-browsers-does-the-cheerpj-jnlp-runner-support">
+<summary>Which browsers does the CheerpJ JNLP Runner support?</summary>
 
 The CheerpJ JNLP Runner is a browser extension for Chrome and Edge, and other Chromium-based browsers.
 
 To run Java Web Start applications in Firefox or Safari, integrate CheerpJ Core on the server instead.
 
-### Which Java versions are supported?
+</details>
+
+<details class="cj-faq" id="which-java-versions-are-supported">
+<summary>Which Java versions are supported?</summary>
 
 The JNLP Runner runs Java 8, the last Java release to include Java Web Start, which is what Java Web Start applications in the field were built for. If your application needs a newer Java version, run it with CheerpJ Core, which supports Java 8, 11, 17 and 21, or [contact us](https://cheerpj.com/contact/).
 
-### Why should I use the CheerpJ JNLP Runner?
+</details>
+
+<details class="cj-faq" id="why-should-i-use-the-cheerpj-jnlp-runner">
+<summary>Why should I use the CheerpJ JNLP Runner?</summary>
 
 CheerpJ allows you to keep running legacy Java Web Start applications that are either impossible or impractical to replace or upgrade, extending the life of your application with minimal investment.
 
 The CheerpJ JNLP Runner improves security by removing the need for a local Java installation and running the application inside the browser sandbox.
 
-### Do I need to install anything on my Desktops or Servers to use the CheerpJ JNLP Runner?
+</details>
+
+<details class="cj-faq" id="do-i-need-to-install-anything-on-my-desktops-or-servers-to-use-the-cheerpj-jnlp-runner">
+<summary>Do I need to install anything on my Desktops or Servers to use the CheerpJ JNLP Runner?</summary>
 
 No. The CheerpJ JNLP Runner does not require a local Java installation on the desktop and does not require server-side integration.
 
 Your application can remain unchanged.
 
-### Which Java Web Start services are supported?
+</details>
+
+<details class="cj-faq" id="which-java-web-start-services-are-supported">
+<summary>Which Java Web Start services are supported?</summary>
 
 The `BasicService`, `SingleInstanceService` and `PersistenceService` JNLP services are supported. If your application uses another service, [tell us which](https://cheerpj.com/contact/).
 
-### Our JNLP file lists native libraries. Will it work?
+</details>
+
+<details class="cj-faq" id="our-jnlp-file-lists-native-libraries-will-it-work">
+<summary>Our JNLP file lists native libraries. Will it work?</summary>
 
 Native libraries listed with `<nativelib>` are pre-built binaries, which cannot run in a browser. If the application cannot run without them, it needs a change; a [compatibility review](https://cheerpj.com/contact/?from=compatibility-review) tells you what.
 
-### Can I deploy the CheerpJ JNLP Runner extension using Group Policies?
+</details>
+
+<details class="cj-faq" id="can-i-deploy-the-cheerpj-jnlp-runner-extension-using-group-policies">
+<summary>Can I deploy the CheerpJ JNLP Runner extension using Group Policies?</summary>
 
 Yes. You can deploy both CheerpJ extensions to your organisation's machines with Group Policy in Chrome or Edge, pin them to the toolbar, and push licence tokens and settings. See the [enterprise configuration guide](https://labs.leaningtech.com/docs/cheerpj-jnlp-runner/guides/configure-extension-for-enterprises).
 
-### Can I self-host the CheerpJ JNLP Runner, and can I run it on air-gapped environments?
+</details>
+
+<details class="cj-faq" id="can-i-self-host-the-cheerpj-jnlp-runner-and-can-i-run-it-on-air-gapped-environments">
+<summary>Can I self-host the CheerpJ JNLP Runner, and can I run it on air-gapped environments?</summary>
 
 Yes. We can assist you in self-hosting the CheerpJ JNLP Runner so your organisation does not need access to the Chrome Web Store or the Edge Add-ons store.
 
 A self-hostable version is available for enterprise use cases, including air-gapped environments. Please get in touch with [Enterprise Sales](https://cheerpj.com/contact/) if you are interested.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Compatibility
 
-### Does CheerpJ support all Java APIs?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="does-cheerpj-support-all-java-apis">
+<summary>Does CheerpJ support all Java APIs?</summary>
 
 CheerpJ runs the OpenJDK class library itself, not a reimplementation, and supports the whole Java language and bytecode. Most production Java applications work out of the box, including those using Swing, AWT, multithreading, networking, reflection, custom class loaders and dynamic constructs.
 
 What a browser does not allow, such as starting local programs or loading pre-built native binaries, needs a different approach. The [compatibility page](https://cheerpj.com/compatibility/) lists it in detail.
 
-### Which Java versions are supported?
+</details>
+
+<details class="cj-faq" id="which-java-versions-are-supported-1">
+<summary>Which Java versions are supported?</summary>
 
 - **CheerpJ Core:** Java 8, 11, 17 and 21, with Java 25 in preview, each built from that release of OpenJDK
 - **Applet Runner and JNLP Runner:** Java 8
@@ -335,7 +604,10 @@ What a browser does not allow, such as starting local programs or loading pre-bu
 
 CheerpJ adds each new Java LTS release. In CheerpJ Core you choose the version when you start CheerpJ, with the [`version`](/docs/reference/cheerpjInit#version) option.
 
-### Which GUI frameworks are supported?
+</details>
+
+<details class="cj-faq" id="which-gui-frameworks-are-supported">
+<summary>Which GUI frameworks are supported?</summary>
 
 - Swing: supported
 - AWT: supported
@@ -343,11 +615,17 @@ CheerpJ adds each new Java LTS release. In CheerpJ Core you choose the version w
 - JavaFX: not supported today, planned for 2027
 - SWT: not supported
 
-### Our application uses JavaFX. Can CheerpJ run it?
+</details>
+
+<details class="cj-faq" id="our-application-uses-javafx-can-cheerpj-run-it">
+<summary>Our application uses JavaFX. Can CheerpJ run it?</summary>
 
 Not today. JavaFX support is planned for 2027. If your application uses JavaFX only for an embedded web view inside a Swing application, [contact us](https://cheerpj.com/contact/), because that case can often be handled with the browser itself.
 
-### Which browsers are supported?
+</details>
+
+<details class="cj-faq" id="which-browsers-are-supported">
+<summary>Which browsers are supported?</summary>
 
 - Chrome, Edge, and other Chromium-based browsers
 - Firefox
@@ -355,119 +633,241 @@ Not today. JavaFX support is planned for 2027. If your application uses JavaFX o
 
 The Applet Runner and JNLP Runner extensions run in Chrome, Edge and other Chromium-based browsers. Minimum versions are on the [compatibility page](https://cheerpj.com/compatibility/).
 
-### Does CheerpJ work on mobile?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-work-on-mobile">
+<summary>Does CheerpJ work on mobile?</summary>
 
 Yes, CheerpJ Core runs in mobile browsers on Android, iOS and iPadOS. It supports touch input and virtual keyboards, and a long press acts as a mouse hover.
 
-### Does CheerpJ require source code?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-require-source-code">
+<summary>Does CheerpJ require source code?</summary>
 
 No. It runs directly on compiled Java bytecode (.jar or .class files), including encrypted and obfuscated code. Third-party libraries and components whose source code you do not have run just like your own code.
 
-### Does CheerpJ support JNI?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-support-jni">
+<summary>Does CheerpJ support JNI?</summary>
 
 Yes. CheerpJ includes OpenJDK's own native code, compiled to WebAssembly, so the Java Native Interface works as it does on a desktop. Your application's own native methods can be implemented in JavaScript or compiled to WebAssembly.
 
 What cannot run are pre-built native binaries, such as `.dll`, `.so` and `.dylib` files, including those packaged inside JARs. If you have the C or C++ source, it can sometimes be compiled to WebAssembly; [ask us](https://cheerpj.com/contact/).
 
-### Do signed JARs work?
+</details>
+
+<details class="cj-faq" id="do-signed-jars-work">
+<summary>Do signed JARs work?</summary>
 
 Yes. Serve the original signed JARs. Re-signing or repackaging them can cause `SecurityException` errors if the signatures no longer match.
 
-### Does the application look the same?
+</details>
+
+<details class="cj-faq" id="does-the-application-look-the-same">
+<summary>Does the application look the same?</summary>
 
 Yes. CheerpJ runs the application's own Swing or AWT code and draws it exactly as Java does, so screens, fonts and layouts match the desktop version closely. CheerpJ ships its own fonts, so text can differ slightly where an application relied on fonts installed on Windows.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Files, printing and networking
 
-### Can the application read and write files?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="can-the-application-read-and-write-files">
+<summary>Can the application read and write files?</summary>
 
 Yes, inside CheerpJ's virtual file system. Files your server publishes are readable, and the application has persistent storage in the browser for the files it writes. A web page cannot read or write the user's disk directly, so files reach the device through uploads and downloads: the user picks files to upload, and files saved to the download folder are downloaded to the device. The [file system guide](/docs/guides/filesystem) explains the folders.
 
-### Can the application open a file in Excel, Word or a PDF viewer?
+</details>
+
+<details class="cj-faq" id="can-the-application-open-a-file-in-excel-word-or-a-pdf-viewer">
+<summary>Can the application open a file in Excel, Word or a PDF viewer?</summary>
 
 A browser cannot hand a file to a desktop application, so calls such as `Desktop.open()`, or `Desktop.browse()` with a local file, cannot work as on the desktop. Instead, download the file to the user, or open it in a browser tab with a blob URL from [`cjFileBlob`](/docs/reference/cjFileBlob).
 
-### Does printing work?
+</details>
+
+<details class="cj-faq" id="does-printing-work">
+<summary>Does printing work?</summary>
 
 Yes. When the application prints, CheerpJ renders the pages and opens the browser's print dialog, where the user chooses a printer or saves a PDF. The application sees one virtual printer, not the list of printers installed on the machine. Allow pop-ups for the site if the dialog does not appear.
 
-### Does copy and paste work?
+</details>
+
+<details class="cj-faq" id="does-copy-and-paste-work">
+<summary>Does copy and paste work?</summary>
 
 Yes. By default, copy and paste work inside the Java application. Sharing the clipboard with other applications on the machine is an option, and browsers allow it only on sites served over HTTPS. See the [`clipboardMode`](/docs/reference/cheerpjInit#clipboardmode) option.
 
-### Can the application connect to our back-end services?
+</details>
+
+<details class="cj-faq" id="can-the-application-connect-to-our-back-end-services">
+<summary>Can the application connect to our back-end services?</summary>
 
 Yes. HTTP and HTTPS requests work as usual and go through the browser, so your network, proxies and certificates apply. Services on a different domain from the page must allow cross-origin requests from it.
 
-### Our application opens TCP connections or connects directly to a database. Does that work?
+</details>
+
+<details class="cj-faq" id="our-application-opens-tcp-connections-or-connects-directly-to-a-database-does-that-work">
+<summary>Our application opens TCP connections or connects directly to a database. Does that work?</summary>
 
 Browsers do not give web pages raw TCP or UDP connections. CheerpJ provides them through Tailscale, a WireGuard-based VPN that can be self-hosted, or through a custom networking backend in enterprise deployments. See the [networking guide](/docs/guides/Networking). Many applications avoid the question entirely, because they already talk to their server over HTTP.
 
-### Do Java proxy settings apply?
+</details>
+
+<details class="cj-faq" id="do-java-proxy-settings-apply">
+<summary>Do Java proxy settings apply?</summary>
 
 HTTP and HTTPS traffic goes through the browser, so the browser's proxy settings apply, and Java's own proxy settings are not used.
 
-### Can the application run external commands?
+</details>
+
+<details class="cj-faq" id="can-the-application-run-external-commands">
+<summary>Can the application run external commands?</summary>
 
 A browser cannot start programs, so `Runtime.exec` and similar calls run nothing by default. You can intercept them in JavaScript and do something equivalent, such as opening a URL; see the [guide to intercepting external commands](/docs/guides/Intercept-external-commands).
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Performance
 
-### How is performance compared to a local JVM?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="how-is-performance-compared-to-a-local-jvm">
+<summary>How is performance compared to a local JVM?</summary>
 
 Once the code has warmed up, CheerpJ runs Java with a multi-tier JIT compiler in the browser, and interactive applications are responsive. Startup is generally slower than a local JVM, because the browser downloads the runtime and the application's JARs, and the code warms up each time the page loads.
 
-### How do I measure startup time fairly?
+</details>
+
+<details class="cj-faq" id="how-do-i-measure-startup-time-fairly">
+<summary>How do I measure startup time fairly?</summary>
 
 Measure the second launch, not the first, because the first one downloads everything. Close the browser's developer tools, which slow CheerpJ down considerably, and test without other extensions. Microsoft Edge's enhanced security mode can turn off the browser's JavaScript compiler on some sites, which also slows CheerpJ, so add your site as an exception if it is on.
 
-### How can I make startup faster?
+</details>
+
+<details class="cj-faq" id="how-can-i-make-startup-faster">
+<summary>How can I make startup faster?</summary>
 
 Serve JARs with caching headers, so they download only once, and with compression. CheerpJ fetches only the parts of the runtime it needs, and you can preload them. See the [startup time guide](/docs/guides/Startup-time-optimization).
 
-### Does CheerpJ keep its own cache of our JARs?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-keep-its-own-cache-of-our-jars">
+<summary>Does CheerpJ keep its own cache of our JARs?</summary>
 
 No. CheerpJ relies on the browser's normal HTTP cache. If JARs download again on every launch, the server is not sending caching headers such as `Cache-Control` or `ETag`. Applet attributes such as `cache_archive` belonged to the Java plug-in's own cache and are not needed.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Deployment & Hosting
 
-### What deployment models does CheerpJ offer?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="what-deployment-models-does-cheerpj-offer">
+<summary>What deployment models does CheerpJ offer?</summary>
 
 CheerpJ Core is a collection of static JavaScript and WebAssembly files and OpenJDK artefacts. You can load it from the CheerpJ CDN or serve it from any standard HTTP server or CDN. The extensions install in the browser, from the Chrome Web Store or the Edge Add-ons store, or from a self-hosted build. The [deployment page](https://cheerpj.com/deployment/) describes the options.
 
-### Does CheerpJ require server changes?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-require-server-changes">
+<summary>Does CheerpJ require server changes?</summary>
 
 No server-side software is needed. CheerpJ works with standard web servers and CDNs, such as nginx, Apache, IIS, WebLogic or Oracle HTTP Server. The server must support HTTP range requests, and should send caching headers and use compression for runtime files. Production deployments should use HTTPS.
 
-### Where can CheerpJ be hosted?
+</details>
+
+<details class="cj-faq" id="where-can-cheerpj-be-hosted">
+<summary>Where can CheerpJ be hosted?</summary>
 
 - The CheerpJ CDN
 - Your own servers or CDN
 - Air-gapped environments, with no connection to any external network
 
-### Can I self-host CheerpJ?
+</details>
+
+<details class="cj-faq" id="can-i-self-host-cheerpj">
+<summary>Can I self-host CheerpJ?</summary>
 
 Yes. Self-hosting is included with Enterprise licences, is available as an add-on with Small Business licences, and is allowed during technical evaluation. Serving the runtime from anywhere other than the CheerpJ CDN, including copying it into your own repository or package, counts as self-hosting. See the [server setup guide](/docs/guides/basic-server-setup).
 
-### Can I host CheerpJ on multiple servers?
+</details>
+
+<details class="cj-faq" id="can-i-host-cheerpj-on-multiple-servers">
+<summary>Can I host CheerpJ on multiple servers?</summary>
 
 Yes. Hosting on more than one server, including with load balancers and CDNs, is allowed within the scope of one licence.
 
-### Can I host CheerpJ in an air-gapped environment?
+</details>
+
+<details class="cj-faq" id="can-i-host-cheerpj-in-an-air-gapped-environment">
+<summary>Can I host CheerpJ in an air-gapped environment?</summary>
 
 Yes. Enterprise licences include a self-hosted build of CheerpJ Core and both extensions that contacts no external server, with offline licence tokens.
 
-### Does CheerpJ work with our single sign-on?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-work-with-our-single-sign-on">
+<summary>Does CheerpJ work with our single sign-on?</summary>
 
 Yes. The application runs in a normal browser page, so it sits behind your existing authentication, and its HTTP requests carry the browser's cookies and certificates.
 
-### How do we roll CheerpJ out to all our users?
+</details>
+
+<details class="cj-faq" id="how-do-we-roll-cheerpj-out-to-all-our-users">
+<summary>How do we roll CheerpJ out to all our users?</summary>
 
 For the extensions, push them with Group Policy or Chrome and Edge policies, together with offline licence tokens and settings. For CheerpJ Core, there is nothing to install: users open a URL. In both cases, remove the application's host from Edge's Internet Explorer mode site list.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Security & Privacy
 
-### How does CheerpJ handle security?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="how-does-cheerpj-handle-security">
+<summary>How does CheerpJ handle security?</summary>
 
 CheerpJ is a pure web application, and therefore inherits the web security model, a significant improvement in security compared to standard, locally installed Java. CheerpJ:
 
@@ -478,71 +878,141 @@ CheerpJ is a pure web application, and therefore inherits the web security model
 
 The [security page](https://cheerpj.com/security/) describes the model in detail.
 
-### Does CheerpJ send any data to Leaning Technologies?
+</details>
+
+<details class="cj-faq" id="does-cheerpj-send-any-data-to-leaning-technologies">
+<summary>Does CheerpJ send any data to Leaning Technologies?</summary>
 
 The self-hosted builds used in enterprise deployments contact no server at all: no licence server, no analytics and no metering. The CheerpJ runtime itself makes only the requests your application makes. The extensions installed from the browser stores check licences online; their privacy policies list what they collect.
 
-### Do we still need to patch Java on our desktops?
+</details>
+
+<details class="cj-faq" id="do-we-still-need-to-patch-java-on-our-desktops">
+<summary>Do we still need to patch Java on our desktops?</summary>
 
 Not for the applications that move to CheerpJ, because there is no Java installed on the desktop. CheerpJ updates are delivered as new web files on your server, or as extension updates.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Troubleshooting
 
-### The local Java, Internet Explorer mode or nothing at all opens instead of CheerpJ. Why?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="the-local-java-internet-explorer-mode-or-nothing-at-all-opens-instead-of-cheerpj-why">
+<summary>The local Java, Internet Explorer mode or nothing at all opens instead of CheerpJ. Why?</summary>
 
 CheerpJ cannot run inside Edge's Internet Explorer mode, so remove the site from the Enterprise Mode Site List. When testing, also uninstall or disable local Java and other Java-related extensions, which can take over the launch.
 
-### Oracle Forms fails with FRM-92060 or a socket error.
+</details>
+
+<details class="cj-faq" id="oracle-forms-fails-with-frm-92060-or-a-socket-error">
+<summary>Oracle Forms fails with FRM-92060 or a socket error.</summary>
 
 The Forms client is in socket mode. Set `connectMode` to `http` or `https`, with `serverURL` pointing at the listener servlet. If the listener servlet returns a 404, the problem is in the Forms server's mapping.
 
-### Oracle Forms starts but fails, although every request returns HTTP 200.
+</details>
+
+<details class="cj-faq" id="oracle-forms-starts-but-fails-although-every-request-returns-http-200">
+<summary>Oracle Forms starts but fails, although every request returns HTTP 200.</summary>
 
 Check whether a proxy, load balancer or web server compresses the responses of `/forms/frmservlet` or `/forms/lservlet`. The Forms client never asks for compression and cannot read it, so exclude `/forms/` from compression.
 
-### Forms will not start again after the user closed the tab.
+</details>
+
+<details class="cj-faq" id="forms-will-not-start-again-after-the-user-closed-the-tab">
+<summary>Forms will not start again after the user closed the tab.</summary>
 
 Closing the tab without exiting Forms can leave its session cookie in the browser, and the next launch fails. Exit Forms from its own menu, or clear the site's cookies. Your WebLogic configuration can also change how Forms uses the session cookie; [contact us](https://cheerpj.com/contact/) if this affects your users often.
 
-### Nothing appears when the application opens a window, report or print dialog.
+</details>
+
+<details class="cj-faq" id="nothing-appears-when-the-application-opens-a-window-report-or-print-dialog">
+<summary>Nothing appears when the application opens a window, report or print dialog.</summary>
 
 The browser has blocked a pop-up. Allow pop-ups for the site, or set the policy for your managed browsers.
 
-### Copy and paste between the application and other programs does not work.
+</details>
+
+<details class="cj-faq" id="copy-and-paste-between-the-application-and-other-programs-does-not-work">
+<summary>Copy and paste between the application and other programs does not work.</summary>
 
 Browsers share the system clipboard only with sites served over HTTPS. Serve the application over HTTPS, and turn on the system clipboard in the extension's settings or with the `clipboardMode` option.
 
-### Text in menus or fields is cut off.
+</details>
+
+<details class="cj-faq" id="text-in-menus-or-fields-is-cut-off">
+<summary>Text in menus or fields is cut off.</summary>
 
 Update to the latest version of the extension or runtime. If text is still cut off on displays with Windows scaling, turn on the setting that disables display scaling in the extension's advanced settings.
 
-### The licence key does not validate.
+</details>
+
+<details class="cj-faq" id="the-licence-key-does-not-validate">
+<summary>The licence key does not validate.</summary>
 
 Corporate web filters often block the extension's licence check. Ask your IT team to allow it, or use offline licence tokens, which enterprise deployments receive through Group Policy.
 
-### The page shows the CheerpJ "runtime ready" message, but the application does not start.
+</details>
+
+<details class="cj-faq" id="the-page-shows-the-cheerpj-runtime-ready-message-but-the-application-does-not-start">
+<summary>The page shows the CheerpJ "runtime ready" message, but the application does not start.</summary>
 
 Check that the page is served over HTTP or HTTPS, not opened as a `file://` URL, that the paths to your JARs are CheerpJ virtual paths, and that no JAR returns a 404. Some 404 errors for runtime files at startup are normal.
 
-### The console reports that the server does not support range requests.
+</details>
+
+<details class="cj-faq" id="the-console-reports-that-the-server-does-not-support-range-requests">
+<summary>The console reports that the server does not support range requests.</summary>
 
 CheerpJ loads JARs and runtime files in parts, with HTTP range requests. Use a web server that supports them; some simple development servers, such as Python's `http.server`, do not.
 
-### The application cannot find a class or a file.
+</details>
+
+<details class="cj-faq" id="the-application-cannot-find-a-class-or-a-file">
+<summary>The application cannot find a class or a file.</summary>
 
 Check that every JAR on the classpath is listed explicitly, without wildcards, with its CheerpJ virtual path, and that file paths point into the virtual file system rather than the user's disk.
 
-### The application loses its login or session cookies.
+</details>
+
+<details class="cj-faq" id="the-application-loses-its-login-or-session-cookies">
+<summary>The application loses its login or session cookies.</summary>
 
 The old Java plug-in installed a cookie handler that shared the browser's cookies with Java. Java itself does not, so `CookieHandler.getDefault()` returns null. A small adapter class that registers a cookie handler restores the plug-in's behaviour; [contact us](https://cheerpj.com/contact/) for an example.
 
-### How do I report a problem?
+</details>
+
+<details class="cj-faq" id="how-do-i-report-a-problem">
+<summary>How do I report a problem?</summary>
 
 Follow the [debugging guide](/docs/guides/cheerpj-debug): open the browser's developer tools before the page loads, reproduce the problem, and save the console log and a HAR file. Send them with the browser, the CheerpJ or extension version, how the application launches, the exact error text and the steps to reproduce. Customers can write to support; everyone can open an issue on [GitHub](https://github.com/leaningtech/cheerpj-meta/issues) or ask the community on Discord.
 
+</details>
+
+</div>
+
+</details>
+
+<details class="cj-faq-group">
+<summary>
+
 ## Licensing & Support
 
-### How is CheerpJ licenced?
+</summary>
+
+<div class="cj-faq-list">
+
+<details class="cj-faq" id="how-is-cheerpj-licenced">
+<summary>How is CheerpJ licenced?</summary>
 
 CheerpJ licences are based on who uses the application:
 
@@ -551,42 +1021,79 @@ CheerpJ licences are based on who uses the application:
 
 Each has a free Community tier. See [licensing and pricing](https://cheerpj.com/licensing/).
 
-### Is CheerpJ free?
+</details>
+
+<details class="cj-faq" id="is-cheerpj-free">
+<summary>Is CheerpJ free?</summary>
 
 CheerpJ is free for personal, educational and hobby use, for technical evaluation by organisations of any size, and, with a "Built with CheerpJ" credit, for one-person companies and non-commercial open-source projects. Business use needs a licence.
 
-### We run Oracle Forms or EBS for our staff. Which licence do we need?
+</details>
+
+<details class="cj-faq" id="we-run-oracle-forms-or-ebs-for-our-staff-which-licence-do-we-need">
+<summary>We run Oracle Forms or EBS for our staff. Which licence do we need?</summary>
 
 A Desktop licence. Count the machines whose browser opens Forms or EBS through CheerpJ. Small teams can buy online, and larger deployments use Enterprise (Desktop), which is priced on volume and includes the self-hosted build.
 
-### Does the licence depend on whether we use an extension or CheerpJ Core?
+</details>
+
+<details class="cj-faq" id="does-the-licence-depend-on-whether-we-use-an-extension-or-cheerpj-core">
+<summary>Does the licence depend on whether we use an extension or CheerpJ Core?</summary>
 
 No. A Desktop licence covers the Applet Runner, the JNLP Runner and CheerpJ Core on that desktop.
 
-### Who holds the licence when a partner or contractor deploys CheerpJ for us?
+</details>
+
+<details class="cj-faq" id="who-holds-the-licence-when-a-partner-or-contractor-deploys-cheerpj-for-us">
+<summary>Who holds the licence when a partner or contractor deploys CheerpJ for us?</summary>
 
 The organisation whose users run the application, or the vendor who ships it. A system integrator's licence does not cover its clients.
 
-### Are licences annual or perpetual?
+</details>
+
+<details class="cj-faq" id="are-licences-annual-or-perpetual">
+<summary>Are licences annual or perpetual?</summary>
 
 Desktop licences for small teams are monthly subscriptions. Enterprise licences run for one, two or three years, and perpetual licences are available.
 
-### Is usage metered?
+</details>
+
+<details class="cj-faq" id="is-usage-metered">
+<summary>Is usage metered?</summary>
 
 No. Enterprise deployments are self-hosted and contact no licence server, and desktop counts are self-reported.
 
-### Does the licence include software updates and support?
+</details>
+
+<details class="cj-faq" id="does-the-licence-include-software-updates-and-support">
+<summary>Does the licence include software updates and support?</summary>
 
 Yes. Every licence includes updates. Enterprise licences also receive out-of-cycle updates and fixes, and include basic support. Small teams' Desktop licences include email support.
 
-### Can I get a custom support agreement with SLAs?
+</details>
+
+<details class="cj-faq" id="can-i-get-a-custom-support-agreement-with-slas">
+<summary>Can I get a custom support agreement with SLAs?</summary>
 
 Yes. Enterprise customers can add a support agreement with 24-hour or 48-hour response times.
 
-### Where can I find documentation?
+</details>
+
+<details class="cj-faq" id="where-can-i-find-documentation">
+<summary>Where can I find documentation?</summary>
 
 This is CheerpJ's technical documentation: start with [getting started](/docs/getting-started). The extensions have their own documentation for the [Applet Runner](https://labs.leaningtech.com/docs/cheerpj-applet-runner) and the [JNLP Runner](https://labs.leaningtech.com/docs/cheerpj-jnlp-runner).
 
-### How quickly can I run a Proof of concept?
+</details>
+
+<details class="cj-faq" id="how-quickly-can-i-run-a-proof-of-concept">
+<summary>How quickly can I run a Proof of concept?</summary>
 
 Many customers complete a working proof of concept in one week. Testing with an extension is often a matter of hours. For Oracle estates, large rollouts or applications with native dependencies, [ask us for a compatibility review](https://cheerpj.com/contact/?from=compatibility-review).
+
+</details>
+
+</div>
+
+</details>
+
