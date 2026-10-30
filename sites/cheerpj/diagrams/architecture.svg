@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1340" viewBox="0 0 2000 1340">
+<style>
+@font-face{font-family:'Mono';src:url(../../../packages/astro-theme/public/fonts/monaspace/MonaspaceArgonVarVF.woff2) format('woff2');font-weight:200 800;}
+@font-face{font-family:'Sans';src:url(fonts/StackSansText-latin.woff2) format('woff2');font-weight:200 700;}
+text{font-kerning:none}
+.mono{font-family:'Mono';font-weight:600}
+.sans{font-family:'Sans';font-weight:700}
+</style>
+<rect width="2000" height="1340" rx="40" fill="#e5e5d6"/>
+<rect x="126" y="86" width="1594" height="1194" rx="40" fill="#1e1e1e"/>
+<rect x="110" y="70" width="1590" height="1190" rx="36" fill="#efe9e9"/>
+<path d="M110,170 V106 a36,36 0 0 1 36,-36 H1664 a36,36 0 0 1 36,36 V170 Z" fill="#ff7c00"/>
+<circle cx="160" cy="125" r="11" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="198" cy="125" r="11" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4.5"/>
+<circle cx="236" cy="125" r="11" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="4.5"/>
+<path d="M622,113 V147 M605,130 H639" stroke="#1e1e1e" stroke-width="5" stroke-linecap="round"/>
+<line x1="110" y1="170" x2="1700" y2="170" stroke="#1e1e1e" stroke-width="7"/>
+<path d="M313.5,174 V106 a10,10 0 0 1 10,-10 H556.5 a10,10 0 0 1 10,10 V174" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="340" y="146" font-size="30" fill="#1e1e1e">MyApp</text>
+<rect x="114" y="173.5" width="1582" height="68.5" fill="#e5e5d6"/>
+<rect x="300" y="187" width="1330" height="42" rx="21" fill="#efe9e9" stroke="#1e1e1e" stroke-width="3"/>
+<rect x="337" y="203" width="258" height="10" rx="5" fill="#a5a1a1"/>
+<path d="M170,208 H142 M152,198 L142,208 L152,218" fill="none" stroke="#1e1e1e" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M194,208 H222 M212,198 L222,208 L212,218" fill="none" stroke="#1e1e1e" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M263,198.5 a13,13 0 1 0 3.5,11" fill="none" stroke="#1e1e1e" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M253,189 L266,199.5 L251,203 Z" fill="#1e1e1e"/>
+<line x1="110" y1="242" x2="1700" y2="242" stroke="#1e1e1e" stroke-width="5"/>
+<rect x="114" y="74" width="1582" height="1182" rx="32" fill="none" stroke="#1e1e1e" stroke-width="8"/>
+<rect x="160.5" y="294" width="13" height="13" fill="#ff7c00" stroke="#1e1e1e" stroke-width="2"/>
+<text class="mono" x="187.5" y="307.5" font-size="20" letter-spacing="1" fill="#1e1e1e">HTML</text>
+<rect x="886.5" y="294" width="13" height="13" fill="#ff7c00" stroke="#1e1e1e" stroke-width="2"/>
+<text class="mono" x="913.5" y="307.5" font-size="20" letter-spacing="1" fill="#1e1e1e">WEBASSEMBLY</text>
+<path d="M230,342 H810 V1172 H160 V412 Z" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<path d="M230,342 V412 H160 Z" fill="#c9c9b8" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<rect x="270.5" y="382" width="299" height="10" rx="5" fill="#6e6e68"/>
+<rect x="270.5" y="408" width="219" height="10" rx="5" fill="#b3b3a8"/>
+<rect x="270.5" y="434" width="259" height="10" rx="5" fill="#b3b3a8"/>
+<g transform="translate(8,8)"><rect x="417.5" y="719.5" width="335.0" height="304.5" rx="5" fill="#1e1e1e"/></g>
+<rect x="417.5" y="719.5" width="335.0" height="304.5" rx="5" fill="#efe9e9"/>
+<path d="M417.5,766 V726.5 a7,7 0 0 1 7,-7 H745.5 a7,7 0 0 1 7,7 V766 Z" fill="#ff7c00"/>
+<line x1="417.5" y1="766" x2="752.5" y2="766" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="694" y="737.0" width="15" height="15" fill="#1e1e1e"/>
+<rect x="718" y="737.0" width="15" height="15" fill="#1e1e1e"/>
+<rect x="419.75" y="721.75" width="330.5" height="300.0" rx="4" fill="none" stroke="#1e1e1e" stroke-width="4.5"/>
+<text class="sans" x="445" y="995.5" font-size="31" fill="#1e1e1e">Window 2</text>
+<g transform="translate(8,8)"><rect x="238.5" y="569.5" width="353.5" height="294.5" rx="5" fill="#1e1e1e"/></g>
+<rect x="238.5" y="569.5" width="353.5" height="294.5" rx="5" fill="#efe9e9"/>
+<path d="M238.5,616 V576.5 a7,7 0 0 1 7,-7 H585 a7,7 0 0 1 7,7 V616 Z" fill="#ff7c00"/>
+<line x1="238.5" y1="616" x2="592" y2="616" stroke="#1e1e1e" stroke-width="4"/>
+<rect x="534" y="587.0" width="15" height="15" fill="#1e1e1e"/>
+<rect x="558" y="587.0" width="15" height="15" fill="#1e1e1e"/>
+<rect x="240.75" y="571.75" width="349.0" height="290.0" rx="4" fill="none" stroke="#1e1e1e" stroke-width="4.5"/>
+<text class="sans" x="265" y="835.5" font-size="31" fill="#1e1e1e">Window 1</text>
+<rect x="842" y="328" width="820" height="887" rx="24" fill="none" stroke="#1e1e1e" stroke-width="4"/>
+<text class="sans" x="868" y="415" font-size="84" letter-spacing="-3.7" fill="#1e1e1e">cheerpj</text>
+<g transform="translate(6,6)"><rect x="913" y="569.5" width="254" height="80.5" rx="40.25" fill="#1e1e1e"/></g>
+<rect x="915.5" y="572.0" width="249" height="75.5" rx="37.75" fill="#ff7c00" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="1040.5" y="619.7" font-size="29.5" fill="#1e1e1e" text-anchor="middle">Interpreter</text>
+<g transform="translate(6,6)"><rect x="913" y="749.5" width="254" height="80.5" rx="40.25" fill="#1e1e1e"/></g>
+<rect x="915.5" y="752.0" width="249" height="75.5" rx="37.75" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="1040" y="800" font-size="30.5" fill="#e5e5d6" text-anchor="middle">JIT code</text>
+<path d="M891,781 A107.8,107.8 0 0 1 876,632" fill="none" stroke="#1e1e1e" stroke-width="6" stroke-linecap="round"/>
+<path d="M892.4,611.2 L885.6,639.6 L866.4,624.4 Z" fill="#1e1e1e"/>
+<path d="M1189,619 A107.8,107.8 0 0 1 1204,768" fill="none" stroke="#1e1e1e" stroke-width="6" stroke-linecap="round"/>
+<path d="M1187.6,788.8 L1194.4,760.4 L1213.6,775.6 Z" fill="#1e1e1e"/>
+<g transform="translate(8,8)"><rect x="1297.5" y="497.5" width="334.5" height="304.5" rx="10" fill="#1e1e1e"/></g>
+<rect x="1297.5" y="497.5" width="334.5" height="304.5" rx="10" fill="#efe9e9"/>
+<path d="M1297.5,567.5 V509.5 a12,12 0 0 1 12,-12 H1620 a12,12 0 0 1 12,12 V567.5 Z" fill="#ff7c00"/>
+<line x1="1297.5" y1="567.5" x2="1632" y2="567.5" stroke="#1e1e1e" stroke-width="5"/>
+<rect x="1300.0" y="500.0" width="329.5" height="299.5" rx="9" fill="none" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="1328.0" y="547.3" font-size="33" fill="#1e1e1e">Networking</text>
+<text class="sans" x="1327" y="649.3" font-size="27.5" letter-spacing="0" fill="#1e1e1e">Anything else</text>
+<text class="sans" x="1327.5" y="739.3" font-size="27.5" letter-spacing="0" fill="#1e1e1e">Same origin HTTP</text>
+<line x1="1320" y1="685" x2="1610" y2="685" stroke="#b9b5b5" stroke-width="3"/>
+<g transform="translate(8,8)"><rect x="1147.5" y="887.5" width="294.5" height="304.5" rx="10" fill="#1e1e1e"/></g>
+<rect x="1147.5" y="887.5" width="294.5" height="304.5" rx="10" fill="#efe9e9"/>
+<path d="M1147.5,957.5 V899.5 a12,12 0 0 1 12,-12 H1430 a12,12 0 0 1 12,12 V957.5 Z" fill="#ff7c00"/>
+<line x1="1147.5" y1="957.5" x2="1442" y2="957.5" stroke="#1e1e1e" stroke-width="5"/>
+<rect x="1150.0" y="890.0" width="289.5" height="299.5" rx="9" fill="none" stroke="#1e1e1e" stroke-width="5"/>
+<text class="sans" x="1178.0" y="937.3" font-size="33" fill="#1e1e1e">File system</text>
+<text class="mono" x="1182" y="1025" font-size="28" letter-spacing="-1" fill="#1e1e1e">/app/</text>
+<text class="mono" x="1182" y="1089" font-size="28" letter-spacing="-1" fill="#1e1e1e">/files/</text>
+<text class="mono" x="1182" y="1153" font-size="28" letter-spacing="-1" fill="#1e1e1e">/str/</text>
+<rect x="1745" y="885" width="225" height="205" rx="22" fill="#ff7c00"/>
+<rect x="1737.5" y="877.5" width="225" height="205" rx="22" fill="#1e1e1e"/>
+<text class="sans" x="1850" y="942.3" font-size="33" fill="#efe9e9" text-anchor="middle">Local</text>
+<text class="sans" x="1850" y="980.3" font-size="33" fill="#efe9e9" text-anchor="middle">server</text>
+<rect x="1790" y="1006" width="121" height="47" rx="11" fill="#ff7c00" stroke="#e5e5d6" stroke-width="3"/>
+<text class="sans" x="1850.5" y="1036.5" font-size="21.5" fill="#1e1e1e" text-anchor="middle">JARs</text>
+<g>
+<circle cx="1862" cy="640" r="55" fill="#efe9e9" stroke="#1e1e1e" stroke-width="5"/>
+<circle cx="1862" cy="640" r="34" fill="#ff7c00" stroke="#1e1e1e" stroke-width="4"/>
+<g fill="none" stroke="#1e1e1e" stroke-width="3.5" stroke-linecap="round">
+<ellipse cx="1862" cy="640" rx="13.5" ry="34"/>
+<line x1="1828" y1="640" x2="1896" y2="640"/>
+<path d="M1834,621 Q1862,630 1890,621"/>
+<path d="M1834,659 Q1862,650 1890,659"/>
+</g>
+</g>
+<path d="M1778,640 H1656" fill="none" stroke="#1e1e1e" stroke-width="6" stroke-linejoin="round"/>
+<path d="M1634,640 L1658,628.5 L1658,651.5 Z" fill="#1e1e1e"/>
+<path d="M1802,640 L1778,628.5 L1778,651.5 Z" fill="#1e1e1e"/>
+<rect x="1654.5" y="623.0" width="122" height="34" rx="17" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1715.5" y="645.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">Tailscale</text>
+<path d="M1850,848 V732 H1656" fill="none" stroke="#1e1e1e" stroke-width="11" stroke-linejoin="round"/>
+<path d="M1634,732 L1658,720.5 L1658,743.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<path d="M1850,873 L1838.5,849 L1861.5,849 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<path d="M1850,848 V732 H1656" fill="none" stroke="#ff7c00" stroke-width="6" stroke-linejoin="round"/>
+<path d="M1634,732 L1658,720.5 L1658,743.5 Z" fill="#ff7c00"/>
+<path d="M1850,873 L1838.5,849 L1861.5,849 Z" fill="#ff7c00"/>
+<rect x="1705.0" y="715.0" width="80" height="34" rx="17" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1745.0" y="737.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">Fetch</text>
+<path d="M1468,1015 H1712" fill="none" stroke="#1e1e1e" stroke-width="11" stroke-linejoin="round"/>
+<path d="M1444,1015 L1468,1003.5 L1468,1026.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<path d="M1736,1015 L1712,1003.5 L1712,1026.5 Z" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="5" stroke-linejoin="round"/>
+<path d="M1468,1015 H1712" fill="none" stroke="#ff7c00" stroke-width="6" stroke-linejoin="round"/>
+<path d="M1444,1015 L1468,1003.5 L1468,1026.5 Z" fill="#ff7c00"/>
+<path d="M1736,1015 L1712,1003.5 L1712,1026.5 Z" fill="#ff7c00"/>
+<rect x="1549.5" y="998.0" width="81" height="34" rx="17" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1590.0" y="1020.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">Fetch</text>
+<path d="M900,1030 H797" fill="none" stroke="#1e1e1e" stroke-width="6" stroke-linejoin="round"/>
+<path d="M775,1030 L799,1018.5 L799,1041.5 Z" fill="#1e1e1e"/>
+<rect x="907.5" y="1013" width="144" height="34" rx="17" fill="#ff7c00" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="979.5" y="1035.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">AWT / Swing</text>
+<line x1="1452" y1="1080" x2="1468" y2="1080" stroke="#1e1e1e" stroke-width="6" stroke-dasharray="6 6"/>
+<line x1="1452" y1="1145" x2="1468" y2="1145" stroke="#1e1e1e" stroke-width="6" stroke-dasharray="6 6"/>
+<g stroke="#1e1e1e" stroke-width="3.5" stroke-linejoin="round">
+<path d="M1470,1064 v33 a19,7 0 0 0 38,0 v-33 Z" fill="#e5e5d6"/>
+<path d="M1470,1071 a19,7 0 0 0 38,0 v10 a19,7 0 0 1 -38,0 Z" fill="#ff7c00"/>
+<path d="M1470,1085 a19,7 0 0 0 38,0 v9 a19,7 0 0 1 -38,0 Z" fill="#ff7c00"/>
+<ellipse cx="1489" cy="1064" rx="19" ry="7" fill="#e5e5d6"/>
+</g>
+<g stroke="#1e1e1e" stroke-width="3.5" stroke-linejoin="round">
+<path d="M1473,1126 h21 l13,13 v30 h-34 Z" fill="#e5e5d6"/>
+<path d="M1494,1126 v13 h13" fill="none"/>
+</g>
+<g fill="#ff7c00">
+<rect x="1480" y="1144" width="21" height="4.5" rx="2.25"/>
+<rect x="1480" y="1152" width="21" height="4.5" rx="2.25"/>
+<rect x="1480" y="1160" width="14" height="4.5" rx="2.25"/>
+</g>
+<rect x="1525.5" y="1063.0" width="116" height="34" rx="17" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1583.5" y="1085.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">IndexedDB</text>
+<rect x="1525.5" y="1128.0" width="140" height="34" rx="17" fill="#e5e5d6" stroke="#1e1e1e" stroke-width="3"/>
+<text class="mono" x="1595.5" y="1150.5" font-size="18" letter-spacing="-1" fill="#1e1e1e" text-anchor="middle">String/data</text>
+</svg>
