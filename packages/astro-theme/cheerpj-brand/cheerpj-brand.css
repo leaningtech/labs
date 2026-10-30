@@ -171,6 +171,20 @@
 	.site-cheerpj .cj-sidebar {
 		background-color: var(--cj-dark-grey);
 	}
+	/*
+	 * Fades out at the bottom while there is more menu to scroll to, as when the footer has
+	 * pushed it up. Driven by its own scroll; without scroll timelines there is no fade.
+	 */
+	@supports (animation-timeline: scroll()) {
+		.site-cheerpj .cj-sidebar {
+			mask-image: linear-gradient(
+				#000 calc(100% - var(--cj-sidebar-fade)),
+				transparent
+			);
+			animation: cj-sidebar-fade linear both;
+			animation-timeline: scroll(self);
+		}
+	}
 
 	/* The footer, and the orange block and stepped strip above it */
 	.site-cheerpj .cj-banner {
@@ -320,3 +334,20 @@
 		}
 	}
 }
+
+/* Animated by .cj-sidebar; 0 when the menu doesn't scroll, as the animation is then inactive */
+@property --cj-sidebar-fade {
+	syntax: "<length>";
+	inherits: false;
+	initial-value: 0px;
+}
+@keyframes cj-sidebar-fade {
+	0%,
+	90% {
+		--cj-sidebar-fade: 48px;
+	}
+	100% {
+		--cj-sidebar-fade: 0px;
+	}
+}
+
