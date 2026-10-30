@@ -100,7 +100,7 @@ cheerpjInit({ logCanvasUpdates: true });
 preloadResources?: { [key: string]: number[] };
 ```
 
-By using `preloadResources`, you can provide CheerpJ with a list of runtime files which you know in advance will be required for the specific application. The list should be given as a JavaScript array of strings.
+By using `preloadResources`, you can provide CheerpJ with a list of runtime files which you know in advance will be required for the specific application. The list is an object that maps each runtime file to the byte ranges of it to load. Generate it with [cjGetRuntimeResources] rather than writing it by hand.
 
 Example:
 
@@ -352,7 +352,7 @@ cheerpjInit({ tailscaleAuthKey: "AuthKeyStringGoesHere" });
 tailscaleLoginUrlCb?: (url: string) => void;
 ```
 
-This option is used to login into a Tailscale network and it is mutually exclusive with [`tailscaleAuthKey`](#tailscaleauthkey). It expects the base URL of a control server that will continue and finish the login process. This callback is executed when it is time to prompt the user to login to Tailscale via the UI.
+This option is used to login into a Tailscale network and it is mutually exclusive with [`tailscaleAuthKey`](#tailscaleauthkey). It is a callback that CheerpJ calls with a login URL when it is time to prompt the user to log in to Tailscale. Show the URL to the user, for example as a link or in a new window, to continue and finish the login process.
 
 For more information visit the [Tailscale documentation](https://tailscale.com/kb/1080/cli/#login).
 
