@@ -29,6 +29,9 @@ async function cheerpjInit(options?: {
 	execCallback?: (cmdPath: string, argsArray: string[]) => void;
 	enableDebug?: boolean;
 	hostName?: string;
+	disableScaling?: boolean;
+	env?: string[];
+	wasmGC?: boolean;
 }): Promise<void>;
 ```
 
@@ -392,12 +395,11 @@ cheerpjInit({ licenseKey: "YourLicenseKey" });
 
 ### `execCallback`
 
+_Supported since CheerpJ version `3.1`_
+
 ```ts
 execCallback?: (cmdPath: string, argsArray: string [])  => void;
 ```
-
-> [!note] Important
-> The `execCallback` option is supported in CheerpJ 3.1 and later versions.
 
 This option allows you to intercept and handle external system commands or program executions that initiated from a Java application. Such commands are typically executed using methods like `Runtime.getRuntime().exec(command)` or `new ProcessBuilder(command)` in Java.
 
@@ -420,12 +422,11 @@ Learn more about the `execCallback` option in our [intercept external commands g
 
 ### `enableDebug`
 
+_Supported since CheerpJ version `3.1`_
+
 ```ts
 enableDebug?: boolean;
 ```
-
-> [!note] Important
-> The `enableDebug` option is supported in CheerpJ 3.1 and later versions.
 
 This option enables advanced debug logging, which is helpful for troubleshooting issues with CheerpJ. Be aware it can significantly affect performance. Disable it when not needed.
 
@@ -439,12 +440,11 @@ Learn more about how to debug CheerpJ in our [Debugging CheerpJ guide](/docs/gui
 
 ### `hostName`
 
+_Supported since CheerpJ version `4.3`_
+
 ```ts
 hostName?: string;
 ```
-
-> [!note] Important
-> The `hostName` option is supported in CheerpJ 4.3 and later versions.
 
 This option will set the hostname of the JVM to the string passed as an argument. This is the value returned when calling the standard Java functions `getHostName()` or `getHostAddress()` from the `java.net.InetAddress` package. These functions are used, for instance, by Oracle's WebUtil component.
 
@@ -454,6 +454,61 @@ Example of usage:
 
 ```js
 cheerpjInit({ hostName: "10.10.90.200" });
+```
+
+### `disableScaling`
+
+_Supported since CheerpJ version `4.3`_
+
+```ts
+disableScaling?: boolean;
+```
+
+This option turns off CheerpJ display scaling on high-DPI screens. This often resolves text rendering issues where text appears truncated.
+
+Example of usage:
+
+```js
+cheerpjInit({ disableScaling: true });
+```
+
+### `env`
+
+_Supported since CheerpJ version `5.0`_
+
+```ts
+env?: string[];
+```
+
+Sets environment variables for the Java runtime. Use this option when your application or a library depends on environment values via `System.getenv()`.
+
+The option takes an array of strings in the form `"key=value"`. Variables are set once at initialization and cannot be changed afterward.
+
+Example usage:
+
+```js
+cheerpjInit({ env: ["env1=value1", "env2=value2"] });
+```
+
+To pass JVM system properties instead, see [`javaProperties`](#javaproperties).
+
+### `wasmGC`
+
+_Supported since CheerpJ version `5.0`_
+
+```ts
+wasmGC?: boolean;
+```
+
+This option enables the experimental WasmGC engine in the CheerpJ Java runtime.
+
+> [!note] Important
+> The `wasmGC` option requires a current browser: Chrome and Edge 137 or later, Firefox 153 or later, and Safari 27 or later (iOS and iPadOS 27 on mobile).
+
+Example of usage:
+
+```js
+cheerpjInit({ wasmGC: true });
 ```
 
 [cjGetRuntimeResources]: /docs/reference/cjGetRuntimeResources
