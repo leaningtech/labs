@@ -9,6 +9,12 @@
 /docs/blog       https://labs.leaningtech.com/blog        301
 /docs/community  https://labs.leaningtech.com/showcase    301
 
+# The CheerpJ 2 docs are gone; anything under cheerpj2/ lands on the migration guide
+/cheerpj2       /migrating-from-cheerpj2       301
+/cheerpj2/*     /migrating-from-cheerpj2       301
+/docs/cheerpj2    /docs/migrating-from-cheerpj2  301
+/docs/cheerpj2/*  /docs/migrating-from-cheerpj2  301
+
 # The Japanese and Chinese docs are gone; send their old URLs to the English page
 /ja/community                                           https://labs.leaningtech.com/showcase       301
 /ja/guides/File-System-support                          /guides/filesystem                          301
