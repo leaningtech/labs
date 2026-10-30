@@ -24,7 +24,7 @@ You can use CheerpJ for free if you fall into any of the following categories:
 |                                                _You are a team using CheerpJ in a FOSS project_                                                 |           Give appropriate credits            |
 | _You are a company and are evaluating CheerpJ to be used for a future commercial project (see [technical evaluations](#technical-evaluations))_ | [Contact sales](https://cheerpj.com/contact/) |
 
-The **CheerpJ Community License** allows unlimited, unmetered use of CheerpJ from the `cjrtnc.leaningtech.com` domain, such as its usage via npm package manager. For self-hosted options, see the [CheerpJ Commercial License](#CheerpJ-Commercial-License).
+The **CheerpJ Community License** allows unlimited, unmetered use of CheerpJ from the `cjrtnc.leaningtech.com` domain, such as its usage via npm package manager. For self-hosted options, see the [CheerpJ Commercial License](#cheerpj-commercial-license).
 
 ## CheerpJ Commercial License
 
