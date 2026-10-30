@@ -1,9 +1,9 @@
 ---
 title: Packing the extension in Edge
-description: Tutorial for packing the CheerpJ Applet Runner Extension in Edge for deployment
+description: Pack the extension into a CRX file in Edge, to host and deploy it yourself
 ---
 
-This tutorial will walk you through the steps to pack the CheerpJ Applet Runner extension in Edge, making it ready for distribution and deployment, particularly useful in enterprise environments like deploying through Group Policy Objects (GPOs).
+This page shows how to pack the extension's files into a CRX file in Edge, to [host it yourself](/docs/cheerpj-applet-runner/guides/private-hosting-for-enterprises) and deploy it through Group Policy.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ This tutorial will walk you through the steps to pack the CheerpJ Applet Runner 
 
 ## Step 1: Open Edge Extensions Settings
 
-Let us access the Edge extensions settings by clicking the three dots in the upper-right corner of the Edge browser, going to `Extensions` and then selecting `Manage extensions`.
+Open the Edge extensions settings by clicking the three dots in the upper-right corner of the Edge browser, going to `Extensions` and then selecting `Manage extensions`.
 
 <div>
 	![](/assets/manual-common-screenshots/edge_nav_to_manage_extensions.png)
@@ -25,7 +25,7 @@ Alternatively, you can type `edge://extensions/` in the address bar to go direct
 
 ## Step 2: Enable Developer Mode
 
-Let us now toggle the `Developer mode` switch to enable it at the bottom-left of the Extensions page. This allows you to pack extensions.
+Toggle the `Developer mode` switch to enable it at the bottom-left of the Extensions page. This allows you to pack extensions.
 
 <div>![](/assets/manual-common-screenshots/edge-pack.png)</div>
 
@@ -41,7 +41,10 @@ Click on the "Pack extension" button that appears after enabling Developer mode.
 	![](/assets/edge-applet-pack-screenshots/edge-pack-applet-select.png)
 </div>
 
-Edge will create two files in the parent directory of your extension: - A `.crx` file (the packed extension) - A `.pem` file (the private key, if you didn't provide one)
+Edge creates two files in the parent directory of your extension:
+
+- a `.crx` file, the packed extension;
+- a `.pem` file, the private key. Keep it: you need it to pack an update with the same extension ID.
 
 A dialog will appear confirming the location of these files:
 
@@ -67,4 +70,4 @@ Now you should see the extension has been successfully installed:
 	![](/assets/edge-applet-pack-screenshots/edge-pack-applet-success.png)
 </div>
 
-By following these steps, you will have successfully packed your CheerpJ Applet Runner extension for Edge, ready for deployment or testing.
+The CRX file is ready to host and deploy.

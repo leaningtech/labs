@@ -1,43 +1,42 @@
 ---
 title: Using the extension for the first time
-description: Tutorial for first-time users
+description: Run your first Java Web Start application with the CheerpJ browser extension for Java Web Start
 ---
 
-This tutorial will guide you on the basic functionalities of the JNLP Runner extension. We assume you have installed the extension on [Chrome](/docs/cheerpj-jnlp-runner/getting-started/install-chrome) or [Edge](/docs/cheerpj-jnlp-runner/getting-started/install-edge).
+This page shows how to run a Java Web Start application with the extension. It assumes you have installed the extension in [Chrome](/docs/cheerpj-jnlp-runner/getting-started/install-chrome) or [Edge](/docs/cheerpj-jnlp-runner/getting-started/install-edge).
 
-## Running a JNLP file
+## Run a .jnlp file
 
-To start an application, you need to run a JNLP file. You can do this by clicking on a link or opening a file with a JNLP extension or by dragging and dropping a JNLP file into the extension popup.
+A Java Web Start application starts from its `.jnlp` file. You can:
 
-### Before using the extension
+- click a link to a `.jnlp` file, as you always have;
+- open a `.jnlp` file from your computer;
+- drag a `.jnlp` file onto the extension's popup.
 
-The first time you launch a JNLP file to run a Java application, the JNLP Runner will automatically detect it and it will start running. The first screen you will see is the license agreement. Please read this carefully and if you agree with the terms and conditions, click on _**Accept license**_.
+The extension stops the download and runs the application in a new tab instead.
 
-You can read the full license agreement [here](https://cheerpj.com/cheerpj-jnlp-runner-end-user-licence-agreement/).
+### Accept the licence agreement
+
+The first time you run an application, the extension shows its licence agreement. Read it and, if you agree, click _**Accept license**_. You can also read the [full end-user licence agreement](https://cheerpj.com/cheerpj-jnlp-runner-end-user-licence-agreement/).
 
 <div class="mx-24">![](/assets/jnlp-screenshots/license_agreement.png)</div>
 
-### The side panel
+## The side panel
 
-When a JNLP file is launched in the browser, the application starts automatically and a side panel appears on the left side of the screen. Hover over the panel to expand it.
+The application starts in its tab, with a side panel on the left. Hover over the panel to expand it.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/jnlp_running.png)</div>
 <div class="mx-24">![](/assets/jnlp-screenshots/jnlp_sidepanel.png)</div>
 
-The side panel provides quick access to the following:
+The side panel has:
 
-#### Download .jnlp
+- **Download .jnlp**, to save the running application's `.jnlp` file to your computer.
+- **Settings**, the extension's advanced settings: debug mode, display scaling, keyboard shortcuts and a [Tailscale](https://tailscale.com/) network for applications that open TCP or UDP sockets.
+- **Upload file**, to give the application a file from your computer. It arrives in `/files/uploads/`. See [upload and download files](/docs/cheerpj-jnlp-runner/guides/file-handling).
+- **Manage license**, to [activate a licence](/docs/cheerpj-jnlp-runner/getting-started/activate-license).
 
-Downloads the currently running JNLP file directly to your machine.
+Once a licence is activated, the side panel is hidden. To show it again, turn on **Show Sidebar** in the advanced settings.
 
-#### Settings
+## If the application doesn't start
 
-Opens the extension settings, where you can configure advanced options such as enabling a Tailscale proxy for socket connections and other runtime options.
-
-#### Upload file
-
-Uploads a local file to the CheerpJ virtual filesystem, making it accessible to the running Java application under `/files/uploads/`. This is useful for applications that need to read local files. For more information, see the [virtual filesystem docs](https://cheerpj.com/docs/explanation/File-System-support).
-
-#### Manage license
-
-Click this link to activate your license key or token. For more information, see the [Activate your license](/docs/cheerpj-jnlp-runner/getting-started/activate-license) tutorial.
+The extension offers to send us a report. A report includes the `.jnlp` file, which can name your organisation's internal servers, so it is only sent if you choose to. You can also use **Report a Bug** in the extension's popup, which opens a public issue on GitHub. For an internal or private application, write to jnlprunner@leaningtech.com instead. See [how to debug the extension](/docs/cheerpj-jnlp-runner/guides/debug-builds).

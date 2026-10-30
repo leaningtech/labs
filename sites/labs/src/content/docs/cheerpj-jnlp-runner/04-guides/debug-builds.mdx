@@ -3,27 +3,27 @@ title: How to debug the extension
 description: How to enable debug mode and collect logs for troubleshooting
 ---
 
-If you encounter issues while running a Java Web Start application with CheerpJ JNLP Runner, enabling **Debug Mode** can provide detailed logs that help our support team identify the problem.
+If a Java Web Start application doesn't run as it should, **debug mode** makes the extension write detailed logs, which help us find the problem.
 
-## Verifying the Extension is Working
+## Check the extension is working
 
-Before enabling debug mode, let's verify if the extension is active and properly handling JNLP files:
+Before turning on debug mode, check that the extension is handling `.jnlp` files:
 
-- **Is the extension pinned?** Ensure the CheerpJ JNLP Runner is pinned to your browser's toolbar so you can easily access it.
+- **Is the extension pinned?** Make sure the extension is pinned to your browser's toolbar.
 - **Is the extension enabled?** Check your browser's extensions page (`chrome://extensions` or `edge://extensions`) to confirm it is toggled on.
-- **Are you using the correct extension?** Make sure you have the CheerpJ JNLP Runner installed (not the Applet Runner).
+- **Are you using the correct extension?** Make sure you have the extension for Java Web Start, not the one for applets.
 - **Does the application launch?** When you click a `.jnlp` link, the application should start automatically, with the extension side panel on the left side of the screen.
 - **Did the JNLP file download instead?** If your browser downloads the `.jnlp` file instead of launching the application, you can use **drag and drop** to test it—simply drag the downloaded file into the extension popup.
 - **Are there any Network errors?** Open the browser's developer tools and check the Network tab for failing requests.
-- **Are you seeing startup or socket errors?** If the application fails during startup, or reports errors when opening network (socket) connections, please reach out to us on our [Discord server](https://discord.leaningtech.com/) for further assistance.
+- **Are you seeing socket errors?** If the application reports errors when it opens network (socket) connections, it needs a [Tailscale](https://tailscale.com/) network: set it in the extension's advanced settings, or ask us on [Discord](https://discord.leaningtech.com/).
 
-If everything above is functioning correctly but you are still experiencing issues, please reach out to us on our [Discord server](https://discord.leaningtech.com/) or by opening an issue on our [GitHub repository](https://github.com/leaningtech/cheerpj-jnlp-runner/issues) so we can assist you. To help us troubleshoot, please enable debug mode as described below and provide the resulting logs.
+If all of that is fine and the problem remains, ask us on [Discord](https://discord.leaningtech.com/) or [open an issue](https://github.com/leaningtech/cheerpj-jnlp-runner/issues/new/choose) on GitHub, with the logs from debug mode described below.
 
-## Enabling Debug Mode
+## Turn on debug mode
 
-To enable the debug build of CheerpJ:
+To turn on debug mode:
 
-1. Click the **CheerpJ JNLP Runner icon** in your browser's toolbar, then click **Advanced Settings** in the popup.
+1. Click the extension's icon in the toolbar, then **Advanced settings**.
 
    <div class="mx-24">
    	![Extension popup showing the Advanced Settings
@@ -37,14 +37,14 @@ To enable the debug build of CheerpJ:
    	position](/assets/jnlp-screenshots/debug_mode_toggle.png)
    </div>
 
-3. The extension will now use the debug version of the runtime, which includes extensive logging but runs more slowly.
+3. The extension now uses the debug version of the CheerpJ runtime, which logs much more and runs more slowly.
 
 > [!important] Reload Required
 > You must enable the debugging mode **before** loading your application, or **reload the page** after enabling it. Otherwise, the setting will not take effect.
 
-## Collecting Debug Information
+## Collect the logs
 
-To help us troubleshoot, we typically need two files: the **Console log** and a **Network HAR file**.
+We usually need two files: the **console log** and a **network HAR file**.
 
 ### Step 1: Open Browser DevTools
 
@@ -71,4 +71,4 @@ A HAR (HTTP Archive) file logs your browser's network interactions and helps us 
 
 ---
 
-Once you have collected these files, please attach them to your support request or bug report on our [Discord server](https://discord.leaningtech.com/) or [GitHub repository](https://github.com/leaningtech/cheerpj-jnlp-runner/issues).
+Attach both files to your bug report on [GitHub](https://github.com/leaningtech/cheerpj-jnlp-runner/issues/new/choose), or send them on [Discord](https://discord.leaningtech.com/). Issues on GitHub are public, and logs and HAR files can contain internal addresses, cookies and other private data: for an internal or private application, send them to jnlprunner@leaningtech.com instead.
