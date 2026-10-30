@@ -2,7 +2,6 @@
 import { SITE_TITLE } from "../consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
-import { getLocalisedPaths } from "../lib/i18n";
 
 export interface Props {
 	title: string;
@@ -77,8 +76,6 @@ let plausibleDomains = [new URL(Astro.url).hostname];
 if (isBlogPost && !plausibleDomains.includes("labs.leaningtech.com"))
 	plausibleDomains.push("labs.leaningtech.com");
 
-const localised = getLocalisedPaths(Astro.url.pathname, Astro.currentLocale);
-
 const gtmScript =
 	gtmId &&
 	`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`;
@@ -95,14 +92,6 @@ const gtmScript =
 	href="https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet"
 />
-{
-	Astro.currentLocale == "ja" && (
-		<link
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
-			rel="stylesheet"
-		/>
-	)
-}
 
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type={faviconType} href={favicon} />
@@ -132,13 +121,6 @@ const gtmScript =
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
-
-<!-- Localised versions of this page -->
-{
-	Object.entries(localised).map(([lang, url]) => (
-		<link rel="alternate" hreflang={lang} href={url} />
-	))
-}
 
 <!-- Plausible analytics -->
 <script

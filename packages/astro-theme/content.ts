@@ -12,11 +12,9 @@ const blogCategories = z.array(
 		"Leaning Technologies",
 	])
 );
-const languages = z.enum(["en", "ja"]);
 
 export type ProductTag = z.infer<typeof productTags>[0];
 export type BlogCategory = z.infer<typeof blogCategories>[0];
-export type LanguageContent = z.infer<typeof languages>;
 
 export function defineLabsCollections() {
 	return {
@@ -90,7 +88,6 @@ export function defineCommonCollections() {
 				shortTitle: z.string().optional(), // Used for nav only
 				fullWidthLayout: z.boolean().default(false),
 				draft: z.boolean().default(false),
-				language: languages.default("en"),
 			}),
 		}),
 	};

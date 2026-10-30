@@ -4,7 +4,6 @@
 
 	export let productId: string | undefined;
 	export let placeholder: string;
-	export let locale: string;
 	export let baseUrl: string;
 
 	let pagefind: Pagefind;
@@ -32,7 +31,7 @@
 		const query = (event.target as HTMLInputElement).value;
 
 		const response = await pagefind.debouncedSearch(query, {
-			filters: { productId, language: locale },
+			filters: { productId },
 			baseUrl,
 		});
 		if (response === null) {

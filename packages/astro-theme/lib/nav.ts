@@ -1,5 +1,4 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import { locales } from "./i18n";
 import { productFromUrl } from "./products";
 
 export interface NavFile {
@@ -20,7 +19,6 @@ export interface NavDirectory {
 	dirname: string; // the last component of the path
 	title: string;
 	entries: NavEntry[];
-	isLanguageDirectory: boolean;
 }
 
 export type NavEntry = NavDirectory | NavFile;
@@ -130,7 +128,6 @@ export async function getRootNav(): Promise<NavEntry[]> {
 			dirname,
 			entries: myEntries,
 			title: idToTitle(path),
-			isLanguageDirectory: locales.includes(path),
 		};
 		parentEntries.push(me);
 		dirPathToEntries[path] = myEntries;
@@ -328,36 +325,6 @@ export function findEntry(nav: NavEntry[], id: string): NavEntry | undefined {
 	return path[path.length - 1];
 }
 
-export function getLocalisedProductNav(
-	nav: NavEntry[],
-	product: Product,
-	locale: string | undefined
-) {
-	nav = findNavDirectory(nav, [product])?.entries ?? nav; // for labs (multiple products on one site)
-
-	// Prioritise the current locale's language directory, if it exists.
-	// For instance if the current locale is "ja", then /ja/page will replace /page if both exist.
-	if (locale) {
-		const localeDir = findNavDirectory(nav, [locale]);
-		if (localeDir) {
-			for (const entry of flattenNav(localeDir.entries)) {
-				const idWithoutLocale = entry.id.replace(`${locale}/`, "");
-				const existingEntry = findEntry(nav, idWithoutLocale);
-
-				if (existingEntry) {
-					existingEntry.href = entry.href;
-					existingEntry.title = entry.title;
-				} else {
-					console.warn(`${entry.id} has no unlocalised equivalent`);
-				}
-			}
-		}
-	}
-
-	// Remove all language directories
-	nav = nav.filter(
-		(entry) => entry.type !== "directory" || !entry.isLanguageDirectory
-	);
-
-	return nav;
+export function getProductNav(nav: NavEntry[], product: Product) {
+	return findNavDirectory(nav, [product])?.entries ?? nav; // for labs (multiple products on one site)
 }
