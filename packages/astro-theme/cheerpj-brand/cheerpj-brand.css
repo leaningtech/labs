@@ -233,8 +233,8 @@
 
 	/*
 	 * The homepage's patterned quarter circle, top right of every page. The track spans the
-	 * article column, so on wide screens the splotch sticks under the nav until the article
-	 * ends, and never covers the footer. On narrow ones it scrolls away, clear of the text.
+	 * article column, so the splotch sticks under the nav until the article ends, and never
+	 * covers the footer. Wide screens only: below lg the sticky menu bar would cover most of it.
 	 */
 	.site-cheerpj .cj-splotch-track {
 		position: absolute;
@@ -243,6 +243,7 @@
 		pointer-events: none;
 	}
 	.site-cheerpj .cj-splotch {
+		display: none;
 		top: 65px;
 		width: 96px;
 		height: 96px;
@@ -253,6 +254,7 @@
 	}
 	@media (min-width: 1024px) {
 		.site-cheerpj .cj-splotch {
+			display: block;
 			position: sticky;
 		}
 	}
