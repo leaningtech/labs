@@ -2,71 +2,82 @@
 title: Licensing
 ---
 
-CheerpJ Core is distributed for _free_ with the **CheerpJ Community License**, which makes it free to use for _personal projects_, _FOSS projects_, and for _technical evaluations_.
+CheerpJ is free for personal, educational and hobby use, and for technical evaluation by organisations of any size. One-person companies and non-commercial open-source projects can also use it for free, with a "Built with CheerpJ" credit. Business use needs a licence.
 
-**Commercial Licenses** are available for any use that falls outside of the scope of the **Community License**, including any _business use_ (with exception of one-person companies), _redistribution_ and _OEM use_.
+This page summarises the licences with examples. The full terms, prices and a licence finder are on [cheerpj.com/licensing][licensing].
 
-## CheerpJ Community License
+## Two kinds of licence
 
-You can use CheerpJ for free if you fall into any of the following categories:
+A CheerpJ licence depends on who uses the application, not on how CheerpJ is integrated.
 
-- Individuals, including one-person companies. For example:
-  - Any personal projects, whether they generate income or not
-  - Public-facing applications (such as games, educational applications, etc.)
-  - Commercial applications developed by one-person companies
-- Free and Open-Source Software (FOSS) projects
-- [Technical evaluations](#technical-evaluations)
+- **Desktop licences** cover Java applications your organisation uses, such as Oracle Forms, Oracle E-Business Suite, applets, Java Web Start applications and your own Java clients. They are priced per desktop: each machine whose browser runs CheerpJ.
+- **Application licences** cover software you build with CheerpJ for customers or the public, including commercial products and SaaS. They are priced per developer or per application.
 
-|                                                                    Use case                                                                     |                 Action point                  |
-| :---------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: |
-|                         _You are an individual using CheerpJ for a personal project (including one generating revenue)_                         |           Give appropriate credits            |
-|                                         _You are an individual developer building a commercial project_                                         |           Give appropriate credits            |
-|                                                _You are a team using CheerpJ in a FOSS project_                                                 |           Give appropriate credits            |
-| _You are a company and are evaluating CheerpJ to be used for a future commercial project (see [technical evaluations](#technical-evaluations))_ | [Contact sales](https://cheerpj.com/contact/) |
+A Desktop licence covers CheerpJ Core, the Applet Runner and the JNLP Runner on that desktop.
 
-The **CheerpJ Community License** allows unlimited, unmetered use of CheerpJ from the `cjrtnc.leaningtech.com` domain, such as its usage via npm package manager. For self-hosted options, see the [CheerpJ Commercial License](#cheerpj-commercial-license).
+## Free use
 
-## CheerpJ Commercial License
+The **Community** licence is free, and covers:
 
-The **CheerpJ Commercial License** allows CheerpJ to be used in any scenario that falls outside the scope of the [**Community License**](#cheerpj-community-license).
+- Personal, educational and hobby use
+- Technical evaluation, for organisations of any size
+- Software published by an individual or a one-person company, including paid software, with a "Built with CheerpJ" credit
+- Non-commercial free and open-source (FOSS) projects, loading CheerpJ from the CheerpJ CDN, with a "Built with CheerpJ" credit
 
-Full details on the commercial licensing options for CheerpJ are available [here](https://cheerpj.com/licensing/).
+Community use loads CheerpJ from the CheerpJ CDN (`cjrtnc.leaningtech.com`), with no metering. Applications running without a licence key show a non-commercial licence message on the CheerpJ display.
 
-CheerpJ can be used for free for technical evaluations before purchasing a commercial license (see [Technical Evaluations](#technical-evaluations)).
+## Examples
 
-The **CheerpJ Commercial License** allows its usage in a commercial setting in addition of:
+| Use case                                                                                      | Licence                                                              |
+| :-------------------------------------------------------------------------------------------- | :------------------------------------------------------------------- |
+| You build a Java game or educational applet and publish it on your own website                | Community, free                                                      |
+| You are a one-person company selling a Java application that runs in the browser              | Community, free, with a "Built with CheerpJ" credit                  |
+| You maintain a non-commercial open-source project and put a web demo of it online             | Community, free, with a "Built with CheerpJ" credit                  |
+| Your company tests whether its Java application runs with CheerpJ before rolling it out       | Community, free, as a [technical evaluation](#technical-evaluations) |
+| Your staff open Oracle Forms or EBS in the browser through CheerpJ                            | [Desktop][licensing], per desktop                                    |
+| Your company runs an internal Swing application for its employees with CheerpJ Core           | [Desktop][licensing], per desktop                                    |
+| Your company uses the Applet Runner or JNLP Runner to reach an internal or vendor application | [Desktop][licensing], per desktop                                    |
+| A startup offers a web edition of its Java product to customers                               | [Application][licensing]: Small Business or Enterprise               |
+| An open-source project backed by a company that sells support, hosting or a paid edition      | [Application][licensing]: Small Business or Enterprise               |
+| A software vendor ships CheerpJ inside a product that its customers host themselves           | [Application][licensing]: Enterprise, with an OEM licence            |
 
-- Self-hosting of the CheerpJ Core component
-- Redistribution and OEM uses
-- Priority Support and SLA
-
-Pricing options are available for _small businesses_, _enterprises_, _public sector_, _academic institutions_, and _non-profit organizations_.
-
-|                                                             Use case                                                             |                          Action point                          |
-| :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------: |
-| _You are a public sector, non-profit, or academic organisation and want to use CheerpJ for an internal or public-facing project_ | [Contact us for a special quote](https://cheerpj.com/contact/) |
-|               _You are a company and you want to use CheerpJ to build customer-facing application (paid or free)_                |         [Contact sales](https://cheerpj.com/contact/)          |
-|                            _You are a company and you want to use CheerpJ on an internal application_                            |         [Contact sales](https://cheerpj.com/contact/)          |
-
-If you are not sure whether you require a license, or would like to discuss your options, please [contact us](https://cheerpj.com/contact/). Full licensing details are available [here](https://cheerpj.com/licensing/).
+If your case is not listed, the [licence finder][licensing] on cheerpj.com asks a few questions and suggests one, or [contact us][contact].
 
 ## Technical evaluations
 
-If an application is not seen by internal or external users, it is considered a technical evaluation.
+Technical evaluation is free for organisations of any size. An application is in technical evaluation while internal or external users do not use it.
 
 **This includes:**
 
 - An application that is not yet in production
 - An application that is not yet available to the public
+- Testing compatibility with CheerpJ for a potential project
 
 **This does not include:**
 
-- An internal application that is used by employees
+- An internal application that employees use
 
 ## Self-hosting
 
-Self hosting CheerpJ is often requested by enterprises for internal use of CheerpJ Core. Self hosting involves hosting the CheerpJ runtime environment within the company servers. If you wish to self-host CheerpJ, you will need a [**Commercial License**](#cheerpj-commercial-license). Please [contact us](https://cheerpj.com/contact/) for more information.
+Serving the CheerpJ runtime from anywhere other than the CheerpJ CDN counts as self-hosting, including copying it into your own repository, package or CDN. Self-hosting is:
 
-## System Integrators (SIs), Resellers and Distributors, OEMs
+- Allowed during technical evaluation
+- Available as an add-on with Small Business licences
+- Included with Enterprise licences, which also provide a self-hosted build that contacts no external server and works on air-gapped networks
 
-If you are a company who wants to offer CheerpJ integration as part of your software development services, you will need a special license and an agreement in place. Please [contact us directly](https://cheerpj.com/contact/) to discuss OEM or reseller licences.
+See [server setup](/docs/guides/basic-server-setup) for how to serve CheerpJ.
+
+## Licence keys
+
+A licence comes with a key, passed to CheerpJ with the [`licenseKey`](/docs/reference/cheerpjInit#licensekey) option of `cheerpjInit`. A valid key removes the non-commercial licence message from the CheerpJ display.
+
+## System integrators, resellers and OEMs
+
+A licence belongs to the organisation whose users run the application, or to the vendor that ships it. A system integrator's licence does not cover its clients. To offer CheerpJ as part of your services, or to redistribute it, [contact us][contact] about partner, reseller and OEM licences.
+
+---
+
+If you are not sure which licence you need, [contact us][contact]. Full licensing details are on [cheerpj.com/licensing][licensing].
+
+[licensing]: https://cheerpj.com/licensing/
+[contact]: https://cheerpj.com/contact/

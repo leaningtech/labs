@@ -1,20 +1,20 @@
 ---
 title: Basic Server Setup
-description: How do serve your own Java application with CheerpJ
+description: How to serve your own Java application with CheerpJ
 ---
 
 ## Overview
 
-To run your Java applications in the browser, you will need to host the application files. This guide will cover some simple HTTP servers that can be used for basic testing. We will also discuss NGINX which is useful in more advanced scenarios, for example when self hosting CheerpJ.
+To run a Java application in the browser with CheerpJ, its files must be served by an HTTP server. Opening the page from the local disk (`file://`) does not work. This guide covers a few one-line HTTP servers for local testing, and an NGINX configuration for more advanced setups, for example when self-hosting the CheerpJ runtime, which needs a [licence](https://cheerpj.com/licensing/).
 
 > [!note] Important
-> The content of this guide is specifically made for testing setups and should not be used for production environments. In production environments it is essential to utilize HTTPS, both to improve security and to gain access to advanced Web APIs.
+> The configurations in this guide are for testing and are not meant for production. Production deployments must use HTTPS, both for security and because some browser APIs, such as the system clipboard, are only available in a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts). See [deployment](https://cheerpj.com/deployment/) for production requirements.
 
-## Static _One-Line_ servers
+## Static one-line servers
 
-_One-Line_ HTTP servers are simple tools that can be run directly from the terminal with a short command. They are simple to set up and useful for quickly serving static files or testing web applications locally.
+One-line HTTP servers run from the terminal with a short command. They are useful for serving static files and testing web applications locally.
 
-_One-Line_ servers that have been tested and work with CheerpJ:
+One-line servers that have been tested with CheerpJ:
 
 - `npx serve`
 - `npx http-server`
@@ -23,36 +23,35 @@ _One-Line_ servers that have been tested and work with CheerpJ:
 
 ### Range requests
 
-CheerpJ makes use of [Range Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests) to download resources in chunks, for example JAR files.
-Thus, the HTTP server hosting the Java application files must support "Range" headers. Some HTTP servers may need additional configuration to enable this feature, while others are not compatible at all. For instance, Python's `http-server` module, commonly used for quick testing, lacks support for range headers and therefore won't work with CheerpJ.
+CheerpJ uses [HTTP Range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests) to download resources, such as JAR files, in chunks. The HTTP server hosting the application files must therefore support the `Range` header. Some servers need extra configuration to enable it, and others do not support it at all. Python's `http.server` module, often used for quick testing, does not support it, so CheerpJ cannot run from it.
 
-If your HTTP server does not support "Range" headers, you will see an error message like this in the browser console:
+If the HTTP server does not support the `Range` header, the browser console shows an error like this:
 
 > [!warning] Network error for http://127.0.0.1:8084/exampleApp.jar: HTTP server does not support the 'Range' header. CheerpJ cannot run.
 
-NPM server tools such as `npx serve` and `npx http-server` typically have built-in support for range requests, making them suitable for basic testing without the need for additional configurations. The same applies to NGINX, which will be discussed in more detail later in this guide.
+`npx serve` and `npx http-server` support range requests without extra configuration, so they are suitable for basic testing. So does NGINX, described [later in this guide](#nginx-guide).
 
 ### JavaScript library files
 
-CheerpJ allows you to implement native libraries in JavaScript, more details on this can be found in our [Native Libraries Guide](/docs/guides/implementing-native-libraries).
+Native libraries can be implemented as JavaScript modules, as described in the [native libraries guide](/docs/guides/implementing-native-libraries).
 
-Depending on the size of the JavaScript library file, you may encounter an error with certain browsers, like Firefox:
+Depending on the size of the JavaScript library file, some browsers, such as Firefox, may show this error:
 
 > [!warning] Network error for http://localhost:8080/library.js: HTTP server returned compressed partial data. That should not happen. CheerpJ cannot run
 
-This error occurs because plain JavaScript files are compressed automatically in Firefox, since it provides the `Accept-Encoding: gzip` header for range requests. This is not well defined, since it is unclear whether the response contains partial compressed data, or compressed partial data.
+Firefox sends the `Accept-Encoding: gzip` header with range requests, and some servers respond by compressing the partial response. This is not well defined: it is unclear whether the response contains part of the compressed file, or a compressed part of the file.
 
-To resolve this issue, you need to disable compression for range requests or disable compression entirely. To disable compression in `npx serve`, use `npx serve -u`.
+To resolve it, disable compression for range requests, or disable compression entirely. To disable compression in `npx serve`, use `npx serve -u`.
 
-By default, `npx http-server` should correctly serve JavaScript library files without compression.
+`npx http-server` serves JavaScript library files without compression by default.
 
-## NGINX Guide
+## NGINX guide
 
-We won't go into detail on how to install and setup NGINX, but will focus on the configuration necessary to integrate NGINX seamlessly with CheerpJ.
+This section does not cover installing NGINX. It covers the configuration NGINX needs to serve a CheerpJ application.
 
-### Nginx configuration file
+### NGINX configuration file
 
-This NGINX configuration template will work with most Java applications and CheerpJ for testing purposes.
+This NGINX configuration template works with most Java applications and CheerpJ for testing.
 
 ```nginx title=nginx.conf
 worker_processes  1;
@@ -100,15 +99,15 @@ http {
 }
 ```
 
-Let's take a closer look at some important settings required for CheerpJ and to also ensure proper file serving.
+The settings that matter for CheerpJ are described below.
 
-We specify the default MIME type for unspecified files as `application/octet-stream`. We do this to indicate that a file is binary data, instructing the server and client to treat the file as raw bytes instead of interpreting it as text or any other format.
+The default MIME type for files with no other type is `application/octet-stream`. This marks the file as binary data, so the browser treats it as raw bytes instead of interpreting it as text or any other format.
 
 ```nginx
 default_type  application/octet-stream;
 ```
 
-Additionally we add a `types` block and define certain MIME types. Like this NGINX identifies the file type for each response and sets the corresponding `Content-Type` header in HTTP responses. This enables browsers and clients to interpret content accurately,
+The `types` block defines MIME types for the file extensions CheerpJ uses. NGINX uses it to set the `Content-Type` header of each response, so the browser interprets the content correctly.
 
 ```nginx
 types {
@@ -119,14 +118,14 @@ types {
 }
 ```
 
-We also enable compression for `.wasm` and `.js` files, primarily used for the runtime chunks, within our server block.
+The server block enables compression for `.js` and `.wasm` files, which make up most of the runtime.
 
 ```nginx
 	gzip on;
 	gzip_types      application/javascript application/wasm;
 ```
 
-To ensure NGINX generates relative redirects, we disable the absolute redirect option within our location block.
+The location block turns off absolute redirects, so NGINX generates relative redirects.
 
 ```nginx
 absolute_redirect off;
@@ -134,7 +133,7 @@ absolute_redirect off;
 
 ### Get rid of 404 not found messages
 
-To get rid of `404 not found` browser console messages when self hosting a runtime build of CheerpJ, you can use the `try_files` option with NGINX.
+When self-hosting a runtime build of CheerpJ, the browser console may show `404 not found` messages for runtime files that do not exist. To avoid them, use the `try_files` directive.
 
 ```nginx {4}
 	location / {
@@ -144,4 +143,4 @@ To get rid of `404 not found` browser console messages when self hosting a runti
 	}
 ```
 
-With the `try_files` directive, NGINX will return a `204` status code for any files that are not found. This indicates that the request was processed successfully but no content is returned.
+With this `try_files` directive, NGINX returns a `204` status code for any file that is not found. This means that the request succeeded and there is no content to return.

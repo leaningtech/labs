@@ -2,11 +2,11 @@
 title: Migration from CheerpJ 2
 ---
 
-CheerpJ version 3 (and above) is a complete reimplementation of CheerpJ 2, and as such it is not fully backward compatible. This page shows how to migrate from CheerpJ 2 to CheerpJ 3+.
+CheerpJ 3 and later are a complete reimplementation of CheerpJ 2, and are not fully backward compatible with it. This page shows how to move an application from CheerpJ 2 to the current version.
 
 ### Script tag
 
-Include the newest CheerpJ loader on your page with the following snippet:
+Replace the CheerpJ 2 loader with the current one:
 
 ```html
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
@@ -14,42 +14,42 @@ Include the newest CheerpJ loader on your page with the following snippet:
 
 ## Breaking changes
 
-When designing the new architecture we had the objective of making a drop-in replacement for CheerpJ 2.3 as much as we could. This objective has been _mostly_ achieved, but in some cases we had to deprecate and remove functionalities in favor of much improved alternatives.
+CheerpJ 3 was designed as a drop-in replacement for CheerpJ 2.3 wherever possible. A few features were removed in favour of better alternatives, listed below.
 
 ### `cheerpjInit` is now asynchronous
 
 The runtime API is not exposed until [`cheerpjInit`] is called and its `Promise` resolves.
 
-Therefore, **be sure to `await` the [`cheerpjInit`] call** before using any other functions.
+**`await` the [`cheerpjInit`] call** before using any other CheerpJ function.
 
 ### `cheerpj-dom.jar` removed
 
-Calling JavaScript functions from Java is now done using the `natives` option of `cheerpjInit`. See the [JNI guide] for more information.
+Java code calls JavaScript through native methods, passed with the `natives` option of `cheerpjInit`. See [implementing native methods][JNI guide].
 
 If you used the `com.leaningtech.client` package extensively, check out the [CJDom library](https://github.com/reportmill/CJDom) (not maintained by Leaning Technologies).
 
 ### `cheerpjRunJarWithClasspath` removed
 
-This feature had no real use case because when using `java -jar`, the JAR file is the source of all user classes, and any other class path settings are ignored.
+With `java -jar`, the JAR is the source of all user classes and any other class path is ignored, so this function had no use. To run a main class with a class path, use [`cheerpjRunMain`].
 
 ### `CheerpJWorker` replaced
 
-CheerpJ can now be imported in a Web Worker without any special setup. Simply call [`importScripts`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts) from a worker to load CheerpJ, then use CheerpJ as usual. The `CheerpJWorker` class has been removed.
+CheerpJ loads in a Web Worker with no special setup. Call [`importScripts`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts) from the worker to load CheerpJ, then use it as usual. The `CheerpJWorker` class has been removed.
 
 ```js
 importScripts("https://cjrtnc.leaningtech.com/5.0/loader.js");
 
 // Use CheerpJ as usual
 (async () => {
-  await cheerpjInit();
-  const lib = await cheerpjRunLibrary("/app/example.jar");
-  // ...
-)();
+	await cheerpjInit();
+	const lib = await cheerpjRunLibrary("/app/example.jar");
+	// ...
+})();
 ```
 
 ### `cjNew` and `cjCall` replaced with library mode API
 
-`cjNew` and `cjCall` have been removed in favour of [`cheerpjRunLibrary`].
+`cjNew` and `cjCall` have been removed in favour of library mode, started with [`cheerpjRunLibrary`]. See the [library mode guide](/docs/guides/library-mode).
 
 ```js
 // CheerpJ 2
@@ -60,7 +60,7 @@ await cjCall(obj, "myMethod");
 ```
 
 ```js
-// CheerpJ 3 (and above)
+// CheerpJ 3 and later
 await cheerpjInit();
 const lib = await cheerpjRunLibrary("/app/library.jar");
 const MyClass = await lib.com.library.MyClass;
@@ -68,30 +68,28 @@ const obj = await new MyClass();
 await obj.myMethod();
 ```
 
-## Other major changes
-
-<!-- TODO: copy from cheerpj-3-deep-dive blog post -->
+## Other changes
 
 ### No Ahead-Of-Time compilation (`cheerpjify.py`)
 
-**No Ahead-Of-Time compilation:** To achieve good performance, CheerpJ required you to post-process JAR files with a custom binary compiler. The compiler would generate a `.jar.js` files for each input JAR. CheerpJ 3 (and above) features an advanced JIT engine that can generate better-performing code than CheerpJ 2.3 ever could. Removal of `.jar.js` files also significantly decreases how much data needs to be downloaded during application startup.
+CheerpJ 2 needed JAR files to be post-processed ahead of time with `cheerpjify.py`, which generated a `.jar.js` file for each JAR. CheerpJ 3 and later run the original JARs: an interpreter starts running the bytecode, and a JIT compiler turns the code that runs most often into optimised JavaScript while the application runs. Without `.jar.js` files, much less data is downloaded at startup.
 
-No downloads are provided with CheerpJ 3 (and above).
+There is nothing to download or install:
 
-- AOT optimization: CheerpJ 3 (and above) use a JIT compiler only, and as such it does not require any pre-processing of the JAR files, like conversion to `.jar.js`.
-- `--natives`: JNI function implementations should be passed to `cheerpjInit` using the `natives` option. See the [JNI guide] for more information.
+- **AOT compilation:** delete the `.jar.js` files, and serve the original JARs.
+- **`--natives`:** pass native method implementations to `cheerpjInit` with the `natives` option. See [implementing native methods][JNI guide].
 
-### Actual support for ClassLoaders
+### Custom class loaders
 
-CheerpJ 2.3 had very limited support for ClassLoaders. As a consequence of requiring AOT compilation of `.jar.js` files, it could only support the standard one provided by OpenJDK. CheerpJ 3 (and above) radically improves the status-quo by properly using ClassLoaders as expected by Java.
+Because it compiled `.jar.js` files ahead of time, CheerpJ 2.3 supported only OpenJDK's standard class loader. CheerpJ 3 and later support custom class loaders as Java defines them.
 
 ### `com.leaningtech.handlers` HTTP handler no longer needed
 
-Previously, CheerpJ 2 required a special Java property to be set in order for HTTP(S) requests to work. This is no longer needed.
+CheerpJ 2 needed a Java property to be set for HTTP and HTTPS requests to work. Remove it: HTTP and HTTPS requests go through the browser's `fetch`. See [networking](/docs/guides/Networking).
 
 ### `cheerpjAddStringFile` deprecated and renamed to `cheerpOSAddStringFile`
 
-The `cheerpjAddStringFile` function has been renamed to `cheerpOSAddStringFile` to better reflect its behaviour and provide parity with CheerpX. The old name is still available for backwards compatibility.
+`cheerpjAddStringFile` is renamed [`cheerpOSAddStringFile`](/docs/reference/cheerpOSAddStringFile), to match CheerpX. The old name still works, for backward compatibility.
 
 [`cheerpjInit`]: /docs/reference/cheerpjInit
 [`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary

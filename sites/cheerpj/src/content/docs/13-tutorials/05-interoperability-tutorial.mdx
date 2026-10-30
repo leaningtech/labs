@@ -5,22 +5,22 @@ description: Learn how to enable Java and JavaScript communication using CheerpJ
 
 import Callout from "@leaningtech/astro-theme/components/Callout.astro";
 
-With CheerpJ, a Java application can interact with JavaScript in a browser environment, enabling seamless interaction between Java and JavaScript code.
+A Java application running in CheerpJ can call JavaScript, and JavaScript can call the Java application.
 
-In this tutorial, we’ll teach you how to create a two-way communication channel between Java and JavaScript using CheerpJ. This setup will allow a Java class to access JavaScript functions and vice versa, enabling data exchange between the two environments.
+This tutorial sets up two-way communication between a Swing application and the web page that hosts it. Java sends text to the page through a native method implemented in JavaScript, and the page sends text to Java by calling a method on a Java object.
 
-We will use a long-running Java thread to enable callbacks into our Java application at any time. It is also possible to call back into Java using native methods, which we explain further in our [`native methods guide`].
+To let JavaScript call into Java at any time, the application keeps a Java thread waiting inside a native method. For calls into Java made while a native method runs, see [calling back into Java from JavaScript][`native methods guide`] in the native methods guide.
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/) (>= 18)
-- Clone the tutorial template [repository](https://github.com/leaningtech/cheerpj-meta.git)
+- A copy of the tutorial [repository](https://github.com/leaningtech/cheerpj-meta.git)
 
 ```sh
 	git clone https://github.com/leaningtech/cheerpj-meta.git
 ```
 
-- Inside this repository, navigate to the Interoperability tutorial and into the projectTemplate directory:
+- Go to the `projectTemplate` directory of the Interoperability example:
 
 ```sh
 	cd examples/Interoperability/projectTemplate
@@ -28,76 +28,125 @@ We will use a long-running Java thread to enable callbacks into our Java applica
 
 ## Project structure
 
-The project consists of the following files and directories:
+The template contains these files:
 
 ```plaintext
 projectTemplate/
-|── com/example/
-│   └── Example.class (and other compiled .class files)
-│   └── Example.java
+├── com/example/
+│   ├── Example.class
+│   ├── Example$1.class
+│   ├── Example.java
 │   └── manifest.txt
 ├── Makefile
 ├── example.jar
 └── index.html
 ```
 
-In this tutorial, we will implement the native methods in JavaScript in the `index.html` file to enable communication between Java and JavaScript.
+`example.jar` is the compiled application. In this tutorial you implement its native methods in JavaScript in `index.html`.
 
-You can see the fully implemented example on [GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Interoperability).
+The finished example is on [GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/Interoperability).
 
 ## Java source code: `Example.java`
 
-Let's start by examining the source code of the Java class that will interact with JavaScript. This class will receive input from JavaScript, process it, and send a response back to JavaScript.
+The Java class opens a small Swing window. It sends the text typed in the window to the page, and shows the text it receives from the page.
 
 ```java title="Example.java"
 package com.example;
 
-public class Example {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Example extends JFrame {
+
+    // Native method to set the Java application instance in JavaScript
+    public static native void nativeSetApplication(Example myApplication);
+
+    // Native method to send text to the HTML UI
     public static native void sendToHTML(String s);
 
-    public String processInput(String input) {
-        sendToHTML(input);
-        return "Java received: " + input;
+    private JTextField javaTextField; // Input text field
+    private JTextField javaTextField2; // Output display field
+
+    public Example() {
+        // Set up the JFrame (Java window)
+        setTitle("Example App");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        // Create a text field for sending input to JavaScript
+        javaTextField = new JTextField("");
+        javaTextField.setBounds(50, 50, 300, 30);
+        add(javaTextField);
+
+        // Create a read-only text field for displaying input from JavaScript
+        javaTextField2 = new JTextField("");
+        javaTextField2.setEditable(false); // Disable editing
+        javaTextField2.setBounds(50, 200, 300, 30);
+        add(javaTextField2);
+
+        // Create a button to send input to JavaScript
+        JButton sendButton = new JButton("Send to HTML");
+        sendButton.setBounds(100, 100, 200, 50);
+
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textToSend = javaTextField.getText();
+                sendToHTML(textToSend); // Call the native method
+            }
+        });
+        add(sendButton);
     }
 
-    public static native void nativeSetApplication(Example myApplication);
+    // Example method to process input from JavaScript
+    public String processInput(String input) {
+        System.out.println("Received input from JavaScript: " + input);
+        javaTextField2.setText(input);
+        return "Java received: " + input; // Send response back to JavaScript
+    }
 
     public static void main(String[] args) {
         Example app = new Example();
+
+        // Start a thread for initializing the Java application instance in JavaScript
         new Thread(() -> {
             nativeSetApplication(app);
             System.out.println("Starting Thread");
         }).start();
+
+        app.setVisible(true);
     }
 }
 ```
 
-This Java class contains the following methods:
+The class has these methods:
 
-- `sendToHTML`: A native method implemented in JavaScript, called to send data to the JavaScript environment.
-- `processInput`: Receives data from JavaScript, passes it to `sendToHTML`, and returns a response.
-- `nativeSetApplication`: Captures the running Java thread for persistent communication with JavaScript.
+- `sendToHTML`: a static native method implemented in JavaScript. The **Send to HTML** button calls it with the text of the first text field.
+- `processInput`: called from JavaScript. It prints the input to the console, shows it in the read-only text field and returns a response string.
+- `nativeSetApplication`: a static native method implemented in JavaScript. `main` calls it from a new thread to hand the `Example` object to JavaScript.
 
 <Callout title="Note" variant="important">
-	There is **no need to recompile the Java code** for this tutorial, as a
-	precompiled file is provided in the template project. However, if you want to
-	modify the Java code, you will need to recompile it. To do so, follow the
-	instructions in the [Running the example](#running-the-example) section.
+	There is **no need to recompile the Java code** for this tutorial: the
+	template includes the compiled `example.jar`. If you change the Java code,
+	recompile it as described in [Running the example](#running-the-example).
 </Callout>
 
 ## JavaScript native method implementation
 
-To enable Java and JavaScript communication, we need to implement the [`native`] methods in JavaScript. These methods will handle the data exchange between the two environments.
+For Java and JavaScript to communicate, implement the Java [`native`] methods in JavaScript.
 
-We will do this in the `index.html` file, inside of the project template directory. In this file, you will find useful comments to guide you through the implementation process described below.
+Add the code in this section to the `<script>` tag in the `<body>` of `index.html`. The comments in the template mark where each part goes.
 
 ### 1. Define JavaScript native methods
 
-In the `<script>` tag, implement the native methods for interacting with Java.
+For each native method, create an `async` function named `Java_<fully-qualified-class-name>_<method-name>`. Its first parameter is `lib`, which gives access to the Java classes. For an instance method the second parameter is the Java object the method was called on. Both methods here are static, so the method's own parameters follow `lib`. See the [`native method`] guide for details.
 
-To implement the native methods in JavaScript, we create an `async` function for each Java method following the naming convention `Java_<fully-qualified-class-name>_<method-name>`. The function should accept `lib` as the first parameter and the Java instance as the second parameter (if applicable). See the [`native method`] implementation guide for more details.
-
-You can move these methods to a separate `.js` file for better organization and include them using the `<script>` tag in the HTML.
+You can also move these functions to a separate `.js` file and include it with a `<script>` tag.
 
 ```js title="index.html"
 async function Java_com_example_Example_sendToHTML(lib, str) {
@@ -120,17 +169,18 @@ async function Java_com_example_Example_nativeSetApplication(
 
 The `Java_com_example_Example_nativeSetApplication` function:
 
-- Assigns the Java application instance to `window.myApplication`.
-- Ensures continuous access by preventing the function from returning.
+- Stores the Java `Example` object in `window.myApplication`.
+- Shows the input field and button on the page.
+- Returns a promise that never resolves, so the Java thread that called it stays inside the native call. This is what keeps `window.myApplication` usable from JavaScript for as long as the page is open.
 
 The `Java_com_example_Example_sendToHTML` function:
 
-- Receives input from Java.
-- Displays the input in the HTML document.
+- Receives a string from Java.
+- Shows it on the page and logs it to the console.
 
 ### 2. Implement the `sendInputToJava` function
 
-Write a function to send input to Java:
+Add the function that the **Send to Java** button calls:
 
 ```js title="index.html"
 async function sendInputToJava() {
@@ -141,18 +191,18 @@ async function sendInputToJava() {
 
 The `sendInputToJava` function:
 
-- Retrieves input from an HTML input box.
-- Sends it to the Java method and displays the response in an alert.
+- Reads the text from the input box on the page.
+- Calls the Java `processInput` method on `window.myApplication` with it. Calls into Java are asynchronous, so the result is awaited. `response` holds the string `processInput` returns; this example does not use it.
 
-### 3. Initialize CheerpJ
+### 3. Initialise CheerpJ
 
-To use CheerpJ, include the following script in the `<head>` section of `index.html`:
+Add the CheerpJ loader to the `<head>` of `index.html`:
 
-```js title="index.html"
+```html title="index.html"
 <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 ```
 
-To load CheerpJ, we initialize it in the HTML file with specific configurations for native methods.
+Then initialise CheerpJ with the native methods and run the JAR:
 
 ```js title="index.html"
 (async () => {
@@ -163,41 +213,41 @@ To load CheerpJ, we initialize it in the HTML file with specific configurations 
 			Java_com_example_Example_nativeSetApplication,
 		},
 	});
-	cheerpjCreateDisplay(800, 600);
+	cheerpjCreateDisplay(400, 300);
 	await cheerpjRunJar("/app/example.jar");
 })();
 ```
 
-Explanation:
+What this does:
 
-- `cheerpjInit`: Initializes CheerpJ with the specified configurations:
-  - `version`: Specifies the Java version to use.
-  - `natives`: Lists JavaScript implementations of native Java methods.
-- `cheerpjCreateDisplay`: Creates a display area for any graphical output (optional in this example).
-- `cheerpjRunJar`: Loads and runs the provided JAR file.
+- [`cheerpjInit`] initialises CheerpJ with these options:
+  - [`version`]: the Java version to run, here Java 8.
+  - [`natives`]: the JavaScript implementations of the Java native methods.
+- [`cheerpjCreateDisplay`] creates a 400x300 display for the Swing window.
+- [`cheerpjRunJar`] runs `example.jar`, whose manifest names `com.example.Example` as the main class.
 
 ## Running the example
 
-1. There is **no need to recompile the Java code** for this tutorial as we only changed the JavaScript code and you can use the precompiled `example.jar` file provided in the template project. However, if you want to modify the Java code, you can recompile it using the provided `Makefile` (requires Java installed):
+1. There is **no need to recompile the Java code**, because only the JavaScript changed and the template includes the compiled `example.jar`. If you change the Java code, recompile it with the provided `Makefile` (requires a Java installation):
 
 ```bash
 make
 ```
 
-Alternatively, compile and package manually:
+Alternatively, compile and package it manually from the `projectTemplate` directory:
 
 ```bash
-javac Example.java
-jar cvfm example.jar manifest.txt com/example/*.class
+javac -d . com/example/Example.java
+jar cvfm example.jar com/example/manifest.txt com/example/*.class
 ```
 
-2. **Start a Local Server**: Serve the files using a simple HTTP server like [`http-server`]:
+2. **Start a local server**: serve the `projectTemplate` directory with an HTTP server such as [`http-server`]:
 
 ```bash
 npx http-server -p 8080
 ```
 
-3. **Run the Example**: Open http://localhost:8080/index.html in your browser.
+3. **Run the example**: open `http://localhost:8080/index.html` in the browser. Type in the page's input box and click **Send to Java** to send text to Java, or type in the Java window and click **Send to HTML** to send text to the page.
 
 ## The result
 
@@ -214,3 +264,8 @@ npx http-server -p 8080
 [`native`]: /docs/guides/implementing-native-methods
 [`native method`]: /docs/guides/implementing-native-methods
 [`native methods guide`]: /docs/guides/implementing-native-methods#calling-back-into-java-from-javascript
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`version`]: /docs/reference/cheerpjInit#version
+[`natives`]: /docs/reference/cheerpjInit#natives
+[`cheerpjCreateDisplay`]: /docs/reference/cheerpjCreateDisplay
+[`cheerpjRunJar`]: /docs/reference/cheerpjRunJar

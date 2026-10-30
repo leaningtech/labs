@@ -1,9 +1,9 @@
 ---
 title: Files and filesystems
-description: Virtual filesystems and how to use them
+description: Virtual file systems and how to use them
 ---
 
-CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multiple mount points. The folder structure looks like this:
+The browser does not let web pages read or write files on the user's computer directly. CheerpJ gives Java applications a UNIX-style virtual file system instead, with several mount points:
 
 ```text
 /
@@ -14,18 +14,18 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 └── str/
 ```
 
-| Mount     | Description                                                                  | Write     | Read |
-| --------- | ---------------------------------------------------------------------------- | --------- | ---- |
-| `/app/`   | An HTTP-based filesystem for loading files from the web server               | No        | Yes  |
-| `/files/` | A persistent read-write file system (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
-| `/str/`   | A filesystem for passing JavaScript strings or binary data to Java           | JS only   | Yes  |
+| Mount     | Description                                                                | Write     | Read |
+| --------- | -------------------------------------------------------------------------- | --------- | ---- |
+| `/app/`   | Files on your web server, read over HTTP                                   | No        | Yes  |
+| `/files/` | Persistent storage in the browser (includes `/uploads/` and `/downloads/`) | Java only | Yes  |
+| `/str/`   | Text or binary data passed from JavaScript to Java, kept in memory         | JS only   | Yes  |
 
-| Directory           | Description                                                           | Write     | Read |
-| ------------------- | --------------------------------------------------------------------- | --------- | ---- |
-| `/files/uploads/`   | Files uploaded via the window title bar upload button, non persistent | No        | Yes  |
-| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine   | Java only | Yes  |
+| Directory           | Description                                                              | Write     | Read |
+| ------------------- | ------------------------------------------------------------------------ | --------- | ---- |
+| `/files/uploads/`   | Files uploaded with the window title bar's upload button, not persistent | No        | Yes  |
+| `/files/downloads/` | Files saved here are automatically downloaded to the user's machine      | Java only | Yes  |
 
-> [!info] The uploads and downloads directories are only available in versions CheerpJ 4.3 and higher
+> [!info] The uploads and downloads directories need CheerpJ 4.3 or later
 
 <div align="center">
 
@@ -34,36 +34,31 @@ CheerpJ filesystems are implemented as UNIX-style virtual filesystems with multi
 </div>
 
 > [!info] Local files
-> CheerpJ provides access to a virtualized filesystem, which does not correspond to the local user's computer. Accessing local files directly is forbidden for browser security reasons.
+> CheerpJ's file systems are virtual: they do not correspond to the files on the user's computer, which browsers do not let web pages access directly. Local files enter the application as [uploads](#specialised-directories) and leave it as downloads.
 
 ## `/app/` mount point
 
-The `/app/` mount point corresponds to a virtual read-only, HTTP-based filesystem. `/app/` can be used for multiple purposes including accessing JAR files and data from your local server.
+The `/app/` mount point is a read-only file system over HTTP. It is the root of the web server the page comes from, and holds the application's JARs and any data it reads from the server. When Java reads a file from `/app/`, CheerpJ fetches it from the server with an HTTP or HTTPS request, in chunks, using HTTP Range requests.
 
-The `/app/` mount point refers to the root of your web server. When a file is read from `/app/`, CheerpJ will make an HTTP(S) request to fetch the file.
+For example, if the page is served from `http://127.0.0.1:8080/`:
 
-To have a clearer concept of the `/app/` mount point, let's assume that HTML file with the CheerpJ application is served from the `http://127.0.0.1:8080/` origin:
+- `/app/example.jar` is `http://127.0.0.1:8080/example.jar`
+- `/app/subdirectory/example.txt` is `http://127.0.0.1:8080/subdirectory/example.txt`
 
-- `/app/example.jar` would be the same as `http://127.0.0.1:8080/example.jar`
-
-- `/app/subdirectory/example.txt` would be the same as `http://127.0.0.1:8080/subdirectory/example.txt`
-
-Considering the examples above, to run a JAR with [`cheerpjRunJar`] and assuming it is stored in the root of the web server, it should be done as follows:
+To run a JAR stored in the root of the web server with [`cheerpjRunJar`]:
 
 ```js
 cheerpjRunJar("/app/my_application_archive.jar");
 ```
 
 > [!tip] JAR file locations
-> The `/app/` mount point is the most common location to store the application's JARs but this is not mandatory. For example, you could write a JAR file into `/str/` with JS and then run that.
+> JARs are usually under `/app/`, but they don't have to be. For example, JavaScript can write a JAR into `/str/` and then run it.
 
 ## `/files/` mount point
 
-The `/files/` mount point corresponds to a virtual read-write, IndexedDB-based filesystem and it is used to store persistent data in the browser client.
+The `/files/` mount point is a read-write file system stored in the browser's IndexedDB. Use it for data that should persist between sessions, such as user preferences.
 
-Use this for storing data that should persist between sessions, such as user preferences.
-
-Writing files into the `/files/` mount point is only possible from inside the Java application. For example:
+Only the Java application can write to `/files/`. For example:
 
 ```java
 File file = new File("/files/myfile.ext");
@@ -71,18 +66,18 @@ OutputStream out = new FileOutputStream(file);
 out.close();
 ```
 
-> [!tip] About data persistency
-> The data in this mount-point would persist even when closing the application and re-launching it. In the scenario of wiping out the browser's data or using the browser as "incognito" data will be evicted. This behaviour may vary depending in the browser used among other scenarios.
+> [!tip] Data persistence
+> Data in `/files/` persists when the application is closed and opened again. It is deleted when the user clears the browser's data, and private (incognito) windows do not keep it. Browsers can also evict stored data under storage pressure, and each browser behaves differently.
 
-For more information about browser's data eviction and persistency please visit [this page](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
+MDN explains [when browsers evict data](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria#when_is_data_evicted).
 
-### Specialized directories
+### Specialised directories
 
-<span style="font-size: 0.97em;color:white;">_Supported in CheerpJ 4.3 and later versions_</span>
+_Supported in CheerpJ 4.3 and later_
 
-Within the `/files/` mount point, there are two specialized directories for interacting with the user's local machine:
+Two directories in `/files/` connect the application with the user's computer:
 
-- **`/files/uploads/`** — When a user uploads a file using the upload icon that is present in the title bar of any decorated window in Java (via the upward arrow icon in the title bar), it is automatically placed here and becomes accessible to the Java application. Please note that this directory is **not persistent** and its contents will be gone upon browser restart.
+- **`/files/uploads/`**: a file the user uploads with the upload button (the upward arrow) in the title bar of any decorated Java window is placed here, where the Java application can read it. This directory is **not persistent**: its contents are gone when the browser restarts.
 
 <div align="center">
 
@@ -90,37 +85,35 @@ Within the `/files/` mount point, there are two specialized directories for inte
 
 </div>
 
-- **`/files/downloads/`** — Any file written to this directory by the Java application will be automatically downloaded to the default download location of the browser.
+- **`/files/downloads/`**: a file the Java application writes here is downloaded to the browser's default download location.
 
 ## `/str/` mount point
 
-The `/str/` mount point is a simple filesystem that can be populated from JavaScript to share data with Java code. This filesystem is read-only from Java.
+The `/str/` mount point is an in-memory file system that JavaScript writes to, to pass data to Java code. Java can only read it.
 
 ### Writing files with JavaScript
 
-From JavaScript, it is possible to add files into the filesystem using the [`cheerpOSAddStringFile`] API. Example:
+Add a file from JavaScript with [`cheerpOSAddStringFile`]:
 
 ```js
 cheerpOSAddStringFile("/str/fileName.txt", "Some text in a JS String");
 ```
 
-Then, you can access this data from Java, for example:
+Java then reads it as any other file:
 
 ```java
-
 import java.io.FileReader;
 
-...
-FileReader f = new FileReader("/str/fileName.txt")
-...
-
+// ...
+FileReader f = new FileReader("/str/fileName.txt");
+// ...
 ```
 
-The `cheerpOSAddStringFile` API can be used with JavaScript `String`s or `Uint8Array`s. `Uint8Array`s may be useful to provide binary data to the Java application. For example, a selected file coming from an HTML5 `<input type="file">` tag.
+`cheerpOSAddStringFile` takes a JavaScript `String` or a `Uint8Array`. Use a `Uint8Array` for binary data, such as a file the user selects with an `<input type="file">` element.
 
 ## Reading files with JavaScript
 
-To read files from any of the mount-points using JavaScript, you must use the [`cjFileBlob`] API as follows:
+To read a file from any mount point in JavaScript, use [`cjFileBlob`], which returns a `Blob`:
 
 ```js
 const blob = await cjFileBlob("/files/myfile.ext");

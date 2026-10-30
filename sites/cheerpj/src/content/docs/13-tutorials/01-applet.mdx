@@ -5,22 +5,22 @@ description: Running an applet with CheerpJ
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-In this tutorial you will learn how to run a Java applet in a modern browser by integrating CheerpJ within your page.
+This tutorial runs a Java applet in a modern browser by adding CheerpJ to the page that hosts it.
 
 <LinkButton label="View demo" href="#the-result" />
 
-For this tutorial we will use the FoilSim applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). This applet shows an interactive simulation of the aerodynamic forces of an aircraft's wings. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/foilsimu/).
+The tutorial uses the FoilSim applet from NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/). The applet is an interactive simulation of the aerodynamic forces on an aircraft wing. [See more](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/foilsimu/).
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/) (>= 18)
-- Clone the tutorial template [repository](https://github.com/leaningtech/cheerpj-meta.git)
+- A copy of the tutorial [repository](https://github.com/leaningtech/cheerpj-meta.git)
 
 ```sh
 	git clone https://github.com/leaningtech/cheerpj-meta.git
 ```
 
-- Inside this repository, navigate to the FoilSim-Applet tutorial and into the projectTemplate directory:
+- Go to the `projectTemplate` directory of the FoilSim-Applet example:
 
 ```sh
 	cd examples/FoilSim-Applet/projectTemplate
@@ -36,26 +36,30 @@ projectTemplate/
 
 ## 1. Run a web server
 
-We need to host the files on a web server. [Vite](https://vitejs.dev/) is a convenient tool for this, as it automatically reloads the page when the files change.
+CheerpJ loads the applet from a web server, so the files must be served over HTTP. [Vite](https://vitejs.dev/) works well during development because it reloads the page when the files change.
 
 ```sh
 npx vite
 ```
 
-Visit the URL shown in the terminal and you should see a blank page. Leave Vite running in the background for the remainder of this tutorial.
+Open the URL shown in the terminal. The page is blank. Leave Vite running for the rest of this tutorial.
 
-Alternatively you can also use the http-server utility.
+Alternatively, use the http-server utility:
 
 ```sh
 npx http-server -p 8080
 ```
 
-Open a browser tab pointing to your localhost such as `http://127.0.0.1:8080/`.
+Then open `http://127.0.0.1:8080/` in the browser.
+
+> [!note] Note
+> The server must support HTTP Range requests, and the page cannot be opened from `file://`. Python's `http.server` does not support Range requests. See [basic server setup](/docs/guides/basic-server-setup).
 
 ## 2. Open `index.html` and add your applet content
 
-The provided template is a basic HTML. You can add all the necessary elements yourself or alternatively, go ahead and replace the file with the code below.
-The first step is to add the applet tag with its parameters, just like they used to be integrated on web pages. We will also add some titles, descriptions and styles.
+The template is a minimal HTML page. Replace its content with the code below, which adds the applet tag with its attributes, as it would appear on a page written for the Java plug-in, along with a title, credits and some styles.
+
+The page uses `<cheerpj-applet>` rather than `<applet>`. CheerpJ handles both, along with `<object>` and `<embed>`, and their `cheerpj-` prefixed versions. The prefixed tag stops a Java plug-in, if one is installed, from trying to run the applet instead of CheerpJ.
 
 ```html {25-32} title="index.html"
 <!doctype html>
@@ -63,20 +67,20 @@ The first step is to add the applet tag with its parameters, just like they used
 	<head>
 		<meta charset="utf-8" />
 		<title>FoilSim applet (CheerpJ)</title>
+		<style>
+			div {
+				max-width: 1000px;
+				margin: auto;
+				text-align: center;
+			}
+			h1 {
+				margin-bottom: 50px;
+			}
+			h5 {
+				margin-top: 20px;
+			}
+		</style>
 	</head>
-	<style>
-		div {
-			max-width: 1000px;
-			margin: auto;
-			text-align: center;
-		}
-		h1 {
-			margin-bottom: 50px;
-		}
-		h5 {
-			margin-top: 20px;
-		}
-	</style>
 
 	<body>
 		<div>
@@ -101,7 +105,7 @@ The first step is to add the applet tag with its parameters, just like they used
 			</h5>
 			<h5>
 				Applet is running with
-				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://cheerpj.com/">CheerpJ</a> by
 				<a href="https://leaningtech.com/">©Leaning Technologies</a>
 			</h5>
 		</div>
@@ -109,13 +113,13 @@ The first step is to add the applet tag with its parameters, just like they used
 </html>
 ```
 
-Go to your browser and refresh the page. You will see the titles and text you just added. As expected, the applet will not be on display, instead there is the message _**Your browser cannot handle the applet tag!**_
+Refresh the page. The title and credits are shown, but the applet is not. In its place is the fallback text _**Your browser cannot handle the applet tag!**_
 
-## 3. Integrating CheerpJ
+## 3. Add CheerpJ
 
-Integrating CheerpJ in your page is as simple as adding a `<script>` with the CheerpJ loader url. This will be placed within the document's `<head>` tag. Next, we need to call `cheerpjInit()` in another script block.
+Add a `<script>` tag with the CheerpJ loader URL to the `<head>`, then call [`cheerpjInit()`](/docs/reference/cheerpjInit) in a second script at the end of the `<body>`. CheerpJ finds the applet tags on the page and runs them.
 
-Your document will look like this:
+The page looks like this:
 
 ```html {6, 49-51} title="index.html"
 <!doctype html>
@@ -124,20 +128,20 @@ Your document will look like this:
 		<meta charset="utf-8" />
 		<title>FoilSim applet (CheerpJ)</title>
 		<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
+		<style>
+			div {
+				max-width: 1000px;
+				margin: auto;
+				text-align: center;
+			}
+			h1 {
+				margin-bottom: 50px;
+			}
+			h5 {
+				margin-top: 20px;
+			}
+		</style>
 	</head>
-	<style>
-		div {
-			max-width: 1000px;
-			margin: auto;
-			text-align: center;
-		}
-		h1 {
-			margin-bottom: 50px;
-		}
-		h5 {
-			margin-top: 20px;
-		}
-	</style>
 
 	<body>
 		<div>
@@ -162,7 +166,7 @@ Your document will look like this:
 			</h5>
 			<h5>
 				Applet is running with
-				<a href="https://labs.leaningtech.com/cheerpj3">CheerpJ</a> by
+				<a href="https://cheerpj.com/">CheerpJ</a> by
 				<a href="https://leaningtech.com/">©Leaning Technologies</a>
 			</h5>
 		</div>
@@ -173,16 +177,14 @@ Your document will look like this:
 </html>
 ```
 
-Refresh your page and now you will be able to see your applet running!
+Refresh the page. The applet runs in place of the fallback text.
 
-> You can also replace the `applet` tag with `<cheerpj-applet>` to avoid potential conflicts with native Java
-
-> [!info] Java Applets and Java 8
-> The method ´cheerpJInit´ runs Java 8 by default if the Java version is not specified. Please notice that if you change the version to Java 11 or higher, applets won't work.
+> [!info] Java applets and Java 8
+> `cheerpjInit` runs Java 8 when no `version` is set. Applets run on Java 8 only, so do not set `version` to 11 or higher on a page that runs an applet.
 
 ## The result
 
-Your final page will look like this:
+The finished page looks like this:
 
 <iframe
 	src="https://leaningtech.github.io/cheerpj-meta/examples/FoilSim-Applet/"
@@ -191,12 +193,13 @@ Your final page will look like this:
 
 ## Source code
 
-[Find the full source code in GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/FoilSim-Applet)
+[View full source code on GitHub](https://github.com/leaningtech/cheerpj-meta/tree/main/examples/FoilSim-Applet)
 
 ## Credits
 
-The applet used for this tutorial belongs to the NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/) and it is available at their [GitHub repository](https://github.com/nasa/BGA/tree/main).
+The applet used in this tutorial belongs to NASA's [Beginner's Guide to Aeronautics](https://www.grc.nasa.gov/WWW/K-12/airplane/) and it is available at their [GitHub repository](https://github.com/nasa/BGA/tree/main).
 
 ## Further reading
 
-To continue learning about CheerpJ, visit the [reference](/docs/reference).
+- [Run a Java applet](/docs/getting-started/Java-applet)
+- [Runtime API reference](/docs/reference)

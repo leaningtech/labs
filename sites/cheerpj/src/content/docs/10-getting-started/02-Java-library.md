@@ -3,29 +3,29 @@ title: Run a Java Library
 description: Use Java classes in JavaScript
 ---
 
-CheerpJ can load and run Java libraries directly in the browser, allowing you to call Java classes and methods from JavaScript with no modifications to your original code. This page will help you get started with CheerpJ and show you how to use an existing Java library (`.jar` file) within a web application.
+CheerpJ loads an existing Java library in the browser, so you can call its classes and methods from JavaScript without changing the original code. This page shows how to load a library's JAR file in a web page and call it.
 
-Java source code is not required to use CheerpJ. If you are using your own library, you should already have its compiled `.jar` file available.
+You need the library's compiled JAR file, not its source code.
 
 **To get started you will need:**
 
-- Your `.jar` file.
-- An HTML file where your Java app will be wrapped.
-- A simple HTTP server to test your webpage locally.
+- Your library's JAR file.
+- An HTML page to load it from.
+- An HTTP server that supports Range requests, to test the page locally.
 
 ## 1. Create a project directory
 
-Let's start by creating a project folder where all your files will be. Copy your java and future HTML files here.
+Create a folder for the project and copy your JAR file into it. The HTML file goes in the same folder.
 
 ```shell
-mkdir directory_name
+mkdir my-project
 ```
 
 ## 2. Create a basic HTML file
 
-Let's create a basic HTML file and include and initialize CheerpJ on your page. The `cheerpjInit` command initialises the CheerpJ runtime environment.
+Create an `index.html` file in the project directory. Add CheerpJ's loader script to the `<head>`, then call [`cheerpjInit`] to initialise the CheerpJ runtime environment:
 
-```html title="index.html" {6, 10}
+```html title="index.html" {6, 9-11}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -34,18 +34,20 @@ Let's create a basic HTML file and include and initialize CheerpJ on your page. 
 		<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 	</head>
 	<body>
-		<script>
+		<script type="module">
 			await cheerpjInit();
 		</script>
 	</body>
 </html>
 ```
 
+The script is a module (`type="module"`) so that it can use `await` at the top level. In a classic `<script>`, wrap the code in an `async` function instead.
+
 ## 3. Load and call the Java library from JavaScript
 
-Now we can load your Java library by calling `cheerpjRunLibrary` which will load the library from the root of your web server. We are assuming your HTML file and your `.jar` files are under the project directory you just created.
+Call [`cheerpjRunLibrary`] with the path to your JAR. `/app/` is the root of the web server, so `/app/library.jar` is the file `library.jar` in the project directory. You then use the library's classes and methods as JavaScript objects:
 
-```html title="index.html" {12-15}
+```html title="index.html" {11-15}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -54,9 +56,9 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 		<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
 	</head>
 	<body>
-		<script>
+		<script type="module">
 			await cheerpjInit();
-			// Example classes and methods — replace these with those from your own library
+			// Example classes and methods: replace them with those from your own library
 			const cj = await cheerpjRunLibrary("/app/library.jar");
 			const MyClass = await cj.com.library.MyClass;
 			const obj = await new MyClass();
@@ -66,19 +68,36 @@ Now we can load your Java library by calling `cheerpjRunLibrary` which will load
 </html>
 ```
 
+Loading a class, constructing an object (`await new`) and calling a method are asynchronous, so `await` each one. A method call resolves to the method's return value, converted as described in [`CJ3Library`]. Public fields are read and written directly, without `await`.
+
+To use only the Java standard library, pass an empty string: `await cheerpjRunLibrary("")`.
+
 ## 4. Host your page
 
-You can now serve this web page on a simple HTTP server, such as the http-server utility.
+Serve the project directory with an HTTP server, such as http-server:
 
 ```shell
+cd my-project
 npx http-server -p 8080
 ```
 
+Then open `http://localhost:8080` in the browser.
+
+> [!note] Info
+> Opening the page directly from disk (a `file://` URL) does not work. The server must support HTTP Range requests: `npx http-server` and `npx serve` do, Python's `http.server` does not. See [basic server setup](/docs/guides/basic-server-setup), and use HTTPS in production.
+
 ## The result
 
-You will see CheerpJ initialize in your browser and load the Java library. Once loaded, the methods from your library can be called directly from JavaScript, just as in the example above. Depending on the size of your library and the optimizations applied, this may take just a few seconds before your code begins executing.
+CheerpJ starts in the browser and loads your library. Once it has loaded, your JavaScript calls the library's methods. Output the library writes to `System.out` appears in the browser console. Depending on the size of the library and the optimisations applied, this can take a few seconds before your code starts running.
+
+If nothing happens, open the browser console. A JavaScript error or a 404 for the JAR in the Network tab usually means the path to the JAR is wrong or is missing the `/app/` prefix.
 
 ## Further reading
 
-- [Learn more about Library Mode](/docs/guides/library-mode)
+- [Learn more about library mode](/docs/guides/library-mode)
+- [Interoperability tutorial](/docs/tutorials/interoperability-tutorial)
 - [`cheerpjRunLibrary` reference](/docs/reference/cheerpjRunLibrary)
+
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
+[`CJ3Library`]: /docs/reference/CJ3Library

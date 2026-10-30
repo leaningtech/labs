@@ -3,23 +3,23 @@ title: Implementing Native Methods
 description: Java Native Interface (JNI) with CheerpJ
 ---
 
-In this guide, we’ll explore how to use **native methods** in CheerpJ to implement Java native methods in JavaScript.
+This guide explains how to implement Java **native methods** in JavaScript with CheerpJ.
 
-CheerpJ allows one to implement Java native methods (typically written in C/C++ or another AOT-compiled language) directly in JavaScript, similar to the Java Native Interface (JNI) in standard Java.
+On the desktop, Java native methods are usually written in C or C++ and called through the Java Native Interface (JNI). Pre-built native binaries cannot run in the browser, so CheerpJ lets you implement native methods in JavaScript instead, where they can use JavaScript libraries and any Web API the browser offers. Native code can also be compiled to WebAssembly; [get in touch](https://cheerpj.com/contact/) if your application needs it.
 
-In Java, native methods are identified by the `native` keyword in their declaration. These methods are not implemented in Java but are instead defined in an external language, which in the case of CheerpJ, is JavaScript.
+In Java, native methods are marked by the `native` keyword in their declaration. They are not implemented in Java, but in another language: with CheerpJ, JavaScript.
 
 ## Steps to implement native methods in CheerpJ
 
-In general, we can implement native methods in CheerpJ by following these steps:
+To implement native methods in CheerpJ:
 
 1. Declare a native method in Java using the `native` keyword.
 2. Implement the native method in JavaScript.
 3. Pass the native function to CheerpJ.
 
-### Declaring Native Methods in Java
+### Declaring native methods in Java
 
-To declare a native method in Java, use the `native` keyword in the method declaration. The method is defined in the Java class but is not implemented in Java. Instead, the implementation will be provided in JavaScript.
+To declare a native method in Java, use the `native` keyword in the method declaration. The method is declared in the Java class but not implemented in Java. Its implementation is provided in JavaScript.
 
 ```java
 public class ClassName {
@@ -28,17 +28,17 @@ public class ClassName {
 }
 ```
 
-### Implementing Native Methods in JavaScript
+### Implementing native methods in JavaScript
 
-To implement a native method in JavaScript, create an `async` function that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, its object key is `Java_com_foo_Bar_baz`.
+To implement a native method in JavaScript, create an `async` function named after the Java method: `Java_<fully-qualified-class-name>_<method-name>`. For instance, if `com.foo.Bar` has a native method called `baz`, the function is called `Java_com_foo_Bar_baz`.
 
 The JavaScript function should accept the following parameters:
 
-- A [`CJ3Library`] object `lib` as the first parameter, which provides access to other classes and methods within the library. The `lib` parameter can be used to call back into the Java class that calls the native method.
-- `self` as the second parameter, the instance of the Java class calling the native method. This parameter can be omitted for static native methods.
-- The native method’s parameters as subsequent parameters.
+- A [`CJ3Library`] object `lib` as the first parameter, which gives access to the application's Java classes and methods. Use it to [call back into Java](#calling-back-into-java-from-javascript).
+- `self` as the second parameter: the Java object the native method was called on. Static native methods do not have this parameter.
+- The native method's own parameters after these.
 
-And returns a value or a Promise that resolves to a value. The function syntax is as follows:
+The function returns a value, or a Promise that resolves to a value. The syntax is:
 
 ```js
 async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1, param2, ...) {
@@ -46,14 +46,14 @@ async function Java_<fully-qualified-class-name>_<method-name>(lib, self, param1
 }
 ```
 
-> [!info] Handling Static Native Methods
-> If the native method is static, the `self` parameter can be omitted.
+> [!info] Handling static native methods
+> If the native method is static, there is no `self` parameter: the method's own parameters follow `lib`.
 
-### Initializing CheerpJ with the `natives` option
+### Initialising CheerpJ with the `natives` option
 
-To use the native method in CheerpJ, pass the function to the [`cheerpjInit`] function as a property of the [`natives`] option. There are two ways in which you can do this.
+Pass the function to [`cheerpjInit`] as a property of the [`natives`] option. There are two ways to do this. The examples implement a static native method, so the function has no `self` parameter.
 
-1. **In the function definition directly**
+1. **Define the function inside the option**
 
 ```js
 await cheerpjInit({
@@ -65,7 +65,7 @@ await cheerpjInit({
 });
 ```
 
-2. **Or just the function name if it was defined earlier**
+2. **Or pass a function defined earlier, by name**
 
 ```js
 async function Java_Example_nativeMethodName(lib, str) {
@@ -75,9 +75,9 @@ async function Java_Example_nativeMethodName(lib, str) {
 await cheerpjInit({ natives: { Java_Example_nativeMethodName } });
 ```
 
-## Example Walkthrough
+## Example walkthrough
 
-Here’s a full example that demonstrates the native method setup in Java and its JavaScript implementation.
+This full example declares a native method in Java and implements it in JavaScript.
 
 1. Declare a native method in Java using the `native` keyword:
 
@@ -91,7 +91,7 @@ public class Example {
 }
 ```
 
-2. Implement the native method by creating an `async` function in JavaScript that follows the naming convention `Java_<fully-qualified-class-name>_<method-name>`.
+2. Implement the native method in JavaScript, with an `async` function named `Java_<fully-qualified-class-name>_<method-name>`. `nativeAlert` is static, so the function has no `self` parameter.
 
 ```js title="index.html"
 async function Java_Example_nativeAlert(lib, str) {
@@ -99,11 +99,11 @@ async function Java_Example_nativeAlert(lib, str) {
 }
 ```
 
-Here, we provide an implementation for the `nativeAlert` method in the `Example` class, by creating a function named `Java_Example_nativeAlert`. The function displays an alert dialog with the message using `window.alert`.
+The function `Java_Example_nativeAlert` implements the `nativeAlert` method of the `Example` class. It shows the message in an alert dialog with `window.alert`.
 
-3. Initialize CheerpJ with the `natives` option and pass the native method implementation to [`cheerpjInit`]:
+3. Initialise CheerpJ with the `natives` option, passing the native method implementation to [`cheerpjInit`]:
 
-```html title="index.html" {13}
+```html title="index.html" {14}
 <!doctype html>
 <html>
 	<head>
@@ -112,24 +112,24 @@ Here, we provide an implementation for the `nativeAlert` method in the `Example`
 	</head>
 	<body>
 		<script type="module">
-			async function Java_Example_Alert(lib, str) {
+			async function Java_Example_nativeAlert(lib, str) {
 				window.alert(str);
 			}
 			// Init CheerpJ and register natives, then run your main
 			await cheerpjInit({
 				natives: { Java_Example_nativeAlert },
 			});
-			await cheerpjRunMain("Example", "/app");
+			await cheerpjRunMain("Example", "/app/");
 		</script>
 	</body>
 </html>
 ```
 
-In this setup, [`cheerpjInit`] loads `Java_Example_nativeAlert` as the native method implementation. When `Example.nativeAlert` is called in Java, it triggers the JavaScript `Java_Example_nativeAlert` function, displaying an alert dialog with the message.
+[`cheerpjInit`] registers `Java_Example_nativeAlert` as the implementation of the native method. When Java calls `Example.nativeAlert`, CheerpJ runs the JavaScript `Java_Example_nativeAlert` function, which shows the message in an alert dialog.
 
 ## Calling back into Java from JavaScript
 
-You can call back into Java from a JavaScript native method implementation using the `lib` parameter. The `lib` object exposes your Java classes so you can invoke their static methods.
+A JavaScript native method can call back into Java through its `lib` parameter. The `lib` object gives access to your Java classes, so you can call their static methods, create objects and call their instance methods.
 
 ```java
 public class ClassName {
@@ -146,9 +146,9 @@ public class ClassName {
 }
 ```
 
-The `ClassName` class defines a `native method` called `nativeMethodName`, which will be implemented in JavaScript. It also includes a public method, `javaMethodName`, that performs some Java logic.
+The `ClassName` class declares a native method, `nativeMethodName`, implemented in JavaScript. It also has a public method, `javaMethodName`, with some Java logic.
 
-In the JavaScript implementation of `nativeMethodName`, you can use the `lib` parameter to access the `ClassName` Java class and call its methods from JavaScript. This allows JavaScript code to call back into Java and execute Java logic directly from the browser.
+The JavaScript implementation of `nativeMethodName` uses `lib` to load the `ClassName` class and call `javaMethodName`.
 
 ```js
 // Example placeholders — replace ClassName/javaMethodName with your own
@@ -158,9 +158,9 @@ async function Java_ClassName_nativeMethodName(lib) {
 }
 ```
 
-This functionality is useful when you need to call back into the Java class in response to a native function call. If you need to call back into Java outside the context of a native function, you can use a long-running Java thread. You can learn more about how to achieve this in our [`Java and JavaScript Interoperability`] tutorial.
+This works for calls into Java made in response to a native method call. To call into Java at any other time, use a long-running Java thread, as shown in the [`Java and JavaScript Interoperability`] tutorial.
 
-## Converting Parameters and Return Values
+## Converting parameters and return values
 
 Parameters and return values of JNI calls are automatically converted between JavaScript and Java types based on [`conversion rules`].
 

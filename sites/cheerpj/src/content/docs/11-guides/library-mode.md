@@ -3,18 +3,16 @@ title: Library mode
 description: Use Java libraries in JavaScript
 ---
 
-Library mode allows you to directly use Java methods, objects, and arrays from JavaScript. This API has been designed to take advantage of async/await to feel more natural to use, without sacrificing any flexibility.
+Library mode lets JavaScript use Java classes, objects and arrays directly. JavaScript loads classes, creates objects, calls methods and reads fields with `async` and `await`, so Java libraries can be used alongside the rest of a web application's code.
 
 ## Getting started
 
-Loading a library is as simple as calling [`cheerpjRunLibrary`].
+To load a library, call [`cheerpjRunLibrary`] after [`cheerpjInit`]:
 
 - `await cheerpjRunLibrary("")` loads **only the Java standard library**
 - `await cheerpjRunLibrary("/app/path/to/some.jar")` loads the Java standard library **plus** all the classes in the JAR
 
-An example of using the standard Java library.
-
-First, we’ll initialize CheerpJ and write a simple program in a JavaScript file using **library mode** to call a few Java standard library classes.
+This first example uses the Java standard library. A JavaScript file initialises CheerpJ and uses **library mode** to call a few standard library classes.
 
 ```js title="script.js"
 await cheerpjInit();
@@ -39,7 +37,7 @@ for (let i = 0; i < 4; i++) {
 	await points.add(p);
 }
 
-// Convert to list to an Object[] array
+// Convert the list to an Object[] array
 const a = await points.toArray();
 
 // Iterate on the array and set y = x
@@ -61,7 +59,7 @@ for (let i = 0; i < a.length; i++) {
 }
 ```
 
-Then, we’ll include that script from a minimal HTML page and run it in the browser. The output will be printed to the browser console.
+A minimal HTML page includes the script. The output is printed to the browser console.
 
 > Note that the HTML page needs to include the public `loader.js` script.
 
@@ -87,27 +85,29 @@ Then, we’ll include that script from a minimal HTML page and run it in the bro
 
 ## Example: generating a PDF with iText
 
-Library mode can be used to integrate powerful Java libraries into your Web application. As a practical example, these few lines of code make it possible to generate a PDF from JavaScript using the popular iText library.
+Library mode brings existing Java libraries into a web application. In this example, a few lines of JavaScript generate a PDF with the iText library.
 
 **This example:**
 
 - Loads `itextpdf-5.5.13.3.jar`
 - Builds a PDF and writes it to `/files/HelloIText.pdf`
-- Reads it back as a blob and shows it in the page
+- Reads it back as a `Blob` with [`cjFileBlob`] and shows it in the page
 
-First, in `script.js`, we initialize CheerpJ, load the iText JAR in library mode, and use iText to create a simple “Hello World” PDF written to `/files/HelloIText.pdf`. We then read the file back as a blob and convert it to an object URL.
+`script.js` initialises CheerpJ and loads the iText JAR in library mode once, when the page loads. Each click of the button uses iText to write a "Hello World!" PDF to `/files/HelloIText.pdf`, reads the file back as a `Blob` and shows it through an object URL.
 
 ```js title="script.js"
 const statusEl = document.getElementById("status");
 const pdfDisplay = document.getElementById("pdfDisplay");
 
+// cheerpjInit must be called only once in the page
+statusEl.textContent = "Initialising CheerpJ…";
+await cheerpjInit();
+
+statusEl.textContent = "Loading iText library…";
+const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.3.jar");
+statusEl.textContent = "Ready";
+
 document.getElementById("makePdf").addEventListener("click", async () => {
-	statusEl.textContent = "Initializing CheerpJ…";
-	await cheerpjInit();
-
-	statusEl.textContent = "Loading iText library…";
-	const lib = await cheerpjRunLibrary("/app/itextpdf-5.5.13.jar");
-
 	try {
 		const Document = await lib.com.itextpdf.text.Document;
 		const Paragraph = await lib.com.itextpdf.text.Paragraph;
@@ -115,15 +115,15 @@ document.getElementById("makePdf").addEventListener("click", async () => {
 		const FileOutputStream = await lib.java.io.FileOutputStream;
 
 		const document = await new Document();
-		const writer = await PdfWriter.getInstance(
+		await PdfWriter.getInstance(
 			document,
 			await new FileOutputStream("/files/HelloIText.pdf")
 		);
 
 		await document.open();
 		await document.add(await new Paragraph("Hello World!"));
+		// Closing the document also closes the writer and the output stream
 		await document.close();
-		await writer.close();
 
 		const blob = await cjFileBlob("/files/HelloIText.pdf");
 		const url = URL.createObjectURL(blob);
@@ -140,7 +140,7 @@ document.getElementById("makePdf").addEventListener("click", async () => {
 });
 ```
 
-Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate PDF” button, and display the resulting PDF directly in the page using an `<iframe>`.
+`index.html` includes CheerpJ and `script.js`, provides a "Generate PDF" button, and shows the PDF in the page in an `<iframe>`.
 
 > Note that the HTML page needs to include the public `loader.js` script.
 
@@ -156,7 +156,7 @@ Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate
 
 		<style>
 			body {
-				font: 14px, sans-serif;
+				font: 14px sans-serif;
 				margin: 2rem;
 			}
 			iframe {
@@ -179,7 +179,10 @@ Next, in `index.html`, we include CheerpJ and `script.js`, provide a “Generate
 
 ## See also
 
-Library mode is also used for [native methods implemented in JavaScript][JNI]. A `native` is effectively just a shorter library mode session.
+Library mode is also used by [native methods implemented in JavaScript][JNI]: the `lib` parameter a native method receives is a library mode session. For the methods of a library mode session and how values are converted, see [`CJ3Library`].
 
 [JNI]: /docs/guides/implementing-native-methods
 [`cheerpjRunLibrary`]: /docs/reference/cheerpjRunLibrary
+[`cheerpjInit`]: /docs/reference/cheerpjInit
+[`cjFileBlob`]: /docs/reference/cjFileBlob
+[`CJ3Library`]: /docs/reference/CJ3Library
