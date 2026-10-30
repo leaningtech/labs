@@ -54,7 +54,7 @@ await cheerpjRunMain(
 
 Command line arguments go after the JAR name or class path, one string per argument.
 
-CheerpJ runs Java 8 unless you choose another version. To run on Java 11, 17 or 21, pass the [`version`] option to [`cheerpjInit`], for example `await cheerpjInit({ version: 17 });`.
+CheerpJ runs Java 8 unless you choose another version. To run on Java 11, 17, 21 or 25, pass the [`version`] option to [`cheerpjInit`], for example `await cheerpjInit({ version: 17 });`.
 
 > [!note] Don't forget to use the /app/ prefix
 > Paths passed to [`cheerpjRunJar`] and [`cheerpjRunMain`] are in CheerpJ's [virtual filesystem], not URLs. `/app/` is the root of the web server the page is loaded from, so `/app/my_application_archive.jar` is the file `my_application_archive.jar` in the project directory. Leaving out the `/app/` prefix is the most common first mistake.
