@@ -80,7 +80,9 @@ const highlightAt =
 				/>
 				<div
 					class:list={[
-						"flex-1 min-w-0 flex justify-center",
+						// The TOC's width is reserved as padding, and the TOC hangs into it: the article
+						// is centred the same before the TOC has loaded, so it doesn't jump on load
+						"flex-1 min-w-0 flex justify-center [--toc-w:clamp(12rem,14vw,16rem)] max-xl:in-data-toc-collapsed:[--toc-w:3.25rem] lg:pr-(--toc-w)",
 						isCheerpj && "relative",
 					]}
 				>
@@ -174,7 +176,7 @@ const highlightAt =
 					</div>
 					<aside
 						data-toc
-						class="flex-none self-start w-[clamp(12rem,14vw,16rem)] max-xl:in-data-toc-collapsed:w-auto px-4 py-6 text-sm hidden lg:flex items-start gap-2 top-[var(--toc-top,65px)] sticky"
+						class="flex-none self-start w-(--toc-w) -mr-(--toc-w) px-4 py-6 text-sm hidden lg:flex items-start gap-2 top-[var(--toc-top,65px)] sticky"
 					>
 						<button
 							data-toc-toggle
