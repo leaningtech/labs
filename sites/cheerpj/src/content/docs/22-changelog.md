@@ -2,6 +2,20 @@
 title: Changelog
 ---
 
+## 5.0 - October 30, 2026
+
+```html
+<script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
+```
+
+- Preview of Java 21 support
+- Preview of Java 25 support
+- New experimental WasmGC engine that can be enabled with the [`wasmGC`](/docs/reference/cheerpjInit#wasmgc) init option
+- New [`env`](/docs/reference/cheerpjInit#env) init option to set environment variables for the Java runtime
+- New [`disableScaling`](/docs/reference/cheerpjInit#disablescaling) init option to turn off CheerpJ display scaling on high-DPI screens
+- Runtime improvements
+- Various bug fixes
+
 ## 4.3 - April 21, 2026
 
 ```html
