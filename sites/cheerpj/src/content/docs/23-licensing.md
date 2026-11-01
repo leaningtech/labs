@@ -1,5 +1,6 @@
 ---
 title: Licensing
+description: "Which CheerpJ licence applies: free uses, desktop licences for Java applications your organisation runs, and application licences for software you build"
 ---
 
 CheerpJ is free for personal, educational and hobby use, and for technical evaluation by organisations of any size. One-person companies and non-commercial open-source projects can also use it for free, with a "Built with CheerpJ" credit. Business use needs a licence.

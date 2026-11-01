@@ -1,5 +1,6 @@
 ---
 title: Open Source Copyright Notices
+description: "Copyright notices and licences of the open-source software included in CheerpJ"
 ---
 
 This page contains the copyright notices and license information for third-party open source software used in CheerpJ.
