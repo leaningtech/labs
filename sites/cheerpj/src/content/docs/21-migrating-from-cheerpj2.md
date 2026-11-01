@@ -1,5 +1,6 @@
 ---
 title: Migration from CheerpJ 2
+description: "Move an application from CheerpJ 2 to the current CheerpJ: the new loader, the asynchronous API, library mode and the removed functions"
 ---
 
 CheerpJ 3 and later are a complete reimplementation of CheerpJ 2, and are not fully backward compatible with it. This page shows how to move an application from CheerpJ 2 to the current version.
