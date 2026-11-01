@@ -9,6 +9,16 @@
 /docs/blog       https://labs.leaningtech.com/blog        301
 /docs/community  https://labs.leaningtech.com/showcase    301
 
+# Old English paths, still linked from GitHub projects and search results
+/guides/Implementing-Java-native-methods-in-JavaScript        /guides/implementing-native-methods       301
+/guides/File-System-support                                   /guides/filesystem                        301
+/guides/File-System-support.html                              /guides/filesystem                        301
+/getting-started/java-app.html                                /getting-started/Java-app                 301
+/docs/guides/Implementing-Java-native-methods-in-JavaScript   /docs/guides/implementing-native-methods  301
+/docs/guides/File-System-support                              /docs/guides/filesystem                   301
+/docs/guides/File-System-support.html                         /docs/guides/filesystem                   301
+/docs/getting-started/java-app.html                           /docs/getting-started/Java-app            301
+
 # The CheerpJ 2 docs are gone; anything under cheerpj2/ lands on the migration guide
 /cheerpj2       /migrating-from-cheerpj2       301
 /cheerpj2/*     /migrating-from-cheerpj2       301
