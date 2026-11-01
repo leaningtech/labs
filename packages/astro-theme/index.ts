@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
+import markdown from "./markdown";
 import { remarkReplaceVars, rehypeReplaceVars } from "./replace-variables";
 import { rehypeBreakoutImages } from "./rehype-breakout-images";
 import svelte from "@astrojs/svelte";
@@ -25,6 +26,7 @@ const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 	theme?: string | ExpressiveCodeTheme; // Shiki theme name, or a custom ExpressiveCodeTheme instance, defaults to material-theme-darker
+	markdown?: boolean; // Write a Markdown twin of each docs page, and llms-full.txt from the site's llms.txt
 };
 
 export default function ThemeIntegration(
@@ -62,6 +64,7 @@ export default function ThemeIntegration(
 					sitemap(),
 					robotsTxt(),
 					pagefind(),
+					...(options.markdown ? [markdown()] : []),
 					svelte(),
 					publicDir({
 						// FIXME claims directory does not exist

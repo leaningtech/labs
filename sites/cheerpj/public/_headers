@@ -1,0 +1,12 @@
+# Agent-readable text: the Markdown twin of each docs page (written by the
+# theme's markdown integration), llms.txt and llms-full.txt.
+/*.md
+	Content-Type: text/markdown; charset=utf-8
+/llms.txt
+	Content-Type: text/plain; charset=utf-8
+/llms-full.txt
+	Content-Type: text/plain; charset=utf-8
+/docs/llms.txt
+	Content-Type: text/plain; charset=utf-8
+/docs/llms-full.txt
+	Content-Type: text/plain; charset=utf-8
