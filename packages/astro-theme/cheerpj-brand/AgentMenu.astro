@@ -1,0 +1,153 @@
+---
+// The panel the CheerpJ docs' "AI agents" button (AgentButton) opens: the prompt that
+// points a coding agent at the CheerpJ skill, the skill's install command, and
+// links for agents. The prompt is cheerpj.com's header prompt (leaningtech.com:
+// sites/cheerpj/src/lib/agent-prompt.ts, job "run"); keep the two in step.
+//
+// The panel is a native popover: it opens in the top layer, so the nav's
+// overflow-hidden doesn't clip it, and closes on Esc or a click outside.
+// It comes before <main> in the HTML, so agents reading the page see it early.
+// CheerpJ docs only: the styles need .site-cheerpj.
+import { Icon } from "astro-icon/components";
+
+const skill = "https://cheerpj.com/skills/cheerpj/SKILL.md";
+const prompt = `Use the CheerpJ skill (${skill}) to help me run our Java application in the browser.`;
+const install = "npx skills add leaningtech/skills --skill cheerpj";
+---
+
+<div id="cj-agents" popover class="cj-agents">
+	<p class="cj-agents-title">Use CheerpJ with a coding agent</p>
+	<p>
+		Give your agent this prompt. It loads the CheerpJ skill, which covers
+		converting Java applications, applets, JNLP, Oracle Forms and libraries, and
+		the common errors.
+	</p>
+	<div class="cj-agents-code" data-copy-box>
+		<code>{prompt}</code>
+		<button type="button" data-copy={prompt}>
+			<Icon name="mdi:content-copy" aria-hidden="true" />
+			<span>Copy</span>
+		</button>
+	</div>
+	<p class="cj-agents-label">Or install the skill</p>
+	<div class="cj-agents-code" data-copy-box>
+		<code>{install}</code>
+		<button type="button" data-copy={install}>
+			<Icon name="mdi:content-copy" aria-hidden="true" />
+			<span>Copy</span>
+		</button>
+	</div>
+	<ul class="cj-agents-links">
+		<li><a href={skill}>Read the skill</a></li>
+		<li>
+			Are you an AI agent? <a href="https://cheerpj.com/agents.md">Read this</a>
+		</li>
+	</ul>
+</div>
+
+<style>
+	/* Under the nav, at its right edge */
+	.cj-agents {
+		position: fixed;
+		inset: 4.5rem 1rem auto auto;
+		width: min(28rem, calc(100vw - 2rem));
+		margin: 0;
+		padding: 20px;
+		border: 1px solid var(--cj-line);
+		border-radius: 12px;
+		background: var(--cj-dark-grey);
+		color: var(--color-bg-300);
+		box-shadow: 0 16px 40px rgb(0 0 0 / 0.45);
+		font-size: 14px;
+		line-height: 1.5;
+		white-space: normal;
+	}
+	.cj-agents p {
+		margin: 0 0 12px;
+	}
+	.cj-agents-title {
+		color: var(--cj-ink);
+		font-size: 16px;
+		font-weight: 700;
+	}
+	.cj-agents-label {
+		margin-top: 16px !important;
+		color: var(--cj-ink);
+		font-weight: 700;
+	}
+	.cj-agents-code {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 10px 10px 10px 12px;
+		border-radius: 8px;
+		background: var(--cj-charcoal);
+	}
+	.cj-agents-code code {
+		flex: 1;
+		min-width: 0;
+		color: var(--cj-warm-white);
+		font-family: var(--cj-font-mono);
+		font-size: 13px;
+		overflow-wrap: anywhere;
+	}
+	.cj-agents-code button {
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		padding: 2px 8px;
+		border: 1px solid var(--cj-line);
+		border-radius: 6px;
+		color: var(--cj-ink);
+		font-size: 13px;
+		font-weight: 700;
+	}
+	.cj-agents-code button:hover {
+		border-color: var(--cj-ink);
+	}
+	.cj-agents-code button svg {
+		width: 13px;
+		height: 13px;
+	}
+	.cj-agents-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px 20px;
+		margin: 16px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+	.cj-agents-links a {
+		color: var(--cj-ink);
+		font-weight: 700;
+		text-decoration: underline;
+		text-decoration-color: var(--cj-orange);
+		text-decoration-thickness: 3px;
+		text-underline-offset: 4px;
+	}
+	.cj-agents-links a:hover {
+		text-decoration-color: currentColor;
+	}
+</style>
+
+<script>
+	// Copy buttons: copy the text, or select it to copy by hand
+	for (const button of document.querySelectorAll<HTMLButtonElement>(
+		"#cj-agents [data-copy]"
+	)) {
+		const label = button.innerHTML;
+		const text = button.dataset.copy ?? "";
+		button.addEventListener("click", async () => {
+			try {
+				await navigator.clipboard.writeText(text);
+				button.textContent = "Copied";
+			} catch {
+				const code = button.closest("[data-copy-box]")?.querySelector("code");
+				if (code) getSelection()?.selectAllChildren(code);
+				button.textContent = "Select to copy";
+			}
+			setTimeout(() => (button.innerHTML = label), 2000);
+		});
+	}
+</script>
