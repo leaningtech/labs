@@ -1,3 +1,10 @@
+# Cloudflare: static redirects go before dynamic ones (splats, placeholders),
+# and the top-most rule that matches wins. All static rules come first; the
+# dynamic ones are at the end of the file.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# ---- Static redirects ----
+
 /cheerpj https://cheerpj.com/ 301
 /sitemap.xml /sitemap-index.xml
 /cheerpj2/getting-started/applet-runner.html https://cheerpj.com/cheerpj-applet-runner/ 301
@@ -28,23 +35,26 @@
 /showcase/cheerpj /showcase?product=CheerpJ 301
 /showcase/cheerpj/ /showcase?product=CheerpJ 301
 /cheerp/installation/rhel8 /cheerp/installation/rhel
-/cheerpj3/examples/* https://cheerpj.com/docs/tutorials/:splat 301
 /cheerpj-jnlprunner /docs/cheerpj-jnlp-runner 301
-/cheerpj-jnlprunner/* /docs/cheerpj-jnlp-runner/:splat 301
 
 /cheerp https://cheerp.io/
-/cheerp/* https://cheerp.io/docs/:splat
 /cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
-/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
 /docs/cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
-/docs/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
 /cheerpj3 https://cheerpj.com/ 301
-/cheerpj3/* https://cheerpj.com/docs/:splat 301
 /cheerpx https://cheerpx.io/
-/cheerpx/* https://cheerpx.io/docs/:splat
 /cheerpx-for-flash /docs/cheerpx-for-flash
-/cheerpx-for-flash/* /docs/cheerpx-for-flash/:splat
 /cheerpj-jnlp-runner /docs/cheerpj-jnlp-runner 301
-/cheerpj-jnlp-runner/* /docs/cheerpj-jnlp-runner/:splat 301
 /cheerpj-applet-runner /docs/cheerpj-applet-runner 301
+
+# ---- Dynamic redirects (after every static one) ----
+
+/cheerpj3/examples/* https://cheerpj.com/docs/tutorials/:splat 301
+/cheerpj-jnlprunner/* /docs/cheerpj-jnlp-runner/:splat 301
+/cheerp/* https://cheerp.io/docs/:splat
+/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/docs/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/cheerpj3/* https://cheerpj.com/docs/:splat 301
+/cheerpx/* https://cheerpx.io/docs/:splat
+/cheerpx-for-flash/* /docs/cheerpx-for-flash/:splat
+/cheerpj-jnlp-runner/* /docs/cheerpj-jnlp-runner/:splat 301
 /cheerpj-applet-runner/* /docs/cheerpj-applet-runner/:splat 301
