@@ -1,6 +1,13 @@
 # Production (labs-cheerpj) is served from its root behind cheerpj.com's /docs/*
 # proxy, which adds /docs back onto root-relative Locations. The previews
 # project serves under /docs/, so each rule is written for both.
+#
+# Cloudflare: static redirects go before dynamic ones (splats, placeholders),
+# and the top-most rule that matches wins. All static rules come first; the
+# dynamic ones are at the end of the file.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# ---- Static redirects ----
 
 /showcase   https://labs.leaningtech.com/showcase    301
 /blog       https://labs.leaningtech.com/blog        301
@@ -9,24 +16,66 @@
 /docs/blog       https://labs.leaningtech.com/blog        301
 /docs/community  https://labs.leaningtech.com/showcase    301
 
-# The CheerpJ 2 docs are gone; anything under cheerpj2/ lands on the migration guide
-/cheerpj2       /migrating-from-cheerpj2       301
-/cheerpj2/*     /migrating-from-cheerpj2       301
-/docs/cheerpj2    /docs/migrating-from-cheerpj2  301
-/docs/cheerpj2/*  /docs/migrating-from-cheerpj2  301
+# The docs root is a real redirect to the overview, not the theme's meta refresh
+# page: agents and other fetchers that don't follow <meta http-equiv="refresh">
+# read only "Redirecting..." at cheerpj.com/docs/, the URL the CheerpJ skill,
+# agents.md and llms.txt point to.
+/        /overview        301
+/docs    /docs/overview   301
+/docs/   /docs/overview   301
 
-# The Japanese and Chinese docs are gone; send their old URLs to the English page
+# Old English paths, still linked from GitHub projects and search results.
+# Matching is case-sensitive (checked on the preview), so the lowercase
+# java-app rules can't catch Java-app and loop. The old pages are gone, so
+# Cloudflare no longer strips their trailing slash: each path also has a
+# slashed form.
+/guides/Implementing-Java-native-methods-in-JavaScript         /guides/implementing-native-methods       301
+/guides/Implementing-Java-native-methods-in-JavaScript/        /guides/implementing-native-methods       301
+/guides/File-System-support                                    /guides/filesystem                        301
+/guides/File-System-support/                                   /guides/filesystem                        301
+/guides/File-System-support.html                               /guides/filesystem                        301
+/getting-started/java-app                                      /getting-started/Java-app                 301
+/getting-started/java-app/                                     /getting-started/Java-app                 301
+/getting-started/java-app.html                                 /getting-started/Java-app                 301
+/guides/limitations                                            https://cheerpj.com/compatibility/        301
+/guides/limitations/                                           https://cheerpj.com/compatibility/        301
+/docs/guides/Implementing-Java-native-methods-in-JavaScript    /docs/guides/implementing-native-methods  301
+/docs/guides/Implementing-Java-native-methods-in-JavaScript/   /docs/guides/implementing-native-methods  301
+/docs/guides/File-System-support                               /docs/guides/filesystem                   301
+/docs/guides/File-System-support/                              /docs/guides/filesystem                   301
+/docs/guides/File-System-support.html                          /docs/guides/filesystem                   301
+/docs/getting-started/java-app                                 /docs/getting-started/Java-app            301
+/docs/getting-started/java-app/                                /docs/getting-started/Java-app            301
+/docs/getting-started/java-app.html                            /docs/getting-started/Java-app            301
+/docs/guides/limitations                                       https://cheerpj.com/compatibility/        301
+/docs/guides/limitations/                                      https://cheerpj.com/compatibility/        301
+
+# The CheerpJ 2 docs are gone; anything under cheerpj2/ lands on the migration guide
+/cheerpj2         /migrating-from-cheerpj2       301
+/docs/cheerpj2    /docs/migrating-from-cheerpj2  301
+
+# The Japanese and Chinese docs are gone; send their old URLs to the English page.
+# Their roots go straight to the overview, not through the docs root.
 /ja/community                                           https://labs.leaningtech.com/showcase       301
 /ja/guides/File-System-support                          /guides/filesystem                          301
 /ja/guides/Implementing-Java-native-methods-in-JavaScript  /guides/implementing-native-methods      301
-/ja      /          301
-/ja/*    /:splat    301
-/zh      /          301
-/zh/*    /:splat    301
+/ja      /overview    301
+/ja/     /overview    301
+/zh      /overview    301
+/zh/     /overview    301
 /docs/ja/community                                      https://labs.leaningtech.com/showcase       301
 /docs/ja/guides/File-System-support                     /docs/guides/filesystem                     301
 /docs/ja/guides/Implementing-Java-native-methods-in-JavaScript  /docs/guides/implementing-native-methods  301
-/docs/ja      /docs/          301
-/docs/ja/*    /docs/:splat    301
-/docs/zh      /docs/          301
-/docs/zh/*    /docs/:splat    301
+/docs/ja      /docs/overview    301
+/docs/ja/     /docs/overview    301
+/docs/zh      /docs/overview    301
+/docs/zh/     /docs/overview    301
+
+# ---- Dynamic redirects (after every static one) ----
+
+/cheerpj2/*       /migrating-from-cheerpj2       301
+/docs/cheerpj2/*  /docs/migrating-from-cheerpj2  301
+/ja/*        /:splat         301
+/zh/*        /:splat         301
+/docs/ja/*   /docs/:splat    301
+/docs/zh/*   /docs/:splat    301

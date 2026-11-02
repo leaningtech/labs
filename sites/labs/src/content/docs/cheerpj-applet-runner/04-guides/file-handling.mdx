@@ -5,7 +5,7 @@ description: How to interact with the local filesystem using the Applet Runner e
 
 For a deeper dive into how file systems work in CheerpJ, check out the [File System explanation guide](https://cheerpj.com/docs/explanation/File-System-support).
 
-The CheerpJ Applet Runner extension provides a virtual filesystem that allows Java applets to read and write files within the browser's sandbox. Since browsers cannot access your local disk directly for security reasons, CheerpJ provides two main ways to move files into and out of this virtual space.
+The extension gives Java applets a virtual filesystem, so they can read and write files inside the browser's sandbox. The browser doesn't let it reach your disk directly, so files move in by upload and out by download.
 
 ## Uploading files
 
@@ -35,10 +35,10 @@ Alternatively, you can upload files directly from the extension popup.
 > If you cannot see the extension popup icon, you may need to pin the extension to your browser's toolbar.
 
 1. Ensure the Java applet is currently running.
-2. Click the **CheerpJ icon** in your browser's toolbar and click the **Upload** button.
+2. Click the extension's icon in the toolbar, then **Upload file**.
 
    <div class="mx-24">
-   	![Extension popup showing the Upload button enabled while an Applet is
+   	![Extension popup showing the Upload file button enabled while an Applet is
    	running](/assets/applet-screenshots/popup-upload.png)
    </div>
 
@@ -46,7 +46,7 @@ Alternatively, you can upload files directly from the extension popup.
 
 ## Downloading files
 
-To export data from the Java applet back to your local machine, simply ensure files within the applet are saved to the **`/files/downloads/`** virtual directory. Any file saved to this directory will be automatically detected and downloaded by your browser to your local machine (usually to your default Downloads folder).
+To get a file out of the applet, save it in the **`/files/downloads/`** virtual directory. The browser downloads every file saved there, usually to your Downloads folder.
 
 **Using a standard save dialog:**
 

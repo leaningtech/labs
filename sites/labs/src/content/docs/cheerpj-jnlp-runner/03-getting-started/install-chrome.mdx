@@ -1,11 +1,11 @@
 ---
 title: Chrome Installation
-description: Install CheerpJ JNLP Runner for Chrome
+description: Install the CheerpJ browser extension for Java Web Start in Chrome
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 
-This tutorial will take you step by step on installing the CheerpJ JNLP Runner extension for Chrome.
+This page takes you through installing the CheerpJ browser extension for Java Web Start in Chrome.
 
 <LinkButton
 	href="https://chromewebstore.google.com/detail/cheerpj-jnlp-runner/achnhggjjhnadfapkmgallnbmemdojdi"
@@ -16,25 +16,25 @@ This tutorial will take you step by step on installing the CheerpJ JNLP Runner e
 
 ## Step 1
 
-Go to the [Chrome Web Store JNLP Runner page](https://chromewebstore.google.com/detail/cheerpj-jnlp-runner/achnhggjjhnadfapkmgallnbmemdojdi) and click _**Add to Chrome**_.
+Go to the [extension's page in the Chrome Web Store](https://chromewebstore.google.com/detail/cheerpj-jnlp-runner/achnhggjjhnadfapkmgallnbmemdojdi) and click _**Add to Chrome**_.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/store_chrome.png)</div>
 
-It will prompt a dialogue asking permission to manage your browser's downloads, then click again on _**add to Chrome**._
+Chrome asks you to let the extension manage your downloads. Click _**Add extension**_.
 
 <div class="mx-24">
 	![Chrome Dialogue1](/assets/jnlp-screenshots/chrome_dialogue.png)
 </div>
 
-> [!info]About downloads permission
-> CheerpJ JNLP Runner needs to see your downloads. This is because the classic way to run JNLP applications is by triggering the download of its corresponding JNLP file. When CheerpJ JNLP Runner detects the download of a JNLP file it will start working with your Java application.
+> [!info] About the downloads permission
+> A Java Web Start application starts when the browser downloads its `.jnlp` file. The extension watches for those downloads: when one starts, it stops the download and runs the application in a new tab instead. It leaves other downloads alone.
 
 ## Step 2
 
-Once the extension is installed you will see the small logo to the right of the browsing bar. If the logo is not there, click on the puzzle icon to see all your installed extensions, it should appear there. Here you can pin the extension to always make it appear visible in your browser menu.
+Once the extension is installed, its icon appears to the right of the address bar. If it isn't there, click the puzzle-piece icon to list your extensions, and pin the extension so it stays in the toolbar.
 
 <div class="mx-24">![](/assets/jnlp-screenshots/chrome_toolbar.png)</div>
 
-## Step 3
+## Next
 
-Your CheerpJ JNLP extension must be already installed on your browser. The next step is to validate your license, please visit the [activate your license](/docs/cheerpj-jnlp-runner/getting-started/activate-license) tutorial.
+[Run your first application](/docs/cheerpj-jnlp-runner/getting-started/using-first-time). If you use the extension for work, [activate your licence](/docs/cheerpj-jnlp-runner/getting-started/activate-license).

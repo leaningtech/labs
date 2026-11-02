@@ -1,14 +1,13 @@
 ---
 title: Configure extension for enterprises
-description: How to configure the Applet Runner extension for enterprises
+description: Deploy and configure the CheerpJ browser extension for applets on managed Chrome and Edge
 ---
 
-As an administrator, you can configure browser extensions for Chrome and Edge using the Windows Group Policy Editor or the Windows Registry.
-This applies to the CheerpJ Applet Runner extension as well, allowing you to customize the extension to meet your users' needs.
+Desktop administrators can install and configure the extension on managed Chrome and Edge browsers with the browsers' own policies, set through Group Policy, the Windows Registry, or a device management tool such as Intune. With an Enterprise licence, the licence is set by policy too, and activates offline.
 
-The following steps assume that you have a basic understanding of using Group Policy and editing the Windows Registry.
+This page assumes you know how to set browser policies with Group Policy or the Windows Registry.
 
-For more detailed guidance, please refer to the official [Chrome](https://support.google.com/chrome/a/answer/7532015)
+For more detailed guidance, see the official [Chrome](https://support.google.com/chrome/a/answer/7532015)
 and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-policies) documentation on configuring browser extensions for enterprise use.
 
 ## The extension ID
@@ -28,8 +27,8 @@ The _extension ID_ of the official **Chrome** Webstore version is:
 bbmolahhldcbngedljfadjlognfaaein
 ```
 
-If you are self-hosting a custom build of the Applet Runner, the _extension ID_ will differ.
-We either provided you with the _extension ID_, or you will need to retrieve it yourself.
+If you host a custom build of the extension yourself, its _extension ID_ is different.
+We send it to you with the build, or you can find it yourself:
 To obtain the _extension ID_ for a custom build, drag the CRX file onto your browser's Extensions page.
 You can navigate there by clicking the three dots in the top-right corner of the browser and selecting **Extensions**. Once the extension is loaded, you can note the ID.
 
@@ -38,10 +37,10 @@ You can navigate there by clicking the three dots in the top-right corner of the
 A common way to configure your extensions is by using the `ExtensionSettings` policy, which includes multiple options for admins to set up extensions for users.
 The `ExtensionSettings` policy enables you to configure multiple settings in one place using a JSON string in the Windows Group Policy Editor.
 
-For more information on the ExtensionSettings policy, please refer to the official documentation for [Chrome](https://support.google.com/chrome/a/answer/7532015)
+For more information on the ExtensionSettings policy, see the official documentation for [Chrome](https://support.google.com/chrome/a/answer/7532015)
 and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-ref-guide).
 
-### Configure `ExtensionsSettings` policy with JSON format
+### Configure the `ExtensionSettings` policy with JSON format
 
 You can access the `ExtensionSettings` policy through the Group Policy Editor. The location of the policy varies depending on the browser you are using.
 
@@ -57,9 +56,9 @@ The policy string should include the _extension ID_ and the different policy set
 { "ExtensionIDHere": { "Setting1": "Value1", "Setting2": "Value2" } }
 ```
 
-### Force install the CheerpJ Applet Runner extension
+### Force install the extension
 
-You can use the `ExtensionInstallForcelist` policy to force install an extension, or you can use`ExtensionSettings` policy.
+You can force install the extension with the `ExtensionInstallForcelist` policy or the `ExtensionSettings` policy.
 
 For the `ExtensionSettings` policy, you will need to use the `installation_mode` setting and set it to `force_install`.
 You will also need to add `update_url` setting, which specifies where the browser should download the extension from.
@@ -90,9 +89,9 @@ Policy string for **official Edge** extension
 
 > [!info] Make sure the policy string is in a single line
 
-### Pin the CheerpJ Applet Runner extension to the toolbar
+### Pin the extension to the toolbar
 
-To automatically pin the extension to the toolbar you can use the `ExtensionSettings` policy, the setting property has a differnt name for
+To automatically pin the extension to the toolbar you can use the `ExtensionSettings` policy, the setting property has a different name for
 [Chrome](https://support.google.com/chrome/a/answer/9867568?hl=en) and [Edge](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-ref-guide).
 
 Policy string for **official Chrome** extension:
@@ -107,11 +106,11 @@ Policy string for **official Edge** extension
 { "ebfcpaoldmijengghefpohddmfpndmic": { "toolbar_state": "force_shown" } }
 ```
 
-## Configuring Extension Settings via Windows Registry (Managed Storage)
+## Configure the extension's settings (managed storage)
 
-The CheerpJ Applet Runner extension supports Chrome Managed Storage, allowing certain settings to be preconfigured via the Windows registry.
+The extension reads some settings from the browser's managed storage, which administrators set in the Windows Registry.
 
-These values are read-only in the extension and must be set by an administrator.
+Users can't change these values in the extension.
 
 ### Registry Path
 
@@ -141,15 +140,18 @@ Set the value name to the setting’s name, and set the value data to the approp
 
 _Supported since version `2025.3`_
 
-The `initOptions` setting is used to configure startup options for CheerpJ.
+Startup options for CheerpJ, passed to `cheerpjInit` when an applet starts.
 It currently supports the following properties:
 [clipboardMode](https://cheerpj.com/docs/reference/cheerpjInit#clipboardmode),
 [enableinputmethods](https://cheerpj.com/docs/reference/cheerpjInit#enableinputmethods),
-[tailscaleControlUrl](https://cheerpj.com/docs/reference/cheerpjInit#tailscaleloginurlcb),
+[tailscaleControlUrl](https://cheerpj.com/docs/reference/cheerpjInit#tailscalecontrolurl),
 [tailscaleAuthKey](https://cheerpj.com/docs/reference/cheerpjInit#tailscaleauthkey),
 and `overrideAllShortcuts`.
 
-The `overrideAllShortcuts` is a custom option that, when set to `true`, overrides all browser-specific keyboard shortcuts.
+`overrideAllShortcuts` is the extension's own option: set to `true`, the applet receives every key, including the browser's keyboard shortcuts.
+
+> [!important] `initOptions` replaces the users' settings
+> When `initOptions` is set, the extension ignores the settings in its popup and advanced settings, and uses only the policy's values.
 
 The schema is as follows:
 
@@ -176,8 +178,7 @@ Example value for the registry key `initOptions`:
 
 _Supported since version `2025.3`_
 
-This setting allows you to change the browser’s user agent for pages where the extension is enabled.
-Some applets modify their output depending on the user agent being used.
+Changes the user agent the browser sends to sites where the extension is enabled, in the `User-Agent` and `Sec-CH-UA-Platform` headers. Some applets, or their servers, behave differently depending on the user agent.
 
 The schema is as follows:
 
@@ -205,7 +206,7 @@ Example value for the registry key `userAgent`:
 
 _Supported since version `2025.9`_
 
-This setting is used to provide the enterprise license token to the extension.
+The Enterprise licence token. With it set, the extension is licensed on every desktop that receives the policy, and activates offline, with no contact with our licence server.
 
 The schema is as follows:
 

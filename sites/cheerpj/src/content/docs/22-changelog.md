@@ -1,5 +1,6 @@
 ---
 title: Changelog
+description: "What changed in each CheerpJ release, with the loader script tag for each version"
 ---
 
 ## 5.0 - October 30, 2026

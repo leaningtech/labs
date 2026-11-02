@@ -53,7 +53,7 @@ export const products: { [product in Product]: ProductData } = {
 		favicon: baseWithSlash + "cheerpj3/favicon.ico",
 		subtitle: "Java Virtual Machine for modern web browsers",
 		description:
-			"Run Java 8, 11 and 17 applications, libraries, applets, Java Web Start, and Oracle Forms on the web without legacy plugins.",
+			"Run Java applications, applets, Java Web Start, Oracle Forms and libraries in the browser, from unmodified JARs, with no plug-in or local Java installation.",
 		github: "https://github.com/leaningtech/cheerpj-meta",
 		repositoryName: "cheerpj-meta",
 	},
