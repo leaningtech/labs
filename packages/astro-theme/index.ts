@@ -136,7 +136,11 @@ export default function ThemeIntegration(
 					compressHTML: prod,
 					build: {
 						format: "file",
-						inlineStylesheets: "always",
+						// Astro's default: only stylesheets under 4 KB are inlined. "always"
+						// put about 109 KB of the same CSS before the content of every page,
+						// downloaded again on each page; as a file it is fetched once and
+						// cached, and agents reading raw HTML reach the content sooner.
+						inlineStylesheets: "auto",
 					},
 					trailingSlash: "never",
 					vite: {
