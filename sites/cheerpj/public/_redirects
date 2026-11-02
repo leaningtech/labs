@@ -24,17 +24,31 @@
 /docs    /docs/overview   301
 /docs/   /docs/overview   301
 
-# Old English paths, still linked from GitHub projects and search results
-/guides/Implementing-Java-native-methods-in-JavaScript        /guides/implementing-native-methods       301
-/guides/File-System-support                                   /guides/filesystem                        301
-/guides/File-System-support.html                              /guides/filesystem                        301
-/getting-started/java-app.html                                /getting-started/Java-app                 301
-/guides/limitations                                           https://cheerpj.com/compatibility/        301
-/docs/guides/Implementing-Java-native-methods-in-JavaScript   /docs/guides/implementing-native-methods  301
-/docs/guides/File-System-support                              /docs/guides/filesystem                   301
-/docs/guides/File-System-support.html                         /docs/guides/filesystem                   301
-/docs/getting-started/java-app.html                           /docs/getting-started/Java-app            301
-/docs/guides/limitations                                      https://cheerpj.com/compatibility/        301
+# Old English paths, still linked from GitHub projects and search results.
+# Matching is case-sensitive (checked on the preview), so the lowercase
+# java-app rules can't catch Java-app and loop. The old pages are gone, so
+# Cloudflare no longer strips their trailing slash: each path also has a
+# slashed form.
+/guides/Implementing-Java-native-methods-in-JavaScript         /guides/implementing-native-methods       301
+/guides/Implementing-Java-native-methods-in-JavaScript/        /guides/implementing-native-methods       301
+/guides/File-System-support                                    /guides/filesystem                        301
+/guides/File-System-support/                                   /guides/filesystem                        301
+/guides/File-System-support.html                               /guides/filesystem                        301
+/getting-started/java-app                                      /getting-started/Java-app                 301
+/getting-started/java-app/                                     /getting-started/Java-app                 301
+/getting-started/java-app.html                                 /getting-started/Java-app                 301
+/guides/limitations                                            https://cheerpj.com/compatibility/        301
+/guides/limitations/                                           https://cheerpj.com/compatibility/        301
+/docs/guides/Implementing-Java-native-methods-in-JavaScript    /docs/guides/implementing-native-methods  301
+/docs/guides/Implementing-Java-native-methods-in-JavaScript/   /docs/guides/implementing-native-methods  301
+/docs/guides/File-System-support                               /docs/guides/filesystem                   301
+/docs/guides/File-System-support/                              /docs/guides/filesystem                   301
+/docs/guides/File-System-support.html                          /docs/guides/filesystem                   301
+/docs/getting-started/java-app                                 /docs/getting-started/Java-app            301
+/docs/getting-started/java-app/                                /docs/getting-started/Java-app            301
+/docs/getting-started/java-app.html                            /docs/getting-started/Java-app            301
+/docs/guides/limitations                                       https://cheerpj.com/compatibility/        301
+/docs/guides/limitations/                                      https://cheerpj.com/compatibility/        301
 
 # The CheerpJ 2 docs are gone; anything under cheerpj2/ lands on the migration guide
 /cheerpj2         /migrating-from-cheerpj2       301
