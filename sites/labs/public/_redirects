@@ -1,11 +1,18 @@
-/cheerpj /cheerpj3
+# Cloudflare: static redirects go before dynamic ones (splats, placeholders),
+# and the top-most rule that matches wins. All static rules come first; the
+# dynamic ones are at the end of the file.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# ---- Static redirects ----
+
+/cheerpj https://cheerpj.com/ 301
 /sitemap.xml /sitemap-index.xml
-/cheerpj2/getting-started/applet-runner.html https://leaningtech.com/cheerpj-applet-runner/
+/cheerpj2/getting-started/applet-runner.html https://cheerpj.com/cheerpj-applet-runner/ 301
 /blog/null /blog
-/cheerpj2/getting-started/applet-runner https://leaningtech.com/cheerpj-applet-runner/
-/cheerpj3/download /cheerpj3/getting-started
-/cheerpj3/downloads /cheerpj3/getting-started
-/cheerpj3/releases /cheerpj3/changelog
+/cheerpj2/getting-started/applet-runner https://cheerpj.com/cheerpj-applet-runner/ 301
+/cheerpj3/download https://cheerpj.com/docs/getting-started 301
+/cheerpj3/downloads https://cheerpj.com/docs/getting-started 301
+/cheerpj3/releases https://cheerpj.com/docs/changelog 301
 /cheerpx2 /cheerpx
 /cheerpx3 /cheerpx
 /docs /#ecosystem
@@ -22,25 +29,32 @@
 /cheerpx/for-flash/Tutorial /cheerpx-for-flash/getting-started/tutorial
 /webvm /cheerpx
 /news /blog
-/cheerpj3/reference/cheerpjAddStringFile /cheerpj3/reference/cheerpOSAddStringFile
+/cheerpj3/reference/cheerpjAddStringFile https://cheerpj.com/docs/reference/cheerpOSAddStringFile 301
+/cheerpj3/guides/Implementing-Java-native-methods-in-JavaScript https://cheerpj.com/docs/guides/implementing-native-methods 301
+/cheerpj3/guides/File-System-support https://cheerpj.com/docs/guides/filesystem 301
+/showcase/cheerpj /showcase?product=CheerpJ 301
+/showcase/cheerpj/ /showcase?product=CheerpJ 301
 /cheerp/installation/rhel8 /cheerp/installation/rhel
-/cheerpj3/examples/* /cheerpj3/tutorials/:splat
-/cheerpj-jnlprunner /cheerpj-jnlp-runner
-/cheerpj-jnlprunner/* /cheerpj-jnlp-runner/:splat
+/cheerpj-jnlprunner /docs/cheerpj-jnlp-runner 301
 
 /cheerp https://cheerp.io/
-/cheerp/* https://cheerp.io/docs/:splat
 /cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
-/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
 /docs/cheerpj2 https://cheerpj.com/docs/migrating-from-cheerpj2 301
-/docs/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
-/cheerpj3 https://cheerpj.com/
-/cheerpj3/* https://cheerpj.com/docs/:splat
+/cheerpj3 https://cheerpj.com/ 301
 /cheerpx https://cheerpx.io/
-/cheerpx/* https://cheerpx.io/docs/:splat
 /cheerpx-for-flash /docs/cheerpx-for-flash
+/cheerpj-jnlp-runner /docs/cheerpj-jnlp-runner 301
+/cheerpj-applet-runner /docs/cheerpj-applet-runner 301
+
+# ---- Dynamic redirects (after every static one) ----
+
+/cheerpj3/examples/* https://cheerpj.com/docs/tutorials/:splat 301
+/cheerpj-jnlprunner/* /docs/cheerpj-jnlp-runner/:splat 301
+/cheerp/* https://cheerp.io/docs/:splat
+/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/docs/cheerpj2/* https://cheerpj.com/docs/migrating-from-cheerpj2 301
+/cheerpj3/* https://cheerpj.com/docs/:splat 301
+/cheerpx/* https://cheerpx.io/docs/:splat
 /cheerpx-for-flash/* /docs/cheerpx-for-flash/:splat
-/cheerpj-jnlp-runner /docs/cheerpj-jnlp-runner
-/cheerpj-jnlp-runner/* /docs/cheerpj-jnlp-runner/:splat
-/cheerpj-applet-runner /docs/cheerpj-applet-runner
-/cheerpj-applet-runner/* /docs/cheerpj-applet-runner/:splat
+/cheerpj-jnlp-runner/* /docs/cheerpj-jnlp-runner/:splat 301
+/cheerpj-applet-runner/* /docs/cheerpj-applet-runner/:splat 301
