@@ -17,6 +17,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
+import { copyFile } from "node:fs/promises";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -26,6 +27,23 @@ export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 	theme?: string | ExpressiveCodeTheme; // Shiki theme name, or a custom ExpressiveCodeTheme instance, defaults to material-theme-darker
 };
+
+// @astrojs/sitemap only writes sitemap-index.xml, but cheerpj.com's own sitemap
+// index (and the habit of most crawlers) asks for sitemap.xml. Serve the same
+// index under both names.
+function sitemapAlias(): AstroIntegration {
+	return {
+		name: "@leaningtech/astro-theme/sitemap-alias",
+		hooks: {
+			"astro:build:done": async ({ dir }) => {
+				await copyFile(
+					new URL("sitemap-index.xml", dir),
+					new URL("sitemap.xml", dir)
+				);
+			},
+		},
+	};
+}
 
 export default function ThemeIntegration(
 	options: Options = {}
@@ -59,7 +77,13 @@ export default function ThemeIntegration(
 						},
 					}),
 					mdx(),
-					sitemap(),
+					sitemap({
+						// /docs is the injected docs index: a meta refresh page (and a 301 on
+						// cheerpj.com) that sends visitors to the first docs page. Sitemaps
+						// list only the pages that answer 200 with content.
+						filter: (page) => !/^\/docs\/?$/.test(new URL(page).pathname),
+					}),
+					sitemapAlias(), // must come after sitemap(): it copies its output
 					robotsTxt(),
 					pagefind(),
 					svelte(),
