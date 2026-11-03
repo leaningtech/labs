@@ -132,22 +132,27 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 </style>
 
 <script>
-	// Copy buttons: copy the text, or select it to copy by hand
+	// Copy buttons: copy the text, or select it to copy by hand.
+	// Only the button's <span> changes: astro-icon puts the icon's <symbol> in
+	// the first button's SVG and points the second button's <use> at it, so
+	// replacing a button's contents would blank the other button's icon.
 	for (const button of document.querySelectorAll<HTMLButtonElement>(
 		"#cj-agents [data-copy]"
 	)) {
-		const label = button.innerHTML;
+		const span = button.querySelector("span");
+		if (!span) continue;
+		const label = span.textContent;
 		const text = button.dataset.copy ?? "";
 		button.addEventListener("click", async () => {
 			try {
 				await navigator.clipboard.writeText(text);
-				button.textContent = "Copied";
+				span.textContent = "Copied";
 			} catch {
 				const code = button.closest("[data-copy-box]")?.querySelector("code");
 				if (code) getSelection()?.selectAllChildren(code);
-				button.textContent = "Select to copy";
+				span.textContent = "Select to copy";
 			}
-			setTimeout(() => (button.innerHTML = label), 2000);
+			setTimeout(() => (span.textContent = label), 2000);
 		});
 	}
 </script>
