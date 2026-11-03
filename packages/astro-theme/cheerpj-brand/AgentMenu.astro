@@ -59,11 +59,17 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 </div>
 
 <style>
-	/* Under the nav, at its right edge */
+	/* Under the nav, at its right edge. It is taller than a phone held sideways,
+	   and fixed, so without a cap the links and the install command below the
+	   fold could not be reached: 4.5rem of nav above, 1rem of air below. */
 	.cj-agents {
 		position: fixed;
 		inset: 4.5rem 1rem auto auto;
 		width: min(28rem, calc(100vw - 2rem));
+		max-height: calc(100vh - 5.5rem);
+		max-height: calc(100dvh - 5.5rem);
+		overflow-y: auto;
+		overscroll-behavior: contain;
 		margin: 0;
 		padding: 20px;
 		border: 1px solid var(--cj-line);
