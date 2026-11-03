@@ -2,6 +2,8 @@
 // The "AI agents" button that opens AgentMenu's panel. Two copies, as the nav
 // is full on phones: in the nav from 640px (icon only up to 1023px), and in
 // the bar under the nav, beside the breadcrumbs, below 640px.
+// It opens a panel, where Discord and GitHub lead somewhere else, so a rule
+// sits between it and that pair.
 // CheerpJ docs only: the styles need .site-cheerpj.
 import { Icon } from "astro-icon/components";
 
@@ -18,9 +20,10 @@ const { where } = Astro.props;
 	popovertarget="cj-agents"
 	aria-label="AI agents"
 >
-	<Icon name="ph:terminal-window" aria-hidden="true" />
+	<Icon name="ph:robot" aria-hidden="true" />
 	<span class="cj-agents-btn-text">AI agents</span>
 </button>
+{where === "nav" && <span class="cj-agents-rule" aria-hidden="true" />}
 
 <style>
 	/* Like the nav's Discord and GitHub buttons, with a label */
@@ -44,6 +47,19 @@ const { where } = Astro.props;
 	.cj-agents-btn svg {
 		width: 18px;
 		height: 18px;
+	}
+
+	/* Between this and the Discord and GitHub pair, which it is not one of */
+	.cj-agents-rule {
+		flex: none;
+		width: 1px;
+		height: 1.25rem;
+		background: var(--cj-line);
+	}
+	@media (max-width: 639px) {
+		.cj-agents-rule {
+			display: none;
+		}
 	}
 
 	.cj-agents-btn-bar {

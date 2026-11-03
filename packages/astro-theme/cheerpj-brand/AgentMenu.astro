@@ -16,6 +16,15 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 ---
 
 <div id="cj-agents" popover class="cj-agents">
+	<button
+		type="button"
+		class="cj-agents-close"
+		popovertarget="cj-agents"
+		popovertargetaction="hide"
+		aria-label="Close"
+	>
+		<Icon name="mdi:close" aria-hidden="true" />
+	</button>
 	<p class="cj-agents-title">Use CheerpJ with a coding agent</p>
 	<p>
 		Give your agent this prompt. It loads the CheerpJ skill, which covers
@@ -24,17 +33,21 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 	</p>
 	<div class="cj-agents-code" data-copy-box>
 		<code>{prompt}</code>
-		<button type="button" data-copy={prompt}>
-			<Icon name="mdi:content-copy" aria-hidden="true" />
-			<span>Copy</span>
+		<button type="button" data-copy={prompt} aria-label="Copy the prompt">
+			<Icon name="mdi:content-copy" class="cj-agents-idle" aria-hidden="true" />
+			<Icon name="mdi:check" class="cj-agents-done" aria-hidden="true" />
 		</button>
 	</div>
 	<p class="cj-agents-label">Or install the skill</p>
 	<div class="cj-agents-code" data-copy-box>
 		<code>{install}</code>
-		<button type="button" data-copy={install}>
-			<Icon name="mdi:content-copy" aria-hidden="true" />
-			<span>Copy</span>
+		<button
+			type="button"
+			data-copy={install}
+			aria-label="Copy the install command"
+		>
+			<Icon name="mdi:content-copy" class="cj-agents-idle" aria-hidden="true" />
+			<Icon name="mdi:check" class="cj-agents-done" aria-hidden="true" />
 		</button>
 	</div>
 	<ul class="cj-agents-links">
@@ -70,6 +83,26 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 		font-size: 16px;
 		font-weight: 700;
 	}
+	.cj-agents-close {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: 6px;
+		color: var(--color-bg-300);
+		transition: color 0.15s ease;
+	}
+	.cj-agents-close:hover {
+		color: var(--cj-ink);
+	}
+	.cj-agents-close svg {
+		width: 18px;
+		height: 18px;
+	}
 	.cj-agents-label {
 		margin-top: 16px !important;
 		color: var(--cj-ink);
@@ -92,67 +125,80 @@ const install = "npx skills add leaningtech/skills --skill cheerpj";
 		overflow-wrap: anywhere;
 	}
 	.cj-agents-code button {
+		position: relative;
 		flex: none;
 		display: inline-flex;
 		align-items: center;
-		gap: 4px;
-		padding: 2px 8px;
+		justify-content: center;
+		width: 1.75rem;
+		height: 1.75rem;
 		border: 1px solid var(--cj-line);
 		border-radius: 6px;
 		color: var(--cj-ink);
-		font-size: 13px;
-		font-weight: 700;
 	}
 	.cj-agents-code button:hover {
 		border-color: var(--cj-ink);
 	}
 	.cj-agents-code button svg {
-		width: 13px;
-		height: 13px;
+		width: 14px;
+		height: 14px;
+		transition: opacity 0.12s ease;
 	}
+	/* The tick sits on top of the copy icon and the two fade past each other.
+	   Neither is display:none, so the icons' shared <symbol> sprites stay in the
+	   document for the other button's <use> to point at. */
+	.cj-agents-code button .cj-agents-done {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		opacity: 0;
+	}
+	.cj-agents-code button[data-done] .cj-agents-idle {
+		opacity: 0;
+	}
+	.cj-agents-code button[data-done] .cj-agents-done {
+		opacity: 1;
+	}
+	/* One link at each edge, lining up with the code blocks' edges */
 	.cj-agents-links {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: space-between;
 		gap: 6px 20px;
 		margin: 16px 0 0;
 		padding: 0;
 		list-style: none;
 	}
 	.cj-agents-links a {
-		color: var(--cj-ink);
+		color: var(--cj-orange);
 		font-weight: 700;
-		text-decoration: underline;
-		text-decoration-color: var(--cj-orange);
-		text-decoration-thickness: 3px;
-		text-underline-offset: 4px;
+		text-decoration: none;
+		transition: color 0.15s ease;
 	}
 	.cj-agents-links a:hover {
-		text-decoration-color: currentColor;
+		color: var(--color-bg-300);
 	}
 </style>
 
 <script>
-	// Copy buttons: copy the text, or select it to copy by hand.
-	// Only the button's <span> changes: astro-icon puts the icon's <symbol> in
-	// the first button's SVG and points the second button's <use> at it, so
-	// replacing a button's contents would blank the other button's icon.
+	// Copy buttons: copy the text and tick for two seconds. Where the clipboard
+	// is barred, select the text instead, for the reader to copy by hand, and
+	// don't tick: nothing was copied.
 	for (const button of document.querySelectorAll<HTMLButtonElement>(
 		"#cj-agents [data-copy]"
 	)) {
-		const span = button.querySelector("span");
-		if (!span) continue;
-		const label = span.textContent;
 		const text = button.dataset.copy ?? "";
 		button.addEventListener("click", async () => {
 			try {
 				await navigator.clipboard.writeText(text);
-				span.textContent = "Copied";
 			} catch {
 				const code = button.closest("[data-copy-box]")?.querySelector("code");
 				if (code) getSelection()?.selectAllChildren(code);
-				span.textContent = "Select to copy";
+				return;
 			}
-			setTimeout(() => (span.textContent = label), 2000);
+			button.dataset.done = "";
+			setTimeout(() => delete button.dataset.done, 2000);
 		});
 	}
 </script>
