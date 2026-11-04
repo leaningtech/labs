@@ -739,11 +739,12 @@
 					onclick={() => (feedPanelOpen = !feedPanelOpen)}
 					aria-expanded={feedPanelOpen}
 					aria-label="Subscribe via RSS"
-					class="flex items-center p-1 rounded-md transition-colors {feedPanelOpen
+					class="flex items-center rounded-md transition-colors {feedPanelOpen
 						? 'text-white'
 						: 'text-bg-400 hover:text-white'}"
 				>
-					{@render rssIcon("w-3.5 h-3.5")}
+					<!-- Sized to the search input's height so the row reads as one band. -->
+					{@render rssIcon("size-[26px]")}
 				</button>
 
 				{#if feedPanelOpen}
