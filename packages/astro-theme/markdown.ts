@@ -7,6 +7,12 @@
 // Converting the built HTML rather than the sources handles MDX components,
 // replaced variables, callouts and code blocks the same way the reader sees them.
 //
+// The flip side: this depends on class names owned by other packages —
+// `expressive-code` (code frames), `callout-title` / `callout-content`
+// (remark-obsidian-callout), `data-pagefind-body` (pagefind). A major bump of
+// any of them, or a move to another repo where versions re-resolve, can quietly
+// degrade the output. After upgrading, check a page with code and a callout.
+//
 // If the site has an llms.txt (a page of the site, so it can follow the docs
 // nav), llms-full.txt is written from it: every page it links to, in order,
 // up to its "## Optional" section.
@@ -140,9 +146,12 @@ function callout(quote: Element, ctx: Context): ElementContent[] {
 	const titleBox = find(quote, (e) => classes(e).includes("callout-title"));
 	const title =
 		find(quote, (e) => classes(e).includes("callout-title-text")) ?? titleBox;
-	const content =
-		find(quote, (e) => classes(e).includes("callout-content"))?.children ??
-		quote.children.filter((c) => c !== titleBox);
+	// The content box holds only the first paragraph: anything after it is a
+	// sibling of the box, so splice it in place rather than selecting it.
+	const contentBox = find(quote, (e) => classes(e).includes("callout-content"));
+	const content = quote.children.flatMap((c) =>
+		c === titleBox ? [] : c === contentBox ? contentBox.children : [c]
+	);
 	const titleText = title ? toText(title).trim() : "";
 	const body = asFlow(cleanAll(content, ctx));
 	return [
@@ -293,7 +302,11 @@ export default function markdown(): AstroIntegration {
 				}
 				logger.info(`${pages.length} Markdown pages`);
 
-				// llms-full.txt from llms.txt, when the site has one
+				// llms-full.txt from llms.txt, when the site has one.
+				// Assumes every .md link in it is a docs page written above. Once the
+				// docs site merges into cheerpj.com, the root llms.txt will also list
+				// marketing pages and the skill, which have no twin here: this will
+				// need to skip links outside `base` rather than read them.
 				let index: string;
 				try {
 					index = await readFile(join(outDir, "llms.txt"), "utf-8");
