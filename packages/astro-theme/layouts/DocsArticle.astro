@@ -14,6 +14,7 @@ import CheerpjFooter from "../cheerpj-brand/Footer.astro";
 import CheerpjLogo from "../cheerpj-brand/cheerpj-logo.svg";
 import ProductNav from "../components/nav/product/Nav.astro";
 import BentoGrid from "../components/patterns/BentoGrid.astro";
+import AgentButton from "../cheerpj-brand/AgentButton.astro";
 
 interface Props {
 	id?: string | undefined;
@@ -105,6 +106,7 @@ const highlightAt =
 								</button>
 							)}
 							{id && <Breadcrumbs current={id} />}
+							{isCheerpj && <AgentButton where="bar" />}
 						</div>
 
 						<main
