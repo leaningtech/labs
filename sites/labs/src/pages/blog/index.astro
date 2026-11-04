@@ -13,6 +13,14 @@ const allPosts = (
 
 const site = getSite(Astro.site?.hostname);
 
+// Passed to ProductFilter as a prop rather than imported there: feeds.ts pulls in
+// @astrojs/rss and astro:content, neither of which can go in the client bundle.
+const feeds = [undefined, ...FEED_PRODUCTS].map((product) => ({
+	label: product ?? "All posts",
+	href: feedPath(product),
+	title: feedTitle(product),
+}));
+
 const blogCards = await Promise.all(
 	allPosts.map(async (post) => {
 		const authorEntries = await Promise.all(
@@ -56,13 +64,13 @@ const blogCards = await Promise.all(
 	filterPage={true}
 >
 	{
-		[undefined, ...FEED_PRODUCTS].map((product) => (
+		feeds.map((feed) => (
 			<link
 				slot="head"
 				rel="alternate"
 				type="application/rss+xml"
-				title={feedTitle(product)}
-				href={feedPath(product)}
+				title={feed.title}
+				href={feed.href}
 			/>
 		))
 	}
@@ -88,6 +96,7 @@ const blogCards = await Promise.all(
 				searchPlaceholder="Search posts…"
 				cards={blogCards}
 				gridType="blog"
+				{feeds}
 			/>
 		</section>
 	</div>
