@@ -1,0 +1,88 @@
+---
+// The "AI agents" button that opens AgentMenu's panel. Two copies, as the nav
+// is full on phones: in the nav from 640px (icon only up to 1023px), and in
+// the bar under the nav, beside the breadcrumbs, below 640px.
+// It opens a panel, where Discord and GitHub lead somewhere else, so a rule
+// sits between it and that pair.
+// CheerpJ docs only: the styles need .site-cheerpj.
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	where: "nav" | "bar";
+}
+
+const { where } = Astro.props;
+---
+
+<button
+	type="button"
+	class:list={["cj-agents-btn", `cj-agents-btn-${where}`]}
+	popovertarget="cj-agents"
+	aria-label="AI agents"
+>
+	<Icon name="ph:robot" aria-hidden="true" />
+	<span class="cj-agents-btn-text">AI agents</span>
+</button>
+{where === "nav" && <span class="cj-agents-rule" aria-hidden="true" />}
+
+<style>
+	/* Like the nav's Discord and GitHub buttons, with a label */
+	.cj-agents-btn {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		gap: 6px;
+		height: 2rem;
+		padding: 0 10px;
+		border: 1px solid var(--cj-line);
+		border-radius: 6px;
+		color: var(--cj-ink);
+		font-size: 14px;
+		font-weight: 700;
+		transition: border-color 0.15s ease;
+	}
+	.cj-agents-btn:hover {
+		border-color: var(--cj-ink);
+	}
+	.cj-agents-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	/* Between this and the Discord and GitHub pair, which it is not one of */
+	.cj-agents-rule {
+		flex: none;
+		width: 1px;
+		height: 1.25rem;
+		background: var(--cj-line);
+	}
+	@media (max-width: 639px) {
+		.cj-agents-rule {
+			display: none;
+		}
+	}
+
+	.cj-agents-btn-bar {
+		margin-left: auto;
+	}
+	@media (min-width: 640px) {
+		.cj-agents-btn-bar {
+			display: none;
+		}
+	}
+	@media (max-width: 639px) {
+		.cj-agents-btn-nav {
+			display: none;
+		}
+	}
+	@media (min-width: 640px) and (max-width: 1023px) {
+		.cj-agents-btn-nav {
+			width: 2rem;
+			padding: 0;
+			justify-content: center;
+		}
+		.cj-agents-btn-nav .cj-agents-btn-text {
+			display: none;
+		}
+	}
+</style>

@@ -18,6 +18,7 @@ export default defineConfig({
 		theme({
 			baseIsDocs: true,
 			theme: cheerpjTheme,
+			markdown: true,
 		}),
 	],
 	vite: {

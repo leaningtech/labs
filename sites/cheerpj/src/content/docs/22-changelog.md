@@ -13,7 +13,6 @@ description: "What changed in each CheerpJ release, with the loader script tag f
 - Preview of Java 25 support
 - New experimental WasmGC engine that can be enabled with the [`wasmGC`](/docs/reference/cheerpjInit#wasmgc) init option
 - New [`env`](/docs/reference/cheerpjInit#env) init option to set environment variables for the Java runtime
-- New [`disableScaling`](/docs/reference/cheerpjInit#disablescaling) init option to turn off CheerpJ display scaling on high-DPI screens
 - Runtime improvements
 - Various bug fixes
 
@@ -28,6 +27,7 @@ description: "What changed in each CheerpJ release, with the loader script tag f
 - Added long-press gesture support to simulate mouse hover events for enhanced mobile/touch screen support
 - General pointer event improvements
 - Runtime improvements
+- New [`disableScaling`](/docs/reference/cheerpjInit#disablescaling) init option to turn off CheerpJ display scaling on high-DPI screens
 
 ## 4.2 - Jun 26, 2025
 
