@@ -1,0 +1,16 @@
+# Agent-readable text: the Markdown twin of each docs page (written by the
+# theme's markdown integration), llms.txt and llms-full.txt.
+#
+# Production (labs-cheerpj) is served from its root behind cheerpj.com's
+# /docs/* proxy; the previews project serves under /docs/. So the named files
+# are listed for both, as in _redirects. The /*.md rule matches either way.
+/*.md
+	Content-Type: text/markdown; charset=utf-8
+/llms.txt
+	Content-Type: text/plain; charset=utf-8
+/llms-full.txt
+	Content-Type: text/plain; charset=utf-8
+/docs/llms.txt
+	Content-Type: text/plain; charset=utf-8
+/docs/llms-full.txt
+	Content-Type: text/plain; charset=utf-8
