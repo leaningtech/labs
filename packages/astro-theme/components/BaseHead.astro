@@ -2,6 +2,7 @@
 import { SITE_TITLE } from "../consts";
 import companyFavicon from "../assets/branding/company/tower.svg";
 import { productFromUrl } from "../lib/products";
+import { getCanonicalURL, isBlogPath } from "../lib/canonical";
 
 export interface Props {
 	title: string;
@@ -10,34 +11,9 @@ export interface Props {
 	gtmId?: string | undefined;
 }
 
-const isBlogPost =
-	Astro.url.pathname.startsWith("/blog/") ||
-	/* CheerpJ */ Astro.url.pathname.startsWith("/docs/blog/");
+const isBlogPost = isBlogPath(Astro.url.pathname);
 
-// For blog posts, the canonical origin should always be labs
-const canonicalSite = isBlogPost
-	? new URL("https://labs.leaningtech.com")
-	: Astro.site;
-
-// BrowserPod posts that have been migrated to browserpod.io point their
-// canonical at the browserpod.io equivalent to avoid duplicate-content conflicts.
-const browserpodCanonicals: Record<string, string> = {
-	"/blog/browserpod-10": "https://browserpod.io/blog/browserpod-10/",
-	"/blog/browserpod-20": "https://browserpod.io/blog/browserpod-20/",
-	"/blog/browserpod-deep-dive":
-		"https://browserpod.io/blog/browserpod-deep-dive/",
-	"/blog/browserpod-beta-announcement":
-		"https://browserpod.io/blog/browserpod-beta-announcement/",
-	"/blog/browserpod-annoucement":
-		"https://browserpod.io/blog/browserpod-announcement/",
-	"/blog/announcing-browsercode":
-		"https://browserpod.io/blog/announcing-browsercode/",
-};
-
-const normalisedPath = Astro.url.pathname.replace(/(?:\.html|\/)$/, "");
-const canonicalURL = browserpodCanonicals[normalisedPath]
-	? new URL(browserpodCanonicals[normalisedPath])
-	: new URL(normalisedPath || "/", canonicalSite);
+const canonicalURL = getCanonicalURL(Astro.url, Astro.site);
 
 const product = productFromUrl(canonicalURL);
 const favicon = product?.favicon ?? companyFavicon.src;
