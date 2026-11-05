@@ -25,7 +25,7 @@ Pods are created with the static [`boot`](/docs/reference/BrowserPod/boot) metho
 const pod = await BrowserPod.boot({ apiKey: "..." });
 ```
 
-`boot` provisions the environment, allocates storage, and returns a ready-to-use Pod. Each call deducts 10 tokens from your account balance.
+`boot` provisions the environment, allocates storage, and returns a ready-to-use Pod. Booting with an API key (on an edge network) deducts 10 tokens from your account balance; booting without an API key (on a fetch network) is free. See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Pod lifecycle
 
