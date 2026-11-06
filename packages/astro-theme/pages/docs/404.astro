@@ -13,4 +13,14 @@ import DocsArticle from "../../layouts/DocsArticle.astro";
 			let us know so we can fix it.
 		</a>
 	</p>
+	<!-- Tells Plausible this was a 404, with the path asked for, so a "404" goal
+	lists the broken links. Defines the queue if BaseHead's script hasn't yet. -->
+	<script is:inline>
+		window.plausible =
+			window.plausible ||
+			function () {
+				(window.plausible.q = window.plausible.q || []).push(arguments);
+			};
+		window.plausible("404", { props: { path: location.pathname } });
+	</script>
 </DocsArticle>
