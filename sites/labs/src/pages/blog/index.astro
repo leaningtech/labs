@@ -5,12 +5,21 @@ import Shell from "@leaningtech/astro-theme/layouts/Shell.astro";
 import Footer from "@leaningtech/astro-theme/components/Footer.astro";
 import { getSite } from "@leaningtech/astro-theme/nav";
 import ProductFilter from "../../components/ProductFilter.svelte";
+import { FEED_PRODUCTS, feedPath, feedTitle } from "../../lib/feeds";
 
 const allPosts = (
 	await getCollection("blog", ({ data }) => data.draft !== true)
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const site = getSite(Astro.site?.hostname);
+
+// Passed to ProductFilter as a prop rather than imported there: feeds.ts pulls in
+// @astrojs/rss and astro:content, neither of which can go in the client bundle.
+const feeds = [undefined, ...FEED_PRODUCTS].map((product) => ({
+	label: product ?? "All posts",
+	href: feedPath(product),
+	title: feedTitle(product),
+}));
 
 const blogCards = await Promise.all(
 	allPosts.map(async (post) => {
@@ -54,6 +63,17 @@ const blogCards = await Promise.all(
 	{site}
 	filterPage={true}
 >
+	{
+		feeds.map((feed) => (
+			<link
+				slot="head"
+				rel="alternate"
+				type="application/rss+xml"
+				title={feed.title}
+				href={feed.href}
+			/>
+		))
+	}
 	<div class="bg-stone-950">
 		<header class="text-center py-16">
 			<h1
@@ -76,6 +96,7 @@ const blogCards = await Promise.all(
 				searchPlaceholder="Search posts…"
 				cards={blogCards}
 				gridType="blog"
+				{feeds}
 			/>
 		</section>
 	</div>
