@@ -6,7 +6,6 @@
 # ---- Static redirects ----
 
 /cheerpj https://cheerpj.com/ 301
-/sitemap.xml /sitemap-index.xml
 /cheerpj2/getting-started/applet-runner.html https://cheerpj.com/cheerpj-applet-runner/ 301
 /blog/null /blog
 /cheerpj2/getting-started/applet-runner https://cheerpj.com/cheerpj-applet-runner/ 301
