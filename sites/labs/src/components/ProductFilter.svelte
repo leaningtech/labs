@@ -20,14 +20,24 @@
 		authors?: Author[];
 	}
 
+	interface Feed {
+		label: string;
+		href: string;
+		title: string;
+	}
+
 	let {
 		searchPlaceholder = "Search…",
 		cards = [] as CardData[],
 		gridType = "showcase" as "showcase" | "blog",
+		// Built server-side and passed in; empty on the showcase page, which has no
+		// feeds, so the subscribe button is simply absent there.
+		feeds = [] as Feed[],
 	}: {
 		searchPlaceholder?: string;
 		cards?: CardData[];
 		gridType?: "showcase" | "blog";
+		feeds?: Feed[];
 	} = $props();
 
 	const TAGS = ["BrowserPod", "Cheerp", "CheerpJ", "CheerpX"] as const;
@@ -107,9 +117,14 @@
 	let inputFocused = $state(false);
 	let filterPanelOpen = $state(false);
 	let mobileSearchOpen = $state(false);
+	let feedPanelOpen = $state(false);
 	let searchContainer: HTMLElement;
 	let mobileFilterRef: HTMLElement;
 	let mobileSearchRef: HTMLElement;
+	// Both breakpoints render a menu and CSS hides one, so click-outside has to
+	// check each ref before deciding the click landed outside.
+	let feedRef: HTMLElement | undefined = $state();
+	let mobileFeedRef: HTMLElement | undefined = $state();
 
 	// Search results derived from card data — no DOM walking required.
 	const searchResults = $derived.by(() => {
@@ -228,6 +243,7 @@
 			inputFocused = false;
 			filterPanelOpen = false;
 			mobileSearchOpen = false;
+			feedPanelOpen = false;
 			(document.activeElement as HTMLElement)?.blur();
 		}
 	}
@@ -242,6 +258,12 @@
 		}
 		if (mobileFilterRef && !mobileFilterRef.contains(e.target as Node)) {
 			filterPanelOpen = false;
+		}
+		const insideFeeds =
+			feedRef?.contains(e.target as Node) ||
+			mobileFeedRef?.contains(e.target as Node);
+		if (!insideFeeds) {
+			feedPanelOpen = false;
 		}
 	}
 
@@ -312,6 +334,38 @@
 </script>
 
 <svelte:window onclick={handleWindowClick} onkeydown={handleKeydown} />
+
+<!-- Subscribe menu, shared by both breakpoints: an RSS glyph and the feed list. -->
+{#snippet rssIcon(size: string)}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		class={size}
+		fill="currentColor"
+		viewBox="0 0 24 24"
+		aria-hidden="true"
+	>
+		<circle cx="6.18" cy="17.82" r="2.18" />
+		<path
+			d="M4 10.1v2.9a7 7 0 0 1 7 7h2.9A9.9 9.9 0 0 0 4 10.1zm0-5.08V7.9A14.1 14.1 0 0 1 18.1 22H21A17 17 0 0 0 4 5.02z"
+		/>
+	</svg>
+{/snippet}
+
+{#snippet feedLinks()}
+	{#each feeds as feed}
+		<a
+			href={feed.href}
+			title={feed.title}
+			onclick={() => (feedPanelOpen = false)}
+			class="block px-4 py-2.5 text-sm text-bg-400 hover:bg-bg-800 hover:text-white transition-colors border-b border-bg-800 last:border-0 whitespace-nowrap"
+		>
+			{feed.label}
+		</a>
+	{/each}
+	<p class="px-4 py-2.5 text-xs text-bg-500 border-t border-bg-800">
+		Paste a link into your feed reader.
+	</p>
+{/snippet}
 
 <!-- ─── Mobile: tabs row → icon controls row ──────────────────────────────────── -->
 <div class="md:hidden flex flex-col gap-y-3 mb-8">
@@ -515,6 +569,33 @@
 			<!-- Spacer pushes search icon to the right -->
 			<div class="flex-1"></div>
 
+			<!-- Subscribe menu -->
+			{#if feeds.length > 0}
+				<div class="relative" bind:this={mobileFeedRef}>
+					<button
+						onclick={() => {
+							feedPanelOpen = !feedPanelOpen;
+							filterPanelOpen = false;
+						}}
+						aria-expanded={feedPanelOpen}
+						aria-label="Subscribe via RSS"
+						class="text-bg-400 hover:text-white transition-colors p-1 {feedPanelOpen
+							? 'text-white'
+							: ''}"
+					>
+						{@render rssIcon("w-4 h-4")}
+					</button>
+
+					{#if feedPanelOpen}
+						<div
+							class="absolute top-full right-0 mt-1.5 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[12rem]"
+						>
+							{@render feedLinks()}
+						</div>
+					{/if}
+				</div>
+			{/if}
+
 			<!-- Search icon -->
 			<button
 				onclick={() => {
@@ -650,6 +731,31 @@
 				</div>
 			{/if}
 		</div>
+
+		<!-- Subscribe menu -->
+		{#if feeds.length > 0}
+			<div class="relative shrink-0" bind:this={feedRef}>
+				<button
+					onclick={() => (feedPanelOpen = !feedPanelOpen)}
+					aria-expanded={feedPanelOpen}
+					aria-label="Subscribe via RSS"
+					class="flex items-center rounded-md transition-colors {feedPanelOpen
+						? 'text-white'
+						: 'text-bg-400 hover:text-white'}"
+				>
+					<!-- Sized to the search input's height so the row reads as one band. -->
+					{@render rssIcon("size-[26px]")}
+				</button>
+
+				{#if feedPanelOpen}
+					<div
+						class="absolute top-full right-0 mt-2 z-50 bg-bg-900 border border-bg-700 rounded-xl shadow-2xl overflow-hidden min-w-[12rem] text-left"
+					>
+						{@render feedLinks()}
+					</div>
+				{/if}
+			</div>
+		{/if}
 	</div>
 </div>
 

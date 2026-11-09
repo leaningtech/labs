@@ -8,6 +8,8 @@ import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
 import CheerpjLogo from "../../../cheerpj-brand/cheerpj-logo.svg";
+import AgentMenu from "../../../cheerpj-brand/AgentMenu.astro";
+import AgentButton from "../../../cheerpj-brand/AgentButton.astro";
 import { getProductNav, getRootNav } from "../../../lib/nav";
 
 interface Props {
@@ -147,6 +149,8 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		{
 			isCheerpj ? (
 				<div class="flex items-center gap-2 flex-none">
+					<AgentButton where="nav" />
+					<AgentMenu />
 					<a href={DISCORD_URL} class="cj-icon-btn">
 						<span class="sr-only">Discord</span>
 						<Icon name="ri:discord-fill" aria-hidden="true" />

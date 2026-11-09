@@ -3,6 +3,13 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 3.5.0:
+
+- Make `apiKey` optional: Pods can now boot without an API key on a free fetch network that routes requests directly through the browser. See [Networking](/docs/understanding-browserpod/networking).
+- Add `network` option to `BrowserPod.boot`, along with `BrowserPod.createEdgeNetwork` and `BrowserPod.createFetchNetwork` for custom network configuration.
+- Add `BrowserPod.opinionatedFetch` to enable `npm install` on the fetch network.
+- Support outgoing WebSockets and plain HTTP from Pods.
+
 ## Version 3.4.0:
 
 - Add `pnpm` and `fd` to the default image

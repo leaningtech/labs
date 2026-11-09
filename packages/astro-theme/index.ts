@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import publicDir from "astro-public";
 import pagefind from "./pagefind";
+import markdown from "./markdown";
 import { remarkReplaceVars, rehypeReplaceVars } from "./replace-variables";
 import { rehypeBreakoutImages } from "./rehype-breakout-images";
 import svelte from "@astrojs/svelte";
@@ -27,6 +28,7 @@ const dirname = import.meta.url.replace("file://", "").replace("/index.ts", "");
 export type Options = {
 	baseIsDocs?: boolean; // Only true for cheerpj site
 	theme?: string | ExpressiveCodeTheme; // Shiki theme name, or a custom ExpressiveCodeTheme instance, defaults to material-theme-darker
+	markdown?: boolean; // Write a Markdown twin of each docs page, and llms-full.txt from the site's llms.txt
 };
 
 // @astrojs/sitemap writes sitemap-index.xml (a <sitemapindex>) alongside
@@ -123,6 +125,7 @@ export default function ThemeIntegration(
 					// drop this integration for the merged site.
 					robotsTxt(),
 					pagefind(),
+					...(options.markdown ? [markdown()] : []),
 					svelte(),
 					publicDir({
 						// FIXME claims directory does not exist
@@ -193,7 +196,11 @@ export default function ThemeIntegration(
 					compressHTML: prod,
 					build: {
 						format: "file",
-						inlineStylesheets: "always",
+						// Astro's default: only stylesheets under 4 KB are inlined. "always"
+						// put about 109 KB of the same CSS before the content of every page,
+						// downloaded again on each page; as a file it is fetched once and
+						// cached, and agents reading raw HTML reach the content sooner.
+						inlineStylesheets: "auto",
 					},
 					trailingSlash: "never",
 					vite: {

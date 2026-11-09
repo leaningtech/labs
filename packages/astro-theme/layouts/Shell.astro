@@ -28,6 +28,7 @@ const gtmId = gtmContainerId(productFromUrl(Astro.url));
 			{image}
 			{gtmId}
 		/>
+		<slot name="head" />
 		<style is:inline is:global>
 			@font-face {
 				font-family: "Monaspace Argon";
