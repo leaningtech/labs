@@ -13,7 +13,7 @@ No. The Node.js server runs inside the browser. You only need to host the outer 
 
 ## Do I need an API key?
 
-Yes. `BrowserPod.boot` requires an API key.
+Not always. `BrowserPod.boot` works without one: the Pod boots on a free **fetch network** that routes its traffic through the browser with `fetch()`, subject to CORS. An API key is required for an **edge network**, which reaches any domain permitted by your key and enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking).
 
 ## Why does BrowserPod need COOP and COEP headers?
 

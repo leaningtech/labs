@@ -7,10 +7,12 @@ BrowserPod provides a sandboxed runtime for executing code safely in the browser
 
 ## 1. Register a free account
 
-In order to use BrowserPod, you need to obtain an API key.
+The quickstart templates boot a Pod on an [edge network](/docs/understanding-browserpod/networking), which needs an API key.
 
 You can register at https://console.browserpod.io using your GitHub account, and
 create a new API key.
+
+If you would rather start without one, a Pod can also boot on a free [fetch network](/docs/understanding-browserpod/networking) that routes its traffic through the browser.
 
 ## 2. Use one of our quickstart templates
 
