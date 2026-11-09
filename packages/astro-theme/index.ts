@@ -18,6 +18,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { type AstroIntegration } from "astro";
 import { addIntegration } from "astro-integration-kit";
 import { copyFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -28,18 +29,37 @@ export type Options = {
 	theme?: string | ExpressiveCodeTheme; // Shiki theme name, or a custom ExpressiveCodeTheme instance, defaults to material-theme-darker
 };
 
-// @astrojs/sitemap only writes sitemap-index.xml, but cheerpj.com's own sitemap
-// index (and the habit of most crawlers) asks for sitemap.xml. Serve the same
-// index under both names.
+// @astrojs/sitemap writes sitemap-index.xml (a <sitemapindex>) alongside
+// sitemap-0.xml (the <urlset> holding the actual pages), but cheerpj.com's own
+// sitemap index — and the habit of most crawlers — asks for sitemap.xml. Copy the
+// urlset there, not the index: cheerpj.com/sitemap.xml is already a <sitemapindex>,
+// and Google does not follow an index nested inside an index, so copying
+// sitemap-index.xml would fix the 404 and still hide every docs URL.
+//
+// Only sitemap-0.xml is copied. Past 45,000 URLs @astrojs/sitemap splits into
+// sitemap-1.xml and beyond, and this copy would cover just the first chunk; at that
+// point the root index has to point at sitemap-index.xml instead.
+//
+// This is safe only while the docs are served from a subfolder (cheerpj.com/docs/):
+// the copy lands at /docs/sitemap.xml, clear of the main site's own /sitemap.xml.
+// When the docs merge into cheerpj.com, if they move to the site root this copy
+// and the main site's sitemap.xml claim the same address and one silently wins.
+// Drop this alias at that point, or rename the file.
 function sitemapAlias(): AstroIntegration {
 	return {
 		name: "@leaningtech/astro-theme/sitemap-alias",
 		hooks: {
-			"astro:build:done": async ({ dir }) => {
-				await copyFile(
-					new URL("sitemap-index.xml", dir),
-					new URL("sitemap.xml", dir)
-				);
+			"astro:build:done": async ({ dir, logger }) => {
+				const urlset = new URL("sitemap-0.xml", dir);
+				// @astrojs/sitemap only warns when it writes nothing (no `site` set, or
+				// every page filtered out). Warn too, rather than failing the build.
+				if (!existsSync(urlset)) {
+					logger.warn(
+						"no sitemap-0.xml was written, skipping the sitemap.xml copy"
+					);
+					return;
+				}
+				await copyFile(urlset, new URL("sitemap.xml", dir));
 			},
 		},
 	};
@@ -68,6 +88,19 @@ export default function ThemeIntegration(
 					shadowColor: "transparent",
 				};
 
+				const docsPrefix = options.baseIsDocs ? "" : "docs";
+				// The docs index and the docs 404 both answer 200 without being a real page:
+				// the index is a meta refresh (and a 301 on cheerpj.com) to the first docs
+				// page, and /404 renders "page not found". Sitemaps list neither. Derived from
+				// `base` and `docsPrefix` so it keeps working if a site changes its base.
+				const docsRoot = `${base}/${docsPrefix}`.replace(/\/$/, "");
+				const unlisted = new Set([
+					docsRoot,
+					`${docsRoot}/`,
+					`${docsRoot}/404`,
+					`${docsRoot}/404/`,
+				]);
+
 				const integrations = [
 					astroExpressiveCode({
 						theme,
@@ -78,12 +111,16 @@ export default function ThemeIntegration(
 					}),
 					mdx(),
 					sitemap({
-						// /docs is the injected docs index: a meta refresh page (and a 301 on
-						// cheerpj.com) that sends visitors to the first docs page. Sitemaps
-						// list only the pages that answer 200 with content.
-						filter: (page) => !/^\/docs\/?$/.test(new URL(page).pathname),
+						filter: (page) => !unlisted.has(new URL(page).pathname),
 					}),
 					sitemapAlias(), // must come after sitemap(): it copies its output
+					// Only effective on sites served from their own domain root (labs, cheerp,
+					// cheerpx). On cheerpj and browserpod the docs sit under /docs/, and crawlers
+					// read robots.txt only at the domain root, so /docs/robots.txt, and the
+					// Sitemap: line in it, is never fetched. Those two rely on the root domain's
+					// robots.txt (another repo) pointing at the docs sitemap. When the docs merge
+					// into the main site, move that line into the single root robots.txt and
+					// drop this integration for the merged site.
 					robotsTxt(),
 					pagefind(),
 					svelte(),
@@ -97,7 +134,6 @@ export default function ThemeIntegration(
 					addIntegration(params, { integration });
 				}
 
-				const docsPrefix = options.baseIsDocs ? "" : "docs";
 				params.injectRoute({
 					pattern: docsPrefix,
 					entrypoint: "@leaningtech/astro-theme/pages/docs/index.astro",
