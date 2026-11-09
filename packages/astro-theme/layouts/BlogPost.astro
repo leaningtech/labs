@@ -11,7 +11,7 @@ import Footer from "../components/Footer.astro";
 import BlogPostCardSet from "../components/BlogPostCardSet.astro";
 import { resolveAuthors } from "../lib/blog";
 import LinkButton from "../components/LinkButton.astro";
-import { DISCORD_URL } from "../consts";
+import { DISCORD_URL, SITE_TITLE } from "../consts";
 import { Image, getImage } from "astro:assets";
 import { productFromUrl } from "../lib/products";
 import ProductNav from "../components/nav/product/Nav.astro";
@@ -60,6 +60,27 @@ const site = tags?.map((t) => tagToSite[t]).find(Boolean) ?? baseSite;
 ---
 
 <Shell title={titleAndSubtitle} {description} image={socialImage?.src} {site}>
+	{
+		/* Feeds served by the labs site: /rss.xml, plus /rss/<product>.xml per tag */
+	}
+	<link
+		slot="head"
+		rel="alternate"
+		type="application/rss+xml"
+		title={SITE_TITLE}
+		href="/rss.xml"
+	/>
+	{
+		tags?.map((tag) => (
+			<link
+				slot="head"
+				rel="alternate"
+				type="application/rss+xml"
+				title={`${tag} posts | ${SITE_TITLE}`}
+				href={`/rss/${tag.toLowerCase()}.xml`}
+			/>
+		))
+	}
 	<div class="bg-stone-950">
 		{product && <ProductNav {product} />}
 		<main class="px-6 py-10 w-full max-w-screen-xl mx-auto">

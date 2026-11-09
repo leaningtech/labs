@@ -1,6 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
-import { DISCORD_URL, X_URL, GITHUB_URL, LINKEDIN_URL } from "../consts";
+import {
+	DISCORD_URL,
+	X_URL,
+	GITHUB_URL,
+	LINKEDIN_URL,
+	RSS_URL,
+} from "../consts";
 import { Image } from "astro:assets";
 import logotype from "../assets/branding/company/logotype-white.svg";
 import awardA from "../assets/awards/uk-business-tech-awards.webp";
@@ -176,6 +182,9 @@ const sections: Section[] = [
 				</a>
 				<a href={LINKEDIN_URL}>
 					<Icon name="mdi:linkedin" class="w-6 h-6 hover:text-primary-500" />
+				</a>
+				<a href={RSS_URL} title="Engineering blog RSS feed">
+					<Icon name="mdi:rss" class="w-6 h-6 hover:text-primary-500" />
 				</a>
 			</div>
 			<div class="text-bg-400 text-xs md:text-right md:col-span-3">
