@@ -127,11 +127,11 @@ const gtmScript =
 	defer
 	data-domain={plausibleDomains.join(",")}
 	src="https://plausible.leaningtech.com/js/script.outbound-links.js"></script>
-<script>
+<!-- Inline so the queue exists before any script in the page body runs. -->
+<script is:inline>
 	window.plausible =
 		window.plausible ||
 		function () {
-			// @ts-ignore
 			(window.plausible.q = window.plausible.q || []).push(arguments);
 		};
 </script>
