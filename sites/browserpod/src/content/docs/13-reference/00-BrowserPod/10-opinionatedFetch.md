@@ -47,6 +47,7 @@ const network = await BrowserPod.createFetchNetwork({
 		return BrowserPod.opinionatedFetch(url, init);
 	},
 });
+const pod = await BrowserPod.boot({ network });
 ```
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
