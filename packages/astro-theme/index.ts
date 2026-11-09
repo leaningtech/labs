@@ -32,11 +32,12 @@ export type Options = {
 };
 
 // @astrojs/sitemap writes sitemap-index.xml (a <sitemapindex>) alongside
-// sitemap-0.xml (the <urlset> holding the actual pages), but cheerpj.com's own
-// sitemap index — and the habit of most crawlers — asks for sitemap.xml. Copy the
-// urlset there, not the index: cheerpj.com/sitemap.xml is already a <sitemapindex>,
-// and Google does not follow an index nested inside an index, so copying
-// sitemap-index.xml would fix the 404 and still hide every docs URL.
+// sitemap-0.xml (the <urlset> holding the actual pages), but the root sitemap
+// indexes of cheerpj.com and browserpod.io (leaningtech.com repo) — and the habit
+// of most crawlers — ask for sitemap.xml. Copy the urlset there, not the index:
+// both root sitemap.xml files are already a <sitemapindex>, and Google does not
+// follow an index nested inside an index, so copying sitemap-index.xml would
+// hide every docs URL.
 //
 // Only sitemap-0.xml is copied. Past 45,000 URLs @astrojs/sitemap splits into
 // sitemap-1.xml and beyond, and this copy would cover just the first chunk; at that
