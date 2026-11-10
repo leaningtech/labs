@@ -19,8 +19,8 @@ class BrowserPod {
 
 ## Options
 
-- **cols (`number`, _optional_)** - The number of columns (width) for the terminal display. If not specified, a default width will be used.
-- **rows (`number`, _optional_)** - The number of rows (height) for the terminal display. If not specified, a default height will be used.
+- **cols (`number`, _optional_)** - The number of columns (width) for the terminal display. Defaults to 80.
+- **rows (`number`, _optional_)** - The number of rows (height) for the terminal display. Defaults to 24.
 - **onOutput (`function(buffer: Uint8Array, vt?: number) => void`)** - Callback function invoked whenever the terminal produces output. The buffer contains the raw terminal data, and vt is the ID of the terminal that produced it.
 
 ## Returns
