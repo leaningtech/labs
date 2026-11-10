@@ -15,6 +15,30 @@ No. The Node.js server runs inside the browser. You only need to host the outer 
 
 Not always. `BrowserPod.boot` works without one: the Pod boots on a free **fetch network** that routes its traffic through the browser with `fetch()`, subject to CORS. An API key is required for an **edge network**, which reaches any domain permitted by your key and enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking).
 
+## Is BrowserPod free?
+
+Yes, for any use, including commercial use, under the [BrowserPod Community Licence](https://browserpod.io/license). The one condition is attribution: a visible "Powered by BrowserPod" credit linking to `https://browserpod.io` on the page that hosts the Pod. See [Licensing](/docs/more/licensing).
+
+## What is metered?
+
+Only BrowserPod Edge, the optional network service: 10 tokens ($0.01) per connected Pod-hour, in one-hour blocks, with 1,000 connected hours free every month on Edge Free. Compute runs in your users' browsers and is never metered. A Pod on a fetch network costs nothing.
+
+## Can I remove the attribution?
+
+Yes, with Edge Pro ($20 a month), or as part of an Enterprise agreement.
+
+## Can I self-host BrowserPod?
+
+Self-hosting the runtime and disk images, vendoring them into your own build, and redistribution need an [Enterprise licence](/docs/more/licensing#enterprise). Under the Community Licence, BrowserPod loads from our CDN.
+
+## Will the runtime version I use stay available?
+
+Yes. Each published runtime version is immutable and stays available, so an application pinned to a version keeps working. The only exception is a version with a critical security flaw, which may be withdrawn or blocked, with an upgrade path to a fixed version.
+
+## Does BrowserPod send data to Leaning Technologies?
+
+The runtime sends no telemetry. Your users' browsers download the runtime and disk images from our CDN, which receives the requests any web server does. See [Privacy for integrators](/docs/more/privacy-for-integrators).
+
 ## Why does BrowserPod need COOP and COEP headers?
 
 BrowserPod uses `SharedArrayBuffer`, which requires cross-origin isolation. COOP and COEP headers enable that isolation.

@@ -39,5 +39,5 @@ class BrowserPod {
 
 ## Notes
 
-- Booting on an edge network deducts 10 tokens from your BrowserPod account balance (and fails if insufficient tokens are available). Booting on a fetch network is free and deducts no tokens.
+- An edge network is charged 10 tokens ($0.01) per connected Pod-hour, in one-hour blocks. The first block is deducted from your BrowserPod account balance at boot, and booting fails if not enough tokens are available. Booting on a fetch network is free and deducts no tokens.
 - For how the Pod's filesystem is structured and when its data persists, see [Filesystem](/docs/understanding-browserpod/filesystem).

@@ -1,37 +1,70 @@
 ---
 title: Licensing
-description: Personal, Pro, and Enterprise licensing for BrowserPod
+description: "BrowserPod is free for any use under the BrowserPod Community Licence, with attribution. Edge plans for networking, Edge Pro to remove the attribution, Enterprise for self-hosting."
 ---
 
-BrowserPod offers two subscription plans: **Personal** (free) and **Pro** (paid).
+BrowserPod is **free for any use**, including commercial use by companies of any size, under the [BrowserPod Community Licence](https://browserpod.io/license). The one condition is **attribution**. You don't need an account, an API key or a plan to use it.
 
-## Personal plan (free)
+What you can pay for is optional: **BrowserPod Edge**, the network service, and **Enterprise** licences for self-hosting and redistribution.
 
-The Personal plan allows you to use BrowserPod for:
+| | Community | Edge Free | Edge Pro | Enterprise |
+| --- | --- | --- | --- | --- |
+| Use of BrowserPod | Any use | Any use | Any use | Any use |
+| Attribution | Required | Required | **Not required** | As agreed |
+| Account | None | Console | Console | Console and contract |
+| Edge networking | No | 1,000 connected hours a month | 2,000 hours a month, then $0.01 per hour | Custom, or self-hosted |
+| Self-hosting, vendoring, redistribution | No | No | No | Yes |
+| Price | Free | Free | $20 / month | Quoted |
 
-- Non-commercial purposes
-- Technical evaluation
-- Personal projects
+## The Community Licence
 
-Requirements:
+The [BrowserPod Community Licence](https://browserpod.io/license) lets you use BrowserPod for development, evaluation and AI agents, and in production: in commercial products, internal tools, SaaS, open-source projects, documentation and education.
 
-- Your application must display BrowserPod attribution (visible link + logo)
-- No resale or redistribution
+The conditions are:
 
-## Pro plan (paid)
+- **Attribution.** Show a visible "Powered by BrowserPod" credit, linking to `https://browserpod.io`, on the page or screen that hosts the Pod: for example in its loading state, footer or About page. Agents and tools that use Pods without a user interface credit BrowserPod in their documentation or README. The runtime also prints a short notice in the browser console when it boots.
+- **Load BrowserPod from our CDN.** The runtime and disk images are served from `rt.browserpod.io` and `disks.browserpod.io`. Don't copy the runtime files into your own build, mirror or re-host them, or redistribute them; that needs an Enterprise licence.
+- **No reverse engineering, no warranty.** Support is through the community.
 
-The Pro plan allows you to use BrowserPod for:
+The licence is the text at [browserpod.io/license](https://browserpod.io/license); this page summarises it.
 
-- Commercial purposes
-- No attribution required
+### Runtime versions are permanent
 
-## Usage limits
+Each published runtime version is immutable and stays available, so an application pinned to a version keeps working. The only exception is a version with a critical security flaw, which may be withdrawn or blocked, with an upgrade path to a fixed version.
 
-Both plans use token-based metering tied to your API key. See the [pricing policy](https://browserpod.io/browserpod-pricing-policy) for specific limits.
+### Which versions does the licence cover?
+
+From 13 November 2026, the Community Licence covers every runtime version served from our CDN, including 3.x. Versions **earlier than 3.5.0** can't boot without an API key, so using them also means using Edge, with an account and the [Edge Terms of Service](https://browserpod.io/terms). Earlier licence texts stay available in the [legal history](https://browserpod.io/legal).
+
+## BrowserPod Edge
+
+[Edge](/docs/understanding-browserpod/networking) is the optional network service. A Pod uses it only if you boot it on an edge network with an API key from the [BrowserPod console](https://console.browserpod.io). Edge gives Pods:
+
+- **Portals**, public URLs to servers running in the Pod;
+- **outbound networking** for socket-level clients such as git, npm and curl, and **TCP** to allowed domains;
+- **controlled egress**: a default allowlist of reachable domains, or custom allowlists on Edge Pro.
+
+Only Edge is metered: **10 tokens ($0.01) per connected Pod-hour**, in one-hour blocks. Compute runs in your users' browsers and is never metered.
+
+- **Edge Free**: 10,000 tokens a month (up to 1,000 connected hours), the default allowlist, up to 5 API keys with one origin each.
+- **Edge Pro**, $20 a month: 20,000 tokens (up to 2,000 connected hours), then $0.01 per extra hour; token top-ups; custom allowlists; unlimited keys and origins; **no attribution required**.
+
+The [Pricing Policy](https://browserpod.io/pricing-policy) and [Edge Terms of Service](https://browserpod.io/terms) have the details. Open-source projects and startups can apply for [Edge grants](https://browserpod.io/pricing#grants).
 
 ## Enterprise
 
-For self-hosting, SSO integration, or custom deployment options, [contact Leaning Technologies](https://forms.leaningtech.com/leaningforms/form/BookaDemo/formperma/2zFTrXkIeE0kW_6tyq1wbmbWM0Jf8s6Tft4ot0waF0Q)
+An Enterprise licence covers what the Community Licence doesn't:
+
+- **Self-hosting** the runtime and disk images on your own servers or CDN, or **vendoring** them into your build;
+- **self-hosted Edge**, with your own network policy, logs and domain;
+- **redistribution / OEM**, shipping BrowserPod inside your product to your customers;
+- removing the attribution, SSO, SLAs and a dedicated solutions engineer.
+
+[Contact us](https://browserpod.io/contact) for a quote.
+
+## Privacy
+
+When your page loads BrowserPod, your users' browsers download the runtime and disk images from our CDN. The [Runtime Privacy Policy](https://browserpod.io/runtime-privacy) describes what that involves; [Privacy for integrators](/docs/more/privacy-for-integrators) explains what to say in your own privacy policy.
 
 ## Support
 

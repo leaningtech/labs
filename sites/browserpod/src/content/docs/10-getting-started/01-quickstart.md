@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: "Get started with BrowserPod in minutes: register a free API key, use a quickstart template, and run your first sandboxed app in the browser."
+description: "Get started with BrowserPod in minutes: install it from npm, boot a Pod with no account or API key, and run your first sandboxed app in the browser."
 ---
 
 BrowserPod provides a sandboxed runtime for executing code safely in the browser. This quickstart will get you running your first BrowserPod application in minutes.

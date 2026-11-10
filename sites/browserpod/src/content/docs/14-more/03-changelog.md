@@ -3,6 +3,14 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+<!-- DRAFT for 4.0 (13 Nov 2026): licensing note only. Yuri and Merlin add the technical entries (networking, TCP on every Edge plan, types, console notice) before the 4.0 tag. -->
+
+## Version 4.0.0:
+
+- **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, with attribution, and covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
+- The hosted network service is now called **BrowserPod Edge**. Only Edge is metered, per connected Pod-hour; Edge Pro removes the attribution requirement.
+- The runtime prints a short licence notice in the browser console at boot.
+
 ## Version 3.5.0:
 
 - Make `apiKey` optional: Pods can now boot without an API key on a free fetch network that routes requests directly through the browser. See [Networking](/docs/understanding-browserpod/networking).
