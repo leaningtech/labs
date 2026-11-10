@@ -5,7 +5,7 @@ description: "Write a string into a TextFile in a BrowserPod Pod's virtual files
 
 ```ts
 class TextFile {
-	async write(data: string): Promise<int>;
+	async write(data: string): Promise<number>;
 }
 ```
 

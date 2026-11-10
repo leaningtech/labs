@@ -5,7 +5,7 @@ description: "Read text from a TextFile in a BrowserPod Pod, returning the reque
 
 ```ts
 class TextFile {
-	async read(length: int): Promise<string>;
+	async read(length: number): Promise<string>;
 }
 ```
 

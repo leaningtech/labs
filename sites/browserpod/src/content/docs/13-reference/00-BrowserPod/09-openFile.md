@@ -5,14 +5,15 @@ description: "Open an existing file in a BrowserPod Pod's virtual filesystem, re
 
 ```ts
 class BrowserPod {
-	async openFile(path: string, mode: string): Promise<BinaryFile | TextFile>;
+	async openFile(path: string, mode: "binary"): Promise<BinaryFile>;
+	async openFile(path: string, mode: "utf-8"): Promise<TextFile>;
 }
 ```
 
 ## Parameters
 
 - **path (`string`)** - Path to an existing file.
-- **mode (`string`)** - Opening mode. Either "binary" or "utf-8".
+- **mode (`"binary" | "utf-8"`)** - Opening mode.
 
 ## Returns
 

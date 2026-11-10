@@ -5,7 +5,7 @@ description: "Write raw bytes from an ArrayBuffer into a BinaryFile in a Browser
 
 ```ts
 class BinaryFile {
-	async write(data: ArrayBuffer): Promise<int>;
+	async write(data: ArrayBuffer): Promise<number>;
 }
 ```
 
