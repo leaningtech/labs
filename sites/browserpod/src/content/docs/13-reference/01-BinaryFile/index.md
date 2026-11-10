@@ -40,7 +40,7 @@ When you create or open a file, you choose a mode:
 ### Example: writing text
 
 ```ts
-const file = await pod.createFile("/project/readme.txt", "text");
+const file = await pod.createFile("/project/readme.txt", "utf-8");
 await file.write("Hello BrowserPod");
 await file.close();
 ```

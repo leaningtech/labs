@@ -52,7 +52,7 @@ const exitCode = await pod.run("node", ["script.js"], { terminal });
 Create and read files with [`createFile`](/docs/reference/BrowserPod/createFile) and [`openFile`](/docs/reference/BrowserPod/openFile):
 
 ```ts
-const file = await pod.createFile("/app/config.json", "text");
+const file = await pod.createFile("/app/config.json", "utf-8");
 await file.write('{ "debug": true }');
 await file.close();
 ```
