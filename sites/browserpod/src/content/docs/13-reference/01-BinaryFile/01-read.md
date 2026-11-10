@@ -5,7 +5,7 @@ description: "Read raw bytes from a BinaryFile in a BrowserPod Pod, returning th
 
 ```ts
 class BinaryFile {
-	async read(length: int): Promise<ArrayBuffer>;
+	async read(length: number): Promise<ArrayBuffer>;
 }
 ```
 

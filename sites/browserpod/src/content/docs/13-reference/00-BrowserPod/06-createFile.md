@@ -5,14 +5,15 @@ description: "Create a new file in a BrowserPod Pod's virtual filesystem, return
 
 ```ts
 class BrowserPod {
-	async createFile(path: string, mode: string): Promise<BinaryFile | TextFile>;
+	async createFile(path: string, mode: "binary"): Promise<BinaryFile>;
+	async createFile(path: string, mode: "utf-8"): Promise<TextFile>;
 }
 ```
 
 ## Parameters
 
 - **path (`string`)** - Path of the newly-created file.
-- **mode (`string`)** - Opening mode. Either "binary" or "utf-8".
+- **mode (`"binary" | "utf-8"`)** - Opening mode.
 
 ## Returns
 

@@ -5,7 +5,7 @@ description: "Get the size in bytes of a BinaryFile stored in a BrowserPod Pod's
 
 ```ts
 class BinaryFile {
-	async getSize(): Promise<int>;
+	async getSize(): Promise<number>;
 }
 ```
 
