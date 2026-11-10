@@ -21,7 +21,7 @@ Yes, for any use, including commercial use, under the [BrowserPod Community Lice
 
 ## What is metered?
 
-Only BrowserPod Edge, the optional network service: 10 tokens ($0.01) per connected Pod-hour, in one-hour blocks, with 1,000 connected hours free every month on Edge Free. Compute runs in your users' browsers and is never metered. A Pod on a fetch network costs nothing.
+Only BrowserPod Edge, the optional network service. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. Edge Free includes 1,000 connected hours every month. Compute runs in your users' browsers and is never metered. A Pod on a fetch network costs nothing.
 
 ## Can I remove the attribution?
 

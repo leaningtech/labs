@@ -44,9 +44,9 @@ From 13 November 2026, the Community Licence covers every runtime version served
 - **outbound networking** for socket-level clients such as git, npm and curl, and **TCP** to allowed domains;
 - **controlled egress**: a default allowlist of reachable domains, or custom allowlists on Edge Pro.
 
-Only Edge is metered: **10 tokens ($0.01) per connected Pod-hour**, in one-hour blocks. Compute runs in your users' browsers and is never metered.
+Only Edge is metered: **10 tokens ($0.01) per connected Pod-hour**. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. Compute runs in your users' browsers and is never metered.
 
-- **Edge Free**: 10,000 tokens a month (up to 1,000 connected hours), the default allowlist, up to 5 API keys with one origin each.
+- **Edge Free**: 10,000 tokens a month (up to 1,000 connected hours), the default allowlist, up to 5 API keys in total, with one origin each.
 - **Edge Pro**, $20 a month: 20,000 tokens (up to 2,000 connected hours), then $0.01 per extra hour; token top-ups; custom allowlists; unlimited keys and origins; **no attribution required**.
 
 The [Pricing Policy](https://browserpod.io/pricing-policy) and [Edge Terms of Service](https://browserpod.io/terms) have the details. Open-source projects and startups can apply for [Edge grants](https://browserpod.io/pricing#grants).
