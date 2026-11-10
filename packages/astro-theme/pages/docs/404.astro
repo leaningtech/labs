@@ -13,4 +13,12 @@ import DocsArticle from "../../layouts/DocsArticle.astro";
 			let us know so we can fix it.
 		</a>
 	</p>
+	<!-- Tells Plausible this was a 404, with the path asked for, so a "404" goal
+	lists the broken links. The queue is defined inline by BaseHead.
+	Skipped when the 404 page itself is opened, which is served as a 200. -->
+	<script is:inline>
+		if (!/\/404(\.html)?\/?$/.test(location.pathname)) {
+			window.plausible("404", { props: { path: location.pathname } });
+		}
+	</script>
 </DocsArticle>
