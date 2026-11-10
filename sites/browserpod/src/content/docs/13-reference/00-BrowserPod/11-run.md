@@ -5,7 +5,7 @@ description: "Run an executable inside a BrowserPod Pod, attach it to a terminal
 
 ```ts
 class BrowserPod {
-	async run(
+	run(
 		executable: string,
 		args: Array<string>,
 		opts: {

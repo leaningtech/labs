@@ -5,17 +5,17 @@ description: Set up a callback that will be invoked when a file or URL is opened
 
 ```ts
 class BrowserPod {
-	onOpen(cb: (path: string) => void): void;
+	onOpen(cb: (urlOrPath: string) => void): void;
 }
 ```
 
 ## Parameters
 
-- **cb** (`function(urlOrpath: string) => void`) - Callback function to invoke when a file or URL is opened within the [Pod].
+- **cb** (`function(urlOrPath: string) => void`) - Callback function to invoke when a file or URL is opened within the [Pod].
 
 ## Callback arguments
 
-- **urlOrpath (`string`)** - The absolute path to the file, or URL, that was opened within the [Pod].
+- **urlOrPath (`string`)** - The absolute path to the file, or URL, that was opened within the [Pod].
 
 ## Returns
 
