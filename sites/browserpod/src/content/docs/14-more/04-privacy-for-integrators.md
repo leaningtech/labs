@@ -20,7 +20,7 @@ To run, your users' browsers download the BrowserPod runtime from `rt.browserpod
 
 We use this to deliver the files and prevent abuse, to count how many applications use BrowserPod and which runtime versions they use, and to identify organisations that use BrowserPod so we can offer support and licensing. **The usage data we keep records the page's origin, not users' IP addresses.** No cookies are set. The [BrowserPod Runtime Privacy Policy](https://browserpod.io/runtime-privacy) is the authoritative description.
 
-If you pass your own `rootImage` or `userImage`, the disk requests go to your servers instead of ours. Self-hosting the runtime needs an [Enterprise licence](/docs/more/licensing#enterprise).
+If you pass your own `rootImage` or `userImage`, the disk requests go to your servers instead of ours. Self-hosting the runtime needs a [BrowserPod Enterprise Licence](/docs/more/licensing#enterprise).
 
 ## Network traffic from a Pod
 

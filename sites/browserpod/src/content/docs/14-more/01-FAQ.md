@@ -25,11 +25,11 @@ Only BrowserPod Edge, the optional network service. Edge is charged in one-hour 
 
 ## Can I use BrowserPod without attribution?
 
-Yes, with a commercial licence. Edge Pro ($20 a month) includes a commercial licence to use BrowserPod without attribution, and Enterprise agreements can include one too.
+Yes. Edge Pro ($20 a month) includes the BrowserPod Community Licence without attribution. For self-hosting, vendoring or redistribution, contact us about a BrowserPod Enterprise Licence.
 
 ## Can I self-host BrowserPod?
 
-Self-hosting the runtime and disk images, vendoring them into your own build, and redistribution need an [Enterprise licence](/docs/more/licensing#enterprise). Under the Community Licence, BrowserPod loads from our CDN.
+Self-hosting the runtime and disk images, vendoring them into your own build, and redistribution need a [BrowserPod Enterprise Licence](/docs/more/licensing#enterprise). Under the Community Licence, BrowserPod loads from our CDN.
 
 ## Will the runtime version I use stay available?
 
