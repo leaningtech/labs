@@ -8,7 +8,7 @@ description: "Release notes and version history for BrowserPod, covering new fea
 ## Version 4.0.0:
 
 - **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, with attribution, and covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
-- The hosted network service is now called **BrowserPod Edge**. Only Edge is metered, per connected Pod-hour; Edge Pro removes the attribution requirement.
+- The hosted network service is now called **BrowserPod Edge**. Only Edge is metered, per connected Pod-hour; Edge Pro includes a commercial licence to use BrowserPod without attribution.
 - The runtime prints a short licence notice in the browser console at boot.
 
 ## Version 3.5.0:

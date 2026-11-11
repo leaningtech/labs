@@ -1,6 +1,6 @@
 ---
 title: Licensing
-description: "BrowserPod is free for any use under the BrowserPod Community Licence, with attribution. Edge plans for networking, Edge Pro to remove the attribution, Enterprise for self-hosting."
+description: "BrowserPod is free for any use under the BrowserPod Community Licence, with attribution. Edge plans for networking; Edge Pro includes a commercial licence to use BrowserPod without attribution; Enterprise for self-hosting."
 ---
 
 BrowserPod is **free for any use**, including commercial use by companies of any size, under the [BrowserPod Community Licence](https://browserpod.io/license). The one condition is **attribution**. You don't need an account, an API key or a plan to use it.
@@ -10,7 +10,7 @@ What you can pay for is optional: **BrowserPod Edge**, the network service, and 
 | | Community | Edge Free | Edge Pro | Enterprise |
 | --- | --- | --- | --- | --- |
 | Use of BrowserPod | Any use | Any use | Any use | Any use |
-| Attribution | Required | Required | **Not required** | As agreed |
+| Attribution | Required | Required | **Not required** (commercial licence included) | As agreed |
 | Account | None | Console | Console | Console and contract |
 | Edge networking | No | 1,000 connected hours a month | 2,000 hours a month, then $0.01 per hour | Custom, or self-hosted |
 | Self-hosting, vendoring, redistribution | No | No | No | Yes |
@@ -47,7 +47,7 @@ From 13 November 2026, the Community Licence covers every runtime version served
 Only Edge is metered: **10 tokens ($0.01) per connected Pod-hour**. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. Compute runs in your users' browsers and is never metered.
 
 - **Edge Free**: 10,000 tokens a month (up to 1,000 connected hours), the default allowlist, up to 5 API keys in total, with one origin each.
-- **Edge Pro**, $20 a month: 20,000 tokens (up to 2,000 connected hours), then $0.01 per extra hour; token top-ups; custom allowlists; unlimited keys and origins; **no attribution required**.
+- **Edge Pro**, $20 a month: 20,000 tokens (up to 2,000 connected hours), then $0.01 per extra hour; token top-ups; custom allowlists; unlimited keys and origins; and **a commercial licence to use BrowserPod without attribution**.
 
 The [Pricing Policy](https://browserpod.io/pricing-policy) and [Edge Terms of Service](https://browserpod.io/terms) have the details. Open-source projects and startups can apply for [Edge grants](https://browserpod.io/pricing#grants).
 
@@ -58,7 +58,7 @@ An Enterprise licence covers what the Community Licence doesn't:
 - **Self-hosting** the runtime and disk images on your own servers or CDN, or **vendoring** them into your build;
 - **self-hosted Edge**, with your own network policy, logs and domain;
 - **redistribution / OEM**, shipping BrowserPod inside your product to your customers;
-- removing the attribution, SSO, SLAs and a dedicated solutions engineer.
+- a commercial licence to use BrowserPod without attribution, SSO, SLAs and a dedicated solutions engineer.
 
 [Contact us](https://browserpod.io/contact) for a quote.
 

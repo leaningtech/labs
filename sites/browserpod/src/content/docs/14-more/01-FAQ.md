@@ -23,9 +23,9 @@ Yes, for any use, including commercial use, under the [BrowserPod Community Lice
 
 Only BrowserPod Edge, the optional network service. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. Edge Free includes 1,000 connected hours every month. Compute runs in your users' browsers and is never metered. A Pod on a fetch network costs nothing.
 
-## Can I remove the attribution?
+## Can I use BrowserPod without attribution?
 
-Yes, with Edge Pro ($20 a month), or as part of an Enterprise agreement.
+Yes, with a commercial licence. Edge Pro ($20 a month) includes a commercial licence to use BrowserPod without attribution, and Enterprise agreements can include one too.
 
 ## Can I self-host BrowserPod?
 
