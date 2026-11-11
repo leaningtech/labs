@@ -9,7 +9,7 @@ class BrowserPod {
 }
 ```
 
-Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic through BrowserPod's edge proxy servers. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking) for an overview.
+Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic through BrowserPod's edge proxy servers. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). Each boot on an edge network costs 10 tokens. See [Networking](/docs/understanding-browserpod/networking) for an overview.
 
 ## Parameters
 
@@ -17,7 +17,7 @@ Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and
 
 ## Options
 
-- **apiKey (`string`)** - The [API key](/docs/understanding-browserpod/api-key) used to authenticate requests. Outgoing traffic is limited to domains allowed for this key in the [BrowserPod console](https://console.browserpod.io).
+- **apiKey (`string`)** - The [API key](/docs/understanding-browserpod/api-key) used to authenticate requests. The network can reach BrowserPod's default domains, such as the npm registry and GitHub. With a Pro plan, you can choose which domains it can reach in the [BrowserPod console](https://console.browserpod.io).
 
 ## Returns
 
