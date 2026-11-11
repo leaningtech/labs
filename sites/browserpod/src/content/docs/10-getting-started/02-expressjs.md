@@ -18,6 +18,7 @@ The project consists of the following files and directories:
 
 ```plaintext
 ├── .env
+├── .gitignore
 ├── index.html
 ├── package.json
 ├── public
@@ -176,8 +177,9 @@ This file contains the utility function `copyFile`, that we will use in the main
 script to copy files into the [Pod](/docs/reference/BrowserPod).
 
 ```js title="src/utils.js"
-export async function copyFile(pod, path) {
-	const f = await pod.createFile("/" + path, "binary");
+export async function copyFile(pod, path, prefix) {
+	const normalizedPrefix = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
+	const f = await pod.createFile(`${normalizedPrefix}/${path}`, "binary");
 	const resp = await fetch(path);
 	const buf = await resp.arrayBuffer();
 	await f.write(buf);
@@ -227,21 +229,23 @@ pod.onPortal(({ url, port }) => {
 });
 
 // Copy our project files
-await pod.createDirectory("/project");
-await copyFile(pod, "project/main.js");
-await copyFile(pod, "project/package.json");
+const homePath = "/home/user";
+const projectPath = `${homePath}/project`;
+await pod.createDirectory(projectPath);
+await copyFile(pod, "project/main.js", homePath);
+await copyFile(pod, "project/package.json", homePath);
 
 // Install dependencies
 await pod.run("npm", ["install"], {
 	echo: true,
 	terminal: terminal,
-	cwd: "/project",
+	cwd: projectPath,
 });
 // Run the web server
 await pod.run("node", ["main.js"], {
 	echo: true,
 	terminal: terminal,
-	cwd: "/project",
+	cwd: projectPath,
 });
 ```
 
