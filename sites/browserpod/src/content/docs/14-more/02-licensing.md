@@ -24,10 +24,11 @@ The Pro plan allows you to use BrowserPod for:
 
 - Commercial purposes
 - No attribution required
+- Choosing which domains Pods can reach on the edge network
 
 ## Usage limits
 
-Both plans use token-based metering tied to your API key. See the [pricing policy](https://browserpod.io/browserpod-pricing-policy) for specific limits.
+Both plans use token-based metering tied to your API key. Booting a Pod without an API key doesn't use tokens. See the [pricing policy](https://browserpod.io/browserpod-pricing-policy) for specific limits.
 
 ## Enterprise
 
