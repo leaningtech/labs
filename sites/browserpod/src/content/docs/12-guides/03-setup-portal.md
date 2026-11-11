@@ -1,26 +1,39 @@
 ---
 title: Set up a Portal
-description: Expose a local server with a BrowserPod Portal URL
+description: Preview and share a server running in a Pod with a Portal URL
 ---
 
-This guide shows how to listen on a port and expose it via a Portal URL.
+This guide shows how to start a server inside a Pod and get a Portal URL to preview and share it.
 
 > [!note]
 > Portals need an [API key](/docs/understanding-browserpod/api-key). Boot the Pod with one before you start.
 
-## 1. Register a Portal handler
+_This guide assumes you have a [terminal](/docs/guides/run-programs-in-a-pod) and your server code in `/project` (see [Write files to the Pod](/docs/guides/write-files-to-pod))._
 
-Register a callback so you can capture the Portal URL when it appears:
+## 1. Add a preview to your page
+
+```html
+<div id="url">Waiting for Portal...</div>
+<iframe id="preview"></iframe>
+```
+
+## 2. Register a Portal handler
+
+Register a callback with [`onPortal`](/docs/reference/BrowserPod/onPortal) to show the Portal URL and load it in the iframe:
 
 ```js
+const iframe = document.querySelector("#preview");
+const urlDiv = document.querySelector("#url");
+
 pod.onPortal(({ url, port }) => {
-	console.log(`Portal URL: ${url} (local port ${port})`);
+	urlDiv.innerHTML = `Portal for port ${port}: <a href="${url}">${url}</a>`;
+	iframe.src = url;
 });
 ```
 
-## 2. Start a server inside the Pod
+## 3. Start a server inside the Pod
 
-When your server listens on a port, BrowserPod will create a Portal:
+When your server listens on a port, BrowserPod creates a Portal:
 
 ```js
 pod.run("node", ["server.js"], {
@@ -30,30 +43,15 @@ pod.run("node", ["server.js"], {
 });
 ```
 
-In your server code:
+A minimal `server.js`:
 
 ```js
-server.listen(3000, () => {
-	console.log("Server listening on port 3000");
-});
-```
-
-## 3. Use the Portal URL
-
-A common pattern is to display the URL and load it in an iframe:
-
-```js
-const iframe = document.querySelector("#preview");
-const urlDiv = document.querySelector("#url");
-
-pod.onPortal(({ url }) => {
-	urlDiv.innerHTML = `Portal available at <a href="${url}">${url}</a>`;
-	iframe.src = url;
-});
+require("http")
+	.createServer((req, res) => res.end("Hello from the Pod"))
+	.listen(3000);
 ```
 
 ## Notes
 
-- The Portal URL is the address your users should open.
-- The `port` value is the internal port inside the Pod that triggered the Portal.
+- Open the Portal URL to preview the server, or share it with others.
 - If multiple servers listen on different ports, you will receive a callback for each Portal.
