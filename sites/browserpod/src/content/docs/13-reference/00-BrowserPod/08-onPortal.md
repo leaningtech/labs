@@ -21,3 +21,6 @@ class BrowserPod {
 ## Returns
 
 `onPortal` does not return a value.
+
+> [!note]
+> Portals are only created on the [edge network](/docs/understanding-browserpod/networking), which requires an [API key](/docs/understanding-browserpod/api-key).
