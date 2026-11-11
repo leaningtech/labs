@@ -53,7 +53,7 @@ export const GET: APIRoute = async ({ site }) => {
 Coding agents: load the BrowserPod skill first: ${origin}/skills/browserpod/SKILL.md. Every page below is Markdown. All of them in one file: ${origin}/docs/llms-full.txt.
 
 - Boot without an API key: \`BrowserPod.boot({})\` runs the pod on a fetch network, where outgoing requests go through the browser (CORS applies; \`BrowserPod.opinionatedFetch\` makes npm and common developer services work).
-- Add BrowserPod Edge, the optional paid network service, only if the user asks for it or the app needs Portals (public URLs for servers in the pod), TCP, or outbound networking without CORS limits. Edge needs an API key from https://console.browserpod.io.
+- Add BrowserPod Edge, the optional network service (free and paid plans), only if the user asks for it or the app needs Portals (public URLs for servers in the pod), TCP, or outbound networking without CORS limits. Edge needs an API key from https://console.browserpod.io.
 - Licence: free for any use under the BrowserPod Community Licence; add a visible "Powered by BrowserPod" credit linking to browserpod.io. Edge Pro includes the BrowserPod Community Licence without attribution. Load the runtime from BrowserPod's CDN: copying or self-hosting its files needs the BrowserPod Enterprise Licence. ${origin}/license
 - Python is a preview. Chromium-based browsers work best; Firefox and Safari have limitations.
 
