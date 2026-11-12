@@ -1,75 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 820" font-family="Poppins, Inter, sans-serif" text-anchor="middle">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 820" font-family="Inter, system-ui, sans-serif" font-weight="500" text-anchor="middle">
 	<defs>
 		<marker id="head" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-			<path d="M1 1 L10 6 L1 11" fill="none" stroke="#FFD500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+			<path d="M1 1 L10 6 L1 11" fill="none" stroke="#ffd633" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 		</marker>
+		<clipPath id="window">
+			<rect x="20" y="40" width="1570" height="760" rx="24"/>
+		</clipPath>
 	</defs>
 
-	<rect width="1900" height="820" fill="#0c0a09"/>
+	<rect width="1900" height="820" fill="#0d0d0e"/>
 
-	<rect x="20" y="40" width="1570" height="760" rx="40" fill="none" stroke="#fff" stroke-width="3"/>
-	<line x1="20" y1="120" x2="1590" y2="120" stroke="#fff" stroke-width="3"/>
-	<circle cx="65" cy="80" r="14" fill="none" stroke="#fff" stroke-width="3"/>
-	<circle cx="105" cy="80" r="14" fill="none" stroke="#fff" stroke-width="3"/>
-	<circle cx="145" cy="80" r="14" fill="none" stroke="#fff" stroke-width="3"/>
-	<text fill="#fff" font-size="32" x="800" y="92">Browser</text>
+	<g clip-path="url(#window)">
+		<rect x="20" y="40" width="1570" height="760" fill="#0a0a0b"/>
+		<rect x="20" y="40" width="1570" height="80" fill="#fff" fill-opacity=".03"/>
+		<line x1="20" y1="120" x2="1590" y2="120" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
+	</g>
+	<rect x="20" y="40" width="1570" height="760" rx="24" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+	<circle cx="66" cy="80" r="12" fill="#2a2a2e"/>
+	<circle cx="104" cy="80" r="12" fill="#2a2a2e"/>
+	<circle cx="142" cy="80" r="12" fill="#2a2a2e"/>
+	<text fill="#a1a1aa" font-weight="400" font-size="28" x="805" y="90">Browser</text>
 
-	<rect x="60" y="160" width="320" height="600" fill="#AFC9FF"/>
-	<rect x="85" y="200" width="270" height="240" fill="#4A7DFF"/>
-	<text fill="#fff" font-size="40" x="220" y="305">Program</text>
-	<text fill="#fff" font-size="26" x="220" y="352">curl, npm, pnpm…</text>
-	<rect x="85" y="460" width="270" height="240" fill="#D52DA8"/>
+	<rect x="60" y="160" width="320" height="600" rx="16" fill="#121213" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>
+	<rect x="85" y="200" width="270" height="240" rx="12" fill="#4a7dff"/>
+	<text fill="#fff" font-size="40" x="220" y="312">Program</text>
+	<rect x="85" y="460" width="270" height="240" rx="12" fill="#c73da6"/>
 	<text fill="#fff" font-size="40" x="220" y="555">BrowserPod</text>
 	<text fill="#fff" font-size="40" x="220" y="603">kernel</text>
-	<text fill="#fff" font-size="26" x="220" y="650">socket syscalls</text>
-	<text fill="#000" font-size="30" x="220" y="742">Web Worker</text>
 
-	<rect x="480" y="160" width="1070" height="600" fill="#AFC9FF"/>
-	<text fill="#000" font-size="30" x="1015" y="742">Main thread</text>
+	<rect x="480" y="160" width="1070" height="600" rx="16" fill="#121213" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>
 
-	<rect x="520" y="200" width="680" height="490" fill="#F0B4DF"/>
-	<text fill="#000" font-size="34" x="860" y="258">Fetch network</text>
+	<rect x="520" y="200" width="680" height="490" rx="16" fill="#18181b" stroke="#c73da6" stroke-opacity=".6" stroke-width="2"/>
+	<text fill="#fafafa" font-size="34" x="860" y="258">Fetch network</text>
 
-	<rect x="550" y="420" width="270" height="220" fill="#D52DA8"/>
+	<rect x="550" y="420" width="270" height="220" rx="12" fill="#c73da6"/>
 	<text fill="#fff" font-size="40" x="685" y="500">TLS</text>
 	<text fill="#fff" font-size="36" x="685" y="546">termination</text>
-	<text fill="#fff" font-size="24" x="685" y="590">certificate from a</text>
-	<text fill="#fff" font-size="24" x="685" y="620">per-boot CA</text>
 
-	<rect x="900" y="420" width="270" height="220" fill="#D52DA8"/>
+	<rect x="900" y="420" width="270" height="220" rx="12" fill="#c73da6"/>
 	<text fill="#fff" font-size="40" x="1035" y="500">HTTP</text>
 	<text fill="#fff" font-size="40" x="1035" y="548">parser</text>
-	<text fill="#fff" font-size="24" x="1035" y="600">bytes → Request</text>
 
-	<rect x="1270" y="420" width="250" height="220" fill="#D52DA8"/>
-	<text fill="#fff" font-size="40" x="1395" y="524">fetch()</text>
-	<text fill="#fff" font-size="24" x="1395" y="585">customizable</text>
+	<rect x="1270" y="420" width="250" height="220" rx="12" fill="#c73da6"/>
 
-	<g fill="none" stroke="#FFD500" stroke-width="5" stroke-linecap="round">
-		<path d="M362 600 H535" marker-start="url(#head)" marker-end="url(#head)"/>
+	<g font-weight="400">
+		<text fill="#fff" font-family="'Commit Mono', ui-monospace, monospace" font-size="38" x="1395" y="524">fetch()</text>
+		<g fill="#fff" fill-opacity=".85" font-size="22">
+			<text x="220" y="356">curl, npm, pnpm…</text>
+			<text x="220" y="650">socket syscalls</text>
+			<text x="685" y="590">certificate from</text>
+			<text x="685" y="620">a per-boot CA</text>
+			<text x="1035" y="600">bytes → Request</text>
+			<text x="1395" y="585">customizable</text>
+		</g>
+		<g fill="#a1a1aa" font-size="26">
+			<text x="220" y="740">Web Worker</text>
+			<text x="1015" y="740">Main thread</text>
+			<text x="1810" y="660">WWW</text>
+		</g>
+		<g fill="#d4d4d8" font-size="22" text-anchor="start">
+			<text x="550" y="312">CA certificate, added to the</text>
+			<text x="550" y="342">pod's trust store at boot</text>
+		</g>
+		<g fill="#ffd633" font-size="22">
+			<text x="430" y="582">TCP</text>
+			<text x="430" y="635">(TLS)</text>
+			<text x="1640" y="510">HTTP(S)</text>
+			<text x="1640" y="575">CORS</text>
+			<text x="1640" y="603">rules</text>
+			<text x="1640" y="631">apply</text>
+		</g>
+	</g>
+
+	<g fill="none" stroke="#ffd633" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M362 600 H538" marker-start="url(#head)" marker-end="url(#head)"/>
 		<path d="M832 530 H888" marker-start="url(#head)" marker-end="url(#head)"/>
 		<path d="M1182 530 H1258" marker-start="url(#head)" marker-end="url(#head)"/>
 		<path d="M1532 530 H1718" marker-start="url(#head)" marker-end="url(#head)"/>
-		<path d="M685 412 V360 H368" stroke-dasharray="14 12" marker-end="url(#head)"/>
-	</g>
-	<g fill="#FFD500" font-size="24">
-		<text x="430" y="582">TCP</text>
-		<text x="430" y="635">(TLS)</text>
-		<text fill="#000" x="550" y="305" text-anchor="start">CA certificate, added to the</text>
-		<text fill="#000" x="550" y="335" text-anchor="start">pod's trust store at boot</text>
-		<text x="1655" y="510">HTTP(S)</text>
-		<text x="1655" y="575">CORS</text>
-		<text x="1655" y="603">rules</text>
-		<text x="1655" y="631">apply</text>
+		<path d="M685 412 V372 Q685 360 673 360 H368" stroke-dasharray="14 12" marker-end="url(#head)"/>
 	</g>
 
-	<g fill="none" stroke="#fff" stroke-width="3">
+	<g fill="none" stroke="#d4d4d8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
 		<circle cx="1810" cy="530" r="80"/>
-		<ellipse cx="1810" cy="530" rx="36" ry="80"/>
-		<line x1="1810" y1="450" x2="1810" y2="610"/>
-		<line x1="1730" y1="530" x2="1890" y2="530"/>
-		<path d="M1742 488 Q1810 502 1878 488"/>
-		<path d="M1742 572 Q1810 558 1878 572"/>
+		<path d="M1730 530 H1890"/>
+		<path d="M1810 450 C1832 473 1844 500 1844 530 S1832 587 1810 610 C1788 587 1776 560 1776 530 S1788 473 1810 450 Z"/>
 	</g>
-	<text fill="#fff" font-size="34" x="1810" y="662">WWW</text>
 </svg>
