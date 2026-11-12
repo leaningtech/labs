@@ -29,11 +29,6 @@ new licensing, new networking.
 {/* (AI agents and their builders; in-browser IDEs, playgrounds, docs and demos; platforms embedding dev tools). */}
 {/* Wording: "Linux applications in the browser", "Linux-like"; not "Real Linux". */}
 
-## What it does, and what it doesn't
-
-{/* TODO: Node.js 22 and Rust production-grade, git, bash, coreutils, Python preview. */}
-{/* Limits: no prebuilt native binaries, cross-origin isolation required, Chromium the reliable target. */}
-
 ## Free for any use
 
 {/* TODO: the BrowserPod Community Licence. */}
@@ -72,10 +67,10 @@ const pod = await BrowserPod.boot();
 
 From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
 anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
-(The number 1 support question that we get for [webvm.io](https://webvm.io) is how to set up the [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale) to enable internet connectivity.)
+We know this from experience: the number 1 support question that we get for [webvm.io](https://webvm.io) is how to set up the [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale) to enable internet connectivity.
 For this reason BrowserPod [came from day 1 with the edge network](/blog/browserpod-deep-dive#solving-networking-again): a managed proxy that allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
 
-While this is very nice, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
+While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
 This is unnecessary friction for the many use cases that don't need unrestricted internet access, and our goal with BrowserPod 4.0
 is to remove any sort of friction in using it, be it with a more permissive license or with the ability to start a pod without an API key.
 
@@ -99,7 +94,7 @@ We implemented all of this inside of BrowserPod. Everything happens **inside you
 #### Customizing it
 
 If you want to pass a custom fetch implementation, you need to explicitly construct a fetch network.
-Your function receives the URL and the request, and `init.defaultFetch` is the browser-backed implementation that you can hand the request on to:
+Your function receives the same parameters as fetch: the URL and the request init options. We add to it `init.defaultFetch`, which is the default implementation you can defer to:
 
 ```js
 const network = await BrowserPod.createFetchNetwork({
@@ -117,7 +112,7 @@ For example, by default npm sends a few telemetry headers (`npm-command`, `npm-s
 [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request), which `registry.npmjs.org` does not support, and the overall request fails. Without those headers, the registry happily replies with
 `Access-Control-Allow-Origin: *`, and the request goes through.
 
-We provide `BrowserPod.opinionatedFetch`, which currently just performs the npm header filter, so that `npm install` and `pnpm install` work out of the box. We plan to add other similar quirks for specific sites over time.
+We provide `BrowserPod.opinionatedFetch`, which is intended to work around known issues and provide useful defaults for BrowserPod users. Currently it just performs the npm header filter, so that `npm install` and `pnpm install` work out of the box. We plan to add other similar quirks for specific sites over time.
 Let us know if you think that a particular workaround should be added in there. You can always also combine it with your own logic:
 
 ```js
@@ -146,7 +141,7 @@ const pod = await BrowserPod.boot({ network });
 It got some love too, with two additions.
 
 **Per-key domain lists.** Users on the [Pro plan](https://browserpod.io/pricing/) can configure API keys to allow a pod to reach domains that are not in our global allowlist:
-you can add your own list, or allow all domains to be reached, per key.
+you can now add your own list, or allow all domains to be reached, per key.
 
 **TCP on any port.** The edge network is no longer limited to HTTP and HTTPS: a pod can open a TCP connection on any port to an allowed domain. Here it talks to GitHub's SSH port:
 
