@@ -5,7 +5,7 @@ description: |
 authors:
   - yuri
 pubDate: "November 16 2026"
-heroImage: "./banners/BrowserPod_4.0-hero.webp"
+heroImage: "./banners/BrowserPod_3.0-hero.webp"
 tags:
   - BrowserPod
 categories:
@@ -15,8 +15,8 @@ categories:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-{/_ TODO: BrowserPodProvider, version="4.0.x", ideally with no apiKey so the post itself boots keyless.
-Check that the component supports that. _/}
+{/* TODO: BrowserPodProvider, version="4.0.x", ideally with no apiKey so the post itself boots keyless. */}
+{/* Check that the component supports that. */}
 
 {/* TODO: hero demo. A small pod that shows at a glance what BrowserPod is. */}
 
@@ -25,18 +25,23 @@ new licensing, new networking.
 
 ## What is BrowserPod
 
-{/_ TODO: re-present from zero. Value proposition, purpose, audience
-(AI agents and their builders; in-browser IDEs, playgrounds, docs and demos; platforms embedding dev tools).
-Wording: "Linux applications in the browser", "Linux-like"; not "Real Linux". _/}
+{/* TODO: re-present from zero. Value proposition, purpose, audience */}
+{/* (AI agents and their builders; in-browser IDEs, playgrounds, docs and demos; platforms embedding dev tools). */}
+{/* Wording: "Linux applications in the browser", "Linux-like"; not "Real Linux". */}
 
 ## What it does, and what it doesn't
 
-{/_ TODO: Node.js 22 and Rust production-grade, git, bash, coreutils, Python preview.
-Limits: no prebuilt native binaries, cross-origin isolation required, Chromium the reliable target. _/}
+{/* TODO: Node.js 22 and Rust production-grade, git, bash, coreutils, Python preview. */}
+{/* Limits: no prebuilt native binaries, cross-origin isolation required, Chromium the reliable target. */}
 
 ## Free for any use
 
-{/_ TODO: the BrowserPod Community Licence. - Free for any use, unlimited, unmetered, commercial production included; with attribution. - npm install, no account, no key; runtime loaded from our CDN; no call-home, no telemetry. - Published runtime versions are immutable and stay available. - Paid: self-hosting / vendoring / redistribution (Enterprise); removing attribution (sales). - Why: motivation for the change. _/}
+{/* TODO: the BrowserPod Community Licence. */}
+{/* - Free for any use, unlimited, unmetered, commercial production included; with attribution. */}
+{/* - npm install, no account, no key; runtime loaded from our CDN; no call-home, no telemetry. */}
+{/* - Published runtime versions are immutable and stay available. */}
+{/* - Paid: self-hosting / vendoring / redistribution (Enterprise); removing attribution (sales). */}
+{/* - Why: motivation for the change. */}
 
 ## New networking features
 
@@ -149,9 +154,9 @@ you can add your own list, or allow all domains to be reached, per key.
 
 And now that pods can speak more than HTTP, we also added [openssh](https://www.openssh.com) to the base image, so you can use a pod as real ssh client:
 
-{/_ DEMO: direct connect: ASCII Star Wars over SSH.
-bash -c "[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519; ssh -o StrictHostKeyChecking=accept-new movie.gabe565.com"
-openssh is in the node image from lt-nix 7281285. The demo key's allowlist needs movie.gabe565.com. _/}
+{/* DEMO: direct connect: ASCII Star Wars over SSH. */}
+{/* bash -c "[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519; ssh -o StrictHostKeyChecking=accept-new movie.gabe565.com" */}
+{/* openssh is in the node image from lt-nix 7281285. The demo key's allowlist needs movie.gabe565.com. */}
 
 ## New Rust utilities in the base image
 
