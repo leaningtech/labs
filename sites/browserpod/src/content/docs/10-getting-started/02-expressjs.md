@@ -5,7 +5,7 @@ description: In this tutorial you will set up a simple NPM project that runs an 
 
 In this tutorial, we'll set up a basic project that uses BrowserPod to run a web server application entirely in the browser, with no backend infrastructure.
 
-The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs an [API key](/docs/understanding-browserpod/api-key). Without a key, the page shows how to add one to enable the preview.
+The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs an [API key](/docs/understanding-browserpod/api-key). Without a key, your app shows how to add one to enable the preview.
 
 ## 1. Get the code
 

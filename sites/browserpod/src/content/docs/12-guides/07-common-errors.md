@@ -49,7 +49,7 @@ pod.run(..., {terminal,...});
 ## `npm install` fails without an API key
 
 - **Symptoms**:
-  - `npm error code ECONNRESET`
+  - After about a minute with no output, while npm retries in the background: `npm error code ECONNRESET` (`socket hang up`)
   - Browser console: `Response to preflight request doesn't pass access control check`
 
 - **Cause**: Without an API key, the Pod uses the fetch network, and the npm registry blocks the requests npm sends from the browser.
@@ -79,19 +79,22 @@ const pod = await BrowserPod.boot({ network });
   - `ENOTFOUND` or `Could not resolve host`
   - Browser console: `DNS query blocked for non-whitelisted domain`
 
-- **Cause**: On the edge network, Pods can only reach BrowserPod's default domains, or the domains you chose for your key.
+- **Cause**: On the edge network, Pods can only reach the allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro.
 
-- **Solution**: With a Pro plan, add the domain in the [BrowserPod console](https://console.browserpod.io). If the server allows CORS, you can also reach it without a key.
+- **Solution**: With Edge Pro, add the domain in the [BrowserPod console](https://console.browserpod.io). If the server allows CORS, you can also reach it without a key.
 
 ## The Pod never finishes booting
 
 - **Symptoms**:
   - `await BrowserPod.boot(...)` never resolves
-  - Browser console: `WebSocket connection failed, check your API key.` or `HTTP Authentication failed`
+  - Browser console: `WebSocket connection failed, check your API key.`
 
-- **Cause**: The API key is empty or invalid. An empty string still counts as a key.
+- **Cause**: The API key is empty or invalid (an empty string still counts as a key), or your account doesn't have enough tokens for the edge network.
 
-- **Solution**: Check that the key in your code or `.env` is complete and correct, or create a new one in the [BrowserPod console](https://console.browserpod.io).
+- **Solution**:
+  - Empty key: add your key, or remove or comment out the `VITE_BP_APIKEY=` line to boot without one. `apiKey: import.meta.env.VITE_BP_APIKEY?.trim() || undefined` handles this for you.
+  - Invalid key: check that it's complete and correct, or create a new one in the [BrowserPod console](https://console.browserpod.io).
+  - Not enough tokens: check your token balance in the [BrowserPod console](https://console.browserpod.io). Meanwhile, you can boot without a key.
 
 ## Errors when passing a network to `boot`
 

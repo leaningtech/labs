@@ -40,5 +40,5 @@ class BrowserPod {
 ## Notes
 
 - Booting on an edge network deducts 10 tokens from your BrowserPod account balance (and fails if insufficient tokens are available). Booting on a fetch network is free and deducts no tokens.
-- An empty or invalid `apiKey` makes `boot` hang instead of failing. See [Common errors](/docs/guides/common-errors#the-pod-never-finishes-booting).
+- An empty or invalid `apiKey`, or too few tokens, makes `boot` hang instead of failing. See [Debugging BrowserPod](/docs/guides/common-errors#the-pod-never-finishes-booting).
 - For how the Pod's filesystem is structured and when its data persists, see [Filesystem](/docs/understanding-browserpod/filesystem).

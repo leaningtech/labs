@@ -7,16 +7,16 @@ BrowserPod provides a sandboxed runtime for executing code safely in the browser
 
 ## 1. Get an API key (optional)
 
-BrowserPod works with or without an API key. A key enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking) for everything that differs between the two.
+BrowserPod works with or without an API key. A key enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking) for what changes with and without a key.
 
 To get a key, register at https://console.browserpod.io using your GitHub account and create a new API key. You can also skip this step and add a key later.
 
 ## 2. Use one of our quickstart templates
 
-Run the following command to create a Vite-based project:
+Run the following command to scaffold a project:
 
 ```bash
-npm create browserpod-quickstart
+npm create browserpod-quickstart@latest
 ```
 
 The CLI asks you to:
@@ -47,7 +47,7 @@ Feel free to modify `src/main.js`. The dev server supports hot reloading.
 To skip the prompts, pass options to the command. npm needs a `--` before them:
 
 ```bash
-npm create browserpod-quickstart -- my-app -t vite-basic -k <your-key>
+npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
 ```
 
 | Option                    | Description                                  |

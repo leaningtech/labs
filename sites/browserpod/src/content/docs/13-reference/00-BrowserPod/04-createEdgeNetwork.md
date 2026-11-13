@@ -17,7 +17,7 @@ Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and
 
 ## Options
 
-- **apiKey (`string`)** - The [API key](/docs/understanding-browserpod/api-key) used to authenticate requests. The network can reach BrowserPod's default domains, such as the npm registry and GitHub. With a Pro plan, you can choose which domains it can reach in the [BrowserPod console](https://console.browserpod.io).
+- **apiKey (`string`)** - The [API key](/docs/understanding-browserpod/api-key) used to authenticate requests. The network can reach its allowed domains: BrowserPod's default domains, such as the npm registry and GitHub, or the ones you choose with Edge Pro in the [BrowserPod console](https://console.browserpod.io).
 
 ## Returns
 

@@ -7,7 +7,7 @@ An API key connects your Pods to BrowserPod's [edge network](/docs/understanding
 
 Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. It's free, but subject to browser CORS rules.
 
-An API key is only needed for the **edge network**. It isn't limited by CORS: it reaches BrowserPod's default domains, and with a Pro plan you can choose which domains it can reach. It also enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking) for details.
+An API key is only needed for the **edge network**. It isn't limited by CORS and can reach its allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro. It also enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Register for an API key
 
@@ -40,14 +40,14 @@ VITE_BP_APIKEY=your_key_here
 
 ```js
 const pod = await BrowserPod.boot({
-	apiKey: import.meta.env.VITE_BP_APIKEY,
+	apiKey: import.meta.env.VITE_BP_APIKEY?.trim() || undefined,
 });
 ```
 
 This keeps the key out of source control and makes local development easier.
 
 > [!note]
-> An empty `VITE_BP_APIKEY=` still counts as a key, and `boot` never finishes. To boot without a key, leave the line out or comment it out.
+> The `?.trim() || undefined` part matters: without it, an empty `VITE_BP_APIKEY=` still counts as a key, and `boot` never finishes.
 
 ### Method 3: Hosting provider env variables (recommended for production)
 

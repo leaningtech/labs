@@ -5,11 +5,8 @@ description: Expose a local server with a BrowserPod Portal URL
 
 This guide shows how to listen on a port and expose it via a Portal URL.
 
-Portals need an [API key](/docs/understanding-browserpod/api-key), so boot the Pod with one:
-
-```js
-const pod = await BrowserPod.boot({ apiKey: "your_key_here" });
-```
+> [!note]
+> Portals need an [API key](/docs/understanding-browserpod/api-key). Boot the Pod with one before you start.
 
 ## 1. Register a Portal handler
 
