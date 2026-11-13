@@ -98,9 +98,9 @@ The technology worked, but the model created excessive friction, and the reason 
 From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
 anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
 
-We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number 1 support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
+We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number one support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
 
-For this reason BrowserPod [came from day 1 with a managed proxy](/blog/browserpod-deep-dive#solving-networking-again), which allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
+For this reason BrowserPod [came from day one with a managed proxy](/blog/browserpod-deep-dive#solving-networking-again), which allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
 
 While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
 
