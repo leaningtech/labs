@@ -230,10 +230,13 @@ const pod = await BrowserPod.boot();
 
 From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
 anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
+
 We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number 1 support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
+
 For this reason BrowserPod [came from day 1 with the edge network](/blog/browserpod-deep-dive#solving-networking-again): a managed proxy that allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
 
 While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
+
 This is unnecessary friction for the many use cases that don't need unrestricted internet access.
 Our goal with BrowserPod 4.0 is to remove that friction, both with a more permissive licence and with the ability to start a pod without an API key.
 
@@ -279,12 +282,15 @@ const pod = await BrowserPod.boot({ network });
 ```
 
 The browser's rules still apply: a request only succeeds if the server allows cross-origin requests, and _most sites don't_. In some cases, slightly tweaking the request can do the trick.
+
 For example, by default npm sends a few telemetry headers (`npm-command`, `npm-session`, `npm-auth-type`, `npm-scope`). Since those are not [CORS-safelisted request headers](https://developer.mozilla.org/en-US/docs/Glossary/CORS-safelisted_request_header), the browser sends a
 [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request), which `registry.npmjs.org` does not support, and the overall request fails. Without those headers, the registry happily replies with
 `Access-Control-Allow-Origin: *`, and the request goes through.
 
 `BrowserPod.opinionatedFetch` works around issues like this one. For now it removes npm's telemetry headers, so that `npm install` and `pnpm install` work out of the box, and we will add workarounds for other sites over time.
-Let us know if you think that a particular workaround should be added in there. You can always also combine it with your own logic:
+Let us know if you think that a particular workaround should be added in there.
+
+You can always also combine it with your own logic:
 
 ```js
 const network = await BrowserPod.createFetchNetwork({
@@ -371,6 +377,7 @@ Rust support landed in [BrowserPod 3.0](/blog/browserpod-rust), and it has prove
 Every pod now comes with [`ripgrep`](https://github.com/BurntSushi/ripgrep) (a `grep` replacement) and [`fd`](https://github.com/sharkdp/fd) (a `find` replacement), two popular tools that are handy for humans and coding agents alike.
 
 But most importantly, we added **[pnpm 12](https://pnpm.io)**, the new Rust-based version of pnpm.
+
 pnpm is a popular alternative to npm for installing and managing Node.js dependencies. It's _much_ faster than npm, especially when there is no pre-existing lockfile. All the demos on [browsercode.io](https://browsercode.io) are now based on it, like this Vite project, which you can edit and run right here:
 
 <iframe
