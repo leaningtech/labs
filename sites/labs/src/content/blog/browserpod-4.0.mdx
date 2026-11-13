@@ -1,11 +1,12 @@
 ---
-title: "BrowserPod 4.0: TODO title"
+title: "BrowserPod: the microVM that runs in the browser, now free for any use"
 description: |
-  TODO one-line description.
+  BrowserPod 4.0 is a free library: a microVM that runs in the browser, with no account and no API key. Plus a new fetch network, TCP on the edge network, SSH and pnpm 12.
 authors:
   - yuri
+  - stefano
 pubDate: "November 16 2026"
-heroImage: "./banners/BrowserPod_3.0-hero.webp"
+heroImage: "./banners/BrowserPod-4.0-hero.webp"
 tags:
   - BrowserPod
 categories:
@@ -15,45 +16,207 @@ categories:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-{/* TODO: BrowserPodProvider, version="4.0.x", ideally with no apiKey so the post itself boots keyless. */}
-{/* Check that the component supports that. */}
+{/* The hero pod boots with no apiKey: the post itself boots keyless, on a fetch network. */}
 
-{/* TODO: hero demo. A small pod that shows at a glance what BrowserPod is. */}
+<BrowserPodProvider
+	client:only="svelte"
+	ctxId="bp4-keyless"
+	version="3.6.0"
+	storageKey="labs-blog-browserpod-4.0"
+	terminalStyle="kit"
+/>
 
-Today we are releasing **BrowserPod 4.0**. TODO: intro. A relaunch: BrowserPod as a free library,
-new licensing, new networking.
+{/* The Edge demos need a key whose allowlist includes github.com and movie.gabe565.com. */}
+{/* TODO(Yuri): confirm or replace this key (it is the one from the Rust post). */}
+
+<BrowserPodProvider
+	client:only="svelte"
+	ctxId="bp4-edge"
+	version="3.6.0"
+	storageKey="labs-blog-browserpod-4.0"
+	lazy={true}
+	terminalStyle="kit"
+	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
+/>
+
+Today we are releasing **BrowserPod 4.0**. It is the biggest change to BrowserPod since we first announced it: BrowserPod is now a **free library**.
+Install it from npm, call `BrowserPod.boot()`, and you have a microVM running in the browser, on your user's own device.
+There is no account to create, no API key to paste, and no meter. It is free for any use, commercial and production included.
+
+The terminal below is a pod that this page booted a moment ago, with no API key:
+
+<BrowserPodTerminal
+	client:only="svelte"
+	variant="kit"
+	ctxId="bp4-keyless"
+	description="A BrowserPod microVM booted by this page, with no API key."
+	autoStart={true}
+	height="18rem"
+	terminalTabs={[
+		{
+			id: "bp4-hero",
+			label: "bash",
+			echo: false,
+			command: "bash",
+			args: [
+				"-c",
+				"[ -f WELCOME_TO_BROWSERPOD.txt ] || printf 'Welcome to BrowserPod!\\n\\nThis file lives in a microVM running in your browser tab.\\nNothing here runs on a server: edit it, delete it, break things.\\n\\nDocs: https://browserpod.io/docs\\n' > WELCOME_TO_BROWSERPOD.txt; { printf 'A microVM in this tab, booted with no API key. Try:\\n\\n  cat WELCOME_TO_BROWSERPOD.txt\\n  node --version\\n  git --version\\n  pnpm --version\\n  rg --version\\n\\n'; echo '$ ls'; ls; echo; } | cat; exec bash",
+			],
+		},
+	]}
+/>
 
 ## What is BrowserPod
 
-{/* TODO: re-present from zero. Value proposition, purpose, audience */}
-{/* (AI agents and their builders; in-browser IDEs, playgrounds, docs and demos; platforms embedding dev tools). */}
-{/* Wording: "Linux applications in the browser", "Linux-like"; not "Real Linux". */}
+BrowserPod is a microVM that runs in the browser, built on WebAssembly.
+
+At its core is a Linux-like kernel that we wrote for WebAssembly ([we described it in detail here](/blog/browserpod-deep-dive)), isolated by the browser's sandbox.
+Linux applications compiled from unmodified source run on it: the real Node.js 22, compiled to WebAssembly, unmodified [Rust programs](/blog/browserpod-rust), git, bash, npm and pnpm, with Python in preview and Go coming soon.
+Processes run in parallel, each in its own Web Worker, and share an ext2 filesystem that is streamed on demand and can persist in the browser between visits.
+
+Like a microVM, it starts near-instantly and keeps a small footprint. It gives applications a whole Linux system to work with.
+And since it runs in the tab, two things come for free:
+
+- **Zero latency.** Execution is local, next to the user and next to the agent. There is no round trip to a cloud sandbox in a run, observe, fix loop.
+- **Zero compute cost to you.** The user's device does the work. A pod costs you the same whether you have ten users or a million.
+
+We built BrowserPod for three groups of people:
+
+- **AI agents, and the people building them.** An agent writing a web app can add BrowserPod and run code in it by itself, with no account it would have to ask you for.
+- **In-browser IDEs, playgrounds, documentation and demos.** [BrowserCode](https://browsercode.io), our free playground, runs on BrowserPod, and so do Claude Code, Codex CLI and Pi when you start them there.
+- **Platforms that embed AI-assisted development** in their own product, and want code to run on their users' machines rather than on a fleet of servers.
+
+BrowserPod does not replace cloud sandboxes: headless, long-running and GPU workloads belong on servers. BrowserPod is for interactive work, next to the user.
 
 ## Free for any use
 
-{/* TODO: the BrowserPod Community Licence. */}
-{/* - Free for any use, unlimited, unmetered, commercial production included; with attribution. */}
-{/* - npm install, no account, no key; runtime loaded from our CDN; no call-home, no telemetry. */}
-{/* - Published runtime versions are immutable and stay available. */}
-{/* - Paid: self-hosting / vendoring / redistribution (Enterprise); removing attribution (sales). */}
-{/* - Why: motivation for the change. */}
+BrowserPod 4.0 comes with a new licence, the [BrowserPod Community Licence](https://browserpod.io/license). In short:
+
+- **Free for any use.** Personal, commercial and production, for companies of any size, open-source projects and AI agents. No usage limit, no fee, nothing metered.
+- **No account, no key, no call-home.** `npm install @leaningtech/browserpod` is all you need. The runtime loads from our CDN and sends us no telemetry.
+- **Versions stay put.** Every published runtime version is immutable and stays available, so an application pinned to a version keeps working.
+
+**Self-hosting, vendoring or redistributing** the runtime needs a BrowserPod Enterprise Licence: [get in touch](https://browserpod.io/contact).
+
+### Why
+
+Until now, BrowserPod was a hosted service. To boot a pod you signed up, created an API key, and every hour of compute was metered.
+
+The technology worked, but the model got in the way, for two reasons.
+The first is that many applications simply don't need our networking service, and they can provide their own, so there is no reason to require an account and a key to run a pod.
+The second is AI agents: we want them to be able to use BrowserPod freely. An agent can add a library to the application it is building, but it cannot sign up for an account and create a key on your behalf.
+
+So the runtime is now free, and what we charge for is what actually costs us something, or is worth something to a business: the network, and the right to self-host.
+
+**If you already use BrowserPod**, nothing breaks. Your account is now a BrowserPod Edge account, and your API keys and plan keep working.
+BrowserPod Pro is now Edge Pro, at the same price and with the same allowances. Your tokens now pay for Edge networking rather than compute.
 
 ## New networking features
 
 For BrowserPod 4.0, we expanded our networking capabilities in two directions:
 
 - A new **[fetch network](https://browserpod.io/docs/reference/BrowserPod/createFetchNetwork)**, which needs no API key: outbound requests are made by the browser's `fetch()`, or by your own custom fetch implementation
-- The **[edge network](https://browserpod.io/docs/reference/BrowserPod/createEdgeNetwork)**, our managed proxy, is not restricted to HTTPS only anymore, and lets pods reach domains that you configure per API key, or even all the internet
+- The **[edge network](https://browserpod.io/docs/reference/BrowserPod/createEdgeNetwork)**, our managed proxy, is not restricted to HTTP and HTTPS anymore: pods can open TCP connections on any port, and reach the domains that you allow for each API key
 
 Here is a quick feature comparison between the two:
 
-|                      | Fetch network                                                                            | Edge network    |
-| -------------------- | ---------------------------------------------------------------------------------------- | --------------- |
-| API key              | no                                                                                       | yes             |
-| Traffic goes through | the user's browser                                                                       | our proxy       |
-| Can reach            | servers that allow [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) | allowed domains |
-| Protocols            | HTTP, HTTPS                                                                              | any TCP         |
-| Inbound (Portals)    | not yet                                                                                  | yes             |
+{/* prettier-ignore */}
+<div className="bp-compare not-prose">
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Fetch network<code>createFetchNetwork()</code></th>
+				<th>Edge network<code>createEdgeNetwork()</code></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><th scope="row">API key</th><td>Not needed</td><td>Required</td></tr>
+			<tr><th scope="row">Traffic goes through</th><td>The user's browser</td><td>Our proxy</td></tr>
+			<tr><th scope="row">Can reach</th><td>Servers that allow <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">CORS</a></td><td>Domains you allow</td></tr>
+			<tr><th scope="row">Protocols</th><td>HTTP, HTTPS</td><td>Any TCP</td></tr>
+			<tr><th scope="row">Inbound (<a href="https://browserpod.io/docs/understanding-browserpod/portals">Portals</a>)</th><td>Not yet</td><td>Yes</td></tr>
+			<tr><th scope="row">Price</th><td>Free</td><td>1,000 hours a month free, then $0.01 per connected hour</td></tr>
+		</tbody>
+	</table>
+</div>
+
+<style>{`
+	.bp-compare {
+		--line: color-mix(in srgb, currentColor 9%, transparent);
+		--rule: color-mix(in srgb, currentColor 18%, transparent);
+		--band: color-mix(in srgb, currentColor 5%, transparent);
+		margin: 2rem 0;
+		overflow-x: auto;
+		border: 1px solid var(--line);
+		border-radius: 16px;
+	}
+	.bp-compare table {
+		width: 100%;
+		min-width: 34rem;
+		border-collapse: collapse;
+		font-size: 0.9375rem;
+		line-height: 1.5;
+		table-layout: fixed;
+	}
+	.bp-compare th,
+	.bp-compare td {
+		padding: 0.8rem 1.25rem;
+		text-align: left;
+		vertical-align: baseline;
+	}
+	/* Header: its own strip, a firm rule below, an accent per column */
+	.bp-compare thead th {
+		padding-top: 1.1rem;
+		padding-bottom: 0.9rem;
+		background: color-mix(in srgb, currentColor 6%, transparent);
+		border-bottom: 1px solid var(--rule);
+		font-size: 1rem;
+		font-weight: 600;
+		vertical-align: bottom;
+	}
+	.bp-compare thead th:first-child {
+		width: 30%;
+	}
+	.bp-compare thead th:nth-child(2) {
+		box-shadow: inset 0 -2px 0 #5b8bff;
+	}
+	.bp-compare thead th:nth-child(3) {
+		box-shadow: inset 0 -2px 0 #ffd633;
+	}
+	.bp-compare thead code {
+		display: block;
+		margin-top: 0.25rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.75rem;
+		font-weight: 400;
+		font-style: normal;
+		opacity: 0.55;
+	}
+	/* Body: alternating bands instead of row lines */
+	.bp-compare tbody tr:nth-child(even) {
+		background: var(--band);
+	}
+	.bp-compare tbody th {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.8125rem;
+		font-weight: 400;
+		opacity: 0.65;
+	}
+	/* Columns: a firm rule after the labels, a light one between the values */
+	.bp-compare th:first-child {
+		border-right: 1px solid var(--rule);
+	}
+	.bp-compare td + td,
+	.bp-compare thead th + th + th {
+		border-left: 1px solid var(--line);
+	}
+	.bp-compare a {
+		color: #5b8bff;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+`}</style>
 
 ### Fetch network
 
@@ -63,38 +226,46 @@ A pod can now boot **without an API key**. In that case its outbound HTTP and HT
 const pod = await BrowserPod.boot();
 ```
 
-#### Why
+#### Why the change?
 
 From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
 anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
-We know this from experience: the number 1 support question that we get for [webvm.io](https://webvm.io) is how to set up the [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale) to enable internet connectivity.
+We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number 1 support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
 For this reason BrowserPod [came from day 1 with the edge network](/blog/browserpod-deep-dive#solving-networking-again): a managed proxy that allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
 
 While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
-This is unnecessary friction for the many use cases that don't need unrestricted internet access, and our goal with BrowserPod 4.0
-is to remove any sort of friction in using it, be it with a more permissive license or with the ability to start a pod without an API key.
+This is unnecessary friction for the many use cases that don't need unrestricted internet access.
+Our goal with BrowserPod 4.0 is to remove that friction, both with a more permissive licence and with the ability to start a pod without an API key.
 
 No key doesn't have to mean no network, though. After all, the browser can make network requests itself, restricted as they might be. And you might have your own CORS proxy or tunnel to use.
 
 #### How it works
 
-Fulfilling low level network requests with `fetch()` is not straightforward:
-all that we get from the pod is a TCP stream that contains encrypted TLS traffic. In order to reconstruct the high level
-HTTPS request one needs to:
+A program in the pod doesn't call `fetch()`: it opens a TCP connection and writes bytes to it.
+For plain HTTP, turning that into a `fetch()` call is simple enough: we parse the HTTP request from the bytes, and build a request that `fetch()` can send.
+
+HTTPS is harder, because all we get from the pod is a TCP stream of encrypted TLS traffic. To reconstruct the HTTPS request, we need to:
 
 - Intercept the TLS handshake between the program in the pod and the server, and put ourselves in the middle (MITM)
 - Make sure that the program trusts the certificate that we will present on behalf of the server
 - Parse the HTTP request from the unencrypted bytes
 - Construct from it a JS [`RequestInit`](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit) object that can be passed to `fetch()`
 
-![How a fetch network turns a pod's TCP connection into a fetch() call](./images/BP_4_fetch_network.svg)
+<figure class="breakout w-full">
+	![How a fetch network turns a pod's TCP connection into a fetch()
+	call](./images/BP_4_fetch_network.svg)
+	<figcaption class="text-center">
+		How the fetch network turns a pod's TCP connection into a `fetch()` call,
+		inside your page.
+	</figcaption>
+</figure>
 
 We implemented all of this inside of BrowserPod. Everything happens **inside your own page**: the certificate authority is generated at each boot and never leaves the page, and the decrypted traffic goes only to `fetch()`.
 
 #### Customizing it
 
 If you want to pass a custom fetch implementation, you need to explicitly construct a fetch network.
-Your function receives the same parameters as fetch: the URL and the request init options. We add to it `init.defaultFetch`, which is the default implementation you can defer to:
+Your function receives the same parameters as `fetch()`: the URL and the request options. The options also include `init.defaultFetch`, the default implementation, so you can change the request and then let BrowserPod send it:
 
 ```js
 const network = await BrowserPod.createFetchNetwork({
@@ -112,7 +283,7 @@ For example, by default npm sends a few telemetry headers (`npm-command`, `npm-s
 [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request), which `registry.npmjs.org` does not support, and the overall request fails. Without those headers, the registry happily replies with
 `Access-Control-Allow-Origin: *`, and the request goes through.
 
-We provide `BrowserPod.opinionatedFetch`, which is intended to work around known issues and provide useful defaults for BrowserPod users. Currently it just performs the npm header filter, so that `npm install` and `pnpm install` work out of the box. We plan to add other similar quirks for specific sites over time.
+`BrowserPod.opinionatedFetch` works around issues like this one. For now it removes npm's telemetry headers, so that `npm install` and `pnpm install` work out of the box, and we will add workarounds for other sites over time.
 Let us know if you think that a particular workaround should be added in there. You can always also combine it with your own logic:
 
 ```js
@@ -124,6 +295,8 @@ const network = await BrowserPod.createFetchNetwork({
 });
 const pod = await BrowserPod.boot({ network });
 ```
+
+When a request fails, it fails the way it would in any web page: with a CORS error, which a person or an agent can read and act on.
 
 #### Limits
 
@@ -138,20 +311,58 @@ const network = await BrowserPod.createEdgeNetwork({ apiKey: "your-api-key" });
 const pod = await BrowserPod.boot({ network });
 ```
 
+With 4.0 it becomes a product in its own right, **BrowserPod Edge**: the optional service for pods that need to reach the internet, or be reached from it.
+Edge is free for 1,000 connected hours a month, and then costs $0.01 per connected hour. Only the network is metered, never compute.
+
 It got some love too, with two additions.
 
-**Per-key domain lists.** Users on the [Pro plan](https://browserpod.io/pricing/) can configure API keys to allow a pod to reach domains that are not in our global allowlist:
-you can now add your own list, or allow all domains to be reached, per key.
+**Per-key domain lists.** On the [Pro plan](https://browserpod.io/pricing/), you can now add your own list of domains to each API key, so that pods can reach domains that are not in our global allowlist.
 
-**TCP on any port.** The edge network is no longer limited to HTTP and HTTPS: a pod can open a TCP connection on any port to an allowed domain. Here it talks to GitHub's SSH port:
+**TCP on any port.** The edge network is no longer limited to HTTP and HTTPS: on every plan, Free included, a pod can open a TCP connection on any port to an allowed domain. Here it talks to GitHub's SSH port:
 
-{/* DEMO (live): nc github.com 22  → prints GitHub's SSH banner, e.g. SSH-2.0-e5270d40 */}
+<BrowserPodTerminal
+	client:only="svelte"
+	variant="kit"
+	ctxId="bp4-edge"
+	description="A pod opening a TCP connection to github.com on port 22"
+	autoStart={false}
+	height="12rem"
+	terminalTabs={[
+		{
+			id: "bp4-nc",
+			label: "nc",
+			echo: false,
+			command: "bash",
+			args: ["-c", "set -x; nc github.com 22; exec bash"],
+		},
+	]}
+/>
 
-And now that pods can speak more than HTTP, we also added [openssh](https://www.openssh.com) to the base image, so you can use a pod as real ssh client:
+And now that pods can speak more than HTTP, we also added [OpenSSH](https://www.openssh.com) to the base image, so you can use a pod as a real SSH client.
+Here is one connecting to a server that plays Star Wars in ASCII art:
 
-{/* DEMO: direct connect: ASCII Star Wars over SSH. */}
-{/* bash -c "[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519; ssh -o StrictHostKeyChecking=accept-new movie.gabe565.com" */}
 {/* openssh is in the node image from lt-nix 7281285. The demo key's allowlist needs movie.gabe565.com. */}
+
+<BrowserPodTerminal
+	client:only="svelte"
+	variant="kit"
+	ctxId="bp4-edge"
+	description="ssh from a pod: ASCII Star Wars, from movie.gabe565.com"
+	autoStart={false}
+	height="22rem"
+	terminalTabs={[
+		{
+			id: "bp4-ssh",
+			label: "ssh",
+			echo: false,
+			command: "bash",
+			args: [
+				"-c",
+				"[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519; ssh -o StrictHostKeyChecking=accept-new movie.gabe565.com",
+			],
+		},
+	]}
+/>
 
 ## New Rust utilities in the base image
 
@@ -160,11 +371,14 @@ Rust support landed in [BrowserPod 3.0](/blog/browserpod-rust), and it has prove
 Every pod now comes with [`ripgrep`](https://github.com/BurntSushi/ripgrep) (a `grep` replacement) and [`fd`](https://github.com/sharkdp/fd) (a `find` replacement), two popular tools that are handy for humans and coding agents alike.
 
 But most importantly, we added **[pnpm 12](https://pnpm.io)**, the new Rust-based version of pnpm.
-Pnpm is a popular alternative to npm for installing and managing Node.js dependencies. It's _much_ faster than npm, especially when there is no pre-existing lockfile. All the demos on [browsercode.io](https://browsercode.io) are now based on it:
+pnpm is a popular alternative to npm for installing and managing Node.js dependencies. It's _much_ faster than npm, especially when there is no pre-existing lockfile. All the demos on [browsercode.io](https://browsercode.io) are now based on it, like this Vite project, which you can edit and run right here:
 
-```
-browsercode embed
-```
+<iframe
+	src="https://browsercode.io/embed?framework=vite&view=files,editor,terminal,preview"
+	allow="cross-origin-isolated"
+	title="BrowserCode running a Vite template with pnpm"
+	class="border border-stone-700 rounded-md w-full h-[40rem]"
+></iframe>
 
 ## What's next
 
@@ -181,4 +395,18 @@ We have many exciting features in our pipeline, some of which are coming very so
 npm install @leaningtech/browserpod
 ```
 
-{/* TODO: quickstart, docs link, BrowserCode, console for Edge, Discord. */}
+```js
+import { BrowserPod } from "@leaningtech/browserpod";
+
+const pod = await BrowserPod.boot();
+```
+
+That is all it takes. If you prefer to start from a working project, `npm create browserpod-quickstart` sets one up for you.
+Or simply ask your coding agent to add BrowserPod to your app: it won't need to ask you for anything.
+
+- The [documentation](https://browserpod.io/docs) covers the API, networking and how to build for BrowserPod.
+- [BrowserCode](https://browsercode.io) is the quickest way to see BrowserPod at work, with framework templates and AI coding agents running in your browser.
+- When your pods need Portals, TCP or more of the internet, create an API key in the [console](https://console.browserpod.io) to add Edge.
+
+Try BrowserPod 4.0 today, with or without an API key, and let us know what you think: your feedback shapes what we build next.
+Come and find us on [Discord](https://discord.leaningtech.com), we would love to see what you build.
