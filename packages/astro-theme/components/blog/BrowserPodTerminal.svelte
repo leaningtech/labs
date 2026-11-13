@@ -68,7 +68,9 @@
 		for (const run of pendingRuns) run();
 		await tick();
 		const firstPaneId = terminalTabs[0]?.id;
-		document.getElementById(firstPaneId)?.querySelector("textarea")?.focus();
+		const pane = document.getElementById(firstPaneId);
+		// NOTE: A "fit" terminal lives in the pane's shadow root
+		(pane?.shadowRoot ?? pane)?.querySelector("textarea")?.focus();
 	}
 </script>
 

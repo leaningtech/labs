@@ -2,7 +2,7 @@
 	import { BrowserPod } from "../../lib/browserpod.ts";
 	import { BrowserPodEditorProvider } from "@leaningtech/svelte-browserpod-editor";
 	import "@leaningtech/svelte-browserpod-editor/theme.css";
-	import "@xterm/xterm/css/xterm.css";
+	import xtermCss from "@xterm/xterm/css/xterm.css?inline";
 
 	// opinionatedFetch: boot without an apiKey, on a fetch network that uses
 	//   BrowserPod.opinionatedFetch.
@@ -42,6 +42,10 @@
 	// font size follows the available width, so the grid never changes.
 	// NOTE: The returned terminal has no `xterm` property, so TerminalPanel
 	// does not resize the view behind the pod's back.
+	// NOTE: The view lives in a shadow root. xterm scopes its font and colour
+	// rules with a class numbered per copy of the library, and the runtime
+	// bundles a copy of its own, so in the same tree the numbers collide and
+	// each terminal picks up the other's rules.
 	async function createFitTerminal(pod, pane, frame) {
 		const cols = Number(frame.dataset.bpFitCols);
 		const rows = Number(frame.dataset.bpFitRows);
@@ -79,13 +83,18 @@
 			rows,
 			onOutput: (buf) => xterm.write(new Uint8Array(buf)),
 		});
-		xterm.open(pane);
+		const root = pane.attachShadow({ mode: "open" });
+		const style = document.createElement("style");
+		style.textContent = xtermCss;
+		const host = document.createElement("div");
+		root.append(style, host);
+		xterm.open(host);
 		xterm.onData((data) => terminal.readData(data));
 
 		// The frame hugs the grid: as wide and as tall as its chrome plus the grid
 		const layout = () => {
 			xterm.options.fontSize = fontSize();
-			const screen = pane.querySelector(".xterm-screen");
+			const screen = host.querySelector(".xterm-screen");
 			const chromeHeight = frame.offsetHeight - pane.clientHeight;
 			frame.style.width = `${chromeWidth() + screen.offsetWidth}px`;
 			frame.style.setProperty(
