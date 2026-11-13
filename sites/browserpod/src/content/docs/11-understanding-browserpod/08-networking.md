@@ -32,7 +32,7 @@ To customize network settings, create a network object with [`createEdgeNetwork`
 
 ## Using npm without an API key
 
-On a plain fetch network, `npm install` fails because the npm registry blocks the requests. To use npm without an API key, create the fetch network with [`opinionatedFetch`](/docs/reference/BrowserPod/opinionatedFetch):
+On a plain fetch network, `npm install` fails: npm adds headers to its requests that the registry doesn't accept, so the browser blocks them. To use npm without an API key, create the fetch network with [`opinionatedFetch`](/docs/reference/BrowserPod/opinionatedFetch):
 
 ```js
 const network = await BrowserPod.createFetchNetwork({
@@ -45,7 +45,7 @@ const pod = await BrowserPod.boot({ network });
 
 Requests on a fetch network come straight from the browser, so they follow the browser's **Cross-Origin Resource Sharing (CORS)** rules: a server must allow requests from your page's origin, or the browser blocks them.
 
-To reach a server that doesn't allow this, boot on the edge network with an [API key](/docs/understanding-browserpod/api-key), if the server is on the edge network's allowed domains. You can also route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler).
+To reach a server that doesn't allow this, boot on the edge network with an [API key](/docs/understanding-browserpod/api-key), or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler).
 
 ## Fetch network and WebSockets
 

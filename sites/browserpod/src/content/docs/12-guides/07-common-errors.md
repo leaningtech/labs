@@ -71,7 +71,7 @@ const pod = await BrowserPod.boot({ network });
 
 - **Cause**: On the fetch network, requests come from the browser, so the server must allow cross-origin requests.
 
-- **Solution**: Boot with an API key if the server is on the edge network's allowed domains. See [Fetch network and CORS](/docs/understanding-browserpod/networking#fetch-network-and-cors). If `npm install` fails, see [`npm install` fails without an API key](#npm-install-fails-without-an-api-key).
+- **Solution**: Boot with an API key if the server is on the edge network's allowed domains, or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler). See [Fetch network and CORS](/docs/understanding-browserpod/networking#fetch-network-and-cors). If `npm install` fails, see [`npm install` fails without an API key](#npm-install-fails-without-an-api-key).
 
 ## Domain not reachable with an API key
 

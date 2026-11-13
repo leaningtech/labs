@@ -47,7 +47,7 @@ const pod = await BrowserPod.boot({
 This keeps the key out of source control and makes local development easier.
 
 > [!note]
-> The `?.trim() || undefined` part matters: without it, an empty `VITE_BP_APIKEY=` still counts as a key, and `boot` never finishes.
+> To boot without a key, comment out or remove the `VITE_BP_APIKEY` line. The `?.trim() || undefined` part covers a line left empty: without it, `VITE_BP_APIKEY=` would still count as a key, and `boot` would never finish.
 
 ### Method 3: Hosting provider env variables (recommended for production)
 
