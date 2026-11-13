@@ -11,7 +11,7 @@ Portals are enabled by BrowserPod's [edge network](/docs/understanding-browserpo
 
 Portals let you:
 
-- **Preview your app**: Show a server running in the Pod in your own page, for example in an iframe.
+- **Preview your app**: Show a server running in the Pod on your own page, for example in an iframe.
 - **Share it**: Send the URL to teammates so they can open the running app without deploying it.
 - **Build demos**: Let users try a working app inside docs or product tours.
 - **Test on other devices**: Open the URL on your phone to test a server running in your laptop's browser.
@@ -20,7 +20,7 @@ Portals let you:
 
 - A Portal is not a separate server. The server runs inside the Pod, in the browser, and the Portal forwards traffic to it.
 - Each port a server listens on gets its own Portal. [`onPortal`](/docs/reference/BrowserPod/onPortal) gives you its `url` and `port`.
-- Anyone with the URL can reach the server.
+- The URL is randomly generated, but anyone who has it can reach the server.
 - A Portal only works while the page running the Pod is open, and its URL changes every time the Pod boots.
 
 If you want the setup steps or code examples, see [Set up a Portal](/docs/guides/setup-portal).

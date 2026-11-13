@@ -8,7 +8,7 @@ This guide shows how to start a server inside a Pod and get a Portal URL to prev
 > [!note]
 > Portals need an [API key](/docs/understanding-browserpod/api-key). Boot the Pod with one before you start.
 
-_This guide assumes you have a [terminal](/docs/guides/run-programs-in-a-pod) and your server code in `/project` (see [Write files to the Pod](/docs/guides/write-files-to-pod))._
+_This guide assumes you have a [terminal](/docs/guides/run-programs-in-a-pod)._
 
 ## 1. Add a preview to your page
 
@@ -31,7 +31,20 @@ pod.onPortal(({ url, port }) => {
 });
 ```
 
-## 3. Start a server inside the Pod
+## 3. Write the server code
+
+Write a minimal server into the Pod (see [Write files to the Pod](/docs/guides/write-files-to-pod)):
+
+```js
+await pod.createDirectory("/project");
+const file = await pod.createFile("/project/server.js", "utf-8");
+await file.write(`require("http")
+	.createServer((req, res) => res.end("Hello from the Pod"))
+	.listen(3000);`);
+await file.close();
+```
+
+## 4. Start the server
 
 When your server listens on a port, BrowserPod creates a Portal:
 
@@ -41,14 +54,6 @@ pod.run("node", ["server.js"], {
 	terminal,
 	cwd: "/project",
 });
-```
-
-A minimal `server.js`:
-
-```js
-require("http")
-	.createServer((req, res) => res.end("Hello from the Pod"))
-	.listen(3000);
 ```
 
 ## Notes

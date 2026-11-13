@@ -174,7 +174,7 @@ with a few elements that we will use to set up BrowserPod.
 ### src/utils.js
 
 This file contains the utility function `copyFile`, that we will use in the main
-script to copy files into the [Pod](/docs/reference/BrowserPod).
+script to copy files into the [Pod](/docs/reference/BrowserPod). Its `prefix` argument is the folder in the Pod to copy into: `copyFile(pod, "project/main.js", "/home/user")` fetches `project/main.js` from the web page and writes it to `/home/user/project/main.js`.
 
 ```js title="src/utils.js"
 export async function copyFile(pod, path, prefix) {
