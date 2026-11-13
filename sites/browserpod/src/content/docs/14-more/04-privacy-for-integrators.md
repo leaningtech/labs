@@ -7,7 +7,7 @@ If your website or application runs BrowserPod, your privacy policy should menti
 
 ## What stays on the device
 
-Code and files in a Pod stay in the user's browser. BrowserPod doesn't upload them to us in order to run them, and the runtime sends no telemetry, licence checks or usage data. A Pod's filesystem is stored in the browser's own storage on the user's device.
+Code and files in a Pod stay in the user's browser. BrowserPod doesn't upload them to us in order to run them, and the runtime sends no telemetry, licence checks or usage data. The runtime may keep a Pod's files in the browser's own storage on the user's device, so that they are available next time.
 
 ## What reaches our CDN
 

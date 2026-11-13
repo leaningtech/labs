@@ -3,8 +3,6 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
-<!-- DRAFT for 4.0 (13 Nov 2026): licensing note only. Yuri and Merlin add the technical entries (networking, TCP on every Edge plan, types, console notice) before the 4.0 tag. -->
-
 ## Version 4.0.0:
 
 - **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, and the licence covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
