@@ -132,8 +132,8 @@ Here is a quick feature comparison between the two:
 		<thead>
 			<tr>
 				<th></th>
-				<th>Fetch network<code>createFetchNetwork()</code></th>
-				<th>Edge network<code>createEdgeNetwork()</code></th>
+				<th>Fetch network</th>
+				<th>Edge network</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -142,7 +142,7 @@ Here is a quick feature comparison between the two:
 			<tr><th scope="row">Can reach</th><td>Servers that allow <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">CORS</a></td><td>Domains you allow</td></tr>
 			<tr><th scope="row">Protocols</th><td>HTTP, HTTPS</td><td>Any TCP</td></tr>
 			<tr><th scope="row">Inbound (<a href="https://browserpod.io/docs/understanding-browserpod/portals">Portals</a>)</th><td>Not yet</td><td>Yes</td></tr>
-			<tr><th scope="row">Price</th><td>Free</td><td>1,000 hours a month free, then $0.01 per connected hour</td></tr>
+			<tr><th scope="row">Price</th><td>Free</td><td>1,000 hours a month free, then $0.01 per hour</td></tr>
 		</tbody>
 	</table>
 </div>
@@ -152,14 +152,13 @@ Here is a quick feature comparison between the two:
 		--line: color-mix(in srgb, currentColor 9%, transparent);
 		--rule: color-mix(in srgb, currentColor 18%, transparent);
 		--band: color-mix(in srgb, currentColor 5%, transparent);
-		margin: 2rem 0;
-		overflow-x: auto;
+		margin: 1.5rem 0;
+		overflow: hidden;
 		border: 1px solid var(--line);
 		border-radius: 16px;
 	}
 	.bp-compare table {
 		width: 100%;
-		min-width: 34rem;
 		border-collapse: collapse;
 		font-size: 0.9375rem;
 		line-height: 1.5;
@@ -167,14 +166,15 @@ Here is a quick feature comparison between the two:
 	}
 	.bp-compare th,
 	.bp-compare td {
-		padding: 0.8rem 1.25rem;
+		padding: 0.4rem 0.55rem;
 		text-align: left;
 		vertical-align: baseline;
+		overflow-wrap: anywhere;
 	}
 	/* Header: its own strip, a firm rule below, an accent per column */
 	.bp-compare thead th {
-		padding-top: 1.1rem;
-		padding-bottom: 0.9rem;
+		padding-top: 0.5rem;
+		padding-bottom: 0.45rem;
 		background: color-mix(in srgb, currentColor 6%, transparent);
 		border-bottom: 1px solid var(--rule);
 		font-size: 1rem;
@@ -189,15 +189,6 @@ Here is a quick feature comparison between the two:
 	}
 	.bp-compare thead th:nth-child(3) {
 		box-shadow: inset 0 -2px 0 #ffd633;
-	}
-	.bp-compare thead code {
-		display: block;
-		margin-top: 0.25rem;
-		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-		font-size: 0.75rem;
-		font-weight: 400;
-		font-style: normal;
-		opacity: 0.55;
 	}
 	/* Body: alternating bands instead of row lines */
 	.bp-compare tbody tr:nth-child(even) {
