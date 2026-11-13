@@ -25,7 +25,9 @@ export const GET: APIRoute = async ({ site }) => {
 		entries.flatMap((e) => (e.type === "file" ? [e] : files(e.entries)));
 
 	const sections: string[] = [];
-	const more: string[] = [];
+	// Top-level pages that aren't the overview. Not "## More": the docs have a
+	// `more/` directory, whose own heading is already that.
+	const other: string[] = [];
 	const optional: string[] = [];
 	for (const entry of await getRootNav()) {
 		if (entry.type === "directory") {
@@ -40,10 +42,10 @@ export const GET: APIRoute = async ({ site }) => {
 		} else if (entry.slug === "overview") {
 			sections.unshift(`## Start here\n\n${line(entry)}`);
 		} else {
-			more.push(line(entry));
+			other.push(line(entry));
 		}
 	}
-	if (more.length) sections.push(`## More\n\n${more.join("\n")}`);
+	if (other.length) sections.push(`## Other\n\n${other.join("\n")}`);
 	if (optional.length) sections.push(`## Optional\n\n${optional.join("\n")}`);
 
 	const body = `# BrowserPod documentation
