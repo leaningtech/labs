@@ -12,7 +12,18 @@
 		autoStart = true,
 		playCaption = "Interactive demo — click to run",
 		height = "25rem",
+		// "kit": no glass box, thin border and transparent header, as in the
+		// BrowserPod design kit. Pair with terminalStyle="kit" on the provider.
+		variant = "glass",
 	} = $props();
+
+	const KIT_VARS = [
+		"--bpe-color-terminal-bg: transparent",
+		"--bpe-container-header-background: transparent",
+		"--bpe-color-border: rgba(255,255,255,0.08)",
+		"--bpe-container-border-radius: 16px",
+		"--bpe-color-tab-active: rgba(255,255,255,0.06)",
+	].join(";");
 
 	// When autoStart is false, either the play button or onReady may fire first.
 	// playClicked tracks whether the user already clicked before the pod was ready,
@@ -48,6 +59,8 @@
 	async function handlePlay() {
 		overlayVisible = false;
 		playClicked = true;
+		// Boots the provider's pod if it was declared lazy; harmless otherwise.
+		window.dispatchEvent(new Event(`browserpod:boot:${ctxId}`));
 		for (const run of pendingRuns) run();
 		await tick();
 		const firstPaneId = terminalTabs[0]?.id;
@@ -59,8 +72,10 @@
 	<div class="w-full relative">
 		<div
 			{id}
-			class="flex w-full p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl"
-			style="height: {height}"
+			class={variant === "kit"
+				? "flex w-full"
+				: "flex w-full p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl"}
+			style="height: {height};{variant === 'kit' ? KIT_VARS : ''}"
 			aria-label={description}
 		>
 			<TerminalPanel {ctxId} {tabs} />
