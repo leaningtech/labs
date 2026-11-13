@@ -8,8 +8,9 @@ import GitHubStarCount from "../GitHubStarCount.svelte";
 import DiscordPresenceCount from "../DiscordPresenceCount.svelte";
 import Link from "./Link.astro";
 import CheerpjLogo from "../../../cheerpj-brand/cheerpj-logo.svg";
-import AgentMenu from "../../../cheerpj-brand/AgentMenu.astro";
-import AgentButton from "../../../cheerpj-brand/AgentButton.astro";
+import AgentMenu from "../../agents/AgentMenu.astro";
+import AgentButton from "../../agents/AgentButton.astro";
+import { agentConfig } from "../../../lib/agents";
 import { getProductNav, getRootNav } from "../../../lib/nav";
 
 interface Props {
@@ -21,6 +22,8 @@ const { product, wide = false } = Astro.props;
 // cheerpj.com's header, with search beside the logo and boxed icons.
 // Every page this build renders is under /docs/, so its Docs button is always active.
 const isCheerpj = product.id === "cheerpj3";
+// The "AI agents" button and panel, for the products that have a skill
+const agent = agentConfig(product.id);
 
 const firstDocsEntry = getProductNav(await getRootNav(), product.id)[0];
 if (!firstDocsEntry) throw new Error("must have a docs entry");
@@ -149,8 +152,8 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 		{
 			isCheerpj ? (
 				<div class="flex items-center gap-2 flex-none">
-					<AgentButton where="nav" />
-					<AgentMenu />
+					{agent && <AgentButton where="nav" />}
+					{agent && <AgentMenu {agent} />}
 					<a href={DISCORD_URL} class="cj-icon-btn">
 						<span class="sr-only">Discord</span>
 						<Icon name="ri:discord-fill" aria-hidden="true" />
@@ -162,6 +165,8 @@ let showcaseref = `https://labs.leaningtech.com/showcase${filterParam}`;
 				</div>
 			) : (
 				<div class="flex items-center gap-4 flex-none text-bg-200">
+					{agent && <AgentButton where="nav" />}
+					{agent && <AgentMenu {agent} />}
 					<a
 						href={DISCORD_URL}
 						class="nav-icon-link flex items-center gap-1.5 hover:text-white group"

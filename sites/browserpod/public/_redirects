@@ -1,3 +1,23 @@
+# Production (labs-browserpod) is served from its root behind browserpod.io's
+# /docs/* proxy, which adds /docs back onto root-relative Locations. Previews
+# serve under /docs/, so each rule is written for both.
+#
+# Cloudflare: static redirects go before dynamic ones (splats, placeholders),
+# and the top-most rule that matches wins.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# ---- Static redirects ----
+
+# The docs root is a real redirect to the overview, not the theme's meta refresh
+# page: agents and other fetchers that don't follow <meta http-equiv="refresh">
+# read only "Redirecting..." at browserpod.io/docs/, the URL the BrowserPod
+# skill, agents.md and llms.txt point to.
+/        /overview        301
+/docs    /docs/overview   301
+/docs/   /docs/overview   301
+
+# ---- Dynamic redirects ----
+
 /docs/:page.html                /docs/:page                      301
 /docs/:category/:page.html      /docs/:category/:page            301
 /docs/:cat1/:cat2/:page.html    /docs/:cat1/:cat2/:page          301
