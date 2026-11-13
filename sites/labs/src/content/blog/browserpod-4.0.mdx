@@ -41,7 +41,7 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 
 Today we are releasing **BrowserPod 4.0**. It brings new networking capabilities, more built-in programs, and most importantly: you can now use it as a library _completely for free_.
 This means that you can simply install BrowserPod from npm, call `BrowserPod.boot` in your page to give your user a private, isolated, zero-cost microVM that runs on their own device.
-No account or API key is required, and there is no metering and no telemetry. It is free for any purposed, including commercial and production use.
+No account or API key is required, and there is no metering and no telemetry. It is free for any purpose, including commercial and production use.
 
 The demo below is a pod running a bash process. Feel free to poke around, run programs, or delete the whole filesystem:
 
@@ -70,7 +70,7 @@ The demo below is a pod running a bash process. Feel free to poke around, run pr
 
 BrowserPod is a microVM that runs in the browser, built on WebAssembly.
 
-At its core is a Linux-like kernel, written from  scratch for the web platfork, ([we described it in detail here](/blog/browserpod-deep-dive)), and isolated by the browser's sandbox.
+At its core is a Linux-like kernel, written from scratch for the web platform ([we described it in detail here](/blog/browserpod-deep-dive)), and isolated by the browser's sandbox.
 On top of the kernel run WebAssembly binaries compiled from the original unmodified sources of the respective programs:
 We currently support Node.js, [Rust programs](/blog/browserpod-rust), git, bash, npm and pnpm, with Python in preview and Go coming soon.
 
@@ -79,7 +79,7 @@ Processes run in parallel, each in its own Web Worker, and share a unified view 
 Like a microVM, it starts near-instantly and keeps a small footprint. It gives applications a whole Linux system to work with.
 And since it runs in the browser, two things come for free:
 
-- **Zero latency.** Execution is local, next to the user and next to the agent. There is no round trip to a cloud sandbox in a run, so you get instant feedback.
+- **Zero latency.** Execution is local, next to the user and next to the agent. There is no round trip to a cloud sandbox, so you get instant feedback.
 - **Infinite scalability at no cost**. The user's device does the work. A pod costs you the same whether you have ten users or a million.
 
 We built BrowserPod for three main use cases:
@@ -104,9 +104,18 @@ BrowserPod 4.0 comes with a new licence, the [BrowserPod Community Licence](http
 
 Until now, BrowserPod was a hosted service. To boot a pod you signed up, created an API key, and every hour of compute was metered.
 
-The technology worked, but the model created excessive friction. We have decided to make using BrowserPod as straightforward as we possibly could.
+The technology worked, but the model created excessive friction, and the reason for it was networking.
 
-Accounts and API keys were originally required since BrowserPod provides by default a network proxy. Without metering and control this could have been abused my malicious actors. Our solution has been to make the proxy component optional.
+From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
+anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
+
+We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number 1 support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
+
+For this reason BrowserPod [came from day 1 with a managed proxy](/blog/browserpod-deep-dive#solving-networking-again), which allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
+
+While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
+
+This is unnecessary friction for the many use cases that don't need unrestricted internet access. So in BrowserPod 4.0 the proxy becomes an optional service with its own name, **BrowserPod Edge**, and everything else is free to use without an account.
 
 **If you already use BrowserPod**, nothing breaks. Your account is now a BrowserPod Edge account, and your API keys and plan keep working.
 BrowserPod Pro is now Edge Pro, at the same price and with the same allowances. Your tokens now pay for Edge networking rather than compute.
@@ -220,27 +229,13 @@ Here is a quick feature comparison between the two:
 
 ### Fetch network
 
-A pod can now boot **without an API key**. In that case its outbound HTTP and HTTPS requests are made by the browser's [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch), directly from your page:
+No managed proxy doesn't have to mean no network. After all, the browser can make network requests itself, restricted as they might be. And you might have your own CORS proxy or tunnel to use.
+
+So when a pod boots without an API key, its outbound HTTP and HTTPS requests are made by the browser's [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch), directly from your page:
 
 ```js
 const pod = await BrowserPod.boot();
 ```
-
-#### Why the change?
-
-From the beginning we wanted BrowserPod to Just Work, with minimal setup, and networking is the hardest part of that:
-anything beyond a toy demo needs networking of some kind, and browsers heavily restrict what you can do from a page.
-
-We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number 1 support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
-
-For this reason BrowserPod [came from day 1 with the edge network](/blog/browserpod-deep-dive#solving-networking-again): a managed proxy that allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
-
-While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
-
-This is unnecessary friction for the many use cases that don't need unrestricted internet access.
-Our goal with BrowserPod 4.0 is to remove that friction, both with a more permissive licence and with the ability to start a pod without an API key.
-
-No key doesn't have to mean no network, though. After all, the browser can make network requests itself, restricted as they might be. And you might have your own CORS proxy or tunnel to use.
 
 #### How it works
 
@@ -258,8 +253,8 @@ HTTPS is harder, because all we get from the pod is a TCP stream of encrypted TL
 	![How a fetch network turns a pod's encrypted TCP connection into a fetch()
 	call](./images/BP_4_fetch_network.svg)
 	<figcaption class="text-center">
-		How the fetch network turns a pod's encrypted TCP connection into a `fetch()` call,
-		inside your page.
+		How the fetch network turns a pod's encrypted TCP connection into a
+		`fetch()` call, inside your page.
 	</figcaption>
 </figure>
 
@@ -310,15 +305,14 @@ The fetch network currently **does not support inbound traffic**, so [Portals](h
 
 ### Edge network
 
-The edge network is the managed proxy, hosted on Cloudflare Workers, that BrowserPod always had. If you pass an [API key](https://console.browserpod.io) to `boot()` you get it by default, and you can also construct it explicitly:
+The edge network is the one BrowserPod always had: it routes a pod's traffic through our managed proxy, now called BrowserPod Edge. If you pass an [API key](https://console.browserpod.io) to `boot()` you get it by default, or you can construct it explicitly:
 
 ```js
 const network = await BrowserPod.createEdgeNetwork({ apiKey: "your-api-key" });
 const pod = await BrowserPod.boot({ network });
 ```
 
-With 4.0 it becomes a product in its own right, **BrowserPod Edge**: the optional service for pods that need to reach the internet, or be reached from it.
-Edge is free for 1,000 connected hours a month, and then costs $0.01 per connected hour.
+Edge has a generous free tier: see the [pricing page](https://browserpod.io/pricing/) for details.
 
 It got some love too, with two additions.
 
@@ -387,7 +381,9 @@ import { BrowserPod } from "@leaningtech/browserpod";
 
 const pod = await BrowserPod.boot();
 
-const terminal = await pod.createDefaultTerminal(document.getElementById("console"));
+const terminal = await pod.createDefaultTerminal(
+	document.getElementById("console")
+);
 
 await pod.run("bash", { terminal });
 ```
