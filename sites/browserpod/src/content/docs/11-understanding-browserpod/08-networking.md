@@ -5,7 +5,7 @@ description: How networking works in BrowserPod, and the differences between edg
 
 A [Pod](/docs/reference/BrowserPod) connects to the internet using one of two network types:
 
-- **Edge network:** Routes network traffic through BrowserPod's edge proxy servers. This requires an [API key](/docs/understanding-browserpod/api-key) and deducts tokens, but allows outgoing connections to any domain permitted by your key and enables public access to servers via [Portals](/docs/understanding-browserpod/portals).
+- **Edge network:** Routes network traffic through BrowserPod's edge proxy servers. This requires an [API key](/docs/understanding-browserpod/api-key) and is charged per connected hour, but allows outgoing connections to any domain permitted by your key and enables public access to servers via [Portals](/docs/understanding-browserpod/portals).
 - **Fetch network:** Routes network traffic directly through the browser using the standard [`fetch()`][fetch] API. This requires no API key and costs no tokens, but traffic is subject to browser security restrictions.
 
 ## Choosing a network
@@ -37,7 +37,7 @@ const pod = await BrowserPod.boot({ network });
 
 Both networks carry outgoing HTTP, HTTPS, and WebSocket traffic. What differs is where that traffic goes and what it costs:
 
-- An edge network reaches any domain permitted by your key, supports [Portals](/docs/understanding-browserpod/portals), and deducts 10 tokens per boot.
+- An edge network reaches any domain permitted by your key, supports [Portals](/docs/understanding-browserpod/portals), and is charged per connected hour. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. See [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance.
 - A fetch network reaches origins that permit CORS, has no Portals, and is free.
 
 ## Fetch network and CORS
