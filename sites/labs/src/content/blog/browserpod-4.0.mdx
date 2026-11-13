@@ -16,12 +16,20 @@ categories:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-{/* The Edge demos need a key whose allowlist includes github.com and movie.gabe565.com. */}
-{/* TODO(Yuri): confirm or replace this key (it is the one from the Rust post). */}
-
 <BrowserPodProvider
 	client:only="svelte"
 	ctxId="bp4"
+	version="4.0.0"
+	storageKey=""
+	terminalStyle="kit"
+	opinionatedFetch={true}
+/>
+
+{/* The SSH demo needs a key whose allowlist includes movie.gabe565.com. */}
+
+<BrowserPodProvider
+	client:only="svelte"
+	ctxId="bp4-ssh"
 	version="4.0.0"
 	storageKey=""
 	terminalStyle="kit"
@@ -49,7 +57,7 @@ The demo below is a pod running a bash process. Feel free to poke around, run pr
 			command: "bash",
 			args: [
 				"-c",
-				"[ -f WELCOME_TO_BROWSERPOD.txt ] || printf 'Welcome to BrowserPod!\\n\\nThis file lives in a microVM running in your browser tab.\\nNothing here runs on a server: edit it, delete it, break things.\\n\\nDocs: https://browserpod.io/docs\\n' > WELCOME_TO_BROWSERPOD.txt; { printf 'A microVM in this tab. Try:\\n\\n  cat WELCOME_TO_BROWSERPOD.txt\\n  node --version\\n  git --version\\n  pnpm --version\\n  rg --version\\n\\n'; echo '$ ls'; ls; echo; } | cat; exec bash",
+				"echo 'This is a BrowserPod microVM, running in your browser tab. Have a look around: try ls, node, git, and more.'; echo; exec bash",
 			],
 		},
 	]}
@@ -271,10 +279,10 @@ For example, by default npm sends a few telemetry headers (`npm-command`, `npm-s
 [preflight request](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request), which `registry.npmjs.org` does not support, and the overall request fails. Without those headers, the registry happily replies with
 `Access-Control-Allow-Origin: *`, and the request goes through.
 
-`BrowserPod.opinionatedFetch` works around issues like this one. For now it removes npm's telemetry headers, so that `npm install` and `pnpm install` work out of the box, and we will add workarounds for other sites over time.
+`BrowserPod.opinionatedFetch` is a fetch implementation that works around issues like this one. For now it removes npm's telemetry headers, so that `npm install` and `pnpm install` work when you pass it to `createFetchNetwork`, and we will add workarounds for other sites over time.
 Let us know if you think that a particular workaround should be added in there.
 
-You can always also combine it with your own logic:
+You can pass it as it is, or combine it with your own logic:
 
 ```js
 const network = await BrowserPod.createFetchNetwork({
@@ -314,21 +322,20 @@ Here is one connecting to a server that plays Star Wars in ASCII art:
 
 <BrowserPodTerminal
 	client:only="svelte"
-	variant="kit"
-	ctxId="bp4"
+	variant="fit"
+	cols={69}
+	rows={23}
+	ctxId="bp4-ssh"
 	description="ssh from a pod: ASCII Star Wars, from movie.gabe565.com"
 	autoStart={false}
-	height="22rem"
+	height="24rem"
 	terminalTabs={[
 		{
 			id: "bp4-ssh",
 			label: "ssh",
 			echo: false,
-			command: "bash",
-			args: [
-				"-c",
-				"[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519; ssh -o StrictHostKeyChecking=accept-new movie.gabe565.com",
-			],
+			command: "ssh",
+			args: ["-o", "StrictHostKeyChecking=accept-new", "movie.gabe565.com"],
 		},
 	]}
 />
