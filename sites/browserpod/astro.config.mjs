@@ -21,6 +21,7 @@ export default defineConfig({
 		theme({
 			baseIsDocs: true,
 			theme: browserpodTheme,
+			markdown: true,
 		}),
 	],
 	vite: {

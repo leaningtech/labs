@@ -9,7 +9,7 @@ class BrowserPod {
 }
 ```
 
-Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic through BrowserPod's edge proxy servers. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). Each boot on an edge network costs 10 tokens. See [Networking](/docs/understanding-browserpod/networking) for an overview.
+Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic through BrowserPod's edge proxy servers. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). An edge network is charged per connected hour, in blocks of 10 tokens. See [Networking](/docs/understanding-browserpod/networking) for an overview.
 
 ## Parameters
 
