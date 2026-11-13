@@ -3,8 +3,6 @@
 	import { BrowserPodEditorProvider } from "@leaningtech/svelte-browserpod-editor";
 	import "@leaningtech/svelte-browserpod-editor/theme.css";
 
-	// lazy: boot only when a BrowserPodTerminal with the same ctxId is played,
-	//   so a second pod on the page does not slow down the first one.
 	// terminalStyle="kit": smaller monospace text on the page background,
 	//   in the style of the BrowserPod design kit.
 	let {
@@ -14,7 +12,6 @@
 		apiKey,
 		userImage,
 		storageKey = undefined,
-		lazy = false,
 		terminalStyle = undefined,
 	} = $props();
 
@@ -60,24 +57,10 @@
 		return pod;
 	}
 
-	function boot() {
-		return BrowserPod(version)
-			.boot({ apiKey, userImage, storageKey })
-			.then(styleTerminals);
-	}
-
 	// svelte-ignore state_referenced_locally
-	const pod = lazy
-		? new Promise((resolve) =>
-				window.addEventListener(
-					`browserpod:boot:${ctxId}`,
-					() => resolve(boot()),
-					{
-						once: true,
-					}
-				)
-			)
-		: boot();
+	const pod = BrowserPod(version)
+		.boot({ apiKey, userImage, storageKey })
+		.then(styleTerminals);
 </script>
 
 <BrowserPodEditorProvider {projectSource} {pod} {ctxId} />

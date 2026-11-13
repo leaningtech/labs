@@ -59,8 +59,6 @@
 	async function handlePlay() {
 		overlayVisible = false;
 		playClicked = true;
-		// Boots the provider's pod if it was declared lazy; harmless otherwise.
-		window.dispatchEvent(new Event(`browserpod:boot:${ctxId}`));
 		for (const run of pendingRuns) run();
 		await tick();
 		const firstPaneId = terminalTabs[0]?.id;

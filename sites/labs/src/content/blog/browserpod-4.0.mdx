@@ -16,27 +16,16 @@ categories:
 import BrowserPodProvider from "@leaningtech/astro-theme/components/blog/BrowserPodProvider.svelte";
 import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/BrowserPodTerminal.svelte";
 
-{/* The hero pod boots with no apiKey: the post itself boots keyless, on a fetch network. */}
-
-<BrowserPodProvider
-	client:only="svelte"
-	ctxId="bp4-keyless"
-	version="3.6.0"
-	storageKey="labs-blog-browserpod-4.0"
-	terminalStyle="kit"
-/>
-
 {/* The Edge demos need a key whose allowlist includes github.com and movie.gabe565.com. */}
 {/* TODO(Yuri): confirm or replace this key (it is the one from the Rust post). */}
 
 <BrowserPodProvider
 	client:only="svelte"
-	ctxId="bp4-edge"
-	version="3.6.0"
-	storageKey="labs-blog-browserpod-4.0"
-	lazy={true}
+	ctxId="bp4"
+	version="4.0.0"
+	storageKey=""
 	terminalStyle="kit"
-	apiKey="bp1_2cc277b71b4bdd4850b0ee9bd117b2354e9be99d6a5b1cf3379f8135c84a8a5a"
+	apiKey="bp1_3ea76deccc02c40d0ce37b1acd4f2545b9775abec0bdff823c79527497cc13cd"
 />
 
 Today we are releasing **BrowserPod 4.0**. It brings new networking capabilities, more built-in programs, and most importantly: you can now use it as a library _completely for free_.
@@ -48,7 +37,7 @@ The demo below is a pod running a bash process. Feel free to poke around, run pr
 <BrowserPodTerminal
 	client:only="svelte"
 	variant="kit"
-	ctxId="bp4-keyless"
+	ctxId="bp4"
 	description="A BrowserPod microVM booted by this page, running bash"
 	autoStart={true}
 	height="18rem"
@@ -60,7 +49,7 @@ The demo below is a pod running a bash process. Feel free to poke around, run pr
 			command: "bash",
 			args: [
 				"-c",
-				"[ -f WELCOME_TO_BROWSERPOD.txt ] || printf 'Welcome to BrowserPod!\\n\\nThis file lives in a microVM running in your browser tab.\\nNothing here runs on a server: edit it, delete it, break things.\\n\\nDocs: https://browserpod.io/docs\\n' > WELCOME_TO_BROWSERPOD.txt; { printf 'A microVM in this tab, booted with no API key. Try:\\n\\n  cat WELCOME_TO_BROWSERPOD.txt\\n  node --version\\n  git --version\\n  pnpm --version\\n  rg --version\\n\\n'; echo '$ ls'; ls; echo; } | cat; exec bash",
+				"[ -f WELCOME_TO_BROWSERPOD.txt ] || printf 'Welcome to BrowserPod!\\n\\nThis file lives in a microVM running in your browser tab.\\nNothing here runs on a server: edit it, delete it, break things.\\n\\nDocs: https://browserpod.io/docs\\n' > WELCOME_TO_BROWSERPOD.txt; { printf 'A microVM in this tab. Try:\\n\\n  cat WELCOME_TO_BROWSERPOD.txt\\n  node --version\\n  git --version\\n  pnpm --version\\n  rg --version\\n\\n'; echo '$ ls'; ls; echo; } | cat; exec bash",
 			],
 		},
 	]}
@@ -326,7 +315,7 @@ Here is one connecting to a server that plays Star Wars in ASCII art:
 <BrowserPodTerminal
 	client:only="svelte"
 	variant="kit"
-	ctxId="bp4-edge"
+	ctxId="bp4"
 	description="ssh from a pod: ASCII Star Wars, from movie.gabe565.com"
 	autoStart={false}
 	height="22rem"
