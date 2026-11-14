@@ -5,7 +5,7 @@ description: "Answers to common BrowserPod questions about API keys, backend ser
 
 ## What is BrowserPod?
 
-BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and Portals for controlled networking.
+BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and networking, with Portals to preview and share the services you run.
 
 ## Do I need a backend server?
 
@@ -13,7 +13,31 @@ No. The Node.js server runs inside the browser. You only need to host the outer 
 
 ## Do I need an API key?
 
-Not always. `BrowserPod.boot` works without one: the Pod boots on a free **fetch network** that routes its traffic through the browser with `fetch()`, subject to CORS. An API key is required for an **edge network**, which reaches any domain permitted by your key and enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking).
+No. Without a key, a Pod boots on the free **fetch network**, which routes its traffic through the browser's `fetch()`, subject to CORS. With a key, it boots on the **edge network**, which reaches its allowed domains and enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking), including [using npm without an API key](/docs/understanding-browserpod/networking#using-npm-without-an-api-key).
+
+## Is BrowserPod free?
+
+Yes, for any use, including commercial use, under the [BrowserPod Community Licence](https://browserpod.io/license). The one condition is attribution: a visible "Powered by BrowserPod" credit linking to `https://browserpod.io` on the page that hosts the Pod. See [Licensing](/docs/more/licensing).
+
+## What is metered?
+
+Only BrowserPod Edge, the optional network service. Edge is charged in one-hour blocks of 10 tokens ($0.01): one block when the Pod connects, and another for each further hour, or part of an hour, that it stays connected. Edge Free includes 1,000 connected hours every month. Compute runs in your users' browsers and is never metered. A Pod on a fetch network costs nothing.
+
+## Can I use BrowserPod without attribution?
+
+Yes. Edge Pro ($20 a month) includes the BrowserPod Community Licence without attribution. For self-hosting, vendoring or redistribution, contact us about a BrowserPod Enterprise Licence.
+
+## Can I self-host BrowserPod?
+
+Self-hosting the runtime and disk images, vendoring them into your own build, and redistribution need a [BrowserPod Enterprise Licence](/docs/more/licensing#enterprise). Under the Community Licence, BrowserPod loads from our CDN.
+
+## Will the runtime version I use stay available?
+
+Yes. Each published runtime version is immutable and stays available, so an application pinned to a version keeps working. The only exception is a version with a critical security flaw, which may be withdrawn or blocked, with an upgrade path to a fixed version.
+
+## Does BrowserPod send data to Leaning Technologies?
+
+The runtime sends no telemetry. Your users' browsers download the runtime and disk images from our CDN, which receives the requests any web server does. See [Privacy for integrators](/docs/more/privacy-for-integrators).
 
 ## Why does BrowserPod need COOP and COEP headers?
 
@@ -51,4 +75,4 @@ BrowserPod uses WebAssembly to run runtime engines at near-native speed. It supp
 
 ## What are Portals?
 
-Portals are BrowserPod's controlled networking feature. When code inside a Pod listens on a port, BrowserPod automatically creates a secure, shareable URL that routes traffic to that service. This enables live previews, interactive demos, and collaborative workflows without provisioning dedicated backend infrastructure.
+Portals give a service running inside your Pod its own URL, so you can preview it and share it with others. BrowserPod creates the URL automatically when code listens on a port. Portals need an [API key](/docs/understanding-browserpod/api-key); see [Portals](/docs/understanding-browserpod/portals).

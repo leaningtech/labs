@@ -1,27 +1,29 @@
 ---
 title: Quickstart
-description: "Get started with BrowserPod in minutes: register a free API key, use a quickstart template, and run your first sandboxed app in the browser."
+description: "Get started with BrowserPod in minutes: use a quickstart template, boot a Pod with no account or API key, and run your first sandboxed app in the browser."
 ---
 
 BrowserPod provides a sandboxed runtime for executing code safely in the browser. This quickstart will get you running your first BrowserPod application in minutes.
 
-## 1. Register a free account
+## 1. Get an API key (optional)
 
-The quickstart templates boot a Pod on an [edge network](/docs/understanding-browserpod/networking), which needs an API key.
+BrowserPod works with or without an API key. A key enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking) for what changes with and without a key.
 
-You can register at https://console.browserpod.io using your GitHub account, and
-create a new API key.
-
-If you would rather start without one, a Pod can also boot on a free [fetch network](/docs/understanding-browserpod/networking) that routes its traffic through the browser.
+To get a key, register at https://console.browserpod.io using your GitHub account and create a new API key. You can also skip this step and add a key later.
 
 ## 2. Use one of our quickstart templates
 
-Run the following command to generate a basic project using Vite for bundling and as a development server.
-When asked, enter a project name and the API key you created in the previous step.
+Run the following command to scaffold a project:
 
 ```bash
-npm create browserpod-quickstart
+npm create browserpod-quickstart@latest
 ```
+
+The CLI asks you to:
+
+1. Pick a template: **Basic** (a Node.js REPL), **Bash shell**, or **Web server** (an Express server with a live preview, which uses Portals).
+2. Name your project.
+3. Paste your API key, or leave it blank to continue without one. You can add or change it later in `.env`.
 
 Then install the dependencies and start the dev server:
 
@@ -39,6 +41,22 @@ see something like this:
 Congratulations! You just ran your first BrowserPod application!
 
 Feel free to modify `src/main.js`. The dev server supports hot reloading.
+
+## Command-line options
+
+To skip the prompts, pass options to the command. npm needs a `--` before them:
+
+```bash
+npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
+```
+
+| Option                    | Description                                  |
+| ------------------------- | -------------------------------------------- |
+| `<project-name>`          | Name of the project folder                   |
+| `-t`, `--template <name>` | Template: `vite-basic`, `bash` or `vite-web` |
+| `-k`, `--api-key <key>`   | API key to save in `.env`                    |
+| `--non-interactive`       | Fail instead of prompting for missing values |
+| `-h`, `--help`            | Show all options                             |
 
 ## Next steps
 
