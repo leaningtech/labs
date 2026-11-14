@@ -12,7 +12,24 @@
 		autoStart = true,
 		playCaption = "Interactive demo — click to run",
 		height = "25rem",
+		// "kit": no glass box, thin border and transparent header, as in the
+		// BrowserPod design kit. Pair with terminalStyle="kit" on the provider.
+		// "fit": the kit look, with a fixed grid of cols x rows. The text is
+		// scaled to the available width and the box hugs the grid: the provider
+		// sets its width and --bp-fit-height, so `height` only applies until
+		// the terminal is created.
+		variant = "glass",
+		cols = 80,
+		rows = 24,
 	} = $props();
+
+	const KIT_VARS = [
+		"--bpe-color-terminal-bg: transparent",
+		"--bpe-container-header-background: transparent",
+		"--bpe-color-border: rgba(255,255,255,0.08)",
+		"--bpe-container-border-radius: 16px",
+		"--bpe-color-tab-active: rgba(255,255,255,0.06)",
+	].join(";");
 
 	// When autoStart is false, either the play button or onReady may fire first.
 	// playClicked tracks whether the user already clicked before the pod was ready,
@@ -51,16 +68,26 @@
 		for (const run of pendingRuns) run();
 		await tick();
 		const firstPaneId = terminalTabs[0]?.id;
-		document.getElementById(firstPaneId)?.querySelector("textarea")?.focus();
+		const pane = document.getElementById(firstPaneId);
+		// NOTE: A "fit" terminal lives in the pane's shadow root
+		(pane?.shadowRoot ?? pane)?.querySelector("textarea")?.focus();
 	}
 </script>
 
 <figure class="w-full">
-	<div class="w-full relative">
+	<div
+		class="w-full relative mx-auto"
+		data-bp-fit-cols={variant === "fit" ? cols : undefined}
+		data-bp-fit-rows={variant === "fit" ? rows : undefined}
+	>
 		<div
 			{id}
-			class="flex w-full p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl"
-			style="height: {height}"
+			class={variant === "glass"
+				? "flex w-full p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl"
+				: "flex w-full"}
+			style="height: var(--bp-fit-height, {height});{variant === 'glass'
+				? ''
+				: KIT_VARS}"
 			aria-label={description}
 		>
 			<TerminalPanel {ctxId} {tabs} />
