@@ -8,6 +8,21 @@ description: "Release notes and version history for BrowserPod, covering new fea
 - **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, and the licence covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
 - The hosted network service is now called **BrowserPod Edge**. Only Edge is metered, per connected Pod-hour; Edge Pro includes the BrowserPod Community Licence without attribution.
 - The runtime prints a licence notice in the browser console at boot. Booting with an Edge Pro API key turns it off.
+- Improved TypeScript types, including the network options.
+- The npm packages include an `AGENTS.md` to help coding agents use BrowserPod.
+
+## Version 3.6.0:
+
+- Pods can run servers on a fetch network, and reach their own servers on `localhost`.
+- Servers bound to `localhost` get a Portal too.
+- Portals stream responses, so server-sent events and progress output arrive live.
+- Edge network: TCP connections to allowed domains, on any port.
+- Fix compressed responses on the edge network.
+- Quickstart: the API key is now optional.
+
+## Version 3.5.1:
+
+- Support passing credentials in requests on the fetch network.
 
 ## Version 3.5.0:
 

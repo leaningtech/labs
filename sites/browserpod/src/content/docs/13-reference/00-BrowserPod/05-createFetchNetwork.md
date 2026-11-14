@@ -14,7 +14,7 @@ class BrowserPod {
 }
 ```
 
-Creates a fetch network instance that routes the Pod's HTTP, HTTPS, and WebSocket traffic directly through the browser using [`fetch()`][fetch]. It requires no API key and costs no tokens.
+Creates a fetch network instance that routes the Pod's HTTP, HTTPS, and WebSocket traffic directly through the browser using [`fetch()`][fetch]. It requires no API key and costs no tokens. `BrowserPod.boot` without an `apiKey` uses this network with the browser's default `fetch()`.
 
 Because requests run inside the browser, they are subject to Cross-Origin Resource Sharing (CORS) restrictions and can only reach servers that allow cross-origin requests. See [Networking](/docs/understanding-browserpod/networking) for an overview.
 

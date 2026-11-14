@@ -5,7 +5,7 @@ description: "Answers to common BrowserPod questions about API keys, backend ser
 
 ## What is BrowserPod?
 
-BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and Portals for controlled networking.
+BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and networking, with Portals to preview and share the services you run.
 
 ## Do I need a backend server?
 
@@ -13,7 +13,7 @@ No. The Node.js server runs inside the browser. You only need to host the outer 
 
 ## Do I need an API key?
 
-Not always. `BrowserPod.boot` works without one: the Pod boots on a free **fetch network** that routes its traffic through the browser with `fetch()`, subject to CORS. An API key is required for an **edge network**, which reaches any domain permitted by your key and enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking).
+No. Without a key, a Pod boots on the free **fetch network**, which routes its traffic through the browser's `fetch()`, subject to CORS. With a key, it boots on the **edge network**, which reaches its allowed domains and enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking), including [using npm without an API key](/docs/understanding-browserpod/networking#using-npm-without-an-api-key).
 
 ## Is BrowserPod free?
 
@@ -75,4 +75,4 @@ BrowserPod uses WebAssembly to run runtime engines at near-native speed. It supp
 
 ## What are Portals?
 
-Portals are BrowserPod's controlled networking feature. When code inside a Pod listens on a port, BrowserPod automatically creates a secure, shareable URL that routes traffic to that service. This enables live previews, interactive demos, and collaborative workflows without provisioning dedicated backend infrastructure.
+Portals give a service running inside your Pod its own URL, so you can preview it and share it with others. BrowserPod creates the URL automatically when code listens on a port. Portals need an [API key](/docs/understanding-browserpod/api-key); see [Portals](/docs/understanding-browserpod/portals).

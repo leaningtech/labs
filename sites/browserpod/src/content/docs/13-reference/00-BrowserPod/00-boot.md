@@ -5,7 +5,7 @@ description: "Boot a BrowserPod Pod to start an isolated, in-browser Linux runti
 
 ```ts
 class BrowserPod {
-	static async boot(opts: {
+	static async boot(opts?: {
 		apiKey?: string;
 		network?: PodNetwork;
 		nodeVersion?: string;
@@ -17,13 +17,13 @@ class BrowserPod {
 
 ## Parameters
 
-- **opts (object)** - Initialization options passed as an object.
+- **opts (object, _optional_)** - Initialization options passed as an object.
 
 ## Options
 
 - **apiKey (`string`, _optional_)** - The [API key](/docs/understanding-browserpod/api-key) used to connect the Pod to an [edge network](/docs/understanding-browserpod/networking).
   - _Omitted_ → The Pod boots on a free [fetch network](/docs/understanding-browserpod/networking), routing requests directly through the browser.
-- **network (`PodNetwork`, _optional_)** - A preconfigured network instance created with [`createEdgeNetwork`](/docs/reference/BrowserPod/createEdgeNetwork) or [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork). Cannot be combined with `apiKey`.
+- **network (`PodNetwork`, _optional_)** - A preconfigured network instance created with [`createEdgeNetwork`](/docs/reference/BrowserPod/createEdgeNetwork) or [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork). Cannot be combined with `apiKey`; pass the key to `createEdgeNetwork` instead. Create a new network for each Pod: booting a second Pod with the same network throws.
 - **nodeVersion (`string`, _optional_)** - The version of Node.js to use. Currently only "22" is allowed.
 - **storageKey (`string`, _optional_)** - Identifies the Pod's persistent storage.
   - _Omitted_ → ephemeral: fresh disk each boot, nothing is saved between sessions.
@@ -40,4 +40,5 @@ class BrowserPod {
 ## Notes
 
 - An edge network is charged in one-hour blocks of 10 tokens ($0.01), deducted from your BrowserPod account balance: one block at boot, and another for each further hour, or part of an hour, that the Pod stays connected. Booting fails if not enough tokens are available. Booting on a fetch network is free and deducts no tokens.
+- An empty or invalid `apiKey`, or too few tokens, makes `boot` hang instead of failing. See [Debugging BrowserPod](/docs/guides/common-errors#the-pod-never-finishes-booting).
 - For how the Pod's filesystem is structured and when its data persists, see [Filesystem](/docs/understanding-browserpod/filesystem).

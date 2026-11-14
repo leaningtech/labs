@@ -11,13 +11,16 @@ class BrowserPod {
 
 ## Parameters
 
-- **cb** (`function({url: string, port: number}) => void`) - Function to invoke when a [Portal](/docs/understanding-browserpod/portals) is created.
+- **cb** (`function({url: string, port: number}) => void`) - Function to invoke each time a [Portal](/docs/understanding-browserpod/portals) is created, once per listening port.
 
 ## Callback arguments
 
 - **url (`string`)** - The URL at which the Portal is accessible.
-- **port (`number`)** - The local port that is connected to the Portal.
+- **port (`number`)** - The port inside the Pod that the server is listening on.
 
 ## Returns
 
 `onPortal` does not return a value.
+
+> [!note]
+> Portals are only created on the [edge network](/docs/understanding-browserpod/networking), which requires an [API key](/docs/understanding-browserpod/api-key).

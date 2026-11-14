@@ -3,9 +3,11 @@ title: API keys
 description: How BrowserPod API keys work and where to place them
 ---
 
-An API key is a secret code that lets your app access a BrowserPod API. It identifies your app and tracks usage. You want to keep it private and include it in your environment so the service knows the requests are coming from you. Think of it like a password for your program to use BrowserPod.
+An API key connects your Pods to BrowserPod's [edge network](/docs/understanding-browserpod/networking) and tracks your token usage. It identifies your app to BrowserPod.
 
-Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. An API key is only required when booting on an **edge network**, which enables [Portals](/docs/understanding-browserpod/portals) and allows connections to external services without browser CORS restrictions. See [Networking](/docs/understanding-browserpod/networking) for details.
+Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. It's free, but subject to browser CORS rules.
+
+An API key is only needed for the **edge network**. It isn't limited by CORS and can reach its allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro. It also enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Register for an API key
 
@@ -14,7 +16,7 @@ Pods can also boot without an API key on a **fetch network**, which routes netwo
 
 ## Where to store the API key
 
-In a browser app, the key will ultimately be available to the client. The main difference between approaches is **how you manage it during development and deployment**.
+In a browser app, the key will ultimately be available to the client, so we recommend restricting it to your app's origins when you create it in the console. The main difference between approaches is **how you manage it during development and deployment**.
 
 ### Method 1: Inline in JavaScript (simple, not recommended for production)
 
@@ -38,11 +40,14 @@ VITE_BP_APIKEY=your_key_here
 
 ```js
 const pod = await BrowserPod.boot({
-	apiKey: import.meta.env.VITE_BP_APIKEY,
+	apiKey: import.meta.env.VITE_BP_APIKEY?.trim() || undefined,
 });
 ```
 
 This keeps the key out of source control and makes local development easier.
+
+> [!note]
+> To boot without a key, comment out or remove the `VITE_BP_APIKEY` line. The `?.trim() || undefined` part covers a line left empty: without it, `VITE_BP_APIKEY=` would still count as a key, and `boot` would never finish.
 
 ### Method 3: Hosting provider env variables (recommended for production)
 

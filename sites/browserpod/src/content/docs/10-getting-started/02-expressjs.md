@@ -5,10 +5,12 @@ description: In this tutorial you will set up a simple NPM project that runs an 
 
 In this tutorial, we'll set up a basic project that uses BrowserPod to run a web server application entirely in the browser, with no backend infrastructure.
 
+The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs an [API key](/docs/understanding-browserpod/api-key). Without a key, your app shows how to add one to enable the preview.
+
 ## 1. Get the code
 
 You can get the source by running `npm create browserpod-quickstart@latest` and
-selecting the "Web Server" template.
+selecting the **Web server** template. When asked, paste your API key, or add `VITE_BP_APIKEY=<your key>` to `.env` later.
 
 ### Project structure
 
@@ -16,6 +18,7 @@ The project consists of the following files and directories:
 
 ```plaintext
 ├── .env
+├── .gitignore
 ├── index.html
 ├── package.json
 ├── public
@@ -171,11 +174,12 @@ with a few elements that we will use to set up BrowserPod.
 ### src/utils.js
 
 This file contains the utility function `copyFile`, that we will use in the main
-script to copy files into the [Pod](/docs/reference/BrowserPod).
+script to copy files into the [Pod](/docs/reference/BrowserPod). Its `prefix` argument is the folder in the Pod to copy into: `copyFile(pod, "project/main.js", "/home/user")` fetches `project/main.js` from the web page and writes it to `/home/user/project/main.js`.
 
 ```js title="src/utils.js"
-export async function copyFile(pod, path) {
-	const f = await pod.createFile("/" + path, "binary");
+export async function copyFile(pod, path, prefix) {
+	const normalizedPrefix = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
+	const f = await pod.createFile(`${normalizedPrefix}/${path}`, "binary");
 	const resp = await fetch(path);
 	const buf = await resp.arrayBuffer();
 	await f.write(buf);
@@ -192,8 +196,25 @@ project in it.
 import { BrowserPod } from "@leaningtech/browserpod";
 import { copyFile } from "./utils";
 
-// Initialize the Pod
-const pod = await BrowserPod.boot({ apiKey: import.meta.env.VITE_BP_APIKEY });
+// Read the API key from .env; an empty value counts as no key
+const apiKey = import.meta.env.VITE_BP_APIKEY?.trim() || undefined;
+
+// Without a key there's no Portal, so explain how to enable the preview
+const urlDiv = document.getElementById("url");
+if (!apiKey) {
+	urlDiv.innerHTML =
+		"The preview needs an API key. Add VITE_BP_APIKEY to .env and restart the dev server.";
+}
+
+// With a key, boot on the edge network. Without one, use the fetch network
+// with opinionatedFetch so npm install works.
+const pod = apiKey
+	? await BrowserPod.boot({ apiKey })
+	: await BrowserPod.boot({
+			network: await BrowserPod.createFetchNetwork({
+				fetch: BrowserPod.opinionatedFetch,
+			}),
+		});
 
 // Create a Terminal
 const terminal = await pod.createDefaultTerminal(
@@ -202,34 +223,35 @@ const terminal = await pod.createDefaultTerminal(
 
 // Hook the Portal to preview the web page in an iframe
 const portalIframe = document.getElementById("portal");
-const urlDiv = document.getElementById("url");
 pod.onPortal(({ url, port }) => {
 	urlDiv.innerHTML = `Portal available at <a href="${url}">${url}</a> for local server listening on port ${port}`;
 	portalIframe.src = url;
 });
 
 // Copy our project files
-await pod.createDirectory("/project");
-await copyFile(pod, "project/main.js");
-await copyFile(pod, "project/package.json");
+const homePath = "/home/user";
+const projectPath = `${homePath}/project`;
+await pod.createDirectory(projectPath);
+await copyFile(pod, "project/main.js", homePath);
+await copyFile(pod, "project/package.json", homePath);
 
 // Install dependencies
 await pod.run("npm", ["install"], {
 	echo: true,
 	terminal: terminal,
-	cwd: "/project",
+	cwd: projectPath,
 });
 // Run the web server
 await pod.run("node", ["main.js"], {
 	echo: true,
 	terminal: terminal,
-	cwd: "/project",
+	cwd: projectPath,
 });
 ```
 
 ## 3. Run and setup your project
 
-1. First, boot your Pod as usual and pass a valid API Key as an argument.
+1. First, boot your Pod: with your API key, or without one on the fetch network with `opinionatedFetch`, so `npm install` still works ([details](/docs/understanding-browserpod/networking#using-npm-without-an-api-key)).
 
 2. Then set up a terminal in the **console** element that was added to the `index.html` file,
    so that the output of the commands ran in the Pod are visible.
@@ -248,7 +270,7 @@ await pod.run("node", ["main.js"], {
 
 ## End result
 
-Once the installation and setup are completed, you should see the iframe loading
+Once the installation and setup are completed, and if you booted with an API key, you should see the iframe loading
 the main page of the project, served from inside the Pod via the Portal.
 
 ![The index.html page rendered](/docs/assets/express.png)

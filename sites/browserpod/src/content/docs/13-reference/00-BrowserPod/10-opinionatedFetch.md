@@ -12,11 +12,9 @@ class BrowserPod {
 }
 ```
 
-A preconfigured fetch handler for [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork).
+A preconfigured fetch handler for [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork). `BrowserPod.boot` doesn't use it by default; pass it to `createFetchNetwork` as in the [Example](#example).
 
-Because a fetch network runs directly in the browser, requests are subject to CORS restrictions. `opinionatedFetch` automatically rewrites and adapts requests for supported external services so they work without manual proxy setup. Unmatched requests are forwarded unchanged to `init.defaultFetch`.
-
-Currently, `opinionatedFetch` enables commands like `npm install` to download packages from the npm registry. Support for additional services will be added in future releases.
+On a fetch network, requests are subject to CORS restrictions. `opinionatedFetch` adapts requests to known services, such as the npm registry, so the browser can send them, which lets commands like `npm install` work. Other requests go to `init.defaultFetch` unchanged. Support for more services is planned.
 
 ## Parameters
 
