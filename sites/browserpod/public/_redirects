@@ -1,6 +1,9 @@
 # Production (labs-browserpod) is served from its root behind browserpod.io's
-# /docs/* proxy, which adds /docs back onto root-relative Locations. Previews
-# serve under /docs/, so each rule is written for both.
+# /docs/* proxy; the previews project serves under /docs/. The proxy forwards
+# the path with /docs stripped and returns the response unchanged, so a Location
+# leaves this origin verbatim and the browser resolves it against the host it
+# asked: /x becomes browserpod.io/x, not browserpod.io/docs/x. Targets are
+# therefore written with the /docs prefix, which is what both deployments want.
 #
 # Cloudflare: static redirects go before dynamic ones (splats, placeholders),
 # and the top-most rule that matches wins.
@@ -12,7 +15,10 @@
 # page: agents and other fetchers that don't follow <meta http-equiv="refresh">
 # read only "Redirecting..." at browserpod.io/docs/, the URL the BrowserPod
 # skill, agents.md and llms.txt point to.
-/        /overview        301
+#
+# In production the proxy makes the / rule the one that answers browserpod.io/docs
+# and /docs/; on previews the /docs rules answer them directly.
+/        /docs/overview   301
 /docs    /docs/overview   301
 /docs/   /docs/overview   301
 
