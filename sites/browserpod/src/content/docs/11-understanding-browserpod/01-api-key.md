@@ -1,13 +1,13 @@
 ---
-title: API keys
-description: How BrowserPod API keys work and where to place them
+title: BrowserPod Edge
+description: What BrowserPod Edge is, how its API keys work and where to place them
 ---
 
-An API key connects your Pods to BrowserPod's [edge network](/docs/understanding-browserpod/networking) and tracks your token usage. It identifies your app to BrowserPod.
+BrowserPod Edge connects your Pods to the internet. A Pod uses Edge when you boot it with an API key: its traffic then goes through the [Edge network](/docs/understanding-browserpod/networking), which reaches its allowed domains without CORS limits, carries TCP connections to them, and enables [Portals](/docs/understanding-browserpod/portals). The allowed domains are BrowserPod's default domains, or the ones you choose with Edge Pro.
 
-Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. It's free, but subject to browser CORS rules.
+The API key identifies your app to BrowserPod and tracks your token usage. Edge is charged per connected hour; see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance.
 
-An API key is only needed for the **edge network**. It isn't limited by CORS and can reach its allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro. It also enables [Portals](/docs/understanding-browserpod/portals). See [Networking](/docs/understanding-browserpod/networking) for details.
+Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. It's free, but subject to browser CORS rules. See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Register for an API key
 
