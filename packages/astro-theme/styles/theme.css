@@ -173,6 +173,30 @@
 		--color-bg-400: rgb(161 161 170); /* --color-text-secondary: #a1a1aa */
 	}
 
+	/* BrowserPod: browserpod.io's display type (Inter, tight, white) for the docs home tagline */
+	.site-browserpod .bp-display {
+		color: #fafafa;
+		font-size: clamp(30px, 3.5vw, 48px);
+		font-weight: 700;
+		letter-spacing: -0.035em;
+		line-height: 1.08;
+		text-wrap: balance;
+	}
+
+	/* White text on a browserpod.io blue band */
+	.site-browserpod .bp-hl {
+		color: #fff;
+		background: linear-gradient(
+			transparent 10%,
+			rgb(74 125 255) 10%,
+			rgb(74 125 255) 96%,
+			transparent 96%
+		);
+		padding: 0 0.08em;
+		-webkit-box-decoration-break: clone;
+		box-decoration-break: clone;
+	}
+
 	/* CheerpJ: cheerpj.com's orange (#ff7c00) as both 500 (fills) and 400 (links, text) */
 	.site-cheerpj {
 		--color-primary-600: rgb(224 109 0); /* #e06d00 */

@@ -147,7 +147,9 @@ const highlightAt =
 										class={
 											product.id === "cheerpj3"
 												? "cj-display text-center"
-												: "text-xl font-medium text-bg-400"
+												: product.id === "browserpod"
+													? "bp-display text-center"
+													: "text-xl font-medium text-bg-400"
 										}
 									>
 										{description &&
@@ -155,7 +157,9 @@ const highlightAt =
 												<span>
 													{[
 														description.slice(0, highlightAt),
-														<span class="cj-hl">{descriptionHighlight}</span>,
+														<span class={isCheerpj ? "cj-hl" : "bp-hl"}>
+															{descriptionHighlight}
+														</span>,
 														description.slice(
 															highlightAt + descriptionHighlight!.length
 														),
