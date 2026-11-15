@@ -1,9 +1,9 @@
 ---
 title: Quickstart
-description: "Get started with BrowserPod in minutes: get a free BrowserPod Edge key, scaffold a project from a template, and run your first Pod in the browser."
+description: "Get started with BrowserPod in minutes: get a free BrowserPod Edge key, then start from a template or add BrowserPod to a web app you already have."
 ---
 
-BrowserPod is a microVM that runs in the browser. This quickstart gets your first BrowserPod application running in minutes.
+Get a Pod running in your browser in a few minutes. Start with a key, then either scaffold a new project from a template, or add BrowserPod to a web app you already have.
 
 ## 1. Get a free BrowserPod Edge key
 
@@ -13,21 +13,23 @@ To get a key, sign in at https://console.browserpod.io with your GitHub account 
 
 You can also continue without a key: Pods still run, with networking through the browser. See [Networking](/docs/understanding-browserpod/networking) for the differences.
 
-## 2. Use one of our quickstart templates
+## 2. Start from a template
 
-Run the following command to scaffold a project:
+Scaffold a project:
 
 ```bash
 npm create browserpod-quickstart@latest
 ```
 
-The CLI asks you to:
+The CLI asks you to pick a template, name your project, and paste your API key. You can add or change the key later in `.env`.
 
-1. Pick a template: **Basic** (a Node.js REPL), **Bash shell**, or **Web server** (an Express server with a live preview, which uses Portals).
-2. Name your project.
-3. Paste your API key, or leave it blank to continue without one. You can add or change it later in `.env`.
+| Template       | What it runs                                                                    |
+| -------------- | ------------------------------------------------------------------------------- |
+| **Basic**      | The Node.js REPL                                                                |
+| **Bash shell** | An interactive bash shell                                                       |
+| **Web server** | An Express server, with a live preview through a Portal (needs BrowserPod Edge) |
 
-Then install the dependencies and start the dev server:
+Install the dependencies and start the dev server:
 
 ```bash
 cd <your-project-name>
@@ -35,18 +37,15 @@ npm install
 npm run dev
 ```
 
-Then, open your localhost (for example, [http://localhost:5173/](http://localhost:5173/)) in your browser, and you should
-see something like this:
+Open the address it prints, for example [http://localhost:5173/](http://localhost:5173/):
 
 ![Output of the basic template](/docs/assets/bp-quickstart.png)
 
-Congratulations! You just ran your first BrowserPod application!
+Your Pod is running. Edit `src/main.js` to change what it runs; the dev server reloads the page as you save.
 
-Feel free to modify `src/main.js`. The dev server supports hot reloading.
+### Skip the prompts
 
-## Command-line options
-
-To skip the prompts, pass options to the command. npm needs a `--` before them:
+Pass options to the command. npm needs a `--` before them:
 
 ```bash
 npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
@@ -60,19 +59,64 @@ npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
 | `--non-interactive`       | Fail instead of prompting for missing values |
 | `-h`, `--help`            | Show all options                             |
 
+## Or add BrowserPod to an existing app
+
+### 1. Install the package
+
+```bash
+npm i @leaningtech/browserpod
+```
+
+### 2. Serve the page cross-origin isolated
+
+BrowserPod needs the page to be [cross-origin isolated](/docs/understanding-browserpod/cross-origin-isolation). With Vite, add the two headers to `vite.config.js`:
+
+```js title="vite.config.js"
+import { defineConfig } from "vite";
+
+export default defineConfig({
+	server: {
+		headers: {
+			"Cross-Origin-Embedder-Policy": "require-corp",
+			"Cross-Origin-Opener-Policy": "same-origin",
+		},
+	},
+});
+```
+
+For other servers and for production, see [Serve your page cross-origin isolated](/docs/guides/hosting).
+
+### 3. Boot a Pod and start a shell
+
+Add an element for the terminal:
+
+```html
+<div id="console" style="height: 400px"></div>
+```
+
+Then boot a Pod with your key, and run bash in the terminal:
+
+```js
+import { BrowserPod } from "@leaningtech/browserpod";
+
+const pod = await BrowserPod.boot({ apiKey: "your-key" });
+const terminal = await pod.createDefaultTerminal(
+	document.querySelector("#console")
+);
+await pod.run("bash", [], { terminal });
+```
+
+- [`boot`](/docs/reference/BrowserPod/boot) starts a Pod. With an API key it boots on the Edge network; without one, on the browser's `fetch()`.
+- [`createDefaultTerminal`](/docs/reference/BrowserPod/createDefaultTerminal) shows a terminal in the element you pass.
+- [`run`](/docs/reference/BrowserPod/run) runs a program in the Pod, here an interactive bash shell.
+
+Keep the key out of your source code: see [where to store the API key](/docs/understanding-browserpod/api-key#where-to-store-the-api-key).
+
 ## Next steps
 
-- **Step-by-step tutorial:** For a complete walkthrough including project setup, server configuration, and working with NPM dependencies, see the [basic NPM project tutorial].
-- **Live demo:** For an interactive example with a file editor, NPM dependencies, and hot reloading, try our [Vite+SvelteKit demo].
-- **API reference:** Learn about all available methods in the [API reference].
-- **Deploying:** Serve your page over HTTPS with the COOP and COEP headers. See [Serve your page cross-origin isolated](/docs/guides/hosting).
+- **Run code an agent writes:** [Write files to the Pod](/docs/guides/write-files-to-pod) and [Run programs in a Pod](/docs/guides/run-programs-in-a-pod).
+- **Build an in-browser IDE or playground:** the [tutorial](/docs/getting-started/expressjs) runs an Express server and previews it through a Portal.
+- **Run your own compiled programs:** [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
+- **Look up an API:** the [API reference](/docs/reference).
 
----
-
-[basic NPM project tutorial]: /docs/getting-started/expressjs
-[Vite+SvelteKit demo]: https://vitedemo.browserpod.io
-[API reference]: /docs/reference
-
-## Any Questions?
-
-We're here to help! If you have any questions or concerns, feel free to explore our [guides](/docs/guides) or [reference](/docs/reference) section or check out our [frequently asked questions](/docs/more/FAQ). You can also connect with our supportive community on [Discord](https://discord.com/invite/yzZJzpaxXT), and reach out whenever you’d like!
+If something doesn't work, see [Debugging BrowserPod](/docs/guides/common-errors), the [FAQ](/docs/more/FAQ), or ask on [Discord](https://discord.leaningtech.com).
