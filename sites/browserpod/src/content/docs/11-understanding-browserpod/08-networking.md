@@ -1,14 +1,16 @@
 ---
 title: Networking
-description: How networking works in BrowserPod, and the differences between edge and fetch networks.
+description: How networking works in BrowserPod, and the differences between Edge and fetch networks.
 ---
 
-A [Pod](/docs/reference/BrowserPod) connects to the internet using one of two network types. Both carry outgoing HTTP, HTTPS, and WebSocket traffic.
+A [Pod](/docs/reference/BrowserPod) connects to the internet using one of two network types. Both carry outgoing HTTP, HTTPS, and WebSocket traffic. On both, programs in a Pod reach each other's servers on `localhost`.
 
-- **Edge network:** Routes traffic through BrowserPod's edge proxy servers. It requires an [API key](/docs/understanding-browserpod/api-key) and is charged per connected hour, in blocks of 10 tokens (see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance).
+- **Edge network:** Routes traffic through BrowserPod Edge. It requires an [API key](/docs/understanding-browserpod/api-key) and is charged per connected hour, in blocks of 10 tokens (see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance).
   - It can reach its **allowed domains**: BrowserPod's default domains, such as the npm registry and GitHub, or the ones you choose with Edge Pro in the [BrowserPod console](https://console.browserpod.io).
+  - Besides HTTP, HTTPS, and WebSocket, it carries other TCP connections to its allowed domains.
   - It enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod.
 - **Fetch network:** Routes traffic directly through the browser's standard [`fetch()`][fetch]. It's free and needs no API key.
+  - It carries HTTP, HTTPS, and WebSocket traffic only, with no other TCP connections.
   - It can reach servers that allow cross-origin requests ([CORS](#fetch-network-and-cors)). npm needs [one extra setup step](#using-npm-without-an-api-key).
   - It doesn't support Portals.
 
@@ -16,7 +18,7 @@ A [Pod](/docs/reference/BrowserPod) connects to the internet using one of two ne
 
 [`BrowserPod.boot`](/docs/reference/BrowserPod/boot) picks the network based on whether you pass an `apiKey`.
 
-Pass an API key to boot on the edge network:
+Pass an API key to boot on the Edge network:
 
 ```js
 const pod = await BrowserPod.boot({ apiKey: "your_key_here" });
@@ -45,7 +47,7 @@ const pod = await BrowserPod.boot({ network });
 
 Requests on a fetch network come straight from the browser, so they follow the browser's **Cross-Origin Resource Sharing (CORS)** rules: a server must allow requests from your page's origin, or the browser blocks them.
 
-To reach a server that doesn't allow this, boot on the edge network with an [API key](/docs/understanding-browserpod/api-key), or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler).
+To reach a server that doesn't allow this, boot on the Edge network with an [API key](/docs/understanding-browserpod/api-key), or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler).
 
 ## Fetch network and WebSockets
 
