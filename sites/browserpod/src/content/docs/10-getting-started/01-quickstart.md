@@ -115,7 +115,7 @@ Keep the key out of your source code: see [where to store the API key](/docs/und
 ## Next steps
 
 - **Run code an agent writes:** [Write files to the Pod](/docs/guides/write-files-to-pod) and [Run programs in a Pod](/docs/guides/run-programs-in-a-pod).
-- **Build an in-browser IDE or playground:** the [tutorial](/docs/getting-started/expressjs) runs an Express server and previews it through a Portal.
+- **Build an in-browser IDE or playground:** the [npm project tutorial](/docs/getting-started/expressjs) installs a project's dependencies, starts its server and previews it through a Portal.
 - **Run your own compiled programs:** [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
 - **Look up an API:** the [API reference](/docs/reference).
 
