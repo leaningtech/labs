@@ -21,7 +21,7 @@ class BrowserPod {
 
 ## Options
 
-- **apiKey (`string`, _optional_)** - The [API key](/docs/understanding-browserpod/api-key) used to connect the Pod to an [edge network](/docs/understanding-browserpod/networking).
+- **apiKey (`string`, _optional_)** - The [API key](/docs/understanding-browserpod/api-key) used to connect the Pod to the [Edge network](/docs/understanding-browserpod/networking).
   - _Omitted_ → The Pod boots on a free [fetch network](/docs/understanding-browserpod/networking), routing requests directly through the browser.
 - **network (`PodNetwork`, _optional_)** - A preconfigured network instance created with [`createEdgeNetwork`](/docs/reference/BrowserPod/createEdgeNetwork) or [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork). Cannot be combined with `apiKey`; pass the key to `createEdgeNetwork` instead. Create a new network for each Pod: booting a second Pod with the same network throws.
 - **nodeVersion (`string`, _optional_)** - The version of Node.js to use. Currently only "22" is allowed.
@@ -39,6 +39,6 @@ class BrowserPod {
 
 ## Notes
 
-- An edge network is charged in one-hour blocks of 10 tokens ($0.01), deducted from your BrowserPod account balance: one block at boot, and another for each further hour, or part of an hour, that the Pod stays connected. Booting fails if not enough tokens are available. Booting on a fetch network is free and deducts no tokens.
+- The Edge network is charged in one-hour blocks of 10 tokens ($0.01), deducted from your BrowserPod account balance: one block at boot, and another for each further hour, or part of an hour, that the Pod stays connected. Booting fails if not enough tokens are available. Booting on a fetch network is free and deducts no tokens.
 - An empty or invalid `apiKey`, or too few tokens, makes `boot` hang instead of failing. See [Debugging BrowserPod](/docs/guides/common-errors#the-pod-never-finishes-booting).
 - For how the Pod's filesystem is structured and when its data persists, see [Filesystem](/docs/understanding-browserpod/filesystem).

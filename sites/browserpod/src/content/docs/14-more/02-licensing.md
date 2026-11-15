@@ -49,7 +49,7 @@ From 13 November 2026, the Community Licence covers every runtime version served
 
 ## BrowserPod Edge
 
-[Edge](/docs/understanding-browserpod/networking) is the optional network service. A Pod uses it only if you boot it on an edge network with an API key from the [BrowserPod console](https://console.browserpod.io). Edge gives Pods:
+[Edge](/docs/understanding-browserpod/networking) is the optional network service. A Pod uses it only if you boot it on the Edge network with an API key from the [BrowserPod console](https://console.browserpod.io). Edge gives Pods:
 
 - **Portals**, public URLs to servers running in the Pod;
 - **outbound networking** for socket-level clients such as git, npm and curl, and **TCP** to allowed domains;

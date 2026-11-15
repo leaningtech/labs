@@ -5,7 +5,7 @@ description: In this tutorial you will set up a simple NPM project that runs an 
 
 In this tutorial, we'll set up a basic project that uses BrowserPod to run a web server application entirely in the browser, with no backend infrastructure.
 
-The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs an [API key](/docs/understanding-browserpod/api-key). Without a key, your app shows how to add one to enable the preview.
+The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Without a key, your app shows how to add one to enable the preview.
 
 ## 1. Get the code
 
@@ -206,7 +206,7 @@ if (!apiKey) {
 		"The preview needs an API key. Add VITE_BP_APIKEY to .env and restart the dev server.";
 }
 
-// With a key, boot on the edge network. Without one, use the fetch network
+// With a key, boot on the Edge network. Without one, use the fetch network
 // with opinionatedFetch so npm install works.
 const pod = apiKey
 	? await BrowserPod.boot({ apiKey })

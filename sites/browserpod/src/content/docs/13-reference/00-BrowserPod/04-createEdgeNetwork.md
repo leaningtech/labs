@@ -1,6 +1,6 @@
 ---
 title: createEdgeNetwork
-description: Create an edge network that routes a Pod's traffic through BrowserPod's edge servers using an API key.
+description: Create an Edge network that routes a Pod's traffic through BrowserPod Edge using an API key.
 ---
 
 ```ts
@@ -9,7 +9,7 @@ class BrowserPod {
 }
 ```
 
-Creates an edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic through BrowserPod's edge proxy servers. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). An edge network is charged per connected hour, in blocks of 10 tokens. See [Networking](/docs/understanding-browserpod/networking) for an overview.
+Creates an Edge network instance that routes the Pod's outbound HTTP, HTTPS, and WebSocket traffic, and other TCP connections to its allowed domains, through BrowserPod Edge. It also enables incoming connections to services running inside the Pod via [Portals](/docs/understanding-browserpod/portals). An Edge network is charged per connected hour, in blocks of 10 tokens. See [Networking](/docs/understanding-browserpod/networking) for an overview.
 
 ## Parameters
 
