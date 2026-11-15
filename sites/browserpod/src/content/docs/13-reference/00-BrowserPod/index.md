@@ -1,15 +1,9 @@
 ---
 title: BrowserPod
-description: "The BrowserPod class is the entry point to the API. An instance, called a Pod, is a complete, isolated Linux environment running in the browser tab."
+description: "The BrowserPod class is the entry point to the API. An instance, called a Pod, is a microVM running in the browser tab."
 ---
 
-`BrowserPod` is the main class and entry point of the BrowserPod API. An instance of `BrowserPod` is commonly called a **Pod**: a complete, isolated Linux environment running inside the browser tab.
-
-Think of it like a lightweight virtual machine:
-
-- It has its own filesystem
-- It can run real programs and shell commands
-- It behaves like a real Linux system
+`BrowserPod` is the main class and entry point of the BrowserPod API. An instance of `BrowserPod` is commonly called a **Pod**: a microVM running inside the browser tab. A Pod boots a Linux-like kernel with its own filesystem, processes and network, and runs Linux programs such as Node.js, git, bash and Rust binaries.
 
 **"Isolated"** means each Pod is self-contained:
 
@@ -19,13 +13,19 @@ Think of it like a lightweight virtual machine:
 
 ## Creating a Pod
 
-Pods are created with the static [`boot`](/docs/reference/BrowserPod/boot) method:
+Pods are created with the static [`boot`](/docs/reference/BrowserPod/boot) method. With an API key, the Pod boots on the Edge network:
 
 ```ts
 const pod = await BrowserPod.boot({ apiKey: "..." });
 ```
 
-`boot` provisions the environment, allocates storage, and returns a ready-to-use Pod. Booting with an API key (on an edge network) is charged per connected hour; booting without an API key (on a fetch network) is free. See [Networking](/docs/understanding-browserpod/networking) for details.
+Without one, it boots on the fetch network:
+
+```ts
+const pod = await BrowserPod.boot();
+```
+
+`boot` provisions the environment, allocates storage, and returns a ready-to-use Pod. Booting with an API key (on the Edge network) is charged per connected hour; booting without an API key (on the fetch network) is free. See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Pod lifecycle
 
