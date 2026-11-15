@@ -1,7 +1,7 @@
 ---
 title: BrowserPod
 shortTitle: Overview
-description: A universal execution layer for running code safely in the browser
+description: "Documentation for BrowserPod, the microVM that runs in the browser: install it from npm, boot a Pod, and run Node.js, Rust and C++ applications on the user's device."
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
@@ -28,9 +28,9 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-**BrowserPod** is a universal execution layer for browser-based compute. It provides a sandboxed runtime API that enables client browsers to host full runtimes, compiled to WebAssembly (Wasm), with near-native performance.
+**BrowserPod** is a microVM that runs in the browser. It boots a Linux-like kernel near-instantly, with a small footprint and on-demand loading. It runs Node.js, Rust and C++ applications, with Python in preview, in a full command-line environment with npm, pnpm, yarn, git and bash. Everything runs on the user's own device, with zero latency, so compute costs you zero.
 
-Instead of provisioning costly cloud servers, BrowserPod allows you to execute full-stack workloads directly within the user's browser tab. Each **pod** is ephemeral, constrained by the browser's security model, and isolated from the host operating system via a dedicated syscall layer.
+Each **Pod** runs in the user's browser tab, isolated by the browser's security sandbox. Run it in the tab, and add [BrowserPod Edge](/docs/understanding-browserpod/api-key) when it needs the network.
 
 <div class="m-4 flex justify-center">
 	[Get started](/docs/getting-started/quickstart) · [Basic
@@ -38,12 +38,6 @@ Instead of provisioning costly cloud servers, BrowserPod allows you to execute f
 	· [GitHub repository](https://github.com/leaningtech/browserpod-meta) ·
 	[Licensing](/docs/more/licensing)
 </div>
-
-## The Shift: Moving Compute to the Client
-
-Traditional sandboxed environments rely on cloud-side virtualization. While effective, this model introduces recurring infrastructure costs, network latency, and data privacy complexities.
-
-**BrowserPod flips the economics of code execution.** By leveraging the user's local CPU and the browser's security model, you eliminate per-session infrastructure overhead. This makes it financially viable to scale applications, like AI code interpreters or interactive coding platforms, to millions of users without the linear growth of a cloud bill.
 
 ## Use Cases
 
@@ -70,13 +64,11 @@ To understand how BrowserPod achieves high-fidelity behavior in a browser, it he
 3.  **Resource Virtualization:** A block-based streaming virtual filesystem provides full POSIX compatibility. Disk images are streamed on-demand, and any file changes stay local to the browser session.
 4.  **Networking via Portals:** When a service inside the Pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
 
-## Roadmap
+## What runs today
 
-BrowserPod currently supports **Node.js**, alongside command-line tools (bash, git, coreutils, and more), and a **Rust** cross-compilation toolchain for building standalone Wasm binaries that run directly in a Pod. Our goal is to expand this into a language-agnostic platform throughout 2026, with planned milestones across the year:
+**Node.js 22**, **Rust** and **C++** applications. **Python** is in preview. **Go** is coming soon, and **Ruby** will follow. To run your own Rust programs, compile them with the [BrowserPod Rust toolchain](/docs/guides/installing-rust-toolchain).
 
-- **Python** and **Ruby** support.
-- Support for **Go**.
-- **Linux-class workloads** powered by CheerpX, enabling any unmodified Linux container to run in the browser.
+Every Pod has a full command-line environment: npm, pnpm and yarn, git, bash and standard command-line tools.
 
 ## Community and Support
 
