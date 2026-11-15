@@ -1,5 +1,5 @@
 ---
-title: Set CORS and COOP headers
+title: Serve your page cross-origin isolated (COOP and COEP)
 description: Cross-origin isolation for BrowserPod (COOP and COEP)
 ---
 
