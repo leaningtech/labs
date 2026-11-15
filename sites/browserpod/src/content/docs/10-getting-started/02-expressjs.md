@@ -1,65 +1,60 @@
 ---
-title: Set up a basic NPM-based project
-description: In this tutorial you will set up a simple NPM project that runs an HTTP server using Express.js
+title: Run an npm project with a live preview
+shortTitle: npm project tutorial
+description: "Tutorial: copy an npm project into a Pod, install its dependencies with npm, start its server, and preview it on your page and on any device through a Portal."
 ---
 
-In this tutorial, we'll set up a basic project that uses BrowserPod to run a web server application entirely in the browser, with no backend infrastructure.
+In this tutorial you build a page that runs an npm project in the browser. The page boots a [Pod](/docs/reference/BrowserPod), copies the project into it, installs its dependencies with `npm install`, and starts its server. A [Portal](/docs/understanding-browserpod/portals) gives the server a public URL, which the page shows in an iframe and which you can open on any other device.
 
-The live preview uses a [Portal](/docs/understanding-browserpod/portals), which needs [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Without a key, your app shows how to add one to enable the preview.
+## Before you start
 
-## 1. Get the code
+- **A BrowserPod Edge key.** Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Get a key at https://console.browserpod.io; see [Quickstart](/docs/getting-started/quickstart#1-get-a-free-browserpod-edge-key). Without a key the server still runs, but there is no preview.
+- **Node.js and npm** on your machine, to run the page's dev server.
 
-You can get the source by running `npm create browserpod-quickstart@latest` and
-selecting the **Web server** template. When asked, paste your API key, or add `VITE_BP_APIKEY=<your key>` to `.env` later.
+## 1. Create the project
 
-### Project structure
+Scaffold the project from the **Web server** template, with your key:
 
-The project consists of the following files and directories:
-
-```plaintext
-├── .env
-├── .gitignore
-├── index.html
-├── package.json
-├── public
-│  ├── favicon.png
-│  ├── logo.png
-│  └── project
-│      ├── main.js
-│      └── package.json
-├── src
-│   ├── main.js
-│   ├── style.css
-│   └── utils.js
-└── vite.config.js
+```bash
+npm create browserpod-quickstart@latest -- npm-tutorial -t vite-web -k <your-key>
+cd npm-tutorial
+npm install
+npm run dev
 ```
 
-There are two different NPM projects at play:
+Open the address the dev server prints, for example [http://localhost:5173/](http://localhost:5173/). The terminal on the page shows `npm install` and then the project's server starting, and the preview loads when the Portal is ready.
 
-- The top level project, which is a Vite project serving a web page with BrowserPod
-  running in it.
-- The inner project, in the `public/project` directory, which is the web application
-  that we want to run inside BrowserPod itself. It's a simple Hello World express.js application.
+## 2. Two npm projects
 
-## 2. Get familiar with the project files
+The project contains two npm projects, one inside the other:
 
-Let's go through the relevant files one by one, explaining their purpose!
+```plaintext
+├── .env                  # VITE_BP_APIKEY, your key
+├── index.html            # the page
+├── package.json          # the page's dependencies: Vite and BrowserPod
+├── vite.config.js        # the dev server, with the COOP and COEP headers
+├── public
+│   └── project           # the project that runs in the Pod
+│       ├── main.js
+│       └── package.json
+└── src
+    ├── main.js           # boots the Pod and runs the project
+    ├── style.css
+    └── utils.js          # copies files into the Pod
+```
 
-### Project's package.json
+- **The page** runs on your machine, served by Vite. It boots the Pod.
+- **The project in `public/project`** runs inside the Pod. Vite serves it as static files, and the page copies them into the Pod.
 
-Let's start from the inner project. This is the NPM project that we want to run
-inside BrowserPod.
+## 3. The project that runs in the Pod
 
-Its package.json is very simple:
+The example project is a small web server built with Express, but it stands for any npm project: the steps are the same for yours. Its only dependency is Express:
 
 ```json title="public/project/package.json"
 {
 	"name": "expressjs-tutorial",
 	"version": "1.0.0",
-	"description": "",
 	"main": "main.js",
-	"scripts": {},
-	"author": "",
 	"license": "MIT",
 	"dependencies": {
 		"express": "^5.1.0"
@@ -67,12 +62,7 @@ Its package.json is very simple:
 }
 ```
 
-The only dependency is express.js, a popular web framework.
-
-### Project's main.js
-
-This is the main code of the project. A simple hello world web server (actual content
-of the html omitted for brevity):
+It serves one page on port 3000 (the page's HTML is left out here):
 
 ```js title="public/project/main.js"
 const express = require("express");
@@ -80,12 +70,7 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
-	res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    ...
-    </html>
-	`);
+	res.send(`<!DOCTYPE html> ... `);
 });
 
 app.listen(port, () => {
@@ -93,41 +78,17 @@ app.listen(port, () => {
 });
 ```
 
-### Top level package.json
+Nothing in it is specific to BrowserPod: the same project runs with Node.js on any machine.
 
-The top level package.json is also very minimal. The only dependencies are Vite (used to bundle
-the code and run a development server), and BrowserPod:
+## 4. The page that runs the Pod
 
-```json title="package.json"
-{
-	"name": "bp-tutorial",
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"vite": "^7.2.4"
-	},
-	"dependencies": {
-		"@leaningtech/browserpod": "latest"
-	}
-}
-```
+### The dev server
 
-### vite.config.js
-
-This file contains the Vite configuration. See [https://vitejs.dev/config](https://vitejs.dev/config)
-for all possible options. We are only interested in setting up [COEP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy)
-and [COOP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Opener-Policy) headers,
-which are necessary for BrowserPod to function.
+`vite.config.js` sets the two headers that make the page [cross-origin isolated](/docs/understanding-browserpod/cross-origin-isolation), which BrowserPod needs:
 
 ```js title="vite.config.js"
 import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
 	server: {
 		headers: {
@@ -138,43 +99,22 @@ export default defineConfig({
 });
 ```
 
-### index.html
+### The page
 
-This is the entry point of our application. It defines a basic HTML page
-with a few elements that we will use to set up BrowserPod.
+`index.html` has three elements for the script to fill: `#url` for the Portal's address, the `#portal` iframe for the preview, and `#console` for the terminal:
 
 ```html title="index.html"
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Hello BrowserPod</title>
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<link rel="stylesheet" href="/src/style.css" />
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<img src="/logo.png" alt="BrowserPod Logo" class="logo" />
-				<h1>Hello BrowserPod</h1>
-			</div>
-			<p>Running Node.js in your browser</p>
-			<div id="url">Waiting for Portal...</div>
-			<div class="preview-container">
-				<iframe id="portal"></iframe>
-				<pre id="console"></pre>
-			</div>
-		</div>
-		<script type="module" src="/src/main.js"></script>
-	</body>
-</html>
+<div id="url">Waiting for portal...</div>
+<div class="preview-container">
+	<iframe id="portal"></iframe>
+	<pre id="console"></pre>
+</div>
+<script type="module" src="/src/main.js"></script>
 ```
 
-### src/utils.js
+### Copying files into the Pod
 
-This file contains the utility function `copyFile`, that we will use in the main
-script to copy files into the [Pod](/docs/reference/BrowserPod). Its `prefix` argument is the folder in the Pod to copy into: `copyFile(pod, "project/main.js", "/home/user")` fetches `project/main.js` from the web page and writes it to `/home/user/project/main.js`.
+`copyFile` fetches a file from the page's server and writes it into the Pod, under the folder you give it. `copyFile(pod, "project/main.js", "/home/user")` writes `/home/user/project/main.js`:
 
 ```js title="src/utils.js"
 export async function copyFile(pod, path, prefix) {
@@ -187,27 +127,28 @@ export async function copyFile(pod, path, prefix) {
 }
 ```
 
-### src/main.js
+See [Write files to the Pod](/docs/guides/write-files-to-pod) for other ways to get files into a Pod.
 
-The main logic of our application. Here we create our Pod and run our express.js
-project in it.
+### Running the project
+
+`src/main.js` does the work, in five steps:
 
 ```js title="src/main.js"
 import { BrowserPod } from "@leaningtech/browserpod";
 import { copyFile } from "./utils";
 
-// Read the API key from .env; an empty value counts as no key
+// 1. Read the key from .env; an empty value counts as no key
 const apiKey = import.meta.env.VITE_BP_APIKEY?.trim() || undefined;
 
-// Without a key there's no Portal, so explain how to enable the preview
+// Portals need a key, so without one, explain how to enable the preview
 const urlDiv = document.getElementById("url");
 if (!apiKey) {
 	urlDiv.innerHTML =
 		"The preview needs an API key. Add VITE_BP_APIKEY to .env and restart the dev server.";
 }
 
-// With a key, boot on the Edge network. Without one, use the fetch network
-// with opinionatedFetch so npm install works.
+// 2. Boot the Pod: on the Edge network with a key, or on the fetch network
+// with opinionatedFetch without one, so that npm install still works
 const pod = apiKey
 	? await BrowserPod.boot({ apiKey })
 	: await BrowserPod.boot({
@@ -216,61 +157,53 @@ const pod = apiKey
 			}),
 		});
 
-// Create a Terminal
 const terminal = await pod.createDefaultTerminal(
 	document.querySelector("#console")
 );
 
-// Hook the Portal to preview the web page in an iframe
+// 3. When a server in the Pod starts listening, show its Portal
 const portalIframe = document.getElementById("portal");
 pod.onPortal(({ url, port }) => {
 	urlDiv.innerHTML = `Portal available at <a href="${url}">${url}</a> for local server listening on port ${port}`;
 	portalIframe.src = url;
 });
 
-// Copy our project files
+// 4. Copy the project into the Pod
 const homePath = "/home/user";
 const projectPath = `${homePath}/project`;
 await pod.createDirectory(projectPath);
 await copyFile(pod, "project/main.js", homePath);
 await copyFile(pod, "project/package.json", homePath);
 
-// Install dependencies
+// 5. Install the dependencies, then start the server
 await pod.run("npm", ["install"], {
 	echo: true,
-	terminal: terminal,
+	terminal,
 	cwd: projectPath,
 });
-// Run the web server
 await pod.run("node", ["main.js"], {
 	echo: true,
-	terminal: terminal,
+	terminal,
 	cwd: projectPath,
 });
 ```
 
-## 3. Run and setup your project
+1. **Read the key.** `VITE_BP_APIKEY` comes from `.env`. See [where to store the API key](/docs/understanding-browserpod/api-key#where-to-store-the-api-key).
+2. **Boot the Pod.** With a key, [`boot`](/docs/reference/BrowserPod/boot) connects the Pod to BrowserPod Edge. Without one, the Pod uses the browser's `fetch()`, with [`opinionatedFetch`](/docs/understanding-browserpod/networking#using-npm-without-an-api-key) so that npm can reach the registry.
+3. **Show the Portal.** [`onPortal`](/docs/reference/BrowserPod/onPortal) calls back when a program in the Pod listens on a port, with a public URL for it. The page shows the URL and loads it in the iframe.
+4. **Copy the project** into `/home/user/project`.
+5. **Run it.** [`run`](/docs/reference/BrowserPod/run) runs `npm install`, then `node main.js`, in the project's folder, as you would in a terminal. `echo` prints each command in the terminal before it runs.
 
-1. First, boot your Pod: with your API key, or without one on the fetch network with `opinionatedFetch`, so `npm install` still works ([details](/docs/understanding-browserpod/networking#using-npm-without-an-api-key)).
+## 5. See it running
 
-2. Then set up a terminal in the **console** element that was added to the `index.html` file,
-   so that the output of the commands ran in the Pod are visible.
+When `npm install` finishes and the server starts, the iframe loads the page the project serves from inside the Pod:
 
-3. Register a callback that will be notified every time an http server is
-   started inside the Pod. The callback takes a Portal URL as an argument: a randomly generated, publicly accessible URL that you can use to show and interact with the inner project.
+![The tutorial page: the project's page in the preview iframe, beside the terminal](/docs/assets/express.png)
 
-4. It will be shown that the page is up and running and link to it in the `#url` div,
-   and display a live rendering of it in the `#portal` iframe. Which were both set
-   up in the `index.html` page.
+The Portal URL is public: open it on your phone, or send it to someone else, while the page is open.
 
-5. Then copy the project files inside the Pod, using the `copyFile` utility function.
+## Next steps
 
-6. Finally, run some commands inside the Pod: `npm install` to install express.js
-   and its dependencies, and `node main.js` to start the web server.
-
-## End result
-
-Once the installation and setup are completed, and if you booted with an API key, you should see the iframe loading
-the main page of the project, served from inside the Pod via the Portal.
-
-![The index.html page rendered](/docs/assets/express.png)
+- [Set up a Portal](/docs/guides/setup-portal) covers Portals in more detail.
+- Keep the project between visits by booting with a [`storageKey`](/docs/understanding-browserpod/filesystem).
+- See [Networking](/docs/understanding-browserpod/networking) for what the Pod can reach with and without Edge.

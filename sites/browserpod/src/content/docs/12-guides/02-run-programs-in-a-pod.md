@@ -5,7 +5,7 @@ description: Create a terminal and run programs inside a Pod
 
 This guide will show you how to add interactive terminals on your page.
 
-_This guide assumes you have a Pod running already. Take a look at our [Quickstart](/docs/getting-started/quickstart) and [npm project setup guide](/docs/getting-started/expressjs) to learn more._
+_This guide assumes you have a Pod running already. Take a look at our [Quickstart](/docs/getting-started/quickstart) and [npm project tutorial](/docs/getting-started/expressjs) to learn more._
 
 ## Create a terminal
 
