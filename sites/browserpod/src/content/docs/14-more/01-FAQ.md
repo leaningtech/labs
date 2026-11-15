@@ -5,7 +5,9 @@ description: "Answers to common BrowserPod questions about API keys, backend ser
 
 ## What is BrowserPod?
 
-BrowserPod is a universal execution layer for browser-based compute. It provides a sandboxed runtime API for running code safely inside the browser using WebAssembly—whether that's for web-based IDEs, interactive documentation, untrusted code execution, or education. It includes a Linux-compliant environment with a virtual filesystem, process isolation, and networking, with Portals to preview and share the services you run.
+BrowserPod is a microVM that runs in the browser. It boots a Linux-like kernel near-instantly, with a small footprint and on-demand loading. It runs Node.js, Rust and C++ applications, with Python in preview, in a full command-line environment with npm, pnpm, yarn, git and bash. Everything runs on the user's own device, with zero latency, so compute costs you zero.
+
+Run it in the tab, and add [BrowserPod Edge](/docs/understanding-browserpod/api-key) when it needs the network.
 
 ## Do I need a backend server?
 
@@ -13,7 +15,7 @@ No. The Node.js server runs inside the browser. You only need to host the outer 
 
 ## Do I need an API key?
 
-No. Without a key, a Pod boots on the free **fetch network**, which routes its traffic through the browser's `fetch()`, subject to CORS. With a key, it boots on the **edge network**, which reaches its allowed domains and enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking), including [using npm without an API key](/docs/understanding-browserpod/networking#using-npm-without-an-api-key).
+No. Without a key, a Pod boots on the free **fetch network**, which routes its traffic through the browser's `fetch()`, subject to CORS. With a key, it boots on the **Edge network**, which reaches its allowed domains and enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking), including [using npm without an API key](/docs/understanding-browserpod/networking#using-npm-without-an-api-key).
 
 ## Is BrowserPod free?
 
@@ -49,7 +51,7 @@ Prebuilt native binaries from npm packages don't run directly. Use Wasm-compatib
 
 ## Which browsers are supported?
 
-All the major browsers on desktop and mobile (Chrome, Edge, Firefox, Safari) are supported.
+Works on all major browsers, desktop and mobile: Chrome, Edge, Firefox and Safari 27+. Works best in Chromium-based browsers.
 
 ## Why is BrowserPod good for running untrusted code?
 
@@ -59,20 +61,23 @@ BrowserPod is designed for executing code in a sandboxed environment, whether th
 
 BrowserPod runs on the user's device rather than provisioning cloud infrastructure for each session. This means:
 
-- **Lower cost**: No per-session VM costs. Computation uses underutilized client resources.
-- **Lower latency**: No cold starts or network round trips to remote servers.
-- **Better data locality**: User inputs and code execution stay in the browser by default, reducing your attack surface and compliance requirements.
-- **High fidelity**: BrowserPod provides a full Linux-compliant syscall interface with complete POSIX filesystem semantics, real process isolation, and true multi-threading. It runs complete, unmodified runtime engines (like the full Node.js) that behave identically to their native counterparts, rather than browser-specific reimplementations.
-- **Multi-language support**: Unlike solutions built for a single runtime, BrowserPod is designed from the ground up as a language-agnostic platform. It already supports **Node.js** and **Rust**, with **Python**, **Ruby**, **Go**, and eventually full Linux containers.
+- **Zero compute cost**: There's no VM or container to size or pay for. The user's device does the work.
+- **Zero latency**: Programs run where the user is, with no network round trip.
+- **Data stays on the device**: Code and files are never uploaded to run.
+- **Real programs**: Pods run the real Node.js, compiled to WebAssembly, rather than a browser-specific reimplementation, along with Rust and C++ applications and a full command-line environment.
 
-## Is my data secure in BrowserPod?
+BrowserPod complements cloud sandboxes rather than replacing them: they stay the right choice for headless, long-running and GPU workloads.
 
-Yes. BrowserPod runs entirely within the browser's security sandbox, which is battle-tested and continuously hardened by browser vendors. Code running in a Pod cannot access the user's operating system, local files (unless explicitly provided), or other browser tabs. Data stays on the user's device by default unless your application specifically transmits it elsewhere.
+## Does my code or data leave the device?
+
+Your code and files stay on the device and are never uploaded to BrowserPod servers in order to run. The runtime and disk images are downloaded from our CDN, which receives the requests any website would. With BrowserPod Edge, a Pod's network traffic passes through our network service; the [Edge privacy policy](https://browserpod.io/browserpod-privacy) says exactly what it can see. See also [Privacy for integrators](/docs/more/privacy-for-integrators).
+
+A Pod runs within the browser's security sandbox. Code running in a Pod cannot access the user's operating system, local files (unless explicitly provided), or other browser tabs.
 
 ## What is the performance like?
 
-BrowserPod uses WebAssembly to run runtime engines at near-native speed. It supports real multi-process workloads with true concurrency via WebWorkers. Performance is suitable for computationally heavy tasks, including development tools, build pipelines, package managers, and code execution workflows.
+Pods start near-instantly, and there's zero latency: programs run on the user's device, with no network round trip. They run as WebAssembly on the browser's own engine, and each Pod is limited by the resources of the user's device.
 
 ## What are Portals?
 
-Portals give a service running inside your Pod its own URL, so you can preview it and share it with others. BrowserPod creates the URL automatically when code listens on a port. Portals need an [API key](/docs/understanding-browserpod/api-key); see [Portals](/docs/understanding-browserpod/portals).
+Portals give a service running inside your Pod its own URL, so you can preview it and share it with others. BrowserPod creates the URL automatically when code listens on a port. Portals need [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available); see [Portals](/docs/understanding-browserpod/portals).
