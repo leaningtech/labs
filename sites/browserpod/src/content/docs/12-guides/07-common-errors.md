@@ -71,15 +71,15 @@ const pod = await BrowserPod.boot({ network });
 
 - **Cause**: On the fetch network, requests come from the browser, so the server must allow cross-origin requests.
 
-- **Solution**: Boot with an API key if the server is on the edge network's allowed domains, or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler). See [Fetch network and CORS](/docs/understanding-browserpod/networking#fetch-network-and-cors). If `npm install` fails, see [`npm install` fails without an API key](#npm-install-fails-without-an-api-key).
+- **Solution**: Boot with an API key if the server is on the Edge network's allowed domains, or route requests through your own proxy with a [custom fetch handler](/docs/reference/BrowserPod/createFetchNetwork#custom-fetch-handler). See [Fetch network and CORS](/docs/understanding-browserpod/networking#fetch-network-and-cors). If `npm install` fails, see [`npm install` fails without an API key](#npm-install-fails-without-an-api-key).
 
-## Domain not reachable with an API key
+## Domain not reachable on Edge
 
 - **Symptoms**:
   - `ENOTFOUND` or `Could not resolve host`
   - Browser console: `DNS query blocked for non-whitelisted domain`
 
-- **Cause**: On the edge network, Pods can only reach the allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro.
+- **Cause**: On the Edge network, Pods can only reach the allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro.
 
 - **Solution**: With Edge Pro, add the domain in the [BrowserPod console](https://console.browserpod.io). If the server allows CORS, you can also reach it without a key.
 
@@ -89,7 +89,7 @@ const pod = await BrowserPod.boot({ network });
   - `await BrowserPod.boot(...)` never resolves
   - Browser console: `WebSocket connection failed, check your API key.`
 
-- **Cause**: The API key is empty or invalid (an empty string still counts as a key), or your account doesn't have enough tokens for the edge network.
+- **Cause**: The API key is empty or invalid (an empty string still counts as a key), or your account doesn't have enough tokens for the Edge network.
 
 - **Solution**:
   - Empty key: add your key, or remove or comment out the `VITE_BP_APIKEY=` line to boot without one. `apiKey: import.meta.env.VITE_BP_APIKEY?.trim() || undefined` handles this for you.
@@ -110,6 +110,6 @@ const pod = await BrowserPod.boot({ network });
 
 - **Symptom**: The `onPortal` callback never runs
 
-- **Cause**: Portals need the edge network, which requires an API key.
+- **Cause**: Portals need BrowserPod Edge (free tier available), which requires an API key.
 
 - **Solution**: Boot with an API key. See [Portals](/docs/understanding-browserpod/portals).
