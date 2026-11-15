@@ -1,15 +1,17 @@
 ---
 title: BrowserPod
 shortTitle: Overview
-description: "Documentation for BrowserPod, the microVM that runs in the browser: install it from npm, boot a Pod, and run Node.js, Rust and C++ applications on the user's device."
+description: The microVM that runs in the browser.
+descriptionHighlight: microVM
 ---
 
 import LinkButton from "@leaningtech/astro-theme/components/LinkButton.astro";
 import { DISCORD_URL } from "@/consts.ts";
+import InstallCommand from "@/components/InstallCommand.astro";
 
 <div class="%BP_LATEST%" />
 
-<div class="not-prose flex gap-2 mb-2">
+<div class="not-prose flex flex-wrap justify-center gap-2 mb-2">
 	<img
 		src="https://img.shields.io/badge/version-%BP_LATEST%-orange"
 		alt="Version %BP_LATEST%"
@@ -28,60 +30,220 @@ import { DISCORD_URL } from "@/consts.ts";
 	</a>
 </div>
 
-**BrowserPod** is a microVM that runs in the browser. It boots a Linux-like kernel near-instantly, with a small footprint and on-demand loading. It runs Node.js, Rust and C++ applications, with Python in preview, in a full command-line environment with npm, pnpm, yarn, git and bash. Everything runs on the user's own device, with zero latency, so compute costs you zero.
-
-Each **Pod** runs in the user's browser tab, isolated by the browser's security sandbox. Run it in the tab, and add [BrowserPod Edge](/docs/understanding-browserpod/api-key) when it needs the network.
+<div class="text-lg">
+	BrowserPod is a **microVM that runs in the browser**. It boots a Linux-like
+	kernel in WebAssembly, and on it runs Node.js, Rust and C++ applications, with
+	Python in preview. Each Pod comes with a full command-line environment
+	including npm, pnpm, git and bash. It has a local filesystem, which can
+	persist across sessions, and reaches the internet through the browser fetch or
+	through BrowserPod Edge, which adds inbound Portals and TCP. Everything runs
+	on the user's own device, with zero latency.
+</div>
 
 <div class="m-4 flex justify-center">
-	[Get started](/docs/getting-started/quickstart) · [Basic
-	Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference)
+	[Quickstart](/docs/getting-started/quickstart) ·
+	[Tutorial](/docs/getting-started/expressjs) · [API reference](/docs/reference)
 	· [GitHub repository](https://github.com/leaningtech/browserpod-meta) ·
 	[Licensing](/docs/more/licensing)
 </div>
 
-## Use Cases
+<InstallCommand />
 
-### Development Tools & Interactive Content
+![Inside your web app, each program runs in its own Web Worker on the BrowserPod kernel, with a streaming filesystem. The main thread holds the BrowserPod API and the network: the browser's fetch(), or the Edge network, which connects through BrowserPod Edge for TCP and inbound Portals.](./overview-diagram.svg)
 
-BrowserPod is built to power the next generation of web-based IDEs and full-stack development environments. By supporting package installs, dev servers, and build tools with high fidelity, it allows developers to create "real" workflows in the browser. This extends to documentation and live demos, where you can turn static examples into runnable environments that users can modify and execute without leaving the page.
+## Choose your path
 
-### Safe Execution of Untrusted Code
+- **Run code an agent writes.** Write the files into a Pod, run them, and read the output back. Start with [Write files to the Pod](/docs/guides/write-files-to-pod) and [Run programs in a Pod](/docs/guides/run-programs-in-a-pod), and use a [custom terminal](/docs/reference/BrowserPod/createCustomTerminal) to capture what they print.
+- **Build an in-browser IDE or playground.** Install packages with npm, start a dev server and preview it live. Follow the [tutorial](/docs/getting-started/expressjs), which runs an Express server behind a [Portal](/docs/guides/setup-portal), and keep the user's work across visits with a [storage key](/docs/understanding-browserpod/filesystem).
+- **Run your own compiled programs.** Build a Rust program for BrowserPod on your machine, copy the binary into a Pod and run it. Start with [Installing the Rust toolchain](/docs/guides/installing-rust-toolchain).
 
-Whether you are running AI-generated code, user scripts, or agent-assembled programs, BrowserPod provides a secure sandbox with zero "cold start" latency. Because execution happens on the client side, you tighten security boundaries by keeping sensitive data within the user's local environment.
+## Quick start
 
-### Privacy-First Applications and Education
+1. Get a free [BrowserPod Edge](/docs/understanding-browserpod/api-key) key: sign in at https://console.browserpod.io with your GitHub account and create an API key. With Edge, everything works: npm, GitHub and the other allowed domains, and [Portals](/docs/understanding-browserpod/portals) for servers running in your Pod.
+2. Add an element for the terminal, boot a Pod and start a shell:
 
-By keeping inputs and outputs on the user's device, BrowserPod enables privacy-conscious applications that bypass the jurisdictional risks of cloud data transfer. For educators, this model removes the operational burden of managing per-student sandboxes, making hands-on technical education economically feasible at any scale.
+```html
+<div id="console"></div>
+```
 
-## How it works
+```js
+import { BrowserPod } from "@leaningtech/browserpod";
 
-![BrowserPod Architecture Diagram](/docs/assets/Browserpod-diagram.png)
+const pod = await BrowserPod.boot({ apiKey: "your-key" });
+const terminal = await pod.createDefaultTerminal(
+	document.querySelector("#console")
+);
+await pod.run("bash", [], { terminal });
+```
 
-To understand how BrowserPod achieves high-fidelity behavior in a browser, it helps to look at the execution flow:
+3. Serve the page with the COOP and COEP headers. See [Serve your page cross-origin isolated](/docs/guides/hosting).
 
-1.  **Runtime Loading:** BrowserPod delivers complete runtime engines (starting with Node.js) compiled to WebAssembly. These engines target a Linux-compliant syscall interface rather than a limited JavaScript shim.
-2.  **Execution:** The browser’s JavaScript engine executes the Wasm-compiled runtime using WebWorkers for true multi-threading and process isolation. This allows for complex, multi-process workloads that would normally require a full OS.
-3.  **Resource Virtualization:** A block-based streaming virtual filesystem provides full POSIX compatibility. Disk images are streamed on-demand, and any file changes stay local to the browser session.
-4.  **Networking via Portals:** When a service inside the Pod listens on a port, BrowserPod automatically creates a **Portal**. This secure URL routes external traffic directly to the service running in the browser, enabling live previews and collaboration without any backend servers.
-
-## What runs today
-
-**Node.js 22**, **Rust** and **C++** applications. **Python** is in preview. **Go** is coming soon, and **Ruby** will follow. To run your own Rust programs, compile them with the [BrowserPod Rust toolchain](/docs/guides/installing-rust-toolchain).
-
-Every Pod has a full command-line environment: npm, pnpm and yarn, git, bash and standard command-line tools.
-
-## Community and Support
-
-<LinkButton
-	type="discord"
-	href={DISCORD_URL}
-	iconLeft="fa-brands:discord"
-	label="Join our Discord server"
-/>
+- [`boot`](/docs/reference/BrowserPod/boot) starts a Pod. With an API key it boots on the Edge network; without one, on the browser's `fetch()`.
+- [`createDefaultTerminal`](/docs/reference/BrowserPod/createDefaultTerminal) shows a terminal in the element you pass.
+- [`run`](/docs/reference/BrowserPod/run) runs a program in the Pod, here an interactive bash shell.
 
 <LinkButton
-	type="secondary"
-	href="https://twitter.com/leaningtech"
-	iconLeft="fa-brands:twitter"
-	label="Follow us on Twitter"
+	type="primary"
+	href="/docs/getting-started/quickstart"
+	label="Start from a template"
 />
+
+## How BrowserPod works
+
+1. **Your page boots a Pod.** The npm package loads the runtime and a Linux-like kernel, which start near-instantly. Disk images stream in blocks as programs need them, so a Pod starts before the whole image has downloaded.
+2. **The Pod runs real programs.** Node.js, bash, git and the other programs are compiled to WebAssembly against Linux system calls. Node.js is the real Node.js, not a JavaScript reimplementation. The browser's own engine runs them, with each process in its own Web Worker.
+3. **Everything stays on the user's device.** File changes stay in the browser, and persist across sessions when you boot with a `storageKey`. A Pod reaches the internet through the browser's `fetch()`, or through BrowserPod Edge, which also gives servers in the Pod a public URL: a [Portal](/docs/understanding-browserpod/portals).
+
+## What BrowserPod supports
+
+|                   |                                                                                                                                                     |
+| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Applications**  | Node.js 22, Rust and C++. Python in preview. Go is coming soon, and Ruby will follow                                                                |
+| **Environment**   | npm, pnpm, git, bash and standard command-line tools                                                                                                |
+| **Your programs** | Rust programs compiled with the [BrowserPod Rust toolchain](/docs/guides/installing-rust-toolchain)                                                 |
+| **Files**         | A [filesystem](/docs/understanding-browserpod/filesystem) streamed on demand, kept in the browser, and persisted with a `storageKey`                |
+| **Networking**    | HTTP, HTTPS and WebSocket through the browser; Portals and TCP to allowed domains with [BrowserPod Edge](/docs/understanding-browserpod/networking) |
+| **Browsers**      | Works on all major browsers, desktop and mobile: Chrome, Edge, Firefox and Safari 27+. Works best in Chromium-based browsers                        |
+| **Hosting**       | A [cross-origin isolated](/docs/understanding-browserpod/cross-origin-isolation) page, served with the COOP and COEP headers                        |
+| **Not supported** | Prebuilt native binaries from npm packages; use [Wasm alternatives](/docs/guides/working-around-native-npm-dependencies)                            |
+
+## Run it in the tab. Add Edge when it needs the network.
+
+Every Pod runs in the user's tab, with no account and no API key, and reaches the internet through the browser. When your app needs more, boot the Pod with an API key and its traffic goes through BrowserPod Edge, our network service: it reaches the domains you allow without CORS limits, carries any TCP connection, and lets the internet reach servers in the Pod through Portals.
+
+{/* prettier-ignore */}
+<div class="bp-compare not-prose">
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>BrowserPod</th>
+				<th>BrowserPod Edge</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><th scope="row">What it is</th><td>The microVM: its kernel, filesystem, processes and terminals</td><td>The network service that connects your Pods to the internet</td></tr>
+			<tr><th scope="row">Outbound</th><td>HTTP, HTTPS and WebSocket through the browser, to servers that allow <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">CORS</a></td><td>Any TCP, including HTTP and WebSocket, to the domains you allow, without CORS limits</td></tr>
+			<tr><th scope="row">Inbound</th><td>Not yet</td><td><a href="/docs/understanding-browserpod/portals">Portals</a>: public URLs for servers in the Pod</td></tr>
+			<tr><th scope="row">Account</th><td>None</td><td><a href="https://console.browserpod.io">BrowserPod console</a>, with GitHub sign-in</td></tr>
+		</tbody>
+	</table>
+</div>
+
+<style>{`
+	.bp-compare {
+		--line: color-mix(in srgb, currentColor 9%, transparent);
+		--rule: color-mix(in srgb, currentColor 18%, transparent);
+		--band: color-mix(in srgb, currentColor 5%, transparent);
+		margin: 1.5rem 0;
+		overflow: hidden;
+		border: 1px solid var(--line);
+		border-radius: 16px;
+	}
+	.bp-compare table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9375rem;
+		line-height: 1.5;
+		table-layout: fixed;
+	}
+	.bp-compare th,
+	.bp-compare td {
+		padding: 0.55rem 0.75rem;
+		text-align: left;
+		vertical-align: baseline;
+		overflow-wrap: anywhere;
+	}
+	/* Header: its own strip, a firm rule below, an accent per column */
+	.bp-compare thead th {
+		padding-top: 0.6rem;
+		padding-bottom: 0.55rem;
+		background: color-mix(in srgb, currentColor 6%, transparent);
+		border-bottom: 1px solid var(--rule);
+		font-size: 1rem;
+		font-weight: 600;
+		vertical-align: bottom;
+	}
+	.bp-compare thead th:first-child {
+		width: 22%;
+	}
+	.bp-compare thead th:nth-child(2) {
+		box-shadow: inset 0 -2px 0 #5b8bff;
+	}
+	/* Edge yellow, as on browserpod.io */
+	.bp-compare thead th:nth-child(3) {
+		color: #ffe680;
+		box-shadow: inset 0 -2px 0 #ffd633;
+	}
+	.bp-compare tbody td:nth-child(3) {
+		background: rgba(255, 214, 51, 0.04);
+	}
+	/* Body: alternating bands instead of row lines */
+	.bp-compare tbody tr:nth-child(even) {
+		background: var(--band);
+	}
+	.bp-compare tbody th {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.8125rem;
+		font-weight: 400;
+		opacity: 0.65;
+	}
+	/* Columns: a firm rule after the labels, a light one between the values */
+	.bp-compare th:first-child {
+		border-right: 1px solid var(--rule);
+	}
+	.bp-compare td + td,
+	.bp-compare thead th + th + th {
+		border-left: 1px solid var(--line);
+	}
+	.bp-compare a {
+		color: #5b8bff;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+`}</style>
+
+See [Networking](/docs/understanding-browserpod/networking) for the details, and [BrowserPod Edge](/docs/understanding-browserpod/api-key) to get a key.
+
+## Using a coding agent?
+
+Give your agent this prompt:
+
+> Use the BrowserPod skill (https://browserpod.io/skills/browserpod/SKILL.md) to add a BrowserPod sandbox to my web app.
+
+Or install the skill:
+
+```sh
+npx skills add leaningtech/skills --skill browserpod
+```
+
+Or point your agent at [browserpod.io/agents.md](https://browserpod.io/agents.md) or [browserpod.io/docs/llms.txt](/docs/llms.txt).
+
+## Licensing
+
+BrowserPod is free for any use, including commercial use, under the BrowserPod Community Licence. Only BrowserPod Edge is metered, and Edge Free covers up to 1,000 connected hours a month. Self-hosting needs an Enterprise Licence. See [Licensing](/docs/more/licensing) for the plans and terms.
+
+## Getting help
+
+| Where                                                                  | Best for                                                    |
+| :--------------------------------------------------------------------- | :---------------------------------------------------------- |
+| [Discord](https://discord.leaningtech.com)                             | Questions, help getting started, and showing what you built |
+| [GitHub issues](https://github.com/leaningtech/browserpod-meta/issues) | Bugs in BrowserPod                                          |
+| [BrowserPod console](https://console.browserpod.io)                    | Your API keys, allowed domains and Edge usage               |
+
+Before you report a bug, read [Debugging BrowserPod](/docs/guides/common-errors) and the [FAQ](/docs/more/FAQ).
+
+<div class="not-prose flex flex-wrap gap-4">
+	<LinkButton
+		type="discord"
+		href={DISCORD_URL}
+		iconLeft="fa-brands:discord"
+		label="Join our Discord server"
+	/>
+	<LinkButton
+		type="secondary"
+		href="https://github.com/leaningtech/browserpod-meta"
+		iconLeft="fa-brands:github"
+		label="Star us on GitHub"
+	/>
+</div>

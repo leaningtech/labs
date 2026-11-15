@@ -1,0 +1,226 @@
+---
+// The two ways in, as browserpod.io's hero shows them (leaningtech.com:
+// sites/browserpod/src/components/marketing/HeroInstall.astro and
+// InstallCommand.svelte): the npm install command in a pill with a "$" prompt
+// and a copy button, then a button that copies the coding agent prompt.
+// The prompt is the docs' "AI agents" prompt (lib/agents.ts in the theme),
+// itself kept in step with the site's agent-prompt.ts. Keep all three in step.
+interface Props {
+	command?: string;
+}
+
+const { command = "npm i @leaningtech/browserpod" } = Astro.props;
+const prompt =
+	"Use the BrowserPod skill (https://browserpod.io/skills/browserpod/SKILL.md) to add a BrowserPod sandbox to my web app.";
+---
+
+<div class="not-prose bp-install-wrap">
+	<div class="bp-install">
+		<code class="bp-install-cmd"
+			><span class="bp-install-prompt" aria-hidden="true">$</span>{
+				command
+			}</code
+		>
+		<button
+			type="button"
+			class="bp-install-copy"
+			data-command={command}
+			aria-label="Copy install command"
+			title="Copy install command"
+		>
+			<svg
+				class="bp-install-icon-copy"
+				width="15"
+				height="15"
+				viewBox="0 0 24 24"
+				fill="none"
+				aria-hidden="true"
+			>
+				<rect
+					x="9"
+					y="9"
+					width="11"
+					height="11"
+					rx="2"
+					stroke="currentColor"
+					stroke-width="2"></rect>
+				<path
+					d="M5 15V5a2 2 0 0 1 2-2h10"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"></path>
+			</svg>
+			<svg
+				class="bp-install-icon-done"
+				width="15"
+				height="15"
+				viewBox="0 0 24 24"
+				fill="none"
+				aria-hidden="true"
+			>
+				<path
+					d="M20 6 9 17l-5-5"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"></path>
+			</svg>
+			<span class="bp-install-label">Copy</span>
+		</button>
+	</div>
+	<button
+		type="button"
+		class="bp-agent-button"
+		data-prompt={prompt}
+		aria-label="Copy the prompt for your coding agent"
+		title={prompt}
+	>
+		<svg
+			width="18"
+			height="18"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.6"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			<rect x="4" y="8" width="16" height="11" rx="3"></rect>
+			<path d="M12 4v4M9 13h.01M15 13h.01M2 13v2M22 13v2"></path>
+		</svg>
+		<span class="bp-agent-label">Copy agent prompt</span>
+	</button>
+</div>
+
+<script>
+	for (const button of document.querySelectorAll<HTMLButtonElement>(
+		".bp-agent-button"
+	)) {
+		const label = button.querySelector(".bp-agent-label")!;
+		button.addEventListener("click", async () => {
+			try {
+				await navigator.clipboard.writeText(button.dataset.prompt ?? "");
+				label.textContent = "Copied";
+			} catch {
+				window.prompt("Copy this prompt", button.dataset.prompt ?? "");
+			}
+			setTimeout(() => (label.textContent = "Copy agent prompt"), 2000);
+		});
+	}
+
+	for (const button of document.querySelectorAll<HTMLButtonElement>(
+		".bp-install-copy"
+	)) {
+		let timer: ReturnType<typeof setTimeout> | undefined;
+		button.addEventListener("click", async () => {
+			try {
+				// The command alone: the "$" is decoration, not something you paste
+				await navigator.clipboard.writeText(button.dataset.command ?? "");
+				button.classList.add("copied");
+				button.querySelector(".bp-install-label")!.textContent = "Copied";
+				clearTimeout(timer);
+				timer = setTimeout(() => {
+					button.classList.remove("copied");
+					button.querySelector(".bp-install-label")!.textContent = "Copy";
+				}, 1500);
+			} catch {
+				/* clipboard unavailable */
+			}
+		});
+	}
+</script>
+
+<style>
+	.bp-install-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+		margin: 2rem 0;
+	}
+
+	/* The site kit's primary button */
+	.bp-agent-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 44px;
+		padding: 0 16px;
+		border: 0;
+		border-radius: 12px;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
+		background: linear-gradient(155deg, #5b8bff 0%, #4a7dff 55%, #3457bd 100%);
+		box-shadow:
+			5px 5px 14px rgba(0, 0, 0, 0.55),
+			-4px -4px 12px rgba(74, 125, 255, 0.14),
+			inset 0 1px 0 rgba(255, 255, 255, 0.25);
+		transition: filter 0.16s ease;
+	}
+
+	.bp-agent-button:hover {
+		filter: brightness(1.08);
+	}
+
+	.bp-install {
+		display: inline-flex;
+		align-items: center;
+		gap: 14px;
+		max-width: 100%;
+		padding: 7px 9px 7px 14px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 12px;
+		background: #0f0f10;
+	}
+
+	.bp-install-cmd {
+		font-family: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 13px;
+		color: rgba(255, 255, 255, 0.75);
+		white-space: nowrap;
+		overflow-x: auto;
+	}
+
+	.bp-install-prompt {
+		margin-right: 8px;
+		color: rgba(255, 255, 255, 0.3);
+		user-select: none;
+	}
+
+	.bp-install-copy {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		flex-shrink: 0;
+		padding: 4px 9px;
+		font-size: 12px;
+		color: rgba(255, 255, 255, 0.6);
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.15s ease;
+	}
+
+	.bp-install-copy:hover {
+		color: rgba(255, 255, 255, 0.95);
+		border-color: rgba(255, 255, 255, 0.14);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.bp-install-icon-done,
+	.bp-install-copy.copied .bp-install-icon-copy {
+		display: none;
+	}
+
+	.bp-install-copy.copied .bp-install-icon-done {
+		display: inline;
+	}
+</style>
