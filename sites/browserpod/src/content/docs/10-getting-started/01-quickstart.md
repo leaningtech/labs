@@ -1,15 +1,17 @@
 ---
 title: Quickstart
-description: "Get started with BrowserPod in minutes: use a quickstart template, boot a Pod with no account or API key, and run your first sandboxed app in the browser."
+description: "Get started with BrowserPod in minutes: get a free BrowserPod Edge key, scaffold a project from a template, and run your first Pod in the browser."
 ---
 
-BrowserPod provides a sandboxed runtime for executing code safely in the browser. This quickstart will get you running your first BrowserPod application in minutes.
+BrowserPod is a microVM that runs in the browser. This quickstart gets your first BrowserPod application running in minutes.
 
-## 1. Get an API key (optional)
+## 1. Get a free BrowserPod Edge key
 
-BrowserPod works with or without an API key. A key enables [Portals](/docs/understanding-browserpod/portals), which let you preview and share services running inside your Pod. See [Networking](/docs/understanding-browserpod/networking) for what changes with and without a key.
+BrowserPod Edge connects your Pods to the internet, so everything works: npm, GitHub and the other [allowed domains](/docs/understanding-browserpod/networking) without CORS limits, and [Portals](/docs/understanding-browserpod/portals), which give servers running in your Pod a public URL. It's free for up to 1,000 connected hours every month.
 
-To get a key, register at https://console.browserpod.io using your GitHub account and create a new API key. You can also skip this step and add a key later.
+To get a key, sign in at https://console.browserpod.io with your GitHub account and create an API key.
+
+You can also continue without a key: Pods still run, with networking through the browser. See [Networking](/docs/understanding-browserpod/networking) for the differences.
 
 ## 2. Use one of our quickstart templates
 
@@ -63,6 +65,7 @@ npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
 - **Step-by-step tutorial:** For a complete walkthrough including project setup, server configuration, and working with NPM dependencies, see the [basic NPM project tutorial].
 - **Live demo:** For an interactive example with a file editor, NPM dependencies, and hot reloading, try our [Vite+SvelteKit demo].
 - **API reference:** Learn about all available methods in the [API reference].
+- **Deploying:** Serve your page over HTTPS with the COOP and COEP headers. See [Serve your page cross-origin isolated](/docs/guides/hosting).
 
 ---
 
