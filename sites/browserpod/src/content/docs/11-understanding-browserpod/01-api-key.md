@@ -11,7 +11,7 @@ Pods can also boot without an API key on a **fetch network**, which routes netwo
 
 ## Register for an API key
 
-1. Register at https://console.browserpod.io
+1. Sign in at https://console.browserpod.io with your GitHub account
 2. Create a key in **Keys & Domains**
 
 ## Where to store the API key

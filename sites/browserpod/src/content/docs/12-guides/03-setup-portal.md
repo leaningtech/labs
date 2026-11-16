@@ -6,7 +6,7 @@ description: Preview and share a server running in a Pod with a Portal URL
 This guide shows how to start a server inside a Pod and get a Portal URL to preview and share it.
 
 > [!note]
-> Portals need an [API key](/docs/understanding-browserpod/api-key). Boot the Pod with one before you start.
+> Portals need [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Boot the Pod with an API key before you start.
 
 _This guide assumes you have a [terminal](/docs/guides/run-programs-in-a-pod)._
 
