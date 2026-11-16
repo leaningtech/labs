@@ -5,13 +5,14 @@ description: "Release notes and version history for BrowserPod, covering new fea
 
 ## Version 4.0.0:
 
-- Pods can run servers on a fetch network, and reach their own servers on `localhost`.
-- Servers bound to `localhost` get a Portal too.
-- Portals stream responses, so server-sent events and progress output arrive live.
-- Edge network: TCP connections to allowed domains, on any port.
-- Fix compressed responses on the edge network.
-- Quickstart: the API key is now optional.
 - **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, and the licence covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
+- Support running servers in a Pod without an API key, and reaching them from the Pod on `localhost`
+- Create Portals for servers bound to `localhost` too
+- Stream Portal responses, so server-sent events and progress output arrive as they're sent
+- Support TCP connections on any port to allowed domains on the Edge network
+- Fix compressed responses on the Edge network
+- Add `ssh` and `ripgrep` to the default image
+- Update `pnpm` to version 12, the new Rust-based release
 
 ## Version 3.6.0:
 
