@@ -1,7 +1,7 @@
 ---
 title: "BrowserPod: the microVM that runs in the browser, now free for any use"
 description: |
-  BrowserPod 4.0 is a free library: a microVM that runs in the browser, with no account and no API key. Plus a new fetch network, TCP on the edge network, SSH and pnpm 12.
+  BrowserPod 4.0 is now free to use. Add a Linux-like microVM in WebAssembly to any website, with no account and no API key. Plus a new fetch network, TCP on BrowserPod Edge, SSH and pnpm 12.
 authors:
   - yuri
   - stefano
@@ -36,11 +36,13 @@ import BrowserPodTerminal from "@leaningtech/astro-theme/components/blog/Browser
 	apiKey="bp1_9e19079609640801b1e173e6861f6f95ea17b84507acffc126f5cb434bb1fbae"
 />
 
-Today we are releasing **BrowserPod 4.0**. It brings new networking capabilities, more built-in programs, and most importantly: you can now use it as a library _completely for free_.
+Today we are releasing **BrowserPod 4.0**, the latest version of our Linux-like microVMs for the browser, powered by WebAssembly.
+
+It brings new networking capabilities, more built-in programs, and most importantly: you can now use it as a library _completely for free_.
 This means that you can simply install BrowserPod from npm, call `BrowserPod.boot` in your page to give your user a private, isolated, zero-cost microVM that runs on their own device.
 No account or API key is required, and there is no metering and no telemetry. It is free for any purpose, including commercial and production use.
 
-The demo below is a pod running a bash process. Feel free to poke around, run programs, or delete the whole filesystem:
+The demo below is a Pod running a bash process. Feel free to poke around, run programs, or delete the whole filesystem:
 
 <BrowserPodTerminal
 	client:only="svelte"
@@ -77,7 +79,7 @@ Like a microVM, it starts near-instantly and keeps a small footprint. It gives a
 And since it runs in the browser, two things come for free:
 
 - **Zero latency.** Execution is local, next to the user and next to the agent. There is no round trip to a cloud sandbox, so you get instant feedback.
-- **Infinite scalability at no cost**. The user's device does the work. A pod costs you the same whether you have ten users or a million.
+- **Infinite scalability at no cost**. The user's device does the work. A Pod costs you the same whether you have ten users or a million.
 
 We built BrowserPod for three main use cases:
 
@@ -99,7 +101,7 @@ BrowserPod 4.0 comes with a new licence, the [BrowserPod Community Licence](http
 
 ### Why
 
-Until now, BrowserPod was a hosted service. To boot a pod you signed up, created an API key, and every hour of compute was metered.
+Until now, BrowserPod was a hosted service. To boot a Pod you signed up, created an API key, and every hour of compute was metered.
 
 The technology worked, but the model created excessive friction, and the reason for it was networking.
 
@@ -108,9 +110,9 @@ anything beyond a toy demo needs networking of some kind, and browsers heavily r
 
 We learned this with [WebVM](https://webvm.io). As soon as people had a Linux system running in their browser, the first thing they wanted was to reach the internet from it, and to this day the number one support question we get for WebVM is how to set up its [Tailscale integration](/blog/webvm-virtual-machine-with-networking-via-tailscale).
 
-For this reason BrowserPod [came from day one with a managed proxy](/blog/browserpod-deep-dive#solving-networking-again), which allows a pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
+For this reason BrowserPod [came from day one with a managed proxy](/blog/browserpod-deep-dive#solving-networking-again), which allows a Pod to send traffic without being restricted by the browser's CORS rules, and even to receive traffic from the internet, so that you can showcase your project to a friend, or test it on your phone.
 
-While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a pod had to be tied to a registered user and an API key.
+While this is very handy, operating a proxy costs money, and also comes with auditing responsibilities in case our infrastructure is used for nefarious purposes. So booting a Pod had to be tied to a registered user and an API key.
 
 This is unnecessary friction for the many use cases that don't need unrestricted internet access. So in BrowserPod 4.0 the proxy becomes an optional service with its own name, **BrowserPod Edge**, and everything else is free to use without an account.
 
@@ -122,7 +124,7 @@ BrowserPod Pro is now Edge Pro, at the same price and with the same allowances. 
 For BrowserPod 4.0, we expanded our networking capabilities in two directions:
 
 - A new **[fetch network](https://browserpod.io/docs/reference/BrowserPod/createFetchNetwork)**, which needs no API key: outbound requests are made by the browser's `fetch()`, or by your own custom fetch implementation
-- The **[edge network](https://browserpod.io/docs/reference/BrowserPod/createEdgeNetwork)**, our managed proxy, is not restricted to HTTP and HTTPS anymore: pods can open TCP connections on any port, and reach the domains that you allow for each API key
+- The **[Edge network](https://browserpod.io/docs/reference/BrowserPod/createEdgeNetwork)**, our managed proxy, is not restricted to HTTP and HTTPS anymore: Pods can open TCP connections on any port, and reach the domains that you allow for each API key
 
 Here is a quick feature comparison between the two:
 
@@ -219,7 +221,7 @@ Here is a quick feature comparison between the two:
 
 No managed proxy doesn't have to mean no network. After all, the browser can make network requests itself, restricted as they might be. And you might have your own CORS proxy or tunnel to use.
 
-So when a pod boots without an API key, its outbound HTTP and HTTPS requests are made by the browser's [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch), directly from your page:
+So when a Pod boots without an API key, its outbound HTTP and HTTPS requests are made by the browser's [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch), directly from your page:
 
 ```js
 const pod = await BrowserPod.boot();
@@ -227,21 +229,21 @@ const pod = await BrowserPod.boot();
 
 #### How it works
 
-A program in the pod doesn't call `fetch()`: it opens a TCP connection and writes bytes to it.
+A program in the Pod doesn't call `fetch()`: it opens a TCP connection and writes bytes to it.
 For plain HTTP, turning that into a `fetch()` call is simple enough: we parse the HTTP request from the bytes, and build a request that `fetch()` can send.
 
-HTTPS is harder, because all we get from the pod is a TCP stream of encrypted TLS traffic. To reconstruct the HTTPS request, we need to:
+HTTPS is harder, because all we get from the Pod is a TCP stream of encrypted TLS traffic. To reconstruct the HTTPS request, we need to:
 
-- Intercept the TLS handshake between the program in the pod and the server, and do TLS termination ourselves
+- Intercept the TLS handshake between the program in the Pod and the server, and do TLS termination ourselves
 - Make sure that the program trusts the certificate that we will present on behalf of the server
 - Parse the HTTP request from the unencrypted bytes
 - Construct from it a JS [`RequestInit`](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit) object that can be passed to `fetch()`
 
 <figure class="breakout w-full">
-	![How a fetch network turns a pod's encrypted TCP connection into a fetch()
+	![How a fetch network turns a Pod's encrypted TCP connection into a fetch()
 	call](./images/BP_4_fetch_network.svg)
 	<figcaption class="text-center">
-		How the fetch network turns a pod's encrypted TCP connection into a
+		How the fetch network turns a Pod's encrypted TCP connection into a
 		`fetch()` call, inside your page.
 	</figcaption>
 </figure>
@@ -293,7 +295,7 @@ The fetch network currently **does not support inbound traffic**, so [Portals](h
 
 ### Edge network
 
-The edge network is the one BrowserPod always had: it routes a pod's traffic through our managed proxy, now called BrowserPod Edge. If you pass an [API key](https://console.browserpod.io) to `boot()` you get it by default, or you can construct it explicitly:
+The Edge network is the one BrowserPod always had: it routes a Pod's traffic through our managed proxy, now called BrowserPod Edge. If you pass an [API key](https://console.browserpod.io) to `boot()` you get it by default, or you can construct it explicitly:
 
 ```js
 const network = await BrowserPod.createEdgeNetwork({ apiKey: "your-api-key" });
@@ -304,9 +306,9 @@ Edge has a generous free tier: see the [pricing page](https://browserpod.io/pric
 
 It got some love too, with two additions.
 
-**Per-key domain lists.** On the [Pro plan](https://browserpod.io/pricing/), you can now add your own list of domains to each API key, so that pods can reach domains that are not in our global allowlist.
+**Per-key domain lists.** On the [Pro plan](https://browserpod.io/pricing/), you can now add your own list of domains to each API key, so that Pods can reach domains that are not in our global allowlist.
 
-**TCP on any port.** The edge network is no longer limited to HTTP and HTTPS: on every plan, Free included, a pod can open a TCP connection on any port to an allowed domain. Thanks to this new capability it made sense to add [OpenSSH](https://www.openssh.com) to the base image, so you can use a pod as a real SSH client.
+**TCP on any port.** The Edge network is no longer limited to HTTP and HTTPS: on every plan, Free included, a Pod can open a TCP connection on any port to an allowed domain. Thanks to this new capability it made sense to add [OpenSSH](https://www.openssh.com) to the base image, so you can use a Pod as a real SSH client.
 Here is one connecting to a server that plays Star Wars in ASCII art:
 
 {/* openssh is in the node image from lt-nix 7281285. The demo key's allowlist needs movie.gabe565.com. */}
@@ -317,7 +319,7 @@ Here is one connecting to a server that plays Star Wars in ASCII art:
 	cols={69}
 	rows={23}
 	ctxId="bp4-ssh"
-	description="ssh from a pod: ASCII Star Wars, from movie.gabe565.com"
+	description="ssh from a Pod: ASCII Star Wars, from movie.gabe565.com"
 	autoStart={false}
 	height="24rem"
 	terminalTabs={[
@@ -335,7 +337,7 @@ Here is one connecting to a server that plays Star Wars in ASCII art:
 
 Rust support landed in [BrowserPod 3.0](/blog/browserpod-rust), and it has proven so solid and stable since then that we now build part of the base image with it.
 
-Every pod now comes with [`ripgrep`](https://github.com/BurntSushi/ripgrep) (a `grep` replacement) and [`fd`](https://github.com/sharkdp/fd) (a `find` replacement), two popular tools that are handy for humans and coding agents alike.
+Every Pod now comes with [`ripgrep`](https://github.com/BurntSushi/ripgrep) (a `grep` replacement) and [`fd`](https://github.com/sharkdp/fd) (a `find` replacement), two popular tools that are handy for humans and coding agents alike.
 
 But most importantly, we added **[pnpm 12](https://pnpm.io)**, the new Rust-based version of pnpm.
 
@@ -380,7 +382,7 @@ Or simply ask your coding agent to add BrowserPod to your app: it won't need to 
 
 - The [documentation](https://browserpod.io/docs) covers the API, networking and how to build for BrowserPod.
 - [BrowserCode](https://browsercode.io) is the quickest way to see BrowserPod at work, with framework templates and AI coding agents running in your browser.
-- When your pods need Portals, TCP or more of the internet, create an API key in the [console](https://console.browserpod.io) to add Edge.
+- When your Pods need Portals, TCP or more of the internet, create an API key in the [console](https://console.browserpod.io) to add Edge.
 
 Try BrowserPod 4.0 today, with or without an API key, and let us know what you think: your feedback shapes what we build next.
 Come and find us on [Discord](https://discord.leaningtech.com), we would love to see what you build.
