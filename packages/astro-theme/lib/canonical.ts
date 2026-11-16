@@ -16,6 +16,7 @@ export const browserpodCanonicals: Record<string, string> = {
 		"https://browserpod.io/blog/browserpod-announcement/",
 	"/blog/announcing-browsercode":
 		"https://browserpod.io/blog/announcing-browsercode/",
+	"/blog/browserpod-40": "https://browserpod.io/blog/browserpod-40/",
 };
 
 // Strips one ".html" or one trailing "/", not both.
