@@ -365,8 +365,7 @@ pnpm is a popular alternative to npm for installing and managing Node.js depende
 We have many exciting features in our pipeline, some of which are coming very soon:
 
 - **Inbound traffic on the fetch network**: this will allow Portals to work with your own reverse proxy, or fully locally via a [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
-- **A Go toolchain**: we are working on a `GOARCH=wasm32`/`GOOS=linux` target that allows unmodified Go programs to run in BrowserPod, including real multithreading support
-- **A Go toolchain**: we are working on a `GOARCH=wasm32` / `GOOS=linux` target that allows unmodified Go programs to run in BrowserPod, including real multithreading support (which the official Go wasm targets lack)
+- **A Go toolchain**: we are working on a `GOARCH=wasm32` / `GOOS=linux` target that allows unmodified Go programs to run in BrowserPod, including real multithreading support (which the official Go Wasm targets lack)
 - **A C/C++ SDK**: like we did for Rust, a sysroot and wrapper scripts around the standard compiler, to make it easier to compile your own C and C++ programs for BrowserPod
 - **Python native modules**: loaded dynamically at runtime, like in regular Python, instead of being compiled into a single static binary. Together with the C/C++ SDK, this means that you will be able to compile and use your own native modules
 
