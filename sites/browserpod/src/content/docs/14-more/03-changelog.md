@@ -2,6 +2,11 @@
 title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
+## Version 4.1.0:
+
+- Fix an issue that prevented reaching some sited behind Cloudflare
+- Fix data corruption near the end of custom disk images whose size is not a multiple of 128 KiB
+- Improve Linux compatibility
 
 ## Version 4.1.0:
 
