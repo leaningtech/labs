@@ -3,6 +3,12 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 4.1.0:
+
+- Fix an issue that prevented reaching some sited behind Cloudflare
+- Fix data corruption near the end of custom disk images whose size is not a multiple of 128 KiB
+- Improve Linux compatibility
+
 ## Version 4.0.0:
 
 - **New licence: the BrowserPod Community Licence.** BrowserPod is free for any use, including commercial use, and the licence covers every runtime version served from our CDN. See [Licensing](/docs/more/licensing). The previous licence remains available in the [legal history](https://browserpod.io/legal).
