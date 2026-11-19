@@ -111,6 +111,16 @@ const terminal = await pod.createDefaultTerminal(
 await pod.run("bash", [], { terminal });
 ```
 
+Without a key, boot on a fetch network with [`opinionatedFetch`](/docs/understanding-browserpod/networking#using-npm-without-an-api-key) instead, so `npm install` works in the shell:
+
+```js
+const pod = await BrowserPod.boot({
+	network: await BrowserPod.createFetchNetwork({
+		fetch: BrowserPod.opinionatedFetch,
+	}),
+});
+```
+
 - [`boot`](/docs/reference/BrowserPod/boot) starts a Pod. With an API key it boots on the Edge network; without one, on the browser's `fetch()`.
 - [`createDefaultTerminal`](/docs/reference/BrowserPod/createDefaultTerminal) shows a terminal in the element you pass.
 - [`run`](/docs/reference/BrowserPod/run) runs a program in the Pod, here an interactive bash shell.
