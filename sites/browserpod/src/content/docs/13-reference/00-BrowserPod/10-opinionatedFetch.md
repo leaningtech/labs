@@ -1,6 +1,6 @@
 ---
 title: opinionatedFetch
-description: A preconfigured fetch handler that enables access to developer services like the npm registry on a fetch network.
+description: A preconfigured fetch handler that adapts requests to known services, such as the npm registry, on a fetch network.
 ---
 
 ```ts
