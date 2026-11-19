@@ -35,9 +35,9 @@ import InstallCommand from "@/components/InstallCommand.astro";
 	kernel in WebAssembly, and on it runs Node.js, Rust and C++ applications, with
 	Python in preview. Each Pod comes with a full command-line environment
 	including npm, pnpm, git and bash. It has a local filesystem, which can
-	persist across sessions, and reaches the internet through the browser fetch or
-	through BrowserPod Edge, which adds inbound Portals and TCP. Everything runs
-	on the user's own device, with zero latency.
+	persist across sessions, and reaches the internet through the browser's
+	`fetch()` or through BrowserPod Edge, which adds inbound Portals and TCP.
+	Everything runs on the user's own device, with zero latency.
 </div>
 
 <div class="m-4 flex justify-center">
@@ -124,7 +124,7 @@ Every Pod runs in the user's tab, with no account and no API key, and reaches th
 		<tbody>
 			<tr><th scope="row">What it is</th><td>The microVM: its kernel, filesystem, processes and terminals</td><td>The network service that connects your Pods to the internet</td></tr>
 			<tr><th scope="row">Outbound</th><td>HTTP, HTTPS and WebSocket through the browser, to servers that allow <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">CORS</a></td><td>Any TCP, including HTTP and WebSocket, to the domains you allow, without CORS limits</td></tr>
-			<tr><th scope="row">Inbound</th><td>Not yet</td><td><a href="/docs/understanding-browserpod/portals">Portals</a>: public URLs for servers in the Pod</td></tr>
+			<tr><th scope="row">Inbound</th><td>No (Portals need BrowserPod Edge)</td><td><a href="/docs/understanding-browserpod/portals">Portals</a>: public URLs for servers in the Pod</td></tr>
 			<tr><th scope="row">Account</th><td>None</td><td><a href="https://console.browserpod.io">BrowserPod console</a>, with GitHub sign-in</td></tr>
 		</tbody>
 	</table>
