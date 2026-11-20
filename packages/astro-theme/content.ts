@@ -67,6 +67,8 @@ export function defineLabsCollections() {
 					),
 					niche: z.string(),
 					hero_image: image().optional(),
+					/** Use hero_image only as the listing thumbnail; don't show it on the demo page. */
+					hide_hero: z.boolean().default(false),
 					draft: z.boolean().default(false),
 					tags: productTags.optional(),
 					/** Impressiveness score. Higher values appear first on the showcase index.

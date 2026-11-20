@@ -28,6 +28,7 @@ const {
 	project_type,
 	niche,
 	hero_image,
+	hide_hero,
 	headings,
 	demo_url,
 	repository_url,
@@ -65,7 +66,7 @@ if (description) {
 					</a>
 					<div class="block md:hidden pb-4">
 						{
-							hero_image && (
+							hero_image && !hide_hero && (
 								<Image
 									src={hero_image}
 									alt=""
@@ -97,7 +98,7 @@ if (description) {
 					<div class="mt-6 md:mt-2">
 						<div class="hidden md:block">
 							{
-								hero_image && (
+								hero_image && !hide_hero && (
 									<Image
 										src={hero_image}
 										alt=""
@@ -108,7 +109,12 @@ if (description) {
 							}
 						</div>
 						<section class="">
-							<div class="flex flex-col lg:flex-row gap-10 mt-16">
+							<div
+								class:list={[
+									"flex flex-col lg:flex-row gap-10",
+									hide_hero ? "mt-0" : "mt-16",
+								]}
+							>
 								<article class="grow w-full md:max-w-3xl">
 									<div
 										class="prose prose-stone md:prose-lg dark:prose-invert"
