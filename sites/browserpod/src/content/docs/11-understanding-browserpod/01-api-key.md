@@ -5,14 +5,14 @@ description: What BrowserPod Edge is, how its API keys work and where to place t
 
 BrowserPod Edge connects your Pods to the internet. A Pod uses Edge when you boot it with an API key: its traffic then goes through the [Edge network](/docs/understanding-browserpod/networking), which reaches its allowed domains without CORS limits, carries TCP connections to them, and enables [Portals](/docs/understanding-browserpod/portals). The allowed domains are BrowserPod's default domains, or the ones you choose with Edge Pro.
 
-The API key identifies your app to BrowserPod and tracks your token usage. Edge is charged per connected hour; see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance.
+The API key identifies your app to BrowserPod and tracks your token usage. Edge is billed per connected hour; see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance.
 
 Pods can also boot without an API key on a **fetch network**, which routes network requests directly through your browser using `fetch()`. It's free, but subject to browser CORS rules. See [Networking](/docs/understanding-browserpod/networking) for details.
 
 ## Register for an API key
 
 1. Register at https://console.browserpod.io
-2. Create a key in **Keys & Domains**
+2. Create a key in **API > Keys & Domains**
 
 ## Where to store the API key
 
@@ -28,7 +28,7 @@ const pod = await BrowserPod.boot({
 });
 ```
 
-This is fine for quick prototypes but not ideal for production, because the key is hard-coded in your source.
+This is fine for quick prototypes but not ideal for production due to the key being hard-coded in your sourc.
 
 ### Method 2: Environment variable via `.env` (recommended for development)
 
@@ -47,7 +47,7 @@ const pod = await BrowserPod.boot({
 This keeps the key out of source control and makes local development easier.
 
 > [!note]
-> To boot without a key, comment out or remove the `VITE_BP_APIKEY` line. The `?.trim() || undefined` part covers a line left empty: without it, `VITE_BP_APIKEY=` would still count as a key, and `boot` would never finish.
+> To boot without a key, comment/remove `VITE_BP_APIKEY` within `.env`. Leaving the .env variable empty is also viable because of <`...?.trim() || undefined`>.
 
 ### Method 3: Hosting provider env variables (recommended for production)
 
