@@ -5,13 +5,13 @@ description: How networking works in BrowserPod and the differences between Edge
 
 A [Pod](/docs/reference/BrowserPod) connects to the internet using one of two network types. Both carry outgoing HTTP, HTTPS, and WebSocket traffic. Regardless of network, the programs in a Pod reach each other's servers on `localhost`.
 
-|| **Edge Network** | **Fetch Network** |
-| --- | --- | --- |
-| Routing | Routes traffic through BrowserPod Edge. | Routes traffic through the browser's standard [`fetch()`][fetch].
-| API & Billing | Requires an API key and is billed per connected hour in blocks of 10 tokens (see Licensing for the free allowance). | Does not require an API key, and is free to use.
-| Reach | Reaches its allowed domains: BrowserPod’s default domains, such as the npm registry and GitHub, or the ones you choose with Edge Pro in the BrowserPod console. | Reaches servers that allow cross-origin requests (CORS). npm needs one extra setup step.
-| Traffic | HTTP, HTTPS, and WebSocket, it carries other TCP connections to its allowed domains. | HTTP, HTTPS, and WebSocket traffic only, with no other TCP connections.
-| Portal support | Yes | No |
+|                | **Edge Network**                                                                                                                                                | **Fetch Network**                                                                        |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Routing        | Routes traffic through BrowserPod Edge.                                                                                                                         | Routes traffic through the browser's standard [`fetch()`][fetch].                        |
+| API & Billing  | Requires an API key and is billed per connected hour in blocks of 10 tokens (see Licensing for the free allowance).                                             | Does not require an API key, and is free to use.                                         |
+| Reach          | Reaches its allowed domains: BrowserPod’s default domains, such as the npm registry and GitHub, or the ones you choose with Edge Pro in the BrowserPod console. | Reaches servers that allow cross-origin requests (CORS). npm needs one extra setup step. |
+| Traffic        | HTTP, HTTPS, and WebSocket, it carries other TCP connections to its allowed domains.                                                                            | HTTP, HTTPS, and WebSocket traffic only, with no other TCP connections.                  |
+| Portal support | Yes                                                                                                                                                             | No                                                                                       |
 
 ## Choosing a network
 
