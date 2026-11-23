@@ -1,11 +1,11 @@
 ---
 title: Quickstart
-description: "Get started with BrowserPod in minutes: get a free BrowserPod Edge key, then start from a template or add BrowserPod to a web app you already have."
+description: "Get started with BrowserPod in minutes: Start from a template or add BrowserPod to an existing web app."
 ---
 
 Get a Pod running in your browser in a few minutes. Start with a key, then either scaffold a new project from a template, or add BrowserPod to a web app you already have.
 
-## 1. Get a free BrowserPod Edge key
+## Get a free BrowserPod Edge key
 
 BrowserPod Edge connects your Pods to the internet, so everything works: npm, GitHub and the other [allowed domains](/docs/understanding-browserpod/networking) without CORS limits, and [Portals](/docs/understanding-browserpod/portals), which give servers running in your Pod a public URL. It's free for up to 1,000 connected hours every month.
 
@@ -13,7 +13,12 @@ To get a key, sign in at https://console.browserpod.io with your GitHub account 
 
 You can also continue without a key: Pods still run, with networking through the browser. See [Networking](/docs/understanding-browserpod/networking) for the differences.
 
-## 2. Start from a template
+## Choose how to start
+
+- **[Start from a template](#start-from-a-template)** — create a BrowserPod project from scratch.
+- **[Add BrowserPod to an existing app](#add-browserpod-to-an-existing-app)** — integrate the package into an app you already have.
+
+## If you chose to start from a template
 
 Scaffold a project:
 
@@ -59,7 +64,7 @@ npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
 | `--non-interactive`       | Fail instead of prompting for missing values |
 | `-h`, `--help`            | Show all options                             |
 
-## Or add BrowserPod to an existing app
+## If you chose to add BrowserPod to an existing app
 
 ### 1. Install the package
 

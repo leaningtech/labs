@@ -1,14 +1,14 @@
 ---
 title: Run an npm project with a live preview
 shortTitle: npm project tutorial
-description: "Tutorial: copy an npm project into a Pod, install its dependencies with npm, start its server, and preview it on your page and on any device through a Portal."
+description: "Copy an npm project into a Pod, then install, start, and preview it on any device through a Portal."
 ---
 
-In this tutorial you build a page that runs an npm project in the browser. The page boots a [Pod](/docs/reference/BrowserPod), copies the project into it, installs its dependencies with `npm install`, and starts its server. A [Portal](/docs/understanding-browserpod/portals) gives the server a public URL, which the page shows in an iframe and which you can open on any other device.
+In this tutorial you build a page that runs an npm project in the browser. The page boots a [Pod](/docs/reference/BrowserPod), copies the project into it, installs its dependencies with `npm install`, and starts its server. A [Portal](/docs/understanding-browserpod/portals) gives the server a public URL, which the page shows in an iframe and can be opened on any other device.
 
-## Before you start
+## Prerequisites
 
-- **A BrowserPod Edge key.** Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Get a key at https://console.browserpod.io; see [Quickstart](/docs/getting-started/quickstart#1-get-a-free-browserpod-edge-key). Without a key the server still runs, but there is no preview.
+- **A BrowserPod Edge key.** Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Get a key at https://console.browserpod.io; see [Quickstart](/docs/getting-started/quickstart#1-get-a-free-browserpod-edge-key). Without a key the server still runs, but won't have a preview.
 - **Node.js and npm** on your machine, to run the page's dev server.
 
 ## 1. Create the project
@@ -114,7 +114,8 @@ export default defineConfig({
 
 ### Copying files into the Pod
 
-`copyFile` fetches a file from the page's server and writes it into the Pod, under the folder you give it. `copyFile(pod, "project/main.js", "/home/user")` writes `/home/user/project/main.js`:
+`copyFile` fetches a file from the page's Vite server and writes it to the same path in the given folder inside the Pod. \
+`copyFile(pod, "project/main.js", "/home/user")` writes `/home/user/project/main.js`:
 
 ```js title="src/utils.js"
 export async function copyFile(pod, path, prefix) {
@@ -192,7 +193,7 @@ await pod.run("node", ["main.js"], {
 2. **Boot the Pod.** With a key, [`boot`](/docs/reference/BrowserPod/boot) connects the Pod to BrowserPod Edge. Without one, the Pod uses the browser's `fetch()`, with [`opinionatedFetch`](/docs/understanding-browserpod/networking#using-npm-without-an-api-key) so that npm can reach the registry.
 3. **Show the Portal.** [`onPortal`](/docs/reference/BrowserPod/onPortal) calls back when a program in the Pod listens on a port, with a public URL for it. The page shows the URL and loads it in the iframe.
 4. **Copy the project** into `/home/user/project`.
-5. **Run it.** [`run`](/docs/reference/BrowserPod/run) runs `npm install`, then `node main.js`, in the project's folder, as you would in a terminal. `echo` prints each command in the terminal before it runs.
+5. **Run it.** The [`run`](/docs/reference/BrowserPod/run) method runs `npm install` followed by `node main.js` in the project's folder. `echo` prints each command in the terminal before it runs.
 
 ## 5. See it running
 
@@ -206,4 +207,4 @@ The Portal URL is public: open it on your phone, or send it to someone else, whi
 
 - [Set up a Portal](/docs/guides/setup-portal) covers Portals in more detail.
 - Keep the project between visits by booting with a [`storageKey`](/docs/understanding-browserpod/filesystem).
-- See [Networking](/docs/understanding-browserpod/networking) for what the Pod can reach with and without Edge.
+- See [Networking](/docs/understanding-browserpod/networking) for details on what the Pod can reach with and without [Edge](https://browserpod.io/docs/understanding-browserpod/api-key).
