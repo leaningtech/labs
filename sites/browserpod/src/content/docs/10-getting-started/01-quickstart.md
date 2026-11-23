@@ -18,7 +18,7 @@ You can also continue without a key: Pods still run, with networking through the
 - **[Start from a template](#start-from-a-template)** — create a BrowserPod project from scratch.
 - **[Add BrowserPod to an existing app](#add-browserpod-to-an-existing-app)** — integrate the package into an app you already have.
 
-## Start from a template
+## If you chose to start from a template
 
 Scaffold a project:
 
@@ -64,7 +64,7 @@ npm create browserpod-quickstart@latest -- my-app -t vite-basic -k <your-key>
 | `--non-interactive`       | Fail instead of prompting for missing values |
 | `-h`, `--help`            | Show all options                             |
 
-## Add BrowserPod to an existing app
+## If you chose to add BrowserPod to an existing app
 
 ### 1. Install the package
 

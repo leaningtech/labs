@@ -193,7 +193,7 @@ await pod.run("node", ["main.js"], {
 2. **Boot the Pod.** With a key, [`boot`](/docs/reference/BrowserPod/boot) connects the Pod to BrowserPod Edge. Without one, the Pod uses the browser's `fetch()`, with [`opinionatedFetch`](/docs/understanding-browserpod/networking#using-npm-without-an-api-key) so that npm can reach the registry.
 3. **Show the Portal.** [`onPortal`](/docs/reference/BrowserPod/onPortal) calls back when a program in the Pod listens on a port, with a public URL for it. The page shows the URL and loads it in the iframe.
 4. **Copy the project** into `/home/user/project`.
-5. **Run it.** [`run`](/docs/reference/BrowserPod/run) runs `npm install` followed by `node main.js` in the project's folder. `echo` prints each command in the terminal before it runs.
+5. **Run it.** The [`run`](/docs/reference/BrowserPod/run) method runs `npm install` followed by `node main.js` in the project's folder. `echo` prints each command in the terminal before it runs.
 
 ## 5. See it running
 

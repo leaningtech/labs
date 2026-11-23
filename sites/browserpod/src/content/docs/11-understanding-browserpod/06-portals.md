@@ -3,7 +3,7 @@ title: Portals
 description: How Portals let you preview and share services running inside a Pod
 ---
 
-A **Portal** is a BrowserPod networking feature that gives a service running inside a [Pod](/docs/reference/BrowserPod) its own URL.
+A **Portal** is a BrowserPod networking feature that gives a service running inside a [Pod](/docs/reference/BrowserPod) its own URL that you can share.
 
 Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available): they need a Pod booted on the [Edge network](/docs/understanding-browserpod/networking) with an API key. When a Pod on the Edge network starts listening on a port, BrowserPod automatically creates a URL that forwards traffic to that server.
 

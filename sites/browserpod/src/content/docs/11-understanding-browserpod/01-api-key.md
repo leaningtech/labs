@@ -28,7 +28,7 @@ const pod = await BrowserPod.boot({
 });
 ```
 
-This is fine for quick prototypes but not ideal for production due to the key being hard-coded in your sourc.
+This is fine for quick prototypes but not ideal for production due to the key being hard-coded in your source.
 
 ### Method 2: Environment variable via `.env` (recommended for development)
 
