@@ -207,4 +207,4 @@ The Portal URL is public: open it on your phone, or send it to someone else, whi
 
 - [Set up a Portal](/docs/guides/setup-portal) covers Portals in more detail.
 - Keep the project between visits by booting with a [`storageKey`](/docs/understanding-browserpod/filesystem).
-- See [Networking](/docs/understanding-browserpod/networking) for details on what the Pod can reach with and without Edge.
+- See [Networking](/docs/understanding-browserpod/networking) for details on what the Pod can reach with and without [Edge](https://browserpod.io/docs/understanding-browserpod/api-key).
