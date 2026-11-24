@@ -35,7 +35,7 @@ It is built on [BrowserPod](https://browserpod.io), a microVM that runs in the b
 
 ## How it works
 
-Each project runs in a BrowserPod sandbox: Node.js on BrowserPod (Rust and Python in preview) and Java on CheerpJ, all compiled to WebAssembly. The sandbox provides a POSIX-like filesystem and command line tools including bash, git, npm, pnpm, curl, ripgrep and fd. Outbound networking is limited to an allowlist covering the npm registry, Yarn, GitHub and the major AI provider APIs.
+Each project runs in a BrowserPod sandbox: Node.js on BrowserPod (Rust and Python in preview) and Java on CheerpJ, all compiled to WebAssembly. The sandbox provides a POSIX-like filesystem and command line tools including `bash`, `git`, `npm`, `pnpm`, `curl`, `ripgrep` and `fd`. Outbound networking is limited to an allowlist covering the npm registry, Yarn, GitHub and the major AI provider APIs.
 
 Everything is isolated from your operating system by the browser's own security model. If an agent breaks something, it breaks it in a tab. The [BrowserPod deep dive](/blog/browserpod-deep-dive) covers the architecture in detail.
 
