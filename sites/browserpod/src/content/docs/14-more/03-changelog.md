@@ -2,6 +2,13 @@
 title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
+
+## Version 4.2.0:
+
+- Support graceful reconnection to the disk backends
+- Start programs and read large files faster: program images are prefetched and sequential reads read ahead
+- Improve Linux compatibility, especially for file system operations
+
 ## Version 4.1.0:
 
 - Fix an issue that prevented reaching some sited behind Cloudflare
