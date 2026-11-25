@@ -7,16 +7,16 @@ Get a Pod running in your browser in a few minutes. Start with a key, then eithe
 
 ## Get a free BrowserPod Edge key
 
-BrowserPod Edge connects your Pods to the internet, so everything works: npm, GitHub and the other [allowed domains](/docs/understanding-browserpod/networking) without CORS limits, and [Portals](/docs/understanding-browserpod/portals), which give servers running in your Pod a public URL. It's free for up to 1,000 connected hours every month.
+BrowserPod Edge connects your Pods to the internet, so everything works: npm, GitHub and the other [allowed domains](/docs/understanding-browserpod/networking#allowed-domains) without CORS limits, and [Portals](/docs/understanding-browserpod/portals), which give servers running in your Pod a public URL. It's free for up to 1,000 connected hours every month.
 
-To get a key, sign in at https://console.browserpod.io with your GitHub account and create an API key.
+To get a key, sign in to the [BrowserPod console](https://console.browserpod.io) with your GitHub account and create an API key.
 
 You can also continue without a key: Pods still run, with networking through the browser. See [Networking](/docs/understanding-browserpod/networking) for the differences.
 
 ## Choose how to start
 
-- **[Start from a template](#start-from-a-template)** — create a BrowserPod project from scratch.
-- **[Add BrowserPod to an existing app](#add-browserpod-to-an-existing-app)** — integrate the package into an app you already have.
+- **[Start from a template](#if-you-chose-to-start-from-a-template)** — create a BrowserPod project from scratch.
+- **[Add BrowserPod to an existing app](#if-you-chose-to-add-browserpod-to-an-existing-app)** — integrate the package into an app you already have.
 
 ## If you chose to start from a template
 

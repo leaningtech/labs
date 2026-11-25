@@ -3,7 +3,7 @@ title: BrowserPod Edge
 description: What BrowserPod Edge is, how its API keys work and where to place them
 ---
 
-BrowserPod Edge connects your Pods to the internet. A Pod uses Edge when you boot it with an API key: its traffic then goes through the [Edge network](/docs/understanding-browserpod/networking), which reaches its allowed domains without CORS limits, carries TCP connections to them, and enables [Portals](/docs/understanding-browserpod/portals). The allowed domains are BrowserPod's default domains, or the ones you choose with Edge Pro.
+BrowserPod Edge connects your Pods to the internet. A Pod uses Edge when you boot it with an API key: its traffic then goes through the [Edge network](/docs/understanding-browserpod/networking), which reaches its [allowed domains](/docs/understanding-browserpod/networking#allowed-domains) without CORS limits, carries TCP connections to them, and enables [Portals](/docs/understanding-browserpod/portals). The allowed domains are BrowserPod's default domains, or the ones you choose with Edge Pro.
 
 The API key identifies your app to BrowserPod and tracks your token usage. Edge is billed per connected hour; see [Licensing](/docs/more/licensing#browserpod-edge) for the free allowance.
 
@@ -11,7 +11,7 @@ Pods can also boot without an API key on a **fetch network**, which routes netwo
 
 ## Register for an API key
 
-1. Sign in at https://console.browserpod.io with your GitHub account
+1. Sign in to the [BrowserPod console](https://console.browserpod.io) with your GitHub account
 2. Create a key in **API > Keys & Domains**
 
 ## Where to store the API key
@@ -47,7 +47,7 @@ const pod = await BrowserPod.boot({
 This keeps the key out of source control and makes local development easier.
 
 > [!note]
-> To boot without a key, comment/remove `VITE_BP_APIKEY` within `.env`. Leaving the .env variable empty is also viable because of <`...?.trim() || undefined`>.
+> To boot without a key, comment out or remove the `VITE_BP_APIKEY` line in `.env`. Leaving it empty also works.
 
 ### Method 3: Hosting provider env variables (recommended for production)
 

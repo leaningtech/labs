@@ -8,7 +8,7 @@ In this tutorial you build a page that runs an npm project in the browser. The p
 
 ## Prerequisites
 
-- **A BrowserPod Edge key.** Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Get a key at https://console.browserpod.io; see [Quickstart](/docs/getting-started/quickstart#1-get-a-free-browserpod-edge-key). Without a key the server still runs, but won't have a preview.
+- **A BrowserPod Edge key.** Portals are part of [BrowserPod Edge](/docs/understanding-browserpod/api-key) (free tier available). Get a key in the [BrowserPod console](https://console.browserpod.io); see [Quickstart](/docs/getting-started/quickstart#get-a-free-browserpod-edge-key). Without a key the server still runs, but won't have a preview.
 - **Node.js and npm** on your machine, to run the page's dev server.
 
 ## 1. Create the project
