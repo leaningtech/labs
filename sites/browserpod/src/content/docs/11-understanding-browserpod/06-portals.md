@@ -20,7 +20,7 @@ Portals let you:
 
 - A Portal is not a separate server. The server runs inside the Pod, in the browser, and the Portal forwards traffic to it.
 - Each port a server listens on gets its own Portal. [`onPortal`](/docs/reference/BrowserPod/onPortal) gives you its `url` and `port`.
-- Anyone can reach the server, but its URL is randomly generated each time the Pod boots.
-- A Portal only works while the page running the Pod is open..
+- Anyone who has the URL can reach the server. The URL is long and randomly generated, so only share it with people you want to give access.
+- A Portal only works while the page running the Pod is open, and its URL changes every time the Pod boots.
 
 If you want the setup steps or code examples, see [Set up a Portal](/docs/guides/setup-portal).

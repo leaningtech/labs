@@ -26,9 +26,9 @@ class BrowserPod {
 - **network (`PodNetwork`, _optional_)** - A preconfigured network instance created with [`createEdgeNetwork`](/docs/reference/BrowserPod/createEdgeNetwork) or [`createFetchNetwork`](/docs/reference/BrowserPod/createFetchNetwork). Cannot be combined with `apiKey`; pass the key to `createEdgeNetwork` instead. Create a new network for each Pod: booting a second Pod with the same network throws.
 - **nodeVersion (`string`, _optional_)** - The version of Node.js to use. Currently only "22" is allowed.
 - **storageKey (`string`, _optional_)** - Identifies the Pod's persistent storage.
-  - _Omitted_ → ephemeral: fresh disk each boot, nothing is saved between sessions.
+  - _Omitted or empty_ → ephemeral: fresh disk each boot, nothing is saved between sessions.
   - _Provided_ → persistent: the same key resumes the same disk, a different key starts a separate one.
-- **userImage (`string`, _optional_)** - A URL pointing to a custom ext2 filesystem image that will be mounted directly on the `/home` directory of the Pod's filesystem. If you change the image, also change the `storageKey` if provided.
+- **userImage (`string`, _optional_)** - An `ext2` disk image to mount on `/home`, as a URL or a path relative to your page. The image itself isn't changed: the Pod's writes are stored in the browser. See [Filesystem](/docs/understanding-browserpod/filesystem#persistence-and-storage). If you change the image, also change the `storageKey` field.
 
 ## Returns
 

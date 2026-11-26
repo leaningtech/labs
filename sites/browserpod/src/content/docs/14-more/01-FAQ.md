@@ -5,7 +5,7 @@ description: "Answers to common BrowserPod questions about API keys, backend ser
 
 ## What is BrowserPod?
 
-BrowserPod is a microVM that runs in the browser. It boots a Linux-like kernel in WebAssembly, and on it runs Node.js, Rust and C++ applications, with Python in preview. Each Pod comes with a full command-line environment including npm, pnpm, git and bash. It has a local filesystem, which can persist across sessions, and reaches the internet through the browser fetch or through BrowserPod Edge, which adds inbound Portals and TCP. Everything runs on the user's own device, with zero latency.
+BrowserPod is a microVM that runs in the browser. It boots a Linux-like kernel in WebAssembly, and on it runs Node.js, Rust and C++ applications, with Python in preview. Each Pod comes with a full command-line environment including `npm`, `pnpm`, `git` and `bash`. It has a local filesystem, which can persist across sessions, and reaches the internet through the browser's `fetch()` or through [BrowserPod Edge](/docs/understanding-browserpod/api-key), which adds inbound Portals and TCP. Everything runs on the user's own device, with zero latency.
 
 Run it in the tab, and add [BrowserPod Edge](/docs/understanding-browserpod/api-key) when it needs the network.
 

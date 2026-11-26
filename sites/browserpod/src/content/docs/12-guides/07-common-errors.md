@@ -79,7 +79,7 @@ const pod = await BrowserPod.boot({ network });
   - `ENOTFOUND` or `Could not resolve host`
   - Browser console: `DNS query blocked for non-whitelisted domain`
 
-- **Cause**: On the Edge network, Pods can only reach the allowed domains: BrowserPod's default domains, or the ones you choose with Edge Pro.
+- **Cause**: On the Edge network, Pods can only reach the [allowed domains](/docs/understanding-browserpod/networking#allowed-domains): BrowserPod's default domains, or the ones you choose with Edge Pro.
 
 - **Solution**: With Edge Pro, add the domain in the [BrowserPod console](https://console.browserpod.io). If the server allows CORS, you can also reach it without a key.
 
