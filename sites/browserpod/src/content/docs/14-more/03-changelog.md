@@ -3,6 +3,10 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 4.3.1:
+
+- Work around a Firefox bug when sending `MessagePort`s across workers
+
 ## Version 4.3.0:
 
 - Fix programs being killed when many processes are started in quick succession
