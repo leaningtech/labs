@@ -42,5 +42,4 @@ Everything is isolated from your operating system by the browser's own security 
 
 ## Learn more
 
-Try it at [browsercode.io](https://browsercode.io), read the [launch announcement](/blog/announcing-browsercode), or run your own copy from the [source on GitHub](https://github.com/leaningtech/browsercode) with a BrowserPod API key.
 Try it at [browsercode.io](https://browsercode.io/), read the launch announcement, or run your own copy from the [source on GitHub](https://github.com/leaningtech/browsercode). A BrowserPod API key is only needed for [Portals](https://browserpod.io/docs/understanding-browserpod/portals), which give your running servers a public URL.
