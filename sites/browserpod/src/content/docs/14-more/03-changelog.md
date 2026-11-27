@@ -3,6 +3,13 @@ title: Changelog
 description: "Release notes and version history for BrowserPod, covering new features, runtime improvements, and bug fixes across each release."
 ---
 
+## Version 4.3.0:
+
+- Fix programs being killed when many processes are started in quick succession
+- Node: fix brotli compression and decompression in `zlib`, and support zstd
+- Fix file system corruption after removing a directory while a file inside it is still open
+- Improve Linux compatibility
+
 ## Version 4.2.0:
 
 - Support graceful reconnection to the disk backends
