@@ -10,6 +10,7 @@ project_type:
 niche: IDE
 tags:
   - BrowserPod
+  - CheerpJ
 score: 95
 hero_image: "./browsercode.png"
 hide_hero: true
